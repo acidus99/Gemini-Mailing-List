@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Lagrange - A Beautiful Gemini Client
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Lagrange%20-%20A%20Beautiful%20Gemini%20Client&In-Reply-To=%3CFhCl2whb0kTSJJWmDRxaol4Z_FIaMxT7R5Y-sP0dCmPh4twLCZFzViD1E2PREPrRy2EQKdTFgmYVmKie2WXNqLpqOR8RBsn2QBfylIi6wlk%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002715.html">
+   <LINK REL="Next"  HREF="002718.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Lagrange - A Beautiful Gemini Client</H1>
+    <B>colecmac at protonmail.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Lagrange%20-%20A%20Beautiful%20Gemini%20Client&In-Reply-To=%3CFhCl2whb0kTSJJWmDRxaol4Z_FIaMxT7R5Y-sP0dCmPh4twLCZFzViD1E2PREPrRy2EQKdTFgmYVmKie2WXNqLpqOR8RBsn2QBfylIi6wlk%3D%40protonmail.com%3E"
+       TITLE="[ANN] Lagrange - A Beautiful Gemini Client">colecmac at protonmail.com
+       </A><BR>
+    <I>Mon Sep 14 01:46:17 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002715.html">[ANN] Lagrange - A Beautiful Gemini Client
+</A></li>
+        <LI>Next message (by thread): <A HREF="002718.html">[ANN] Lagrange - A Beautiful Gemini Client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2717">[ date ]</a>
+              <a href="thread.html#2717">[ thread ]</a>
+              <a href="subject.html#2717">[ subject ]</a>
+              <a href="author.html#2717">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+The screenshots I've seen look great! I'm was excited to try this client,
+but instead I got a segfault staring back at me. Can you help me debug
+this?
+
+I'm on Arch Linux, and I'm pretty sure I have all the right libs installed.
+
+Here's the output:
+
+&#10095; ./lagrange
+[the_Foundation] version: 1.0.0 cstd:201112
+[the_Foundation] locale: en_US.UTF-8
+Lagrange: A Beautiful Gemini Client
+[1]    319881 segmentation fault (core dumped)  ./lagrange
+
+
+And here are the strace lines right before the segfault:
+
+rt_sigprocmask(SIG_BLOCK, ~[], [], 8)   = 0
+clone(child_stack=0x7fea702e4ef0, flags=CLONE_VM|CLONE_FS|CLONE_FILES|CLONE_SIGHAND|CLONE_THREAD|CLONE_SYSVSEM|CLONE_SETTLS|CLONE_PARENT_SETTID|CLONE_CHILD_CLEARTID, parent_tid=[319841], tls=0x7fea702e5640, child_tidptr=0x7fea702e5910) = 319841
+rt_sigprocmask(SIG_SETMASK, [], NULL, 8) = 0
+access(&quot;/home/makeworld/.config/lagrange&quot;, R_OK) = 0
+getcwd(&quot;/home/makeworld/Software/lagrange-0.1.0/build&quot;, 4096) = 46
+stat(&quot;/home/makeworld/.config/lagrange/trusted.txt&quot;, 0x7ffd22276360) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/home/makeworld/.config/lagrange/trusted.txt&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+stat(&quot;/home/makeworld/.config/lagrange/idents.binary&quot;, 0x7ffd22276360) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/home/makeworld/.config/lagrange/idents.binary&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+access(&quot;/home/makeworld/.config/lagrange/idents&quot;, R_OK) = 0
+stat(&quot;/home/makeworld/.config/lagrange/idents&quot;, {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+openat(AT_FDCWD, &quot;/home/makeworld/.config/lagrange/idents&quot;, O_RDONLY|O_NONBLOCK|O_CLOEXEC|O_DIRECTORY) = 17
+fstat(17, {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+getdents64(17, 0x56014d354160 /* 2 entries */, 32768) = 48
+getdents64(17, 0x56014d354160 /* 0 entries */, 32768) = 0
+access(&quot;/home/makeworld/.config&quot;, R_OK) = 0
+mkdir(&quot;/home/makeworld/.config/lagrange&quot;, 0755) = -1 EEXIST (File exists)
+stat(&quot;/home/makeworld/.config/lagrange/prefs.cfg&quot;, 0x7ffd22276600) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/home/makeworld/.config/lagrange/prefs.cfg&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+stat(&quot;/home/makeworld/.config/lagrange/visited.txt&quot;, 0x7ffd22276500) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/home/makeworld/.config/lagrange/visited.txt&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+stat(&quot;/home/makeworld/.config/lagrange/bookmarks.txt&quot;, 0x7ffd22276540) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/home/makeworld/.config/lagrange/bookmarks.txt&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+stat(&quot;/home/makeworld/Software/lagrange-0.1.0/share/lagrange/resources.binary&quot;, 0x7ffd222765e0) = -1 ENOENT (No such file or directory)
+stat(&quot;/home/makeworld/Software/lagrange-0.1.0/share/lagrange/resources.binary&quot;, 0x7ffd222765b0) = -1 ENOENT (No such file or directory)
+openat(AT_FDCWD, &quot;/home/makeworld/Software/lagrange-0.1.0/share/lagrange/resources.binary&quot;, O_RDONLY) = -1 ENOENT (No such file or directory)
+stat(&quot;/home/makeworld/Software/lagrange-0.1.0/build/resources.binary&quot;, {st_mode=S_IFREG|0644, st_size=9086132, ...}) = 0
+stat(&quot;/home/makeworld/Software/lagrange-0.1.0/build/resources.binary&quot;, {st_mode=S_IFREG|0644, st_size=9086132, ...}) = 0
+openat(AT_FDCWD, &quot;/home/makeworld/Software/lagrange-0.1.0/build/resources.binary&quot;, O_RDONLY) = 18
+--- SIGSEGV {si_signo=SIGSEGV, si_code=SEGV_ACCERR, si_addr=0x56014b9fe980} ---
++++ killed by SIGSEGV (core dumped) +++
+[1]    319831 segmentation fault (core dumped)  strace ./lagrange
+
+
+I downloaded the specific .tar.gz from your releases that includes theFoundation.
+Any idea what the issue is?
+
+
+makeworld
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002715.html">[ANN] Lagrange - A Beautiful Gemini Client
+</A></li>
+	<LI>Next message (by thread): <A HREF="002718.html">[ANN] Lagrange - A Beautiful Gemini Client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2717">[ date ]</a>
+              <a href="thread.html#2717">[ thread ]</a>
+              <a href="subject.html#2717">[ subject ]</a>
+              <a href="author.html#2717">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

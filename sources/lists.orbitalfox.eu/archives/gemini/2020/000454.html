@@ -1,0 +1,321 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> An outsider's view of the `gemini://` protocol
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20outsider%27s%20view%20of%20the%20%60gemini%3A//%60%20protocol&In-Reply-To=%3C20200228234201.GE16159%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000449.html">
+   <LINK REL="Next"  HREF="000455.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>An outsider's view of the `gemini://` protocol</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20outsider%27s%20view%20of%20the%20%60gemini%3A//%60%20protocol&In-Reply-To=%3C20200228234201.GE16159%40brevard.conman.org%3E"
+       TITLE="An outsider's view of the `gemini://` protocol">sean at conman.org
+       </A><BR>
+    <I>Fri Feb 28 23:42:01 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000449.html">An outsider's view of the `gemini://` protocol
+</A></li>
+        <LI>Next message (by thread): <A HREF="000455.html">An outsider's view of the `gemini://` protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#454">[ date ]</a>
+              <a href="thread.html#454">[ thread ]</a>
+              <a href="subject.html#454">[ subject ]</a>
+              <a href="author.html#454">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Ciprian Dorin Craciun once stated:
+&gt;<i> On Fri, Feb 28, 2020 at 11:07 AM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+</I>&gt;<i> &gt;   Why is a numeric status code so bad?  Yes, the rest of the protocol is
+</I>&gt;<i> &gt; English centric (MIME types; left-to-right, UTF-8).  It just seems that
+</I>&gt;<i> &gt; using words (regardless of language) is just complexity for its own sake.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Why did people use `/etc/hosts` files before DNS was invented?  Why do
+</I>&gt;<i> we have `/etc/services`?  Why do we have `O_READ`?  Why do we have
+</I>&gt;<i> `chmod +x`?
+</I>
+  True, but parsing the status code character by character is only one way
+of doing it.  Another way to to just convert it to a number and do that
+comparison.  When doing HTTP releated things [1], I do have named constants
+like HTTP_OKAY and HTTP_NOTFOUND.
+
+&gt;<i> Because numbers are hard to remember, and say nothing to a person that
+</I>&gt;<i> doesn't know the spec by heart.  (For example although I do a lot of
+</I>&gt;<i> HTTP related work with regard to routing and such, I always don't
+</I>&gt;<i> remember which of the 4-5 HTTP redirect codes says &quot;temporary redirect
+</I>&gt;<i> but keep the same method&quot; as &quot;opposed to temporary redirect but switch
+</I>&gt;<i> to `GET`&quot;.)
+</I>
+  But you have that anyway.  I have HTTP_MOVETEMP (hmmm, why isn't it
+HTTP_REDIRECT_TEMPORARY?  I have to think on that ... ) but even then, I
+have to know that causes clients to switch to GET and if I don't want that,
+I have to use HTTP_MOVETEMP_M (hmm ... I almost typed HTTP_MOVETMP_M ...
+something else to think about).  So even with symbolic names there are
+issues.
+
+  Perhaps it's me, but I don't mind looking up things if I don't recall
+them.  I've been programming in C for 30 years now.  I *still* have to look
+up the details to strftime() every single time I use it, but I recall that
+rand() returns a number between 0 and MAX_RAND (inclusive), yet I use
+strftime() way more often than I do rand().  
+
+&gt;<i> &gt; &gt; As minor issues:
+</I>&gt;<i> &gt; &gt; * why `CRLF`?  it's easier (both in terms of availability of functions
+</I>&gt;<i> &gt; &gt; and efficiency) to split lines by a single character `\n` than by a
+</I>&gt;<i> &gt; &gt; string;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;   That was discussed earlier on the list:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;         <A HREF="https://lists.orbitalfox.eu/archives/gemini/2019/000116.html">https://lists.orbitalfox.eu/archives/gemini/2019/000116.html</A>
+</I>&gt;<i> 
+</I>&gt;<i> OK, reading that email the answer seems to be &quot;because other protocols
+</I>&gt;<i> have it&quot;...  And even you admit that in your own code you also handle
+</I>&gt;<i> just `LF`.
+</I>&gt;<i> 
+</I>&gt;<i> So then why bother?  Why not simplify the protocol?
+</I>
+  True, but there's the 800-pound gorilla to consider---Windows.  On
+Windows, a call like:
+
+	fgets(buffer,sizeof(buffer),stdin);
+
+will read the next line into the buffer, and automatically convert CRLF into
+just LF.  That's because Windows uses CRLF to mark end of lines.  It got
+that from MS-DOS, which got that from CP/M, which got that from RT-11, which
+got that from (I suspect) a literal interpretation of the ASCII spec from
+the mid-60s [2].  Also the RFCs written in the 70s describing the early work
+of the Internet also used a literal interpretation of ASCII.
+
+  So there's a lot of protocols defined for the Internet that use CRLF. 
+Could a switch be made to just LF?  Sure.  It's also about as likely as the
+Internet byte order being switched from big-endian to little-endian.
+
+&gt;<i> &gt;   Okay, we use NaCL.  Now what?  What's needed to secure the communication
+</I>&gt;<i> &gt; channel?  A key exchange.  Again, rule 1---never implement crypto.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Given that one has the public key of the server (more on that later),
+</I>&gt;<i> one could use the following on client / server sides:
+</I>&gt;<i> 
+</I>&gt;<i>     <A HREF="https://libsodium.gitbook.io/doc/public-key_cryptography/sealed_boxes">https://libsodium.gitbook.io/doc/public-key_cryptography/sealed_boxes</A>
+</I>
+  There's this wonderful talk by John Carmack:
+
+	<A HREF="https://www.youtube.com/watch?v=dSCBCk4xVa0">https://www.youtube.com/watch?v=dSCBCk4xVa0</A>
+
+which talks about ideas, and what might seem a good idea isn't when it comes
+to an actual implementation.
+
+  The linked page just talks about an API for signing and ecrypting data. 
+It says nothing about negotiating the cipher, key size, or anything remotely
+like a protocol.  I would ask that if you feel this strongly about it, *do
+it!*  Implement a client and server that uses these alternative crypto
+systems and then we'll have something to talk about.
+
+  When solderpunk first designed Gemini, I didn't agree with all his
+descisions (especially the status codes), but I was interested.  I also
+wanted to play around with TLS since I had finished writing a Lua interface
+for libtls.  So I wrote my own server, with what I felt the status codes
+should be.  The thing was---*there was a working implementation* that was
+used to argue certain points.  And through that, we got the compromise of
+the current status codes.
+
+  You can argue for an idea.  But an idea *and an implementation* is
+stronger than just the idea.  I think that's why my Gemini server is so
+featureful---I went ahead and implemented my ideas to help argue for/against
+ideas, or even to just present *something* to talk about (when I have no
+opinion one way or the other).
+
+&gt;<i> My take on this:  given a set of clear requirements for the
+</I>&gt;<i> `<A HREF="gemini://`">gemini://`</A> protocol (which I've seen there are) one can come up with
+</I>&gt;<i> better solutions than TLS, ones that better fit the use-case.
+</I>
+  So do it.  One of the goals for Gemini is ease of implemetation (of both
+the server and the client), so this will go a long way to showing how easy
+it is to implement your ideas.
+
+&gt;<i> (Again, just to be clear, I'm not saying &quot;lets invent our own crypto&quot;,
+</I>&gt;<i> but instead &quot;let's look at other tested&quot; alternatives.  As a
+</I>&gt;<i> side-note, NaCL, on which `libsodium` is based, was created by `Daniel
+</I>&gt;<i> J. Bernstein`...)
+</I>
+  Yes, I am aware of that.  I even installed djb's version of NaCL and
+played around with it.  It's nice, but a protocol it is not.
+
+&gt;<i> &gt;   One problem with that---incentives.  What's my incentive to make all this
+</I>&gt;<i> &gt; information more easily machine readable?  On the web, you do that, and what
+</I>&gt;<i> &gt; happens?  Google comes along, munches on all that sweet machine readable
+</I>&gt;<i> &gt; data and serves it up directly to users, meaning the user just has to go to
+</I>&gt;<i> &gt; Google for the information, not your server.  Given those incentives, I have
+</I>&gt;<i> &gt; no reason to make my data easily machine readable when it means less
+</I>&gt;<i> &gt; traffic.
+</I>&gt;<i> 
+</I>&gt;<i> The incentive is a clear one:  for the end-user.  Given that we can
+</I>&gt;<i> standardize on such an &quot;index&quot;, then we can create better
+</I>&gt;<i> &quot;user-agents&quot; that are more useful to our actual users.  (And I'm not
+</I>&gt;<i> even touching on the persons that have various disabilities that
+</I>&gt;<i> hamper their interaction with computers.)
+</I>
+  Okay, how does that incentivise me?
+
+  It's easy enough to add machine readable annotations to HTML.  Heck, there
+are plenty of semantic tags in HTML to help with machine readability.  Yet
+why don't more people hand-code HTML?  Why is Markdown, which, I will add,
+has no defined way of adding metadata except by including HTML, so popular?
+
+&gt;<i> For example say I'm exposing a API documentation via `<A HREF="gemini://`.">gemini://`.</A>  How
+</I>&gt;<i> do I handle the &quot;all functions index page&quot;?  Do I create a large
+</I>&gt;<i> `text/gemini` file, or a large HTML file?  How does the user interact
+</I>&gt;<i> with that?  With search?  Wouldn't he be better served by a searchable
+</I>&gt;<i> interface which filters the options as he types, like `dmenu` / `rofi`
+</I>&gt;<i> / `fzf` (or the countless other clones) do?  (Currently each
+</I>&gt;<i> programming language from Rust to Scheme tries to do something similar
+</I>&gt;<i> with JavaScript and the result is horrible...)
+</I>
+  PHP (which I don't like personally) has incredible documentation, but the
+PHP developers put a lot of work into creating the system to enable that. 
+It's not just &quot;make machine readable documentation&quot; and poof---it's done.
+
+  I would say that's mostly tooling, not an emergent property of HTML.
+
+&gt;<i> Or, to take another approach, why do people use Google to search
+</I>&gt;<i> things?  Because our web pages are so poor when it comes to
+</I>&gt;<i> structuring information, that most often than not, when I want to find
+</I>&gt;<i> something on a site I just Google: `site:example.com the topic i'm
+</I>&gt;<i> interested in`.
+</I>
+  Web search engines were not initially designed to find stuff on a given
+site, it was to find sites you didn't even knew existed, period.  The web
+quickly grew from &quot;here's a list of all known web sites&quot; to &quot;there's no way
+for a single person to know what's out there.&quot;  Since then Google has grown
+to be a better index of sites than sites themselves (although I think Google
+isn't quite as good as it used to be).
+
+  Creating and maintaining a web site structure isn't easy, and it's all too
+easy to make a mistake that is hard to rectify, and I speak from experience
+since my website [3] is now 22 years old [4], and I have a bunch of
+redirects to rectify past organizational mistakes (and redirects were
+another aspect I had to argue to add to Gemini, by the way---the
+implemetation helped).
+
+&gt;<i> I'm not advocating for RDF (it was quite convoluted) or semantic web,
+</I>&gt;<i> or GraphQL, etc.  I'm just advocating something better than the Gopher
+</I>&gt;<i> map.
+</I>
+  Okay, create a format and post it.  That's the best way to get this
+started.
+
+&gt;<i> &gt;   As a user, that's great!  As a web site operator, not so much.
+</I>&gt;<i> 
+</I>&gt;<i> OK...  Now here is something I don't understand:  aren't you building
+</I>&gt;<i> Gemini sites for &quot;users&quot;?  You are building it for &quot;operators&quot;?
+</I>
+  I'm building it primarily for me.  Much like my website (and gophersite
+[5]) is mostly for my own benefit---if others like it, cool!  But it's not
+solely for others.
+
+&gt;<i> Because if the operator is what you optimize for, then why not just
+</I>&gt;<i> SSH into the operator's server where he provides you with his
+</I>&gt;<i> &quot;favourite&quot; BBS clone.
+</I>
+  Those do exist, but that's not something I want to do.
+
+&gt;<i> &gt;   Hey, go ahead and implement that.  I'd like to see that ...
+</I>&gt;<i> 
+</I>&gt;<i> There is already FreeNet and IPFS that implement content-based
+</I>&gt;<i> addressing.  I just wanted something in between that is still
+</I>&gt;<i> &quot;location&quot; driven, but is &quot;content identity&quot; aware.
+</I>
+  Again, what's stopping you from just doing it?  Waiting for consensus? 
+Have you read the thread on text formatting?  It's literally half the
+messages to this list.  I do have to wonder how far along Gemini would be if
+I had not just gone ahead and implented a server.
+
+  -spc (In my opinion, working code trumps ideas ... )
+
+[1]	Like my blog engine, written in C:
+
+	<A HREF="https://github.com/spc476/mod_blog">https://github.com/spc476/mod_blog</A>
+
+[2]	A close reading of the actual ASCII standard reveals two control
+	codes, CR and LF.  CR is defined as &quot;returning the carriage head
+	back to the start of a line&quot; and LF is defined as &quot;advancing to the
+	next line, without changing the position of the carriage.&quot; So a
+	literal reading of the spec says if you want to advance to the start
+	of the next line, you send both a CR and LF.  There is no control
+	code defined by ASCII that means &quot;return the carriage to the start
+	of the line and advance to the next line.&quot; There *is* such a control
+	character, NEL, but that's defined by the ISO, not ANSI (and it
+	happens to be either character 133 or &lt;ESC&gt;E).
+
+	Over time, some systems have adpoted one or the other to mean
+	&quot;return carriage to start of line and advance to next line.&quot; Most
+	8-bit systems I've experienced used CR for that.  Unix picked LF.  A
+	few (mostly DEC influenced, like CP/M) used both.
+
+	The RFCs written in the 70s (when the Internet was first being
+	developed) used a more literal imterpretation of the ASCII standard
+	and required both CRLF to mark the end of the line.
+
+	There is also a similar issue with backspace.  ASCII defines BS as
+	&quot;move the carriage to the previous character position; if at the
+	start of the line, don't do anything.&quot; DEL is defined as &quot;ignore
+	this character.&quot; Neither one means &quot;move back one space and erase
+	the character&quot;.  BS was intended to be used to create characters not
+	defined by ASCII, like &#228; by issuing the sequence
+
+		a&lt;BS&gt;&quot;
+
+	Over time, different systems have implemented the &quot;move back one
+	space and erase the character&quot; by using either BS or DEL.
+
+[3]	<A HREF="http://www.conman.org/">http://www.conman.org/</A>
+
+[4]	At the current domain.  It's a bit older than that, but it was under
+	a different domain I didn't control, which is why my personal pages
+	are under:
+
+		<A HREF="http://www.conman.org/people/spc/">http://www.conman.org/people/spc/</A>
+	
+	and not the top level.  That move was painful enough as it was.
+
+[5]	<A HREF="gopher://gopher.conman.org/">gopher://gopher.conman.org/</A>
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000449.html">An outsider's view of the `gemini://` protocol
+</A></li>
+	<LI>Next message (by thread): <A HREF="000455.html">An outsider's view of the `gemini://` protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#454">[ date ]</a>
+              <a href="thread.html#454">[ thread ]</a>
+              <a href="subject.html#454">[ subject ]</a>
+              <a href="author.html#454">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

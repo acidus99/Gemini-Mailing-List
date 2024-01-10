@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Documents with mixed languages
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Documents%20with%20mixed%20languages&In-Reply-To=%3CQROqC4EalCU4FrsWcT47KVSs8ObpdY8cDeFszGlPg6E2tm93bkzSoR9NF56EmxzZ83VMrQOSX7_FcrqNtboRjQ5oTwVD3Ulx-Q3qNDX9eyY%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007678.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Documents with mixed languages</H1>
+    <B>Krixano</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Documents%20with%20mixed%20languages&In-Reply-To=%3CQROqC4EalCU4FrsWcT47KVSs8ObpdY8cDeFszGlPg6E2tm93bkzSoR9NF56EmxzZ83VMrQOSX7_FcrqNtboRjQ5oTwVD3Ulx-Q3qNDX9eyY%3D%40protonmail.com%3E"
+       TITLE="Documents with mixed languages">krixano at protonmail.com
+       </A><BR>
+    <I>Mon Dec 13 11:21:44 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007678.html">Documents with mixed languages
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7679">[ date ]</a>
+              <a href="thread.html#7679">[ thread ]</a>
+              <a href="subject.html#7679">[ subject ]</a>
+              <a href="author.html#7679">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Yeah, some people don't know Gemini History apparently, lol.
+
+People need to stop imposing their views on the standard as if it was part of the original design of the protocol when it wasn't. Solderpunk could change things at any time, of course, but that doesn't change the original designs. So... No, as far as I'm aware, Gemini was never about read-only. It was about balancing the power-to-weight ratio. No, Gemini's text input was never exclusively for search - there's an article written by Solderpunk that details why he included input labels. No, Gemini was never anti-applications (at least since the idea of Client Certificates). Solderpunk wrote an article showing that applications were at least considered as a potential for the protocol. Also, no, having (text, and others) streaming and browsers that interact with streams in Gemini is not against the intended spec. In fact, allowing for Text Streaming was a decision talked about between Solderpunk, Tomasino (iirc), Mozz, and a few other people. Solderpunk references this feature in one of his recent emails here on the mailing list (regarding how close_notify doesn't affect streaming via Gemini).
+
+Now, about what the spec states. If you read the spec too literally and linearly, then I can kinda see how people might think the spec says requests must be handled after close_notify, from:
+&gt;<i> C: Opens connection
+</I>&gt;<i> S: Accepts connection
+</I>&gt;<i> C/S: Complete TLS handshake (see section 4)
+</I>&gt;<i> C: Validates server certificate (see 4.2)
+</I>&gt;<i> C: Sends request (one CRLF terminated line) (see section 2)
+</I>&gt;<i> S: Sends response header (one CRLF terminated line), closes connection
+</I> under non-success conditions (see 3.1 and 3.2)
+&gt;<i> S: Sends response body (text or binary data) (see 3.3)
+</I>&gt;<i> S: Closes connection (including TLS close_notify, see section 4)
+</I>&gt;<i> C: Handles response (see 3.4)
+</I>
+I firmly believe that this is an undesired overly-linear interpretation, and that perhaps Solderpunk might want to consider changing this if necessary, and if his views on streaming haven't changed. Remember, the spec isn't actually final yet.
+
+As for the links:
+On Inputs and Client Certificates: <A HREF="gopher://zaibatsu.circumlunar.space:70/0/~solderpunk/gemini/inputs-and-client-certs.txt">gopher://zaibatsu.circumlunar.space:70/0/~solderpunk/gemini/inputs-and-client-certs.txt</A>
+On Streaming (Tomasino): <A HREF="gemini://rawtext.club/~sloum/geminilist/001696.gmi">gemini://rawtext.club/~sloum/geminilist/001696.gmi</A>
+On Applications and Streaming (Solderpunk): <A HREF="gemini://gemini.circumlunar.space/users/solderpunk/gemlog/a-vision-for-gemini-applications.gmi">gemini://gemini.circumlunar.space/users/solderpunk/gemlog/a-vision-for-gemini-applications.gmi</A>
+Mozz's Response to Solderpunk on Streaming: <A HREF="gemini://mozz.us/journal/2020-06-21.gmi">gemini://mozz.us/journal/2020-06-21.gmi</A>
+
+Links via Gemini:
+On Inputs and Client Certificates: <A HREF="gemini://zaibatsu.circumlunar.space/~solderpunk/gemini/inputs-and-client-certs.txt">gemini://zaibatsu.circumlunar.space/~solderpunk/gemini/inputs-and-client-certs.txt</A>
+On Streaming (Tomasino): [Only Available Via Gopher, afaik]
+On Applications and Streaming (Solderpunk): <A HREF="gemini://gemini.circumlunar.space/users/solderpunk/gemlog/a-vision-for-gemini-applications.gmi">gemini://gemini.circumlunar.space/users/solderpunk/gemlog/a-vision-for-gemini-applications.gmi</A>
+Mozz's Response to Solderpunk on Streaming: [Only Available Via Gopher, afaik]
+
+Christian Seibold
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007678.html">Documents with mixed languages
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7679">[ date ]</a>
+              <a href="thread.html#7679">[ thread ]</a>
+              <a href="subject.html#7679">[ subject ]</a>
+              <a href="author.html#7679">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Query Strings
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Query%20Strings&In-Reply-To=%3C1141063286.117280.1590338036891%40ichabod.co-bxl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001010.html">
+   <LINK REL="Next"  HREF="001020.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Query Strings</H1>
+    <B>Brian Evans</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Query%20Strings&In-Reply-To=%3C1141063286.117280.1590338036891%40ichabod.co-bxl%3E"
+       TITLE="Query Strings">b__m__e at mailfence.com
+       </A><BR>
+    <I>Sun May 24 17:33:56 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001010.html">spec clarification request: scheme omission
+</A></li>
+        <LI>Next message (by thread): <A HREF="001020.html">Query Strings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1019">[ date ]</a>
+              <a href="thread.html#1019">[ thread ]</a>
+              <a href="subject.html#1019">[ subject ]</a>
+              <a href="author.html#1019">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Greetings,
+I got a bug report recently for Bombadillo about how I have been handling query strings.
+I had accidentally left a big in where I was chaining queries:
+
+some.site/thing.gmi?hello?world
+
+They brought up, and it seemed clear to me, that the query should be replaced and not
+added on to. So I have done that update (and it will be a part of a big release soon, for
+which I will notify the list when it happens).
+
+The other thing they brought up was escaping before sending to the server. Bombadillo
+does not escape querystrings currently (for gopher or for gemini).
+
+A look at the spec provides no further explanation re: what is expected: escaped or
+unescaped? The spec does point to an RFC that no doubt encourages the escaping
+of querystrings (I have not read through the RFC recently)... 
+
+However, in practice, servers offering search (GUS and Houston) do not seem to
+unescape a query that is sent to them. I have not tested places other than those two
+but neither seems to do so. If I send:
+
+some.site/thing.gmi?This%2C+is+a+string
+
+GUS reports the search string as: &quot;This%2C+is+a+string&quot;
+But it should, if escaping and unescaping is expected, report it as: &quot;This, is a string&quot;
+
+I think it would be good to clearly state what is expected of clients and servers
+regarding the escaping of querystring values for gemini.
+
+--&#160;
+Sent with <A HREF="https://mailfence.com">https://mailfence.com</A>
+Secure and private email
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001010.html">spec clarification request: scheme omission
+</A></li>
+	<LI>Next message (by thread): <A HREF="001020.html">Query Strings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1019">[ date ]</a>
+              <a href="thread.html#1019">[ thread ]</a>
+              <a href="subject.html#1019">[ subject ]</a>
+              <a href="author.html#1019">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

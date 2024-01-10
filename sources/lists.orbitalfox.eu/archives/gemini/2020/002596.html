@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A proposed scheme for parsing preformatted alt text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C20200907203134.GE2239112%40tilde.team%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002594.html">
+   <LINK REL="Next"  HREF="002592.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A proposed scheme for parsing preformatted alt text</H1>
+    <B>easeout at tilde.team</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C20200907203134.GE2239112%40tilde.team%3E"
+       TITLE="A proposed scheme for parsing preformatted alt text">easeout at tilde.team
+       </A><BR>
+    <I>Mon Sep  7 21:31:34 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002594.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+        <LI>Next message (by thread): <A HREF="002592.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2596">[ date ]</a>
+              <a href="thread.html#2596">[ thread ]</a>
+              <a href="subject.html#2596">[ subject ]</a>
+              <a href="author.html#2596">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Sep 07, 2020 at 08:31:58PM +0100, Luke Emmet wrote:
+&gt;<i> On 07-Sep-2020 19:16, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">easeout at tilde.team</A> wrote:
+</I>&gt;<i> &gt; I think it would be helpful to quote the spec here:
+</I>&gt;<i> &gt; &gt; Use of alt text is at the client's discretion, and simple clients may
+</I>&gt;<i> &gt; &gt; ignore it. Alt text is recommended for ASCII art or similar
+</I>&gt;<i> &gt; &gt; non-textual content which, for example, cannot be meaningfully
+</I>&gt;<i> &gt; &gt; understood when rendered through a screen reader or usefully indexed
+</I>&gt;<i> &gt; &gt; by a search engine. Alt text may also be used for computer source code
+</I>&gt;<i> &gt; &gt; to identify the programming language which advanced clients may use
+</I>&gt;<i> &gt; &gt; for syntax highlighting.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Alt text is recommended for, and I think named after, the role of alt
+</I>&gt;<i> &gt; text in HTML&lt;img&gt;. That is, to be an alternative representation of the
+</I>&gt;<i> &gt; content, like &quot;Photograph of a woman on a horse&quot;. In that sense it is
+</I>&gt;<i> &gt; meant to be text that users see! Just not every user in all
+</I>&gt;<i> &gt; circumstances. HTML&lt;img&gt;  alt text is meant in part for users that use
+</I>&gt;<i> &gt; screen readers, but users nonetheless. So I would prefer we not go
+</I>&gt;<i> &gt; adding extensions to alt text that prevent it from being always
+</I>&gt;<i> &gt; human-readable.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; (Refer to the alt attribute as documented here:)
+</I>&gt;<i> &gt; <A HREF="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Img">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Img</A>
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; The advanced use case cited in the spec matches the way in
+</I>&gt;<i> &gt; GitHub-flavored Markdown you can write ```typescript to get TypeScript
+</I>&gt;<i> &gt; syntax highlighting. While not an alternative content representation,
+</I>&gt;<i> &gt; that is at least human-readable.
+</I>&gt;<i> 
+</I>&gt;<i> Whilst a reference to the HTML spec is interesting, we are defining Gemini
+</I>&gt;<i> here, so the Gemini spec isn't beholden to HTML.
+</I>
+To be clear, I'm not saying we are beholden to HTML. But it is the basis
+for the spec's vocabulary: In this case &quot;alt text&quot; is a term from HTML.
+I'm pointing to HTML's &lt;img&gt; alt attribute because that's what I believe
+Solderpunk was talking about when the spec mentioned &quot;alt text&quot;. I think
+that, and the text of the spec (&quot;Alt text is recommended for&#8230;&quot;), support
+the notion that human-readable alternative content representation is the
+primary point of the field.
+
+&gt;<i> The spec mentions both applications of the tail of the &quot;mode switch line&quot;
+</I>&gt;<i> (to avoid a normative gloss), both as an alt text and to identify the
+</I>&gt;<i> programming language. So this duality is already envisaged in the spec.
+</I>
+It does, but my next point was that this two-uses-for-one-field
+situation creates conflict between the uses with negative consequences
+for users. It would be better regarded as a mistake in the spec worth
+amending.
+
+&gt;<i> &gt; Really, I think what we have here is a field with two possible uses that
+</I>&gt;<i> &gt; are at cross purposes, one for people and one for machines. Syntatically
+</I>&gt;<i> &gt; it's based on something in Markdown that's for machine use, but it's
+</I>&gt;<i> &gt; recommended for the human use. But the whole idea of it being for human
+</I>&gt;<i> &gt; use is spoiled by the fact that it will grate on humans in cases when it
+</I>&gt;<i> &gt; is not for their use.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I would rather the spec either make a call and pick one purpose, or omit
+</I>&gt;<i> &gt; the field entirely, rather than leaving this conflict unresolved.
+</I>&gt;<i> 
+</I>&gt;<i> I prefer that the spec allows for multiple uses. Primarily it is a label for
+</I>&gt;<i> human benefit, but that is not to say it cannot be comprehended by a
+</I>&gt;<i> machine.
+</I>
+I hear you, but I don't see how that addresses the problem create for
+users by having the field work two ways.
+
+&gt;<i> This sort of relates to the other thread on the ML right now - about whether
+</I>&gt;<i> there could be a feed format based on gemtext - it would be based on certain
+</I>&gt;<i> conventions in the use of the format, without breaking gemtext at all.
+</I>
+As I understand it, a feed format based on Gemtext would be usable as a
+plain Gemtext page by a plain browser, which is great. And for a feed
+aggregator to use it as a subscription mechanism, you'd have to
+formalize some piece of it. All of that sounds OK for that purpose.
+
+But in this thread, I think we're talking interpreting Gemtext alt text
+differently, not for a special kind of client, but in regular
+user-facing interactive browsers. And not on special documents like
+feeds, but in general purpose Gemtext pages.
+
+I think that difference makes these two cases not comparable. Adding
+Gemtext-compatible formality for feed pages has no effect on other
+Gemtext pages. Adding accessibility-incompatible formality for all
+Gemtext pages could have a negative effect on particular users across
+Gemini as a whole.
+
+&gt;<i> I don't see how the spec can mandate the content that is in an informative
+</I>&gt;<i> part of the content -i.e. a label on an element.
+</I>
+I think what the spec can do is make a clearer recommendation. Maybe
+we'd have two fields and they wouldn't have to step on each other's
+toes.
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002594.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+	<LI>Next message (by thread): <A HREF="002592.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2596">[ date ]</a>
+              <a href="thread.html#2596">[ thread ]</a>
+              <a href="subject.html#2596">[ subject ]</a>
+              <a href="author.html#2596">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

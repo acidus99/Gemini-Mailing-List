@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tech] A server to test client certificates?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BTech%5D%20A%20server%20to%20test%20client%20certificates%3F&In-Reply-To=%3CCAFwUW92Js8eM3R7fA0fvWFHtjDd3MLov9_cQ0m56bRqvZobUJw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007652.html">
+   <LINK REL="Next"  HREF="007653.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tech] A server to test client certificates?</H1>
+    <B>Mansfield</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BTech%5D%20A%20server%20to%20test%20client%20certificates%3F&In-Reply-To=%3CCAFwUW92Js8eM3R7fA0fvWFHtjDd3MLov9_cQ0m56bRqvZobUJw%40mail.gmail.com%3E"
+       TITLE="[Tech] A server to test client certificates?">mansfield at ondollo.com
+       </A><BR>
+    <I>Sun Nov 28 23:41:09 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007652.html">[Tech] A server to test client certificates?
+</A></li>
+        <LI>Next message (by thread): <A HREF="007653.html">[Tech] A server to test client certificates?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7651">[ date ]</a>
+              <a href="thread.html#7651">[ thread ]</a>
+              <a href="subject.html#7651">[ subject ]</a>
+              <a href="author.html#7651">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Nov 28, 2021 at 12:18 PM Stephane Bortzmeyer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stephane at sources.org</A>&gt;
+wrote:
+
+&gt;<i> I'm quite sad that <A HREF="gemini://gemini.conman.org/">gemini://gemini.conman.org/</A> is gone, it was very
+</I>&gt;<i> useful for, among other things, testing client certificate support in
+</I>&gt;<i> a Gemini client.
+</I>&gt;<i>
+</I>&gt;<i> I'm looking for an alternative. Is there another server that accepts
+</I>&gt;<i> client certificates and echoes in some way the received cert, to
+</I>&gt;<i> include in a test suite for a client?
+</I>&gt;<i>
+</I>
+
+The gemini server at ondollo.com has some URLs to test clients, one of
+which will respond with the common name and a chunk from the first part of
+the fingerprint.
+
+```
+<A HREF="gemini://ondollo.com/internal/test?showCert">gemini://ondollo.com/internal/test?showCert</A>
+```
+
+Using the Mansfield client to hit that url and dump the raw response to the
+cli looks like this:
+
+```
+./mansfield -rs <A HREF="gemini://ondollo.com/internal/test?showCert">gemini://ondollo.com/internal/test?showCert</A>
+20 text/gemini
+common_name_in_cert:26:99:8E
+```
+
+I wouldn't mind adding more to the output if it helped you.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20211128/1dc52ebd/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20211128/1dc52ebd/attachment.htm</A>&gt;
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007652.html">[Tech] A server to test client certificates?
+</A></li>
+	<LI>Next message (by thread): <A HREF="007653.html">[Tech] A server to test client certificates?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7651">[ date ]</a>
+              <a href="thread.html#7651">[ thread ]</a>
+              <a href="subject.html#7651">[ subject ]</a>
+              <a href="author.html#7651">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

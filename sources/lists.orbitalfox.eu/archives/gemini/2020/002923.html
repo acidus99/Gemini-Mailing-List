@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Debugging Lagrange (was Re: [ANN] Lagrange - A Beautiful Gemini Client)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Debugging%20Lagrange%20%28was%20Re%3A%20%5BANN%5D%20Lagrange%20-%20A%20Beautiful%20Gemini%0A%20Client%29&In-Reply-To=%3C20201025183510.GA459032%40rawtext.club%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002921.html">
+   <LINK REL="Next"  HREF="002924.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Debugging Lagrange (was Re: [ANN] Lagrange - A Beautiful Gemini Client)</H1>
+    <B>avalos at rawtext.club</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Debugging%20Lagrange%20%28was%20Re%3A%20%5BANN%5D%20Lagrange%20-%20A%20Beautiful%20Gemini%0A%20Client%29&In-Reply-To=%3C20201025183510.GA459032%40rawtext.club%3E"
+       TITLE="Debugging Lagrange (was Re: [ANN] Lagrange - A Beautiful Gemini Client)">avalos at rawtext.club
+       </A><BR>
+    <I>Sun Oct 25 18:35:10 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002921.html">Debugging Lagrange (was Re: [ANN] Lagrange - A Beautiful Gemini Client)
+</A></li>
+        <LI>Next message (by thread): <A HREF="002924.html">Debugging Lagrange (was Re: [ANN] Lagrange - A Beautiful Gemini Client)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2923">[ date ]</a>
+              <a href="thread.html#2923">[ thread ]</a>
+              <a href="subject.html#2923">[ subject ]</a>
+              <a href="author.html#2923">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Oct 25, 2020 at 01:15:07PM +0200, skyjake wrote:
+&gt;<i> On 24. Oct 2020, at 22:01, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">avalos at rawtext.club</A> wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; On 24. Oct 2020, at 5:47, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">avalos at rawtext.club</A> wrote:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt;&gt; However, in Manjaro ARM (Pinebook Pro), sites like
+</I>&gt;<i> &gt;&gt; <A HREF="gemini://circumlunar.space/">gemini://circumlunar.space/</A> and <A HREF="gemini://gus.guru/">gemini://gus.guru/</A> for some reason
+</I>&gt;<i> &gt;&gt; don't seem to load at all. Maybe it has something to do with TLS, I'm
+</I>&gt;<i> &gt;&gt; not sure how to debug, but I'd like to help.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Yes, I can access those sites on other clients, such as Castor and
+</I>&gt;<i> &gt; amfora. It's probably a bug in Lagrange.
+</I>&gt;<i> 
+</I>&gt;<i> Which version of OpenSSL is being used on the Pinebook?
+</I>
+I'm using OpenSSL 1.1.1h as well.
+
+&gt;<i> So far I haven't had any luck reproducing this issue nor do I have a clearer picture of why it might be failing, but here's something we can try. On the Pinebook, run this openssl command and let's compare the output:
+</I>&gt;<i> 
+</I>&gt;<i>     openssl s_client -connect gus.guru:1965 -debug -tlsextdebug
+</I>&gt;<i> 
+</I>&gt;<i> Output from OpenSSL 1.1.1h on a Mac:
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; <A HREF="https://media.skyjake.fi/openssl_debug.txt">https://media.skyjake.fi/openssl_debug.txt</A>
+</I>
+Here's my output:
+<A HREF="https://cryptpad.avalos.me/code/#/2/code/view/52l0LbI+Fo8xPNa1k8bggAOr2MTQOSIr-St+J+ceBhY/">https://cryptpad.avalos.me/code/#/2/code/view/52l0LbI+Fo8xPNa1k8bggAOr2MTQOSIr-St+J+ceBhY/</A>
+
+The OpenSSL command took a lot of time to finish and print the output.
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002921.html">Debugging Lagrange (was Re: [ANN] Lagrange - A Beautiful Gemini Client)
+</A></li>
+	<LI>Next message (by thread): <A HREF="002924.html">Debugging Lagrange (was Re: [ANN] Lagrange - A Beautiful Gemini Client)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2923">[ date ]</a>
+              <a href="thread.html#2923">[ thread ]</a>
+              <a href="subject.html#2923">[ subject ]</a>
+              <a href="author.html#2923">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

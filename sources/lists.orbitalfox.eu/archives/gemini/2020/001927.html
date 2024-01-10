@@ -1,0 +1,239 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Mercury
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Mercury&In-Reply-To=%3C20200626110424.GA4156%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001924.html">
+   <LINK REL="Next"  HREF="001947.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Mercury</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Mercury&In-Reply-To=%3C20200626110424.GA4156%40SDF.ORG%3E"
+       TITLE="Mercury">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Fri Jun 26 12:04:24 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001924.html">Mercury
+</A></li>
+        <LI>Next message (by thread): <A HREF="001947.html">Mercury
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1927">[ date ]</a>
+              <a href="thread.html#1927">[ thread ]</a>
+              <a href="subject.html#1927">[ subject ]</a>
+              <a href="author.html#1927">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Jun 25, 2020 at 06:48:04PM +0000, Phil Leblanc wrote:
+&gt;<i> _minimalism_:  as a personal taste and aesthetic principle, Yes. Also
+</I>&gt;<i> a guiding principle, as frugality.
+</I>&gt;<i> 
+</I>&gt;<i> _simplicity_: Yes, by far the most important reason -- as in &quot;less
+</I>&gt;<i> moving parts&quot;, &quot;no black box&quot;. Easily understanding all the core parts
+</I>&gt;<i> to the ground  Grasping it all at the same time without digging deep.
+</I>&gt;<i> 
+</I>&gt;<i> It relates to &quot;_explainability_&quot;:  explain sockets and basic network
+</I>&gt;<i> to a beginner and they will grasp Gemini without pain - it could even
+</I>&gt;<i> be a basic example of how to use sockets
+</I>&gt;<i> 
+</I>&gt;<i> ...
+</I>&gt;<i> 
+</I>&gt;<i> _easier DIYability_: Yes. closely related to simplicity. A _very
+</I>&gt;<i> refreshing_ aspect of Gemini is &quot;it is so simple you can implement it
+</I>&gt;<i> in a few hours. -- Ooops... and for TLS?  -- it is very simple. Just
+</I>&gt;<i> call this [big] shared library. -- Hmm ... if I call a big TLS library
+</I>&gt;<i> where it becomes complex, I could as well _very easily_ build a
+</I>&gt;<i> HTTP/HTML client by calling libcurl, right?  And arguably, I can find
+</I>&gt;<i> libcurl in as many platforms as libtls!
+</I>&gt;<i> 
+</I>&gt;<i> I think it relates also to hardware hobbyists. I don't mean the
+</I>&gt;<i> Raspberry Pi sort of thing (actually more powerful than hardly old
+</I>&gt;<i> PCs). I mean rather Arduino-like boards. I could imagine some smart
+</I>&gt;<i> guys will or have already implemented a ultra minimal TCP stack, and
+</I>&gt;<i> PPP to an internet gateway and could use Gemini -- ... probably not
+</I>&gt;<i> with TLS.
+</I>
+Thanks for clarifying.  For what it's worth, I acknowledge all these
+points.  I appreciate beautifully minimal things like FORTH, I value
+ease of teaching and of learning, and I tinker with AVR micros and even
+more constrained platforms myself.  I get it.  These are important things
+to consider.  But at the end of the day no one protocol can optimise
+simultaneously for all these things.  Often times the different
+requirements fight each other.  Even aesthetic minimalism and
+explainability can conflict, as really beautifully minimal systems with
+great generality/flexibility/power often require the user to first adapt
+to some unfamiliar, abstract mode of thinking that is not easy to grasp
+quickly.
+
+Ultimately, Gemini is supposed to be a practical protocol to solve a
+concrete, real-world problem: the web has become a disaster on many
+fronts simultaneously, and lots of people really want out, at least some
+of the time and for some things, but the only &quot;off the shelf&quot; thing they
+can flee to for roughly the same experience is Gopher, but many of them
+can't/won't flee to Gopher due to various shortcomings, one of which,
+yes, really, is the lack of encryption.  I don't want Gemini to be a
+beautiful object of appreciation for hackers that most people have no
+use for (there's no shortage of these!), I want it to be a viable
+lifeboat for evacuees from the web.  The first-class application is
+computer literate non-developers using &quot;normal computers&quot; and software
+other people wrote to read meaningful textual content with a reasonable
+expectation of privacy.  I am happy to make it simpler, more beautiful,
+more hackable, more general purpose, friendlier to low power computers
+and slow networks, to whatever extent is possible without interfering
+with its seaworthiness as a lifeboat.  I realise that it's worthwhile
+to do so to incentivise developers (who are inevitably the early
+adopters, and who will get excited by these properties) to write
+clients and servers and other tools which can then be used by others.
+And it honestly makes *me* happier to push it in those directions.
+But throwing out TLS so that it can be more readily implemented by
+somebody who just learned what a socket is yesterday is ultimately
+self-defeating from the lifeboat perspective.  If part of the reason
+people want to flee from the web is because of privacy concerns,
+offering them a plaintext alternative makes no sense at all, and they
+just won't make the jump.  The mandatory encryption in Gemini is an
+important, functional, deliberate part of the lifeboat design.  It would
+be a bad lifeboat without out.
+
+When we *do* chase improvements in these other regards without
+compromising our role as a lifeboat, we also need to keep a sense of
+perspective, make our criteria clear, make measurements and not trust
+our guts, etc.  I'm all for a lower power, greener internet.  But if you
+really want to push in that direction hard, you need to make radical
+departures from the basic paradigms that the web and Gemini are both
+built around.  I'm talking about systems where content is automatically
+and user-invisibly replicated across hosts and naturally ends up
+&quot;migrating&quot; to hosts which are closest, from a network perspective, to
+the places where demand for access to that content is highest.  A really
+radical solarpunk future internet has to be built around slow,
+intermittent, improvised/opportunistic connections, and &quot;offline first&quot;
+thinking has to dominate.  Gemini is just dead in the water in that
+kind of a world.  It's built around old-fashioned ideas, on purpose, in
+order to be &quot;radically familiar&quot; to both users and developers from the
+web, because a lifeboat protocol *needs* to be radically familiar.  If
+you throw in P2P and content-based addressing and blockchains and all
+the stuff you need to use to address the deep problems with the
+internet, a majority of both users and developers immediately have no
+idea what is going on and they won't get in your lifeboat because they
+can't.  So, by virtue of its deliberate old fashionedness, Gemini is
+never going to be the absolute best choice for low power consumption,
+for low bandwidth, etc.  That's not so say we shouldn't give those
+things any thought, but we needn't bend over backward for 1% or 2%
+savings because it just doesn't make sense.  We should concern ourselves
+with the &quot;low hanging fruit&quot; of these problems.
+
+If people who are interested in solving problems other than the &quot;web
+evacuee lifeboat&quot; problem, or who are interested in building &quot;jewels for
+hackers&quot; want to start separate projects of their own to do so, I wish
+them, sincerely, all the luck in the world.  I straight up do not have
+the time and energy spare after Gemini to have even slight active
+involvement in such projects, but that doesn't mean I don't wish them
+well.  If these other projects want to make use of the text/gemini
+markup format, I am more than happy about that - it's a popular part of
+Gemini and one which is completely orthogonal to the network protocol.
+Please feel free to distribute it over IPFS, DAT, SSB, Gopher (maybe
+people can write Gopher clients which interpret item type 0 documents
+differently based on file extension?  It forces you into ugly URLs
+forever, but so be it), and stuff that doesn't even exist yet.  You have
+my blessing.
+
+Be wary, please, of spreading a small and young community (not the
+Gemini community, but the &quot;neo small internet&quot; community) too thin with
+multiple simultaneous projects with only minor differences between each
+other.  Be wary of burdening client authors with an expectation that a
+good &quot;small internet browser&quot; needs to simultaneously support a large
+number of protocols to be useful, because that's a pain and you should
+be nice to client authors.  Be wary that clients which speak encrypted
+protocols and unencrypted ones and which flip between them automatically
+and invisibly are fundamentally risky propositions.
+
+Be aware that &quot;Mercury&quot;, as I sketched it, was a &quot;conceptual
+navigational aid&quot; for me to try to grapple with the question of whether
+or not Gemini was becoming &quot;too complex&quot; (and one that most people - not
+all, but most - had a very negative reaction to).  As such it is was
+designed (very quickly!) from the perspective of starting with Gemini
+and ripping stuff out.  If other projects seek to explicitly optimise
+some criteria which they feel Gemini is lacking in (energy consumption,
+network overhead or latency, fits-in-head-ability, need for external
+libraries), they should be aware that the Mercury sketch is not
+necessarily a sensible starting point, because its design took for
+granted certain concepts already depply established in the design of
+Gemini, and those concepts were not established with these other
+criteria in mind.  You might do a lot better by starting from scratch
+and making all decisions with your ultimate goal firmly in mind.
+
+I think that's all I have to say on this matter.
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001924.html">Mercury
+</A></li>
+	<LI>Next message (by thread): <A HREF="001947.html">Mercury
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1927">[ date ]</a>
+              <a href="thread.html#1927">[ thread ]</a>
+              <a href="subject.html#1927">[ subject ]</a>
+              <a href="author.html#1927">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

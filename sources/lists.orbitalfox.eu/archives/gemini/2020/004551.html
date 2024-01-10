@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] Oustanding issues
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Oustanding%20issues&In-Reply-To=%3Cdd2695d3-c2ef-3b5f-b2a1-c1a78d64f856%40foxypossibilities.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004475.html">
+   <LINK REL="Next"  HREF="004449.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] Oustanding issues</H1>
+    <B>Kiba Fox</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Oustanding%20issues&In-Reply-To=%3Cdd2695d3-c2ef-3b5f-b2a1-c1a78d64f856%40foxypossibilities.com%3E"
+       TITLE="[spec] Oustanding issues">kiba.fox at foxypossibilities.com
+       </A><BR>
+    <I>Mon Dec 28 19:31:09 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004475.html">[spec] Oustanding issues
+</A></li>
+        <LI>Next message (by thread): <A HREF="004449.html">[Users] new release of mastodon allow gemini URL
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4551">[ date ]</a>
+              <a href="thread.html#4551">[ thread ]</a>
+              <a href="subject.html#4551">[ subject ]</a>
+              <a href="author.html#4551">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+I have a suggestion to add to the list and a question on parsing quote 
+lines.
+
+&gt;<i> I'm trying to prepare a list of spec issues that I want to finalise as
+</I>&gt;<i> soon as possible.  If you think I've forgotten something, please let me know.
+</I>
+The current spec suggests supporting TOFU.  I think you may want to 
+consider also supporting using the default/system certificate authority 
+trust system as a fallback.  This allows certificates signed by Let's 
+Encrypt or others to be used without the client having to store the 
+known certificate. It also allows server operators to renew certificates 
+without breaking clients.
+
+This might be the behavior of clients today (trust system trusted CAs or 
+use TOFU), but it's nice to have clearly defined behavior.
+
+&gt;<i> * There's this long-standing issue of the fact that none of the
+</I>&gt;<i>    character sequences which identify the start of a non-text line type
+</I>&gt;<i>    were originally defined with spaces after them, but we've added that
+</I>&gt;<i>    requirement hodge-podge as ambiguities have appeared, and now we're in
+</I>&gt;<i>    a situation where half the line types need them and half don't.
+</I>&gt;<i>    Consistency suggests we require spaces everywhere, but this has been
+</I>&gt;<i>    surprisingly controversial and may break some things.  But a final
+</I>&gt;<i>    ruling is required.
+</I>
+I've been wondering about this...  Specifically, in these example scenarios:
+
+Sans whitespace: &gt;This is a quote
+With whitespace: &gt; This is a quote
+
+Should these two be parsed the same or should one include leading 
+whitespace?
+
+-----
+
+Also, are you open to suggestions/additions to the text/gemini format?
+
+-- 
+Kind regards,
+Kiba
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004475.html">[spec] Oustanding issues
+</A></li>
+	<LI>Next message (by thread): <A HREF="004449.html">[Users] new release of mastodon allow gemini URL
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4551">[ date ]</a>
+              <a href="thread.html#4551">[ thread ]</a>
+              <a href="subject.html#4551">[ subject ]</a>
+              <a href="author.html#4551">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

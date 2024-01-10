@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] What to do of fragments when there is a redirection
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20What%20to%20do%20of%20fragments%20when%20there%20is%20a%20redirection&In-Reply-To=%3CCAD2gp_Sf7TiN3cP941pKybu_67hO4hNLm5mgyc-kcTEQNTUKuQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004248.html">
+   <LINK REL="Next"  HREF="004291.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] What to do of fragments when there is a redirection</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20What%20to%20do%20of%20fragments%20when%20there%20is%20a%20redirection&In-Reply-To=%3CCAD2gp_Sf7TiN3cP941pKybu_67hO4hNLm5mgyc-kcTEQNTUKuQ%40mail.gmail.com%3E"
+       TITLE="[spec] What to do of fragments when there is a redirection">cowan at ccil.org
+       </A><BR>
+    <I>Tue Dec 22 20:34:03 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004248.html">[spec] What to do of fragments when there is a redirection
+</A></li>
+        <LI>Next message (by thread): <A HREF="004291.html">[spec] What to do of fragments when there is a redirection
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4281">[ date ]</a>
+              <a href="thread.html#4281">[ thread ]</a>
+              <a href="subject.html#4281">[ subject ]</a>
+              <a href="author.html#4281">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>
+</I>&gt;<i> Therefore, for HTTP, RFC 7231 has to describe in detail what the
+</I>&gt;<i> client (&quot;user agent&quot;, in HTTP parlance) has to do with
+</I>&gt;<i> fragments. Should we consider that &quot;in doubt, do as HTTP does?&quot;)
+</I>&gt;<i>
+</I>
+I think we should adopt the following RFC 7231 compatible rules.
+
+0) The semantics of a fragment are defined solely by the media type of the
+resource and not by the rest of the URL.
+
+1) Clients MUST NOT send a fragment to the server.  If the server needs to
+know the content of a fragment, it should be part of the path or the query
+string instead.  This was a firm HTTP rule until fragments beginning with !
+were invented, and IMO should be a firm Gemini rule.
+
+2) If the client gets a redirect containing a fragment, the client MUST
+apply this fragment when the redirected resource is retrieved, ignoring any
+original fragment.
+
+3) If the original URL has a fragment and the redirect doesn't, the client
+MUST apply the original fragment when the redirected resource is retrieved.
+
+4) Content authors MUST NOT put personally identifying information into
+fragments, as they can be transferred from one host to another by the
+operation of rule 3.
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+He who would do good to another must do it in Minute Particulars;
+General Good is the plea of the scoundrel, hypocrite and flatterer:
+For Art and Science cannot exist but in minutely organized Particulars.
+  --William Blake, il miglior fabbro
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201222/ef94f595/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201222/ef94f595/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004248.html">[spec] What to do of fragments when there is a redirection
+</A></li>
+	<LI>Next message (by thread): <A HREF="004291.html">[spec] What to do of fragments when there is a redirection
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4281">[ date ]</a>
+              <a href="thread.html#4281">[ thread ]</a>
+              <a href="subject.html#4281">[ subject ]</a>
+              <a href="author.html#4281">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

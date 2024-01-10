@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> IETF policy on encodings and languages
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IETF%20policy%20on%20encodings%20and%20languages&In-Reply-To=%3C3TQ5SKO220HGX.3T5D97BB3Q792%40nothien.uber.space%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004616.html">
+   <LINK REL="Next"  HREF="004629.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>IETF policy on encodings and languages</H1>
+    <B>nothien at uber.space</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IETF%20policy%20on%20encodings%20and%20languages&In-Reply-To=%3C3TQ5SKO220HGX.3T5D97BB3Q792%40nothien.uber.space%3E"
+       TITLE="IETF policy on encodings and languages">nothien at uber.space
+       </A><BR>
+    <I>Wed Dec 30 22:16:24 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004616.html">IETF policy on encodings and languages
+</A></li>
+        <LI>Next message (by thread): <A HREF="004629.html">IETF policy on encodings and languages
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4621">[ date ]</a>
+              <a href="thread.html#4621">[ thread ]</a>
+              <a href="subject.html#4621">[ subject ]</a>
+              <a href="author.html#4621">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>John Cowan &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>&gt; wrote:
+&gt;<i> Up to a point, certainly.  The tail end of languages probably don't
+</I>&gt;<i> need interfaces.
+</I>
+Yep, makes sense.  Too much work (unless someone's willing to do it all
+for you).
+
+&gt;<i> Suppose you have written an essay in French on the novels of Jules
+</I>&gt;<i> Verne in text/gemini format, and you want to link to a collection of
+</I>&gt;<i> the novels themselves.  You can then insert this link line:
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; <A HREF="gemini://gemguten.example.com/advsearch.gmi?lang=fr&amp;author=Jules&amp;author=Verne">gemini://gemguten.example.com/advsearch.gmi?lang=fr&amp;author=Jules&amp;author=Verne</A> Les oeuvres de Jules Verne en fran&#231;ais
+</I>&gt;<i> 
+</I>&gt;<i> The user who selects this link will receive a text/gemini document,
+</I>&gt;<i> something like this:
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; <A HREF="gemini://gemguten.example.com/etext/5082">gemini://gemguten.example.com/etext/5082</A> Verne, Jules, 1828-1905. Le chate&#226;u des Carpathe. [fr]
+</I>&gt;<i> =&gt; <A HREF="gemini://gemguten.example.com/etext/8174">gemini://gemguten.example.com/etext/8174</A> Verne, Jules, 1828-1905. K&#233;raban-Le-T&#234;tu, Volume I. [fr]
+</I>&gt;<i> =&gt; <A HREF="gemini://gemguten.example.com/etext/17832">gemini://gemguten.example.com/etext/17832</A> Verne, Jules, 1828-1905. Une ville flottante. [fr]
+</I>&gt;<i> ...
+</I>&gt;<i> 
+</I>&gt;<i> Since this is not an _interactive_ search, the Gemini conventions
+</I>&gt;<i> about status 1x and the query string don't apply.
+</I>
+But it is an interactive search.  When you point to someone that they
+can use the advanced search page, you're going to point them to
+<A HREF="gemini://gemguten.example.com/advsearch.gmi.">gemini://gemguten.example.com/advsearch.gmi.</A>  If you fill in a query
+string for them, that's fine, but you also had to write that out
+manually.  There's no way in Gemini to automatically create that link
+(as to do so you would have to give what you're looking for to a page to
+translate it to that format for you, but if it has that translation
+ability it would be supported in the advsearch.gmi page itself).  In the
+end, someone had to write it out by hand, and that's not the right way
+to do it.  I completely understand that such a search function is
+needed, and I obviously can't stop you from using this format if you
+want, but I do feel that there is a better way to pull it off.  For
+example, if you're just searching for an author, you could make an
+author-searching page where the query string is only the author name.
+But I don't know what the better way, if there is one, is yet.
+
+Also, under my system, the URL you've given says nothing about the
+language of the interface (e.g. the &quot;Les oeuvres de Jules Verne en
+fran&#231;ais&quot;, which would presumably be in the header of the search page).
+Under my system, prepending 'fr.' to the domain would effectively
+request that the server use a French interface, so that everything from
+the returned text/gemini documents to error messages would be in French.
+But the URL would be otherwise unaffected.
+
+~aravk | ~nothien
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004616.html">IETF policy on encodings and languages
+</A></li>
+	<LI>Next message (by thread): <A HREF="004629.html">IETF policy on encodings and languages
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4621">[ date ]</a>
+              <a href="thread.html#4621">[ thread ]</a>
+              <a href="subject.html#4621">[ subject ]</a>
+              <a href="author.html#4621">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Titan, the proposed upload protocol for Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Titan%2C%20the%20proposed%20upload%20protocol%20for%20Gemini&In-Reply-To=%3C8e090a022c878ea289373959d4557a2cd0e951ca.camel%40gnu.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002042.html">
+   <LINK REL="Next"  HREF="002082.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Titan, the proposed upload protocol for Gemini</H1>
+    <B>Alex Schroeder</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Titan%2C%20the%20proposed%20upload%20protocol%20for%20Gemini&In-Reply-To=%3C8e090a022c878ea289373959d4557a2cd0e951ca.camel%40gnu.org%3E"
+       TITLE="Titan, the proposed upload protocol for Gemini">alex at gnu.org
+       </A><BR>
+    <I>Sat Jul  4 19:49:20 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002042.html">Titan, the proposed upload protocol for Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="002082.html">Titan, the proposed upload protocol for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2044">[ date ]</a>
+              <a href="thread.html#2044">[ thread ]</a>
+              <a href="subject.html#2044">[ subject ]</a>
+              <a href="author.html#2044">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, 2020-07-04 at 15:17 +0000, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+&gt;<i> I think it'd be great to eventually use client certificates for
+</I>&gt;<i> authentication, but I definitely understand why you went with the
+</I>&gt;<i> simpler token system for this initial implementation, it's a lot
+</I>&gt;<i> easier to handle.
+</I>
+Oh, sure. I do think those are two different use cases, though:
+authentication and authorization. It's not just easier to implement
+(because I don't really understand the nitty gritty of TLS) but it also
+involves a design goal of mine regarding anonymous collaboration.
+
+That's how I understand client certificates, in any case:
+
+If we're using temporary client certificates, then nothing is gained.
+In a wiki context, we don't need to know about sessions. We don't need
+to know that this edit was made by the same person that made the other
+edit a few minutes ago. (And in fact, Gemini Wiki computes a changing
+&quot;code&quot; for each contributor and stores that, hopefully allowing us to
+discern visually whether two edits made a few minutes appart are
+probably made by the same person without allowing us to know whether
+two edits made days appart were made by the same person.)
+
+If we're using permanent client certificates, we've again gained
+perpetual sessions which we don't need, or we're using the client
+certificats to hand out capabilities: who is an admin, who is an
+editor, who is a visitor, who is banned. We're using them for
+autorization. I'd like to avoid thinking about that as part of Titan,
+though. It's already part of Gemini. If anybody needs this, like they
+want to restrict people to uploads to their own area of a site, then
+that's fine. That's already covered by Gemini, as far as I'm concerned.
+
+For my use case, tokens straddle that middle ground of anonymous
+editing, web of trust, friends of friends, and password protection. We
+can pass tokens on to friends and friends of friends, and if it breaks
+down, we will issue a new set of tokens. These will again spread from
+person to person (or to anybody who knows where to look them up). That
+is, in any case, how I would like it to be. &#128516;
+
+And if we really want, then of course we can tie tokens to users, make
+them into bearer tokens like they are used in OAuth2: somewhere, you
+make an account, you generate a token, and use it for your Gemini
+client. On the original site, you can invalidate the token, or the
+person running the server can invalidate the token, the token can be
+associated with different capabilities, and so on. Tokens allow us to
+go there... but we don't have to.
+
+Anyway, Gemini Wiki has the notion of &quot;spaces&quot; &#8211; separate wikis hosted
+within the same software. These spaces could be tied to client
+certificates, for example, allowing people to have personal wikis that
+are effectively read-only for others. The software isn't there, yet,
+but it's something on my radar, for sure. I'm expecting that this will
+work without having to change anything about Titan because client
+certificates are already part of Gemini &#8211; and if I go there, I might
+decide that those spaces either don't need tokens, or I might decide
+that within those spaces, the people with the right client certificate
+are admins and get to generate and invalidate local tokens for their
+friends and family. Then we can have both: authentication for admins,
+and simple token-based authorization for collaborators.
+
+Cheers
+Alex
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002042.html">Titan, the proposed upload protocol for Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="002082.html">Titan, the proposed upload protocol for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2044">[ date ]</a>
+              <a href="thread.html#2044">[ thread ]</a>
+              <a href="subject.html#2044">[ subject ]</a>
+              <a href="author.html#2044">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

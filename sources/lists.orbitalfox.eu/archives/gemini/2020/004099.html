@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Crawlers on Gemini and best practices
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Crawlers%20on%20Gemini%20and%20best%20practices&In-Reply-To=%3CbW5YadQFC31b9fcacSpzA7w7BXp8M46OIYnYYjrWtVSWNbKDohkWavRJu5aowSC8Bo-weLSo_ivgsXaaLxG7AxhxtLBMUWdqG0EA0Fnnahc%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004021.html">
+   <LINK REL="Next"  HREF="004035.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Crawlers on Gemini and best practices</H1>
+    <B>colecmac at protonmail.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Crawlers%20on%20Gemini%20and%20best%20practices&In-Reply-To=%3CbW5YadQFC31b9fcacSpzA7w7BXp8M46OIYnYYjrWtVSWNbKDohkWavRJu5aowSC8Bo-weLSo_ivgsXaaLxG7AxhxtLBMUWdqG0EA0Fnnahc%3D%40protonmail.com%3E"
+       TITLE="Crawlers on Gemini and best practices">colecmac at protonmail.com
+       </A><BR>
+    <I>Wed Dec 16 21:24:27 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004021.html">Crawlers on Gemini and best practices
+</A></li>
+        <LI>Next message (by thread): <A HREF="004035.html">Crawlers on Gemini and best practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4099">[ date ]</a>
+              <a href="thread.html#4099">[ thread ]</a>
+              <a href="subject.html#4099">[ subject ]</a>
+              <a href="author.html#4099">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Saturday, December 12, 2020 4:46 AM, Leo &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">list at gkbrk.com</A>&gt; wrote:
+
+&gt;<i> &gt; Why are we defining new standards and filenames? bots.txt, .well-known,
+</I>&gt;<i> &gt; etc.
+</I>&gt;<i>
+</I>&gt;<i> Just want to point out that the .well-known path for machine-readable
+</I>&gt;<i> data about an origin is a proposed IETF standard that has relatively
+</I>&gt;<i> widespread use today. It is filed under RFC8615, and is definitely not a
+</I>&gt;<i> standard that was invented in this thread.
+</I>
+Yes, I'm aware of .well-known. I meant that using it to hold a robots.txt-type
+file would be a new filepath.
+
+&gt;<i> The first paragraph of the introduction even references the robots file.
+</I>&gt;<i>
+</I>&gt;<i> While I don't necessarily agree with the naming of bots.txt, I see no
+</I>&gt;<i> problem with putting these files under a .well-known directory.
+</I>
+My only problem was that it would be reinventing something that already
+exists, but I likewise have no issue with the idea of .well-known in general.
+
+&gt;<i> &gt; We don't need this.
+</I>&gt;<i>
+</I>&gt;<i> Thanks for making this mailing list a lot more efficient and talking
+</I>&gt;<i> about what the Gemini community needs in a 4-word sentence.
+</I>
+Sorry, perhaps that was too curt. I don't intend to speak for everyone,
+it's only my opinion. However it wasn't just a 4-word sentence, I backed
+up my opinion with the rest of my email.
+
+&gt;<i> Even if the original path of /robots.txt is kept, I think it makes sense
+</I>&gt;<i> to clarify an algorithm in non-ambiguous steps in order to get rid of
+</I>&gt;<i> the disagreements in edge-cases.
+</I>&gt;<i>
+</I>&gt;<i> &gt; let's just pick a standard that works and make it offical.
+</I>&gt;<i>
+</I>&gt;<i> The point is that the standard works for simple cases, but leaves a lot
+</I>&gt;<i> to be desired when it comes to clarifying more complex cases. This
+</I>&gt;<i> results in a lot of robots.txt implementations disagreeing about what is
+</I>&gt;<i> allowed and not allowed.
+</I>
+I agree, that's why I was trying to pick a standard instead of developing
+our own. Picking a well-written standard will cover all these cases.
+
+&gt;<i> Additionally by crawling the Web, you can see that people tend to extend
+</I>&gt;<i> robots.txt in non-standard ways and this only gets incorporated into
+</I>&gt;<i> Google's crawlers if the website is important enough.
+</I>
+Ok? I don't see how that's relevant. By picking a standard here and sticking
+to it, we can avoid that.
+
+&gt;<i> &gt; I am no big fan of Google, but they are the kings of crawling and it
+</I>&gt;<i> &gt; makes sense to go with them here.
+</I>&gt;<i>
+</I>&gt;<i> The kings of crawling deemed HTTP and AMP the most suitable protocol and
+</I>&gt;<i> markup format for content to be crawled, why don't we stop inventing
+</I>&gt;<i> standards like Gemini and Gemtext and go with them here.
+</I>
+Again I don't see how that's relevant. Yes &quot;we&quot; don't like AMP here, yes
+we don't like HTTP, etc. This doesn't make the robots.txt standard I sent
+a bad one.
+
+&gt;<i> &gt; The spec makes many example references to HTTP, but note that it is
+</I>&gt;<i> &gt; fully protocol-agnostic, so it works fine for Gemini.
+</I>&gt;<i>
+</I>&gt;<i> Gemtext spec makes references to Gemini, but it is fully
+</I>&gt;<i> protocol-agnostic, so it works fine with HTTP. Similarly, Gemini makes
+</I>&gt;<i> many references to Gemtext, but it is content-type agnostic so it works
+</I>&gt;<i> fine with HTML. But we thought we could be better off shedding
+</I>&gt;<i> historical baggage and reinvented not one, but two main concepts of the
+</I>&gt;<i> traditional Web.
+</I>&gt;<i>
+</I>
+This quote, along with this line:
+
+&gt;<i> why don't we stop inventing standards like Gemini and Gemtext and go with
+</I>&gt;<i> them [Google] here.
+</I>
+makes me think you misunderstand some of Gemini's ideas. Solderpunk has
+talked about the idea of &quot;radical familiarity&quot; on here, and how Gemini uses
+well known (ha) protocols as much as possible, like TLS, media types, URLs,
+etc. Gemini tries to *avoid* re-inventing! Obviously the protocol itself
+and gemtext are the exceptions to this, but otherwise, making niche protocols
+only for Gemini is not the way to go (in my opinion). It makes things harder
+to implement and understand for developers.
+
+
+Cheers,
+makeworld
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004021.html">Crawlers on Gemini and best practices
+</A></li>
+	<LI>Next message (by thread): <A HREF="004035.html">Crawlers on Gemini and best practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4099">[ date ]</a>
+              <a href="thread.html#4099">[ thread ]</a>
+              <a href="subject.html#4099">[ subject ]</a>
+              <a href="author.html#4099">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

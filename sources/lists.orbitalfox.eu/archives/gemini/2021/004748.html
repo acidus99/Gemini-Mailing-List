@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Schapcom
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Schapcom&In-Reply-To=%3C87a6tm87h7.fsf%40idiomdrottning.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004805.html">
+   <LINK REL="Next"  HREF="004753.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Schapcom</H1>
+    <B>Sandra Snan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Schapcom&In-Reply-To=%3C87a6tm87h7.fsf%40idiomdrottning.org%3E"
+       TITLE="[ANN] Schapcom">sandra.snan at idiomdrottning.org
+       </A><BR>
+    <I>Wed Jan  6 14:28:52 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004805.html">[spec] Oustanding issues
+</A></li>
+        <LI>Next message (by thread): <A HREF="004753.html">[ANN] Schapcom
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4748">[ date ]</a>
+              <a href="thread.html#4748">[ thread ]</a>
+              <a href="subject.html#4748">[ subject ]</a>
+              <a href="author.html#4748">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE># Schapcom
+
+<A HREF="gemini://idiomdrottning.org/schapcom">gemini://idiomdrottning.org/schapcom</A>
+
+Schapcom is a feed aggregator for Gemini similar to CAPCOM.
+
+Schapcom is written in Chicken Scheme using a ton of libraries so it's
+not lightweight in that regard. It's just a quick fix to get something
+to work.
+
+Schapcom uses a three-tiered model of Feeds&#8594;Curators&#8594;Aggregated Feeds.
+
+## Feeds
+
+Schapcom is compatible with both Gemfeed and Gmisub feed formats.
+
+=&gt; <A HREF="https://tildegit.org/solderpunk/gemfeed">https://tildegit.org/solderpunk/gemfeed</A> Gemfeed
+=&gt; <A HREF="gemini://calcuode.com/gmisub-readme.gmi">gemini://calcuode.com/gmisub-readme.gmi</A> Gmisub
+
+Feeds are Atom feeds (a la Gemfeed) or gmisub feeds.
+
+## Curators
+
+Curators set up lists of URLs of such feeds that they wanna follow. Each
+line needs to end with .xml or .gmi, and this list of URLs should be in
+a text file, one url per line, no other lines, no comments no header no
+nothing, and end with a .txt file ending. The list of URLs can be on
+gemini or on http / https, to minimize the amount of work that curators
+need to do. They only need to be able to host a text file, anywhere.
+
+## Aggregators
+
+Each Schapcom instance is then pointed to a list of such lists. It
+writes a gmi file (similar to CAPCOM's output format) and then
+terminates. It shows duplicates-deleted union of entries so it's fine if
+a feed is accidentally entered twice, or entered in multiple formats, or
+if an entry shows up several times or in several feeds.
+
+So the intent is that a curator's list of follows can be read and used
+by several Schapcom instances.
+
+Finding cool feeds to follow is hard work, so leveraging each other's
+work around that is the idea.
+
+Run from cron or manually.
+
+schapcom [curator-url1] [curator-url2] [curator-url3] &gt; feeds.gmi
+
+For a repo, git clone <A HREF="https://idiomdrottning.org/schapcom">https://idiomdrottning.org/schapcom</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004805.html">[spec] Oustanding issues
+</A></li>
+	<LI>Next message (by thread): <A HREF="004753.html">[ANN] Schapcom
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4748">[ date ]</a>
+              <a href="thread.html#4748">[ thread ]</a>
+              <a href="subject.html#4748">[ subject ]</a>
+              <a href="author.html#4748">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

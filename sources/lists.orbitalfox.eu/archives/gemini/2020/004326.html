@@ -1,0 +1,223 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] IRIs, IDNs, and all that international jazz
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3C87o8ikh5j5.fsf%40dorothy.carcosa.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004323.html">
+   <LINK REL="Next"  HREF="004327.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] IRIs, IDNs, and all that international jazz</H1>
+    <B>Jason McBrayer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3C87o8ikh5j5.fsf%40dorothy.carcosa.net%3E"
+       TITLE="[spec] IRIs, IDNs, and all that international jazz">jmcbray at carcosa.net
+       </A><BR>
+    <I>Wed Dec 23 16:05:18 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004323.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+        <LI>Next message (by thread): <A HREF="004327.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4326">[ date ]</a>
+              <a href="thread.html#4326">[ thread ]</a>
+              <a href="subject.html#4326">[ subject ]</a>
+              <a href="author.html#4326">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&quot;Solderpunk&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at posteo.net</A>&gt; writes:
+
+Answering for Common Lisp, as best I know (I'm kind of a n00b). Detailed
+Common Lisp spam below, skip if you are afraid of parentheses.
+
+&gt;<i> 1. Parse and relativise URLs with non-ASCII characters (so, yes, okay,
+</I>&gt;<i>    technically not URLs at all, you know what I mean) in paths and/or
+</I>&gt;<i>    domains?
+</I>
+No URI handling in the standard library, but quicklisp has libraries for
+it. I'm using quri, which I think is the most used, and it seems to be
+fine.
+
+CL-USER&gt; (defparameter *my-iri* (quri:uri &quot;<A HREF="gemini://r&#228;ksm&#246;rg&#229;s.josefsson.org/&#128007;/&#129365;.gmi">gemini://r&#228;ksm&#246;rg&#229;s.josefsson.org/&#128007;/&#129365;.gmi</A>&quot;))
+*MY-IRI*
+
+CL-USER&gt; *my-iri*
+#&lt;QURI.URI:URI <A HREF="gemini://r&#228;ksm&#246;rg&#229;s.josefsson.org/&#128007;/&#129365;.gmi">gemini://r&#228;ksm&#246;rg&#229;s.josefsson.org/&#128007;/&#129365;.gmi</A>&gt;
+
+CL-USER&gt; (quri:uri-domain *my-iri*)
+&quot;josefsson.org&quot;
+
+CL-USER&gt; (quri:uri-authority *my-iri*)
+&quot;r&#228;ksm&#246;rg&#229;s.josefsson.org&quot;
+
+CL-USER&gt; (quri:uri-path *my-iri*)
+&quot;/&#128007;/&#129365;.gmi&quot;
+
+CL-USER&gt; (quri:uri-query *my-iri*)
+NIL
+
+CL-USER&gt; (setf (quri:uri-path *my-iri*) &quot;&#128007;/&#128048;.gmi&quot;)
+&quot;&#128007;/&#128048;.gmi&quot;
+
+CL-USER&gt; (quri:uri-path *my-iri*)
+&quot;&#128007;/&#128048;.gmi&quot;
+
+&gt;<i> 2. Transform back and forth between URIs and IRIs?
+</I>
+Using idna package in quicklisp on the hostname:
+
+CL-USER&gt; (idna:to-ascii (quri:uri-authority *my-iri*))
+&quot;xn--rksmrgs-5wao1o.josefsson.org&quot;
+
+CL-USER&gt; (idna:to-unicode (idna:to-ascii (quri:uri-authority *my-iri*)))
+&quot;r&#228;ksm&#246;rg&#229;s.josefsson.org&quot;
+
+And URL-encoding on the path:
+
+CL-USER&gt; (quri:url-encode (quri:uri-path *my-iri*))
+&quot;%F0%9F%90%87%2F%F0%9F%90%B0.gmi&quot;
+
+And decoding the path:
+
+CL-USER&gt; (quri:url-decode (quri:url-encode (quri:uri-path *my-iri*)))
+&quot;&#128007;/&#128048;.gmi&quot;
+
+I will note, however, that (quri:url-decode &quot;&#128007;/&#129365;.gmi&quot;) produces
+garbage, which means on the server I can't use the library to fix up the
+space in &quot;&#128007;/&#129365;%20&#128111;.gmi&quot; when getting the filename for the IRI, and
+will have to write a unicode-safe function to handle decoding just
+IRI reserved characters.
+
+Putting these together into a function and handling edge-cases is
+something I'll do if it turns out I have to.
+
+&gt;<i> 3. Do DNS lookups of IDNs without them being punycoded first?  You can
+</I>&gt;<i>    test this with r&#228;ksm&#246;rg&#229;s.josefsson.org.
+</I>
+The CL standard library is actually so old it doesn't have
+sockets/gethostbyname. But everyone uses usocket, which is in quicklisp:
+
+CL-USER&gt; (usocket:get-host-by-name (quri:uri-authority *my-iri*))
+#(178 174 241 102)
+
+So that works, without punycoding, at least in my environment (sbcl
+2.0.1, Linux 5.8.18, Fedora 33). It might be worth someone trying sbcl
+on a BSD to see if their resolver behaves differently.
+
+&gt;<i> Getting good data on all three of these questions for a wide range
+</I>&gt;<i> of languages is necessary to make a well-informed decision here.
+</I>
+Personally, I would be most gratified if option 3 proved to be workable.
+
+-- 
++-----------------------------------------------------------+
+|<i> Jason F. McBrayer                    <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">jmcbray at carcosa.net</A>  |
+</I>|<i> A flower falls, even though we love it; and a weed grows, |
+</I>|<i> even though we do not love it.            -- Dogen        |
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004323.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+	<LI>Next message (by thread): <A HREF="004327.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4326">[ date ]</a>
+              <a href="thread.html#4326">[ thread ]</a>
+              <a href="subject.html#4326">[ subject ]</a>
+              <a href="author.html#4326">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

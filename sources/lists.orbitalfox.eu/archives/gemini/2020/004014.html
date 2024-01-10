@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Some reading on IRIs and IDNs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3C874kksqjm2.fsf%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004013.html">
+   <LINK REL="Next"  HREF="003988.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Some reading on IRIs and IDNs</H1>
+    <B>Gary Johnson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3C874kksqjm2.fsf%40disroot.org%3E"
+       TITLE="Some reading on IRIs and IDNs">lambdatronic at disroot.org
+       </A><BR>
+    <I>Fri Dec 11 18:32:21 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004013.html">Some reading on IRIs and IDNs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003988.html">Some reading on IRIs and IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4014">[ date ]</a>
+              <a href="thread.html#4014">[ thread ]</a>
+              <a href="subject.html#4014">[ subject ]</a>
+              <a href="author.html#4014">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>John Cowan &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>&gt; writes:
+
+&gt;&gt;<i> 2. Percent-encode reserved characters and non-US-ASCII characters in the
+</I>&gt;&gt;<i>    path, query, and fragment components.
+</I>
+&gt;<i> You don't want to escape the ASCII reserved characters, because they should
+</I>&gt;<i> already be escaped.  Changing the path /foo/bar.gmi to %25foo%25bar.gmi
+</I>&gt;<i> would be Evil and Wrong.  If you really want that path, you have to encode
+</I>&gt;<i> it yourself.
+</I>
+Yes, that is quite right. I suppose we are using a different
+interpretation of the phrase &quot;reserved characters&quot; here. For clarity, I
+meant characters such as those in the string &quot; ?#&quot;, which are either
+forbidden (when unencoded) within the path, query, and fragment
+components or are used to delimit them.
+
+&gt;<i> 2.5. If the IRI is a relative reference, resolve it against the URI of the
+</I>&gt;<i> text/gemini file that contains it.
+</I>
+Yep.
+
+&gt;&gt;<i> 4. Send the punycode + percent-encoded URI as the request to the Gemini
+</I>&gt;&gt;<i>    server.
+</I>&gt;<i>
+</I>&gt;<i> Note that fragments must not be sent, so if there is one, chop it off.
+</I>
+I'm not sure that is the case here. To quote the Gemini spec:
+
+========================================================================
+1.2 Gemini URI scheme
+
+Resources hosted via Gemini are identified using URIs with the scheme
+&quot;gemini&quot;. This scheme is syntactically compatible with the generic URI
+syntax defined in RFC 3986, but does not support all components of the
+generic syntax. In particular, the authority component is allowed and
+required, but its userinfo subcomponent is NOT allowed. The host
+subcomponent is required. The port subcomponent is optional, with a
+default value of 1965. The path, query and fragment components are
+allowed and have no special meanings beyond those defined by the generic
+syntax. Spaces in gemini URIs should be encoded as %20, not +.
+========================================================================
+
+Please note the text about fragment components being allowed. I'm not
+currently aware of any good uses for them in Gemini, but the spec
+supports them, so I've included that support in my server.
+
+&gt;&gt;<i> 5. The server parses the URI into scheme, host, port, path, query, and
+</I>&gt;&gt;<i>    fragment components and then percent-decodes the path, query, and
+</I>&gt;&gt;<i>    fragment strings.
+</I>&gt;<i>
+</I>&gt;<i> Consequently, the server will not get a fragment string.  There would be no
+</I>&gt;<i> need for fragment strings if they were understood on the server side;
+</I>&gt;<i> they'd just be part of the path.
+</I>
+See above.
+
+&gt;&gt;<i>  6. The parsed and decoded URI information can then either be used to
+</I>&gt;&gt;<i>     perform a file retrieval, generate a directory listing, or run a
+</I>&gt;&gt;<i>     CGI script, ultimately sending back a valid Gemini response to
+</I>&gt;&gt;<i>     the client. Redirect responses should make sure to percent-encode
+</I>&gt;&gt;<i>     the path, query, and fragment components of the redirected URI.
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Except not the fragment.
+</I>
+Again, see above.
+
+Yada yada...spec compliance...yada yada.
+
+Happy hacking,
+  Gary
+
+-- 
+GPG Key ID: 7BC158ED
+Use `gpg --search-keys lambdatronic' to find me
+Protect yourself from surveillance: <A HREF="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</A>
+=======================================================================
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+Why is HTML email a security nightmare? See <A HREF="https://useplaintext.email/">https://useplaintext.email/</A>
+
+Please avoid sending me MS-Office attachments.
+See <A HREF="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004013.html">Some reading on IRIs and IDNs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003988.html">Some reading on IRIs and IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4014">[ date ]</a>
+              <a href="thread.html#4014">[ thread ]</a>
+              <a href="subject.html#4014">[ subject ]</a>
+              <a href="author.html#4014">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

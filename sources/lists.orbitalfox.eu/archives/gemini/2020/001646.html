@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Repeating the Web's Mistakes (was gemini+submit:// (was Re: Uploading Gemini content))
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Repeating%20the%20Web%27s%20Mistakes%20%28was%20gemini%2Bsubmit%3A//%20%28was%20Re%3A%0A%20Uploading%20Gemini%20content%29%29&In-Reply-To=%3C20200614012215.GO11281%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001643.html">
+   <LINK REL="Next"  HREF="001652.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Repeating the Web's Mistakes (was gemini+submit:// (was Re: Uploading Gemini content))</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Repeating%20the%20Web%27s%20Mistakes%20%28was%20gemini%2Bsubmit%3A//%20%28was%20Re%3A%0A%20Uploading%20Gemini%20content%29%29&In-Reply-To=%3C20200614012215.GO11281%40brevard.conman.org%3E"
+       TITLE="Repeating the Web's Mistakes (was gemini+submit:// (was Re: Uploading Gemini content))">sean at conman.org
+       </A><BR>
+    <I>Sun Jun 14 02:22:15 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001643.html">Repeating the Web's Mistakes (was gemini+submit:// (was Re: Uploading Gemini content))
+</A></li>
+        <LI>Next message (by thread): <A HREF="001652.html">Repeating the Web's Mistakes (was gemini+submit:// (was Re: Uploading Gemini content))
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1646">[ date ]</a>
+              <a href="thread.html#1646">[ thread ]</a>
+              <a href="subject.html#1646">[ subject ]</a>
+              <a href="author.html#1646">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Matthew Graybosch once stated:
+&gt;<i> 
+</I>&gt;<i> Let's be honest; it shouldn't be that hard to run a gemini daemon out
+</I>&gt;<i> of a personal computer in your own home, whether it's your main desktop
+</I>&gt;<i> or just a raspberry pi. The protocol is light enough that CPU and
+</I>&gt;<i> memory usage should be next to nothing compared to Firefox or Chrome. 
+</I>
+ ... 
+
+&gt;<i> I think the biggest problem, at least in the US, is that ISPs seem
+</I>&gt;<i> hellbent on keeping residential internet users from using their
+</I>&gt;<i> connections for anything but consumption. 
+</I>
+  As someone who has worked for various ISPs and webhosting companies for
+most of my career, I think this slamming of IPSs is unwaranted.  And as
+someone who runs both a public server *and* a few services on my home
+network [1] there are some things you need to consider.
+
+1. Open servers are *attacked* at an alarming rate. At home, I run an sshd
+instance tha is open to the Internet [2].  I am currently blocking 2,520
+hosts that have attempted to log in via ssh.  That count is only over the
+past 30 days (technically, 30 days, 10 hours, 30 minutes, as that's the
+average month length over the year).  Not doing so means my machine will be
+constantly under login attempts.
+
+  99% of all traffic to my webserver (on my actual public server) is
+automated programs, not actual humans.  Most are just webbots spidering my
+content, some are script kiddies looking for an exploit and some are just
+incompetently written programs that just blow my mind [3].  There's the
+wierd network traffic that just sucks up connections requests [4].  And then
+there's the *wierd* (and quite stressful) situations involving black-hat
+hackers [5].
+
+  Then there's the issues with running UDP based services [6].  It's not
+pretty on the open Internet.
+
+2. If people could run a business server on their home connection, they
+would.  Then they'll bitch and moan about the service being slow, or can't
+the ISP do something about the DDoS attack they're under?  Even if they
+aren't and their service is just popular.  Or why their connection dropped? 
+Never mind the power is out, why did my server loose connection?
+
+  Or in self defense, the ISP cuts the connection because the home server is
+running a port scanner, participating in a botnet, or sending out spam
+emails because of an unpatched exploit in some server being run at home.
+
+3. Do people realize they'll need to basically firewall off their Windows
+boxes?  Seriously, the level of exploits on Windows is (was?) staggering and
+the number of services (like file sharing) it runs by default (because
+that's what the users want) it runs is *not* condusive to allowing a Windows
+box full access to the Internet.  The same can be said for Mac and Linux,
+but to a slightly lesser degree.
+
+4. It was email that poisoned home-run servers intially.  Spam increased
+dramatically during the late 90s/early 2000s to the point where it because a
+Byzantine nightmare to configure and run an email server due to SPF, DMARC
+and DKIM, along with greylisting and filtering of attachments.  Oh, and as a
+self-defense mechanism, nearly every ISP around the world will block
+incoming/outgoing TCP port 25 to home users.
+
+&gt;<i> You've got to use a dynamic
+</I>&gt;<i> DNS service like no-ip.com, and even if you manage that you might still
+</I>&gt;<i> find yourself getting cut off over a TOS violation. People are
+</I>&gt;<i> thoroughly conditioned toward using the internet as glorified cable TV,
+</I>&gt;<i> and only expressing themselves on platforms they don't control.
+</I>
+  That is true too, but I suspect even *if* you could easily run a server at
+home, 99% would not even bother (or know what it is).
+
+&gt;<i> Then there's DNS, domain names, ICAAN, etc. Maybe if we still used a
+</I>&gt;<i> UUCP-style addressing scheme like
+</I>&gt;<i> &lt;country&gt;.&lt;province&gt;.&lt;city&gt;.&lt;neighborhood&gt;.&lt;hostname&gt; it wouldn't
+</I>&gt;<i> matter what I called my host as long as the hostname was unique to the
+</I>&gt;<i> &lt;neighborhood&gt;. But instead we settled on &lt;domain-name&gt;.&lt;tld&gt;, which
+</I>&gt;<i> needs to be administered by registrars to ensure uniqueness, and domain
+</I>&gt;<i> registration is yet more sysadmin stuff that most people don't
+</I>&gt;<i> necessarily have the time, skill, or inclination to deal with.
+</I>
+  There are groups working on alternative naming/routing schemes that don't
+require a global namespace.  It's not an easy problem.
+
+  Also, at one time, domains under the .us domain were restricted to
+geographical names, like example.boca-raton.fl.us.  But they were free to
+register, and as far as I can tell, permanent.  The issue though, is that
+even under the &lt;city&gt;,&lt;state&gt;.us, you still need unique names, although it's
+a smaller area to worry about.
+
+  I don't think you can do that anymore.  I went down that rabbit hole
+several months ago looking to register a geographical domain under .us and
+couldn't do it (or find out who controls the domains under
+boca-raton.fl.us).  Pitty, I was hoping to get a free domain registration
+for life.
+
+&gt;<i> I would prefer that public hosts weren't necessary. I think that
+</I>&gt;<i> everybody who wants to should be able to publish from their own device
+</I>&gt;<i> without having to become a sysadmin. As long as operating a gemini
+</I>&gt;<i> service remains the province of sysadmins, we're going to maintain the
+</I>&gt;<i> division between haves (sysadmins) and have nots (people who can't or
+</I>&gt;<i> don't want to sysadmin) that prevented the web from becoming (or
+</I>&gt;<i> remaining) a democratic platform.
+</I>
+  Never underestimate the lack of giving a damn the general population have. 
+I'm sure there are aspects of your life that you lack a damn about that
+other people think you should give more than a damn.
+
+&gt;<i> This became something of a political rant, and I probably should have
+</I>&gt;<i> put it on demifiend.org instead. Sorry if this doesn't belong here; I'm
+</I>&gt;<i> posting this under a new subject so that it starts a new thread instead
+</I>&gt;<i> of derailing the existing one.
+</I>
+  I think it's a conversation worth having, as it relates to how Gemini
+expands with new content.
+
+  -spc
+
+[1]	Disclaimer: I do pay extra for a static IPv4 address---at the time I
+	needed it for my job, and now it's a &quot;nice to have&quot; and I can still
+	afford it.  It's actually not that much over the stock price of
+	service.
+
+[2]	My router will forward ssh traffic to my main development system.
+
+[3]	<A HREF="http://boston.conman.org/2019/07/09-12">http://boston.conman.org/2019/07/09-12</A>
+	<A HREF="http://boston.conman.org/2019/08/06.2">http://boston.conman.org/2019/08/06.2</A>
+
+[4]	<A HREF="http://boston.conman.org/2020/04/05.1">http://boston.conman.org/2020/04/05.1</A>
+
+[5]	<A HREF="http://boston.conman.org/2004/09/19.1">http://boston.conman.org/2004/09/19.1</A>
+
+[6]	<A HREF="http://boston.conman.org/2019/05/13.1">http://boston.conman.org/2019/05/13.1</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001643.html">Repeating the Web's Mistakes (was gemini+submit:// (was Re: Uploading Gemini content))
+</A></li>
+	<LI>Next message (by thread): <A HREF="001652.html">Repeating the Web's Mistakes (was gemini+submit:// (was Re: Uploading Gemini content))
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1646">[ date ]</a>
+              <a href="thread.html#1646">[ thread ]</a>
+              <a href="subject.html#1646">[ subject ]</a>
+              <a href="author.html#1646">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,310 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Questions regarding &quot;POST&quot; request and line endings
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Questions%20regarding%20%22POST%22%20request%20and%20line%20endings&In-Reply-To=%3Cdabc8d5e-8046-cf9a-6d47-34c22d9e34fa%40masterq32.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000760.html">
+   <LINK REL="Next"  HREF="000766.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Questions regarding &quot;POST&quot; request and line endings</H1>
+    <B>Felix Quei&#223;ner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Questions%20regarding%20%22POST%22%20request%20and%20line%20endings&In-Reply-To=%3Cdabc8d5e-8046-cf9a-6d47-34c22d9e34fa%40masterq32.de%3E"
+       TITLE="Questions regarding &quot;POST&quot; request and line endings">felix at masterq32.de
+       </A><BR>
+    <I>Sun May 17 15:10:36 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000760.html">Questions regarding &quot;POST&quot; request and line endings
+</A></li>
+        <LI>Next message (by thread): <A HREF="000766.html">Questions regarding &quot;POST&quot; request and line endings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#763">[ date ]</a>
+              <a href="thread.html#763">[ thread ]</a>
+              <a href="subject.html#763">[ subject ]</a>
+              <a href="author.html#763">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>First of all: thanks for the very extensive response!
+
+&gt;<i> It's not that I don't think there are good uses for this.
+</I>&gt;<i> 
+</I>&gt;<i> The original reason is that I was obsessed from day one with making it
+</I>&gt;<i> extremely hard for people to be able to extend the core Gemini protocol.
+</I>&gt;<i> HTTP, for example, allows as many headers as you like in
+</I>&gt;<i> requests/responses.  Clients are expected to read them all, and handle
+</I>&gt;<i> the ones they can handle.  This means anybody can come up with a new
+</I>&gt;<i> header, and if it's popular many clients/servers will implement it, and
+</I>&gt;<i> then it becomes a de facto part of the standard, and clients/servers
+</I>&gt;<i> which don't handle it are seen as &quot;broken&quot; or &quot;primitive&quot;.
+</I>Yes i can understand this and it was not my intention to create
+extensibility in the protocol but just allow a single, client-induced
+data upload to the server.
+
+&gt;<i> This extensibility is of course a useful thing in many ways from an
+</I>&gt;<i> engineering perspective.  But in the long term it is, IMHO, fundamentaly
+</I>&gt;<i> totally incompatible with ideals like simplicity and minimalism and
+</I>&gt;<i> privacy and &quot;anybody can implement it themselves over a weekend in &lt;
+</I>&gt;<i> 1000 LOC&quot;.  Designers of protocols which are extensible effectively lose
+</I>&gt;<i> a lot of control over their protocol.
+</I>Yes, true
+
+&gt;<i> It's pointless me trying very
+</I>&gt;<i> hard to keep stuff which could be abused for tracking out of Gemini if
+</I>&gt;<i> it can be snuck in by popular consensus this way, because inevitably it
+</I>&gt;<i> will be.  You've just got to limit the scope for this kind of extension
+</I>&gt;<i> everywhere you can.
+</I>One proposal for more privacy and less tracking:
+Explicitly allow clients to remove the query string from any request, as
+most of the web stuff does also tracking via request parameters (before
+cookies).
+
+This would prevent servers relying on per-user generated URLs in between
+pages and the user can be queried if they want to remove the query
+parameters.
+
+&gt;<i> If you take this idea seriously, you are basically forced to choose
+</I>&gt;<i> one kind of &quot;thing&quot; a lot, and then have that thing be totally implicit.
+</I>&gt;<i> If there's only one kind of Gemini request (something analogous to GET),
+</I>&gt;<i> then we don't have to explicitly put anything in the request format
+</I>&gt;<i> saying &quot;this is a GET-ish request&quot;.  And if there's nothing explicit
+</I>&gt;<i> there, nobody can write an &quot;advanced&quot; server which recognises a
+</I>&gt;<i> different value in that place.
+</I>
+Yeah that's why i asked for a specific PUT in the first place. It may
+start to emerge that people want a more interactive version of
+gemini-served pages and would start to abuse standard features like url
+queries to introduce that kind of interactivity and it would be a point
+where the server would be able to pretty easily &quot;trick&quot; the user into
+following trackable links.
+
+Having an explicit PUT option in the protocol and preventing servers to
+rely on queries would make stuff simpler and more straightforward in the
+long term
+
+&gt;<i> If somebody can come up with a way to distinguish GET from POST style
+</I>&gt;<i> requests without also opening up an obvious door to arbitrarily many
+</I>&gt;<i> extra request types, I'll give it some thought.  But I'm not optimistic.
+</I>
+I actually came up with an idea, but i don't know how good it is in the end:
+
+Respec the 10 INPUT so that it works like this:
+
+1. Client sends usual request header
+2. Server responds with &quot;10 Your forum post:&quot;
+3. Client now has two options:
+    1. The client drops the connection and sends no bytes. This would be
+the status quo.
+    2. The client now sends a single line with the mime type of the
+data, then sends the data similar to the server responding with a 20
+status code (so, instead of the server sending data to the client, the
+client just sends data to the server)
+
+This would allow several things:
+1. Server can notify that the client needs to upload data, the client
+can now chose to upload or not
+2. With the mime type in the upload header, the server can just drop the
+connection after the mime, displaying the client that the data sent is
+unwanted.
+
+
+&gt;<i> Insisting on non-extensibility necessarily imposes limits on how much
+</I>&gt;<i> Gemini can do.  That's okay.  Limitations encourage creativity, and give
+</I>&gt;<i> different things their own unique style/taste/whatever.  Gemini is never
+</I>&gt;<i> going to be able to do everything that the web can do - it can't
+</I>&gt;<i> possibly do that while remaining simpler.  We should accept this.
+</I>
+Yeah true. But the first idea that comes to my mind when i'd like to
+upload a file would be:
+
+Chunk the file into 256 byte large pieces, and upload the whole data via
+a huge load of requests containing a query
+
+  /path/?offset=X&amp;length=Y&amp;blob=Z
+
+where X is the offset in the uploaded file, Y is the length of the
+transferred data and Z would be the URL-encoded data itself.
+
+
+&gt;<i> As recently mentioned, the spec doesn't actually explicitly say anything
+</I>&gt;<i> about line endings in text/gemini content itself (although it should).
+</I>&gt;<i> It does suggest that CRLF is needed at the end of =&gt; lines, but that was
+</I>&gt;<i> unintentional on my part.  I agree that requiring CRLF for actual
+</I>&gt;<i> content is strange and I suspect this will change in the next revision.
+</I>&gt;<i> 
+</I>&gt;<i> CRLF *is* clearly and deliberately specced in the non-content part of
+</I>&gt;<i> the protocol, i.e. for requests and response headers.  And the honest
+</I>&gt;<i> answer here is, well, that's how every internet protocol whose spec I've
+</I>&gt;<i> ever looked at works - HTTP, Gopher, SMTP, IRC, for example, all do
+</I>&gt;<i> this.  I admit to being ignorant as to the exact historical reason for 
+</I>&gt;<i> his convention.  But it's a deep and wide convention adhered to by
+</I>&gt;<i> people who know more than I do, and for that reason I'm reluctant to
+</I>&gt;<i> break it without very good reason.
+</I>Thanks for clarifying!
+
+&gt;<i> If people have strong feelings in either direction about the line
+</I>&gt;<i> terminator to be used in the protocol and in text/gemini content, I'm
+</I>&gt;<i> very happy to hear it.
+</I>I'd like to see a pure &lt;LF&gt; version, especially for the protocol header.
+My client atm just reads until the first &lt;LF&gt;, then checks if the &lt;CR&gt;
+is there and if not, drops the connection to the server and respons with
+&quot;InvalidResponse&quot;
+
+I assume a lot of servers/clients either ignore the existence of &lt;CR&gt; or
+drop the connection for protocol violation because both options are the
+sane thing to do. It's not like a lone &lt;CR&gt; or &lt;LF&gt; are allowed anyways
+in the header.
+
+Regards
+xq
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000760.html">Questions regarding &quot;POST&quot; request and line endings
+</A></li>
+	<LI>Next message (by thread): <A HREF="000766.html">Questions regarding &quot;POST&quot; request and line endings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#763">[ date ]</a>
+              <a href="thread.html#763">[ thread ]</a>
+              <a href="subject.html#763">[ subject ]</a>
+              <a href="author.html#763">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

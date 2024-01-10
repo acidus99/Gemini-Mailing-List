@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Scheme Section 2 quibble
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3C20201117021911.GN19536%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003371.html">
+   <LINK REL="Next"  HREF="003374.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Scheme Section 2 quibble</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3C20201117021911.GN19536%40brevard.conman.org%3E"
+       TITLE="Scheme Section 2 quibble">sean at conman.org
+       </A><BR>
+    <I>Tue Nov 17 02:19:16 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003371.html">Scheme Section 2 quibble
+</A></li>
+        <LI>Next message (by thread): <A HREF="003374.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3373">[ date ]</a>
+              <a href="thread.html#3373">[ thread ]</a>
+              <a href="subject.html#3373">[ subject ]</a>
+              <a href="author.html#3373">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Ali Fardan once stated:
+&gt;<i> On Mon, 16 Nov 2020 23:39:19 +0000
+</I>&gt;<i> acdw &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">acdw at acdw.net</A>&gt; wrote:
+</I>&gt;<i> &gt; &gt; The authority component is preceded by a double slash (&quot;//&quot;) and is
+</I>&gt;<i> &gt; &gt; terminated by the next slash (&quot;/&quot;), question mark (&quot;?&quot;), or number
+</I>&gt;<i> &gt; &gt; sign (&quot;#&quot;) character, or by the end of the URI.  
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Meaning that the scheme does not, in fact, include a &quot;//&quot; at the end,
+</I>&gt;<i> &gt; but rather that &quot;//&quot; is a separator between the scheme and the
+</I>&gt;<i> &gt; authority.  In fact, to actually encode a scheme-agnostic URL in a
+</I>&gt;<i> &gt; link, an author needs to write &quot;//example.com/path&quot;.  For an example,
+</I>&gt;<i> &gt; see the links in flounder.online.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I bring this issue up because there have been instances of geminauts
+</I>&gt;<i> &gt; linking like this:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; =&gt; example.com/path An example link  
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Which resolves, not to <A HREF="gemini://example.com/path,">gemini://example.com/path,</A> but
+</I>&gt;<i> &gt; to ./example.com/path on the current server.
+</I>&gt;<i> 
+</I>&gt;<i> This is wrong, even by web standards, when referencing to a different
+</I>&gt;<i> host, one must explicitly write a valid URL, you DON'T see:
+</I>&gt;<i> 
+</I>&gt;<i> &gt;	&lt;a href=&quot;example.tld/index.html&quot;&gt;&lt;/a&gt;
+</I>&gt;<i> 
+</I>&gt;<i> &gt; To resolve this confusion, I propose is to either
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; (a) strip the &quot;//&quot; (and probably &quot;:&quot;, though I found no particular
+</I>&gt;<i> &gt; reference to it in the spec) from the &quot;scheme of <A HREF="gemini://">gemini://</A> is
+</I>&gt;<i> &gt; implied&quot; portion of the above paragraph, or
+</I>&gt;<i> 
+</I>&gt;<i> In my humble opinion, I think that &quot;//example.tld/&quot; is an
+</I>&gt;<i> implementation specific hack and has no place in the protocol, a URI
+</I>&gt;<i> like that is invalid and should not be respected by servers, 
+</I>
+  It *is* allowed though---it's a schemeless URI and in a given context, it
+can be inferred.  Check out RFC-3986 section 5.2.2 (Transforming
+Rreferences, aka, resolving a URL with a base URL) and section 5.3
+(Component Recomposision) where ':' is appended to the scheme, and '//' is
+prefixed to the authority (host) section.
+
+  So, given a URL like this:
+
+	//example.net/path/to/resource
+
+in a resource, if the resource was served up via HTTP, then the scheme is
+'http:'; if HTTPS, then 'https:' and if gemini, 'gemini:'.  
+
+  A URL like this:
+
+	example.net/path/to/resource
+
+is, again, per RFC-3986 parsing rules, to be interpreted as a path, not an
+authority section then path.  Need I create an example to show this?  I can.
+
+  -spc
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003371.html">Scheme Section 2 quibble
+</A></li>
+	<LI>Next message (by thread): <A HREF="003374.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3373">[ date ]</a>
+              <a href="thread.html#3373">[ thread ]</a>
+              <a href="subject.html#3373">[ subject ]</a>
+              <a href="author.html#3373">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

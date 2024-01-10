@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Some reading on IRIs and IDNs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3CF8AAF3E9-130E-4D0E-BCD6-FE4129F598C3%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003961.html">
+   <LINK REL="Next"  HREF="003952.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Some reading on IRIs and IDNs</H1>
+    <B>Petite Abeille</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3CF8AAF3E9-130E-4D0E-BCD6-FE4129F598C3%40gmail.com%3E"
+       TITLE="Some reading on IRIs and IDNs">petite.abeille at gmail.com
+       </A><BR>
+    <I>Thu Dec 10 14:36:17 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003961.html">Some reading on IRIs and IDNs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003952.html">Some reading on IRIs and IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3964">[ date ]</a>
+              <a href="thread.html#3964">[ thread ]</a>
+              <a href="subject.html#3964">[ subject ]</a>
+              <a href="author.html#3964">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+&gt;<i> On Dec 10, 2020, at 15:20, Jason McBrayer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">jmcbray at carcosa.net</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> non-internet domain names in Active Directory, which
+</I>&gt;<i> we don't have to support.
+</I>
+Hmmm... so... no .local queries ala Cheshire?
+
+<A HREF="https://tools.ietf.org/html/rfc6762#appendix-F">https://tools.ietf.org/html/rfc6762#appendix-F</A>
+
+Perhaps worthwhile quoting in full:
+
+Appendix F.  Use of UTF-8
+
+   After many years of debate, as a result of the perceived need to
+   accommodate certain DNS implementations that apparently couldn't
+   handle any character that's not a letter, digit, or hyphen (and
+   apparently never would be updated to remedy this limitation), the
+   Unicast DNS community settled on an extremely baroque encoding called
+   &quot;Punycode&quot;.  Punycode is a remarkably ingenious encoding
+   solution, but it is complicated, hard to understand, and hard to
+   implement, using sophisticated techniques including insertion unsort
+   coding, generalized variable-length integers, and bias adaptation.
+   The resulting encoding is remarkably compact given the constraints,
+   but it's still not as good as simple straightforward UTF-8, and it's
+   hard even to predict whether a given input string will encode to a
+   Punycode string that fits within DNS's 63-byte limit, except by
+   simply trying the encoding and seeing whether it fits.  Indeed, the
+   encoded size depends not only on the input characters, but on the
+   order they appear, so the same set of characters may or may not
+   encode to a legal Punycode string that fits within DNS's 63-byte
+   limit, depending on the order the characters appear.  This is
+   extremely hard to present in a user interface that explains to users
+   why one name is allowed, but another name containing the exact same
+   characters is not.  Neither Punycode nor any other of the &quot;ASCII-
+   Compatible Encodings&quot; proposed for Unicast DNS may be used
+   in Multicast DNS messages.  Any text being represented internally in
+   some other representation must be converted to canonical precomposed
+   UTF-8 before being placed in any Multicast DNS message.
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003961.html">Some reading on IRIs and IDNs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003952.html">Some reading on IRIs and IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3964">[ date ]</a>
+              <a href="thread.html#3964">[ thread ]</a>
+              <a href="subject.html#3964">[ subject ]</a>
+              <a href="author.html#3964">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

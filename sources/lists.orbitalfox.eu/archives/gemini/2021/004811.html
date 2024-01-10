@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Message boards via e-mail, not Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Message%20boards%20via%20e-mail%2C%20not%20Gemini&In-Reply-To=%3CCAD2gp_S2s-he9V-Y7DzAsdwWOyXUGX79TjxyhUyQA1%3DuP9RXbg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004797.html">
+   <LINK REL="Next"  HREF="004789.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Message boards via e-mail, not Gemini</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Message%20boards%20via%20e-mail%2C%20not%20Gemini&In-Reply-To=%3CCAD2gp_S2s-he9V-Y7DzAsdwWOyXUGX79TjxyhUyQA1%3DuP9RXbg%40mail.gmail.com%3E"
+       TITLE="Message boards via e-mail, not Gemini">cowan at ccil.org
+       </A><BR>
+    <I>Mon Jan 11 22:14:50 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004797.html">Message boards via e-mail, not Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="004789.html">Message boards via e-mail, not Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4811">[ date ]</a>
+              <a href="thread.html#4811">[ thread ]</a>
+              <a href="subject.html#4811">[ subject ]</a>
+              <a href="author.html#4811">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Jan 10, 2021 at 1:00 AM Rohan Kumar &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">seirdy at seirdy.one</A>&gt; wrote:
+
+
+&gt;<i> This has been solved on the WWW through Webmentions. It should be
+</I>&gt;<i> possible to bring this to a Gemini site, though perhaps not using the
+</I>&gt;<i> Gemini protocol.
+</I>&gt;<i>
+</I>
+This is really a very nice design.  Here's my attempt to adapt it to Gemini:
+
+1) Alice mentions Bob's post in a text/gemini document by posting her
+response containing a link line to it.
+
+2) Alice (or a tool that Alice uses) fetches Bob's post and scans it for a
+link line whose text is (or contains) &quot;Webmentions&quot;.  If there isn't one,
+Alice can't proceed.  We'll call this the linkage URL.  It can be absolute
+or relative but can't contain a fragment.
+
+3) Otherwise, Alice takes the linkage URL and appends
+&quot;source=url1&amp;target=url2&quot; to it in the usual way.  That is, prefixed by &quot;?&quot;
+if there is no query part already, or prefixed by &amp; if there is.  Url1 is
+Alice's post and url2 is Bob's post.  There is no need to %-escape either
+of them.  Note that this use of parameters is specific to linkage servers.
+
+4) Alice then makes a Gemini request to the extended linkage URL.  A 20
+response means success, but Alice doesn't have to care what is returned
+(perhaps an empty document or something human readable).  The server
+referenced in the linkage URL, which we will call the linkage server,
+queues up the request for offline processing.  This is important, as it
+makes DDOSing more or less useless.
+
+5) Alice can then do the same thing for all the other links in her post,
+and then she doesn't have to worry about it any more.
+
+6) At some future time, the linkage server referred to in Bob's post
+dequeues a request:
+
+6a) The server does some simple validation (url1 must be different from
+url2, neither url must be &quot;localhost&quot;, etc.) and makes sure that url2 is a
+resource for which it is willing to accept requests.  If any of this fails,
+the request is dropped.
+
+6b) The server makes sure that it hasn't seen this request before (if so,
+it drops it).
+
+6c) The server fetches Alice's post at url1 to make sure it really does
+contain a link line that points to url2.  If it gets an error other than
+52, it can (but doesn't have to) queue up the request to try again.  A 52
+GONE request means don't try again, as Alice has deleted the post.
+
+7) Exactly what happens next depends on how the linkage server works.
+
+7a) The linkage server may notify Bob by email saying &quot;Your post &lt;url2&gt; has
+been linked from a post at &lt;url1&gt;.
+
+7b) If the linkage server has read/write access to Bob's post (through the
+file system, for example, or via sftp), it may create a link line to
+Alice's post using the first &quot;#&quot; header line in Alice's post as the link
+text, and append that line to Bob's post under a header line saying &quot;#
+Responses&quot;.  This would leave a permanent record that anyone reading Bob's
+post can see.
+
+7c) Or the linkage server can do (as they say on Monty Python) something
+completely different.
+
+8)  If  Alice updates the post, she can repeat the process for any newly
+added links.
+
+9) More advanced client tools and linkage servers can cope with media types
+other than text/gemini:
+
+9a) If Bob's post is text/plain, it can be checked for a line saying
+&quot;Webmentions: &quot; followed by an URL; if Alice's post is text/plain, its body
+can be searched for url2.
+
+9b) If Bob's post is text/html, it can be checked for a link or a element
+whose rel attribute is &quot;webmention&quot;; if Alice's post is text/html, it can
+be checked for a link, a, src, or video element whose href  or src
+attribute is url2.
+
+9c) Linkage servers can be smarter and handle schemes other than gemini,
+such as http(s), in which case they should follow &lt;
+<A HREF="https://www.w3.org/TR/webmention/">https://www.w3.org/TR/webmention/</A>&gt;, or gopher, or whatever.
+
+A nice thing about this design is that Alice and Bob can do everything
+pretty much by hand.  Alice has to be careful to construct the right URL,
+but if she messes up, nothing very bad happens.  The linkage server is the
+only part that has to be smart, and even then it is not all that smart.
+Queueing up requests can be done by writing each one to a small file in a
+directory, and they can be dequeued by reading a file from the directory
+and unlinking it when it is processed.  Alternatively the Posix batch(1)
+command can be used to run a command that processes one request.
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+Andrew Watt on Microsoft:  Never in the field of human computing has so
+much been paid by so many to so few! (pace Winston Churchill)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210111/c9093f43/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210111/c9093f43/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004797.html">Message boards via e-mail, not Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="004789.html">Message boards via e-mail, not Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4811">[ date ]</a>
+              <a href="thread.html#4811">[ thread ]</a>
+              <a href="subject.html#4811">[ subject ]</a>
+              <a href="author.html#4811">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

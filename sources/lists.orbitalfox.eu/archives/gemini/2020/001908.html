@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> SPOOFED: Re: [ANN] Tiny ad-hoc server
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20SPOOFED%3A%20Re%3A%20%5BANN%5D%20Tiny%20ad-hoc%20server&In-Reply-To=%3C044ea4e7-4e04-4a8f-af70-f1d68f041621%40case.codes%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001896.html">
+   <LINK REL="Next"  HREF="001811.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>SPOOFED: Re: [ANN] Tiny ad-hoc server</H1>
+    <B>Case Nelson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20SPOOFED%3A%20Re%3A%20%5BANN%5D%20Tiny%20ad-hoc%20server&In-Reply-To=%3C044ea4e7-4e04-4a8f-af70-f1d68f041621%40case.codes%3E"
+       TITLE="SPOOFED: Re: [ANN] Tiny ad-hoc server">me at case.codes
+       </A><BR>
+    <I>Thu Jun 25 18:59:51 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001896.html">SPOOFED: Re: [ANN] Tiny ad-hoc server
+</A></li>
+        <LI>Next message (by thread): <A HREF="001811.html">Some new tests in the Gemini Client Torture Test
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1908">[ date ]</a>
+              <a href="thread.html#1908">[ thread ]</a>
+              <a href="subject.html#1908">[ subject ]</a>
+              <a href="author.html#1908">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I think you can get rid of the loop here and use ncat -k , it's been working pretty well for me in testing.
+
+Jun 25, 2020 6:30:42 AM defdefred &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">defdefred at protonmail.com</A>&gt;:
+
+&gt;<i> Ok I'm dumb... don't saw the braces :-)
+</I>&gt;<i> 
+</I>&gt;<i> Bash process substitution will do too
+</I>&gt;<i> 
+</I>&gt;<i> #!/bin/sh
+</I>&gt;<i> 
+</I>&gt;<i> port=&quot;1965&quot;
+</I>&gt;<i> cert=&quot;cert.pem&quot;
+</I>&gt;<i> key=&quot;key.pem&quot;
+</I>&gt;<i> 
+</I>&gt;<i> printf &quot;Starting gemini server on port %s...\n&quot; &quot;$port&quot;
+</I>&gt;<i> while true; do
+</I>&gt;<i> ncat --ssl --ssl-cert &quot;$cert&quot; --ssl-key &quot;$key&quot; --listen &quot;$port&quot; &lt;( \
+</I>&gt;<i> printf &quot;20 text/gemini; charset=utf-8\r\n&quot; ; \
+</I>&gt;<i> printf &quot;Page generated: %s\n\n&quot; &quot;$(date)&quot; ; \
+</I>&gt;<i> cat &quot;$1&quot; )
+</I>&gt;<i> done
+</I>&gt;<i> 
+</I>&gt;<i> freD.
+</I>&gt;<i> 
+</I>&gt;<i> &#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208; Original Message &#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;
+</I>&gt;<i> On Thursday 25 June 2020 14:09, James Tomasino &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">tomasino at lavabit.com</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> On 6/25/20 11:34 AM, defdefred wrote:
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;&gt;<i> I don't understand how the infinite while works in this case...
+</I>&gt;&gt;&gt;<i> Is it consuming cpu all the time?
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> ncat waits only for a single connection, then terminates. I tried using the switch to keep the connection alive and reuse it, but that means the connection is never closed on any single request and most clients display nothing. By wrapping it in an infinite while I just tell ncat to start a new listener when the previous one is used. There's only ever one running at a time, and it's a single thread, but traffic is low and it seems to work just fine.
+</I>&gt;<i> 
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001896.html">SPOOFED: Re: [ANN] Tiny ad-hoc server
+</A></li>
+	<LI>Next message (by thread): <A HREF="001811.html">Some new tests in the Gemini Client Torture Test
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1908">[ date ]</a>
+              <a href="thread.html#1908">[ thread ]</a>
+              <a href="subject.html#1908">[ subject ]</a>
+              <a href="author.html#1908">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

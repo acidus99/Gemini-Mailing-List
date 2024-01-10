@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposal about content-size and hash
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%20about%20content-size%20and%20hash&In-Reply-To=%3CC6S136HG3ZPW.2X4HX0V7PRNVP%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002997.html">
+   <LINK REL="Next"  HREF="002999.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposal about content-size and hash</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%20about%20content-size%20and%20hash&In-Reply-To=%3CC6S136HG3ZPW.2X4HX0V7PRNVP%40stilgar%3E"
+       TITLE="Proposal about content-size and hash">solderpunk at posteo.net
+       </A><BR>
+    <I>Sun Nov  1 15:22:25 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002997.html">Proposal about content-size and hash
+</A></li>
+        <LI>Next message (by thread): <A HREF="002999.html">Proposal about content-size and hash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2998">[ date ]</a>
+              <a href="thread.html#2998">[ thread ]</a>
+              <a href="subject.html#2998">[ subject ]</a>
+              <a href="author.html#2998">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun Nov 1, 2020 at 3:47 PM CET, Solderpunk wrote:
+
+&gt;<i> The other option is to stick it *after* the MIME type, separated by a
+</I>&gt;<i> tab or some other delimiter, and I don't like that idea because as soon
+</I>&gt;<i> as the precedent is set that extra bits of optional information can be
+</I>&gt;<i> tacked on after the MIME type and simpler clients can ignore them, it
+</I>&gt;<i> opens the gateway to endless such extensions, and the risk that some of
+</I>&gt;<i> them will become so popular and widely implemented that clients which
+</I>&gt;<i> don't do so are considered &quot;outdated&quot; or &quot;broken&quot;, and these &quot;optional&quot;
+</I>&gt;<i> extensions are now de-facto obligatory spec features.
+</I>
+...I suspect I'll regret sharing this, but intellectual honesty compels
+me.  It's just occurred to me that this problem can actually be avoided by
+having the &lt;META&gt; value for status code 20 be the content size in bytes,
+followed by arbitrary whitespace, followed by the MIME type.  With this
+approach, the designated separator between the size and the MIME type
+is whitespace, but because MIME types may themselves contain whitespace
+(to e.g. separate type/subtype from parameter values), it would be
+extremely problematic to attempt to add any optional extensions on after
+the MIME type using that same designated separator.  Having the
+separator possibly occur inside the final element of the list makes the
+list self-terminating, which completely addresses my greatest fear with
+having a list at all, as opposed to just a single bit of information.
+
+So, this is actually solvable, in principle.  It would require a
+backward-compatibility breaking change to the protocol, which would
+probably throw the Geminiverse into a period of chaos as clients and
+servers made the change at different rates.  I haven't done anything
+like this since the early days when you could count Gemini
+implementations on your fingers and I had pre-existing relationships
+with all the authors, so the chaotic period was measured in mere days
+before we achieved perfect unity again.  I have no idea how it would go
+down this time now that everybody and their dog has written some Gemini
+tooling, and I'm not at all convinced that the lack of Content-Size is
+such a big practical problem that it's worth this kind of upheaval.
+
+But if content size is ever going to make it in, this seems like the
+best approach to me.  It doesn't abuse MIME types at all and it doesn't
+provide an obvious place for would-be extenders of the protocol to add
+additional content to the response header.  No other previous proposal
+has had both those properties, to the best of my knowledge.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002997.html">Proposal about content-size and hash
+</A></li>
+	<LI>Next message (by thread): <A HREF="002999.html">Proposal about content-size and hash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2998">[ date ]</a>
+              <a href="thread.html#2998">[ thread ]</a>
+              <a href="subject.html#2998">[ subject ]</a>
+              <a href="author.html#2998">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

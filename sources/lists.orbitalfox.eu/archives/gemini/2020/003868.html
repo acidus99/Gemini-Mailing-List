@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> IDN with Gemini?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C4308633.o1BF5sGNnQ%40tempete%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003864.html">
+   <LINK REL="Next"  HREF="003869.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>IDN with Gemini?</H1>
+    <B>C&#244;me Chilliet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C4308633.o1BF5sGNnQ%40tempete%3E"
+       TITLE="IDN with Gemini?">come at chilliet.eu
+       </A><BR>
+    <I>Mon Dec  7 23:40:43 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003864.html">IDN with Gemini?
+</A></li>
+        <LI>Next message (by thread): <A HREF="003869.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3868">[ date ]</a>
+              <a href="thread.html#3868">[ thread ]</a>
+              <a href="subject.html#3868">[ subject ]</a>
+              <a href="author.html#3868">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Le lundi 7 d&#233;cembre 2020, 19:00:02 CET <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> a &#233;crit :
+&gt;<i> C&#244;me's reply here asserts that a client would never need to parse
+</I>&gt;<i> IRIs, and so there's no added complexity. Just copy the IRI from the
+</I>&gt;<i> link line, do DNS, and send the IRI to the server. But this is not
+</I>&gt;<i> true, a client would need to do parsing.
+</I>&gt;<i> 
+</I>&gt;<i> What parsing would a client have to do?
+</I>&gt;<i> 
+</I>&gt;<i> - Extracting the domain, so it can be punycoded for DNS lookups
+</I>
+True, thanks for pointing that out.
+
+&gt;<i> - Resolving relative IRIs would require parsing the current IRI,
+</I>&gt;<i>    and the provided one, and combining them. You cannot just copy it
+</I>&gt;<i>    to make the request.
+</I>
+Also true, but it should be the same value that is extracted for DNS.
+
+&gt;<i> - When receiving an input status code on a page that already has a
+</I>&gt;<i>    query string, the IRI has to be parsed to detect that there is a
+</I>&gt;<i>    query string, and then remove and replace it with the new input of
+</I>&gt;<i>    the user.
+</I>
+Good to know, I did not think of query string situation.
+
+&gt;<i> - Extracting the path to get a name for downloading files
+</I>&gt;<i> - Etc.
+</I>&gt;<i> 
+</I>&gt;<i> There are many reasons why a client would need to be able to parse an
+</I>&gt;<i> IRI, the relative link one and DNS one being the most important.
+</I>&gt;<i> 
+</I>&gt;<i> This would then require IRI parsing libraries, and as I have explained
+</I>&gt;<i> earlier, these don't exist in likely many programming languages, and
+</I>&gt;<i> when they do, they are third-party.
+</I>
+From what you said on irc, the situation is different between URI and IRI because most languages have URI parsing either in their stdlib or in a well tested known library.
+But, if no project use IRI, of course no one will write a library for it, this is a chicken and egg situation here.
+
+Also, for the purpose of a client, it seems to me the parsing needed (domain and query extraction) is only to search for the first &quot;/&quot; and the last &quot;?&quot;, and some minor tweaks on the scheme maybe (which does not contain unicode, I will leave the scheme alone, promise).
+
+Note: Just tried <A HREF="gemini://gemini.circumlunar.space/%64%6f%63%73/%66%61%71%2e%67%6d%69">gemini://gemini.circumlunar.space/%64%6f%63%73/%66%61%71%2e%67%6d%69</A> in lagrange, it does work.
+
+C&#244;me
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003864.html">IDN with Gemini?
+</A></li>
+	<LI>Next message (by thread): <A HREF="003869.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3868">[ date ]</a>
+              <a href="thread.html#3868">[ thread ]</a>
+              <a href="subject.html#3868">[ subject ]</a>
+              <a href="author.html#3868">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

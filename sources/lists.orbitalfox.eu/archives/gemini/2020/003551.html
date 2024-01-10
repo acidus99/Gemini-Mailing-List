@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Assuming%20disallow-all%2C%20and%20some%20research%20on%20robots.txt%20in%0A%20Geminispace%20%28Was%3A%20Re%3A%20robots.txt%20for%20Gemini%20formalised%29&In-Reply-To=%3CCAD2gp_QG-c7mTSoiUOzdjuAmfG3kW6cUziHVAEd47Ww9PjnDeg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003544.html">
+   <LINK REL="Next"  HREF="003554.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Assuming%20disallow-all%2C%20and%20some%20research%20on%20robots.txt%20in%0A%20Geminispace%20%28Was%3A%20Re%3A%20robots.txt%20for%20Gemini%20formalised%29&In-Reply-To=%3CCAD2gp_QG-c7mTSoiUOzdjuAmfG3kW6cUziHVAEd47Ww9PjnDeg%40mail.gmail.com%3E"
+       TITLE="Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)">cowan at ccil.org
+       </A><BR>
+    <I>Wed Nov 25 15:10:44 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003544.html">Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+</A></li>
+        <LI>Next message (by thread): <A HREF="003554.html">Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3551">[ date ]</a>
+              <a href="thread.html#3551">[ thread ]</a>
+              <a href="subject.html#3551">[ subject ]</a>
+              <a href="author.html#3551">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Nov 25, 2020 at 6:32 AM Nick Thomas &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gemini at ur.gs</A>&gt; wrote:
+
+&gt;<i> (Received off-list, but I assume it was *meant* for the list, so
+</I>&gt;<i> replying there)
+</I>&gt;<i>
+</I>
+It was, so thanks.  My private messages are labeled (Private message) at
+the top because I make this mistake a lot.
+
+Whatever the outcome of the opt-in vs opt-out part of this discussion,
+&gt;<i>
+</I>
+That's the only part that concerns me.  A robots.txt spec is good and
+crawlers/archivers that respect it are fine too, though of course some
+won't.
+
+I once wrote to the author of a magazine article who had published a simple
+crawler that it would hammer whatever server it was crawling, since it did
+not delay between requests or intersperse them with requests to other
+servers, but simply walked the server's tree depth-first. and that it
+should respect robots.txt.  He wrote back saying &quot;That's the Internet
+today; deal with it.&quot;  I could have answered (but I didn't) that hits are a
+cost to the server operator, and anyone running his dumb crawler was not
+only DDOSing, but spending my money for his own purposes.
+
+But I do think that once robots.txt support is in place, no robots.txt = no
+expressed preference.
+
+If it's true for people with an explicit preference, it can also be
+&gt;<i> true for people who haven't expressed a preference yet. Since Gemini
+</I>&gt;<i> has a higher standard for user privacy than the web, it can also have a
+</I>&gt;<i> higher standard for these preferences - one that does not rely on
+</I>&gt;<i> presumed consent - if we want it to.
+</I>&gt;<i>
+</I>
+By this logic, nobody should be able to access a Gemini server at all
+unless the capsule author has expressed a preference for them to do so.
+But to publish is to expose your work to the public.
+
+&gt;<i> The FAQ immediately above the one you quoted reads:
+</I>&gt;<i>
+</I>&gt;<i> &gt; Why isn't the site I'm looking for in the archive?*
+</I>&gt;<i>
+</I>&gt;<i> &gt; Some sites may not be included because the automated crawlers were
+</I>&gt;<i> &gt; unaware of their existence at the time of the crawl. It's also
+</I>&gt;<i> &gt; possible that some sites were not archived because they were
+</I>&gt;<i> &gt; password protected, blocked by robots.txt, or otherwise inaccessible
+</I>&gt;<i> &gt; to our automated systems. Site owners might have also requested that
+</I>&gt;<i> &gt; their sites be excluded from the Wayback Machine.
+</I>&gt;<i>
+</I>
+I interpret that to mean that some sites were not crawled during the period
+when the Archive was paying attention to robots.txt, and so their content
+as of that date is unavailable.  Note the past tense:  &quot;were [...]
+protected by robots.txt&quot; as opposed to &quot;are protected&quot;.
+
+&gt;<i> If archive.org didn't respect robots.txt at all, it would lend a lot of
+</I>&gt;<i> flavour to the &quot;archiver&quot; virtual user-agent idea in the companion
+</I>&gt;<i> spec, in addition to this discussion. Do you still have doubts after
+</I>&gt;<i> reading this section?
+</I>&gt;<i>
+</I>
+I have no doubt whatever that the crawler doesn't respect robots.txt.  I
+could do a little experiment, though.
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+The competent programmer is fully aware of the strictly limited size of his
+own
+skull; therefore he approaches the programming task in full humility, and
+among
+other things he avoids clever tricks like the plague.  --Edsger Dijkstra
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201125/7813ec46/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201125/7813ec46/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003544.html">Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+</A></li>
+	<LI>Next message (by thread): <A HREF="003554.html">Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3551">[ date ]</a>
+              <a href="thread.html#3551">[ thread ]</a>
+              <a href="subject.html#3551">[ subject ]</a>
+              <a href="author.html#3551">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

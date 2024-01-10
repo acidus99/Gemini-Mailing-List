@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Announcing gemcert, a simple certificate generator
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Announcing%20gemcert%2C%20a%20simple%20certificate%20generator&In-Reply-To=%3CC47E58M2B3UU.2FOKMT130ZR1O%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002208.html">
+   <LINK REL="Next"  HREF="002210.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Announcing gemcert, a simple certificate generator</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Announcing%20gemcert%2C%20a%20simple%20certificate%20generator&In-Reply-To=%3CC47E58M2B3UU.2FOKMT130ZR1O%40stilgar%3E"
+       TITLE="[ANN] Announcing gemcert, a simple certificate generator">solderpunk at posteo.net
+       </A><BR>
+    <I>Wed Jul 15 18:58:25 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002208.html">Amfora and Bombadillo now at the ssh kiosk!
+</A></li>
+        <LI>Next message (by thread): <A HREF="002210.html">[ANN] Announcing gemcert, a simple certificate generator
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2209">[ date ]</a>
+              <a href="thread.html#2209">[ thread ]</a>
+              <a href="subject.html#2209">[ subject ]</a>
+              <a href="author.html#2209">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ahoy!
+
+My dead simple alternative to using `openssl` and its overwhelming
+torrent of cryptic command line switches to generate self-signed
+certificates for use in Geminispace is finally starting to take shape
+and is now ready for some test driving:
+
+<A HREF="https://tildegit.org/solderpunk/gemcert">https://tildegit.org/solderpunk/gemcert</A>
+
+Some example incantations follow.
+
+Want to make certificate to use for your server at example.com?  Run:
+
+gemcert -server -domain example.com
+
+and that's it!  You'll get, by default, an ECDSA cert valid for any
+subdomain of example.com for 5 years.  Prefer ED25519 and 2 years of
+validity?  Easy:
+
+gemcert -server -domain example.com -ed25519 -years 2
+
+Want a long-lived certificate you can use as a client cert for
+Astrobotany, with the username HirokoAi?  Easy:
+
+gemcert -client -cn HirokoAi -years 100
+
+You get the idea.
+
+It's still a little rough around the edges in some respects (e.g. the
+output is always saved to cert.pem and key.pem in the pwd), but it
+should be usable with some care.  Feedback very welcome!
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002208.html">Amfora and Bombadillo now at the ssh kiosk!
+</A></li>
+	<LI>Next message (by thread): <A HREF="002210.html">[ANN] Announcing gemcert, a simple certificate generator
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2209">[ date ]</a>
+              <a href="thread.html#2209">[ thread ]</a>
+              <a href="subject.html#2209">[ subject ]</a>
+              <a href="author.html#2209">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

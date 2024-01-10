@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Molly Brown Certificate Zone Help
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Molly%20Brown%20Certificate%20Zone%20Help&In-Reply-To=%3CCAHvN2xxnT7SWurGAD8h%2BsmTRS8%3D-3bzuwCe-1rUvSEUbQzdbsA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005259.html">
+   <LINK REL="Next"  HREF="005231.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Molly Brown Certificate Zone Help</H1>
+    <B>Lindsay</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Molly%20Brown%20Certificate%20Zone%20Help&In-Reply-To=%3CCAHvN2xxnT7SWurGAD8h%2BsmTRS8%3D-3bzuwCe-1rUvSEUbQzdbsA%40mail.gmail.com%3E"
+       TITLE="Molly Brown Certificate Zone Help">newsspeak11 at gmail.com
+       </A><BR>
+    <I>Tue Feb 16 16:58:57 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005259.html">Molly Brown Certificate Zone Help
+</A></li>
+        <LI>Next message (by thread): <A HREF="005231.html">Counting visits
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5292">[ date ]</a>
+              <a href="thread.html#5292">[ thread ]</a>
+              <a href="subject.html#5292">[ subject ]</a>
+              <a href="author.html#5292">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I was able to solve my problem, although I'm still not sure what the issue
+was.
+
+I stumbled across solderpunk's gemcert
+&lt;<A HREF="https://tildegit.org/solderpunk/gemcert">https://tildegit.org/solderpunk/gemcert</A>&gt; program for creating
+certificates. His program provides server and client key pairs. As part of
+the client key creation process, it automatically outputs a certificate
+fingerprint with SHA256 encoding.
+
+With this I did the following:
+1. Reinstall server certificates issued by gemcert
+2. Add client key and certificate to Kristall issued by gemcert
+3. Added the hash provided by gemcert from creating client certificates to
+the CertficiateZone are of the Molly Brown configuration file.
+4. Restart Molly Brown
+
+I can now browse the restricted area using the client certificate, but I'm
+still not sure why this worked and creating one through OpenSSL did not
+work. The only difference I could see is that gemcert creates ECDSA
+certificates instead of the RSA ones I tried previously.
+
+If anyone has any insights, I'd love to understand why this was successful.
+Unfortunately the only thing I learned through all this is to use gemcert
+for client certificates and I have no idea why.
+
+On Sun, Feb 14, 2021 at 7:03 PM Lindsay &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">newsspeak11 at gmail.com</A>&gt; wrote:
+
+&gt;<i> After some additional reading and trial and error, I think I've made
+</I>&gt;<i> progress, but still not successful.
+</I>&gt;<i>
+</I>&gt;<i> I've now created a client key and a signed client certificate and added
+</I>&gt;<i> them both to Kristall's certificate manager. I've also managed to generate
+</I>&gt;<i> what I believe is a proper SHA256 has using this command on my client
+</I>&gt;<i> certificate: openssl dgst -sha256
+</I>&gt;<i>
+</I>&gt;<i> I believe this is a proper hash as it matches the style and length of the
+</I>&gt;<i> examples proved in the molly.conf file. I've also verified that the
+</I>&gt;<i> fingerprint of the key pair in Kristall matches the fingerprint of the
+</I>&gt;<i> client certificate I used to generate the SHA256 hash.
+</I>&gt;<i>
+</I>&gt;<i> The Certificate Zone area of the config file now looks something like this:
+</I>&gt;<i>
+</I>&gt;&gt;<i> [CertificateZones]
+</I>&gt;&gt;<i> &quot;^/foo/&quot; = [
+</I>&gt;&gt;<i>     &quot;d146953386694266175d10be3617427dfbeb751d1805d36b3c7aedd9de02d9af&quot;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> ]
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Now that I have a certificate value that looks to be correct, I'm not sure
+</I>&gt;<i> what else to try. Are there any verbose logs available that I can enable to
+</I>&gt;<i> see what is being passed to Molly Brown or how the certificates are being
+</I>&gt;<i> compared?
+</I>&gt;<i>
+</I>&gt;<i> On Sat, Feb 13, 2021 at 7:31 PM Lindsay &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">newsspeak11 at gmail.com</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Greetings all,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I am trying to set up a server using Molly Brown and am having trouble
+</I>&gt;&gt;<i> implementing its &quot;Certificate Zone&quot; feature. If this isn't the correct
+</I>&gt;&gt;<i> forum for this question, please let me know.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> So far, I've set a directory require a certificate and successfully
+</I>&gt;&gt;<i> tested it - I am free to access all areas on the site and receive a
+</I>&gt;&gt;<i> certificate challenge to the one directory as configured.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> The problem I'm having is understanding how to add a specific client
+</I>&gt;&gt;<i> fingerprint to the &quot;allowed&quot; list in the config file. The Molly Brown
+</I>&gt;&gt;<i> documentation specify an allowed value takes the format of &quot;hex-encoded
+</I>&gt;&gt;<i> SHA256 fingerprints of client certificates&quot;. I have what I think is a valid
+</I>&gt;&gt;<i> fingerprint that I then converted into hex added to this section (which is
+</I>&gt;&gt;<i> significantly longer than any of the examples provided), but the
+</I>&gt;&gt;<i> corresponding certificate is rejected when provided.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I am certain this is user error. I have very little knowledge on how to
+</I>&gt;&gt;<i> manage certificates and rely on google searches when generated the correct
+</I>&gt;&gt;<i> ones for this server. Assuming the values provided in the example config
+</I>&gt;&gt;<i> file are based on real, working values, my value is nearly 4 times as long.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Here's what I did:
+</I>&gt;&gt;<i> 1. Generate a new key with following command:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> openssl req -new -newkey rsa:4096 -x509 -sha256 -days 3650 -nodes -out
+</I>&gt;&gt;&gt;<i> cert.crt -keyout key.key
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i> 2. Changed extension on output keys to .pem as required by Kristall
+</I>&gt;&gt;<i> Browser
+</I>&gt;&gt;<i> 3. Imported ley and cer into Kristall
+</I>&gt;&gt;<i> 4. Converted the fingerprint of the cert into hexadecimal with the
+</I>&gt;&gt;<i> following command:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> echo -n &quot;[Fingerprint went here]&quot; | od -A n -t x1
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> 5. Copied hexadecimal value into Molly Brown configuration file so the section looks like this:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> [CertificateZones]
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &quot;^/foo/&quot; = [
+</I>&gt;&gt;&gt;<i> #
+</I>&gt;&gt;&gt;<i>       &quot;d146953386694266175d10be3617427dfbeb751d1805d36b3c7aedd9de02d9af&quot;,
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> &quot;aa1ee9e5a1572a4677e9f59e181b5c6a27527c7602bd441e7bf909f681db2eb36c32246c5193a270fcfbc509fef9349b03d6a299907580c90566c881752a01adcd9055fae1e53a308c56020462849b42ab777d67c9c5e3fd0427ec6d42a997&quot;,
+</I>&gt;&gt;&gt;<i> ]
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i> 6. Relaunch Molly Brown
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Apologies if this is an elementary problem or the incorrect forum for such a question and appreciate any help that is provided.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Tanks!
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210216/6b3e85f1/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210216/6b3e85f1/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005259.html">Molly Brown Certificate Zone Help
+</A></li>
+	<LI>Next message (by thread): <A HREF="005231.html">Counting visits
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5292">[ date ]</a>
+              <a href="thread.html#5292">[ thread ]</a>
+              <a href="subject.html#5292">[ subject ]</a>
+              <a href="author.html#5292">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

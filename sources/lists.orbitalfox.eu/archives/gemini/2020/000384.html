@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3Cd1c39345-1051-71db-2775-8dd2fa402b13%40lavabit.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000381.html">
+   <LINK REL="Next"  HREF="000385.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>James Tomasino</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3Cd1c39345-1051-71db-2775-8dd2fa402b13%40lavabit.com%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">tomasino at lavabit.com
+       </A><BR>
+    <I>Sat Jan 18 23:13:50 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000381.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000385.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#384">[ date ]</a>
+              <a href="thread.html#384">[ thread ]</a>
+              <a href="subject.html#384">[ subject ]</a>
+              <a href="author.html#384">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 1/18/20 10:18 PM, Aaron Janse wrote:
+&gt;<i> Speaking of these...what happens when a client encounters this:
+</I>&gt;<i> 
+</I>&gt;<i> ** Foo
+</I>&gt;<i> ** Bar
+</I>&gt;<i> ** Baz
+</I>&gt;<i> 
+</I>&gt;<i> i.e. a bunch of allegedly nested list items which are not emedded in a
+</I>&gt;<i> higher-level list?
+</I>
+Line 1: A list has started at depth 2. Display a depth 2 list item.
+
+Line 2: A list has continued at depth 2.
+Display another depth 2 list item.
+
+Line 3: A list has continued at depth 2.
+Display another depth 2 list item.
+
+Pretty straight forward if we're just processing line by line. It's
+every-so-slightly trickier if we're working in ordered lists. You'll
+want to keep an ordinal stack.
+
++ item 1
+++ sub item 1
++++ sub-sub item 1
++++ sub-sub item 2
+++ sub item 2
++++ a new sub-sub item 1
+++ sub item 3
++ item 2
+
+As you push deeper you'll want to keep references to those items at a
+higher level so you can continue to number when you pop back out. Upon
+popping, though, you can reset the deeper list ordinal. At least, that's
+how I'd handle it.
+
+What constitutes the end of an ordered list? Unordered lists are &quot;dumb&quot;
+in that they just display their appropriate depth no matter what, but
+the ordered lists need to keep track of that state. Does a non-list line
+break the list? What about empty lines?
+
++ is this list
+
++ still counting
+
++ up to 3?
+
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000381.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000385.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#384">[ date ]</a>
+              <a href="thread.html#384">[ thread ]</a>
+              <a href="subject.html#384">[ subject ]</a>
+              <a href="author.html#384">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

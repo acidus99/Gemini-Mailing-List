@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] server testing
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20server%20testing&In-Reply-To=%3C20210420103301.GA28722%40sources.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006394.html">
+   <LINK REL="Next"  HREF="006403.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] server testing</H1>
+    <B>Stephane Bortzmeyer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20server%20testing&In-Reply-To=%3C20210420103301.GA28722%40sources.org%3E"
+       TITLE="[tech] server testing">stephane at sources.org
+       </A><BR>
+    <I>Tue Apr 20 11:33:01 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006394.html">[tech] server testing
+</A></li>
+        <LI>Next message (by thread): <A HREF="006403.html">[tech] server testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6395">[ date ]</a>
+              <a href="thread.html#6395">[ thread ]</a>
+              <a href="subject.html#6395">[ subject ]</a>
+              <a href="author.html#6395">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Apr 20, 2021 at 10:18:03AM +0000,
+ Sgaith &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">Sgiath at pm.me</A>&gt; wrote 
+ a message of 46 lines which said:
+
+&gt;<i> I am not too familiar with low level networking so I am looking for
+</I>&gt;<i> more information here. Specifically I would like to test scenario
+</I>&gt;<i> where client request comes in multiple packets over very slow
+</I>&gt;<i> connection. Is there some automated test which can do that for me?
+</I>&gt;<i> Or how could I test it manually (on Linux)?
+</I>
+On Linux, you can use the &quot;tc&quot; program to tell the kernel to drop
+and/or delay packets. For instance (DON'T TYPE IT BEFORE READING IT!)
+
+tc qdisc add dev  tap0 root netem delay 150ms loss 50%
+
+Will add 150 ms of delay to all packets going through the network
+interface tap0 and in addition will drop (more or less) half of them.
+
+% ping -c 10 gemini.circumlunar.space 
+PING gemini.circumlunar.space(2604:180:f3::185 (2604:180:f3::185)) 56 data bytes
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=1 ttl=54 time=78.6 ms
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=2 ttl=54 time=78.7 ms
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=3 ttl=54 time=78.4 ms
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=4 ttl=54 time=78.6 ms
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=5 ttl=54 time=78.6 ms
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=6 ttl=54 time=78.5 ms
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=7 ttl=54 time=79.7 ms
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=8 ttl=54 time=78.6 ms
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=9 ttl=54 time=78.4 ms
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=10 ttl=54 time=82.8 ms
+
+--- gemini.circumlunar.space ping statistics ---
+10 packets transmitted, 10 received, 0% packet loss, time 23ms
+rtt min/avg/max/mdev = 78.380/79.089/82.831/1.323 ms
+
+% sudo tc qdisc add dev eth1 root netem delay 150ms loss 50% 
+
+% ping -c 10 gemini.circumlunar.space                       
+PING gemini.circumlunar.space(2604:180:f3::185 (2604:180:f3::185)) 56 data bytes
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=1 ttl=54 time=229 ms
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=2 ttl=54 time=230 ms
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=3 ttl=54 time=229 ms
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=4 ttl=54 time=233 ms
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=7 ttl=54 time=229 ms
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=8 ttl=54 time=230 ms
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=9 ttl=54 time=229 ms
+64 bytes from 2604:180:f3::185 (2604:180:f3::185): icmp_seq=10 ttl=54 time=229 ms
+
+--- gemini.circumlunar.space ping statistics ---
+10 packets transmitted, 8 received, 20% packet loss, time 71ms
+rtt min/avg/max/mdev = 228.666/229.638/232.723/1.252 ms
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006394.html">[tech] server testing
+</A></li>
+	<LI>Next message (by thread): <A HREF="006403.html">[tech] server testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6395">[ date ]</a>
+              <a href="thread.html#6395">[ thread ]</a>
+              <a href="subject.html#6395">[ subject ]</a>
+              <a href="author.html#6395">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

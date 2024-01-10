@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> IDN with Gemini?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3Cq7qS0ixprcnlFN6CAm3ZO5xd0DlATrZyrnf8GFntjju6BDDPXiSffMw8YdoDlNsKKdXUdlvbTOKzcjXKyKECvRN3gc-chprwI-ipf2FJikE%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003868.html">
+   <LINK REL="Next"  HREF="003870.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>IDN with Gemini?</H1>
+    <B>colecmac at protonmail.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3Cq7qS0ixprcnlFN6CAm3ZO5xd0DlATrZyrnf8GFntjju6BDDPXiSffMw8YdoDlNsKKdXUdlvbTOKzcjXKyKECvRN3gc-chprwI-ipf2FJikE%3D%40protonmail.com%3E"
+       TITLE="IDN with Gemini?">colecmac at protonmail.com
+       </A><BR>
+    <I>Mon Dec  7 23:54:24 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003868.html">IDN with Gemini?
+</A></li>
+        <LI>Next message (by thread): <A HREF="003870.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3869">[ date ]</a>
+              <a href="thread.html#3869">[ thread ]</a>
+              <a href="subject.html#3869">[ subject ]</a>
+              <a href="author.html#3869">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Glad to hear that you realize how it's more complex than you originally
+thought.
+
+&gt;<i> &gt; -   Resolving relative IRIs would require parsing the current IRI,
+</I>&gt;<i> &gt;     and the provided one, and combining them. You cannot just copy it
+</I>&gt;<i> &gt;     to make the request.
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> Also true, but it should be the same value that is extracted for DNS.
+</I>
+No. I'm referring to things like this:
+
+=&gt; /docs/
+=&gt; example.gmi
+=&gt; dir/test/foo.gmi
+=&gt; //gus.guru/
+
+These are all relative in some way, and they must be resolved in reference
+to the IRI (or for Gemini right now, the URI) of the current page. This is not
+the same as the domain that was extracted for DNS, and requires a full
+parser.
+
+&gt;<i> From what you said on irc, the situation is different between URI and IRI
+</I>&gt;<i> because most languages have URI parsing either in their stdlib or in a well
+</I>&gt;<i> tested known library. But, if no project use IRI, of course no one will
+</I>&gt;<i> write a library for it, this is a chicken and egg situation here.
+</I>
+Yep, it's a shame. But we must live with it, and so URIs are the way forward.
+
+&gt;<i> Also, for the purpose of a client, it seems to me the parsing needed
+</I>&gt;<i> (domain and query extraction) is only to search for the first &quot;/&quot; and the last
+</I>&gt;<i> &quot;?&quot;, and some minor tweaks on the scheme maybe (which does not contain unicode,
+</I>&gt;<i> I will leave the scheme alone, promise).
+</I>
+It's always more complex than that. I'm a bit too tired to go dig into the RFCs
+to prove it right now, but I would not trust software that just matches some
+characters instead of compliantly parsing things in their entirety. This method
+would make Gemini more complex and easily introduce bugs. If we use URIs, we don't
+have to resort to this.
+
+&gt;<i> Note: Just tried <A HREF="gemini://gemini.circumlunar.space/%64%6f%63%73/%66%61%71%2e%67%6d%69">gemini://gemini.circumlunar.space/%64%6f%63%73/%66%61%71%2e%67%6d%69</A>
+</I>&gt;<i> in lagrange, it does work.
+</I>
+Works in Amfora too, and note that also the server software (Molly Brown) is accepting
+and parsing it correctly into a file path. But that's expected, because it's
+perfectly valid to percent-encode ASCII in a URL path.
+
+Cheers,
+makeworld
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003868.html">IDN with Gemini?
+</A></li>
+	<LI>Next message (by thread): <A HREF="003870.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3869">[ date ]</a>
+              <a href="thread.html#3869">[ thread ]</a>
+              <a href="subject.html#3869">[ subject ]</a>
+              <a href="author.html#3869">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

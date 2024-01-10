@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Three possible uses for IRIs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3CCAD2gp_QH6VdrmATGO55bdFMtBn3eZZg%2BRp_h2L9tPhqm6ubhsQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003875.html">
+   <LINK REL="Next"  HREF="003880.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Three possible uses for IRIs</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3CCAD2gp_QH6VdrmATGO55bdFMtBn3eZZg%2BRp_h2L9tPhqm6ubhsQ%40mail.gmail.com%3E"
+       TITLE="Three possible uses for IRIs">cowan at ccil.org
+       </A><BR>
+    <I>Tue Dec  8 04:00:01 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003875.html">Three possible uses for IRIs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003880.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3876">[ date ]</a>
+              <a href="thread.html#3876">[ thread ]</a>
+              <a href="subject.html#3876">[ subject ]</a>
+              <a href="author.html#3876">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Dec 7, 2020 at 9:47 PM &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A>&gt; wrote:
+
+
+&gt;<i> I don't think that's true. To convert them to a URI reference, the domain
+</I>&gt;<i> needs
+</I>&gt;<i> to be extracted and punycoded,
+</I>
+
+Agreed.  But if you have a Punycode encoder, then the following steps will
+convert an IRI reference to a URI reference, without regard to whether it
+is an IRI or a relative reference:
+
+1) Look in the IRI reference for a &quot;//&quot; and a following &quot;/&quot;; if they exist,
+pass the characters in between through your encoder and substitute the
+result into the IRI reference.
+
+2) Start over from the beginning.  If a character is ASCII, leave it
+unchanged.  Otherwise, take the character, convert it to UTF-8 bytes (easy)
+and each byte to hex digits (trivial), decorate it with leading %
+(trivial), and move on.  When you come to the end, stop.
+
+
+&gt;<i> Furthermore, it's breaking change to Gemini. I don't think that's a good
+</I>&gt;<i> idea in
+</I>&gt;<i> any case with the possible exception of TLS security. Gemini must be
+</I>&gt;<i> reliable,
+</I>&gt;<i> and it's too late for a breaking change.
+</I>&gt;<i>
+</I>
+Probably true.  ~~sigh~~
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+Normally I can handle panic attacks on my own; but panic is, at the moment,
+a way of life.                 --Joseph Zitt
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201207/67b23603/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201207/67b23603/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003875.html">Three possible uses for IRIs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003880.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3876">[ date ]</a>
+              <a href="thread.html#3876">[ thread ]</a>
+              <a href="subject.html#3876">[ subject ]</a>
+              <a href="author.html#3876">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

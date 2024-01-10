@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Crawlers on Gemini and best practices
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Crawlers%20on%20Gemini%20and%20best%20practices&In-Reply-To=%3C803842604.RZAbtYdCJc%40tempete%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003991.html">
+   <LINK REL="Next"  HREF="004003.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Crawlers on Gemini and best practices</H1>
+    <B>C&#244;me Chilliet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Crawlers%20on%20Gemini%20and%20best%20practices&In-Reply-To=%3C803842604.RZAbtYdCJc%40tempete%3E"
+       TITLE="Crawlers on Gemini and best practices">come at chilliet.eu
+       </A><BR>
+    <I>Fri Dec 11 10:18:00 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003991.html">Crawlers on Gemini and best practices
+</A></li>
+        <LI>Next message (by thread): <A HREF="004003.html">Crawlers on Gemini and best practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4000">[ date ]</a>
+              <a href="thread.html#4000">[ thread ]</a>
+              <a href="subject.html#4000">[ subject ]</a>
+              <a href="author.html#4000">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Le vendredi 11 d&#233;cembre 2020, 09:26:54 CET Stephane Bortzmeyer a &#233;crit :
+&gt;<i> &gt; - know who you are: archiver, indexer, feed-reader, researcher etc.
+</I>&gt;<i> &gt; - ask for /bots.txt
+</I>&gt;<i> &gt; - if 20 text/plain then
+</I>&gt;<i> &gt; -- allowed = set()
+</I>&gt;<i> &gt; -- denied = set()
+</I>&gt;<i> &gt; -- split response by newlines, for each line
+</I>&gt;<i> &gt; --- split by spaces and tabs into fields
+</I>&gt;<i> &gt; ---- paths = field[0] split by ','
+</I>&gt;<i> &gt; ---- if fields[2] is &quot;allowed&quot; and you in field[1] split by ',' then
+</I>&gt;<i> &gt; allowed = allowed union paths
+</I>&gt;<i> &gt; ----- if field[3] is &quot;but&quot; and field[5] is &quot;denied&quot; and you in
+</I>&gt;<i> &gt; field[4] split by ',' then denied = denied union paths
+</I>&gt;<i> &gt; ---- if fields[2] is &quot;denied&quot; and you in field[1] split by ',' then
+</I>&gt;<i> &gt; denied = denied union paths
+</I>&gt;<i> &gt; you always match all, never match none
+</I>&gt;<i> &gt; union of paths is special:
+</I>&gt;<i> &gt;     { &quot;/a/b&quot; } union { &quot;/a/b/c&quot; } ==&gt; { &quot;/a/b&quot; }
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; when you request for path, find the longest match from allowed and
+</I>&gt;<i> &gt; denied; if it is in allowed you're allowed, otherwise not;; when a
+</I>&gt;<i> &gt; tie: undefined behaviour, do what you want.
+</I>&gt;<i> 
+</I>&gt;<i> It seems perfect.
+</I>
+I guess I&#8217;m not the only one needing some examples to fully understand how this would work?
+
+If I get it it&#8217;s something like so:
+path1,path2 archiver,crawler allowed but path3 denied
+path4 * denied
+
+
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003991.html">Crawlers on Gemini and best practices
+</A></li>
+	<LI>Next message (by thread): <A HREF="004003.html">Crawlers on Gemini and best practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4000">[ date ]</a>
+              <a href="thread.html#4000">[ thread ]</a>
+              <a href="subject.html#4000">[ subject ]</a>
+              <a href="author.html#4000">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

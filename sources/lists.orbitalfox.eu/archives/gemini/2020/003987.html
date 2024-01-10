@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Some reading on IRIs and IDNs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3CCAD2gp_TTxOAzao2PFN52c9GHntQjnFTjm0syBd_EMK1F92fiBA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003986.html">
+   <LINK REL="Next"  HREF="003989.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Some reading on IRIs and IDNs</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3CCAD2gp_TTxOAzao2PFN52c9GHntQjnFTjm0syBd_EMK1F92fiBA%40mail.gmail.com%3E"
+       TITLE="Some reading on IRIs and IDNs">cowan at ccil.org
+       </A><BR>
+    <I>Fri Dec 11 02:45:55 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003986.html">Some reading on IRIs and IDNs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003989.html">Some reading on IRIs and IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3987">[ date ]</a>
+              <a href="thread.html#3987">[ thread ]</a>
+              <a href="subject.html#3987">[ subject ]</a>
+              <a href="author.html#3987">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Dec 10, 2020 at 8:12 PM Gary Johnson &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">lambdatronic at disroot.org</A>&gt;
+wrote:
+
+1. Punycode the hostname.
+&gt;<i>
+</I>
+If there is one.  You can look for &quot;//&quot; on the left and the next &quot;/&quot; on the
+right, so you don't need full parsing.
+
+&gt;<i> 2. Percent-encode reserved characters and non-US-ASCII characters in the
+</I>&gt;<i>    path, query, and fragment components.
+</I>&gt;<i>
+</I>
+You don't want to escape the ASCII reserved characters, because they should
+already be escaped.  Changing the path /foo/bar.gmi to %25foo%25bar.gmi
+would be Evil and Wrong.  If you really want that path, you have to encode
+it yourself.
+
+In addition, you can safely %-encode the whole IRI reference without
+parsing it, since Punycode names are always safe.
+2.5. If the IRI is a relative reference, resolve it against the URI of the
+text/gemini file that contains it.
+
+3. Make a DNS query with the punycoded hostname.
+&gt;<i>
+</I>&gt;<i> 4. Send the punycode + percent-encoded URI as the request to the Gemini
+</I>&gt;<i>    server.
+</I>&gt;<i>
+</I>
+Note that fragments must not be sent, so if there is one, chop it off.
+
+
+&gt;<i> 5. The server parses the URI into scheme, host, port, path, query, and
+</I>&gt;<i>    fragment components and then percent-decodes the path, query, and
+</I>&gt;<i>    fragment strings.
+</I>&gt;<i>
+</I>
+Consequently, the server will not get a fragment string.  There would be no
+need for fragment strings if they were understood on the server side;
+they'd just be part of the path.
+
+Whether it %-decodes or not is up to the server.  If it's serving a
+conventional file system, then it needs to document whether it does such
+decoding.  If it isn't, it can do whatever it wants to with the paths.
+
+
+&gt;<i>  6. The parsed and decoded URI information can then either be used to
+</I>
+   perform a file retrieval, generate a directory listing, or run a CGI
+&gt;<i>    script, ultimately sending back a valid Gemini response to the
+</I>&gt;<i>    client. Redirect responses should make sure to percent-encode the
+</I>&gt;<i>    path, query, and fragment components of the redirected URI.
+</I>&gt;<i>
+</I>
+Except not the fragment.
+
+&gt;<i> Since at least one
+</I>&gt;<i> poster has indicated that the widespread unevenness in DNS support for
+</I>&gt;<i> unicode has lead to the need to store A records in their punycoded form,
+</I>&gt;<i>
+</I>
+Indeed, I don't think that any registrar using the standard DNS root will
+even register non-punycoded names.  MS Active Directory DNS servers are
+another story.
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+This great college [Trinity], of this ancient university [Cambridge],
+has seen some strange sights. It has seen Wordsworth drunk and Porson
+sober. And here am I, a better poet than Porson, and a better scholar
+than Wordsworth, somewhere betwixt and between.  --A.E. Housman
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201210/33b59f84/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201210/33b59f84/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003986.html">Some reading on IRIs and IDNs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003989.html">Some reading on IRIs and IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3987">[ date ]</a>
+              <a href="thread.html#3987">[ thread ]</a>
+              <a href="subject.html#3987">[ subject ]</a>
+              <a href="author.html#3987">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

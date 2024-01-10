@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Gemini privacy
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20privacy&In-Reply-To=%3Cf10488bd-3165-9c3b-8183-0b36d7334fd8%40NorthTech.US%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006032.html">
+   <LINK REL="Next"  HREF="006042.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Gemini privacy</H1>
+    <B>Bradley D. Thornton</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20privacy&In-Reply-To=%3Cf10488bd-3165-9c3b-8183-0b36d7334fd8%40NorthTech.US%3E"
+       TITLE="Gemini privacy">Bradley at NorthTech.US
+       </A><BR>
+    <I>Wed Mar 10 09:51:39 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006032.html">Gemini privacy
+</A></li>
+        <LI>Next message (by thread): <A HREF="006042.html">Gemini privacy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6041">[ date ]</a>
+              <a href="thread.html#6041">[ thread ]</a>
+              <a href="subject.html#6041">[ subject ]</a>
+              <a href="author.html#6041">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+On 3/9/2021 4:54 PM, Sean Conner wrote:
+&gt;<i> It was thus said that the Great Phil Leblanc once stated:
+</I>&gt;&gt;<i> On Tue, Mar 9, 2021 at 6:36 PM &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">nothien at uber.space</A>&gt; wrote:
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> P.S: I've been thinking about all the issues we've come across with TLS,
+</I>&gt;&gt;&gt;<i> and I've been collecting ideas for a new transport security protocol.  I
+</I>&gt;&gt;&gt;<i> know ~spc's stance on crypto (&quot;get it approved by the crypto community,
+</I>&gt;&gt;&gt;<i> make an implementation, then we'll talk&quot;),
+</I>
+NaCl? ;) <A HREF="https://github.com/cipriancraciun/gemini-experiments">https://github.com/cipriancraciun/gemini-experiments</A>
+
+&gt;&gt;<i>
+</I>&gt;&gt;<i> I think Sean Conner's statement is rhetoric or tongue-in-cheek :-)
+</I>&gt;&gt;<i> Whether one likes it or not, Gemini IS built upon TLS. Period. That
+</I>&gt;&gt;<i> ship has sailed.  So I understand Sean (and others) want to limit
+</I>&gt;&gt;<i> entropy in the mailing list
+</I>&gt;&gt;<i>
+</I>&gt;<i>   It's not completely rhetorical---it's to just shut up those what want
+</I>&gt;<i> others to do the work.  But I mean it---present a working proof-of-concept
+</I>&gt;<i> that has passed the crypto community and by all means, it'll be worth
+</I>&gt;<i> talking about then (mostly about hose easy it is to implement across a
+</I>&gt;<i> variety of languages).  Until then, it's TLS.
+</I>&gt;<i> 
+</I>&gt;<i>   -spc (We've already had one &quot;proof-of-concept&quot; alternative crypto, but it
+</I>&gt;<i> 	was rejected by the person who did it for further study ... )
+</I>&gt;<i> 
+</I>
+Yes we have. A little over a year ago. Ciprian Craciun wanted to, and
+most  enthusiastically, proposed that we replace TLS with NaCl. He even
+wrote a proof of concept to support and test it (above), which in the
+long run wasn't really a viable solution, at least for Gemini protocol.
+
+I've seen a lot of other folks come in proposing truly extensible
+integrations, but extensible is usually antithetical to Project Gemini's
+aims.
+
+Now that Gemini is experiencing Logarithmic growth it seems that many
+well meaning folks are dropping onto the list and proposing changes to
+the specifications that have not only already been hashed out by both
+consensus, but also practical trial and error feasibility studies in
+actual practice.
+
+NaCl didn't fly because it's a wonderful thing to build a better web
+connection with, and if one actually considers those notions, it
+translates into a very narrow deployment capability - even TLS has not
+been without its issues in Gemini, Sean was fortunate due to his use of
+the particular libtls, and for some things, even using his own
+libraries, while Python presented some interesting problems that I'm not
+sure all have been resolved. Other languages... the same. Some
+implementations fare better than others, but still, one can actually
+write a client or a server that provides basic Gemini protocol
+compliance in a weekend or two that includes TLS (at least in IPv4).
+
+It's not a lot to ask that someone implement rather than postulate what
+is possible, can the suggestion actually yield services that adhere to
+the basic premise upon which Gemini is prefaced?
+
+If Orange is the new black, then Gemini is the new *show me* state. It's
+a very simple concept, 'Is this a realy proposal? Where's the beef? Show
+everyone the money, and that can be introduced along with a discussion
+backed by demonstrated feasibility.
+
+But before even that, we're talking about a very young project. It's
+certainly not too much to ask, and yes it should be prominently posted
+somewhere, to please review the archives because much of what is being
+bantered back and forth lately are very much reruns of what those who
+have already implemented production services have wrestled with.
+
+Ciprian kinda just up and disappeared last spring following his NaCl
+proposal. He even advocated for a versioning system for Gemini protocol
+that included current stable, past stable, and I guess tomorrow's latest
+and greatest extensible.... Wait! That would make Gemini like HTTP. It
+was a valid excercise in building a prototype for a better web, and
+that's just not Gemini. Sadly, I get the feeling that there are a lot of
+folks that are chomping at the bit to contribute something in the realm
+of protocol design here, but we're not buildng a better web through
+Gemini - we never were.
+
+Rohan was just mentioning to me the other day that he would still like
+to see just two things canonized in Gemini. Accessibility support that
+triggers what I have referred to as *noise* alerts -ASCII art (In fact,
+I've already begun implementing an interim solution), and compression.
+Me too. I want those things for users and clients, respectively.
+
+The problem with compression however, is that it has been stated several
+times that Gemini is intended (expected, rather) to deliver mostly small
+files, but not so ubiquitously so in my case. i.e., I've been a SCO
+partner for many many years and I'm one of the only places I know of on
+the net where you can freely download ISOs of SCO 5 and 6, the kewlest
+part about that, and one reason I don't want webproxies on my lawn, is
+because I make those archives available exlusively via Gemini (Maybe
+Gopher too, I'll have to check lolz). Point being, Vger gets a couple of
+folks downloading old SCO .iso's every month, and it seems to go fine
+without compression. Would compression be nice? - you betcha! but at
+1Gbps it's not really that big of a deal - at least for now.
+
+At this juncture the spec is being finalized, the time for wonderful
+ideas as to how to handshake and secure connections has pretty much
+passed, and judging by the evidence (check GUS or LUPA, Geddit, Manisha,
+medusae.space, Sloam and gmisub just to name a few), Gemini is off to a
+great start and Solderpunk has, as recently as a week ago, acknowldeged
+that his child has now gone off to college as a young adult.
+
+By the way, neither of those two things (Accessibility or gzip
+compression) have anything to do with, nor have any place in
+discussions, for spec changes.
+
+One thing I would really suggest here for folks climbing on board the
+Gemini train with new ideas - use Gemini first. We have a LOT of
+resources, including several archives of this mailing list which you can
+search through. Much of what people suggest lately are more often than
+not already hashed out in the archives, which are easily searchable from
+within Gemini space.
+
+Well, just my thoughts on the matter. If you build it (and it works)
+they will come, or you can talk about it, but that won't *make it so*
+Commander Data ;)
+
+I hope that helps :)
+
+Kindest regards,
+
+
+-- 
+Bradley D. Thornton
+Manager Network Services
+<A HREF="http://NorthTech.US">http://NorthTech.US</A>
+TEL: +1.310.421.8268
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006032.html">Gemini privacy
+</A></li>
+	<LI>Next message (by thread): <A HREF="006042.html">Gemini privacy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6041">[ date ]</a>
+              <a href="thread.html#6041">[ thread ]</a>
+              <a href="subject.html#6041">[ subject ]</a>
+              <a href="author.html#6041">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

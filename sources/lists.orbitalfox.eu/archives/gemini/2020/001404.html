@@ -1,0 +1,280 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> implementing client certificate support
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20implementing%20client%20certificate%20support&In-Reply-To=%3C20200607203720.GG15622%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001400.html">
+   <LINK REL="Next"  HREF="001412.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>implementing client certificate support</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20implementing%20client%20certificate%20support&In-Reply-To=%3C20200607203720.GG15622%40SDF.ORG%3E"
+       TITLE="implementing client certificate support">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Sun Jun  7 21:37:20 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001400.html">implementing client certificate support
+</A></li>
+        <LI>Next message (by thread): <A HREF="001412.html">implementing client certificate support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1404">[ date ]</a>
+              <a href="thread.html#1404">[ thread ]</a>
+              <a href="subject.html#1404">[ subject ]</a>
+              <a href="author.html#1404">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Jun 07, 2020 at 08:54:39PM +0200, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">mbays at sdf.org</A> wrote:
+ 
+&gt;<i> I just finished adding client certificate support to my line-based textual
+</I>&gt;<i> gemini client diohsc. This involved making some non-trivial choices, and I
+</I>&gt;<i> didn't copy av98 in all cases, so I hope discussing the decisions I made and
+</I>&gt;<i> the reasoning behind them could be of use to other client developers and in
+</I>&gt;<i> refining the spec.
+</I>
+Good!  The way stuff is done in AV-98 current is *not* supposed to be
+normative.  It's supposed to give us the ability to experiment with
+different client certificate work flows so we can see what works and
+does not.
+ 
+&gt;<i> ## User interface
+</I>&gt;<i> * The technical terminology &quot;client certificate&quot;, which describes an
+</I>&gt;<i> implementation detail rather than the underlying concept, is mostly hidden
+</I>&gt;<i> from the user. Instead, the client talks about &quot;identities&quot;. An identity is
+</I>&gt;<i> just a client certificate along with an optional name.
+</I>&gt;<i> * In diohsc, there are two kinds of identity -- temporary anonymous
+</I>&gt;<i> identities and long-term named identities. The latter are saved to disc, the
+</I>&gt;<i> former are held only in memory.
+</I>&gt;<i> * There is no way to name and save an anonymous identity. Allowing it would
+</I>&gt;<i> complicate the UI and the conceptual distinction between the two kinds of
+</I>&gt;<i> identity.
+</I>
+This all sounds pretty sensible.
+
+&gt;<i> ### Creating identities
+</I>&gt;<i> * When 61 is received, the user is asked if they want to create an anonymous
+</I>&gt;<i> identity.
+</I>&gt;<i> * On any other 6* error code, the user may select an existing named identity
+</I>&gt;<i> or create a new named or anonymous identity, and then retry the request.
+</I>&gt;<i> * When creating a named identity, the user is prompted to set a Common Name
+</I>&gt;<i> (which can be empty). This is the only choice required of the user. It would
+</I>&gt;<i> make for a neater UI to automatically set the Common Name to be the name of
+</I>&gt;<i> the identity, and in some ways it would make sense. But the user may well
+</I>&gt;<i> want to use the same Common Name (e.g. &quot;anon&quot; or &quot;&quot;) on multiple servers
+</I>&gt;<i> without a common identity.
+</I>
+For what it's worth, I am thinking pretty heavily about deprecating the
+current status code 61 (and 21).  They totally violate the idea that all
+status codes should degrade gracefully in super simple clients which
+ignore the second digit.  If 61 is interpreted as 60, there is no
+guarantee that the resulting certificate will be transient as intended,
+and if 21 is interpreted as 20 the active certificate may not be deleted
+as soon as the server is done with it.
+
+I am increasingly thinking that having a single code for on-demand
+certificates and encouraging clients to implement the
+transient/persistent distinction themselves, like you are doing with any
+other 6* code.
+
+&gt;<i> ### Using identities
+</I>&gt;<i> * An identity can be set to be used on a given server at and below a given
+</I>&gt;<i> URI path. So you can have one identity in use for
+</I>&gt;<i> <A HREF="gemini://foo.bar/~quux/...,">gemini://foo.bar/~quux/...,</A> and another for <A HREF="gemini://foo.bar/~xuuq/...">gemini://foo.bar/~xuuq/...</A>
+</I>&gt;<i> * Whenever an URI is shown to the user, it is annotated with the identity,
+</I>&gt;<i> if any, which would be used if it were requested; e.g.
+</I>&gt;<i> &quot;<A HREF="gemini://foo.bar/~xuuq/hello.gmi[clarkKent">gemini://foo.bar/~xuuq/hello.gmi[clarkKent</A>]&quot;. This includes relative URIs
+</I>&gt;<i> in links. So the user knows when they're going to use what identity.
+</I>&gt;<i> * Colouring is used to visually separate the annotation from the URI (but
+</I>&gt;<i> '[' and ']' are reserved characters in URIs, so this isn't actually
+</I>&gt;<i> necessary).
+</I>&gt;<i> * Anonymous identities are denoted as &quot;[]&quot;.
+</I>&gt;<i> * If the user requests an URI which would use an identity which hasn't been
+</I>&gt;<i> used in 30m, they are asked to confirm whether they want to still use it. If
+</I>&gt;<i> they don't want to, the identity is disabled for this path.
+</I>
+This also all sounds really good!  How does a certificate come to be
+restricted to a given URL path and subpaths?  Is it just up to the user
+to take an educated guess at the required scope for a cert and manually
+specify the path?  I have been thinking that perhaps the &lt;META&gt; line for
+status coedes 6x could be used for the server to specify precisely this
+information.
+
+&gt;<i> ### Controlling identities
+</I>&gt;<i> * There is a single new command added to deal with identities: &quot;identify
+</I>&gt;<i> [URI]&quot;. If URI is missing, it defaults to the current URI (if any).
+</I>&gt;<i> * If there is an identity in use at the URI, after confirmation it is
+</I>&gt;<i> removed.
+</I>&gt;<i> * Otherwise the user is prompted to select an existing identity or create a
+</I>&gt;<i> new one, as if 60 had been received.
+</I>
+Aah, so this is how certs get associated with a path.
+
+&gt;<i> ## Certificates
+</I>&gt;<i> * To minimise information leakage to the server, all certificates, for both
+</I>&gt;<i> anonymous and named identities, are created the same way apart from the
+</I>&gt;<i> Common Name.
+</I>&gt;<i> * The expiration date is set to 2 years in the future. I'm not sure if this
+</I>&gt;<i> is the best compromise.
+</I>&gt;<i> * The &quot;valid from&quot; date is set to 1 year in the past. Why not set it to the
+</I>&gt;<i> current time? It's a known problem that users &quot;in the wild&quot; often don't have
+</I>&gt;<i> correctly set clocks -- they don't set the right time zone, then set the
+</I>&gt;<i> clock to make the time &quot;look right&quot;. Since gemini servers are meant to be
+</I>&gt;<i> widely deployed, we shouldn't expect either client or server to have the
+</I>&gt;<i> right time. So we should backdate certificates by at least a couple of days,
+</I>&gt;<i> and then a year seems a nice round safe choice.
+</I>&gt;<i> * The serial number is set to 0, no extensions are set, and the
+</I>&gt;<i> distinguished name consists only of the Common Name.
+</I>&gt;<i> * The key is 2048 bit RSA with public exponent e=65537, and with hash
+</I>&gt;<i> algorithm SHA256. I would have liked to use Ed25519, which is more efficient
+</I>&gt;<i> in size and processing, but not all servers accept it.
+</I>
+I have also been wondering about putting something in the best practices
+about certificate key types and sizes (based on discussions with 80h
+about performance on their ESP8266 implementation).  And about
+ciphersuites generally, with a view toward minimising TLS overhead and
+improving performance on low-power machines like Raspbery Pis.
+
+&gt;<i> ### Fingerprinting
+</I>&gt;<i> Currently, these choices identify diohsc uniquely. Hopefully a future
+</I>&gt;<i> version of the spec will suggest defaults to prevent such fingerprinting,
+</I>&gt;<i> and I think these would be reasonable choices. But it could be worth
+</I>&gt;<i> considering mandating Ed25519, even if this means only TLS1.3 servers can
+</I>&gt;<i> use client certificates. This can be considered an &quot;advanced&quot; feature for a
+</I>&gt;<i> server, so it isn't so much of a problem if some servers aren't capable of
+</I>&gt;<i> it.
+</I>
+This is definitely worth giving consideration and the spec *should*
+eventually say stuff about this.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001400.html">implementing client certificate support
+</A></li>
+	<LI>Next message (by thread): <A HREF="001412.html">implementing client certificate support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1404">[ date ]</a>
+              <a href="thread.html#1404">[ thread ]</a>
+              <a href="subject.html#1404">[ subject ]</a>
+              <a href="author.html#1404">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

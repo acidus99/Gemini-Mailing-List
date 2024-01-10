@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> New user, spec details
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20New%20user%2C%20spec%20details&In-Reply-To=%3C2L4C8JSU35PLB.36KUIT6ASS810%40appa.upyum.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002255.html">
+   <LINK REL="Next"  HREF="002244.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>New user, spec details</H1>
+    <B>kooda at upyum.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20New%20user%2C%20spec%20details&In-Reply-To=%3C2L4C8JSU35PLB.36KUIT6ASS810%40appa.upyum.com%3E"
+       TITLE="New user, spec details">kooda at upyum.com
+       </A><BR>
+    <I>Fri Jul 17 20:39:16 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002255.html">question about links parsing
+</A></li>
+        <LI>Next message (by thread): <A HREF="002244.html">New user, spec details
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2243">[ date ]</a>
+              <a href="thread.html#2243">[ thread ]</a>
+              <a href="subject.html#2243">[ subject ]</a>
+              <a href="author.html#2243">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi!
+
+I&#8217;ve been browsing the Gemini space for about a week and so far I love
+it! I just fired up my own server and intend to contribute to the content
+soon.
+
+I also skimmed the mailing list and there are still a few details of the
+spec I would like to discuss:
+
+First, in the overview of the transaction (#1.1), it appears to me that
+the client must wait for the server to close the connection before doing
+anything with the response. It seems to be an unnecessary constraint,
+especially since the text/gemini format is designed to be handled line by
+line without needing to store the whole document. It would also enable
+rendering of progressive images, playing audio files, etc during the
+transfer.
+
+In the same section, as well as #3.3 Response bodies, it is stated that
+the server closes the connection after the document is sent. I think it
+would be interesting to be a little more precise and state that the server
+sends a close_notify from the TLS layer before closing the connection. It
+would make it possible for clients to detect a truncated download and warn
+the user about it.
+
+I would also like to know the general opinion about TLS session caches. It
+could be used as a light tracking tool&#8230; but I don&#8217;t think it&#8217;s that
+bad. IP address and requests timing can also be used in the same way to
+track users on a single server. And if someone really wanted, they could
+just serve unique URLs to each visitor to track their movements on their
+server.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002255.html">question about links parsing
+</A></li>
+	<LI>Next message (by thread): <A HREF="002244.html">New user, spec details
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2243">[ date ]</a>
+              <a href="thread.html#2243">[ thread ]</a>
+              <a href="subject.html#2243">[ subject ]</a>
+              <a href="author.html#2243">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

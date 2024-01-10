@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> The protection offered by TLS in a TOFU scheme
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20The%20protection%20offered%20by%20TLS%20in%20a%20TOFU%20scheme&In-Reply-To=%3CCAJScK0JTgXafAx4CSkyUkBQm17vhnwe1E%3Dh5ox7eXpdrq1jTZQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005947.html">
+   <LINK REL="Next"  HREF="005949.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>The protection offered by TLS in a TOFU scheme</H1>
+    <B>Bj&#246;rn W&#228;rmedal</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20The%20protection%20offered%20by%20TLS%20in%20a%20TOFU%20scheme&In-Reply-To=%3CCAJScK0JTgXafAx4CSkyUkBQm17vhnwe1E%3Dh5ox7eXpdrq1jTZQ%40mail.gmail.com%3E"
+       TITLE="The protection offered by TLS in a TOFU scheme">bjorn.warmedal at gmail.com
+       </A><BR>
+    <I>Fri Mar  5 10:30:42 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005947.html">The protection offered by TLS in a TOFU scheme
+</A></li>
+        <LI>Next message (by thread): <A HREF="005949.html">The protection offered by TLS in a TOFU scheme
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5948">[ date ]</a>
+              <a href="thread.html#5948">[ thread ]</a>
+              <a href="subject.html#5948">[ subject ]</a>
+              <a href="author.html#5948">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> &#8226; PROTECT DATA IN TRANSIT FROM DRAGNET SURVEILLANCE
+</I>&gt;<i>
+</I>&gt;<i> Yes, somewhat &#8212; ignoring larger issues such as deeper network traffic analyzes. But yes, the transmission is somewhat encrypted, at a bare minimum.
+</I>&gt;<i>
+</I>&gt;<i> Courtesy of TLS though, the aptly named Transport Layer Security. Nothing to do with TOFU per se.
+</I>&gt;<i>
+</I>&gt;<i> The expedient of ignoring certificates altogether would achieve the same effect.
+</I>&gt;<i>
+</I>&gt;<i> Also, the mere existence of certificates and usage of TLS may compromise privacy &#8212; for a given value of &quot;privacy&quot;.
+</I>&gt;<i>
+</I>&gt;<i> TLS Fingerprint
+</I>&gt;<i> <A HREF="https://tlsfingerprint.io">https://tlsfingerprint.io</A>
+</I>&gt;<i>
+</I>&gt;<i> The use of TLS in Censorship Circumvention
+</I>&gt;<i> <A HREF="https://tlsfingerprint.io/static/frolov2019.pdf">https://tlsfingerprint.io/static/frolov2019.pdf</A>
+</I>&gt;<i>
+</I>&gt;<i> Clients could leak unwelcome informations.
+</I>&gt;<i> Servers could generate unique certificates for tracking purpose.
+</I>&gt;<i> The possibilities for abuse are endless, as always.
+</I>
+Yes. Note that I don't -- for example -- claim that it protects us
+from meta data or tracking. As you say, there are endless options for
+abuse. Most of those apply to the CA cert validation scheme too, of
+course. Any data we send or receive is a data point that can be
+harvested at some point and form along the way, and the more data
+points an adversary has the more it can analyse and infer.
+
+&gt;<i> &#8226; TOFU IS NOT PERFECT, BUT IT'S A LOT BETTER THAN NO VALIDATION
+</I>&gt;<i>
+</I>&gt;<i> The same assertion is made by the current specification, toward the end of 4.2 Server certificate validation:
+</I>&gt;<i>
+</I>&gt;<i> &quot;This model is by no means perfect, but it is not awful and is vastly superior to just accepting self-signed certificates unconditionally.&quot;
+</I>&gt;<i>
+</I>&gt;<i> Saying so doesn't make it so.
+</I>&gt;<i>
+</I>&gt;<i> My personal point of contention is that I do not buy that argument at all: it seems to be more wishful thinking than actual reality.
+</I>&gt;<i>
+</I>&gt;<i> The operative word in &quot;Trust on first use&quot; is /trust/.
+</I>&gt;<i>
+</I>&gt;<i> Where does the trust come from?
+</I>
+You are absolutely right. As I wrote in my second gemlog post:
+
+&quot;Trust On First Use basically means that if I can't verify the
+identity of the server I connect to, I can at least make sure to check
+that it's the same server on any subsequent connections. In and of
+itself this is not a terrible scheme. As mentioned in the spec no
+certificate chain needs to be sent, for example. This can almost half
+the amount of data sent on in a single request, as gemtext documents
+are typically quite small. We also protect ourselves from Man in the
+Middle Attacks on all connections except - notably - the first.
+
+The downsides are equally obvious. First of all we can't automatically
+validate the server on our first connection. Neither can we really on
+subsequent connections; we can only tell if it's still the same host.&quot;
+
+In a CA scheme we trust the CAs. Despite the CA system having its own
+set of flaws (did you know that a company Example Inc can be
+incorporated in two different states in the US by entirely different
+people, and thus both buy legitimate certificates for the same
+domains, as the CAs will assume that it's the same corporate entity?).
+
+Basically, whichever scheme we choose will have its own flaws and
+merits. It's very much a matter of which flaws you find to be most
+dangerous or abhorrent.
+
+For my own sake I very much liked both your implementation of the
+mercury protocol and Solderpunk's speculative post about it. There's
+something alluringly simple about proclaiming that &quot;F it, TLS is just
+security theatre anyway!&quot; and skipping it altogether. And it wouldn't
+be entirely wrong; there are some huge and obvious problems with it,
+as we've seen. I twitch nervously whenever sending login credentials
+over an unencrypted connection, though, knowing that it'll be stored
+in plain text in someone's log somewhere along the way.
+
+I definitely think that TOFU solves some problems. Not all, but some.
+And somewhere we have to decide which problems we want to solve and
+which ones we're willing to accept. Gemini is not a great protocol if
+you're in need of strong privacy.
+
+Cheers,
+ew0k
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005947.html">The protection offered by TLS in a TOFU scheme
+</A></li>
+	<LI>Next message (by thread): <A HREF="005949.html">The protection offered by TLS in a TOFU scheme
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5948">[ date ]</a>
+              <a href="thread.html#5948">[ thread ]</a>
+              <a href="subject.html#5948">[ subject ]</a>
+              <a href="author.html#5948">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

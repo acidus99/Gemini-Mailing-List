@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposed minor spec changes, for comment.
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C20200518215145.drc5qnigdb6cd522%40vineta.saintnet.lan%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000832.html">
+   <LINK REL="Next"  HREF="000835.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposed minor spec changes, for comment.</H1>
+    <B>Steve Ryan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C20200518215145.drc5qnigdb6cd522%40vineta.saintnet.lan%3E"
+       TITLE="Proposed minor spec changes, for comment.">stryan at saintnet.tech
+       </A><BR>
+    <I>Mon May 18 22:51:45 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000832.html">Proposed minor spec changes, for comment.
+</A></li>
+        <LI>Next message (by thread): <A HREF="000835.html">Proposed minor spec changes, for comment.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#834">[ date ]</a>
+              <a href="thread.html#834">[ thread ]</a>
+              <a href="subject.html#834">[ subject ]</a>
+              <a href="author.html#834">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 20/05/18 08:35PM, solderpunk wrote:
+&gt;<i> ISSUE 2:
+</I>&gt;<i> 
+</I>&gt;<i> Problem: The spec makes a big fuss about how text/gemini is
+</I>&gt;<i> line-oriented, but does not clearly state what exactly constitutes a
+</I>&gt;<i> line.  The definition of link lines includes a &lt;CR&gt;&lt;LF&gt; at the end but
+</I>&gt;<i> it's not clear if that applies to all line types - or whether I even
+</I>&gt;<i> meant to do this or it was a careless error.
+</I>&gt;<i> 
+</I>&gt;<i> Proposal: Actually, it turns out this is decided for us.  RFC2046,
+</I>&gt;<i> which defines the text/* MIME media type and the text/plain subtype
+</I>&gt;<i> covers this very clearly:
+</I>&gt;<i> 
+</I>&gt;<i> ---
+</I>&gt;<i> 4.1.1.  Representation of Line Breaks
+</I>&gt;<i> 
+</I>&gt;<i>    The canonical form of any MIME &quot;text&quot; subtype MUST always represent a
+</I>&gt;<i>    line break as a CRLF sequence.  Similarly, any occurrence of CRLF in
+</I>&gt;<i>    MIME &quot;text&quot; MUST represent a line break.  Use of CR and LF outside of
+</I>&gt;<i>    line break sequences is also forbidden.
+</I>&gt;<i> 
+</I>&gt;<i>    This rule applies regardless of format or character set or sets
+</I>&gt;<i>    involved.
+</I>&gt;<i> ---
+</I>&gt;<i> 
+</I>&gt;<i> Since text/gemini is, well, text/gemini, it is a &quot;text&quot; subtype and
+</I>&gt;<i> using anything other than CRLF means we're violating the RFCs we're
+</I>&gt;<i> supposedly building on top of.
+</I>&gt;<i> 
+</I>&gt;<i> So, CRLF everywhere it is.
+</I>&gt;<i> 
+</I>&gt;<i> I propose it be mostly the server's job to handle this.  Text editors
+</I>&gt;<i> on different operating systems used by content authors will use
+</I>&gt;<i> various different line break encodings which are beyond our control,
+</I>&gt;<i> so we can't really make it the author's job.  Servers can translate LF
+</I>&gt;<i> to CRLF before sending content over the network.  This way clients
+</I>&gt;<i> only need to handle the &quot;canonical&quot; format, no matter what authors do.
+</I>&gt;<i> 
+</I>&gt;<i> Rationale: Don't break foundational RFCs.
+</I>&gt;<i> 
+</I>&gt;<i> Yeah, I know, this is tedious and no fun for server authors, but, well,
+</I>&gt;<i> see above.
+</I>
+My only concern with this is the &quot;server's job&quot; part. I'd rather not
+have my server transform user-supplied content, even if it's something
+as minor as line breaks. Apache doesn't attempt to fix invalid HTML, why
+should SecretShop fix invalid text/gemini? Seems to me this should be
+handled by something like the gemini vim-syntax plugin.
+
+It also makes writing servers a bit more complicated since text/gemini
+has to be treated differently from other files and actually parsed
+versus being directly served up. Not the biggest deal (and you've
+already admited it's tedious) but just something I noticed.
+
+&gt;<i> 
+</I>&gt;<i> ISSUE 4:
+</I>&gt;<i> 
+</I>&gt;<i> Problem: Name-based virtual hosting is explicitly described as being
+</I>&gt;<i> supported in the spec, but no mention is made of SNI (Server Name
+</I>&gt;<i> Indication, a TLS extension which puts the desired server hostname in
+</I>&gt;<i> the TLS handshake).  Without this, virtual hosting can't be made to
+</I>&gt;<i> work reliably.
+</I>&gt;<i> 
+</I>&gt;<i> Proposal: Mandate use of SNI by clients.
+</I>&gt;<i> 
+</I>
+SecretShop implements virtual-hosting with the assumption that clients
+are using SNI, so I'm in favour.
+
+-Steve
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000832.html">Proposed minor spec changes, for comment.
+</A></li>
+	<LI>Next message (by thread): <A HREF="000835.html">Proposed minor spec changes, for comment.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#834">[ date ]</a>
+              <a href="thread.html#834">[ thread ]</a>
+              <a href="subject.html#834">[ subject ]</a>
+              <a href="author.html#834">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

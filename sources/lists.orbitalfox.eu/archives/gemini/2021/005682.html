@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Metadata Without A Proposal
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Metadata%20Without%20A%20Proposal&In-Reply-To=%3C31IMQ1YPY3CMN.3JU99MQXAPLAO%40nothien.uber.space%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005683.html">
+   <LINK REL="Next"  HREF="005693.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Metadata Without A Proposal</H1>
+    <B>nothien at uber.space</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Metadata%20Without%20A%20Proposal&In-Reply-To=%3C31IMQ1YPY3CMN.3JU99MQXAPLAO%40nothien.uber.space%3E"
+       TITLE="Metadata Without A Proposal">nothien at uber.space
+       </A><BR>
+    <I>Fri Feb 26 12:59:55 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005683.html">Metadata Without A Proposal
+</A></li>
+        <LI>Next message (by thread): <A HREF="005693.html">Metadata Without A Proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5682">[ date ]</a>
+              <a href="thread.html#5682">[ thread ]</a>
+              <a href="subject.html#5682">[ subject ]</a>
+              <a href="author.html#5682">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Philip Linde &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">linde.philip at gmail.com</A>&gt; wrote:
+&gt;<i> &gt; 2. Must not be English-specific.
+</I>&gt;<i> 
+</I>&gt;<i> What is the preferable alternative? We could use numbers to indicate
+</I>&gt;<i> element type, but ultimately numbers are dependent on numeral systems,
+</I>&gt;<i> which depend on language and culture.
+</I>
+... Did you read the rest of the e-mail?  I listed specific ways in
+which we can support date, author, and license metadata, using existing
+formats and conventions, none of which use English (for licenses,
+instead of SPDX license identifiers, Petite Abeille has neatly suggested
+using links, although I don't agree with their format).
+
+&gt;<i> If instead of using English directly, we define opaque strings of
+</I>&gt;<i> characters for the tags, such that the tag &quot;author&quot; consistently means
+</I>&gt;<i> &quot;author&quot;, we really achieve the same thing. That is a simple solution
+</I>&gt;<i> that is language independent.
+</I>&gt;<i> 
+</I>&gt;<i> Or we could use emoji, although I believe most computer users in the
+</I>&gt;<i> world would have a harder time typing out a given emoji than a given
+</I>&gt;<i> opaque, ASCII- and English-compatible string.
+</I>
+So you want to force non-English Gemini writers to use English words?
+When (seeing my original proposal) it's unnecessary?  Imagine if you had
+to end every Gemini document with the magic incantanation &quot;&#943;&#301;&#1574;&#1659;&#616;&#385;&#1016;&#886;&#1120;G&#1703;&quot;.
+That doesn't seem fun.
+
+&gt;<i> &gt; 3. Must be machine-parsable.
+</I>&gt;<i> 
+</I>&gt;<i> We should consider the difference between needs and wants here. If I
+</I>&gt;<i> have no interest in specifying another license to use my work than what
+</I>&gt;<i> is implied from my sharing it, that doesn't necessarily mean I don't
+</I>&gt;<i> want to specify date or author, so perhaps all or most elements should
+</I>&gt;<i> be optional.
+</I>
+The sole purpose of giving a fixed format to metadata is so that it is
+machine parsable; all other metadata can simply be stated using natural
+language.  And yes, if you read the rest of my e-mail, you would notice
+that everything in it is completely optional.
+
+&gt;<i> &gt; 4. Should affect presentation.
+</I>&gt;<i> &gt;   
+</I>&gt;<i> &gt;    gemtext as a whole is about separating content from presentation.
+</I>&gt;<i> &gt;    Some of the earlier metadata proposals referred to metadata for
+</I>&gt;<i> &gt;    presentation, e.g. to specify a color to view the text in.  This is
+</I>&gt;<i> &gt;    against the spirit of gemtext/Gemini (if not the spec).
+</I>&gt;<i> 
+</I>&gt;<i> Agreed, but as I understand it you do *not* want it to affect
+</I>&gt;<i> presentation.
+</I>
+Yep, typo.
+
+&gt;<i> &gt; 5. Must be difficult to extend.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt;   ...
+</I>&gt;<i> 
+</I>&gt;<i> What do you propose that prevents conventional use from dictating
+</I>&gt;<i> reality? And why is it important that the specification can not be
+</I>&gt;<i> extended? Unlike e.g. text/gemini, if a client doesn't support some
+</I>&gt;<i> superset of the tags initially specified, there is no degradation. If
+</I>&gt;<i> in the future we want to extend a meta data format to support e.g.
+</I>&gt;<i> specifying where, in addition to when, it was written, the clients
+</I>&gt;<i> that don't support it shouldn't suffer from it.
+</I>&gt;<i> 
+</I>&gt;<i> The only important concern to me is that there is a canonical
+</I>&gt;<i> description of tags. That description can be extended indefinitely as
+</I>&gt;<i> far as I'm concerned, for as long as the original meanings of the
+</I>&gt;<i> initial set of supported tags aren't changed or overloaded by newer
+</I>&gt;<i> tags.
+</I>
+Non-extensibility is a fundamental part of the spirit of Gemini.  We
+want to prevent metadata from being used for all but the specified
+purposes so that it is not misused in the future.  Consider, for
+example, a 'color' metadata key that had been suggested early on in the
+original metadata thread.  We want to prevent these kinds of misuses
+from happening at all.  Notice that my proposal-not-proposal handles
+each metadata field on a case-by-case basis; there is no way provided to
+handle additional fields.  In addition, I've stated that other metadata
+fields, which don't have to be known to search engines, can use an
+arbitrary, capsule-specific convention, so that you can use additional
+metadata fields internally.
+
+&gt;<i> I think that instead of defining ourselves what fields are important
+</I>&gt;<i> we should start from a standard, e.g. DCMI with the element set
+</I>&gt;<i> defined in IETF RFC 5013.
+</I>&gt;<i> 
+</I>&gt;<i> With that as a basis, if there is no suitable format already, we can
+</I>&gt;<i> define a human readable, text-compatible data format and a
+</I>&gt;<i> corresponding text/xyz MIME type. Then, a text/gemini document that
+</I>&gt;<i> feels like supplying additional metadata can link to a metadata file
+</I>&gt;<i> which the server serves with the above MIME type. A client that does
+</I>&gt;<i> not support the MIME type should defer to serving unknown text/* types
+</I>&gt;<i> as plain text. A client that does support it can localize the
+</I>&gt;<i> elements, including things like names and date and time formats. If
+</I>&gt;<i> the client is a crawler, it should find the linked metadata document
+</I>&gt;<i> as a matter of its normal operation because it is linked from the
+</I>&gt;<i> document.
+</I>
+This has a few problems:
+
+1. It is extensible.  As I've argued above, we don't want extensibility.
+   This would mean that we have to have a very strict format for this
+   metadata file, and given how few fields are really necessary to be
+   machine-parsable, this would be a very small file.  With my proposal,
+   we can embed all the necessary metadata into the existing files.
+
+2. The keys specified in IETF RFC 5013 are English-specific.  As I've
+   explained in my original mail, this is not sustainable for
+   non-English Gemini clients and writers, as either the writers are
+   forced to use English (bad), or the clients are forced to support the
+   same keywords across a /lot/ of languages (bad).
+
+&gt;<i> Personally I don't think this is a standard I would use either way.
+</I>&gt;<i> It's mostly for the benefit of robots that there's a point in
+</I>&gt;<i> formalizing information like this. Humans can interpret such
+</I>&gt;<i> information as indicated in the document itself in a much wider
+</I>&gt;<i> variety of formats. It's not my intention, primarily, to serve robots.
+</I>
+Many gemlogs use the gmisub format, which is essentially providing date
+metadata.  There are uses, and making your content understandable to
+'robots' will also make it understandable to the users behind them.  One
+particularly helpful area that my proposal-not-proposal provides for is
+basic search engine filtering (by date, author, and license).
+
+~aravk | ~nothien
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005683.html">Metadata Without A Proposal
+</A></li>
+	<LI>Next message (by thread): <A HREF="005693.html">Metadata Without A Proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5682">[ date ]</a>
+              <a href="thread.html#5682">[ thread ]</a>
+              <a href="subject.html#5682">[ subject ]</a>
+              <a href="author.html#5682">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

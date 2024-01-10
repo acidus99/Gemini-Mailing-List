@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] comments on the proposed gemini spec revisions
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20comments%20on%20the%20proposed%20gemini%20spec%20revisions&In-Reply-To=%3C447ec99b-a1de-9922-d132-fc5b322af061%40bunburya.eu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007287.html">
+   <LINK REL="Next"  HREF="007291.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] comments on the proposed gemini spec revisions</H1>
+    <B>Alan Bunbury</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20comments%20on%20the%20proposed%20gemini%20spec%20revisions&In-Reply-To=%3C447ec99b-a1de-9922-d132-fc5b322af061%40bunburya.eu%3E"
+       TITLE="[spec] comments on the proposed gemini spec revisions">gemini at bunburya.eu
+       </A><BR>
+    <I>Mon Oct 11 15:44:33 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007287.html">[spec] comments on the proposed gemini spec revisions
+</A></li>
+        <LI>Next message (by thread): <A HREF="007291.html">[spec] [whitespace]
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7290">[ date ]</a>
+              <a href="thread.html#7290">[ thread ]</a>
+              <a href="subject.html#7290">[ subject ]</a>
+              <a href="author.html#7290">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 11/10/2021 13:51, Oliver Simmons wrote:
+&gt;<i> Clients can do what the hell they like IMO, as long as things that
+</I>&gt;<i> transmit over the net obey the spec.
+</I>&gt;<i> So gemtext is pretty unlimited, but making protocol requests is
+</I>&gt;<i> strictly limited.
+</I>&gt;<i> Something like replacing `---` is entirely a client-side thing and
+</I>&gt;<i> affects no one but the reader.
+</I>
+The current spec states:
+
+    Text lines should be presented to the user, after being wrapped to the
+    appropriate width for the client's viewport (see below). Text lines
+    may be
+    presented to the user in a visually pleasing manner for general
+    reading, the
+    precise meaning of which is at the client's discretion. For example,
+    variable width fonts may be used, spacing may be normalised, with spaces
+    between sentences being made wider than spacing between words, and other
+    such typographical niceties may be applied. Clients may permit users to
+    customise the appearance of text lines by altering the font, font
+    size, text
+    and background colour, etc. Authors should not expect to exercise any
+    control over the precise rendering of their text lines, only of
+    their actual
+    textual content.
+
+This gives clients a broad discretion as to what visual modifications 
+they make to text lines by altering font size, colours, spacing, etc. It 
+doesn't appear to go as far as permitting clients to amend or replace 
+the actual text that appears on a text line, and appears to suggest that 
+authors should expect to exercise control over the precise rendering of 
+their &quot;actual textual content&quot;. (At least, my interpretation of the 
+second last sentence is that clients may allow users to customise 
+appearance of text lines by altering text colour, not text itself, 
+though I appreciate it's slightly ambiguous.)
+
+The problem I have with separators and similar visual niceties is that 
+they involve deleting or replacing text that was put there by the 
+author. What if an author didn't want to put a separator there, but 
+really wanted to put &quot;---&quot;? Unless the spec provides that &quot;---&quot; means a 
+separator it is not reasonable to expect authors to know that.
+
+In truth I'm not sure in what circumstances a &quot;---&quot; text line would be 
+intended as something other than a separator, but I'm sure other authors 
+are more imaginative than I am. To take another example, I have 
+regularly encountered situations where a single * in a markdown document 
+is incorrectly interpreted as marking the beginning of italicised text, 
+so the rest of the document is italicised inappropriately. I'd like for 
+that not to become commonplace in Geminispace.
+
+Separately, on the whitespace issue, I do think it would be helpful to 
+clarify in the spec whether whitespace is mandatory, particularly for 
+headers. For example, should the line &quot;#### Hello&quot; be interpreted as (i) 
+a level 3 header whose text is &quot;# Hello&quot;, or (ii) a text line whose text 
+is &quot;#### Hello&quot;? AFAIK that is ambiguous unless there is a clear stance 
+on mandatory whitespace in the spec.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20211011/c08cb1f4/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20211011/c08cb1f4/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007287.html">[spec] comments on the proposed gemini spec revisions
+</A></li>
+	<LI>Next message (by thread): <A HREF="007291.html">[spec] [whitespace]
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7290">[ date ]</a>
+              <a href="thread.html#7290">[ thread ]</a>
+              <a href="subject.html#7290">[ subject ]</a>
+              <a href="author.html#7290">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

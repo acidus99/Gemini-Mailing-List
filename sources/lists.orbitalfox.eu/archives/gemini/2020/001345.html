@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Ambiguity in spec regarding line endings
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Ambiguity%20in%20spec%20regarding%20line%20endings&In-Reply-To=%3C20200604165651.3xqhphozlupx4ssr%40zeta.rak.ac%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001341.html">
+   <LINK REL="Next"  HREF="001348.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Ambiguity in spec regarding line endings</H1>
+    <B>Ryan Kavanagh</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Ambiguity%20in%20spec%20regarding%20line%20endings&In-Reply-To=%3C20200604165651.3xqhphozlupx4ssr%40zeta.rak.ac%3E"
+       TITLE="Ambiguity in spec regarding line endings">rak at rak.ac
+       </A><BR>
+    <I>Thu Jun  4 17:56:51 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001341.html">Ambiguity in spec regarding line endings
+</A></li>
+        <LI>Next message (by thread): <A HREF="001348.html">Ambiguity in spec regarding line endings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1345">[ date ]</a>
+              <a href="thread.html#1345">[ thread ]</a>
+              <a href="subject.html#1345">[ subject ]</a>
+              <a href="author.html#1345">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+On Thu, Jun 04, 2020 at 12:23:26PM -0400, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">prisonpotato at tilde.team</A> wrote:
+&gt;<i> I disagree with this idea, as it adds a signifigant burden to both
+</I>&gt;<i> server implementations and client implementations running on unix
+</I>&gt;<i> systems.
+</I>
+The proposed modification *reduces* the burden for clients on all
+systems. Indeed, clients are currently required to accept *both* CRLF
+and bare LF as being representative of a line break. The proposed change
+requires them only to accept CRLF, while giving them the option to also
+accept LF if they so desire. This means: clients satisfying the spec now
+will satisfy the spec after the change.
+
+You are correct in that it increases the burden for servers (regardless
+of the host system): they must convert bare LF endings to CRLF before
+transmitting text. Whether or not this change imposes a &quot;significant&quot;
+burden is subjective. For what it's worth, the gopher protocol specifies
+CRLF line endings, and gophernicus manages to do this conversion with ~5
+lines of code [0, 1].
+
+The question boils down to a cost-benefit analysis of:
+
+    preserving spec compliance for existing servers and not having
+    servers worry about line endings
+
+versus
+
+    respecting network protocol conventions that have been established
+    for decades and not violating a MUST requirement of RFC 2046 &#167;4.1.1
+
+Best,
+Ryan
+
+[0] <A HREF="https://github.com/gophernicus/gophernicus/blob/master/src/file.c#L68">https://github.com/gophernicus/gophernicus/blob/master/src/file.c#L68</A>
+[1] <A HREF="https://github.com/gophernicus/gophernicus/blob/master/src/string.c#L122">https://github.com/gophernicus/gophernicus/blob/master/src/string.c#L122</A>
+
+-- 
+|<i>)|/  Ryan Kavanagh      | GPG: 4E46 9519 ED67 7734 268F
+</I>|<i>\|\  <A HREF="https://rak.ac">https://rak.ac</A>     |      BD95 8F7B F8FC 4A11 C97A
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001341.html">Ambiguity in spec regarding line endings
+</A></li>
+	<LI>Next message (by thread): <A HREF="001348.html">Ambiguity in spec regarding line endings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1345">[ date ]</a>
+              <a href="thread.html#1345">[ thread ]</a>
+              <a href="subject.html#1345">[ subject ]</a>
+              <a href="author.html#1345">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

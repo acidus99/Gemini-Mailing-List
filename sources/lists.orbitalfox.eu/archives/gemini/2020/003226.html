@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Escaping in gemtext
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Escaping%20in%20gemtext&In-Reply-To=%3CCAKSVUB%2BPPKrxAGP7CNwXUnTNi%2BXxU0ABTqjTTDz9gdk4gbCh%3Dw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003213.html">
+   <LINK REL="Next"  HREF="003236.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Escaping in gemtext</H1>
+    <B>Ryan Westlund</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Escaping%20in%20gemtext&In-Reply-To=%3CCAKSVUB%2BPPKrxAGP7CNwXUnTNi%2BXxU0ABTqjTTDz9gdk4gbCh%3Dw%40mail.gmail.com%3E"
+       TITLE="Escaping in gemtext">rlwestlund at gmail.com
+       </A><BR>
+    <I>Tue Nov 10 15:00:17 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003213.html">Escaping in gemtext
+</A></li>
+        <LI>Next message (by thread): <A HREF="003236.html">Escaping in gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3226">[ date ]</a>
+              <a href="thread.html#3226">[ thread ]</a>
+              <a href="subject.html#3226">[ subject ]</a>
+              <a href="author.html#3226">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Sean Conner wrote:
+&gt;<i>It was thus said that the Great Ryan Westlund once stated:
+</I>&gt;&gt;<i> The main reason I don't prefer it to my own suggestion is that it would
+</I>&gt;&gt;<i> still mean that preformatted lines might need to be altered in some way
+</I>&gt;&gt;<i> (if the preformatted lines contain &quot;\```&quot; or something), instead of
+</I>&gt;&gt;<i> allowing to paste them in unmodified and only have to modify the
+</I>&gt;&gt;<i> prefomatting toggle lines.
+</I>
+&gt;<i>  Sorry, no way around that.  I mean, one *could* use HTML entities:
+</I>
+The point of that paragraph was that my proposal makes it so that you
+only have to modify the preformatting toggle lines to paste in
+arbitrary content, not the content itself. It does achieve that.
+(CDATA does not because the string &quot;]]&gt;&quot; ends it and there is no rule
+about matching the number about brackets used to open it, so a CDATA
+section cannot include &quot;]]&gt;&quot;.)
+
+For what it's worth, the reason I don't think HTML needs this as much
+as gemtext is because HTML already has a general escaping mechanism,
+and is not necessarily meant to be written by hand anyway.
+
+
+
+Ali Fardan wrote:
+&gt;<i> Indeed it is ugly, one other workaround to this is having
+</I>&gt;<i>
+</I>&gt;&gt;<i>       ```
+</I>&gt;&gt;<i>       ```
+</I>&gt;<i>
+</I>&gt;<i> interpreted as literal '```' to avoid altering preformatted text, and
+</I>&gt;<i> to be clear, this does not apply to the case of having multiple
+</I>&gt;<i> preformatted text blocks next to each other, this only applies to a
+</I>&gt;<i> single preformatted text block that contains nothing..
+</I>
+Interesting. Clarification: is this like PostgreSQL string escapes,
+where two consecutive toggle lines inside a block come out as a
+literal &quot;```&quot;? Or does it only apply to empty blocks (and not the same
+pattern within a block with other content), so that embedding a
+literal &quot;```&quot; requires four in a row (one to end the current block,
+then two for the literal sequence, then the fourth to open another
+preformatting block - assuming two adjacent blocks will be merged)?
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003213.html">Escaping in gemtext
+</A></li>
+	<LI>Next message (by thread): <A HREF="003236.html">Escaping in gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3226">[ date ]</a>
+              <a href="thread.html#3226">[ thread ]</a>
+              <a href="subject.html#3226">[ subject ]</a>
+              <a href="author.html#3226">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

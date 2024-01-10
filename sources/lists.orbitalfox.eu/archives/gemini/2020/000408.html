@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> FW: Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20FW%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200120212652.GA5988%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000407.html">
+   <LINK REL="Next"  HREF="000399.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>FW: Text reflow woes (or: I want bullets back!)y</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20FW%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200120212652.GA5988%40SDF.ORG%3E"
+       TITLE="FW: Text reflow woes (or: I want bullets back!)y">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Mon Jan 20 21:26:52 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000407.html">FW: Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000399.html">FW: Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#408">[ date ]</a>
+              <a href="thread.html#408">[ thread ]</a>
+              <a href="subject.html#408">[ subject ]</a>
+              <a href="author.html#408">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks for taking the time to write this!
+
+There are a few details that could be nitpicked (e.g. a lot of this code
+seems to assume that *s or #s at the start of lines are followed by
+whitespace, which hasn't been specced), but I'm totally happy that this
+code is representative of the complexity involved in handling everything
+proposed so far.
+
+If a bare-minimum renderer implementing only the compulsory core line
+types can be done in ~10 lines and a full-strength renderer implementing
+everything to the max can be done in ~100 lines then I'm totally happy
+with that - in terms of implementation difficulty.
+
+I still want to think very carefully about graceful degradation, to make
+sure those ~10 line renderers still yield usable results.  I still have
+real concerns about ordered lists in that regard.
+
+Cheers,
+Solderpunk
+
+
+
+On Mon, Jan 20, 2020 at 11:53:51AM -0800, Aaron Janse wrote:
+&gt;<i> Attached is a &lt;100 line python gemini renderer with the following features:
+</I>&gt;<i> * no external dependencies
+</I>&gt;<i> * only two state variables
+</I>&gt;<i> * unlimited-depth ordered lists that rotates through
+</I>&gt;<i>   * numbers
+</I>&gt;<i>   * letters (does `az` after `z`, `aaa` after `zz`, etc)
+</I>&gt;<i>   * roman numerals
+</I>&gt;<i> * unlimited-depth unordered lists
+</I>&gt;<i> * unlimited-depth headers with rotating colors
+</I>&gt;<i> * wraps at word boundaries, with fancy indents for lists and quotes
+</I>&gt;<i> * colors for all special syntax
+</I>&gt;<i> * horizontal rules that span the width of the display
+</I>&gt;<i> * preformatted text
+</I>&gt;<i> * links
+</I>&gt;<i> 
+</I>&gt;<i> To use this script, pipe text/gemini into stdin.
+</I>&gt;<i> 
+</I>&gt;<i> I hope this makes a strong case that these features aren't too complex to
+</I>&gt;<i> implement.
+</I>
+&gt;<i> #!/usr/bin/env python3
+</I>&gt;<i> 
+</I>&gt;<i> import sys
+</I>&gt;<i> import textwrap
+</I>&gt;<i> 
+</I>&gt;<i> def int2roman(number):
+</I>&gt;<i>     numerals = { 1 : &quot;I&quot;, 4 : &quot;IV&quot;, 5 : &quot;V&quot;, 9 : &quot;IX&quot;, 10 : &quot;X&quot;, 40 : &quot;XL&quot;, 
+</I>&gt;<i>         		 50 : &quot;L&quot;, 90 : &quot;XC&quot;, 100 : &quot;C&quot;, 400 : &quot;CD&quot;, 500 : &quot;D&quot;,
+</I>&gt;<i>         		 900 : &quot;CM&quot;, 1000 : &quot;M&quot; }
+</I>&gt;<i>     result = &quot;&quot;
+</I>&gt;<i>     for value, numeral in sorted(numerals.items(), reverse=True):
+</I>&gt;<i>         while number &gt;= value:
+</I>&gt;<i>             result += numeral
+</I>&gt;<i>             number -= value
+</I>&gt;<i>     return result
+</I>&gt;<i> 
+</I>&gt;<i> width = 80
+</I>&gt;<i> 
+</I>&gt;<i> # only two state variables
+</I>&gt;<i> preformatted = False
+</I>&gt;<i> list_counter = [0]
+</I>&gt;<i> 
+</I>&gt;<i> for line in sys.stdin:
+</I>&gt;<i> 	if line.startswith('```'):
+</I>&gt;<i> 		preformatted = not preformatted
+</I>&gt;<i> 		continue
+</I>&gt;<i> 
+</I>&gt;<i> 	if preformatted:
+</I>&gt;<i> 		print('\033[37m'+line+'\033[m', end='')
+</I>&gt;<i> 		continue
+</I>&gt;<i> 
+</I>&gt;<i> 	line = line.rstrip()
+</I>&gt;<i> 
+</I>&gt;<i> 	if line.startswith('=&gt;'):
+</I>&gt;<i> 		parts = line[2:].strip().split(maxsplit=1)
+</I>&gt;<i> 		print('\033[36m'+parts[0]) # url
+</I>&gt;<i> 		print(parts[1]+'\033[m') # text
+</I>&gt;<i> 	elif line.startswith('#'):
+</I>&gt;<i> 		parts = line.split(maxsplit=1)
+</I>&gt;<i> 		depth = len(parts[0]) - 1
+</I>&gt;<i> 		colors = ['31', '93', '92', '34']
+</I>&gt;<i> 		color = colors[depth % len(colors)]
+</I>&gt;<i> 		print('\033['+color+'m'+line+'\033[m')
+</I>&gt;<i> 	elif line.startswith('*'):
+</I>&gt;<i> 		parts = line.split(maxsplit=1)
+</I>&gt;<i> 		depth = len(parts[0])
+</I>&gt;<i> 		text = textwrap.fill(parts[1], width)
+</I>&gt;<i> 		text = textwrap.indent(text, ' '*(2*depth)).lstrip()
+</I>&gt;<i> 		print(2*(depth-1)*' '+'\033[93m&#226;&#128;&#162;\033[m '+text)
+</I>&gt;<i> 	elif line.startswith('+'):
+</I>&gt;<i> 		list_counter = list_counter if len(list_counter) &gt; 0 else [0]
+</I>&gt;<i> 
+</I>&gt;<i> 		parts = line.split(maxsplit=1)
+</I>&gt;<i> 		depth = len(parts[0])
+</I>&gt;<i> 
+</I>&gt;<i> 		if depth &gt; len(list_counter):
+</I>&gt;<i> 			list_counter += [0]
+</I>&gt;<i> 		elif depth &lt; len(list_counter):
+</I>&gt;<i> 			list_counter = list_counter[:depth]
+</I>&gt;<i> 
+</I>&gt;<i> 		assert len(list_counter) == depth
+</I>&gt;<i> 
+</I>&gt;<i> 		marker = ''
+</I>&gt;<i> 
+</I>&gt;<i> 		counter_type = (len(list_counter) - 1) % 3
+</I>&gt;<i> 		list_counter[-1] += 1
+</I>&gt;<i> 		count = list_counter[-1]
+</I>&gt;<i> 		if counter_type == 0:
+</I>&gt;<i> 			marker = str(count)
+</I>&gt;<i> 		elif counter_type == 1:
+</I>&gt;<i> 			while True:
+</I>&gt;<i> 				count -= 1
+</I>&gt;<i> 				marker = chr(97+(count%26)) + marker
+</I>&gt;<i> 				count = count // 26
+</I>&gt;<i> 				if count == 0:
+</I>&gt;<i> 					break
+</I>&gt;<i> 		else:
+</I>&gt;<i> 			marker = int2roman(count)
+</I>&gt;<i> 
+</I>&gt;<i> 		text = textwrap.fill(parts[1], width)
+</I>&gt;<i> 		text = textwrap.indent(text, ' '*(3*depth)+' '*(len(marker)-1)).lstrip()
+</I>&gt;<i> 		print('\033[93m'+(depth-1)*3*' ' + marker + '. \033[m' + text)
+</I>&gt;<i> 	elif line.startswith('&gt;'):
+</I>&gt;<i> 		depth = 0
+</I>&gt;<i> 		while True:
+</I>&gt;<i> 			if line.startswith('&gt;'):
+</I>&gt;<i> 				line = line[1:].lstrip()
+</I>&gt;<i> 				depth += 1
+</I>&gt;<i> 			else:
+</I>&gt;<i> 				break
+</I>&gt;<i> 		text = textwrap.fill(line, width)
+</I>&gt;<i> 		text = textwrap.indent(text, '\033[93m&gt;\033[m '*depth)
+</I>&gt;<i> 		print(text)
+</I>&gt;<i> 	elif line.startswith('---'):
+</I>&gt;<i> 		print('\033[37m'+'-'*width+'\033[m')
+</I>&gt;<i> 	else:
+</I>&gt;<i> 		print(textwrap.fill(line, width))
+</I>&gt;<i> 
+</I>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000407.html">FW: Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000399.html">FW: Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#408">[ date ]</a>
+              <a href="thread.html#408">[ thread ]</a>
+              <a href="subject.html#408">[ subject ]</a>
+              <a href="author.html#408">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

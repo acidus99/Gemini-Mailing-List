@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Escaping in gemtext
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Escaping%20in%20gemtext&In-Reply-To=%3CCAKSVUBJorsSq0vo2%3D5pFNofs_zMYAJe3KEVpQYghkVz2A1dTdQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003266.html">
+   <LINK REL="Next"  HREF="003211.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Escaping in gemtext</H1>
+    <B>Ryan Westlund</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Escaping%20in%20gemtext&In-Reply-To=%3CCAKSVUBJorsSq0vo2%3D5pFNofs_zMYAJe3KEVpQYghkVz2A1dTdQ%40mail.gmail.com%3E"
+       TITLE="Escaping in gemtext">rlwestlund at gmail.com
+       </A><BR>
+    <I>Tue Nov 10 05:19:53 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003266.html">Escaping in gemtext
+</A></li>
+        <LI>Next message (by thread): <A HREF="003211.html">Escaping in gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3209">[ date ]</a>
+              <a href="thread.html#3209">[ thread ]</a>
+              <a href="subject.html#3209">[ subject ]</a>
+              <a href="author.html#3209">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>So if I understand Ali Fardan's suggestion, it is to introduce starting with '\'
+as a signal for a new line type which could accomodate all of these issues. I
+admit I like that it solves both the issues I mentioned with one change, even
+the one I didn't think really needed a solution.
+
+The main reason I don't prefer it to my own suggestion is that it would still
+mean that preformatted lines might need to be altered in some way (if the
+preformatted lines contain &quot;\```&quot; or something), instead of allowing to paste
+them in unmodified and only have to modify the prefomatting toggle lines.
+
+And that is if escaping only considers syntax that would be interpreted anyway.
+If it implemented in a context-insensitive way, meaning a line starting with
+&quot;\#&quot; is still translated to &quot;#&quot; inside preformatted text, it could actually
+make the problem worse by increasing the number of preformatted lines that
+must be modified.
+
+One comment on that same message:
+
+&gt;<i> also keep in mind that '\' does not only escape the character after it,
+</I>&gt;<i> it disables line formatting, because in the example above, if '=' is
+</I>&gt;<i> escaped, '&gt;' is right after it and can be interpreted as a quote.
+</I>
+I don't see how this is correct? A quote line must start with &gt;, not =&gt;.
+If in &quot;\=&gt;&quot;, the \ escapes the = so that the resulting text is =&gt;,
+I don't see how it could be interpreted as a quote.
+
+Ali's comment on the idea of using zero-width space
+or ASCII backspace voices my own thoughts:
+
+&gt;<i> Here you're making assumptions about how \b will be rendered, I'm not
+</I>&gt;<i> all against your approach, but I'm not also confident that all
+</I>&gt;<i> implementations will render this properly.
+</I>
+This is definitely my concern. Including invisible characters
+that are outside of normal consideration seems like a bad idea.
+
+In response to message from Sudipto Mallick:
+
+&gt;<i> Use whitespace before the preformatted text and give warning
+</I>&gt;<i> to your reader to be careful when copying such text.
+</I>
+I don't like anything that requires &quot;give warning to your reader&quot;, because
+that's an admission that the markup is getting in the way. A markup format
+shouldn't require telling your reader &quot;I had to format this weirdly because
+of the markup; you need to correct it&quot;.
+
+&gt;<i> Maybe clients could do '''Maximum Common Frontal White Space
+</I>&gt;<i> Elimination''' in preformatted text blocks :P
+</I>
+But that could alter the meaning, for example if writing about indentation.
+
+For the sake of use case: I write Python tutorials in Markdown, as well as
+the specification for Sanemark, a variant of Markdown. Several similar issues
+have come up for me before with Markdown (this specific one would've been a
+major obstacle for the Sanemark spec if Markdown didn't implement what
+I suggest, because leading space is significant).
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003266.html">Escaping in gemtext
+</A></li>
+	<LI>Next message (by thread): <A HREF="003211.html">Escaping in gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3209">[ date ]</a>
+              <a href="thread.html#3209">[ thread ]</a>
+              <a href="subject.html#3209">[ subject ]</a>
+              <a href="author.html#3209">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

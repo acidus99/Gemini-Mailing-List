@@ -1,0 +1,313 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Titan, the proposed upload protocol for Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Titan%2C%20the%20proposed%20upload%20protocol%20for%20Gemini&In-Reply-To=%3C62a658ca529faa305ac95aca09820df653f6aaf2.camel%40gnu.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002033.html">
+   <LINK REL="Next"  HREF="002036.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Titan, the proposed upload protocol for Gemini</H1>
+    <B>Alex Schroeder</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Titan%2C%20the%20proposed%20upload%20protocol%20for%20Gemini&In-Reply-To=%3C62a658ca529faa305ac95aca09820df653f6aaf2.camel%40gnu.org%3E"
+       TITLE="Titan, the proposed upload protocol for Gemini">alex at gnu.org
+       </A><BR>
+    <I>Fri Jul  3 23:16:15 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002033.html">[ANN] Titan - a Console-based Browser Written in Java
+</A></li>
+        <LI>Next message (by thread): <A HREF="002036.html">Titan, the proposed upload protocol for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2034">[ date ]</a>
+              <a href="thread.html#2034">[ thread ]</a>
+              <a href="subject.html#2034">[ subject ]</a>
+              <a href="author.html#2034">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all
+People on the IRC channel asked me to send an email to the list
+regarding the Titan protocol I've been using for my Gemini Wiki
+project.
+
+Background
+
+I'm really interested in wikis. They seem to me to be the simplest form
+of collaboration in text. Simple both in because you don't need a lot
+of technology to make it work, and also simple because all of the
+structure, all of the processes, are things that the software doesn't
+provide: it's up to people to organize themselves. I wrote a bit more
+about it on my site, if you're interested.
+<A HREF="https://alexschroeder.ch/wiki/2020-06-15_Why_Wiki%e2%80%bd">https://alexschroeder.ch/wiki/2020-06-15_Why_Wiki%e2%80%bd</A>
+<A HREF="gemini://alexschroeder.ch/2020-06-15_Why_Wiki%e2%80%bd">gemini://alexschroeder.ch/2020-06-15_Why_Wiki%e2%80%bd</A>
+
+At first, I proposed something I called Gemini+Write, and implemented
+it for my site, and for a Gemini Client I was using. It was inspired by
+my idea for Gopher Wiki. I know, I know. I keep bashing on that wiki
+idea. Anyway, the idea is simple: to *read* from a site, you open a
+connection and send a selector. Then, on subsequent lines, you send
+more stuff like MIME-type, file-size, password, and so on. It wasn't
+pretty.
+<A HREF="https://alexschroeder.ch/wiki/2017-12-30_Gopher_Wiki">https://alexschroeder.ch/wiki/2017-12-30_Gopher_Wiki</A>
+<A HREF="gemini://alexschroeder.ch/2017-12-30_Gopher_Wiki">gemini://alexschroeder.ch/2017-12-30_Gopher_Wiki</A>
+<A HREF="https://alexschroeder.ch/wiki/2020-06-04_Gemini_Upload">https://alexschroeder.ch/wiki/2020-06-04_Gemini_Upload</A>
+<A HREF="gemini://alexschroeder.ch/2020-06-04_Gemini_Upload">gemini://alexschroeder.ch/2020-06-04_Gemini_Upload</A>
+
+In any case, Sean Conner picked up on the idea, and started a long
+thread back in June. It went a lot further than what I had in mind,
+mimicking HTTP methods (GET, PUT, POST), discussed the differences
+between PUT and POST, and some form of authentication that used client
+certificates to allow users to edit just their pages.
+<A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/001611.html">https://lists.orbitalfox.eu/archives/gemini/2020/001611.html</A>
+<A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/001657.html">https://lists.orbitalfox.eu/archives/gemini/2020/001657.html</A>
+
+Matthew Greybosch proposed to name this protocol &quot;Titan&quot; in one of the
+replies to Sean Conner's post.
+<A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/001615.html">https://lists.orbitalfox.eu/archives/gemini/2020/001615.html</A>
+
+There was some resistance to the idea, and my mail setup was apparently
+causing some users a bit of grief, and for both of these reasons I
+didn't get involved in the discussion. I wanted to get a Gemini Wiki
+working and that was all I cared about.
+
+Titan
+
+Sean Conner's Titan proposal had some ideas I liked and some I didn't
+care for. The shortest summary is the following, from the second thread
+link of his:
+
+  <A HREF="titan://example.com/post-handler/endpoint?size=1234&amp;mime=text/plain">titan://example.com/post-handler/endpoint?size=1234&amp;mime=text/plain</A>
+  <A HREF="titan://example.com/path/to/new/resource;size=1234&amp;mime=text/plain">titan://example.com/path/to/new/resource;size=1234&amp;mime=text/plain</A>
+  <A HREF="titan://example.com/path/to/remove;size=0">titan://example.com/path/to/remove;size=0</A>
+
+  The logic goes something like this [2]:
+
+  if the request has a query, it's an upload of data---accept data.
+  if the request has no query, and the path parameter (marked by ';')
+    doesn't exist---error.
+  if the request has no query, and the path parameter exists:
+    if size==0, delete the resource
+    if size&gt;0, accept data and make the resource available.
+
+I decided that what I really needed was just the second example he
+provided:
+
+<A HREF="titan://example.com/path/to/new/resource;size=1234&amp;mime=text/plain">titan://example.com/path/to/new/resource;size=1234&amp;mime=text/plain</A>
+
+I also needed some form of authorization (are you allowed to edit the
+site) and I didn't really care for authentication (are you the person
+you claim to be). I imagined my Gemini Wiki working without necessarily
+identifying users. I needed some sort of token, a kind of password. My
+Oddmuse wiki uses this system since 2003: there are editor and admin
+passwords, and knowing one of these passwords allows you to do things
+reserved to editors and admins, but these passwords aren't tied to
+usernames. They're basically just tokens. You can pass them to a friend
+and say: here, join us!
+
+Thus, for my needs I need the following:
+
+<A HREF="titan://example.com/path/to/new/resource;size=1234;mime=text/plain;toke">titan://example.com/path/to/new/resource;size=1234;mime=text/plain;toke</A>
+n=hello
+
+Some people used to web URIs might be wondering: where is the question
+mark between path and query? The point is that this isn't a query. If
+you look at the URI RFC 3986 section 3.3, you'll see what I mean.
+
+&quot;URI producing applications often use the reserved characters allowed
+in a segment to delimit scheme-specific or
+dereference-handler-specific subcomponents. For example, the semicolon
+(&quot;;&quot;) and equals (&quot;=&quot;) reserved characters are often used to delimit
+parameters and parameter values applicable to that segment. The comma
+(&quot;,&quot;) reserved character is often used for similar purposes. For
+example, one URI producer might use a segment such as &quot;name;v=1.1&quot; to
+indicate a reference to version 1.1 of &quot;name&quot;, whereas another might
+use a segment such as &quot;name,1.1&quot; to indicate the same. Parameter types
+may be defined by scheme-specific semantics, but in most cases the
+syntax of a parameter is specific to the implementation of the URI's
+dereferencing algorithm.&quot;
+<A HREF="https://tools.ietf.org/html/rfc3986#section-3.3">https://tools.ietf.org/html/rfc3986#section-3.3</A>
+
+So that's how I think about it. Let's look at this example again:
+
+<A HREF="titan://example.com/path/to/new/resource;size=1234;mime=text/plain;toke">titan://example.com/path/to/new/resource;size=1234;mime=text/plain;toke</A>
+n=hello
+
+We want to create a new revision of &quot;resource&quot; and the necessary
+parameters, as defined by the Titan protocol, are size, MIME-type, and
+token.
+
+Now, you might wonder: why size? The server needs to know when the
+transmission of the client ends. Remember, if connectivity is bad,
+content can arrive in chunks interspersed with silence. Is the client
+done? In text based transmissions, we have more options. A Ctrl-D might
+be used to indicate the end-of-file (EOF). In your ASCII man page it
+might say &quot;EOT (end of transmission)&quot;. In very old tools like Berkley
+mail you'd end your letter with a single dot on a line. The Gopher spec
+also says that a single dot on a line ends the transmission. All of
+these solutions won't work when we're talking about binary files,
+however. And yes, I want a wiki where people can upload images, or
+audio files, or videos, PDF files. Therefore, no particular byte or
+pattern can be used. We need to tell the server how many bytes to
+expect, and then the server reads exactly that many bytes, with a
+timeout in case the transmission just isn't going to work.
+
+You might also wonder: why MIME-type? Can't we just rely on file name
+extensions? I guess we could. But why not use MIME-types? I've gotten
+used to them. My wiki serves images called &quot;foo&quot; and tells your browser
+via the MIME-type that it's an image/png. It allows my wiki to store
+this MIME-type and serve it back in a response when clients request a
+file. Otherwise I'd have to guess. I've had unhappy experiences with
+/etc/mailcap files. All the programming languages do &quot;something&quot;,
+merging system mailcap files with user mailcap files and programming
+language libary mailcap files, and mailcap files so much more than just
+an association of file name extensions and MIME-types. They're a
+nightmare. Compared to that complexity (which is often invisible to
+developers, granted), I find explicit MIME-types easier to deal with.
+
+Upload
+
+OK, so now we've talked about the request: The client sends
+<A HREF="titan://example.com/path/to/new/resource;size=1234;mime=text/plain;toke">titan://example.com/path/to/new/resource;size=1234;mime=text/plain;toke</A>
+n=hello followed by the CR LF sequence we all know, and then it sends
+the 1234 bytes it promised to send. That's it.
+
+Now, the client-server reaction can be a bit tricky if you're writing a
+client: how do you handle an error message after the first line?
+Because there will be errors. My wiki has errors for resources that
+aren't editable, sizes that exceed the max size I'm willing to accept,
+MIME-types I'm not willing to accept, and tokens that are not correct.
+There might be more. I'm using 59 error codes for them all. I know that
+Baschdel has been arguing for better error codes. The Baschdel proposal
+argued for special error codes: ES for wrong size, EM for wrong MIME
+type, and E_ for whatever else. Baschdel also argued that it would be
+nice if a server replied with WR to say that it will in fact accept the
+upload. I confess, I didn't really care for that and decided to write a
+very simple implementation.
+<A HREF="https://alexschroeder.ch/wiki/Baschdels_spin_on_Gemini_uploading">https://alexschroeder.ch/wiki/Baschdels_spin_on_Gemini_uploading</A>
+<A HREF="gemini://alexschroeder.ch/Baschdels_spin_on_Gemini_uploading">gemini://alexschroeder.ch/Baschdels_spin_on_Gemini_uploading</A>
+
+Request for Comments (RFC)
+
+So there you have it. Uploading! Titan! &#128640;&#128640;&#127881;&#128515;
+
+What do you think?
+
+I'd love to see more clients supporting it. I have two independent
+implementations to show how it works, both for servers and clients,
+four in total:
+
+My wiki uses a server code that interfaces with the underlying Oddmuse
+wiki engine to edit pages.
+<A HREF="https://oddmuse.org/wiki/Gemini_Server">https://oddmuse.org/wiki/Gemini_Server</A>
+<A HREF="gemini://alexschroeder.ch/">gemini://alexschroeder.ch/</A>
+
+My Gemini Wiki uses stand-alone code to just serve .gmi files as a
+wiki, allowing users to create new ones and to edit existing ones. Note
+that it is hosted on the same domain, but on a different port.
+<A HREF="https://alexschroeder.ch/cgit/gemini-wiki/about/">https://alexschroeder.ch/cgit/gemini-wiki/about/</A>
+<A HREF="gemini://alexschroeder.ch:1968/">gemini://alexschroeder.ch:1968/</A>
+
+My two Bash functions &quot;gemini&quot; and &quot;titan&quot; allow a super simple
+interaction with Gemini (for reading) and Titan (for writing).
+<A HREF="https://alexschroeder.ch/cgit/gemini-titan/about/">https://alexschroeder.ch/cgit/gemini-titan/about/</A>
+
+I also love Emacs and so I wrote some code that allows me to edit wiki
+pages from Elpher.
+<A HREF="https://alexschroeder.ch/cgit/gemini-write/about/">https://alexschroeder.ch/cgit/gemini-write/about/</A>
+
+Anyway, let me know what you think. Let me know what you'd like to
+implement for your servers and clients and what you'd need to add or
+drop from this proposal.
+
+Here's what I can see:
+
+- the size parameter can be made optional if you only care about text
+uploads
+- the MIME-type can be made optional if you only care about Gemtext
+- the token can be made optional if you want to rely on client
+certificates
+
+What else?
+
+Hope to hear from you all,
+Alex
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002033.html">[ANN] Titan - a Console-based Browser Written in Java
+</A></li>
+	<LI>Next message (by thread): <A HREF="002036.html">Titan, the proposed upload protocol for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2034">[ date ]</a>
+              <a href="thread.html#2034">[ thread ]</a>
+              <a href="subject.html#2034">[ subject ]</a>
+              <a href="author.html#2034">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> =?UTF-8?Q?Bug_reports:_Multiple_spaces_in_links; _=E2=8C=98S_unreliable_(?= was: Re: [ANN] Lagrange - A Beautiful Gemini Client)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%3D%3FUTF-8%3FQ%3FBug_reports%3A_Multiple_spaces_in_links%3B%0A%20_%3DE2%3D8C%3D98S_unreliable_%28%3F%3D%0A%20%3D%3FUTF-8%3FQ%3Fwas%3A_Re%3A_%5BANN%5D_Lagrange_-_A_Beautiful_Gemini_Client%29%3F%3D&In-Reply-To=%3C12310e89-4329-4134-87f6-436dae2de121%40www.fastmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002892.html">
+   <LINK REL="Next"  HREF="002854.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>=?UTF-8?Q?Bug_reports:_Multiple_spaces_in_links; _=E2=8C=98S_unreliable_(?= was: Re: [ANN] Lagrange - A Beautiful Gemini Client)</H1>
+    <B>mailinglists at ngalt.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%3D%3FUTF-8%3FQ%3FBug_reports%3A_Multiple_spaces_in_links%3B%0A%20_%3DE2%3D8C%3D98S_unreliable_%28%3F%3D%0A%20%3D%3FUTF-8%3FQ%3Fwas%3A_Re%3A_%5BANN%5D_Lagrange_-_A_Beautiful_Gemini_Client%29%3F%3D&In-Reply-To=%3C12310e89-4329-4134-87f6-436dae2de121%40www.fastmail.com%3E"
+       TITLE="=?UTF-8?Q?Bug_reports:_Multiple_spaces_in_links; _=E2=8C=98S_unreliable_(?= was: Re: [ANN] Lagrange - A Beautiful Gemini Client)">mailinglists at ngalt.com
+       </A><BR>
+    <I>Sun Oct 11 03:04:39 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002892.html">[ANN] Lagrange - A Beautiful Gemini Client
+</A></li>
+        <LI>Next message (by thread): <A HREF="002854.html">Bug reports: Multiple spaces in links; Cmd+S unreliable (was: Re: [ANN] Lagrange - A Beautiful Gemini Client)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2850">[ date ]</a>
+              <a href="thread.html#2850">[ thread ]</a>
+              <a href="subject.html#2850">[ subject ]</a>
+              <a href="author.html#2850">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Oct 10, 2020, at 5:56 AM, skyjake wrote:
+&gt;<i> Hello all,
+</I>&gt;<i> 
+</I>&gt;<i> Here's a brief update on what's been happening with Lagrange since the 
+</I>&gt;<i> initial v0.1 release.
+</I>&gt;<i> 
+</I>&gt;<i> I've just released v0.4 today with preliminary audio playback support. 
+</I>&gt;<i> You can now listen to Ogg Vorbis and WAV files using an inline audio 
+</I>&gt;<i> player. It works the same way as the image viewer.
+</I>
+First and by far the most important, I'd like to echo John Cowan's effusive praise. Lagrange is nothing short of insanely great.
+
+I noticed a couple odd things, though:
+
+First, in the category of &quot;I don't know if it's wrong, but it _is_ different and I'm not sure I like it&quot;: I went to &lt;<A HREF="gemini://gemini.circumlunar.space/users/">gemini://gemini.circumlunar.space/users/</A>&gt; and multiple spaces in link text are being collapsed into one space. In the source, the link lines look like:
+
+=&gt; / ..
+=&gt; 0xgem/ 0xgem/                                                 Jul  7 2020
+=&gt; acdw/ acdw/                                                  Jul 25 2020
+=&gt; adiabatic/ adiabatic/                                             Oct  6 2020
+=&gt; alchemist/ alchemist/                                             Jun 21 2020
+=&gt; b/ b/                                                     Oct  6 2020
+=&gt; bentsai/ bentsai/                                               Jul  7 2020
+=&gt; chance/ chance/                                                Sep  6 2020
+
+In amfora, a command-line TUI client, the dates are right-aligned if you've got a wide-enough terminal, but in Lagrange, multiple spaces are collapsed into one and each line is kind of hard to read because of the raggedyness of it all.
+
+For the second, I noticed that the ASCII art at &quot;midnight.pub&quot; didn't look right compared to amfora. I wanted to check the source text at &lt;<A HREF="gemini://tilde.team/~m15o/">gemini://tilde.team/~m15o/</A>&gt; to see what was going on, but when I hit &#8984;S, I got:
+
+```
+ERROR SAVING PAGE
+Read-only file system
+[Continue]
+```
+
+I wasn't expecting this error message at all, considering it's (1) only my ~/Downloads and (2) &lt;<A HREF="gemini://gemini.circumlunar.space/users/">gemini://gemini.circumlunar.space/users/</A>&gt; downloads just fine to it from Lagrange and (3) amfora saves &quot;~m15o.gmi&quot; just fine there when I hit C-s in it.
+
+&#8230;and hm. The ASCII art there isn't backticked. I should go pester the author to wrap it all in
+
+```Midnight
+&#8230;
+```
+.
+
+&#8212; Nathan
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002892.html">[ANN] Lagrange - A Beautiful Gemini Client
+</A></li>
+	<LI>Next message (by thread): <A HREF="002854.html">Bug reports: Multiple spaces in links; Cmd+S unreliable (was: Re: [ANN] Lagrange - A Beautiful Gemini Client)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2850">[ date ]</a>
+              <a href="thread.html#2850">[ thread ]</a>
+              <a href="subject.html#2850">[ subject ]</a>
+              <a href="author.html#2850">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

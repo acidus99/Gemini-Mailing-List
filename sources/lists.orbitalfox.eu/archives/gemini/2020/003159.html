@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20sizes%2C%20the%20explosion%20of%20responise%20codes%20%28was%20Re%3A%0A%20Caching%20and%20status%20codes%29&In-Reply-To=%3C20201109075356.GA10576%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003156.html">
+   <LINK REL="Next"  HREF="003175.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)</H1>
+    <B>marc</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20sizes%2C%20the%20explosion%20of%20responise%20codes%20%28was%20Re%3A%0A%20Caching%20and%20status%20codes%29&In-Reply-To=%3C20201109075356.GA10576%40localhost.localdomain%3E"
+       TITLE="Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)">marcx2 at welz.org.za
+       </A><BR>
+    <I>Mon Nov  9 07:53:56 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003156.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+        <LI>Next message (by thread): <A HREF="003175.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3159">[ date ]</a>
+              <a href="thread.html#3159">[ thread ]</a>
+              <a href="subject.html#3159">[ subject ]</a>
+              <a href="author.html#3159">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> This is what I *think* how *should* clients work with caching:
+</I>&gt;<i> 
+</I>&gt;<i> The clients with history support and supports going ''backwards'' and
+</I>&gt;<i> ''forwards'' through history should cache text/* responses in memory
+</I>&gt;<i> for that browsing session. When the user browses through the history
+</I>&gt;<i> using ''forward'' and ''backward'' action, no reloading should happen.
+</I>&gt;<i> But, when a user clicks the link for a resource already in cache or
+</I>&gt;<i> writes the link by hand or selects the link from previously visited
+</I>&gt;<i> links or asks for reload: the cache is purged and the resource
+</I>&gt;<i> reloaded. It is assumed that requests with query part are idempotent.
+</I>&gt;<i> Now, when a page is dynamic, it should be stated as such so that the
+</I>&gt;<i> user would reload that page.
+</I>&gt;<i> With that, no new response codes.
+</I>
+I think your proposal is excellent. I am sure a browser
+could add a command &quot;press r to reload&quot; for any page.
+
+I have to say I am really puzzled by the protracted
+discussion about caching. The difference between returning
+the full document and a message saying &quot;document hasn't
+changed&quot; is really small in the greater scheme of things:
+
+The tcp 3 way handshake plus the tls negotiation
+consume quite a number of packets, and add round trip
+latency. Network load is often measured in number of frames
+rather than bytes, and there is space for 1500 or even
+9000 bytes per frame - this means that if your document is
+below that size (I'd venture most good ones are), then a
+&quot;not changed&quot; response doesn't even change the number of
+packets sent. That even suggests another heuristic: If
+your content is dynamic, try generating a short document,
+the implication being that larger ones should be cached,
+as there might be an actual benefit.
+
+I really think this is a holdover people still thinking
+in http+html instead of gemini:
+
+Plaintext http allowed several parties to share
+a cache. This isn't the case there, as things are
+encrypted. Html often includes other urls (&quot;img src&quot;),
+which might be shared across pages. Gemini doesn't do
+that either.
+
+And *if* caching should be done, then it seems
+a poor idea to have the caching clues live in the
+transfer/session/transport layer. Instead it should be in
+the document markup. 
+
+Even http+html finally realised that with the messy
+&quot;http-meta-equiv&quot; fields in the markup. At least that
+provides a better path for the document author to
+tell is how long the document might be valid for. And
+with a machine readable license that would allow for
+aggregation/replication/archiving/broadcast/etc which seems a
+much better way to save bandwidth and have persistent documents.
+
+TLDR: Don't think in http+html, do better
+
+regards
+
+marc
+
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003156.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+	<LI>Next message (by thread): <A HREF="003175.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3159">[ date ]</a>
+              <a href="thread.html#3159">[ thread ]</a>
+              <a href="subject.html#3159">[ subject ]</a>
+              <a href="author.html#3159">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

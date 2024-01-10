@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> implementing client certificate support
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20implementing%20client%20certificate%20support&In-Reply-To=%3C20200608172451.GA12292%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001415.html">
+   <LINK REL="Next"  HREF="001440.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>implementing client certificate support</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20implementing%20client%20certificate%20support&In-Reply-To=%3C20200608172451.GA12292%40SDF.ORG%3E"
+       TITLE="implementing client certificate support">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Mon Jun  8 18:24:51 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001415.html">implementing client certificate support
+</A></li>
+        <LI>Next message (by thread): <A HREF="001440.html">implementing client certificate support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1427">[ date ]</a>
+              <a href="thread.html#1427">[ thread ]</a>
+              <a href="subject.html#1427">[ subject ]</a>
+              <a href="author.html#1427">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Jun 07, 2020 at 10:00:02PM -0400, Michael Lazar wrote:
+ 
+&gt;<i> For what it's worth, I have been thinking about reorganizing the URL
+</I>&gt;<i> structure for astrobotany so that all of the authenticated endpoints
+</I>&gt;<i> live behind a single path. I am also planning on adding more
+</I>&gt;<i> unauthenticated content to the server, so I want to establish a
+</I>&gt;<i> clear separation between the sections that require a client certificate
+</I>&gt;<i> and the sections that do not.
+</I>&gt;<i> 
+</I>&gt;<i> - <A HREF="gemini://astrobotany.mozz.us/">gemini://astrobotany.mozz.us/</A>
+</I>&gt;<i> - <A HREF="gemini://astrobotany.mozz.us/about">gemini://astrobotany.mozz.us/about</A>
+</I>&gt;<i> - <A HREF="gemini://astrobotany.mozz.us/app">gemini://astrobotany.mozz.us/app</A> (requires client certificate)
+</I>&gt;<i> - <A HREF="gemini://astrobotany.mozz.us/app/plant">gemini://astrobotany.mozz.us/app/plant</A>
+</I>&gt;<i> - <A HREF="gemini://astrobotany.mozz.us/app/directory">gemini://astrobotany.mozz.us/app/directory</A>
+</I>&gt;<i> - ...
+</I>&gt;<i> 
+</I>&gt;<i> There are several other advantages to having a well designed path
+</I>&gt;<i> hierarchy. It's something that I often don't spend enough time
+</I>&gt;<i> thinking about up front and then I regret not doing it right later.
+</I>
+This seems wise to me.  It's already pretty clear that associating
+client certificates with domains, as currently specced (for transient
+certs, at least) and as implemented in AV-98, is not the best idea.  It
+will inevitably cause confusion/frustration/difficulty in environments
+where multiple users share a domain (like pubnixes).  Associating them
+with paths seems the obvious solution.
+
+As the current leading implementer of client cert consumning apps, I'm
+curious how you feel about the idea of using the &lt;META&gt; for 6x statuses
+to convey an intended &quot;path scope&quot; for certs?
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001415.html">implementing client certificate support
+</A></li>
+	<LI>Next message (by thread): <A HREF="001440.html">implementing client certificate support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1427">[ date ]</a>
+              <a href="thread.html#1427">[ thread ]</a>
+              <a href="subject.html#1427">[ subject ]</a>
+              <a href="author.html#1427">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

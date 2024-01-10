@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Cache duration and response body size proposals
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cache%20duration%20and%20response%20body%20size%20proposals&In-Reply-To=%3C6588ab3c-3f1d-0a0f-c47b-a47b75640f1d%40scotdoyle.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003238.html">
+   <LINK REL="Next"  HREF="003228.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Cache duration and response body size proposals</H1>
+    <B>Scot</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cache%20duration%20and%20response%20body%20size%20proposals&In-Reply-To=%3C6588ab3c-3f1d-0a0f-c47b-a47b75640f1d%40scotdoyle.com%3E"
+       TITLE="Cache duration and response body size proposals">gmi1 at scotdoyle.com
+       </A><BR>
+    <I>Tue Nov 10 17:53:07 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003238.html">Cache duration and response body size proposals
+</A></li>
+        <LI>Next message (by thread): <A HREF="003228.html">Cache duration and response body size proposals
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3247">[ date ]</a>
+              <a href="thread.html#3247">[ thread ]</a>
+              <a href="subject.html#3247">[ subject ]</a>
+              <a href="author.html#3247">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 11/10/20 10:33 AM, Gary Johnson wrote:
+&gt;<i> bie &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">bie at 202x.moe</A>&gt; writes:
+</I>&gt;<i>
+</I>&gt;&gt;<i> I'm far from a TLS expert, so I might be completely wrong here, but
+</I>&gt;&gt;<i> can't the client rely on the server's TLS close_notify signal to decide if
+</I>&gt;&gt;<i> the download was interrupted? As far as I can tell, the entire point of
+</I>&gt;&gt;<i> close_notify is to guard against data truncation...?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> bie
+</I>&gt;<i> That's right. Here's a summary of the issues and solutions proposed on
+</I>&gt;<i> the mailing list over the past couple of weeks regarding various
+</I>&gt;<i> content-size and content-hash response header proposals:
+</I>&gt;<i>
+</I>&gt;<i> 1. What about caching?
+</I>&gt;<i>
+</I>&gt;<i>     This should either be performed by clients for links visited within a
+</I>&gt;<i>     single session or not at all. If a client performs caching, it should
+</I>&gt;<i>     provide some way to signal that you want to clear the current page
+</I>&gt;<i>     from the cache and reload it.
+</I>&gt;<i>
+</I>&gt;<i> 2. How do I know if I got the entire response body?
+</I>&gt;<i>
+</I>&gt;<i>     Your client will receive a TLS close_notify message when the server
+</I>&gt;<i>     has finished sending the response. If you don't get one, the
+</I>&gt;<i>     connection was broken. Retry your request or don't. It's up to you.
+</I>&gt;<i>
+</I>&gt;<i> 3. What if I'm impatient and am prone to canceling requests that take a
+</I>&gt;<i>     long time?
+</I>&gt;<i>
+</I>&gt;<i>     Outside of network latency issues or buggy servers, this should
+</I>&gt;<i>     really only be happening when requesting large files. Content authors
+</I>&gt;<i>     should consider including the file size for such files in their link
+</I>&gt;<i>     descriptions, so the user will know generally how long they might
+</I>&gt;<i>     have to wait.
+</I>&gt;<i>
+</I>&gt;<i>     =&gt; /foo.mp3 foo.mp3 (14 MiB)
+</I>&gt;<i>
+</I>&gt;<i> 4. Okay, the link told me it was a big file, so I waited long enough for
+</I>&gt;<i>     it to finish, and I know I got the whole file because I received a
+</I>&gt;<i>     TLS close_notify message...but...how do I know I got all the intended
+</I>&gt;<i>     bytes?
+</I>&gt;<i>
+</I>&gt;<i>     If content validation is desirable, authors should provide a content
+</I>&gt;<i>     hash in the link description or provide a separate link to a file
+</I>&gt;<i>     containing the content hash (e.g., foo.mp3.md5 or foo.mp3.sha256):
+</I>&gt;<i>
+</I>&gt;<i>     =&gt; /foo.mp3 foo.mp3 (14 MiB) SHA256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+</I>To further reduce the opportunity for undetected data corruption,
+clients could also keep an in-memory hash of the received data and
+compare this to a hash of the stored file.
+&gt;<i> 5. Now can we add my proposal for sending content-size, content-hash,
+</I>&gt;<i>     and cache-duration headers to Gemini responses?
+</I>&gt;<i>
+</I>&gt;<i>     See 1-4 above.
+</I>&gt;<i>
+</I>&gt;<i> That's all, folks!
+</I>&gt;<i>    Gary
+</I>&gt;<i>
+</I>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003238.html">Cache duration and response body size proposals
+</A></li>
+	<LI>Next message (by thread): <A HREF="003228.html">Cache duration and response body size proposals
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3247">[ date ]</a>
+              <a href="thread.html#3247">[ thread ]</a>
+              <a href="subject.html#3247">[ subject ]</a>
+              <a href="author.html#3247">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

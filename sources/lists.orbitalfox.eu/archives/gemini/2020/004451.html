@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] Oustanding issues
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Oustanding%20issues&In-Reply-To=%3CC83KED7C841J.GYQBT62DU7JM%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004450.html">
+   <LINK REL="Next"  HREF="004452.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] Oustanding issues</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Oustanding%20issues&In-Reply-To=%3CC83KED7C841J.GYQBT62DU7JM%40stilgar%3E"
+       TITLE="[spec] Oustanding issues">solderpunk at posteo.net
+       </A><BR>
+    <I>Sun Dec 27 12:25:41 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004450.html">[spec] Oustanding issues
+</A></li>
+        <LI>Next message (by thread): <A HREF="004452.html">[spec] Oustanding issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4451">[ date ]</a>
+              <a href="thread.html#4451">[ thread ]</a>
+              <a href="subject.html#4451">[ subject ]</a>
+              <a href="author.html#4451">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun Dec 27, 2020 at 1:01 PM CET, Martin Keegan wrote:
+
+&gt;<i> You posted on your gemlog some time ago that the experience of the use
+</I>&gt;<i> of
+</I>&gt;<i> TLS client certificates had raised issues that needed to be clarified in
+</I>&gt;<i> the spec; I don't know whether these issues were satisfactorily
+</I>&gt;<i> resolved.
+</I>&gt;<i>
+</I>&gt;<i> =&gt;
+</I>&gt;<i> <A HREF="gemini://gemini.circumlunar.space/users/solderpunk/gemlog/tls-musings.gmi">gemini://gemini.circumlunar.space/users/solderpunk/gemlog/tls-musings.gmi</A>
+</I>
+Thanks for the reminder!  The SNI issue was addressed and this is now
+mentioned in the spec.  The status codes related to client certificates
+were also simplified and &quot;transient certificates&quot; are no longer a
+first-class concept in the spec.  I *think* those were the major issues
+that a little real-world experience revealed, and that they are both now
+resolved.
+
+&gt;<i> For my own part I'd like to know about timeouts. My server is coded with
+</I>&gt;<i> some concern about DoS attacks such as the Slow Loris attack:
+</I>&gt;<i>
+</I>&gt;<i> =&gt; <A HREF="https://en.wikipedia.org/wiki/Slowloris_(computer_security">https://en.wikipedia.org/wiki/Slowloris_(computer_security</A>)
+</I>&gt;<i>
+</I>&gt;<i> To mitigate this, the server shuts down any connection which hasn't
+</I>&gt;<i> submitted a request after ten seconds. Pragmatically, client authors do
+</I>&gt;<i> not need licence from the spec to implement a timeout, but it may be
+</I>&gt;<i> useful to constrain when and how server implementors should/must/must
+</I>&gt;<i> not
+</I>&gt;<i> do this.
+</I>
+Hmm.  While I agree that neither servers nor clients really need
+permission to implement basic functionality like timeouts, this
+particular case *does* raise some questions.  Currently it seems
+implicit in the spec that servers may not say anything until the client
+has finished sending a request.  In principle, there are circumstances
+where a server might know what it wants to do before that point - an
+invalid URL (triggering a status code 59 response) might be detected
+before it is complete, and the n-th request within m seconds (triggering
+a status code 44 response) can be detected before *anything* is
+received.  And, as you point out, reasonable defensive timeouts can
+occur before a request is complete.  Is a server obligated to wait for a
+complete response before saying anything?
+
+Thanks for bringing this up, I'll think about it.  Thoughts are welcome.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004450.html">[spec] Oustanding issues
+</A></li>
+	<LI>Next message (by thread): <A HREF="004452.html">[spec] Oustanding issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4451">[ date ]</a>
+              <a href="thread.html#4451">[ thread ]</a>
+              <a href="subject.html#4451">[ subject ]</a>
+              <a href="author.html#4451">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

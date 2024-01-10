@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> &lt;META&gt; overloading...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%3CMETA%3E%20overloading...&In-Reply-To=%3C20200529092451.GA2354%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001146.html">
+   <LINK REL="Next"  HREF="001158.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>&lt;META&gt; overloading...</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%3CMETA%3E%20overloading...&In-Reply-To=%3C20200529092451.GA2354%40SDF.ORG%3E"
+       TITLE="&lt;META&gt; overloading...">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Fri May 29 10:24:51 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001146.html">&lt;META&gt; overloading...
+</A></li>
+        <LI>Next message (by thread): <A HREF="001158.html">&lt;META&gt; overloading...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1156">[ date ]</a>
+              <a href="thread.html#1156">[ thread ]</a>
+              <a href="subject.html#1156">[ subject ]</a>
+              <a href="author.html#1156">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, May 29, 2020 at 04:10:40AM +0200, Petite Abeille wrote:
+
+I can see this has triggered a thread of replies already but I only have
+a little time before I need to start work so I thought I'd just reply
+now to the first post without having read anything else to share my
+initial and uninfluenced reaction (which I don't think will change, mind
+you).
+
+&gt;<i> Presently, a successful status code may look like:
+</I>&gt;<i> 
+</I>&gt;<i> 20 text/gemini; charset=utf-8
+</I>&gt;<i> 
+</I>&gt;<i> Would it be reasonable to consider the structure of &lt;META&gt; as equivalent to a modernized MIME header?
+</I>
+They're not &quot;equivalent to a modernized MIME header&quot;, they are literally
+specced as being exactly that (well, without the modernized part).  From
+section 3.3:
+
+&gt;<i> Response bodies only accompany responses whose header indicates a
+</I>&gt;<i> SUCCESS status (i.e. a status code whose first digit is 2).  For such
+</I>&gt;<i> responses, &lt;META&gt; is a MIME media type as defined in RFC 2046.
+</I>
+This is very deliberate!  It lets people use pre-existing machinery for
+parsing MIME types to easily throw together Gemini software without
+having to write any customised code.
+ 
+&gt;<i> We already have the charset, so... as we have 1024 bytes to play with...
+</I>
+Yes, it's true we are free to define additional parameters for our media
+type, and I *have* stressed out about this in the past.  However...
+ 
+&gt;<i> ... we could add a couple of further information such as Content-Length [1], Content-Disposition [2], Content-Language [3], and Date[4]..
+</I>&gt;<i> 
+</I>&gt;<i> Perhaps something like this:
+</I>&gt;<i> 
+</I>&gt;<i> 20 text/gemini; charset=utf-8; length=28102; name=&quot;Speculative specification&quot;; date=2020-05-26; language=en-US
+</I>
+...most of what is new here makes no sense whatsoever.  We are allowed
+to define parameters for our media type, but we can't change the fact
+that it is a *media type*.  It is information for clients about *what
+kind of thing* they're about to get, so they can determine how to handle
+it.  It is *category* information.  &quot;English text with Gemini line
+types&quot; is a sensible category.  There can be infinitely many documents
+in that category and it makes sense for a user agent to treat them all
+identically, and to perhaps treat them a little differently from &quot;Arabic
+text with Gemini line types&quot; (by rendering text LTR instead of RTL).
+Those are genuine &quot;types of stuff&quot;.  But &quot;28102 bytes of English text
+with Gemini line types written three days ago with the title
+Speculative specification&quot; isn't a &quot;type of stuff&quot;.  It's not a sensible
+category.  Information which is unique to a particular document is just
+wholly inappropriate in a MIME media type, it's not the place for it.
+
+I'm definitely not going to spec any parameters for text/gemini which I
+don't feel fit with the semantics of what a media type is.  It's true
+that I can't stop servers from doing this (and the MIME RFC clearly says
+that clients must ignore parameters they don't recognise, so I can't
+even recommend that clients refuse to handle responses which do this as
+a kind of defensive measure).  I hope people will be disuaded from doing
+this not just by virtue of it being against my wishes for and the
+intended spirit of Gemini, but also because it completely and clearly
+violates the intent of a much older and more established piece of
+internet infrastructure.  It's double wrong!
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001146.html">&lt;META&gt; overloading...
+</A></li>
+	<LI>Next message (by thread): <A HREF="001158.html">&lt;META&gt; overloading...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1156">[ date ]</a>
+              <a href="thread.html#1156">[ thread ]</a>
+              <a href="subject.html#1156">[ subject ]</a>
+              <a href="author.html#1156">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] A '.well-known/' path for contact information?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20A%20%27.well-known/%27%20path%20for%20contact%20information%3F&In-Reply-To=%3C20210107081417.26bmafi5juscrzf4%40devbox%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004763.html">
+   <LINK REL="Next"  HREF="004767.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] A '.well-known/' path for contact information?</H1>
+    <B>Jon</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20A%20%27.well-known/%27%20path%20for%20contact%20information%3F&In-Reply-To=%3C20210107081417.26bmafi5juscrzf4%40devbox%3E"
+       TITLE="[tech] A '.well-known/' path for contact information?">jon at shit.cx
+       </A><BR>
+    <I>Thu Jan  7 08:14:42 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004763.html">[tech] A '.well-known/' path for contact information?
+</A></li>
+        <LI>Next message (by thread): <A HREF="004767.html">[tech] A '.well-known/' path for contact information?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4765">[ date ]</a>
+              <a href="thread.html#4765">[ thread ]</a>
+              <a href="subject.html#4765">[ subject ]</a>
+              <a href="author.html#4765">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 07/01/21 02:25, Sean Conner wrote:
+&gt;<i> It was thus said that the Great Jon once stated:
+</I>&gt;<i> &gt; On 06/01/21 22:00, Jason McBrayer wrote:
+</I>&gt;<i> &gt; &gt; I think it's a good idea in principle, but it is maybe not
+</I>&gt;<i> &gt; &gt; well-suited for multi-user sites, which a lot of Gemini sites are.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Hmm. I assumed that most sites were on their own domain.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; On a multi-tenanted host, is each tenant generally confined to a
+</I>&gt;<i> &gt; unix homedir? For example `/~${USER}/*`. If that's the case,
+</I>&gt;<i> &gt; checking the users root before hitting the root shouldn't be
+</I>&gt;<i> &gt; unreasonable.
+</I>&gt;<i> 
+</I>&gt;<i>   It might not always be the case that a user's directory is marked by
+</I>&gt;<i>   a '~'.  For instance, on &lt;<A HREF="gemini://republic.cirumlunar.space/">gemini://republic.cirumlunar.space/</A>&gt; users
+</I>&gt;<i>   are under &lt;<A HREF="gemini://republic.circumlunar.space/users/">gemini://republic.circumlunar.space/users/</A>&gt;.
+</I>&gt;<i> 
+</I>&gt;<i>   -spc
+</I>&gt;<i> 
+</I>
+I guess traversing up the tree looking for a humans.txt file would work.
+
+Finding the humans.txt file for a document at
+`/users/jon/gemlog/2021-01-07-a-new-doc/index.gmi` would search:
+
+- /users/jon/gemlog/2021-01-07-a-new-doc/humans.txt
+- /users/jon/gemlog/humans.txt
+- /users/jon/humans.txt
+- /users/humans.txt
+- /humans.txt
+
+This would allow one document, or an entire branch of the tree have a
+different contact than the rest, but it's a lot more complex than simply
+hitting up /humans.txt.
+
+Even though it handles the edge cases, I'm less enthusiastic about this
+solution. What was initially a simple task of fetching /humans.txt is,
+well not that anymore.
+
+-- 
+Jon
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004763.html">[tech] A '.well-known/' path for contact information?
+</A></li>
+	<LI>Next message (by thread): <A HREF="004767.html">[tech] A '.well-known/' path for contact information?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4765">[ date ]</a>
+              <a href="thread.html#4765">[ thread ]</a>
+              <a href="subject.html#4765">[ subject ]</a>
+              <a href="author.html#4765">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

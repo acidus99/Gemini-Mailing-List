@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Again on feeds in Gemini format
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Again%20on%20feeds%20in%20Gemini%20format&In-Reply-To=%3C2e4883d3-1c39-373d-03dd-27af29c75dc2%40emilis.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003453.html">
+   <LINK REL="Next"  HREF="003427.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Again on feeds in Gemini format</H1>
+    <B>Emilis</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Again%20on%20feeds%20in%20Gemini%20format&In-Reply-To=%3C2e4883d3-1c39-373d-03dd-27af29c75dc2%40emilis.net%3E"
+       TITLE="Again on feeds in Gemini format">emilis at emilis.net
+       </A><BR>
+    <I>Fri Nov 20 01:58:26 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003453.html">&quot;ISO 8601&quot; nitpick (was: Re: Again on feeds in Gemini format)
+</A></li>
+        <LI>Next message (by thread): <A HREF="003427.html">Again on feeds in Gemini format
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3454">[ date ]</a>
+              <a href="thread.html#3454">[ thread ]</a>
+              <a href="subject.html#3454">[ subject ]</a>
+              <a href="author.html#3454">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 11/19/20 5:44 PM, Solderpunk wrote:
+&gt;<i> * The text of the first heading line (e.g. # My gemlog) to appear in the
+</I>&gt;<i>    document is equivalent to the &lt;feed&gt;&lt;title&gt; element of an Atom feed.
+</I>&gt;<i>    All other heading lines are ignored.
+</I>&gt;<i> * All other lines which are not link lines are ignored.
+</I>&gt;<i> * All link lines with labels where the first whitespace-separated
+</I>&gt;<i>    component of the label is a recognised datestamp are treated as
+</I>&gt;<i>    equivalent to an Atom &lt;entry&gt; element, where:
+</I>&gt;<i>      - The link's URL provides &lt;entry&gt;&lt;link&gt;
+</I>&gt;<i>      - The datestamp provides &lt;entry&gt;&lt;updated&gt;
+</I>&gt;<i>      - The content of the label after the datestamp provides
+</I>&gt;<i>        &lt;entry&gt;&lt;title&gt;
+</I>&gt;<i> * All other link lines are ignored
+</I>
+So I went and updated my aggregator code to match this format. Then went 
+to SpaceWalk to look for pages to parse.
+
+The output:
+<A HREF="gemini://tilde.team/~emilis/aggregated-test.gmi">gemini://tilde.team/~emilis/aggregated-test.gmi</A>
+
+The code:
+<A HREF="https://tildegit.org/emilis/gmi-feed-aggregator">https://tildegit.org/emilis/gmi-feed-aggregator</A>
+
+Some notes:
+
+1. I added support for relative URLs to my aggregator. At the moment it 
+became the most complex part of the code.
+
+2. Due to relative URL support it is possible to just parse Home/index 
+pages of some of the gemlogs -- no separate feed file is needed.
+
+3. Some gemlogs are missing the h1 or it is too generic (&quot;Blog&quot;, 
+&quot;Updates&quot;). I skipped those.
+
+4. Some gemlogs have characters added to date. E.g. &quot;2020-11-19: And 
+then the title&quot;. I had to skip these too.
+
+5. I removed the timestamps from link text and prefixed the feed-titles 
+to the entry-titles to separate between sources. Seems OK, but one may 
+need to hover over the link to be sure of where the link is coming from. 
+I think I could add hostnames to link text. Not sure if link text will 
+become too long.
+
+
+--
+Emilis Dambauskas
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003453.html">&quot;ISO 8601&quot; nitpick (was: Re: Again on feeds in Gemini format)
+</A></li>
+	<LI>Next message (by thread): <A HREF="003427.html">Again on feeds in Gemini format
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3454">[ date ]</a>
+              <a href="thread.html#3454">[ thread ]</a>
+              <a href="subject.html#3454">[ subject ]</a>
+              <a href="author.html#3454">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

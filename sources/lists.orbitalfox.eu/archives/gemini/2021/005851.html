@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] &#9791;&#65039; gemini &#8212; a minimalist gemini protocol 
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%3D%3Futf-8%3FB%3FW3NwZWNdIOKYv%2B%2B4jyBnZW1pbmkg4oCUIGEgbWluaW1hbGlzdCBn%3F%3D%0A%20%3D%3Futf-8%3FB%3FZW1pbmkgcHJvdG9jb2wg%3F%3D&In-Reply-To=%3C6D20D985-1119-4D52-B461-56753E0BBC15%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005849.html">
+   <LINK REL="Next"  HREF="005852.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] &#9791;&#65039; gemini &#8212; a minimalist gemini protocol </H1>
+    <B>Petite Abeille</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%3D%3Futf-8%3FB%3FW3NwZWNdIOKYv%2B%2B4jyBnZW1pbmkg4oCUIGEgbWluaW1hbGlzdCBn%3F%3D%0A%20%3D%3Futf-8%3FB%3FZW1pbmkgcHJvdG9jb2wg%3F%3D&In-Reply-To=%3C6D20D985-1119-4D52-B461-56753E0BBC15%40gmail.com%3E"
+       TITLE="[spec] &#9791;&#65039; gemini &#8212; a minimalist gemini protocol ">petite.abeille at gmail.com
+       </A><BR>
+    <I>Tue Mar  2 11:58:08 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005849.html">[spec] gemini capabilities
+</A></li>
+        <LI>Next message (by thread): <A HREF="005852.html">&#9791;&#65039; gemini &#8212; esthetics
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5851">[ date ]</a>
+              <a href="thread.html#5851">[ thread ]</a>
+              <a href="subject.html#5851">[ subject ]</a>
+              <a href="author.html#5851">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>All details are similar to gemini itself, &#177; some minor adjustments.
+
+&#9986;&#65038;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;
+
+&#9791;&#65039;://&#9791;&#65039;
+
+By default, a &#9791;&#65039; gemini service runs over plain TCP, at port 1961.
+
+A &#9791;&#65039; <A HREF="gemini://">gemini://</A> request is one-line &#8212;4,096 bytes long at most, UTF-8 encoded&#8212; containing a fully qualified, normalized Internationalized Resource Identifier (IRI):
+
+<A HREF="gemini://host.xyz:1961/">gemini://host.xyz:1961/</A>
+
+An IRI is an UTF-8 version of an Uniform Resource Identifier (URI). 
+An URI can be either an Uniform Resource Locator (URL), or Uniform Resource Name (URN).
+
+&#9986;&#65038;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;
+
+An example of a &#9791;&#65039; gemini request, followed by a &#9791;&#65039; text/gemini response:
+
+# echo -e '<A HREF="gemini://gemini.xyz:1961/\r\n">gemini://gemini.xyz:1961/\r\n</A>' | nc 127.0.0.1 1961
+20 text/gemini;charset=utf-8;
+Hello &#9791;&#65039; Gemini!
+
+=&gt; <A HREF="gemini://host.xyz:1961/license">gemini://host.xyz:1961/license</A> CC0-1.0 
+&lt;end of connection&gt; 
+
+A successful &#9791;&#65039; gemini response is a one-line with status 20&#8212;optionally followed by a content type, plus associated attributes, such as encoding:  
+
+20 text/gemini;charset=utf-8;
+
+The content type is optional &#8212; defaulting to &#9791;&#65039; text/gemini, UTF-8 encoded.
+
+The content itself follow the  20 status line &#8212; terminated by the service dropping the network connection.
+
+&#9986;&#65038;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;
+
+There are 3 status codes:
+
+20 SUCCESS &#8212; one-line, with optional content type, plus attributes, 4,096 bytes long at most, UTF-8 encoded
+20 text/gemini;charset=utf-8;
+
+30 REDIRECT &#8212; one-line IRI, fully qualified, and normalized, 4,096 bytes long at most, UTF-8 encoded
+30 <A HREF="gemini://host.xyz:1961/">gemini://host.xyz:1961/</A>
+
+40 ERROR &#8212; one-line, 4,096 bytes long at most, UTF-8 encoded, with optional description 
+40 &#9888;&#65038;&#9791;&#65039;&#9888;&#65038;
+
+&#9986;&#65038;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;
+
+A &#9791;&#65039; text/gemini consists of two line types: text, and link. 
+
+A link is denoted as one-line, starting with the arrow symbol (=&gt;), followed by a space, followed by a fully qualified, and normalized IRI &#8212; optionally followed by a space separated description:
+
+=&gt; <A HREF="gemini://host.xyz/license">gemini://host.xyz/license</A> CC0-1.0
+
+All other lines are regular text lines.
+
+&#9986;&#65038;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;&#12539;
+
+That's all folks.
+
+&#177;0&#162;
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005849.html">[spec] gemini capabilities
+</A></li>
+	<LI>Next message (by thread): <A HREF="005852.html">&#9791;&#65039; gemini &#8212; esthetics
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5851">[ date ]</a>
+              <a href="thread.html#5851">[ thread ]</a>
+              <a href="subject.html#5851">[ subject ]</a>
+              <a href="author.html#5851">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

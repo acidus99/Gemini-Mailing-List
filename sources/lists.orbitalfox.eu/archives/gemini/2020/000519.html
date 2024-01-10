@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> robots.txt for Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20robots.txt%20for%20Gemini&In-Reply-To=%3C20200324213508.GD22036%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000517.html">
+   <LINK REL="Next"  HREF="000520.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>robots.txt for Gemini</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20robots.txt%20for%20Gemini&In-Reply-To=%3C20200324213508.GD22036%40brevard.conman.org%3E"
+       TITLE="robots.txt for Gemini">sean at conman.org
+       </A><BR>
+    <I>Tue Mar 24 21:35:08 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000517.html">robots.txt for Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="000520.html">robots.txt for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#519">[ date ]</a>
+              <a href="thread.html#519">[ thread ]</a>
+              <a href="subject.html#519">[ subject ]</a>
+              <a href="author.html#519">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great solderpunk once stated:
+&gt;<i> The biggest question, in my mind, is what to do about user-agents, which
+</I>&gt;<i> Gemini lacks (by design, as they are a component of the browser
+</I>&gt;<i> fingerprinting problem, and because they encourage content developers to
+</I>&gt;<i> serve browser-specific content which is a bad thing IMHO).  The 2019 RFC
+</I>&gt;<i> says &quot;The product token SHOULD be part of the identification string that
+</I>&gt;<i> the crawler sends to the service&quot; (where &quot;product token&quot; is bizarre and
+</I>&gt;<i> disappointingly commercial alternative terminology for &quot;user-agent&quot; in
+</I>&gt;<i> this document), so the fact that Gemini doesn't send one is not
+</I>&gt;<i> technically a violation.
+</I>
+  Two possible solutions for robot identification:
+
+1) Allow IP addresses to be used where a user-agent would be specificifed. 
+Some examples:
+
+	User-agent: 172.16.89.3
+	User-agent: 172.17.24.0/27
+	User-agent: fde7:a680:47d3/48
+
+Yes, I'm including CIDR (Classless Inter-Domain Routing) notation to specify
+a range of IP addresses.  And for a robot, if your IP addresss matches an IP
+address (or range), then you need to follow the following rules.
+
+2) Use the fragment portion of a URL to designate a robot.  The fragment
+portion of a URL has no meaning for a server (it does for a client).  A
+robot could use this fact to skip it its identifier when making a request. 
+The server MUST NOT use this information, but the logs could show it.  For
+example, a robot could request:
+
+	<A HREF="gemini://example.com/robots.txt#GUS">gemini://example.com/robots.txt#GUS</A>
+
+A review of the logs would reveal that GUS is a robot, and the text &quot;GUS&quot;
+could be placed in the User-agent: field to control it.  It SHOULD be the
+text the robot would recognize in robots.txt.  One clarification, this:
+
+	<A HREF="gemini://example.com/robots.txt#foo%20bot">gemini://example.com/robots.txt#foo%20bot</A>
+
+would be 
+
+	User-agent: foo bot
+
+but a robot ID SHOULD NOT contain spaces---it SHOULD be one word.
+
+  Anyway, that's my ideas.
+
+  -spc
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000517.html">robots.txt for Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="000520.html">robots.txt for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#519">[ date ]</a>
+              <a href="thread.html#519">[ thread ]</a>
+              <a href="subject.html#519">[ subject ]</a>
+              <a href="author.html#519">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

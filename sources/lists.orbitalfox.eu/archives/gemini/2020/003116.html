@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Potential preloading of MIME?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Potential%20preloading%20of%20MIME%3F&In-Reply-To=%3C20201107132842.61111d16%40lappy.lan%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003112.html">
+   <LINK REL="Next"  HREF="003118.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Potential preloading of MIME?</H1>
+    <B>Tom</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Potential%20preloading%20of%20MIME%3F&In-Reply-To=%3C20201107132842.61111d16%40lappy.lan%3E"
+       TITLE="Potential preloading of MIME?">tgrom.automail at nuegia.net
+       </A><BR>
+    <I>Sat Nov  7 21:28:51 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003112.html">hello
+</A></li>
+        <LI>Next message (by thread): <A HREF="003118.html">Potential preloading of MIME?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3116">[ date ]</a>
+              <a href="thread.html#3116">[ thread ]</a>
+              <a href="subject.html#3116">[ subject ]</a>
+              <a href="author.html#3116">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+&gt;<i> 3) I am a mathematical physicist and use a lot of equations
+</I>&gt;<i> and data visualization. As a scientist, how can I use gemini?
+</I>&gt;<i> For equations, I usually use MathJax. Talk about bloating!!!
+</I>&gt;<i> It is great but it is huge. There are alternatives, but none
+</I>&gt;<i> is near close to a plain text solution. We also have a set
+</I>&gt;<i> of utilities like tex2mail, which converts LaTeX into ascii
+</I>&gt;<i> or unicode art, but... it is really ugly and inconvenient.
+</I>&gt;<i> We could just use raw LaTeX code, which for some expressions
+</I>&gt;<i> would be fine:
+</I>&gt;<i> 
+</I>&gt;<i> \frac{a+b}{x^2+x-2}
+</I>&gt;<i> 
+</I>&gt;<i> or 
+</I>&gt;<i> 
+</I>&gt;<i> (x+y^2)^n
+</I>&gt;<i> 
+</I>&gt;<i> but what about a matrix or a more involved code? 
+</I>&gt;<i> Is this up to us or is there a way to integrate this without
+</I>&gt;<i> adding excessive complication?
+</I>&gt;<i> 
+</I>&gt;<i> What about data? The only thing that comes to me now is to
+</I>&gt;<i> use Python's Sympy, which can render LaTeX equations in
+</I>&gt;<i> ascii and also data graphics.
+</I>&gt;<i> 
+</I>&gt;<i> 4) What about musicians, or artists? I am not talking about
+</I>&gt;<i> music score, which even in html has never been offered a nice
+</I>&gt;<i> solution (that I know of). But audio? Is it possible to 
+</I>&gt;<i> have audio? I mean, no need for the browser to play it, but
+</I>&gt;<i> to link it? And what about artistic expression? As much as
+</I>&gt;<i> I love plain text and black and white, many Sapiens consider
+</I>&gt;<i> design and style a very important thing. Will these communities
+</I>&gt;<i> feel excluded from gemini because of extreme (I like extreme)
+</I>&gt;<i> simplicity? I am sure I still have a lot to learn here.
+</I>&gt;<i> Sometimes I use ncurses just to have some nice colors in my
+</I>&gt;<i> terminal. My question here is: is the style and design of
+</I>&gt;<i> the page enforced by the protocol, the client or the page
+</I>&gt;<i> itself? IMHO a plain text browser in which each page could
+</I>&gt;<i> define background and text color would be really awesome.
+</I>&gt;<i> 
+</I>&gt;<i> 5) I love design and colors, but most of all I love content,
+</I>&gt;<i> and I think that gemini is a refocus on content. And I love
+</I>&gt;<i> it, with or without colors, with or without math. But my dream?
+</I>&gt;<i> A minimalistic browsing with page-defined colors and with
+</I>&gt;<i> some easiness to integrate math and graphics with plain text.
+</I>&gt;<i> 
+</I>&gt;<i> Thanks for all the work. I will keep learning from you.
+</I>&gt;<i> And I will also write less words next time (`:
+</I>&gt;<i> 
+</I>&gt;<i> fluxion
+</I>&gt;<i> 
+</I>
+Hello,
+
+I understand your concern completely and share some of it. One of the
+biggest reasons not to use gemini over XHTML is the lack of MathML. And
+a reason to use MathML over others such as just exporting a scalable
+vector graphic is so that MathML can be read as Nemeth code so that
+disabled people may still view the math. Talking about accessibility
+this super important.
+
+Now I'm not a fan of not being able to insert objects inline in gemini,
+but the compromise of just having a link on a single line to do not
+feel serves this side particularly well. Take a more general thing like
+images. Clients that do want to display images the only way they have
+of determining which links contains images is be following each one of
+them, which in a form can trigger unwanted actions and certainly
+increase overall network load. Some clients look at the extension at
+the end of the file name, for example .jpg or .png and preload if the
+filename ends in that. I do not think this is a good option. For one we
+have MIME, and secondly using filenames for determining file type is a
+relic of DOS we really should leave behind, and we have left behind on
+every operating system besides DOS and NT. Replacing with magic(5).
+
+Many files to not even have a .something at the end of their name as
+magic(5) takes care of type recognition.
+
+I don't think it would be practical to have Gemini clients need to
+check the magic of every link and instead think a much more robust
+solution would be simple to optionally (or mandatory) add an expected
+MIME for links in Gemini. This way clients could decide what they are
+capable of rendering and decide to go get that content if it wants it.
+
+This however I feel is still only a half-solution for expressing
+mathematical and scientific formulas as it is still not inline, which
+is how scientific papers often use formulas.
+
+Looking for more commentary on this topic.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003112.html">hello
+</A></li>
+	<LI>Next message (by thread): <A HREF="003118.html">Potential preloading of MIME?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3116">[ date ]</a>
+              <a href="thread.html#3116">[ thread ]</a>
+              <a href="subject.html#3116">[ subject ]</a>
+              <a href="author.html#3116">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

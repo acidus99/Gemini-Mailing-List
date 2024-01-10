@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CSRF in Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CSRF%20in%20Gemini&In-Reply-To=%3C20200616113520.524580ec%40phi%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001720.html">
+   <LINK REL="Next"  HREF="001735.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CSRF in Gemini</H1>
+    <B>Francesco Gazzetta</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CSRF%20in%20Gemini&In-Reply-To=%3C20200616113520.524580ec%40phi%3E"
+       TITLE="CSRF in Gemini">fgaz at fgaz.me
+       </A><BR>
+    <I>Tue Jun 16 10:35:20 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001720.html">CSRF in Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="001735.html">CSRF in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1736">[ date ]</a>
+              <a href="thread.html#1736">[ thread ]</a>
+              <a href="subject.html#1736">[ subject ]</a>
+              <a href="author.html#1736">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, 16 Jun 2020 00:11:35 +0200
+Peter Vernigorov &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">pitr.vern at gmail.com</A>&gt; wrote:
+
+&gt;<i> This type of attack impacts more than just endpoints that rely on
+</I>&gt;<i> query parameter. For example, one can delete their astrobotany plant
+</I>&gt;<i> simply by getting redirected to /app/plant/harvest/confirm (although
+</I>&gt;<i> that is not strictly deletion). If a certificate is already activated
+</I>&gt;<i> for this site, then this will not help stop the attack.
+</I>
+I think that's also a different problem. Such endpoints should IMO
+require input from the user, like &quot;Type yes to confirm&quot;. Or there could
+be an additional 1x code for requesting a simple yes/no confirmation.
+This code could easily fallback to 10, by having the buttons send &quot;yes&quot;
+or &quot;no&quot; and the question say &quot;Do you confirm? Type yes/no&quot;.
+
+&gt;<i> However, the difference I see between HTTP/HTML and Gemini is that
+</I>&gt;<i> this attack is not happening in an invisible iframe/xhr request, but
+</I>&gt;<i> in plain sight of the user. Once they are redirected to any of the
+</I>&gt;<i> impacted pages, they will see a message from server informing them of
+</I>&gt;<i> their actions. &quot;you posted a comment&quot;, &quot;you harvested/deleted your
+</I>&gt;<i> plant&quot;. Perhaps an easy workaround is to let user undo their action?
+</I>&gt;<i> &quot;you posted a comment, would you like to undo?&quot; This has an additional
+</I>&gt;<i> positive side effect of an easy undo of human errors, in case the
+</I>&gt;<i> comment was submitted prematurely, or contains an error.
+</I>
+Undo is not always easy to implement though (strawman: you launched a
+nuclear missile. undo?), and one has to remember to do it for every
+page, much like remembering to escape string-concatenated sql
+statements.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001720.html">CSRF in Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="001735.html">CSRF in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1736">[ date ]</a>
+              <a href="thread.html#1736">[ thread ]</a>
+              <a href="subject.html#1736">[ subject ]</a>
+              <a href="author.html#1736">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

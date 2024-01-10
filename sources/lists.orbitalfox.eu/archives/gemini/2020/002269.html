@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Reopening: Stream status code
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Reopening%3A%20Stream%20status%20code&In-Reply-To=%3CC4ANS2LX7FKK.284EOLQKPCRPW%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002260.html">
+   <LINK REL="Next"  HREF="002271.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Reopening: Stream status code</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Reopening%3A%20Stream%20status%20code&In-Reply-To=%3CC4ANS2LX7FKK.284EOLQKPCRPW%40stilgar%3E"
+       TITLE="Reopening: Stream status code">solderpunk at posteo.net
+       </A><BR>
+    <I>Sun Jul 19 15:09:24 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002260.html">Reopening: Stream status code
+</A></li>
+        <LI>Next message (by thread): <A HREF="002271.html">Reopening: Stream status code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2269">[ date ]</a>
+              <a href="thread.html#2269">[ thread ]</a>
+              <a href="subject.html#2269">[ subject ]</a>
+              <a href="author.html#2269">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat Jul 18, 2020 at 11:09 PM CEST,  wrote:
+&gt;<i> Hello all,
+</I>&gt;<i>
+</I>&gt;<i> A stream status code has been mentioned on this list before, and I'd
+</I>&gt;<i> like to
+</I>&gt;<i> bring it up again. Streams have begun appearing on Gemini, notably on
+</I>&gt;<i> <A HREF="gemini://chat.mozz.us.">gemini://chat.mozz.us.</A> But at the same time, responsible clients have
+</I>&gt;<i> been
+</I>&gt;<i> adding timeouts for server responses. It is even part of the Egsam test,
+</I>&gt;<i> under
+</I>&gt;<i> section 1.1: <A HREF="gemini://egsam.pitr.ca/1.1.gmi.">gemini://egsam.pitr.ca/1.1.gmi.</A>
+</I>
+Sorry I didn't chime in on this the first time it came up:  I meant to.
+I like all the streaming experiments which have been floating around,
+it's cool stuff.
+
+My biggest objection (and I think it's a fatal one) to the idea of
+having a 2x status code to convey that a stream is coming is that the
+second digit of status codes is supposed to be ignorable without any
+serious negative consequences and treating, say, 21 differently from 20
+is supposed to be strictly optional on the part of client authors.  If
+streamed content breaks clients which take advantage of that
+optionality, that's a problem.
+
+Even ignoring that, having separate 20 and 21 codes for &quot;here comes a
+non-stream&quot; and &quot;here comes a stream&quot; doesn't make much sense, because
+non-streams can be handled perfectly well using exactly the same code,
+so the most concise implementation would be to have exactly the same
+code handling two different status codes, which makes the different
+statuses redundant.
+
+This is mainly just an issue of what to do about timeouts, right?
+If you don't have any timeout at all, streamed content works fine, but
+buggy/overloaded servers hang the client, and that's bad.  If you have a
+fixed timeout of 5 seconds, some streaming applications (like the chat
+example mozz has done) break.
+
+Does having clients use, say, a 5 second inital timeout after sending
+the request, which gets bumped up to something a little higher after
+successfully receiving a response header help a bit here?
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002260.html">Reopening: Stream status code
+</A></li>
+	<LI>Next message (by thread): <A HREF="002271.html">Reopening: Stream status code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2269">[ date ]</a>
+              <a href="thread.html#2269">[ thread ]</a>
+              <a href="subject.html#2269">[ subject ]</a>
+              <a href="author.html#2269">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

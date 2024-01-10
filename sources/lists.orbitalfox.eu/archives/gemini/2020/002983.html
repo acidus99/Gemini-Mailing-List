@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Content length, EOF -- ways to resolve whether we received everything
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Content%20length%2C%20EOF%20--%20ways%20to%20resolve%20whether%20we%20received%0A%20everything&In-Reply-To=%3C20201030231210.GA31935%40thrax.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003007.html">
+   <LINK REL="Next"  HREF="002975.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Content length, EOF -- ways to resolve whether we received everything</H1>
+    <B>Ivy Foster</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Content%20length%2C%20EOF%20--%20ways%20to%20resolve%20whether%20we%20received%0A%20everything&In-Reply-To=%3C20201030231210.GA31935%40thrax.localdomain%3E"
+       TITLE="Content length, EOF -- ways to resolve whether we received everything">escondida at iff.ink
+       </A><BR>
+    <I>Fri Oct 30 23:12:10 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003007.html">External SHA hashes instead?
+</A></li>
+        <LI>Next message (by thread): <A HREF="002975.html">[ANN] Gemini Anonymous Board (and julia server)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2983">[ date ]</a>
+              <a href="thread.html#2983">[ thread ]</a>
+              <a href="subject.html#2983">[ subject ]</a>
+              <a href="author.html#2983">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 30 Oct 2020, at 12:50 pm +0100, Bj&#246;rn W&#228;rmedal wrote:
+&gt;<i> A proposal that arose (I think acdw may have been the first to suggest it;
+</I>&gt;<i> correct me if I'm wrong) was to include a &quot;content-length: &lt;nr of bytes&gt;&quot;
+</I>&gt;<i> in the &lt;META&gt; of a status 20 response. It's a simple thing to add, that
+</I>&gt;<i> doesn't extend the protocol into bloat.
+</I>
+&gt;<i> &quot;But, ew0k! The &lt;META&gt; is for MIME types! That's not a MIME type!&quot;
+</I>
+&gt;<i> Yes, this is true. Would that cause an issue? In that case calling it
+</I>&gt;<i> &quot;x-gemi-content-length&quot; should resolve it, as the &quot;x-&quot; prefix is for
+</I>&gt;<i> experimental types and any receiver that doesn't recognize it will ignore
+</I>&gt;<i> it. I'm aware that it still doesn't convey info on the *type* of content,
+</I>&gt;<i> and thereby doesn't belong among MIME type info, but it's a compromise I'm
+</I>&gt;<i> willing to make.
+</I>
+Alternately, as I [previously pointed out][1], there is [an
+established RFC][2] for including size as a parameter to a MIME type.
+Specifically, it's part of the specification for email: if any
+&quot;attachment&quot; is actually an external part to be fetched rather than an
+actual attachment, you specify
+&quot;content-type:foo/bar;access-type:how-you-get-it;(optionally)size:octets&quot;.
+Solderpunk did shoot it down, granted, but since the conversation's
+come up again I figure I should point this out instead of having us
+come up with new MIME extensions.
+
+[1]: <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/001534.html">https://lists.orbitalfox.eu/archives/gemini/2020/001534.html</A>
+[2]: <A HREF="https://tools.ietf.org/html/rfc1341">https://tools.ietf.org/html/rfc1341</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003007.html">External SHA hashes instead?
+</A></li>
+	<LI>Next message (by thread): <A HREF="002975.html">[ANN] Gemini Anonymous Board (and julia server)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2983">[ date ]</a>
+              <a href="thread.html#2983">[ thread ]</a>
+              <a href="subject.html#2983">[ subject ]</a>
+              <a href="author.html#2983">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

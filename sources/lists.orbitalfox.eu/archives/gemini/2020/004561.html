@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] [eli5] US-ASCII is a subset of UTF-8. UTF-8 is a superset of US-ASCII. 
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20%5Beli5%5D%20US-ASCII%20is%20a%20subset%20of%20UTF-8.%20UTF-8%20is%20a%20superset%20of%0A%20US-ASCII.%20&In-Reply-To=%3CECCFB60A-21C1-4FE6-8999-8C73C365E95F%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004612.html">
+   <LINK REL="Next"  HREF="004562.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] [eli5] US-ASCII is a subset of UTF-8. UTF-8 is a superset of US-ASCII. </H1>
+    <B>Petite Abeille</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20%5Beli5%5D%20US-ASCII%20is%20a%20subset%20of%20UTF-8.%20UTF-8%20is%20a%20superset%20of%0A%20US-ASCII.%20&In-Reply-To=%3CECCFB60A-21C1-4FE6-8999-8C73C365E95F%40gmail.com%3E"
+       TITLE="[tech] [eli5] US-ASCII is a subset of UTF-8. UTF-8 is a superset of US-ASCII. ">petite.abeille at gmail.com
+       </A><BR>
+    <I>Tue Dec 29 10:02:39 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004612.html">[user] new capsule
+</A></li>
+        <LI>Next message (by thread): <A HREF="004562.html">[tech] [eli5] URI = IRI = ASCII = UTF-8 = Unicode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4561">[ date ]</a>
+              <a href="thread.html#4561">[ thread ]</a>
+              <a href="subject.html#4561">[ subject ]</a>
+              <a href="author.html#4561">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&quot;UTF-8 was first officially presented at the USENIX conference in San Diego in 1993... &quot;
+
+Nearly 28 years ago. We must have a clear understanding of what it is by now.
+
+When something can handle US-ASCII, does *not* imply it can handle UTF-8.
+
+When something can handle UTF-8, it *does* imply it can handle US-ASCII.
+
+US-ASCII is a subset of UTF-8. UTF-8 is a superset of US-ASCII. 
+
+UTF stands for Unicode Transformation Format.
+
+It carries all the complexity of Unicode, plus some, namely validation.
+
+Including Unicode normalization.
+
+The very same character can be be represented by various code-point sequences in Unicode. 
+And therefore in UTF-8 text. 
+And therefore in punycode. 
+And therefore in URL encoding.
+And therefore in URI encoding.
+And therefore in IRI.
+
+This is why, before any interactions can take place, both parties MUST normalize Unicode the same way. And then encode/decode it.
+
+There is no way around this requirement if we say that we support UTF-8, and therefore Unicode.
+
+All this applies wherever UTF-8 can appear: in a request URL, in text/gemini, in a text/gemini link url.
+
+Making UTF-8 a MUST makes Unicode a MUST. This is the way.
+
+If Gemini does not want to deal with the complexity of Unicode, Gemini MUST change the specification to read:
+
+Clients MUST support US-ASCII, and SHOULD support UTF-8.
+
+Gemini cannot have it both ways, it's either UTF-8, and therefore Unicode, or plain US-ASCII.
+
+HTH.
+
+ 
+
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004612.html">[user] new capsule
+</A></li>
+	<LI>Next message (by thread): <A HREF="004562.html">[tech] [eli5] URI = IRI = ASCII = UTF-8 = Unicode
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4561">[ date ]</a>
+              <a href="thread.html#4561">[ thread ]</a>
+              <a href="subject.html#4561">[ subject ]</a>
+              <a href="author.html#4561">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

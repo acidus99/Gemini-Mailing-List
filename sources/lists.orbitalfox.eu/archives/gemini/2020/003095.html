@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> libmagic
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20libmagic&In-Reply-To=%3CCAD2gp_T43c1Jyay%3DNm9zMfbbdRQgBpXeXwUY0HvGYQMMi07KNA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003094.html">
+   <LINK REL="Next"  HREF="003096.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>libmagic</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20libmagic&In-Reply-To=%3CCAD2gp_T43c1Jyay%3DNm9zMfbbdRQgBpXeXwUY0HvGYQMMi07KNA%40mail.gmail.com%3E"
+       TITLE="libmagic">cowan at ccil.org
+       </A><BR>
+    <I>Sat Nov  7 00:28:16 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003094.html">[ANN] Announcing cyberpunksin.space
+</A></li>
+        <LI>Next message (by thread): <A HREF="003096.html">libmagic
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3095">[ date ]</a>
+              <a href="thread.html#3095">[ thread ]</a>
+              <a href="subject.html#3095">[ subject ]</a>
+              <a href="author.html#3095">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This post is to suggest that servers currently using file extensions to
+determine MIME-types switch to libmagic.  This C library analyzes the
+content of a file (by name, by file descriptor, or by looking at a buffer
+containing the content) and can provide a MIME-type and an encoding.  This
+library is behind the `file` command on Linux, FreeBSD, and NetBSD (but not
+OpenBSD), and there are interfaces for at least Python, Rust, and Go, plus
+a version for Windows.  If you are testing (or serving!) on a Mac, use
+Homebrew or Guix.  Googling for &quot;libmagic&quot; and some keyword will probably
+find more.
+
+Obviously, using libmagic is slower than just comparing a file extension to
+a list of known extensions.  But Gemini servers are not, in general,
+high-volume, and it has the advantage of being maintained by an outside
+group that is quite good about accepting information about new file
+formats.  This means that Gemini servers can serve content in most formats
+without a problem.
+
+Unfortunately, at the moment `file --mime`  will report either &quot;text/plain;
+charset=utf-8&quot; or &quot;text/plain; charset=us-ascii&quot; instead of text/gemini.
+So an interesting question is: how can a text/gemini file best be
+identified by its content? It doesn't have to be infallible, because it can
+be backed up by checking the extension.
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+The native charset of SMS messages supports English, French, mainland
+Scandinavian languages, German, Italian, Spanish with no accents, and
+GREEK SHOUTING.  Everything else has to be Unicode, which means you get
+only 70 16-bit characters in a text instead of 160 7-bit characters.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201106/a3ebaca9/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201106/a3ebaca9/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003094.html">[ANN] Announcing cyberpunksin.space
+</A></li>
+	<LI>Next message (by thread): <A HREF="003096.html">libmagic
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3095">[ date ]</a>
+              <a href="thread.html#3095">[ thread ]</a>
+              <a href="subject.html#3095">[ subject ]</a>
+              <a href="author.html#3095">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

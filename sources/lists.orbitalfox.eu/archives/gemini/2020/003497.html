@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> robots.txt for Gemini formalised
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20robots.txt%20for%20Gemini%20formalised&In-Reply-To=%3C20201122225942.GB1721%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003481.html">
+   <LINK REL="Next"  HREF="003498.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>robots.txt for Gemini formalised</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20robots.txt%20for%20Gemini%20formalised&In-Reply-To=%3C20201122225942.GB1721%40brevard.conman.org%3E"
+       TITLE="robots.txt for Gemini formalised">sean at conman.org
+       </A><BR>
+    <I>Sun Nov 22 22:59:42 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003481.html">robots.txt for Gemini formalised
+</A></li>
+        <LI>Next message (by thread): <A HREF="003498.html">robots.txt for Gemini formalised
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3497">[ date ]</a>
+              <a href="thread.html#3497">[ thread ]</a>
+              <a href="subject.html#3497">[ subject ]</a>
+              <a href="author.html#3497">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Solderpunk once stated:
+&gt;<i> Hi folks,
+</I>&gt;<i> 
+</I>&gt;<i> There is now (finally!) an official reference on the use of robots.txt
+</I>&gt;<i> files in Geminispace.  Please see:
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="gemini://gemini.circumlunar.space/docs/companion/robots.gmi">gemini://gemini.circumlunar.space/docs/companion/robots.gmi</A>
+</I>
+  Nice.
+
+&gt;<i> I attempted to take into account previous discussions on the mailing
+</I>&gt;<i> list and the currently declared practices of various well-known Gemini
+</I>&gt;<i> bots (broadly construed).
+</I>&gt;<i> 
+</I>&gt;<i> I don't consider this &quot;companion spec&quot; to necessarily be finalised at
+</I>&gt;<i> this point, but I am primarily interested in hearing suggestions for
+</I>&gt;<i> change from either authors of software which tries to respect robots.txt
+</I>&gt;<i> who are having problems caused by the current specification, or from
+</I>&gt;<i> server admins who are having bot problems who feel that the current
+</I>&gt;<i> specification is not working for them.
+</I>
+  Right now, there are two things I would change.
+
+	1. Add &quot;allow&quot;.  While the initial spec [1] did not have an allow
+	   rule, a subsequent draft proposal [2] did, which Google is
+	   pushing (as of 2019) to become an RFC [3].
+
+	2. I would specify virtual agents as:
+
+		Virtual-agent: archiver
+		Virtual-agent: indexer
+
+	   This makes it easier to add new virtual agents, separates the
+	   namespace of agents from the namespace of virtual agents, and is
+	   allowed by all current and proposed standards [4].
+
+	   The rule I would follow is:
+
+		Definitions:  
+			specific user agent is one that is not '*'
+			specific virtual agent is one that is not '*'
+			generic user agent is one that is specified as '*'
+			generic virtual agent is one that is '*'
+
+		A crawler should use a block of rules:
+
+			if it finds a specific user agent (most targetted)
+			or it finds a specific virtual agent
+			or it finds a generic virtual agent
+			or it finds a generic user agent (least targetted)
+
+	   I'm wavering on the generic virtual agent bit, so if you think
+	   that makes this too complicated, fine, I think it can go.
+
+&gt;<i> The biggest gap that I can currently see is that there is no advice on
+</I>&gt;<i> how often bots should re-query robots.txt to check for policy changes.
+</I>&gt;<i> I could find no clear advice on this for the web, either.  I would be
+</I>&gt;<i> happy to hear from people who've written software that uses robots.txt
+</I>&gt;<i> with details on what their current practices are in this respect.
+</I>
+  The Wikipedia page [5] lists a non-standard extension &quot;Crawl-delay&quot; which
+informs a crawler how often they should make requests.  It might be easy to
+add a field saying how often to fetch a resource.  A sample file:
+
+# The GUS agent, plus any agent that identifies as an &quot;indexer&quot; is allowed
+# one path in an otherwise disallowed place, and only fetch items in 10
+# second increments.
+
+User-agent: GUS
+Virtual-agent: indexer
+Allow: /private/butpublic
+Disallow: /private
+Crawl-delay: 10
+
+# Agents that fetch feeds, should only grab every 6 hours.  &quot;Check&quot; is
+# allowed as agents should ignore fields it doesn't understand.
+
+Virtual-agent: feed
+Disallow: /private
+Check: 21600
+
+# And a fallback.  Here we don't allow any old crawler into the private
+# space, and we force them to use 20 seonds between fetches.
+
+User-agent: *
+Disallow: /private
+Crawl-delay: 20
+
+  -spc
+
+[1]	<A HREF="gemini://gemini.circumlunar.space/docs/companion/robots.gmi">gemini://gemini.circumlunar.space/docs/companion/robots.gmi</A>
+
+[2]	<A HREF="http://www.robotstxt.org/norobots-rfc.txt">http://www.robotstxt.org/norobots-rfc.txt</A>
+
+[3]	<A HREF="https://developers.google.com/search/reference/robots_txt">https://developers.google.com/search/reference/robots_txt</A>
+
+[4]	Any field not understood by a crawler should be ignored.
+
+[5]	<A HREF="https://en.wikipedia.org/wiki/Robots_exclusion_standard">https://en.wikipedia.org/wiki/Robots_exclusion_standard</A>
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003481.html">robots.txt for Gemini formalised
+</A></li>
+	<LI>Next message (by thread): <A HREF="003498.html">robots.txt for Gemini formalised
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3497">[ date ]</a>
+              <a href="thread.html#3497">[ thread ]</a>
+              <a href="subject.html#3497">[ subject ]</a>
+              <a href="author.html#3497">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

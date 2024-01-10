@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] GemIF - Simple Interactive Fiction engine for Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20GemIF%20-%20Simple%20Interactive%20Fiction%20engine%20for%20Gemini&In-Reply-To=%3C010001762357d621-26349d57-b6a7-4b1e-ab10-d01934ffe469-000000%40email.amazonses.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003729.html">
+   <LINK REL="Next"  HREF="003745.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] GemIF - Simple Interactive Fiction engine for Gemini</H1>
+    <B>Norm MacLennan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20GemIF%20-%20Simple%20Interactive%20Fiction%20engine%20for%20Gemini&In-Reply-To=%3C010001762357d621-26349d57-b6a7-4b1e-ab10-d01934ffe469-000000%40email.amazonses.com%3E"
+       TITLE="[ANN] GemIF - Simple Interactive Fiction engine for Gemini">norm at iwritethe.codes
+       </A><BR>
+    <I>Wed Dec  2 12:05:27 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003729.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="003745.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3736">[ date ]</a>
+              <a href="thread.html#3736">[ thread ]</a>
+              <a href="subject.html#3736">[ subject ]</a>
+              <a href="author.html#3736">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 12/2/20 4:13 AM, Luke Emmet wrote:
+&gt;<i> Its a great start, but I'm afraid it breaks the forward and back 
+</I>&gt;<i> navigation in my client, and might affect other clients too. This is 
+</I>&gt;<i> because each rendered page has the same URL.
+</I>&gt;<i>
+</I>&gt;<i> I would suggest some sort of simple modification should fix it, for 
+</I>&gt;<i> example a simple step number, like this maybe
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="gemini://server/path/sessionguid/step">gemini://server/path/sessionguid/step</A>
+</I>&gt;<i>
+</I>&gt;<i> e.g.
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/1">gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/1</A>
+</I>&gt;<i> <A HREF="gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/2">gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/2</A>
+</I>&gt;<i> <A HREF="gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/3">gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/3</A>
+</I>&gt;<i> etc
+</I>&gt;<i>
+</I>&gt;<i> Or some other marker - it doesn't have to be an incrementing index. This 
+</I>&gt;<i> would then work in a wider range of clients and they'd be able to back 
+</I>&gt;<i> and forward through their session.
+</I>
+Hey Luke,
+
+Thanks for checking it out and thanks for the feedback. Since I was
+always opening a new Amfora tab to test, I hadn't considered how it
+breaks back/forward but you're completely right.
+
+Due to the nature of how the application currently works, I'm going to
+have to do some noodling on how to fix this. Though your suggestion will
+likely be some part of it.
+
+If I wanted to keep the low complexity of the app as it is now, I could
+even do away with the notion of &quot;games&quot; completely and just have it move
+you between a static URI for each room. That is,
+
+```
+# GemIF
+
+This is the homepage.
+
+=&gt; <A HREF="gemini://gemif.fedi.farm/room/the_beginning">gemini://gemif.fedi.farm/room/the_beginning</A> start the game
+```
+
+And on the next page
+
+```
+# The Beginning
+
+Some description.
+
+=&gt; <A HREF="gemini://gemif.fedi.farm/room/the_middle_a">gemini://gemif.fedi.farm/room/the_middle_a</A> make choice a
+=&gt; <A HREF="gemini://gemif.fedi.farm/room/the_middle_b">gemini://gemif.fedi.farm/room/the_middle_b</A> make choice b
+```
+
+That would probably be the most straightforward way of not hijacking
+history for the clients as the user could freely jump back and forward
+due to stable URLs and lack of server-side state.
+
+However, it becomes a little problematic if I want to introduce actual
+game state (e.g. you have the key because you made choice b). So I'll
+need to do some thinking on how important such state is to me (and
+anyone else interested). It originally seemed fairly integral to the
+ability to create a branching narrative without forcing the author to
+repeat themselves, but maybe it's not actually necessary or just not
+something I need to think about yet.
+
+If I do decide to implement simple game state, I'll likely play with
+your suggestion. But in stories where game state is used have it render
+something like the below when the user goes back to a previous page:
+
+```
+# Invalid Game State
+
+This story doesn't allow time travel.
+
+=&gt; <A HREF="gemini://gemif.fedi.farm/game/my_game_id/latest_recorded_step">gemini://gemif.fedi.farm/game/my_game_id/latest_recorded_step</A> Go back
+to the current scene
+=&gt; <A HREF="gemini://gemif.fedi.farm/">gemini://gemif.fedi.farm/</A> Exit game
+```
+
+Because otherwise I'm stuck selectively rolling back game state on the
+server side. While it's not ideal and some users will find the messages
+annoying, it should at least be a bit more pleasant than their clients
+throwing error messages about non-existent exits or whatever it's doing
+now. And it means I don't need to worry about server-side needing to be
+able to selectively roll-back game state (or at least not immediately
+and I can add that feature later).
+
+Thanks again for the feedback, it has definitely been useful. If you
+think of anything else let me know.
+
+Thanks,
+Norm
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003729.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="003745.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3736">[ date ]</a>
+              <a href="thread.html#3736">[ thread ]</a>
+              <a href="subject.html#3736">[ subject ]</a>
+              <a href="author.html#3736">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

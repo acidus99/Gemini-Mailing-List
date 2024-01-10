@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] GemIF - Simple Interactive Fiction engine for Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20GemIF%20-%20Simple%20Interactive%20Fiction%20engine%20for%20Gemini&In-Reply-To=%3C0100017624cf55b3-cbb3a89d-e7f2-4733-8ee4-4abb2a3a490b-000000%40email.amazonses.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003741.html">
+   <LINK REL="Next"  HREF="003746.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] GemIF - Simple Interactive Fiction engine for Gemini</H1>
+    <B>Norm MacLennan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20GemIF%20-%20Simple%20Interactive%20Fiction%20engine%20for%20Gemini&In-Reply-To=%3C0100017624cf55b3-cbb3a89d-e7f2-4733-8ee4-4abb2a3a490b-000000%40email.amazonses.com%3E"
+       TITLE="[ANN] GemIF - Simple Interactive Fiction engine for Gemini">norm at iwritethe.codes
+       </A><BR>
+    <I>Wed Dec  2 18:55:36 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003741.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="003746.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3743">[ date ]</a>
+              <a href="thread.html#3743">[ thread ]</a>
+              <a href="subject.html#3743">[ subject ]</a>
+              <a href="author.html#3743">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 12/2/20 10:28 AM, Nick Thomas wrote:
+&gt;<i> I recently got sucked into Stay: <A HREF="https://ejadelomax.itch.io/stay">https://ejadelomax.itch.io/stay</A> -
+</I>&gt;<i> which is built using a not-web-specific IF engine called Ink: 
+</I>&gt;<i> <A HREF="https://www.inklestudios.com/ink/">https://www.inklestudios.com/ink/</A>
+</I>&gt;<i>
+</I>&gt;<i> While reading up on the language, I did find it quite gemini-like.
+</I>&gt;<i> GemIF looks interesting, but I'm curious what you think of the ink
+</I>&gt;<i> approach, and whether a gemini exporter (like the existing web
+</I>&gt;<i> exporter) for the existing editors would make more sense? If not, you
+</I>&gt;<i> might find the language used by Ink more compelling than a  yaml file.
+</I>&gt;<i>
+</I>&gt;<i> I do find myself thinking that it would be fun to play Stay on Gemini
+</I>&gt;<i> rather than the web ^^.
+</I>&gt;<i>
+</I>&gt;<i> /Nick
+</I>
+Hey Nick,
+
+I'm not familiar with Ink, but it looks pretty cool.
+
+I haven't looked into how the project is persisted on disk nor how
+exporters work, but I bet making an exporter for simple Ink stories into
+a Gemini static site would be possible. But it looks like Ink has some
+more advanced features like conditions and variables which wouldn't lend
+themselves to a static site format and would require a server to keep
+track of gamestate (where I assume the web exporter does everything
+client-side with Javascript).
+
+In that case, unless I'm missing something, a Gemini exporter would
+basically need to scaffold and generate the entire server for each story
+- at least for stories that require conditions and variables. In which
+case it might make sense to build a pre-made server to be the engine and
+just generate configuration for the individual stories to keep the
+exporter relatively simple. Probably you can see where I'm going with
+this, but once GemIF has rough feature parity with Ink it might be
+interesting to look into making a GemIF exporter that generates the YAML
+from your Ink project.
+
+But I haven't really looked into the structure of Ink projects or the
+full feature-set beyond basic syntax to know what that might look like
+or if it's even feasible. Maybe once I do I'll find a better
+configuration format than YAML, cause I agree giant YAML files are the
+worst. But I figured it was halfway between human readable and machine
+readable and I could build some tooling to generate it from something
+easier to read and maintain in the future.
+
+Thanks for linking me to this, if nothing else it will give me more
+prior art to draw from but potentially also shows a valuable integration
+for the future.
+
+Thanks,
+Norm
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003741.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="003746.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3743">[ date ]</a>
+              <a href="thread.html#3743">[ thread ]</a>
+              <a href="subject.html#3743">[ subject ]</a>
+              <a href="author.html#3743">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

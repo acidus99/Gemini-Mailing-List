@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] robots.txt format
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20robots.txt%20format&In-Reply-To=%3C20210127105604.GU5326%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004937.html">
+   <LINK REL="Next"  HREF="004940.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] robots.txt format</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20robots.txt%20format&In-Reply-To=%3C20210127105604.GU5326%40brevard.conman.org%3E"
+       TITLE="[tech] robots.txt format">sean at conman.org
+       </A><BR>
+    <I>Wed Jan 27 10:56:04 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004937.html">[tech] robots.txt format
+</A></li>
+        <LI>Next message (by thread): <A HREF="004940.html">[tech] robots.txt format
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4939">[ date ]</a>
+              <a href="thread.html#4939">[ thread ]</a>
+              <a href="subject.html#4939">[ subject ]</a>
+              <a href="author.html#4939">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Ren&#233; Wagner once stated:
+&gt;<i> Hi,
+</I>&gt;<i> 
+</I>&gt;<i> simple question: 
+</I>&gt;<i> is the following robots.txt format valid in a form that the &quot;disallow&quot; is applied to all User-agents mentioned before?
+</I>&gt;<i> ---
+</I>&gt;<i> User-agent: researcher
+</I>&gt;<i> User-agent: indexer
+</I>&gt;<i> User-agent: archiver
+</I>&gt;<i> Disallow: about
+</I>&gt;<i> ---
+</I>
+  That will work, but you need to add a leading '/' to the Disallow line:
+
+Disallow: /about
+
+That will match any request starting with '/about', like '/about',
+'/aboutthis', '/about/that', etc.  
+
+&gt;<i> or do i need to be more chatty?
+</I>&gt;<i> ---
+</I>&gt;<i> User-agent: researcher
+</I>&gt;<i> Disallow: about
+</I>&gt;<i> User-agent: indexer
+</I>&gt;<i> Disallow: about
+</I>&gt;<i> User-agent: archiver
+</I>&gt;<i> Disallow: about
+</I>&gt;<i> ---
+</I>
+  That will work too (same thing about the Disallow: line though).  You can
+read more about it at &lt;<A HREF="http://www.robotstxt.org/">http://www.robotstxt.org/</A>&gt;.
+
+  -spc
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004937.html">[tech] robots.txt format
+</A></li>
+	<LI>Next message (by thread): <A HREF="004940.html">[tech] robots.txt format
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4939">[ date ]</a>
+              <a href="thread.html#4939">[ thread ]</a>
+              <a href="subject.html#4939">[ subject ]</a>
+              <a href="author.html#4939">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

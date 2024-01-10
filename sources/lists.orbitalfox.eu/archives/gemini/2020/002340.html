@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Getting slammed by a client
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Getting%20slammed%20by%20a%20client&In-Reply-To=%3C608eb4f13d0720d9552c05488b380786b544e02d.camel%40gnu.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002346.html">
+   <LINK REL="Next"  HREF="002345.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Getting slammed by a client</H1>
+    <B>Alex Schroeder</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Getting%20slammed%20by%20a%20client&In-Reply-To=%3C608eb4f13d0720d9552c05488b380786b544e02d.camel%40gnu.org%3E"
+       TITLE="Getting slammed by a client">alex at gnu.org
+       </A><BR>
+    <I>Sat Jul 25 14:32:09 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002346.html">Getting slammed by a client
+</A></li>
+        <LI>Next message (by thread): <A HREF="002345.html">Getting slammed by a client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2340">[ date ]</a>
+              <a href="thread.html#2340">[ thread ]</a>
+              <a href="subject.html#2340">[ subject ]</a>
+              <a href="author.html#2340">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>(Resending because it seems that my mail disappeared somewhere.)
+
+2200 hits in the last few days...
+
+I'm going to setup a fail2ban rule.  Adapt the datepattern to your
+logfiles. Basically any successful connection counts as &quot;a failed login
+attempt&quot;. Of these, you may have 20 in a 40s time window, which is what
+I think is a reasonable upper limit for humans and bots. If you're
+crawling the site faster than that, you get banned for 10min by the
+firewall.
+
+
+/etc/fail2ban/jail.d/alex.conf:
+
+[alex-gemini]
+enabled = true
+port    = 1965
+logpath = /home/alex/farm/gemini-wiki.log
+findtime = 40
+maxretry = 20
+
+
+/etc/fail2ban/filter.d/alex-gemini.conf:
+
+[Init]
+# 2018/08/25-09:08:55 CONNECT TCP Peer: &quot;[000.000.000.000]:56281&quot;
+Local: &quot;[000.000.000.000]:70&quot;
+datepattern = ^%%Y/%%m/%%d-%%H:%%M:%%S
+
+[Definition]
+# ANY match in the logfile counts!
+failregex = CONNECT TCP Peer: &quot;\[&lt;HOST&gt;\]:\d+&quot;
+
+
+I also activated the recidive rule in fail2ban. This means that people
+who get banned by fail2ban repeatedly get banned for even longer times
+(hours instead of minutes). This is in the first file again:
+
+
+/etc/fail2ban/jail.d/alex.conf:
+
+[recidive]
+enabled = true
+
+
+I use this system for my websites, my gopher sites, and now for gemini,
+too.
+
+Cheers
+Alex
+
+
+
+
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002346.html">Getting slammed by a client
+</A></li>
+	<LI>Next message (by thread): <A HREF="002345.html">Getting slammed by a client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2340">[ date ]</a>
+              <a href="thread.html#2340">[ thread ]</a>
+              <a href="subject.html#2340">[ subject ]</a>
+              <a href="author.html#2340">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

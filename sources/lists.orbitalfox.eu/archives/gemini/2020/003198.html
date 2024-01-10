@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Escaping in gemtext
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Escaping%20in%20gemtext&In-Reply-To=%3C20201110050330.4877d47d%40home%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003196.html">
+   <LINK REL="Next"  HREF="003199.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Escaping in gemtext</H1>
+    <B>Ali Fardan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Escaping%20in%20gemtext&In-Reply-To=%3C20201110050330.4877d47d%40home%3E"
+       TITLE="Escaping in gemtext">raiz at stellarbound.space
+       </A><BR>
+    <I>Tue Nov 10 02:03:30 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003196.html">Escaping in gemtext
+</A></li>
+        <LI>Next message (by thread): <A HREF="003199.html">Escaping in gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3198">[ date ]</a>
+              <a href="thread.html#3198">[ thread ]</a>
+              <a href="subject.html#3198">[ subject ]</a>
+              <a href="author.html#3198">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, 9 Nov 2020 20:38:08 -0500
+Ryan Westlund &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">rlwestlund at gmail.com</A>&gt; wrote:
+
+&gt;<i> According to the Gemtext specification, any line that starts with
+</I>&gt;<i> &quot;```&quot; is a preformatting toggle. This makes it impossible to have such
+</I>&gt;<i> a line as part of a preformatted block. I understand the design goals
+</I>&gt;<i> of Gemtext, but I believe the Markdown solution to the same problem
+</I>&gt;<i> can be lifted straight into Gemtext relatively easily: allow more than
+</I>&gt;<i> 3 backticks to open a preformatted block, and require the same number
+</I>&gt;<i> to close it as the number that opened it. This way, any possible text
+</I>&gt;<i> can be included in a preformatted block. Thoughts?
+</I>
+No, I don't like that idea.
+
+&gt;<i> The same issue exists with text lines (it's impossible to display &quot;=&gt;&quot;
+</I>&gt;<i> or &quot;#&quot; at the beginning of a line of text), but I'm not concerned
+</I>&gt;<i> about that because having to prefix such lines with a space is not a
+</I>&gt;<i> big deal for plain text, whereas it is for code.
+</I>
+I have suggested this in IRC as I've considered that someone might have
+use for this, I agree with your argument, and since gemtext processing
+happens only by reading the first few bytes of each line, it is
+possible to introduce a new line format that is '\' which is escaped
+line, where it discards line formatting that is based on the first few
+characters so
+
+&gt;<i>	\=&gt; this is escaped
+</I>
+will print
+
+&gt;<i>	=&gt; this is escaped
+</I>
+also keep in mind that '\' does not only escape the character after it,
+it disables line formatting, because in the example above, if '=' is
+escaped, '&gt;' is right after it and can be interpreted as a quote.
+
+Now, even pre-formatted text toggle characters can be escaped by adding
+a rule in your parser to consider '\```' within a pre-formatted text
+block and translate it to literal '```'.
+
+Anyone else who might find my suggestion unappealing or have a better
+idea, feel free to share, I think this is a flaw with the gemtext
+document format not to have a way to escape certain characters to
+disable them from being interpreted mistakenly, all other formats do
+have a mechanism for doing this.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003196.html">Escaping in gemtext
+</A></li>
+	<LI>Next message (by thread): <A HREF="003199.html">Escaping in gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3198">[ date ]</a>
+              <a href="thread.html#3198">[ thread ]</a>
+              <a href="subject.html#3198">[ subject ]</a>
+              <a href="author.html#3198">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

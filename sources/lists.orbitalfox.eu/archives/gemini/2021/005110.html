@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposal to drop double slashes from URL syntax
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%20to%20drop%20double%20slashes%20from%20URL%20syntax&In-Reply-To=%3C20210209205909.opbsz64wwuz6d77n%40GLaDOS%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005109.html">
+   <LINK REL="Next"  HREF="005112.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposal to drop double slashes from URL syntax</H1>
+    <B>Alex // nytpu</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%20to%20drop%20double%20slashes%20from%20URL%20syntax&In-Reply-To=%3C20210209205909.opbsz64wwuz6d77n%40GLaDOS%3E"
+       TITLE="Proposal to drop double slashes from URL syntax">alex at nytpu.com
+       </A><BR>
+    <I>Tue Feb  9 20:59:09 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005109.html">Proposal to drop double slashes from URL syntax
+</A></li>
+        <LI>Next message (by thread): <A HREF="005112.html">Proposal to drop double slashes from URL syntax
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5110">[ date ]</a>
+              <a href="thread.html#5110">[ thread ]</a>
+              <a href="subject.html#5110">[ subject ]</a>
+              <a href="author.html#5110">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Also, to my understanding removing them does not violate the standard.
+</I>&gt;<i> For example, `tel:+1-816-555-1212` and `magnet:?xt=urn:sha1:...` are
+</I>&gt;<i> valid URIs.
+</I>The URI standard[1] says that if an &quot;authority&quot; is present in a URI, it
+MUST be preceded by &quot;//&quot;.  If an authority is not present, it
+MUST NOT be preceded by two forward slashes.  A magnet link does not
+have an authority because it is content addressed via a peer to peer
+network, and an authority is only used when one central authority (for
+instance the IANA for domain names) dictates the allocation and
+structure of identifiers within that space.
+
+[1]: RFC3986, in particular:
+<A HREF="https://tools.ietf.org/html/rfc3986#appendix-A">https://tools.ietf.org/html/rfc3986#appendix-A</A>  (ABNF of a URI)
+<A HREF="https://tools.ietf.org/html/rfc3986#section-3.2">https://tools.ietf.org/html/rfc3986#section-3.2</A> (Description of an
+                                                 authority)
+
+&gt;<i> There is some confusion regarding the terms URI and URL. The W3C tries
+</I>&gt;<i> to clear that up[0].
+</I>The W3C deals exclusively with http and its derivative protocols (https,
+etc), so we are not held to standards they pass (although we
+unfortunately have to deal with the fallout sometimes).
+
+&gt;<i> It used to be that they ment different things in what they call the
+</I>&gt;<i> &quot;classical view&quot; but this difference isn't as dominant anymore in the
+</I>&gt;<i> &quot;contemporary view&quot;. In my understanding, a scheme, which would be
+</I>&gt;<i> `gemini:`, can define upon its own what it expects after the colon.
+</I>&gt;<i> You can find more registered schemes here, some of which require a
+</I>&gt;<i> double-slash, some don't.
+</I>In conversational terms, or even in technical discussion by
+implementers, yes they have different meanings than they used to.
+However, when you're dealing with standards, you have to use formally
+defined words and as such the &quot;classical&quot; meanings of URI/URL/URN are
+what is generally used on /this list/ because we^Weveryone else loves to
+bikeshed the spec a lot.
+
+Also, the gemini spec specifically says:
+&gt;<i> This scheme is syntactically compatible with the generic URI syntax
+</I>&gt;<i> defined in RFC 3986, ut does not support all components of the generic
+</I>&gt;<i> syntax. In particular, the authority component is allowed and
+</I>&gt;<i> required.
+</I><A HREF="https://gemini.circumlunar.space/docs/specification.html">https://gemini.circumlunar.space/docs/specification.html</A> Section 1.2
+
+Now, this is obviously what you're talking about changing, but there's
+good reasons to be compliant with the URI spec (which, as previously
+mentioned, mandates &quot;//&quot; precedes an authority).  The most compelling
+reason being that there's a URI library for every programming language
+that's ever been used in the past 30 years, and a main goal of gemini is
+to reuse existing specifications where it's not necessary to save people
+the trouble of having to roll their own everything.  This is the same
+reason that gemini uses DNS and TLS despite their respective problems.
+They already exist, they're standardized, and they're well used by
+everyone already.
+
+
+I hope I don't seem rude here, I'm just trying to lay out the general
+position clearly.
+
+~nytpu
+
+-- 
+Alex // nytpu
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">alex at nytpu.com</A>
+GPG Key: <A HREF="https://www.nytpu.com/files/pubkey.asc">https://www.nytpu.com/files/pubkey.asc</A>
+Key fingerprint: 43A5 890C EE85 EA1F 8C88 9492 ECCD C07B 337B 8F5B
+<A HREF="https://useplaintext.email/">https://useplaintext.email/</A>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 833 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210209/570849bc/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20210209/570849bc/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005109.html">Proposal to drop double slashes from URL syntax
+</A></li>
+	<LI>Next message (by thread): <A HREF="005112.html">Proposal to drop double slashes from URL syntax
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5110">[ date ]</a>
+              <a href="thread.html#5110">[ thread ]</a>
+              <a href="subject.html#5110">[ subject ]</a>
+              <a href="author.html#5110">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

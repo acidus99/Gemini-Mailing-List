@@ -1,0 +1,333 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200118171556.GE4518%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000350.html">
+   <LINK REL="Next"  HREF="000383.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200118171556.GE4518%40SDF.ORG%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Sat Jan 18 17:15:56 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000350.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000383.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#362">[ date ]</a>
+              <a href="thread.html#362">[ thread ]</a>
+              <a href="subject.html#362">[ subject ]</a>
+              <a href="author.html#362">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Jan 17, 2020 at 09:16:27PM -0500, Sean Conner wrote:
+ 
+&gt;<i>   Red alert!  Raise shields!  Strap in!  This is going to be a bumpy ride.
+</I>
+I'd have expected nothing less from you. :)  In fact, the very fact that
+felt this abrupt change of direction was worth careful nit-picking
+rather than dismisisng it with a fatal flaw up front is a plesant
+surprise!
+
+&gt;<i>   Not quite true, even according to this document.  Leading white space in
+</I>&gt;<i> lists is the glaring exception here.
+</I>
+I'll deal with this properly in the relevant part below, but there *is*
+no leading whitespace in lists by definition.  &quot;Begins with&quot; means
+&quot;begins with&quot;! :)
+ 
+&gt;<i> &gt; 5. HEADING LINES
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Lines beginning with one, two or three consecutive # characters are
+</I>&gt;<i> &gt; HEADING LINES, corresponding to headings, subheadings or susubheadings
+</I>&gt;<i> &gt; respectively.  The text following the # characters (with leading
+</I>&gt;<i> &gt; whitespace removed) 
+</I>&gt;<i> 
+</I>&gt;<i>   The parenthetical here is ambiguous.  Does it refer to this issue?
+</I>&gt;<i> 
+</I>&gt;<i> #A title
+</I>&gt;<i> ## A title with space between the '#' and text
+</I>&gt;<i> ###	Even more white space
+</I>&gt;<i> 
+</I>&gt;<i> or
+</I>&gt;<i> 
+</I>&gt;<i> #A title
+</I>&gt;<i>   ##A title with leading space before the '#'
+</I>&gt;<i> 	###Even more white space
+</I>&gt;<i> 
+</I>&gt;<i>   I'm thinking the former now that I'm replying, but my code deals with both
+</I>&gt;<i> cases combined, so I can handle:
+</I>
+Definitely the former.  Lines with leading spaces before the # do not
+satisfy the definition of a HEADING LINE, which is any line that begins
+with #, ## or ###
+
+I'm open to reconsidering the leading whitespace thing.  I guess I was
+thinking that some people might like to line up their headings in this
+fashion:
+
+#   Title
+##  Section
+### Sub-section 
+
+and we should think of the top-level heading as &quot;Title&quot; and not &quot;
+Title&quot;.
+ 
+&gt;<i>   Almost---tabs (and yes, I do use tabs---I like me the tabs) are an issue
+</I>&gt;<i> and while I can handle them (I have code that will expand them up to 8
+</I>&gt;<i> spaces) not everybody has code to deal with this.  So question:
+</I>&gt;<i> 
+</I>&gt;<i> 	WHAT ABOUT TABS?
+</I>&gt;<i> 
+</I>&gt;<i>   They WILL show up.
+</I> 
+In headings???  I have no idea what to suggest regarding how to handle
+that.  Is this such a deranged edge case that we feel safe letting that
+behaviour be client-defined?
+
+&gt;<i> &gt; constitute the heading and should be displayed to
+</I>&gt;<i> &gt; the user.  Clients MAY choose to apply special styling to headings to
+</I>&gt;<i> &gt; distinguish them from ordinary lines.  However, the primary purpose of
+</I>&gt;<i> &gt; HEADING LINES is to represent the internal structure of the document
+</I>&gt;<i> &gt; in a machine-readable way.  Advanced clients can use this information
+</I>&gt;<i> &gt; to, e.g. display a hierarchically formatted &quot;table of contents&quot; for a
+</I>&gt;<i> &gt; long document in a side-pane, allowing users to easily jump to
+</I>&gt;<i> &gt; specific sections without excessive scrolling.  Or CMS-style tools
+</I>&gt;<i> &gt; automatically generating menus or Atom/RSS feeds for a directory of
+</I>&gt;<i> &gt; text/gemini files can use the first heading in a file as a
+</I>&gt;<i> &gt; human-friendly label for links to it.
+</I>&gt;<i> 
+</I>&gt;<i>   So another question.  I have some headings like this:
+</I>&gt;<i> 
+</I>&gt;<i> ### Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sodales eget nisi quis condimentum. Donec ipsum arcu, fermentum eu ullamcorper sit amet, facilisis id nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam tempus nulla ut dolor luctus malesuada. Suspendisse orci sem, semper at maximus non, pharetra et justo. Quisque lectus arcu, viverra ac convallis eu, vulputate ut enim. Nulla aliquam, lacus consequat suscipit facilisis, nisl tortor facilisis nisi, vel mattis eros arcu sed tellus. Duis quis lectus pellentesque, posuere dolor ut, sodales massa. Proin vel blandit mauris.
+</I>&gt;<i> 
+</I>&gt;<i> Given a screen width of 40, which of the four below should be displayed?
+</I>&gt;<i> 
+</I>&gt;<i> ### Lorem ipsum dolor sit amet, consect
+</I>&gt;<i> 
+</I>&gt;<i> ### Lorem ipsum dolor sit amet, cons...
+</I>&gt;<i> 
+</I>&gt;<i> ### Lorem ipsum dolor sit amet,
+</I>&gt;<i> ### consectetur adipiscing elit. Cras
+</I>&gt;<i> ### sodales eget nisi quis condimentum.
+</I>&gt;<i> ### Donec ipsum arcu, fermentum eu
+</I>&gt;<i> ### ullamcorper sit amet, facilisis id
+</I>&gt;<i> ### nunc. Class aptent taciti sociosqu
+</I>&gt;<i> ### ad litora torquent per conubia
+</I>&gt;<i> ### nostra, per inceptos himenaeos. Nam
+</I>&gt;<i> ### tempus nulla ut dolor luctus
+</I>&gt;<i> ### malesuada. Suspendisse orci sem,
+</I>&gt;<i> ### semper at maximus non, pharetra et
+</I>&gt;<i> ### justo. Quisque lectus arcu, viverra
+</I>&gt;<i> ### ac convallis eu, vulputate ut enim.
+</I>&gt;<i> ### Nulla aliquam, lacus consequat
+</I>&gt;<i> ### suscipit facilisis, nisl tortor
+</I>&gt;<i> ### facilisis nisi, vel mattis eros
+</I>&gt;<i> ### arcu sed tellus. Duis quis lectus
+</I>&gt;<i> ### pellentesque, posuere dolor ut,
+</I>&gt;<i> ### sodales massa. Proin vel blandit
+</I>&gt;<i> ### mauris.
+</I>&gt;<i> 
+</I>&gt;<i> ### Lorem ipsum dolor sit amet,
+</I>&gt;<i>     consectetur adipiscing elit. Cras
+</I>&gt;<i>     sodales eget nisi quis condimentum.
+</I>&gt;<i>     Donec ipsum arcu, fermentum eu
+</I>&gt;<i>     ullamcorper sit amet, facilisis id
+</I>&gt;<i>     nunc. Class aptent taciti sociosqu
+</I>&gt;<i>     ad litora torquent per conubia
+</I>&gt;<i>     nostra, per inceptos himenaeos. Nam
+</I>&gt;<i>     tempus nulla ut dolor luctus
+</I>&gt;<i>     malesuada. Suspendisse orci sem,
+</I>&gt;<i>     semper at maximus non, pharetra et
+</I>&gt;<i>     justo. Quisque lectus arcu, viverra
+</I>&gt;<i>     ac convallis eu, vulputate ut enim.
+</I>&gt;<i>     Nulla aliquam, lacus consequat
+</I>&gt;<i>     suscipit facilisis, nisl tortor
+</I>&gt;<i>     facilisis nisi, vel mattis eros
+</I>&gt;<i>     arcu sed tellus. Duis quis lectus
+</I>&gt;<i>     pellentesque, posuere dolor ut,
+</I>&gt;<i>     sodales massa. Proin vel blandit
+</I>&gt;<i>     mauris.
+</I>&gt;<i> 
+</I>&gt;<i> ### Lorem ipsum dolor sit amet,
+</I>&gt;<i> consectetur adipiscing elit. Cras
+</I>&gt;<i> sodales eget nisi quis condimentum.
+</I>&gt;<i> Donec ipsum arcu, fermentum eu
+</I>&gt;<i> ullamcorper sit amet, facilisis id
+</I>&gt;<i> nunc. Class aptent taciti sociosqu ad
+</I>&gt;<i> litora torquent per conubia nostra, per
+</I>&gt;<i> inceptos himenaeos. Nam tempus nulla ut
+</I>&gt;<i> dolor luctus malesuada. Suspendisse
+</I>&gt;<i> orci sem, semper at maximus non,
+</I>&gt;<i> pharetra et justo. Quisque lectus arcu,
+</I>&gt;<i> viverra ac convallis eu, vulputate ut
+</I>&gt;<i> enim. Nulla aliquam, lacus consequat
+</I>&gt;<i> suscipit facilisis, nisl tortor
+</I>&gt;<i> facilisis nisi, vel mattis eros arcu
+</I>&gt;<i> sed tellus. Duis quis lectus
+</I>&gt;<i> pellentesque, posuere dolor ut, sodales
+</I>&gt;<i> massa. Proin vel blandit mauris.
+</I>&gt;<i> 
+</I>&gt;<i>   Or is this way into the &quot;you have *got* to be kidding!&quot; territory?  I
+</I>&gt;<i> swear, I'm not trying to take these things to the extreme ... well, okay, I
+</I>&gt;<i> *am* trying to take these things to the exteme, but only to find out where
+</I>&gt;<i> the borders are.
+</I>
+You're right to do so.
+
+Your last example is what would be produced by a simple client which
+recognises only the compulsory line types (and hence treats heading
+lines as text lines).
+
+I think any of the others would be reasonable outputs for an advanced
+client, although as a reader I would strongly prefer one of the
+non-truncating options.  I'm not sure it makes sense to specify the
+correct behaviour here, any more than it makes sense to specify what
+kind of bullet symbol should be used for list items.
+
+&gt;<i>   Okay, several questions here.  First off, replace the '###' with '*' in
+</I>&gt;<i> the above example---how to properly format a list item that is ridiculously
+</I>&gt;<i> long.
+</I>
+Well, a simple client that doesn't recognise list items as anything
+special will just wrap it:
+
+* To demonstrate endurance of humans and equipment in spaceflight for
+extended periods, at least eight days required for a Moon landing, to
+a maximum of two weeks
+
+If we adopt this syntax, I would probably have AV-98 recognise item
+lines and format the above like this:
+
+* To demonstrate endurance of humans and equipment in spaceflight for
+  extended periods, at least eight days required for a Moon landing,
+  to a maximum of two weeks
+
+i.e. instead of splitting the line into lines of length N, split them
+into lines of length N-2, prefix the first line with &quot;* &quot; (or maybe find
+some nice unicode bullet symbol) and prefix all the other lines with
+&quot;  &quot;.  I suspect most clients will do something vaguely similar.  I'm
+not sure we need to constrain this via spec, if somebody writes a client
+which yields:
+
+* To demonstrate endurance of humans and equipment in spaceflight...
+
+nobody is going to want to use it.
+ 
+&gt;<i>   Second question---this list:
+</I>&gt;<i> 
+</I>&gt;<i> * lorem
+</I>&gt;<i>  * ipsum
+</I>&gt;<i>   * dolor
+</I>&gt;<i>    * Fusce faucibus ... (I'll save you the text)
+</I>&gt;<i>    * Nunc pharetra ...
+</I>&gt;<i>   * consectetur
+</I>&gt;<i>   * adipiscing
+</I>&gt;<i>   * elit
+</I>&gt;<i>  * Cras
+</I>&gt;<i>  * sodales
+</I>&gt;<i> * eget
+</I>&gt;<i> * nisi
+</I>&gt;<i> 
+</I>&gt;<i>   This is a nested list, so the lines start with a blank line.  This list
+</I>&gt;<i> indents one space, but it could be two spaces per index, three, eight. 
+</I>&gt;<i> Also, this list:
+</I>&gt;<i> 
+</I>&gt;<i> * lorem
+</I>&gt;<i> 	* ipsum
+</I>&gt;<i> 		* dolor
+</I>&gt;<i> 			* Fusce faucibus ...
+</I>&gt;<i> 			* Nunc pharetra ... 
+</I>&gt;<i> 		* consectetur
+</I>&gt;<i> 		* adipiscing
+</I>&gt;<i> 		* elit
+</I>&gt;<i> 	* Cras
+</I>&gt;<i> 	* sodales
+</I>&gt;<i> * eget
+</I>&gt;<i> * nisi
+</I>&gt;<i> 
+</I>&gt;<i>   Uses tabs (ah, lovely tabs).  Are indents preserved?  Transformed?  What
+</I>&gt;<i> if there's mixed spaces and tabs (one line is a tab and two space, another
+</I>&gt;<i> line is 10 spaces---with a default tab stop of 8, they both line up)? 
+</I>
+Well, as I guess is clear by now, I don't consider most of those lines
+to be list item lines because they don't start with *.  I had intended
+nested lists to be unsupported, but I don't think I have a problem with
+Tomasino's idea of permitting them via *** .  I'm still thinking on that
+though.
+
+&gt;<i> &gt; 7. ORDERED LIST ITEMS
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; As above with obvious changes.
+</I>&gt;<i> 
+</I>&gt;<i>   Not so fast there!  Again, the same issues as above, but now here are some
+</I>&gt;<i> ordered lists that are obvious *to me* but maybe not to others:
+</I>
+Well, I guess a lot of your questions here are moot in light of my
+earlier post about the + syntax.
+ 
+&gt;<i>   -spc (Will torture specs for food ...)
+</I>
+You'll never go hungry!
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000350.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000383.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#362">[ date ]</a>
+              <a href="thread.html#362">[ thread ]</a>
+              <a href="subject.html#362">[ subject ]</a>
+              <a href="author.html#362">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

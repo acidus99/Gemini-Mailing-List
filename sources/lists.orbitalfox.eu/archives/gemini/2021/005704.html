@@ -1,0 +1,367 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Clients] Gemini and accessibility regarding preformatted code blocks
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BClients%5D%20Gemini%20and%20accessibility%20regarding%20preformatted%20code%0A%20blocks&In-Reply-To=%3C71eba8db-6804-8269-c84d-6af96bf7b9a1%40NorthTech.US%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005660.html">
+   <LINK REL="Next"  HREF="005706.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Clients] Gemini and accessibility regarding preformatted code blocks</H1>
+    <B>Bradley D. Thornton</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BClients%5D%20Gemini%20and%20accessibility%20regarding%20preformatted%20code%0A%20blocks&In-Reply-To=%3C71eba8db-6804-8269-c84d-6af96bf7b9a1%40NorthTech.US%3E"
+       TITLE="[Clients] Gemini and accessibility regarding preformatted code blocks">Bradley at NorthTech.US
+       </A><BR>
+    <I>Fri Feb 26 15:13:32 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005660.html">[Clients] Gemini and accessibility regarding preformatted code blocks
+</A></li>
+        <LI>Next message (by thread): <A HREF="005706.html">[Clients] Gemini and accessibility regarding preformatted code blocks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5704">[ date ]</a>
+              <a href="thread.html#5704">[ thread ]</a>
+              <a href="subject.html#5704">[ subject ]</a>
+              <a href="author.html#5704">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+On 2/25/2021 6:51 PM, Sean Conner wrote:
+&gt;<i> It was thus said that the Great Rohan Kumar once stated:
+</I>&gt;&gt;<i> On Thu, Feb 25, 2021 at 05:25:08PM -0500, Sean Conner wrote:
+</I>&gt;&gt;&gt;<i> I might suggest something like:
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> 	preformat = &quot;```&quot; [ [WSP] tag ] [ [WSP] alt-text] end-of-line
+</I>&gt;&gt;&gt;<i> 	tag       = '@art' / '@code' / '@data' / '@poem'
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I think that a small but significant change to the spec is necessary 
+</I>&gt;&gt;<i> here. My proposal:
+</I>
+I also saw somewhere in this thread someone suggest something that would
+enable the server to dictate the delivery of how the content is
+presented. I'm definitely NOT in favor of something that requires
+clients to format text a certain way based on what a server says, and
+further, such is contrary to the design philosophies of Gemini going
+back as far as discussions in June 2019 before the first line of code
+was ever written by anyone.
+
+&gt;<i> 
+</I>&gt;<i>   The proposal above does not require a change in the specification for
+</I>&gt;<i> text/gemini, and could be considered a convention used.
+</I>
+Indeed. And this is an elegant solution.
+
+It is, however, from the perspective of a developer, and as I certainly
+admire its utility and I have no real issues with something like this,
+I'm also thinking about the majority of people writing gemlogs. It is
+asking a bit (of optional syntax) that expects an author of a page as
+well as the author of a client to incorporate.
+
+Where this may be an ideal situation, my original intent wasn't to
+suggest any particular handlers, but rather, a simple convention that
+*some* authors of clients could key off of in the text, who are wanting
+to facilitate &quot;Accessibility&quot; for non-sighted readers.
+
+Perhaps there are more comprehensive aspects that are beyond what I was
+attempting to address for avoiding the spamnation of non-sighted
+readers... So I don't really have a real preference, other than to say
+whatever it is, that it be simple for someone writing a page and easy
+for authors of *some* clients to accommodate.
+
+&gt;<i> 
+</I>&gt;&gt;<i> - Three backticks signify readable preformatted text (e.g. a code 
+</I>&gt;&gt;<i> 	snippet or a poem); screen-readers should not skip this.
+</I>&gt;&gt;<i> - Four backticks signify something that isn't readable, like ascii-art.
+</I>
+I think this was a suggestion to alter the spec. As such I feel it's not
+necessary to consider as such. What I suggested, indeed implemented, was
+a way for a client to interpret something that follows as something that
+a non-sighted reader would rather not have to endure.
+
+I believe it was Solene that brought up the obvious, that '```' and
+'````' are prone to issues. When I read what she wrote, I thought about
+using a colon (:) instead, very unobtrusive for a key that could alert
+*some* clients to not deliver what is contained in the block, while
+keeping the readability of the raw .gmi file.
+
+Where actual code is concerned, I think that what Sean proposed is
+probably the most effective, and still by convention, not any spec
+changes, but it &quot;might&quot; add a lot of weight to *some* clients that seek
+to provide syntax highlighting.
+
+Where poetry is concerned, I fail to see the significance at all. It's a
+block of preformatted text, right? Am I missing something? Coz I fail to
+see the significance between prose and poetry where preformatted text is
+concerned. It certainly has no significance where accessibility is
+concerned, IMO, since non-sighted readers would probably want to listen
+to the poems anyway, albeit, with a really messed up cadence ;)
+
+Just imagine yourself, surfing Gemini space, and having to listen to this:
+
+&lt;snip&gt;
+                        .-.
+                        ( (
+                         `-'
+
+
+
+
+
+
+                    .   ,- To the Moon Alice !
+                   .'.
+                   |o|
+                  .'o'.
+                  |.-.|
+                  '   '
+                   ( )
+                    )
+                   ( )
+
+               ____
+          .-'&quot;&quot;p 8o&quot;&quot;`-.
+       .-'8888P'Y.`Y[ ' `-.
+     ,']88888b.J8oo_      '`.
+   ,' ,88888888888[&quot;        Y`.
+  /   8888888888P            Y8\
+ /    Y8888888P'             ]88\
+:<i>     `Y88'   P              `888:
+</I>:<i>       Y8.oP '- &gt;            Y88:
+</I>|<i>          `Yb  __             `'|
+</I>:<i>            `'d8888bo.          :
+</I>:<i>             d88888888ooo.      ;
+</I> \            Y88888888888P     /
+  \            `Y88888888P     /
+   `.            d88888P'    ,'
+     `.          888PP'    ,'
+       `-.      d8P'    ,-'   -CJ-
+          `-.,,_'__,,.-'
+&lt;/snip&gt;
+
+&gt;<i> 
+</I>&gt;<i>   I picked a format that should be easy to find, with a limited set of
+</I>&gt;<i> options that, in my opinion, seem to cover the majority of cases with
+</I>&gt;<i> preforamtted blocks.  Again with some examples, only with alt-text and NOT
+</I>&gt;<i> with my proposal:
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ```: No text is required at all to let an accessible client opt to skip this&gt;  ____        _   _
+</I>&gt;<i> |  _ \ _   _| |_| |__   ___  _ __
+</I>&gt;<i> | |_) | | | |  _| '_ \ / _ \| ._ \
+</I>&gt;<i> |  __/| |_| | |_| | | | (_) | | | |
+</I>&gt;<i> |_|    \_,  |\__|_| |_|\___/|_| |_|
+</I>&gt;<i>        |___/
+</I>&gt;<i> ```
+</I>&gt;<i>
+</I>
+The following is beyond the scope of my immediate concern for agreed
+upon convention by the authors of clients to enable user accessibility
+for non-sighted readers. I think that here is where what Sean has
+proposed comes into its own and demonstrates some real value, and, as he
+points out changes nothing in the spec - but it does ask a bit of the
+authors of Gemini clients who wish to enrich the presentation of syntax.
+
+&gt;<i> ``` Python
+</I>&gt;<i> @app.route('/')
+</I>&gt;<i> def index[]:
+</I>&gt;<i>     try:
+</I>&gt;<i>         session['num']
+</I>&gt;<i>     except:
+</I>&gt;<i>         session['success'] = False
+</I>&gt;<i>         session['num'] = random.randrager(1,100)
+</I>&gt;<i>     return render_template('index.html')
+</I>&gt;<i> ```
+</I>&gt;<i>
+</I>
+This next example from Sean I want to address in more detail, so I'll do
+that following the example.
+
+&gt;<i> ``` Python
+</I>&gt;<i> Genus		#species	common name
+</I>&gt;<i> -------------------------------------------
+</I>&gt;<i> Antaresia	4		Children's phythons
+</I>&gt;<i> Apodora		1		Papaun olive python
+</I>&gt;<i> Aspidites	2		Sheild pythons
+</I>&gt;<i> Bothrochilus	1		Bismark ringed python
+</I>&gt;<i> Liasis		3		water pythons
+</I>&gt;<i> ```
+</I>&gt;<i>
+</I>
+
+Okay Solene and I discussed something related to the above off list
+briefly, and it is really on a different topic altogether, but I might
+as well bring it up here because I keep seeing people asking for changes
+to the spec to accommodate more markdown features, which is IMO,
+problematic.
+
+I mentioned to Solene that I thought it would be nice if more features
+of Markdown were supported in clients, but that doesn't mean that it has
+any business being in the Gemini specification.
+
+Why? Because Markdown for the most part is perfectly readable even if it
+isn't rendered as such (Even pretty much tables with cells, etc.).
+
+So my use case is writing papers like showcased above with Genus and
+Species like, **Flabellina iodinea** or **Cordyceps sinensis** or
+**Pleurotus ostreatus** - Scientific convention is such that one should
+italicize or underline genus and species. Now, markdown makes that  nice
+and easy, but most everyone already knows how to interpet &quot;*&quot; or &quot;**&quot; or
+&quot;***&quot; or their underbar equivalents and it does nothing to detract from
+the readability of the text even if it isn't rendered as bold, or
+underlined, or in italics.
+
+The one thing that I would like  to see support for in clients, is the
+inline preformatted text begin and end markers:
+i.e., `$ rm -f /bin/laden`. But absolutely NONE of these things require
+nor beg for inclusion into the Gemini spec, yet they *could* be
+supported in *some* clients.
+
+I hope that puts those discussions for the expanded use of markdown to
+be included in the spec, at least for the next fortnight :)
+
+&gt;<i>   I think that '@poem', '@art', '@code' and '@data' would be very helpful to
+</I>&gt;<i> a client program.  Adding an additional backtick for &quot;something that isn't
+</I>&gt;<i> readble&quot; just seems too little.
+</I>&gt;<i> 
+</I>&gt;<i>   But anyone arguing for (or against) this, please feel free to use the
+</I>&gt;<i> above Python examples when making arguments.
+</I>
+Yes, thank you for making those exammples handy :)
+
+&gt;<i> 
+</I>&gt;&gt;<i> This is consistent with the spirit of gemtext: characters at the 
+</I>&gt;&gt;<i> beginning of a line are the only way to describe semantics.
+</I>
+Indeed.
+
+Solene also mentioned her aprehensions in using a particular language
+for such tags, which I thought was very eloquently addressed by
+Stephanie below:
+
+&lt;snip&gt;
+OK, inspired by my past life as a Perl programmer, I suggest a fully
+i18n solution:
+
+```@    (ASCII art)
+```$    (Code)
+```%    (poetry)
+```|    (data)
+
+&lt;/snip&gt;
+
+I really like this too! Notwithstanding my questions as to why poetry
+would be relevant, and the only thing I would mention would be that I
+don't actually care for the &quot;@&quot; sign, for to me, it usually implies
+other meanings, although I get the association it may have for ASCII. I
+would prefer rather, something like the colon (:), as it's rather
+innocuous where implications are concerned, doesn't stand out like a
+ketchup stain on a white shirt when someone is reading a raw .gmi  file,
+and it will work with ASCII art, ANSI art, or anything else that may
+subject the listener to cacophany.
+
+But whatever anyone comes up with between these two types of proposals
+I'll be happy to implement when I author my .gmi files.
+
+I feel a sense of urgency, however, for at the very least, addressing
+the matter of user accessibility now, in consideration of those who
+would listen to the audible delivery of text/gemini.
+
+And for that, I feel that we will actually be best served by those who
+actually author Gemini clients, as to their suggestions on how they feel
+best in implementing that type of support in their products.
+
+&gt;&gt;<i>   
+</I>&gt;&gt;<i> Benefits of this proposal:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> - It doesn't break any existing sites; it just adds one feature.
+</I>&gt;&gt;<i> - It's very simple to implement: parsers scan for a single additional 
+</I>&gt;&gt;<i> 	backtick
+</I>&gt;&gt;<i> - Authors can still provide any alt-text they wish without worrying 
+</I>&gt;&gt;<i> 	about &quot;reserved words&quot; like the proposed tags
+</I>&gt;<i> 
+</I>&gt;<i>   Which of the above blocks should be read, and shouldn't be read?
+</I>&gt;<i> 
+</I>&gt;&gt;<i> - It provides *critical* semantic information: whether or not a block of 
+</I>&gt;&gt;<i> 	preformatted text should be treated as readable text.
+</I>&gt;<i> 
+</I>&gt;<i>   Not enough in my opinion.
+</I>&gt;<i> 
+</I>&gt;<i>   -spc
+</I>&gt;<i>
+</I>
+All very valid concerns and suggestions. Just let me know soon how to
+alter the way in which I author my pages :)
+
+I hope that helps :)
+
+Kindest regards,
+
+
+-- 
+Bradley D. Thornton
+Manager Network Services
+<A HREF="http://NorthTech.US">http://NorthTech.US</A>
+TEL: +1.310.421.8268
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005660.html">[Clients] Gemini and accessibility regarding preformatted code blocks
+</A></li>
+	<LI>Next message (by thread): <A HREF="005706.html">[Clients] Gemini and accessibility regarding preformatted code blocks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5704">[ date ]</a>
+              <a href="thread.html#5704">[ thread ]</a>
+              <a href="subject.html#5704">[ subject ]</a>
+              <a href="author.html#5704">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

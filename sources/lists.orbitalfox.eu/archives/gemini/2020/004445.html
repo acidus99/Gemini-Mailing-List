@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] to postel or not to postel, that is the question
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20to%20postel%20or%20not%20to%20postel%2C%20that%20is%20the%20question&In-Reply-To=%3CCAD2gp_R%3DT35C2918nEeqw8zUB%2BVE14xHBnP7cVeZoyvGTiw7Hg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004437.html">
+   <LINK REL="Next"  HREF="004446.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] to postel or not to postel, that is the question</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20to%20postel%20or%20not%20to%20postel%2C%20that%20is%20the%20question&In-Reply-To=%3CCAD2gp_R%3DT35C2918nEeqw8zUB%2BVE14xHBnP7cVeZoyvGTiw7Hg%40mail.gmail.com%3E"
+       TITLE="[tech] to postel or not to postel, that is the question">cowan at ccil.org
+       </A><BR>
+    <I>Sun Dec 27 04:46:16 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004437.html">[tech] to postel or not to postel, that is the question
+</A></li>
+        <LI>Next message (by thread): <A HREF="004446.html">[ANN] announcing the outpost, a kinda sorta reddit-esque forum
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4445">[ date ]</a>
+              <a href="thread.html#4445">[ thread ]</a>
+              <a href="subject.html#4445">[ subject ]</a>
+              <a href="author.html#4445">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Dec 26, 2020 at 6:25 PM Petite Abeille &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">petite.abeille at gmail.com</A>&gt;
+wrote:
+
+Looking at the various implementations of the URL/URI/IRI stack in
+&gt;<i> mainstream libraries, one has to face Jon Postel's robustness ghost &#185;.
+</I>&gt;<i>
+</I>
+In fairness to Jon, the context makes it clear that he did not mean what he
+is commonly taken to mean.  Being liberal in what you expect does not mean
+&quot;be willing to accept anything and make sense of it&quot;.
+
+for example: i am perfectly willing to read poetry or even prose written in
+lower case only, even though it is harder for me and most people to read.
+but i would never (except in this one email) write anything that was not
+conventionally capitalized.  postel's law applies: i am liberal in what i
+accept (conventional capitals or no capitals) but conservative in what i
+send (conventional caps only).
+
+What Postel's law does _not_ mean is that
+IAMWILLINGTOACCEPTSCRIPTIOCONTINUAINENGLISH
+EVENTHOUGHROMANINSCRIPTIONSWEREMOSTLY
+like this.  (Imagine pages and pages of this style.  No.)  That's because
+Postel's law is broken: I will not accept something well outside the
+protocol of English writing, and I will not normally send something
+s&#305;&#613;&#647; s&#592; &#647;&#643;n&#596;&#305;&#607;&#607;&#305;p s&#592; to read either.
+
+
+&gt;<i>
+</I>&gt;<i> Exhibit &#8470; 1: Google's own net/url/url.go &#178;
+</I>&gt;<i>
+</I>&gt;<i> // See RFC 3986. This package generally follows RFC 3986, except where
+</I>&gt;<i> // it deviates for compatibility reasons.
+</I>&gt;<i>
+</I>&gt;<i> Indeed. A very pragmatic approach to reality, taking the robustness
+</I>&gt;<i> principle to heart: pretty much anything goes. Such is life.
+</I>&gt;<i>
+</I>
+They have two conflicting rules to deal with: Postel's law and &quot;Don't break
+the customer's code&quot;.  There's simply no good answer to that.
+
+
+&gt;<i> Exhibit &#8470; 2: Sean Conner's own Parsing Expression Grammar &#179; &#8308; &#8309;
+</I>&gt;<i> The anti-thesis of Postel's law, as strict as the MUST imperative.
+</I>
+
+The apotheosis of Postel's law: accept everything, and only, what the
+protocol says.
+
+So here's an example closer to Gemini: should %-encoding use all lower
+case?  Most code does, so it's the conservative thing to send.  But the
+protocol is clear: a conformant implementation has to accept both.  But
+because people often copy broken implementations from other programmers'
+broken implementations, sometimes they don't even know that upper case is
+acceptable.  Again, being conservative in what you send makes sure you can
+interoperate with such broken implementations.
+
+What does Gemini want, as a protocol? Leniency as provided by Exhibit &#8470; 1?
+&gt;<i> Or strictness as demonstrated by Exhibit &#8470; 2?
+</I>&gt;<i>
+</I>
+Strictness, of course, give the above.
+
+
+&gt;<i> It is my personal opinion that Postel's Law is the root of all evils as we
+</I>&gt;<i> know them to this day:
+</I>
+It isn't _money_ that's the root of all evil.  It's the greed for money.
+
+
+
+&gt;<i> Protocol MUST be strict. This is why we have them in the first place. To
+</I>&gt;<i> clearly define what's legal or not, protocol wise.
+</I>&gt;<i>
+</I>
+Amen.  (But note that there are multiple versions of most protocols.)
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+weirdo:    When is R7RS coming out?
+Riastradh: As soon as the top is a beautiful golden brown and if you
+stick a toothpick in it, the toothpick comes out dry.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201226/0914b422/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201226/0914b422/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004437.html">[tech] to postel or not to postel, that is the question
+</A></li>
+	<LI>Next message (by thread): <A HREF="004446.html">[ANN] announcing the outpost, a kinda sorta reddit-esque forum
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4445">[ date ]</a>
+              <a href="thread.html#4445">[ thread ]</a>
+              <a href="subject.html#4445">[ subject ]</a>
+              <a href="author.html#4445">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Reopening: Stream status code
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Reopening%3A%20Stream%20status%20code&In-Reply-To=%3C20200731131858.b3ee7b72acca87fc88290b7f%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002362.html">
+   <LINK REL="Next"  HREF="002259.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Reopening: Stream status code</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Reopening%3A%20Stream%20status%20code&In-Reply-To=%3C20200731131858.b3ee7b72acca87fc88290b7f%40gmail.com%3E"
+       TITLE="Reopening: Stream status code">linde.philip at gmail.com
+       </A><BR>
+    <I>Fri Jul 31 12:18:58 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002362.html">Reopening: Stream status code
+</A></li>
+        <LI>Next message (by thread): <A HREF="002259.html">Reopening: Stream status code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2364">[ date ]</a>
+              <a href="thread.html#2364">[ thread ]</a>
+              <a href="subject.html#2364">[ subject ]</a>
+              <a href="author.html#2364">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, 31 Jul 2020 07:01:10 -0400
+Paul Boyd &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">boyd.paul2 at gmail.com</A>&gt; wrote:
+&gt;<i> Please don't. That would complicate generated responses. The server would
+</I>&gt;<i> have to hold the response until the whole thing was rendered just to count
+</I>&gt;<i> the number of bytes. It's a lot simpler to write the data as it's ready,
+</I>&gt;<i> which also avoids (potentially large) temporary memory allocations.
+</I>
+That is true. There are approaches to dynamically generated responses
+that avoid the need for preallocation, but they are indeed quite
+complex compared to having e.g. a CGI script simply dump some data on
+its standard output.
+
+Usually, when I need to determine a buffer size in advance, I implement
+a &quot;dry run&quot; of whatever fills the buffer that instead of writing
+anything simply tallies up the number of bytes that *would* be written
+and run that to determine the size of the buffer before a &quot;real&quot; run. A
+similar approach can be used to determine content length for CGI
+scripts.
+
+It's a good point nonetheless.
+
+--
+Philip
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200731/7856c218/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20200731/7856c218/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002362.html">Reopening: Stream status code
+</A></li>
+	<LI>Next message (by thread): <A HREF="002259.html">Reopening: Stream status code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2364">[ date ]</a>
+              <a href="thread.html#2364">[ thread ]</a>
+              <a href="subject.html#2364">[ subject ]</a>
+              <a href="author.html#2364">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

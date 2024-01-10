@@ -1,0 +1,280 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Cognitive aspects of navigation in gemini space
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cognitive%20aspects%20of%20navigation%20in%20gemini%20space&In-Reply-To=%3C5EBD95BD.4050405%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001214.html">
+   <LINK REL="Next"  HREF="000619.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Cognitive aspects of navigation in gemini space</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cognitive%20aspects%20of%20navigation%20in%20gemini%20space&In-Reply-To=%3C5EBD95BD.4050405%40gmail.com%3E"
+       TITLE="Cognitive aspects of navigation in gemini space">luke.emmet at gmail.com
+       </A><BR>
+    <I>Thu May 14 20:02:21 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001214.html">gophermap -&gt; text/gemini converter
+</A></li>
+        <LI>Next message (by thread): <A HREF="000619.html">Cognitive aspects of navigation in gemini space
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#622">[ date ]</a>
+              <a href="thread.html#622">[ thread ]</a>
+              <a href="subject.html#622">[ subject ]</a>
+              <a href="author.html#622">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello
+&gt;<i> I understand entirely where you are coming from.  An idea I've had for
+</I>&gt;<i> a while now (I don't remember if I've mentioned it here before) is that
+</I>&gt;<i> it would be nice if a graphical Gemini browser used a different
+</I>&gt;<i> foreground and background colour (and perhaps even a different font?)
+</I>&gt;<i> for different domains (subdomains)?  This would be something the client
+</I>&gt;<i> would do itself, with no possibility of control or influence from the
+</I>&gt;<i> server - it would just use the domain as the seed to a PRNG which chose
+</I>&gt;<i> a new scheme.  This would then give different sites their own subtly
+</I>&gt;<i> distinct look and feel, which a user could learn to recognise in time.
+</I>&gt;<i> I have no idea how feasible this is: programmatically generating
+</I>&gt;<i> genuinely pleasant colour schemes is certainly not straightforward.
+</I>
+This is interesting, something like the sigils in Urbit, or Gravitar 
+that are automatically generated from
+some identifier?
+
+<A HREF="https://urbit.org/blog/creating-sigils/">https://urbit.org/blog/creating-sigils/</A>
+
+<A HREF="https://en.gravatar.com/site/implement/">https://en.gravatar.com/site/implement/</A>
+
+And so when you were on a &quot;site&quot; the content would be labelled/decorated 
+in a simple yet consistent way
+
+I think that could work.
+
+If it is for the client to decide, how do we determine the &quot;scope&quot; of a 
+site:
+
+1.  If it is one per domain then that works, but I suppose that is not a 
+universal
+     assumption a client can make as many gemini spaces might be hosted 
+on the same domain.
+
+2. Full path - is very specific, but it would mean the placemarker would 
+change with every request.
+
+3. The author indicates it somehow
+
+4. ?
+
+It would be good perhaps if the author could optionally provide a seed 
+site id as part of the content.
+
+e.g. &quot;site-name: Mysite&quot; or other such pre-defined, not extensible 
+syntax (we have headings, bullets, links...). Maybe the @symbol is 
+awaiting such a role
+
+&quot;@ MySite&quot;
+
+This can be ignored by any disinterested client and is just text in the 
+document that CLI readers can read without polluting the content with 
+metadata.
+
+&gt;<i> The idea of favicons has been mentioned before in a gemlog post:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="gemini://mozz.us/journal/2020-04-17.gmi">gemini://mozz.us/journal/2020-04-17.gmi</A>
+</I>&gt;<i>
+</I>&gt;<i> I have a couple of big concerns here:
+</I>&gt;<i>
+</I>&gt;<i> One is that right now Gemini is strictly one-request-per-resource and a
+</I>&gt;<i> lot of people, myself included, consider that a really desirable
+</I>&gt;<i> property.  Anything like favicons or CSS would remove that property, no
+</I>&gt;<i> matter how light weight they were.  It's true that at least the second
+</I>&gt;<i> request would go to the same server as the first so this doesn't
+</I>&gt;<i> actually destroy predictability or control of which servers your client
+</I>&gt;<i> connects to, which is one of the arguments in favour of the one request
+</I>&gt;<i> thing.
+</I>
+I don't see the single request per resource is really violated here, 
+since it is optional and not required to understand the content. But if 
+that is really a worry
+the client side option might work.
+
+Maybe the favicon thing is just a convention that authors could include 
+or not. The client could search up the url path and show the first one 
+it finds, or none
+
+
+&gt;<i> Another is that, philosophically, I kind of feel like styling *should*
+</I>&gt;<i> be under the control of the client and not the server.
+</I>That is OK, but maybe the server can hint.
+&gt;<i>   Some people have
+</I>&gt;<i> strong preferences for light text on dark backgrounds, for example,
+</I>&gt;<i> because they have problems with eye strain the other way around.
+</I>Agree
+&gt;<i> Right
+</I>&gt;<i> now on the web this is really only possible if the author deigns to
+</I>&gt;<i> provide the option (as Stack Overflow recently did, to much fanfare).  I
+</I>&gt;<i> think that's totally backwards.  Give the power over styling to the
+</I>&gt;<i> people who actually have to read the content, let them read your stuff
+</I>&gt;<i> in the way that works best for their eyesight and that *they* find
+</I>&gt;<i> aesthetically pleasing.  I realise this reduces some of the scope for
+</I>&gt;<i> self-expression on the part of Gemini content authors, but there's more
+</I>&gt;<i> than enough scope for that in the actual *content* they produce (if not,
+</I>&gt;<i> there are bigger problems...).
+</I>&gt;<i>
+</I>&gt;<i> &lt;snip&gt;
+</I>&gt;<i> I'd be much more interested in us exploring innovative possibilities
+</I>&gt;<i> which are strictly under the control of the client, like keying the
+</I>&gt;<i> styling to the domain as I mentioned earlier.  I'm not saying that exact
+</I>&gt;<i> approach necessarily is the best way to do it, or even a good way.  But
+</I>&gt;<i> it's *a* way to do it which doesn't run afoul of any of the issues above
+</I>&gt;<i> and that kind of out-of-the-box thinking is a good direction to take,
+</I>&gt;<i> IMHO.
+</I>
+-- 
+______________________________________
+
+Orlando Lutes
+<A HREF="http://www.orlando-lutes.com">http://www.orlando-lutes.com</A>
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001214.html">gophermap -&gt; text/gemini converter
+</A></li>
+	<LI>Next message (by thread): <A HREF="000619.html">Cognitive aspects of navigation in gemini space
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#622">[ date ]</a>
+              <a href="thread.html#622">[ thread ]</a>
+              <a href="subject.html#622">[ subject ]</a>
+              <a href="author.html#622">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

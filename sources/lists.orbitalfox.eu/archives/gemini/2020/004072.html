@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Unicode vs. the World
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3CCAJScK0K7VRXhOfmc9DmURxpVXRmUZYeN%2Bj-x1Vbs%3D%3DEY0ixw1A%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004071.html">
+   <LINK REL="Next"  HREF="004074.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Unicode vs. the World</H1>
+    <B>Bj&#246;rn W&#228;rmedal</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3CCAJScK0K7VRXhOfmc9DmURxpVXRmUZYeN%2Bj-x1Vbs%3D%3DEY0ixw1A%40mail.gmail.com%3E"
+       TITLE="Unicode vs. the World">bjorn.warmedal at gmail.com
+       </A><BR>
+    <I>Tue Dec 15 15:05:14 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004071.html">Unicode vs. the World
+</A></li>
+        <LI>Next message (by thread): <A HREF="004074.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4072">[ date ]</a>
+              <a href="thread.html#4072">[ thread ]</a>
+              <a href="subject.html#4072">[ subject ]</a>
+              <a href="author.html#4072">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thank you so much for the summary! I lost track of the ML for a few
+days and... it was just too much &gt;.&lt;
+
+My contention is this: I want us to support internationalization as
+best we can. And as far as I understand it the web has done this with
+punycoded domain names and percent encoded paths for years. And after
+a few hours of fiddling with my own cli tool gemcall
+(<A HREF="https://notabug.org/tinyrabbit/gemcall/src/master/gemcall">https://notabug.org/tinyrabbit/gemcall/src/master/gemcall</A>) it doesn't
+look like it's too hard. Check line 35:
+
+parsed = up.urlparse(url).encode(&quot;idna&quot;)
+
+As far as I can tell gemcall can now handle <A HREF="gemini://[rabbit">gemini://[rabbit</A> emoji
+that I don't know how to include...].mozz.us/
+
+As for the path that follows, that must be percent encoded in the
+gemtext document. There is no way for a client to know if a path is
+already percent encoded or not, and percent encoding twice breaks the
+link. Consider this:
+=&gt; <A HREF="gemini://example.com/why-space-is-%20-in-urls.gmi">gemini://example.com/why-space-is-%20-in-urls.gmi</A> We see that this
+needs to be percent encoded, but a tool can't reliably tell if it does
+or if it is already.
+
+Requiring clients to punycode domain names will break existing
+clients. Sorry about that, but let's just fix them instead of
+complaining about it.
+
+Cheers,
+ew0k
+
+Oh! Mandatory rabbit!
+
+ ()_()
+ (^.^)
+_(| |)_
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004071.html">Unicode vs. the World
+</A></li>
+	<LI>Next message (by thread): <A HREF="004074.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4072">[ date ]</a>
+              <a href="thread.html#4072">[ thread ]</a>
+              <a href="subject.html#4072">[ subject ]</a>
+              <a href="author.html#4072">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

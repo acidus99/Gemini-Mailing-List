@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Using normal tls certificates with gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Using%20normal%20tls%20certificates%20with%20gemini&In-Reply-To=%3CC5TBIIZOFZ3E.1Y0LQQFHANUJ2%40homura%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002755.html">
+   <LINK REL="Next"  HREF="002822.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Using normal tls certificates with gemini</H1>
+    <B>Drew DeVault</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Using%20normal%20tls%20certificates%20with%20gemini&In-Reply-To=%3CC5TBIIZOFZ3E.1Y0LQQFHANUJ2%40homura%3E"
+       TITLE="Using normal tls certificates with gemini">sir at cmpwn.com
+       </A><BR>
+    <I>Mon Sep 21 21:09:21 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002755.html">Using normal tls certificates with gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="002822.html">Using normal tls certificates with gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2756">[ date ]</a>
+              <a href="thread.html#2756">[ thread ]</a>
+              <a href="subject.html#2756">[ subject ]</a>
+              <a href="author.html#2756">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon Sep 21, 2020 at 3:04 PM EDT, Alex // nytpu wrote:
+&gt;<i> As an additional question, if I was writing a more advanced gemini
+</I>&gt;<i> client, should I validate cert chains if they're availaible or only use
+</I>&gt;<i> TOFU on the fingerprint and ignore chains entirely? The spec just says
+</I>&gt;<i> to validate however you want, but what's the community's recommendation?
+</I>
+Coincidentally, I just finished a TOFU implementation in my client which
+I'm relatively satisfied with. To answer your question directly, I chose
+to disregard the certificate chain and *always* use TOFU. I don't think
+the CA cabal is something Gemini needs to get used to supporting.
+
+In more detail, the TOFU algorithm I decided to use is:
+
+1. On startup, the client loads a list of known hosts from
+   ~/.local/share/gmni/known_hosts (adjusted per XDG basedirs as
+   appropriate), which is a plaintext file where each line is one host,
+   with the following attributes in order, separated by spaces:
+
+   hostname fingerprint-algorithm fingerprint expires
+
+   fingerprint-algorithm is always &quot;SHA-512&quot;; if it's not, this
+   known_hosts entry is discarded. The fingerprint is the SHA-512 digest
+   of the X509 certificate, and expiry is the Unix timestamp of the
+   certificate's notAfter time.
+2. Upon receiving a request to validate a certificate:
+   A. It confirms that the current time is within [notBefore, notAfter].
+      If not, the trust state is INVALID, GOTO 3.
+   B. Computes the fingerprint.
+   C. Consults the list of known hosts for a matching host. If not
+      found, the trust state is UNKNOWN, GOTO 3.
+   D. If a matching host is found, and the fingerprint matches, the
+      trust state is TRUSTED. GOTO 3.
+   E. If a matching host is found, and the fingerprint does not match,
+      the trust state is UNTRUSTED. GOTO 3.
+3. If the trust state is TRUSTED, proceed with the request.
+4. If the trust state is UNKNOWN, display the fingerprint to the user
+   and ask them if they want to trust this certificate, now or always.
+   If always, another entry is written to known_hosts.
+5. If the trust state is INVALID, the user is told about the issue and
+   given the option to continue (but not to update known_hosts).
+6. If the trust state is UNTRUSTED, the user is told so and the request
+   is aborted. The user must manually intervene in the known_hosts file
+   to continue.
+
+Code is here:
+
+<A HREF="https://git.sr.ht/~sircmpwn/gmni/commit/02f6af661513683f0c6c1465c5ff1dd8f03a30c9">https://git.sr.ht/~sircmpwn/gmni/commit/02f6af661513683f0c6c1465c5ff1dd8f03a30c9</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002755.html">Using normal tls certificates with gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="002822.html">Using normal tls certificates with gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2756">[ date ]</a>
+              <a href="thread.html#2756">[ thread ]</a>
+              <a href="subject.html#2756">[ subject ]</a>
+              <a href="author.html#2756">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

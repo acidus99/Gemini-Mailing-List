@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Dioscuri, another application layer protocol
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Dioscuri%2C%20another%20application%20layer%20protocol&In-Reply-To=%3CCAD2gp_RcNzW%2BA%2BaEZwqRnZz6p75qpm7-gTn_zykQtGfywCzw1Q%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002793.html">
+   <LINK REL="Next"  HREF="002795.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Dioscuri, another application layer protocol</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Dioscuri%2C%20another%20application%20layer%20protocol&In-Reply-To=%3CCAD2gp_RcNzW%2BA%2BaEZwqRnZz6p75qpm7-gTn_zykQtGfywCzw1Q%40mail.gmail.com%3E"
+       TITLE="Dioscuri, another application layer protocol">cowan at ccil.org
+       </A><BR>
+    <I>Mon Sep 28 13:52:11 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002793.html">Dioscuri, another application layer protocol
+</A></li>
+        <LI>Next message (by thread): <A HREF="002795.html">Dioscuri, another application layer protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2801">[ date ]</a>
+              <a href="thread.html#2801">[ thread ]</a>
+              <a href="subject.html#2801">[ subject ]</a>
+              <a href="author.html#2801">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Sep 27, 2020 at 9:59 PM Meff &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">meff at meff.me</A>&gt; wrote:
+
+
+&gt;<i> Does Dioscuri have the same line-length limits as Gemini?
+</I>&gt;<i>
+</I>
+Yes.  That means that you can't have quite as long an URL as in Gemini.
+However, I suspect few people will do Gopher/Gemini-style searches through
+Dioscuri.
+
+Do you mean &quot;70&quot; here instead of &quot;60&quot;?
+&gt;<i>
+</I>
+I picked 70 more or less at random, then went back and saw that 5x is the
+highest Gemini status code, so I'll go with 60.  I didn't quite consummate
+the change.
+
+
+&gt;<i> Are there any limits on payload length from the client?
+</I>
+
+No, any more than there are limits on payload length from the server in
+Gemini (or Dioscuri).
+
+
+&gt;<i> Are there any
+</I>&gt;<i> plans for the client to indicate to the server the length of the
+</I>&gt;<i> payload?
+</I>
+
+That's the point of the one-sided close.  If we had to batch requests on
+the same TCP connection, Content-Length would be indispensable, but as
+things stand, closing the write side of the socket conveys that information.
+
+
+&gt;<i> What happens if the server encounters a fault while reading in
+</I>&gt;<i> the entire client payload?
+</I>&gt;<i>
+</I>
+That's pretty vague: what kind of a fault?  The safe answer for the server
+is &quot;Close the connection&quot;, at which point the client will figure out (after
+TCP timeout) that the request didn't work and apply its general policy
+(abort, retry, or ignore) for such events.
+
+
+&gt;<i> Is there any guidance on timeouts? Should implementors assume that
+</I>&gt;<i> timeouts are quick and the server should hangup quickly if nothing is
+</I>&gt;<i> found on the client's send stream, or is this application dependent so
+</I>&gt;<i> that it's up to the server/endpoint to determine timeouts (e.g. for a
+</I>&gt;<i> streaming application)?
+</I>
+
+The latter, I think.  The Gemini protocol definition mentions timeouts only
+in connection with CGI.
+
+
+&gt;<i> My worry is that opening connections to the
+</I>&gt;<i> server and keeping the server send connection open can quickly exhaust
+</I>&gt;<i> the number of sockets/fds the server has available.
+</I>&gt;<i>
+</I>
+With the Internet the way it is, servers must be written to defend
+themselves against both intentional and unintentional attacks in any case.
+But the difference between use and abuse depends on the use.  Sockets can
+equally be overwhelmed by a Gemini attack.  DDOS protection helps here.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200928/1af67ced/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200928/1af67ced/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002793.html">Dioscuri, another application layer protocol
+</A></li>
+	<LI>Next message (by thread): <A HREF="002795.html">Dioscuri, another application layer protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2801">[ date ]</a>
+              <a href="thread.html#2801">[ thread ]</a>
+              <a href="subject.html#2801">[ subject ]</a>
+              <a href="author.html#2801">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

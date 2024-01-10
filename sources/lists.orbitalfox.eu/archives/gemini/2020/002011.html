@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Minimal client
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Minimal%20client&In-Reply-To=%3CCAOH6EB8kzin-ZqaMQa9_K4Swasj%3DwedJ-BmAvSNxKOFFSGougQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002010.html">
+   <LINK REL="Next"  HREF="002012.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Minimal client</H1>
+    <B>Phil Leblanc</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Minimal%20client&In-Reply-To=%3CCAOH6EB8kzin-ZqaMQa9_K4Swasj%3DwedJ-BmAvSNxKOFFSGougQ%40mail.gmail.com%3E"
+       TITLE="Minimal client">philanc at gmail.com
+       </A><BR>
+    <I>Wed Jul  1 23:06:44 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002010.html">[ANN] tinmop update
+</A></li>
+        <LI>Next message (by thread): <A HREF="002012.html">Minimal client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2011">[ date ]</a>
+              <a href="thread.html#2011">[ thread ]</a>
+              <a href="subject.html#2011">[ subject ]</a>
+              <a href="author.html#2011">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+I am looking for a solution to build a _small_, _statically linked_,
+minimal gemini client. My focus at the moment is to implement the
+basic communication layer (including TLS!): just enough to send a
+request to a gemini host and receive a response.
+
+Has anybody already built such a client? any pointer or suggestion?
+
+Where I stand as of now:
+
+--- I discarded OpenSSL.  Bad memories of building small static
+executables a long time ago. Maybe it has improved and I am just
+prejudiced.
+
+--- LibreSSL:
+  - not TLS v1.3 yet, but definitely alive and moving there.
+  - easily builds static libraries, but no modular build: I mean I
+found no way to build libraries/executable with only a limited set of
+crypto algorithms
+  =&gt; executables are large: The openssl command (similar to the
+OpenSSL one) is 2.5 MB  (built on Linux with Musl libc, fully static,
+-Os, stripped). They also include the OpenBSD 'nc' command which
+supports TLS connections - 2 MB (for reference I have a small static
+nc without TLS support which is 50KB)
+
+--- BearSSL
+  - very nice code. An impressive feat for a one-man project (Thomas Pornin)
+  - not yet at TLS-1.3. The code looks maintained but I don't know if
+it is actively developed. I saw no sign of ed25519 cert signing, but
+may be wrong here.
+  - code size: the whole libbearssl.a is ~ 860KB, basic client and
+server examples are in the 150KB range, which is very nice.
+
+--- WolfSSL
+  - supports TLS-1.3. Is actively maintained by a company targeting
+embedded systems (but the code is GPL)
+  - I don't know yet how to properly build small code, but with a
+default support for only TLS-1.3, and no ed25519 cert support, I could
+build basic client/server examples at ~ 260 KB.
+
+--- MatrixSSL
+  - supports TLS-1.3 but the code of the last public (GPL) version
+hasn't changed in the last 6 months.
+  - I have not yet succeeded in building static working examples with
+a cross compiler. So I don't have ballpark code size figures.
+
+--- Busybox ssl_client
+  - some TLS support has been added in the recent busybox trees, based
+on MatrixSSLcode. As they say, &quot;enough TLS to allow the busybox wget
+applet to retrieve a kernel source&quot; from <A HREF="https://kernel.org/">https://kernel.org/</A>
+  - I built the ssl_client applet as a standalone static exe: 71 KB
+  - it supports TLS-1.2 with a very limited set of crypto algos. and
+_no cert validation_.
+  - I tried for fun to retrieve with it the root pages from all the
+gemini sites listed on Gus / known hosts:  On a total of 116 sites, it
+managed to
+get 98 root pages and 18 TLS errors (I lack detailed error causes, but
+apparently mostly missing algos, and maybe some unsupported curves for
+ ECDH(E).-- not so bad for such a small &quot;client&quot; - but clearly not
+enough for real use.
+
+Obviously, a big part of the equation is the evil number of
+combinations of ciphers, hashes and key exchange algos.  Any guideline
+or best practice document about what ciphers/algos Gemini servers
+_should_ minimally support would help immensely!
+
+Again, any suggestion on how to build a small, static SSL client is
+more than welcome.Thanks in advance,
+
+Phil
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002010.html">[ANN] tinmop update
+</A></li>
+	<LI>Next message (by thread): <A HREF="002012.html">Minimal client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2011">[ date ]</a>
+              <a href="thread.html#2011">[ thread ]</a>
+              <a href="subject.html#2011">[ subject ]</a>
+              <a href="author.html#2011">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

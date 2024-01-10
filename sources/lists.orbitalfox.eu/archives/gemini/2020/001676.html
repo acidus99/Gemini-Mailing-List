@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Repeating the Web's Mistakes (was gemini+submit:// (was Re: Uploading Gemini content))
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Repeating%20the%20Web%27s%20Mistakes%20%28was%20gemini%2Bsubmit%3A//%20%28was%20Re%3A%0A%20Uploading%20Gemini%20content%29%29&In-Reply-To=%3CynIhaxwCK90fqhpv9FN-s8sv32gErns3Rq8053ri0jLiqRHiQRrHKAnEa3widBxm-GlWwlsIM1Go8Mt0UN_iiHlKqUavQaWRC15tQWETXMM%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001652.html">
+   <LINK REL="Next"  HREF="001683.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Repeating the Web's Mistakes (was gemini+submit:// (was Re: Uploading Gemini content))</H1>
+    <B>colecmac at protonmail.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Repeating%20the%20Web%27s%20Mistakes%20%28was%20gemini%2Bsubmit%3A//%20%28was%20Re%3A%0A%20Uploading%20Gemini%20content%29%29&In-Reply-To=%3CynIhaxwCK90fqhpv9FN-s8sv32gErns3Rq8053ri0jLiqRHiQRrHKAnEa3widBxm-GlWwlsIM1Go8Mt0UN_iiHlKqUavQaWRC15tQWETXMM%3D%40protonmail.com%3E"
+       TITLE="Repeating the Web's Mistakes (was gemini+submit:// (was Re: Uploading Gemini content))">colecmac at protonmail.com
+       </A><BR>
+    <I>Sun Jun 14 19:13:09 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001652.html">Repeating the Web's Mistakes (was gemini+submit:// (was Re: Uploading Gemini content))
+</A></li>
+        <LI>Next message (by thread): <A HREF="001683.html">Repeating the Web's Mistakes (was gemini+submit:// (was Re: Uploading Gemini content))
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1676">[ date ]</a>
+              <a href="thread.html#1676">[ thread ]</a>
+              <a href="subject.html#1676">[ subject ]</a>
+              <a href="author.html#1676">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> I'm finding this out the hard way. Fortunately I thought to disable
+</I>&gt;<i> root logins in /etc/ssh/sshd_config when I first set up my VPS, but I'm
+</I>&gt;<i> also reading up on fail2ban. Thinking of using this HOWTO since it
+</I>&gt;<i> emphasizes not tampering with distributed config files.
+</I>
+If you haven't already, it's a MUST to setup an SSH key and turn off password
+login. This will basically remove all SSH based attacks.
+
+<A HREF="https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/">https://www.cyberciti.biz/faq/how-to-set-up-ssh-keys-on-linux-unix/</A>
+
+makeworld
+
+&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208; Original Message &#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;
+On Saturday, June 13, 2020 10:40 PM, Matthew Graybosch &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">hello at matthewgraybosch.com</A>&gt; wrote:
+
+&gt;<i> On Sat, 13 Jun 2020 21:22:15 -0400
+</I>&gt;<i> Sean Conner <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A> wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; As someone who has worked for various ISPs and webhosting companies
+</I>&gt;<i> &gt; for most of my career, I think this slamming of IPSs is unwaranted.
+</I>&gt;<i>
+</I>&gt;<i> You're probably right.
+</I>&gt;<i>
+</I>&gt;<i> &gt; 1.  Open servers are attacked at an alarming rate. At home, I run an
+</I>&gt;<i> &gt;     sshd instance tha is open to the Internet [2]. I am currently
+</I>&gt;<i> &gt;     blocking 2,520 hosts that have attempted to log in via ssh. That
+</I>&gt;<i> &gt;     count is only over the past 30 days (technically, 30 days, 10 hours,
+</I>&gt;<i> &gt;     30 minutes, as that's the average month length over the year). Not
+</I>&gt;<i> &gt;     doing so means my machine will be constantly under login attempts.
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> I'm finding this out the hard way. Fortunately I thought to disable
+</I>&gt;<i> root logins in /etc/ssh/sshd_config when I first set up my VPS, but I'm
+</I>&gt;<i> also reading up on fail2ban. Thinking of using this HOWTO since it
+</I>&gt;<i> emphasizes not tampering with distributed config files.
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="https://phrye.com/tools/fail2ban-on-freebsd/">https://phrye.com/tools/fail2ban-on-freebsd/</A>
+</I>&gt;<i>
+</I>&gt;<i> &gt; And then there's the wierd (and quite stressful) situations
+</I>&gt;<i> &gt; involving black-hat hackers [5].
+</I>&gt;<i>
+</I>&gt;<i> You know what? I think I recognize your email because I've read about
+</I>&gt;<i> your experience with the black-hat.
+</I>&gt;<i>
+</I>&gt;<i> I'm reading this email and thinking, &quot;Dear creeping gods, what have I
+</I>&gt;<i> gotten myself into?&quot;
+</I>&gt;<i>
+</I>&gt;<i> &gt; 2.  If people could run a business server on their home connection,
+</I>&gt;<i> &gt;     they would. ... Never mind the power is out, why did my
+</I>&gt;<i> &gt;     server loose connection?
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> I've been this clueless. Fortunate my phone wasn't working so I
+</I>&gt;<i> couldn't inflict it on some poor tech support worker.
+</I>&gt;<i>
+</I>&gt;<i> &gt; Or in self defense, the ISP cuts the connection because the home
+</I>&gt;<i> &gt; server is running a port scanner, participating in a botnet, or
+</I>&gt;<i> &gt; sending out spam emails because of an unpatched exploit in some
+</I>&gt;<i> &gt; server being run at home.
+</I>&gt;<i>
+</I>&gt;<i> You're right, this is legit.
+</I>&gt;<i>
+</I>&gt;<i> &gt; 3.  Do people realize they'll need to basically firewall off their
+</I>&gt;<i> &gt;     Windows boxes?
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> I firewalled the hell out of my wife's Windows machine just to block
+</I>&gt;<i> the damn telemetry. It's insane.
+</I>&gt;<i>
+</I>&gt;<i> &gt; 4.  It was email that poisoned home-run servers intially.
+</I>&gt;<i>
+</I>&gt;<i> I remember this now. I know there was a reason I was reluctant to even
+</I>&gt;<i> try setting up external email on tanelorn.city. I thought I was just
+</I>&gt;<i> being irrational.
+</I>&gt;<i>
+</I>&gt;<i> &gt; That is true too, but I suspect even if you could easily run a
+</I>&gt;<i> &gt; server at home, 99% would not even bother (or know what it is).
+</I>&gt;<i>
+</I>&gt;<i> Fair point.
+</I>&gt;<i>
+</I>&gt;<i> &gt; Never underestimate the lack of giving a damn the general
+</I>&gt;<i> &gt; population have. I'm sure there are aspects of your life that you
+</I>&gt;<i> &gt; lack a damn about that other people think you should give more than a
+</I>&gt;<i> &gt; damn.
+</I>&gt;<i>
+</I>&gt;<i> You're right. It's just that I see barriers and had forgotten that some
+</I>&gt;<i> of the barriers exist for a reason.
+</I>&gt;<i>
+</I>&gt;<i> &gt; I think it's a conversation worth having, as it relates to how
+</I>&gt;<i> &gt; Gemini expands with new content.
+</I>&gt;<i>
+</I>&gt;<i> Thanks for taking the time to reply. There's a lot here that I either
+</I>&gt;<i> didn't know or had forgotten.
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------------------------------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i> Matthew Graybosch <A HREF="gemini://starbreaker.org">gemini://starbreaker.org</A>
+</I>&gt;<i> #include &lt;disclaimer.h&gt; <A HREF="gemini://demifiend.org">gemini://demifiend.org</A>
+</I>&gt;<i> <A HREF="https://matthewgraybosch.com">https://matthewgraybosch.com</A> <A HREF="gemini://tanelorn.city">gemini://tanelorn.city</A>
+</I>&gt;<i> &quot;Out of order?! Even in the future nothing works.&quot;
+</I>
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001652.html">Repeating the Web's Mistakes (was gemini+submit:// (was Re: Uploading Gemini content))
+</A></li>
+	<LI>Next message (by thread): <A HREF="001683.html">Repeating the Web's Mistakes (was gemini+submit:// (was Re: Uploading Gemini content))
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1676">[ date ]</a>
+              <a href="thread.html#1676">[ thread ]</a>
+              <a href="subject.html#1676">[ subject ]</a>
+              <a href="author.html#1676">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

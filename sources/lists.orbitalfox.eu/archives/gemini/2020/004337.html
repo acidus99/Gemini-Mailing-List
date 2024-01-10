@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] IRIs, IDNs, and all that international jazz
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3C20201223215944.GA9267%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004331.html">
+   <LINK REL="Next"  HREF="004374.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] IRIs, IDNs, and all that international jazz</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3C20201223215944.GA9267%40brevard.conman.org%3E"
+       TITLE="[spec] IRIs, IDNs, and all that international jazz">sean at conman.org
+       </A><BR>
+    <I>Wed Dec 23 21:59:44 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004331.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+        <LI>Next message (by thread): <A HREF="004374.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4337">[ date ]</a>
+              <a href="thread.html#4337">[ thread ]</a>
+              <a href="subject.html#4337">[ subject ]</a>
+              <a href="author.html#4337">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Solderpunk once stated:
+&gt;<i> Feedback welcome, especially if I've overlooked anything, which is
+</I>&gt;<i> certainly possible.  What I'd be most interested in hearing, at this
+</I>&gt;<i> point, is client authors letting me know whether the standard library
+</I>&gt;<i> in the language their client is implemented in can straightforwardly:
+</I>&gt;<i> 
+</I>&gt;<i> 1. Parse and relativise URLs with non-ASCII characters (so, yes, okay,
+</I>&gt;<i>    technically not URLs at all, you know what I mean) in paths and/or
+</I>&gt;<i>    domains?
+</I>&gt;<i> 2. Transform back and forth between URIs and IRIs?
+</I>&gt;<i> 3. Do DNS lookups of IDNs without them being punycoded first?  You can
+</I>&gt;<i>    test this with r&#228;ksm&#246;rg&#229;s.josefsson.org.
+</I>
+  For C, I'm sure there is code, somewhere, that can parse IRIs, but it's a
+matter of finding them.  
+
+  For Lua, the answers are:
+
+	1. Yes.  I had to write some code [1][2], and modify some existing
+	   code [3], but Lua now has modules to parse IRI and URIs.
+
+	2. I can do IRI-&gt;URL, but not the other way---I have no need of a
+	   URL-&gt;IRI as of yet.
+
+	3. For my setups (systems I've been able to test), I cannot lookup
+	   IDNs as is---I *have* to convert to punycode first.
+
+  -spc
+
+[1]	<A HREF="https://github.com/spc476/LPeg-Parsers/blob/master/iri.lua">https://github.com/spc476/LPeg-Parsers/blob/master/iri.lua</A>
+
+[2]	<A HREF="https://github.com/spc476/lua-conmanorg/blob/master/src/idn.c">https://github.com/spc476/lua-conmanorg/blob/master/src/idn.c</A>
+
+[3]	<A HREF="https://github.com/spc476/GLV-1.12556/blob/master/Lua/GLV-1/url-util.lua">https://github.com/spc476/GLV-1.12556/blob/master/Lua/GLV-1/url-util.lua</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004331.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+	<LI>Next message (by thread): <A HREF="004374.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4337">[ date ]</a>
+              <a href="thread.html#4337">[ thread ]</a>
+              <a href="subject.html#4337">[ subject ]</a>
+              <a href="author.html#4337">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

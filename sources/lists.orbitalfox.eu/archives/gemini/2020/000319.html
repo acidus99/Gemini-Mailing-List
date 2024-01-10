@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200115202137.GA21763%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000317.html">
+   <LINK REL="Next"  HREF="000320.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200115202137.GA21763%40SDF.ORG%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Wed Jan 15 20:21:37 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000317.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000320.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#319">[ date ]</a>
+              <a href="thread.html#319">[ thread ]</a>
+              <a href="subject.html#319">[ subject ]</a>
+              <a href="author.html#319">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Jan 15, 2020 at 12:03:28AM -0500, Michael Lazar wrote:
+&gt;<i> 
+</I>&gt;<i> Not to mention, pages like this [1]
+</I>&gt;<i> display perfectly on my iphone using a
+</I>&gt;<i> gemini-http proxy server. Regardless of
+</I>&gt;<i> whether you choose to adopt the ```
+</I>&gt;<i> mode, you're still going to need to
+</I>&gt;<i> recommend a line length for authors to
+</I>&gt;<i> hard wrap their text/gemini files at.
+</I>&gt;<i> And I suggest that 40 is still worth
+</I>&gt;<i> considering for this.
+</I>
+Yes, I definitely intend to include a recommendation that text/gemini
+content be hard wrapped at something less than the traditional 70 or 80
+columns.  This convention seems to slowly taking hold in the
+phlogosphere (driven, delightfully, as much by retro PDA enthusiasts as
+smartphone users!).  In writing about this earlier, I idly raised the
+prospect of clients for &quot;real computers&quot; displaying text hard wrapped at
+~40 characters displaying multiple columns side by side - I actually
+bumped into an example of this in the wild the other day (see the end of
+<A HREF="gemini://tilde.black/users/brool/stoned.txt">gemini://tilde.black/users/brool/stoned.txt</A>) and thought it looked
+great!
+ 
+&gt;<i> Here are some other alternatives that
+</I>&gt;<i> might be worth considering. I do think
+</I>&gt;<i> that displaying gemini links is a valid
+</I>&gt;<i> use-case, but adding a whole new
+</I>&gt;<i> preformatted text mode only for this
+</I>&gt;<i> narrow case feels a bit heavy-handed to
+</I>&gt;<i> me. Granted, I realize there are other
+</I>&gt;<i> benefits to the preformatted mode that
+</I>&gt;<i> have already been outlined.
+</I>
+I agree that the ability to display literal Gemini links inside a
+text/gemini page probably doesn't, by itself, justify adding any kind
+of markup complexity.  But there are indeed many other benefits, as you
+mentioned.  I had kind of been on the fence about whether or not such
+complexity was worth adding mostly on the basis of those other benefits
+(which mostly relate to supporting mobile devices, which, even though I
+do use them, I kind of hate and feel reluctant to cater to).  The
+realisation that a verbatim text mode can also do some genuinely useful
+work even on a &quot;big screen&quot; where text reflowing never has to be done
+has, I think, tipped the scales for me enough to decide that this is
+worth it.
+
+After all, the essential complexity cost we'd be paying for these
+benefits is quite low.  Remembering that it will be explicitly okay for
+simple clients not to reflow text if they don't want to, the most
+anybody will be obligated to do is something like the following:
+
+in_verbatim = False
+for line in all_the_lines:
+    if line == &quot;```&quot;:
+        in_verbatim = not in_verbatim
+    elif line.startswith(&quot;=&gt;&quot;):
+        handle_a_link(line)
+    else:
+        print(line)
+
+This won't display the ``` lines and will avoid trying to parse any
+links which are supposed to be presented verbatim to the uesr (which,
+for the purposes of education, might be syntactically invalid and not
+something the client should try to parse anyway).  Nobody can
+reasonably call the above difficult or bloated, and it's only three
+lines longer than the bare minimum that is currently required:
+ 
+for line in all_the_lines:
+    if line.startswith(&quot;=&gt;&quot;):
+        handle_a_link(line)
+    else:
+        print(line)
+
+(as an aside, the times recently I've talked about &quot;simple clients
+catting content straight to stdout&quot; was a bit careless, because of
+course you need to actively extract the links as above)
+
+If this is all it takes to make it possible for ambitious client authors
+to support word reflowing on mobile clients without making it impossible
+to include ASCII art, source code or poetry, that seems like a fair
+trade to me.
+
+&gt;<i> Option 1. Use a no-op link
+</I>&gt;<i> 
+</I>&gt;<i> Pick a URL that by convention doesn't
+</I>&gt;<i> lead anywhere useful, and then hijack
+</I>&gt;<i> the (link friendly name) portion to
+</I>&gt;<i> display your gemini link.
+</I>&gt;<i> 
+</I>&gt;<i> =&gt;# =&gt;/about.txt About
+</I>&gt;<i> 
+</I>&gt;<i> &quot;#&quot; is a valid relative URL, right?
+</I>
+This is kind of a cute hack, I'll admit, but I worry that (especially to
+people that aren't intimiately familiar with RFC3986!) it's obscure and
+less easy to remember than the back tick syntax familiar from several
+other markup languages.  Also...
+
+&gt;<i> This would be displayed on
+</I>&gt;<i> most gemini clients as:
+</I>&gt;<i> 
+</I>&gt;<i> =&gt;/about.txt About
+</I>
+...it would display as something like:
+
+[7] =&gt;/about.txt About
+
+in AV-98.  And with a button styling in Castor!  In general I think it's
+nice if clients have a little leeway in choosing how they want to
+present links.
+
+&gt;<i> The line would be highlighted as a link
+</I>&gt;<i> (unless clients choose to handle this
+</I>&gt;<i> special case), 
+</I>
+Which I guess would take at *least* two extra lines of code, giving this
+approach only a one line advantage over the ``` approach which also
+facilitates reflowing text (this hack is just to make it possible to
+display link syntax insie text/gemini documents, right?).
+
+&gt;<i> Option 2. Use text/plain
+</I>&gt;<i> 
+</I>&gt;<i> ...
+</I>&gt;<i> 
+</I>&gt;<i> How you feel about this option likely
+</I>&gt;<i> depends on which side of the fence you
+</I>&gt;<i> fall on regarding text/gemini usage.
+</I>&gt;<i> Should text/gemini be used like HTML is
+</I>&gt;<i> on the web, with most content being
+</I>&gt;<i> written as gemini files? Or should it be
+</I>&gt;<i> more like gopher, where directories are
+</I>&gt;<i> type text/gemini but many people write
+</I>&gt;<i> their blog posts and other leaf
+</I>&gt;<i> documents as text/plain.
+</I>&gt;<i> 
+</I>&gt;<i> Lately I have been leaning more towards
+</I>&gt;<i> the second interpretation. Take another
+</I>&gt;<i> example: Instead of writing a python
+</I>&gt;<i> code snippet inline in a text/gemini
+</I>&gt;<i> document, what if you instead added a
+</I>&gt;<i> link to your code snippet and served it
+</I>&gt;<i> as &quot;text/x-python&quot;? This feels natural
+</I>&gt;<i> to me given that other media content
+</I>&gt;<i> like images also can't be displayed
+</I>&gt;<i> inline.
+</I>
+This is a conversation well worth having!  From my point of view, Gemini
+very deliberately chose to cast aside Gopher's strict distinction
+between menus and content, in part because so many people in Gopherspace
+seemed to be disatisfied with it.  So, it seems kind of a shame to just
+disregard this and go back to the gopher way.  Of course, people are
+totally free to do so if they want to!  Neither the protocol nor I will
+object.
+
+It is true that there seem to be quite a lot of cases in the wild where
+people are using text/gemini menus to link to collections of text/plain
+files.  Sometimes this seems to be accidental, because the files
+actually contain attempted Gemini links, e.g.:
+
+<A HREF="gemini://tilde.black/users/fox/journal/20190831-starting-out.txt">gemini://tilde.black/users/fox/journal/20190831-starting-out.txt</A>
+
+Other times I suspect this is to facilitate straightforward bihosting on
+Gopher and Gemini.
+
+I presonally plan to write Gemini content primarily in text/gemini, and
+in fact I'll probably decide how to distribute content between my Gopher
+and Gemini sites based in part on how well different kinds of content
+benefit from Gemini's ability to do in-line links.  Is anybody else
+planning to do this?  Are the people currently not doing this doing so
+out of conscious choice or just carrying over old Gopher habits?
+
+As for using in-line links as a way to include un-flowed text, I did
+think of this option (maybe somebody else already mentioned it in the
+list?).  It would work, but I feel like the user experience would be
+fairly clunky, especially for the combination of articles with frequent
+short code snippets (like programming tutorials) and simple
+terminal-based clients where going &quot;back&quot; to the text/gemini document
+from the text/x-python document wouldn't return the reader to the same
+point in the (potentially quite long) document from which they followed
+the link.
+
+I do take your point, though, that we're already forced into that clunky
+paradigm for images and other non-textual media...
+
+Ultimately I don't think I like either of these alternatives as much as
+the ``` syntax, but I'm happy to hear others' thoughts...
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000317.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000320.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#319">[ date ]</a>
+              <a href="thread.html#319">[ thread ]</a>
+              <a href="subject.html#319">[ subject ]</a>
+              <a href="author.html#319">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

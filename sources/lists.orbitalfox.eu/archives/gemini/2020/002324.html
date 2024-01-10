@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Identifying robots (was Re: Open Source Proxy)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Identifying%20robots%20%28was%20Re%3A%20Open%20Source%20Proxy%29&In-Reply-To=%3C20200724005903.GC32353%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002320.html">
+   <LINK REL="Next"  HREF="002343.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Identifying robots (was Re: Open Source Proxy)</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Identifying%20robots%20%28was%20Re%3A%20Open%20Source%20Proxy%29&In-Reply-To=%3C20200724005903.GC32353%40brevard.conman.org%3E"
+       TITLE="Identifying robots (was Re: Open Source Proxy)">sean at conman.org
+       </A><BR>
+    <I>Fri Jul 24 01:59:03 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002320.html">Identifying robots (was Re: Open Source Proxy)
+</A></li>
+        <LI>Next message (by thread): <A HREF="002343.html">Identifying robots (was Re: Open Source Proxy)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2324">[ date ]</a>
+              <a href="thread.html#2324">[ thread ]</a>
+              <a href="subject.html#2324">[ subject ]</a>
+              <a href="author.html#2324">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Natalie Pendragon once stated:
+&gt;<i> For the GUS crawl at least, the crawler doesn't identify itself _to_
+</I>&gt;<i> crawled sites, but it does obey blocks of rules in robots.txt files
+</I>&gt;<i> according to user-agent. So it works without needing a user-agent
+</I>&gt;<i> header.
+</I>&gt;<i> 
+</I>&gt;<i> It obeys user-agent of `*`, `indexer`, and `gus` in order of
+</I>&gt;<i> increasing importance.
+</I>&gt;<i> 
+</I>&gt;<i> There's been some talk of the generic sorts of user-agents in the
+</I>&gt;<i> past, which I think is a really nice idea. If `indexer` is a
+</I>&gt;<i> user-agent that both sites and crawlers had some sort of informal
+</I>&gt;<i> consensus on, then sites wouldn't need to worry about keeping up with
+</I>&gt;<i> any new indexers popping up.
+</I>&gt;<i> 
+</I>&gt;<i> Some other generic user-agent ideas, iirc, were `archiver` and
+</I>&gt;<i> `proxy`.
+</I>
+  That's a decent idea, but that still doesn't help when I want to block a
+particular bot for &quot;misbehaving&quot; (in some nebulous way).  For example,
+there's this one bot, &quot;The Knowledge AI&quot; which sends requests like
+
+	/%22http:/wesiseli.com/magician/%22 [1]
+
+(and yes, that's an actual example, pulled straight off the log file).  It's
+not quite yet annoying enough to block [2] but at least I have some chance
+of blocking it via robots.txt (which it does request).  
+
+  -spc
+
+[1]	I can't quite figure out why it includes the quotes as part of the
+	link.  *All* the links on my websites look like:
+
+		&lt;a href=&quot;<A HREF="http://example.com/">http://example.com/</A>&quot;&gt;
+
+	and for the most part, it can parse those links correctly.  And
+	that's not limited to just *one* bot, but several of them have that
+	behavior.
+
+[2]	Although it's nearly impossible to find anything out about it as the
+	user-agent string is literally &quot;The Knowledge AI&quot;, so it might be
+	worth blocking it just out of spite.
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002320.html">Identifying robots (was Re: Open Source Proxy)
+</A></li>
+	<LI>Next message (by thread): <A HREF="002343.html">Identifying robots (was Re: Open Source Proxy)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2324">[ date ]</a>
+              <a href="thread.html#2324">[ thread ]</a>
+              <a href="subject.html#2324">[ subject ]</a>
+              <a href="author.html#2324">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

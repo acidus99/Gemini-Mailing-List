@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3CCAFTy05avH-wCrseWbk2VQQEFqVBgUkM4TzQbjmFw7UG7LyNkug%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001556.html">
+   <LINK REL="Next"  HREF="001564.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)</H1>
+    <B>Michael Lazar</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3CCAFTy05avH-wCrseWbk2VQQEFqVBgUkM4TzQbjmFw7UG7LyNkug%40mail.gmail.com%3E"
+       TITLE="CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)">lazar.michael22 at gmail.com
+       </A><BR>
+    <I>Thu Jun 11 20:33:37 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001556.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+        <LI>Next message (by thread): <A HREF="001564.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1562">[ date ]</a>
+              <a href="thread.html#1562">[ thread ]</a>
+              <a href="subject.html#1562">[ subject ]</a>
+              <a href="author.html#1562">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Jun 11, 2020 at 1:37 PM solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at sdf.org</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> On Wed, Jun 10, 2020 at 06:58:38PM -0400, Michael Lazar wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; Ok I'll walk that back. It's too late to make changes *unless* there's a good
+</I>&gt;<i> &gt; reason to do so. I don't want to break CGI variables on a whim anymore, but if
+</I>&gt;<i> &gt; we all agree on a standard then I will follow suit.
+</I>&gt;<i>
+</I>&gt;<i> You're not storing these hashes in some kind of database for
+</I>&gt;<i> Astrobotany?  Wouldn't changing how you calcultate the TLS_CLIENT_HASH
+</I>&gt;<i> variable break a lot of accounts?
+</I>
+I am storing them in the database as base64-encoded strings. But it would not
+be hard to convert between the two text formats as long as the fingerprint
+bytes are the same. What we're discussing here (to my knowledge) is two
+different text representations of the same SHA256 digest of the public x509
+certificate DER [0][1]. That's the standard way to do certificate
+fingerprinting from what I can tell.
+
+Even if we do pick a different hashing algorithm for the CGI variable,
+astrobotany is implemented as a jetforce &quot;application&quot; where the python code is
+invoked directly inside the server's interpreter. So it has full access to the
+raw client certificate and can generate whichever hash it needs. I think this
+is similar to what GLV-1.12556 does with allowing custom LUA &quot;handlers&quot;.
+
+[0] <A HREF="https://github.com/michael-lazar/jetforce/blob/ea7d8c6f4cbc3db14f62c01bf12c375abfe98e7e/jetforce/tls.py#L25">https://github.com/michael-lazar/jetforce/blob/ea7d8c6f4cbc3db14f62c01bf12c375abfe98e7e/jetforce/tls.py#L25</A>
+[1] <A HREF="https://github.com/pyca/cryptography/blob/f5735cf25acd08222368a1db615bbf61d36b8007/src/cryptography/hazmat/backends/openssl/x509.py#L47">https://github.com/pyca/cryptography/blob/f5735cf25acd08222368a1db615bbf61d36b8007/src/cryptography/hazmat/backends/openssl/x509.py#L47</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001556.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+	<LI>Next message (by thread): <A HREF="001564.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1562">[ date ]</a>
+              <a href="thread.html#1562">[ thread ]</a>
+              <a href="subject.html#1562">[ subject ]</a>
+              <a href="author.html#1562">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposal: Simple structured form specification
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%3A%20Simple%20structured%20form%20specification&In-Reply-To=%3CCAN4yCu_FGOybihNHQoss-n3rak3%2BY8d5Yu5b3Pki%2BqUoc3c4bQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004953.html">
+   <LINK REL="Next"  HREF="004926.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposal: Simple structured form specification</H1>
+    <B>Russtopia</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%3A%20Simple%20structured%20form%20specification&In-Reply-To=%3CCAN4yCu_FGOybihNHQoss-n3rak3%2BY8d5Yu5b3Pki%2BqUoc3c4bQ%40mail.gmail.com%3E"
+       TITLE="Proposal: Simple structured form specification">rmagee at gmail.com
+       </A><BR>
+    <I>Tue Jan 26 07:17:29 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004953.html">Poetry in Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="004926.html">Proposal: Simple structured form specification
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4921">[ date ]</a>
+              <a href="thread.html#4921">[ thread ]</a>
+              <a href="subject.html#4921">[ subject ]</a>
+              <a href="author.html#4921">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+I have just started to get into Gemini, now running a simple server locally
+with the Kristal client to test things out.
+
+Reading the draft spec, I see there are only two ways to obtain input from
+the
+user -- via responses 10 and 11 (INPUT and SENSITIVE INPUT).
+
+While this allows simple single-field entry of values to the server, there
+appears to be no facility to allow users to enter multi-field, structured
+data in a single operation -- that is, simple forms.
+
+If it does not violate the fundamental tenets of the Gemini project, I
+humbly
+suggest an extension to the syntax of gemtext in the following manner to
+enable structured multi-field forms. The logic and work here would be ~90%
+on
+the client side, as it is mostly a convention for encoding structured forms
+within .gmi documents, parsed and acted on by the client. Form submission
+would require no additional core server-side logic; interpretation of
+submitted form values would follow the standard patterns of request handling
+with URL query parameters.
+No client or server state would be introduced.
+
+I have used an encoding similar to what follows successfully in a past
+'minimal HTML' project, to generate simple forms dynamically (but on the
+server-side). I hope it might serve well to allow Gemini users a more
+convenient way to interface with back-end programs, whilst preserving the
+overall ethos of minimalism and privacy.
+
+If the idea of adding a new link type to the gemtext specification is
+anathema,
+please consider the proposal as a purely client-side convention,
+displayed but otherwise ignored by existing clients as part of the
+&lt;USER-FRIENDLY LINK NAME&gt; portion of the existing '=&gt;' syntax instead.
+
+--
+
+PROPOSAL
+5.5.4 Link line form encoding
+
+Lines beginning with the two characters &quot;?&gt;&quot; are form-link lines, which
+follow
+the same rules as standard Link lines [5.4.2], plus a &lt;FORM-SPEC&gt; section
+preceding the &lt;USER-FRIENDLY LINK NAME&gt;:
+
+?&gt;[&lt;whitespace&gt;]&lt;URL&gt;[&lt;whitespace&gt;]&lt;FORM-SPECS&gt;&lt;whitespace&gt;[&lt;USER-FRIENDLY
+LINK NAME&gt;]
+
+where:
+
+&lt;whitespace&gt; is any non-zero number of consecutive spaces or tabs
+Square brackets indicate that the enclosed content is optional.
+&lt;URL&gt; is a URL, which may be absolute or relative.
+&lt;FORM-SPEC&gt; is a list of one or more &lt;form-field-specifier&gt; items, separated
+ by the Unicode/ASCII forward-slash '/'. The client uses &lt;FORM-SPEC&gt; to
+build
+ a form entry popup, dialog, or series of input prompts to gather structured
+ user input.
+
+Each &lt;form-field-specifier&gt; follows the form
+
+  T#VAR#DEFVALUE#LABEL
+
+  where T &#8714; [ s | c | b  ]
+
+'s' denotes a string (freeform data) field;
+'x' denotes a string/number SENSITIVE field, which the client MUST shroud as
+  password-type data;
+'c' denotes a choice (dropdown/one-of) field;
+'b' denotes a boolean ( checkbox, yes/no ) field
+
+'s' fields are freeform text, and may be used for numbers, text, or freeform
+  data. It is the server's responsibility to validate submitted data.
+For 'c' fields, the first choice is the default, all following choices being
+  delimited from it and each other by the pipe '|' character.
+For 'b' fields, allowable DEFVALUEs are [0 | 1], [yes | no], or [on | off].
+The
+  client is responsible for detecting these and returning sensible
+  counterparts to the DEFVALUE if the user chooses their opposites.
+
+VAR denotes the name of the form variable when submitting back to the server
+  upon submission.
+DEFVALUE denotes the default value to be displayed in the form. For choice
+  type fields, the first item in the choice list is the default.
+LABEL is text to be displayed by the client explaining the form field.
+Clients
+ MUST use the VAR field as a default LABEL if the .gmi link omits one.
+
+A valid &lt;FORM-SPEC&gt; field is of the form
+
+  &lt;form-field-specifier&gt;{/&lt;form-field-specifier&gt;/...}
+
+Example - three field form requesting a string, a choice, and a boolean
+
+  s#DELAY#5#Delay in seconds/c#SIZE#small|big|huge#Size of
+something:b#DEBUG#1#
+
+Note the above example has no LABEL for the final form field, so the client
+  should render a default label using the form variable's name, 'DEBUG'.
+This would instruct the client to display a form, popup or series of prompts
+  (in the case of a text-based client) to enter three items.
+The choice field would default to 'small', the first item in its set.
+The client would return a URI upon submission with the query parameters
+
+  ?DELAY=5&amp;SIZE=small&amp;DEBUG=1
+
+if the user submitted with default values.
+
+
+A fully-realized example of this proposed syntax would thus be
+
+?&gt; <A HREF="gemini://example.org/formSubmit">gemini://example.org/formSubmit</A> s#DELAY#5#Delay in
+seconds:c#SIZE#small|big|huge#Size of something:b#DEBUG#1# Please fill out
+this handy form
+
+Suggested limits on form structure and data
+
+Max &lt;form-field-specifiers&gt;: 8
+Max &lt;form-field-specifier&gt; sub-field lengths
+  (VAR, DEFVALUE, LABEL): 255 Unicode characters
+Max 'c' type choice length per item: 64 Unicode characters
+Max 'c' type choices: 64
+Max 's' value: enforced by server-side endpoint handler
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210125/f3a3aeec/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210125/f3a3aeec/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004953.html">Poetry in Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="004926.html">Proposal: Simple structured form specification
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4921">[ date ]</a>
+              <a href="thread.html#4921">[ thread ]</a>
+              <a href="subject.html#4921">[ subject ]</a>
+              <a href="author.html#4921">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

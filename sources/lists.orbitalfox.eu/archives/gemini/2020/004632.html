@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] [spec] TLS statistics
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20%5Bspec%5D%20TLS%20statistics&In-Reply-To=%3C46684aa3f60f500f8bd01dbe130edb3c%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004628.html">
+   <LINK REL="Next"  HREF="004633.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] [spec] TLS statistics</H1>
+    <B>nervuri</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20%5Bspec%5D%20TLS%20statistics&In-Reply-To=%3C46684aa3f60f500f8bd01dbe130edb3c%40disroot.org%3E"
+       TITLE="[tech] [spec] TLS statistics">nervuri at disroot.org
+       </A><BR>
+    <I>Thu Dec 31 11:34:08 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004628.html">[tech] [spec] TLS statistics
+</A></li>
+        <LI>Next message (by thread): <A HREF="004633.html">[tech] [spec] TLS statistics
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4632">[ date ]</a>
+              <a href="thread.html#4632">[ thread ]</a>
+              <a href="subject.html#4632">[ subject ]</a>
+              <a href="author.html#4632">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>December 30, 2020 11:53 PM, Sean Conner wrote:
+  &gt; I currently log client certificates (gasp!).
+
+That's different from what I was referring to. You're not a third party, you're supposed to receive that information. The problem with client certs + TLS 1.2 is that any third party on the network route can also see that information.
+
+When I log into a web forum over https using cookies, my ISP doesn't see what user I log in as. But when I log into a gemini forum using a client cert, my ISP does - and, as you point out, may even see the email address I used. However, that problem goes away with TLS 1.3.
+
+  &gt; Given the current state of Gemini, *even if* the domain name were encrypted, there's still a near 80% chance of knowing which domain is being accessed, just because most servers only serve one domain.
+
+I went from 394 to 258 hosts after eliminating subdomains (like all those *.flounder.online vhosts). So it's about 65%, rather than 80%. A 45% improvement is nothing to scoff at.
+
+But even if in 100% of cases there was a 1-to-1 mapping from domain to IP address, encrypted SNI still raises the bar, as the watchers on the network route need to do more work to find the domain - they don't simply get it when inspecting network traffic. Especially since, with SNI, you can't always find a domain if all you have is its IP address. For example, let's take 107.5.198.24 - tell me what Gemini domain is hosted there without looking at the data I gathered. If you find out, tell us how.
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004628.html">[tech] [spec] TLS statistics
+</A></li>
+	<LI>Next message (by thread): <A HREF="004633.html">[tech] [spec] TLS statistics
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4632">[ date ]</a>
+              <a href="thread.html#4632">[ thread ]</a>
+              <a href="subject.html#4632">[ subject ]</a>
+              <a href="author.html#4632">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

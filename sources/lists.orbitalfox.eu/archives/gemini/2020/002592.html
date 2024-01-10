@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A proposed scheme for parsing preformatted alt text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C20200907213805.2c119a34.me%40ecmelberk.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002596.html">
+   <LINK REL="Next"  HREF="002595.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A proposed scheme for parsing preformatted alt text</H1>
+    <B>Ecmel Berk Canl&#305;er</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C20200907213805.2c119a34.me%40ecmelberk.com%3E"
+       TITLE="A proposed scheme for parsing preformatted alt text">me at ecmelberk.com
+       </A><BR>
+    <I>Mon Sep  7 19:38:05 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002596.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+        <LI>Next message (by thread): <A HREF="002595.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2592">[ date ]</a>
+              <a href="thread.html#2592">[ thread ]</a>
+              <a href="subject.html#2592">[ subject ]</a>
+              <a href="author.html#2592">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I just had this interesting formating idea reading through this thread:
+
+
+[modifiers...] [type] [:] &lt;description&gt;
+
+
+This format lets the alt text be mostly human-readable while keeping
+some semantics for machines to parse through.
+
+As an example, all these lines should be valid:
+
+&quot;python code: Code to parse this format&quot;
+&quot;table: Point leaderboard&quot;
+&quot;Description without any machine readable parts&quot;
+
+The [modifiers...] part is a list of adjectives the pre-formatted text
+has, like a programming language name, type of art (ascii / ansi /
+unicode / whatever), or whatever else other people can think of. They are
+all single words separated by spaces.
+
+[type] is the type of the content in the pre-formatted text block. Like
+&quot;code&quot;, &quot;table&quot; or &quot;art&quot;
+
+The [:] is just a separator between the machine-readable part and the
+description. If a machine reads any &quot;:&quot;, it will stop processing, as the
+continuation of this line is for humans only.
+
+&lt;description&gt; is the human-readable explanation of what's inside the
+pre-formatted block. It can contain anything, including &quot;:&quot; characters
+since the machines should stop parsing after the first one.
+
+If a machine has any doubts (any unrecognized modifier or type, or maybe some 
+other heuristic), it should halt parsing and display the entire line as
+is, to make sure malformed input can still be understood by a human.
+
+
+
+I am not entirely sure how well this would actually work &quot;in
+production&quot;, but I feel like this is definitely something to throw out
+here.
+
+-- 
+Have a nice (day|night|week(end)?)
+~ Ecmel B. Canl&#305;er ~
+</PRE>
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002596.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+	<LI>Next message (by thread): <A HREF="002595.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2592">[ date ]</a>
+              <a href="thread.html#2592">[ thread ]</a>
+              <a href="subject.html#2592">[ subject ]</a>
+              <a href="author.html#2592">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

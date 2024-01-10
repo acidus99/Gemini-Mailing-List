@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposed minor spec changes, for comment.
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C20200519074625.GD4068%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000837.html">
+   <LINK REL="Next"  HREF="000862.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposed minor spec changes, for comment.</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C20200519074625.GD4068%40SDF.ORG%3E"
+       TITLE="Proposed minor spec changes, for comment.">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Tue May 19 08:46:25 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000837.html">Proposed minor spec changes, for comment.
+</A></li>
+        <LI>Next message (by thread): <A HREF="000862.html">Proposed minor spec changes, for comment.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#858">[ date ]</a>
+              <a href="thread.html#858">[ thread ]</a>
+              <a href="subject.html#858">[ subject ]</a>
+              <a href="author.html#858">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, May 18, 2020 at 05:37:15PM -0500, epoch wrote:
+ 
+&gt;<i> <A HREF="https://tools.ietf.org/html/rfc5147#section-4.1">https://tools.ietf.org/html/rfc5147#section-4.1</A>
+</I>&gt;<i> 
+</I>&gt;<i> &quot;   In Internet messages, line endings in text/plain MIME entities are
+</I>&gt;<i>    represented by CR+LF character sequences (see RFC 2046 [3] and RFC
+</I>&gt;<i>    3676 [6]).  However, some protocols (such as HTTP) additionally allow
+</I>&gt;<i>    other conventions for line endings.&quot;
+</I>&gt;<i> 
+</I>&gt;<i> precedent of protocols allowing for other line endings, so the gemini spec
+</I>&gt;<i> could just say the same thing that http does about line endings.
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="https://tools.ietf.org/html/rfc2616#section-3.7.1">https://tools.ietf.org/html/rfc2616#section-3.7.1</A>
+</I>&gt;<i> 
+</I>&gt;<i> &quot;   When in canonical form, media subtypes of the &quot;text&quot; type use CRLF as
+</I>&gt;<i>    the text line break. HTTP relaxes this requirement and allows the
+</I>&gt;<i>    transport of text media with plain CR or LF alone representing a line
+</I>&gt;<i>    break when it is done consistently for an entire entity-body. HTTP
+</I>&gt;<i>    applications MUST accept CRLF, bare CR, and bare LF as being
+</I>&gt;<i>    representative of a line break in text media received via HTTP.&quot;
+</I>
+Aaah, wonderful!  Thanks for bringing this to my attention.
+
+I *had* been wondering whether or not mainstream webservers were doing
+newline translation for text/html, which I had convinced myself they
+should have been doing, in principle.
+
+Okay, so we can actually spec whatever we like here for stuff that goes
+over the wire. CRLF is only mandatory for &quot;canonical form&quot; (although if
+that's not what is on the disk and not what is on the wire, what the
+heck *is* it?).
+
+So now the question is which do we prefer, forcing servers to
+canonicalise (canonise?) everything, with client behaviour then being
+strictly limited, or letting servers just send whatever the author uses
+and forcing clients to accept any of CRLF, CR or LF?
+
+In general I have preferred pushing burden to server authors over client
+authors for Gemini...but I expect the client burden is pretty small here
+as most languages will have some kind of functionality for breaking
+strings into lines which already handles this...
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000837.html">Proposed minor spec changes, for comment.
+</A></li>
+	<LI>Next message (by thread): <A HREF="000862.html">Proposed minor spec changes, for comment.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#858">[ date ]</a>
+              <a href="thread.html#858">[ thread ]</a>
+              <a href="subject.html#858">[ subject ]</a>
+              <a href="author.html#858">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

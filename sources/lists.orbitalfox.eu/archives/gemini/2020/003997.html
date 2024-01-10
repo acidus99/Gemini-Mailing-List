@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Good practices regarding MIME type
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Good%20practices%20regarding%20MIME%20type&In-Reply-To=%3C20201211104137.1b6d88875a03a9428cc2e65f%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004012.html">
+   <LINK REL="Next"  HREF="004009.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Good practices regarding MIME type</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Good%20practices%20regarding%20MIME%20type&In-Reply-To=%3C20201211104137.1b6d88875a03a9428cc2e65f%40gmail.com%3E"
+       TITLE="Good practices regarding MIME type">linde.philip at gmail.com
+       </A><BR>
+    <I>Fri Dec 11 09:41:37 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004012.html">Good practices regarding MIME type
+</A></li>
+        <LI>Next message (by thread): <A HREF="004009.html">[ANN] Castor9 gemini browser for Plan 9
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3997">[ date ]</a>
+              <a href="thread.html#3997">[ thread ]</a>
+              <a href="subject.html#3997">[ subject ]</a>
+              <a href="author.html#3997">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, 10 Dec 2020 22:12:41 +0100
+Sol&#232;ne Rapenne &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solene at perso.pw</A>&gt; wrote:
+
+&gt;<i> Hi,
+</I>&gt;<i> 
+</I>&gt;<i> I wrote a gemini server in C and I currently use an hardcoded list of 
+</I>&gt;<i> file extensions &lt;-&gt; MIME type assocation.
+</I>&gt;<i> This isn't great because it relies on file extension which can be wrong, 
+</I>&gt;<i> but a file without extension would
+</I>&gt;<i> use a default.
+</I>&gt;<i> 
+</I>&gt;<i> I chose to set a default text/gemini in case the extension is unknown or 
+</I>&gt;<i> if the file has no extension.
+</I>&gt;<i> 
+</I>&gt;<i> What are the good practices to determine a file MIME type?
+</I>
+There is no way that will work completely reliably without implementing
+full parsers of the different file types. For a complete server I'd
+expect to be able to determine file type for a certain served resource
+myself without relying on an extension-type mapping. For example, to be
+able to say that every file under /text/ is text/plain.
+
+John Cowan suggests libmagic and file. AFAIK utilities/libraries like
+this can operate using matching rules on some-few bytes of a file to
+determine the file type with a limited degree of accuracy
+
+I suggest a procedure like this to determine the file type:
+
+1. Check if there is a configuration rule for this particular file to
+   determine its file type. If so, use that.
+2. If there is not, check if the server extension-type mapping
+   configuration contains the file extension. If so, use that.
+3. If there is not, check the system level mime type database if there
+   is a type assigned to the extension. If so, use that.
+4. If there is not, you can now optionally use some heuristic approach
+   to determine the file type. This can be via a library like
+   libmagic, or a simpler approach as suggested by makeworld to
+   determine whether you can defer to text/plain or not. If so, use
+   that.
+5. If not, assume application/octet-stream and use that.
+
+You could cache the results in memory and drop the cache on e.g. SIGHUP
+
+As for extension-less files, if you don't want extensions visible to
+the client, you can still use extensions on the server side, which the
+server optionally strips off.
+
+Overall I think it's fair to expect some level of effort from the
+server operator in making sure that the static files have sensible
+extensions. Any smartness beyond extension mapping is at best a bonus
+AFAIC, at worst a potentially nasty surprise.
+
+-- 
+Philip
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201211/818212f4/attachment-0001.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201211/818212f4/attachment-0001.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004012.html">Good practices regarding MIME type
+</A></li>
+	<LI>Next message (by thread): <A HREF="004009.html">[ANN] Castor9 gemini browser for Plan 9
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3997">[ date ]</a>
+              <a href="thread.html#3997">[ thread ]</a>
+              <a href="subject.html#3997">[ subject ]</a>
+              <a href="author.html#3997">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

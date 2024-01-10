@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Critique my setup, please
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Critique%20my%20setup%2C%20please&In-Reply-To=%3C327BADF6-89C8-4F19-BDCD-9CAAD2142FDB%40ngalt.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002734.html">
+   <LINK REL="Next"  HREF="002693.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Critique my setup, please</H1>
+    <B>Nathan Galt</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Critique%20my%20setup%2C%20please&In-Reply-To=%3C327BADF6-89C8-4F19-BDCD-9CAAD2142FDB%40ngalt.com%3E"
+       TITLE="Critique my setup, please">mailinglists at ngalt.com
+       </A><BR>
+    <I>Sat Sep 12 21:01:48 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002734.html">HTML as an escape hatch
+</A></li>
+        <LI>Next message (by thread): <A HREF="002693.html">Critique my setup, please
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2691">[ date ]</a>
+              <a href="thread.html#2691">[ thread ]</a>
+              <a href="subject.html#2691">[ subject ]</a>
+              <a href="author.html#2691">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I&#8217;m setting up a capsule on a VPS served up with Molly Brown. I&#8217;d like to get some feedback on what I should be doing, in case I&#8217;m doing something egregiously wrong. The capsule isn&#8217;t intended to be permanent, at least not yet, so I&#8217;m giving it the domain name of beepbeepbeep.example.
+
+(It was only after I decided I should post this that I remembered that the best way to get good advice on the Internet is to post bad advice&#8230;)
+
+I wasn&#8217;t sure how to make/get certs, so I stumbled around and found this:
+
+<A HREF="https://github.com/michael-lazar/jetforce#tls-certificates">https://github.com/michael-lazar/jetforce#tls-certificates</A>
+
+And then there&#8217;s also
+
+sudo certbot certonly --standalone
+
+as shown on &lt;<A HREF="https://certbot.eff.org/lets-encrypt/ubuntufocal-other">https://certbot.eff.org/lets-encrypt/ubuntufocal-other</A>&gt;.
+
+I&#8217;m waffling back and forth on whether I should stick everything in some unprivileged user&#8217;s home directory (much like I do here) or if I should put things in &#8220;proper&#8221; places like /var/gemini. Opinions welcome. I do not intend for humans other than me to be inside this server ever.
+
+Without further ado, the commands I used just now:
+
+- - - - - - - - - 8&lt; - - - - - - - - - 
+
+#!/bin/bash
+apt update
+apt upgrade --yes
+
+apt install --yes fish bat
+ln -s /usr/bin/batcat /usr/local/bin/bat
+
+mkdir /etc/skel/.ssh
+cp ~/.ssh/authorized_keys /etc/skel/.ssh/
+
+addgroup certview
+
+# named after Gus Grissom, who named the Gemini 3 capsule &#8220;Molly Brown&#8221;
+adduser --shell /usr/bin/fish --disabled-password --gecos -- griss
+usermod -aG certview griss
+
+snap install --classic certbot
+certbot certonly --standalone \
+    --non-interactive \
+    --agree-tos \
+    --domains &quot;gemini.beepbeepbeep.example&quot; \
+    --register-unsafely-without-email
+
+chmod 0755     /etc/letsencrypt/{live,archive}
+chmod g+r      /etc/letsencrypt/archive/gemini.beepbeepbeep.example/privkey1.pem
+chgrp certview /etc/letsencrypt/archive/gemini.beepbeepbeep.example/privkey1.pem
+
+cat &lt;&lt; 'EOF' &gt; /etc/molly.conf
+Hostname = &quot;gemini.beepbeepbeep.example&quot;
+DefaultLang = &quot;en-US&quot;
+
+DocBase =   &quot;/home/griss/public&quot;
+AccessLog = &quot;/home/griss/access.log&quot;
+ErrorLog =  &quot;/home/griss/error.log&quot;
+
+CertPath = &quot;/etc/letsencrypt/live/gemini.beepbeepbeep.example/fullchain.pem&quot;
+KeyPath =  &quot;/etc/letsencrypt/live/gemini.beepbeepbeep.example/privkey.pem&quot;
+
+[MimeOverrides]
+&quot;atom.xml$&quot; = &quot;application/atom+xml&quot;
+EOF
+
+cat &lt;&lt; 'EOF' &gt; /etc/systemd/system/molly-brown.service
+[Unit]
+Description=Molly Brown gemini server
+After=network.target
+
+[Service]
+Type=simple
+Restart=on-failure
+User=griss
+ExecStart=/home/griss/go/bin/molly-brown
+
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/home/griss/access.log /home/griss/error.log
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl enable molly-brown.service 
+
+# Much later&#8230;
+systemctl start molly-brown.service 
+
+#######################################
+# As griss&#8230;
+
+wget <A HREF="https://golang.org/dl/go1.15.2.linux-amd64.tar.gz">https://golang.org/dl/go1.15.2.linux-amd64.tar.gz</A>
+tar xf go*
+mv go go-dist
+mkdir go
+
+./go-dist/bin/go get tildegit.org/solderpunk/molly-brown
+
+# openssl req -newkey rsa:2048 -nodes -keyout gemini.beepbeepbeep.example.key \
+#    -nodes -x509 -out gemini.beepbeepbeep.example.crt -subj &quot;/CN=gemini.beepbeepbeep.example&quot;
+
+mkdir public
+
+printf &quot;# It works!\n\nYour Gemini capsule is up and running.\n&quot; &gt; public/index.gmi
+
+
+
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002734.html">HTML as an escape hatch
+</A></li>
+	<LI>Next message (by thread): <A HREF="002693.html">Critique my setup, please
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2691">[ date ]</a>
+              <a href="thread.html#2691">[ thread ]</a>
+              <a href="subject.html#2691">[ subject ]</a>
+              <a href="author.html#2691">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

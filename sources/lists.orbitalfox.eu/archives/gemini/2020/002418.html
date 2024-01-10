@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> gemini+stream://
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bstream%3A//&In-Reply-To=%3C20200815184124.GA19347%40kurosawa.casa.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002413.html">
+   <LINK REL="Next"  HREF="002421.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>gemini+stream://</H1>
+    <B>cage</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bstream%3A//&In-Reply-To=%3C20200815184124.GA19347%40kurosawa.casa.net%3E"
+       TITLE="gemini+stream://">cage-dev at twistfold.it
+       </A><BR>
+    <I>Sat Aug 15 19:41:24 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002413.html">gemini+stream://
+</A></li>
+        <LI>Next message (by thread): <A HREF="002421.html">gemini+stream://
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2418">[ date ]</a>
+              <a href="thread.html#2418">[ thread ]</a>
+              <a href="subject.html#2418">[ subject ]</a>
+              <a href="author.html#2418">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Aug 15, 2020 at 01:25:37PM -0400, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">easeout at tilde.team</A> wrote:
+
+Hi!
+
+Thank you for your reply!
+
+With this message i try to give an answer both to you an Kevin because
+i feel my answer try to address the arguments raised by both of you.
+
+&gt;<i> On Sat, Aug 15, 2020 at 12:47:22PM +0200, cage wrote:
+</I>&gt;<i> &gt; Honestly i  fail to understand  why a new  scheme is needed  here. The
+</I>&gt;<i> &gt; protocol already supports  stream as discussed in  a previous messages
+</I>&gt;<i> &gt; and i  do no  see a lott  of advantages for  using a  different scheme
+</I>&gt;<i> &gt; except (as you wrote) to signal to  the user that the content will not
+</I>&gt;<i> &gt; end.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Probably i am missing something, please help me to understand.
+</I>&gt;<i>
+</I>&gt;<i> In our IRC discussion, we raised some user-facing guarantees of Gemini:
+</I>&gt;<i>
+</I>&gt;<i> - You know that when you open a link, you're just getting that one file,
+</I>&gt;<i>   not an implicit bundle of child requests
+</I>&gt;<i> - You know the connection will not remain open after you have begun to
+</I>&gt;<i>   see its content
+</I>
+OK, my honest question  is now is: &quot;is the last  point true?&quot;.  Let me
+give you an example (sorry i have to talk about my work, i hope you do
+not feel this annoying).
+
+When i  started my client i  assumed all the content  was non streamed
+and then, when  i discovered it was not i  felt very depressed because
+my code  would be  useless, then  reading a  previous message  in this
+mailing list I  started to assume every content got  from server was a
+stream. And started to code following this assumption.
+
+Now, the code  is crude and not  complete but it works  quite nice for
+endless flow of  gemini formatted lines (so you see  the contents of a
+gemini  file  while  the  connection  is  still  open)  but  also  for
+downloading a single file, so there  is no need for different code for
+streamed contents and non streamed contents.
+
+(At this time  i could not handle, for example,  an endless audio file
+but  i consider  this  an issue  of  my  client not  an  issue in  the
+protocol.)
+
+At this moment (assuming no bug in  my code and that i have understood
+the proposal  correctly, two generous  assumptions to be  honest! :-D)
+all i  need to  support 'gemini+<A HREF="stream://">stream://</A>'  is just  to treat  it like
+'<A HREF="gemini://">gemini://</A>'.
+
+&gt;<i> As users, these guarantees feel good to us.
+</I>
+As an user too i agree! :)
+
+&gt;<i> And we have confidence in
+</I>&gt;<i> these guarantees whenever we see a <A HREF="gemini://">gemini://</A> link. So we would like to
+</I>&gt;<i> keep that user confidence high. For that reason, we like the idea of
+</I>&gt;<i> leaving the <A HREF="gemini://">gemini://</A> scheme for content you download and then consume,
+</I>&gt;<i> and a separate scheme for content you consume while the connaection
+</I>&gt;<i> remains open.
+</I>
+OK i think i  kind to understand the point, so what  you propose it to
+enforce the  second &quot;guarantee&quot; of  your list for  '<A HREF="gemini://">gemini://</A>' scheme,
+and  leave  the  &quot;live&quot;  (sorry  i  can  not  find  a  better  word)
+connections to the 'gemini+<A HREF="stream://">stream://</A>' right?
+
+&gt;<i> &gt; &gt;  6. It is  still a single client-initiated request  happening in the
+</I>&gt;<i> &gt; &gt; foreground. We  aren't creating background threads  of who-know-what
+</I>&gt;<i> &gt; &gt; running services.  We're getting  an ongoing document  in real-time,
+</I>&gt;<i> &gt; &gt; that's all.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I do not think this is entirely  true if you want to update/keep alive
+</I>&gt;<i> &gt; the  UI  of  the  client  while   the  content  is  flowing  from  the
+</I>&gt;<i> &gt; server. Some kind of concurrent works enter in the equation, i think.
+</I>&gt;<i>
+</I>&gt;<i> I think the &quot;foreground&quot; versus &quot;background&quot; concept was really more
+</I>&gt;<i> about what the user is made aware of. In that sense, a &quot;background&quot;
+</I>&gt;<i> operation would be one that happens without the user's knowledge. We
+</I>&gt;<i> like the idea that in Gemini, even if streamed, you don't stream
+</I>&gt;<i> anything you're not aware of. If a second process or thread did the
+</I>&gt;<i> work, but the user can see that happening, that's no problem.
+</I>
+So I was entirely missing the point here! Thank you for clarifying this
+to me! :)
+
+Bye!
+C.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002413.html">gemini+stream://
+</A></li>
+	<LI>Next message (by thread): <A HREF="002421.html">gemini+stream://
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2418">[ date ]</a>
+              <a href="thread.html#2418">[ thread ]</a>
+              <a href="subject.html#2418">[ subject ]</a>
+              <a href="author.html#2418">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

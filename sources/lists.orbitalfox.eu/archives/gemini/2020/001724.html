@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> gemini streaming
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%20streaming&In-Reply-To=%3C20200616011822.GZ11281%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001696.html">
+   <LINK REL="Next"  HREF="001697.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>gemini streaming</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%20streaming&In-Reply-To=%3C20200616011822.GZ11281%40brevard.conman.org%3E"
+       TITLE="gemini streaming">sean at conman.org
+       </A><BR>
+    <I>Tue Jun 16 02:18:22 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001696.html">gemini streaming
+</A></li>
+        <LI>Next message (by thread): <A HREF="001697.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1724">[ date ]</a>
+              <a href="thread.html#1724">[ thread ]</a>
+              <a href="subject.html#1724">[ subject ]</a>
+              <a href="author.html#1724">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great James Tomasino once stated:
+&gt;<i> Since text/gemini (or gemtext, if that's what we're calling it) is
+</I>&gt;<i> parsable from top-to bottom in a single pass, it's also perfectly well
+</I>&gt;<i> suited to being treated as a stream instead of a document. I believe the
+</I>&gt;<i> only limitation to this currently is that many clients are expecting that
+</I>&gt;<i> gemtext is a document and are deferring parsing until the end-of-document
+</I>&gt;<i> is reached.
+</I>&gt;<i> 
+</I>&gt;<i> When I raised this question on the IRC channel I wanted to know if there
+</I>&gt;<i> was a way to indicate within the MIME perhaps that the resource is a
+</I>&gt;<i> stream and not a document. Then clients could know explicitly that they
+</I>&gt;<i> shouldn't be waiting on the end of document before parsing. I'm really not
+</I>&gt;<i> familiar with the technical mechanisms of how that's set up on HTTP, so I
+</I>&gt;<i> wanted to toss it to the list.
+</I>
+  A web browser already knows how it will deal with the content by the time
+it's reading the body of the response, and unless the browser is going to
+hand off the content to another program (say a PDF viewer) the browser can
+just treat the resulting download of data as a stream.  TCP (the underlying
+protocol for both HTTP and Gemini) provides a &quot;reliable byte-oriented
+stream&quot; [1] and it's up to the client to deal with that as it sees fit.
+
+  A Gemini client can see it's getting a text/gemimi file, and start reading
+the network stream a line at a time and displaying it at the same time if it
+so chooses.  It doesn't *have* to wait for the entire file to download
+before processing it.
+
+&gt;<i> Should we investigate a MIME solution to be explicit, or should clients
+</I>&gt;<i> treat all text/gemini as streams and just parse as they go? The later
+</I>&gt;<i> seems easier from a implementation standpoint. Someone raised the question
+</I>&gt;<i> about how the display should be handled between the two, though. Sometimes
+</I>&gt;<i> streams desire to keep the focus pinned to the newest content, not the
+</I>&gt;<i> start of the document. That sort of functionality would support using a
+</I>&gt;<i> separate explicit MIME or some other way to differentiate them.
+</I>
+  It depends how the client is written.  I client can certainly parse and
+display a text/gemini as it receives it (much like web browsers can start
+displaying partially downloaded content) but it complicates the codebase. 
+Is it worth the tradeoff?  
+
+&gt;<i> With streams in place we could do some very cool things. We could build a
+</I>&gt;<i> fediverse front-end, or a view into the IRC channel. If you use two tabs
+</I>&gt;<i> and a response 10 loop and client certs, you could even post INTO these
+</I>&gt;<i> platforms. Let your imagination run wild!
+</I>
+  Nothing stopping you now from doing that.  This no size parameter, a
+Gemini client can continuously stream data to a client until the connection
+is broken.
+
+  -spc
+
+[1]	Technically, TCP exists to manage the bandwidth between two
+	endpoints, but it was engineers to also provide the said &quot;reliable
+	byte-oriented stream&quot;.  There are no packets to the client code,
+	just a stream of bytes it has to read.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001696.html">gemini streaming
+</A></li>
+	<LI>Next message (by thread): <A HREF="001697.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1724">[ date ]</a>
+              <a href="thread.html#1724">[ thread ]</a>
+              <a href="subject.html#1724">[ subject ]</a>
+              <a href="author.html#1724">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

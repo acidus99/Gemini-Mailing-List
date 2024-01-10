@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Emacs org-mode to gemini export back-end
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Emacs%20org-mode%20to%20gemini%20export%20back-end&In-Reply-To=%3C86360o24fl.fsf%40abrah.ms%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003718.html">
+   <LINK REL="Next"  HREF="003685.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Emacs org-mode to gemini export back-end</H1>
+    <B>Justin Abrahms</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Emacs%20org-mode%20to%20gemini%20export%20back-end&In-Reply-To=%3C86360o24fl.fsf%40abrah.ms%3E"
+       TITLE="[ANN] Emacs org-mode to gemini export back-end">justin at abrah.ms
+       </A><BR>
+    <I>Wed Dec  2 04:54:38 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003718.html">[ANN] Emacs org-mode to gemini export back-end
+</A></li>
+        <LI>Next message (by thread): <A HREF="003685.html">Suggestion: ABNF in spec
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3726">[ date ]</a>
+              <a href="thread.html#3726">[ thread ]</a>
+              <a href="subject.html#3726">[ subject ]</a>
+              <a href="author.html#3726">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+&gt;&gt;<i> I'll poke around on yours. I'd love to figure out how we can have one
+</I>&gt;&gt;<i> package instead of two. :)
+</I>&gt;<i>
+</I>&gt;<i> Yep, I&#8217;ll do the same to see if we can converge at some point or if both
+</I>&gt;<i> approach are worth to exist :)
+</I>
+I spent a bit of time with yours yesterday. Mostly taking my gemini site
+and seeing how ours compare. Here were my thoughts:
+
+
+1. I link all of my documents with file: directives. Your links appear
+to add `(file)` to the end of the link, which doesn't make a lot of
+sense to me.
+
+2. I like my linking behavior a little better (bias alert!)
+
+3. I don't like how either of us output lists of links.
+
+Source:
+```org
+* [[link text][example.org]]
+```
+
+Yours:
+
+```gemini
+* link text[1]
+
+=&gt; example.org [1] link text
+```
+
+Mine:
+
+```gemini
+* [link text]
+
+=&gt; example.org link text
+```
+
+Ideal:
+
+```gemini
+=&gt; example.org link text
+```
+
+4. Your renders dates oddly.
+
+If I have `&lt;2020-11-11 Wed&gt;` in a post (org timestamp), it shows up as:
+
+```gemini
+&lt;span class=&quot;timestamp-wrapper&quot;&gt;&lt;span class=&quot;timestamp&quot;&gt;&lt;2020-11-11
+Wed&gt;&lt;/span&gt;&lt;/span&gt;
+```
+
+I'm guessing this is because you inherit from markdown and it pulls in
+some unhelpful html escaping. Mine, by comparison, renders it as the
+plaintext string `&lt;2020-11-11 Wed&gt;`.
+
+That's what I got so far. Would love to hear your impression of mine.
+
+ -abrahms
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003718.html">[ANN] Emacs org-mode to gemini export back-end
+</A></li>
+	<LI>Next message (by thread): <A HREF="003685.html">Suggestion: ABNF in spec
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3726">[ date ]</a>
+              <a href="thread.html#3726">[ thread ]</a>
+              <a href="subject.html#3726">[ subject ]</a>
+              <a href="author.html#3726">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

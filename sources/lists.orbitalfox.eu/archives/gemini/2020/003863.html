@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> IDN with Gemini?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3Cc03e5926-1403-00ac-0969-19725384680c%40scotdoyle.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003858.html">
+   <LINK REL="Next"  HREF="003865.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>IDN with Gemini?</H1>
+    <B>Scot</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3Cc03e5926-1403-00ac-0969-19725384680c%40scotdoyle.com%3E"
+       TITLE="IDN with Gemini?">gmi1 at scotdoyle.com
+       </A><BR>
+    <I>Mon Dec  7 21:00:33 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003858.html">IDN with Gemini?
+</A></li>
+        <LI>Next message (by thread): <A HREF="003865.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3863">[ date ]</a>
+              <a href="thread.html#3863">[ thread ]</a>
+              <a href="subject.html#3863">[ subject ]</a>
+              <a href="author.html#3863">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 12/7/20 12:00 PM, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+&gt;<i> What parsing would a client have to do?
+</I>&gt;<i>
+</I>&gt;<i> - Extracting the domain, so it can be punycoded for DNS lookups
+</I>&gt;<i>
+</I>
+Can we be sure gemini host resolution will always use the global DNS?
+
+Section 4 of RFC 6055 cautions against assuming that all name resolution
+is using the global DNS and therefore that querying with punycode
+domain names will succeed:
+
+ &#160; It is inappropriate for an application that calls a general-purpose
+   name resolution library to convert a name to an A-label unless the
+   application is absolutely certain that, in all environments where the
+   application might be used, only the global DNS that uses IDNA
+   A-labels actually will be used to resolve the name.
+
+Conversely, querying with utf8 domain names fails on Ubuntu 20.04
+using systemd-resolved [1].
+
+Some languages/libraries such as Python convert utf8 requests to
+punycode silently before submitting the request to the resolver [2].
+
+
+
+[1] C program fails without punycode conversion
+#include &lt;netdb.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;sys/socket.h&gt;
+int show_ip(char *name) {
+   struct hostent *entry;
+   entry = gethostbyname(name);
+   if (entry) {
+     printf(&quot;name '%s' has ip address\n&quot;, entry-&gt;h_name);
+     printf(&quot;ip: %s\n\n&quot;,inet_ntoa(*(struct in_addr*)entry-&gt;h_name));
+   } else {
+     printf(&quot;error querying '%s': %s\n&quot;, name, hstrerror(h_errno));
+   }
+}
+int main() {
+   show_ip(&quot;xn--td2a.jp&quot;);
+   show_ip(&quot;&#34552;.jp&quot;);
+}
+
+
+[2] Python program succeeds with *implicit* punycode conversion
+import socket
+def show_ip(name):
+   print(&quot;name '%s' has ip '%s'&quot; % (name, (socket.gethostbyname(name))))
+show_ip('xn--td2a.jp')
+show_ip('&#34552;.jp')
+
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003858.html">IDN with Gemini?
+</A></li>
+	<LI>Next message (by thread): <A HREF="003865.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3863">[ date ]</a>
+              <a href="thread.html#3863">[ thread ]</a>
+              <a href="subject.html#3863">[ subject ]</a>
+              <a href="author.html#3863">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Three possible uses for IRIs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3C20201208212004.GS24194%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003917.html">
+   <LINK REL="Next"  HREF="003921.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Three possible uses for IRIs</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3C20201208212004.GS24194%40brevard.conman.org%3E"
+       TITLE="Three possible uses for IRIs">sean at conman.org
+       </A><BR>
+    <I>Tue Dec  8 21:20:04 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003917.html">Three possible uses for IRIs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003921.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3913">[ date ]</a>
+              <a href="thread.html#3913">[ thread ]</a>
+              <a href="subject.html#3913">[ subject ]</a>
+              <a href="author.html#3913">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> once stated:
+&gt;<i> 
+</I>&gt;<i> I'm unsure whether that would require an IRI parser or not, but I'd feel more
+</I>&gt;<i> confident with one. However, there is already a client torture test that *sort of*
+</I>&gt;<i> covers this. It's not designed as an IRI test, but it includes invalid
+</I>&gt;<i> characters in a link line.
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="gemini://gemini.conman.org/test/torture/0031">gemini://gemini.conman.org/test/torture/0031</A>
+</I>&gt;<i> 
+</I>&gt;<i> That page contains a link line that looks like this:
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; &lt;0032&gt; &quot;Beware the bad link&quot;
+</I>&gt;<i> 
+</I>&gt;<i> And the Go stdlib will actually correct this link and output a correct
+</I>&gt;<i> absolute one. So in Amfora, it will go to the correct URL, which is
+</I>&gt;<i> <A HREF="gemini://gemini.conman.org/test/torture/%3C0032%3E">gemini://gemini.conman.org/test/torture/%3C0032%3E</A>
+</I>
+  What you failed to quote from that test is:
+
+	I'm not entirely sure what the proper response should be ...
+
+  And it was a last minute thing to add the link to %3C0032%3E---I was
+thinking it was more of an Easter Egg type of thing than what the actual
+result should be.  
+
+&gt;<i> I've set up my own test that contains a more complex Unicode character: &#34552;.
+</I>&gt;<i> It tests the path, as well as Unicode in the query strings.
+</I>&gt;<i> You can access it at: <A HREF="gemini://makeworld.gq/test/iri-link.gmi">gemini://makeworld.gq/test/iri-link.gmi</A>
+</I>
+  I tried both the Gemini Client Torture Test 31, and your link with the
+Gemini portal at portal.mozz.us.  The results were interesting.  If failed
+the Gemini Client Torture Test, but loaded the page with the Unicode
+character on your site.  So at least it supports percent encoding of
+characters outside the ASCII range.
+
+  -spc (So that's one more data point ... )
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003917.html">Three possible uses for IRIs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003921.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3913">[ date ]</a>
+              <a href="thread.html#3913">[ thread ]</a>
+              <a href="subject.html#3913">[ subject ]</a>
+              <a href="author.html#3913">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

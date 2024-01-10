@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> IDN with Gemini?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C20201204150029.GA4584%40sources.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003792.html">
+   <LINK REL="Next"  HREF="003799.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>IDN with Gemini?</H1>
+    <B>Stephane Bortzmeyer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C20201204150029.GA4584%40sources.org%3E"
+       TITLE="IDN with Gemini?">stephane at sources.org
+       </A><BR>
+    <I>Fri Dec  4 15:00:30 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003792.html">IDN with Gemini?
+</A></li>
+        <LI>Next message (by thread): <A HREF="003799.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3794">[ date ]</a>
+              <a href="thread.html#3794">[ thread ]</a>
+              <a href="subject.html#3794">[ subject ]</a>
+              <a href="author.html#3794">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Dec 04, 2020 at 09:46:40AM -0500,
+ John Cowan &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>&gt; wrote 
+ a message of 93 lines which said:
+
+&gt;<i> It seems clear from the behavior of web browsers that the Right Thing is to
+</I>&gt;<i> convert all IDNs to Punycode before putting them on the wire.
+</I>
+I disagree. This is not because HTTP does it that way that everyone
+else should. IMHO, the right behaviour would be:
+
+* parse the IRI and extract the domain name
+* convert it to Punycode
+* do the DNS lookup
+* connect to the IP address and send the IRI as request
+
+This leaves open interesting issues such as Unicode normalization but
+it would be more natural for a new protocol, free of HTTP legacy.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003792.html">IDN with Gemini?
+</A></li>
+	<LI>Next message (by thread): <A HREF="003799.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3794">[ date ]</a>
+              <a href="thread.html#3794">[ thread ]</a>
+              <a href="subject.html#3794">[ subject ]</a>
+              <a href="author.html#3794">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [TECH] proxies and TOFU (was Re: The problem with unusual ports)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BTECH%5D%20proxies%20and%20TOFU%20%28was%20Re%3A%20The%20problem%20with%20unusual%20ports%29&In-Reply-To=%3C21b0d947-4f5c-231d-1eff-ed797139bb3c%40qwertqwefsday.eu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004353.html">
+   <LINK REL="Next"  HREF="004362.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[TECH] proxies and TOFU (was Re: The problem with unusual ports)</H1>
+    <B>Johann Galle</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BTECH%5D%20proxies%20and%20TOFU%20%28was%20Re%3A%20The%20problem%20with%20unusual%20ports%29&In-Reply-To=%3C21b0d947-4f5c-231d-1eff-ed797139bb3c%40qwertqwefsday.eu%3E"
+       TITLE="[TECH] proxies and TOFU (was Re: The problem with unusual ports)">johann at qwertqwefsday.eu
+       </A><BR>
+    <I>Fri Dec 25 15:06:11 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004353.html">The problem with unusual ports
+</A></li>
+        <LI>Next message (by thread): <A HREF="004362.html">[Tech] [Spec] TOFU or not TOFU?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4376">[ date ]</a>
+              <a href="thread.html#4376">[ thread ]</a>
+              <a href="subject.html#4376">[ subject ]</a>
+              <a href="author.html#4376">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 2020-12-24T03:45Z, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+&gt;&gt;&gt;<i> Someone has written one. :)
+</I>&gt;&gt;&gt;<i> gmitohtml is a Gemini proxy server.
+</I>&gt;&gt;&gt;<i> <A HREF="https://gitlab.com/tslocum/gmitohtml">https://gitlab.com/tslocum/gmitohtml</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Forgive me if I misunderstand, but I believe the idea is to run the Gemini
+</I>&gt;&gt;<i> protocol and serve gemini content, but just be able to do it on a port other
+</I>&gt;&gt;<i> than 1965 (In this case, proxying gemini over the https port).
+</I>&gt;<i>
+</I>&gt;<i> To clarify, I'm talking about Gemini server that accepts request URLs with
+</I>&gt;<i> other hosts. Like the server runs at example.com, and will accept requests for
+</I>&gt;<i> example.com, gus.guru, makeworld.gq, etc. And it will make the request on your
+</I>&gt;<i> behalf.
+</I>&gt;<i>
+</I>&gt;<i> And then that server could run on any port, port 443 for example. This would
+</I>&gt;<i> be a way to get around blocking.
+</I>&gt;<i>
+</I>&gt;<i> makeworld
+</I>
+This topic has now been mentioned in another thread, but TOFU makes a &quot;nice&quot;[1]
+proxy difficult:
+
+The TLS certificate has to be sent before any content from the client is
+transmitted (* remember this). This means that the proxy sends its own
+certificate. Depending on how lax the client is on checking the certificates
+contents, it cannot work differently.
+Only after verifying the certificate is the requested URL transmitted.
+
+Now the problem arises: How should the proxy handle the endpoint's certificate
+under TOFU?
+
+Idealy the certificate would just be forwarded by the proxy, but this is not
+possible because of (*).
+The proxy could do its own TOFU and allow its users to update the cert store,
+but on a public proxy this could be exploited by an attacker.
+The proxy could have its own &quot;user sessions&quot; but at that point the
+implementation of the proxy would be considerably inflated IMHO.
+It would probably be much cleaner to use a VPN or an SSH tunnel at that point
+(and probably a zillion other ways).
+
+[1] Whatever would be considered nice is a different point, i.e. what
+     Stephane Bortzmeyer wrote on 2020-12-24T13:06Z:
+     &gt; Do note that this requires trust in the proxy [...]
+
+Johann
+---
+You can verify the digital signature on this email with the public key
+available through web key discovery. Try e.g. `gpg --locate-keys`...
+
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: OpenPGP_signature
+Type: application/pgp-signature
+Size: 840 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201225/ef270839/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201225/ef270839/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004353.html">The problem with unusual ports
+</A></li>
+	<LI>Next message (by thread): <A HREF="004362.html">[Tech] [Spec] TOFU or not TOFU?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4376">[ date ]</a>
+              <a href="thread.html#4376">[ thread ]</a>
+              <a href="subject.html#4376">[ subject ]</a>
+              <a href="author.html#4376">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

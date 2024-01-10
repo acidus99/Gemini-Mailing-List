@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Uploading Gemini content
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Uploading%20Gemini%20content&In-Reply-To=%3C5EE48DCA.2040706%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001618.html">
+   <LINK REL="Next"  HREF="001622.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Uploading Gemini content</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Uploading%20Gemini%20content&In-Reply-To=%3C5EE48DCA.2040706%40marmaladefoo.com%3E"
+       TITLE="Uploading Gemini content">luke at marmaladefoo.com
+       </A><BR>
+    <I>Sat Jun 13 09:26:50 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001618.html">Uploading Gemini content
+</A></li>
+        <LI>Next message (by thread): <A HREF="001622.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1620">[ date ]</a>
+              <a href="thread.html#1620">[ thread ]</a>
+              <a href="subject.html#1620">[ subject ]</a>
+              <a href="author.html#1620">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 13-Jun-2020 08:05, Sean Conner wrote:
+&gt;<i> One of Sir Tim Berners-Lee's initial ideas for HTTP was to allow the user
+</I>&gt;<i> to edit the page in the browser and have that update the file on the server.
+</I>&gt;<i> HTTP didn't get this capability until May of 1996 [1] where various methods
+</I>&gt;<i> were defined that included PUT and DELETE.  It's sad to think that no
+</I>&gt;<i> browsers at that time even attempted to do that [2].  Instead, we kept on
+</I>&gt;<i> using FTP, later sftp and maybe even rsync for the technically minded.
+</I>
+Actually there was Amaya (defunct 2012) which was a W3 reference browser 
+which implemented read and write for the web. There was also a version 
+of Netscape Navigator (3.04 Gold) that had something too.
+
+<A HREF="https://www.w3.org/Amaya/">https://www.w3.org/Amaya/</A>
+
+<A HREF="https://www.webdesignmuseum.org/old-software/web-browsers/netscape-navigator-3-04">https://www.webdesignmuseum.org/old-software/web-browsers/netscape-navigator-3-04</A>
+
+Sadly it never really took off as it is less than 1% (n.b. made up 
+statistic) of people that write the content on the web, so no-one really 
+needed that functionality. But in Gemini, the readers and writers are a 
+more overlapping set, as the barriers to participation are lowered.
+
+However, as we all know, what really did explode was the wiki concept of 
+being able to edit content in your browser, which has led to the 
+plethora of editable websites we see today and markdown.
+
+I'd really like to see a simple concept in gemini (+friends) of being 
+able to do this. It would be good to thrash this out.
+
+We already have the simplest, most useful text based markup language, so 
+that bit is done.
+
+I think your ideas for a schema are a good start.
+
+&gt;<i> C: gemini+<A HREF="put://example.com/path/to/new.txt?mime=text/plain&amp;size=1024">put://example.com/path/to/new.txt?mime=text/plain&amp;size=1024</A> CRLF
+</I>&gt;<i> S: 1x continue CRLF
+</I>&gt;<i> C: size bytes of content
+</I>
+I would like to see the target path be a percent encoded parameter to 
+the end point, otherwise we cannot so easily implement multiple end 
+points on the same server. For example there might be a number of 
+different server of CGI applications able to receive content on the same 
+server or domain.
+
+so maybe something like this is a more flexible way to specify the put 
+request
+
+C: gemini+<A HREF="put://example.com/put-handler?path=path/to/new.txt?mime=text/plain&amp;size=1024">put://example.com/put-handler?path=path/to/new.txt?mime=text/plain&amp;size=1024</A> CRLF
+&lt;continues&gt;
+
+One idea I've been working with is to integrate this with the preformatted area of a page, and then the client could render certain types using a text editor, something like this:
+
+```gemini+<A HREF="write://example.com/put-handler?path=path/to/new.txt">write://example.com/put-handler?path=path/to/new.txt</A>
+
+this content can be edited by the user and the client provides a button somewhere to &quot;submit&quot; it
+
+```end of content
+
+On submitting, the mime=text/plain and size=XYZ is provided
+
+Best Wishes
+
+  - Luke
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001618.html">Uploading Gemini content
+</A></li>
+	<LI>Next message (by thread): <A HREF="001622.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1620">[ date ]</a>
+              <a href="thread.html#1620">[ thread ]</a>
+              <a href="subject.html#1620">[ subject ]</a>
+              <a href="author.html#1620">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

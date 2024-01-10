@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] twinwiki, a Gemini wiki edited with sed commands
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20twinwiki%2C%20a%20Gemini%20wiki%20edited%20with%20sed%20commands&In-Reply-To=%3CCANmFPemKtTiYrC%2B%3Dw7aq6qgXMHbhzb4O_axSnsB624fuiUEV2g%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002073.html">
+   <LINK REL="Next"  HREF="002079.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] twinwiki, a Gemini wiki edited with sed commands</H1>
+    <B>Hannu Hartikainen</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20twinwiki%2C%20a%20Gemini%20wiki%20edited%20with%20sed%20commands&In-Reply-To=%3CCANmFPemKtTiYrC%2B%3Dw7aq6qgXMHbhzb4O_axSnsB624fuiUEV2g%40mail.gmail.com%3E"
+       TITLE="[ANN] twinwiki, a Gemini wiki edited with sed commands">hannu.hartikainen+gemini at gmail.com
+       </A><BR>
+    <I>Sun Jul  5 23:49:55 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002073.html">Hacker News again
+</A></li>
+        <LI>Next message (by thread): <A HREF="002079.html">[ANN] twinwiki, a Gemini wiki edited with sed commands
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2078">[ date ]</a>
+              <a href="thread.html#2078">[ thread ]</a>
+              <a href="subject.html#2078">[ subject ]</a>
+              <a href="author.html#2078">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi!
+
+I'm announcing my first proper piece of Gemini software: twinwiki!
+
+The general idea is that a single line of input[1] works for very few text
+editing interfaces, yet most of us know one: sed. Mostly people use a very
+small subset of sed. Here I've implemented a slightly larger subset and I
+feel you could actually edit pages quite well if the browser showed line
+numbers.
+
+To get a feel, please try out this test instance:
+<A HREF="gemini://hannuhartikainen.fi/twinwiki">gemini://hannuhartikainen.fi/twinwiki</A>
+
+Feel free to create new pages and edit the existing ones. All page changes
+can be reverted. Pages cannot be deleted. I.e. if you're able to break
+something, it's my fault.
+
+The basic wiki features exist: you can edit, create pages, view history,
+see an index of pages and read help.
+
+Some caveats:
+- Navigating back to a /_edit?&lt;sed_command&gt; URL will redo the edit, which
+is mostly not what you tried to do. This will probably be an issue on many
+gemini applications; browsers will need to consider it if applications
+become a thing.
+- The sed syntax is not fully POSIX even for the implemented parts:
+whitespace after commands is taken literally; regex syntax is the one from
+the Rust regex crate.
+
+The project page (git repo, mailing lists, ticket tracker) is at
+<A HREF="https://sr.ht/~dancek/twinwiki/">https://sr.ht/~dancek/twinwiki/</A>
+
+Any comments, contributions etc. are welcome. I hope this will give other
+people other ideas about possible user interfaces.
+
+-Hannu
+
+[1] A sed command containing newlines will probably work, too, as long as
+it's percent-encoded properly (ie. \n = %0A). However, the Gemini spec
+suggests that the input should not contain newlines: &quot;The requested
+resource accepts a line of textual user input.&quot; Is it a bad sin to send
+multiple lines?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200706/b713b8ec/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200706/b713b8ec/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002073.html">Hacker News again
+</A></li>
+	<LI>Next message (by thread): <A HREF="002079.html">[ANN] twinwiki, a Gemini wiki edited with sed commands
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2078">[ date ]</a>
+              <a href="thread.html#2078">[ thread ]</a>
+              <a href="subject.html#2078">[ subject ]</a>
+              <a href="author.html#2078">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

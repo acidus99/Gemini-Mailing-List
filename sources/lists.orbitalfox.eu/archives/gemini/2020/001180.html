@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] GemiNaut - a user friendly Gemini browser for Windows in C#
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20GemiNaut%20-%20a%20user%20friendly%20Gemini%20browser%20for%20Windows%20in%20C%23&In-Reply-To=%3C5ED16B3C.3080002%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001129.html">
+   <LINK REL="Next"  HREF="001199.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] GemiNaut - a user friendly Gemini browser for Windows in C#</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20GemiNaut%20-%20a%20user%20friendly%20Gemini%20browser%20for%20Windows%20in%20C%23&In-Reply-To=%3C5ED16B3C.3080002%40gmail.com%3E"
+       TITLE="[ANN] GemiNaut - a user friendly Gemini browser for Windows in C#">luke.emmet at gmail.com
+       </A><BR>
+    <I>Fri May 29 21:06:20 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001129.html">[ANN] GemiNaut - a user friendly Gemini browser for Windows in C#
+</A></li>
+        <LI>Next message (by thread): <A HREF="001199.html">&#9802;&#65038;# (was Re: [ANN] GemiNaut - a user friendly Gemini browser for Windows in C#)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1180">[ date ]</a>
+              <a href="thread.html#1180">[ thread ]</a>
+              <a href="subject.html#1180">[ subject ]</a>
+              <a href="author.html#1180">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+On 29-May-2020 01:09, Sean Conner wrote:
+&gt;&gt;<i> My concept of a site is that it is either the domain itself, or if there
+</I>&gt;&gt;<i> is a user specified in the path, then it is the user home.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> <A HREF="gemini://domain1.tld/mypath.gmi">gemini://domain1.tld/mypath.gmi</A> -&gt;  site is domain1.tld for that page
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> <A HREF="gemini://domain2.tld/users/foo/bar/baz.gmi">gemini://domain2.tld/users/foo/bar/baz.gmi</A> -&gt;  site is domain/users/foo
+</I>&gt;&gt;<i> for that page
+</I>&gt;<i>    Be careful, because different servers might display user directories
+</I>&gt;<i> differently.  Some might do:
+</I>&gt;<i>
+</I>&gt;<i> 	<A HREF="gemini://example.com/~alice/">gemini://example.com/~alice/</A>
+</I>&gt;<i>
+</I>&gt;<i> and others:
+</I>&gt;<i>
+</I>&gt;<i> 	<A HREF="gemini://example.net/users/bob/">gemini://example.net/users/bob/</A>
+</I>&gt;<i>
+</I>&gt;<i> and still others:
+</I>&gt;<i>
+</I>&gt;<i> 	<A HREF="gemini://example.org/Carol/">gemini://example.org/Carol/</A>
+</I>&gt;<i>
+</I>&gt;<i> And some might just do all three just to mess with you 8-P
+</I>
+I was a little loose with my description. It cannot know where the 
+&quot;user&quot;'s &quot;home&quot; page is, it just makes an educated guess based on a 
+general heuristic. I think it mostly applies, at least in these early 
+days of Gemini Pubnix DIY server culture. All it is doing is traversing 
+up the path from the current page  URL to propose a likely home path
+
+In the first two cases alice and bob would get their own theming. Carol 
+would inherit the site wide theming as there is no way to infer her 
+existence as a user based on the URL. So Carol would have to nag her 
+sysadmin if she wanted the site specific theming to apply to her.
+
+There are other cases (servers in other languages for example). Maybe a 
+German server would have <A HREF="gemini://domain/benutzer/frank">gemini://domain/benutzer/frank</A> - this is not 
+considered at present, but pull requests are welcome! Also I havent 
+implemented it so &quot;*/~bar/baz&quot; gets the same theme as &quot;*/users/bar/baz&quot; 
+on the same server, but that could come if it is a common form to be 
+found around and about. It could be always be an option, even 
+potentially the end user might say &quot;for this path, I expect the home 
+page to be at this level in the URL&quot;
+
+It would be nice if there was a way for a user to optionally convey some 
+kind of seed or info for some basic theming (like favicon). That could 
+be picked up by a client if it existed. Very basic info, maybe 
+foreground, background colours, site icon and maybe the definitive home 
+page link.
+
+Best wishes
+
+   - Luke
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001129.html">[ANN] GemiNaut - a user friendly Gemini browser for Windows in C#
+</A></li>
+	<LI>Next message (by thread): <A HREF="001199.html">&#9802;&#65038;# (was Re: [ANN] GemiNaut - a user friendly Gemini browser for Windows in C#)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1180">[ date ]</a>
+              <a href="thread.html#1180">[ thread ]</a>
+              <a href="subject.html#1180">[ subject ]</a>
+              <a href="author.html#1180">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

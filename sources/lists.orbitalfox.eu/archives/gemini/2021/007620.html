@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Case-sensitive hostnames
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Case-sensitive%20hostnames&In-Reply-To=%3Cc08f2ee6-e5c7-435a-a1b8-118a5f1ec6ea%40Spark%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007617.html">
+   <LINK REL="Next"  HREF="007621.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Case-sensitive hostnames</H1>
+    <B>Matthias Portzel</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Case-sensitive%20hostnames&In-Reply-To=%3Cc08f2ee6-e5c7-435a-a1b8-118a5f1ec6ea%40Spark%3E"
+       TITLE="Case-sensitive hostnames">matthiasportzel at gmail.com
+       </A><BR>
+    <I>Sat Nov 20 07:36:37 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007617.html">Fwd: Re: Haskell Gemini server framework
+</A></li>
+        <LI>Next message (by thread): <A HREF="007621.html">Case-sensitive hostnames
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7620">[ date ]</a>
+              <a href="thread.html#7620">[ thread ]</a>
+              <a href="subject.html#7620">[ subject ]</a>
+              <a href="author.html#7620">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Recently, I attempted to navigate to my capsule <A HREF="gemini://MatthiasPortzel.com,">gemini://MatthiasPortzel.com,</A> with capital letters. I found that my Gemini server (a custom server implementation) didn&#8217;t respond to that URL, since I was preforming a case-sensitive hostname match. I would like to be able to stylize my domain name with capital letters sometimes to make my first and last name easier to distinguish. (MatthiasPortzel is more readable than matthiasportzel.)
+
+I changed my capsule to preform a case-insensitive match, to match what I expect from DNS and HTTP.
+
+However, I then tried requesting different capitalizations of other popular Gemini capsules. And hardly any of them responded to changed capitalizations. I believe Molly Brown, Agate, Jetforce, and others, do this simple case-sensitive hostname check.
+
+So I wanted to ask the mailing list. Is this a bug that exists in a significant number of Gemini server implementations that no one has noticed before? Or is it the responsibility of someone else (like the Gemini client or the author of the link) to ensure that domain names are lowercase? Neither Lagrange or Amfora lowercase domain names. On the HTTP side, I believe that Apache&#8217;s virtual hosting is case-insensitive, and additionally, it appears that Chrome and Safari lowercase domain names before sending them.
+
+The intuitive behavior here is definitely that case shouldn&#8217;t effect domain names. So I would guess that these servers need to be patched. Unless there are objections, it might be worth adding a line to the specification to that effect.
+
+-Matthias Portzel
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20211120/6b4d5798/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20211120/6b4d5798/attachment.htm</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007617.html">Fwd: Re: Haskell Gemini server framework
+</A></li>
+	<LI>Next message (by thread): <A HREF="007621.html">Case-sensitive hostnames
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7620">[ date ]</a>
+              <a href="thread.html#7620">[ thread ]</a>
+              <a href="subject.html#7620">[ subject ]</a>
+              <a href="author.html#7620">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

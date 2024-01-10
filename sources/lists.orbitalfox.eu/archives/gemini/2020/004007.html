@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Crawlers on Gemini and best practices
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Crawlers%20on%20Gemini%20and%20best%20practices&In-Reply-To=%3CCAFaUHvLRqi2aPAApaq8wu7berX2n5ttguaos0%2B%3DBTodB%2BLYVvg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004003.html">
+   <LINK REL="Next"  HREF="004008.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Crawlers on Gemini and best practices</H1>
+    <B>Sudipto Mallick</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Crawlers%20on%20Gemini%20and%20best%20practices&In-Reply-To=%3CCAFaUHvLRqi2aPAApaq8wu7berX2n5ttguaos0%2B%3DBTodB%2BLYVvg%40mail.gmail.com%3E"
+       TITLE="Crawlers on Gemini and best practices">smallick.dev at gmail.com
+       </A><BR>
+    <I>Fri Dec 11 12:57:28 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004003.html">Crawlers on Gemini and best practices
+</A></li>
+        <LI>Next message (by thread): <A HREF="004008.html">Crawlers on Gemini and best practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4007">[ date ]</a>
+              <a href="thread.html#4007">[ thread ]</a>
+              <a href="subject.html#4007">[ subject ]</a>
+              <a href="author.html#4007">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>what i wrote was a rough algorithm, now here is a human readable
+description for bots.txt:
+
+every line has the following format:
+
+    &lt;paths&gt; &lt;bots&gt; (&quot;allowed&quot; | &quot;denied&quot;)
+OR
+    &lt;paths&gt; &lt;bots&gt; &quot;allowed&quot; &quot;but&quot; &lt;bots&gt; &quot;denied&quot;
+&lt;paths&gt; is comma seperated paths to be allowed or denied
+&lt;bots&gt; is comma seperated bot ''descriptors'' (think of better word
+for this) matching [A-Za-z][A-Za-z0-9_-]*
+* the paths should not contain comma or spaces, percent encode if that
+is the case
+* word in &quot;quotes&quot; is written literally without the quotes
+* every field is seperated by whitespace i.e. [ \t]+
+
+an ideal bot creates a set of allowed and denied paths for it from its
+real and virtual user agent and the &quot;all&quot; group.
+before requesting for a path, this ideal bot finds the longest match
+from both the allowed and denied path sets. if the longest match is
+from the allowed set, it proceeds to request that path. if both sets
+have the longest match, then follow the most specific match of the
+&quot;descriptor&quot; (name of bot &gt; virtual agent &gt; &quot;all&quot;)
+for example:
+
+    /a,/p all denied
+    /a/b,/p/q indexer,researcher allowed
+    /a/b/c researcher denied
+    /a/b/c heh allowed
+
+now the researcher 'heh' may access /p/q/* and and /a/b/c and it may
+not access /a/b/{X} when {X} != 'c'
+other researchers may only access /p/q and /a/b/{Z} when {Z} != 'c' so
+they may not access /a/b/c
+indexers may access /a/b and /p/q
+* real bots would try to behave as close as possible to the ideal bot
+
+Q. do we need to support comments in bots.txt
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004003.html">Crawlers on Gemini and best practices
+</A></li>
+	<LI>Next message (by thread): <A HREF="004008.html">Crawlers on Gemini and best practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4007">[ date ]</a>
+              <a href="thread.html#4007">[ thread ]</a>
+              <a href="subject.html#4007">[ subject ]</a>
+              <a href="author.html#4007">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

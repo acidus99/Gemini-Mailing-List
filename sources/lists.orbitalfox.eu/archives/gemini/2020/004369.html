@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] [spec] Decide on use of URL fragment
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20%5Bspec%5D%20Decide%20on%20use%20of%20URL%20fragment&In-Reply-To=%3Cfff3a41016125eb1482e87c12e2ed55b%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004364.html">
+   <LINK REL="Next"  HREF="004418.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] [spec] Decide on use of URL fragment</H1>
+    <B>nervuri at disroot.org</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20%5Bspec%5D%20Decide%20on%20use%20of%20URL%20fragment&In-Reply-To=%3Cfff3a41016125eb1482e87c12e2ed55b%40disroot.org%3E"
+       TITLE="[tech] [spec] Decide on use of URL fragment">nervuri at disroot.org
+       </A><BR>
+    <I>Thu Dec 24 21:01:20 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004364.html">[ANN] motm - the messageboard on the moon
+</A></li>
+        <LI>Next message (by thread): <A HREF="004418.html">[tech] [spec] Decide on use of URL fragment
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4369">[ date ]</a>
+              <a href="thread.html#4369">[ thread ]</a>
+              <a href="subject.html#4369">[ subject ]</a>
+              <a href="author.html#4369">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello and thank you all for Gemini! Coming to Gemini from the web feels like leaving the smog and breathing clean air again. The documentation was a delight to read through, the trade-offs Gemini makes are well thought out and argued for. I respect the effort, so I'm here to lend a hand.
+
+One of the missing bits is the ability to link to a specific part of a Gemini page, which is quite important when dealing with large documents. At one point there was talk of a library on Gemini ( <A HREF="gemini://booksin.space/">gemini://booksin.space/</A> ), with complete books in plain text. So, indeed, this function would be very useful.
+
+  <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/003702.html">https://lists.orbitalfox.eu/archives/gemini/2020/003702.html</A>
+
+Gemini doesn't yet use the URL fragment (the part after &quot;#&quot;). The web does, but in a rigid way: if a web page doesn't contain elements with IDs or names, there's nothing visitors can do to link to a specific section.
+
+Gemini browsers can do better. I'm opening this thread to gather all proposed solutions, so that a standard may be reached. In this message I'll provide an overview of the ground that has been covered so far. At the end I highlight the solutions that I think best fit the Gemini ethos.
+
+This topic has been discussed on the mailing list, but the discussion didn't go very far:
+
+  <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/001454.html">https://lists.orbitalfox.eu/archives/gemini/2020/001454.html</A>
+  <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/004291.html">https://lists.orbitalfox.eu/archives/gemini/2020/004291.html</A>
+
+Proposed solutions:
+
+* Numbering schemes, such as #20 (line 20) or #3.2 (heading 3, subheading 2). Short and simple, but easily broken if the page is modified. RFC 5147 is another such scheme, which introduces optional integrity checks and allows highlighting passages. But even with integrity checking, the fragment becomes useless if changes are made before (or within) the specified section. The fragility of these solutions is their major downside.
+
+* Linking to headings, either by URL-encoding them directly into the fragment (ex: #5.4%20Core%20line%20types) or converting them to kebab case (ex: #core-line-types). Such links would be more robust than using number-based fragments, but why limit them to headings?
+
+A more flexible option for for text/gemini and text/plain is to use the fragment for in-page search. Advanced browsers are bound to develop a &quot;find in page&quot; function which can be reused here, taking the fragment as input. This solution allows for linking to any point in the page and can be used to highlight passages.
+
+I made a demo which includes a &quot;link to here&quot; option when selecting text:
+
+<A HREF="https://nervuri.net/fragment-search/">https://nervuri.net/fragment-search/</A>
+
+It uses the following syntax:
+
+#&lt;text&gt;[:&lt;occurrence&gt;]
+
+, where &lt;text&gt; is any URL-encoded excerpt from the page and &lt;occurrence&gt; is an optional integer (negative numbers can be used for backwards search). It's still partially a numeric scheme, so a link like &quot;#a:98&quot; (the 98th occurrence of the letter &quot;a&quot;) is very easily broken when the document changes. But if a long enough search string is used, the link will withstand most changes.
+
+It turns out that this idea has been around on the web for a long time:
+
+  <A HREF="https://indieweb.org/fragmention">https://indieweb.org/fragmention</A>
+
+Most importantly, there is an emerging web standard which we can learn from:
+
+  <A HREF="https://github.com/WICG/scroll-to-text-fragment">https://github.com/WICG/scroll-to-text-fragment</A>
+  <A HREF="https://temp.treora.com/text-fragments-ts/demo.html">https://temp.treora.com/text-fragments-ts/demo.html</A>
+
+The syntax is:
+
+#:~:text=[prefix-,]textStart[,textEnd][,-suffix]
+
+Leaving aside its complexity (which I know is a sticking point for Gemini), it is more robust and versatile than basic search, because:
+
+* it allows specifying any fragment of text, no matter how long, using only its beginning and end
+* the &quot;prefix-&quot; and &quot;-suffix&quot; are better than an integer at disambiguating a specific instance of repeating text on a dynamic page
+* it allows highlighting multiple fragments of text, using the &quot;&amp;&quot; separator.
+
+The standard could be simplified for Gemini, as the security considerations don't apply and partial implementations are possible (having multiple quotes in the same URL is arguably overkill). Even so, its complexity probably rules it out for Gemini.
+
+It's interesting to note that all of these solutions fit together like pieces of Lego. Browsers can use all or none (or partial implementations), in a way that allows for graceful degradation. Multiple standards can even be used in the same link. Examples:
+
+#char=100       (RFC 5147)
+#line=10,20     (RFC 5147)
+#heading=3.1.2
+#heading=core-line-types
+#text=some text
+#text=some text:2
+#text=from here,to here
+#text=pre-,from here,to here,-post
+#text=first,passage&amp;text=second,passage
+#text=word:3&amp;text=some text
+#line=10&amp;text=some text
+#regex=^(.+?):(-?\d+)$      (URL-encoded)
+etc.
+
+Ok, this got out of hand. Nobody wants all of these standards floating around in Gemini space, right? So, to conclude, I think the best options for Gemini are:
+
+* basic search (#search%20me), perhaps with occurrence number (#search%20me:3). I consider this the best fit for Gemini, as it's the lowest complexity/(robustness*flexibility) value. It's trivial to implement for browsers that already have a &quot;find in page&quot; function. Search engines can also use this feature to generate links that take you directly to the part of the page that matches your query. On the other hand, if avoiding long ugly links is considered important, we can go with:
+
+* headings only, using &quot;lowercase kebab case of the alphabetic content, with single hyphens&quot; (ex: #core-line-types) - which is what Luke Emmet suggested back in June ( <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/001462.html">https://lists.orbitalfox.eu/archives/gemini/2020/001462.html</A> ). This is also low-complexity, gives us shorter links and is very robust to changes. But only linking to headings is quite restrictive. Also, it wouldn't work for identical (sub)headings or headings without letters, unless an occurrence number is added.
+
+* just yesterday Luke Emmet had another good proposal on this topic: using the first 12 chars of the base64-encoding of the heading (details here: <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/004341.html">https://lists.orbitalfox.eu/archives/gemini/2020/004341.html</A> ). Note that it can be applied to any line in the file. Again, an occurrence number can be added if needed. Hashes can be considered as alternatives to base64. The problem with this solution is that it's the most opaque of all. There's no way to tell what the fragment points to when looking at it, and creating the link without the assistance of an advanced browser is pretty much out of the question. But it's otherwise a good compromise which takes URL length into account.
+
+Honorable mention to just using line numbers. Fragility aside, this is the most simple, straightforward option. Maybe append a hash of the line for integrity checking, like in RFC 5147.
+
+Fragment search can encourage use of very long links. I, for one, don't consider this to be a serious downside. Links are primarily meant for computers - that's why Gemini has the optional user-friendly link names, after all.
+
+Whichever solution is chosen (if any), I think it should be part of the Gemini best practices document, because we want links to work the same way for everyone - at least in the more advanced browsers that will support this. I do encourage the community to choose one, as even the most rudimentary solution is better than nothing.
+
+Finally, the fragment may also be used for other purposes. For instance, a hash could be used by the browser to check if a page has been modified, or if a file has been downloaded correctly. So it might be wise to use prefixes, like #find= and #hash:sha256=.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004364.html">[ANN] motm - the messageboard on the moon
+</A></li>
+	<LI>Next message (by thread): <A HREF="004418.html">[tech] [spec] Decide on use of URL fragment
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4369">[ date ]</a>
+              <a href="thread.html#4369">[ thread ]</a>
+              <a href="subject.html#4369">[ subject ]</a>
+              <a href="author.html#4369">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

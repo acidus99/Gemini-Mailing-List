@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [users] Tables in Gemtext
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Busers%5D%20Tables%20in%20Gemtext&In-Reply-To=%3C20210102232529.hfgs5vubdmlcojh7%40tilde.institute%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004652.html">
+   <LINK REL="Next"  HREF="004696.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[users] Tables in Gemtext</H1>
+    <B>Paper</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Busers%5D%20Tables%20in%20Gemtext&In-Reply-To=%3C20210102232529.hfgs5vubdmlcojh7%40tilde.institute%3E"
+       TITLE="[users] Tables in Gemtext">paper at tilde.institute
+       </A><BR>
+    <I>Sat Jan  2 23:25:29 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004652.html">[users] Tables in Gemtext
+</A></li>
+        <LI>Next message (by thread): <A HREF="004696.html">[users] Tables in Gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4658">[ date ]</a>
+              <a href="thread.html#4658">[ thread ]</a>
+              <a href="subject.html#4658">[ subject ]</a>
+              <a href="author.html#4658">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Jan 02, 2021 at 06:13:45PM +0000, Luke Emmet wrote:
+&gt;<i> On 02-Jan-2021 03:04, Ki&#235;d Llaentenn wrote:
+</I>&gt;<i> &gt; Just recently I was creating a Gemini mirror of an HTTP site, and came
+</I>&gt;<i> &gt; across several pages that made heavy use of tables. I did what I suspect
+</I>&gt;<i> &gt; most Gemini publishers/content authors do: use ASCII tables, like so:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; +--------------------------------+-------+
+</I>&gt;<i> &gt; | Food                           | Price |
+</I>&gt;<i> &gt; +--------------------------------+-------+
+</I>&gt;<i> &gt; | Eggs                           | $2    |
+</I>&gt;<i> &gt; | Eggs and spam                  | $4    |
+</I>&gt;<i> &gt; | Eggs, spam, eggs and spam      | $8    |
+</I>&gt;<i> &gt; | Spam spam baked beans and spam | $8    |
+</I>&gt;<i> &gt; | Just spam                      | $2    |
+</I>&gt;<i> &gt; +--------------------------------+-------+
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; There are several problems with this approach, though:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 1. It requires the client to display the table in a monospaced font,
+</I>&gt;<i> &gt;     which many would prefer not to use.
+</I>&gt;<i> &gt; 2. Text in table rows won't be wrapped properly on narrow displays.
+</I>&gt;<i> &gt; 3. ASCII tables are anything but screenreader friendly, since there's no
+</I>&gt;<i> &gt;     semantic information about the table's structure.
+</I>&gt;<i> &gt; 4. It mixes information and presentation, which is against the spirit of
+</I>&gt;<i> &gt;     Gemini(?)
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; So, are there any other options for having tables in Gemtext, other than
+</I>&gt;<i> &gt; adding a new syntax to the spec? I'm hard pressed to think of another
+</I>&gt;<i> &gt; solution.
+</I>&gt;<i> Some other ideas:
+</I>&gt;<i> 
+</I>&gt;<i> If you want to present the information in its original structure, there are
+</I>&gt;<i> other options
+</I>&gt;<i> (as well as trying to inline it into gemtext preformatted text already
+</I>&gt;<i> discussed on this thread):
+</I>&gt;<i> 
+</I>&gt;<i> 1. provide link to a CSV
+</I>
+We should try to use what we have before designing a new gemtext feature.
+
+Lagrange provides a way to create scripts which handle MIME types lagrange
+which are not supported by lagrange natively. We can use this to render CSV:
+
+~/.config/lagrange/mimehooks.txt:
+
+	CSV tables
+	text/csv
+	/bin/sh;/home/user/bin/csv2txt
+
+~/bin/csv2txt:
+
+	#!/bin/sh
+	printf &quot;20 text/plain\r\n&quot;
+	/bin/column -s, -t
+
+Don't forget to make this script executable. Now, test how well it works:
+
+<A HREF="gemini://gempaper.strangled.net/experiments/ubuntu-versions.csv">gemini://gempaper.strangled.net/experiments/ubuntu-versions.csv</A>
+
+picture: <A HREF="https://ttm.sh/dvO.png">https://ttm.sh/dvO.png</A>
+
+This is obviously not optimal:
+
+* there are no cell borders (can be fixed easily)
+* wide tables will overflow the border to the right (can be fixed in the
+  client)
+* if you link to a csv file, clicking on it will open it in a new
+  frame, not inside the text like images (lagrange specific feature,
+  can be fixed)
+* only lagrange supports MIME hooks (can we improve this?)
+
+But also has many advantages:
+
+* embraces an existing format
+* doesn't require anything special in gemtext
+* even big tables can work
+* if some clients choose to support CSV natively, they can do fancy
+  tricks like sorting by columns
+
+~paper
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004652.html">[users] Tables in Gemtext
+</A></li>
+	<LI>Next message (by thread): <A HREF="004696.html">[users] Tables in Gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4658">[ date ]</a>
+              <a href="thread.html#4658">[ thread ]</a>
+              <a href="subject.html#4658">[ subject ]</a>
+              <a href="author.html#4658">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

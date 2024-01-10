@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> robots.txt for Gemini formalised
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20robots.txt%20for%20Gemini%20formalised&In-Reply-To=%3C20201124151649.GA20449%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003518.html">
+   <LINK REL="Next"  HREF="003555.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>robots.txt for Gemini formalised</H1>
+    <B>marc</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20robots.txt%20for%20Gemini%20formalised&In-Reply-To=%3C20201124151649.GA20449%40localhost.localdomain%3E"
+       TITLE="robots.txt for Gemini formalised">marcx2 at welz.org.za
+       </A><BR>
+    <I>Tue Nov 24 15:16:49 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003518.html">robots.txt for Gemini formalised
+</A></li>
+        <LI>Next message (by thread): <A HREF="003555.html">robots.txt for Gemini formalised
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3525">[ date ]</a>
+              <a href="thread.html#3525">[ thread ]</a>
+              <a href="subject.html#3525">[ subject ]</a>
+              <a href="author.html#3525">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi
+
+&gt;<i> How the server produces responses to robots.txt requests is an
+</I>&gt;<i> implementation detail. robots.txt can easily be implemented such that
+</I>&gt;<i> the server responds with access information provided by files in
+</I>&gt;<i> subdirectories. For example: a system directory corresponding to
+</I>&gt;<i> /~somebody/ contains a file named &quot;.disallow&quot; containing
+</I>&gt;<i> &quot;personal.gmi&quot;. When the server builds a response to /robots.txt, it
+</I>&gt;<i> considers the content of all &quot;.disallow&quot; files and includes Disallow
+</I>&gt;<i> lines corresponding to their content. This way, individual users on a
+</I>&gt;<i> multi-user system can decide for themselves the access policy for their
+</I>&gt;<i> content without shared access to a canonical robots.txt.
+</I>
+Note that the apache people worry about just doing a
+stat() for .htaccess along a path. This proposal requires an
+opendir() for *every* directory in the exported hierarchy.
+
+I concede that this isn't impossible - it is potentially expensive,
+messy or nonstandard (and yes, there are inotify tricks or
+serving the entire site out of a database, but that isn't a
+common thing).
+
+&gt;<i> &gt; I have pitched this idea before: I think a footer containing
+</I>&gt;<i> &gt; the license/rules under which a page can be distributed/cached
+</I>&gt;<i> &gt; is more sensible than robots.txt. This approach is:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; * local to the page (no global /robots.txt)
+</I>&gt;<i> &gt; * persistent (survives being copied, mirrored &amp; re-exported)
+</I>&gt;<i> &gt; * sound (one knows the conditions under which this can be redistributed)
+</I>&gt;<i> 
+</I>&gt;<i> What if my document is a binary file of some sort that I can not add a
+</I>&gt;<i> footer to? The only ways to address this consistently for all document
+</I>&gt;<i> types are to
+</I>&gt;<i> 
+</I>&gt;<i> a) Include the information in the response, *distinct* from its body
+</I>&gt;<i> b) Provide the information in a sidecar file or sideband communication
+</I>&gt;<i>    channel
+</I>
+So I think this is the interesting bit of the discussion -
+the tradeoff of keeping this information inside the file or
+in a sidechannel. You are of course correct that not every
+file format permits embedding such information, and that
+is the one side of the tradeoff.... the other side is
+the argument for persistence - having the data in another
+file (or in a protocol header) means that is likely to be
+lost.
+
+And my view is that caching/archiving/aggregating/protocol
+translation all involve making copies, where a careless or
+inconsiderate intermediate is likely to discard information
+not embedded in the file. For instance, if a web frontend
+serves <A HREF="gemini://example.org/private.gmi">gemini://example.org/private.gmi</A> as
+<A HREF="https://example.com/gemini/example.org/private.gmi">https://example.com/gemini/example.org/private.gmi</A>
+how good are the odds that this frontend fetches
+<A HREF="gemini://example.org/robots.txt,">gemini://example.org/robots.txt,</A> rewrites the urls in there
+from /private.gmi to /gemini/example.org/private.gmi and
+merges it into its own /robots.txt ? And does it before
+any crawler request is made... 
+
+A pragmatist's argument: The web and geminispace are a graph
+of links, and all the interior nodes have to be markup, so those
+are covered, and they control the reachability - without
+a link you can't get to the terminal/leaf node. And even if
+this is bypassed (robots.txt isn't really a defence against hotlinking
+either) most other terminal nodes are images or video, which typically have
+ways of adding meta information (exif, etc).
+
+regards
+
+marc
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003518.html">robots.txt for Gemini formalised
+</A></li>
+	<LI>Next message (by thread): <A HREF="003555.html">robots.txt for Gemini formalised
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3525">[ date ]</a>
+              <a href="thread.html#3525">[ thread ]</a>
+              <a href="subject.html#3525">[ subject ]</a>
+              <a href="author.html#3525">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

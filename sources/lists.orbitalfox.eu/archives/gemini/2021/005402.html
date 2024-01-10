@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] reverse proxy gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20reverse%20proxy%20gemini&In-Reply-To=%3C871rd9l8pg.fsf%40omarpolo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005394.html">
+   <LINK REL="Next"  HREF="005405.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] reverse proxy gemini</H1>
+    <B>Omar Polo</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20reverse%20proxy%20gemini&In-Reply-To=%3C871rd9l8pg.fsf%40omarpolo.com%3E"
+       TITLE="[tech] reverse proxy gemini">op at omarpolo.com
+       </A><BR>
+    <I>Sun Feb 21 15:52:11 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005394.html">[tech] reverse proxy gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="005405.html">[tech] reverse proxy gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5402">[ date ]</a>
+              <a href="thread.html#5402">[ thread ]</a>
+              <a href="subject.html#5402">[ subject ]</a>
+              <a href="author.html#5402">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Vincent A. &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">vincent at valvin.fr</A>&gt; writes:
+
+&gt;<i> Hello,
+</I>&gt;<i>
+</I>&gt;<i> My curiosity about Gemini lead me to think about how to host easily many
+</I>&gt;<i> different domain on the same server.
+</I>&gt;<i>
+</I>&gt;<i> I have a simple idea which consists in publishing static content from a
+</I>&gt;<i> git repository. And allow users to update their content by updating a
+</I>&gt;<i> git repository and maybe through an interface later.
+</I>&gt;<i>
+</I>&gt;<i> For this I imagine using containerization with an existing gemini
+</I>&gt;<i> server. Here I've tested Agate :
+</I>&gt;<i> <A HREF="https://gitlab.com/valvin/gemini-agate-image">https://gitlab.com/valvin/gemini-agate-image</A>
+</I>&gt;<i>
+</I>&gt;<i> Deploying a single hostname is ok. But I'm wondering how to deploy many
+</I>&gt;<i> hostnames using the same public IP(v4) address. With HTTP we are used to
+</I>&gt;<i> deploy a reverse proxy (nginx, haproxy, traefik...). It allowes then to
+</I>&gt;<i> split traffic based on the DNS name requested in the &quot;Host&quot; header.
+</I>&gt;<i>
+</I>&gt;<i> TCP load-balacing doesn't allow this I think but maybe I'm wrong. It
+</I>&gt;<i> requires to get the information of hostname in the request.
+</I>&gt;<i>
+</I>&gt;<i> So I'm wondering if there is not yet something that has been done about
+</I>&gt;<i> this. Or maybe I miss somethin
+</I>&gt;<i> g in TCP load-balancing and it is possible
+</I>&gt;<i> to do this already.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Thank you
+</I>&gt;<i>
+</I>&gt;<i> Valvin.
+</I>
+As Dave was saying, SNI is madatory on Gemini; clients during the TLS
+handshake tells the server which domain they want to talk to, and so the
+server can use the correct certificate and serve the right stuff.
+Support for this varies between servers.
+
+Agate supports multiple hosts it, search for &quot;Virtual Hosts&quot; (that's how
+they're called) in the readme, but with the limitation of only one
+certificate.  Other servers (I'll shameless advertise my own) like
+gmid[0] or solene' vger[1] supports multiple virtual hosts, with
+different certificates too.
+
+Cheers,
+
+Omar Polo
+
+[0]: <A HREF="https://github.com/omar-polo/gmid/">https://github.com/omar-polo/gmid/</A>
+[1]: <A HREF="https://tildegit.org/solene/vger">https://tildegit.org/solene/vger</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005394.html">[tech] reverse proxy gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="005405.html">[tech] reverse proxy gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5402">[ date ]</a>
+              <a href="thread.html#5402">[ thread ]</a>
+              <a href="subject.html#5402">[ subject ]</a>
+              <a href="author.html#5402">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

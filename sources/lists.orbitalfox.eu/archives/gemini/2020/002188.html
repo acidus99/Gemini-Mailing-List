@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] New Gemini Server: Space Age
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20New%20Gemini%20Server%3A%20Space%20Age&In-Reply-To=%3C87k0zbgpnq.fsf%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002187.html">
+   <LINK REL="Next"  HREF="002189.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] New Gemini Server: Space Age</H1>
+    <B>Gary Johnson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20New%20Gemini%20Server%3A%20Space%20Age&In-Reply-To=%3C87k0zbgpnq.fsf%40disroot.org%3E"
+       TITLE="[ANN] New Gemini Server: Space Age">lambdatronic at disroot.org
+       </A><BR>
+    <I>Fri Jul 10 20:01:45 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002187.html">[ANN] New Gemini Server: Space Age
+</A></li>
+        <LI>Next message (by thread): <A HREF="002189.html">[ANN] New Gemini Server: Space Age
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2188">[ date ]</a>
+              <a href="thread.html#2188">[ thread ]</a>
+              <a href="subject.html#2188">[ subject ]</a>
+              <a href="author.html#2188">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Yes, these are CGI scripts in practice. I'm just trying not to shell out
+to subprocesses in the interest of server responsiveness. I'm currently
+just thinking through how to provide as simple and intuitive an
+interface as possible for the script writer. Probably it will amount to
+some kind of handler function API that takes a request map and returns a
+response map in the classic tradition of all ring-based Clojure web
+apps.
+
+Scripts are currently run within their own auto-generated temporary
+namespaces, which prevents them from accidentally polluting the server's
+namespaces with def* forms. Any I/O to stdout is captured in a string
+and currently returned as the body of a &quot;20 text/gemini; charset=utf-8&quot;
+response. This is fine as a starting point, but I think I want to create
+something that feels more functional and less state-oriented pretty
+soon.
+
+I'll keep you posted as it progresses.
+
+Happy hacking,
+  Gary
+
+
+Petite Abeille &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">petite.abeille at gmail.com</A>&gt; writes:
+
+&gt;&gt;<i> On Jul 10, 2020, at 20:38, Gary Johnson &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">lambdatronic at disroot.org</A>&gt; wrote:
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> Any query params from the request URL are
+</I>&gt;&gt;<i> available to the script in a global variable called (creatively)
+</I>&gt;&gt;<i> &quot;request-params&quot;. Anything you print to stdout in your script will be
+</I>&gt;&gt;<i> returned as the body of a text/gemini response to the client.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> I'm still thinking through just how much additional info I want to pass
+</I>&gt;&gt;<i> to these scripts and how/whether I should let them send non-success
+</I>&gt;&gt;<i> responses, but that's half the fun of it after all.
+</I>&gt;<i>
+</I>&gt;<i> Perhaps The Common Gateway Interface (CGI) could be of guidance?
+</I>&gt;<i>
+</I>&gt;<i> Sounds similar in principle.
+</I>
+
+-- 
+GPG Key ID: 7BC158ED
+Use `gpg --search-keys lambdatronic' to find me
+Protect yourself from surveillance: <A HREF="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</A>
+=======================================================================
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+Please avoid sending me MS-Office attachments.
+See <A HREF="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002187.html">[ANN] New Gemini Server: Space Age
+</A></li>
+	<LI>Next message (by thread): <A HREF="002189.html">[ANN] New Gemini Server: Space Age
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2188">[ date ]</a>
+              <a href="thread.html#2188">[ thread ]</a>
+              <a href="subject.html#2188">[ subject ]</a>
+              <a href="author.html#2188">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

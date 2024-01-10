@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Titan - a Console-based Browser Written in Java
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Titan%20-%20a%20Console-based%20Browser%20Written%20in%20Java&In-Reply-To=%3C20200703220745.GS19717%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002031.html">
+   <LINK REL="Next"  HREF="002034.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Titan - a Console-based Browser Written in Java</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Titan%20-%20a%20Console-based%20Browser%20Written%20in%20Java&In-Reply-To=%3C20200703220745.GS19717%40brevard.conman.org%3E"
+       TITLE="[ANN] Titan - a Console-based Browser Written in Java">sean at conman.org
+       </A><BR>
+    <I>Fri Jul  3 23:07:45 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002031.html">[ANN] Titan - a Console-based Browser Written in Java
+</A></li>
+        <LI>Next message (by thread): <A HREF="002034.html">Titan, the proposed upload protocol for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2033">[ date ]</a>
+              <a href="thread.html#2033">[ thread ]</a>
+              <a href="subject.html#2033">[ subject ]</a>
+              <a href="author.html#2033">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> once stated:
+&gt;<i> lel wrote:
+</I>&gt;<i> &gt; [...] but no one had formalized anything about it yet [...]
+</I>&gt;<i> 
+</I>&gt;<i> This, and the rest of the paragraph, is correct as far as I know. I'd like to see
+</I>&gt;<i> more discussion around the gemini write / titan protocol, so that we can get something
+</I>&gt;<i> that people can agree on, and clients and servers can actually implement.
+</I>&gt;<i> 
+</I>&gt;<i> I've talked kensanata / Alex, who created CommunityWiki on IRC, and we've discussed how
+</I>&gt;<i> he was experimenting and pushing things ahead, but I don't think I'm alone in saying that
+</I>&gt;<i> there should definitely be more discussion, an official spec, Solderpunk chiming in, etc.
+</I>
+  Not to put words into solderpunk's mouth, but I suspect he'd stay out of
+this conversation and as long as it isn't pushed as something that's
+mandatory, he'd be fine with this.
+
+  As per more discussion, Alex is basing his work off this message to the
+list:
+
+	<A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/001657.html">https://lists.orbitalfox.eu/archives/gemini/2020/001657.html</A>
+
+with the slight change in that the path parameters are all separated by a
+';', not a leading ';' and '&amp;' for the others, which, okay, I'm fine with
+it.  So to update it a bit:
+
+	<A HREF="titan://example.com/post-handler/endpoint?size=1234&amp;mime=text/plain">titan://example.com/post-handler/endpoint?size=1234&amp;mime=text/plain</A>
+	<A HREF="titan://example.com/path/to/new/resource;size=1234;mime=text/plain">titan://example.com/path/to/new/resource;size=1234;mime=text/plain</A>
+	<A HREF="titan://example.com/path/to/remove;size=0">titan://example.com/path/to/remove;size=0</A>
+
+  The logic goes something like this [2]:
+
+	if the request has a query, it's an upload of data---accept data.
+	if the request has no query, and the path parameter (marked by ';')
+		doesn't exist---error.
+	if the request has no query, and the path parameter exists:
+		if size==0, delete the resource
+		if size&gt;0, accept data and make the resource available.
+
+  The 'size' parameter is mandatory; the 'mime' parameter is mandatory for
+non-delete requests, there may be other parameters that are specific to a
+host or implementation.
+
+  I was also thinking that a request like:
+
+	<A HREF="titan://example.com/path/to/resource">titan://example.com/path/to/resource</A>
+
+with no query string or path parameters, *might* return meta information
+about the resource, like:
+
+	size			(mandatory)
+	MIME type		(mandatory)
+	creation time		(optional)
+	modification time	(mandatory)
+	author			(optional)
+	version			(optional)
+	etc.			(other, optional fields)
+
+  Just an idea.
+
+&gt;<i> Don't get me wrong, I'm happy that there's real code and stuff that works.
+</I>
+  Same here.
+
+  -spc
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002031.html">[ANN] Titan - a Console-based Browser Written in Java
+</A></li>
+	<LI>Next message (by thread): <A HREF="002034.html">Titan, the proposed upload protocol for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2033">[ date ]</a>
+              <a href="thread.html#2033">[ thread ]</a>
+              <a href="subject.html#2033">[ subject ]</a>
+              <a href="author.html#2033">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

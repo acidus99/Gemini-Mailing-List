@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> IDN with Gemini?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C20201208102924.GB11926%40sources.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003870.html">
+   <LINK REL="Next"  HREF="003890.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>IDN with Gemini?</H1>
+    <B>Stephane Bortzmeyer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C20201208102924.GB11926%40sources.org%3E"
+       TITLE="IDN with Gemini?">stephane at sources.org
+       </A><BR>
+    <I>Tue Dec  8 10:29:24 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003870.html">IDN with Gemini?
+</A></li>
+        <LI>Next message (by thread): <A HREF="003890.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3884">[ date ]</a>
+              <a href="thread.html#3884">[ thread ]</a>
+              <a href="subject.html#3884">[ subject ]</a>
+              <a href="author.html#3884">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Dec 07, 2020 at 06:00:02PM +0000,
+ <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A>&gt; wrote 
+ a message of 32 lines which said:
+
+&gt;<i> What parsing would a client have to do?
+</I>...
+&gt;<i> This would then require IRI parsing libraries, and as I have explained
+</I>&gt;<i> earlier, these don't exist in likely many programming languages, and
+</I>&gt;<i> when they do, they are third-party.
+</I>
+For Python (a common programming language), this is not true, standard
+library's urlparse has no problem:
+
+% ./test-urlparse.py <A HREF="gemini://g&#233;meaux.bortzmeyer.org:8965/caf&#233;\?foo=bar">gemini://g&#233;meaux.bortzmeyer.org:8965/caf&#233;\?foo=bar</A>
+Host name: g&#233;meaux.bortzmeyer.org
+Port: 8965
+Path: /caf&#233;
+Query: foo=bar
+
+% cat test-urlparse.py
+#!/usr/bin/env python3
+
+import sys
+import urllib.parse
+
+for url in sys.argv[1:]:
+    components = urllib.parse.urlparse(url)
+    print(&quot;Host name: %s&quot; % components.hostname)
+    if components.port is not None:
+        print(&quot;Port: %s&quot; % components.port)
+    print(&quot;Path: %s&quot; % components.path)
+    if components.query != &quot;&quot;:
+        print(&quot;Query: %s&quot; % components.query)
+</PRE>
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003870.html">IDN with Gemini?
+</A></li>
+	<LI>Next message (by thread): <A HREF="003890.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3884">[ date ]</a>
+              <a href="thread.html#3884">[ thread ]</a>
+              <a href="subject.html#3884">[ subject ]</a>
+              <a href="author.html#3884">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

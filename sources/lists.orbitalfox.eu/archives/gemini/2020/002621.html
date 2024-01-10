@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Unadorned Gemtext instead of syndication formats
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unadorned%20Gemtext%20instead%20of%20syndication%20formats&In-Reply-To=%3C20200909235412.GC1964344%40tilde.team%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002614.html">
+   <LINK REL="Next"  HREF="002623.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Unadorned Gemtext instead of syndication formats</H1>
+    <B>easeout at tilde.team</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unadorned%20Gemtext%20instead%20of%20syndication%20formats&In-Reply-To=%3C20200909235412.GC1964344%40tilde.team%3E"
+       TITLE="Unadorned Gemtext instead of syndication formats">easeout at tilde.team
+       </A><BR>
+    <I>Thu Sep 10 00:54:12 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002614.html">Unadorned Gemtext instead of syndication formats
+</A></li>
+        <LI>Next message (by thread): <A HREF="002623.html">Unadorned Gemtext instead of syndication formats
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2621">[ date ]</a>
+              <a href="thread.html#2621">[ thread ]</a>
+              <a href="subject.html#2621">[ subject ]</a>
+              <a href="author.html#2621">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Sep 09, 2020 at 04:17:43PM -0400, Paper wrote:
+&gt;<i> I am an author of a feed reader and I thought about implementing this
+</I>&gt;<i> after I read this, but there are some problems:
+</I>&gt;<i> 
+</I>&gt;<i> How should my feed reader behave if there are links to different paths
+</I>&gt;<i> on the page? I think I should reject all links from a different domain
+</I>&gt;<i> and from a different protocol, but there could be a link to the same
+</I>&gt;<i> domain, but to a different path.
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; / back
+</I>&gt;<i> =&gt; /gemlog/1/ post 1
+</I>&gt;<i> =&gt; /gemlog/2/ post 2
+</I>&gt;<i> =&gt; /contact/ contact to me
+</I>&gt;<i> 
+</I>&gt;<i> Here, it is visible which ones are the blog entries and which ones are
+</I>&gt;<i> something else, but a program would have to guess. I don't think it
+</I>&gt;<i> would be a good idea to hardcode that everything with gemlog in the path
+</I>&gt;<i> is a feed item, that would cause too much confusion. Also, different
+</I>&gt;<i> clients would behave differently adding to the confusion.
+</I>
+I'm suggesting only a bare bones, dead simple, worse-is-better,
+get-what-you-can-with-what's-on-hand version of syndication. I would
+just collect all links on the page and not devise an intelligent way to
+filter them, as if we were scraping web pages for only the good stuff. I
+agree that would lead to divergent behavior among clients.
+
+So let it be just the simplest possible implementation. The upgrade path
+to a nicer experience would be for the author to publish RSS or Atom in
+order to select just the right links for readers.
+
+&gt;<i> It is a great idea, but I think we could instead write a script or a
+</I>&gt;<i> cli-program which would output Atom/RSS/Json feed for a gemini URL
+</I>&gt;<i> given. This program would do the neccessary guessing and parsing and
+</I>&gt;<i> output something that can be understood by all RSS libraries and
+</I>&gt;<i> clients. Some clients I know support running a command to get a feed.
+</I>&gt;<i> 
+</I>&gt;<i> Or we could just use gemfeed to generate Atom for us.
+</I>
+Generating Atom et al is the kind of thing many Gemini authors are
+already doing (like me!), and those folks certainly don't need to worry
+about this idea. When a feed is offered, I think users will prefer to
+use it.
+
+But if this takes off, new authors who haven't taken the step of
+generating a feed will be more tied into the conversation already. For
+instance, I was not going to get any blog replies or readership until I
+did the work to publish Atom so I could then submit to CAPCOM. An 80%
+solution would have helped me get engaged as a newcomer. It would also
+help future users as Gemini's audience slowly broadens to include a less
+technical crowd.
+
+One more benefit for us early adopters: If we lower the barrier to entry
+for others, it will mean more content for us to read and engage with.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002614.html">Unadorned Gemtext instead of syndication formats
+</A></li>
+	<LI>Next message (by thread): <A HREF="002623.html">Unadorned Gemtext instead of syndication formats
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2621">[ date ]</a>
+              <a href="thread.html#2621">[ thread ]</a>
+              <a href="subject.html#2621">[ subject ]</a>
+              <a href="author.html#2621">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

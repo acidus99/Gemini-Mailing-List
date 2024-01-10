@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] GemIF - Simple Interactive Fiction engine for Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20GemIF%20-%20Simple%20Interactive%20Fiction%20engine%20for%20Gemini&In-Reply-To=%3C5FC9EB0B.3040305%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003775.html">
+   <LINK REL="Next"  HREF="003798.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] GemIF - Simple Interactive Fiction engine for Gemini</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20GemIF%20-%20Simple%20Interactive%20Fiction%20engine%20for%20Gemini&In-Reply-To=%3C5FC9EB0B.3040305%40marmaladefoo.com%3E"
+       TITLE="[ANN] GemIF - Simple Interactive Fiction engine for Gemini">luke at marmaladefoo.com
+       </A><BR>
+    <I>Fri Dec  4 07:53:47 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003775.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="003798.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3778">[ date ]</a>
+              <a href="thread.html#3778">[ thread ]</a>
+              <a href="subject.html#3778">[ subject ]</a>
+              <a href="author.html#3778">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+On 03-Dec-2020 23:20, Nick Thomas wrote:
+&gt;<i> On Thu, 2020-12-03 at 23:11 +0000, Norm MacLennan wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> I'm not sure I'm  willing to categorically state all requests must be
+</I>&gt;&gt;<i> idempotent.
+</I>&gt;<i> I have the same feeling, but I think it's well-founded. Gemini requests
+</I>&gt;<i> don't map well to HTTP GET semantics at all - we just don't have the
+</I>&gt;<i> safety guarantees we need for it.
+</I>&gt;<i>
+</I>&gt;<i> A simple example - imagine I build a gemini client that prefetches all
+</I>&gt;<i> links on the current page in the background, for performance. If
+</I>&gt;<i> they're all HTTP GETs in principle, this is fine.
+</I>&gt;<i>
+</I>&gt;<i> However, like any bad web 1.0 application that used links + GET instead
+</I>&gt;<i> of form buttons + POST for actions, my browser will make astrobotany no
+</I>&gt;<i> fun to play at all, as I simultaneously water, shake, and feed my plant
+</I>&gt;<i> each time I visit it.
+</I>
+Well for all its retro quirky ascii art cuteness, Astrobotany is a bit 
+of an outlier in this respect. It can get away with &quot;abusing&quot; gemini 
+links only because it sits behind a layer of authentication, that 
+restricts access to the links within the application. It would be a much 
+safer application to implement in Gemini had a proper non-cacheable 
+non-idempotent method.
+
+For example, consider that GUS (and other agents) visit all our sites on 
+a semi-regular basis. this means that all the links will be activated 
+many times. If there is a link somewhere
+
+=&gt; liveendpoint click this link if you liked my article
+
+this will be activated an aribitrary number of times, and is a mismatch 
+for gemini as links in a public hypertext system are - in general - 
+idempotent.
+
+If some other contrarian gemini author put 20 (or 1000) links to that 
+live end point on their gemsite, whenever GUS comes to visit, I'm going 
+to get 20 new &quot;likes&quot;
+
+One other point that is relevant here is that the &quot;input&quot; method (meta 
+10 and 11) do not really help, since again they are implemented as 
+parameterised links (/path/to/endpoint?inputcontent). As such they can 
+be reused as persistable links.
+
+But this is all we have in Gemini, so authors and developers do their 
+best to work around the natural restrictions.
+
+Its the same on the web - there is a limit to the types of application 
+you can implement with just normal links. If you want to change state, 
+you need a post method (or equivalent/JSON etc).
+
+I'd be interested in what a non-cacheable, non-persistable, 
+non-idempotent &quot;post&quot; type method would look like in Gemini, but at the 
+moment we just have sort of hacks to try to fake it as best we can in 
+some limited scenarios.
+
+  - Luke
+
+
+______________________________________
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003775.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="003798.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3778">[ date ]</a>
+              <a href="thread.html#3778">[ thread ]</a>
+              <a href="subject.html#3778">[ subject ]</a>
+              <a href="author.html#3778">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> content-disposition vs data URI
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20content-disposition%20vs%20data%20URI&In-Reply-To=%3CB8F21775-37EB-4A1C-B53B-FE81BA3B5F04%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001335.html">
+   <LINK REL="Next"  HREF="001336.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>content-disposition vs data URI</H1>
+    <B>Petite Abeille</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20content-disposition%20vs%20data%20URI&In-Reply-To=%3CB8F21775-37EB-4A1C-B53B-FE81BA3B5F04%40gmail.com%3E"
+       TITLE="content-disposition vs data URI">petite.abeille at gmail.com
+       </A><BR>
+    <I>Wed Jun  3 19:25:37 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001335.html">Small break
+</A></li>
+        <LI>Next message (by thread): <A HREF="001336.html">content-disposition vs data URI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1307">[ date ]</a>
+              <a href="thread.html#1307">[ thread ]</a>
+              <a href="subject.html#1307">[ subject ]</a>
+              <a href="author.html#1307">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>content-disposition defines either inline or attachment,  when it comes to how to display content.
+
+text/gemini link is firmly in the external camp, assuming explicit user action to interact with linked content: a link is an external resource to the document, an attachment, to be activated by the user.
+
+Additionally, perhaps text/gemini could embraces data url as small inline adornment.
+
+For example, given a small data encoded vCard, 917 bytes long:
+
+data:text/vcard;charset=utf-8;base64,QkVHSU46VkNBUkQNClZFUlNJT046NC4wDQpOOkd1bXA7Rm9ycmVzdDs7TXIuOw0KRk46Rm9ycmVzdCBHdW1wDQpPUkc6QnViYmEgR3VtcCBTaHJpbXAgQ28uDQpUSVRMRTpTaHJpbXAgTWFuDQpQSE9UTztNRURJQVRZUEU9aW1hZ2UvZ2lmOmh0dHA6Ly93d3cuZXhhbXBsZS5jb20vZGlyX3Bob3Rvcy9teV9waG90by5naWYNClRFTDtUWVBFPXdvcmssdm9pY2U7VkFMVUU9dXJpOnRlbDorMS0xMTEtNTU1LTEyMTINClRFTDtUWVBFPWhvbWUsdm9pY2U7VkFMVUU9dXJpOnRlbDorMS00MDQtNTU1LTEyMTINCkFEUjtUWVBFPVdPUks7UFJFRj0xO0xBQkVMPSIxMDAgV2F0ZXJzIEVkZ2VuQmF5dG93biwgTEEgMzAzMTRuVW5pdGVkIFN0YXRlcyBvZiBBbWVyaWNhIjo7OzEwMCBXYXRlcnMgRWRnZTtCYXl0b3duO0xBOzMwMzE0O1VuaXRlZCBTdGF0ZXMgb2YgQW1lcmljYQ0KQURSO1RZUEU9SE9NRTtMQUJFTD0iNDIgUGxhbnRhdGlvbiBTdC5uQmF5dG93biwgTEEgMzAzMTRuVW5pdGVkIFN0YXRlcyBvZiBBbWVyaWNhIjo7OzQyIFBsYW50YXRpb24gU3QuO0JheXRvd247TEE7MzAzMTQ7VW5pdGVkIFN0YXRlcyBvZiBBbWVyaWNhDQpFTUFJTDpmb3JyZXN0Z3VtcEBleGFtcGxlLmNvbQ0KUkVWOjIwMDgwNDI0VDE5NTI0M1oNCngtcXE6MjE1ODg4OTENCkVORDpWQ0FSRA==
+
+A client MAY render it inline, for the user to interact with, in any appropriate ways:
+
+BEGIN:VCARD
+VERSION:4.0
+N:Gump;Forrest;;Mr.;
+FN:Forrest Gump
+ORG:Bubba Gump Shrimp Co.
+TITLE:Shrimp Man
+PHOTO;MEDIATYPE=image/gif:<A HREF="http://www.example.com/dir_photos/my_photo.gif">http://www.example.com/dir_photos/my_photo.gif</A>
+TEL;TYPE=work,voice;VALUE=uri:tel:+1-111-555-1212
+TEL;TYPE=home,voice;VALUE=uri:tel:+1-404-555-1212
+ADR;TYPE=WORK;PREF=1;LABEL=&quot;100 Waters Edge\nBaytown\, LA 30314\nUnited States of America&quot;:;;100 Waters Edge;Baytown;LA;30314;United States of America
+ADR;TYPE=HOME;LABEL=&quot;42 Plantation St.\nBaytown\, LA 30314\nUnited States of America&quot;:;;42 Plantation St.;Baytown;LA;30314;United States of America
+EMAIL:<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">forrestgump at example.com</A>
+REV:20080424T195243Z
+x-qq:21588891
+END:VCARD
+
+Forrest Gump
+Bubba Gump Shrimp Co.
+Shrimp Man
+
+100 Waters Edge Baytown 
+LA 30314
+United States of America
+
++1-111-555-1212
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">forrestgump at example.com</A>
+
+There is a bunch of micro format such as text/vcard, text/calendar, text/directory, text/csv, application/x-x509-ca-cert , etc, etc, worthwhile displaying as small inline attachment.
+
+
+[1] <A HREF="https://en.wikipedia.org/wiki/VCard">https://en.wikipedia.org/wiki/VCard</A>
+
+
+
+
+ 
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200603/f0664873/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200603/f0664873/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001335.html">Small break
+</A></li>
+	<LI>Next message (by thread): <A HREF="001336.html">content-disposition vs data URI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1307">[ date ]</a>
+              <a href="thread.html#1307">[ thread ]</a>
+              <a href="subject.html#1307">[ subject ]</a>
+              <a href="author.html#1307">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

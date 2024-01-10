@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> HTTP/0.95 - the sweet spot or thereabouts?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20HTTP/0.95%20-%20the%20sweet%20spot%20or%20thereabouts%3F&In-Reply-To=%3C5EE91BCF.9080703%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001760.html">
+   <LINK REL="Next"  HREF="001748.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>HTTP/0.95 - the sweet spot or thereabouts?</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20HTTP/0.95%20-%20the%20sweet%20spot%20or%20thereabouts%3F&In-Reply-To=%3C5EE91BCF.9080703%40marmaladefoo.com%3E"
+       TITLE="HTTP/0.95 - the sweet spot or thereabouts?">luke at marmaladefoo.com
+       </A><BR>
+    <I>Tue Jun 16 20:21:51 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001760.html">Escaping in text/gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="001748.html">HTTP/0.95 - the sweet spot or thereabouts?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1746">[ date ]</a>
+              <a href="thread.html#1746">[ thread ]</a>
+              <a href="subject.html#1746">[ subject ]</a>
+              <a href="author.html#1746">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi everyone
+
+Just to toss a couple of things into the debate, for those interested in 
+a minimal application capability for Gemini, but don't want all the 
+bells, whistles and complexity of what the web became (cue scary music)
+
+I did a bit of digging on the background history of HTTP. Maybe you are 
+all familiar with this, but personally I found it quite illuminating on 
+our conversation. If we are positioning Gemini between Gopher and the 
+Web, we can decide where is the sweet spot along the spectrum.
+
+<A HREF="https://medium.com/platform-engineer/evolution-of-http-69cfe6531ba0">https://medium.com/platform-engineer/evolution-of-http-69cfe6531ba0</A>
+
+<A HREF="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Evolution_of_HTTP">https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Evolution_of_HTTP</A> 
+
+
+<A HREF="https://hpbn.co/brief-history-of-http/">https://hpbn.co/brief-history-of-http/</A>
+
+HTTP 1.1 was the first fully standardised version, having an extensible 
+structure, and many possible headers, cookies etc. However before that 
+there were two pre-standardisation version that are quite interesting to 
+look at.
+
+== HTTP 0.9 ==
+
+This was the very first version designed by Berners Lee. All it had was 
+GET (sound familiar?)
+
+Modulo the certificates/TLS stuff in Gemini, it is more or less what 
+Gemini is right now.
+
+If you just want idempotent resources and nothing else, this is all you 
+need and is what we have in Gemini at the moment.
+
+== HTTP 1.0 ==
+
+This introduced two other methods HEAD (a GET with no response body) and 
+POST which is for sending content to the server. It was still one 
+connection per resource. It defined URL format, charsets and mime types 
+and the idea of a header format and some standard headers 
+(Content-Length, Date, Others).
+
+It also defined a mechanism to create new arbitrary headers (we can get 
+rid of that)
+
+== HTTP 1.1 ==
+
+The first fully standardised version that really took off and had a 
+million different options including persistent connections, cookies and 
+so on. This is too much for our needs and the extensibility opened the 
+door to all the sugary complexity we are trying to avoid.
+
+    _________
+
+Looking at HTTP 1.0, it seems to mirror the basic needs for Gemini to be 
+able to be used as a platform without the bloat that became 1.1, 2.0 
+(and in the future 3.0/QUIC is in discussion)
+
+My sense is we can find the sweet spot at about &quot;HTTP 0.95&quot; which is 
+enough to support application development without the cruft of arbitrary 
+headers and extensibility.
+
+Here is the RFC for HTTP 1.0:
+
+<A HREF="https://tools.ietf.org/html/rfc1945">https://tools.ietf.org/html/rfc1945</A>
+
+quoting from the RFC about POST:
+
+
+    The POST method is used to request that the destination server accept
+    the entity enclosed in the request as a new subordinate of the
+    resource identified by the Request-URI in the Request-Line. POST is
+    designed to allow a uniform method to cover the following functions:
+
+       o Annotation of existing resources;
+
+       o Posting a message to a bulletin board, newsgroup, mailing list,
+         or similar group of articles;
+
+       o Providing a block of data, such as the result of submitting a
+         form, to a data-handling process;
+
+       o Extending a database through an append operation.
+
+
+    The actual function performed by the POST method is determined by the
+    server and is usually dependent on the Request-URI. The posted entity
+    is subordinate to that URI in the same way that a file is subordinate
+    to a directory containing it, a news article is subordinate to a
+    newsgroup to which it is posted, or a record is subordinate to a
+    database.
+
+&lt;continues&gt;
+
+    A valid Content-Length is required on all HTTP/1.0 POST requests. An
+    HTTP/1.0 server should respond with a 400 (bad request) message if it
+    cannot determine the length of the request message's content.
+
+    Applications must not cache responses to a POST request because the
+    application has no way of knowing that the server would return an
+    equivalent response on some future request.
+
+
+This seems to well describe the needs of building non-idempotent 
+applications in Gemini.
+As per previous emails we dont need the full vocabulary of the other 
+HTTP verbs such as DELETE/PUT etc
+and we can also still dispense with HEAD (a body-less GET) as adding not 
+much (and was not much used).
+Clients can implement a simplistic form of HEAD by abandoning a 
+connection after the header line is seen.
+
+So what I think we need is something around HTTP 0.95 (it never existed) 
+which is about half way between HTTP 0.9 and 1.0.
+
+GET (gemini right now)
+POST (for non-idempotent interactions)
+Content-Length indicator (to make POST work)
+
+no other headers, so not extensible, so not as far as HTTP 1.0, but 
+allows application development.
+
+I'll leave you in peace now :-)
+
+  - Luke
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001760.html">Escaping in text/gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="001748.html">HTTP/0.95 - the sweet spot or thereabouts?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1746">[ date ]</a>
+              <a href="thread.html#1746">[ thread ]</a>
+              <a href="subject.html#1746">[ subject ]</a>
+              <a href="author.html#1746">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

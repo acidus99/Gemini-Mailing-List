@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Crawlers on Gemini and best practices
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Crawlers%20on%20Gemini%20and%20best%20practices&In-Reply-To=%3C8bcb4b7117ce5f4ebe22b476146aec0a%40tilde.team%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004006.html">
+   <LINK REL="Next"  HREF="003992.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Crawlers on Gemini and best practices</H1>
+    <B>Robert &quot;khuxkm&quot; Miles</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Crawlers%20on%20Gemini%20and%20best%20practices&In-Reply-To=%3C8bcb4b7117ce5f4ebe22b476146aec0a%40tilde.team%3E"
+       TITLE="Crawlers on Gemini and best practices">khuxkm at tilde.team
+       </A><BR>
+    <I>Thu Dec 10 21:44:50 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004006.html">Crawlers on Gemini and best practices
+</A></li>
+        <LI>Next message (by thread): <A HREF="003992.html">Crawlers on Gemini and best practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3983">[ date ]</a>
+              <a href="thread.html#3983">[ thread ]</a>
+              <a href="subject.html#3983">[ subject ]</a>
+              <a href="author.html#3983">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>December 10, 2020 8:43 AM, &quot;Stephane Bortzmeyer&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stephane at sources.org</A>&gt; wrote:
+
+&gt;<i> - snip -
+</I>&gt;<i> 
+</I>&gt;<i> The spec is quite vague about the *order* of directives. For instance,
+</I>&gt;<i> &lt;<A HREF="gemini://gempaper.strangled.net/robots.txt">gemini://gempaper.strangled.net/robots.txt</A>&gt; is:
+</I>&gt;<i> 
+</I>&gt;<i> User-agent: *
+</I>&gt;<i> Disallow: /credentials.txt
+</I>&gt;<i> User-agent: archiver
+</I>&gt;<i> Disallow: /
+</I>&gt;<i> 
+</I>&gt;<i> The intented semantics is probably to disallow archivers but my parser
+</I>&gt;<i> regarded the site as available because it stopped at the first match,
+</I>&gt;<i> the star. Who is right?
+</I>
+Not you. The idea is that you start with the most direct User-Agent that applies to you (in this case, `archiver`), and then if that doesn't say you can't access the file, go up a level (in this case, `*`), and if *that* doesn't say you can't access the file, go up another level, and so on. If you run out of levels and haven't been told you can't access a file (or a parent directory of the file) then go ahead and access the file. In this case, a web proxy has no specific rules, so it would follow the `*` rule and not serve credentials.txt. However, an archiver *does* have specific rules: don't access anything, and so the archiver doesn't access anything.
+
+An example in &quot;A Standard For Robot Exclusion&quot; (as archived by robotstxt.org[1]) uses an ordering like this and insinuates that the intent is to (in this case) allow `cybermapper` to access everything but block anyone else from accessing the cyberworld application:
+
+```
+# robots.txt for <A HREF="http://www.example.com/">http://www.example.com/</A>
+
+User-agent: *
+Disallow: /cyberworld/map/ # This is an infinite virtual URL space
+
+# Cybermapper knows where to go.
+User-agent: cybermapper
+Disallow:
+```
+
+Just my 2 cents,
+Robert &quot;khuxkm&quot; Miles
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004006.html">Crawlers on Gemini and best practices
+</A></li>
+	<LI>Next message (by thread): <A HREF="003992.html">Crawlers on Gemini and best practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3983">[ date ]</a>
+              <a href="thread.html#3983">[ thread ]</a>
+              <a href="subject.html#3983">[ subject ]</a>
+              <a href="author.html#3983">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

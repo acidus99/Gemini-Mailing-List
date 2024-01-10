@@ -1,0 +1,300 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Thoughts on TOFU
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Thoughts%20on%20TOFU&In-Reply-To=%3CzRS1CVTZHgzt7Alr2ER4lIMpCS5NW4ZGZcumbFYDyCaCVr4u-z7gpIp6m7v1lTEj4mhPitYyOUUisM4J9oOudOvRwKjoKcrM9J0yAQ1QtQc%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001800.html">
+   <LINK REL="Next"  HREF="001804.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Thoughts on TOFU</H1>
+    <B>colecmac at protonmail.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Thoughts%20on%20TOFU&In-Reply-To=%3CzRS1CVTZHgzt7Alr2ER4lIMpCS5NW4ZGZcumbFYDyCaCVr4u-z7gpIp6m7v1lTEj4mhPitYyOUUisM4J9oOudOvRwKjoKcrM9J0yAQ1QtQc%3D%40protonmail.com%3E"
+       TITLE="Thoughts on TOFU">colecmac at protonmail.com
+       </A><BR>
+    <I>Fri Jun 19 19:51:35 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001800.html">Thoughts on TOFU
+</A></li>
+        <LI>Next message (by thread): <A HREF="001804.html">Thoughts on TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1803">[ date ]</a>
+              <a href="thread.html#1803">[ thread ]</a>
+              <a href="subject.html#1803">[ subject ]</a>
+              <a href="author.html#1803">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks for the well written response! Worth the wait :)
+
+I see now that I have over-analyzed TOFU, thanks for pointing that
+out. I think having a mostly secure protocol that works without
+a centralized system is a good place to be in, even though reaching
+&quot;full&quot; security might be mostly unattainable.
+
+With that in mind, let me look back at those ideas again.
+
+&gt;<i> * Servers can generate their new self-signed cert N months in advance
+</I>&gt;<i> and, for those N months, advertise the hash of the new cert at a
+</I>&gt;<i> well-known endpoint, access to which is secured by the current cert.
+</I>&gt;<i> TOFU clients can notice when an accepted cert is close to expiry and
+</I>&gt;<i> pre-fetch the future fingerprint.
+</I>
+This is the one I like the most I think, it seems the simplest. Even simpler
+than the signing method, because server don't need to serve multiple certs
+and increase the overhead, and clients don't even need to do key validation.
+
+Whether this is specced (as an optional client behaviour) or not, I think
+the spirit of &quot;mostly secure&quot; suggests that at the very least, simple clients
+should look at cert hash and expiry, and not just the cert public key as Felix
+suggested in this thread originally. I think it'd be nice to see this suggestion
+in the Best Practices file, if you agree.
+
+Thanks,
+makeworld
+
+&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208; Original Message &#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;
+On Friday, June 19, 2020 1:29 PM, solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at SDF.ORG</A>&gt; wrote:
+
+&gt;<i> Sorry for letting this thread sit for a while!
+</I>&gt;<i>
+</I>&gt;<i> On Mon, Jun 15, 2020 at 06:53:49PM +0000, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; &gt; I do think that &quot;controlling how servers use certs&quot; is [a good idea]
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; This is probably the only way forward, but unfortunately it complicates things.
+</I>&gt;<i> &gt; It makes Gemini less simple, because people can't stick to what they
+</I>&gt;<i> &gt; know about certs, or just use the existing one they have for their domain.
+</I>&gt;<i> &gt; I guess we just have to try and get servers to support this and abstract it
+</I>&gt;<i> &gt; away.
+</I>&gt;<i>
+</I>&gt;<i> Well, &quot;different&quot; and &quot;less simple&quot; aren't always the same. The
+</I>&gt;<i> automated cron-based approach of Let's Encrypt is very different to
+</I>&gt;<i> what people were used to before it came along, but uptake was swift -
+</I>&gt;<i> okay, in part because it was free, but also in part because it was
+</I>&gt;<i> actually easier. I think that anything which can be implemented as a
+</I>&gt;<i> cron job is feasible for widespread adoption. A cron job which does not
+</I>&gt;<i> communicate with any external machines is arguably even simpler than one
+</I>&gt;<i> which does.
+</I>&gt;<i>
+</I>&gt;<i> &gt; &gt; -   Servers can sign their new cert with their previous private key.
+</I>&gt;<i> &gt; &gt;     Then TOFU clients which accepted the previous cert can validate the
+</I>&gt;<i> &gt; &gt;     changeover - and then immediately stop trusting the previous cert so
+</I>&gt;<i> &gt; &gt;     that anybody who stole the private key can't sign their own new cert.
+</I>&gt;<i> &gt; &gt;     Basically, when you accept a new cert you also grant it one-use-only,
+</I>&gt;<i> &gt; &gt;     very-limited-scope CA powers.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; BLoCkcHaiN style, nice ;)
+</I>&gt;<i> &gt; This does mean that servers would have to serve up an ever growing certificate
+</I>&gt;<i> &gt; chain though? I think? Because otherwise how can a client verify that it was signed.
+</I>&gt;<i>
+</I>&gt;<i> I hadn't imagined an ever-growing chain, that would soon add up to some
+</I>&gt;<i> pretty hefty overhead. I imagined just two or maybe three at most.
+</I>&gt;<i>
+</I>&gt;<i> &gt; I guess the servers only need to serve up two certs, the previous and current, but
+</I>&gt;<i> &gt; if I boot up my client after a year, then how does it know whether it just has missed
+</I>&gt;<i> &gt; some certs in between, or if there's an MITM attack?
+</I>&gt;<i>
+</I>&gt;<i> It wouldn't!
+</I>&gt;<i>
+</I>&gt;<i> Let me be clear: TOFU is a very simple security model. It's totally
+</I>&gt;<i> decentralised, totally decommercialised, involves no third parties
+</I>&gt;<i> beyond the server and client and you can deploy it even on weirdo
+</I>&gt;<i> off-grid wifi meshnets that have no connection to the Real Internet
+</I>&gt;<i> whatsoever. It should go without saying that something like this is not
+</I>&gt;<i> going to give you 100% unconditional authentication of remote
+</I>&gt;<i> identities under all circumstances.
+</I>&gt;<i>
+</I>&gt;<i> That doesn't mean it's rubbish. The CA model doesn't give you 100%
+</I>&gt;<i> unconditional authentication either (and it certainly don't look simple
+</I>&gt;<i> once you add in things like OCSP and CT to try and get it closer to that
+</I>&gt;<i> goal). In terms of the its ability to protect everyday people from
+</I>&gt;<i> their greatest realistic privacy threats (things like passive, automated
+</I>&gt;<i> bulk surveillance by their ISP) compared to its implementation
+</I>&gt;<i> complexity, I think TOFU can be very worth using. But you do need to
+</I>&gt;<i> have realistic expectations: really strengthening it up to the point
+</I>&gt;<i> where it can address active, targetted attacks will necessarily involve
+</I>&gt;<i> adding more complexity, and this is the spirit in which I brought up all
+</I>&gt;<i> the ideas in this thread.
+</I>&gt;<i>
+</I>&gt;<i> The role of TOFU-based TLS in Gemini is not to offer something
+</I>&gt;<i> equivalent to TLS on the web, so we can all comfortably send around our
+</I>&gt;<i> credit card numbers and make bank transfers in Geminispace even though
+</I>&gt;<i> criminals are actively trying to intercept us. It's to fix the glaring
+</I>&gt;<i> defect of Gopher whereby nobody would blame you for being reluctant to
+</I>&gt;<i> use Gopher to consume:
+</I>&gt;<i>
+</I>&gt;<i> -   serious political activism
+</I>&gt;<i> -   information about a locally-banned religion
+</I>&gt;<i> -   erotic literature
+</I>&gt;<i> -   health advice for stigmatised conditions
+</I>&gt;<i> -   counselling resources for abuse victims
+</I>&gt;<i>
+</I>&gt;<i>     because it would be trivial for your ISP to sell that information to
+</I>&gt;<i>     marketing agencies or report you to people who will haul you off to the
+</I>&gt;<i>     gulag (because if they don't, they're at risk of getting hauled off).
+</I>&gt;<i>     Or because if you're using the open wifi network at a cafe or a public
+</I>&gt;<i>     library or an airport, all the other patrons on that network will be
+</I>&gt;<i>     able to see what you're reading. I believe that people who want/need
+</I>&gt;<i>     to read the above should be able to read the above with some degree
+</I>&gt;<i>     of protection, and Gopher lets them down on that point. I honestly
+</I>&gt;<i>     think this keeps a lot of people who are fed up with all the web's
+</I>&gt;<i>     problems from migrating into Gopherspace. At the same time, I believe
+</I>&gt;<i>     that fixing this shouldn't require complicated and expensive
+</I>&gt;<i>     private infrastructure: Yes, Let's Encrypt is free for the end user
+</I>&gt;<i>     and I'm a big fan, but it costs millions of dollars each year to run
+</I>&gt;<i>     it, most of which comes from corporate sponsors and, ironically, some
+</I>&gt;<i>     of their biggest sponsors are companies like Google and Facebook
+</I>&gt;<i>     that make the money they donate by doing things that aren't good for
+</I>&gt;<i>     privacy!
+</I>&gt;<i>
+</I>&gt;<i>     From this perspective, TOFU provides &quot;good enough&quot; security at a &quot;cheap
+</I>&gt;<i>     enough&quot; price that I feel like it should be treated as a first class
+</I>&gt;<i>     option in Geminispace, and that it's a viable option for a lot of (but
+</I>&gt;<i>     maybe not all) Gemini servers. It's enough to stop ISPs and sleazy
+</I>&gt;<i>     hotspot providers doing automated MITM attacks on all Gemini traffic,
+</I>&gt;<i>     which they could do if we just accepted whatever certificate came down
+</I>&gt;<i>     the line without any checks whatsoever - all it takes is one customer
+</I>&gt;<i>     with a TOFU client on a machine which routinely moves between networks
+</I>&gt;<i>     (say work and home, or home and the library, whatever) to reveal that
+</I>&gt;<i>     this is happening and raise the alarm.
+</I>&gt;<i>
+</I>&gt;<i>     Thinking about comparatively simple extensions on top of basic TOFU
+</I>&gt;<i>     which can add a little extra security is absolutely worth doing and I
+</I>&gt;<i>     encourage it and that's the spirit in which I've proposed a lot of these
+</I>&gt;<i>     things, like signing new certs with old keys, or pre-announcement of
+</I>&gt;<i>     cert roll-overs. But I think it makes more sense to ask of these simple
+</I>&gt;<i>     additional layers &quot;do they add protection against some feasible attack
+</I>&gt;<i>     on vanilla TOFU?&quot; and not &quot;are there still some scenarios in which this
+</I>&gt;<i>     is vulnerable?&quot;, because the answer to the latter will always be &quot;yes&quot;.
+</I>&gt;<i>
+</I>&gt;<i>     For the record, I would not recommend using Gemini for serious life and
+</I>&gt;<i>     death stuff, unless perhaps you're in a situation where you can meet
+</I>&gt;<i>     everybody involved face-to-face and confirm certificate fingerprints in
+</I>&gt;<i>     an offline way.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; &gt; -   Servers can generate their new self-signed cert N months in advance
+</I>&gt;<i> &gt; &gt;     and, for those N months, advertise the hash of the new cert at a
+</I>&gt;<i> &gt; &gt;     well-known endpoint, access to which is secured by the current cert.
+</I>&gt;<i> &gt; &gt;     TOFU clients can notice when an accepted cert is close to expiry and
+</I>&gt;<i> &gt; &gt;     pre-fetch the future fingerprint.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The problem is still like what if I miss a cert? Like if my client got cert 1 and
+</I>&gt;<i> &gt; the hash of cert 2, but by the time I come back online, that site is serving cert 3
+</I>&gt;<i> &gt; and I don't know whether that's one I should trust or not.
+</I>&gt;<i>
+</I>&gt;<i> Same response as above, I guess. Both of these approaches work best
+</I>&gt;<i> for sites that you visit &quot;regularly&quot;, where &quot;regular&quot; is relative to
+</I>&gt;<i> certificate lifetime. If you're only going to check in with somewhere
+</I>&gt;<i> once every few years and have no contact with the people involved
+</I>&gt;<i> inbetween, it's very hard to maintain trust without involving third
+</I>&gt;<i> parties.
+</I>&gt;<i>
+</I>&gt;<i> &gt; DANE seems cool, I want to look into it more. But it will complicate things, and then
+</I>&gt;<i> &gt; there's DNSSEC, etc etc. I'm guessing it should be avoided for now.
+</I>&gt;<i>
+</I>&gt;<i> I was surprised at how many people in #gemini said the other day that
+</I>&gt;<i> they had DNSSEC working for their domains! But, yes, this is perhaps
+</I>&gt;<i> the trickiest add-on discussed, because automating it would require
+</I>&gt;<i> hooking into an API for updating DNS records, and there are many of
+</I>&gt;<i> those in use so writing a cron-jobbable implementation of this approach
+</I>&gt;<i> which can be used by the majority of people is not straightforward.
+</I>&gt;<i> This might be something adopted by a relatively small number of servers
+</I>&gt;<i> who have some good reason to want to provide additonal assurance to
+</I>&gt;<i> their visitors.
+</I>&gt;<i>
+</I>&gt;<i> &gt; &gt; -   We could built Perspectives/Convergence style &quot;notary&quot; servers that
+</I>&gt;<i> &gt; &gt;     TOFU clients clients can consult when receiving an unrecognised cert.
+</I>&gt;<i> &gt; &gt;     This was an idea that was developed before it's time, IMHO. Today there
+</I>&gt;<i> &gt; &gt;     is no reason that achieving broad network perspective requires trusted
+</I>&gt;<i> &gt; &gt;     third parties and an effective &quot;shadow infrastructure&quot; alongside CAs.
+</I>&gt;<i> &gt; &gt;     Just run your own certificate observatory on a dirt cheap VPS. Share it
+</I>&gt;<i> &gt; &gt;     with friends, who share theirs with you. Pubnixes can run then for
+</I>&gt;<i> &gt; &gt;     their users. Unlike some of the other ideas, this works just as nicely
+</I>&gt;<i> &gt; &gt;     with CA-signed certs (like those from Let's Encrypt) as self-signed
+</I>&gt;<i> &gt; &gt;     certs.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; This seems cool, and I want to learn more. How is conflict resolution handled?
+</I>&gt;<i> &gt; Doesn't this need bootstrapping? It could be a good solution, but still will
+</I>&gt;<i> &gt; complicate the protocol a lot.
+</I>&gt;<i>
+</I>&gt;<i> I think this one is cool, too. :) I plan to code such an observatory
+</I>&gt;<i> (as a Gemini server itself, naturally!) one day. I like that it works
+</I>&gt;<i> well even for CA-signed certs, and that it requires nothing special on
+</I>&gt;<i> the part of the server admin.
+</I>&gt;<i>
+</I>&gt;<i> Conflict resolution would, I imagine, be configurable at the client's
+</I>&gt;<i> end. You could set it up to raise a red flag unless every observatory
+</I>&gt;<i> polled had seen the cert in question, or you could accept a cert if more
+</I>&gt;<i> than N observatories had seen it, whatever you thought was sensible. I
+</I>&gt;<i> don't think bootstrapping is needed, observatories can check which cert
+</I>&gt;<i> they see for a domain fairly quickly when they first receive a query
+</I>&gt;<i> about it (and thereafter add it to a list to to check on a recurring
+</I>&gt;<i> basis).
+</I>&gt;<i>
+</I>&gt;<i> Regarding &quot;complicating the protocol a lot&quot;, I certainly don't imagine
+</I>&gt;<i> speccing this or any of the other ideas here as required. I don't
+</I>&gt;<i> think consulting remote TLS observatories will be a mainstream thing
+</I>&gt;<i> the average Geminiaut does. It will probably mostly be a toy for
+</I>&gt;<i> privacy and decentralisation geeks, and perhaps something that people
+</I>&gt;<i> involved in serious activism might pick up once said geeks have gotten
+</I>&gt;<i> it working smoothly.
+</I>&gt;<i>
+</I>&gt;<i> &gt; I feel somewhat unsure about the problems I raised here btw, please correct me if
+</I>&gt;<i> &gt; I've made any mistakes.
+</I>&gt;<i>
+</I>&gt;<i> I think everything you said, about possible shortcomings of my
+</I>&gt;<i> proposals, was factually correct! I think there was just a difference
+</I>&gt;<i> in expectations of what simple TOFU solutions can provide.
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i> Solderpunk
+</I>
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001800.html">Thoughts on TOFU
+</A></li>
+	<LI>Next message (by thread): <A HREF="001804.html">Thoughts on TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1803">[ date ]</a>
+              <a href="thread.html#1803">[ thread ]</a>
+              <a href="subject.html#1803">[ subject ]</a>
+              <a href="author.html#1803">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Unicode vs. the World
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3C20201217094843.GC9267%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004107.html">
+   <LINK REL="Next"  HREF="004110.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Unicode vs. the World</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3C20201217094843.GC9267%40brevard.conman.org%3E"
+       TITLE="Unicode vs. the World">sean at conman.org
+       </A><BR>
+    <I>Thu Dec 17 09:48:43 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004107.html">Unicode vs. the World
+</A></li>
+        <LI>Next message (by thread): <A HREF="004110.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4109">[ date ]</a>
+              <a href="thread.html#4109">[ thread ]</a>
+              <a href="subject.html#4109">[ subject ]</a>
+              <a href="author.html#4109">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Bj&#246;rn W&#228;rmedal once stated:
+&gt;<i> How does a client handle a link like the following:
+</I>&gt;<i> =&gt; essays/why-spaces-are-%20-in-URLs.gmi
+</I>&gt;<i> 
+</I>&gt;<i> The assumption here is that the author has not percent encoded
+</I>&gt;<i> themselves -- this is the actual filename, %20 and all.
+</I>&gt;<i> 
+</I>&gt;<i> How can the client tell if it's percent encoded or not? If you start
+</I>&gt;<i> by decoding it you distort the filename. If you just assume it isn't
+</I>&gt;<i> percent encoded and go ahead and do that you will handle this link
+</I>&gt;<i> correctly but break any links that are already percent encoded. I've
+</I>&gt;<i> only done this in python, using the urllib.parse library. I can tell
+</I>&gt;<i> that to encode or decode, but it will do what I tell it to without
+</I>&gt;<i> exception. It's up to me to build logic that avoids breaking the edge
+</I>&gt;<i> cases.
+</I>&gt;<i> 
+</I>&gt;<i> We can decide to *always* percent encode links in gemtext (as the spec
+</I>&gt;<i> states now) or to *never* do it, but I don't see how we can reasonably
+</I>&gt;<i> have both. And never doing it means we can never link to a file with
+</I>&gt;<i> spaces in the URL, and will have to percent decode anything we copy
+</I>&gt;<i> paste from web browser's address bar. There will be extra work for
+</I>&gt;<i> authors either way.
+</I>&gt;<i> 
+</I>&gt;<i> Consider another hypothetical case:
+</I>&gt;<i> =&gt; teddybearoftheyear.com/vote?ew0k%20The%20Great Vote for me!
+</I>&gt;<i> 
+</I>&gt;<i> How would you solve that?
+</I>&gt;<i> 
+</I>&gt;<i> However much I *want* to have IRIs and IDNs in gemtext and leave the
+</I>&gt;<i> work to clients and servers, I don't have a solution for that as an
+</I>&gt;<i> implementer.
+</I>
+  I don't have a solution either, and while trying to nail down every
+possible corner case is admirable, sometimes, you just have to say, &quot;don't
+do that!&quot; (or in other words, document or warn about the corner case).
+
+  It's already the case on Unix systems where a file name can technically
+have any character other than '/' (because it's the path separator) and NUL
+(marks the end of the string), but I doubt you'll find any filenames with
+control characters [1] or even &quot;problematic characters because of the shell&quot;
+like &quot;&amp;&quot;, &quot;?&quot;, or &quot;*&quot; in them.  People just kind of learn what they can and
+can't use for filenames over time.  In fact, that might be an interesting
+thing for Lupa [2] or GUS to report on---characters found in filenames [3].
+
+  I'm not sure how apropos this is, but years ago, when I was at university
+studying Computer Science, I was writing a program (for a friend, not course
+related) where I wanted to log errors so they would later be seen (as the
+program would run unattended, and any messages to the display would not be
+seen).  I could log to a file, but the disk could fill up.  Okay, if that
+happened, I could log to the printer, but there might not be a printer (or
+it could be turned off---this back when printers were hooked directly to a
+computer).  I asked one of my instructors (who worked at IBM, and was on the
+team for one of the first Fortran compilers for IBM) what I should do.  His
+advice was (and as sad as this is, it's pretty true), if you don't know how
+to handle an error, don't bother looking for it.
+
+  -spc
+
+&gt;<i> Cheers,
+</I>&gt;<i> ew0k
+</I>
+[1]	Unless it's for pranking someone, not that I would know that.
+
+[2]	St&#233;phane's new research crawler for Gemini.
+
+[3]	This reminds me, I have a new feature on my own server that allows
+	one to dive into a ZIP file:
+
+		<A HREF="gemini://gemini.conman.org/test/UCSD-Pascal-source.zip/">gemini://gemini.conman.org/test/UCSD-Pascal-source.zip/</A>
+
+		vs.
+
+		<A HREF="gemini://gemini.conman.org/test/UCSD-Pascal-source.zip">gemini://gemini.conman.org/test/UCSD-Pascal-source.zip</A>
+
+	Right now it's not much of an issue since the filenames for the
+	&quot;proof-of-concept&quot; file are just plain ASCII, but in the general
+	case, I suppose I should support conversion of filenames to UTF-8,
+	but that might be a hard case as well, as character encodings aren't
+	readily recorded in ZIP files.
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004107.html">Unicode vs. the World
+</A></li>
+	<LI>Next message (by thread): <A HREF="004110.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4109">[ date ]</a>
+              <a href="thread.html#4109">[ thread ]</a>
+              <a href="subject.html#4109">[ subject ]</a>
+              <a href="author.html#4109">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

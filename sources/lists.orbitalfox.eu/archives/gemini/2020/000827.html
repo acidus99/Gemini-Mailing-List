@@ -1,0 +1,305 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposed minor spec changes, for comment.
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C20200518203544.GA23608%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000826.html">
+   <LINK REL="Next"  HREF="000828.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposed minor spec changes, for comment.</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C20200518203544.GA23608%40SDF.ORG%3E"
+       TITLE="Proposed minor spec changes, for comment.">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Mon May 18 21:35:44 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000826.html">SPOOFED: Re: SPOOFED: Re: Example Gemini pages?
+</A></li>
+        <LI>Next message (by thread): <A HREF="000828.html">Proposed minor spec changes, for comment.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#827">[ date ]</a>
+              <a href="thread.html#827">[ thread ]</a>
+              <a href="subject.html#827">[ subject ]</a>
+              <a href="author.html#827">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ahoy!
+
+The three month spec freeze announced, well, almost three months ago,
+will be expiring soon.  Things to ponder/discuss have been piling
+up.  So, I've been considering dealing with some of the &quot;low hanging
+fruit&quot; early (I have some time off work later this week because of a
+national holiday).  I'm thinking in particular of fairly minor
+changes, where it is obvious that there is a problem in what's already
+specced or important functionality is missing, and where there are
+fairly obviously solutions.
+
+To this end, I'm going to outline some proposals below for feedback.
+I *hope* that these will be pretty uncontroversial.  Feedback is
+welcome, as always, but we have to do *something* about these issues,
+so if you really think what I propose below is a bad idea, a better
+alternative would be a very good thing to bring to the discussion!
+
+Here we go, then...
+
+ISSUE 1:
+
+Problem: The current spec does not impose any limit on request header
+length.  The status code and META field can be separated by
+arbitrarily many spaces and/or tabs.  Malicious or buggy servers can
+hang or crash carelessly written clients by sending an infinite stream
+of whitespace.  It's not clear *why* anybody would want to do this (a
+&quot;reverse DOS attack&quot; is not very useful!), but it's clearly a problem
+nevertheless.
+
+Proposal: Redfine response headers from:
+
+&lt;STATUS&gt;&lt;whitespace&gt;&lt;META&gt;&lt;CR&gt;&lt;LF&gt;
+
+to:
+
+&lt;STATUS&gt; &lt;META&gt;&lt;CR&gt;&lt;LF&gt;
+
+i.e. exactly one space character between &lt;STATUS&gt; and &lt;META&gt;
+
+Rationale: Allowing multiple whitespace characters of different kinds
+makes sense in, e.g., the link syntax of text/gemini - that has to be
+written and read by human content authors, so it's a good idea to
+accommodate different editor behaviours and different personal
+preferences for laying things out.  But response headers are written
+and read by software, so there's no need to be so generous.
+Specifying the header format more precisely actually just makes life
+slightly easier for client authors.  As a result of this, the maximum
+length of a response becomes finite (as the length of &lt;STATUS&gt; and
+&lt;META&gt; are already well defined elsewhere).
+
+Client authors who want to follow Postel's law won't need to make any
+changes here.  I imagine many server authors also won't actually need
+to.  The most probable scenario is no change needed (the server already
+sends one space) or a single s/\t/ / is neeed.
+
+ISSUE 2:
+
+Problem: The spec makes a big fuss about how text/gemini is
+line-oriented, but does not clearly state what exactly constitutes a
+line.  The definition of link lines includes a &lt;CR&gt;&lt;LF&gt; at the end but
+it's not clear if that applies to all line types - or whether I even
+meant to do this or it was a careless error.
+
+Proposal: Actually, it turns out this is decided for us.  RFC2046,
+which defines the text/* MIME media type and the text/plain subtype
+covers this very clearly:
+
+---
+4.1.1.  Representation of Line Breaks
+
+   The canonical form of any MIME &quot;text&quot; subtype MUST always represent a
+   line break as a CRLF sequence.  Similarly, any occurrence of CRLF in
+   MIME &quot;text&quot; MUST represent a line break.  Use of CR and LF outside of
+   line break sequences is also forbidden.
+
+   This rule applies regardless of format or character set or sets
+   involved.
+---
+
+Since text/gemini is, well, text/gemini, it is a &quot;text&quot; subtype and
+using anything other than CRLF means we're violating the RFCs we're
+supposedly building on top of.
+
+So, CRLF everywhere it is.
+
+I propose it be mostly the server's job to handle this.  Text editors
+on different operating systems used by content authors will use
+various different line break encodings which are beyond our control,
+so we can't really make it the author's job.  Servers can translate LF
+to CRLF before sending content over the network.  This way clients
+only need to handle the &quot;canonical&quot; format, no matter what authors do.
+
+Rationale: Don't break foundational RFCs.
+
+Yeah, I know, this is tedious and no fun for server authors, but, well,
+see above.
+
+ISSUE 3:
+
+Problem: There's no way to specify the (human) language a text/gemini document
+is written in.
+
+Proposal: Define a new parameter for the text/gemini MIME type
+(alongside the previously defined `charset`) to specify language.
+Following the example set by HTML, it seems natural to call the
+parameter `lang` and to allow values as per RFC1766, e.g.:
+
+text/gemini; charset=utf-8; lang=en
+text/gemini; charset=utf-8; lang=en-US
+text/gemini; charset=utf-8; lang=en-GB
+text/gemini; charset=utf-8; lang=es
+text/gemini; charset=utf-8; lang=fr
+
+Rationale: A protocol for a global network which targets human beings
+reading textual content as its first-class application shouldn't be
+Anglocentric!  Gemini already has:
+
+* A Spanish-only server at <A HREF="gemini://gagarin.p4g.club">gemini://gagarin.p4g.club</A>
+* An auditory browser which is/will be language aware
+* A search engine which will eventually become more difficult to use
+  without the ability to limit searches to target languages.
+
+This looks a bit scary at first from an extensibility point of view,
+because it does kind of open the door to defining all sorts of
+additional parameters.  However, the pre-exisiting MIME RFCs we're
+leveraging here make it pretty clear that (i) these things aren't
+open-ended, each MIME type and subtype has a fixed and finite set of
+defined parameters, and (ii) that only certain kinds of semantic
+information are really appropriate here.  So this is about as safe as
+extensibility gets.
+
+ISSUE 4:
+
+Problem: Name-based virtual hosting is explicitly described as being
+supported in the spec, but no mention is made of SNI (Server Name
+Indication, a TLS extension which puts the desired server hostname in
+the TLS handshake).  Without this, virtual hosting can't be made to
+work reliably.
+
+Proposal: Mandate use of SNI by clients.
+
+Rationale: Earlier I proposed speccing that clients SHOULD use SNI but
+requiring that servers be robust against its absence, by assigning a
+default hostname.  Upon more thought, this won't work.  I was thinking
+about how a missing Host: header was handled in this situation in
+HTTP, where a default host works just fine.  But with TLS involved,
+this is a problem: if the default host is not the one the client has
+actually requested, the default certificate's Common Name and Subject
+Alternative Names won't match what the client expects and the
+certificiate will be rejected.  So, I think we just have to require
+SNI.
+
+If you're a client developer, please check whether or not the TLS
+library you are using supports SNI!  If not, let me know.  I imagine
+in this day and age they all will, so this won't be a burdensome
+requirement.
+
+That's it!
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000826.html">SPOOFED: Re: SPOOFED: Re: Example Gemini pages?
+</A></li>
+	<LI>Next message (by thread): <A HREF="000828.html">Proposed minor spec changes, for comment.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#827">[ date ]</a>
+              <a href="thread.html#827">[ thread ]</a>
+              <a href="subject.html#827">[ subject ]</a>
+              <a href="author.html#827">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

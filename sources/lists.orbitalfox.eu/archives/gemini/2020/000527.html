@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client certificates
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificates&In-Reply-To=%3C20200420181956.GA22501%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000526.html">
+   <LINK REL="Next"  HREF="000528.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client certificates</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificates&In-Reply-To=%3C20200420181956.GA22501%40SDF.ORG%3E"
+       TITLE="Client certificates">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Mon Apr 20 19:19:56 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000526.html">Client certificates
+</A></li>
+        <LI>Next message (by thread): <A HREF="000528.html">Client certificates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#527">[ date ]</a>
+              <a href="thread.html#527">[ thread ]</a>
+              <a href="subject.html#527">[ subject ]</a>
+              <a href="author.html#527">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Apr 20, 2020 at 04:02:00PM +0300, Ciprian Dorin Craciun wrote:
+ 
+&gt;<i> On Mon, Apr 20, 2020 at 12:23 AM Julien Blanchard &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">julien at typed-hole.org</A>&gt; wrote:
+</I>&gt;<i> &gt; When trying to implement client certificate support in my client I
+</I>&gt;<i> &gt; wondered whether or not we would want to be able to use different
+</I>&gt;<i> &gt; certificates for different gemini places?
+</I>&gt;<i> 
+</I>&gt;<i> I would definitively want to have different &quot;personas&quot; for different
+</I>&gt;<i> sites.  In fact even for the same site I would like to have different
+</I>&gt;<i> ones, for example:  one for administrative purposes, and one for
+</I>&gt;<i> normal (but authenticated) access.
+</I>
+Yes, absolutely the idea is that different certificates would be used to
+identify the client to different servers.  A universal client
+certificate would allow server admins to compare logs and track users.
+
+Possibly this question was provoked by the way the (wonderful!)
+astrobotany app advices people to use client certs with AV-98, where you
+provide a cert path when starting AV-98 and it's used for everything.  I
+should clarify that this way of handling client certs was added to AV-98
+as a kind of quick-and-dirty way to get the astrobotany app usable.
+It's not supposed to be the standard way of using client certificates.
+
+&gt;<i> &gt; I figured why not so started I my implementation by searching for a
+</I>&gt;<i> &gt; certificate that matches the host domain name like
+</I>&gt;<i> &gt; astrobotany.mozz.us.key and astrobotany.mozz.us.crt.
+</I>&gt;<i> &gt; Does it make sense? Where should one put its certificates if such a
+</I>&gt;<i> &gt; place exists in a filesystem?
+</I>
+Transient certificates are explicitly bound to a domain in the spec.
+Nothing is said about non-transient certificates, but I guess it makes
+sense that they would work similarly.  The META part of response headers
+with status 6x have no explicit semantics yet - it's possible we could
+implement a syntax for binding certificates to subdomains?  Or even
+paths?
+
+I should remind myself how this works for cookies...
+ 
+&gt;<i> Automatically choosing a client certificate and presenting it to the
+</I>&gt;<i> server, I believe is a bad idea from a privacy perspective.  I would
+</I>&gt;<i> implement something like this:  when connecting to a domain for which
+</I>&gt;<i> one could use a client certificate, ask the user the first time if he
+</I>&gt;<i> wants to:
+</I>&gt;<i> * always use the same certificate for that particular domain;
+</I>&gt;<i> * wants to use a particular certificate (assuming there are multiple),
+</I>&gt;<i> but prefers to confirm it for each new &quot;tab&quot; (or browsing context);
+</I>&gt;<i> (i.e. sort of &quot;last-used&quot; but &quot;confirm&quot;;)
+</I>&gt;<i> * never use any certificate;
+</I>
+Bugging the user about certs upon each connection to a new domain would
+be a pretty unpleasant user experience!  I would expect clients not to
+use client certificates by default and not to ask the user about client
+certificates until receieving a response with a status of 60, 61 or 62.
+
+When a user opts to generate a new non-transient certificate to send to
+a site, I guess it would be handy if the client offered a &quot;Remember me&quot;
+option, such that the same certificate would then automatically be used
+for all connections to that domain (which would involve saving the key
+and certificate to disk, presumably in some client-specific location).
+This way one could automatically and invisibly log in to places like
+astrobotany on each visit.  One of course could reverse this decision at
+any time.
+
+While we're talking details on client certificates - I never envisaged
+client certificates being signed by the server they're destined for.
+This does no harm, but it also does no good, either, if the server signs
+them without any kind of validation process.  In general I don't see a
+need for it and it just adds a lot of friction to the &quot;signup process&quot;.
+But, I'm aware that lots of TLS libraries are very inflexible when it
+comes to certificate validation, and accepting self-signed client
+certificates may not be possible - I wouldn't be surprised if this was
+the cause for astrobotany, since Python's standard library is precisely
+one of these inflexible ones...
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000526.html">Client certificates
+</A></li>
+	<LI>Next message (by thread): <A HREF="000528.html">Client certificates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#527">[ date ]</a>
+              <a href="thread.html#527">[ thread ]</a>
+              <a href="subject.html#527">[ subject ]</a>
+              <a href="author.html#527">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

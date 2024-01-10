@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Markdown and Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Markdown%20and%20Gemini&In-Reply-To=%3C87o90li6lh.fsf%40cassilda.carcosa.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000046.html">
+   <LINK REL="Next"  HREF="000049.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Markdown and Gemini</H1>
+    <B>Jason McBrayer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Markdown%20and%20Gemini&In-Reply-To=%3C87o90li6lh.fsf%40cassilda.carcosa.net%3E"
+       TITLE="Markdown and Gemini">jmcbray at carcosa.net
+       </A><BR>
+    <I>Mon Aug 19 15:15:54 BST 2019</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000046.html">Markdown and Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="000049.html">Markdown and Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#48">[ date ]</a>
+              <a href="thread.html#48">[ thread ]</a>
+              <a href="subject.html#48">[ subject ]</a>
+              <a href="author.html#48">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Brian Evans writes:
+
+&gt;<i> I agree with Sean that the lack of a standard is an issue. Additionally, most
+</I>&gt;<i> versions of markdown allow for embedded html as well as inline images. I
+</I>&gt;<i> believe the majority of us were against these things. In additional to
+</I>&gt;<i> philosophical disagreements there are issues, as Sean also writes, with
+</I>&gt;<i> the mandate that a simple client should be buildable as a weekend project.
+</I>
+I have, from the beginning, thought that Markdown was the ideal document
+type to serve over Gemini &#8211; it meets with my intuitions about &quot;the Lynx
+web&quot; being about the right level of presentation complexity. I have been
+supporting the use of Text Junior only because it is easier to implement
+without library support than Markdown.
+
+Can we talk about what we would want to restrict, were we to implement
+Markdown in Gemini clients, and why?
+
+1. No embedded HTML.
+
+   This should be pretty obvious; we are not generating HTML, and we do
+   not want to be supporting arbitrary HTML in the client, so there is
+   no use-case for including embedded HTML. We should probably specify a
+   behavior for embedded HTML that is included by mistake. Options are
+   to strip it entirely, to extract text from it and put the text  in a
+   paragraph, or to display it raw in a ```code``` block.
+
+2. No inline images.
+
+   There are basically two reasons. The less compelling reason to me is
+   aesthetic: we want documents to be text, and inline images in NCSA
+   Mosaic were the start of the slippery slope that led to the current
+   web being mostly Not Text. I consider this less compelling, because
+   there is a legitimate use for inline images as figures in academic
+   papers or lead images in news stories, for example.
+
+   The more compelling case, to me, is request predictability and
+   tracking avoidance.  I want following a link in a Gemini client to
+   make one (1) Gemini request and receive one (1) Gemini response.
+   Inline images mean that a client may make a cascade of additional
+   requests for resources that is not predictable by following the
+   original link. Some of these requests may be to third-party servers,
+   enabling tracking. This is something we strongly want to avoid.
+
+The remaining reason to not use Markdown is client complexity. A simple
+text-mode client can basically ignore *most* of Markdown's formatting,
+and just display it literally. This adds no client complexity. The one
+thing that can't be ignored is links, and Markdown links are somewhat
+complex. They can appear anywhere in the text, and they can be in either
+[immediate](<A HREF="gemini://domain/path">gemini://domain/path</A>) or [reference][1] format. This is an
+impediment to easy implementation and I think is the biggest block to us
+adopting Markdown for Gemini.
+
+[1]: <A HREF="gemini://domain/path">gemini://domain/path</A>
+
+&gt;<i> If that route were chosen, I think we would need to create parsers
+</I>&gt;<i> that return an AST in a variety of languages and make the libraries
+</I>&gt;<i> available to developers to use in their gemini projects. This would be
+</I>&gt;<i> a pretty big undertaking and I do not know that it is exactly in
+</I>&gt;<i> scope.
+</I>
+I am willing to write such libraries for Python and Common Lisp. The
+existing libraries for both languages can be extended to provide
+alternative outputs. The Python library uses ElementTree internally, and
+a method could be added that uses the rest of the markdown library but
+returns an ElementTree rather than a string. The Common Lisp library can
+probably only produce a string (I will have to look at it further), but
+that string could easily be an s-expression representing a parse tree,
+so that's not hard to bring back into memory.
+
+There is already such a library for C (discount)[2], though I don't know
+what the in-memory representation is. I am willing to wrap the C library
+for Vala, probably.
+
+[2]: <A HREF="http://www.pell.portland.or.us/~orc/Code/discount/">http://www.pell.portland.or.us/~orc/Code/discount/</A>
+
+--
+Jason McBrayer      | &#8220;Strange is the night where black stars rise,
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">jmcbray at carcosa.net</A> | and strange moons circle through the skies,
+                    | but stranger still is lost Carcosa.&#8221;
+                    | &#8213; Robert W. Chambers,The King in Yellow
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000046.html">Markdown and Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="000049.html">Markdown and Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#48">[ date ]</a>
+              <a href="thread.html#48">[ thread ]</a>
+              <a href="subject.html#48">[ subject ]</a>
+              <a href="author.html#48">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

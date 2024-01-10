@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Removing expiry dates for TOFU
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Removing%20expiry%20dates%20for%20TOFU&In-Reply-To=%3Cbe4b0efd64dbdaea89b5a37b39f92773%40posteo.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002068.html">
+   <LINK REL="Next"  HREF="002075.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Removing expiry dates for TOFU</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Removing%20expiry%20dates%20for%20TOFU&In-Reply-To=%3Cbe4b0efd64dbdaea89b5a37b39f92773%40posteo.net%3E"
+       TITLE="Removing expiry dates for TOFU">solderpunk at posteo.net
+       </A><BR>
+    <I>Sun Jul  5 18:17:48 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002068.html">Removing expiry dates for TOFU
+</A></li>
+        <LI>Next message (by thread): <A HREF="002075.html">Removing expiry dates for TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2071">[ date ]</a>
+              <a href="thread.html#2071">[ thread ]</a>
+              <a href="subject.html#2071">[ subject ]</a>
+              <a href="author.html#2071">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Using the same keypair for a very long time is generally considered a 
+bad idea, as it increases both the risk of key compromise and the 
+duration for which a stolen key can be exploited.  There's also the 
+issue of ownership of domain names changing over long timespans, and 
+former legitimate domain owners being able to impersonate new legitimate 
+domain owners with old certificates.  Even CA certificates have expiry 
+dates.  I don't think we should be advising people to use certs which 
+last forever.
+
+That said, for typical Gemini applications I don't think something like 
+a three year key/cert lifespan is necessarily a big problem, and would 
+certainly make TOFU issues less common.  In principle it doesn't make 
+much sense to rotate your TLS keys much more often than your server's 
+SSH keys, and let's be honest: how often do most of us do that?
+
+One idea I had, which could be neat for people who are really serious 
+about good, long-term identity management without CAs, is the following: 
+generate a key pair, for use as an ephemeral signing key, and a 
+self-signed certificate for the public key with 100 years of validity.  
+Then generate 100 additional keypairs, and use the signing key to sign 
+certificates for them with a validity of, say, 1 year each, and 
+consecutive validity periods.  Permanently delete the signing key, but 
+keep the self-signed certificate.  Move all the 1 year keys to a USB 
+stick, and transfer them one at a time, as they become valid, to your 
+server.  For the next 100 years, serve up a two certificate long chain, 
+with the self-signed cert for the signing key, plus your currently 
+active 1 year cert signed with the signing key.  Once a client 
+TOFU-accepts the signing key's certificate, they'll be able to validate 
+all the annual key roll overs as originating from the same party, even 
+if they don't visit your site for 10 years at a time.  Someone who 
+breaks into your server can steal this year's key, but not any future 
+keys, because they're on the USB stick, so their ability to impersonate 
+you is strictly time-limited.  Nobody can steal the original signing key 
+and make their own certificate which will be accepted by TOFU clients, 
+because it's been deleted.  Hijacking this identity basically requires 
+stealing the physical USB key.  This sounds like a lot of work, but 
+generating all the keys and certs could be trivially automated.
+
+Cheers,
+Solderpunk
+
+On 05.07.2020 18:27, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+&gt;<i> Hello all,
+</I>&gt;<i> 
+</I>&gt;<i> Mozz proposed an interesting idea to me on Github, which was removing
+</I>&gt;<i> expiry dates
+</I>&gt;<i> from TOFU entirely.
+</I>&gt;<i> 
+</I>&gt;<i> I wrote a quick post on it, I'd appreciate it if you could read
+</I>&gt;<i> it and offer your thoughts. I think this could help make things more 
+</I>&gt;<i> secure on
+</I>&gt;<i> Gemini, and possibly make TOFU and cert management more painless.
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="gemini://makeworld.gq/gemlog/2020-07-05-tofu-2.gmi">gemini://makeworld.gq/gemlog/2020-07-05-tofu-2.gmi</A>
+</I>&gt;<i> 
+</I>&gt;<i> Thanks,
+</I>&gt;<i> makeworld
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002068.html">Removing expiry dates for TOFU
+</A></li>
+	<LI>Next message (by thread): <A HREF="002075.html">Removing expiry dates for TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2071">[ date ]</a>
+              <a href="thread.html#2071">[ thread ]</a>
+              <a href="subject.html#2071">[ subject ]</a>
+              <a href="author.html#2071">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

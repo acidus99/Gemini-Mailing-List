@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> An observation about client certificates
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20observation%20about%20client%20certificates&In-Reply-To=%3C20200511081816.GA23500%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000553.html">
+   <LINK REL="Next"  HREF="000558.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>An observation about client certificates</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20observation%20about%20client%20certificates&In-Reply-To=%3C20200511081816.GA23500%40SDF.ORG%3E"
+       TITLE="An observation about client certificates">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Mon May 11 09:18:16 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000553.html">An observation about client certificates
+</A></li>
+        <LI>Next message (by thread): <A HREF="000558.html">An observation about client certificates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#555">[ date ]</a>
+              <a href="thread.html#555">[ thread ]</a>
+              <a href="subject.html#555">[ subject ]</a>
+              <a href="author.html#555">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Haha, this was me!  In order to get a 1.0.0 release of AV-98 out the
+door and into PyPI quickly so that there's an easy to install client for
+curious newcomers, I spent some time yesterday hacking away on client
+certificate support.  Mozz added some basic support a few weeks back to
+facilitate the astrobotany game, but I am working on something slightly
+more user-friendly.  As long as the `openssl` command line tool is
+installed, it will soon be possible to generate certs from within AV-98
+in response to status codes wanting them.  Once you navigate to a
+different domain other than the one for which the cert was generated,
+you'll get a privacy warning and the option to stop using that cert.
+It's certainly still rough around the edges, but it's usable enough and
+will facilitate more experimentation on the server side with client
+certificates.  I'll post lots more about this work here in the near
+future.
+
+Anyway, at some point yesterday I got tired of filling out `openssl`s
+prompts when making new certs and just gave blank answers to everything,
+which would be the requests you noticed.  Are you quite sure that your
+server handled them just fine as the logs indicate?  If I remember
+rightly the SSL handshake seemed to fail when I did this so I quickly
+reverted to putting something non-zero in there.
+
+We should talk about logging formats some time.  Molly Brown keeps logs
+too (I keep meaning to make a nice graph showing the wave of traffice
+that came in after we hit HN), in an ad-hoc format that doesn't match
+yours below at all (unsurprisingly).  Having a standard format would
+facilitate tools to monitor/visualise logs.
+
+Cheers,
+Solderpunk
+
+On Sun, May 10, 2020 at 08:18:21PM -0400, Sean Conner wrote:
+&gt;<i> 
+</I>&gt;<i>   I know logging isn't popular here, but I still do it anyway, in order to
+</I>&gt;<i> track down issues that might come up, either bugs in the server.  Early on,
+</I>&gt;<i> I decided also log certificates that might be used to hit the &quot;/private&quot;
+</I>&gt;<i> directory on my server.  I'm seeing a bit more activity there, which is
+</I>&gt;<i> nice, the latest one being:
+</I>&gt;<i> 
+</I>&gt;<i> remote=---.---.---.--- status=20 request=&quot;<A HREF="gemini://gemini.conman.org/private/">gemini://gemini.conman.org/private/</A>&quot; bytes=213 subject=&quot;/CN=AV-98 cert test&quot; issuer=&quot;/CN=AV-98 cert test&quot;
+</I>&gt;<i> 
+</I>&gt;<i>   But the following requests had me seriously puzzled:
+</I>&gt;<i> 
+</I>&gt;<i> remote=---.---.---.--- status=20 request=&quot;<A HREF="gemini://gemini.conman.org/private/">gemini://gemini.conman.org/private/</A>&quot; bytes=213 subject=&quot;&quot; issuer=&quot;&quot;
+</I>&gt;<i> remote=---.---.---.--- status=20 request=&quot;<A HREF="gemini://gemini.conman.org/private/mondrian.gif">gemini://gemini.conman.org/private/mondrian.gif</A>&quot; bytes=3082 subject=&quot;&quot; issuer=&quot;&quot;
+</I>&gt;<i> 
+</I>&gt;<i>   After quite a bit of testing and thinking on this, I can only conclude
+</I>&gt;<i> that whomever sent this request did have a certificate, but the certificate
+</I>&gt;<i> did not include the issuer or subject fields.  As I stated, I accept any
+</I>&gt;<i> certificate (as long as the dates are valid).  I did not expect a
+</I>&gt;<i> certificate sans issuer/subject could be valid as well.  Perhaps it's not, I
+</I>&gt;<i> don't actually know, but kudos to the requestor.  I was not expecting this.
+</I>&gt;<i> 
+</I>&gt;<i>   -spc
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000553.html">An observation about client certificates
+</A></li>
+	<LI>Next message (by thread): <A HREF="000558.html">An observation about client certificates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#555">[ date ]</a>
+              <a href="thread.html#555">[ thread ]</a>
+              <a href="subject.html#555">[ subject ]</a>
+              <a href="author.html#555">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

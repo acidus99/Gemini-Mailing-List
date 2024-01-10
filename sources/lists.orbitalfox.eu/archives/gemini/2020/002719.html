@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Lagrange - A Beautiful Gemini Client
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Lagrange%20-%20A%20Beautiful%20Gemini%20Client&In-Reply-To=%3CFAFAA0ED-AB2A-4857-8AF5-EC1684AD66C6%40dengine.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002711.html">
+   <LINK REL="Next"  HREF="002720.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Lagrange - A Beautiful Gemini Client</H1>
+    <B>skyjake</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Lagrange%20-%20A%20Beautiful%20Gemini%20Client&In-Reply-To=%3CFAFAA0ED-AB2A-4857-8AF5-EC1684AD66C6%40dengine.net%3E"
+       TITLE="[ANN] Lagrange - A Beautiful Gemini Client">skyjake at dengine.net
+       </A><BR>
+    <I>Mon Sep 14 09:18:42 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002711.html">[ANN] Lagrange - A Beautiful Gemini Client
+</A></li>
+        <LI>Next message (by thread): <A HREF="002720.html">[ANN] Lagrange - A Beautiful Gemini Client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2719">[ date ]</a>
+              <a href="thread.html#2719">[ thread ]</a>
+              <a href="subject.html#2719">[ subject ]</a>
+              <a href="author.html#2719">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+many thanks for the kind words! :)
+
+Collected replies follow:
+
+&gt;<i> On 14. Sep 2020, at 0:05, Luke Emmet &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">luke at marmaladefoo.com</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> Very nice work - well done! I just took it for a spin on Win10. You might want to create an installer at some point, my anti virus seemed to look on it suspiciously and I had to retrieve it from quarantine.
+</I>&gt;<i> 
+</I>&gt;<i> A v minor comment - when using a http proxy, it seems to need the IP address (e.g. on local machine needs &quot;127.0.0.1:port&quot; using &quot;localhost:port&quot; didn't work for me).
+</I>
+Yes, a Windows installer will be used in a future build, most likely using CMake's CPack module as that it relatively painless and I've done it before in another project.
+
+I'll check the proxy address lookup, I believe it should work with domain names as well.
+
+
+&gt;<i> On 14. Sep 2020, at 1:58, Peter Deal &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">dealpete at fastmail.com</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> It is a beautiful client - congratulations! I especially like how you use a different colour scheme for each domain, and make it clear in the links where you&#8217;re going. The only issue I had was it hangs when I try to navigate to gus.guru (I&#8217;m on a Mac, if that helps).
+</I>
+I'm mostly developing this on a Mac myself. There is certainly some kind of weirdness with gus.guru, while it works most of the time for me sometimes I have to reload the page manually. Not exactly sure what's going on, will have to investigate. Seems pretty random.
+
+
+&gt;<i> On 14. Sep 2020, at 2:50, Kevin Sangeelee &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">kevin at susa.net</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> For some reason, the opengl renderer was really messing up my display (needed to switch to console and back to recover, even after quitting lagrange). Recompiled with the software renderer, and it works beautifully. I was running a Debian guest on a Windows 7 VirtualBox host.
+</I>&gt;<i> 
+</I>&gt;<i> The auto-enlarging of the first paragraph, while it looks nice, is jarring with the reading of my docs.
+</I>&gt;<i> 
+</I>&gt;<i> The block-quotes text doesn't really stand out as a block quote to my eyes.
+</I>
+Yeah, I suppose OpenGL issues can be rather common, especially under VMs. I will add an option to force software rendering in a future build. (See below how to do it manually.)
+
+I have been considering adding a user preference for the enlarged first paragraph, along with other page style customization settings. Could you point me to / share an example page where it looks jarring? Perhaps I can still tweak things a little to detect when not to apply the effect.
+
+Also curious about the block quote appearance, what would you consider a more distinctive appearance?
+
+
+&gt;<i> On 14. Sep 2020, at 3:46, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+</I>&gt;<i> 
+</I>&gt;<i> I'm on Arch Linux, and I'm pretty sure I have all the right libs installed.
+</I>&gt;<i> &lt;strace output&gt;
+</I>&gt;<i> 
+</I>&gt;<i> I downloaded the specific .tar.gz from your releases that includes theFoundation.
+</I>&gt;<i> Any idea what the issue is?
+</I>
+Hmm, at least it found the resources file, so that's good. My first guess is always that there is some problem with OpenGL. I'll add the software rendering option, but maybe in the meantime you could try going to src/ui/window.c:480 and uncomment &quot;#define ENABLE_SWRENDER&quot;.
+
+Hopefully that helps, but if not, we could try a debug build and run it under gdb to get a stack trace?
+
+
+&gt;<i> On 14. Sep 2020, at 6:46, Alexis &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">flexibeast at gmail.com</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> Unfortunately i haven't been able to build it on Void Linux, due to a problem when trying to build the_Foundation:
+</I>&gt;<i> 
+</I>&gt;<i> ```
+</I>&gt;<i> error: implicit declaration of function 'ASN1_TIME_to_tm'; did you mean 'ASN1_TIME_set_tm'? [-Werror=implicit-function-declaration]
+</I>&gt;<i> ```
+</I>
+It appears `ASN1_TIME_to_tm`  was added to OpenSSL 1.1.1, so I'll document that as a required dependency. If anyone wants to provide a workaround for older OpenSSL releases, I'll gladly accept a patch. :)
+
+--jaakko
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002711.html">[ANN] Lagrange - A Beautiful Gemini Client
+</A></li>
+	<LI>Next message (by thread): <A HREF="002720.html">[ANN] Lagrange - A Beautiful Gemini Client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2719">[ date ]</a>
+              <a href="thread.html#2719">[ thread ]</a>
+              <a href="subject.html#2719">[ subject ]</a>
+              <a href="author.html#2719">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

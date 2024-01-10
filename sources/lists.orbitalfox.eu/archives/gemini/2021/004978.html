@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] The Tragedy of &amp;
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20The%20Tragedy%20of%20%26&In-Reply-To=%3C20210131231618.GG5326%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004976.html">
+   <LINK REL="Next"  HREF="004969.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] The Tragedy of &amp;</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20The%20Tragedy%20of%20%26&In-Reply-To=%3C20210131231618.GG5326%40brevard.conman.org%3E"
+       TITLE="[spec] The Tragedy of &amp;">sean at conman.org
+       </A><BR>
+    <I>Sun Jan 31 23:16:18 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004976.html">[spec] The Tragedy of &amp;
+</A></li>
+        <LI>Next message (by thread): <A HREF="004969.html">[spec] The Tragedy of &amp;
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4978">[ date ]</a>
+              <a href="thread.html#4978">[ thread ]</a>
+              <a href="subject.html#4978">[ subject ]</a>
+              <a href="author.html#4978">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Gary Johnson once stated:
+&gt;<i> Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; writes:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Not if the CGI interface is properly written.  All I had to do was write
+</I>&gt;<i> &gt; this CGI script and drop it into my tests directory [1]:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; 	<A HREF="gemini://gemini.conman.org/test/pathseg.cgi">gemini://gemini.conman.org/test/pathseg.cgi</A>
+</I>
+  [ snip ]
+
+  
+&gt;<i> Thanks for sharing some code, Sean. I, of course, realize that one could
+</I>&gt;<i> write a CGI script to pick apart the PATH_INFO for user inputs. This
+</I>&gt;<i> issue I raised in my message was that this doesn't make any sense in the
+</I>&gt;<i> context of a CGI script which is looked up using the path on the remote
+</I>&gt;<i> filesystem.
+</I>&gt;<i> 
+</I>&gt;<i> In your example, your script is located at /test/pathseg.cgi. However,
+</I>&gt;<i> lacking side information, I see no indicator (outside of the --
+</I>&gt;<i> admittedly optional -- cgi extension on your file name) of which path
+</I>&gt;<i> segments should be considered part of the CGI filename lookup and which
+</I>&gt;<i> parts are meant to be user input data in your example link:
+</I>&gt;<i> 
+</I>&gt;<i> /test/pathseg.cgi/name=and%20a%20one/age=and%20a%20two/action=skidoosh
+</I>
+  That's a particular implementation detail of GLV-1.12556 [1].  Other
+servers could require the extension, or some other mechanism.
+
+&gt;<i> This feels like a massive hack to me and an abuse of path segments TBH.
+</I>&gt;<i> 
+</I>&gt;<i> If I were to embrace this approach, I can see that I would have to
+</I>&gt;<i> reprogram my server to do some additional path preprocessing magic. I
+</I>&gt;<i> could either:
+</I>&gt;<i> 
+</I>&gt;<i> 1. Check every sequence of path segments starting from the document root
+</I>&gt;<i>    to see if any of them correspond to an executable file or have the
+</I>&gt;<i>    blessed CGI file extension for my server.
+</I>
+  I see your server just accepts the requested path as is.  GLV-1.12556
+(once it gets into the filesystem handler) walks down the document root
+checking each path segment looking for an exectuable file (which indicates a
+CGI script) or symbolic link (which indicates a SCGI script).
+
+&gt;<i> Once one of these 3 approaches enables the server to successfully detect
+</I>&gt;<i> that a particular path corresponds to a CGI script that is not actually
+</I>&gt;<i> located where that path is pointing, then the server would need to
+</I>&gt;<i> execute that script with PATH_INFO bound to the entire path. Every
+</I>&gt;<i> installed CGI script would then be responsible for manually removing
+</I>&gt;<i> SCRIPT_NAME from PATH_INFO and splitting it up to get the user inputs,
+</I>&gt;<i> which puts an additional burden on CGI developers.
+</I>
+  If you want to follow RFC-3875, that's not the case.  PATH_INFO only
+contans data past the script name (section 4.1.5). This link:
+
+	<A HREF="gemini://gemini.conman.org/cgi">gemini://gemini.conman.org/cgi</A>
+
+returns
+
+	SCRIPT_NAME = /cgi
+
+There is no PATH_INFO or PATH_TRANSLATED because it's not needed.  However:
+
+	<A HREF="gemini://gemini.conman.org/cgi/path/to/nowhere">gemini://gemini.conman.org/cgi/path/to/nowhere</A>
+
+returns
+
+	SCRIPT_NAME = /cgi
+	PATH_INFO = /path/to/nowhere
+	PATH_TRANSLATED = /home/spc/projects/gemini/non-checkin/gemini.conman.org/path/to/nowhere
+
+  The work is on the server side, not the CGI script side.
+
+&gt;<i> So I've now heard from multiple folks that we should all just get on
+</I>&gt;<i> with these path segment hacks and accept that as the best we can do in
+</I>&gt;<i> Gemini.
+</I>&gt;<i> 
+</I>&gt;<i> While I can see that it's technically possible (though arguable ugly) to
+</I>&gt;<i> do so, I suppose my question is:
+</I>&gt;<i> 
+</I>&gt;<i> &quot;What exactly does Gemini lose by allowing chained query parameters?
+</I>&gt;<i> (with &amp;)&quot;
+</I>
+  Nothing as far as I can see, as long as the characters '=' and '&amp;' are
+escaped if they appear in the input (to prevent confusion).  
+
+&gt;<i> What am I missing here, folks?
+</I>
+  Somebody to do a proof-of-concept probably.
+
+&gt;<i> Any chance of weighing in here, Solderpunk?
+</I>
+  Is he still alive?
+
+  -spc
+
+[1]	<A HREF="https://github.com/spc476/GLV-1.12556">https://github.com/spc476/GLV-1.12556</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004976.html">[spec] The Tragedy of &amp;
+</A></li>
+	<LI>Next message (by thread): <A HREF="004969.html">[spec] The Tragedy of &amp;
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4978">[ date ]</a>
+              <a href="thread.html#4978">[ thread ]</a>
+              <a href="subject.html#4978">[ subject ]</a>
+              <a href="author.html#4978">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

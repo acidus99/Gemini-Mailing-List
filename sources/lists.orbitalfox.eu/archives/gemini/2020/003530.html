@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Assuming%20disallow-all%2C%20and%20some%20research%20on%20robots.txt%20in%0A%20Geminispace%20%28Was%3A%20Re%3A%20robots.txt%20for%20Gemini%20formalised%29&In-Reply-To=%3Ca75cf3477ad8e01859ea55cb1c87d937%40tilde.team%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003529.html">
+   <LINK REL="Next"  HREF="003533.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)</H1>
+    <B>Robert &quot;khuxkm&quot; Miles</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Assuming%20disallow-all%2C%20and%20some%20research%20on%20robots.txt%20in%0A%20Geminispace%20%28Was%3A%20Re%3A%20robots.txt%20for%20Gemini%20formalised%29&In-Reply-To=%3Ca75cf3477ad8e01859ea55cb1c87d937%40tilde.team%3E"
+       TITLE="Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)">khuxkm at tilde.team
+       </A><BR>
+    <I>Tue Nov 24 19:08:57 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003529.html">robots.txt for Gemini formalised
+</A></li>
+        <LI>Next message (by thread): <A HREF="003533.html">Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3530">[ date ]</a>
+              <a href="thread.html#3530">[ thread ]</a>
+              <a href="subject.html#3530">[ subject ]</a>
+              <a href="author.html#3530">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I am personally against this idea of forcing (or even normalizing) browsers giving special treatment to a request for a URL based on what the server would normally respond (I'm not even going to entertain the idea of pretending the internet draft doesn't apply to us). This is what I assume it would look like in spec (or best practices, or wherever you want to put it):
+
+&gt;<i> When a client makes a request for a URI with a path component of &quot;/robots.txt&quot;, and the server would normally respond to such a request with a 51 Not Found status code, it should instead respond with a 20 status code, a MIME type of text/plain, and content of &quot;User-Agent: *\r\nDisallow: /\r\n&quot;. This prevents capsules from being indexed without consent.
+</I>
+Doesn't that just *feel* like a hack to you?
+
+I did some research with GUS's known-hosts list. Of the 362 hosts known to GUS, only 36 have a robots.txt file, so any choice made as to what the default robots.txt should be will affect around 90% of Geminispace (not to mention any new hosts to come). Notably, of the 36 hosts to impose a robots.txt, 7 of them completely block archiving (although that number is skewed, as I know that at least 3 of those hosts are ran by the same person, and 2 of those hosts are ran by another person). This means that anywhere between 2% (all of the hosts who don't have a robots.txt are fine with being archived) to 20% (the sample of people who have robots.txt is representative of the whole population), or even 91% (everybody without a robots.txt doesn't want to be archived). I don't feel comfortable making a declaration either way, but this is food for thought.
+
+Just my two cents,
+Robert &quot;khuxkm&quot; Miles
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003529.html">robots.txt for Gemini formalised
+</A></li>
+	<LI>Next message (by thread): <A HREF="003533.html">Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3530">[ date ]</a>
+              <a href="thread.html#3530">[ thread ]</a>
+              <a href="subject.html#3530">[ subject ]</a>
+              <a href="author.html#3530">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

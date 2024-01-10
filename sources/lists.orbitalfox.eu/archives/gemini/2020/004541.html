@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] What to do of fragments when there is a redirection
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20What%20to%20do%20of%20fragments%20when%20there%20is%20a%20redirection&In-Reply-To=%3C5FE9DF4B.90401%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004533.html">
+   <LINK REL="Next"  HREF="004282.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] What to do of fragments when there is a redirection</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20What%20to%20do%20of%20fragments%20when%20there%20is%20a%20redirection&In-Reply-To=%3C5FE9DF4B.90401%40marmaladefoo.com%3E"
+       TITLE="[spec] What to do of fragments when there is a redirection">luke at marmaladefoo.com
+       </A><BR>
+    <I>Mon Dec 28 13:36:11 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004533.html">[spec] What to do of fragments when there is a redirection
+</A></li>
+        <LI>Next message (by thread): <A HREF="004282.html">[spec] What to do of fragments when there is a redirection
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4541">[ date ]</a>
+              <a href="thread.html#4541">[ thread ]</a>
+              <a href="subject.html#4541">[ subject ]</a>
+              <a href="author.html#4541">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+On 28-Dec-2020 09:59, Solderpunk wrote:
+&gt;<i> Okay, so original URL fragments should be carried over to redirect URLs
+</I>&gt;<i> if the redirect URL has no fragment (which I still suspect perhaps
+</I>&gt;<i> should be the only valid case).
+</I>Redirect URLs should not have a fragment as they specify a client side 
+action. They wont be aware of the clients currently held fragment, so 
+cannot act legitimately on it (for example to propose an alternative 
+fragment). If they do have one, the client should strip it off, if they 
+re-apply the previous fragment.
+
+But frankly I'm skeptical it is a good semantics for a client to 
+re-apply an old fragment on an out of date resource to a newly 
+redirected resource. In my view they are attached only to the original 
+URL and should not be replayed.
+
+There are also some information leakage questions here of replaying 
+fragments against new resources, but probably they arent too problematic 
+in practice.
+
+&gt;<i> What about queries?
+</I>&gt;<i>
+</I>&gt;<i> To some extent, the issue of a redirect URL having a query in it is
+</I>&gt;<i> similar to a link in a text/gemini document having a query in it, which
+</I>&gt;<i> was slightly controversial.  Not so much in the sense that people
+</I>&gt;<i> thought it should be disallowed, but that it was widely believed clients
+</I>&gt;<i> should handle such things very carefully and give the user a chance to
+</I>&gt;<i> confirm or edit the query string contents.
+</I>&gt;<i>
+</I>&gt;<i> Should redirect URLs be allowed to contain queries?
+</I>&gt;<i>
+</I>&gt;<i> If an original URL has a query in it but the client gets back a redirect
+</I>&gt;<i> URL without a query, should the original query be appended?
+</I>
+No, queries are very different to fragments which are client side. 
+Queries are part of the server's URL space, like the path.
+
+URLs with queries should not be adjusted by the client, unless in 
+response to a user input.
+
+A server may legitimately use these to implement various kinds of state 
+- for example (in relation to another thread) the language partition of 
+the application. For example I could implement a weather report in 
+different languages thus:
+
+<A HREF="gemini://server/weather/report?english">gemini://server/weather/report?english</A>
+
+if the server implements a redirect to a new end point, it should do the 
+work of appending any relevant parameterised query, thus:
+
+31 <A HREF="gemini://server/weather/new-report?english">gemini://server/weather/new-report?english</A>
+
+The client cannot know that the query would be valid against the target 
+URL, and besides the target URL may already have a query on it, that the 
+client should not strip off and replace with something else
+
+  - Luke
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004533.html">[spec] What to do of fragments when there is a redirection
+</A></li>
+	<LI>Next message (by thread): <A HREF="004282.html">[spec] What to do of fragments when there is a redirection
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4541">[ date ]</a>
+              <a href="thread.html#4541">[ thread ]</a>
+              <a href="subject.html#4541">[ subject ]</a>
+              <a href="author.html#4541">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

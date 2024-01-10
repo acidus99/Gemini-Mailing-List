@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Crawlers on Gemini and best practices
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Crawlers%20on%20Gemini%20and%20best%20practices&In-Reply-To=%3CCAFaUHv%2Bd%2BcbREnz%2BXPtWzd3Cf4bY_PkmhK%2Bm1yEqT5_7dTvJoQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003969.html">
+   <LINK REL="Next"  HREF="003991.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Crawlers on Gemini and best practices</H1>
+    <B>Sudipto Mallick</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Crawlers%20on%20Gemini%20and%20best%20practices&In-Reply-To=%3CCAFaUHv%2Bd%2BcbREnz%2BXPtWzd3Cf4bY_PkmhK%2Bm1yEqT5_7dTvJoQ%40mail.gmail.com%3E"
+       TITLE="Crawlers on Gemini and best practices">smallick.dev at gmail.com
+       </A><BR>
+    <I>Thu Dec 10 18:07:34 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003969.html">Crawlers on Gemini and best practices
+</A></li>
+        <LI>Next message (by thread): <A HREF="003991.html">Crawlers on Gemini and best practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3973">[ date ]</a>
+              <a href="thread.html#3973">[ thread ]</a>
+              <a href="subject.html#3973">[ subject ]</a>
+              <a href="author.html#3973">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 12/10/20, Stephane Bortzmeyer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stephane at sources.org</A>&gt; wrote:
+&gt;<i> Opinion: may be we should specify a syntax for Gemini's robots.txt,
+</I>&gt;<i> not relying on the broken Web one?
+</I>Here it is:
+
+'bots.txt' for gemini bots and crawlers.
+
+- know who you are: archiver, indexer, feed-reader, researcher etc.
+- ask for /bots.txt
+- if 20 text/plain then
+-- allowed = set()
+-- denied = set()
+-- split response by newlines, for each line
+--- split by spaces and tabs into fields
+---- paths = field[0] split by ','
+---- if fields[2] is &quot;allowed&quot; and you in field[1] split by ',' then
+allowed = allowed union paths
+----- if field[3] is &quot;but&quot; and field[5] is &quot;denied&quot; and you in
+field[4] split by ',' then denied = denied union paths
+---- if fields[2] is &quot;denied&quot; and you in field[1] split by ',' then
+denied = denied union paths
+you always match all, never match none
+union of paths is special:
+    { &quot;/a/b&quot; } union { &quot;/a/b/c&quot; } ==&gt; { &quot;/a/b&quot; }
+
+when you request for path, find the longest match from allowed and
+denied; if it is in allowed you're allowed, otherwise not;; when a
+tie: undefined behaviour, do what you want.
+
+examples:
+default, effectively:
+    / all allowed
+or
+    / none denied
+complex example:
+    /priv1,/priv2,/login all denied
+    /cgi-bin indexer allowed but archiver denied
+    /priv1/pub researcher allowed but blabla,meh,heh,duh denied
+
+what do you think?
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003969.html">Crawlers on Gemini and best practices
+</A></li>
+	<LI>Next message (by thread): <A HREF="003991.html">Crawlers on Gemini and best practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3973">[ date ]</a>
+              <a href="thread.html#3973">[ thread ]</a>
+              <a href="subject.html#3973">[ subject ]</a>
+              <a href="author.html#3973">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

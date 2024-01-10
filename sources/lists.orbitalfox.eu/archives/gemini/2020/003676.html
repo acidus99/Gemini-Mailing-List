@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC-CHANGE] Mandatory scheme in request and link URLs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Mandatory%20scheme%20in%20request%20and%20link%20URLs&In-Reply-To=%3CCAJScK0%2BWAaEBaokDa_U7tu5kMU5fyDC%2B6FWa%2BpcQtbnCOX1X9g%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003674.html">
+   <LINK REL="Next"  HREF="003677.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC-CHANGE] Mandatory scheme in request and link URLs</H1>
+    <B>Bj&#246;rn W&#228;rmedal</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Mandatory%20scheme%20in%20request%20and%20link%20URLs&In-Reply-To=%3CCAJScK0%2BWAaEBaokDa_U7tu5kMU5fyDC%2B6FWa%2BpcQtbnCOX1X9g%40mail.gmail.com%3E"
+       TITLE="[SPEC-CHANGE] Mandatory scheme in request and link URLs">bjorn.warmedal at gmail.com
+       </A><BR>
+    <I>Mon Nov 30 09:18:36 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003674.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003677.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3676">[ date ]</a>
+              <a href="thread.html#3676">[ thread ]</a>
+              <a href="subject.html#3676">[ subject ]</a>
+              <a href="author.html#3676">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> &gt; leaving existing behaviour of assuming a scheme of gemini in place
+</I>&gt;<i> &gt; could be considered a valid application of Postel's law.
+</I>&gt;<i>
+</I>&gt;<i> Note that one of the reasons why the Web became so bloated is
+</I>&gt;<i> precisely Postel's law (the robustness principle). Browsers and
+</I>&gt;<i> servers violate the spec, these violations soon became
+</I>&gt;<i> de-facto-mandatory-to-support and one after the other, the &quot;unofficial
+</I>&gt;<i> spec&quot; became much larger than the real one.
+</I>
+I agree with the general principle that you should be conservative
+(even draconian) in your implementation. Stick to the specification,
+and keep the specification concise and unambiguous. If you receive
+requests or answers that don't adhere to the specification these
+should be treated as errors. A liberal or lenient interpretation of
+the spec leads to problems down the line.
+
+On the topic of explicit scheme in gemtext links I have one opinion
+and one question.
+
+Opinion: when cross-hosting between the web and geminispace I think
+the publisher can reasonably be expected to run a search-replace. If I
+host on both <A HREF="https://tilde.team/~ew0k/">https://tilde.team/~ew0k/</A> and <A HREF="gemini://tilde.team/~ew0k/">gemini://tilde.team/~ew0k/</A>
+I can easily make sure to replace that particular line in links. I see
+that there may be an issue if I link to someone else who also
+cross-posts, though... I'm willing to admit that the scheme should NOT
+be required in gemtext links.
+
+Question: How does this work with relative links in gemtext documents?
+
+Cheers,
+ew0k
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003674.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003677.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3676">[ date ]</a>
+              <a href="thread.html#3676">[ thread ]</a>
+              <a href="subject.html#3676">[ subject ]</a>
+              <a href="author.html#3676">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Gemini privacy
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20privacy&In-Reply-To=%3CCAOH6EB8DPDyJaQZgknHBpA8Ta%2BJosZMWARhPZUKYtsDa2XDtKQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006019.html">
+   <LINK REL="Next"  HREF="006021.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Gemini privacy</H1>
+    <B>Phil Leblanc</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20privacy&In-Reply-To=%3CCAOH6EB8DPDyJaQZgknHBpA8Ta%2BJosZMWARhPZUKYtsDa2XDtKQ%40mail.gmail.com%3E"
+       TITLE="Gemini privacy">philanc at gmail.com
+       </A><BR>
+    <I>Tue Mar  9 17:15:45 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006019.html">Gemini privacy
+</A></li>
+        <LI>Next message (by thread): <A HREF="006021.html">[users] New capsule from sunny Barcelona: gemini://bcn08012.ddns.net/
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6027">[ date ]</a>
+              <a href="thread.html#6027">[ thread ]</a>
+              <a href="subject.html#6027">[ subject ]</a>
+              <a href="author.html#6027">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Mar 9, 2021 at 7:53 AM Stephane Bortzmeyer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stephane at sources.org</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> This attack is well known and, for HTTP, documented in many
+</I>&gt;<i> articles. A general view of the problem and of countermeasures is
+</I>&gt;<i> &quot;Peek-a-Boo, I Still See You: Why Efficient Traffic Analysis
+</I>&gt;<i> Countermeasures Fail&quot;
+</I>&gt;<i> &lt;<A HREF="https://cise.ufl.edu/~teshrim/tmAnotherLook.pdf">https://cise.ufl.edu/~teshrim/tmAnotherLook.pdf</A>&gt;.
+</I>
+I wasn't implying length attacks are new :-)  (just gave an example
+for people less familiar with the subject).
+
+Thanks for the interesting &quot;Peek-a-Boo&quot; paper link (It also includes
+several interesting references). I think it  addresses a different
+problem (traffic analysis of an encrypted stream - ie. what
+information can we extract from an encrypted tunnel traffic).
+
+Length attacks on Gemini traffic are _much_ simpler and more efficient
+since (1) the traffic is composed of independent TLS transactions with
+one request and one response, and (2) responses are documents which a
+publicly available on the Gemini server (except for CGI and client
+cert-authenticated  traffic).
+
+&gt;<i> 4. The client could obfuscate the traffic with many gratuitous
+</I>&gt;<i> requests. See the excellent book &quot;Obfuscation&quot;
+</I>&gt;<i> &lt;<A HREF="https://mitpress.mit.edu/books/obfuscation">https://mitpress.mit.edu/books/obfuscation</A>&gt;.
+</I>
+This approach depends on what are the attacker's objectives. If they
+want to establish that you have accessed a specific sensitive
+document, the fact that you also accessed many decoys doesn't matter
+much - except if you accessed _all_  files and claim that you are in
+fact just indexing the site.
+
+Thanks for the Obfuscation book reference. Will try to have a look.
+
+Cheers
+
+Phil
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006019.html">Gemini privacy
+</A></li>
+	<LI>Next message (by thread): <A HREF="006021.html">[users] New capsule from sunny Barcelona: gemini://bcn08012.ddns.net/
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6027">[ date ]</a>
+              <a href="thread.html#6027">[ thread ]</a>
+              <a href="subject.html#6027">[ subject ]</a>
+              <a href="author.html#6027">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

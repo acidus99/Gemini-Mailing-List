@@ -1,0 +1,342 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Status codes
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Status%20codes&In-Reply-To=%3C20200520201642.GC27888%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000920.html">
+   <LINK REL="Next"  HREF="000924.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Status codes</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Status%20codes&In-Reply-To=%3C20200520201642.GC27888%40SDF.ORG%3E"
+       TITLE="Status codes">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Wed May 20 21:16:42 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000920.html">Status codes
+</A></li>
+        <LI>Next message (by thread): <A HREF="000924.html">Status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#921">[ date ]</a>
+              <a href="thread.html#921">[ thread ]</a>
+              <a href="subject.html#921">[ subject ]</a>
+              <a href="author.html#921">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Howdy!
+</I>
+Ahoy!
+ 
+&gt;<i> I understand that there may be some aversion to changing things that
+</I>&gt;<i> are already pretty well established, but I hope it's not too late and
+</I>&gt;<i> my arguments will be at least a little bit convincing. :)
+</I>
+I do kind of worry that the time to propose changes to &quot;core&quot; stuff is
+passed or passing.  New implementations are being written at an
+astonishing rate and with so many clients and servers out there, every
+substantial change runs the risk of fracturing the nascent Geminispace
+into incompatible subspaces.  Stuff that is very poorly implemented,
+like client certificiate stuff, doesn't have this risk so much, but
+anything fundamental I worry is already more or less &quot;set&quot; now.  It's
+the downside to unexpected explosive growth!
+
+&gt;<i> Suggestion #0: Strengthen language around status codes
+</I>
+I'm totally open to rewording parts of the spec to make stuff clearer if
+people think what's there now is confusing.  I will take this into
+consideration, and please look out for a post to the list sometime this
+coming weekend about people being able to more conveniently make
+suggestions for changes to the spec and other docs.
+ 
+&gt;<i> Suggestion #1: Remove proxy related codes
+</I> 
+&gt;<i> Current spec is already something that is likely to be two IETF RFCs
+</I>&gt;<i> in the future (protocol and document format).
+</I>
+I like your optimism!!!
+
+&gt;<i> Adding proxy support into
+</I>&gt;<i> the mix complicates things even further. Problems with proxy IMO start
+</I>&gt;<i> with the fact that it's not clear (to me at least) what sort of proxy
+</I>&gt;<i> gemini would benefit from; nor is it stated in the spec.
+</I>
+The most compelling case, IMHO, is proxies which are
+protocol-translating gateways.  One of these already exists
+(<A HREF="https://tildegit.org/solderpunk/agena">https://tildegit.org/solderpunk/agena</A>), it answers queries for
+<A HREF="gopher://">gopher://</A> URLs by fetching the original content over gopher and
+translating it to text/gemini (which is, by design, very easy to do).
+AV-98 can be given the host and port of such a proxy and then it will
+automatically use it to follow Gopher links.  Any other client could add
+this support to become a combined Gemini-Gopher client without the
+author having to write a line of Gopher-related code.
+
+In principle this could be done for HTTP too, but converting websites to
+text/gemini is less straight forward (and likely to result in something
+ugly to look at anyway because all sorts of irrelevant crap will be
+converted too, minus some Herculean effort to detect what the actual
+content is).
+
+One could also simply run a straight Gemini proxy which listens on a
+port other than 1965 in order to circumvent a filter on outgoing traffic
+on that port.
+
+There are definitely useful things which can be done.  Perhaps &quot;proxy&quot;
+is a misleading word to have used for this.  I was never imagining
+anything super complicated with expiration mechanisms, or a proxy server
+which basically acts as a packet router.  They would be very explicitly
+MITM operations, and you couldn't use them to access services which
+relied on client cetificiatees - which should really end up being a
+small minority of content.  Nothing that would actually require anything
+in the way of a formal spec.
+
+Should these be called something else?
+
+&gt;<i> Suggestion #2: Deduplicate client cert errors
+</I> 
+&gt;<i> Only a single client cert can be sent when establishing the communication
+</I>&gt;<i> channel. My mental model (correct me if I'm wrong!) is that transient
+</I>&gt;<i> cert is a session substitute and permanent cert is authentication
+</I>&gt;<i> mechanism (roughly speaking at least).
+</I>
+That model is totally accurate (roughly speaking at least), I'm glad
+people get this!
+ 
+&gt;<i> Current spec has 3 cert request mechanisms, 3 rejection codes and
+</I>&gt;<i> a revocation code. This creates numerous corner cases for clients
+</I>&gt;<i> to handle properly, e.g.
+</I>&gt;<i> * what do you do if you get 21 in response to a request that included
+</I>&gt;<i> your permanent key? I sure hope the browser doesn't actually delete
+</I>&gt;<i> the permanent key from the store :)
+</I>&gt;<i> * what do you do if you get 64 but your cert is not from the future?
+</I>&gt;<i> * what do you do if you get 65 but your cert hasn't expired?
+</I>&gt;<i> 
+</I>&gt;<i> I'd like to see a single &quot;client certificate rejected&quot; code eliminating
+</I>&gt;<i> responses that would potentially make no sense.
+</I>
+I'm not really convinced these are serious problems.  If you get a 64 or
+65 but you know your cert is temporaly, you display an error message
+suggesting perhaps the server's clock is faulty.
+
+I mean, what do you do if you get your proposed &quot;client certificate
+rejected&quot; status code in response to a request which was made without a
+client certificate?
+
+&gt;<i> Suggestion #3: Change end of cert session (21) into a redirection
+</I>&gt;<i> 
+</I>&gt;<i> This will probably be a very controversial one but the way I see it
+</I>&gt;<i> the end of session typically results in the redirection. This lets you
+</I>&gt;<i> chain requests on logout in a way that enables permanent client key
+</I>&gt;<i> delivery or temporary key replacement. With current design you serve
+</I>&gt;<i> a page in a response to a request that displays something and asks
+</I>&gt;<i> the client to delete the transient cert. If you want to re-establish
+</I>&gt;<i> some sort of validation from the client, you need a manual intervention
+</I>&gt;<i> from the user to do that. I'm not sure if my explanation is clear enough,
+</I>&gt;<i> I can try and expand upon it if needed.
+</I>
+I'd appreciate it if you tried, I'm not sure I really understand what
+you are proposing here.
+
+&gt;<i> Suggestion #4: Merge different types of server error to prevent leaking
+</I>&gt;<i> what happened under the hood
+</I>&gt;<i> 
+</I>&gt;<i> a planned maintenance. Basically I'm sort of allergic to disclosing
+</I>&gt;<i> information about the server state.
+</I>
+I don't think it would be any probem at all for a server admin who was
+conerned about the security implications of this to configure their
+server so that it logged the full two-digit codes for the sake of log
+monitoring and debugging, but exclusively sent x0 codes to the client.
+
+I think actually in the very early days of Gemini when debate raged over
+how many status codes we need and how many digits was enough, I made the
+case that there was no point at all in having codes that distinguish
+situations which clients can't possibly react to in meaningfully
+different ways.  I was convinced (and rightly so, I think), that it's
+good to be able to make these distinctions on the server side.  The
+strategy outlined above is kind of like an encoding of this principle.
+
+Of course, no off-the-shell servers support this mode of operation yet,
+but if people like the idea that could change...
+ 
+&gt;<i> Suggestion #5: A comment, really
+</I>&gt;<i> 
+</I>&gt;<i> 5x codes are by design permanent errors but 51 (HTTP 404 equivalent) is
+</I>&gt;<i> actually a temporary problem according to the spec.
+</I>&gt;<i> In fact this is precisely what differentiates it from HTTP 410 GONE
+</I>&gt;<i> (gemini 52). So there seems to be a design error here but I don't really
+</I>&gt;<i> know what the correct solution is. Either 5x aren't really permanent
+</I>&gt;<i> errors (how would they be called then?) or 51 shouldn't be a 5x error
+</I>&gt;<i> to begin with.
+</I>
+It's true that &quot;not found&quot; is, in principle, temporary, or at least
+non permanent, in the sense that, yes, maybe tomorrow or next month or
+next year there will be something at that address.
+
+The temporary/permanent error distinction in Gemini is intended mostly
+to be useful for non-human user agents, like search engine crawlers or
+feed aggregators or things like that, rather than people sitting in
+front of something like Bombadillo or Castor.  If a bot tries to fetch a
+feed from a bad URL, it would be nice if it didn't continually try again
+every hour on the hour thinking that it's only a temporary failure and
+one day the feed will appear!
+
+&gt;<i> This sums up my thoughts about the status codes. I know this reads very
+</I>&gt;<i> much like &quot;too complex, cut!&quot; and that kinda is exactly that. But if you
+</I>&gt;<i> can make things simpler, why not do it? :)
+</I>
+It's very refreshing to see discussion on this mailing list aimed at
+taking stuff away, not adding it! :)
+
+&gt;<i> Thanks for reading this, cheers!
+</I>
+Thanks for sharing your thoughts!
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000920.html">Status codes
+</A></li>
+	<LI>Next message (by thread): <A HREF="000924.html">Status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#921">[ date ]</a>
+              <a href="thread.html#921">[ thread ]</a>
+              <a href="subject.html#921">[ subject ]</a>
+              <a href="author.html#921">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

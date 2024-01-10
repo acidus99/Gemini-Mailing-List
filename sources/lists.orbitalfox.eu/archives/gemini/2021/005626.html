@@ -1,0 +1,304 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC] Backwards-compatible metadata in Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3CCAD2gp_TRs%2BauwRoG_q3yjTCb_xzeTB73WavP4gVnO6sZBHczOg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005622.html">
+   <LINK REL="Next"  HREF="005627.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC] Backwards-compatible metadata in Gemini</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3CCAD2gp_TRs%2BauwRoG_q3yjTCb_xzeTB73WavP4gVnO6sZBHczOg%40mail.gmail.com%3E"
+       TITLE="[SPEC] Backwards-compatible metadata in Gemini">cowan at ccil.org
+       </A><BR>
+    <I>Thu Feb 25 19:05:55 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005622.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="005627.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5626">[ date ]</a>
+              <a href="thread.html#5626">[ thread ]</a>
+              <a href="subject.html#5626">[ subject ]</a>
+              <a href="author.html#5626">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Feb 25, 2021 at 4:17 AM Omar Polo &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">op at omarpolo.com</A>&gt; wrote:
+
+ - we have TLS because it's fundamental to guarantee confidentiality
+&gt;<i>    between servers and clients
+</I>&gt;<i>
+</I>
+I personally don't give a damn about this (after all, who's going to pass
+confidential information over Gemini?  See below.), but I accept that other
+people do.
+
+ - we have status codes, because a page that says &quot;an error occurred&quot;
+&gt;<i>    or &quot;certificate required&quot; cannot be interpreted correctly otherwise
+</I>&gt;<i>
+</I>
+They aren't actually part of the required protocol engine, except for 1x
+vs. 2x.  The META for the others is just human-readable content, and could
+be replaced by a 2x document, and some other mechanism could be found for
+the marginal case of 1x.  (Clients might exploit 6x to automatically retry
+with a (different) cert, but it's unclear that this is the Right Thing: the
+protocol document is, as usual, ambiguous, as it says &quot;should be retried&quot;
+but not who should retry it.)
+
+
+&gt;<i>  - we have pre-formatted blocks to allow certain types of
+</I>&gt;<i>    explanations/presentations that otherwise would have been impossible
+</I>&gt;<i>    (how do we teach how to write text/gemini in text/gemini?)
+</I>&gt;<i>
+</I>
+It's still hard to explain ``` within ```: you can talk about it but you
+can't show an example.
+
+Anyway, I don't care about any of these points, just that &quot;necessary&quot; is in
+the eye of the beholder.
+
+ - the one adding the line-type =: (or whatever): you have to parse the
+&gt;<i>
+</I>   whole document to extract the metadata
+
+
+True, but that's true for any approach except metadata-at-the-top.  Note
+that ^^^ within ``` does not mark metadata, so you have to parse at least
+that much.
+
+and it allows for possibly unreadable text/gemini files[1]
+&gt;<i>
+</I>
+&#1383;&#10995;&#8712;&#174;&#1009; &#10991;&#8747;&#8745;'&#9840; &#8704;&#951;&#1265; &#1378;&#174;&#959;&#1074;&#8356;&#1009;&#8798; &#8705;&#1410;&#8364;&#8704;&#9841;&#953;&#8719;&#8370; &#10994;&#945;&#1410;&#4331; &#1383;&#959; &#174;&#8707;&#8704;&#10962; &#1293;&#1009;&#8798;&#10991;&#8719;&#953; &#10989;&#1111;&#8356;&#8455;&#8747;.
+_O_ver _there_/ _O_ver _there_ /_Send_ the _word, _Send_ the _word_ / _to_
+pre _pare_.
+[PRETEND THE NEXT PARAGRAPH IS IN ITALICS]
+[READ THE WORDS IN ANY ORDER DESIRED]
+ad pulcritudinem tria requiruntur, integritas, consonantia, claritas.
+There's no problem creating Gemini text that's hard to read.
+T&#820;&#838;&#780;&#779;&#775;&#780;&#861;&#783;&#779;&#859;&#832;&#830;&#860;&#845;&#802;&#796;h&#824;&#836;&#829;&#864;&#840;&#791;&#792;&#813;&#804;&#803;&#815;&#804;&#797;&#807;&#813;i&#821;&#773;&#789;&#785;&#795;&#797;&#825;&#858;&#812;&#798;&#853;&#810;s&#823;&#795;&#829;&#836;&#836;&#809;&#798;&#798;
+&#822;&#786;&#859;&#836;&#770;&#835;&#833;&#782;&#784;&#829;&#779;&#771;&#803;&#804;&#813;&#813;i&#820;&#778;&#835;&#836;&#778;&#776;&#789;&#781;&#783;&#768;&#844;&#769;&#850;&#829;&#839;s&#820;&#795;&#778;&#813;&#800;&#800;&#818;&#853;&#804;&#813;&#792;&#799;&#799;
+&#821;&#784;&#859;&#843;&#854;&#810;&#799;&#815;&#791;&#799;&#817;&#790;&#860;g&#820;&#856;&#773;&#835;&#864;&#768;&#777;&#855;&#834;&#781;&#861;&#782;&#843;&#837;&#858;&#802;&#813;&#799;&#827;&#825;&#806;l&#822;&#785;&#775;&#836;&#838;&#787;&#786;&#768;&#864;&#782;&#783;&#772;&#789;&#843;&#796;&#853;&#800;&#825;&#816;&#812;&#797;&#839;&#851;&#802;i&#822;&#786;&#787;&#834;&#834;&#777;&#840;&#858;&#827;&#825;&#801;&#812;t&#824;&#829;&#785;&#818;&#852;&#857;&#853;&#841;&#858;&#827;c&#821;&#785;&#772;&#833;&#844;&#784;&#855;&#838;&#773;&#788;&#772;&#840;&#840;&#860;&#790;h&#822;&#776;&#836;&#830;&#829;&#773;&#783;&#771;&#772;&#861;&#779;&#787;&#843;&#787;&#776;&#797;&#804;&#800;&#860;&#857;&#815;&#806;&#808;&#817;&#799;&#828;y&#820;&#773;&#770;&#778;&#848;&#785;&#836;&#832;&#852;&#837;&#803;&#846;&#839;&#814;&#828;&#839;&#811;&#816;
+&#824;&#774;&#780;&#771;&#843;&#771;&#770;&#842;&#850;&#771;&#787;&#785;&#833;&#784;&#801;t&#823;&#794;&#830;&#830;&#776;&#786;&#855;&#779;&#797;&#828;&#825;&#815;&#812;&#799;&#854;&#858;&#857;&#818;&#810;&#810;&#793;&#800;e&#820;&#770;&#778;&#864;&#771;&#861;&#856;&#861;&#786;&#832;&#785;&#795;&#851;&#815;&#800;&#791;&#828;&#851;&#805;&#798;&#854;&#802;&#806;&#802;x&#822;&#836;&#852;&#808;&#814;&#827;&#860;&#853;&#825;&#816;&#812;&#841;&#805;t&#820;&#795;&#777;&#784;&#777;&#830;&#784;&#776;&#771;&#773;&#829;&#842;&#810;&#792;&#798;&#817;&#802;&#840;&#841;&#801;&#803;&#810;&#805;&#852;&#796;
+&#820;&#850;&#773;&#794;&#843;&#812;&#851;&#851;&#846;&#816;&#837;&#851;&#858;&#813;&#851;&#814;&#860;&#804;a&#824;&#786;&#864;&#833;&#809;&#839;&#799;&#799;&#792;&#799;&#819;t&#822;&#849;&#844;&#788;&#773;&#838;&#856;&#789;&#794;&#829;&#786;&#849;&#833;&#776;&#855;&#818;&#839;&#798;
+&#824;&#848;&#772;&#848;&#842;&#838;&#861;&#848;&#795;&#843;&#837;&#819;&#810;&#792;&#802;&#819;&#807;&#814;&#796;&#818;&#819;&#816;&#803;l&#820;&#838;&#861;&#774;&#842;&#781;&#832;&#769;&#784;&#794;&#849;&#784;&#817;&#791;&#802;&#814;&#809;&#811;&#802;&#808;&#846;e&#824;&#844;&#776;&#836;&#770;&#838;&#833;&#784;&#836;&#829;&#830;&#779;&#852;&#817;v&#822;&#789;&#856;&#784;&#783;&#775;&#786;&#795;&#778;&#831;&#781;&#836;&#785;&#859;&#770;&#805;&#811;&#806;&#792;&#826;&#846;&#816;&#803;&#841;&#813;&#845;e&#822;&#842;&#842;&#842;&#812;&#816;&#841;&#809;l&#820;&#779;&#850;&#781;&#836;&#858;&#825;&#811;&#799;&#853;&#858;&#860;
+&#823;&#778;&#780;&#801;&#819;&#826;&#807;1&#823;&#830;&#769;&#771;&#829;&#788;&#789;&#864;&#819;&#854;&#802;&#810;&#806;&#800;&#798;&#840;
+&#820;&#794;&#779;&#803;&#807;c&#822;&#771;&#850;&#861;&#850;&#784;&#776;&#807;&#810;&#805;&#860;&#828;&#802;&#840;r&#822;&#835;&#856;&#856;&#795;&#830;&#770;&#786;&#848;&#771;&#777;&#786;&#771;&#771;&#840;&#798;&#817;&#797;&#815;&#803;&#827;a&#824;&#836;&#855;&#851;&#841;&#840;&#815;&#811;&#805;&#815;&#808;&#792;z&#823;&#785;&#861;&#782;&#771;&#846;&#839;&#792;&#812;&#802;&#853;&#801;&#839;&#851;&#800;i&#824;&#856;&#833;&#856;&#843;&#855;&#776;&#768;&#770;&#786;&#774;&#780;&#777;&#859;&#780;&#793;&#807;&#816;&#797;&#818;n&#823;&#773;&#787;&#779;&#778;&#789;&#773;&#843;&#784;&#864;&#842;&#833;&#775;&#861;&#787;&#818;&#813;&#845;&#827;e&#821;&#842;&#856;&#781;&#792;&#803;&#837;&#816;&#817;&#790;s&#824;&#771;&#770;&#851;&#791;s&#822;&#836;&#855;&#781;&#784;&#864;&#833;&#779;&#802;&#839;&#804;&#793;&#827;&#804;.&#823;&#864;&#834;&#772;&#861;&#831;&#830;&#781;&#784;&#844;&#836;&#795;&#832;&#812;&#860;&#841;&#816;&#841;
+you probably will have trouble here
+Workers at the Tower of Babel:
+&quot;Bitte geben Sie mir einen kleineren Schraubenschl&#252;ssel.'
+'Non ho idea di quello che stai chiedendo.&#8217;
+&#8216;&#1044;&#1072;&#1074;&#1072;&#1081;&#1090;&#1077; &#1095;&#1072;&#1096;&#1082;&#1091; &#1095;&#1072;&#1103; &#1080; &#1076;&#1086;&#1084;&#1086;&#1081;.&#8217;
+&#8216;Kei te korero koe i tito noa, ko ahau ngenge o te whare pourewa.'
+
+There.  A perfectly valid text/gemini or indeed text/plain document, and
+yet quite unintelligible, and it would be trivial to make it far worse.
+The question is, what is the _motive_ for writing and serving such rubbish?
+Web pages lie to search engines because money.  Web pages contain hidden
+text because money.  Web pages plant tracking pixels because money.  The
+love of money is the root of all Web evil. But where's the money in
+Gemini?  I mean, you could put textual ads in your pages and a link to a
+website, but why not just use the website?
+
+   An user on a non-sophisticate client cannot (easily) understand
+&gt;<i>    that.  It's just full of bloat.
+</I>&gt;<i>
+</I>
+Again, you'd have to be a fool to write something like your example or mine
+except for hack value.  Reasonable people would either put metadata at the
+bottom of the document or the most important entries at the top and less
+important ones at the bottom; it's the possibility of doing that, along
+with allowing links-with-metadata, that make me want it to be able to go
+anywhere.  Gemini is like (anarchist) Anarres: everything is open to
+everyone's .  The Web has become like (capitalist) Urras: there is lots of
+glitz on top, but the important stuff is hidden in the cellars, where
+people are bleeding to death.
+
+Repeating myself:  metadata conventions should go in a metadata spec, *not*
+in the text/gemini spec, since neither clients nor servers are required to
+take any notice of them.
+
+What I think is missing in all these discussions is a valid reason to
+&gt;<i> outweight the cons.
+</I>&gt;<i>
+</I>
+Lars explained that much better than I could.  Also, look up
+cataloging-in-publication, which basically puts metadata on the copyright
+page of every published book.  That way it stays with the book.
+
+However, I feel that denying and turning down feature requests for
+&gt;<i> addition is not a good thing.  I think we should reflect on what's the
+</I>&gt;<i> actual problem and solve it, because this smells like a XY problem[2] to
+</I>&gt;<i> me.
+</I>&gt;<i>
+</I>
+&quot;If you want PL/I, you know where to find it.&quot; --Dennis Ritchie
+
+(PL/I was notoriously a bloated language by the standards of its time: by
+today's standards, not so much.)
+
+If we want to give people ways to manage their local data, maybe because
+&gt;<i> they want to search across documents or do some kind of publications
+</I>&gt;<i> over Gemini, then centralising metadata in one place is an option.
+</I>&gt;<i>
+</I>
+Out-of-band markup is fine, except that it tends to get lost as content is
+passed around, reduced reused recycled.
+
+Sure, I can stick a
+&gt;<i> description of &quot;About the interpretation of the Will of power in
+</I>&gt;<i> Nietzsche&quot; with tags &quot;philosophy, nietzsche, will-to-power&quot; and a
+</I>&gt;<i> category of &quot;essay&quot;, but you cannot trust me to talk about those
+</I>&gt;<i> arguments in the page, maybe it only contains link to pics of cute
+</I>&gt;<i> kittens :)
+</I>&gt;<i>
+</I>
+Do that enough and people will simply ignore you.  It's a funny-once joke.
+
+
+&gt;<i> Why I think metadata will make things like GUS worst?  While full-text
+</I>&gt;<i> search is not without its drawbacks, as Bortzmeyer reminded us, people
+</I>&gt;<i> will abuse the metadata to &quot;go up&quot; in the search results,
+</I>&gt;<i>
+</I>
+Why would a geminaut want to &quot;go up&quot;?  We are already in orbit.
+
+On Thu, Feb 25, 2021 at 6:41 AM Omar Polo &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">op at omarpolo.com</A>&gt; wrote:
+
+but then I would have to convince this list, people who write content
+&gt;<i> and people who write clients and tools to recognise the -~ line type and
+</I>&gt;<i> cope with that.  I don't think it will gain traction, so...
+</I>&gt;<i>
+</I>
+I agree: social pressure is probably enough here.  But scripts make clients
+*do* things, which is very different from passive metadata.
+
+&gt;<i> ...not having metadata is slightly better then because people would have
+</I>&gt;<i> to come up with a syntax, implement it in their clients and convince
+</I>&gt;<i> others to do the same while looking weird in the eyes of others.  Having
+</I>&gt;<i> a standardised syntax for it allows from day-one someone to say
+</I>&gt;<i> `background-image: kittens.png' and be fine with that, without looking
+</I>&gt;<i> weird to other people browsing his/hers capsule.
+</I>&gt;<i>
+</I>
+Again, clients have to implement this, and they probably won't because it's
+a lot of trouble.
+
+&gt;<i> One thing that I haven't though about when writing the mail, but only
+</I>&gt;<i> later when discussing the matter with thfr@, is that we're trying to
+</I>&gt;<i> hide stuff from users eyes.  Sure, if used correctly those two proposed
+</I>&gt;<i> syntaxes (=: and ^^^) can be easy to read, but lets be honest: clients
+</I>&gt;<i> won't show them as-is, in particular the more advanced ones.
+</I>&gt;<i>
+</I>
+I'm sorry, but I am unwilling to take this for granted.  Why hide them?
+(I'm already annoyed that Gmail hides signatures, and mine aren't always
+the same, so I don't use the standard &quot;-- &quot; line to announce them any more.)
+
+As things stands now, there are only two things that Gemini clients
+&gt;<i> usually hide: the URL of a link-line and the alt-text of a pre-formatted
+</I>&gt;<i> block.
+</I>
+
+I actually think hiding the URL is bad UX.  People should be able to know
+*before* going to a page where it's coming from.  Showing the domain is not
+enough, because multi-hosting.  (This is an option in Lagrange now.)
+
+&gt;<i> There's a understandable UX reason for that, but do we really
+</I>&gt;<i> need to add something else that we know will be hidden to end users?
+</I>&gt;<i>
+</I>
+&quot;Know&quot; is a very strong verb, especially for something that hasn't happened
+yet.  Metadata in HTML head elements was *required* to be hidden from day 1.
+
+&gt;<i> Another thing that I forgot to explicitly say in my previous message is
+</I>&gt;<i> that we can use some sort of common notation, a convention, rather than
+</I>&gt;<i> adding new things to the specification.  See for instance the
+</I>&gt;<i> &quot;Subscribing to Gemini pages&quot; companion specification: a lightweight,
+</I>&gt;<i> convention-based way to provide atom-like feeds.  I found it pretty
+</I>&gt;<i> elegant, and has proven a) easy to implement b) easy for content writers
+</I>&gt;<i> to use c) easy for end-users to consume and d) avoid adding extra line
+</I>&gt;<i> types/file types/etc to the specification.
+</I>&gt;<i>
+</I>
+That's what I want too.  =: does not have to be a text/gemini line type,
+just a convention explained elsewhere.
+OT: I'm actually designing something like GeminiScript, but not for Gemini
+clients.  I think the idea of no-install instant-download software with
+severe limitations on presentation and no access to the local system except
+very limited keyboard/screen/mouse is in fact a good one, but unlike
+Brendan Eich I have the luxury of more than two weeks to think about it.  I
+also want to make it as accessible to non-professionals as microcomputer
+Basic was.  It would run in its own native client, either CLI or TUI or GUI
+(there are some issues around the fact that CLIs linearize access).  Like
+most languages, it could probably be compiled to JavaScript.
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+Your worships will perhaps be thinking that it is an easy thing
+to blow up a dog? [Or] to write a book?
+    --Don Quixote, Introduction
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210225/453b3420/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210225/453b3420/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005622.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="005627.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5626">[ date ]</a>
+              <a href="thread.html#5626">[ thread ]</a>
+              <a href="subject.html#5626">[ subject ]</a>
+              <a href="author.html#5626">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

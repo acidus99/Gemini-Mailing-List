@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Three possible uses for IRIs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3CCAD2gp_Q2cGT1pTerB%2BnO%2Br2z%2Ba_jSti1MngJv6V_1VgfNpmUdA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003915.html">
+   <LINK REL="Next"  HREF="003913.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Three possible uses for IRIs</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3CCAD2gp_Q2cGT1pTerB%2BnO%2Br2z%2Ba_jSti1MngJv6V_1VgfNpmUdA%40mail.gmail.com%3E"
+       TITLE="Three possible uses for IRIs">cowan at ccil.org
+       </A><BR>
+    <I>Tue Dec  8 21:52:38 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003915.html">Three possible uses for IRIs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003913.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3917">[ date ]</a>
+              <a href="thread.html#3917">[ thread ]</a>
+              <a href="subject.html#3917">[ subject ]</a>
+              <a href="author.html#3917">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Dec 8, 2020 at 4:42 PM &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A>&gt; wrote:
+
+
+&gt;<i> (It also defines a list called sub-delims, but that only applies to query
+</I>&gt;<i> strings I believe, and is irrelevant to the way Gemini uses them.)
+</I>&gt;<i>
+</I>
+Gemini query strings can certainly be formatted like Web query strings if
+the client knows that's what the server expects.  Simple free text isn't
+the only possibility.  I'm going to talk about that in a posting at some
+point.
+
+These characters are reserved because of their use in other parts of
+&gt;<i> a URI. But Gemini does not use all those parts, such as userinfo. I
+</I>&gt;<i> believe a reserved character list for Gemini could look like this:
+</I>&gt;<i>
+</I>&gt;<i> &quot;:&quot; / &quot;/&quot; / &quot;#&quot; / &quot;?&quot; / &quot;[&quot; / &quot;]&quot;
+</I>&gt;<i>
+</I>
+We still need the square brackets for the rare case when the host-part is
+an IPv6 address.  The only character we could leave out with complete
+safety is @, and I don't think that's worth special-casing for Gemini.
+It's simpler and better to have the same rules for all URIs.
+
+&gt;<i> I left fragments (&quot;#&quot;) in, so that clients can add support for them later,
+</I>&gt;<i> if/when a header-to-fragment algorithm is defined, like exists for
+</I>&gt;<i> Markdown.
+</I>&gt;<i>
+</I>
++1 to leaving # reserved, not only for that reason but for the same reason
+as @; it's not worth making a special rule for Gemini to avoid a trivial
+amount of %-encoding, especially given that most file names don't have
+either one in their names.
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+weirdo:    When is R7RS coming out?
+Riastradh: As soon as the top is a beautiful golden brown and if you
+stick a toothpick in it, the toothpick comes out dry.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201208/47393bea/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201208/47393bea/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003915.html">Three possible uses for IRIs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003913.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3917">[ date ]</a>
+              <a href="thread.html#3917">[ thread ]</a>
+              <a href="subject.html#3917">[ subject ]</a>
+              <a href="author.html#3917">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

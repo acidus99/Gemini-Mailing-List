@@ -1,0 +1,222 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> gemini+submit:// (was Re: Uploading Gemini content)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bsubmit%3A//%20%28was%20Re%3A%20Uploading%20Gemini%20content%29&In-Reply-To=%3C20200613221103.GL11281%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001703.html">
+   <LINK REL="Next"  HREF="001641.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>gemini+submit:// (was Re: Uploading Gemini content)</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bsubmit%3A//%20%28was%20Re%3A%20Uploading%20Gemini%20content%29&In-Reply-To=%3C20200613221103.GL11281%40brevard.conman.org%3E"
+       TITLE="gemini+submit:// (was Re: Uploading Gemini content)">sean at conman.org
+       </A><BR>
+    <I>Sat Jun 13 23:11:04 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001703.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+        <LI>Next message (by thread): <A HREF="001641.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1638">[ date ]</a>
+              <a href="thread.html#1638">[ thread ]</a>
+              <a href="subject.html#1638">[ subject ]</a>
+              <a href="author.html#1638">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great solderpunk once stated:
+&gt;<i> A couple of thoughts on this new line of discussion:
+</I>&gt;<i> 
+</I>&gt;<i> 1. I am very grateful that people have made a point of defining this as
+</I>&gt;<i> separate &quot;companion&quot; protocol rather than asking for it as part of the
+</I>&gt;<i> core Gemini protocol, to give me a bit of breathing room.  I *do* like
+</I>&gt;<i> the idea of naming it <A HREF="titan://...">titan://...</A>
+</I>
+  Fair enough.  titan: it is.
+
+&gt;<i> 2. At this point I can only laugh at the completeness with which using
+</I>&gt;<i> URIs as requests has backfired on me.  First the userinfo auto cookie
+</I>&gt;<i> debacle and now, hah, the scheme has proven its ability to function as
+</I>&gt;<i> a vehicle for different request methods.  Yes, the '+' character is
+</I>&gt;<i> valid in a URI scheme.  So, why not gemini+<A HREF="HEAD://,">HEAD://,</A> gemini+<A HREF="POST://,">POST://,</A>
+</I>&gt;<i> gemini+<A HREF="PUT://....">PUT://....</A>  
+</I>
+  Yes, the more I thought about gemini+put:, gemini+del:, the less I liked
+it.  And no, the extensibility did not escape me as I was working on this.
+
+  Another way of looking at this is the lengths people will go to to solve
+their problems using tools at hand, even if they may not be the best tools
+to use to solve the issue.  See Raymond Chen's blog &quot;The Old New Thing&quot; [1]
+where he describes some of the crazy things Windows programmers have done.
+
+&gt;<i> Moral of the story: everything is always extensible if you try hard
+</I>&gt;<i> enough. Corollary: Gopher has remained largely unextended for so long for
+</I>&gt;<i> non-technical, presumably cultural reasons. There may be great wisdom to
+</I>&gt;<i> be found in understanding why.
+</I>
+  Gopher has its own URL scheme, which doesn't include:
+
+	* userinfo
+	* query string
+	* fragments
+
+  That hasn't stopped people from misusing it though (I've seen gopher URLs
+with query strings even though that's not allowed).  I think the other
+reason (besides cultural) is that it died *quickly* (for the most part) in
+the mid-90s (when the UoM wanted to charge royalties for use of the protocol
+when HTTP was free).  It limped along for *years* until maybe 2010 when
+there was a newed interest, and it's not like people are refusing to use
+UTF-8 or non-standard selector types because they're not allowed to ...
+
+&gt;<i> 3. Dear God, when/where/how does it stop?!  This was supposed to be a
+</I>&gt;<i> simple, humble, protocol of limited scope!  But...
+</I>&gt;<i> 
+</I>&gt;<i> 4. ...I totally &quot;get it&quot;, with the ability to edit Gemini resources from
+</I>&gt;<i> within the client.  Compared to the current situation where publishing
+</I>&gt;<i> in Geminispace requires using scp, (s)ftp, rsync, git or whatever, this
+</I>&gt;<i> feature would make the protocol accessible to literally several orders
+</I>&gt;<i> of magnitude more people.  The decision to let this happen or to crush
+</I>&gt;<i> it in the name of simplicity and minimalism could have tremendous
+</I>&gt;<i> consequences for the eventual destiny of Gemini.  It's exciting stuff,
+</I>&gt;<i> and I don't want to exclude non-technical people from using what we've
+</I>&gt;<i> built.  But...
+</I>&gt;<i> 
+</I>&gt;<i> 5. ...I'm wary that facilitating &quot;user friendly&quot; Gemini hosts which
+</I>&gt;<i> anybody can post to using a client carries a very real risk of fostering
+</I>&gt;<i> a culture of dependency where people don't know how to do anything not
+</I>&gt;<i> offered as a feature by their provider, who has the ability to change,
+</I>&gt;<i> remove, or charge for those featurs, and also of pushing us toward a
+</I>&gt;<i> more centralised Geminispace where large numbers of users congregate on
+</I>&gt;<i> a small number of servers which make themselves especially appealing to
+</I>&gt;<i> non-technical users.  These servers could easily become little
+</I>&gt;<i> semi-closed gardens with internal-only comment notification facilities
+</I>&gt;<i> and other such niceties which work much more smoothly than the various
+</I>&gt;<i> decntralised solutions people have already been talking about.  They
+</I>&gt;<i> might not, but the risk is there: we might just end up creating new
+</I>&gt;<i> versions of LiveJournal, Wordpress, Blogspot, etc, etc.
+</I>
+  As I said, HTTP has had all the features required to support &quot;development
+in the browser via HTTP only&quot; since 1996, but as far as I know, no current
+browser (or even old ones from the time) ever did this.  I know programs
+like DreamWeaver [2] could upload documents to a server, but it did so over
+FTP, not the web.
+
+  Another aspect is that it wasn't apparent *how* to support methods like
+PUT or DELETE in a general purpose web server, and it took several years for
+Apache (for example) to even provide a way to do this---either via custom
+Apache modules [3] or (eventually) through a CGI script.  In any case, it
+required special configuration on the server side of things, and for mass
+hosting ... you ain't gonna get that.  I can, but that's because I'm insane
+enough to run my own web server (and email server, and gopher server, and
+gemini server ... ).
+
+&gt;<i> 6. Does anybody else feel like we are just instinctively re-implementing
+</I>&gt;<i> the familiar history of the web without much caution or critical
+</I>&gt;<i> thought?
+</I>
+  Believe me, I had actively surpress thoughts during the initial
+development of Gemini to push for more web-like features.  And this proposal
+woudn't even have come to light if it weren't for Alex Schroeder working on
+this because he likes wikis so much (also, see my response for point 2).
+
+&gt;<i> 7. It's of no practical use today, here and now, for &quot;everyday users&quot;,
+</I>&gt;<i> but I just want to get it on the record that in a hypothetical future
+</I>&gt;<i> where IPv6 or something else has provided us all with abundant
+</I>&gt;<i> publically reachable addresses, the obvious and elegant way for a
+</I>&gt;<i> client to upload to a Gemini &quot;server&quot; is actually to just host the
+</I>&gt;<i> resource itself, on a random, one-use-only URL, and then send that URL
+</I>&gt;<i> as a query to a well-known uploading endpoint on the other end,
+</I>&gt;<i> whereupon the &quot;server&quot; briefly becomes a client and fetches the resource
+</I>&gt;<i> in the usual way.  Nothing extra needed in the protocol at all!
+</I>
+  I responsed to this in my previous email.
+
+  -spc
+
+[1]	<A HREF="https://devblogs.microsoft.com/oldnewthing/">https://devblogs.microsoft.com/oldnewthing/</A>
+
+[2]	An HTML editor from the mid to late 90s.
+
+[3]	Not easy to do.  I did write an Apache module [4] twenty years ago
+	and I find it easier to maintain a instance of Apache 1.3 to run it,
+	than to try to adapt the code to Apache 2.4.  Maybe one of these
+	days I'll get a round tuit.
+
+[4]	<A HREF="https://github.com/spc476/mod_litbook">https://github.com/spc476/mod_litbook</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001703.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+	<LI>Next message (by thread): <A HREF="001641.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1638">[ date ]</a>
+              <a href="thread.html#1638">[ thread ]</a>
+              <a href="subject.html#1638">[ subject ]</a>
+              <a href="author.html#1638">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

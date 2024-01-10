@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposed minor spec changes, for comment.
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C20200518223715.iysu4hsc57bwa465%40enzo.thebackupbox.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000835.html">
+   <LINK REL="Next"  HREF="000858.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposed minor spec changes, for comment.</H1>
+    <B>epoch</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C20200518223715.iysu4hsc57bwa465%40enzo.thebackupbox.net%3E"
+       TITLE="Proposed minor spec changes, for comment.">epoch at enzo.thebackupbox.net
+       </A><BR>
+    <I>Mon May 18 23:37:15 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000835.html">Proposed minor spec changes, for comment.
+</A></li>
+        <LI>Next message (by thread): <A HREF="000858.html">Proposed minor spec changes, for comment.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#837">[ date ]</a>
+              <a href="thread.html#837">[ thread ]</a>
+              <a href="subject.html#837">[ subject ]</a>
+              <a href="author.html#837">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, May 18, 2020 at 10:00:56PM +0000, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">jan6 at tilde.ninja</A> wrote:
+&gt;<i> May 19, 2020 12:51 AM, &quot;Steve Ryan&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stryan at saintnet.tech</A>&gt; wrote:
+</I>&gt;<i> &gt; My only concern with this is the &quot;server's job&quot; part. I'd rather not
+</I>&gt;<i> &gt; have my server transform user-supplied content, even if it's something
+</I>&gt;<i> &gt; as minor as line breaks. Apache doesn't attempt to fix invalid HTML, why
+</I>&gt;<i> &gt; should SecretShop fix invalid text/gemini? Seems to me this should be
+</I>&gt;<i> &gt; handled by something like the gemini vim-syntax plugin.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; It also makes writing servers a bit more complicated since text/gemini
+</I>&gt;<i> &gt; has to be treated differently from other files and actually parsed
+</I>&gt;<i> &gt; versus being directly served up. Not the biggest deal (and you've
+</I>&gt;<i> &gt; already admited it's tedious) but just something I noticed.
+</I>&gt;<i> 
+</I>&gt;<i> well, teeeechnically it'd have to do this for all text/* files, according to the rfc, including
+</I>&gt;<i> plaintext and whatnot... although THAT's unlikely to happen...
+</I>&gt;<i> 
+</I>&gt;<i> I'd also be in favor of server handling it, although that is a kinda-valid point...
+</I>&gt;<i> html doesn't count because the browsers will do their best to fix all kinds of TOTALLY BROKEN html,
+</I>&gt;<i> you can have partial tags, no end tags for some, etc, and the browser will never tell the user your
+</I>&gt;<i> site is a trashpile, it will just silently try its best to fix it up (even in inspect element,
+</I>&gt;<i> you'd see the &quot;repaired&quot; version)...
+</I>
+<A HREF="https://tools.ietf.org/html/rfc5147#section-4.1">https://tools.ietf.org/html/rfc5147#section-4.1</A>
+
+&quot;   In Internet messages, line endings in text/plain MIME entities are
+   represented by CR+LF character sequences (see RFC 2046 [3] and RFC
+   3676 [6]).  However, some protocols (such as HTTP) additionally allow
+   other conventions for line endings.&quot;
+
+precedent of protocols allowing for other line endings, so the gemini spec
+could just say the same thing that http does about line endings.
+
+<A HREF="https://tools.ietf.org/html/rfc2616#section-3.7.1">https://tools.ietf.org/html/rfc2616#section-3.7.1</A>
+
+&quot;   When in canonical form, media subtypes of the &quot;text&quot; type use CRLF as
+   the text line break. HTTP relaxes this requirement and allows the
+   transport of text media with plain CR or LF alone representing a line
+   break when it is done consistently for an entire entity-body. HTTP
+   applications MUST accept CRLF, bare CR, and bare LF as being
+   representative of a line break in text media received via HTTP.&quot;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000835.html">Proposed minor spec changes, for comment.
+</A></li>
+	<LI>Next message (by thread): <A HREF="000858.html">Proposed minor spec changes, for comment.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#837">[ date ]</a>
+              <a href="thread.html#837">[ thread ]</a>
+              <a href="subject.html#837">[ subject ]</a>
+              <a href="author.html#837">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

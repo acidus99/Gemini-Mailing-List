@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposal: Simple structured form specification
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%3A%20Simple%20structured%20form%20specification&In-Reply-To=%3CCAEzvDCV-0GA5agLtY%3D52tED4Fw4VabyWsaZi-OUn%2BGT-YXQGog%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004971.html">
+   <LINK REL="Next"  HREF="004935.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposal: Simple structured form specification</H1>
+    <B>easrng</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%3A%20Simple%20structured%20form%20specification&In-Reply-To=%3CCAEzvDCV-0GA5agLtY%3D52tED4Fw4VabyWsaZi-OUn%2BGT-YXQGog%40mail.gmail.com%3E"
+       TITLE="Proposal: Simple structured form specification">easrng at gmail.com
+       </A><BR>
+    <I>Tue Jan 26 23:16:30 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004971.html">[spec] The Tragedy of &amp;
+</A></li>
+        <LI>Next message (by thread): <A HREF="004935.html">Proposal: Simple structured form specification
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4934">[ date ]</a>
+              <a href="thread.html#4934">[ thread ]</a>
+              <a href="subject.html#4934">[ subject ]</a>
+              <a href="author.html#4934">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I agree that Gemini should have forms, but that format doesn't look
+great to me. What if forms were implemented as their own pages, not a
+new link line type? I'm thinking something like this:
+
+# Gemini Form Proposal
+## Basic Format
+Form fields are on their own line. Any line starting with `[in` is
+considered a form element. This allows clients to continue to
+determine line types by the first 3 characters. After the `[in`, a
+dash is required.
+After the dash, the input type is listed. If a client cannot handle an
+input type, it SHOULD fall back to text. The rest of the line, up to
+the first ] is used as options for the input. Next, there is a ]
+character, then an optional text label.
+## Escape sequences
+In order to allow for ] characters, newlines, and literal backslashes
+in input options, preface them with a backslash.
+## Input types
+Other types could be added, like number, email, phone, color, or even
+file, but I feel this is an acceptable minimum set of types.
+### text
+A text input is a single line text input. Its format is as follows.
+(Things in parentheses are optional)
+```
+[in-text &lt;name&gt;( &lt;initial value&gt;)]
+```
+For example,
+```
+[in-text userFullName Alex Fierro] What is your name?
+```
+### password
+A password input is a single line text input that MUST hide the value
+typed into it. For security reasons, there is now way to prefill a
+password input. Its format is as follows.
+```
+[in-password &lt;name&gt;]
+```
+For example,
+```
+[in-password newPassword] What is your name?
+```
+### multiline
+A multiline input is a text input that accepts any number of lines.
+Its format is as follows. (Things in parentheses are optional)
+```
+[in-multiline &lt;name&gt; ( &lt;initial value&gt;)]
+```
+For example,
+```
+[in-multiline bio I am a demigod who enjoys art and the colors pink
+and green.\nI usually use she/her pronouns, but sometimes I use
+he/him.] Tell me about yourself
+```
+### submit
+A submit input is a button that submits a form to a URL. It's label
+SHOULD be used as the text on the button. Its format is as follows.
+```
+[in-submit /url/to/submit/to]
+```
+For example,
+```
+[in-submit /cgi-bin/profile.py] Update Profile
+```
+## Submitting
+When an `[in-submit]` is (clicked|tapped|activated with the
+keyboard|etc) all named inputs on the page (submit buttons are not
+named) will be added to the URL of the submit button as query
+parameters, and the resulting URL will be loaded.
+
+
+- easrng
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004971.html">[spec] The Tragedy of &amp;
+</A></li>
+	<LI>Next message (by thread): <A HREF="004935.html">Proposal: Simple structured form specification
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4934">[ date ]</a>
+              <a href="thread.html#4934">[ thread ]</a>
+              <a href="subject.html#4934">[ subject ]</a>
+              <a href="author.html#4934">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

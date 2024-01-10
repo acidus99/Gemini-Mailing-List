@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Regarding `gemini://` over NaCL (replacing TLS)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Regarding%20%60gemini%3A//%60%20over%20NaCL%20%28replacing%20TLS%29&In-Reply-To=%3C20200302223051.GJ5475%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000469.html">
+   <LINK REL="Next"  HREF="000495.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Regarding `gemini://` over NaCL (replacing TLS)</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Regarding%20%60gemini%3A//%60%20over%20NaCL%20%28replacing%20TLS%29&In-Reply-To=%3C20200302223051.GJ5475%40brevard.conman.org%3E"
+       TITLE="Regarding `gemini://` over NaCL (replacing TLS)">sean at conman.org
+       </A><BR>
+    <I>Mon Mar  2 22:30:51 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000469.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+        <LI>Next message (by thread): <A HREF="000495.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#474">[ date ]</a>
+              <a href="thread.html#474">[ thread ]</a>
+              <a href="subject.html#474">[ subject ]</a>
+              <a href="author.html#474">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+  I think I'm going to bow out of the encryption talk.  It's clear to me
+that I feel TLS is good enougn, and Ciprian doesn't (or would rather have
+alternatives).  I'm not the creator of the Gemini protocol, so I don't have
+the authority to make drastic changes to the protocol.
+
+  I've heard the admonintion to not roll your own crypto, and I believe that
+it extends to protocols as well.  And as bad and complex as TLS might be,
+it's a standard, there are real cryptographers trying to break it, and there
+are multiple implementations of it available: OpenSSL and LibreSSL are two,
+but off the top of my head, there are also bearSSL, PolarSSL, boringSSL. and
+GNUTLS.  And in a sense, that makes it easier to use, since these
+implementations *exit*.  This new protocol Ciprian is designing hasn't been
+vetted, and I'm unaware of anyone on this list that is expert enough in
+crypto to fully examine it.
+
+  And Ciprian wants to design a new secure protocol ... 
+
+  Anyway, a few comments about this message.
+
+It was thus said that the Great Ciprian Dorin Craciun once stated:
+&gt;<i> On Mon, Mar 2, 2020 at 2:18 AM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+</I>&gt;<i> &gt; 1) I assume the 32-bit length is sent bigendian (if I understand the
+</I>&gt;<i> &gt; argument to struct.pack() and struct.unpack() correctly---I'm not a Python
+</I>&gt;<i> &gt; programmer).  Why big endian?  99% of all computers on the Internet today is
+</I>&gt;<i> &gt; little endian (x86) so it seems to me that sending it little endian would be
+</I>&gt;<i> &gt; better.  [1][2]
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; [1]     Okay, I happen to agree with the big endian choice, but that's
+</I>&gt;<i> &gt;         because I'm biased---binary based Internet protocols are all big
+</I>&gt;<i> &gt;         endian, and I have a soft spot for the Motorola CPUs of past.  I've
+</I>&gt;<i> &gt;         never been a fan of little endian personally.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; [2]     I'm also asking to reflect back to you the same argument you
+</I>&gt;<i> &gt;         presented with using CRLF.  Your big endian choice seems to be
+</I>&gt;<i> &gt;         &quot;because that's how all Internet protocols do it&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> There are a couple of reasons I like big endian for protocols:
+</I>&gt;<i> 
+</I>&gt;<i> * it is logical;  for example although all integers are stored in
+</I>&gt;<i> little endian on x86, when we write numbers in code we use &quot;big
+</I>&gt;<i> endian&quot;;
+</I>
+  We use the Arabic numerals these days.  It's interesting to note that the
+value three hundred and twenty-one is written in the order of 321 in Arabic
+(much like in Western countries) but Arabic itself is written right-to-left,
+so one could say they write their numbers in little endian format.  You're
+just expressing a western bias---logic has nothing to do with it 8-P
+
+&gt;<i> * (and most importantly) when dumping a protocol capture there are no
+</I>&gt;<i> &quot;surprises&quot;, I read the number left to right, and if I just take the
+</I>&gt;<i> bytes in hex and concatenate them I can get the constant, i.e. `[01 02
+</I>&gt;<i> 03 04]` is just `0x01020304`;
+</I>
+  And it'd be backwards for Arabic programmers.
+
+  -spc
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000469.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+	<LI>Next message (by thread): <A HREF="000495.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#474">[ date ]</a>
+              <a href="thread.html#474">[ thread ]</a>
+              <a href="subject.html#474">[ subject ]</a>
+              <a href="author.html#474">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

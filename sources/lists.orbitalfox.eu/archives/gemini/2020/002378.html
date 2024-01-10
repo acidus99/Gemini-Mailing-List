@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proxying
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proxying&In-Reply-To=%3CC4TL9SQKDW14.287DHT7EM6TZA%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002373.html">
+   <LINK REL="Next"  HREF="002379.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proxying</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proxying&In-Reply-To=%3CC4TL9SQKDW14.287DHT7EM6TZA%40stilgar%3E"
+       TITLE="Proxying">solderpunk at posteo.net
+       </A><BR>
+    <I>Mon Aug 10 21:12:09 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002373.html">Proxying
+</A></li>
+        <LI>Next message (by thread): <A HREF="002379.html">Proxying
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2378">[ date ]</a>
+              <a href="thread.html#2378">[ thread ]</a>
+              <a href="subject.html#2378">[ subject ]</a>
+              <a href="author.html#2378">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun Aug 9, 2020 at 7:55 PM CEST, Jason McBrayer wrote:
+&gt;<i> <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> writes:
+</I>&gt;<i>
+</I>&gt;<i> &gt; I have to wonder whether anyone would actually use this. What do you
+</I>&gt;<i> &gt; all think of this workflow/feature? Is it potentially useful?
+</I>&gt;<i>
+</I>&gt;<i> I do think a caching proxy would be potentially useful, especially as
+</I>&gt;<i> few clients do caching themselves. I could also see it useful for
+</I>&gt;<i> offline use (client spiders through local proxy while online, client
+</I>&gt;<i> reads
+</I>&gt;<i> offline through local proxy).
+</I>&gt;<i>
+</I>&gt;<i> The tricky bit is, of course, cache expiration. We don't provide as much
+</I>&gt;<i> useful information to the cache as http does. You'll need to use
+</I>&gt;<i> heuristics not only for how long to cache, but to provide a way to force
+</I>&gt;<i> a refresh, which isn't covered in the spec.
+</I>
+If nothing else, I think there's a small, useful role for a very simple
+caching proxy which just maintains an in-memory cache of everything
+visited which is valid for, say, five minutes.  The reason this is
+useful is that navigating Gemini capsules often involves extensive use
+of the &quot;back button&quot; (and, at least for me on AV-98, the &quot;up&quot; command,
+which gets you from example.com/foo/bar/baz to to example.com/foo/bar/
+even in the lack of an explicit link, and the &quot;root&quot; command, which gets
+you from example.com/foo/bar/baz to to example.com), which often entails
+loading the same page repeatedly in a relatively short window of time.
+A very simple dumb local cache would cut down on transactions for this.
+
+For people like me who often read something in Gemini/Gopherspace, then
+want to reference a few days later but cannot remember where they read
+it, a proxy which maintained full-text search of everything visited in
+the past month or so would be *super* handy, but I have no idea how to
+build such a thing.
+
+I'm kind of attracted to the idea of small, simple, do-one-thing-well
+proxies which can be chained together like &quot;filter&quot; programs in a
+pipeline...but I guess the TLS overhead would stack up quickly,
+encouraging a kind of highly configurable &quot;Swiss army knife&quot; proxy
+instead.  Not as pretty, but potentially very useful...
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002373.html">Proxying
+</A></li>
+	<LI>Next message (by thread): <A HREF="002379.html">Proxying
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2378">[ date ]</a>
+              <a href="thread.html#2378">[ thread ]</a>
+              <a href="subject.html#2378">[ subject ]</a>
+              <a href="author.html#2378">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Malicious Links
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Malicious%20Links&In-Reply-To=%3C2d5c87ab5d23a28bf21e46c03aa71236%40libre.brussels%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006885.html">
+   <LINK REL="Next"  HREF="006895.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Malicious Links</H1>
+    <B>Jonathan McHugh</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Malicious%20Links&In-Reply-To=%3C2d5c87ab5d23a28bf21e46c03aa71236%40libre.brussels%3E"
+       TITLE="Malicious Links">indieterminacy at libre.brussels
+       </A><BR>
+    <I>Sat Jul 10 16:54:54 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006885.html">Malicious Links
+</A></li>
+        <LI>Next message (by thread): <A HREF="006895.html">Malicious Links
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6888">[ date ]</a>
+              <a href="thread.html#6888">[ thread ]</a>
+              <a href="subject.html#6888">[ subject ]</a>
+              <a href="author.html#6888">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks for an informative post.
+
+Just one point of concern:
+
+In the UK term 'nonce' was a perjorative term - its mercifully left the everyday lexicon. Just as the term 'fag' used to mean an 'old lady who picks up sticks', language moves on.
+
+While I understand that it has a cryptographic definition, is it possible to have/use another term than 'nonces'?
+
+Having grown up watching the satirical series, Brass Eye, the following could be featured as a comedy monologue:
+```
+A nonce introduces randomness, and sometimes time-stamping, into communications so that the application can verify the user. This added uniqueness makes it impossible for hackers to use prior communications to impersonate the legitimate parties for nefarious purposes.
+```
+
+
+
+====================
+Jonathan McHugh
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">indieterminacy at libre.brussels</A>
+
+July 10, 2021 2:57 PM, &quot;nervuri&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">nervuri at disroot.org</A>&gt; wrote:
+
+&gt;<i> On Fri, 2021-07-09, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">nothien at uber.space</A> wrote:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> What does the Gemini community think? How big of a problem is this?
+</I>&gt;&gt;<i> Are there any other feasible workarounds? Which major (and minor) sites
+</I>&gt;&gt;<i> are affected? Does this call for some sort of change in protocol?
+</I>&gt;<i> 
+</I>&gt;<i> See previous discussions:
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="gemini://gemini.circumlunar.space/~/fgaz/posts/2020-06-15-csrf-in-gemini/">gemini://gemini.circumlunar.space/~/fgaz/posts/2020-06-15-csrf-in-gemini/</A>
+</I>&gt;<i> - <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/001698.html">https://lists.orbitalfox.eu/archives/gemini/2020/001698.html</A>
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="gemini://gemini.circumlunar.space/users/solderpunk/cornedbeef/a-vision-for-gemini-applications.gmi">gemini://gemini.circumlunar.space/users/solderpunk/cornedbeef/a-vision-for-gemini-applications.gmi</A>
+</I>&gt;<i> - <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/001747.html">https://lists.orbitalfox.eu/archives/gemini/2020/001747.html</A>
+</I>&gt;<i> 
+</I>&gt;<i> Takeaways:
+</I>&gt;<i> 
+</I>&gt;<i> Server-side: mandate client certs for requests with non-trivial
+</I>&gt;<i> consequences and use nonces (CSRF tokens) to be extra-safe (see the
+</I>&gt;<i> first link).
+</I>&gt;<i> 
+</I>&gt;<i> Client-side: never use a client certificate when following a link from
+</I>&gt;<i> outside the client certificate's scope, as defined in section 4.3 of the
+</I>&gt;<i> spec. This rule could be added to the spec itself. Here's how the
+</I>&gt;<i> scope is defined:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> A client certificate which is generated or loaded in response to such a
+</I>&gt;&gt;<i> status code has its scope bound to the same hostname as the request URL
+</I>&gt;&gt;<i> and to all paths below the path of the request URL path. E.g. if a
+</I>&gt;&gt;<i> request for <A HREF="gemini://example.com/foo">gemini://example.com/foo</A> returns status 60 and the user
+</I>&gt;&gt;<i> chooses to generate a new client certificate in response to this, that
+</I>&gt;&gt;<i> same certificate should be used for subsequent requests to
+</I>&gt;&gt;<i> <A HREF="gemini://example.com/foo,">gemini://example.com/foo,</A> <A HREF="gemini://example.com/foo/bar/,">gemini://example.com/foo/bar/,</A>
+</I>&gt;&gt;<i> <A HREF="gemini://example.com/foo/bar/baz,">gemini://example.com/foo/bar/baz,</A> etc.,
+</I>&gt;<i> 
+</I>&gt;<i> Another client-side takeaway: consider Solderpunk's idea of a
+</I>&gt;<i> &quot;containerised&quot; client, exemplified in [1].
+</I>&gt;<i> 
+</I>&gt;<i> Such client-side precautions should cover most cases of CSRF, except, to
+</I>&gt;<i> quote Solderpunk:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> It is not foolproof - it cannot protect against application-internal
+</I>&gt;&gt;<i> CSRF attacks, e.g. some kind of multi-user application where one user
+</I>&gt;&gt;<i> can post text/gemini content which is rendered by another user of the
+</I>&gt;&gt;<i> same application.
+</I>&gt;<i> 
+</I>&gt;<i> Nonces (CSRF tokens) should be used in such instances.
+</I>&gt;<i> 
+</I>&gt;<i> [1] <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/001771.html">https://lists.orbitalfox.eu/archives/gemini/2020/001771.html</A>
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006885.html">Malicious Links
+</A></li>
+	<LI>Next message (by thread): <A HREF="006895.html">Malicious Links
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6888">[ date ]</a>
+              <a href="thread.html#6888">[ thread ]</a>
+              <a href="subject.html#6888">[ subject ]</a>
+              <a href="author.html#6888">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

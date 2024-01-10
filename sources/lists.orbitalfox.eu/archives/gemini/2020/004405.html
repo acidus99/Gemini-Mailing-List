@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] &lt;URL&gt; is a UTF-8 erratum
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20%3CURL%3E%20is%20a%20UTF-8%20erratum&In-Reply-To=%3CC82T38LZQGT2.3VAFFEB8JVNZX%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004395.html">
+   <LINK REL="Next"  HREF="004407.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] &lt;URL&gt; is a UTF-8 erratum</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20%3CURL%3E%20is%20a%20UTF-8%20erratum&In-Reply-To=%3CC82T38LZQGT2.3VAFFEB8JVNZX%40stilgar%3E"
+       TITLE="[spec] &lt;URL&gt; is a UTF-8 erratum">solderpunk at posteo.net
+       </A><BR>
+    <I>Sat Dec 26 15:01:39 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004395.html">[spec] &lt;URL&gt; is a UTF-8 erratum
+</A></li>
+        <LI>Next message (by thread): <A HREF="004407.html">[spec] &lt;URL&gt; is a UTF-8 erratum
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4405">[ date ]</a>
+              <a href="thread.html#4405">[ thread ]</a>
+              <a href="subject.html#4405">[ subject ]</a>
+              <a href="author.html#4405">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat Dec 26, 2020 at 2:34 AM CET, Petite Abeille wrote:
+&gt;<i> The spec says, as of v0.14.3, November 29th 2020, under # 2 Gemini
+</I>&gt;<i> requests:
+</I>&gt;<i>
+</I>&gt;<i> &lt;URL&gt; is a UTF-8 encoded absolute URL, including a scheme, of maximum
+</I>&gt;<i> length 1024 bytes.
+</I>&gt;<i>
+</I>&gt;<i> This is wrong.
+</I>&gt;<i>
+</I>&gt;<i> What's wrong is URL. It should read IRI instead, to make it consistent
+</I>&gt;<i> with UTF-8. An URL cannot be UTF-8, while an IRI can. As UTF-8 precedes
+</I>&gt;<i> URL in the sentence, UTF-8 has to take precedence.
+</I>
+I've already made it very clear in the main [spec] thread for this topic
+that whether we adopt IRIs or not, the use of &quot;UTF-8 encoded URL&quot; should
+be fixed, as it is likely to cause confusion.  Rest assured, when the
+decision is made, this will be fixed accordingly.  There's no need to
+split the thread over this.
+
+It's not true that URLs cannot be UTF-8.  In fact, the opposite is true.
+The characters valid in a URL are a subset of those which can be
+represented in ASCII, and all byte strings which are valid ASCII are also
+valid UTF-8, with equivalent decodings.  Hence, *every* URL is UTF-8.
+So there. :p
+
+The idea that, as a general principle, when an existing sentence in the
+spec is ambiguous or inconsistent, the problem should be resolved by
+granting absolute priority to whichever term occurs first in the current
+form of the sentence is, plainly, absurd.
+
+It's probably not a hill I'll choose to die on when it comes time to
+update the spec based on the IRI decision, but personally I reject the
+modern notion that the URL/URN (or IRL/IRN) distinction is not important
+and thus everything should be specified at maximum generality as a URI
+(or IRN).  The difference matters and protocols/formats should choose
+appropriately.  The practical question of how to handle a text/gemini
+document becomes *considerably* murkier when link lines contain URNs (of
+course, you and I know this quite well already).
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004395.html">[spec] &lt;URL&gt; is a UTF-8 erratum
+</A></li>
+	<LI>Next message (by thread): <A HREF="004407.html">[spec] &lt;URL&gt; is a UTF-8 erratum
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4405">[ date ]</a>
+              <a href="thread.html#4405">[ thread ]</a>
+              <a href="subject.html#4405">[ subject ]</a>
+              <a href="author.html#4405">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

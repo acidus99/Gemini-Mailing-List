@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A vision for Gemini applications
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20vision%20for%20Gemini%20applications&In-Reply-To=%3C20200617100221.GA6870%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001751.html">
+   <LINK REL="Next"  HREF="001756.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A vision for Gemini applications</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20vision%20for%20Gemini%20applications&In-Reply-To=%3C20200617100221.GA6870%40SDF.ORG%3E"
+       TITLE="A vision for Gemini applications">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Wed Jun 17 11:02:21 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001751.html">A vision for Gemini applications
+</A></li>
+        <LI>Next message (by thread): <A HREF="001756.html">A vision for Gemini applications
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1753">[ date ]</a>
+              <a href="thread.html#1753">[ thread ]</a>
+              <a href="subject.html#1753">[ subject ]</a>
+              <a href="author.html#1753">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Jun 17, 2020 at 12:53:32AM -0700, Meff wrote:
+ 
+&gt;<i> You mentioned that you would like to see *no* cross-domain linking, in order
+</I>&gt;<i> to remove the complexities of having to do some sort of CSRF-style
+</I>&gt;<i> validation. The thing is, I think cross-domain linking is useful. It's
+</I>&gt;<i> useful when replying to someone's Gemlog post, it's useful when creating
+</I>&gt;<i> lists of links you would like to recommend to visitors of your capsule, and
+</I>&gt;<i> for linking to sources of truth that may live elsewhere (especially if
+</I>&gt;<i> linking against the web).
+</I>
+You have misunderstood!  The stuff about no cross-domain linking was
+strictly in the context of a &quot;safety client&quot; for very safely using a
+certificate-secured app.  In the context of a reading-oriented client
+for browsing gemlogs etc., *of course* cross-domain linking is
+absolutely essential and a client which didn't allow it would be
+useless.
+ 
+&gt;<i> How about a relaxed version of this, where all clients that wish to &quot;follow&quot;
+</I>&gt;<i> cross-domain links *must* strip out any query params. For basic clients,
+</I>&gt;<i> that would be as simple as a regex that strips the &quot;?&quot; used to start a query
+</I>&gt;<i> string, and everything that comes after. For more sophisticated clients that
+</I>&gt;<i> have access to URL processing libraries, this should be as simple as parsing
+</I>&gt;<i> the URL, removing any query strings, and hydrating this URL again. Now
+</I>&gt;<i> cross-domain requests cannot contain any sort of &quot;payload&quot; that the server
+</I>&gt;<i> would mutate state with. Of course, there is the possibility that a page
+</I>&gt;<i> view for an URL even without a query param would mutate state on the server,
+</I>&gt;<i> but that is already an issue now.
+</I>
+This is a perfectly good idea for &quot;everyday&quot; clients to implement, in
+order to make life a bit easier for people who really want to build and
+use apps that don't hide behind a certificate requirement.  It would
+make it impossible to, e.g., link to a GUS search result page, though.
+That could be fixed if <A HREF="gemini://gus.guru/search?foo">gemini://gus.guru/search?foo</A> redirected to
+<A HREF="gemini://gus.guru/search/marbles,">gemini://gus.guru/search/marbles,</A> but maybe it's not worth it.
+
+In general, requiring all non-idempotent requests to use a query and
+recommending clients to strip (or ask for confirmation of) queries found
+in links and redirects, might be enough to solve the worst of the
+problem.  It would make applications quite a bit clunkier to use (I
+guess they would need to use status code 10 to ask &quot;Are you sure?&quot; to
+every non-idempotent request), but some people might find that less clunky
+than using certs, I guess.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001751.html">A vision for Gemini applications
+</A></li>
+	<LI>Next message (by thread): <A HREF="001756.html">A vision for Gemini applications
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1753">[ date ]</a>
+              <a href="thread.html#1753">[ thread ]</a>
+              <a href="subject.html#1753">[ subject ]</a>
+              <a href="author.html#1753">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

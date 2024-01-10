@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Assuming%20disallow-all%2C%20and%20some%20research%20on%20robots.txt%20in%0A%20Geminispace%20%28Was%3A%20Re%3A%20robots.txt%20for%20Gemini%20formalised%29&In-Reply-To=%3C9cea8f8a58cf006ec109b235e5a891aebb68681b.camel%40ur.gs%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003530.html">
+   <LINK REL="Next"  HREF="003538.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)</H1>
+    <B>Nick Thomas</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Assuming%20disallow-all%2C%20and%20some%20research%20on%20robots.txt%20in%0A%20Geminispace%20%28Was%3A%20Re%3A%20robots.txt%20for%20Gemini%20formalised%29&In-Reply-To=%3C9cea8f8a58cf006ec109b235e5a891aebb68681b.camel%40ur.gs%3E"
+       TITLE="Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)">gemini at ur.gs
+       </A><BR>
+    <I>Tue Nov 24 20:25:05 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003530.html">Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+</A></li>
+        <LI>Next message (by thread): <A HREF="003538.html">Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3533">[ date ]</a>
+              <a href="thread.html#3533">[ thread ]</a>
+              <a href="subject.html#3533">[ subject ]</a>
+              <a href="author.html#3533">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, 2020-11-24 at 19:08 +0000, Robert &quot;khuxkm&quot; Miles wrote:
+
+&gt;<i> Doesn't that just *feel* like a hack to you?
+</I>
+It definitely feels hackish when worded like this :).
+
+The precise technical form is secondary to the outcome (as I see it) of
+protecting users from a privacy-hostile default in the robots.txt
+specification. I appreciate that you're currently an opt-out, rather
+than opt-in, advocate, but I'd still appreciate any ideas you have to
+make it nicer *if* gemini ends up going for opt-in.
+
+An alternative form that just came to mind is a server implementation
+recommendation like this:
+
+```
+Geminispace crawlers use the /robots.txt request path to determine
+whether a capsule can be accessed for archival, indexing, research, and
+other purposes. This can have privacy implications for the user, so
+servers should not start unless they have an explicit signal on how to
+handle requests to the /robots.txt path.
+
+For example, this signal may be the availability of any content for the
+/robots.txt path, a user-added database entry indicating that the path
+should receive a 5x response, or a non-default configuration parameter
+specifying that it's OK to skip the check.
+
+If no such signal is present, the server should emit an error message
+and either exit immediately, or allow the user to specify how the path
+should be handled.
+```
+
+As a new server operator with no idea about `robots.txt`, I'd run, say:
+
+```
+$ agate [::]:1995 mysite cert.pem key.rsa ur.gs
+
+No robots.txt file present! Please create mysite/robots.txt, or re-run
+Agate with --permit-robots to allow your content to be archived,
+indexed, or otherwise used by automated crawlers of Geminispace
+```
+
+*I'd* think &quot;hang on, I don't want my content to be archived&quot; and go
+off to learn about this robots.txt thing; others might shrug and just
+add the --permit-robots flag. 
+
+&gt;<i>  Of the 362 hosts known to GUS, only 36 have a robots.txt file, so
+</I>&gt;<i> any choice made as to what the default robots.txt should be will
+</I>&gt;<i> affect around 90% of Geminispace 
+</I>
+Thanks for running the numbers on this. I agree with everything you
+said based on them. That any change affects such a large proportion of
+existing geminispace is especially worth emphasising.
+
+/Nick
+
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003530.html">Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+</A></li>
+	<LI>Next message (by thread): <A HREF="003538.html">Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3533">[ date ]</a>
+              <a href="thread.html#3533">[ thread ]</a>
+              <a href="subject.html#3533">[ subject ]</a>
+              <a href="author.html#3533">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

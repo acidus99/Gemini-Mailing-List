@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> New Dillo plugin
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20New%20Dillo%20plugin&In-Reply-To=%3C20200626233208.ad2ac3e362c3c1b44b9f295c%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002170.html">
+   <LINK REL="Next"  HREF="001962.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>New Dillo plugin</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20New%20Dillo%20plugin&In-Reply-To=%3C20200626233208.ad2ac3e362c3c1b44b9f295c%40gmail.com%3E"
+       TITLE="New Dillo plugin">linde.philip at gmail.com
+       </A><BR>
+    <I>Fri Jun 26 22:32:08 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002170.html">TLS certificate sizes in Geminispace
+</A></li>
+        <LI>Next message (by thread): <A HREF="001962.html">New Dillo plugin
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1957">[ date ]</a>
+              <a href="thread.html#1957">[ thread ]</a>
+              <a href="subject.html#1957">[ subject ]</a>
+              <a href="author.html#1957">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+I tried the existing Dillo plugin but couldn't get it to work.
+Perhaps it got the job done at some iteration of the protocol.
+I've written my own according to the current spec for anyone
+interested:
+
+<A HREF="https://github.com/boomlinde/gemini.filter.dpi">https://github.com/boomlinde/gemini.filter.dpi</A>
+
+I've decided that in my client you explicitly have to pin invalid
+certificates and certificates with unknown authorities. On the first
+request to a site with a self-signed or invalid certificate, an error
+description will be displayed and you'll be given the option to pin it
+and continue anyway. After the certificate is pinned, you won't get a
+warning again until it changes.
+
+The certificate pins are stored in $HOME/.dillo/gemini/pinned as
+base64 encoded sha1 sums of the entire certificate chain used.
+
+For now it doesn't undersand client certificate status codes and will
+show them as it does errors (simply outputting the header in plain
+text). It will display an error on any encoding except utf-8 and
+us-ascii.
+
+Input works fine!
+
+The project has also yielded two interesting libraries:
+
+<A HREF="https://github.com/boomlinde/gemini">https://github.com/boomlinde/gemini</A> is a protocol implementation, for
+now only a client, in Go. The client library makes it easy to set up a
+pin database and verifies connections by default.
+
+<A HREF="https://github.com/boomlinde/dpi">https://github.com/boomlinde/dpi</A> implements a Dillo plugin server, in
+Go. It can be used to build both filter and server plugins.
+
+Neither of these libraries are really versioned yet. I want to dog-food
+the plugin for a while to weed any issues out before I will say that
+the APIs are stable.
+
+I hope someone else finds some use for this!
+
+--
+Philip
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200626/a3d89eff/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20200626/a3d89eff/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002170.html">TLS certificate sizes in Geminispace
+</A></li>
+	<LI>Next message (by thread): <A HREF="001962.html">New Dillo plugin
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1957">[ date ]</a>
+              <a href="thread.html#1957">[ thread ]</a>
+              <a href="subject.html#1957">[ subject ]</a>
+              <a href="author.html#1957">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

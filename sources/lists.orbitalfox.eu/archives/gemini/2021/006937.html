@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Logging format for Gemini servers
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Logging%20format%20for%20Gemini%20servers&In-Reply-To=%3CYPSpuS/%2B%2BeVbd16D%40sysrq.79.202.136%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006936.html">
+   <LINK REL="Next"  HREF="006938.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Logging format for Gemini servers</H1>
+    <B>Anna &#8220;CyberTailor&#8221;</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Logging%20format%20for%20Gemini%20servers&In-Reply-To=%3CYPSpuS/%2B%2BeVbd16D%40sysrq.79.202.136%3E"
+       TITLE="Logging format for Gemini servers">cyber at sysrq.in
+       </A><BR>
+    <I>Sun Jul 18 23:22:49 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006936.html">Gemini chatroom
+</A></li>
+        <LI>Next message (by thread): <A HREF="006938.html">Logging format for Gemini servers (addition)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6937">[ date ]</a>
+              <a href="thread.html#6937">[ thread ]</a>
+              <a href="subject.html#6937">[ subject ]</a>
+              <a href="author.html#6937">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello everyone, today I'd like to talk about access logs.
+
+Almost every HTTP server uses NCSA Common Log Format (or its superset -
+Combined Log Format). This is very cool, because developers of misc
+utilities (like fail2ban or monitoring tools) don't need to bother
+writing log parsers for each server.
+
+## Example log entry
+
+ .---------------------- IP address of the client which made the request
+ |         .------------ rfc1413 identity (always &quot;-&quot; in practice)
+ |         | .---------- authorized user ID (as in .htpasswd file)
+ |         | |     .---- datetime string [%d/%b/%Y:%H:%M:%S %z]
+ |         | |     |
+ |         | |     |
+ *         * *     *
+ 127.0.0.1 - frank [10/Oct/2000:13:55:36 -0700] &quot;GET /apache_pb.gif HTTP/1.0&quot; 200 2326
+                                                                            *   *    *
+                                                                            |   |    |
+                                                                            |   |    |
+                         HTTP method, resource and protocol version --------.   |    |
+                         HTTP status code returned to the client ---------------.    |
+                         number of bytes of data transferred (without headers) ------.
+
+References:
+=&gt; <A HREF="https://en.wikipedia.org/wiki/Common_Log_Format">https://en.wikipedia.org/wiki/Common_Log_Format</A>
+=&gt; <A HREF="https://publib.boulder.ibm.com/tividd/td/ITWSA/ITWSA_info45/en_US/HTML/guide/c-logs.html#common">https://publib.boulder.ibm.com/tividd/td/ITWSA/ITWSA_info45/en_US/HTML/guide/c-logs.html#common</A>
+=&gt; <A HREF="https://www.loganalyzer.net/log-analyzer/apache-common-log.html">https://www.loganalyzer.net/log-analyzer/apache-common-log.html</A>
+
+## Adaptibility
+
+If you look at Gophernicus code, it's using Combined Log Format, which
+is nice but confusing (I mean seeing &quot;HTTP/1.0&quot; string and HTTP status
+codes in a Gopher server's log feels weird), however compatibility is
+worth it.
+
+I think Common Log Format can be applied for Gemini too. The only
+problem is, such format does not include &lt;META&gt;. Also it won't look good
+in syslog because of double datetime.
+
+Let's review the syntax:
+
+&gt;<i> host ident authuser date request status bytes
+</I>
+Everything is obvious except authuser. I suggest using last 7 characters
+of client certificate's SHA-1 cache (git had shown that it is enough).
+
+## RFC 1413: Ident protocol
+
+If you run a webserver, you probably understand how useful User-agent is
+for identifying robots visiting your website.
+
+Thankfully, Gemini doesn't require client identification as there're no
+compatibility issues between different Gemini clients. But that makes
+learning anything about robots very hard for capsule operators :(
+
+I appreciate St&#233;phane Bortzmeyer for including additional info in
+robots.txt requests:
+
+&gt;<i> <A HREF="gemini://example.space/robots.txt?robot=true&amp;uri=gemini://gemini.bortzmeyer.org/software/lupa/">gemini://example.space/robots.txt?robot=true&amp;uri=gemini://gemini.bortzmeyer.org/software/lupa/</A>
+</I>
+I'd like to suggest another one solution for this problem (so we have 15
+competing standards later).
+
+Let's suppose Yuri runs a Gemini server, Sergei runs a Gemini search
+egnine *AND* an identd server, for example, fakeidentd:
+=&gt; <A HREF="http://www.guru-group.fi/~too/sw/">http://www.guru-group.fi/~too/sw/</A> A static, secure identd. One source file only!
+
+Sergei's crawler makes a request to Yuri's server. Yuri's server sends
+an ident query to Sergei's identd server, reads response and writes
+access log. Yuri reads 'celestial-crawler' in the logs and gets excited
+about his capsule getting indexed.
+
+Upsides:
+* looks cool and fun
+* opt-in
+* actually standartized
+* 'ident' field can be logged every time a request is made
+* human visitors can leave their names in server logs so Geminispace
+  feels more comfy and personal
+=&gt; <A HREF="https://tvtropes.org/pmwiki/pmwiki.php/Main/KilroyWasHere">https://tvtropes.org/pmwiki/pmwiki.php/Main/KilroyWasHere</A>
+
+Downsides:
+* identd probably won't work behind ISP's NAT
+* requires writing asynchronous or threaded server code to avoid
+  blocking main thread (although separating logger and listener
+  processes is a good idea as it's more secure)
+* default fail2ban filters rely on 'ident' field always being &quot;-&quot;
+
+What are you thoughts?
+Feel free to ask questions &#128579;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006936.html">Gemini chatroom
+</A></li>
+	<LI>Next message (by thread): <A HREF="006938.html">Logging format for Gemini servers (addition)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6937">[ date ]</a>
+              <a href="thread.html#6937">[ thread ]</a>
+              <a href="subject.html#6937">[ subject ]</a>
+              <a href="author.html#6937">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

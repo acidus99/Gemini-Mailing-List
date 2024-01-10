@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> robots.txt for Gemini formalised
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20robots.txt%20for%20Gemini%20formalised&In-Reply-To=%3C20201124123109.b08d27b9dbe0285829cd51b2%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003517.html">
+   <LINK REL="Next"  HREF="003525.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>robots.txt for Gemini formalised</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20robots.txt%20for%20Gemini%20formalised&In-Reply-To=%3C20201124123109.b08d27b9dbe0285829cd51b2%40gmail.com%3E"
+       TITLE="robots.txt for Gemini formalised">linde.philip at gmail.com
+       </A><BR>
+    <I>Tue Nov 24 11:31:09 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003517.html">robots.txt for Gemini formalised
+</A></li>
+        <LI>Next message (by thread): <A HREF="003525.html">robots.txt for Gemini formalised
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3518">[ date ]</a>
+              <a href="thread.html#3518">[ thread ]</a>
+              <a href="subject.html#3518">[ subject ]</a>
+              <a href="author.html#3518">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, 24 Nov 2020 11:29:02 +0100
+marc &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">marcx2 at welz.org.za</A>&gt; wrote:
+
+&gt;<i> Consider the <A HREF="gemini://example.com/~somebody/personal.gmi">gemini://example.com/~somebody/personal.gmi</A> -
+</I>&gt;<i> if somebody wishes to exclude personal.gmi from being
+</I>&gt;<i> crawled they need write access to example.com/robots.txt,
+</I>&gt;<i> and how do we go about making sure that ~somebodyelse,
+</I>&gt;<i> also on example.com doesn't overwrite robots.txt with
+</I>&gt;<i> their own rules ?
+</I>
+How the server produces responses to robots.txt requests is an
+implementation detail. robots.txt can easily be implemented such that
+the server responds with access information provided by files in
+subdirectories. For example: a system directory corresponding to
+/~somebody/ contains a file named &quot;.disallow&quot; containing
+&quot;personal.gmi&quot;. When the server builds a response to /robots.txt, it
+considers the content of all &quot;.disallow&quot; files and includes Disallow
+lines corresponding to their content. This way, individual users on a
+multi-user system can decide for themselves the access policy for their
+content without shared access to a canonical robots.txt.
+
+&gt;<i> I have pitched this idea before: I think a footer containing
+</I>&gt;<i> the license/rules under which a page can be distributed/cached
+</I>&gt;<i> is more sensible than robots.txt. This approach is:
+</I>&gt;<i> 
+</I>&gt;<i> * local to the page (no global /robots.txt)
+</I>&gt;<i> * persistent (survives being copied, mirrored &amp; re-exported)
+</I>&gt;<i> * sound (one knows the conditions under which this can be redistributed)
+</I>
+What if my document is a binary file of some sort that I can not add a
+footer to? The only ways to address this consistently for all document
+types are to
+
+a) Include the information in the response, *distinct* from its body
+b) Provide the information in a sidecar file or sideband communication
+   channel
+
+-- 
+Philip
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201124/fb819cb7/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201124/fb819cb7/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003517.html">robots.txt for Gemini formalised
+</A></li>
+	<LI>Next message (by thread): <A HREF="003525.html">robots.txt for Gemini formalised
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3518">[ date ]</a>
+              <a href="thread.html#3518">[ thread ]</a>
+              <a href="subject.html#3518">[ subject ]</a>
+              <a href="author.html#3518">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

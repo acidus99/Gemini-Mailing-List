@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Titan, the proposed upload protocol for Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Titan%2C%20the%20proposed%20upload%20protocol%20for%20Gemini&In-Reply-To=%3C008debb3d160ed6a38387d28abf88076e9f436ae.camel%40gnu.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002034.html">
+   <LINK REL="Next"  HREF="002037.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Titan, the proposed upload protocol for Gemini</H1>
+    <B>Alex Schroeder</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Titan%2C%20the%20proposed%20upload%20protocol%20for%20Gemini&In-Reply-To=%3C008debb3d160ed6a38387d28abf88076e9f436ae.camel%40gnu.org%3E"
+       TITLE="Titan, the proposed upload protocol for Gemini">alex at gnu.org
+       </A><BR>
+    <I>Sat Jul  4 10:09:18 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002034.html">Titan, the proposed upload protocol for Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="002037.html">Titan, the proposed upload protocol for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2036">[ date ]</a>
+              <a href="thread.html#2036">[ thread ]</a>
+              <a href="subject.html#2036">[ subject ]</a>
+              <a href="author.html#2036">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Upon reading my mail the next day I'd like to add a few points.
+<A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/002034.html">https://lists.orbitalfox.eu/archives/gemini/2020/002034.html</A>
+
+
+Titan, the name
+
+I don't mind lel's Java client being called &quot;Titan&quot;. After all, there
+are many things that are called Titan &#8211; and Apache also named their
+webserver httpd. And, like I said, originally I called the protocol
+gemini+write... So, I don't know? I like the name Titan, of course. &#128515;
+
+
+gnutls-cli
+
+Here's an example of me updating a page with the content of test.txt
+using gnutls-cli:
+
+(sleep 1; \
+ echo &quot;<A HREF="titan://alexschroeder.ch:1968/raw/Test;mime=text/plain;size=">titan://alexschroeder.ch:1968/raw/Test;mime=text/plain;size=</A>&quot;`wc
+--bytes &lt; test.txt`&quot;;token=hello&quot;; \
+ cat test.txt) | \
+ gnutls-cli --insecure localhost:1965
+
+I'm using --insecure because of the self-signed certificate, and I'm
+using sleep 1 because gnutls-cli (at least on my system) isn't
+immediately ready to accept ouput.
+
+The drawback with this solution is that there's plenty of gnuttls-cli
+info shown that you don't really care about.
+
+
+openssl
+
+Here's an example of me updating a page with the content of test.txt
+using openssl:
+
+echo &quot;<A HREF="titan://alexschroeder.ch:1968/raw/Test;mime=text/plain;size=">titan://alexschroeder.ch:1968/raw/Test;mime=text/plain;size=</A>&quot;`wc
+--bytes &lt; test.txt`&quot;;token=hello&quot; \
+  | cat - test.txt | openssl s_client --quiet --connect
+alexschroeder.ch:1968 2&gt;/dev/null
+
+Here I can use the --quiet flag to reduce openssl's output, and as the
+rest is printed on stderr I can redirect stderr to /dev/null in order
+to make the output really quiet.
+
+
+Gemini Wiki on the web
+
+The Gemini Wiki also serves HTTP (although it's an extremely simple
+HTTP server: no content negotiation). That's why you can visit
+<A HREF="gemini://alexschroeder.ch:1968">gemini://alexschroeder.ch:1968</A> on the web using 
+<A HREF="https://alexschroeder.ch:1968">https://alexschroeder.ch:1968</A> &#8211; Gemini Wiki installations just have to
+make sure to use those Let's Encrypt certificates and not their self-
+signed ones because browsers are really picky and display all sorts of
+warnings. Gemini Wiki only serves the web as secondary citizen. There
+are no HTML forms to edit pages from the web. That only works using the
+Titan protocol.
+
+
+Cheers
+Alex
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002034.html">Titan, the proposed upload protocol for Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="002037.html">Titan, the proposed upload protocol for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2036">[ date ]</a>
+              <a href="thread.html#2036">[ thread ]</a>
+              <a href="subject.html#2036">[ subject ]</a>
+              <a href="author.html#2036">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

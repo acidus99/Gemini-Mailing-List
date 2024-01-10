@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] client certificate expiry
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20client%20certificate%20expiry&In-Reply-To=%3C20210328142549.nr2fvmrtom3ea43e%40localhost%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006212.html">
+   <LINK REL="Next"  HREF="006199.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] client certificate expiry</H1>
+    <B>mbays</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20client%20certificate%20expiry&In-Reply-To=%3C20210328142549.nr2fvmrtom3ea43e%40localhost%3E"
+       TITLE="[tech] client certificate expiry">mbays at sdf.org
+       </A><BR>
+    <I>Sun Mar 28 15:25:49 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006212.html">[tech] client certificate expiry
+</A></li>
+        <LI>Next message (by thread): <A HREF="006199.html">.onion capsules?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6233">[ date ]</a>
+              <a href="thread.html#6233">[ thread ]</a>
+              <a href="subject.html#6233">[ subject ]</a>
+              <a href="author.html#6233">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>* Saturday, 2021-03-27 at 10:23 +0100 - Stephane Bortzmeyer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stephane at sources.org</A>&gt;:
+
+&gt;<i>On Fri, Mar 26, 2021 at 07:54:48PM +0100,
+</I>&gt;<i> mbays &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">mbays at sdf.org</A>&gt; wrote
+</I>&gt;&gt;<i> Under what circumstances would it make sense to set an expiration
+</I>&gt;&gt;<i> date? What does it indicate? RFC5280 says &quot;The certificate validity
+</I>&gt;&gt;<i> period is the time interval during which the CA warrants that it
+</I>&gt;&gt;<i> will maintain information about the status of the
+</I>&gt;&gt;<i> certificate.&quot;. With a self-signed certificate there's no CA, so this
+</I>&gt;&gt;<i> seems to be meaningless.
+</I>&gt;<i>
+</I>&gt;<i>Without an expiration date, any compromission of the private key lasts
+</I>&gt;<i>forever. Expiration dates are also here to prevent the thief from
+</I>&gt;<i>using the certficate infinitely.
+</I>
+Right, I suppose this is actually still meaningful with TOFU -- the 
+validity period is the time in which the certificate claims that it 
+represents the same identity it did on first use.
+
+That could make sense if you're linking the certificate to an existing 
+identity, e.g. an email address, or an astrobotany account. But when 
+a new certificate creates a new pseudonymous identity, which is often 
+the case currently in gemspace, I can't imagine wanting to give it 
+a limited lifespan. If there's no way to rotate the certificate, that 
+means choosing the day the identity will die on the day it's born. If 
+there is, it still means the identity will permanently die if you 
+neglect to rotate in time, which is pretty harsh.
+
+Revised version then: if you're writing a client which generates client 
+certificates, and *if* you plan not to set a proper end validity, then 
+rather than use something arbitrary like 100 years from creation, 
+consider using the value given in rfc5280.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 195 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210328/7b804edf/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20210328/7b804edf/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006212.html">[tech] client certificate expiry
+</A></li>
+	<LI>Next message (by thread): <A HREF="006199.html">.onion capsules?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6233">[ date ]</a>
+              <a href="thread.html#6233">[ thread ]</a>
+              <a href="subject.html#6233">[ subject ]</a>
+              <a href="author.html#6233">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

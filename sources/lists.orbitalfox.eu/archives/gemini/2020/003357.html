@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> (proposal) on metadata in documents
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%28proposal%29%20on%20metadata%20in%20documents&In-Reply-To=%3Cb08b3b6949c68b2cbe4e80ee1d34fb8c%40asciiking.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003351.html">
+   <LINK REL="Next"  HREF="003349.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>(proposal) on metadata in documents</H1>
+    <B>cbabcock at asciiking.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%28proposal%29%20on%20metadata%20in%20documents&In-Reply-To=%3Cb08b3b6949c68b2cbe4e80ee1d34fb8c%40asciiking.com%3E"
+       TITLE="(proposal) on metadata in documents">cbabcock at asciiking.com
+       </A><BR>
+    <I>Mon Nov 16 20:30:15 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003351.html">(proposal) on metadata in documents
+</A></li>
+        <LI>Next message (by thread): <A HREF="003349.html">(proposal) on metadata in documents
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3357">[ date ]</a>
+              <a href="thread.html#3357">[ thread ]</a>
+              <a href="subject.html#3357">[ subject ]</a>
+              <a href="author.html#3357">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>November 16, 2020 4:17 AM, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">smlckz at tilde.pink</A> wrote:
+
+&gt;<i> I am not against ISO 8601 format and don't want to dive into l10n mess. I wonder if we need a
+</I>&gt;<i> seperator between content and metadata or not, or
+</I>&gt;<i> it'd be better to put the whole metadata into a preformatted text block
+</I>&gt;<i> with alt-text of `metadata`, or using some prefix for each line of metadata
+</I>&gt;<i> field. What do you think?
+</I>&gt;<i> 
+</I>&gt;<i> ~smlckz
+</I>
+The least friction way to implement metadata would be to present it a preformatted yaml:
+
+``` yaml
+title:  'This is the title: it contains a colon'
+author:
+- Author One
+- Author Two
+keywords: [nothing, nothingness]
+abstract: |
+  This is the abstract.
+
+  It consists of two paragraphs.
+```
+
+A variation that I believe would have utility the most utility in clients would be a new syntactic feature called metadata implemented similar to preformatted blocks, like:
+
+--- yaml
+title:  'This is the title: it contains a colon'
+author:
+- Author One
+- Author Two
+keywords: [nothing, nothingness]
+abstract: |
+  This is the abstract.
+
+  It consists of two paragraphs.
+---
+
+Not evangelizing yaml in this context, though it's not a bad fit. Just taking my example from Pandoc documentation - <A HREF="https://pandoc.org/MANUAL.html#metadata-blocks">https://pandoc.org/MANUAL.html#metadata-blocks</A> 
+
+Obviously document writers *can* include metadata in any document they write, so the question would be whether the value added by encouraging a uniform presentation is worth defining a metadata line type in the specification. I think doing so enables interesting options for client code, and that creating a line type as opposed to dictating page placement is more idiomatically gemini text
+
+Chris
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003351.html">(proposal) on metadata in documents
+</A></li>
+	<LI>Next message (by thread): <A HREF="003349.html">(proposal) on metadata in documents
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3357">[ date ]</a>
+              <a href="thread.html#3357">[ thread ]</a>
+              <a href="subject.html#3357">[ subject ]</a>
+              <a href="author.html#3357">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

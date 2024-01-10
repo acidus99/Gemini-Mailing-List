@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tech] A broken server in the wild, tearing down connection when the resource does not exist?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BTech%5D%20A%20broken%20server%20in%20the%20wild%2C%20tearing%20down%20connection%0A%20when%20the%20resource%20does%20not%20exist%3F&In-Reply-To=%3CMkhCe8z--3-2%40tutamail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007229.html">
+   <LINK REL="Next"  HREF="007227.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tech] A broken server in the wild, tearing down connection when the resource does not exist?</H1>
+    <B>Jacob Stewart</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BTech%5D%20A%20broken%20server%20in%20the%20wild%2C%20tearing%20down%20connection%0A%20when%20the%20resource%20does%20not%20exist%3F&In-Reply-To=%3CMkhCe8z--3-2%40tutamail.com%3E"
+       TITLE="[Tech] A broken server in the wild, tearing down connection when the resource does not exist?">jacob.stewart at tutamail.com
+       </A><BR>
+    <I>Tue Sep 28 17:22:07 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007229.html">[Tech] A broken server in the wild, tearing down connection when the resource does not exist?
+</A></li>
+        <LI>Next message (by thread): <A HREF="007227.html">Gemini Usenet Newsgroup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7241">[ date ]</a>
+              <a href="thread.html#7241">[ thread ]</a>
+              <a href="subject.html#7241">[ subject ]</a>
+              <a href="author.html#7241">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I've noticed station.martinrue.com doesn't seem to implement the spec correctly (to my knowledge).
+I experimented with using a TLS client (gnutls-cli) to send messages over the protocol manually and Station replied weirdly to requests.
+It responds to '<A HREF="gemini://gemini.circumlunar.space/">gemini://gemini.circumlunar.space/</A>' with '20 text/gemini' and then the home page. Shouldn't that be something like '53 We are not a proxy'?
+It responds to '<A HREF="http://njw.name/">http://njw.name/</A>' with '59 Client scheme is non-gemini'. Shouldn't that also be 53?
+
+
+-- 
+Securely sent with Tutanota.
+Get your own encrypted, ad-free mailbox at&#160;<A HREF="https://tutanota.com">https://tutanota.com</A> or <A HREF="https://protonmail.ch.">https://protonmail.ch.</A>
+<A HREF="https://fastmail.fm">https://fastmail.fm</A> is not encrypted but has some privacy.
+You can search for more providers.
+
+
+
+27 Sept 2021, 12:00 by <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gemini-request at lists.orbitalfox.eu</A>:
+
+&gt;<i> Send Gemini mailing list submissions to
+</I>&gt;<i>  <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gemini at lists.orbitalfox.eu</A>
+</I>&gt;<i>
+</I>&gt;<i> To subscribe or unsubscribe via the World Wide Web, visit
+</I>&gt;<i>  <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">https://lists.orbitalfox.eu/listinfo/gemini</A>
+</I>&gt;<i> or, via email, send a message with subject or body 'help' to
+</I>&gt;<i>  <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gemini-request at lists.orbitalfox.eu</A>
+</I>&gt;<i>
+</I>&gt;<i> You can reach the person managing the list at
+</I>&gt;<i>  <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gemini-owner at lists.orbitalfox.eu</A>
+</I>&gt;<i>
+</I>&gt;<i> When replying, please edit your Subject line so it is more specific
+</I>&gt;<i> than &quot;Re: Contents of Gemini digest...&quot;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Today's Topics:
+</I>&gt;<i>
+</I>&gt;<i>  1. [Tech] A broken server in the wild, tearing down connection
+</I>&gt;<i>  when the resource does not exist? (Stephane Bortzmeyer)
+</I>&gt;<i>  2. Re: [Tech] A broken server in the wild, tearing down
+</I>&gt;<i>  connection when the resource does not exist? (Anna ?CyberTailor?)
+</I>&gt;<i>  3. Gemini Usenet Newsgroup (Jason Evans)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ----------------------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i> Message: 1
+</I>&gt;<i> Date: Sun, 26 Sep 2021 20:30:31 +0200
+</I>&gt;<i> From: Stephane Bortzmeyer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stephane at sources.org</A>&gt;
+</I>&gt;<i> To: <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gemini at lists.orbitalfox.eu</A>
+</I>&gt;<i> Subject: [Tech] A broken server in the wild, tearing down connection
+</I>&gt;<i>  when the resource does not exist?
+</I>&gt;<i> Message-ID: &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">YVC8R6z+YmcpD7m6 at sources.org</A>&gt;
+</I>&gt;<i> Content-Type: text/plain; charset=us-ascii
+</I>&gt;<i>
+</I>&gt;<i> It seems there is a specific brand of server that immediately resets
+</I>&gt;<i> the connection when you ask a non-existing file (such as robots.txt)
+</I>&gt;<i> instead of replying with 51.
+</I>&gt;<i>
+</I>&gt;<i> You can find it for instance at fulton.software, blog.snowfrost.garden
+</I>&gt;<i> or cee64.us.
+</I>&gt;<i>
+</I>&gt;<i> Any idea what it is?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------
+</I>&gt;<i>
+</I>&gt;<i> Message: 2
+</I>&gt;<i> Date: Mon, 27 Sep 2021 14:21:44 +0500
+</I>&gt;<i> From: Anna ?CyberTailor? &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cyber at sysrq.in</A>&gt;
+</I>&gt;<i> To: <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gemini at lists.orbitalfox.eu</A>
+</I>&gt;<i> Subject: Re: [Tech] A broken server in the wild, tearing down
+</I>&gt;<i>  connection when the resource does not exist?
+</I>&gt;<i> Message-ID: &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">YVGNKDRQZe+MPq5e at sysrq.in</A>&gt;
+</I>&gt;<i> Content-Type: text/plain; charset=us-ascii
+</I>&gt;<i>
+</I>&gt;<i> You can identify gemini servers by their error messages (try getting
+</I>&gt;<i> &quot;59 BAD REQUEST&quot; or &quot;53 PROXY REQUEST REFUSED&quot;)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------
+</I>&gt;<i>
+</I>&gt;<i> Message: 3
+</I>&gt;<i> Date: Mon, 27 Sep 2021 11:39:03 +0200
+</I>&gt;<i> From: Jason Evans &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">jsevans at mailfence.com</A>&gt;
+</I>&gt;<i> To: <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gemini at lists.orbitalfox.eu</A>
+</I>&gt;<i> Subject: Gemini Usenet Newsgroup
+</I>&gt;<i> Message-ID: &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">896aaba2-3d3e-1661-feb3-b095aeb1b4dc at mailfence.com</A>&gt;
+</I>&gt;<i> Content-Type: text/plain; charset=UTF-8
+</I>&gt;<i>
+</I>&gt;<i> Hi all,
+</I>&gt;<i>
+</I>&gt;<i> If anyone is interested, I can start putting together a proposal for a
+</I>&gt;<i> Gemini Usenet newsgroup. comp.infosystems.gopher is still around and
+</I>&gt;<i> active. A new comp.infosystems.gemini could be created in the classic
+</I>&gt;<i> Usenet Big-8 hierarchies but we need people who are willing to say that
+</I>&gt;<i> they would use it before it could be created.
+</I>&gt;<i>
+</I>&gt;<i> Full disclosure: I am a member of the Usenet Big-8 Management Board
+</I>&gt;<i> which creates and manages the Big-8 Usenet Hierarchies. see:
+</I>&gt;<i> <A HREF="https://en.wikipedia.org/wiki/Big_8_(Usenet">https://en.wikipedia.org/wiki/Big_8_(Usenet</A>) and <A HREF="https://big-8.org">https://big-8.org</A> and
+</I>&gt;<i> we are looking to create groups for people who want to use Usenet. We're
+</I>&gt;<i> not for profit and we don't make any money except enough to cover expenses.
+</I>&gt;<i>
+</I>&gt;<i> Jason
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------
+</I>&gt;<i>
+</I>&gt;<i> Subject: Digest Footer
+</I>&gt;<i>
+</I>&gt;<i> Gemini mailing list
+</I>&gt;<i> <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">Gemini at lists.orbitalfox.eu</A>
+</I>&gt;<i> <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">https://lists.orbitalfox.eu/listinfo/gemini</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------
+</I>&gt;<i>
+</I>&gt;<i> End of Gemini Digest, Vol 26, Issue 34
+</I>&gt;<i> **************************************
+</I>&gt;<i>
+</I>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210928/bfd99876/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210928/bfd99876/attachment-0001.htm</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007229.html">[Tech] A broken server in the wild, tearing down connection when the resource does not exist?
+</A></li>
+	<LI>Next message (by thread): <A HREF="007227.html">Gemini Usenet Newsgroup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7241">[ date ]</a>
+              <a href="thread.html#7241">[ thread ]</a>
+              <a href="subject.html#7241">[ subject ]</a>
+              <a href="author.html#7241">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

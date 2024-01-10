@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] Proposed changes
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Proposed%20changes&In-Reply-To=%3CC83QDJ4HMBDT.B67DERRV9EZM%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004467.html">
+   <LINK REL="Next"  HREF="004490.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] Proposed changes</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Proposed%20changes&In-Reply-To=%3CC83QDJ4HMBDT.B67DERRV9EZM%40stilgar%3E"
+       TITLE="[spec] Proposed changes">solderpunk at posteo.net
+       </A><BR>
+    <I>Sun Dec 27 17:06:42 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004467.html">[spec] Proposed changes
+</A></li>
+        <LI>Next message (by thread): <A HREF="004490.html">[spec] Proposed changes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4469">[ date ]</a>
+              <a href="thread.html#4469">[ thread ]</a>
+              <a href="subject.html#4469">[ subject ]</a>
+              <a href="author.html#4469">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun Dec 27, 2020 at 6:04 PM CET,  wrote:
+&gt;<i> I don't see what's wrong with having an empty META, and I believe this
+</I>&gt;<i> is
+</I>&gt;<i> already in use. Why not just allow it and make the spec more clear so
+</I>&gt;<i> that
+</I>&gt;<i> client authors know they need to be able to handle it? I would keep the
+</I>&gt;<i> tab
+</I>&gt;<i> mandatory as well.
+</I>
+For previous discussion see
+<A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/003009.html.">https://lists.orbitalfox.eu/archives/gemini/2020/003009.html.</A>
+
+The thinking is that there are circumstances where an empty META makes
+no sense.  The clearest case is in redirects, where there *must* be a
+new URL to request.  An empty META with a 1x status code *could* be
+handled sensibly with a default prompt, but leads to a very poor user
+experience (they have no idea what they're being asked to submit).
+
+Response handling is simplest if META is either always optional or
+always required (otherwise handling needs to be conditioned on the
+status code), and since always optional is not sensible (due to the
+above situations), always required is the simplest course of action.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004467.html">[spec] Proposed changes
+</A></li>
+	<LI>Next message (by thread): <A HREF="004490.html">[spec] Proposed changes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4469">[ date ]</a>
+              <a href="thread.html#4469">[ thread ]</a>
+              <a href="subject.html#4469">[ subject ]</a>
+              <a href="author.html#4469">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

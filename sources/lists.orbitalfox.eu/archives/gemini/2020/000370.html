@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200118183456.GJ4518%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000366.html">
+   <LINK REL="Next"  HREF="000382.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200118183456.GJ4518%40SDF.ORG%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Sat Jan 18 18:34:56 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000366.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000382.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#370">[ date ]</a>
+              <a href="thread.html#370">[ thread ]</a>
+              <a href="subject.html#370">[ subject ]</a>
+              <a href="author.html#370">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Jan 18, 2020 at 06:39:47PM +0100, Julien Blanchard wrote:
+
+&gt;<i> I'm really glad this conversation is coming to a conclusion which so far
+</I>&gt;<i> seems to satisfy
+</I>&gt;<i> everybody and we can finally move on to other topics!
+</I>
+Me too!  Although I'm still very keen to hear from jmcbray on these
+recent developments.  I *suspect* they'll be happy.  But I really don't
+want to rush into this.
+
+But I am amazed at how much more tractable getting away from
+gopher-style hard wrapping has made this whole discussion.  It has made
+it obvious to me that the problem all along has been with determining
+the scope of special features.
+
+Consider bulleted lists, with hard-wrapping.  Suppose we have this
+content, hard wrapped to 40 characters, and our viewport is 60
+characters so we want to combine lines:
+
+* To demonstrate endurance of humans and    | Line 1
+equipment in spaceflight for extended       | 2
+periods, at least eight days required       | 3
+for a Moon landing, to a maximum of two     | 4
+weeks                                       | 5
+* To effect rendezvous and docking with     | 6
+another vehicle, and to maneuver the        | 7
+combined spacecraft using the               | 8
+propulsion system of the target vehicle     | 9
+* To demonstrate Extra-Vehicular            | 10
+Activity (EVA), or space-&quot;walks&quot; outside    |
+the protection of the spacecraft, and to    |
+evaluate the astronauts' ability to         |
+perform tasks there * To perfect            |
+techniques of atmospheric reentry and       |
+touchdown at a pre-selected location on     |
+land                                        |
+
+Any old client can recognise that Line 1 is a list item by virtue of
+the leading *.  But in order for a client to do a nice job of
+reformatting this list to 60 chars, it has to understand that lines 1
+through 5 constitute a single list item (i.e. that this is the scope of
+the * in line 1), and that lines 2-5 are not an independent paragraph
+of text coming after a list with only a single item.  To a human, this
+is obvious, even if they can't read English, because the list items at
+lines 6 and 10 make it clear.  But to a parser, at the time it
+encounters line 2, it has no idea what's in lines 6 or 10.  So parsing
+requires looking ahead, and understanding rules like &quot;Once started, a
+list item continues until we encounter either a new list item or a blank
+line&quot;.  It's exactly that kind of fiddly rule that I was terrified of
+filling the spec with earlier.
+
+In HTML, the scoping problem is trivial, because there are explicit
+beginning and tags, &lt;li&gt; and &lt;/li&gt;.  Markdown gets rid of these for
+visual lightness (great!), but that scoping information is still
+essential.  In Markdown it's in there implicitly for a sufficiently
+complicated (bad!) parser which understands the concept of blocks
+(which can be nested).  So Markdown trades the visual complexity of
+HTML for conceptual complexity that makes it a pain to parse.
+
+The syntax we're now talking about, where scope is limited to a single
+line, is such an elegant alternative to both of these!  One way to think
+about it is that things like =&gt;, * and # are differnet kinds of opening
+tag but they all have the same closing tag, which is \n.  Because there
+are opening and closing tags, the parsing is easy, like HTML.  But
+because our closing tags are invisible and need to be there anyway, we
+get ease of authoring and visual lightness like Markdown.  It's the best
+of both worlds.
+
+I'm so glad we hit upon this before I ran out of patience and just
+declared Gopher-style plain text hard wrapping to be the final decision!
+Thanks to everybody who steered the conversation in this direction.
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000366.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000382.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#370">[ date ]</a>
+              <a href="thread.html#370">[ thread ]</a>
+              <a href="subject.html#370">[ subject ]</a>
+              <a href="author.html#370">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

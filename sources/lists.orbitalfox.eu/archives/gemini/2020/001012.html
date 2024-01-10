@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client certificate musings
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200524040654.GB39921%40allanon.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001011.html">
+   <LINK REL="Next"  HREF="001014.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client certificate musings</H1>
+    <B>Thomas Karpiniec</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200524040654.GB39921%40allanon.local%3E"
+       TITLE="Client certificate musings">tkarpiniec at icloud.com
+       </A><BR>
+    <I>Sun May 24 05:06:54 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001011.html">Client certificate musings
+</A></li>
+        <LI>Next message (by thread): <A HREF="001014.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1012">[ date ]</a>
+              <a href="thread.html#1012">[ thread ]</a>
+              <a href="subject.html#1012">[ subject ]</a>
+              <a href="author.html#1012">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, May 23, 2020 at 09:57:14PM -0400, Sean Conner wrote:
+&gt;<i> &gt; Or is it because the user will permanently lose access to their
+</I>&gt;<i> &gt; account if they ever lose that key?
+</I>&gt;<i> 
+</I>&gt;<i>   Of if they get logged out and forget the password?  That can happen now,
+</I>&gt;<i> so I don't think it's of much concern.
+</I>
+Apologies for the double-reply; another thought occurred to me.
+
+Suppose that TLS just expects a parseable cert from the client, and
+the server application is only interested in the key type and
+fingerprint. Maybe expiry is not a significant concern? (After all, we
+don't normally expire passwords on the web.)
+
+A client could implement this using random keys and a permanent
+keystore if it wanted. It could simply regenerate its own certificate
+based on the same key when it wants to. That sidesteps the validity
+problem.
+
+Alternatively, a client could use a key derivation function based on a
+combination of a user-selected (hopefully high quality) password and
+the domain of the server. You would then be able to reestablish your
+identity at any time knowing just the password. If the key derivation
+method was enshrined as a best practice, you could then take your
+passwords with you when you try out different clients that implemented
+it.
+
+This would free applications from the main burden of my original
+proposal, which is having to add some sort of login/response system on
+top of the certificate. That is admittedly a hassle.
+
+I forgot to mention, thank you for the history of how the current
+certificate handling came to be! Very interesting.
+
+Cheers,
+
+Tom
+
+
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001011.html">Client certificate musings
+</A></li>
+	<LI>Next message (by thread): <A HREF="001014.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1012">[ date ]</a>
+              <a href="thread.html#1012">[ thread ]</a>
+              <a href="subject.html#1012">[ subject ]</a>
+              <a href="author.html#1012">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> FW: Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20FW%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3CCAFTy05YRbZGO2q0fE4wA3vF4M9dQV7g2H4CrScDKnnrcOHxuAg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000397.html">
+   <LINK REL="Next"  HREF="000400.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>FW: Text reflow woes (or: I want bullets back!)y</H1>
+    <B>Michael Lazar</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20FW%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3CCAFTy05YRbZGO2q0fE4wA3vF4M9dQV7g2H4CrScDKnnrcOHxuAg%40mail.gmail.com%3E"
+       TITLE="FW: Text reflow woes (or: I want bullets back!)y">lazar.michael22 at gmail.com
+       </A><BR>
+    <I>Mon Jan 20 02:01:17 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000397.html">FW: Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000400.html">FW: Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#398">[ date ]</a>
+              <a href="thread.html#398">[ thread ]</a>
+              <a href="subject.html#398">[ subject ]</a>
+              <a href="author.html#398">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I think there have been a lot of good suggestions coming from all sides. Here's
+my take on a compromised format that tries to take everything into account while
+also inserting a few of my own opinions:
+
+Parser pseudo-code (actually, it's valid python):
+
+```
+preformat_mode = False
+preformat_buffer = []
+for line in document:
+    if line.startswith('```'):
+        if not preformat_mode:
+            # Start preformat block
+            preformat_mode = True
+            preformat_buffer = []
+        else:
+            # End preformat block
+            preformat_mode = False
+            display_preformat_block(preformat_buffer)
+    elif preformat_mode:
+        # Inside of preformat block
+        preformat_buffer.append(line)
+    elif line.startswith('###'):
+        display_header_level_3(line)
+    elif line.startswith('##'):
+        display_header_level_2(line)
+    elif line.startswith('#'):
+        display_header_level_1(line)
+    elif line.startswith('=&gt;'):
+        display_link(line)
+    elif line.startswith('---'):
+        display_horizontal_rule()
+    else:
+        display_paragraph(line)
+
+if preformat_mode:
+    # Flush the preformat block if there was no end tag
+    add_preformat_block(preformat_buffer)
+```
+
+This pseudo-code was written with &quot;fancy&quot; gemini clients in mind. In other
+words, this should be close to the worst-case scenario for how complicated a
+gemini document parser would ever need to be.
+
+## Preformat mode
+
+Many clients are going to want to display a preformat block of text in a
+horizontally scrollable window or some other type of block widget. This
+pseudo-code reflects that by sticking the pre-formatted lines in a separate
+buffer until the end of the block. I think this is a more accurate
+representation of what most client parsers would end up looking like.
+
+## Headers
+
+I'm of the opinion that there should only be a fixed number of header levels.
+It keeps the matching logic flat and straightforward. Three levels is few
+enough that most clients should be able to come up with distinct styles to
+display them. Fixed header lines are trivial to parse and provide a lot of
+utility for organizing a document and linking to sub-sections.
+
+### Ordered Lists &amp; Unordered Lists
+
+Lists are tricky because while they would be nice to have, the complicate the
+parsing significantly. In order to parse a list while preserving its semantic
+structure, you will need to keep track of where it starts and ends. Nested
+lists complicate this even further, no matter which syntax for nesting is used.
+
+Parsing lists semantically would require keeping a separate buffer for each type
+of list, and then keeping flags and making sure that these buffers are flushed
+after the last element in the list. Because of this, I do not believe that they
+pass the power-to-weight ratio smell test.
+
+For authors, they still have a few choices for lists:
+
+1. Stick the list in a preformat block
+2. Write the list in plain mode without special formatting
+
+I accept that neither of these options is *ideal* for all use cases, but I
+think they are *good enough* for most use cases. Don't forget that unicode
+bullets can already be added directly in gemini documents if the author
+wishes to do so.
+
+### Quotes
+
+Quote blocks with &quot;&gt;&quot; would be ok if we could count on them being only a single
+line long. However, many quotes will necessarily include line breaks that
+should be displayed together in a single block. This complicates parsing in the
+same way that lists do, so I think that quotes should also be omitted for the
+same reason.
+
+If you want to display something like a quote from a mailing list message, I
+think that would be a perfect candidate for copying it into a preformat
+block. For other types of quotes, stick them between two horizontal rules to
+separate them from the surrounding text.
+
+### Horizontal Rule
+
+I find the horizontal rule useful for separating sections of a page. I see them
+commonly use on gopher to add a footer to the bottom. They can likewise be
+used for header sections.
+
+```
+Header
+---
+Content
+---
+Footer
+```
+
+The following gemini sites already use some form of horizontal separator on
+their front pages (the precise syntax varies):
+
+- <A HREF="gemini://vger.cloud/">gemini://vger.cloud/</A>
+- <A HREF="gemini://gemini.conman.org/">gemini://gemini.conman.org/</A>
+- <A HREF="gemini://zaibatsu.circumlunar.space/">gemini://zaibatsu.circumlunar.space/</A>
+- <A HREF="gemini://carcosa.net/">gemini://carcosa.net/</A>
+- <A HREF="gemini://yam655.com/">gemini://yam655.com/</A>
+
+I think that since horizontal rules are easy to parse and they add utility for
+structuring pages, they should be included in the spec.
+
+### Other Random Opinions
+
+- Leading and trailing whitespace should be stripped from all of lines outside
+  of the preformat block. If you're allowing a non-monospace font for these
+  elements, then leading whitespace can look inconsistent and trailing
+  whitespace serves no real purpose. By leading whitespace, I mean that
+
+##     heading text
+
+  Should be interpreted as &quot;heading text&quot;, not &quot;     heading text&quot;.
+- I have no opinion on whether the ``` should allow text after it on the same
+  line.
+
+I think I would be satisfied enough with the above document to at least try it
+out by converting all of my existing gemini content. I also think I would be
+fine keeping everything fixed-width and hard wrapping. I *don't* think I would
+want to implement nested lists or quote blocks, or anything significantly more
+complicated than what is outlined above.
+
+- mozz
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000397.html">FW: Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000400.html">FW: Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#398">[ date ]</a>
+              <a href="thread.html#398">[ thread ]</a>
+              <a href="subject.html#398">[ subject ]</a>
+              <a href="author.html#398">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

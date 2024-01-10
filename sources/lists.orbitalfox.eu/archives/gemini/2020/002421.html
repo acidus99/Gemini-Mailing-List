@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> gemini+stream://
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bstream%3A//&In-Reply-To=%3C0f0a745a-d26c-002d-8601-68886a1a2d00%40lavabit.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002418.html">
+   <LINK REL="Next"  HREF="002423.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>gemini+stream://</H1>
+    <B>James Tomasino</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bstream%3A//&In-Reply-To=%3C0f0a745a-d26c-002d-8601-68886a1a2d00%40lavabit.com%3E"
+       TITLE="gemini+stream://">tomasino at lavabit.com
+       </A><BR>
+    <I>Sat Aug 15 20:59:18 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002418.html">gemini+stream://
+</A></li>
+        <LI>Next message (by thread): <A HREF="002423.html">gemini+stream://
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2421">[ date ]</a>
+              <a href="thread.html#2421">[ thread ]</a>
+              <a href="subject.html#2421">[ subject ]</a>
+              <a href="author.html#2421">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 8/15/20 6:41 PM, cage wrote:
+&gt;<i> OK, my honest question  is now is: &quot;is the last  point true?&quot;.  Let me
+</I>&gt;<i> give you an example (sorry i have to talk about my work, i hope you do
+</I>&gt;<i> not feel this annoying).
+</I>
+This was the original point I missed as well when I first started talking about streaming in Gemini. According to the specification section 1.1, here's the transaction summary:
+
+C:   Opens connection
+S:   Accepts connection
+C/S: Complete TLS handshake (see section 4)
+C:   Validates server certificate (see 4.2)
+C:   Sends request (one CRLF terminated line) (see section 2)
+S:   Sends response header (one CRLF terminated line), closes connection
+     under non-success conditions (see 3.1 and 3.2)
+S:   Sends response body (text or binary data) (see 3.3)
+S:   Closes connection
+C:   Handles response (see 3.4)
+
+Notice that final &quot;Closes connection&quot; before &quot;Handles response&quot;. If that were reversed then the protocol would effectively assume everything was a stream and everyone's clients would be built in the manner you've been working toward. Since it's explicit that the connection closes first in the spec it's understandable that client authors built clients the way they have.
+
+Your technique of treating everything as a stream may &quot;just work&quot; for <A HREF="gemini://">gemini://</A> and gemini+<A HREF="stream://">stream://</A> both, honestly. Time will tell!
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002418.html">gemini+stream://
+</A></li>
+	<LI>Next message (by thread): <A HREF="002423.html">gemini+stream://
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2421">[ date ]</a>
+              <a href="thread.html#2421">[ thread ]</a>
+              <a href="subject.html#2421">[ subject ]</a>
+              <a href="author.html#2421">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

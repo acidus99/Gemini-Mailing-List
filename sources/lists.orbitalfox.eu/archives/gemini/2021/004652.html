@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [users] Tables in Gemtext
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Busers%5D%20Tables%20in%20Gemtext&In-Reply-To=%3C5FF0B7D9.9010105%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004653.html">
+   <LINK REL="Next"  HREF="004658.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[users] Tables in Gemtext</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Busers%5D%20Tables%20in%20Gemtext&In-Reply-To=%3C5FF0B7D9.9010105%40marmaladefoo.com%3E"
+       TITLE="[users] Tables in Gemtext">luke at marmaladefoo.com
+       </A><BR>
+    <I>Sat Jan  2 18:13:45 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004653.html">[users] Tables in Gemtext
+</A></li>
+        <LI>Next message (by thread): <A HREF="004658.html">[users] Tables in Gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4652">[ date ]</a>
+              <a href="thread.html#4652">[ thread ]</a>
+              <a href="subject.html#4652">[ subject ]</a>
+              <a href="author.html#4652">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 02-Jan-2021 03:04, Ki&#235;d Llaentenn wrote:
+&gt;<i> Just recently I was creating a Gemini mirror of an HTTP site, and came
+</I>&gt;<i> across several pages that made heavy use of tables. I did what I suspect
+</I>&gt;<i> most Gemini publishers/content authors do: use ASCII tables, like so:
+</I>&gt;<i>
+</I>&gt;<i> +--------------------------------+-------+
+</I>&gt;<i> | Food                           | Price |
+</I>&gt;<i> +--------------------------------+-------+
+</I>&gt;<i> | Eggs                           | $2    |
+</I>&gt;<i> | Eggs and spam                  | $4    |
+</I>&gt;<i> | Eggs, spam, eggs and spam      | $8    |
+</I>&gt;<i> | Spam spam baked beans and spam | $8    |
+</I>&gt;<i> | Just spam                      | $2    |
+</I>&gt;<i> +--------------------------------+-------+
+</I>&gt;<i>
+</I>&gt;<i> There are several problems with this approach, though:
+</I>&gt;<i>
+</I>&gt;<i> 1. It requires the client to display the table in a monospaced font,
+</I>&gt;<i>     which many would prefer not to use.
+</I>&gt;<i> 2. Text in table rows won't be wrapped properly on narrow displays.
+</I>&gt;<i> 3. ASCII tables are anything but screenreader friendly, since there's no
+</I>&gt;<i>     semantic information about the table's structure.
+</I>&gt;<i> 4. It mixes information and presentation, which is against the spirit of
+</I>&gt;<i>     Gemini(?)
+</I>&gt;<i>
+</I>&gt;<i> So, are there any other options for having tables in Gemtext, other than
+</I>&gt;<i> adding a new syntax to the spec? I'm hard pressed to think of another
+</I>&gt;<i> solution.
+</I>Some other ideas:
+
+If you want to present the information in its original structure, there 
+are other options
+(as well as trying to inline it into gemtext preformatted text already 
+discussed on this thread):
+
+1. provide link to a CSV
+2. serialise as simple text
+3. If you just want to preserve the visual appearance, you could also 
+provide a link to a rendered PDF
+
+For option 2, most tables can be &quot;flattened&quot; in a way that users can 
+usually get the idea of that was there. In my own html2gmi app [1] it 
+has this as an option for processing tables as well as the &quot;preformatted 
+text layout&quot;:
+
+&#8862; table &#8862;
+
+Food Price
+Eggs $2
+Eggs and spam  $4
+Eggs, spam, eggs and spam $8
+Spam spam baked beans and spam $8
+Just spam $2
+
+Works fine for your table above IMHO. Or you could use some similar 
+variant approach of this.
+
+I grant you this won't help for complex tables, but for those your 
+options are limited apart from option 1 and 3 if you want to keep the 
+full original appearance or structure.
+
+
+  - Luke
+
+[1] <A HREF="https://github.com/LukeEmmet/html2gmi">https://github.com/LukeEmmet/html2gmi</A>
+
+
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004653.html">[users] Tables in Gemtext
+</A></li>
+	<LI>Next message (by thread): <A HREF="004658.html">[users] Tables in Gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4652">[ date ]</a>
+              <a href="thread.html#4652">[ thread ]</a>
+              <a href="subject.html#4652">[ subject ]</a>
+              <a href="author.html#4652">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

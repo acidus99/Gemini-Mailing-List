@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200118114503.GA4518%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000349.html">
+   <LINK REL="Next"  HREF="000355.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200118114503.GA4518%40SDF.ORG%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Sat Jan 18 11:45:03 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000349.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000355.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#353">[ date ]</a>
+              <a href="thread.html#353">[ thread ]</a>
+              <a href="subject.html#353">[ subject ]</a>
+              <a href="author.html#353">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Jan 17, 2020 at 09:59:18AM -0800, Aaron Janse wrote:
+&gt;<i> &gt; Lines consisting of only and exactly three back ticks (```) are preformatted
+</I>&gt;<i> &gt; toggle lines.
+</I>&gt;<i> 
+</I>&gt;<i> Hmm, this might confuse some people who are used to markdown's allowance of
+</I>&gt;<i> specifying the language:
+</I>&gt;<i> 
+</I>&gt;<i> ```python
+</I>&gt;<i> print(&quot;Hello!&quot;)
+</I>&gt;<i> ```
+</I>&gt;<i> 
+</I>&gt;<i> Plus, if we *allow* people to specify the language, maybe some clients could
+</I>&gt;<i> implement syntax highlighting. Would that be too complex?
+</I>
+Ah, yes, Tomasino mentioned this earlier.
+
+I guess it is harmless (?) to change the definition of these lines to
+any which begin with ```, not which consist strictly of ```.  That lets
+sufficiently fancy clients support this, the rest can just ignore it.
+These lines are never actually shown to the user, so it doesn't matter
+what junk comes after the ```.
+
+&gt;<i> If not, what would happen if people add text to the closing three ticks?
+</I>
+Well, that's unambiguous.  If we didn't make the above change, lines with
+text after the three ticks would not meet the definition of a preformatted
+toggle line, so a client would identify them as a text line and they would
+be rendered accordingly.
+
+&gt;<i> &gt; Lines longer than the client's viewport must not be wrapped, leading or
+</I>&gt;<i> &gt; trailing whitespace must not be removed, etc.  Handling of lines longer than
+</I>&gt;<i> &gt; the viewport is client-specific
+</I>&gt;<i> 
+</I>&gt;<i> These two sentences contradict each other, I think.
+</I>
+Hmm, okay, I guess they technically do.  Clients can handle over-long
+lines however they want as long as they don't wrap them?
+
+&gt;<i> Are minus signs allowed for unordered list items? How about plus signs etc?
+</I>&gt;<i> I'm somewhat in favor of limiting bullets to astrisks and minuses.
+</I>
+I'm fairly strongly in favour of limiting everything to exactly one way
+of doing it.  The other day I skimmed the CommonMark spec
+<A HREF="https://spec.commonmark.org/0.29/">https://spec.commonmark.org/0.29/</A> to reassure myself we weren't doing
+too much wheel re-invention.  Holy heck, there are so many different
+ways to do everything!  Simple is best, less is more, one is enough!
+ 
+&gt;<i> Can top-level bullets begin with a space? What about nested bullet points?
+</I>
+If a line begins with a space, then it doesn't begin with a *!  So then
+it's by definition not an UNORDERED LIST ITEM.  It's a TEXT LINE.  I
+really did mean &quot;begins with&quot; everywhere I said it.  IMHO this syntax
+quickly becomes really unappealing unless the task of deciding which
+type of line a line is remains dirt simple.
+
+Yes, this means no nested lists.  It may seem like I've gone nuts and
+suddenly happily let a whole bunch of complicated stuff into the spec,
+but I really haven't!  This is still supposed to be a very simple
+syntax, which inevitably comes with limitations.  There is no nested
+anything in the whole syntax.  Reliable detection of nestedness in the
+face of even slight variation in how authors write things will require
+considering lines in the context of previous or subsequent lines, and
+that's a no-no here.  I'm only willing to allow all these fun toys in if
+we can do it in such a way that an adequate rendering job can be done by
+considering each line of the file in perfect isolation, with a single
+pass of the entire document.
+
+&gt;<i> &gt; 7. ORDERED LIST ITEMS
+</I>&gt;<i> 
+</I>&gt;<i> I'd further specify what is/isn't allowed here. For example:
+</I>&gt;<i> - Some people may try `1)` instead of `1.`. I personally think that spec should
+</I>&gt;<i>   say that only the latter is allowed but clients may choose to *render*
+</I>&gt;<i>   ordered lists as the former
+</I>&gt;<i> - What about nested ordered bullet points. Wouldn't they start with whitespace?
+</I>&gt;<i> - Markdown allows lists to be auto-numbered. For example, the nested bullet
+</I>&gt;<i>   points would be re-numbered from 1 to 5 in markdown:
+</I>&gt;<i>   1. one
+</I>&gt;<i>   1. two
+</I>&gt;<i>   5. three
+</I>&gt;<i>   2. four
+</I>&gt;<i>   1. five
+</I>&gt;<i> - What about lettered lists (A-Z)? I think these would be cool to have but I
+</I>&gt;<i>   doubt they'd be worth the complexity. I'd be explicit in the spec
+</I>&gt;<i> - What about roman numerals? I don't think these should be allowed
+</I>&gt;<i> 
+</I>&gt;<i> While we could leave some stuff un-specified and see how things play out, I
+</I>&gt;<i> think there could be some value in limiting authors for the sake of preventing
+</I>&gt;<i> a scenario where making a client is so complex that very few nice clients exist
+</I>&gt;<i> (as we see in the world of web browsers).
+</I>
+Okay, I totally goofed up here in declaring the changes as &quot;obvious&quot;.  I
+meant &quot;obvious to everybody who has read
+<A HREF="gemini://mozz.us/markdown/design_document">gemini://mozz.us/markdown/design_document</A> and accepted is as their
+personal Lord and saviour&quot;.  Well, actually, I read that and foolishly
+assumed the nice approach to ordered list items was more or less the
+same as standard Markdown.  Turns out it's not and Michael has done very
+good simplifying work here.
+
+As said above, I am strongly in favour of there being exactly one way to
+do things, and of identifying a line's type being brutally simple.  This
+totally rules out letting authors actually write numbers.  Actually
+having a number followed by a period define such a line type would also
+bring a very high risk of falsely identifying ordered list item lines
+when processing hard-wrapped text if a sentence ending in a number, like
+&quot;Ten Gemini crews flew low Earth orbit (LEO) missions during 1965 and
+1966.&quot; was wrapped in such a way that the final word was at the start of
+a line.  Yes, I know, this new syntax works best when there is no hard
+wrapping, so that we can use lines to determine the scope of certain
+kinds of &quot;specialness&quot;, but I will be VERY HAPPY if we can make the
+syntax robust enough that it can still be applied to rare instances of
+hard-wrapped content without much going wrong.
+
+So, lines beginning with a + (not any whitespace, but a +!) are ORDERED
+LIST ITEM lines.  Clients who want to be fancy can add a little bit of
+extra internal state to their rendering code and can replace the +s with
+incrementing numbers.  It's the client's choice whether it uses 1. 2. 3.
+or 1) 2) 3) or i&gt; ii&gt; iii&gt; or whatever else.  Very fancy clients can let
+the user decide.  Yes, this means content authors lose precise control
+over how their content is rendered (while retaining precise control over
+the *semantics* of their content, i.e. authors decide whether an item is
+ordered or not).  I'm not just okay with this, I'm actively happy about
+it.  The web paradigm where readers are subordinate to authors with
+regards to layout is a cause of many different kinds of grief.  Good
+riddace to it!
+ 
+&gt;<i> Hmm, I only saw 7 different types specified.
+</I>
+Okay, turns out I can't count in a hurry. :)  I actually just wrote N
+when I first wrote that sentence, then when I ran out of time to sketch
+this thing out I went back, did a quick, incorrect count, and changed
+it.  In the actual spec I'll double check, and the number will be
+whatever it is - I didn't mean for the list I sent out to be exhaustive,
+although I also think we should resist the urge to add every nice little
+thing we can think of.  It'd be great if we kept the total number to 10
+or less.
+
+&gt;<i> I also recommend you specify that
+</I>&gt;<i> people may use greater-than-symbol quotes, which may be nested.
+</I>
+I have no problem with quotes, but I'm not thrilled by the nesting
+prospect.
+
+&gt;<i> that authors MUST NOT unnecessarily hard-wrap their quotes, suggesting that
+</I>&gt;<i> advanced clients MAY add a visual greater-than symbol to the beginning of each
+</I>&gt;<i> wrapped line.
+</I>&gt;<i> 
+</I>&gt;<i> Example:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; hello this is wider than the viewport
+</I>&gt;<i> 
+</I>&gt;<i> Displayed by advanced clients as:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; hello this is
+</I>&gt;<i> &gt; wider that the
+</I>&gt;<i> &gt; viewport
+</I>
+This is exactly how I'd expect advanced clients to handle this, and I
+think this whole idea is implicit in the design of this syntax: the
+start of a line indicates what kind of line it is, and the scope of that
+type is precisely that line.  A hard-wrapped quote with a &gt; at the start
+of each line is, in this syntax, actually several distinct consecutive
+quotes.
+ 
+&gt;<i> What about Gemini proxies of comment thread sites, such as hacker news (*waves
+</I>&gt;<i> to Michael Lazar's awesome HN Gopher proxy*). I think we should take those
+</I>&gt;<i> into consideration.
+</I>
+Hmm.  I would want to think a bit before I lay down a hard statement on
+this because I don't want to impose too much of my own ideology on
+Gemini, as it's supposed to be a general-purpose tool....but I am not
+excited by verbatim dragging of mainstream web 2.0 cultural concepts
+like comment threads into Gemini.  The circle of Gemini early-adopters
+overlaps considerably with the &quot;Small Internet&quot; / &quot;Slow Internet&quot;
+movement, which I guess has coloured how I think about the protocol.
+Thus the idea of adding something into the spec specifically to support
+visualising deep comment threads in the web-conventional way kind of
+gives me the heebie-jeebies.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000349.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000355.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#353">[ date ]</a>
+              <a href="thread.html#353">[ thread ]</a>
+              <a href="subject.html#353">[ subject ]</a>
+              <a href="author.html#353">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

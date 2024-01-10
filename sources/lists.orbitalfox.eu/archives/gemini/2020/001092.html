@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client certificate musings
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3Calpine.DEB.2.20.2005271916350.18317%40pling.qwghlm.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001091.html">
+   <LINK REL="Next"  HREF="001093.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client certificate musings</H1>
+    <B>Martin Keegan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3Calpine.DEB.2.20.2005271916350.18317%40pling.qwghlm.org%3E"
+       TITLE="Client certificate musings">martin at no.ucant.org
+       </A><BR>
+    <I>Wed May 27 19:37:02 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001091.html">Client certificate musings
+</A></li>
+        <LI>Next message (by thread): <A HREF="001093.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1092">[ date ]</a>
+              <a href="thread.html#1092">[ thread ]</a>
+              <a href="subject.html#1092">[ subject ]</a>
+              <a href="author.html#1092">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, 27 May 2020, solderpunk wrote:
+
+&gt;&gt;<i> must present its cert; to present the cert, the client must be asked to do
+</I>&gt;&gt;<i> so by the server; but the server doesn't know it should ask for the
+</I>&gt;&gt;<i> certificate before the client has said which resource it wants to access.
+</I>&gt;<i>
+</I>&gt;<i> Hmm.  Either you are mistaken, or you're correct but all the servers
+</I>&gt;<i> I've tested this against thus far (admittedly not many!) request a
+</I>&gt;<i> client cert unconditionally and don't complain when one is not provided.
+</I>&gt;<i> If you're right, I guess we need to spec this behaviour as required.
+</I>
+Thanks for taking the time to spell this out. I was largely mistaken, as 
+far as I can tell from my own attempts to add client certs to my server 
+implementation. I think what's going on is that since I last seriously 
+looked into this circa 2001, client UIs now behave better when servers 
+request a client cert without making it mandatory.
+
+&gt;&gt;<i> Anyway, I think the ergonomics and patterns around how certificate signing
+</I>&gt;&gt;<i> requests get moved around are going to be a bigger problem.
+</I>&gt;<i>
+</I>&gt;<i> I have to admit that I don't see a lot of point in using CSRs in this
+</I>&gt;<i> context.  The whole point of a signed certificate is so that party A can
+</I>
+Well, they are a potential implementation of the step you referred to as
+&quot;You may need to e.g. coordinate with the admin to get your certificate&quot;
+
+In my proposed pattern, the server trusts any cert which has been signed 
+by some CA run by the server operator. The coordination with the admin to 
+get such a cert is done via normal CSRs.
+
+I'd recommend having a look at how Scuttlebutt does its analogous step: 
+&quot;invite codes&quot;. See, e..g.,
+
+<A HREF="https://github.com/ssbc/ssb-server/wiki/pub-servers">https://github.com/ssbc/ssb-server/wiki/pub-servers</A>
+<A HREF="https://ssbc.github.io/scuttlebutt-protocol-guide/">https://ssbc.github.io/scuttlebutt-protocol-guide/</A> (invite codes section)
+<A HREF="https://handbook.scuttlebutt.nz/guides/pubs/create-an-invite">https://handbook.scuttlebutt.nz/guides/pubs/create-an-invite</A>
+
+... which suggests that a layer on top of CSRs may also be useful. Anyway, 
+best way to find out is to try it.
+
+&gt;<i> really party A.  The certificate is for the benefit of third parties.
+</I>&gt;<i> If you are running a Gemini server and you want to use client certificates to
+</I>&gt;<i> restrict access to certain people, there is no third party in the
+</I>&gt;<i> picture.  So why not just remember the fingerprint of certificates you've
+</I>&gt;<i> verified as belong to people you want to grant access to?  That way nobody
+</I>&gt;<i> has to send you a CSR and you don't have to send back a signed certificate.
+</I>&gt;<i> In a two-party scenario all that just seems like pointless busy work to
+</I>&gt;<i> me.  Am I missing something?
+</I>
+Well, in the two party scenario, sending a CSR and sending a fingerprint 
+seem to be pretty similar: the user's software submits the mystic runes 
+to openssl and the result is pasted to the other party. In the CSR route, 
+however, you do indeed need to save the other party's response (the cert).
+
+I would say that the CSR mechanism goes with the grain of how SSL is 
+conventionally used, and thus is likely to have better 
+existinglibrary/docs support.
+
+My server sets $REMOTE_USER to the client cert's &quot;Common Name&quot; field, 
+which is probably not what other people are doing, but which I think is 
+more in the spirit of Gemini. If I get time I'll write up what the current 
+practices of the other server software are.
+
+Mk
+
+
+-- 
+Martin Keegan, +44 7779 296469, @mk270, <A HREF="https://mk.ucant.org/">https://mk.ucant.org/</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001091.html">Client certificate musings
+</A></li>
+	<LI>Next message (by thread): <A HREF="001093.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1092">[ date ]</a>
+              <a href="thread.html#1092">[ thread ]</a>
+              <a href="subject.html#1092">[ subject ]</a>
+              <a href="author.html#1092">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

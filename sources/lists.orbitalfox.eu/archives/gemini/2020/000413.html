@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200121200654.GA8684%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000410.html">
+   <LINK REL="Next"  HREF="000414.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200121200654.GA8684%40SDF.ORG%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Tue Jan 21 20:06:54 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000410.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000414.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#413">[ date ]</a>
+              <a href="thread.html#413">[ thread ]</a>
+              <a href="subject.html#413">[ subject ]</a>
+              <a href="author.html#413">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Okay, it looks like we are not as close to a consensus as I had hoped or
+imagined.  That's fine.  I don't want to rush this process, as much as
+I'm looking forward to it being over.  I wonder if we can make a simple
+incremental improvement to the spec-spec now, though, using some of the
+ideas that have come out of this latest round of discussion.
+
+As a reminder, the current spec-spec, version 0.9.2, basically defines
+text/gemini thusly:
+
+* Lines beginning with =&gt; are links
+* Links must always be displayed on their own lines
+* All other lines are just text
+* Text may be optionally reflowed as per RFC 1896, i.e. by turning
+  isolated newlines into spaces and N consecutive newlines into N
+  consecutive newlines.
+
+That's it.
+
+This format:
+
+* Gives us links
+* Results in nice text on arbitrary width screens
+* Completely breaks lists like this one by joining all items
+  together
+
+(this last point kicked off this gigantic email thread)
+
+We could change this to the following:
+
+* Lines beginning with =&gt; are links
+* Links must always be displayed on their own lines
+* All other lines are just text
+* Lines of text wider than the screen should be wrapped to fit the
+  screen, but no RFC 1896 style mangling of newlines is allowed
+* Authors are strongly encouraged not to hard-wrap their text but to
+  write long lines instead.
+
+This format:
+
+* Gives us links
+* Results in nice text on arbitrary width screens
+* Lets lists like this one work just fine
+
+i.e. it solves the problem that kicked off this email thread, without
+sacrificing support for arbitary screen width - at the cost of requiring
+that clients be able to wrap lines.
+
+Does anybody *disagree* that this change by itself would improve the
+current spec-spec?
+
+I think this is, in fact, the smallest possible change to the current
+spec-spec which solves my original complaint without sacrificing support
+for arbitrary screen width.  So maybe I should rephrase that question:
+
+Would anybody *prefer* that we spec hard-wrapping to some specified
+length (80, 40, whatever) over speccing the above &quot;long line&quot; solution?
+Please speak up if so!
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000410.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000414.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#413">[ date ]</a>
+              <a href="thread.html#413">[ thread ]</a>
+              <a href="subject.html#413">[ subject ]</a>
+              <a href="author.html#413">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

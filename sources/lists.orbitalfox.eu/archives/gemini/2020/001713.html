@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC-CHANGE] Simplified client certs, URI scheme, alt text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Simplified%20client%20certs%2C%20URI%20scheme%2C%20alt%20text&In-Reply-To=%3CXff6InGzZiX9m3u-SrWAdK7tD4xQzzPnTtIvjN7SqZnSy7HXUC7SOsQqGypIDecs5cYJGRtxP8Qtvy30UVPbFMi3kjH4VOEBCmJsRT1s1aA%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001705.html">
+   <LINK REL="Next"  HREF="001717.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC-CHANGE] Simplified client certs, URI scheme, alt text</H1>
+    <B>colecmac at protonmail.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Simplified%20client%20certs%2C%20URI%20scheme%2C%20alt%20text&In-Reply-To=%3CXff6InGzZiX9m3u-SrWAdK7tD4xQzzPnTtIvjN7SqZnSy7HXUC7SOsQqGypIDecs5cYJGRtxP8Qtvy30UVPbFMi3kjH4VOEBCmJsRT1s1aA%3D%40protonmail.com%3E"
+       TITLE="[SPEC-CHANGE] Simplified client certs, URI scheme, alt text">colecmac at protonmail.com
+       </A><BR>
+    <I>Mon Jun 15 20:02:22 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001705.html">[SPEC-CHANGE] Simplified client certs, URI scheme, alt text
+</A></li>
+        <LI>Next message (by thread): <A HREF="001717.html">[SPEC-CHANGE] Simplified client certs, URI scheme, alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1713">[ date ]</a>
+              <a href="thread.html#1713">[ thread ]</a>
+              <a href="subject.html#1713">[ subject ]</a>
+              <a href="author.html#1713">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Sounds good! Can this be updated on the website?
+
+makeworld
+
+&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208; Original Message &#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;
+On Monday, June 15, 2020 12:13 PM, solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at SDF.ORG</A>&gt; wrote:
+
+&gt;<i> Ahoy, Geminauts!
+</I>&gt;<i>
+</I>&gt;<i> I have just made the proposed spec changes that I asked for comment on
+</I>&gt;<i> over the just past weekend official.
+</I>&gt;<i>
+</I>&gt;<i> SUMMARY OF CHANGES:
+</I>&gt;<i>
+</I>&gt;<i> -   A <A HREF="gemini://">gemini://</A> URI scheme is formally defined for the first time,
+</I>&gt;<i>     explicitly disallowing the use of the userinfo subcomponent of the
+</I>&gt;<i>     authority component.
+</I>&gt;<i>
+</I>&gt;<i> -   The client certificate system has been substantially simplified, with
+</I>&gt;<i>     transient certificates no long a formally defined concept with
+</I>&gt;<i>     prescribed behaviour.
+</I>&gt;<i>
+</I>&gt;<i> -   A lightweight notion of alt text for pre-formatted content has been
+</I>&gt;<i>     introduced as a tentative step toward fixing the worst search and
+</I>&gt;<i>     accessibility related problems with pre-formatted non-textual content.
+</I>&gt;<i>     No special structures or semantics for alt text are defined - if a
+</I>&gt;<i>     convention for doing this organically arises in the community it may
+</I>&gt;<i>     become a recommended best practice.
+</I>&gt;<i>
+</I>&gt;<i> -   A few minor corrections and tidyups.
+</I>&gt;<i>
+</I>&gt;<i>     IMPLICATIONS FOR SERVER AUTHORS:
+</I>&gt;<i>
+</I>&gt;<i>     Servers SHOULD return status 59 (BAD REQUEST) if they receive a request
+</I>&gt;<i>     for a <A HREF="gemini://">gemini://</A> URL containing a userinfo subcomponent. If you really
+</I>&gt;<i>     want to be hyper-Postelian, you MAY instead strip out the userinfo so
+</I>&gt;<i>     that, for example, it does not end up in logs, is not passed to CGI
+</I>&gt;<i>     apps, etc.
+</I>&gt;<i>
+</I>&gt;<i>     IMPLICATIONS FOR CLIENT AUTHORS:
+</I>&gt;<i>
+</I>&gt;<i>     Clients should either refuse to follow <A HREF="gemini://">gemini://</A> links with userinfo
+</I>&gt;<i>     subcomponents, or should strip out the userinfo before following the
+</I>&gt;<i>     link.
+</I>&gt;<i>
+</I>&gt;<i>     Clients with support for client certificates should adapt to the new
+</I>&gt;<i>     simplified specification, which may involve e.g. removing support for
+</I>&gt;<i>     the deprecated status code 21.
+</I>&gt;<i>
+</I>&gt;<i>     Clients may do something with alt text. This is probably most relevant
+</I>&gt;<i>     to search engines and accessibility-focussed clients, but I suppose e.g.
+</I>&gt;<i>     graphical clients may wish to support web browser style hover over
+</I>&gt;<i>     display. Strictly optional in all cases.
+</I>&gt;<i>
+</I>&gt;<i>     IMPLICATIONS FOR CONTENT AUTHORS:
+</I>&gt;<i>
+</I>&gt;<i>     If you have authored content which includes <A HREF="gemini://">gemini://</A> links with
+</I>&gt;<i>     userinfo subcomponents, you MUST remove the userinfo.
+</I>&gt;<i>
+</I>&gt;<i>     You may wish to add alt text to preformatted content which is not
+</I>&gt;<i>     meaningfully screen readable or search engine indexable.
+</I>&gt;<i>
+</I>&gt;<i>     Cheers,
+</I>&gt;<i>     Solderpunk
+</I>&gt;<i>
+</I>
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001705.html">[SPEC-CHANGE] Simplified client certs, URI scheme, alt text
+</A></li>
+	<LI>Next message (by thread): <A HREF="001717.html">[SPEC-CHANGE] Simplified client certs, URI scheme, alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1713">[ date ]</a>
+              <a href="thread.html#1713">[ thread ]</a>
+              <a href="subject.html#1713">[ subject ]</a>
+              <a href="author.html#1713">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

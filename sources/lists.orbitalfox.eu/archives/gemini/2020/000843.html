@@ -1,0 +1,245 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposed minor spec changes, for comment.
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C20200519022138.GF30203%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000842.html">
+   <LINK REL="Next"  HREF="000844.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposed minor spec changes, for comment.</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C20200519022138.GF30203%40brevard.conman.org%3E"
+       TITLE="Proposed minor spec changes, for comment.">sean at conman.org
+       </A><BR>
+    <I>Tue May 19 03:21:38 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000842.html">Proposed minor spec changes, for comment.
+</A></li>
+        <LI>Next message (by thread): <A HREF="000844.html">Proposed minor spec changes, for comment.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#843">[ date ]</a>
+              <a href="thread.html#843">[ thread ]</a>
+              <a href="subject.html#843">[ subject ]</a>
+              <a href="author.html#843">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great kaoD once stated:
+&gt;<i> Glad to hear about SNI being in the radar. It's a must for virtual hosting.
+</I>
+  Yup.  At least two servers that I am aware of implement it, GLV-1.12556 (I
+wrote this one) and gemserv.
+
+&gt;<i> Any thoughts about SNI interaction with the current &quot;host in request URL is
+</I>&gt;<i> like Host header&quot; in the spec? 
+</I>
+  It's how GLV-1.12556 determines what set of content handlers to look
+through when serving up a request.  The public server I have doesn't serve
+multiple hosts, but the code running it can.
+
+&gt;<i> Since SNI does the virtual hosting part (and
+</I>&gt;<i> better) it would only be useful for proxying other hosts AFAICT.
+</I>&gt;<i> 
+</I>&gt;<i> Is proxying allowed currently in any server? 
+</I>
+  I saw something about gemserv supporting proxying, but I don't know the
+details of how it works.
+
+  As for proxy support in GLV-1.12556 (the only server I can speak
+authoritatively about), it would be easy to write a handler to support a
+proxy like:
+
+	<A HREF="gemini://gemini.conman.org/proxy/mozz.us/journal/2020-05-06.gmi">gemini://gemini.conman.org/proxy/mozz.us/journal/2020-05-06.gmi</A>
+
+  But if by &quot;proxy&quot; you mean you connect to gemini.conman.org and expect the
+request itself to be proxied:
+
+		<A HREF="gemini://mozz.us/journal/2020-05-06.gmi">gemini://mozz.us/journal/2020-05-06.gmi</A>
+
+that ... could be done, but it would require two things---1) your client
+would have to know to use the gemini.conman.org certificate to connect to my
+server and 2) my server would have to know to proxy this domain (and
+supporting that type of proxy in GLV-1.12556 would require some
+thought---the server isn't set up for that type of thing [1]).
+
+&gt;<i> Is it even desirable in the
+</I>&gt;<i> protocol? Or is it just an idea that ossified in the spec without real
+</I>&gt;<i> world use? (Genuine questions! I don't see the use but in sure it's been
+</I>&gt;<i> discussed and I'm just late to the party.)
+</I>
+  When the suggestion to use the URL as the request (which would give us
+multidomain support with a server), solderpunk also saw a proxy being easy
+to implement without thinking about the implications.  
+
+&gt;<i> Most servers (all I've tried, circumlunar.space included) fail to handle
+</I>&gt;<i> host-less requests (out of spec) and deny proxying other hosts.
+</I>&gt;<i> 
+</I>&gt;<i> And I'm pretty sure clients are adapting to this behavior. I'm afraid this
+</I>&gt;<i> will end up being the de facto standard even with SNI making it obsolete.
+</I>
+  Huh?  I don't understand the concern here.
+
+  -spc
+[1]	Nor does it support multiple domains with a single certificate/key
+	pair.  Right now, each server requires its own certificate/key file.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000842.html">Proposed minor spec changes, for comment.
+</A></li>
+	<LI>Next message (by thread): <A HREF="000844.html">Proposed minor spec changes, for comment.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#843">[ date ]</a>
+              <a href="thread.html#843">[ thread ]</a>
+              <a href="subject.html#843">[ subject ]</a>
+              <a href="author.html#843">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] Regarding the proposal to remove status code 11
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Regarding%20the%20proposal%20to%20remove%20status%20code%2011&In-Reply-To=%3C3cc0c239-2a0f-5593-26b5-5cb144184d7a%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006126.html">
+   <LINK REL="Next"  HREF="006135.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] Regarding the proposal to remove status code 11</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Regarding%20the%20proposal%20to%20remove%20status%20code%2011&In-Reply-To=%3C3cc0c239-2a0f-5593-26b5-5cb144184d7a%40marmaladefoo.com%3E"
+       TITLE="[spec] Regarding the proposal to remove status code 11">luke at marmaladefoo.com
+       </A><BR>
+    <I>Tue Mar 16 01:18:03 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006126.html">[spec] Regarding the proposal to remove status code 11
+</A></li>
+        <LI>Next message (by thread): <A HREF="006135.html">[spec] Regarding the proposal to remove status code 11
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6129">[ date ]</a>
+              <a href="thread.html#6129">[ thread ]</a>
+              <a href="subject.html#6129">[ subject ]</a>
+              <a href="author.html#6129">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+On 15-Mar-2021 23:59, Sean Conner wrote:
+&gt;<i> It was thus said that the Great Sandra Snan once stated:
+</I>&gt;&gt;<i> The purpose for this status code is in case someone is looking over your
+</I>&gt;&gt;<i> shoulder in the same physical location. That's why it's fine to be an
+</I>&gt;&gt;<i> LSD (least significant digit / optional) code, it's a snazzy feature
+</I>&gt;&gt;<i> that's nice to have but not mandatory. I think it's a good feature.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> It doesn't send it unencrypted (i.e. same as any other request) so it's
+</I>&gt;&gt;<i> not security theatre. It's there so people in the same location don't
+</I>&gt;&gt;<i> see your password.
+</I>&gt;<i> 
+</I>&gt;<i>    Do current Gemini browsers include the query string when displaying the
+</I>&gt;<i> location?  If they do in the case of a 10 status, perhaps they should not
+</I>&gt;<i> for an 11?
+</I>
+Hello
+
+GemiNaut displays the full URI of the current resource being shown - as 
+you might see when using a normal web browser.
+
+My view is that the client should be transparent to the user about the 
+location of the resource they are looking at. It is important they are 
+informed of the actual location and the client should not obfuscate the 
+location. If we start hiding content, the user may not be able to 
+readily actually see the location, which may be a security concern in 
+its own right.
+
+We should not be trying to invent a new semantics for URLs - the 
+population at large understand what they are, how they are used etc.
+
+Ironically the gemini URI scheme does not permit users to put user info 
+(user name or password) into the URI. However the status 11 allows it 
+back in - this is the primary role of this code as far as I understand 
+how people want to use it:
+
+   &quot;In particular, the authority component is allowed and required,
+    but its userinfo subcomponent is NOT allowed.&quot;
+
+So no I won't be attempting to obfuscate URIs in GemiNaut and it will 
+warn users if the server invites them to put sensitive info into the URI.
+
+  - Luke
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006126.html">[spec] Regarding the proposal to remove status code 11
+</A></li>
+	<LI>Next message (by thread): <A HREF="006135.html">[spec] Regarding the proposal to remove status code 11
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6129">[ date ]</a>
+              <a href="thread.html#6129">[ thread ]</a>
+              <a href="subject.html#6129">[ subject ]</a>
+              <a href="author.html#6129">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

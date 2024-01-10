@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Unicode vs. the World
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3CCAD2gp_To25%2BoUmywJ-TyGHCoR%2Bgzi%2B1oA%2BZfMVaT17cFE%2BBzRw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004112.html">
+   <LINK REL="Next"  HREF="004119.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Unicode vs. the World</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3CCAD2gp_To25%2BoUmywJ-TyGHCoR%2Bgzi%2B1oA%2BZfMVaT17cFE%2BBzRw%40mail.gmail.com%3E"
+       TITLE="Unicode vs. the World">cowan at ccil.org
+       </A><BR>
+    <I>Thu Dec 17 22:47:45 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004112.html">Unicode vs. the World
+</A></li>
+        <LI>Next message (by thread): <A HREF="004119.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4115">[ date ]</a>
+              <a href="thread.html#4115">[ thread ]</a>
+              <a href="subject.html#4115">[ subject ]</a>
+              <a href="author.html#4115">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Dec 17, 2020 at 2:39 AM Bj&#246;rn W&#228;rmedal &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">bjorn.warmedal at gmail.com</A>&gt;
+wrote:\
+
+How can the client tell if it's percent encoded or not? If you start
+&gt;<i> by decoding it you distort the filename. If you just assume it isn't
+</I>&gt;<i> percent encoded and go ahead and do that you will handle this link
+</I>&gt;<i> correctly but break any links that are already percent encoded.
+</I>
+Exactly.  To make things worse, space is a protocol element in link lines
+and *can't* be left unencoded by the author, whichever way we choose.
+
+
+&gt;<i> We can decide to *always* percent encode links in gemtext (as the spec
+</I>&gt;<i> states now) or to *never* do it, but I don't see how we can reasonably
+</I>&gt;<i> have both.
+</I>
+
+I agree.  But what we can have (and it's messy, but not as messy as the
+alternatives) is &quot;authors encode percent and space&quot; and &quot;clients encode all
+other reserved and non-ASCII characters.&quot;
+
+&gt;<i> Consider another hypothetical case:
+</I>
+=&gt; teddybearoftheyear.com/vote?ew0k%20The%20Great Vote for me!
+&gt;<i>
+</I>
+That's the best you can do.  But in the case where the link line is
+
+&gt;<i> =&gt; teddybearoftheyear.com/vote?&#1048;&#1074;&#1072;&#1085;%20&#1043;&#1088;&#1086;&#1079;&#1085;&#1099;&#1081;
+</I>&gt;<i> &lt;<A HREF="http://teddybearoftheyear.com/vote?ew0k%20The%20Great">http://teddybearoftheyear.com/vote?ew0k%20The%20Great</A>&gt; &#1043;&#1086;&#1083;&#1086;&#1089;&#1091;&#1081; &#1079;&#1072; &#1084;&#1077;&#1085;&#1103;! [1]
+</I>&gt;<i> [2] [3]
+</I>&gt;<i>
+</I>then the client must translate it for sending over the wire into
+
+<A HREF="gemini://">gemini://</A>
+teddybearoftheyear.com/vote?%D0%98%D0%B2%D0%B0%D0%BD%20%D0%93%D1%80%D0%BE%D0%B7%D0%BD%D1%8B%D0%B9
+&lt;<A HREF="http://teddybearoftheyear.com/vote?ew0k%20The%20Great">http://teddybearoftheyear.com/vote?ew0k%20The%20Great</A>&gt;
+
+because making the author type all that is wholly abominable.  Online
+URL-encoders are not that helpful, because they give you + instead of %20.
+
+[1] This is Ivan the Terrible, who for most of his life was actually a
+quite effective tsar despite his (occupational) paranoia and a serious
+outbreak of madness just before he died; a better translation would be
+&quot;Ivan the Formidable&quot;.  Still, nobody would call him a teddy bear (and so
+his ukase &quot;Vote for me!&quot; would probably be in vain).
+
+[2] The latest spec change makes this line incorrect unless &quot;
+teddybearoftheyear.com/vote&quot; is to be interpreted as a relative path.  It
+needs to be prefixed by &quot;<A HREF="gemini://">gemini://</A>&quot; or at the very least &quot;//&quot;.
+
+[3] If the space had not been %-encoded by the author, the Tsar's second
+name would be part of the link name and not part of the IRI.
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+'My young friend, if you do not now, immediately and instantly, pull
+as hard as ever you can, it is my opinion that your acquaintance in the
+large-pattern leather ulster' (and by this he meant the Crocodile) 'will
+jerk you into yonder limpid stream before you can say Jack Robinson.'
+        --the Bi-Coloured-Python-Rock-Snake
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201217/7e968ab6/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201217/7e968ab6/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004112.html">Unicode vs. the World
+</A></li>
+	<LI>Next message (by thread): <A HREF="004119.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4115">[ date ]</a>
+              <a href="thread.html#4115">[ thread ]</a>
+              <a href="subject.html#4115">[ subject ]</a>
+              <a href="author.html#4115">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

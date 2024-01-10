@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> FW: Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20FW%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3CCAFTy05aCw%2BLVwmbw%2BP%3Db-xw167o76GEc1%2B_SgUSvTwSmc%3DMgtQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000404.html">
+   <LINK REL="Next"  HREF="000405.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>FW: Text reflow woes (or: I want bullets back!)y</H1>
+    <B>Michael Lazar</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20FW%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3CCAFTy05aCw%2BLVwmbw%2BP%3Db-xw167o76GEc1%2B_SgUSvTwSmc%3DMgtQ%40mail.gmail.com%3E"
+       TITLE="FW: Text reflow woes (or: I want bullets back!)y">lazar.michael22 at gmail.com
+       </A><BR>
+    <I>Mon Jan 20 17:30:14 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000404.html">FW: Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000405.html">FW: Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#403">[ date ]</a>
+              <a href="thread.html#403">[ thread ]</a>
+              <a href="subject.html#403">[ subject ]</a>
+              <a href="author.html#403">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Jan 20, 2020 at 5:29 AM solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at sdf.org</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Just a quick response for now: nice post, thanks, there's a lot in here
+</I>&gt;<i> that I agree with (and I had been starting to think similar things about
+</I>&gt;<i> quotes), but can I ask you to elaborate on:
+</I>&gt;<i>
+</I>&gt;<i> On Sun, Jan 19, 2020 at 09:01:17PM -0500, Michael Lazar wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; Lists are tricky because while they would be nice to have, the complicate the
+</I>&gt;<i> &gt; parsing significantly. In order to parse a list while preserving its semantic
+</I>&gt;<i> &gt; structure, you will need to keep track of where it starts and ends. Nested
+</I>&gt;<i> &gt; lists complicate this even further, no matter which syntax for nesting is used.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Parsing lists semantically would require keeping a separate buffer for each type
+</I>&gt;<i> &gt; of list, and then keeping flags and making sure that these buffers are flushed
+</I>&gt;<i> &gt; after the last element in the list. Because of this, I do not believe that they
+</I>&gt;<i> &gt; pass the power-to-weight ratio smell test.
+</I>&gt;<i>
+</I>&gt;<i> In particular, what do you mean by &quot;parsing lists semantically&quot;?
+</I>&gt;<i>
+</I>&gt;<i> At no point in these discussions have I been envisaging anything to do
+</I>&gt;<i> with lists which requires clients to recognise or keep track of whether
+</I>&gt;<i> or not they are &quot;inside&quot; a list or not, or sticking lists in buffers.
+</I>&gt;<i> I have imagined list items standing alone and &quot;lists&quot; being an emergent
+</I>&gt;<i> property of a document that clients have no awareness of - in exactly
+</I>&gt;<i> the same way that &quot;paragraphs&quot; are an emergenty property of lines (if
+</I>&gt;<i> some of those lines happen to be blank).
+</I>
+By &quot;parsing lists semantically&quot; I mean that if I build an AST, I want all of
+the list items grouped together inside of single list object. This is how I
+did it when I was playing around with markdown a while ago [0]. From my
+research this seems to be the common way to do it [1].
+
+Sophisticated gemini clients could utilize this is a variety of ways. Maybe
+you want to add a little bit of extra whitespace surrounding the list. Or you
+want to make sure that the your display does not cut-off half way through the
+list. Or you want to support re-ordering list items alphabetically. I don't
+know, the sky is the limit.
+
+I'm willing to admit that HTML has perhaps tainted my thinking here, but it
+just feels *wrong* to me to have an &lt;li&gt; without the surrounding &lt;ul&gt;. Doing
+the same thing with &quot;paragraphs&quot; (i.e. each line is a new paragraph) doesn't
+feel wrong in the same way. I just have a hard time mentally getting past it.
+
+If I understand correctly, the main argument that I'm hearing in favor of
+unordered lists is so that users can visually distinguish the first line of
+the list from subsequent lines that have been wrapped by the client. I can
+emphasize with this. Bullet lists have been called out because they're an
+obvious example of where this is painful. But this might be a more generalized
+problem. For example, a poem will have deliberate line breaks, but you would
+also like your poem to be wrapped by the client.
+
+What if I were to say this:
+
+When a client is wrapping a line longer than the viewport, the client may chose
+to add indents or other visual indicators to distinguish the beginning of the
+line from a continuation line. The simplest way to do this would be by adding a
+hanging indent to continuation lines.
+
+Expanding on my previous code example:
+
+```
+def display_paragraph(line):
+    # Strip leading and trailing whitespace
+    line = line.strip()
+
+    initial_indent = ''
+    subsequent_indent = '    '
+    wrapped_text = textwrap.wrap(line, initial_indent, subsequent_indent)
+    for line in wrapped_text:
+        print(line)
+```
+
+If we generalize this to all lines, we don't need to handle list items as a
+special case. Is there anything that this would break?
+
+[0] <A HREF="gemini://mozz.us/markdown/design_document.json">gemini://mozz.us/markdown/design_document.json</A>
+[1] <A HREF="https://github.com/syntax-tree/mdast#list">https://github.com/syntax-tree/mdast#list</A>
+
+- mozz
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000404.html">FW: Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000405.html">FW: Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#403">[ date ]</a>
+              <a href="thread.html#403">[ thread ]</a>
+              <a href="subject.html#403">[ subject ]</a>
+              <a href="author.html#403">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Unicode vs. the World
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3C20201215152800.6hn34r3rcvapfi3o%40GLaDOS%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004096.html">
+   <LINK REL="Next"  HREF="004075.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Unicode vs. the World</H1>
+    <B>Alex // nytpu</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3C20201215152800.6hn34r3rcvapfi3o%40GLaDOS%3E"
+       TITLE="Unicode vs. the World">alex at nytpu.com
+       </A><BR>
+    <I>Tue Dec 15 15:28:00 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004096.html">Unicode vs. the World
+</A></li>
+        <LI>Next message (by thread): <A HREF="004075.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4073">[ date ]</a>
+              <a href="thread.html#4073">[ thread ]</a>
+              <a href="subject.html#4073">[ subject ]</a>
+              <a href="author.html#4073">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is the only time I'm going to reply to one of these threads, but I
+should actually say what I think: Supporting IDNs and IRIs is something
+I can get behind, but it simply doesn't require a spec change. Maybe a
+&quot;Gemini Best Practices&quot; change, or even (in the extreme) a companion
+spec detailing the basics of punycoding and percent encoding, but that's
+it.
+
+
+Firstly, on IRIs: there is literally no reason not to support them. You
+already percent-encode half of ascii anyways, why not just encode the
+rest? 100% on board.
+
+IDNs I also agree with, as long as it doesn't get too out of hand with
+what you're requiring from people, and as long as at least some
+consideration is given to people's more obscure languages that may or
+may not have various necessary libraries. I still think it should be
+supported, but I'd say to heed the robustness principle: &quot;Be liberal in
+what you accept, and conservative in what you send.&quot;
+
+
+I support allowing people to write in unicode in gemtext, including in
+link lines, but the client should convert it (transparently or not) for
+the server, no spec change required. Look at what Lagrange did for
+v0.13! It even displays the unicode URL in the address bar, and deals
+with all the conversions so the content authors and users don't even
+have to think about it. That's the optimal change for an &quot;advanced&quot;
+client I'd say, and a &quot;simple&quot; client could just convert it to
+punycode/percent encoded once and display and work with that afterwards
+so they don't have to worry about the unicode version internally.
+<A HREF="https://gmi.skyjake.fi/lagrange/">https://gmi.skyjake.fi/lagrange/</A>
+
+My main complaint I have is how long these threads run, and how they
+completely overtake the mailing list, drowning out pretty much
+everything else. Even if they were arguing about something I
+passionately argue for, I'd still make fun of them because they're so
+long that they're farcical. They're full of people misreading everything
+that's being said (I'm within that group), people that argue about
+something else that's vaguely related but not really. The first thread
+was about IDNs and people immediately started talking about IRIs
+instead! (or maybe vice-versa? I can't keep the two terms straight).
+
+***
+
+The main reason I wrote this is to clarify that I am firmly against
+changing the spec, no matter how noble the causes, for anything other
+than clarification or typos. There are lots of possibilities that don't
+require a spec change, both in internationalization support and the
+other common mailing list complaints that were long like this thread in
+the past (usually about gemtext's &quot;weaknesses&quot;).
+
+Just go and do your own thing, experiment, chat on the mailing list
+about something if it requires client/server support, and maybe people
+will support it! You can use their experience to guide you before
+actually suggesting any real best practice changes, companion specs,
+etc. For instance, Lagrange really changed my opinion. Its change to
+support the full suite of Iwhatevers was much simpler than I expected,
+which lightened up my opinion, because I was worried it would result in
+web-browser levels of just annoying and impossible for an individual to
+write. (&quot;TLS is bad enough, but at least all but the most esoteric
+languages have a library somewhere.&quot;) Lagrange showed it's actually not
+that bad, adding it in was no worse than regular URI parsing.
+
+In summary, Just experiment, chat on the ML (preferably on multiple
+topics...) and just do cool stuff! It's what gemini is all about, isn't
+it?
+
+-- 
+Alex // nytpu
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">alex at nytpu.com</A>
+GPG Key: <A HREF="https://www.nytpu.com/files/pubkey.asc">https://www.nytpu.com/files/pubkey.asc</A>
+Key fingerprint: 43A5 890C EE85 EA1F 8C88 9492 ECCD C07B 337B 8F5B
+<A HREF="https://useplaintext.email/">https://useplaintext.email/</A>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 833 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201215/aef6462f/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201215/aef6462f/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004096.html">Unicode vs. the World
+</A></li>
+	<LI>Next message (by thread): <A HREF="004075.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4073">[ date ]</a>
+              <a href="thread.html#4073">[ thread ]</a>
+              <a href="subject.html#4073">[ subject ]</a>
+              <a href="author.html#4073">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

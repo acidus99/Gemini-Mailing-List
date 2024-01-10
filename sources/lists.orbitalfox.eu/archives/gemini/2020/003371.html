@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Scheme Section 2 quibble
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3C20201117044745.7ce92cf7%40home%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003364.html">
+   <LINK REL="Next"  HREF="003373.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Scheme Section 2 quibble</H1>
+    <B>Ali Fardan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3C20201117044745.7ce92cf7%40home%3E"
+       TITLE="Scheme Section 2 quibble">raiz at stellarbound.space
+       </A><BR>
+    <I>Tue Nov 17 01:47:45 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003364.html">Scheme Section 2 quibble
+</A></li>
+        <LI>Next message (by thread): <A HREF="003373.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3371">[ date ]</a>
+              <a href="thread.html#3371">[ thread ]</a>
+              <a href="subject.html#3371">[ subject ]</a>
+              <a href="author.html#3371">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, 16 Nov 2020 23:39:19 +0000
+acdw &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">acdw at acdw.net</A>&gt; wrote:
+&gt;<i> &gt; The authority component is preceded by a double slash (&quot;//&quot;) and is
+</I>&gt;<i> &gt; terminated by the next slash (&quot;/&quot;), question mark (&quot;?&quot;), or number
+</I>&gt;<i> &gt; sign (&quot;#&quot;) character, or by the end of the URI.  
+</I>&gt;<i> 
+</I>&gt;<i> Meaning that the scheme does not, in fact, include a &quot;//&quot; at the end,
+</I>&gt;<i> but rather that &quot;//&quot; is a separator between the scheme and the
+</I>&gt;<i> authority.  In fact, to actually encode a scheme-agnostic URL in a
+</I>&gt;<i> link, an author needs to write &quot;//example.com/path&quot;.  For an example,
+</I>&gt;<i> see the links in flounder.online.
+</I>&gt;<i> 
+</I>&gt;<i> I bring this issue up because there have been instances of geminauts
+</I>&gt;<i> linking like this:
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; example.com/path An example link  
+</I>&gt;<i> 
+</I>&gt;<i> Which resolves, not to <A HREF="gemini://example.com/path,">gemini://example.com/path,</A> but
+</I>&gt;<i> to ./example.com/path on the current server.
+</I>
+This is wrong, even by web standards, when referencing to a different
+host, one must explicitly write a valid URL, you DON'T see:
+
+&gt;<i>	&lt;a href=&quot;example.tld/index.html&quot;&gt;&lt;/a&gt;
+</I>
+&gt;<i> To resolve this confusion, I propose is to either
+</I>&gt;<i> 
+</I>&gt;<i> (a) strip the &quot;//&quot; (and probably &quot;:&quot;, though I found no particular
+</I>&gt;<i> reference to it in the spec) from the &quot;scheme of <A HREF="gemini://">gemini://</A> is
+</I>&gt;<i> implied&quot; portion of the above paragraph, or
+</I>
+In my humble opinion, I think that &quot;//example.tld/&quot; is an
+implementation specific hack and has no place in the protocol, a URI
+like that is invalid and should not be respected by servers, what
+should actually work is providing authority and path like so:
+&quot;example.tld/path/&quot;, this is discouraged by RFC 3986 (section 4.5) but
+it actually makes sense if context is defined, in this case, context is
+gemini so a scheme of gemini is implied.
+
+Also, this is the default behavior for web browsers implying scheme of
+http(s), which I think is acceptable and convenient behavior, so I
+agree with you on that, assuming that's what you meant.
+
+&gt;<i> (b) remove the scheme bit altogether.  I personally prefer this
+</I>&gt;<i> because it's maximally precise.
+</I>
+The scheme bit in requests allows for proxies to work, for example,
+when I host a proxy instance at &quot;<A HREF="gemini://raiz.proxy/">gemini://raiz.proxy/</A>&quot; someone sends a
+request of &quot;<A HREF="https://example.tld/">https://example.tld/</A>&quot;, my proxy can fetch the page and send
+it back to the client through gemini, I think that's why it's there.
+
+Perhaps there are many many other use cases for this that I haven't
+thought of.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003364.html">Scheme Section 2 quibble
+</A></li>
+	<LI>Next message (by thread): <A HREF="003373.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3371">[ date ]</a>
+              <a href="thread.html#3371">[ thread ]</a>
+              <a href="subject.html#3371">[ subject ]</a>
+              <a href="author.html#3371">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

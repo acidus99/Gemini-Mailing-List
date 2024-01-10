@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> gemini+submit:// (was Re: Uploading Gemini content)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bsubmit%3A//%20%28was%20Re%3A%20Uploading%20Gemini%20content%29&In-Reply-To=%3C20200616010555.GY11281%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001739.html">
+   <LINK REL="Next"  HREF="001738.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>gemini+submit:// (was Re: Uploading Gemini content)</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bsubmit%3A//%20%28was%20Re%3A%20Uploading%20Gemini%20content%29&In-Reply-To=%3C20200616010555.GY11281%40brevard.conman.org%3E"
+       TITLE="gemini+submit:// (was Re: Uploading Gemini content)">sean at conman.org
+       </A><BR>
+    <I>Tue Jun 16 02:05:55 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001739.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+        <LI>Next message (by thread): <A HREF="001738.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1722">[ date ]</a>
+              <a href="thread.html#1722">[ thread ]</a>
+              <a href="subject.html#1722">[ subject ]</a>
+              <a href="author.html#1722">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great solderpunk once stated:
+&gt;<i> On Mon, Jun 15, 2020 at 07:39:01AM +0000, solderpunk wrote:
+</I>&gt;<i> &gt; On Sun, Jun 14, 2020 at 10:06:11PM +0100, Luke Emmet wrote:
+</I>&gt;<i> &gt;  
+</I>&gt;<i> &gt; &gt; I think this is a great idea! It would go quite a long way to supporting
+</I>&gt;<i> &gt; &gt; collaborative editing. And as you say it is infrastructure we already have.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I'm glad you think so!  I hope other people who were keen on an upload
+</I>&gt;<i> &gt; mechanism are too.  As you point out there are small details to smooth
+</I>&gt;<i> &gt; over for the wiki case; but for simple &quot;publishing for the masses&quot;
+</I>&gt;<i> &gt; where the starting state is a blank page, doesn't this basically get us
+</I>&gt;<i> &gt; there?
+</I>&gt;<i> 
+</I>&gt;<i> An interesting idea which was just floated on the BBS at the Zaibatsu
+</I>&gt;<i> pubnix, inspired by the &quot;friSBEe&quot; project started by cmmcabe (admin of
+</I>&gt;<i> <A HREF="gemini://rawtext.club">gemini://rawtext.club</A>), is the possibility of publishing via email.
+</I>&gt;<i> Typical text/gemini content is certainly small enough to be &quot;uploaded&quot; as
+</I>&gt;<i> an attachment (it can't really travel in the body of an email due to
+</I>&gt;<i> restrictions on line length).
+</I>
+  As someone who runs their own email server [1], and set up my blog to
+accept posts via email [2], I think I'm in a unique position to comment
+credibly on this topic.
+
+  It's a good idea, but there are issues to consider.  When I first added
+email support to my blogging engine (back in 2001, 2002?) I often wondered
+why no other blogging engine copied the idea.  I mean, the user can use
+their own proferred method of editing, and email clients exist for just
+about everything under the sun, but no.  That feature remains a very niche
+feature, and I think I finally figured out why---NO ONE BLODDY WELL RUNS
+THEIR OWN EMAIL SERVER ANYMORE! [3]
+
+  Ahem.  Sorry.
+
+  But it's true.  Due to a lot of reasons I outlined in another email,
+running a server is a pain, and email is especially painful because of all
+the *other* things you have to do in addition to running an SMTP server. 
+Now, aside the usual problem when running a server for a well known service,
+I will say that setting up a &quot;receive-only&quot; email server (for the express
+purpose of updating content) is vastly easier than a &quot;full service email
+server&quot;, so that's a positive.
+
+  The next issue is hooking up the processing into the email server.  This
+is not really an issue as any MTA (Postfix is great, there are others, but
+trust me on this---avoid sendmail [4] at all costs) can do this.  The MTA I
+use makes this trivial---just add an entry to /etc/aliases that looks like:
+
+localaddress: &quot;|/program/to/handle -option1 -option2&quot;
+
+  Done.
+
+  Now the issue becomes one of validating the email.  The scheme I use for
+my blog is not secure [5] but it hasn't been broken yet, mainly because it's
+not worth the trouble to thwart it.  I use a special email address that's
+never been published, and there are some checks I make on the incoming
+email but nothing bullet-proof.  The program then knows how to add the entry
+to my blog, but subsequent changes tend to require manual editing of the
+file on the server [6].  
+
+  Then you have to decide how the email is to be formatted for the system to
+know what is being created, updated, deleted, etc.  I include the required
+information (author, title, date, etc) of the post in the email body [7] and
+as such, it's again, not bullet-proof since I'm the only one using it, so I
+know what I can and can't do (and even then, I've been bitten by typos I've
+made---sigh).  
+
+  The relevant limits for SMTP is in RFC-5321, and are:
+
+	1,000 bytes per line
+	65,536 bytes maximum message size
+
+  Of course, a server can support larger limits than these (and I would
+suspect modern systems do, but I haven't tested this).  I've never had an
+issue with sending posts, but then rarely do I have lines longer than 1,000
+bytes [8].
+
+  To address security concerns, some of the things that *could* be done
+include:
+
+	Use a custom email to accept emails, perhaps a custom one per user.
+
+	Check the From: or Sender: header, do a DNS MX lookup on the domain
+	portion, and cross reference that with the Received: headers.
+
+	Check the DKIM-Signature: header (if it exists).
+
+	Dive into the rabbit hole that is PGP.
+
+  So that's my two-bits worth on this topic.  Good idea, but quite a bit of
+work involved.
+
+  -spc
+
+[1]	Of course I would.
+
+[2]	Of course I did.
+
+[3]	Well, almost no one.
+
+[4]	It is a nightmare.  The last time I worked with sendmail, the
+	configuration file had a configuration file (I kid you not) and it's
+	been the enevitable Swiss Cheese of secure programs over its entire
+	history.
+
+[5]	This is probably a mistake to announce on a public list, but I am
+	aware of the ramifications of doing so.
+
+[6]	I do not have a way to handle a modification of an existing entry
+	via email, but that's a limitiation I have, not to the idea as a
+	whole.
+
+[7]	I could use email headers for some of this, but I was lazy at the
+	time and found it easier to specify in the body.
+
+[8]	The technique I use these days is to have a sentance fragment per
+	line.  This allows me easier editing while composing the entry. 
+	Here's a sample of the first two paragraphs of my reply written in
+	this style.
+
+As someone who runs their own email server [1],
+and set up my blog to accept posts via email [2],
+I think I'm in a unique position to comment credibly on this topic.
+
+It's a good idea,
+but there are issues to consider.
+When I first added email support to my blogging engine
+(back in 2001, 2002?)
+I often wondered why no other blogging engine copied the idea.
+I mean,
+the user can use their own proferred method of editing,
+and email clients exist for just about everything under the sun,
+but no.
+That feature remains a very niche feature,
+and I think I finally figured out why---NO ONE BLODDY WELL RUNS THEIR OWN EMAIL SERVER ANYMORE! [3]
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001739.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+	<LI>Next message (by thread): <A HREF="001738.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1722">[ date ]</a>
+              <a href="thread.html#1722">[ thread ]</a>
+              <a href="subject.html#1722">[ subject ]</a>
+              <a href="author.html#1722">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

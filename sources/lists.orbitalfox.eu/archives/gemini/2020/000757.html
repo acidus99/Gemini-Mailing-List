@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Questions regarding &quot;POST&quot; request and line endings
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Questions%20regarding%20%22POST%22%20request%20and%20line%20endings&In-Reply-To=%3C471a87749342ac14ce492caf0f9629f3%40tilde.ninja%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000756.html">
+   <LINK REL="Next"  HREF="000760.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Questions regarding &quot;POST&quot; request and line endings</H1>
+    <B>jan6 at tilde.ninja</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Questions%20regarding%20%22POST%22%20request%20and%20line%20endings&In-Reply-To=%3C471a87749342ac14ce492caf0f9629f3%40tilde.ninja%3E"
+       TITLE="Questions regarding &quot;POST&quot; request and line endings">jan6 at tilde.ninja
+       </A><BR>
+    <I>Sun May 17 14:10:28 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000756.html">Questions regarding &quot;POST&quot; request and line endings
+</A></li>
+        <LI>Next message (by thread): <A HREF="000760.html">Questions regarding &quot;POST&quot; request and line endings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#757">[ date ]</a>
+              <a href="thread.html#757">[ thread ]</a>
+              <a href="subject.html#757">[ subject ]</a>
+              <a href="author.html#757">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>May 17, 2020 3:55 PM, &quot;Felix Quei&#223;ner&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">felix at masterq32.de</A>&gt; wrote:
+&gt;<i> Why does gemini use &lt;CR&gt;&lt;LF&gt; line endings instead of a single &lt;LF&gt; or
+</I>&gt;<i> &lt;CR&gt; token? It makes the parser implementation more complex and imho
+</I>&gt;<i> brings no benefit to the protocol and text format itself.
+</I>
+&lt;CR&gt;&lt;LF&gt; is the windows line ending, also HTTP spec for example, requires that
+no idea why it's required, exactly
+
+functionally you could just split on &lt;LF&gt; and remove all &lt;CR&gt; occurrences, I think.
+CR, the carriage return, would return the cursor to the start of the line, which is almost certainly not wanted in the middle of the text (also ancient macOS, before OS X, used ONLY &lt;CR&gt;, iirc, as a fun sidenote)
+
+using &lt;CR&gt;&lt;LF&gt; would allow you to directly netcat from windows, or so, I suppose...
+
+I'd think it would be best if the server side would accept either &lt;CR&gt;&lt;LF&gt;, AND only a normal &lt;LF&gt;
+
+and I'm not sure it really matter what the server returns, because you can strip out all &lt;CR&gt; characters,
+and on linux (probably all unixes?) it displays like a normal newline anyway
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000756.html">Questions regarding &quot;POST&quot; request and line endings
+</A></li>
+	<LI>Next message (by thread): <A HREF="000760.html">Questions regarding &quot;POST&quot; request and line endings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#757">[ date ]</a>
+              <a href="thread.html#757">[ thread ]</a>
+              <a href="subject.html#757">[ subject ]</a>
+              <a href="author.html#757">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

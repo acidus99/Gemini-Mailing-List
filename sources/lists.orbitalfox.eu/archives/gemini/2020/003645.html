@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CGI and client certificate, or do we need a CGI spec
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%20and%20client%20certificate%2C%20or%20do%20we%20need%20a%20CGI%20spec&In-Reply-To=%3C8925fcd625a5f2bc7927b399a4ef9be5%40tilde.team%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003768.html">
+   <LINK REL="Next"  HREF="003649.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CGI and client certificate, or do we need a CGI spec</H1>
+    <B>Robert &quot;khuxkm&quot; Miles</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%20and%20client%20certificate%2C%20or%20do%20we%20need%20a%20CGI%20spec&In-Reply-To=%3C8925fcd625a5f2bc7927b399a4ef9be5%40tilde.team%3E"
+       TITLE="CGI and client certificate, or do we need a CGI spec">khuxkm at tilde.team
+       </A><BR>
+    <I>Sun Nov 29 19:30:56 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003768.html">CGI and client certificate, or do we need a CGI spec
+</A></li>
+        <LI>Next message (by thread): <A HREF="003649.html">CGI and client certificate, or do we need a CGI spec
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3645">[ date ]</a>
+              <a href="thread.html#3645">[ thread ]</a>
+              <a href="subject.html#3645">[ subject ]</a>
+              <a href="author.html#3645">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>November 29, 2020 11:58 AM, &quot;Remco&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">me at rwv.io</A>&gt; wrote:
+
+&gt;<i> Hi,
+</I>&gt;<i> 
+</I>&gt;<i> I've been working on a gemini server and implemented CGI by skimming
+</I>&gt;<i> through the CGI/1.1 spec (RFC 3875) and looking through some gemini
+</I>&gt;<i> server implementations a couple of weeks ago, to figure out what
+</I>&gt;<i> environment variables to provide.
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; <A HREF="https://git.sr.ht/~rwv/dezhemini/tree/bf5b0ec4/dezhmnsrv.rkt#L253">https://git.sr.ht/~rwv/dezhemini/tree/bf5b0ec4/dezhmnsrv.rkt#L253</A>
+</I>&gt;<i> 
+</I>&gt;<i> Currently I'm playing around with client certificates (having learned a
+</I>&gt;<i> lot more about libopenssl and racket ffi than I bargained for) and was
+</I>&gt;<i> wondering what environment variables I want to expose to bring that
+</I>&gt;<i> information into CGI scripts. So I visited the list of gemini server
+</I>&gt;<i> software again, browsed some code and found 4 servers supporting both
+</I>&gt;<i> CGI and client certificates.
+</I>&gt;<i> 
+</I>&gt;<i> Here's what the expose.
+</I>&gt;<i> 
+</I>&gt;<i> # Jetforce
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; <A HREF="https://github.com/michael-lazar/jetforce/blob/d2d1f63f/jetforce/protocol.py#L180">https://github.com/michael-lazar/jetforce/blob/d2d1f63f/jetforce/protocol.py#L180</A>
+</I>&gt;<i> 
+</I>&gt;<i> * AUTH_TYPE : &quot;CERTIFICATE&quot;.
+</I>&gt;<i> * REMOTE_USER : client certificate X509 subject common name
+</I>&gt;<i> * TLS_CLIENT_HASH : certificate fingerprint
+</I>&gt;<i> * TLS_CLIENT_NOT_BEFORE : certificate start date
+</I>&gt;<i> * TLS_CLIENT_NOT_AFTER : certificate end date
+</I>&gt;<i> * TLS_CLIENT_SERIAL_NUMBER : certificate X509 serial number
+</I>&gt;<i> * TLS_CLIENT_AUTHORISED : &quot;true&quot; if certificate is validated by server CA store
+</I>&gt;<i> 
+</I>&gt;<i> # GLV-1.12556
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; <A HREF="https://github.com/spc476/GLV-1.12556/blob/13d52b63/Lua/GLV-1/gateway.lua#L156">https://github.com/spc476/GLV-1.12556/blob/13d52b63/Lua/GLV-1/gateway.lua#L156</A>
+</I>&gt;<i> 
+</I>&gt;<i> * AUTH_TYPE : &quot;Certificate&quot;
+</I>&gt;<i> * REMOTE_USER : client certificate X509 subject common name
+</I>&gt;<i> * TLS_CLIENT_HASH : certificate fingerprint
+</I>&gt;<i> * TLS_CLIENT_ISSUER : certificate X509 issuer
+</I>&gt;<i> * TLS_CLIENT_ISSUER_* : certificate X509 issuer sub fields
+</I>&gt;<i> * TLS_CLIENT_NOT_AFTER : certificate end date
+</I>&gt;<i> * TLS_CLIENT_NOT_BEFORE : certificate start date
+</I>&gt;<i> * TLS_CLIENT_REMAIN : certificate days left
+</I>&gt;<i> * TLS_CLIENT_SUBJECT : certificate X509 subject
+</I>&gt;<i> * TLS_CLIENT_SUBJECT_* : certificate X509 subject sub fields
+</I>&gt;<i> 
+</I>&gt;<i> # Gemserv
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; <A HREF="https://git.sr.ht/~int80h/gemserv/tree/ebc22964/src/cgi.rs#L42">https://git.sr.ht/~int80h/gemserv/tree/ebc22964/src/cgi.rs#L42</A>
+</I>&gt;<i> 
+</I>&gt;<i> * AUTH_TYPE : &quot;Certificate&quot;
+</I>&gt;<i> * REMOTE_USER : client certificate X509 subject common name
+</I>&gt;<i> * TLS_CLIENT_HASH : certificate fingerprint
+</I>&gt;<i> 
+</I>&gt;<i> # The Unsinkable Molly Brown
+</I>&gt;<i> 
+</I>&gt;<i> =&gt;
+</I>&gt;<i> <A HREF="https://tildegit.org/solderpunk/molly-brown/src/commit/48f9a206c03c0470e1c132b9667c6daa3583dada/dyna">https://tildegit.org/solderpunk/molly-brown/src/commit/48f9a206c03c0470e1c132b9667c6daa3583dada/dyna</A>
+</I>&gt;<i> ic.go#L151
+</I>&gt;<i> 
+</I>&gt;<i> * TLS_CLIENT_HASH : certificate fingerprint
+</I>&gt;<i> * TLS_CLIENT_ISSUER : certificate X509 issuer
+</I>&gt;<i> * TLS_CLIENT_ISSUER_CN : certificate X509 issuer common name
+</I>&gt;<i> * TLS_CLIENT_SUBJECT : certificate X509 subject
+</I>&gt;<i> * TLS_CLIENT_SUBJECT_CN : certificate X509 subject common name
+</I>&gt;<i> 
+</I>&gt;<i> Looking at these it's obvious everybody is looking at everybody else to
+</I>&gt;<i> see how they implemented it and just pick whatever they like, so it
+</I>&gt;<i> seems I am on the right track. ;-) Personally I like this minimal
+</I>&gt;<i> approach of the latter two and will probably go with no more than:
+</I>&gt;<i> 
+</I>&gt;<i> * REMOTE_USER : client certificate X509 subject common name
+</I>&gt;<i> * TLS_CLIENT_HASH : certificate fingerprint
+</I>&gt;<i> 
+</I>&gt;<i> Because when writing a CGI scripts these are the only things I would
+</I>&gt;<i> really need: a way to communicate with the user about their certificate
+</I>&gt;<i> (REMOTE_USER) and a way to distinguish between offered certificates
+</I>&gt;<i> (TLS_CLIENT_HASH). I won't need AUTH_TYPE because if I do get a
+</I>&gt;<i> TLS_CLIENT_HASH I'll know I can authenticate the user.
+</I>&gt;<i> 
+</I>&gt;<i> But that brings me to the real question here. Does gemini need a CGI
+</I>&gt;<i> spec? Given status code 42 for CGI errors, it kinda committed to
+</I>&gt;<i> something CGI-ish without actually stating what that is. The only
+</I>&gt;<i> server making the effort to implement CGI/1.1 is GLV but, IMHO, that
+</I>&gt;<i> isn't the kind of simplicity I am here for and it's a bit of a hack to
+</I>&gt;<i> be honest.
+</I>&gt;<i> 
+</I>&gt;<i> GLV does manage to make CGI scripts more portable, whereas other servers
+</I>&gt;<i> don't really make the effort. For instance, some don't provide
+</I>&gt;<i> PATH_INFO but do provide PATH_TRANSLATED and others provide neither. I
+</I>&gt;<i> would like to share my CGI-scripts and have them run anywhere but to
+</I>&gt;<i> make sharing easier something like a spec would be nice. What do you
+</I>&gt;<i> think?
+</I>&gt;<i> 
+</I>&gt;<i> Anyway, back to libopenssl and racket ffi..
+</I>&gt;<i> 
+</I>&gt;<i> Cheers,
+</I>&gt;<i> Remco
+</I>
+Some thoughts:
+
+1. My gemini CGI library for Python assumes AUTH_TYPE is available because it should be. I could technically edit it to test for the existence of TLS_CLIENT_HASH but why should I, when AUTH_TYPE is how you're supposed to check?
+2. I kinda like the idea of having as much info as we can give about the cert, although I do think there's something to be said about minimalism and finding a balance.
+
+That being said, my proposal:
+
+ - `AUTH_TYPE`: Certificate
+ - `REMOTE_USER`: certificate subject CN
+ - `TLS_CLIENT_HASH`: Hash of the client cert (with `ALGO:HASHBYTESGOHERE` format)
+ - `TLS_CLIENT_NOT_AFTER`: End date
+ - `TLS_CLIENT_NOT_BEFORE`: Start date
+ - `TLS_CLIENT_ISSUER`: Issuer
+ - `TLS_CLIENT_SUBJECT`: Subject
+
+The assumption is that TLS_CLIENT_ISSUER and TLS_CLIENT_SUBJECT are in forms where the info can easily be parsed out (so no need for the sub-field variables, apart from REMOTE_USER being the subject CN). TLS_CLIENT_REMAINING isn't needed, either, since any programming language worth its salt is going to have a way to get the days between today and TLS_CLIENT_NOT_AFTER.
+
+Just my two cents,
+Robert &quot;khuxkm&quot; Miles
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003768.html">CGI and client certificate, or do we need a CGI spec
+</A></li>
+	<LI>Next message (by thread): <A HREF="003649.html">CGI and client certificate, or do we need a CGI spec
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3645">[ date ]</a>
+              <a href="thread.html#3645">[ thread ]</a>
+              <a href="subject.html#3645">[ subject ]</a>
+              <a href="author.html#3645">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

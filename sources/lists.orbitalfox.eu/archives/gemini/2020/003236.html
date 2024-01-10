@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Escaping in gemtext
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Escaping%20in%20gemtext&In-Reply-To=%3C20201110161729.uvsojrpe3agobvv3%40localhost%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003226.html">
+   <LINK REL="Next"  HREF="003243.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Escaping in gemtext</H1>
+    <B>mbays at sdf.org</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Escaping%20in%20gemtext&In-Reply-To=%3C20201110161729.uvsojrpe3agobvv3%40localhost%3E"
+       TITLE="Escaping in gemtext">mbays at sdf.org
+       </A><BR>
+    <I>Tue Nov 10 16:17:29 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003226.html">Escaping in gemtext
+</A></li>
+        <LI>Next message (by thread): <A HREF="003243.html">Escaping in gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3236">[ date ]</a>
+              <a href="thread.html#3236">[ thread ]</a>
+              <a href="subject.html#3236">[ subject ]</a>
+              <a href="author.html#3236">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Here's a possible solution to the problem of escapes which I don't think 
+has been mentioned.
+
+Currently each of the line types is introduced by a 1-3 char prefix with 
+two exceptions: the default text line type, and the preformatted line 
+type. We can deal with the escaping problem by adding prefixes for these 
+too. So there's a sense in which this actually makes gemtext *simpler*, 
+more regular, even as it adds more notation. As a nice side-effect, it 
+also lets one- and two-liner preformatted blocks take less vertical 
+space. 
+
+The prefix for text line could be just a backslash, roughly in line with 
+the suggestion elsewhere in this thread. Examples:
+
+\#Bold# text is sometimes denoted this way.
+
+\=&gt; HELLO! &lt;=
+
+\* is the multiplication operator
+
+\\n refers to the newline character.
+
+\This is just an ordinary text line, the initial backslash is ignored.
+
+
+And for preformatted lines, it could e.g. be &quot;`` &quot;:
+
+`` $ make install
+
+`` ```   rain
+``  ```   drops
+
+`` `` ... '' she replied, speechless.
+
+
+That leaves the problem (if we're to be completist) of associating 
+alt-text to a sequence of preformatted lines using this notation. We 
+could say that such a sequence immediately following a preformatted 
+block using &quot;```&quot; is considered part of the block:
+
+``` rain drops
+```
+`` ```
+``  ```
+
+Alternatively (neater?) we could consider &quot;`` &quot; as magic even when it's 
+within a preformatted block:
+
+``` rain drops
+`` ```
+``  ```
+```
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 195 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201110/3517c648/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201110/3517c648/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003226.html">Escaping in gemtext
+</A></li>
+	<LI>Next message (by thread): <A HREF="003243.html">Escaping in gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3236">[ date ]</a>
+              <a href="thread.html#3236">[ thread ]</a>
+              <a href="subject.html#3236">[ subject ]</a>
+              <a href="author.html#3236">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

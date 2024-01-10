@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Unicode vs. the World
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3CBFF5254E-4C06-442B-ABB1-6A299D28F037%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004069.html">
+   <LINK REL="Next"  HREF="004072.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Unicode vs. the World</H1>
+    <B>Petite Abeille</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3CBFF5254E-4C06-442B-ABB1-6A299D28F037%40gmail.com%3E"
+       TITLE="Unicode vs. the World">petite.abeille at gmail.com
+       </A><BR>
+    <I>Tue Dec 15 13:27:36 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004069.html">Proposal: Rabbits in gemtext
+</A></li>
+        <LI>Next message (by thread): <A HREF="004072.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4071">[ date ]</a>
+              <a href="thread.html#4071">[ thread ]</a>
+              <a href="subject.html#4071">[ subject ]</a>
+              <a href="author.html#4071">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>[In the spirit of Scott Pilgrim vs. the World]
+
+There has been a handful of  intertwingled* conversation about the topic.
+
+
+To recap:
+
+2020-12-04 Stephane Bortzmeyer got the ball rolling with &quot;IDN with Gemini?&quot;: <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/003788.html">https://lists.orbitalfox.eu/archives/gemini/2020/003788.html</A>
+2020-12-08 John Cowan followed with &quot;Three possible uses for IRIs&quot;: <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/003873.html">https://lists.orbitalfox.eu/archives/gemini/2020/003873.html</A>
+2020-12-09 Jason McBrayer contributed &quot;Some reading on IRIs and IDNs&quot;: <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/003923.html">https://lists.orbitalfox.eu/archives/gemini/2020/003923.html</A>
+
+&#128169;&#128239; To be charitable, we can also include Alex's self-described &quot;shitpost&quot;  dated 2020-12-15 : <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/004055.html">https://lists.orbitalfox.eu/archives/gemini/2020/004055.html</A>
+
+[2020-12-15T01:47:20.412Z] &lt;nytpu&gt; sending an message to the ML making fun of the long-running spec-changing threads. i'll probably regret it, but here goes
+[2020-12-15T07:05:14.499Z] &lt;nytpu&gt; i've bitched about it but this is the first time i've really addressed the points other than in passing
+[2020-12-15T07:05:42.682Z] &lt;nytpu&gt; and even then it's more a shitpost than a real rebuttal, don't take it too seriously
+
+
+So what's the issue making Alex lose his marbles, thin-skin aside?
+
+It boils down to this:
+
+ =&gt; <A HREF="gemini://&#128048;.mozz.us/&#128007;.gmi">gemini://&#128048;.mozz.us/&#128007;.gmi</A> &#129365;Hoppity hop&#129365;
+
+What do do with such a construct? Possible? Not possible? Allowed? Not allowed? First class citizen? Afterthought? How do deal with it, if at all? 
+
+Decisions, decisions, decisions.
+
+Technically speaking, while text/gemini is Unicode friendly by default, the links are not. The location part must be encoded, following idiosyncratic, local customs, perhaps such as:
+
+ =&gt; <A HREF="gemini://xn--4o8h.mozz.us/%F0%9F%90%87.gmi">gemini://xn--4o8h.mozz.us/%F0%9F%90%87.gmi</A> &#129365;Hoppity hop&#129365;
+
+In other words, a bit of punycode + percent encoding + glossing over normalization + other niceties. Everything must be US-ASCII clean at the end of the day.
+
+Some will make the distinction between &quot;content&quot; vs. &quot;addressing&quot;:
+
+[2020-12-15T07:35:09.590Z] &lt;bie&gt; also... this was never about internationalized content, but a lot of people like to pretend that it is
+[2020-12-15T07:36:40.861Z] &lt;bie&gt; addressing != content
+
+While there are some merits about such hair splitting -as it has be handled at different level of the stack- it distracts from the crux of the problem:
+
+=&gt; <A HREF="gemini://&#128048;.mozz.us/&#128007;.gmi">gemini://&#128048;.mozz.us/&#128007;.gmi</A> &#129365;Hoppity hop&#129365; 
+vs.
+=&gt; <A HREF="gemini://xn--4o8h.mozz.us/%F0%9F%90%87.gmi">gemini://xn--4o8h.mozz.us/%F0%9F%90%87.gmi</A> &#129365;Hoppity hop&#129365;
+
+As it stands, the first variant cannot be handled by gemini -neither in text/gemini, nor in the protocol itself- with further technical gotchas such as address resolution and what not along the way. 
+
+It must be converted to the second variant, the US-ASCII one.
+
+So, what to do? This is what these various conversations are about. Exploring what the scope of the problem is, and what to do about it, if anything. So one can eventually reach an informed decision.
+
+For example:
+
+[2020-12-14T22:12:14.914Z] &lt;remyabel&gt; I lurk this channel and the mailing lists and keep seeing people trying to extend gemini or make it web-like, there's just no point in arguing against it
+[2020-12-14T22:12:28.578Z] &lt;CoopDot&gt; I used to be in the US-ASCII only camp but now it's more &quot;do the bare mininum to not forbid UTF-8 'URLs' in the spec and make strong recommendations in best-practices.gmi&quot;
+
+^Those are the &quot;cannot be arsed&quot; camp: things are the way they are, and cannot be bothered to changed anything, technically speaking... we are done. The &quot;not-my-problem&quot; camp.
+
+
+[2020-12-15T07:30:13.193Z] &lt;khuxkm&gt; honestly my issue with the iri thread was the whole &quot;we NEED this&quot; and &quot;we MUST do this it's our MORAL DUTY&quot;
+[2020-12-15T07:30:52.931Z] &lt;khuxkm&gt; like forcing everybody to use IRIs or be non-compliant with the spec is somehow going to solve discrimination
+
+^Those are the... hmmm... oh-so-fragile &quot;entitled&quot; camp.
+
+
+To summarize: this is a genuine choice for gemini. And not so much a technical issue.
+
+
+-- 
+&#661;&#183;&#7461;&#183;&#660;
+
+
+Tangentially unrelated, as always:
+
+The Internet is for End Users
+<A HREF="https://tools.ietf.org/html/rfc8890">https://tools.ietf.org/html/rfc8890</A>
+
+Terminology, Power, and Inclusive Language in Internet-Drafts and RFCs
+<A HREF="https://tools.ietf.org/id/draft-knodel-terminology-04.html">https://tools.ietf.org/id/draft-knodel-terminology-04.html</A>
+
+
+* <A HREF="https://en.wikipedia.org/wiki/Intertwingularity">https://en.wikipedia.org/wiki/Intertwingularity</A>
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004069.html">Proposal: Rabbits in gemtext
+</A></li>
+	<LI>Next message (by thread): <A HREF="004072.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4071">[ date ]</a>
+              <a href="thread.html#4071">[ thread ]</a>
+              <a href="subject.html#4071">[ subject ]</a>
+              <a href="author.html#4071">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

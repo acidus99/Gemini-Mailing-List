@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Cognitive aspects of navigation in gemini space
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cognitive%20aspects%20of%20navigation%20in%20gemini%20space&In-Reply-To=%3C083b16d3-c9b4-a62c-508c-eb0b6f1bf538%40lavabit.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000752.html">
+   <LINK REL="Next"  HREF="000761.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Cognitive aspects of navigation in gemini space</H1>
+    <B>James Tomasino</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cognitive%20aspects%20of%20navigation%20in%20gemini%20space&In-Reply-To=%3C083b16d3-c9b4-a62c-508c-eb0b6f1bf538%40lavabit.com%3E"
+       TITLE="Cognitive aspects of navigation in gemini space">tomasino at lavabit.com
+       </A><BR>
+    <I>Sun May 17 14:16:05 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000752.html">Cognitive aspects of navigation in gemini space
+</A></li>
+        <LI>Next message (by thread): <A HREF="000761.html">Cognitive aspects of navigation in gemini space
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#758">[ date ]</a>
+              <a href="thread.html#758">[ thread ]</a>
+              <a href="subject.html#758">[ subject ]</a>
+              <a href="author.html#758">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 5/17/20 11:42 AM, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">jan6 at tilde.ninja</A> wrote:
+&gt;<i> I'm not a fan of the ending part having text too,
+</I>&gt;<i> slightly harder parser, and noticeably harder to read for humans, 
+</I>&gt;<i> especially if there are several blocks back-to-back
+</I>&gt;<i> other than that, not too bad idea, I suppose
+</I>
+TLDR;
+
+``` this is alt text / syntax descriptor
+this should not be search by engines or read by screen readers by default
+```
+
+```
+this has no alt text and should be searched by engines and read by
+screen readers
+```
+
+--- The long version ---
+
+I've been thinking of ways to keep it extremely simple. If the goals are:
+
+- provide alt text for a block that may not be easily parsed by bots &amp;
+screen readers
+
+- indicate which blocks should and should not be parsed
+
+Then I think we can accomplish the goal with a single code fence suffix
+that is either blank, indicating that the content CAN be parsed, or has
+text, indicating that IS the alt text.
+
+``` anything here is alt text
+moo moo moo moo moo
+```
+
+```
+This will be parsed because there's no fence suffix at the start.
+```
+
+That would be incredibly easy to parse and require zero effort from
+clients that already exist since they can continue to just look at the
+first three characters and ignore the rest. Search engines can read the
+alt/descriptor and skip the rest of the block if it exits, or read the
+contents if its blank. Easy all around.
+
+
+The complication would come if you want that space to have another
+purpose, such as defining the language for syntax highlighting on a code
+block like we see in markdown.
+
+```bash
+#!/usr/bin/env bash
+printf &quot;moo moo moo moo moo\\n&quot;
+```
+
+This would be interpreted for alt-text purposes as just &quot;bash&quot;. First of
+all, it would mean that search engines wouldn't parse code blocks which
+may or may not be a bad thing.
+
+It may actually work out great for accessible clients though. I don't
+know of anyone making an accessible client YET, but if it were
+structured this way the block, when hit, could indicate verbally that a
+preformatted block had been reached and the alt/descriptor could be
+read. A good accessible client might even inform the user how many lines
+the block contains and offer some way to &quot;page&quot; through it bit by bit.
+
+This sort of behavior would be nice to talk through with anyone working
+on such a client, but beyond giving it some initial consideration I
+don't see it as belonging in the gemini spec itself.
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000752.html">Cognitive aspects of navigation in gemini space
+</A></li>
+	<LI>Next message (by thread): <A HREF="000761.html">Cognitive aspects of navigation in gemini space
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#758">[ date ]</a>
+              <a href="thread.html#758">[ thread ]</a>
+              <a href="subject.html#758">[ subject ]</a>
+              <a href="author.html#758">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

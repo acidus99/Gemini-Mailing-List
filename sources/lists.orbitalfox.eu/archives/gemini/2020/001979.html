@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Illusory latency due to trailing slash redirects
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Illusory%20latency%20due%20to%20trailing%20slash%20redirects&In-Reply-To=%3C20200627152817.452a0840%40celehner.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001968.html">
+   <LINK REL="Next"  HREF="001980.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Illusory latency due to trailing slash redirects</H1>
+    <B>Charles E. Lehner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Illusory%20latency%20due%20to%20trailing%20slash%20redirects&In-Reply-To=%3C20200627152817.452a0840%40celehner.com%3E"
+       TITLE="Illusory latency due to trailing slash redirects">cel at celehner.com
+       </A><BR>
+    <I>Sat Jun 27 20:28:17 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001968.html">Illusory latency due to trailing slash redirects
+</A></li>
+        <LI>Next message (by thread): <A HREF="001980.html">Illusory latency due to trailing slash redirects
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1979">[ date ]</a>
+              <a href="thread.html#1979">[ thread ]</a>
+              <a href="subject.html#1979">[ subject ]</a>
+              <a href="author.html#1979">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, 27 Jun 2020 08:57:14 +0000
+solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at SDF.ORG</A>&gt; wrote:
+
+&gt;<i> On the server side, server authors should take care when doing things
+</I>&gt;<i> like automatically generating directory listings to put trailing
+</I>&gt;<i> slashes in links to directories so that the redirect is not necessary.
+</I>
+Search engines and link aggregators could also help.
+
+For example, GUS has this entry:
+  <A HREF="gemini://gemini.circumlunar.space/servers">gemini://gemini.circumlunar.space/servers</A>
+which is a redirect to:
+  <A HREF="gemini://gemini.circumlunar.space/servers/">gemini://gemini.circumlunar.space/servers/</A>
+
+The search engine could try to detect that kind of redirect during the
+crawl and update the entry.
+
+On Sat, 27 Jun 2020 11:42:39 +0200
+Philip Linde &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">linde.philip at gmail.com</A>&gt; wrote:
+
+&gt;<i> A server that serves different content on //server and //server/ can
+</I>&gt;<i> be a huge pain in the neck. When I wrote my dillo plugin I noticed
+</I>&gt;<i> that it seems to apply this normalization in reverse before the URL
+</I>&gt;<i> is handed to the plugin. So &quot;<A HREF="gemini://example.horse/">gemini://example.horse/</A>&quot; could only be
+</I>&gt;<i> seen on the plugin end as &quot;<A HREF="gemini://example.horse">gemini://example.horse</A>&quot;, which also makes
+</I>&gt;<i> redirects to &quot;<A HREF="gemini://example.horse/">gemini://example.horse/</A>&quot; loop back to
+</I>&gt;<i> &quot;<A HREF="gemini://example.horse/">gemini://example.horse/</A>&quot;. Redirect hell ensued!
+</I>
+I also noticed this. Dillo uses whichever URL was loaded first in the
+session (with or without the &quot;/&quot;). It caches the resulting resource,
+with the normalized URL as the cache key. So if you visit
+&quot;<A HREF="gemini://example.horse">gemini://example.horse</A>&quot; first, then subsequently visiting
+&quot;<A HREF="gemini://example.horse/">gemini://example.horse/</A>&quot; retrieves the cached response for
+&quot;<A HREF="gemini://example.horse">gemini://example.horse</A>&quot;. And you can't remove the cache entry except
+by starting a new Dillo process.
+
+Since servers are redirecting &quot;&quot; to &quot;/&quot;, I think adding the &quot;/&quot; in the
+plugin like you are doing is the right thing to do, to work around what
+I now consider a bug in Dillo. In the older dillo-gemini plugin, I did
+not think to do that, but instead made redirects not automatic but just
+an internal page with a link to the target URL (i.e. require user
+confirmation) and work around the cache/normalization problem as a
+user by manually adding a query string to the URL to get a new cache
+key, e.g. visiting &quot;<A HREF="gemini://example.horse/?">gemini://example.horse/?</A>&quot;
+
+-- 
+Charles
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 833 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200627/2dc0b44e/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20200627/2dc0b44e/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001968.html">Illusory latency due to trailing slash redirects
+</A></li>
+	<LI>Next message (by thread): <A HREF="001980.html">Illusory latency due to trailing slash redirects
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1979">[ date ]</a>
+              <a href="thread.html#1979">[ thread ]</a>
+              <a href="subject.html#1979">[ subject ]</a>
+              <a href="author.html#1979">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

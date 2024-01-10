@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Documents with mixed languages
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Documents%20with%20mixed%20languages&In-Reply-To=%3C20211211120013.u26rzavy7o5bfkys%40mail.wolfsden.cz%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007670.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Documents with mixed languages</H1>
+    <B>Wolf</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Documents%20with%20mixed%20languages&In-Reply-To=%3C20211211120013.u26rzavy7o5bfkys%40mail.wolfsden.cz%3E"
+       TITLE="Documents with mixed languages">wolf at wolfsden.cz
+       </A><BR>
+    <I>Sat Dec 11 12:00:13 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007670.html">[users] Any live gmnigit capsules?
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7672">[ date ]</a>
+              <a href="thread.html#7672">[ thread ]</a>
+              <a href="subject.html#7672">[ subject ]</a>
+              <a href="author.html#7672">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+I'm considering implementing a gemini client over the Christmas, so I've
+started to read the spec. And I think I've notice a missing thing in
+text/gemini format. In particular regarding documents with content
+composed from multiple languages. The specification provides this
+example:
+
+&quot;text/gemini; lang=en,fr&quot;
+  Denotes a text/gemini document written in a mixture of English and
+  French
+
+However, that seems to be a document-wide settings. If I wanted a
+document to have a mix of Japanese and Chinese, I believe it would be:
+
+&quot;text/gemini; lang=ja,zh&quot;
+
+However, that in itself is not very useful. What I think is missing is
+an ability to set language for a specific part of the document itself.
+I'm not sure if the spec is permanently frozen or can still be extended,
+but I would like to propose adding a language toggle command to
+text/gemini.
+
+Not sure about specific syntax, basically anything would work, ideally
+something that would be not very disrupting if just render by clients
+that do not know about it. So for example:
+
+    Here are some examples in Japanese and Chinese:
+
+    !lang=ja
+    &#12371;&#12435;&#12395;&#12385;&#12399;&#12290;
+
+    !lang=zh
+    &#20320;&#22909;&#12290;
+
+    !lang=en
+    And back to the original language.
+
+This is just proposal, I don't really care if it is a switch (like mine
+example) or some kind of block.
+
+Now, why is this necessary. For Japanese and Chinese in particular,
+Unicode is simply not enough. Same code point can be rendered very
+differently depending on the language. So for proper rendering of the
+text, you need to know the language. If the document has just one, there
+is currently available way to do so (document language), but for
+mixture, it is simply not possible. And I think that is a shame.
+
+
+
+Thanks for considering.
+
+W.
+
+PS: I'm not subscribed, so please CC.
+
+-- 
+There are only two hard things in Computer Science:
+cache invalidation, naming things and off-by-one errors.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 833 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20211211/b47cc774/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20211211/b47cc774/attachment.sig</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007670.html">[users] Any live gmnigit capsules?
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7672">[ date ]</a>
+              <a href="thread.html#7672">[ thread ]</a>
+              <a href="subject.html#7672">[ subject ]</a>
+              <a href="author.html#7672">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

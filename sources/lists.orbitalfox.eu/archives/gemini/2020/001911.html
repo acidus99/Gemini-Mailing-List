@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Mercury
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Mercury&In-Reply-To=%3C20200625184228.GH16671%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001874.html">
+   <LINK REL="Next"  HREF="001914.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Mercury</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Mercury&In-Reply-To=%3C20200625184228.GH16671%40SDF.ORG%3E"
+       TITLE="Mercury">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Thu Jun 25 19:42:28 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001874.html">Mercury
+</A></li>
+        <LI>Next message (by thread): <A HREF="001914.html">Mercury
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1911">[ date ]</a>
+              <a href="thread.html#1911">[ thread ]</a>
+              <a href="subject.html#1911">[ subject ]</a>
+              <a href="author.html#1911">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Jun 24, 2020 at 06:30:26PM +0200, Felix Quei&#223;ner wrote:
+&gt;<i> Hey
+</I>&gt;<i> 
+</I>&gt;<i> &gt; That the point about serving public data encrypted while every body can request it?
+</I>&gt;<i> &gt; Example:
+</I>&gt;<i> &gt; - public domain book
+</I>&gt;<i> &gt; - weather (curl wttr.in/paris)
+</I>&gt;<i> &gt; - public news
+</I>&gt;<i> &gt; - governmental information
+</I>&gt;<i> &gt; - cute kitten videos
+</I>&gt;<i> &gt; - etc.
+</I>&gt;<i> Yes, as you can trust that you actually receive the data the server
+</I>&gt;<i> wants you to see. If a MITM attack happens, they can serve you the wrong
+</I>&gt;<i> news for example, wrong governmental information (deluding you to do
+</I>&gt;<i> illegal acts)
+</I>
+Okay, I lied, some Mercury responses today, not tomorrow. :)
+
+No MITM attack is even necessary for this n&#228;ive &quot;I can use plaintext
+to read publically available information and only turn it on when I do
+important secret stuff&quot; attitude to backfire!  Does this really need
+explanation in 2020?  Here's a list of publically available,
+non-personal information, a lot of which you could find in a good
+public library, which would nevertheless be a very bad idea to be
+easily identified as wanting to read or having read in various
+times/places in recent history right up to the present, with
+consequences ranging from serious social stigma and ostracism to
+imprisonment, torture and death:
+
+* The Bible
+* The Torah
+* The Quran
+* The collected works of Karl Marx
+* The collected works of the US founding fathers
+* Eye-witness accounts of what happened in Tiananmen Square in 1989
+* Factual medical information concerning contraception
+* Factual medical information concerning abortion
+* Factual medical information concerning sexually transmitted diseases
+* Factual medical information concerning same-sex sexual health
+* Factual legal information concerning domestic violence
+* Factual legal information concerning sexual assault
+* Factual legal information concerning recreational drugs
+* Factual political information on when/where/how to vote for X
+* Public news reporting from the &quot;wrong&quot; source
+
+This is not a remote issue affecting only distant third-world
+dictatorships, or an outdated issue only relevant in the McCarthyist
+past; plenty of the above will get you into trouble in certain parts of
+Western liberal democracies in 2020 - okay, probably not tortured or
+killed by the government, but people will absolutely be bullied, be
+beaten up, be kicked out of home, be kicked out of school, or lose
+friends, parters or jobs because of some of the above material even in
+&quot;normal&quot; countries where none of the above is illegal (and in the case
+of information on abortion in some parts of the US, jail time is not 
+actually inconceivable).
+
+Often times the adversary who needs to be defeated to avoid these
+scenarios is not an all-powerful intelligence/police/military actor with
+a big budget and a team of infosec specialists and a warehouse full of
+supercomputers, for whom TLS is (perhaps) not impenetrable, but rather
+parents, teachers, classmates, employers, nosy small business owners
+providing open wireless hotspots, script kiddies sniffing traffic on
+said hotspots or small, rural police departments for whom we can safely
+assume TLS *is* impenetrable.
+
+Lucky you if 99% of what you want to read online does not fall into
+these categories at the present time in your present location, but:
+* What's safe today may not be safe tomorrow (and computers can
+  remember for a long time).
+* Making it easy to deliberately perform unencrypted transactions when
+  it's safe simultaneously makes it easy to accidentally perform (or to
+  be tricked into performing) unencrypted transactions when it's *not*
+  safe.
+* Only using encryption the 1% of times you really need it makes the
+  use of encryption suspicious in and of itself.
+
+Crypto is not a &quot;sometimes food&quot;!  More or less the entire technology
+industry has accepted this argument and the simultaneous side-by-side
+existence of <A HREF="http://">http://</A> and <A HREF="https://">https://</A> with browsers equally happy to accept
+either is on its way to becoming a brief historical accident.  I'm
+really unenthusiastic about deliberately rolling that clock back in
+Geminispace.  More than one person has told me that Gopher's lack of
+support for encryption stopped them from ditching the web in favour of
+Gopher, despite prefering Gopher in every other respect.  Now they're
+happily in Geminispace.  I suspect that this is *not* an unusual
+situation.
+
+Yes, it sucks that this philosophy drags in some complexity (I chose TLS
+precisely to try to minimise the *implementation* complexity, by virtue
+of ubiquitious library support and documentation) and some performance
+penalty (which we so far have not made much serious effort to
+ameliorate) and an increased energy footprint (which I assure you
+professional cryptographers are actively trying to reduce without
+compromising security, because doing so will improve battery life on
+phones and &quot;smart&quot; devices, which is a multi-billion dollar industry,
+and by virtue of using the industry-standard TLS we'll be able to reap
+future payoffs of this research - and which, anyway, I am not sure is
+actually greater than the wireless data transmission footprint in many
+real-world scenarios).  I still think it's the right philosophy for
+Gemini and that throwing away important privacy protections for the sake
+of decreased latency would make many more would-be Geminauts sad than
+it would make happy.  I really think we just need to do our best to
+minimise the impact of the unavoidable suckage that ubiquitious
+cryptography brings with it.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001874.html">Mercury
+</A></li>
+	<LI>Next message (by thread): <A HREF="001914.html">Mercury
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1911">[ date ]</a>
+              <a href="thread.html#1911">[ thread ]</a>
+              <a href="subject.html#1911">[ subject ]</a>
+              <a href="author.html#1911">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

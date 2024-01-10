@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Using netcat with gemini (was Re: A question regarding the spec)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Using%20netcat%20with%20gemini%20%28was%20Re%3A%20A%20question%20regarding%20the%20spec%29&In-Reply-To=%3C875z6umll9.fsf%40guixSD.i-did-not-set--mail-host-address--so-tickle-me%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002951.html">
+   <LINK REL="Next"  HREF="002967.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Using netcat with gemini (was Re: A question regarding the spec)</H1>
+    <B>Nicol&#242; Balzarotti</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Using%20netcat%20with%20gemini%20%28was%20Re%3A%20A%20question%20regarding%20the%20spec%29&In-Reply-To=%3C875z6umll9.fsf%40guixSD.i-did-not-set--mail-host-address--so-tickle-me%3E"
+       TITLE="Using netcat with gemini (was Re: A question regarding the spec)">anothersms at gmail.com
+       </A><BR>
+    <I>Wed Oct 28 15:11:46 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002951.html">Using netcat with gemini (was Re: A question regarding the spec)
+</A></li>
+        <LI>Next message (by thread): <A HREF="002967.html">Using netcat with gemini (was Re: A question regarding the spec)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2959">[ date ]</a>
+              <a href="thread.html#2959">[ thread ]</a>
+              <a href="subject.html#2959">[ subject ]</a>
+              <a href="author.html#2959">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Jeffrey Horn &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">jrhorn424 at gmail.com</A>&gt; writes:
+
+Hi, I don't think netcat does tls.  One thing you could do is to use
+openssl:
+
+#+begin_src bash
+echo -e &quot;<A HREF="gemini://gemini.circumlunar.space:1965/\r\n">gemini://gemini.circumlunar.space:1965/\r\n</A>&quot; | openssl s_client -connect gemini.circumlunar.space:1965 -ign_eof
+#+end_src
+
+this command establishes a connection, sends &lt;URL&gt;&lt;CR&gt;&lt;LF&gt; and then
+reads the response (&quot;20 text/gemini&quot;)
+
+
+
+&gt;<i> On Sun, Oct 25, 2020 at 7:02 AM Ali Fardan &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">raiz at stellarbound.space</A>&gt; wrote:
+</I>&gt;&gt;<i> I was browsing gemspace using netcat ...
+</I>&gt;<i>
+</I>&gt;<i> This made me curious so I started up netcat. According to the spec,
+</I>&gt;<i> the request is `&lt;URI&gt; &lt;CR&gt; &lt;LF&gt;`. I thought this was correct, but I
+</I>&gt;<i> just lose the connection when sending the line feed:
+</I>&gt;<i>
+</I>&gt;<i> ```
+</I>&gt;<i> $ nc gemini.circumlunar.space 1965
+</I>&gt;<i> <A HREF="gemini://gemini.circumlunar.space/">gemini://gemini.circumlunar.space/</A>
+</I>&gt;<i> $
+</I>&gt;<i> ```
+</I>&gt;<i>
+</I>&gt;<i> Any suggestions?
+</I>&gt;<i>
+</I>&gt;<i> -- 
+</I>&gt;<i> jeff
+</I></PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002951.html">Using netcat with gemini (was Re: A question regarding the spec)
+</A></li>
+	<LI>Next message (by thread): <A HREF="002967.html">Using netcat with gemini (was Re: A question regarding the spec)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2959">[ date ]</a>
+              <a href="thread.html#2959">[ thread ]</a>
+              <a href="subject.html#2959">[ subject ]</a>
+              <a href="author.html#2959">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

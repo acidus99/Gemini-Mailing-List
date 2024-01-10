@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] Geminipg: using Gnupg to sign Gemini pages and directories
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Geminipg%3A%20using%20Gnupg%20to%20sign%20Gemini%20pages%20and%20directories&In-Reply-To=%3C20210224195952.GA13187%40host%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005550.html">
+   <LINK REL="Next"  HREF="005718.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] Geminipg: using Gnupg to sign Gemini pages and directories</H1>
+    <B>nervuri</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Geminipg%3A%20using%20Gnupg%20to%20sign%20Gemini%20pages%20and%20directories&In-Reply-To=%3C20210224195952.GA13187%40host%3E"
+       TITLE="[tech] Geminipg: using Gnupg to sign Gemini pages and directories">nervuri at disroot.org
+       </A><BR>
+    <I>Wed Feb 24 19:59:52 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005550.html">[tech] Geminipg: using Gnupg to sign Gemini pages and directories
+</A></li>
+        <LI>Next message (by thread): <A HREF="005718.html">[tech] Geminipg: using Gnupg to sign Gemini pages and directories
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5585">[ date ]</a>
+              <a href="thread.html#5585">[ thread ]</a>
+              <a href="subject.html#5585">[ subject ]</a>
+              <a href="author.html#5585">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I really like what you're trying to achieve, but maybe we can find a
+solution than doesn't involve all those extra files / network requests.
+
+Why not use a single SHA256SUMS file for all files on the capsule?  We
+could put it in .well-known and sign it.  To generate it, we only need
+a simple script that runs sha256sum recursively.  We end up with:
+
+.well-known/key.pub
+.well-known/SHA256SUMS
+.well-known/SHA256SUMS.sign
+
+A proof-of-concept client can also be a relatively simple shell script:
+
+./verify.sh <A HREF="gemini://capsule.org/~user/file">gemini://capsule.org/~user/file</A>
+
+It would first download the 3 well-known files, check the signature of
+SHA256SUMS and keep it locally, along with the key.  Then it can verify
+any file on <A HREF="gemini://capsule.org/~user/">gemini://capsule.org/~user/</A> without making additional
+network requests.  On hash mismatch, it would check if SHA256SUMS
+changed on the server.  It would apply TOFU on key.pub.  It could output
+gemtext to stdout, to be piped into a client that renders it nicely.
+
+Note that in this example, .well-known is under ~user, not directly
+under capsule.org.  This is to account for multi-user systems
+(pubnixes/tilde communities).
+
+The 3 files can be merged into one, because why not?  So this system
+involves one extra network request every once in a while, which makes
+the client stand out fingerprinting-wise.  This slight privacy trade-off
+is something to keep in mind when you use this feature - maybe only use
+it sparingly, when you need the extra security.
+
+That's it, in short.  It would work the same way on gemini, gopher and
+the web.  I'll probably code this if nobody does it before me.
+
+I also want to explore the idea of a signed &quot;key-sources&quot; file
+containing links to the public key from multiple sources, for
+cross-checking in case the key changes.  Not sure how this would work
+exactly, I need to give it more thought.
+
+Instead of GPG, I recommend OpenBSD's signify [1], which gives us nice
+and short Ed25519 keys and signatures.  It's also available on GNU/Linux
+(in Debian, `apt install signify-openbsd`).
+
+There is already a good solution for page signing on the web [2], made
+by the developer of EteSync (great guy).  The problem of included files
+is solved by subresource integrity [3].
+
+[1] <A HREF="https://man.openbsd.org/signify">https://man.openbsd.org/signify</A>
+[2] <A HREF="https://stosb.com/blog/signed-web-pages/">https://stosb.com/blog/signed-web-pages/</A>
+[3] <A HREF="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity">https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity</A>
+
+
+&gt;<i> Several signatures for one file
+</I>
+I don't think multiple signatures are worth the added complexity.  But
+I'm curious if you have arguments to the contrary.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005550.html">[tech] Geminipg: using Gnupg to sign Gemini pages and directories
+</A></li>
+	<LI>Next message (by thread): <A HREF="005718.html">[tech] Geminipg: using Gnupg to sign Gemini pages and directories
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5585">[ date ]</a>
+              <a href="thread.html#5585">[ thread ]</a>
+              <a href="subject.html#5585">[ subject ]</a>
+              <a href="author.html#5585">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

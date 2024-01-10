@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Geminize, a Firefox addon for the Gemini Protocol
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Geminize%2C%20a%20Firefox%20addon%20for%20the%20Gemini%20Protocol&In-Reply-To=%3CCAF3jwTm16OKaWAmNT-ZGthY6tT%2BudDzWX5sagd4pXr-T%2BJ4h3g%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004823.html">
+   <LINK REL="Next"  HREF="004858.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Geminize, a Firefox addon for the Gemini Protocol</H1>
+    <B>Andre Garzia</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Geminize%2C%20a%20Firefox%20addon%20for%20the%20Gemini%20Protocol&In-Reply-To=%3CCAF3jwTm16OKaWAmNT-ZGthY6tT%2BudDzWX5sagd4pXr-T%2BJ4h3g%40mail.gmail.com%3E"
+       TITLE="Geminize, a Firefox addon for the Gemini Protocol">andre at andregarzia.com
+       </A><BR>
+    <I>Tue Jan 19 03:23:46 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004823.html">Geminize, a Firefox addon for the Gemini Protocol
+</A></li>
+        <LI>Next message (by thread): <A HREF="004858.html">Geminize, a Firefox addon for the Gemini Protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4846">[ date ]</a>
+              <a href="thread.html#4846">[ thread ]</a>
+              <a href="subject.html#4846">[ subject ]</a>
+              <a href="author.html#4846">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Waveic,
+
+That depends on how you define native. If you ship an add-on that uses
+&quot;native messaging&quot;[1] to talk to a companion app (such as a console python
+script), then you can have the companion app do the gemini protocol dance
+and send the data back to Firefox.
+
+What sucks is that you can't have the add-on install the native companion
+app for obvious security reasons, but if you can convince your user to run
+an installer, then it is all very easy. When I was developing some SSB
+add-on toys for Firefox, I initially used this approach and it worked fine.
+Later I started using WebSockets to talk to the SSB server instead which
+was much easier for the user. Still, using native messaging works, and it
+works across platforms and across browsers. Oh, an in the subject of
+add-ons, I vaguelly remember something about  Brave is exposing sockets to
+add-on developers, you might want to check it out.
+
+I'm sad about libdweb as well. I was one of the contributors. It had so
+much potential, Mozilla totally dropped the ball.
+
+[1] Native Messaging:
+<A HREF="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging">https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Native_messaging</A>
+
+On Fri, 15 Jan 2021 at 10:56, Waweic &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">waweic at activ.ism.rocks</A>&gt; wrote:
+
+&gt;<i> You simply can't write a &quot;native&quot; Gemini add-on. Mozillas dweb project
+</I>&gt;<i> (which would have enabled you to build protocols other than http into
+</I>&gt;<i> the browser as an add-on) is dead in the water, everybody who had been
+</I>&gt;<i> working on it does not work at Mozilla anymore and the bug tracker
+</I>&gt;<i> status is like &quot;we aren't really interested, maybe, if you write it
+</I>&gt;<i> yourself, we might accept it into the Firefox codebase&quot;.
+</I>&gt;<i> Only upside is that Chromium does not do much better.
+</I>&gt;<i>
+</I>&gt;<i> On Fri, 2021-01-15 at 08:44 +0100, Stephane Bortzmeyer wrote:
+</I>&gt;<i> &gt; On Wed, Jan 13, 2021 at 08:58:45PM +0000,
+</I>&gt;<i> &gt;  <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">louis at waffle.tech</A> &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">louis at waffle.tech</A>&gt; wrote
+</I>&gt;<i> &gt;  a message of 6 lines which said:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; I wrote a Firefox addon for enabling the Gemini protocol. It's dead
+</I>&gt;<i> &gt; &gt; simple: it just redirects <A HREF="gemini://">gemini://</A> URLs &amp; links to a HTTP-to-
+</I>&gt;<i> &gt; &gt; Gemini
+</I>&gt;<i> &gt; &gt; proxy
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; No &quot;native&quot; Gemini add-on for Firefox? I don't find one in
+</I>&gt;<i> &gt; &lt;<A HREF="gemini://gemini.circumlunar.space/software/">gemini://gemini.circumlunar.space/software/</A>&gt; at the &quot;Browser
+</I>&gt;<i> &gt; plugins&quot;
+</I>&gt;<i> &gt; entry [side note: for this sort of things, fragments in URI
+</I>&gt;<i> &gt; &lt;<A HREF="gemini://gemini.bortzmeyer.org/gemini/fragment.gmi">gemini://gemini.bortzmeyer.org/gemini/fragment.gmi</A>&gt; could be
+</I>&gt;<i> &gt; useful]. But I do not see yours either, I assume this list is
+</I>&gt;<i> &gt; maintained with some delay.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+-- 
+<A HREF="https://www.andregarzia.com">https://www.andregarzia.com</A> &lt;<A HREF="http://www.andregarzia.com">http://www.andregarzia.com</A>&gt;
+Want to support me? Buy me a coffee at <A HREF="https://ko-fi.com/andregarzia">https://ko-fi.com/andregarzia</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210119/7c050978/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210119/7c050978/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004823.html">Geminize, a Firefox addon for the Gemini Protocol
+</A></li>
+	<LI>Next message (by thread): <A HREF="004858.html">Geminize, a Firefox addon for the Gemini Protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4846">[ date ]</a>
+              <a href="thread.html#4846">[ thread ]</a>
+              <a href="subject.html#4846">[ subject ]</a>
+              <a href="author.html#4846">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

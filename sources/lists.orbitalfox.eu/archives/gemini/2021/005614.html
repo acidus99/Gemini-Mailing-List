@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC] Backwards-compatible metadata in Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3CCAFkF85Z3WcZ%3DOBvkic7czSo8G61MxzdPJ1pfTEUHD9VGWgtrLw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005613.html">
+   <LINK REL="Next"  HREF="005615.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC] Backwards-compatible metadata in Gemini</H1>
+    <B>Oliver Simmons</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3CCAFkF85Z3WcZ%3DOBvkic7czSo8G61MxzdPJ1pfTEUHD9VGWgtrLw%40mail.gmail.com%3E"
+       TITLE="[SPEC] Backwards-compatible metadata in Gemini">oliversimmo at gmail.com
+       </A><BR>
+    <I>Thu Feb 25 10:23:45 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005613.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="005615.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5614">[ date ]</a>
+              <a href="thread.html#5614">[ thread ]</a>
+              <a href="subject.html#5614">[ subject ]</a>
+              <a href="author.html#5614">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, 25 Feb 2021 at 09:17, Omar Polo &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">op at omarpolo.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> I think this is a bogus point.  I never contributed to OSM, but from
+</I>&gt;<i> what you're saying I suppose they use something like XML/SGML/...  Those
+</I>&gt;<i> things are *meant* for extensions (the 'X' in XML stands for that),
+</I>&gt;<i> whilst everything around Gemini is focused on non-extensibility and
+</I>&gt;<i> simplicity, even at cost of missing features.
+</I>&gt;<i>
+</I>
+I'm not talking about XML/etc, that's an entirely separate topic.
+I'm talking about the key=value system.
+
+
+&gt;<i> But instead of thinking about what we may add, let's think about what we
+</I>&gt;<i> have:
+</I>&gt;<i>  - we have TLS because it's fundamental to guarantee confidentiality
+</I>&gt;<i>    between servers and clients
+</I>&gt;<i>  - we have status codes, because a page that says &quot;an error occurred&quot;
+</I>&gt;<i>    or &quot;certificate required&quot; cannot be interpreted correctly otherwise
+</I>&gt;<i>  - we have a media-type in the response, so users know what kind of
+</I>&gt;<i>    document they're getting
+</I>
+These are all about the protocol, not Gemtext.
+
+
+&gt;<i>  - we have links, so we can connect different pages, even across
+</I>&gt;<i>    different capsules
+</I>&gt;<i>  - we have titles, paragraphs, quotes and lists to express and organize
+</I>&gt;<i>    our writings
+</I>&gt;<i>  - we have pre-formatted blocks to allow certain types of
+</I>&gt;<i>    explanations/presentations that otherwise would have been impossible
+</I>&gt;<i>    (how do we teach how to write text/gemini in text/gemini?)
+</I>&gt;<i>
+</I>&gt;<i> From here you can notice how humanly-centric Gemini is.  We don't have
+</I>&gt;<i> features for bots (more than what it's absolutely needed at least) and
+</I>&gt;<i> even more importantly we only have basic and necessary stuff.  There's
+</I>&gt;<i> no fluff in Gemini.
+</I>
+
+
+&gt;<i> If you think about it, we only have features that we can't objectively
+</I>&gt;<i> live without (no links? no paragraphs? no media-types? ...) while we're
+</I>&gt;<i> lacking various things that would be &quot;nice to have&quot;.
+</I>
+Specification section 5.5 - Advanced line types:
+&gt;<i> The following advanced line types MAY be recognised by advanced clients.
+</I>&gt;<i> Simple clients may treat them all as text lines as per 5.4.1 without any loss of essential function.
+</I>
+I agree though, unnecessary features shouldn't be added.
+
+
+&gt;<i> We don't have headers, because with them comes extensibility and
+</I>&gt;<i> complexities, and we're getting just fine without them.  We don't have
+</I>&gt;<i> inline formatting because it's difficult to handle client-side and we're
+</I>&gt;<i> doing really fine without, etc.
+</I>
+Extensibility *is* an issue with metadata, but this applies to Gemtext
+as a whole due to its nature of being text-based, who's to stop
+someone from creating a new line type that their client understands?
+Standardising metadata now would make people less likely to add it in
+their own weird formats in the future, and laying down solid rules of
+what is and isn't allowed as metadata in Gemini documents helps in
+avoiding (it doesn't prevent entirely) people from adding styling or
+other weird things in the future.
+
+On the opposite side, adding metadata would make it easier for people
+to add new things like styling, if they ignore what it's intended for.
+Neither side of the argument really wins here in my eyes.
+
+
+&gt;<i>  - (your?) proposal of the ^^^ toggle line, while eastetically nice
+</I>&gt;<i>    (I'll give you that!) has the additional drawbacks of breaking the
+</I>&gt;<i>    concatenation.  As things stands, I know I can
+</I>&gt;<i>
+</I>&gt;<i>     cat file1.gmi file2.gmi ... &gt; result.gmi
+</I>&gt;<i>
+</I>&gt;<i>    and obtain a valid text/gemini file.  With your proposal, I have to
+</I>&gt;<i>    write a parser that analyzes every file.  There are a lot of people
+</I>&gt;<i>    who uses simple scripts/makefiles to generate their capsules with
+</I>&gt;<i>    standard UNIX tools, this would (possibly) break them.  And even
+</I>&gt;<i>    worst, the cat(1) example I gave before will break only *sometimes*,
+</I>&gt;<i>    depending on the content of the files.  (let's not talk about how to
+</I>&gt;<i>    merge metadata from multiple files...)
+</I>
+I hadn't thought about that, a very valid point.
+But I think allowing metadata to be mixed in with text, as the other
+format allows, is a bigger drawback than enforcing putting it at the
+end of files and breaking concatenation.
+Having both the opening and closing toggle lines would fix this, but
+it would allow moving and splitting up metadata thought files again.
+
+
+&gt;<i> Also, the examples you gave in support of your proposals seems bogus
+</I>&gt;<i> too.  Serving a mailing list archive over Gemini?  Cool, but why convert
+</I>&gt;<i> the mails to text/gemini?  Wrapping them in ``` (with headers visible)
+</I>&gt;<i> or serving them &quot;raw&quot; is not enough?
+</I>
+Yup, they're pretty pointless, there aren't many specialised 'good' use cases.
+
+
+&gt;<i> Why I think metadata will make things like GUS worst?  While full-text
+</I>&gt;<i> search is not without its drawbacks, as Bortzmeyer reminded us, people
+</I>&gt;<i> will abuse the metadata to &quot;go up&quot; in the search results, and the
+</I>&gt;<i> outcome of that is crystal-clear on the Web, other than making the life
+</I>&gt;<i> of who makes a SE more difficult, as now they also have to try to
+</I>&gt;<i> understand if the metadata is actually relevant or not.
+</I>
+Reverse is also true.
+Look at some recipes on the modern web, or a news article.
+Recipes will have a 'backstory', for some reason Margret's cookies
+will have a few paragraphs explaining how they improved her life and
+how this (bog standard) recipe has descended through her family.
+News articles are changed to be repetitive and often the
+highest-ranking ones in search results don't actually go into much
+detail.
+
+I'm not saying that metadata doesn't also have this issue, I'm saying
+it applies to everything, not just metadata.
+
+
+
+Now, to get off-topic:
+
+&gt;<i> [0]: mine?  I would love to have a syntax for definition lists and
+</I>&gt;<i>      3-levels of unordered lists.
+</I>
+If you mean ordered lists with your first point they would be ~fairly
+hard for clients to parse compared to other line types, they don't
+start with a static first three characters. (See spec section 5.3 -
+&quot;Line-orientation&quot;)
+1. Hi
+2. Foo
+3. Bar
+Works fine anyways with plain text, it just doesn't have as nice
+line-wrapping as quotes and unordered lists.
+
+Multiple levels of unordered lists actually wouldn't be very hard:
+* Hi
+** And welcome
+*** to my list
+* Boop!
+** Booyah!
+
+
+&gt;<i> [1]: .gms is GeminiScript of course.  A minimal, non-estensibile and
+</I>&gt;<i>      simple scripting language for your preferred client, hoping it
+</I>&gt;<i>      doesn't lack support for it /s
+</I>
+burn. it. with. fire.
+
+
+- Oliver Simmons (GoodClover)
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005613.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="005615.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5614">[ date ]</a>
+              <a href="thread.html#5614">[ thread ]</a>
+              <a href="subject.html#5614">[ subject ]</a>
+              <a href="author.html#5614">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Specification update (v 0.16.0)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Specification%20update%20%28v%200.16.0%29&In-Reply-To=%3C20211115025210.2c42a55ecfd672efaafef102%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007600.html">
+   <LINK REL="Next"  HREF="007633.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Specification update (v 0.16.0)</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Specification%20update%20%28v%200.16.0%29&In-Reply-To=%3C20211115025210.2c42a55ecfd672efaafef102%40gmail.com%3E"
+       TITLE="[ANN] Specification update (v 0.16.0)">linde.philip at gmail.com
+       </A><BR>
+    <I>Mon Nov 15 01:52:10 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007600.html">[ANN] Specification update (v 0.16.0)
+</A></li>
+        <LI>Next message (by thread): <A HREF="007633.html">[ANN] Specification update (v 0.16.0)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7604">[ date ]</a>
+              <a href="thread.html#7604">[ thread ]</a>
+              <a href="subject.html#7604">[ subject ]</a>
+              <a href="author.html#7604">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, 14 Nov 2021 23:03:01 +0100
+almaember &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">almaember at disroot.org</A>&gt; wrote:
+
+&gt;<i> Could you please elaborate on what &quot;apply the original request's query 
+</I>&gt;<i> to the redirect URL&quot; means? I'm not sure what this forbids.
+</I>
+Basically, from what I understand
+
+c: <A HREF="gemini://example.com/?querystring">gemini://example.com/?querystring</A>
+s: 30 /movedhere
+c (redirecting): <A HREF="gemini://example.com/movedhere?querystring">gemini://example.com/movedhere?querystring</A>
+
+is now explicitly forbidden. The client should drop the query string
+following the redirect and use the redirect URL directly:
+
+c: <A HREF="gemini://example.com/?querystring">gemini://example.com/?querystring</A>
+s: 30 /movedhere
+c (redirecting): <A HREF="gemini://example.com/movedhere">gemini://example.com/movedhere</A>
+
+The query string can still carry over, but it's up to the server, which
+has to be explicit about it:
+
+c: <A HREF="gemini://example.com/?querystring">gemini://example.com/?querystring</A>
+s: 30 /movedhere?querystring
+c (redirecting): <A HREF="gemini://example.com/movedhere?querystring">gemini://example.com/movedhere?querystring</A>
+
+-- 
+Philip
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007600.html">[ANN] Specification update (v 0.16.0)
+</A></li>
+	<LI>Next message (by thread): <A HREF="007633.html">[ANN] Specification update (v 0.16.0)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7604">[ date ]</a>
+              <a href="thread.html#7604">[ thread ]</a>
+              <a href="subject.html#7604">[ subject ]</a>
+              <a href="author.html#7604">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

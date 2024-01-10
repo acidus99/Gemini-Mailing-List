@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] Can I use existing ssh keys for gemini identity?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Can%20I%20use%20existing%20ssh%20keys%20for%20gemini%20identity%3F&In-Reply-To=%3C516de29c54955b7a908e87f772b61b3e%40tilde.team%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006877.html">
+   <LINK REL="Next"  HREF="006875.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] Can I use existing ssh keys for gemini identity?</H1>
+    <B>Robert &quot;khuxkm&quot; Miles</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Can%20I%20use%20existing%20ssh%20keys%20for%20gemini%20identity%3F&In-Reply-To=%3C516de29c54955b7a908e87f772b61b3e%40tilde.team%3E"
+       TITLE="[tech] Can I use existing ssh keys for gemini identity?">khuxkm at tilde.team
+       </A><BR>
+    <I>Fri Jul  9 23:57:28 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006877.html">[tech] Can I use existing ssh keys for gemini identity?
+</A></li>
+        <LI>Next message (by thread): <A HREF="006875.html">Gemini Digest, Vol 24, Issue 12
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6880">[ date ]</a>
+              <a href="thread.html#6880">[ thread ]</a>
+              <a href="subject.html#6880">[ subject ]</a>
+              <a href="author.html#6880">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>July 9, 2021 9:30 AM, &quot;Chris McGee&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">newton688 at gmail.com</A>&gt; wrote:
+
+&gt;<i> Hi All,
+</I>&gt;<i> 
+</I>&gt;<i> Does anyone know of a way to use my ssh RSA key-pairs as my identity for Gemini?
+</I>
+As everyone else has said, Gemini uses TLS and not SSH. However, nobody seems to have mentioned you
+could just sign a TLS certificate with your private key? You would simply use a command like the
+following:
+
+openssl req -x509 -sha256 -days 3650 -key privkey.pem -out mycert.crt
+
+That would generate a certificate with your existing private key.
+
+Just my two cents,
+Robert &quot;khuxkm&quot; Miles
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006877.html">[tech] Can I use existing ssh keys for gemini identity?
+</A></li>
+	<LI>Next message (by thread): <A HREF="006875.html">Gemini Digest, Vol 24, Issue 12
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6880">[ date ]</a>
+              <a href="thread.html#6880">[ thread ]</a>
+              <a href="subject.html#6880">[ subject ]</a>
+              <a href="author.html#6880">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

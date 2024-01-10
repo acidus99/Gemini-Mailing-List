@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] glv.one - Gemini PaaS
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20glv.one%20-%20Gemini%20PaaS&In-Reply-To=%3CCAG-mZ3h8CSFFBP%3Db_rgqD0Cnf9ZvLGGg_QBV5Siv%3D3qaur%2Bk8w%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002519.html">
+   <LINK REL="Next"  HREF="002521.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] glv.one - Gemini PaaS</H1>
+    <B>Peter Vernigorov</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20glv.one%20-%20Gemini%20PaaS&In-Reply-To=%3CCAG-mZ3h8CSFFBP%3Db_rgqD0Cnf9ZvLGGg_QBV5Siv%3D3qaur%2Bk8w%40mail.gmail.com%3E"
+       TITLE="[ANN] glv.one - Gemini PaaS">pitr.vern at gmail.com
+       </A><BR>
+    <I>Sat Aug 29 23:18:59 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002519.html">[ANN] glv.one - Gemini PaaS
+</A></li>
+        <LI>Next message (by thread): <A HREF="002521.html">[ANN] glv.one - Gemini PaaS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2520">[ date ]</a>
+              <a href="thread.html#2520">[ thread ]</a>
+              <a href="subject.html#2520">[ subject ]</a>
+              <a href="author.html#2520">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Beware, if you're building a Go app on Linux, on a platform that's not
+</I>Alpine, your code may fail to run! Because Alpine uses musl instead of
+libc.
+
+Yes, I compile my Go code with CGO_ENABLED=0, good point!
+
+&gt;<i> Are you thinking about putting these instructions up on
+</I>the capsule itself?
+
+Good idea, I added a link to a How To page.
+
+&gt;<i> And finally, is the source code of this platform available?
+</I>
+There isn't much code to make available per se. I run a private Docker
+registry with some limitations (eg. can't fetch images, only push).
+Registry is configured with a webhook [1] that notifies a simple http
+service of a push, which in turn checks user permissions, shuts down
+any old Docker containers and starts one with a new image version.
+Routing mesh is nginx built with ngx_stream_ssl_preread module [2] to
+route requests based on ClientHello messages. Admin panel is a very
+simple (200 lines) gemini app built with gig to create apps, view
+logs, rollback to old versions, etc.
+
+[1] <A HREF="https://docs.docker.com/registry/notifications/">https://docs.docker.com/registry/notifications/</A>
+[2] <A HREF="http://nginx.org/en/docs/stream/ngx_stream_ssl_preread_module.html">http://nginx.org/en/docs/stream/ngx_stream_ssl_preread_module.html</A>
+
+&gt;<i> Could I host a SMTP server with the Gemini server an make a gemail service?
+</I>
+Why not! I am not entirely sure what you mean by gemail, but ping me
+and we can try setting this up.
+
+On Sat, Aug 29, 2020 at 10:37 PM A. E. Spencer-Reed &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">easrng at gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Could I host a SMTP server with the Gemini server an make a gemail service?
+</I>&gt;<i>
+</I>&gt;<i> On Sat, Aug 29, 2020, 4:15 PM &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">easeout at tilde.team</A>&gt; wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> On Sat, Aug 29, 2020 at 07:39:17PM +0000, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+</I>&gt;&gt;<i> &gt; Beware, if you're building a Go app on Linux, on a platform that's not
+</I>&gt;&gt;<i> &gt; Alpine, your code may fail to run! Because Alpine uses musl instead of
+</I>&gt;&gt;<i> &gt; libc. Some solutions:
+</I>&gt;&gt;<i> &gt;
+</I>&gt;&gt;<i> &gt; - Build the binary in the docker container, and use multi-stage builds
+</I>&gt;&gt;<i> &gt;   to reduce size
+</I>&gt;&gt;<i> &gt; - Build with CGO_ENABLED=0 to not link to any C libs
+</I>&gt;&gt;<i> &gt; - Base your docker image on Debian/Ubuntu instead of Alpine
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I agree, and I'll add one more option:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> - While developing an application that will run in Docker, run your
+</I>&gt;&gt;<i>   development builds in Docker too.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> One advantage of Docker is that your development environment can closely
+</I>&gt;&gt;<i> simulate your release environment. A nice way to do that is with a
+</I>&gt;&gt;<i> multi-stage build and an optional bind-mounted volume:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> - In the first stage, include what you need to build, adding your source
+</I>&gt;&gt;<i>   files last.
+</I>&gt;&gt;<i> - In the second stage, do a release build.
+</I>&gt;&gt;<i> - In the third stage, restart with blank Alpine and add the binary.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> For a release image, build to the last stage. For development, build up
+</I>&gt;&gt;<i> to the first stage only, and supply a command to build and run. If you
+</I>&gt;&gt;<i> supply a bind mount to your source folder, you can even combine a tool
+</I>&gt;&gt;<i> like entr and a bind mount to build and run on source file changes from
+</I>&gt;&gt;<i> your editor of choice on the host OS.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I've used this kind of workflow with multiple languages, hosting Alpine
+</I>&gt;&gt;<i> containers on macOS. Go is particularly good at it due to its fast build
+</I>&gt;&gt;<i> times. This would also work if you are not rebuilding software, but say,
+</I>&gt;&gt;<i> rerunning a static site generator given new input files. I could trim
+</I>&gt;&gt;<i> some project down to an example if you're interested.
+</I></PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002519.html">[ANN] glv.one - Gemini PaaS
+</A></li>
+	<LI>Next message (by thread): <A HREF="002521.html">[ANN] glv.one - Gemini PaaS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2520">[ date ]</a>
+              <a href="thread.html#2520">[ thread ]</a>
+              <a href="subject.html#2520">[ subject ]</a>
+              <a href="author.html#2520">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

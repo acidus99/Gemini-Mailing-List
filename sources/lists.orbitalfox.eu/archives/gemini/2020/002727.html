@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Firefox Add-on protocol schema
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Firefox%20Add-on%20protocol%20schema&In-Reply-To=%3CCAF3jwTkqW-oMPtmuff3zttDFs0n4vptBQFUHgNLn8YBWHbDhmQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002725.html">
+   <LINK REL="Next"  HREF="002726.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Firefox Add-on protocol schema</H1>
+    <B>Andre Garzia</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Firefox%20Add-on%20protocol%20schema&In-Reply-To=%3CCAF3jwTkqW-oMPtmuff3zttDFs0n4vptBQFUHgNLn8YBWHbDhmQ%40mail.gmail.com%3E"
+       TITLE="Firefox Add-on protocol schema">andre at andregarzia.com
+       </A><BR>
+    <I>Mon Sep 14 20:49:57 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002725.html">Firefox Add-on protocol schema
+</A></li>
+        <LI>Next message (by thread): <A HREF="002726.html">Automatic hyphenation and the lang parameter to text/gemini  
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2727">[ date ]</a>
+              <a href="thread.html#2727">[ thread ]</a>
+              <a href="subject.html#2727">[ subject ]</a>
+              <a href="author.html#2727">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I believe I was one of the last people  to get niche protocols in that list
+as can be seen on this bugzilla issue[1]. I know that there is a
+disconnection between that list and whatever is used by
+&quot;registerProtocolHanlder&quot;[2], and that people at Igalia are working on
+patches to webkit/blink and talking to Mozilla to make sure the
+registerProtocolHandler works the same on all browser and has the dweb
+protocols in it. We got SSB whitelisted in that work. You can learn a bit
+more about it in [3]. I suspect that a simple patch like I did on [1] will
+not work, but opening an issue and maybe attaching a patch like that might
+be a good conversation opener with the maintainers. A message on one of the
+channels outlined in [4] asking for help with it might be a good way to go
+as well.
+
+[1]: <A HREF="https://bugzilla.mozilla.org/show_bug.cgi?id=1428446">https://bugzilla.mozilla.org/show_bug.cgi?id=1428446</A>
+[2]:
+<A HREF="https://developer.mozilla.org/en-US/docs/Web/API/Navigator/registerProtocolHandler">https://developer.mozilla.org/en-US/docs/Web/API/Navigator/registerProtocolHandler</A>
+[3]: <A HREF="https://github.com/whatwg/html/issues/3935">https://github.com/whatwg/html/issues/3935</A>
+[4]: <A HREF="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/Contact_us">https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/Contact_us</A>
+
+
+
+On Mon, 14 Sep 2020 at 19:22, Emma Humphries &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">ech at emmah.net</A>&gt; wrote:
+
+&gt;<i> There's a couple of Bugzilla bugs to follow on that:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="https://bugzilla.mozilla.org/show_bug.cgi?id=1385357">https://bugzilla.mozilla.org/show_bug.cgi?id=1385357</A> this looks like this
+</I>&gt;<i> got regressed as reported in
+</I>&gt;<i> <A HREF="https://bugzilla.mozilla.org/show_bug.cgi?id=1629149.">https://bugzilla.mozilla.org/show_bug.cgi?id=1629149.</A>
+</I>&gt;<i>
+</I>&gt;<i> I'll log in and update that.
+</I>&gt;<i>
+</I>&gt;<i> -- Emma
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> On Mon, Sep 14, 2020, at 11:17, acdw wrote:
+</I>&gt;<i> &gt; On 2020-09-14 (Monday) at 14:30, Leo &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">list at gkbrk.com</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; Firefox has a hard-coded list of schemas that extensions are allowed
+</I>&gt;<i> to
+</I>&gt;<i> &gt; &gt; handle without the web+
+</I>&gt;<i> &gt; &gt; or webext+ prefix. I believe gopher can be handled this way.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Has anyone got in touch or created an issue to add gemini to this
+</I>&gt;<i> list?
+</I>&gt;<i> &gt; &gt; While it defeats the purpose
+</I>&gt;<i> &gt; &gt; of having a separate protocol and document format, it would be good to
+</I>&gt;<i> &gt; &gt; make all the <A HREF="gemini://">gemini://</A> links
+</I>&gt;<i> &gt; &gt; work in Firefox.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; Leo
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I haven't, but I've come across this problem as well. Would it be
+</I>&gt;<i> &gt; possible for an add-on to just add &quot;web+&quot; to all &lt;a&gt; tags with
+</I>&gt;<i> &gt; href^=<A HREF="gemini://">gemini://</A> ? Then define a protocol handler to web+gemini?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I was going to try this but my Javascript skills are sorely lacking.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; ~ acdw
+</I>&gt;<i> &gt; acdw.net | breadpunk.club/~breadw
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>
+
+-- 
+<A HREF="https://www.andregarzia.com">https://www.andregarzia.com</A> &lt;<A HREF="http://www.andregarzia.com">http://www.andregarzia.com</A>&gt;
+Want to support me? Buy me a coffee at <A HREF="https://ko-fi.com/andregarzia">https://ko-fi.com/andregarzia</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200914/bac67dad/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200914/bac67dad/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002725.html">Firefox Add-on protocol schema
+</A></li>
+	<LI>Next message (by thread): <A HREF="002726.html">Automatic hyphenation and the lang parameter to text/gemini  
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2727">[ date ]</a>
+              <a href="thread.html#2727">[ thread ]</a>
+              <a href="subject.html#2727">[ subject ]</a>
+              <a href="author.html#2727">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

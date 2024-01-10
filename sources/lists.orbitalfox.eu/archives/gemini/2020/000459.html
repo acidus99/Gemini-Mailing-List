@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> An outsider's view of the `gemini://` protocol
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20outsider%27s%20view%20of%20the%20%60gemini%3A//%60%20protocol&In-Reply-To=%3C279d3c5b-6c42-3461-d86c-c6bc40ebb353%40NorthTech.US%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000456.html">
+   <LINK REL="Next"  HREF="000460.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>An outsider's view of the `gemini://` protocol</H1>
+    <B>Bradley D. Thornton</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20outsider%27s%20view%20of%20the%20%60gemini%3A//%60%20protocol&In-Reply-To=%3C279d3c5b-6c42-3461-d86c-c6bc40ebb353%40NorthTech.US%3E"
+       TITLE="An outsider's view of the `gemini://` protocol">Bradley at NorthTech.US
+       </A><BR>
+    <I>Sun Mar  1 08:22:22 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000456.html">An outsider's view of the `gemini://` protocol
+</A></li>
+        <LI>Next message (by thread): <A HREF="000460.html">An outsider's view of the `gemini://` protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#459">[ date ]</a>
+              <a href="thread.html#459">[ thread ]</a>
+              <a href="subject.html#459">[ subject ]</a>
+              <a href="author.html#459">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+On 2/28/2020 2:04 AM, Ciprian Dorin Craciun wrote:
+&gt;<i> On Fri, Feb 28, 2020 at 11:07 AM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+</I>&gt;&gt;<i>   Why is a numeric status code so bad?  Yes, the rest of the protocol is
+</I>&gt;&gt;<i> English centric (MIME types; left-to-right, UTF-8).  It just seems that
+</I>&gt;&gt;<i> using words (regardless of language) is just complexity for its own sake.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Why did people use `/etc/hosts` files before DNS was invented?  Why do
+</I>&gt;<i> we have `/etc/services`?  Why do we have `O_READ`?  Why do we have
+</I>&gt;<i> `chmod +x`?
+</I>&gt;<i> 
+</I>&gt;<i> Because numbers are hard to remember, and say nothing to a person that
+</I>&gt;<i> doesn't know the spec by heart.  (For example although I do a lot of
+</I>&gt;<i> HTTP related work with regard to routing and such, I always don't
+</I>&gt;<i> remember which of the 4-5 HTTP redirect codes says &quot;temporary redirect
+</I>&gt;<i> but keep the same method&quot; as &quot;opposed to temporary redirect but switch
+</I>&gt;<i> to `GET`&quot;.)
+</I>&gt;<i> 
+</I>
+Well, section 1.3.2 of the Gemini spec-spec says two digit codes, but
+single (first digit) is all that is required. So, a 2, a 20, and a 21
+are all success and there's no ambituity as to anything occuring at the
+first digit level, it's just more gravy with the second digit.
+
+I do fail to see why what appears to me to be a whole lot of work to
+implement what you suggest, especially considering that most servers
+will invariably choose to implement their own custom handlers for
+status/error codes, much like one does in Apache so the server operator
+themselves gets to choose what content to deliver as a result of a 404.
+
+So there would be added framework for human readable, non-numeric status
+codes (I would rather read the numerical codes in my logfiles), and then
+as Gemini matures and stabilizes, devs will build frameworks so the
+server operators can and will devlop custom pages for the status codes
+anyway. This seems, at best, somewhat redundant to me (ultimately).
+
+A 5 (or 50) might not provide as complete a picture as one would like,
+yet it's optional to serve the full digit code and still unambiguous
+with respect of what's going on at the baseline - a permanent falure.
+
+A 51 though, perhaps the most common user facing state where errors are
+encountered, will certainly eventually be accommodated by some clever
+little remark intended to amuse the user who just asked for something
+that isn't there. Reinforcing my suggestion that the server operators
+are going to want the devs to enable them to deliver cute little
+messages during such fashion faux pas'.
+
+That's just kinda what I was pondering while reading the exchange.
+
+-- 
+Bradley D. Thornton
+Manager Network Services
+<A HREF="http://NorthTech.US">http://NorthTech.US</A>
+TEL: +1.310.421.8268
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000456.html">An outsider's view of the `gemini://` protocol
+</A></li>
+	<LI>Next message (by thread): <A HREF="000460.html">An outsider's view of the `gemini://` protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#459">[ date ]</a>
+              <a href="thread.html#459">[ thread ]</a>
+              <a href="subject.html#459">[ subject ]</a>
+              <a href="author.html#459">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

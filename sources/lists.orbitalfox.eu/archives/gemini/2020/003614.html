@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> On the use of %20 instead of + in URIs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20the%20use%20of%20%2520%20instead%20of%20%2B%20in%20URIs&In-Reply-To=%3C0b696f2a-21ac-4c24-6efa-8dbe7353ef2b%40lavabit.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003611.html">
+   <LINK REL="Next"  HREF="003615.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>On the use of %20 instead of + in URIs</H1>
+    <B>James Tomasino</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20the%20use%20of%20%2520%20instead%20of%20%2B%20in%20URIs&In-Reply-To=%3C0b696f2a-21ac-4c24-6efa-8dbe7353ef2b%40lavabit.com%3E"
+       TITLE="On the use of %20 instead of + in URIs">tomasino at lavabit.com
+       </A><BR>
+    <I>Fri Nov 27 17:53:36 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003611.html">On the use of %20 instead of + in URIs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003615.html">On the use of %20 instead of + in URIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3614">[ date ]</a>
+              <a href="thread.html#3614">[ thread ]</a>
+              <a href="subject.html#3614">[ subject ]</a>
+              <a href="author.html#3614">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 11/27/20 4:20 PM, Adnan Maolood wrote:
+&gt;<i> The Go URL library encodes spaces in the query string as '+'. Is this
+</I>&gt;<i> correct behavior?
+</I>
+It's correct, but be careful:
+
+- x-www-form-urlencoded *should* use +
+- query string *may* use either + or %20 (%20 is notable in mailto link subject values)
+- remainder of URL *must* use %20
+
+That last bit is the important one for this discussion. Any spaces before the ? must be %20.
+
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003611.html">On the use of %20 instead of + in URIs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003615.html">On the use of %20 instead of + in URIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3614">[ date ]</a>
+              <a href="thread.html#3614">[ thread ]</a>
+              <a href="subject.html#3614">[ subject ]</a>
+              <a href="author.html#3614">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

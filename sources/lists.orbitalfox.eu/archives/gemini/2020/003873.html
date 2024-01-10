@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Three possible uses for IRIs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3CCAD2gp_TtBMWDkoPT-dd%2BGR8Sga0L9xGbtgnrUyu%3Dwj1Tg4A8Eg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003831.html">
+   <LINK REL="Next"  HREF="003875.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Three possible uses for IRIs</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3CCAD2gp_TtBMWDkoPT-dd%2BGR8Sga0L9xGbtgnrUyu%3Dwj1Tg4A8Eg%40mail.gmail.com%3E"
+       TITLE="Three possible uses for IRIs">cowan at ccil.org
+       </A><BR>
+    <I>Tue Dec  8 02:37:28 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003831.html">[ANN] A Nagios (and compatible) monitoring plugin for Gemini servers
+</A></li>
+        <LI>Next message (by thread): <A HREF="003875.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3873">[ date ]</a>
+              <a href="thread.html#3873">[ thread ]</a>
+              <a href="subject.html#3873">[ subject ]</a>
+              <a href="author.html#3873">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>(Starting a separate thread for this)
+
+I think there are three possible places where IRIs could possibly appear in
+Gemini:
+
+1) In client inputs (the address bar or CLI analogue) and outputs
+(revealing a link)
+
+2) In the Gemini protocol
+
+3) In text/gemini link lines
+
+I think it's important to disentangle these three cases.  Case 1 just
+affects individual clients and can be left up to them, except that there is
+some best-practice advice about when *n&#1086;t* to display an IRI, specifically
+when there are cross-script confusables involved.  For example,
+&quot;<A HREF="gemini://gemini.circumlunar.xn--spce-63d/">gemini://gemini.circumlunar.xn--spce-63d/</A>&quot; should not be displayed as
+&quot;<A HREF="gemini://gemini.circumlunar.sp&#1072;ce">gemini://gemini.circumlunar.sp&#1072;ce</A>&quot;, because that would be deceptive, even
+in Gemini: you might be pointed to the Evil Version of the Gemini spec and
+not realize it.
+
+I think everyone agrees that Case 2 is a mistake: the protocol elements
+should continue to be URIs.
+
+Case 3 is the difficult one.  Should authors be allowed to write
+text/gemini links with IRI references? It's not that hard for a client to
+convert them to URI references.  No normalization is needed except as part
+of punycoding.  However, everyone has to agree on whether this should work
+or not; we don't want a user trying to follow a link and sending the Wrong
+Thing to the server.
+
+Gemini isn't just supposed to be easy to program for, it's supposed to be
+easy to author, too.  Unfortunately these objectives are in conflict here.
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+Lope de Vega: &quot;It wonders me I can speak at all.  Some caitiff rogue
+did rudely yerk me on the knob, wherefrom my wits yet wander.&quot;
+An Englishman: &quot;Ay, belike a filchman to the nab'll leave you
+crank for a spell.&quot; --Harry Turtledove, Ruled Britannia
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201207/ed25588c/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201207/ed25588c/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003831.html">[ANN] A Nagios (and compatible) monitoring plugin for Gemini servers
+</A></li>
+	<LI>Next message (by thread): <A HREF="003875.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3873">[ date ]</a>
+              <a href="thread.html#3873">[ thread ]</a>
+              <a href="subject.html#3873">[ subject ]</a>
+              <a href="author.html#3873">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,392 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Supporting optional underscores for italics
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Supporting%20optional%20underscores%20for%20italics&In-Reply-To=%3CCAD2gp_S%3DZuYjNJuJL5L6Nx%2B7EJ%3DAnQ%3D%3D24Gf13JejA%2BXEumbjQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003308.html">
+   <LINK REL="Next"  HREF="003291.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Supporting optional underscores for italics</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Supporting%20optional%20underscores%20for%20italics&In-Reply-To=%3CCAD2gp_S%3DZuYjNJuJL5L6Nx%2B7EJ%3DAnQ%3D%3D24Gf13JejA%2BXEumbjQ%40mail.gmail.com%3E"
+       TITLE="Supporting optional underscores for italics">cowan at ccil.org
+       </A><BR>
+    <I>Fri Nov 13 01:03:52 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003308.html">adding space after heading and more
+</A></li>
+        <LI>Next message (by thread): <A HREF="003291.html">Supporting optional underscores for italics
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3290">[ date ]</a>
+              <a href="thread.html#3290">[ thread ]</a>
+              <a href="subject.html#3290">[ subject ]</a>
+              <a href="author.html#3290">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Given that we are *not* going to change the definition of text/gemini, but
+that many people want italics (including me), I have prepared some
+instructions aimed at programmers of client software who would like to
+support the _underscore emphasis_ convention.
+
+0.  Under no circumstances are underscores to be removed from the text.
+That compensates for less-than-infallible algorithms.
+
+1.  If an underscore appears outside an emphasized text section, and is at
+the beginning of a text line or after the # characters in a header line, or
+is preceded by a whitespace character, then it marks the beginning of an
+emphasized-text section (rendered as italics or in some other way).
+
+2.  If an underscore appears inside an emphasized text section, and is at
+the end of a line, or is followed by whitespace, sentence-terminating
+punctuation, or parenthesis- or quotation-terminating punctuation, then it
+marks the end of the emphasized-text section.
+
+These rules exclude underscores in things like snake_case_variables, while
+supporting most actual uses.
+
+3.  An emphasized-text section ends unconditionally at the end of a line.
+
+The attached file specifies all the Unicode whitespace and terminating
+punctuation, from the Unicode Character Database.  There are quite a few,
+but you don't even need a regular expression, just a list of the characters.
+
+I hope this is helpful and/or inspirational.
+
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+People go through the bother of Christmas because Christmas helps them
+to understand why they go through the bother of living out their lives
+the rest of the year. For one brief instant, we see human society as it
+should and could be, a world in which business has become the exchanging
+of presents and in which nothing is important except the happiness and
+well-being of the ultimate consumer.  --Northrop Frye (1948)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201112/9d0022fa/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201112/9d0022fa/attachment-0001.htm</A>&gt;
+-------------- next part --------------
+0009..000D    ; White_Space # Cc   [5] &lt;control-0009&gt;..&lt;control-000D&gt;
+0020          ; White_Space # Zs       SPACE
+0085          ; White_Space # Cc       &lt;control-0085&gt;
+00A0          ; White_Space # Zs       NO-BREAK SPACE
+1680          ; White_Space # Zs       OGHAM SPACE MARK
+2000..200A    ; White_Space # Zs  [11] EN QUAD..HAIR SPACE
+2028          ; White_Space # Zl       LINE SEPARATOR
+2029          ; White_Space # Zp       PARAGRAPH SEPARATOR
+202F          ; White_Space # Zs       NARROW NO-BREAK SPACE
+205F          ; White_Space # Zs       MEDIUM MATHEMATICAL SPACE
+3000          ; White_Space # Zs       IDEOGRAPHIC SPACE
+
+# Total code points: 25
+
+# ================================================
+
+0021          ; STerm # Po       EXCLAMATION MARK
+003F          ; STerm # Po       QUESTION MARK
+0589          ; STerm # Po       ARMENIAN FULL STOP
+061E..061F    ; STerm # Po   [2] ARABIC TRIPLE DOT PUNCTUATION MARK..ARABIC QUESTION MARK
+06D4          ; STerm # Po       ARABIC FULL STOP
+0700..0702    ; STerm # Po   [3] SYRIAC END OF PARAGRAPH..SYRIAC SUBLINEAR FULL STOP
+07F9          ; STerm # Po       NKO EXCLAMATION MARK
+0837          ; STerm # Po       SAMARITAN PUNCTUATION MELODIC QITSA
+0839          ; STerm # Po       SAMARITAN PUNCTUATION QITSA
+083D..083E    ; STerm # Po   [2] SAMARITAN PUNCTUATION SOF MASHFAAT..SAMARITAN PUNCTUATION ANNAAU
+0964..0965    ; STerm # Po   [2] DEVANAGARI DANDA..DEVANAGARI DOUBLE DANDA
+104A..104B    ; STerm # Po   [2] MYANMAR SIGN LITTLE SECTION..MYANMAR SIGN SECTION
+1362          ; STerm # Po       ETHIOPIC FULL STOP
+1367..1368    ; STerm # Po   [2] ETHIOPIC QUESTION MARK..ETHIOPIC PARAGRAPH SEPARATOR
+166E          ; STerm # Po       CANADIAN SYLLABICS FULL STOP
+1735..1736    ; STerm # Po   [2] PHILIPPINE SINGLE PUNCTUATION..PHILIPPINE DOUBLE PUNCTUATION
+1803          ; STerm # Po       MONGOLIAN FULL STOP
+1809          ; STerm # Po       MONGOLIAN MANCHU FULL STOP
+1944..1945    ; STerm # Po   [2] LIMBU EXCLAMATION MARK..LIMBU QUESTION MARK
+1AA8..1AAB    ; STerm # Po   [4] TAI THAM SIGN KAAN..TAI THAM SIGN SATKAANKUU
+1B5A..1B5B    ; STerm # Po   [2] BALINESE PANTI..BALINESE PAMADA
+1B5E..1B5F    ; STerm # Po   [2] BALINESE CARIK SIKI..BALINESE CARIK PAREREN
+1C3B..1C3C    ; STerm # Po   [2] LEPCHA PUNCTUATION TA-ROL..LEPCHA PUNCTUATION NYET THYOOM TA-ROL
+1C7E..1C7F    ; STerm # Po   [2] OL CHIKI PUNCTUATION MUCAAD..OL CHIKI PUNCTUATION DOUBLE MUCAAD
+203C..203D    ; STerm # Po   [2] DOUBLE EXCLAMATION MARK..INTERROBANG
+2047..2049    ; STerm # Po   [3] DOUBLE QUESTION MARK..EXCLAMATION QUESTION MARK
+2E2E          ; STerm # Po       REVERSED QUESTION MARK
+2E3C          ; STerm # Po       STENOGRAPHIC FULL STOP
+3002          ; STerm # Po       IDEOGRAPHIC FULL STOP
+A4FF          ; STerm # Po       LISU PUNCTUATION FULL STOP
+A60E..A60F    ; STerm # Po   [2] VAI FULL STOP..VAI QUESTION MARK
+A6F3          ; STerm # Po       BAMUM FULL STOP
+A6F7          ; STerm # Po       BAMUM QUESTION MARK
+A876..A877    ; STerm # Po   [2] PHAGS-PA MARK SHAD..PHAGS-PA MARK DOUBLE SHAD
+A8CE..A8CF    ; STerm # Po   [2] SAURASHTRA DANDA..SAURASHTRA DOUBLE DANDA
+A92F          ; STerm # Po       KAYAH LI SIGN SHYA
+A9C8..A9C9    ; STerm # Po   [2] JAVANESE PADA LINGSA..JAVANESE PADA LUNGSI
+AA5D..AA5F    ; STerm # Po   [3] CHAM PUNCTUATION DANDA..CHAM PUNCTUATION TRIPLE DANDA
+AAF0..AAF1    ; STerm # Po   [2] MEETEI MAYEK CHEIKHAN..MEETEI MAYEK AHANG KHUDAM
+ABEB          ; STerm # Po       MEETEI MAYEK CHEIKHEI
+FE56..FE57    ; STerm # Po   [2] SMALL QUESTION MARK..SMALL EXCLAMATION MARK
+FF01          ; STerm # Po       FULLWIDTH EXCLAMATION MARK
+FF1F          ; STerm # Po       FULLWIDTH QUESTION MARK
+FF61          ; STerm # Po       HALFWIDTH IDEOGRAPHIC FULL STOP
+10A56..10A57  ; STerm # Po   [2] KHAROSHTHI PUNCTUATION DANDA..KHAROSHTHI PUNCTUATION DOUBLE DANDA
+10F55..10F59  ; STerm # Po   [5] SOGDIAN PUNCTUATION TWO VERTICAL BARS..SOGDIAN PUNCTUATION HALF CIRCLE WITH DOT
+11047..11048  ; STerm # Po   [2] BRAHMI DANDA..BRAHMI DOUBLE DANDA
+110BE..110C1  ; STerm # Po   [4] KAITHI SECTION MARK..KAITHI DOUBLE DANDA
+11141..11143  ; STerm # Po   [3] CHAKMA DANDA..CHAKMA QUESTION MARK
+111C5..111C6  ; STerm # Po   [2] SHARADA DANDA..SHARADA DOUBLE DANDA
+111CD         ; STerm # Po       SHARADA SUTRA MARK
+111DE..111DF  ; STerm # Po   [2] SHARADA SECTION MARK-1..SHARADA SECTION MARK-2
+11238..11239  ; STerm # Po   [2] KHOJKI DANDA..KHOJKI DOUBLE DANDA
+1123B..1123C  ; STerm # Po   [2] KHOJKI SECTION MARK..KHOJKI DOUBLE SECTION MARK
+112A9         ; STerm # Po       MULTANI SECTION MARK
+1144B..1144C  ; STerm # Po   [2] NEWA DANDA..NEWA DOUBLE DANDA
+115C2..115C3  ; STerm # Po   [2] SIDDHAM DANDA..SIDDHAM DOUBLE DANDA
+115C9..115D7  ; STerm # Po  [15] SIDDHAM END OF TEXT MARK..SIDDHAM SECTION MARK WITH CIRCLES AND FOUR ENCLOSURES
+11641..11642  ; STerm # Po   [2] MODI DANDA..MODI DOUBLE DANDA
+1173C..1173E  ; STerm # Po   [3] AHOM SIGN SMALL SECTION..AHOM SIGN RULAI
+11944         ; STerm # Po       DIVES AKURU DOUBLE DANDA
+11946         ; STerm # Po       DIVES AKURU END OF TEXT MARK
+11A42..11A43  ; STerm # Po   [2] ZANABAZAR SQUARE MARK SHAD..ZANABAZAR SQUARE MARK DOUBLE SHAD
+11A9B..11A9C  ; STerm # Po   [2] SOYOMBO MARK SHAD..SOYOMBO MARK DOUBLE SHAD
+11C41..11C42  ; STerm # Po   [2] BHAIKSUKI DANDA..BHAIKSUKI DOUBLE DANDA
+11EF7..11EF8  ; STerm # Po   [2] MAKASAR PASSIMBANG..MAKASAR END OF SECTION
+16A6E..16A6F  ; STerm # Po   [2] MRO DANDA..MRO DOUBLE DANDA
+16AF5         ; STerm # Po       BASSA VAH FULL STOP
+16B37..16B38  ; STerm # Po   [2] PAHAWH HMONG SIGN VOS THOM..PAHAWH HMONG SIGN VOS TSHAB CEEB
+16B44         ; STerm # Po       PAHAWH HMONG SIGN XAUS
+16E98         ; STerm # Po       MEDEFAIDRIN FULL STOP
+1BC9F         ; STerm # Po       DUPLOYAN PUNCTUATION CHINOOK FULL STOP
+1DA88         ; STerm # Po       SIGNWRITING FULL STOP
+
+# Total code points: 140
+
+# ================================================
+
+0022          ; Close # Po       QUOTATION MARK
+0027          ; Close # Po       APOSTROPHE
+0028          ; Close # Ps       LEFT PARENTHESIS
+0029          ; Close # Pe       RIGHT PARENTHESIS
+005B          ; Close # Ps       LEFT SQUARE BRACKET
+005D          ; Close # Pe       RIGHT SQUARE BRACKET
+007B          ; Close # Ps       LEFT CURLY BRACKET
+007D          ; Close # Pe       RIGHT CURLY BRACKET
+00AB          ; Close # Pi       LEFT-POINTING DOUBLE ANGLE QUOTATION MARK
+00BB          ; Close # Pf       RIGHT-POINTING DOUBLE ANGLE QUOTATION MARK
+0F3A          ; Close # Ps       TIBETAN MARK GUG RTAGS GYON
+0F3B          ; Close # Pe       TIBETAN MARK GUG RTAGS GYAS
+0F3C          ; Close # Ps       TIBETAN MARK ANG KHANG GYON
+0F3D          ; Close # Pe       TIBETAN MARK ANG KHANG GYAS
+169B          ; Close # Ps       OGHAM FEATHER MARK
+169C          ; Close # Pe       OGHAM REVERSED FEATHER MARK
+2018          ; Close # Pi       LEFT SINGLE QUOTATION MARK
+2019          ; Close # Pf       RIGHT SINGLE QUOTATION MARK
+201A          ; Close # Ps       SINGLE LOW-9 QUOTATION MARK
+201B..201C    ; Close # Pi   [2] SINGLE HIGH-REVERSED-9 QUOTATION MARK..LEFT DOUBLE QUOTATION MARK
+201D          ; Close # Pf       RIGHT DOUBLE QUOTATION MARK
+201E          ; Close # Ps       DOUBLE LOW-9 QUOTATION MARK
+201F          ; Close # Pi       DOUBLE HIGH-REVERSED-9 QUOTATION MARK
+2039          ; Close # Pi       SINGLE LEFT-POINTING ANGLE QUOTATION MARK
+203A          ; Close # Pf       SINGLE RIGHT-POINTING ANGLE QUOTATION MARK
+2045          ; Close # Ps       LEFT SQUARE BRACKET WITH QUILL
+2046          ; Close # Pe       RIGHT SQUARE BRACKET WITH QUILL
+207D          ; Close # Ps       SUPERSCRIPT LEFT PARENTHESIS
+207E          ; Close # Pe       SUPERSCRIPT RIGHT PARENTHESIS
+208D          ; Close # Ps       SUBSCRIPT LEFT PARENTHESIS
+208E          ; Close # Pe       SUBSCRIPT RIGHT PARENTHESIS
+2308          ; Close # Ps       LEFT CEILING
+2309          ; Close # Pe       RIGHT CEILING
+230A          ; Close # Ps       LEFT FLOOR
+230B          ; Close # Pe       RIGHT FLOOR
+2329          ; Close # Ps       LEFT-POINTING ANGLE BRACKET
+232A          ; Close # Pe       RIGHT-POINTING ANGLE BRACKET
+275B..2760    ; Close # So   [6] HEAVY SINGLE TURNED COMMA QUOTATION MARK ORNAMENT..HEAVY LOW DOUBLE COMMA QUOTATION MARK ORNAMENT
+2768          ; Close # Ps       MEDIUM LEFT PARENTHESIS ORNAMENT
+2769          ; Close # Pe       MEDIUM RIGHT PARENTHESIS ORNAMENT
+276A          ; Close # Ps       MEDIUM FLATTENED LEFT PARENTHESIS ORNAMENT
+276B          ; Close # Pe       MEDIUM FLATTENED RIGHT PARENTHESIS ORNAMENT
+276C          ; Close # Ps       MEDIUM LEFT-POINTING ANGLE BRACKET ORNAMENT
+276D          ; Close # Pe       MEDIUM RIGHT-POINTING ANGLE BRACKET ORNAMENT
+276E          ; Close # Ps       HEAVY LEFT-POINTING ANGLE QUOTATION MARK ORNAMENT
+276F          ; Close # Pe       HEAVY RIGHT-POINTING ANGLE QUOTATION MARK ORNAMENT
+2770          ; Close # Ps       HEAVY LEFT-POINTING ANGLE BRACKET ORNAMENT
+2771          ; Close # Pe       HEAVY RIGHT-POINTING ANGLE BRACKET ORNAMENT
+2772          ; Close # Ps       LIGHT LEFT TORTOISE SHELL BRACKET ORNAMENT
+2773          ; Close # Pe       LIGHT RIGHT TORTOISE SHELL BRACKET ORNAMENT
+2774          ; Close # Ps       MEDIUM LEFT CURLY BRACKET ORNAMENT
+2775          ; Close # Pe       MEDIUM RIGHT CURLY BRACKET ORNAMENT
+27C5          ; Close # Ps       LEFT S-SHAPED BAG DELIMITER
+27C6          ; Close # Pe       RIGHT S-SHAPED BAG DELIMITER
+27E6          ; Close # Ps       MATHEMATICAL LEFT WHITE SQUARE BRACKET
+27E7          ; Close # Pe       MATHEMATICAL RIGHT WHITE SQUARE BRACKET
+27E8          ; Close # Ps       MATHEMATICAL LEFT ANGLE BRACKET
+27E9          ; Close # Pe       MATHEMATICAL RIGHT ANGLE BRACKET
+27EA          ; Close # Ps       MATHEMATICAL LEFT DOUBLE ANGLE BRACKET
+27EB          ; Close # Pe       MATHEMATICAL RIGHT DOUBLE ANGLE BRACKET
+27EC          ; Close # Ps       MATHEMATICAL LEFT WHITE TORTOISE SHELL BRACKET
+27ED          ; Close # Pe       MATHEMATICAL RIGHT WHITE TORTOISE SHELL BRACKET
+27EE          ; Close # Ps       MATHEMATICAL LEFT FLATTENED PARENTHESIS
+27EF          ; Close # Pe       MATHEMATICAL RIGHT FLATTENED PARENTHESIS
+2983          ; Close # Ps       LEFT WHITE CURLY BRACKET
+2984          ; Close # Pe       RIGHT WHITE CURLY BRACKET
+2985          ; Close # Ps       LEFT WHITE PARENTHESIS
+2986          ; Close # Pe       RIGHT WHITE PARENTHESIS
+2987          ; Close # Ps       Z NOTATION LEFT IMAGE BRACKET
+2988          ; Close # Pe       Z NOTATION RIGHT IMAGE BRACKET
+2989          ; Close # Ps       Z NOTATION LEFT BINDING BRACKET
+298A          ; Close # Pe       Z NOTATION RIGHT BINDING BRACKET
+298B          ; Close # Ps       LEFT SQUARE BRACKET WITH UNDERBAR
+298C          ; Close # Pe       RIGHT SQUARE BRACKET WITH UNDERBAR
+298D          ; Close # Ps       LEFT SQUARE BRACKET WITH TICK IN TOP CORNER
+298E          ; Close # Pe       RIGHT SQUARE BRACKET WITH TICK IN BOTTOM CORNER
+298F          ; Close # Ps       LEFT SQUARE BRACKET WITH TICK IN BOTTOM CORNER
+2990          ; Close # Pe       RIGHT SQUARE BRACKET WITH TICK IN TOP CORNER
+2991          ; Close # Ps       LEFT ANGLE BRACKET WITH DOT
+2992          ; Close # Pe       RIGHT ANGLE BRACKET WITH DOT
+2993          ; Close # Ps       LEFT ARC LESS-THAN BRACKET
+2994          ; Close # Pe       RIGHT ARC GREATER-THAN BRACKET
+2995          ; Close # Ps       DOUBLE LEFT ARC GREATER-THAN BRACKET
+2996          ; Close # Pe       DOUBLE RIGHT ARC LESS-THAN BRACKET
+2997          ; Close # Ps       LEFT BLACK TORTOISE SHELL BRACKET
+2998          ; Close # Pe       RIGHT BLACK TORTOISE SHELL BRACKET
+29D8          ; Close # Ps       LEFT WIGGLY FENCE
+29D9          ; Close # Pe       RIGHT WIGGLY FENCE
+29DA          ; Close # Ps       LEFT DOUBLE WIGGLY FENCE
+29DB          ; Close # Pe       RIGHT DOUBLE WIGGLY FENCE
+29FC          ; Close # Ps       LEFT-POINTING CURVED ANGLE BRACKET
+29FD          ; Close # Pe       RIGHT-POINTING CURVED ANGLE BRACKET
+2E00..2E01    ; Close # Po   [2] RIGHT ANGLE SUBSTITUTION MARKER..RIGHT ANGLE DOTTED SUBSTITUTION MARKER
+2E02          ; Close # Pi       LEFT SUBSTITUTION BRACKET
+2E03          ; Close # Pf       RIGHT SUBSTITUTION BRACKET
+2E04          ; Close # Pi       LEFT DOTTED SUBSTITUTION BRACKET
+2E05          ; Close # Pf       RIGHT DOTTED SUBSTITUTION BRACKET
+2E06..2E08    ; Close # Po   [3] RAISED INTERPOLATION MARKER..DOTTED TRANSPOSITION MARKER
+2E09          ; Close # Pi       LEFT TRANSPOSITION BRACKET
+2E0A          ; Close # Pf       RIGHT TRANSPOSITION BRACKET
+2E0B          ; Close # Po       RAISED SQUARE
+2E0C          ; Close # Pi       LEFT RAISED OMISSION BRACKET
+2E0D          ; Close # Pf       RIGHT RAISED OMISSION BRACKET
+2E1C          ; Close # Pi       LEFT LOW PARAPHRASE BRACKET
+2E1D          ; Close # Pf       RIGHT LOW PARAPHRASE BRACKET
+2E20          ; Close # Pi       LEFT VERTICAL BAR WITH QUILL
+2E21          ; Close # Pf       RIGHT VERTICAL BAR WITH QUILL
+2E22          ; Close # Ps       TOP LEFT HALF BRACKET
+2E23          ; Close # Pe       TOP RIGHT HALF BRACKET
+2E24          ; Close # Ps       BOTTOM LEFT HALF BRACKET
+2E25          ; Close # Pe       BOTTOM RIGHT HALF BRACKET
+2E26          ; Close # Ps       LEFT SIDEWAYS U BRACKET
+2E27          ; Close # Pe       RIGHT SIDEWAYS U BRACKET
+2E28          ; Close # Ps       LEFT DOUBLE PARENTHESIS
+2E29          ; Close # Pe       RIGHT DOUBLE PARENTHESIS
+2E42          ; Close # Ps       DOUBLE LOW-REVERSED-9 QUOTATION MARK
+3008          ; Close # Ps       LEFT ANGLE BRACKET
+3009          ; Close # Pe       RIGHT ANGLE BRACKET
+300A          ; Close # Ps       LEFT DOUBLE ANGLE BRACKET
+300B          ; Close # Pe       RIGHT DOUBLE ANGLE BRACKET
+300C          ; Close # Ps       LEFT CORNER BRACKET
+300D          ; Close # Pe       RIGHT CORNER BRACKET
+300E          ; Close # Ps       LEFT WHITE CORNER BRACKET
+300F          ; Close # Pe       RIGHT WHITE CORNER BRACKET
+3010          ; Close # Ps       LEFT BLACK LENTICULAR BRACKET
+3011          ; Close # Pe       RIGHT BLACK LENTICULAR BRACKET
+3014          ; Close # Ps       LEFT TORTOISE SHELL BRACKET
+3015          ; Close # Pe       RIGHT TORTOISE SHELL BRACKET
+3016          ; Close # Ps       LEFT WHITE LENTICULAR BRACKET
+3017          ; Close # Pe       RIGHT WHITE LENTICULAR BRACKET
+3018          ; Close # Ps       LEFT WHITE TORTOISE SHELL BRACKET
+3019          ; Close # Pe       RIGHT WHITE TORTOISE SHELL BRACKET
+301A          ; Close # Ps       LEFT WHITE SQUARE BRACKET
+301B          ; Close # Pe       RIGHT WHITE SQUARE BRACKET
+301D          ; Close # Ps       REVERSED DOUBLE PRIME QUOTATION MARK
+301E..301F    ; Close # Pe   [2] DOUBLE PRIME QUOTATION MARK..LOW DOUBLE PRIME QUOTATION MARK
+FD3E          ; Close # Pe       ORNATE LEFT PARENTHESIS
+FD3F          ; Close # Ps       ORNATE RIGHT PARENTHESIS
+FE17          ; Close # Ps       PRESENTATION FORM FOR VERTICAL LEFT WHITE LENTICULAR BRACKET
+FE18          ; Close # Pe       PRESENTATION FORM FOR VERTICAL RIGHT WHITE LENTICULAR BRAKCET
+FE35          ; Close # Ps       PRESENTATION FORM FOR VERTICAL LEFT PARENTHESIS
+FE36          ; Close # Pe       PRESENTATION FORM FOR VERTICAL RIGHT PARENTHESIS
+FE37          ; Close # Ps       PRESENTATION FORM FOR VERTICAL LEFT CURLY BRACKET
+FE38          ; Close # Pe       PRESENTATION FORM FOR VERTICAL RIGHT CURLY BRACKET
+FE39          ; Close # Ps       PRESENTATION FORM FOR VERTICAL LEFT TORTOISE SHELL BRACKET
+FE3A          ; Close # Pe       PRESENTATION FORM FOR VERTICAL RIGHT TORTOISE SHELL BRACKET
+FE3B          ; Close # Ps       PRESENTATION FORM FOR VERTICAL LEFT BLACK LENTICULAR BRACKET
+FE3C          ; Close # Pe       PRESENTATION FORM FOR VERTICAL RIGHT BLACK LENTICULAR BRACKET
+FE3D          ; Close # Ps       PRESENTATION FORM FOR VERTICAL LEFT DOUBLE ANGLE BRACKET
+FE3E          ; Close # Pe       PRESENTATION FORM FOR VERTICAL RIGHT DOUBLE ANGLE BRACKET
+FE3F          ; Close # Ps       PRESENTATION FORM FOR VERTICAL LEFT ANGLE BRACKET
+FE40          ; Close # Pe       PRESENTATION FORM FOR VERTICAL RIGHT ANGLE BRACKET
+FE41          ; Close # Ps       PRESENTATION FORM FOR VERTICAL LEFT CORNER BRACKET
+FE42          ; Close # Pe       PRESENTATION FORM FOR VERTICAL RIGHT CORNER BRACKET
+FE43          ; Close # Ps       PRESENTATION FORM FOR VERTICAL LEFT WHITE CORNER BRACKET
+FE44          ; Close # Pe       PRESENTATION FORM FOR VERTICAL RIGHT WHITE CORNER BRACKET
+FE47          ; Close # Ps       PRESENTATION FORM FOR VERTICAL LEFT SQUARE BRACKET
+FE48          ; Close # Pe       PRESENTATION FORM FOR VERTICAL RIGHT SQUARE BRACKET
+FE59          ; Close # Ps       SMALL LEFT PARENTHESIS
+FE5A          ; Close # Pe       SMALL RIGHT PARENTHESIS
+FE5B          ; Close # Ps       SMALL LEFT CURLY BRACKET
+FE5C          ; Close # Pe       SMALL RIGHT CURLY BRACKET
+FE5D          ; Close # Ps       SMALL LEFT TORTOISE SHELL BRACKET
+FE5E          ; Close # Pe       SMALL RIGHT TORTOISE SHELL BRACKET
+FF08          ; Close # Ps       FULLWIDTH LEFT PARENTHESIS
+FF09          ; Close # Pe       FULLWIDTH RIGHT PARENTHESIS
+FF3B          ; Close # Ps       FULLWIDTH LEFT SQUARE BRACKET
+FF3D          ; Close # Pe       FULLWIDTH RIGHT SQUARE BRACKET
+FF5B          ; Close # Ps       FULLWIDTH LEFT CURLY BRACKET
+FF5D          ; Close # Pe       FULLWIDTH RIGHT CURLY BRACKET
+FF5F          ; Close # Ps       FULLWIDTH LEFT WHITE PARENTHESIS
+FF60          ; Close # Pe       FULLWIDTH RIGHT WHITE PARENTHESIS
+FF62          ; Close # Ps       HALFWIDTH LEFT CORNER BRACKET
+FF63          ; Close # Pe       HALFWIDTH RIGHT CORNER BRACKET
+1F676..1F678  ; Close # So   [3] SANS-SERIF HEAVY DOUBLE TURNED COMMA QUOTATION MARK ORNAMENT..SANS-SERIF HEAVY LOW DOUBLE COMMA QUOTATION MARK ORNAMENT
+
+# Total code points: 187
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003308.html">adding space after heading and more
+</A></li>
+	<LI>Next message (by thread): <A HREF="003291.html">Supporting optional underscores for italics
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3290">[ date ]</a>
+              <a href="thread.html#3290">[ thread ]</a>
+              <a href="subject.html#3290">[ subject ]</a>
+              <a href="author.html#3290">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

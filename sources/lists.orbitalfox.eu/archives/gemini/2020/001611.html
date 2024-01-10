@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Uploading Gemini content
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Uploading%20Gemini%20content&In-Reply-To=%3C20200613053926.GH11281%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001619.html">
+   <LINK REL="Next"  HREF="001615.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Uploading Gemini content</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Uploading%20Gemini%20content&In-Reply-To=%3C20200613053926.GH11281%40brevard.conman.org%3E"
+       TITLE="Uploading Gemini content">sean at conman.org
+       </A><BR>
+    <I>Sat Jun 13 06:39:26 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001619.html">[ANN] A new gemini client for acme
+</A></li>
+        <LI>Next message (by thread): <A HREF="001615.html">Uploading Gemini content
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1611">[ date ]</a>
+              <a href="thread.html#1611">[ thread ]</a>
+              <a href="subject.html#1611">[ subject ]</a>
+              <a href="author.html#1611">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+  Okay, there's quite a few people on this list what would like to see more
+content in Gemini.  What I'm proposing is *not* a modification to the Gemini
+protocol itself, but it's an adjunct that *could* be implemented [1] to ease
+the creation of more Gemini content.  I'm not trying to scare you,
+solderpunk, there are others working on this concept, but they aren't on the
+mailing list because of technical issues [2].
+
+  Anyway, it's *another* protocol, very similar to Gemini but one that uses
+a new URL scheme, to ensure that no one mistakes this for the actual Gemini
+protocol.  There are already two variations on this, one by Alex Schroeder
+[3] and one by baschdel [4].  The one I've constructed is a mix of the two
+but not quite the same.
+
+  I define two new URL schemes---&quot;gemini+put&quot; and &quot;gemini+del&quot;.  The first
+is to add (or update) a file to a server, while the second exists to delete
+a file.  The protocol for uploading a file (C=client, S=server):
+
+C: gemini+<A HREF="put://example.com/path/to/new.txt?mime=text/plain&amp;size=1024">put://example.com/path/to/new.txt?mime=text/plain&amp;size=1024</A> CRLF
+S: 1x continue CRLF
+C: size bytes of content
+S: 31 <A HREF="gemini://example.com/path/to/new.txt">gemini://example.com/path/to/new.txt</A> CRLF &lt;close&gt;
+
+  The thought process behind this is for the client to send the full path to
+the new (or updated) resource.  They query string sends along some critical
+information about the upload, the MIME type and the size.  This allows the
+server to reject certain types of content or restrict the resources to a
+given size. I'm using the query string for this information the other
+methods defined by Alex and baschdel stray a bit too far from Gemini (in my
+opinion).  I also think it's fine here as I've defined a new URL scheme and
+I can say what the sections mean.
+
+  I included the 1x response (input) in order to give the server a chance to
+return errors (like unsupported MIME type or size issues) before the client
+sends the data.  So the client can expect to see 4x or 5x here (or even
+6x---but more on this below).  Once the client sees the 1x response, it can
+then proceed with uploading the content.  Upon successfully receiving the
+data, the server then responds with a 31 redirection to the new resource on
+the server.  I can see an argument for a 20 status, but to me, 31 (a
+permanent redirection) seems semantically better for a &quot;successful&quot; upload.
+
+  The protocol to delete a file is not complicated either (C=client,
+S=server):
+
+C: gemini+<A HREF="del://example.com/path/to/old.txt">del://example.com/path/to/old.txt</A> CRLF
+S: 52 Gone CRLF &lt;close&gt;
+
+  Again, here a 52 response makes sense as the resource is being
+deleted---any other error means an actual error.
+
+  Now obviously this requires some security, so a client certificate giving
+authority is required.  The &quot;proof-of-concept&quot; uses the Common Name from the
+certificate to control access to the appropriate files.  Assuming user
+content is defined by:
+
+	<A HREF="gemini://example.com/~user/">gemini://example.com/~user/</A>
+
+a user of the site could generate (and have validated) or be given (by the
+admins) a certificate to use to upload content.  The common name could be
+the user name so the server will know what area of the filesystem a
+certificate is valid for.  
+
+  The idea is for a user to be able to use a Gemini client to not only
+browse Gemini content, but *create* and upload new content to a server, from
+within the client (a client can shell out to an editor, for instance).  This
+should reduce the friction of generating content.
+
+  I do have a &quot;proof-of-concept&quot; mostly finished [5], and if there is enough
+interest, I can make it live.  The registration process would probably be
+something like:
+
+	1. Generate a CSR (only field required will be CN)
+	2. Upload the CSR to a known path (with MIME type application/pkcs10)
+	3. Server will then accept the request, sign it, and redirect to the
+	   certificate the client can use (MIME type
+	   application/x-x509-user-cert).
+
+  And I repeat---this is *NOT* intended to become part of the actual Gemini
+protocol, but an adjunct, a separate protocol that is still simple, but
+allows data to flow from the client to the server.  And if solderpunk sticks
+his fingers in his ears and goes &quot;La la la la la la la&quot; that's fine
+too---this is just an idea.
+
+  -spc
+
+[1]	Because I've implemented it.  It's not live, *yet*.  But my
+	&quot;proof-of-concept&quot; does work.
+
+[2]	<A HREF="https://alexschroeder.ch/wiki/2020-06-04_DMARC_an_Mailing_Lists">https://alexschroeder.ch/wiki/2020-06-04_DMARC_an_Mailing_Lists</A>
+
+[3]	<A HREF="https://alexschroeder.ch/wiki/2020-06-05_Gemini_Write">https://alexschroeder.ch/wiki/2020-06-05_Gemini_Write</A>
+	<A HREF="https://alexschroeder.ch/wiki/2020-06-04_Gemini_Upload">https://alexschroeder.ch/wiki/2020-06-04_Gemini_Upload</A>
+
+[4]	<A HREF="https://alexschroeder.ch/wiki/Baschdels_spin_on_Gemini_uploading">https://alexschroeder.ch/wiki/Baschdels_spin_on_Gemini_uploading</A>
+
+[5]	All the bits except for certificate generation.  I need to work on
+	client certificate verification in GLV-1.12556.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001619.html">[ANN] A new gemini client for acme
+</A></li>
+	<LI>Next message (by thread): <A HREF="001615.html">Uploading Gemini content
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1611">[ date ]</a>
+              <a href="thread.html#1611">[ thread ]</a>
+              <a href="subject.html#1611">[ subject ]</a>
+              <a href="author.html#1611">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

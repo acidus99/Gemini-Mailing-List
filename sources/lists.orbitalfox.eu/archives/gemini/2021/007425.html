@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A proposal to freeze the Gemini specification
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposal%20to%20freeze%20the%20Gemini%20specification&In-Reply-To=%3C20211026011233.jyfeqyl23qhydmkf%40rkumarlappie%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007415.html">
+   <LINK REL="Next"  HREF="007426.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A proposal to freeze the Gemini specification</H1>
+    <B>Rohan Kumar</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposal%20to%20freeze%20the%20Gemini%20specification&In-Reply-To=%3C20211026011233.jyfeqyl23qhydmkf%40rkumarlappie%3E"
+       TITLE="A proposal to freeze the Gemini specification">seirdy at seirdy.one
+       </A><BR>
+    <I>Tue Oct 26 02:12:33 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007415.html">A proposal to freeze the Gemini specification
+</A></li>
+        <LI>Next message (by thread): <A HREF="007426.html">A proposal to freeze the Gemini specification
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7425">[ date ]</a>
+              <a href="thread.html#7425">[ thread ]</a>
+              <a href="subject.html#7425">[ subject ]</a>
+              <a href="author.html#7425">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Oct 25, 2021 at 11:21:04PM +0000, mntn wrote:
+&gt;<i>I think you may be asking for a heavier process than is warranted. It 
+</I>&gt;<i>is my personal hope that there will be no further versions of the spec 
+</I>&gt;<i>once finalized,
+</I>
+A TLDR: the ecosystem can evolve without changing/breaking the existing 
+spec. Let's freeze the spec soon!
+
+Agreed that the Gemini spec seems feature-complete for now. There was a 
+time when I would've liked to see features like compression and tables, 
+but the spec doesn't prevent anyone from serving up an alternate 
+mimetype like text/gemini+gzip or csv. Clients like Lagrange can load a 
+CSV document from a link as an inline table just like they load inline 
+images (following a user gesture, ofc). This is a good example of adding 
+functionality to the ecosystem without adding functionality to the spec.
+
+&gt;<i>other than perhaps a change from TLS should it ever become extremely 
+</I>&gt;<i>obsolete, decades from now.
+</I>
+Also agreed that it might be necessary to deprecate some TLS versions as 
+time goes by, but that should be quite straightforward: deprecate one 
+version of TLS, have capsules stop supporting it while clients support 
+old and new versions, and then remove support from clients.
+
+Some people from the netsec crowd have bristled at Gemini's TOFU model, 
+but I don't think fixing that should require changes in the spec either. 
+Adding e.g. a DHT of some sort doesn't have to change how the Gemini 
+protocol works; it can simply be a thing users use to verify certs &quot;out 
+of band&quot; the first time they visit a capsule. Stuff like Tor hidden 
+services are also a good fit for Gemini (I think the part of the Gemini 
+Space accessible over Tor is called &quot;Deep Space&quot;) and can mitigate the 
+issues inherent to TOFU without changing the spec.
+
+Adding features is typically misguided: it's better to *complement* 
+Gemini with other protocols suited for other purposes than to *extend* 
+it. One such protocol is the <A HREF="spartan://">spartan://</A> client-to-server protocol.  
+Gemini can concentrate on supporting server-to-many-client situations 
+while Spartan can concentrate on client-to-server communication.
+
+(This is not necessarily an endorsement of Spartan; I do have some 
+issues with it, but that's off-topic).
+
+The ecosystem can evolve, but the spec seems about done.
+
+Welcome back, Solderpunk.
+
+-- 
+/Seirdy
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 898 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20211025/f6c32299/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20211025/f6c32299/attachment.sig</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007415.html">A proposal to freeze the Gemini specification
+</A></li>
+	<LI>Next message (by thread): <A HREF="007426.html">A proposal to freeze the Gemini specification
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7425">[ date ]</a>
+              <a href="thread.html#7425">[ thread ]</a>
+              <a href="subject.html#7425">[ subject ]</a>
+              <a href="author.html#7425">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

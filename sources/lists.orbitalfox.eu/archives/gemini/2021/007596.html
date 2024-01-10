@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Uploading content over gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Uploading%20content%20over%20gemini&In-Reply-To=%3CCAOEKZX-23Ps13riasLU6-zL28X6KeHtNqneHJU4pLj8q28dRkw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007595.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Uploading content over gemini</H1>
+    <B>Bal&#225;zs Botond</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Uploading%20content%20over%20gemini&In-Reply-To=%3CCAOEKZX-23Ps13riasLU6-zL28X6KeHtNqneHJU4pLj8q28dRkw%40mail.gmail.com%3E"
+       TITLE="Uploading content over gemini">balazsbotond at gmail.com
+       </A><BR>
+    <I>Fri Nov 12 05:57:52 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007595.html">Uploading content over gemini
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7596">[ date ]</a>
+              <a href="thread.html#7596">[ thread ]</a>
+              <a href="subject.html#7596">[ subject ]</a>
+              <a href="author.html#7596">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Nov 12, 2021 at 5:03 AM Alex &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">alex at alexwennerberg.com</A>&gt; wrote:
+&gt;<i> However, one idea I had was to use Gemini itself, without modification, to handle uploading content, ie a file. I have a couple of ideas:
+</I>&gt;<i>
+</I>&gt;<i> 1. sending several  &lt;META&gt; In 1024 bytes to write an entire file.
+</I>&gt;<i> 2. For a text file, sending a diff including a line number and a line of text up to 1024 bytes. Repeat this for each diff.
+</I>&gt;<i>
+</I>&gt;<i> While both of these are technically feasible, they are a bit wonky, and for large files would involve many requests. What I&#8217;m wondering is whether these are ideas worth considering &#8212; ways to upload files without extending or replacing Gemini. Any thoughts?
+</I>
+Skyjake linked something Solderpunk wrote about 1,5 years ago
+(<A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/001672.html">https://lists.orbitalfox.eu/archives/gemini/2020/001672.html</A>) in
+another thread:
+
+&gt;<i> It should also be very easy to write an app targetted at &quot;non-technical&quot;
+</I>&gt;<i> authors which lets them submit chunks of writing up to 2 KiB or so, with
+</I>&gt;<i> an &quot;append&quot; link at the submission confirmation page to submit a follow
+</I>&gt;<i> up chunk.  It wouldn't necessarily be the smoothest experience in the
+</I>&gt;<i> world, but if most content could be written in a single request and 99%
+</I>&gt;<i> with one or two &quot;append&quot; requests, I think it would be usable enough.
+</I>&gt;<i> Heck, this is the &quot;slow internet&quot;, right?  A little bit of inconvenience
+</I>&gt;<i> as part of a careful and deliberate process should not scare us away.
+</I>&gt;<i>
+</I>&gt;<i> In general, solving perceived problems with the limitations that Gemini
+</I>&gt;<i> imposes by combining the &quot;primitives&quot; which are already there in
+</I>&gt;<i> creative new ways, even if they are very slightly clunky, makes me far,
+</I>&gt;<i> far happier than adding in additional more advanced features to remove
+</I>&gt;<i> those limitations.  If we discover really useful and generally
+</I>&gt;<i> applicable constructions that can be built in this way, we can give them
+</I>&gt;<i> names, standardise them, and clients can choose to impelement them in
+</I>&gt;<i> ways which hide the clunkiness from the user.  It would be wonderful,
+</I>&gt;<i> though, if they were still usable in a clunky way by a knowledgable
+</I>&gt;<i> users in clients which didn't support them explicitly.
+</I>
+What his and your ideas have in common is that they push complexity to
+the client. In my opinion, this complexity should be in the
+server-side application, keeping both servers and clients simple.
+Simplicity of client and server implementation is one of the core
+ideas of Gemini. If there are multiple competing clients and servers,
+each with at least some market share, this ensures that no client or
+server can unilaterally extend the protocol or the gemtext format
+(with e.g. tracking, making multiple requests behind the user's back
+etc.). If a capsule - a wiki or a gemlog or whatever - decides to
+expect chunked input or diffs that only certain clients can provide,
+then some clients will be &quot;more equal than others&quot;, to quote a
+classic.
+
+But if we want the complexity of uploading/writing/editing content to
+reside in the application, and we also want to avoid the problem
+detailed above, we have two options left:
+* Use a &quot;back channel&quot; different from Gemini (e.g. an HTTP API, Titan,
+FTP, etc.) to upload
+* Introduce a new, POST-like way to upload via the Gemini protocol itself.
+
+While ideas to do the second have been consistently rejected in the
+past, let me try to argue for why we should reconsider it. The FAQ
+says:
+
+&gt;<i> Alternative, simple-by-design protocols like Gopher and Gemini create
+</I>&gt;<i> alternative, simple-by-design spaces with obvious boundaries and
+</I>&gt;<i> hard restrictions. You know for sure when you enter Geminispace,
+</I>&gt;<i> and you can know for sure and in advance when following a certain
+</I>&gt;<i> link will cause you leave it. While you're there, you know for sure and
+</I>&gt;<i> in advance that everybody else there is playing by the same rules. You
+</I>&gt;<i> can relax and get on with your browsing, and follow links to sites you've
+</I>&gt;<i> never heard of before, which just popped up yesterday, and be
+</I>&gt;<i> confident that they won't try to track you or serve you garbage because
+</I>&gt;<i> they *can't*. You can do all this with a client you wrote yourself, so you
+</I>&gt;<i> *know* you can trust it. It's a very different, much more liberating and
+</I>&gt;<i> much more empowering experience than trying to carve out a tiny,
+</I>&gt;<i> invisible sub-sub-sub-sub-space of the web.
+</I>
+I believe this is another core value of Gemini - that it should be a
+self-contained space. But if the protocol itself doesn't allow a
+simple way to author content, people will need to either use back
+channels or purpose-built clients that implement chunking, chunked
+diffs or whatever. If the protocol itself defined a (very simple but
+convenient for both implementers and end-users) method to do so, it
+would solve the self-containment problem. Making the protocol a tiny
+bit more complex is well worth it in my opinion to avoid ad-hoc,
+convention-based client implementations that would make simpler
+clients incompatible with some server side apps (or at least extremely
+inconvenient to use - you would need to manually chunk the content,
+create a diff etc.).
+
+I'm relatively new to Geminispace so maybe this discussion has already
+been had. If so, please disregard what I wrote, I don't want to repeat
+a debate that has already come to a conclusion.
+
+What do you think?
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007595.html">Uploading content over gemini
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7596">[ date ]</a>
+              <a href="thread.html#7596">[ thread ]</a>
+              <a href="subject.html#7596">[ subject ]</a>
+              <a href="author.html#7596">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

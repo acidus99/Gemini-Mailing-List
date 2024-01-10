@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> On certificates and validation
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20certificates%20and%20validation&In-Reply-To=%3CC7D7R32PHPGZ.A5AQXP8VGQGQ%40taiga%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003584.html">
+   <LINK REL="Next"  HREF="003596.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>On certificates and validation</H1>
+    <B>Drew DeVault</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20certificates%20and%20validation&In-Reply-To=%3CC7D7R32PHPGZ.A5AQXP8VGQGQ%40taiga%3E"
+       TITLE="On certificates and validation">sir at cmpwn.com
+       </A><BR>
+    <I>Thu Nov 26 13:01:44 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003584.html">On certificates and validation
+</A></li>
+        <LI>Next message (by thread): <A HREF="003596.html">On certificates and validation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3586">[ date ]</a>
+              <a href="thread.html#3586">[ thread ]</a>
+              <a href="subject.html#3586">[ subject ]</a>
+              <a href="author.html#3586">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu Nov 26, 2020 at 6:02 AM EST, Bj&#246;rn W&#228;rmedal wrote:
+&gt;<i> &gt; Ssh doesn't expire its keys, and isn't worse for that.
+</I>&gt;<i>
+</I>&gt;<i> This is the analogue I was looking for. SSH doesn't care about Common
+</I>&gt;<i> Name or other cruft in the cert, either.
+</I>
+We use TLS, not SSH.
+
+&gt;<i> I agree that some sort of sanity check is nice, but at the same time I
+</I>&gt;<i> have trouble finding a philosophical or practical reason for doing any
+</I>&gt;<i> sort of validation on first use, and any beyond &quot;same as last time&quot; on
+</I>&gt;<i> subsequent visits.
+</I>&gt;<i>
+</I>&gt;<i> Yes, Drew says I should. But are there any arguments supporting that
+</I>&gt;<i> position?
+</I>
+These are configurable parameters. If they are configured incorrectly,
+then we should reject the certificate. Someone may have configured them
+with an expiration, for example, by design, knowing that their server
+would soon disappear, and that certificate reuse signals that something
+stinky is going on. Or the common name could be set because the admin
+has chosen to set up their own certificate authority, perhaps complete
+with signed client-side certificates, and the common name is used to
+strongly identify the server.
+
+Consider that the stakes are leaking your user's private information and
+do your goddamn job as a responsible steward of their needs.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003584.html">On certificates and validation
+</A></li>
+	<LI>Next message (by thread): <A HREF="003596.html">On certificates and validation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3586">[ date ]</a>
+              <a href="thread.html#3586">[ thread ]</a>
+              <a href="subject.html#3586">[ subject ]</a>
+              <a href="author.html#3586">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

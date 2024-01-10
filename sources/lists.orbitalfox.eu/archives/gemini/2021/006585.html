@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] Gemini reverse proxy
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Gemini%20reverse%20proxy&In-Reply-To=%3C87cztcmsmi.fsf%40omarpolo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006584.html">
+   <LINK REL="Next"  HREF="006586.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] Gemini reverse proxy</H1>
+    <B>Omar Polo</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Gemini%20reverse%20proxy&In-Reply-To=%3C87cztcmsmi.fsf%40omarpolo.com%3E"
+       TITLE="[tech] Gemini reverse proxy">op at omarpolo.com
+       </A><BR>
+    <I>Thu May 27 10:29:57 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006584.html">[tech] Gemini reverse proxy
+</A></li>
+        <LI>Next message (by thread): <A HREF="006586.html">[ANN] GemThread: an experimental conversation server
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6585">[ date ]</a>
+              <a href="thread.html#6585">[ thread ]</a>
+              <a href="subject.html#6585">[ subject ]</a>
+              <a href="author.html#6585">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Michael Lazar &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">lazar.michael22 at gmail.com</A>&gt; writes:
+
+&gt;<i> Greetings,
+</I>&gt;<i>
+</I>&gt;<i> Has anyone gotten a reverse proxy server working with gemini?
+</I>&gt;<i> Specifically, I'm looking for something that can listen on port 1965
+</I>&gt;<i> and route encrypted traffic to other ports based on the TLS SNI. I
+</I>&gt;<i> don't want to do TLS termination at the proxy-layer because I need to
+</I>&gt;<i> support client certificates on the destination servers.
+</I>&gt;<i>
+</I>&gt;<i> From my research, it looks like Nginx and HAProxy both claim to
+</I>&gt;<i> support TLS routing like this, but I can't for the life of me figure
+</I>&gt;<i> out how to configure either of them :/
+</I>&gt;<i>
+</I>&gt;<i> Best,
+</I>&gt;<i> Michael
+</I>
+Not exactly what you're asking for, but have you considered using
+FastCGI?  It would allow your gemini server to do TLS and forward
+requests to various backends.  Info about the client certificates can be
+sent as parameters.
+
+I think it could be a viable option for Gemini, and I started to
+experiment with it in gmid[0], but further work in needed in this
+regard.
+
+HTH,
+
+Omar Polo
+
+
+[0]: <A HREF="https://github.com/omar-polo/gmid/commit/8ff40039e885f6ba64c887f390daf7e7f3bc2ff8">https://github.com/omar-polo/gmid/commit/8ff40039e885f6ba64c887f390daf7e7f3bc2ff8</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006584.html">[tech] Gemini reverse proxy
+</A></li>
+	<LI>Next message (by thread): <A HREF="006586.html">[ANN] GemThread: an experimental conversation server
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6585">[ date ]</a>
+              <a href="thread.html#6585">[ thread ]</a>
+              <a href="subject.html#6585">[ subject ]</a>
+              <a href="author.html#6585">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

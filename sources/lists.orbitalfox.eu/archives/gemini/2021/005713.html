@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Metadata Without A Proposal
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Metadata%20Without%20A%20Proposal&In-Reply-To=%3CCAFkF85ZYC7NdqxDp6_GQE-vh0dLU_GkuprHFY%3DufereqNOCU2g%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005698.html">
+   <LINK REL="Next"  HREF="005714.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Metadata Without A Proposal</H1>
+    <B>Oliver Simmons</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Metadata%20Without%20A%20Proposal&In-Reply-To=%3CCAFkF85ZYC7NdqxDp6_GQE-vh0dLU_GkuprHFY%3DufereqNOCU2g%40mail.gmail.com%3E"
+       TITLE="Metadata Without A Proposal">oliversimmo at gmail.com
+       </A><BR>
+    <I>Fri Feb 26 21:25:57 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005698.html">Metadata Without A Proposal
+</A></li>
+        <LI>Next message (by thread): <A HREF="005714.html">Metadata Without A Proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5713">[ date ]</a>
+              <a href="thread.html#5713">[ thread ]</a>
+              <a href="subject.html#5713">[ subject ]</a>
+              <a href="author.html#5713">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, 26 Feb 2021 at 10:51, &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">nothien at uber.space</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> I've lost track of the currently raging metadata thread entirely, and so
+</I>&gt;<i> I've started this as a new post.
+</I>
+Good choice :)
+
+
+
+&gt;<i> 3. Must be machine-parsable.
+</I>&gt;<i>
+</I>&gt;<i>    Search engines, archivers, and other crawler-style clients need to be
+</I>&gt;<i>    attended to.  Some of the information they need is: date, author, and
+</I>&gt;<i>    license.
+</I>
+Every form of somewhat organised info is &quot;machine readable&quot;, only
+sentences and stuff aren't.
+(although ML is getting really good - but i don't think anyone want to use that)
+
+
+
+&gt;<i> 5. Must be difficult to extend.
+</I>&gt;<i>
+</I>&gt;<i>    Again, this comes from the general Gemini philosophy that anything
+</I>&gt;<i>    that can be misused will be misused.  This rules out lots of current
+</I>&gt;<i>    proposals because they specify tags, and the usage of tags can only be
+</I>&gt;<i>    controlled by convention, which is subject to change.
+</I>
+We use a text-based format, so this is semi-bogus.
+I can easily add stuff, such as styling, to my documents *without* a
+tag format and make software to support it - without extending the
+spec.
+Gemini wants to be &quot;non-extensible&quot;, but having freeform text breaks that.
+This is an unfixable problem though, and just a side effect of what Gemini is.
+
+
+
+&gt;<i> ## Dates
+</I>&gt;<i>
+</I>&gt;<i> My proposal with dates is to use what we already have - the gmisub companion spec.
+</I>[...]
+&gt;<i> Search engines
+</I>&gt;<i> and crawlers can still choose to include date information based on when
+</I>&gt;<i> they last crawled the page.
+</I>
+This would only really work for things that are looking at sites as a
+whole, mainly search engines.
+My issue with these metadata in separate location ideas is that it
+creates additional work, and network requests, to get the info about
+one file.
+Also for more one-off things with dates, creating gmisub stuff for it
+is slightly overboard.
+
+
+
+&gt;<i> ## Licenses
+</I>
+This is really nice, I didn't know there was a convention for it.
+
+&gt;<i> ## Authors
+</I>&gt;<i>
+</I>&gt;<i> There are two possibilities I see with author metadata: either take it
+</I>&gt;<i> from the license line, discussed above, or extend the gmisub spec to
+</I>&gt;<i> also allow for an optional author field.
+</I>
+See above about gmisub.
+The licence line makes most sense to me, however not everyone adds
+licenses (meaning they get copyright), and may still want their name
+on it, the current method of licence-first doesn't work in this case.
+
+- Oliver Simmons
+-- DBAD
+
+(`- name` is how I sign my emails and stuff when I remember)
+There's probably many other ways this could be done, the above was
+just a quickly typed example.
+
+In the example I have pointed out a second issue - licenses that aren't in SPDX.
+I'm not entirely sure what SPDX is, but from a quick search it appears
+it doesn't contain the DBAD license (which is what I personally use
+for stuff I really don't care about).
+
+=&gt; <A HREF="https://dbad-license.org/">https://dbad-license.org/</A>
+
+
+
+&gt;<i> ## Other Fields
+</I>&gt;<i>
+</I>&gt;<i> Clearly, other fields aren't supported by this.  If you want to place
+</I>&gt;<i> additional metadata in your content, then I suggest writing it in
+</I>&gt;<i> natural language.  If it is absolutely necessary to have it
+</I>&gt;<i> machine-parsable (so that it can be specially understood by e.g. search
+</I>&gt;<i> engines) then we can talk about that here on the ML, but others have
+</I>&gt;<i> argued against e.g. tags because they allow easily manipulating search
+</I>&gt;<i> results.  Expect resistance.
+</I>
+Agreed on this, tag metadata formats are just a catch-all, and
+catch-alls are typically bad.
+
+
+
+&gt;<i> ## Conclusion
+</I>&gt;<i>
+</I>&gt;<i> I don't think we need a 'metadata proposal' to achieve the goals we're
+</I>&gt;<i> looking for.  The format conventions are already mostly in place; we
+</I>&gt;<i> just need to formalize them.
+</I>
+I agree that the catch-all metadata proposals are unneeded, I think we
+should stop with them.
+I would also think we should start calling them catch-all metadata or
+something similar, there's a distinction between a generic format that
+allows any metadata, and dedicated formats for individual pieces of
+metadata, such as dates, authors and licenses.
+
+
+
+- Oliver Simmons
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005698.html">Metadata Without A Proposal
+</A></li>
+	<LI>Next message (by thread): <A HREF="005714.html">Metadata Without A Proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5713">[ date ]</a>
+              <a href="thread.html#5713">[ thread ]</a>
+              <a href="subject.html#5713">[ subject ]</a>
+              <a href="author.html#5713">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

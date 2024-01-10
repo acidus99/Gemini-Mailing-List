@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Debugging TLS connections with Wireshark?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Debugging%20TLS%20connections%20with%20Wireshark%3F&In-Reply-To=%3Ce941c0e2-7b2e-f209-ba79-2da5c23f4ea5%40vrtz.ch%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002172.html">
+   <LINK REL="Next"  HREF="002191.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Debugging TLS connections with Wireshark?</H1>
+    <B>Johannes von Rotz</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Debugging%20TLS%20connections%20with%20Wireshark%3F&In-Reply-To=%3Ce941c0e2-7b2e-f209-ba79-2da5c23f4ea5%40vrtz.ch%3E"
+       TITLE="Debugging TLS connections with Wireshark?">jr at vrtz.ch
+       </A><BR>
+    <I>Fri Jul 10 14:22:45 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002172.html">Debugging TLS connections with Wireshark?
+</A></li>
+        <LI>Next message (by thread): <A HREF="002191.html">Debugging TLS connections with Wireshark?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2174">[ date ]</a>
+              <a href="thread.html#2174">[ thread ]</a>
+              <a href="subject.html#2174">[ subject ]</a>
+              <a href="author.html#2174">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 10.07.2020 13:18, Hannu Hartikainen wrote:
+&gt;<i> I logged some traffic between my own client and server last night with
+</I>&gt;<i> Wireshark. Obviously the data is encrypted, but I was surprised to not
+</I>&gt;<i> be able to decrypt the data even when I have the private key for the
+</I>&gt;<i> server (it would work for some TLS 1.2 setup, apparently). Fortunately I
+</I>&gt;<i> found the bug hindering my progress just by looking at the code. Eventually.
+</I>&gt;<i> 
+</I>&gt;<i> Does anyone know how to log TLS session keys and later use them to
+</I>&gt;<i> decrypt the logged traffic? Does some client perhaps already support&#160;this?
+</I>
+The (asymmetric) keys in the certificates are only used to exchange a
+(symmetric) session key, which would need to be logged in order to be
+able to decrypt the traffic.
+
+You would typically log the session keys to a file which then is read by
+Wireshark to decrypt the TLS traffic, see [0] for an example using Firefox.
+
+To have an idea of how to do it in your own application you might want
+to have a look at the answers at [1].
+
+Cheers, J.
+
+[0] <A HREF="https://wiki.wireshark.org/TLS#Using_the_.28Pre.29-Master-Secret">https://wiki.wireshark.org/TLS#Using_the_.28Pre.29-Master-Secret</A>
+[1]
+<A HREF="https://security.stackexchange.com/questions/80158/extract-pre-master-keys-from-an-openssl-application">https://security.stackexchange.com/questions/80158/extract-pre-master-keys-from-an-openssl-application</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002172.html">Debugging TLS connections with Wireshark?
+</A></li>
+	<LI>Next message (by thread): <A HREF="002191.html">Debugging TLS connections with Wireshark?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2174">[ date ]</a>
+              <a href="thread.html#2174">[ thread ]</a>
+              <a href="subject.html#2174">[ subject ]</a>
+              <a href="author.html#2174">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

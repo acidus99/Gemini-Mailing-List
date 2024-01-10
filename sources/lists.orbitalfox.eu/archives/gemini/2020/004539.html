@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> What is required to be IRI compliant?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20What%20is%20required%20to%20be%20IRI%20compliant%3F&In-Reply-To=%3CC84FZAXR46NW.19FYONR1ABX0S%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004531.html">
+   <LINK REL="Next"  HREF="004543.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>What is required to be IRI compliant?</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20What%20is%20required%20to%20be%20IRI%20compliant%3F&In-Reply-To=%3CC84FZAXR46NW.19FYONR1ABX0S%40stilgar%3E"
+       TITLE="What is required to be IRI compliant?">solderpunk at posteo.net
+       </A><BR>
+    <I>Mon Dec 28 13:10:36 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004531.html">What is required to be IRI compliant?
+</A></li>
+        <LI>Next message (by thread): <A HREF="004543.html">What is required to be IRI compliant?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4539">[ date ]</a>
+              <a href="thread.html#4539">[ thread ]</a>
+              <a href="subject.html#4539">[ subject ]</a>
+              <a href="author.html#4539">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon Dec 28, 2020 at 12:59 PM CET, Solene Rapenne wrote:
+
+&gt;<i> the code doesn't check anything, it only serves what is requested [1].
+</I>
+Okay, I just read the complete Vger code, and see that the URL handling
+is indeed pretty minimal.  E.g. domain-based virtual hosting would break
+if a request included an explicit port (which would be interpreted as
+part of the hostname), and filenames with spaces in them cannot be
+served (because the %20 encoding of the space character in the URL path
+is not reversed by the server), and queries (which make no sense for
+static content and should be ignored) are not separated from the path.
+
+I don't mean this as criticism, obviously for hobby servers something
+like this is perfectly workable.  I guess the concern is that we ideally
+want even &quot;production grade&quot; servers to be quite easy to write.  Such a
+server would need to handle all the things above and more.  Few people
+want to do all that parsing by hand, so would use a library, and because
+URI parsing is so widely used the theory is it's never too hard to find
+a library for your favourite language with your favourite license.  This
+is why there are already plenty of production grade (or close to it)
+servers and clients out there.  But apparently many URI parsing
+libraries have never been upgraded to also do IRIs.  I had hoped Vger's
+surprising IRI compatibility meant there was easily available C code for
+doing this after all, but it seems not.
+
+So, while this is still very happy news, it's no rebuttal of the
+argument that switching to IRIs would make writing a solid server in C
+(or other languages without extensive and modern standard libraries, C
+is not really special here) into a considerably more difficult
+undertaking.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004531.html">What is required to be IRI compliant?
+</A></li>
+	<LI>Next message (by thread): <A HREF="004543.html">What is required to be IRI compliant?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4539">[ date ]</a>
+              <a href="thread.html#4539">[ thread ]</a>
+              <a href="subject.html#4539">[ subject ]</a>
+              <a href="author.html#4539">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

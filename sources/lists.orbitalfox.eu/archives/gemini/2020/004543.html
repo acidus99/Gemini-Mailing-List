@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> What is required to be IRI compliant?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20What%20is%20required%20to%20be%20IRI%20compliant%3F&In-Reply-To=%3C20201228144042.2c7ff670%40kongroo.lan%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004539.html">
+   <LINK REL="Next"  HREF="004536.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>What is required to be IRI compliant?</H1>
+    <B>Solene Rapenne</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20What%20is%20required%20to%20be%20IRI%20compliant%3F&In-Reply-To=%3C20201228144042.2c7ff670%40kongroo.lan%3E"
+       TITLE="What is required to be IRI compliant?">solene at perso.pw
+       </A><BR>
+    <I>Mon Dec 28 13:40:42 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004539.html">What is required to be IRI compliant?
+</A></li>
+        <LI>Next message (by thread): <A HREF="004536.html">[user] [ot] flame warriors: a full taxonomy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4543">[ date ]</a>
+              <a href="thread.html#4543">[ thread ]</a>
+              <a href="subject.html#4543">[ subject ]</a>
+              <a href="author.html#4543">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, 28 Dec 2020 14:10:36 +0100
+&quot;Solderpunk&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at posteo.net</A>&gt;:
+
+&gt;<i> On Mon Dec 28, 2020 at 12:59 PM CET, Solene Rapenne wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; the code doesn't check anything, it only serves what is requested [1].  
+</I>&gt;<i> 
+</I>&gt;<i> Okay, I just read the complete Vger code, and see that the URL handling
+</I>&gt;<i> is indeed pretty minimal.  E.g. domain-based virtual hosting would break
+</I>&gt;<i> if a request included an explicit port (which would be interpreted as
+</I>&gt;<i> part of the hostname), and filenames with spaces in them cannot be
+</I>&gt;<i> served (because the %20 encoding of the space character in the URL path
+</I>&gt;<i> is not reversed by the server), and queries (which make no sense for
+</I>&gt;<i> static content and should be ignored) are not separated from the path.
+</I> 
+indeed, using the port in the query would currently break, a patch will
+be published soon. I had very few feedback about the daemon and it seem
+to work for most people so yes, issues (or lacks of special cases)
+are still to be found, but I'd like vger to be production grade though.
+
+&gt;<i> I don't mean this as criticism, obviously for hobby servers something
+</I>&gt;<i> like this is perfectly workable.  I guess the concern is that we ideally
+</I>&gt;<i> want even &quot;production grade&quot; servers to be quite easy to write.  Such a
+</I>&gt;<i> server would need to handle all the things above and more.  Few people
+</I>&gt;<i> want to do all that parsing by hand, so would use a library, and because
+</I>&gt;<i> URI parsing is so widely used the theory is it's never too hard to find
+</I>&gt;<i> a library for your favourite language with your favourite license.  This
+</I>&gt;<i> is why there are already plenty of production grade (or close to it)
+</I>&gt;<i> servers and clients out there.  But apparently many URI parsing
+</I>&gt;<i> libraries have never been upgraded to also do IRIs.  I had hoped Vger's
+</I>&gt;<i> surprising IRI compatibility meant there was easily available C code for
+</I>&gt;<i> doing this after all, but it seems not.
+</I>&gt;<i> 
+</I>&gt;<i> So, while this is still very happy news, it's no rebuttal of the
+</I>&gt;<i> argument that switching to IRIs would make writing a solid server in C
+</I>&gt;<i> (or other languages without extensive and modern standard libraries, C
+</I>&gt;<i> is not really special here) into a considerably more difficult
+</I>&gt;<i> undertaking.
+</I>&gt;<i> 
+</I>&gt;<i> Cheers,
+</I>&gt;<i> Solderpunk
+</I>
+I'll take a look at libcu as suggested. I think it's widely available
+and certainly already there for most people because it must be a very
+common dependency so I wouldn't considered it a bloat to use libcu.
+
+If I get something done with libcu, I'll share it here if someone
+is interested. For others languages, it would still be possible to
+use ffi to call the C libicu into your favorite programming language.
+
+Obviously, supporting IRI is far more complicated than answering to a
+query containing special characters. That's why I asked on the mailing
+list, I lack knowledge in this field and I couldn't imagine all cases.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004539.html">What is required to be IRI compliant?
+</A></li>
+	<LI>Next message (by thread): <A HREF="004536.html">[user] [ot] flame warriors: a full taxonomy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4543">[ date ]</a>
+              <a href="thread.html#4543">[ thread ]</a>
+              <a href="subject.html#4543">[ subject ]</a>
+              <a href="author.html#4543">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

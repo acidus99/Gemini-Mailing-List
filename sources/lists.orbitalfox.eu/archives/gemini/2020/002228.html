@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Question About Link Format
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Question%20About%20Link%20Format&In-Reply-To=%3C668d753c251f8f2547f7c498a7ce1fa28a5b4e7c.camel%40gnu.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002226.html">
+   <LINK REL="Next"  HREF="002263.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Question About Link Format</H1>
+    <B>Alex Schroeder</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Question%20About%20Link%20Format&In-Reply-To=%3C668d753c251f8f2547f7c498a7ce1fa28a5b4e7c.camel%40gnu.org%3E"
+       TITLE="Question About Link Format">alex at gnu.org
+       </A><BR>
+    <I>Fri Jul 17 11:52:43 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002226.html">Question About Link Format
+</A></li>
+        <LI>Next message (by thread): <A HREF="002263.html">Question About Link Format
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2228">[ date ]</a>
+              <a href="thread.html#2228">[ thread ]</a>
+              <a href="subject.html#2228">[ subject ]</a>
+              <a href="author.html#2228">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, 2020-07-17 at 13:51 +0430, Ben wrote:
+&gt;<i> It does seem a proper URI should best contain %C4%9D in place of &#285;,
+</I>&gt;<i> but 
+</I>&gt;<i> the question is whether I should change it in the document? Does the 
+</I>&gt;<i> internal linking (in my case the link is local/relative) even count
+</I>&gt;<i> as a 
+</I>&gt;<i> URI?
+</I>
+I think you should change it to %C4%9D; otherwise you're relying on
+clients to do it for you (which might work). But in the example you
+give, the stuff after =&gt; is a URL, just not an absolute one. It's a
+relative URL and the client is supposed to know how to combine it with
+the URL of our current URL and to request this document if the user
+wants to follow the link. So if the current URL is
+<A HREF="gemini://example.org/foo/bar">gemini://example.org/foo/bar</A> then following the link below will take
+the user to <A HREF="gemini://example.org/foo/logarion/ta%C4%9Dikio.">gemini://example.org/foo/logarion/ta%C4%9Dikio.</A>
+
+=&gt; logarion/ta&#285;ikio--lando-montara.gmi Ta&#285;ikio: Lando Montara
+
+A good way to think about this would be spaces in file names. Assume
+the filename is &quot;ta&#285;ikio: lando montara.gmi&quot;. What would you write?
+This won't work:
+
+=&gt; logarion/ta&#285;ikio: lando montara.gmi Ta&#285;ikio: Lando Montara
+
+If you escape the spaces, why not escape the rest that needs escaping?
+
+=&gt; logarion/ta&#285;ikio:%20lando%20montara.gmi Ta&#285;ikio: Lando Montara
+
+That's how I reason about it. Or if you want to go all-in, RFC 3986 has
+you covered. The only characters that unambiguously never have to
+escaped, no matter where they appear, are the unreserved ones:
+
+   Characters that are allowed in a URI but do not have a reserved
+   purpose are called unreserved.  These include uppercase and
+   lowercase letters, decimal digits, hyphen, period, underscore,
+   and tilde.
+
+      unreserved  = ALPHA / DIGIT / &quot;-&quot; / &quot;.&quot; / &quot;_&quot; / &quot;~&quot;
+
+   <A HREF="https://tools.ietf.org/html/rfc3986#section-2.3">https://tools.ietf.org/html/rfc3986#section-2.3</A>
+
+And to be clear, ALPHA means a-z and A-Z, nothing else.
+
+Cheers
+Alex
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002226.html">Question About Link Format
+</A></li>
+	<LI>Next message (by thread): <A HREF="002263.html">Question About Link Format
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2228">[ date ]</a>
+              <a href="thread.html#2228">[ thread ]</a>
+              <a href="subject.html#2228">[ subject ]</a>
+              <a href="author.html#2228">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

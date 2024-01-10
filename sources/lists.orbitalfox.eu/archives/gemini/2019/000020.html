@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> File size issues
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20File%20size%20issues&In-Reply-To=%3C20190816104312.GA23118%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000016.html">
+   <LINK REL="Next"  HREF="000021.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>File size issues</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20File%20size%20issues&In-Reply-To=%3C20190816104312.GA23118%40SDF.ORG%3E"
+       TITLE="File size issues">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Fri Aug 16 11:43:12 BST 2019</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000016.html">File size issues
+</A></li>
+        <LI>Next message (by thread): <A HREF="000021.html">File size issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#20">[ date ]</a>
+              <a href="thread.html#20">[ thread ]</a>
+              <a href="subject.html#20">[ subject ]</a>
+              <a href="author.html#20">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>   Gopher does address this rather obliquely---text files (and gopher
+</I>&gt;<i> indexes) are supposed to end with a '.' on a line by itself.  This lets the
+</I>&gt;<i> client know it received the data correctly, and it says as much in RFC-1436,
+</I>&gt;<i> section 3.8:
+</I>
+Whoops, true!  In my defence, I think this is very rarely used nowadays.
+VF-1 includes no code whatsoever to detect and strip this from files it
+downloads and I've never seen one appear on screen.
+ 
+&gt;<i>   I'm not seeing much of an issue.  Assuming tabs separate the compoents on
+</I>&gt;<i> the status line, then
+</I>&gt;<i> 
+</I>&gt;<i> 	(\d+)\t([^\t]+)(\t([^\t]+))*
+</I>&gt;<i> 
+</I>&gt;<i> would parse the line (I suspect, I'm not a fan of regex but I think the
+</I>&gt;<i> above would work to parse the status line).  I don't see much of an issue in
+</I>&gt;<i> parsing any of the following:
+</I>&gt;<i> 
+</I>&gt;<i> 	20&lt;HTAB&gt;text/plain; charset=utf-8&lt;HTAB&gt;2123&lt;CRLF&gt;
+</I>&gt;<i> 	20&lt;HTAB&gt;text/plain&lt;CRLF&gt;
+</I>&gt;<i> 
+</I>&gt;<i>   Which could be specified, &quot;don't put tabs in the MIME type section.&quot;
+</I>
+Yes, with sufficient prescription of whitespace practices in response
+headers it could be made sufficiently parsable, but it would be nice if
+things weren't so brittle.
+
+This also, of course, sets a precendent of &quot;whenever we decide a little
+bit of extra metadata would be handy in the header, just append it after
+a tab&quot;, which over time could bloat our header until it's basically just
+a HTTP header in disguise with tabs instead of newlines.
+
+(not a fan of regex either, by the way, and was quite happy to discover
+Lua's lightweight alternative system when I first picked it up)
+ 
+&gt;<i>   One way would be to query a well-known endpoint (these exist in the HTTP
+</I>&gt;<i> world---robots.txt is one such file) that contains tiemstamps for various
+</I>&gt;<i> resources.  Slap a MIME type of text/gemini-timestamp and call it done:
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="gemini://example.com/">gemini://example.com/</A>	2019-08-15T13:53:00-05:00
+</I>&gt;<i> <A HREF="gemini://example.com/feed">gemini://example.com/feed</A>	2019-07-29T00:00:00-05:00
+</I>&gt;<i> <A HREF="gemini://example.com/other">gemini://example.com/other</A>	2019-08-01T00:00:00-05:00
+</I>&gt;<i> 
+</I>&gt;<i>   That's one way.
+</I>
+I actually quite like this idea.  No need to make it timestamp-specific
+either.  We could have a well-known endpoint for general file metadata,
+which listed modification time, file size, checksum, MIME type, etc.  It
+could accept queries for a specific path, and *that* could be the way to
+do an equivalent of a HEAD request.
+
+This would let clients for specific scenarios do the extra work
+themselves to work around their problems, e.g. clients with very low
+memory or storage space could request the metadata for all files before
+attempting to access them and warn the user if the file size exceeds a
+threshold; clients on unreliable connections could request the metadata
+before downloading and then warn the user if file size and/checksum did
+not agree.  Most &quot;normal&quot; clients could do neither and just operate as
+they already do.
+
+I think it's kind of neat to keep solutions to edge problems outside of
+the protocol itself and push them into things like well-known endpoints
+like the above where they can easily be ignored when they are not
+needed/wanted.  The downside is that server developers have to do the
+work to add support for these things - but it's expected, I think, that
+servers are harder to write than clients.  Ease of client implementation
+is very important - it leads to a large number of independent clients,
+which means unofficial extensions of the standard can only really take
+off if a large number of people with presumably diverse opinions can be
+convinced they are worthwhile.  And, of course, some server authors can
+just choose not to support some of these endpoints, and when queried can
+just return status 51 and then the client understands they are on their
+own.  All of this can be done without any change to the core Gemini spec
+(each well-known endpoint, of course, would need its own spec).
+
+&gt;<i>   As I mentioned in a private email to solderpunk earlier, one could always
+</I>&gt;<i> take advantage of the sub-delimeters in the path portion.  I had at one
+</I>&gt;<i> point mentioned using those to specify the prompt (otherwise the server
+</I>&gt;<i> would return a status of 10):
+</I>&gt;<i> 
+</I>&gt;<i> 	<A HREF="gemini://example.com/search;Search%20for">gemini://example.com/search;Search%20for</A>
+</I>&gt;<i> 
+</I>&gt;<i> This could be formalized:
+</I>&gt;<i> 
+</I>&gt;<i> 	<A HREF="gemini://example.com/search;prompt=Search%20for">gemini://example.com/search;prompt=Search%20for</A>
+</I>&gt;<i> 	<A HREF="gemini://example.com/blogfeed;timestamp=2019-08-15T00:00:00Z">gemini://example.com/blogfeed;timestamp=2019-08-15T00:00:00Z</A>
+</I>&gt;<i> 	<A HREF="gemini://example.com/wildexample;prompt=Search%20for;timestamp=2019-08-15:00:00:00Z?query=foo&amp;usename=bar">gemini://example.com/wildexample;prompt=Search%20for;timestamp=2019-08-15:00:00:00Z?query=foo&amp;usename=bar</A>
+</I>&gt;<i> 
+</I>&gt;<i>   So, you have &quot;prompt&quot; and &quot;timestamp&quot;.  Others could be propsed.  If the
+</I>&gt;<i> &quot;timestamp&quot; thing above is accepted, then you might want to have a new
+</I>&gt;<i> status code meaning &quot;no change&quot; or &quot;okay, but there's no content&quot;.
+</I>
+I think I prefer the well-known endpoint over this, but that's right now
+more of a gut reaction and not a well thought-out and defencible
+position. 
+ 
+&gt;<i>   Well, there are RFC-5147 and RFC-7111 that give semantics to the URI
+</I>&gt;<i> fragment section, but I still think using the sub-delimeter of ';' in the
+</I>&gt;<i> path portion is the way to go.
+</I>
+Ah, more for the reading list!
+
+-Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000016.html">File size issues
+</A></li>
+	<LI>Next message (by thread): <A HREF="000021.html">File size issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#20">[ date ]</a>
+              <a href="thread.html#20">[ thread ]</a>
+              <a href="subject.html#20">[ subject ]</a>
+              <a href="author.html#20">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

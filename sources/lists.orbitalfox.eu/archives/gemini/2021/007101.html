@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] trailing '?' for input (was: entry field in gemtext)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20trailing%20%27%3F%27%20for%20input%20%28was%3A%20entry%20field%20in%20gemtext%29&In-Reply-To=%3C20210912145333.GA5861%40host%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007100.html">
+   <LINK REL="Next"  HREF="007102.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] trailing '?' for input (was: entry field in gemtext)</H1>
+    <B>nervuri</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20trailing%20%27%3F%27%20for%20input%20%28was%3A%20entry%20field%20in%20gemtext%29&In-Reply-To=%3C20210912145333.GA5861%40host%3E"
+       TITLE="[tech] trailing '?' for input (was: entry field in gemtext)">nervuri at disroot.org
+       </A><BR>
+    <I>Sun Sep 12 15:53:33 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007100.html">[tech] trailing '?' for input (was: entry field in gemtext)
+</A></li>
+        <LI>Next message (by thread): <A HREF="007102.html">[tech] trailing '?' for input (was: entry field in gemtext)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7101">[ date ]</a>
+              <a href="thread.html#7101">[ thread ]</a>
+              <a href="subject.html#7101">[ subject ]</a>
+              <a href="author.html#7101">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, 2021-09-10, mbays wrote:
+&gt;<i>=&gt; /link? Enter your input
+</I>
+I kind of like it, but I don't think adopting such a convention is worth
+the trouble.  It has strange edge cases and it can be confusing.
+
+Ideally this would be a client-only signal, which can be achieved with
+an empty fragment identifier:
+
+=&gt; /link# Enter your input
+
+But that just doesn't look right. :)
+
+&gt;<i>* Clients could render such links differently, e.g. with an inline text
+</I>&gt;<i>box.
+</I>
+Multiple text boxes might give the false impression of a form.
+
+&gt;<i>every CGI implementation I've seen won't differentiate between &quot;/link&quot;
+</I>&gt;<i>and &quot;/link?&quot;.
+</I>
+The problem is in the CGI spec:
+
+<A HREF="https://datatracker.ietf.org/doc/html/rfc3875#section-4.1.7">https://datatracker.ietf.org/doc/html/rfc3875#section-4.1.7</A>
+
+   The server MUST set this variable; if the Script-URI does not include
+   a query component, the QUERY_STRING MUST be defined as an empty
+   string (&quot;&quot;).
+
+So in order for a CGI script to do what you suggest:
+
+&gt;<i>* Doesn't break clients who ignore the convention, as long as the server
+</I>&gt;<i>returns 10 to a request with empty query.
+</I>
+it would have to return 10 in response to both &quot;/link&quot; and &quot;/link?&quot;,
+which is not something we can expect everyone to do.  For instance, I
+have a script which requests input only on &quot;/link?input&quot;, and returns
+an intro page when the query is empty.
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007100.html">[tech] trailing '?' for input (was: entry field in gemtext)
+</A></li>
+	<LI>Next message (by thread): <A HREF="007102.html">[tech] trailing '?' for input (was: entry field in gemtext)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7101">[ date ]</a>
+              <a href="thread.html#7101">[ thread ]</a>
+              <a href="subject.html#7101">[ subject ]</a>
+              <a href="author.html#7101">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

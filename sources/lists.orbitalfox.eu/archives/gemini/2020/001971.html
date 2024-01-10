@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> New Dillo plugin
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20New%20Dillo%20plugin&In-Reply-To=%3C20200627144906.06fa2db575baa59ef31ac343%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001962.html">
+   <LINK REL="Next"  HREF="001964.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>New Dillo plugin</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20New%20Dillo%20plugin&In-Reply-To=%3C20200627144906.06fa2db575baa59ef31ac343%40gmail.com%3E"
+       TITLE="New Dillo plugin">linde.philip at gmail.com
+       </A><BR>
+    <I>Sat Jun 27 13:49:06 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001962.html">New Dillo plugin
+</A></li>
+        <LI>Next message (by thread): <A HREF="001964.html">Illusory latency due to trailing slash redirects
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1971">[ date ]</a>
+              <a href="thread.html#1971">[ thread ]</a>
+              <a href="subject.html#1971">[ subject ]</a>
+              <a href="author.html#1971">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Hi Philip,
+</I>&gt;<i> 
+</I>&gt;<i> Nice work. I like the certificate pinning feature.
+</I>
+Thanks, Charles. I think your plugin better embodies the &quot;100-line
+client&quot; idea in at least having significantly less than a thousand lines
+of code, and there is high value in that. I will link back to it as
+well.
+
+&gt;<i> The other plugin (dillo-gemini) works with the current protocol, except
+</I>&gt;<i> for client certificates or any server certificate management. Maybe you
+</I>&gt;<i> were missing a dependency. I added a link to yours in its readme.
+</I>
+I investigated a bit further and found that my client doesn't
+understand the -verify_quiet flag:
+
+ $ openssl s_client -verify_quiet -quiet &quot;example.horse:1965&quot;
+ unknown option -verify_quiet
+ # ...
+ $ openssl version
+ LibreSSL 3.0.2
+
+So my openssl is actually from the LibreSSL fork. OpenBSD does this,
+and (apparently) my desktop OS of choice, Void Linux. There seem to be
+further differences preventing a simple fix.
+
+I have systems running Debian with genuine OpenSSL so if I can work out
+the differences and improve compatibility with LibreSSL in a clean way,
+I'll send you a patch.
+
+Have a great weekend,
+Philip
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200627/63e5906e/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20200627/63e5906e/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001962.html">New Dillo plugin
+</A></li>
+	<LI>Next message (by thread): <A HREF="001964.html">Illusory latency due to trailing slash redirects
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1971">[ date ]</a>
+              <a href="thread.html#1971">[ thread ]</a>
+              <a href="subject.html#1971">[ subject ]</a>
+              <a href="author.html#1971">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Status update for MoonGem - Gemini server with inline Lua scripting
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Status%20update%20for%20MoonGem%20-%20Gemini%20server%20with%20inline%20Lua%20scripting&In-Reply-To=%3C2cb6d560-df5d-17aa-acd0-51291e0da3fb%40panda-roux.dev%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006545.html">
+   <LINK REL="Next"  HREF="006559.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Status update for MoonGem - Gemini server with inline Lua scripting</H1>
+    <B>panda-roux</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Status%20update%20for%20MoonGem%20-%20Gemini%20server%20with%20inline%20Lua%20scripting&In-Reply-To=%3C2cb6d560-df5d-17aa-acd0-51291e0da3fb%40panda-roux.dev%3E"
+       TITLE="Status update for MoonGem - Gemini server with inline Lua scripting">contact at panda-roux.dev
+       </A><BR>
+    <I>Thu May 20 18:47:44 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006545.html">[ANN] [tech] Romulus Gemini Client
+</A></li>
+        <LI>Next message (by thread): <A HREF="006559.html">[users] kiln version 0.2.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6553">[ date ]</a>
+              <a href="thread.html#6553">[ thread ]</a>
+              <a href="subject.html#6553">[ subject ]</a>
+              <a href="author.html#6553">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hope you're well!
+
+A couple of weeks ago I sent out a notice regarding a piece of Gemini 
+server software I'd developed.&#160; This is an update in regards to how that 
+project has been progressing.
+
+<A HREF="https://sr.ht/~panda-roux/MoonGem/">https://sr.ht/~panda-roux/MoonGem/</A>
+
+<A HREF="gemini://gemini.panda-roux.dev/moongem">gemini://gemini.panda-roux.dev/moongem</A>
+
+I'm considering MoonGem to be &quot;basically finished&quot; for now. There are a 
+couple of luxuries I'd like to add, but it's essentially 
+feature-complete as far as I'm concerned.
+
+As of version 1.3.1, the following features have been added in addition 
+to refactoring and code cleanup:
+
+Scripting API features (and corresponding Lua method signatures):
+
+  * Input handling
+      o HEAD:get_input([prompt])
+      o HEAD:get_sensitive_input([prompt])
+  * Specifying a language header part
+      o HEAD:set_lang(&lt;language&gt;)
+  * Client certificate handling
+      o HEAD:get_cert([prompt])
+      o HEAD:has_cert()
+      o Currently a fingerprint and not_after fields are captured.
+
+Server features:
+
+  * Buffered responses for non-gemtext files (i.e. static files are sent
+    piecemeal)
+  * Specify a non-standard port via the MOONGEM_PORT environment variable
+  * Sanitized URI paths
+  * Proper request logging
+      o Example: [::ffff:127.0.0.1:54502] /moongem | 32 header + 3639
+        body bytes sent (total: 3671)
+  * Request pipeline logic that can be interrupted by script method
+    calls requiring an irregular response code
+      o i.e. if a script calls HEAD:get_input() and there's no input in
+        the request URI, the server will drop what it's doing and return
+        a 1X code (and prompt META) immediately.
+
+The following are nice-to-have features that I would like to add in the 
+future:
+
+  * Automatic directory listing
+      o Implementing this in Lua is trivial but it'd be nice to have the
+        server handle it
+  * Expose more information from client certificates to the scripting API
+  * Rate-limiting
+  * Some sort of mechanism for response caching
+      o Not worth the headache of trying to do this correctly at the moment
+  * Some sort of fancy URI variable binding (thinking of ASP.NET's
+    routing, e.g. &quot;/posts/{postId}/{commentId}&quot;)
+
+Thank you for reading!&#160; Any and all feedback is appreciated.
+
+panda-roux
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: OpenPGP_0x44DDD4AEE37FA6A8.asc
+Type: application/pgp-keys
+Size: 5149 bytes
+Desc: OpenPGP public key
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210520/95f25d6a/attachment-0001.bin">https://lists.orbitalfox.eu/archives/gemini/attachments/20210520/95f25d6a/attachment-0001.bin</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: OpenPGP_signature
+Type: application/pgp-signature
+Size: 495 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210520/95f25d6a/attachment-0001.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20210520/95f25d6a/attachment-0001.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006545.html">[ANN] [tech] Romulus Gemini Client
+</A></li>
+	<LI>Next message (by thread): <A HREF="006559.html">[users] kiln version 0.2.0
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6553">[ date ]</a>
+              <a href="thread.html#6553">[ thread ]</a>
+              <a href="subject.html#6553">[ subject ]</a>
+              <a href="author.html#6553">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

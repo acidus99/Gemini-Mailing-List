@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client behavior when server doesn't close connection?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20behavior%20when%20server%20doesn%27t%20close%20connection%3F&In-Reply-To=%3C6469cb16-e126-4bb8-bd02-a8373bf912fc%40www.fastmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002136.html">
+   <LINK REL="Next"  HREF="002140.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client behavior when server doesn't close connection?</H1>
+    <B>Case Duckworth</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20behavior%20when%20server%20doesn%27t%20close%20connection%3F&In-Reply-To=%3C6469cb16-e126-4bb8-bd02-a8373bf912fc%40www.fastmail.com%3E"
+       TITLE="Client behavior when server doesn't close connection?">acdw at acdw.net
+       </A><BR>
+    <I>Thu Jul  9 15:17:21 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002136.html">Client behavior when server doesn't close connection?
+</A></li>
+        <LI>Next message (by thread): <A HREF="002140.html">Client behavior when server doesn't close connection?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2139">[ date ]</a>
+              <a href="thread.html#2139">[ thread ]</a>
+              <a href="subject.html#2139">[ subject ]</a>
+              <a href="author.html#2139">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Gemini absolutely can send binary files -- AFAICT that's one of the main reasons it has the MIME type included in the header. Also, I don't think it's helpful to replace &quot;very large&quot; with &quot;binary&quot; -- there are plenty of binary files that are smaller than 100 MiB, including images of almost any size, lots of binary executables, songs, and even some shorter musical albums. While it's not a great idea to serve giant files over gemini, it's certainly possible (see konpeito.media, sloum's Drift Theory on circumlunar.space), and clients should *absolutely* be able to handle them. 
+
+A client author could write some checks to see if a download is taking too long or hanging, or even filter based on received MIME type, but I think the gemini experience would be lessened if a user couldn't download, e.g., images from gemini.
+
+~ acdw
+
+On Thu, Jul 9, 2020, at 8:21 AM, Petite Abeille wrote:
+&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;&gt;<i> On Jul 9, 2020, at 15:14, defdefred &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">defdefred at protonmail.com</A>&gt; wrote:
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> On Thursday 9 July 2020 14:52, Petite Abeille &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">petite.abeille at gmail.com</A>&gt; wrote:
+</I>&gt;&gt;&gt;&gt;<i> And what about binary content?
+</I>&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;<i> Use a different protocol.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> Gemini can't send image?
+</I>&gt;<i> 
+</I>&gt;<i> Sure it can. But perhaps it shouldn't. Depends on how much reliability one is after.
+</I>&gt;<i> 
+</I>&gt;<i> See &quot;File size&quot; in &quot;Best practices for Gemini implementations&quot;:
+</I>&gt;<i> <A HREF="https://portal.mozz.us/gemini/gemini.circumlunar.space/docs/best-practices.gmi">https://portal.mozz.us/gemini/gemini.circumlunar.space/docs/best-practices.gmi</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> **Gemini servers do not inform clients of the size of files they are serving, which can make it difficult to detect if a connection is closed prematurely due to a server fault*. This risk of this happening increases with file size.*
+</I>&gt;<i> **
+</I>&gt;<i> *Gemini also has no support for compression of large files, or support for checksums to enable *detection of file corruption*, the risk of which also increases with file size.*
+</I>&gt;<i> **
+</I>&gt;<i> *For all of these reasons, *Gemini is not well suited to the transfer* of &quot;very large&quot; files. Exactly what counts as &quot;very large&quot; depends to some extent on the speed and reliability of the internet connections involved, and the patience of the users. As a rule of thumb, files larger than 100MiB might be thought of as best served some other way.*
+</I>&gt;<i> **
+</I>&gt;<i> *Of course, because Gemini supports linking to other online content via any protocol with a URL scheme, *it's still possible to link from a Gemini document to a large file served via HTTPS*, BitTorrent, IPFS or whatever else tickles your fancy.*
+</I>&gt;<i> 
+</I>&gt;<i> Replace &quot;very large file&quot; with binary and you get the gist of it.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200709/26276f73/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200709/26276f73/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002136.html">Client behavior when server doesn't close connection?
+</A></li>
+	<LI>Next message (by thread): <A HREF="002140.html">Client behavior when server doesn't close connection?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2139">[ date ]</a>
+              <a href="thread.html#2139">[ thread ]</a>
+              <a href="subject.html#2139">[ subject ]</a>
+              <a href="author.html#2139">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

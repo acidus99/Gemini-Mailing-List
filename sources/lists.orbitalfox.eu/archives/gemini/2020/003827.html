@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Small spec change required by RFC for lang params
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Small%20spec%20change%20required%20by%20RFC%20for%20lang%20params&In-Reply-To=%3Cj1Z3z1j0QYKv0_UD8zlxxLtUpMoFQj0M8ypAvFnCYoiWdY50qAmQeaNr19p0iC48VYbejoo-YNkhMP_SawrDEkxyI7T2f83zjwB9jJ26G0g%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004039.html">
+   <LINK REL="Next"  HREF="003911.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Small spec change required by RFC for lang params</H1>
+    <B>colecmac at protonmail.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Small%20spec%20change%20required%20by%20RFC%20for%20lang%20params&In-Reply-To=%3Cj1Z3z1j0QYKv0_UD8zlxxLtUpMoFQj0M8ypAvFnCYoiWdY50qAmQeaNr19p0iC48VYbejoo-YNkhMP_SawrDEkxyI7T2f83zjwB9jJ26G0g%3D%40protonmail.com%3E"
+       TITLE="Small spec change required by RFC for lang params">colecmac at protonmail.com
+       </A><BR>
+    <I>Mon Dec  7 04:06:18 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004039.html">[ANN] Geminiserver ASM
+</A></li>
+        <LI>Next message (by thread): <A HREF="003911.html">Small spec change required by RFC for lang params
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3827">[ date ]</a>
+              <a href="thread.html#3827">[ thread ]</a>
+              <a href="subject.html#3827">[ subject ]</a>
+              <a href="author.html#3827">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello Geminauts,
+
+A small spec change is required by RFC for the &quot;lang&quot; parameter in the
+text/gemini mediatype.
+
+Section 5.2 of the spec states:
+
+&gt;<i> Valid values for the &quot;lang&quot; parameter are comma-separated lists of one
+</I>&gt;<i> or more language tags as defined in RFC4646. For example:
+</I>&gt;<i>
+</I>&gt;<i> - &quot;text/gemini; lang=en&quot; Denotes a text/gemini document written in English
+</I>&gt;<i> - &quot;text/gemini; lang=fr&quot; Denotes a text/gemini document written in French
+</I>&gt;<i> - &quot;text/gemini; lang=en,fr&quot; Denotes a text/gemini document written in a mixture of English and French
+</I>&gt;<i> - &quot;text/gemini; lang=de-CH&quot; Denotes a text/gemini document written in Swiss German
+</I>&gt;<i> - &quot;text/gemini; lang=sr-Cyrl&quot; Denotes a text/gemini document written in Serbian using the Cyrllic script
+</I>&gt;<i> - &quot;text/gemini; lang=zh-Hans-CN&quot; Denotes a text/gemini document written in Chinese using the Simplified script as used in mainland China
+</I>
+However, as can been seen in Go, the multi-language examples here are
+not compliant with the relevant RFCs.
+
+<A HREF="https://play.golang.org/p/7j0z3iORRmP">https://play.golang.org/p/7j0z3iORRmP</A>
+
+Attempting to parse the third example in the spec gives an error. After
+digging through the Go source code, I eventually found a reference to
+RFC 2045. On both page 12 and page 31, we see this relevant ABNF:
+
+
+     tspecials :=  &quot;(&quot; / &quot;)&quot; / &quot;&lt;&quot; / &quot;&gt;&quot; / &quot;@&quot; /
+                   &quot;,&quot; / &quot;;&quot; / &quot;:&quot; / &quot;\&quot; / &lt;&quot;&gt;
+                   &quot;/&quot; / &quot;[&quot; / &quot;]&quot; / &quot;?&quot; / &quot;=&quot;
+                   ; Must be in quoted-string,
+                   ; to use within parameter values
+
+
+This clearly denotes that commas cannot be in a lang parameter without
+quoting. Indeed, this is what we find when using the Go stdlib parser
+again:
+
+<A HREF="https://play.golang.org/p/L4qh1Qev-TS">https://play.golang.org/p/L4qh1Qev-TS</A>
+
+
+My simple suggestion is to change these examples so the ones with commas
+use quotes. Perhaps explicitly mention how quotes must be used for those
+types of lang parameters.
+
+
+Thanks,
+makeworld
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004039.html">[ANN] Geminiserver ASM
+</A></li>
+	<LI>Next message (by thread): <A HREF="003911.html">Small spec change required by RFC for lang params
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3827">[ date ]</a>
+              <a href="thread.html#3827">[ thread ]</a>
+              <a href="subject.html#3827">[ subject ]</a>
+              <a href="author.html#3827">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPECS text/gemini] Heading lines proposal
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPECS%20text/gemini%5D%20Heading%20lines%20proposal&In-Reply-To=%3CCALRCexvC5q-h8RjGgVTGji5QOQbgbGdSzYjwvJS%3DOEXBYuFa_Q%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002321.html">
+   <LINK REL="Next"  HREF="002323.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPECS text/gemini] Heading lines proposal</H1>
+    <B>Mad Ogrit</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPECS%20text/gemini%5D%20Heading%20lines%20proposal&In-Reply-To=%3CCALRCexvC5q-h8RjGgVTGji5QOQbgbGdSzYjwvJS%3DOEXBYuFa_Q%40mail.gmail.com%3E"
+       TITLE="[SPECS text/gemini] Heading lines proposal">madogrit0 at gmail.com
+       </A><BR>
+    <I>Fri Jul 24 00:31:24 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002321.html">[SPECS text/gemini] Heading lines proposal
+</A></li>
+        <LI>Next message (by thread): <A HREF="002323.html">[SPECS text/gemini] Heading lines proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2322">[ date ]</a>
+              <a href="thread.html#2322">[ thread ]</a>
+              <a href="subject.html#2322">[ subject ]</a>
+              <a href="author.html#2322">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Requiring a space for structural formatting seems wise. I don't believe the
+proposal implied that navigational formatting (=&gt;) would require one.
+
+But regarding quotes, although the &gt; prefix may be visually familiar from
+text threads its use is inconsistent at best with regard to space before or
+after. Requiring a space will definitely break multiply-nested multi-line
+things (or make them redundant).
+
+Which brings me to... If quotes are only meant for a single depth, but
+represent semantic rather than structural formatting (sourced content,
+could reasonably have an author or other meaningful attribution), would it
+make more sense to treat them like preformatted lines (line toggled) and
+retire the prefix entirely?
+
+If they are really only for visual distinction... Well I guess I don't
+think they ought to be.
+
+So as long as you're talking about updating the spec...
+
+
+Context:
+
+Hi! Long time observer (nearly a week!) first time poster. I hadn't seen
+deedum when I first began using my enthusiasm for both classic gopher and a
+lighter better secure-er web to begin writing dart/flutter libraries for
+Gemini.
+
+I'm a very low vision user and this approach to content is very welcome.
+It's been a fun exercise and there still seems to be room for a formal
+library on pubget and so forth, and I am imagining a kind conversational
+model where browsing and contributing are possible within the same
+experience. Anywho...
+
+Things I noticed in this process where I've tried to include robust edge
+case tests and simulate workflows that may be common to streamline
+anybody's ability to create content:
+*  I actually do use # without spaces for headers but nobody else seems to
+* Quoted content when visually distinct has more in common with
+preformatted content in that, while it can be wrapped and flowed, you're
+often quoting something by copy-pasting at which point the original layout
+can be relevant
+* Many things one might paste with one level of quote include multiple
+levels with hideous line breaking
+* And so realized I couldn't find many uses for &gt; where ``` wasn't also at
+least useful.
+* So I began tinkering with a language param for pre that allowed one to
+specify more quote-like behavior
+
+I'll share links in a few days when the repo moves from embarrassing to
+merely incomplete.
+
+
+On Thu, Jul 23, 2020, 6:08 PM &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A>&gt; wrote:
+
+&gt;<i> &gt; At this point it seems like we may as well go &quot;whole hog&quot; and insist on
+</I>&gt;<i> &gt; at least one space after all the line type markers - that would mean
+</I>&gt;<i> &gt; quote lines starting with &quot;&gt; &quot; and link lines starting with &quot;=&gt; &quot;. Does
+</I>&gt;<i> &gt; anybody object to that?
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> I do sort of object to this. I don't think there's much value in switching
+</I>&gt;<i> the other definitions when a need hasn't been demonstrated. I have seen
+</I>&gt;<i> many
+</I>&gt;<i> links that don't have a space after the &quot;=&gt;&quot;, and I don't see why there
+</I>&gt;<i> needs to
+</I>&gt;<i> be a space after the quote marker either. It's nicer to read in both cases,
+</I>&gt;<i> but I'm not in favour of creating changes when they don't seem to be
+</I>&gt;<i> required.
+</I>&gt;<i>
+</I>&gt;<i> Why not just change the heading lines?
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i> makeworld
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200723/877a78ce/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200723/877a78ce/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002321.html">[SPECS text/gemini] Heading lines proposal
+</A></li>
+	<LI>Next message (by thread): <A HREF="002323.html">[SPECS text/gemini] Heading lines proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2322">[ date ]</a>
+              <a href="thread.html#2322">[ thread ]</a>
+              <a href="subject.html#2322">[ subject ]</a>
+              <a href="author.html#2322">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

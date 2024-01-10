@@ -1,0 +1,164 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Cache duration and response body size proposals
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cache%20duration%20and%20response%20body%20size%20proposals&In-Reply-To=%3C20201111011442.67bacc3c%40home%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003229.html">
+   <LINK REL="Next"  HREF="003220.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Cache duration and response body size proposals</H1>
+    <B>Ali Fardan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cache%20duration%20and%20response%20body%20size%20proposals&In-Reply-To=%3C20201111011442.67bacc3c%40home%3E"
+       TITLE="Cache duration and response body size proposals">raiz at stellarbound.space
+       </A><BR>
+    <I>Tue Nov 10 22:14:42 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003229.html">Cache duration and response body size proposals
+</A></li>
+        <LI>Next message (by thread): <A HREF="003220.html">Cache duration and response body size proposals
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3253">[ date ]</a>
+              <a href="thread.html#3253">[ thread ]</a>
+              <a href="subject.html#3253">[ subject ]</a>
+              <a href="author.html#3253">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, 10 Nov 2020 14:17:13 +0000
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">khuxkm at tilde.team</A> wrote:
+&gt;<i> I keep hearing this argument and I don't agree with it one bit. (I'm
+</I>&gt;<i> not necessarily disagreeing with *you*, Johann, just in general.)
+</I>&gt;<i> 
+</I>&gt;<i> One design criterion of Gemini is generality. As the FAQ puts it:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; But, just like HTTP can be, and is, used for much, much more than
+</I>&gt;<i> &gt; serving HTML, Gemini should be able to be used for as many other
+</I>&gt;<i> &gt; purposes as possible without compromising the simplicity and
+</I>&gt;<i> &gt; privacy criteria above.  
+</I>&gt;<i> 
+</I>&gt;<i> It's *possible* to serve large files over Gemini. I can make a script
+</I>&gt;<i> that generates a large image (or I can just have a large image to
+</I>&gt;<i> serve). Therefore, you should be able to use Gemini to serve large
+</I>&gt;<i> files. The main draw I can see for a Content-Length header is being
+</I>&gt;<i> able to see if the whole file comes across the wire. The ability to
+</I>&gt;<i> resume an interrupted download need not exist; just retry the request
+</I>&gt;<i> if all of the content doesn't get across.
+</I>
+Just because it is possible to do this within the protocol doesn't mean
+it should accommodate every use case, your use case is possible, but
+not recommended, the protocol is designed for serving small text
+documents, I said this million times, you just skip it and continue
+your push for the &quot;solutions&quot; to non-existent problems in Gemini.
+
+If you believe the protocol is limited, THAT IS BY DESIGN, if it gets
+extended to allow the frequent serving of large files then nothing
+stopping anyone from developing a new markup language that is meant for
+Gemini that serves stylesheets and what not, I know this is against the
+Gemini philosophy, but if it is, then the protocol should not provide
+means for its possibility.
+
+You have to appreciate that the community give each other a slap on the
+wrist for when someone thinks that their proposal is acceptable, for
+example, look at my recent suggestion to add escaped lines to gemtext,
+it got rejected with valid criticism, It was explained to me it was a
+bad idea so I backed off and agreed, I'm thankful for that.
+
+Yet you refuse to address the common concerns brought to you against
+your proposal, it seems that every time the mailing list moves on you
+come back advocating for such feature again and again, and you get the
+exact same replies... move on.
+
+Let me quote Arav K. for you, as he brought up the same points I
+brought up previously that you seemed to have ignored anyway:
+On Tue, 10 Nov 2020 13:46:30 +0100
+&quot;Arav K.&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">nothien at uber.space</A>&gt; wrote:
+&gt;<i> We just had massive discussions about both of these on the ML.  I'll
+</I>&gt;<i> provide you with some of my thoughts and consensuses(?) from the
+</I>&gt;<i> conversations in the ML:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Caching
+</I>&gt;<i> &gt; Content-Size / Content-Length  
+</I>&gt;<i> 
+</I>&gt;<i> Both of these proposals and the general idea around them focuses on
+</I>&gt;<i> the transmission of large files.  Caching is geared towards reducing
+</I>&gt;<i> request times, and content-size/length aims to provide progress bars
+</I>&gt;<i> and size verification.  Content hashing, which you've not discussed,
+</I>&gt;<i> is also toward content verification.
+</I>&gt;<i> 
+</I>&gt;<i> Gemini is focused on serving small textual files.  They clearly do not
+</I>&gt;<i> need caching.  Clients that do wish to cache should only cache
+</I>&gt;<i> backward and forward in history (i.e. pages that the user had visited
+</I>&gt;<i> in the current session), and should provide a reload button at least
+</I>&gt;<i> for these pages so that they can be refreshed when needed.  In
+</I>&gt;<i> addition, large files are not expected to be requested repeatedly (at
+</I>&gt;<i> least, Gemini is not the protocol to do it in), so they do not need
+</I>&gt;<i> to be cached.  Small text files are also small enough that their size
+</I>&gt;<i> does not need to be known (as they load quickly enough to remove the
+</I>&gt;<i> need for progress bars) and they can easily be verified by hand just
+</I>&gt;<i> by reading them (the underlying connection is already over TLS, so
+</I>&gt;<i> receiving bad data is hard enough as it is).
+</I>&gt;<i> 
+</I>&gt;<i> Gemini is just not good at large transmissions, and this is
+</I>&gt;<i> intentional. If you need to do large transmissions, use other
+</I>&gt;<i> protocols that already support content-size (and perhaps
+</I>&gt;<i> content-hash), as they are geared towards such transmissions and will
+</I>&gt;<i> support it better.
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003229.html">Cache duration and response body size proposals
+</A></li>
+	<LI>Next message (by thread): <A HREF="003220.html">Cache duration and response body size proposals
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3253">[ date ]</a>
+              <a href="thread.html#3253">[ thread ]</a>
+              <a href="subject.html#3253">[ subject ]</a>
+              <a href="author.html#3253">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

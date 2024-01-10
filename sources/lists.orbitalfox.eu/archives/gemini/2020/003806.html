@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Garden Gnome Society!
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Garden%20Gnome%20Society%21&In-Reply-To=%3C148F02E4-480E-4849-888C-1A6C0C908EAA%40low-key.me%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003777.html">
+   <LINK REL="Next"  HREF="003810.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Garden Gnome Society!</H1>
+    <B>Lokesh Krishna</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Garden%20Gnome%20Society%21&In-Reply-To=%3C148F02E4-480E-4849-888C-1A6C0C908EAA%40low-key.me%3E"
+       TITLE="[ANN] Garden Gnome Society!">lokesh at low-key.me
+       </A><BR>
+    <I>Sat Dec  5 01:22:11 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003777.html">[ANN] Garden Gnome Society!
+</A></li>
+        <LI>Next message (by thread): <A HREF="003810.html">[ANN] Garden Gnome Society!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3806">[ date ]</a>
+              <a href="thread.html#3806">[ thread ]</a>
+              <a href="subject.html#3806">[ subject ]</a>
+              <a href="author.html#3806">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+On 4 December 2020 12:40:07 pm IST, &quot;Bj&#246;rn W&#228;rmedal&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">bjorn.warmedal at gmail.com</A>&gt; wrote:
+&gt;&gt;<i> Brilliant work, Bj&#246;rn! I try to water another community garden plant
+</I>&gt;&gt;<i> each day, but I usually have to pick a bunch of them at random before I
+</I>&gt;&gt;<i> find one that needs watering. Thanks for making this a MUCH easier
+</I>&gt;&gt;<i> process.
+</I>&gt;<i>
+</I>&gt;<i>Thank you, Gary! It was exactly that problem I intended to solve :)
+</I>&gt;<i>
+</I>&gt;&gt;<i> This is awesome! I know botany from the tildeverse, but have never used
+</I>&gt;&gt;<i> it! I was wondering, could you, or someone else, teach me how to attach
+</I>&gt;&gt;<i> my output from astrobotany to my index page of my gemini capsule?
+</I>&gt;<i>
+</I>&gt;<i>Hey, Vidak! Good question, and I'm happy to help :)
+</I>&gt;<i>
+</I>&gt;<i>It's surprisingly simple, actually! There are a few curl-like command
+</I>&gt;<i>line utilities for gemini out there. When I was planning on making
+</I>&gt;<i>this I looked at <A HREF="https://github.com/makeworld-the-better-one/gemget">https://github.com/makeworld-the-better-one/gemget</A> at
+</I>&gt;<i>first. It ended up not working for me for two reasons: it doesn't
+</I>&gt;<i>(yet) support client certificates -- which AstroBotany requires to let
+</I>&gt;<i>you walk the community garden or visit your own plant -- and the Go
+</I>&gt;<i>version on my Raspberry Pi was incompatible (that's probably a
+</I>&gt;<i>solvable problem, but I would still need the client cert support).
+</I>&gt;<i>
+</I>&gt;<i>I ended up writing my own in python3:
+</I>&gt;<i><A HREF="https://github.com/makeworld-the-better-one/gemget">https://github.com/makeworld-the-better-one/gemget</A>
+</I>&gt;<i>
+</I>&gt;<i>Python3 is great for me, because it works on my laptop and my RPi
+</I>&gt;<i>without needing to compile anything. This tool is *really* basic for
+</I>&gt;<i>now. There's no error checking, it decodes everything to UTF-8 before
+</I>&gt;<i>pushing it to stdout, and the response header line is included in the
+</I>&gt;<i>output. And there's no server cert validation of any kind (i.e. no
+</I>&gt;<i>known-hosts database). But it works for the purpose of fetching
+</I>&gt;<i>AstroBotany info!
+</I>&gt;<i>
+</I>&gt;<i>Basically: find where your browser keeps your client cert, run
+</I>&gt;<i>&quot;gemcall -c &lt;path to cert&gt; -k &lt;path to cert key&gt; -u
+</I>&gt;<i><A HREF="gemini://astrobotany.mozz.us/app/plant">gemini://astrobotany.mozz.us/app/plant</A>&quot; and you'll get text output. Be
+</I>&gt;<i>sure to not have the colour setting turned on for that client cert, as
+</I>&gt;<i>that will ruin the experience for some people visiting your capsule.
+</I>&gt;<i>Then you just have to figure out which lines from the output you want!
+</I>&gt;<i>Put it in a cron job or systemd.timer if you can, and it's fully
+</I>&gt;<i>automated.
+</I>&gt;<i>
+</I>&gt;<i>Cheers,
+</I>&gt;<i>ew0k
+</I>
+Hello,
+
+
+&gt;<i>I ended up writing my own in python3:
+</I>&gt;<i><A HREF="https://github.com/makeworld-the-better-one/gemget">https://github.com/makeworld-the-better-one/gemget</A>
+</I>
+Um, it looks like you linked to gemget again. Could you please link to the one you created because I too would love to be able to do this.
+
+Thanks!
+&#8213; Lokesh Krishna
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003777.html">[ANN] Garden Gnome Society!
+</A></li>
+	<LI>Next message (by thread): <A HREF="003810.html">[ANN] Garden Gnome Society!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3806">[ date ]</a>
+              <a href="thread.html#3806">[ thread ]</a>
+              <a href="subject.html#3806">[ subject ]</a>
+              <a href="author.html#3806">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

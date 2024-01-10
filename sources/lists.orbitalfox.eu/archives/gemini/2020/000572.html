@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Basic git clone over gemini:// working
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Basic%20git%20clone%20over%20gemini%3A//%20working&In-Reply-To=%3Ca405e60f-f349-4ab8-9191-ff56c61c0de7%40www.fastmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000567.html">
+   <LINK REL="Next"  HREF="000565.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Basic git clone over gemini:// working</H1>
+    <B>Dave Huseby</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Basic%20git%20clone%20over%20gemini%3A//%20working&In-Reply-To=%3Ca405e60f-f349-4ab8-9191-ff56c61c0de7%40www.fastmail.com%3E"
+       TITLE="Basic git clone over gemini:// working">dwh at vi.rs
+       </A><BR>
+    <I>Wed May 13 00:25:52 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000567.html">Basic git clone over gemini:// working
+</A></li>
+        <LI>Next message (by thread): <A HREF="000565.html">New gemini server fully spanish
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#572">[ date ]</a>
+              <a href="thread.html#572">[ thread ]</a>
+              <a href="subject.html#572">[ subject ]</a>
+              <a href="author.html#572">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>So it does rely on the query parameters feature of Gemini urls but I supposed a gopher equivalent would be to encode the git command parameters as parts of the path just like how the document type is sometimes encoded as part of the url path.
+
+Git is actually pretty modular and is easily adapted to new transport protocols. You just have to implement a &quot;remote helper&quot; binary that follows Git's pipe-fork API for remotes. It's documented in the Git documentation and there's article written about implementing them.
+
+I wrote the absolutely bare minimum remote helper. And since Gemini is a read-only protocol, `git push` will never work. This is just useful for publishing git repos on Gemini sites. The server side could easily be added to the Gemini servers that support CGI scripts.
+
+Cheers!
+Dave
+
+On Tue, May 12, 2020, at 11:13 AM, solderpunk wrote:
+&gt;<i> Holy heck!  That is impressive and exciting.  I know essentially nothing
+</I>&gt;<i> about git internals.  To what extent does doing this rely on features of
+</I>&gt;<i> Gemini which have no equivalent in Gopher?  Or is this actually much
+</I>&gt;<i> simpler than I'm imagining it?
+</I>&gt;<i> 
+</I>&gt;<i> Cheers,
+</I>&gt;<i> Solderpunk
+</I>&gt;<i> 
+</I>&gt;<i> On Mon, May 11, 2020 at 06:32:45PM -0700, Dave Huseby wrote:
+</I>&gt;<i> &gt; Howdy,
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I got bored over the weekend and wrote a simple Git remote helper for the gemini protocol. I published it on github for now: <A HREF="https://github.com/dhuseby/git-remote-gemini.git">https://github.com/dhuseby/git-remote-gemini.git</A>  Once you have it built and installed in your PATH somewhere, you'll then be able to clone it from the its actual location here: <A HREF="gemini://vi.rs/git-remote-gemini.git">gemini://vi.rs/git-remote-gemini.git</A>
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; I did a short terminal capture of me cloning a repo over gemini: <A HREF="https://asciinema.org/a/y2QxPEbgHsiGh4Go1AuHTLT0D">https://asciinema.org/a/y2QxPEbgHsiGh4Go1AuHTLT0D</A>
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; To make this work, I had to hack up Pollux to respond to simple queries and run the appropriate Git commands on the server. The details are in the README.gemini file in the repo.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Cheers!
+</I>&gt;<i> &gt; Dave
+</I>&gt;<i>
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000567.html">Basic git clone over gemini:// working
+</A></li>
+	<LI>Next message (by thread): <A HREF="000565.html">New gemini server fully spanish
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#572">[ date ]</a>
+              <a href="thread.html#572">[ thread ]</a>
+              <a href="subject.html#572">[ subject ]</a>
+              <a href="author.html#572">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

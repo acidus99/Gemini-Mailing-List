@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] Proposed changes
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Proposed%20changes&In-Reply-To=%3C764da81d-75f1-d800-f7d7-16143c32f994%40scotdoyle.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004469.html">
+   <LINK REL="Next"  HREF="004473.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] Proposed changes</H1>
+    <B>Scot</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Proposed%20changes&In-Reply-To=%3C764da81d-75f1-d800-f7d7-16143c32f994%40scotdoyle.com%3E"
+       TITLE="[spec] Proposed changes">gmi1 at scotdoyle.com
+       </A><BR>
+    <I>Sun Dec 27 22:16:24 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004469.html">[spec] Proposed changes
+</A></li>
+        <LI>Next message (by thread): <A HREF="004473.html">IETF policy on encodings and languages
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4490">[ date ]</a>
+              <a href="thread.html#4490">[ thread ]</a>
+              <a href="subject.html#4490">[ subject ]</a>
+              <a href="author.html#4490">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>(I apologize for breaking the thread view by not replying directly to
+the original message.)
+
+&gt;<i> ...
+</I>&gt;<i>
+</I>&gt;<i> Client authors should note that the semantics of &quot;close_notify&quot;
+</I>&gt;<i> changed between TLS 1.2 and 1.3 - only in TLS 1.3 may a client safely
+</I>&gt;<i> send a &quot;close_notify&quot; after a request to convey that it will not write
+</I>&gt;<i> anything further and then continue to receive the response.  To avoid
+</I>&gt;<i> interoperability problems, clients SHOULD NOT send a &quot;close_notify&quot;
+</I>&gt;<i> before the server does under non-error conditions.  The completion of a
+</I>&gt;<i> request is already unambiguously indicated by the CRLF characters.
+</I>
+Thanks Solderpunk for proposing these updates.
+
+Section 6.1 of RFC 8446 [1] is specified in order to avoid truncation
+attacks. Since, as you noted, the server has another way to determine
+that a full request has been received, I think there is no need for a
+client to send a TLS close_notify.
+
+The server is allowed to close the read side of its TCP connection at
+any time:
+
+    Both parties need not wait to receive a &quot;close_notify&quot; alert
+    before closing their read side of the connection, though doing
+    so would introduce the possibility of truncation.
+
+Since the sender of a close_notify is allowed to fully close the TCP
+connection without waiting for a response, I think the RFC is
+implicitely giving permission to the receiver of the close_notify
+not to respond in kind.
+
+This is also what I recall seeing in HTTP and Gemini TLS 1.3 packet
+flows. Immediately after sending a TLS close_notify the server would
+send a TCP FIN (disconnect) packet. When the client received the TLS
+close_notify, it would not reply with its own close_notify. Rather,
+it would wait for the TCP FIN packet and then reply with its own TCP
+FIN packet.
+
+
+
+[1] RFC 8446
+
+Section 6.1. Closure Alerts
+
+    The client and the server must share knowledge that the connection is
+    ending in order to avoid a truncation attack.
+
+    close_notify:  This alert notifies the recipient that the sender will
+       not send any more messages on this connection.  Any data received
+       after a closure alert has been received MUST be ignored.
+
+    ...
+
+    Either party MAY initiate a close of its write side of the connection
+    by sending a &quot;close_notify&quot; alert.  Any data received after a closure
+    alert has been received MUST be ignored.  If a transport-level close
+    is received prior to a &quot;close_notify&quot;, the receiver cannot know that
+    all the data that was sent has been received.
+
+    Each party MUST send a &quot;close_notify&quot; alert before closing its write
+    side of the connection, unless it has already sent some error alert.
+    This does not have any effect on its read side of the connection.
+    Note that this is a change from versions of TLS prior to TLS 1.3 in
+    which implementations were required to react to a &quot;close_notify&quot; by
+    discarding pending writes and sending an immediate &quot;close_notify&quot;
+    alert of their own.  That previous requirement could cause truncation
+    in the read side.  Both parties need not wait to receive a
+    &quot;close_notify&quot; alert before closing their read side of the
+    connection, though doing so would introduce the possibility of
+    truncation.
+
+    ...
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004469.html">[spec] Proposed changes
+</A></li>
+	<LI>Next message (by thread): <A HREF="004473.html">IETF policy on encodings and languages
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4490">[ date ]</a>
+              <a href="thread.html#4490">[ thread ]</a>
+              <a href="subject.html#4490">[ subject ]</a>
+              <a href="author.html#4490">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

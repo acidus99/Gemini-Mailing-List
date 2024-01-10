@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A proposed scheme for parsing preformatted alt text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3CCAEzvDCV-nPZu%3DGAKupVf0q20_UXmweVmks5%2BHk2A7_FrGFBdZQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002645.html">
+   <LINK REL="Next"  HREF="002657.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A proposed scheme for parsing preformatted alt text</H1>
+    <B>A. E. Spencer-Reed</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3CCAEzvDCV-nPZu%3DGAKupVf0q20_UXmweVmks5%2BHk2A7_FrGFBdZQ%40mail.gmail.com%3E"
+       TITLE="A proposed scheme for parsing preformatted alt text">easrng at gmail.com
+       </A><BR>
+    <I>Thu Sep 10 19:07:38 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002645.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+        <LI>Next message (by thread): <A HREF="002657.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2646">[ date ]</a>
+              <a href="thread.html#2646">[ thread ]</a>
+              <a href="subject.html#2646">[ subject ]</a>
+              <a href="author.html#2646">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>When parsing closing lines with extra text after the &quot;```&quot;, should
+they just be treated as part of the block? ex. should
+```Alt Text
+1
+```2
+3
+```
+4
+
+look like
++------------------------------+
+|<i> 1                            |
+</I>|<i> ```2                         |
+</I>|<i> 3                            |
+</I>+------------------------------+
+4
+
+or
+
++------------------------------+
+|<i> 1                            |
+</I>+------------------------------+
+3
++------------------------------+
+|<i> 4                            |
+</I>+------------------------------+
+
+
+On Thu, Sep 10, 2020 at 1:54 PM James Tomasino &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">tomasino at lavabit.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> On 9/10/20 5:47 PM, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">mbays at sdf.org</A> wrote:
+</I>&gt;<i> &gt; How about if clients have an easily toggled switch between showing
+</I>&gt;<i> &gt; preformatted text and just showing alt text? I guess that would still
+</I>&gt;<i> &gt; lead to more easter-egging, but maybe not too much? It seems there's a
+</I>&gt;<i> &gt; tradeoff between discouraging inaccessible uses as human-readable text,
+</I>&gt;<i> &gt; and discouraging inaccessible uses as machine-readable text...
+</I>&gt;<i>
+</I>&gt;<i> I've been thinking about clients toggling the visibility of preformatted text. While it may not provide much value in a desktop client for sighted users, this could be very useful in mobile clients. Preformatted text is one of the troublesome areas that screws up displays on narrow screens. If a mobile client were to serve the alternate text instead then visitors could choose whether they want to expand it to see the preformatted content.
+</I>&gt;<i>
+</I>&gt;<i> This sort of flow is exactly what a screen reader would be doing for a blind user. It serves up that alternate text first and the user then can decide whether it is worth the effort to dive into the contents further.
+</I>&gt;<i>
+</I>&gt;<i> Maybe it will also help keep alt-text top-of-mind for content authors if they run into it themselves in the proper context.
+</I>&gt;<i>
+</I>
+
+-- 
+&#127861;
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002645.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+	<LI>Next message (by thread): <A HREF="002657.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2646">[ date ]</a>
+              <a href="thread.html#2646">[ thread ]</a>
+              <a href="subject.html#2646">[ subject ]</a>
+              <a href="author.html#2646">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Feed format for gemini (alternative to rss feed)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Feed%20format%20for%20gemini%20%28alternative%20to%20rss%20feed%29&In-Reply-To=%3Cda5239674d446986ee4bb0604ae1dfb2%40tilde.team%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002655.html">
+   <LINK REL="Next"  HREF="002573.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Feed format for gemini (alternative to rss feed)</H1>
+    <B>prisonpotato at tilde.team</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Feed%20format%20for%20gemini%20%28alternative%20to%20rss%20feed%29&In-Reply-To=%3Cda5239674d446986ee4bb0604ae1dfb2%40tilde.team%3E"
+       TITLE="Feed format for gemini (alternative to rss feed)">prisonpotato at tilde.team
+       </A><BR>
+    <I>Mon Sep  7 17:17:07 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002655.html">Feed format for gemini (alternative to rss feed)
+</A></li>
+        <LI>Next message (by thread): <A HREF="002573.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2584">[ date ]</a>
+              <a href="thread.html#2584">[ thread ]</a>
+              <a href="subject.html#2584">[ subject ]</a>
+              <a href="author.html#2584">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> The reason I went for non csv in this is that people might want to use commas in the description or
+</I>&gt;<i> title.
+</I>&gt;<i> 
+</I>&gt;<i> This can be solved by enclosing strings in quotations but then if people want to include quotations
+</I>&gt;<i> in their strings they need to be escaped.
+</I>&gt;<i> 
+</I>&gt;<i> The idea behind using ::: is that its rare enough to never really show up and therefore makes a
+</I>&gt;<i> fairly solid delimiter. It also makes manually writing a feed file easier because commas quotes and
+</I>&gt;<i> escapes are not a concern at all.
+</I>&gt;<i> 
+</I>&gt;<i> Basically its just more simple and clean, in my mind anyway.
+</I>
+Just my 2 cents -- I do like the idea of a line based format for this.
+Maybe something even simpler, building on the idea of previous
+proposals:
+
+=&gt; link1 date1 name1
+=&gt; link2 date2 name2
+=&gt; link3 date3 name3
+
+Where link is a absolute gemini link, date is an ISO-8601 date,
+and name is the human readable name of the article.  For example:
+
+=&gt; <A HREF="gemini://foo.bar/glog/1">gemini://foo.bar/glog/1</A> 2020-01-01 Happy New Years!
+
+This way you get a valid gemini document that you can display to
+humans without any changes, or you can parse it fairly easily.  So
+you could mix two feeds together and keep them sorted by date, etc.
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002655.html">Feed format for gemini (alternative to rss feed)
+</A></li>
+	<LI>Next message (by thread): <A HREF="002573.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2584">[ date ]</a>
+              <a href="thread.html#2584">[ thread ]</a>
+              <a href="subject.html#2584">[ subject ]</a>
+              <a href="author.html#2584">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

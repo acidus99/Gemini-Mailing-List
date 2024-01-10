@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Removing expiry dates for TOFU
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Removing%20expiry%20dates%20for%20TOFU&In-Reply-To=%3CC40B9OGF2BVL.37E26R39CC4TD%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002101.html">
+   <LINK REL="Next"  HREF="002105.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Removing expiry dates for TOFU</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Removing%20expiry%20dates%20for%20TOFU&In-Reply-To=%3CC40B9OGF2BVL.37E26R39CC4TD%40stilgar%3E"
+       TITLE="Removing expiry dates for TOFU">solderpunk at posteo.net
+       </A><BR>
+    <I>Tue Jul  7 11:14:30 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002101.html">Removing expiry dates for TOFU
+</A></li>
+        <LI>Next message (by thread): <A HREF="002105.html">Removing expiry dates for TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2102">[ date ]</a>
+              <a href="thread.html#2102">[ thread ]</a>
+              <a href="subject.html#2102">[ subject ]</a>
+              <a href="author.html#2102">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>A proposal: &quot;TOFU-TOTS&quot;.  You know, like tater tots, but without
+potatoes in them.  Or rather, trust-on-first-use augmented by
+trust-over-time-and-space.
+
+Desiderata:
+
+* Limit actions of blind faith to a single point in time.
+* Allow ever more trust to slowly, organically build up after that
+  point.
+* Permit fully automated regular key rotation on servers.
+* Don't require client authors to write code to validate signatures.
+
+Assumptions:
+
+* MITM attacks limited to a single network for a short duration of time
+  are a plausible threat, but MITM attacks which target an individual
+  user no matter which network their using are extremely hard, and even
+  on a single network (home ISP, say), MITM attacks which last for
+  months or years require dedication and are more likely to be
+  whistleblown.
+
+Quick description:
+
+* Certs last for several years
+* The very first time you connect to a server (or the first time after
+  so long that all your previous knowledge about that server is badly
+  out of date), blindly accept whatever you get.
+* New keys and certs are generated 1 year before they become valid
+  (consecutive certs have maybe 1 month of overlapping validity to allow
+  for change over)
+* New certs, or their fingerprint, are served on a well-known end point
+  immediately after generation, i.e. for roughly one year before their
+  validity begins.
+* TOFU-TOTS clients have a &quot;trust maintenance&quot; procedure which should be
+  run, say, once a month, or maybe every 3 months.  Fancy clients can do
+  this automatically in the background on a separate thread.  Simple
+  clients can just keep track of when this was last run, check that
+  against the current date on startup and say &quot;Hey, you haven't done
+  trust maintenance in a while, wanna do it now?  Y/N&quot; without bothering
+  with threads.  Users who are security nerds should be able to run it
+  on demand whenever they like.
+* Trust maintenance involves:
+    - Removing expired certificates from the TOFU database
+    - If a non-expired cert in the DB has less than 1 year of validity
+      left, hit the server's well known endpoint and, assuming that
+      transaction takes place using a previously trusted cert, store the
+      cert/fingerprint you see at that endpoint, along with a counter of
+      how many times you've observed it.
+    - If the same well known endpoint ever serves up different future
+      certificates while the same current certificate is valid, &quot;warn
+      hard&quot;.
+* When a new cert comes down the line, &quot;warn hard&quot; if it's completely
+  out of the blue.  Accept it silently if it's been pre-advertised by
+  the appropriate server at least N times previously (perhaps &quot;warn
+  softly&quot; if it's been advertised less than N times but at least once),
+  and delete that server's previously trusted cert (possibly
+  incrementing a counter of the number of trusted roll-overs this server
+  has achieved, permitting the option to &quot;warn extremely hard&quot; if we
+  ever get an out of the blue cert change for a server which has
+  previously done the right thing multiple times).
+
+Properties:
+
+* Meets all desiderata above.
+* If I steal your private key, I can straightforwardly use this in
+  attacks only until your current cert expires - not forever, as
+  would be the case with 100 year certs.
+* In order to extend the time I can exploit the stolen key, I need to
+  successfully MITM every possible future victim of my attacks, for
+  multiple executions of their trust maintenance routine, which happen
+  at unpredictable times, over the course of a year, possibly from
+  multiple different networks, and I can't do this if I steal your key
+  in its final year of validity, because victims will have already
+  picked up the true next certificate at least once - this is a big
+  improvement over roll-over schemes where new certificates are signed
+  with the private key of the old certificate, in which case once I've
+  stolen your key it's trivial for me to just sign myself future
+  certificates which anybody will accept - and I can keep doing this,
+  forever, spinning a single key breach out indefinitely despite
+  regular rotation!
+* Clients are, as always, vulnerable to undetected MITM attacks on that
+  very first connection, but such an attack can be fairly easily
+  discovered after the fact (providing a strong disincentive for e.g.
+  commercial ISPs to do them regularly) unless the attacker commits to a
+  clean exit by MITMing you multiple times in the future to feed you the
+  legitimate next cert.
+
+Right now, I think this provides pretty good robustness against MITM
+attacks relative to how conceptually complicated it is - nothing is
+involved on the server side except generating stand-alone self-signed
+certs and copying them at the right time into the document root, which
+is very easily automated, and nothing is involved on the client side
+except storing hashes of entire certs in a DB and checking expiry dates.
+Client authors never have to write their own signature validation code,
+so this can be done even with TLS libraries that don't make that easy.
+It also has the advantage of keeping TLS network overhead as low as
+possible by having servers only ever send a single cert.
+
+But, maybe I've overlooked something.  Feedback welcome.
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002101.html">Removing expiry dates for TOFU
+</A></li>
+	<LI>Next message (by thread): <A HREF="002105.html">Removing expiry dates for TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2102">[ date ]</a>
+              <a href="thread.html#2102">[ thread ]</a>
+              <a href="subject.html#2102">[ subject ]</a>
+              <a href="author.html#2102">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

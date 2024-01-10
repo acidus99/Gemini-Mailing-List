@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Preformatted text blocks
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Preformatted%20text%20blocks&In-Reply-To=%3C20200205092243.GB8780%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000427.html">
+   <LINK REL="Next"  HREF="000429.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Preformatted text blocks</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Preformatted%20text%20blocks&In-Reply-To=%3C20200205092243.GB8780%40SDF.ORG%3E"
+       TITLE="Preformatted text blocks">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Wed Feb  5 09:22:43 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000427.html">[SPEC-CHANGE] Full text reflow is out, long line wrapping is in
+</A></li>
+        <LI>Next message (by thread): <A HREF="000429.html">Preformatted text blocks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#428">[ date ]</a>
+              <a href="thread.html#428">[ thread ]</a>
+              <a href="subject.html#428">[ subject ]</a>
+              <a href="author.html#428">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Now that the line-wrapping issue seems to be sorted, at long last, the
+next thing I want to quickly clear up is whether or not we really do
+want some kind of pre-formatted text mode (the thing we've been
+discussing with ``` syntax).
+
+All the header/list stuff we've talked about is definitely - and always
+was definitely - going to be optional and ignorable by simple clients.
+So I don't feel as strong a need to build consensus on that, and I'm
+pretty sure I'm going to spec it.  But verbatim mode would likely be an
+obligatory thing to implement, if only because if it's in the spec at
+all, some authors will produce content with would-be Gemini links in it,
+under the expectation that clients won't try to parse them as links
+because they're within a verbatim text block.  Some of these lines may
+not actually use valid link syntax, for the purposes of teaching newbies
+how *not* to format their links, so clients which ignore the ``` lines
+may find themselves in trouble (although, ideally, all clients should be
+robust against malformed link lines - Sean, is that in the torture
+test?).
+
+I don't think there's any question that such a facility would have
+legitimate and useful applications, the quesiton is whether they provide
+enough value to be worth the increased implementation effort - which,
+for the record, is quite low.
+
+The only reason I think this is worth questioning is that the *original*
+reason having such a feature was proposed on this list was as a
+work-around to our old style of text reflow breaking lists.  The idea
+was that bulleted lists could be enclosed in ``` lines to prevent the
+lines all getting joined together.  This was never a great solution in
+the first place (as was discussed on the list, it just meant that
+content would display weirdly if any individual list item was longer
+than a single line on a given client's display), and now it is totally
+unecessary as our new line-wrapping solution doesn't break lists, or
+poems, or source code.
+
+As far as I see it, the main arguments in favour of a preformatted block
+concept now are:
+
+1. The ability to include text/gemini syntax without it actually being
+   rendered by the client, so Gemini can be discussed/taught over
+   Gemini.
+2. The ability to insist that some content (e.g. source code, ASCII
+   art), be rendered in a monospace font, even by graphical clients
+   which might display text in a variable width font by default.
+
+Point 2. could in principle be nullified by mandating the use of
+monospace fonts for all clients, but I think this is a pretty bad idea
+and conflicts with the idea that clients should be *able* to make
+reading text/gemini a typographically pleasant experience.
+
+I think the case is strong enough to spec these, but I recall at least
+one person already suggested we shouldn't, so I'm willing to hear
+counter arguments, if anybody wants to provide them.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000427.html">[SPEC-CHANGE] Full text reflow is out, long line wrapping is in
+</A></li>
+	<LI>Next message (by thread): <A HREF="000429.html">Preformatted text blocks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#428">[ date ]</a>
+              <a href="thread.html#428">[ thread ]</a>
+              <a href="subject.html#428">[ subject ]</a>
+              <a href="author.html#428">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Unicode vs. the World
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3C20201216234127.GB9267%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004095.html">
+   <LINK REL="Next"  HREF="004103.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Unicode vs. the World</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3C20201216234127.GB9267%40brevard.conman.org%3E"
+       TITLE="Unicode vs. the World">sean at conman.org
+       </A><BR>
+    <I>Wed Dec 16 23:41:27 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004095.html">Unicode vs. the World
+</A></li>
+        <LI>Next message (by thread): <A HREF="004103.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4102">[ date ]</a>
+              <a href="thread.html#4102">[ thread ]</a>
+              <a href="subject.html#4102">[ subject ]</a>
+              <a href="author.html#4102">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Bj&#246;rn W&#228;rmedal once stated:
+&gt;<i> 
+</I>&gt;<i> &gt; but unreasonable for it to have to urlencode the path (a common encoding
+</I>&gt;<i> &gt; for which libraries are ubiquitous)?
+</I>&gt;<i> 
+</I>&gt;<i> Because &#8212; as I tried to point out &#8212; there is no reasonably simple
+</I>&gt;<i> heuristic for determining whether a URL is already percent encoded or not.
+</I>&gt;<i> And percent encoding a URL that is already percent encoded exchanges all %
+</I>&gt;<i> characters with %25. Attempting to punycode a domain name that is already
+</I>&gt;<i> punycoded, however, changes nothing at all. No heuristics are needed, the
+</I>&gt;<i> client can just punycode everything.
+</I>
+  I can't say for certain what most clients do, but I'm under the impression
+that some (the majority?) use some existing library to parse links.  The
+specification states that relative links are allowed in text/gemini:
+
+=&gt; ../%F0%9D%92%BB%F0%9D%92%B6%F0%9D%93%83%F0%9D%92%B8%F0%9D%93%8E.txt Some &#119995;&#119990;&#120003;&#119992;&#120014; stuff here
+
+but a full URI needs to be sent to the server, so some processing of the
+link is required (specifically, section 5.2 of RFC-3986).  And existing
+libraries help here.  The library I'm currently using will parse the above
+link into the following structure:
+
+	{
+	  path = &quot;../&#119995;&#119990;&#120003;&#119992;&#120014;.txt&quot;
+	}
+
+  Note how the text has been translated and any percent encoding has been
+decoded.  Next, the base URL of the page:
+
+	<A HREF="gemini://example.com/files/others/">gemini://example.com/files/others/</A>
+
+has previously parsed (because it was needed to retrieve the page currently
+being viewed):
+
+	{
+	  path = &quot;/files/others/&quot;,
+	  port = 1965.000000,
+	  host = &quot;example.com&quot;,
+	  scheme = &quot;gemini&quot;,
+	}
+
+  The two are then merged into a single reference:
+
+	{
+	  path = &quot;/files/&#119995;&#119990;&#120003;&#119992;&#120014;.txt&quot;
+	  port = 1965.000000,
+	  host = &quot;example.com&quot;,
+	  scheme = &quot;gemini&quot;,
+	}
+
+  Then to make a request, this new link is converted into a URI to make the
+request:
+
+	<A HREF="gemini://example.com/files/%F0%9D%92%BB%F0%9D%92%B6%F0%9D%93%83%F0%9D%92%B8%F0%9D%93%8E.txt">gemini://example.com/files/%F0%9D%92%BB%F0%9D%92%B6%F0%9D%93%83%F0%9D%92%B8%F0%9D%93%8E.txt</A>
+
+  As you can see, that process has re-encoded the path, percent-encoding it.
+I would expect that some (the majority?) of clients are doing something
+similar to this---doing a conversion from percent-encoding, marging
+references, then converting to percent-encoding (except for the host, which
+needs to be converted to punycode).
+
+  It would be instructive to know how clients are handling this---do they
+decode percent-encoded data, merge the base link to the relative link and
+re-encode?  Or something different?
+
+  -spc
+
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004095.html">Unicode vs. the World
+</A></li>
+	<LI>Next message (by thread): <A HREF="004103.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4102">[ date ]</a>
+              <a href="thread.html#4102">[ thread ]</a>
+              <a href="subject.html#4102">[ subject ]</a>
+              <a href="author.html#4102">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

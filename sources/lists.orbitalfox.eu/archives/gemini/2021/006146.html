@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> C program to resolve UTF-8 IDNs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20C%20program%20to%20resolve%20UTF-8%20IDNs&In-Reply-To=%3C20210318021318.GK18160%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006145.html">
+   <LINK REL="Next"  HREF="006147.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>C program to resolve UTF-8 IDNs</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20C%20program%20to%20resolve%20UTF-8%20IDNs&In-Reply-To=%3C20210318021318.GK18160%40brevard.conman.org%3E"
+       TITLE="C program to resolve UTF-8 IDNs">sean at conman.org
+       </A><BR>
+    <I>Thu Mar 18 02:13:18 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006145.html">C program to resolve UTF-8 IDNs
+</A></li>
+        <LI>Next message (by thread): <A HREF="006147.html">[spec] C program to resolve UTF-8 IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6146">[ date ]</a>
+              <a href="thread.html#6146">[ thread ]</a>
+              <a href="subject.html#6146">[ subject ]</a>
+              <a href="author.html#6146">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Scot once stated:
+&gt;<i> Hi Sean,
+</I>
+  Hi Scot!
+
+&gt;<i> I think you were wondering whether it's possible to resolve UTF-8
+</I>&gt;<i> IDNs with a C or Lua program. This Linux C program [7] will do so
+</I>&gt;<i> via glibc's getaddrinfo(). For platforms without glibc such as the
+</I>&gt;<i> BSDs, ports of the libidn library [1] are available.
+</I>&gt;<i> 
+</I>&gt;<i> Microsoft provides IdnToAscii() [2] for use with Windows 7 and it
+</I>&gt;<i> looks as if they support automatic conversion to punycode [3]
+</I>&gt;<i> in their implemenation of getaddrinfo() as of Windows 8.
+</I>&gt;<i> 
+</I>&gt;<i> Slides 30 through 48 of this presentation [4] describe how Apple
+</I>&gt;<i> approaches network name internationalization. iOS 10 and
+</I>&gt;<i> macOS Sierra will try to query a given UTF-8 name via DNS. If
+</I>&gt;<i> the server doesn't have an entry for the UTF-8 name, it
+</I>&gt;<i> converts to punycode and tries again.
+</I>&gt;<i> 
+</I>&gt;<i> Android 2.3 has the java.net.IDN package [5] for converting
+</I>&gt;<i> IDNs and Android 7.0 has android.icu.text.IDNA [6].
+</I>&gt;<i> 
+</I>&gt;<i> Thoughts?
+</I>
+  Thank you *so* much for the sample code, and providing much needed
+background information about this.  This will make the final decision on IRI
+support a bit easier to make.  I was not aware of the GNU-specific AI_IDN
+flag to getaddrinfo() (and I wish it was standard actually), and yes, it
+does work on systems that have it (Linux).
+
+  Just one thing though---you might want to be careful when pasting code
+into email---the code below contained non-breaking spaces that my C compiler
+(gcc) did not like.  It's an easy fix, so this is mostly an FYI getting
+weird errors when compiling the code below.
+
+  Again, thank you for your message.
+
+  -spc
+
+&gt;<i> [1] <A HREF="https://www.gnu.org/software/libidn/">https://www.gnu.org/software/libidn/</A>
+</I>&gt;<i> [2] <A HREF="https://docs.microsoft.com/en-us/windows/win32/api/winnls/nf-winnls-idntoascii">https://docs.microsoft.com/en-us/windows/win32/api/winnls/nf-winnls-idntoascii</A>
+</I>&gt;<i> [3] <A HREF="https://docs.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfo">https://docs.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfo</A>
+</I>&gt;<i> [4] <A HREF="https://devstreaming-cdn.apple.com/videos/wwdc/2016/714urluxe140lardrb7/714/714_networking_for_the_modern_internet.pdf?dl=1">https://devstreaming-cdn.apple.com/videos/wwdc/2016/714urluxe140lardrb7/714/714_networking_for_the_modern_internet.pdf?dl=1</A>
+</I>&gt;<i> [5] <A HREF="https://developer.android.com/reference/kotlin/java/net/IDN">https://developer.android.com/reference/kotlin/java/net/IDN</A>
+</I>&gt;<i> [6] <A HREF="https://developer.android.com/reference/android/icu/text/IDNA">https://developer.android.com/reference/android/icu/text/IDNA</A>
+</I>&gt;<i> [7] Public domain example C program to resolve UTF-8 IDNs
+</I>
+P.S.  Here's the code with the non-breaking spaces removed.
+
+#include &lt;locale.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+
+#define ADDR_LEN 1024
+
+void show_ip(char *name) {
+  struct addrinfo filter, *info;
+  char address[ADDR_LEN];
+  void *addr;
+  memset (&amp;filter, 0, sizeof(filter));
+  filter.ai_family = PF_UNSPEC;
+  filter.ai_socktype = SOCK_STREAM;
+  filter.ai_flags = AI_IDN;
+  if (getaddrinfo (name, NULL, &amp;filter, &amp;info) == 0) {
+    printf (&quot;\nHost: %s\n&quot;, name);
+    while (info) {
+      if (info-&gt;ai_family == AF_INET) {
+        addr = &amp;((struct sockaddr_in *) info-&gt;ai_addr)-&gt;sin_addr;
+        inet_ntop (AF_INET, addr, address, ADDR_LEN);
+        printf (&quot;&#160; IPv4 address: %s\n&quot;, address);
+      } else if (info-&gt;ai_family == AF_INET6) {
+        addr = &amp;((struct sockaddr_in6 *) info-&gt;ai_addr)-&gt;sin6_addr;
+        inet_ntop (AF_INET6, addr, address, ADDR_LEN);
+        printf (&quot;&#160; IPv6 address: %s\n&quot;, address);
+      }
+      info = info-&gt;ai_next;
+    }
+  } else
+  perror (&quot;getaddrinfo&quot;);
+  freeaddrinfo(info);
+}
+
+int main() {
+  setlocale(LC_ALL, &quot;&quot;);
+  show_ip(&quot;&#34552;.jp&quot;);
+  show_ip(&quot;xn--td2a.jp&quot;);
+  show_ip(&quot;g&#233;meaux.bortzmeyer.org&quot;);
+  show_ip(&quot;xn--gmeaux-bva.bortzmeyer.org&quot;);
+  show_ip(&quot;caf&#233;.mozz.us&quot;);
+  show_ip(&quot;xn--caf-dma.mozz.us&quot;);
+}
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006145.html">C program to resolve UTF-8 IDNs
+</A></li>
+	<LI>Next message (by thread): <A HREF="006147.html">[spec] C program to resolve UTF-8 IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6146">[ date ]</a>
+              <a href="thread.html#6146">[ thread ]</a>
+              <a href="subject.html#6146">[ subject ]</a>
+              <a href="author.html#6146">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> &quot;Wide load&quot; status code(s)?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%22Wide%20load%22%20status%20code%28s%29%3F&In-Reply-To=%3C20200611173413.GB29628%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001534.html">
+   <LINK REL="Next"  HREF="001490.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>&quot;Wide load&quot; status code(s)?</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%22Wide%20load%22%20status%20code%28s%29%3F&In-Reply-To=%3C20200611173413.GB29628%40SDF.ORG%3E"
+       TITLE="&quot;Wide load&quot; status code(s)?">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Thu Jun 11 18:34:13 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001534.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+        <LI>Next message (by thread): <A HREF="001490.html">redirect opt-in?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1555">[ date ]</a>
+              <a href="thread.html#1555">[ thread ]</a>
+              <a href="subject.html#1555">[ subject ]</a>
+              <a href="author.html#1555">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Jun 11, 2020 at 12:52:36AM -0500, Ivy Foster wrote:
+ 
+&gt;<i> I'm aware that this is a very contentious point, but just to throw a
+</I>&gt;<i> wrench into things...there actually is [an RFC precedent][rfc1341] for
+</I>&gt;<i> including size as a parameter to a MIME type, even though MIME type is
+</I>&gt;<i> generally intended to be a classification. Granted, it's intended
+</I>&gt;<i> specifically for external message bodies, so the user can decide
+</I>&gt;<i> whether it's worth their while to download...but isn't an external
+</I>&gt;<i> message body ultimately what any arbitrary file you fetch is anyway?
+</I>&gt;<i> 
+</I>&gt;<i> [rfc1341]: <A HREF="https://tools.ietf.org/html/rfc1341">https://tools.ietf.org/html/rfc1341</A>
+</I>
+Well, that is unexpected!  I guess practicality beats the idea of
+semantic purity even in &quot;real specs&quot;.
+
+&gt;<i> I totally get it if the answer's still no to a size parameter; the
+</I>&gt;<i> &quot;where does it end?&quot; argument is a strong one. However, a precedent
+</I>&gt;<i> for including a very useful piece of information as a MIME type
+</I>&gt;<i> parameter is still something to consider.
+</I>
+It definitely weakens my argument that file size is not appropriate
+information to attach to a MIME type.  Nevertheless, it's still true
+that we only get to dictate the permissible parameters for the one MIME
+type that we are actually defining ourselves.  All other registered MIME
+types, including all the image/*, audio/* and video/* types which are
+liable to be the most common large files, have their own pre-defined
+list of registered parameters and we shouldn't be adding extras of our
+own.
+
+Maybe we just need to (continue to) let the file size issue go.  I won't
+deny that it's useful, but (as so often) Gopherspace is the existence
+proof that useful and valuable stuff can be built without it.
+
+The concern about users without fast and cheap internet which was part
+of the motivation for my recent suggestion for more 2x codes was
+genuine, and it would have been one more nice utilisation of the &quot;two
+digit codes which degrade gracefully into one digit codes&quot; philosophy
+(which I think is neat but worry that we perhaps don't utilise enough
+to make it worth while), but as was pointed out in the ensuing
+discussion, most text/* content is likely to be quite small and clients
+can already terminate connections early on the basis of a non text/*
+MIME type in precisely the way that I was proposing they should do on
+the receipt of a 2x code above their threshold.  So, they can get quite
+a lot of the benefit of that proposal with no changes required.  I think
+I will add an option to quick-terminate on non-text content to AV-98.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001534.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+	<LI>Next message (by thread): <A HREF="001490.html">redirect opt-in?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1555">[ date ]</a>
+              <a href="thread.html#1555">[ thread ]</a>
+              <a href="subject.html#1555">[ subject ]</a>
+              <a href="author.html#1555">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

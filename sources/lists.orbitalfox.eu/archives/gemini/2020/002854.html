@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Bug reports: Multiple spaces in links; Cmd+S unreliable (was: Re: [ANN] Lagrange - A Beautiful Gemini Client)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Bug%20reports%3A%20Multiple%20spaces%20in%20links%3B%20Cmd%2BS%20unreliable%20%28was%3A%20Re%3A%0A%20%5BANN%5D%20Lagrange%20-%20A%20Beautiful%20Gemini%20Client%29&In-Reply-To=%3C22C1780C-F67D-40BA-8B48-94BF2256CFEA%40iki.fi%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002850.html">
+   <LINK REL="Next"  HREF="002852.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Bug reports: Multiple spaces in links; Cmd+S unreliable (was: Re: [ANN] Lagrange - A Beautiful Gemini Client)</H1>
+    <B>Jaakko Ker&#228;nen</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Bug%20reports%3A%20Multiple%20spaces%20in%20links%3B%20Cmd%2BS%20unreliable%20%28was%3A%20Re%3A%0A%20%5BANN%5D%20Lagrange%20-%20A%20Beautiful%20Gemini%20Client%29&In-Reply-To=%3C22C1780C-F67D-40BA-8B48-94BF2256CFEA%40iki.fi%3E"
+       TITLE="Bug reports: Multiple spaces in links; Cmd+S unreliable (was: Re: [ANN] Lagrange - A Beautiful Gemini Client)">jaakko.keranen at iki.fi
+       </A><BR>
+    <I>Sun Oct 11 08:26:48 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002850.html">=?UTF-8?Q?Bug_reports:_Multiple_spaces_in_links; _=E2=8C=98S_unreliable_(?= was: Re: [ANN] Lagrange - A Beautiful Gemini Client)
+</A></li>
+        <LI>Next message (by thread): <A HREF="002852.html">Bug reports: Multiple spaces in links; Cmd+S unreliable (was: Re: [ANN] Lagrange - A Beautiful Gemini Client) 
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2854">[ date ]</a>
+              <a href="thread.html#2854">[ thread ]</a>
+              <a href="subject.html#2854">[ subject ]</a>
+              <a href="author.html#2854">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 11. Oct 2020, at 5:04, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">mailinglists at ngalt.com</A> wrote:
+
+&gt;<i> First and by far the most important, I'd like to echo John Cowan's effusive praise. Lagrange is nothing short of insanely great.
+</I>
+Thanks, glad to hear you like it. :)
+
+&gt;<i> First, in the category of &quot;I don't know if it's wrong, but it _is_ different and I'm not sure I like it&quot;: I went to &lt;<A HREF="gemini://gemini.circumlunar.space/users/">gemini://gemini.circumlunar.space/users/</A>&gt; and multiple spaces in link text are being collapsed into one space.
+</I>
+Hmm, interesting. The Gemini spec doesn't seem to weigh in on whitespace normalization in link text (only in regular text lines), although it does say &quot;clients can present links to users in whatever fashion the client author wishes&quot;.
+
+The way the right-aligning is done here assumes a fixed-width font. While it isn't appropriate to show all links using a fixed-width font, perhaps this use case of whitespace padding could be detected by the client and it could switch to fixed-width for those links only? Seems a little fiddly, though, since it also assumes a specific line width.
+
+Maybe a better way would be to take the whitespace padding as a signal to align the remaining text separately, although that could get complicated.
+
+&gt;<i> when I hit &#8984;S, I got:
+</I>&gt;<i> 
+</I>&gt;<i> ```
+</I>&gt;<i> ERROR SAVING PAGE
+</I>&gt;<i> Read-only file system
+</I>&gt;<i> [Continue]
+</I>&gt;<i> ```
+</I>
+This is a bug in Lagrange's save path. It gets confused by the tilde in &quot;~m15o&quot; and ignores the Downloads directory set in Preferences. Will fix.
+
+Thanks for reporting!
+
+--jaakko
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002850.html">=?UTF-8?Q?Bug_reports:_Multiple_spaces_in_links; _=E2=8C=98S_unreliable_(?= was: Re: [ANN] Lagrange - A Beautiful Gemini Client)
+</A></li>
+	<LI>Next message (by thread): <A HREF="002852.html">Bug reports: Multiple spaces in links; Cmd+S unreliable (was: Re: [ANN] Lagrange - A Beautiful Gemini Client) 
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2854">[ date ]</a>
+              <a href="thread.html#2854">[ thread ]</a>
+              <a href="subject.html#2854">[ subject ]</a>
+              <a href="author.html#2854">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Draft spec changes for comments
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Draft%20spec%20changes%20for%20comments&In-Reply-To=%3C20200614100107.GC363%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001653.html">
+   <LINK REL="Next"  HREF="001648.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Draft spec changes for comments</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Draft%20spec%20changes%20for%20comments&In-Reply-To=%3C20200614100107.GC363%40SDF.ORG%3E"
+       TITLE="Draft spec changes for comments">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Sun Jun 14 11:01:07 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001653.html">Draft spec changes for comments
+</A></li>
+        <LI>Next message (by thread): <A HREF="001648.html">Germinal v0.2.0 update
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1665">[ date ]</a>
+              <a href="thread.html#1665">[ thread ]</a>
+              <a href="subject.html#1665">[ subject ]</a>
+              <a href="author.html#1665">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Jun 13, 2020 at 10:50:16PM -0400, Michael Lazar wrote:
+
+Thanks a lot for the feedback!
+ 
+&gt;<i> &gt; 5.4.2 Link lines
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; =&gt;[&lt;whitespace&gt;]&lt;URL&gt;[&lt;whitespace&gt;&lt;USER-FRIENDLY LINK NAME&gt;]&lt;CR&gt;&lt;LF&gt;
+</I>&gt;<i> 
+</I>&gt;<i> I am confused that the &lt;CR&gt;&lt;LF&gt; is explicitly called out here and not for any
+</I>&gt;<i> of the other line types. It makes me think if my client sees a link without the
+</I>&gt;<i> &lt;CR&gt; in it, I should treat it like a text line instead of a link. There is also
+</I>&gt;<i> an edge case where the last line of a text/gemini contains a link, but doesn't
+</I>&gt;<i> have a newline at all. I suggest removing the newline from the link definition
+</I>&gt;<i> all together since line breaking behavior is already defined elsewhere.
+</I>&gt;<i> 
+</I>&gt;<i> =&gt;[&lt;whitespace&gt;]&lt;URL&gt;[&lt;whitespace&gt;&lt;USER-FRIENDLY LINK NAME&gt;]
+</I>
+Good catch, this makes perfect sense.  This probably should have been
+spotted and changed at the same time as clarifying CR/LF requirements.
+
+&gt;<i> &gt; 61 CERTIFICATE NOT AUTHORISED
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The supplied client certificate is not authorised for accessing the
+</I>&gt;<i> particular requested resource.  The problem is not with the certificate itself,
+</I>&gt;<i> which may be authorised for other rsources.
+</I>&gt;<i> 
+</I>&gt;<i> Spelling error, &quot;rsources&quot;
+</I>
+Fixed, thanks!
+
+&gt;<i> &gt; 62 CERTIFICATE NOT VALID
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The supplied client certificate was not accepted because either its validity
+</I>&gt;<i> start date is in the future or its expiry date has passed.  This indicates a
+</I>&gt;<i> problem with the certificate in and of itself, with no consideration of the
+</I>&gt;<i> particular requested resource.
+</I>&gt;<i> 
+</I>&gt;<i> This wording implies that the validity/expiration date are the ONLY two errors
+</I>&gt;<i> that should ever trigger this error code. There are probably other certificate
+</I>&gt;<i> errors that should fall into this category like corrupt certificates or invalid
+</I>&gt;<i> self-signatures.
+</I>
+Yep, very true, I will fix this.
+
+&gt;<i> Astrobotany returns a 6x error message if you attempt to sign-in using a TLS
+</I>&gt;<i> certificate that does not contain a subject CN field. What error should that
+</I>&gt;<i> return with the new spec, 61 or 62?
+</I>
+Hmm.  The subject field itself is actually allowed to be empty, I think.
+So strictly speaking such a certificate is not &quot;invalid&quot; in any absolute
+sense.  Sice a non-empty subject CN is a requirement of Astrobotany, I
+guess 61 is the correct code.  The CN requirement should be made clear
+in the META.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001653.html">Draft spec changes for comments
+</A></li>
+	<LI>Next message (by thread): <A HREF="001648.html">Germinal v0.2.0 update
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1665">[ date ]</a>
+              <a href="thread.html#1665">[ thread ]</a>
+              <a href="subject.html#1665">[ subject ]</a>
+              <a href="author.html#1665">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

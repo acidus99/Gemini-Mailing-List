@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Web proxies and robots.txt (was Re: Heads up about a Gemini client @ 198.12.83.123)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Web%20proxies%20and%20robots.txt%20%28was%20Re%3A%20Heads%20up%20about%20a%20Gemini%0A%20client%20%40%20198.12.83.123%29&In-Reply-To=%3Cd04a40a820b312e7b465a21785676fce%40tilde.team%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003664.html">
+   <LINK REL="Next"  HREF="003670.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Web proxies and robots.txt (was Re: Heads up about a Gemini client @ 198.12.83.123)</H1>
+    <B>Robert &quot;khuxkm&quot; Miles</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Web%20proxies%20and%20robots.txt%20%28was%20Re%3A%20Heads%20up%20about%20a%20Gemini%0A%20client%20%40%20198.12.83.123%29&In-Reply-To=%3Cd04a40a820b312e7b465a21785676fce%40tilde.team%3E"
+       TITLE="Web proxies and robots.txt (was Re: Heads up about a Gemini client @ 198.12.83.123)">khuxkm at tilde.team
+       </A><BR>
+    <I>Mon Nov 30 02:35:14 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003664.html">Web proxies and robots.txt (was Re: Heads up about a Gemini client @ 198.12.83.123)
+</A></li>
+        <LI>Next message (by thread): <A HREF="003670.html">Web proxies and robots.txt (was Re: Heads up about a Gemini client @ 198.12.83.123)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3666">[ date ]</a>
+              <a href="thread.html#3666">[ thread ]</a>
+              <a href="subject.html#3666">[ subject ]</a>
+              <a href="author.html#3666">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>November 29, 2020 9:25 PM, &quot;Sean Conner&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+
+&gt;<i> It was thus said that the Great Sean Conner once stated:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> It's not threatening my server or anything, but who ever is responsible
+</I>&gt;&gt;<i> for the client at 198.12.83.123, your client is currently stuck in the
+</I>&gt;&gt;<i> Redirection From Hell test and has been for some time. From the length of
+</I>&gt;&gt;<i> time, it appears to be running autonomously so perhaps a leftover thread, or
+</I>&gt;&gt;<i> an autonomous client that doesn't read robots.txt, or didn't follow the spec
+</I>&gt;&gt;<i> carefully enough.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> Anyway, just a heads up.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> -spc
+</I>&gt;<i> 
+</I>&gt;<i> So the client in question was most likely a web proxy. I'm not sure what
+</I>&gt;<i> site, nor the software used, but it did response to a Gemini request with
+</I>&gt;<i> &quot;53 Proxy Requet Refused&quot; so there *is* a Gemini server there. And given
+</I>&gt;<i> that it made 137,060 requests before I shut down my own server told me that
+</I>&gt;<i> it was an autonomous agent that no one was watching. Usually, I may see a
+</I>&gt;<i> client hit 20 or 30 times before it stops. Not this one.
+</I>&gt;<i> 
+</I>&gt;<i> Now granted, my server is a bit unique in that I have tests set up
+</I>&gt;<i> specifically for clients to test against, and several of them involve
+</I>&gt;<i> infinite redirects. And yes, that was 137,060 *unique* requests.
+</I>&gt;<i> 
+</I>&gt;<i> So first up, Solderpunk, if you could please add a redirection follow
+</I>&gt;<i> limit to the specification and make it mandatory. You can specify some
+</I>&gt;<i> two, heck, even three digit number to follow, but please, *please*, add it
+</I>&gt;<i> to the specification and *not* just the best practices document to make
+</I>&gt;<i> programmers aware of the issue. It seems like it's too easy to overlook
+</I>&gt;<i> this potential trap (I see it often enough).
+</I>&gt;<i> 
+</I>&gt;<i> Second, had the proxy in question fetched robots.txt, I had this area
+</I>&gt;<i> specifically marked out:
+</I>&gt;<i> 
+</I>&gt;<i> User-agent: *
+</I>&gt;<i> Disallow: /test/redirehell
+</I>&gt;<i> 
+</I>&gt;<i> I have that for a reason, and had the autonomous client in question read
+</I>&gt;<i> it, this wouldn't have happened in the first place. Even if you disagree
+</I>&gt;<i> with this, it may be difficult to stop an autonomous agent once the user of
+</I>&gt;<i> said web proxy has dropped the web connection. I don't know, I haven't
+</I>&gt;<i> written a web proxy, and this is one more thing to keep in mind when writing
+</I>&gt;<i> one. I think it would be easier to follow robots.txt.
+</I>&gt;<i> 
+</I>&gt;<i> -spc (To the person who called me a dick for blocking a web proxy---yes,
+</I>&gt;<i> there *are* reasons to block them)
+</I>
+I recently wrote a gemini to web proxy as a simple side-project to see how easy it would be to create, and one thing I implemented that I feel should be a standard for web proxies is not handling redirects internally. If you tell my gemini proxy to request a page that offers a redirect (say, the next page link for LEO), it will send you back a small web page saying &quot;hey, the site at this URL wants to send you to this other URL, do you want to follow that redirect or nah?&quot; (not exact wording but you get my drift). That is, if you attempt to access the Redirection from Hell test using my proxy, each and every redirect would be a &quot;confirm redirect&quot; page served to the user. After about 20 pages, you'd think the user would catch on. That being said, my gemini proxy is not linked anywhere on my website (and if it were in a place I would link publically I would use robots.txt to prevent web crawlers from accessing it), so perhaps I'm not the target of this message.
+
+I still maintain that a proxy is a direct agent of a user, and not an automated client. Proxy authors should use robots.txt on the web side to block crawlers from accessing the proxy, but proxies shouldn't have to follow robots.txt.
+
+It's actually easier to just write your web proxy in such a way that this doesn't happen to you.
+
+Just my two cents,
+Robert &quot;khuxkm&quot; Miles
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003664.html">Web proxies and robots.txt (was Re: Heads up about a Gemini client @ 198.12.83.123)
+</A></li>
+	<LI>Next message (by thread): <A HREF="003670.html">Web proxies and robots.txt (was Re: Heads up about a Gemini client @ 198.12.83.123)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3666">[ date ]</a>
+              <a href="thread.html#3666">[ thread ]</a>
+              <a href="subject.html#3666">[ subject ]</a>
+              <a href="author.html#3666">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

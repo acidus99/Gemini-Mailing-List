@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> implementing client certificate support
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20implementing%20client%20certificate%20support&In-Reply-To=%3C20200607185439.zd33kbeffsldnzry%40gonzales.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001456.html">
+   <LINK REL="Next"  HREF="001404.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>implementing client certificate support</H1>
+    <B>mbays at sdf.org</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20implementing%20client%20certificate%20support&In-Reply-To=%3C20200607185439.zd33kbeffsldnzry%40gonzales.net%3E"
+       TITLE="implementing client certificate support">mbays at sdf.org
+       </A><BR>
+    <I>Sun Jun  7 19:54:39 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001456.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
+</A></li>
+        <LI>Next message (by thread): <A HREF="001404.html">implementing client certificate support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1400">[ date ]</a>
+              <a href="thread.html#1400">[ thread ]</a>
+              <a href="subject.html#1400">[ subject ]</a>
+              <a href="author.html#1400">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>[This post is also a glog entry at
+<A HREF="gemini://gemini.thegonz.net/glog/200607-clientCertificatePostMortem.gmi">gemini://gemini.thegonz.net/glog/200607-clientCertificatePostMortem.gmi</A>]
+
+I just finished adding client certificate support to my line-based 
+textual gemini client diohsc. This involved making some non-trivial 
+choices, and I didn't copy av98 in all cases, so I hope discussing the 
+decisions I made and the reasoning behind them could be of use to other 
+client developers and in refining the spec.
+
+## User interface
+* The technical terminology &quot;client certificate&quot;, which describes an 
+implementation detail rather than the underlying concept, is mostly 
+hidden from the user. Instead, the client talks about &quot;identities&quot;. An 
+identity is just a client certificate along with an optional name.
+* In diohsc, there are two kinds of identity -- temporary anonymous 
+identities and long-term named identities. The latter are saved to disc, 
+the former are held only in memory.
+* There is no way to name and save an anonymous identity. Allowing it 
+would complicate the UI and the conceptual distinction between the two 
+kinds of identity.
+
+### Creating identities
+* When 61 is received, the user is asked if they want to create an 
+anonymous identity.
+* On any other 6* error code, the user may select an existing named 
+identity or create a new named or anonymous identity, and then retry the 
+request.
+* When creating a named identity, the user is prompted to set a Common 
+Name (which can be empty). This is the only choice required of the user. 
+It would make for a neater UI to automatically set the Common Name to be 
+the name of the identity, and in some ways it would make sense. But the 
+user may well want to use the same Common Name (e.g. &quot;anon&quot; or &quot;&quot;) on 
+multiple servers without a common identity.
+
+### Using identities
+* An identity can be set to be used on a given server at and below 
+a given URI path. So you can have one identity in use for 
+<A HREF="gemini://foo.bar/~quux/...,">gemini://foo.bar/~quux/...,</A> and another for <A HREF="gemini://foo.bar/~xuuq/...">gemini://foo.bar/~xuuq/...</A>
+* Whenever an URI is shown to the user, it is annotated with the 
+identity, if any, which would be used if it were requested; e.g. 
+&quot;<A HREF="gemini://foo.bar/~xuuq/hello.gmi[clarkKent">gemini://foo.bar/~xuuq/hello.gmi[clarkKent</A>]&quot;. This includes relative 
+URIs in links. So the user knows when they're going to use what 
+identity.
+* Colouring is used to visually separate the annotation from the URI 
+(but '[' and ']' are reserved characters in URIs, so this isn't actually 
+necessary).
+* Anonymous identities are denoted as &quot;[]&quot;.
+* If the user requests an URI which would use an identity which hasn't 
+been used in 30m, they are asked to confirm whether they want to still 
+use it. If they don't want to, the identity is disabled for this path.
+
+### Controlling identities
+* There is a single new command added to deal with identities: &quot;identify 
+[URI]&quot;. If URI is missing, it defaults to the current URI (if any).
+* If there is an identity in use at the URI, after confirmation it is 
+removed.
+* Otherwise the user is prompted to select an existing identity or 
+create a new one, as if 60 had been received.
+
+## Certificates
+* To minimise information leakage to the server, all certificates, for 
+both anonymous and named identities, are created the same way apart from 
+the Common Name.
+* The expiration date is set to 2 years in the future. I'm not sure if 
+this is the best compromise.
+* The &quot;valid from&quot; date is set to 1 year in the past. Why not set it to 
+the current time? It's a known problem that users &quot;in the wild&quot; often 
+don't have correctly set clocks -- they don't set the right time zone, 
+then set the clock to make the time &quot;look right&quot;. Since gemini servers 
+are meant to be widely deployed, we shouldn't expect either client or 
+server to have the right time. So we should backdate certificates by at 
+least a couple of days, and then a year seems a nice round safe choice.
+* The serial number is set to 0, no extensions are set, and the 
+distinguished name consists only of the Common Name.
+* The key is 2048 bit RSA with public exponent e=65537, and with hash 
+algorithm SHA256. I would have liked to use Ed25519, which is more 
+efficient in size and processing, but not all servers accept it.
+
+### Fingerprinting
+Currently, these choices identify diohsc uniquely. Hopefully a future 
+version of the spec will suggest defaults to prevent such 
+fingerprinting, and I think these would be reasonable choices. But it 
+could be worth considering mandating Ed25519, even if this means only 
+TLS1.3 servers can use client certificates. This can be considered an 
+&quot;advanced&quot; feature for a server, so it isn't so much of a problem if 
+some servers aren't capable of it.
+
+## Libraries
+I used Vincent Hanquez's excellent pure-haskell cryptography libraries 
+to create and use client certificates. Neither openssl nor gnu-tls are 
+involved at all.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 195 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200607/b0e961b6/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20200607/b0e961b6/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001456.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
+</A></li>
+	<LI>Next message (by thread): <A HREF="001404.html">implementing client certificate support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1400">[ date ]</a>
+              <a href="thread.html#1400">[ thread ]</a>
+              <a href="subject.html#1400">[ subject ]</a>
+              <a href="author.html#1400">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

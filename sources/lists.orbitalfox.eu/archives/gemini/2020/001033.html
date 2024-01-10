@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client certificate musings
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3Cc985ea32-276d-1ab4-0f5b-20ccad31a44b%40masterq32.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001121.html">
+   <LINK REL="Next"  HREF="001035.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client certificate musings</H1>
+    <B>Felix Quei&#223;ner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3Cc985ea32-276d-1ab4-0f5b-20ccad31a44b%40masterq32.de%3E"
+       TITLE="Client certificate musings">felix at masterq32.de
+       </A><BR>
+    <I>Sun May 24 22:16:05 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001121.html">Client certificate musings
+</A></li>
+        <LI>Next message (by thread): <A HREF="001035.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1033">[ date ]</a>
+              <a href="thread.html#1033">[ thread ]</a>
+              <a href="subject.html#1033">[ subject ]</a>
+              <a href="author.html#1033">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hey!
+
+&gt;<i> thoughts about client certificates
+</I>
+First of all: I really love the idea of client certificates, especially
+for short-term session management it's a nice idea!
+
+I wanted to write a much longer, more detailed answer with deeper
+insight, but i don't think i'll find the time for that, so i just share
+my &quot;main&quot; concern/idea:
+
+When i first read the idea of the persistent/long-term certificates, i
+didn't even come across the idea of using it for whitelisting.
+
+My first thought was: Nice, this makes some really good identitiy
+management for web forums/shops/chats/...
+
+It gives the client full control over their identity. I can use multiple
+client certificates for the same site to manage different identities.
+
+What i imagined in a client was this:
+<A HREF="https://i.imgur.com/Ayh2sVx.png">https://i.imgur.com/Ayh2sVx.png</A>
+
+When a server requests use of a client certificate, you get to chose one
+of many identities, maybe even share an identity between sites for
+collaborating services.
+
+You are always allowed to create new identities, destroy old ones.
+
+&lt;/end-of-vision&gt;
+
+It didn't occur to me that certificates require a lifetime to be chosen
+and now i'm thinking about how to solve this.
+
+The &quot;easy&quot; way would be to create certificates with 150 year duration,
+and force the recovery strategies on the user. But as already discussed,
+this isn't practical and losing the certificate and/or key would require
+some kind of account recovery strategy.
+
+E-Mail-Recovery is a usual strategy common in the webspace, but i'm not
+a huge fan of that. Another possibility would be that the server gives
+the user a common secret that allows re-connection of a account to a new
+certificate, but there's the same problem of the lost identity.
+
+Regards
+- xq
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001121.html">Client certificate musings
+</A></li>
+	<LI>Next message (by thread): <A HREF="001035.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1033">[ date ]</a>
+              <a href="thread.html#1033">[ thread ]</a>
+              <a href="subject.html#1033">[ subject ]</a>
+              <a href="author.html#1033">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

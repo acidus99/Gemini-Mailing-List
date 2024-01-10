@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] Proposed changes
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Proposed%20changes&In-Reply-To=%3CC83PO0VCH71H.3A5PCK1T74T0N%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004535.html">
+   <LINK REL="Next"  HREF="004467.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] Proposed changes</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Proposed%20changes&In-Reply-To=%3CC83PO0VCH71H.3A5PCK1T74T0N%40stilgar%3E"
+       TITLE="[spec] Proposed changes">solderpunk at posteo.net
+       </A><BR>
+    <I>Sun Dec 27 16:33:23 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004535.html">[user] wikipedia coverage of Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="004467.html">[spec] Proposed changes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4465">[ date ]</a>
+              <a href="thread.html#4465">[ thread ]</a>
+              <a href="subject.html#4465">[ subject ]</a>
+              <a href="author.html#4465">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+Below are some proposed spec changes to address some (but not yet all)
+of the recently enumerated outstanding issues.  Feedback is welcome.
+
+# Section 1.1:
+
+In the outline of a Gemini transaction, the step:
+
+&gt;<i> S:   Closes connection
+</I>
+becomes:
+
+&gt;<i> S:   Closes connection (including TLS close_notify, see 4.2)
+</I>
+and the entire outline is followed by the following new text:
+
+The outline above describes typical behaviour under typical
+circumstances, and should be considered illustrative rather than
+normative in every detail.  Some clarifying remarks follow.
+
+It is generally the server's responsibility to close the connection,
+however the client MAY close the connection at any time, e.g.
+because it has not heard anything from the server for some time, or
+because the size of the received response body has already exceeded
+the size it is willing/able to handle.
+
+Under non-success conditions, the server MAY send a response header
+and close the connection before a complete request has been received
+from the client.
+
+The server SHOULD NOT close the connection without sending a response
+header.
+
+The client MAY begin handling a partially-received response body prior
+to the closure of the connection by the server.
+
+# Section 3
+
+Two sets of changes here.  First, in order to address the issue of empty
+&lt;META&gt;s:
+
+The line:
+
+&gt;<i> &lt;META&gt; is a UTF-8 encoded string of maximum length 1024 bytes, whose
+</I>&gt;<i> meaning is &lt;STATUS&gt; dependent.
+</I>
+becomes:
+
+&gt;<i> &lt;META&gt; is a UTF-8 encoded string with a length between 1 and 1024
+</I>&gt;<i> bytes (inclusive), whose meaning is &lt;STATUS&gt; dependent.
+</I>
+(i.e. META may not be empty)
+
+All instances of
+
+&gt;<i> The contents of &lt;META&gt; may provide additional information on the
+</I>&gt;<i> failure
+</I>
+become:
+
+&gt;<i> The contents of &lt;META&gt; SHOULD provide additional information on the
+</I>&gt;<i> failure
+</I>
+The line:
+
+&gt;<i> If &lt;META&gt; is an empty string, the MIME type MUST default to
+</I>&gt;<i> &quot;text/gemini; charset=utf-8&quot;.  The text/gemini media type is defined
+</I>&gt;<i> in section 5.
+</I>
+is removed.
+
+Secondly, regarding redirects, the following additional lines are added
+to the explanation of status code 3x in section 3.2.3:
+
+Clients MAY request confirmation from a user before redirecting a
+request.
+
+Clients MUST NOT automatically redirect a request more than 5 times,
+to prevent incorrectly or maliciously configured servers &quot;trapping&quot;
+clients in infinite redirect sequences, which waste resources on
+both sides.
+
+# Section 4
+
+A new subsection is added:
+
+## 4.2 Close notification
+
+As per RFCs 5246 and 8446, TLS 1.2 and 1.3 clients and servers both
+MUST send a &quot;close_notify&quot; alert before closing their write side of
+the connection.
+
+Under ordinary conditions, the server is responsible for closing the
+connection.  Besides being mandated by TLS RFCs, the use of
+&quot;close_notify&quot; by the server is important as it allows clients to
+disambiguate between successfully completed transactions and those
+where the complete response body was not received due to a network
+fault or attack.
+
+Client authors should note that the semantics of &quot;close_notify&quot;
+changed between TLS 1.2 and 1.3 - only in TLS 1.3 may a client safely
+send a &quot;close_notify&quot; after a request to convey that it will not write
+anything further and then continue to receive the response.  To avoid
+interoperability problems, clients SHOULD NOT send a &quot;close_notify&quot;
+before the server does under non-error conditions.  The completion of a
+request is already unambiguously indicated by the CRLF characters.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004535.html">[user] wikipedia coverage of Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="004467.html">[spec] Proposed changes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4465">[ date ]</a>
+              <a href="thread.html#4465">[ thread ]</a>
+              <a href="subject.html#4465">[ subject ]</a>
+              <a href="author.html#4465">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

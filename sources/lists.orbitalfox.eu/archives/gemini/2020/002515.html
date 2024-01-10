@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] glv.one - Gemini PaaS
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20glv.one%20-%20Gemini%20PaaS&In-Reply-To=%3CCAG-mZ3jd5wtAwWb-wbkmmvUbVgWMuRt6tqeDT3Afy0CWgWmHmw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002514.html">
+   <LINK REL="Next"  HREF="002517.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] glv.one - Gemini PaaS</H1>
+    <B>Peter Vernigorov</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20glv.one%20-%20Gemini%20PaaS&In-Reply-To=%3CCAG-mZ3jd5wtAwWb-wbkmmvUbVgWMuRt6tqeDT3Afy0CWgWmHmw%40mail.gmail.com%3E"
+       TITLE="[ANN] glv.one - Gemini PaaS">pitr.vern at gmail.com
+       </A><BR>
+    <I>Sat Aug 29 01:50:02 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002514.html">Announcing slice.breadpunk.club
+</A></li>
+        <LI>Next message (by thread): <A HREF="002517.html">[ANN] glv.one - Gemini PaaS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2515">[ date ]</a>
+              <a href="thread.html#2515">[ thread ]</a>
+              <a href="subject.html#2515">[ subject ]</a>
+              <a href="author.html#2515">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is slightly different from other capsule hosting sites. Instead
+of hosting .gmi files, glv.one will run your Docker image with Gemini
+service. Obviously the barrier of entry is higher than sftp-ing text
+files to a server, but I see some folks here who want to build dynamic
+gemini sites but not able to host them themselves.
+
+It all started when I was annoyed with complicated deployment of my
+gemini servers (egsam, wikipedia proxy, geddit) and wanted something
+simple, like a `docker push`. So I've built a Platform-as-a-Service
+(think Heroku, AWS Elastic Beanstalk etc). My sites have been running
+on it for about a month now.
+
+## What you get
+- 1 docker container with 0.1  CPU shares and 10mb of RAM
+- MySQL database with daily backups
+- Domain MY_APP.glv.one with support for a custom (sub-)domain if you have one
+- At no cost (my setup is pretty economical and I can easily support ~50 apps)
+
+## How to use it
+- Ping me for an account at this email address
+- Login and create an app at <A HREF="gemini://glv.one">gemini://glv.one</A> (this is where you will
+find an admin panel)
+- Push your docker images to deploy.glv.one/USER/APP:VERSION
+
+## Example
+The following example deploys a simple Go app using gig framework, but
+any language is supported as long as it can run inside Docker. To
+start, create the following files:
+
+### Dockerfile
+```
+FROM alpine:latest
+
+ADD example /
+ADD my.crt /my.crt
+ADD my.key /my.key
+
+CMD [&quot;/example&quot;]
+```
+
+### main.go
+```
+package main
+
+import &quot;github.com/pitr/gig&quot;
+
+func main() {
+  g := gig.Default()
+
+  g.Handle(&quot;/&quot;, func(c gig.Context) error {
+    return c.Gemini(&quot;# Hello, World!&quot;)
+  })
+
+  g.Run(&quot;my.crt&quot;, &quot;my.key&quot;)
+}
+```
+
+Now run the following:
+- `go mod init example`
+- `GOOS=linux GOARCH=amd64 go build`
+- `openssl req -x509 -out my.crt -keyout my.key -newkey rsa:2048
+-nodes -sha256 -subj '/CN=example.glv.one' -extensions EXT -config &lt;(
+printf &quot;[dn]\nCN=example.glv.one\n[req]\ndistinguished_name =
+dn\n[EXT]\nsubjectAltName=DNS:example.glv.one\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth&quot;)`
+- `docker build -t deploy.glv.one/USER/example:v1 .`
+- `docker push deploy.glv.one/USER/example:v1`
+
+That's it, it's deployed. More information, such as how to access DB,
+is available once authenticated at <A HREF="gemini://glv.one">gemini://glv.one</A>
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002514.html">Announcing slice.breadpunk.club
+</A></li>
+	<LI>Next message (by thread): <A HREF="002517.html">[ANN] glv.one - Gemini PaaS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2515">[ date ]</a>
+              <a href="thread.html#2515">[ thread ]</a>
+              <a href="subject.html#2515">[ subject ]</a>
+              <a href="author.html#2515">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,248 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client certificate musings
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200524142726.GB4190%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001018.html">
+   <LINK REL="Next"  HREF="001030.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client certificate musings</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200524142726.GB4190%40SDF.ORG%3E"
+       TITLE="Client certificate musings">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Sun May 24 15:27:26 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001018.html">Client certificate musings
+</A></li>
+        <LI>Next message (by thread): <A HREF="001030.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1015">[ date ]</a>
+              <a href="thread.html#1015">[ thread ]</a>
+              <a href="subject.html#1015">[ subject ]</a>
+              <a href="author.html#1015">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, May 24, 2020 at 09:04:29AM +1000, Thomas Karpiniec wrote:
+ 
+&gt;<i> This was the thing that stood out most on my first read-through of the
+</I>&gt;<i> spec! I particularly like the insistence &quot;Transient certificates MUST
+</I>&gt;<i> NOT be generated automatically&quot;. I wasn't here for the earlier
+</I>&gt;<i> discussion but I assume this is to fend off servers making sessions
+</I>&gt;<i> purely for tracking purposes by default.
+</I>
+Right, transient sessions generated automatically and invisibly to the
+user are not really any better than cookies.  Of course, even though tht
+spec forbids is, there is a risk that clients start actually doing that.
+The fact that generating a certificate takes a small but noticable
+amount of time means this would not make for a good user experience,
+which I hope is incentive against it.
+ 
+&gt;<i> I've seen similar problems before with custom usage of X.509. It would
+</I>&gt;<i> be nice to use something smaller than UUID if possible just to keep
+</I>&gt;<i> cert size down - provided there is library support as you noted.
+</I>
+The cert size concern is a good one (the lack of connection reuse in
+Gemini means that TLS overhead is more of an issue than it otherwise
+would be.  This is one nice thing about self-signed certs, they will
+typically be shorter as they won't have a long chain of intermediate
+signing certs).  I think Sean's solution of having the spec require a
+single fixed nonce value is a good one.  Having every cert identical
+with regard to subject/issuer prevents linking certs together just as
+well as having every one be unique.
+ 
+&gt;<i> I'm not a big fan of using certificate fields for anything meaningful
+</I>&gt;<i> - it's a side channel (surrounded by lots of other fields that people
+</I>&gt;<i> might be tempted to use) - and it slightly increases the complexity of
+</I>&gt;<i> integration between the TLS library and the client/server code.
+</I>
+I guess I am seduced to some extent by the ideas in FOAF+SSL.  If the
+cert can refer to some other resource (a FOAF profile in that case, but
+we wouldn't need to follow that) and that resource contains the cert
+fingerprint to validate the connection, then client certificates can -
+if and only if the user wants them to! - be vehicles for rich
+identities under full user control.
+ 
+&gt;<i> When a server wants the client to use a non-disposable certificate
+</I>&gt;<i> there is an ambiguity. Is it just because they want the user to
+</I>&gt;<i> preserve their authentication for more than 24 hours for convenience?
+</I>&gt;<i> Or is it because the user will permanently lose access to their
+</I>&gt;<i> account if they ever lose that key?
+</I>
+The former, i.e. the idea is that, unlike a transient certificate (which
+has the semantics of &quot;I don't really care who you are and am not at all
+interested in recognising you again next week, I just need to tie
+together a handful of separate requests *right now*&quot; - although that
+idea can be destroyed if that handful of separate requests involves the
+client providing a username and password), a non-disposable certificate
+is supposed to be a persistent identity - what people think of as a
+&quot;user account&quot; on the web.
+
+In the simplest possible implementation of this, the server just uses
+the cert hash as user ID and then, yes, we're in high-risk territory
+where if the user doesn't backup their keys and certs then a hard drive
+failure or theft of a laptop or similar scenarios result in lock out.
+It doesn't *need* to work that way, though.  An application which users
+authenticate to this way could give users the option to associate an
+email address which could be used for the equivalent of &quot;password
+recovery&quot; - email the user a URL with a random unique token in it and
+tell them the first new certificate which visits that URL sometime in
+the next one hour will become linked to their account.
+
+&gt;<i> With this in mind, my current opinion is that there should be no way
+</I>&gt;<i> for a server to request a non-disposable certificate. Where
+</I>&gt;<i> authentication is required, it should be done in-band via a password
+</I>&gt;<i> or username/password 10 responses as you noted, which is then
+</I>&gt;<i> associated on the server with the transient certificate. It then
+</I>&gt;<i> becomes the responsibility of clients to ask the user &quot;how long do you
+</I>&gt;<i> want to stay authenticated to this website?&quot; If it times out, they can
+</I>&gt;<i> simply repeat their authentication.
+</I>
+Hmm, interesting.  I'll ponder this, thanks for your thoughts.  My first
+reaction is that that I'm reluctant to remove a dedicated mechanism for
+creating something which is unavoidably and non-negotiably very short
+lived.  Maybe you didn't mean for that to happen, though?
+
+&gt;<i> One final thought: do we need a way to encourage clients to have
+</I>&gt;<i> multiple certificates for the same server, depending on path? If I
+</I>&gt;<i> authenticate to a CGI application on a multi-user server I don't
+</I>&gt;<i> necessarily want my identity to be followed by everybody else's
+</I>&gt;<i> applications on that server.
+</I>
+Ah!  I absolutely positively meant to bring this up in my original post
+to this thread.  This is a very valid point.  Right now, the spec (and
+my proof-of-concept implementations in AV-98) associates client certs
+with a domain.  The presence of many multi-user servers in Geminispace
+(and for what it's worth, I like those, a lot, assuming the users
+constitute a community in some sense beyond sharing a server) means this
+is not necessarily going to work well.  We could use the &lt;META&gt; content
+of status codes which request a cert to specify a path or range of paths
+for which the cert should be used.
+
+I'm, unsurprisingly, extremely out of touch with modern web development:
+are cookies still strictly tied to domains or have they evolved some
+kind of path-specificity?
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001018.html">Client certificate musings
+</A></li>
+	<LI>Next message (by thread): <A HREF="001030.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1015">[ date ]</a>
+              <a href="thread.html#1015">[ thread ]</a>
+              <a href="subject.html#1015">[ subject ]</a>
+              <a href="author.html#1015">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Removing expiry dates for TOFU
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Removing%20expiry%20dates%20for%20TOFU&In-Reply-To=%3C1932ecc7-527d-c838-9240-28a4e99887d8%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002130.html">
+   <LINK REL="Next"  HREF="002074.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Removing expiry dates for TOFU</H1>
+    <B>Terry Brennan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Removing%20expiry%20dates%20for%20TOFU&In-Reply-To=%3C1932ecc7-527d-c838-9240-28a4e99887d8%40gmail.com%3E"
+       TITLE="Removing expiry dates for TOFU">tcb913 at gmail.com
+       </A><BR>
+    <I>Thu Jul  9 17:57:39 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002130.html">Removing expiry dates for TOFU
+</A></li>
+        <LI>Next message (by thread): <A HREF="002074.html">Removing expiry dates for TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2147">[ date ]</a>
+              <a href="thread.html#2147">[ thread ]</a>
+              <a href="subject.html#2147">[ subject ]</a>
+              <a href="author.html#2147">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>A thought from one without enough knowledge to have a right to thoughts:
+
+Getting broad acceptance of Gemini both theoretically as a viable 
+standard and practically as a growing community is important. Having 
+community members developing their own clients and servers - not so much.
+
+I am sure I will always be using a client which someone else wrote, just 
+as I use a  web browser someone else wrote. And I am dead certain I will 
+never try to write my own server, as I will never try to write my own 
+Apache.
+
+Best to all,
+
+Terry B.
+
+
+On 07/08/2020 08:39 PM, Thomas Karpiniec wrote:
+&gt;&gt;<i> From: Gemini &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gemini-bounces at lists.orbitalfox.eu</A>&gt; On Behalf Of Solderpunk
+</I>&gt;&gt;<i> A proposal: &quot;TOFU-TOTS&quot;.  You know, like tater tots, but without
+</I>&gt;&gt;<i> potatoes in them.  Or rather, trust-on-first-use augmented by
+</I>&gt;&gt;<i> trust-over-time-and-space.
+</I>&gt;<i> Setting aside that I already put my support behind the oligarchy, this is an interesting problem and I'll weigh in. :)
+</I>&gt;<i>
+</I>&gt;<i> I agree that that this proposal would provide fairly effective protection against MITM. I worry that it is so unusual that it would push newbies away from setting up gemini servers. Faced with regular rotation requirements I suspect that many people would automate the process with cronjobs, meaning that the keys for the next certificate are sitting right there on the server ready to be nabbed.
+</I>&gt;<i>
+</I>&gt;<i> More annoyingly, suppose the current private key is compromised and the legitimate server owner realises it - they don't have any good options. One is to put up with being spoofable until their next-advertised certificate becomes valid, which may be 10 months in the future. Otherwise they could do an out-of-turn certificate rotation, which clients will warn on just as harshly as any other unexpected change. (Further down the thread, Baschdel suggested backup certificates to alleviate this. But what if you're compromised twice? To me the complexity creep feels disproportionate to the advantages.)
+</I>&gt;<i>
+</I>&gt;<i> A suggestion: what if instead of publishing a future certificate, we publish our own CA certificate, which is used to sign our server certificates? A client should cache this CA certificate permanently and use it to verify all future requests to that domain. A diligent system administrator will keep their CA key material offline. Someone who doesn't care so much can just generate everything on their server.
+</I>&gt;<i>
+</I>&gt;<i> * Client logic is simpler
+</I>&gt;<i> * Keys and certificates can be rotated at will by the sysadmin and they can choose whatever expiry they are comfortable with
+</I>&gt;<i> * Relies on familiar concepts of TLS trust (&quot;oh I'm my own CA, okay&quot;) and sysadmins can choose their own level of caution
+</I>&gt;<i> * Uses the existing feature of TLS libraries to verify a connection against a given CA. Clients don't have to handle public keys or fingerprints - they just download the CA certificate and feed it into their TLS library.
+</I>&gt;<i> * Combines neatly with LetsEncrypt-style certificate management - you are just adding one extra trusted CA. If it can be verified by either that, or one of the normal roots, then you're okay.
+</I>&gt;<i> * Only slightly more complicated openssl commands required when setting up a server
+</I>&gt;<i>
+</I>&gt;<i> Cheers, Tom
+</I>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002130.html">Removing expiry dates for TOFU
+</A></li>
+	<LI>Next message (by thread): <A HREF="002074.html">Removing expiry dates for TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2147">[ date ]</a>
+              <a href="thread.html#2147">[ thread ]</a>
+              <a href="subject.html#2147">[ subject ]</a>
+              <a href="author.html#2147">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

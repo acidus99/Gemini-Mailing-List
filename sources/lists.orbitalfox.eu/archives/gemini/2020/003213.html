@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Escaping in gemtext
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Escaping%20in%20gemtext&In-Reply-To=%3C20201110103221.44d530f6%40home%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003212.html">
+   <LINK REL="Next"  HREF="003226.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Escaping in gemtext</H1>
+    <B>Ali Fardan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Escaping%20in%20gemtext&In-Reply-To=%3C20201110103221.44d530f6%40home%3E"
+       TITLE="Escaping in gemtext">raiz at stellarbound.space
+       </A><BR>
+    <I>Tue Nov 10 07:32:21 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003212.html">Escaping in gemtext
+</A></li>
+        <LI>Next message (by thread): <A HREF="003226.html">Escaping in gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3213">[ date ]</a>
+              <a href="thread.html#3213">[ thread ]</a>
+              <a href="subject.html#3213">[ subject ]</a>
+              <a href="author.html#3213">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, 10 Nov 2020 00:19:53 -0500
+Ryan Westlund &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">rlwestlund at gmail.com</A>&gt; wrote:
+&gt;<i> The main reason I don't prefer it to my own suggestion is that it
+</I>&gt;<i> would still mean that preformatted lines might need to be altered in
+</I>&gt;<i> some way (if the preformatted lines contain &quot;\```&quot; or something),
+</I>&gt;<i> instead of allowing to paste them in unmodified and only have to
+</I>&gt;<i> modify the prefomatting toggle lines.
+</I>
+Indeed it is ugly, one other workaround to this is having
+
+&gt;<i>	```
+</I>&gt;<i>	```
+</I>
+interpreted as literal '```' to avoid altering preformatted text, and
+to be clear, this does not apply to the case of having multiple
+preformatted text blocks next to each other, this only applies to a
+single preformatted text block that contains nothing.
+
+&gt;<i> And that is if escaping only considers syntax that would be
+</I>&gt;<i> interpreted anyway. If it implemented in a context-insensitive way,
+</I>&gt;<i> meaning a line starting with &quot;\#&quot; is still translated to &quot;#&quot; inside
+</I>&gt;<i> preformatted text, it could actually make the problem worse by
+</I>&gt;<i> increasing the number of preformatted lines that must be modified.
+</I>
+I suggested a special parser rule for preformatted text blocks that is
+separate for the rule used for all other text, and this rule only
+applies to '^\```', though I agree with your concerns.
+
+&gt;<i> &gt; also keep in mind that '\' does not only escape the character after
+</I>&gt;<i> &gt; it, it disables line formatting, because in the example above, if
+</I>&gt;<i> &gt; '=' is escaped, '&gt;' is right after it and can be interpreted as a
+</I>&gt;<i> &gt; quote.  
+</I>&gt;<i> 
+</I>&gt;<i> I don't see how this is correct? A quote line must start with &gt;, not
+</I>&gt;<i> =&gt;. If in &quot;\=&gt;&quot;, the \ escapes the = so that the resulting text is =&gt;,
+</I>&gt;<i> I don't see how it could be interpreted as a quote.
+</I>
+I'm pointing out to those writing parsers to avoid the pitfall of just
+skipping the character after that escape character and continuing as
+normal from there, I do that myself so I thought it might be worth
+noting, to clarify, if the parser ignores the character that is escaped
+and continues as normal from there, then:
+
+&gt;<i>	\=&gt;
+</I>
+escaped only the '=' which means now that '&gt;' is the first character in
+the line and can be interpreted as a quote block, of course, this is
+implementation specific, and I don't know how others have implemented
+their parsers.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003212.html">Escaping in gemtext
+</A></li>
+	<LI>Next message (by thread): <A HREF="003226.html">Escaping in gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3213">[ date ]</a>
+              <a href="thread.html#3213">[ thread ]</a>
+              <a href="subject.html#3213">[ subject ]</a>
+              <a href="author.html#3213">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

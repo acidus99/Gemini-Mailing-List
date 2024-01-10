@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> IDN with Gemini?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C5803930.odQ0NCZWSD%40tempete%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003822.html">
+   <LINK REL="Next"  HREF="003858.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>IDN with Gemini?</H1>
+    <B>C&#244;me Chilliet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C5803930.odQ0NCZWSD%40tempete%3E"
+       TITLE="IDN with Gemini?">come at chilliet.eu
+       </A><BR>
+    <I>Mon Dec  7 17:35:26 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003822.html">IDN with Gemini?
+</A></li>
+        <LI>Next message (by thread): <A HREF="003858.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3857">[ date ]</a>
+              <a href="thread.html#3857">[ thread ]</a>
+              <a href="subject.html#3857">[ subject ]</a>
+              <a href="author.html#3857">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+Some thoughts on answers on the topic of unicode links. (I will focus on unicode in path rather than in domain here).
+
+First, I wanted to point out that almost no-one uses them on the french Web. Some used that as an argument against having unicode in URIs, but I think no one uses them because of the punycode and percent encoding weirdness.
+
+I read part of the RFC 3987 (IRI) and part of RFC 3986 (URI) and still do not understand what is the horrible added complexity you are talking about.
+Could people asserting IRI is a complex hell impossible to implement point to the exact problems with IRI?
+
+Here is the life cycle of a link in a page:
+
+1 - The author writes it
+2 - The server saves it
+3 - A client requires the page to the server
+4 - The server sends it
+5 - The client display it
+6 - The user click it
+7 - The client resolve the hostname
+8 - The client sends it as request to the server
+9 - The server fetches the associated page
+
+I think we can safely assume that the author will not write percent encoding without help.
+
+So, with bie suggestions that clients and servers help by percent-encoding, but the author/user only have to deal with unicode, it means:
+1 - somewhere between step 1 and step 4, the server have to percent-encode the link
+2 - somewhere between step 4 and 5 the client needs to decode it
+3 - In 8 either the client stored the encoded link or has to reencode again, or if someone copy/paste he has to reencode.
+4 - In 9 the server needs to decode it to get the real target path
+
+If we just use the utf-8 path all along, points 1 throuh 3 are not needed. 4 still is, because some links will still be percent encoded and the server needs to understand them.
+
+&gt;<i> Petite Abeille &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">petite.abeille at gmail.com</A>&gt;:
+</I>&gt;<i> No, but the internet plumbing is de facto US-ASCII. 
+</I>
+If this is true, why bother with responses in utf-8?
+
+Regarding the breaking change argument, I think it is a bit weak, testing shows there is no consistency in how different clients/servers handles unicode currently.
+
+&gt;<i> bie:
+</I>&gt;<i> I actually implemented this in my personal gemini server
+</I>&gt;<i> today, and it was a trivial change (especially when compared to what I'd0
+</I>&gt;<i> have to do to properly validate IRIs...), allowing me to write &quot;=&gt; &#38609;&#24565;/
+</I>&gt;<i> &#38609;&#24565;&quot; and have it sent to the client as &quot;=&gt; %e%9b%91%e5%bf%b5/ &#38609;&#24565;&quot;.
+</I>
+If you are all this confortable with links that looks like &#171;%e%9b%91%e5%bf%b5&#187; lets go the whole way and percent-encode ascii as well.
+Let&#8217;s see how long before you change your mind after using this kind of stuff on a daily basis. And at least this would put all languages at the same point.
+	
+&gt;<i> <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A>
+</I>&gt;<i> Supporting IRIs is *not* simple. For example, in Python it requires a
+</I>&gt;<i> third-party library[1], and in Go I wasn't even able to find one. This
+</I>&gt;<i> means that in many programming languages, no one would be able to even
+</I>&gt;<i> begin writing a Gemini client before writing a library that parses and
+</I>&gt;<i> conforms to the complex specification that is IRIs.
+</I>
+On the server I wrote in PHP, getting a request in UTF-8 worked without me doing anything for it. Not accepting IRI would actually require me to *add* code, it seems. (again I might have missed a whole lot of edgecases IRI)
+In these languages, it means they are actively checking for non-ascii characters? Or are they using string format which is not compatible with utf-8?
+They need to speak UTF-8 for the response anyway.
+I get that *validating* an IRI might be hard, but is it the job of the server to validate it? I just use whatever input is thrown at me and suppose it is valid.
+(Note that these are real non-rethorical questions, I&#8217;m not trying to deny that handling IRI would be hard, I&#8217;m trying to understand why)
+
+(On a more general note, I guess everyone understood english is not my mother tongue, sorry if I&#8217;m being rude or something like that, I&#8217;m not trying to. I just really believe using utf-8 here would be better, but I understand there are complex technical questions involved)
+
+MCMic
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003822.html">IDN with Gemini?
+</A></li>
+	<LI>Next message (by thread): <A HREF="003858.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3857">[ date ]</a>
+              <a href="thread.html#3857">[ thread ]</a>
+              <a href="subject.html#3857">[ subject ]</a>
+              <a href="author.html#3857">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

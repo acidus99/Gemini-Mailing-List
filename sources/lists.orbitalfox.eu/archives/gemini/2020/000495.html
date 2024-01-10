@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Regarding `gemini://` over NaCL (replacing TLS)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Regarding%20%60gemini%3A//%60%20over%20NaCL%20%28replacing%20TLS%29&In-Reply-To=%3C874kuw71rg.fsf%40cassilda.carcosa.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000474.html">
+   <LINK REL="Next"  HREF="000496.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Regarding `gemini://` over NaCL (replacing TLS)</H1>
+    <B>Jason McBrayer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Regarding%20%60gemini%3A//%60%20over%20NaCL%20%28replacing%20TLS%29&In-Reply-To=%3C874kuw71rg.fsf%40cassilda.carcosa.net%3E"
+       TITLE="Regarding `gemini://` over NaCL (replacing TLS)">jmcbray at carcosa.net
+       </A><BR>
+    <I>Tue Mar 10 13:55:31 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000474.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+        <LI>Next message (by thread): <A HREF="000496.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#495">[ date ]</a>
+              <a href="thread.html#495">[ thread ]</a>
+              <a href="subject.html#495">[ subject ]</a>
+              <a href="author.html#495">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; writes:
+
+&gt;<i> It was thus said that the Great Ciprian Dorin Craciun once stated:
+</I>&gt;&gt;<i> So I've taken Sean Conner advice and implemented a proof-of-concept
+</I>&gt;&gt;<i> client and server (only the protocol, transport and crypto part, not
+</I>&gt;&gt;<i> the actual file serving) in Python by replacing TLS with NaCL /
+</I>&gt;&gt;<i> `libsodium`.
+</I>
+&gt;<i> 2) As I feared, this requires a more complicated implementation.  solderpunk
+</I>&gt;<i> wanted a protocol that could be implemented quickly and while TLS might be a
+</I>&gt;<i> bad protocol, it at least has the feature of being widely available and
+</I>&gt;<i> largly transparent if done correctly (like libtls, part of LibreSSL, does). 
+</I>&gt;<i> It handles not only the crypo portion, but the framing of data (invisibly to
+</I>&gt;<i> the rest of the application).  To tell the truth, I don't know the actual
+</I>&gt;<i> bytes of the TLS portion of the protcol as that is handled for me.
+</I>
+If we really wanted to go down this route, Noise protocol is more
+comparable to TLS than just using NaCL directly; the Python bindings
+seem only about as complex to use as the Python TLS bindings. The only
+thing is that Noise has libraries for 5 or 6 languages, compared to how
+ubiquitous TLS is.
+
+-- 
+Jason McBrayer      | &#8220;Strange is the night where black stars rise,
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">jmcbray at carcosa.net</A> | and strange moons circle through the skies,
+                    | but stranger still is lost Carcosa.&#8221;
+                    | &#8213; Robert W. Chambers,The King in Yellow
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000474.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+	<LI>Next message (by thread): <A HREF="000496.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#495">[ date ]</a>
+              <a href="thread.html#495">[ thread ]</a>
+              <a href="subject.html#495">[ subject ]</a>
+              <a href="author.html#495">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

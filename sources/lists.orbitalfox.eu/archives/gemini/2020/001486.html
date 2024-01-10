@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> &quot;Wide load&quot; status code(s)?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%22Wide%20load%22%20status%20code%28s%29%3F&In-Reply-To=%3C20200610073216.GA16028%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001474.html">
+   <LINK REL="Next"  HREF="001495.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>&quot;Wide load&quot; status code(s)?</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%22Wide%20load%22%20status%20code%28s%29%3F&In-Reply-To=%3C20200610073216.GA16028%40SDF.ORG%3E"
+       TITLE="&quot;Wide load&quot; status code(s)?">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Wed Jun 10 08:32:16 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001474.html">Kristall browser
+</A></li>
+        <LI>Next message (by thread): <A HREF="001495.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1486">[ date ]</a>
+              <a href="thread.html#1486">[ thread ]</a>
+              <a href="subject.html#1486">[ subject ]</a>
+              <a href="author.html#1486">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hey all,
+
+Just throwing out a quick idea I had last night while trying to sleep,
+to see how people feel about it.  It's simple and easily ignorable and I
+think it's kind of neat.
+
+It's been a small pain point for some people for a while now that there
+is no way for a Gemini client to know how large a file it's downloading
+is without simply downloading the whole thing.  This is inconvenient
+from a UI perspective, as there is no way to display a progress bar, and
+simple clients like AV-98 which simply download a complete file and then
+pass it off to a handler program appear to &quot;freeze&quot; on large downloads
+with no clear indication that anything is happening.  This is a much
+bigger problem for people on limited machines (e.g. low memory diskless
+systems are perfectly viable for reading text/gemini content and
+displaying small images but not for downloading large binaries, but they
+can't gracefully opt out of the big stuff and are forced to simply
+terminate the connection once a threshold amount of content has been
+downloaded, and then wastefully discard that partial content) or
+internet connections (e.g. people at sea using satellite data plans
+which are billed per megabyte).
+
+People usually want to address this by having the server somehow declare
+the file size upfront in the header, as per HTTP's &quot;Content-Length&quot;, but
+I've resisted that tooth and nail because there's no sensible way to do
+it which doesn't turn the response header into an infinitely extensible
+thing which people can tack their own variables onto, leaving us no
+better off than HTTP (so, please, no more ideas on this front)...
+
+I was very happy to realise that a lot of these problems can be solved,
+or at least ameliorated, in a very simple way with an additional 2x
+status code.  Since I plan to deprecate the current 21 code for ending a
+transient certificate session, we could reuse 21 to mean &quot;SUCCESS, a
+response body follows, and it's larger than $THRESHOLD MiB&quot; (note I am
+proposing no change to the existing code 20 - 20 does NOT mean &quot;what's
+coming in less than $THRESHOLD&quot;).  Simple clients could simply treat 21
+as 20 and be in exactly the situation they are in now, so the graceful
+degredation of status codes to their x0 form works nicely here.  But
+e.g. AV-98 could print &quot;Downloading large file, please wait...&quot; upon
+receving a 21, and then proceed as usual.  This is a very low effort
+client change, but it solves the problem of people thinking something
+has gone wrong when they unknowingly start a large download.  More
+importantly, users in resource-limited environments could use clients
+which simply terminate the connection immediately on seeing a header
+starting with 21, providing a quick and low-waste &quot;opt out&quot; of large
+content.
+
+On the server side, again, a dirt simple server could just always serve
+up 20 without actually breaking anything.  I realise that knowing
+whether to use 20 or 21 for dynamically generated content may not be
+straightforward - no problem, it is *always* valid to just send 20 when
+in doubt.  21 is nothing more than a helpful hint to clients who might
+need it.  It doesn't need to be 100% reliable to still have value.
+
+This feels like a good idea to me.  It's totally optional and very easy
+to handle on both the client and server sides, and I feel like being
+friendly to small/slow computers and slow/intermittent network
+connections is a good fit with the overall &quot;vibe&quot; of Gemini, provided
+doing so does not conflict with overall simplicity.
+
+Naturally, deciding to do this will lead immediately to a weeks-long
+heated debate on what the appropriate value of $THRESHOLD should be.  We
+*could* wade into those waters, but I'll just also throw out that we
+could use 21, 22 and 23 to indicate payloads exceeding 1MiB, 10MiB or
+100MiB respectively and leave it at that.  Clients targetting
+resource-limited environments could let their users configure their own
+threshold for early termination of downloads.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001474.html">Kristall browser
+</A></li>
+	<LI>Next message (by thread): <A HREF="001495.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1486">[ date ]</a>
+              <a href="thread.html#1486">[ thread ]</a>
+              <a href="subject.html#1486">[ subject ]</a>
+              <a href="author.html#1486">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

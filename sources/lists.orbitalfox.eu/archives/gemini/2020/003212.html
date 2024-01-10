@@ -1,0 +1,299 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Escaping in gemtext
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Escaping%20in%20gemtext&In-Reply-To=%3C20201110071556.GQ30302%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003211.html">
+   <LINK REL="Next"  HREF="003213.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Escaping in gemtext</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Escaping%20in%20gemtext&In-Reply-To=%3C20201110071556.GQ30302%40brevard.conman.org%3E"
+       TITLE="Escaping in gemtext">sean at conman.org
+       </A><BR>
+    <I>Tue Nov 10 07:15:56 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003211.html">Escaping in gemtext
+</A></li>
+        <LI>Next message (by thread): <A HREF="003213.html">Escaping in gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3212">[ date ]</a>
+              <a href="thread.html#3212">[ thread ]</a>
+              <a href="subject.html#3212">[ subject ]</a>
+              <a href="author.html#3212">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+  There's quite a bit to unpack here.
+
+  First, let me say that the issue here is in-band signalling.  You get this
+issue whenever you use some value (or characater in this case) to signal
+some change in interpretation of data, and you need to use the value (or
+character) *as* data and not a signal.
+
+  HTML has this issue as well, in that it needs a way to designate a markup
+tag, and it uses '&lt;' for that (based upon its use in SGML).  But if one
+needs to use '&lt;' in regular text it needs to be escaped.  So (again, from
+SGML) they use the '&amp;' character to introduce named entities---a
+representation of a character that could not otherwise be typed.  But that
+means if you want to use '&amp;' as a character, it too, needs to be escaped. 
+So that means in HTML, if you want to display a '&amp;' you escape it as &quot;&amp;&quot;
+[1].  And to display a '&lt;' you escape it as &quot;&gt;&quot;.
+
+  Gemtext does *not* have such a facility, as it complicates the processing
+of the text, which is something solderpunk wanted to keep simple.  Escaping
+data complicates this (I've seen complications with the proper encoding of
+URLs for instance).  There is no solution (aside from serving up a plain
+text file) that will easily solve this issue.
+
+  Now on with the rest of the commentary ... 
+
+It was thus said that the Great Ryan Westlund once stated:
+&gt;<i> The main reason I don't prefer it to my own suggestion is that it would
+</I>&gt;<i> still mean that preformatted lines might need to be altered in some way
+</I>&gt;<i> (if the preformatted lines contain &quot;\```&quot; or something), instead of
+</I>&gt;<i> allowing to paste them in unmodified and only have to modify the
+</I>&gt;<i> prefomatting toggle lines.
+</I>
+  Sorry, no way around that.  I mean, one *could* use HTML entities:
+
+```
+Blah blah blah blah.  And now a preformatted block of code:
+
+&DiacriticalGrave;`` 
+This is a diagram
+&DiacriticalGrave;`` 
+
+```
+
+but then the processing becomes harder as the client would then have to scan
+character by character, converting entities to characters.  Or perhaps use
+the standard '\' as an escape character:
+
+```
+Blah blah blah blah.  And now a preformatted block of code:
+
+\```
+This is a diagram
+``\`
+```
+
+as long as at least one of the grave characters is escaped, it won't trigger
+block mode (on or off).  But again, you have to process everything character
+by character to handle the '\' character.  Or just decide that the following
+four characters at the start of a line
+
+	\```
+
+is to be presented, verbatim, as 
+
+	```
+
+and *not* trigger block mode.  As mentioned earlier, one could just use more
+than three such characters:
+
+````````````
+Look Ma!  Block mode!
+
+It's defined as
+
+```
+...
+
+See?
+
+````````
+
+But it's not really defined as three, but more than three, and again, you
+have issues.  Other possibilities---use the first non ` character as a final
+delimeter:
+
+```|
+To define a block mode, use three grave accents in a row, with another
+character that doesn't appear in the text; said character will then end the
+block mode.  For example:
+
+```@
+this is block mode
+@
+
+See?
+|<i>
+</I>
+Or perhaps a sequence of characters?
+
+```end-of-line
+To define a block mode, use three grave accents in a row, followed by a
+sequence of non-blank characters; said sequence will end the block mode:
+
+```EOF
+This is block mode
+EOF
+
+See?
+end-of-line
+
+  Or how about this variant:
+
+```end-of-line
+Blah blah blah
+```EOF
+This is a sample block mode
+```EOF
+See?
+```end-of-line
+
+  I mean, you can go crazy with this stuff.  But every option involves more
+processing than happens now.
+
+  This is also not to say I endorse or condemn any of these methods.
+
+&gt;<i> For the sake of use case: I write Python tutorials in Markdown, as well as
+</I>&gt;<i> the specification for Sanemark, a variant of Markdown.  
+</I>
+  Do you know that Markdown was created by John Gruber as an easy way to
+create HTML pages, with shortcuts for the tags he used the most often,
+leaving the more obscure or harder to support tags to HTML itself?  I mean,
+why else would his Markdown include the ability to include HTML?  If he
+needed an image (and I don't think he includes many images) he would type
+the &lt;IMG ...  &gt; tag by hand.  The varitions come when people wanted to
+*replace* all HTML with this weird shorthand notation (and then go on to
+generate HTML from it) [2].
+
+&gt;<i> Several similar
+</I>&gt;<i> issues have come up for me before with Markdown (this specific one
+</I>&gt;<i> would've been a major obstacle for the Sanemark spec if Markdown didn't
+</I>&gt;<i> implement what I suggest, because leading space is significant).
+</I>
+  So I looked up Sanemark, because I was curious.  And I came across this
+bit where you said: [9]
+
+&gt;<i> The rules for HTML blocks are overcomplicated as hell.  The spec defines 7
+</I>&gt;<i> different kinds of them, including support for obscure bullshit that
+</I>&gt;<i> should never have been invented like &lt;?php and CDATA, and a fucking
+</I>&gt;<i> hardcoded list of all block-level HTML tags.  Nevermind future-proofing, I
+</I>&gt;<i> guess custom elements can go fuck themselves?
+</I>
+  The reason that abominations like &quot;&lt;?php&quot; and &quot;&lt;![CDATA[&quot; exist is becuase
+*people wanted support for it!*  You might consider them abominations (I'll
+agree with PHP [6]) but not everybody, and they do solve real issues [7]. 
+And isn't trying to change the Gemini text specification a form of
+contravariance? [8]  I'm just asking ...
+
+  I'm also reminded of this quote from Bjarne Stroustrup, creator of C++:
+
+	There are just two kinds of [programming] languages: the ones
+	everybody complains about and the ones nobody uses.
+
+  -spc (But the nice thing about standards is that there are so many to
+	choose from ... )
+
+[1]	Yes, there are four more ways to get that as well, &quot;&#38;&quot;,
+	&quot;&amp;#X26;&quot;, &quot;&amp;#x26&quot; and &quot;&lt;![CDATA[&amp;]]&gt;&quot;, but I don't want to digress
+	too much here ...
+
+[2]	Personally, I'm not a fan of Markdown (to the degree that I rejected a
+	pull request for GLV-1.12556 [3]) and *I* even created my own markup
+	language [4] to make it easier for me to write blog posts.  But I
+	don't *store* the blog entries in this markup language, but in their
+	final HTML form.  That way, I can modify the language (it's already
+	happened at least once) without having to maintain backwards
+	compatability nor having to update dozens, perhaps hundreds, of
+	previously written entries.
+
+	If you are curious enough, here's the code to format it [5].
+
+[3]	<A HREF="https://github.com/spc476/GLV-1.12556/pull/2">https://github.com/spc476/GLV-1.12556/pull/2</A>
+
+[4]	<A HREF="https://github.com/spc476/mod_blog/blob/master/NOTES/testmsg">https://github.com/spc476/mod_blog/blob/master/NOTES/testmsg</A>
+
+[5]	<A HREF="https://github.com/spc476/mod_blog/blob/master/Lua/format.lua">https://github.com/spc476/mod_blog/blob/master/Lua/format.lua</A>
+
+[6]	I personally hate the language, but I can't deny that it lets many
+	people who would otherwise not be able to express themselves,
+	express themselves.  I console myself with the fact that I don't
+	have to maintain such code, thank God.
+
+[7]	You want to easily embed HTML sample code in HTML?  You don't have
+	to entity escape every '&lt;' and '&amp;' and &quot;'&quot; but instead drop that
+	mess into a single &lt;![CDATA[ ...  ]]&gt; block and there you go. 
+	Sample HTML code in an HTML page without pain (as long as there
+	isn't a &lt;![CDATA[ ]]&gt; block inside, which in that case, you can
+	escape the leading '&lt;' and trailing '&gt;' with entities, which is
+	*still* a lot less work than trying to safely convert HTML with
+	entities.
+
+[8]	<A HREF="https://yujiri.xyz/software/specs_are_contravariant">https://yujiri.xyz/software/specs_are_contravariant</A>
+
+[9]	<A HREF="https://yujiri.xyz/sanemark">https://yujiri.xyz/sanemark</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003211.html">Escaping in gemtext
+</A></li>
+	<LI>Next message (by thread): <A HREF="003213.html">Escaping in gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3212">[ date ]</a>
+              <a href="thread.html#3212">[ thread ]</a>
+              <a href="subject.html#3212">[ subject ]</a>
+              <a href="author.html#3212">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

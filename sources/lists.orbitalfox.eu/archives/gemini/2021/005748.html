@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] Certificate trust
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Certificate%20trust&In-Reply-To=%3C3718633.9u7rkilq9Z%40tempete%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005746.html">
+   <LINK REL="Next"  HREF="005749.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] Certificate trust</H1>
+    <B>C&#244;me Chilliet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Certificate%20trust&In-Reply-To=%3C3718633.9u7rkilq9Z%40tempete%3E"
+       TITLE="[spec] Certificate trust">come at chilliet.eu
+       </A><BR>
+    <I>Sun Feb 28 19:27:26 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005746.html">Mastodon proxy for Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="005749.html">[spec] Certificate trust
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5748">[ date ]</a>
+              <a href="thread.html#5748">[ thread ]</a>
+              <a href="subject.html#5748">[ subject ]</a>
+              <a href="author.html#5748">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+I have been using lagrange for a few months to browse Gemini, and I realize that I&#8217;m already making a habit of ignoring certificate mismatch warnings, and blindly trusting any certificate that shows.
+
+The certificate trust is one of the weak point of the current specification I think, and it would need to be clarified.
+
+Firstly, there is the idea of TOFU, but it does not say on which part of the certificate the TOFU works (some people consider it&#8217;s the whole certificate, some only the fingerprint), and it does not say how much the certificate needs to be valid (I&#8217;ve seen on the ML some people considering that a wrong domain in a certificate and a past expiration date should be ignored by clients). Reading the specification it appears that it recommends using fingerprint and to consider past expiration date invalid.
+Secondly, there is the good old CA system, nowadays mostly using letsencrypt. It seems badly supported in most clients which still use TOFU in this case and will complain at each renewal.
+A third possibility I think would be to use DANE and base validation on the DNS system, but I&#8217;ve not seen anyone advocating this, is there anything wrong with that idea?
+
+I&#8217;m failing to see how TOFU can provide any security, especially if there is no way to announce a renewal by sending both new and old cert or something, there is a MITM possibility at each renewal. The only TOFU example I&#8217;ve seen cited is openssh, which seems offtopic because you usually do not ssh into random machine on the internet by following links like you do with Gemini.
+
+C&#244;me
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005746.html">Mastodon proxy for Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="005749.html">[spec] Certificate trust
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5748">[ date ]</a>
+              <a href="thread.html#5748">[ thread ]</a>
+              <a href="subject.html#5748">[ subject ]</a>
+              <a href="author.html#5748">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

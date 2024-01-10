@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Updated recommendations regarding TOFU &amp; TLS
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Updated%20recommendations%20regarding%20TOFU%20%26%20TLS&In-Reply-To=%3CC9OPUIIEUN5D.3CQFDM76VBX4W%40taiga%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005902.html">
+   <LINK REL="Next"  HREF="005905.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Updated recommendations regarding TOFU &amp; TLS</H1>
+    <B>Drew DeVault</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Updated%20recommendations%20regarding%20TOFU%20%26%20TLS&In-Reply-To=%3CC9OPUIIEUN5D.3CQFDM76VBX4W%40taiga%3E"
+       TITLE="Updated recommendations regarding TOFU &amp; TLS">sir at cmpwn.com
+       </A><BR>
+    <I>Thu Mar  4 16:43:49 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005902.html">[spec] TLS &#8212; life is like a box of tofu
+</A></li>
+        <LI>Next message (by thread): <A HREF="005905.html">Updated recommendations regarding TOFU &amp; TLS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5904">[ date ]</a>
+              <a href="thread.html#5904">[ thread ]</a>
+              <a href="subject.html#5904">[ subject ]</a>
+              <a href="author.html#5904">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Note: I'm not subscribed to this list, please use &quot;reply-all&quot; to make
+sure I get Cc'd on your reply.
+
+Hello! I have recently announced some upcoming changes to my Gemini
+software implementations with respect to TLS and TOFU:
+
+<A HREF="https://lists.sr.ht/~sircmpwn/gmni-discuss/%3CC9OP7IK9T9EP.15EOEOOS7QSB9%40taiga%3E">https://lists.sr.ht/~sircmpwn/gmni-discuss/%3CC9OP7IK9T9EP.15EOEOOS7QSB9%40taiga%3E</A>
+
+I've also updated my older TOFU recommendations article to reflect the
+changes:
+
+<A HREF="gemini://drewdevault.com/2020/09/21/Gemini-TOFU.gmi">gemini://drewdevault.com/2020/09/21/Gemini-TOFU.gmi</A>
+
+In short, after listening to some feedback from the community on TOFU,
+I'd like to make the following updated suggestions:
+
+- Use long-lived certificates with the expiration set to the far future
+- Client software should disregard notBefore/notAfter dates, and the
+  common name as well. Requiring strong algorithms and other technical
+  constraints is fine.
+
+Any server software which wants to migrate to long-lived certificates
+should let their current certificates expire and then automatically
+issue a long-lived certificate to replace it when the time comes, rather
+than switching immediately and causing your clients to flag your cert as
+untrusted.
+
+To re-state one of my previous recommendations, which I still figure is
+a good idea: server software should handle certificate maintenance for
+the user. Making the sysadmin generate certificates is cumbersome and
+error prone, and because Gemini encourages TOFU and self-signed
+certificates, we can remove that burden from server operators entirely
+by generating certificates on-demand for the hosts we intend to service.
+
+Aside: it might be a good idea to have a non-authoratitive TLS
+best-practices document on gemini.circumlunar.space somewhere. I'd be
+happy to draft up such a document if this is desirable.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005902.html">[spec] TLS &#8212; life is like a box of tofu
+</A></li>
+	<LI>Next message (by thread): <A HREF="005905.html">Updated recommendations regarding TOFU &amp; TLS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5904">[ date ]</a>
+              <a href="thread.html#5904">[ thread ]</a>
+              <a href="subject.html#5904">[ subject ]</a>
+              <a href="author.html#5904">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

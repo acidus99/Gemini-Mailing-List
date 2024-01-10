@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposal about content-size and hash
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%20about%20content-size%20and%20hash&In-Reply-To=%3CC6RYW789F726.ZSL119S0I898%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002990.html">
+   <LINK REL="Next"  HREF="003002.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposal about content-size and hash</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%20about%20content-size%20and%20hash&In-Reply-To=%3CC6RYW789F726.ZSL119S0I898%40stilgar%3E"
+       TITLE="Proposal about content-size and hash">solderpunk at posteo.net
+       </A><BR>
+    <I>Sun Nov  1 13:39:16 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002990.html">Proposal about content-size and hash
+</A></li>
+        <LI>Next message (by thread): <A HREF="003002.html">Proposal about content-size and hash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2993">[ date ]</a>
+              <a href="thread.html#2993">[ thread ]</a>
+              <a href="subject.html#2993">[ subject ]</a>
+              <a href="author.html#2993">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri Oct 30, 2020 at 11:06 PM CET, Sean Conner wrote:
+
+&gt;<i> Ah yes ... this is something I proposed back in August of 2019:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="gemini://gemini.conman.org/gRFC/0003">gemini://gemini.conman.org/gRFC/0003</A>
+</I>&gt;<i>
+</I>&gt;<i> Solderpunk has always rejected it when it comes up, mumbling
+</I>&gt;<i> &quot;simplicity&quot;
+</I>&gt;<i> and &quot;not HTTP again&quot; under his breath.
+</I>
+Well, that's not quite fair.  What I usually mumble, in the context of
+people wanting to add this stuff as part of the MIME type in a status 20
+response, is something like this:
+
+1) The parameters which may be legitimately appended to a MIME media
+type are those registered in that media type's formal definition.
+You can't just stick whatever you want on there.  We can define
+parameters for text/gemini, but we can't do anything about other media
+types whose definitions are beyond our control.
+
+2) A media type is supposed to specify, well, what *type* of thing a
+file is.  They are *categories*, which a client can use to decide how to
+handle a given file.  From RFC 2045, section 5:
+
+&gt;<i> The purpose of the Content-Type field is to describe the data
+</I>&gt;<i> contained in the body fully enough that the receiving user agent can
+</I>&gt;<i> pick an appropriate agent or mechanism to present the data to the
+</I>&gt;<i> user, or otherwise deal with the data in an appropriate manner.
+</I>
+It seems very clear to me that information which is unique to a specific
+individual file - like its size, hash, last update time, etc. - is just
+not semantically appropriate here.
+
+TLDR; MIME types aren't big trucks that you just dump something on.
+They have a clearly limited semantic scope, and each media type and
+subtype is constrained by a formal definition.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002990.html">Proposal about content-size and hash
+</A></li>
+	<LI>Next message (by thread): <A HREF="003002.html">Proposal about content-size and hash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2993">[ date ]</a>
+              <a href="thread.html#2993">[ thread ]</a>
+              <a href="subject.html#2993">[ subject ]</a>
+              <a href="author.html#2993">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

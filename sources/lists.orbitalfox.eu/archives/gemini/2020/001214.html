@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> gophermap -&gt; text/gemini converter
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gophermap%20-%3E%20text/gemini%20converter&In-Reply-To=%3Cc7f8c89c-283d-b9cb-fb1b-b9d4fe4119d8%40lavabit.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001213.html">
+   <LINK REL="Next"  HREF="000622.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>gophermap -&gt; text/gemini converter</H1>
+    <B>James Tomasino</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gophermap%20-%3E%20text/gemini%20converter&In-Reply-To=%3Cc7f8c89c-283d-b9cb-fb1b-b9d4fe4119d8%40lavabit.com%3E"
+       TITLE="gophermap -&gt; text/gemini converter">tomasino at lavabit.com
+       </A><BR>
+    <I>Sat May 30 22:53:06 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001213.html">The Sigil! (was Re: Cognitive aspects of navigation in gemini space)
+</A></li>
+        <LI>Next message (by thread): <A HREF="000622.html">Cognitive aspects of navigation in gemini space
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1214">[ date ]</a>
+              <a href="thread.html#1214">[ thread ]</a>
+              <a href="subject.html#1214">[ subject ]</a>
+              <a href="author.html#1214">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>There was an offhand request for a converter from gophermap to the
+native text/gemini format in the IRC channel. I had an awk script
+written already to parse gophermaps, so I made some quick adjustments
+and can share the results here:
+
+<A HREF="https://github.com/jamestomasino/dotfiles-minimal/blob/master/bin/gophermap2gemini.awk">https://github.com/jamestomasino/dotfiles-minimal/blob/master/bin/gophermap2gemini.awk</A>
+
+Currently it detects html links, telnet links, and remaining linkable
+gopher types and formats those into the =&gt; link pattern. I am checking
+URLs for spaces and escaping those, since spaced URLs do actually work
+in gopher but won't in gemini due to link line parsing. I'm defaulting
+to code-fencing all type i lines in the file unless the lines match the
+formatting for a header (#, ##, ###, but not ####), or an unordered list.
+
+It's in GNU awk and untested on BSD. I'm guessing it'll explode there
+brilliantly.
+
+For those of you looking to batch-convert or cross-serve content, it may
+be useful. Hack it up and enjoy.
+
+PS: do we have a name for the text/gemini format itself? The spec-spec
+just refers to it by media type.
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001213.html">The Sigil! (was Re: Cognitive aspects of navigation in gemini space)
+</A></li>
+	<LI>Next message (by thread): <A HREF="000622.html">Cognitive aspects of navigation in gemini space
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1214">[ date ]</a>
+              <a href="thread.html#1214">[ thread ]</a>
+              <a href="subject.html#1214">[ subject ]</a>
+              <a href="author.html#1214">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

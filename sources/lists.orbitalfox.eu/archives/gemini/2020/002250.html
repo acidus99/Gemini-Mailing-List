@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CGI
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI&In-Reply-To=%3CCABuFWiLemWc%2Brj%3DdJpa%2B6jDe1z%2B-BVjxW01STS0PjPjc7qy6vw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002242.html">
+   <LINK REL="Next"  HREF="002251.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CGI</H1>
+    <B>Paul Boyd</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI&In-Reply-To=%3CCABuFWiLemWc%2Brj%3DdJpa%2B6jDe1z%2B-BVjxW01STS0PjPjc7qy6vw%40mail.gmail.com%3E"
+       TITLE="CGI">boyd.paul2 at gmail.com
+       </A><BR>
+    <I>Sat Jul 18 14:46:42 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002242.html">CGI
+</A></li>
+        <LI>Next message (by thread): <A HREF="002251.html">CGI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2250">[ date ]</a>
+              <a href="thread.html#2250">[ thread ]</a>
+              <a href="subject.html#2250">[ subject ]</a>
+              <a href="author.html#2250">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I put all the collected data in the URL. It works pretty well and got rid
+of the temp files. It event fixed the cache problem since each generated
+URL is unique to the data submitted. But it generates some nasty URLs (see
+the bottom).
+
+Luke, good points about the ability to replay a post. Temporary session
+files didn't have that problem at least. I suppose I could bring back a
+session ID just to counter replays, but I'll wait until it becomes a
+problem.
+
+Anyway, I'm probably not going to write something like this again. The
+guestbook is kind of fun (Hello K&#233;vin and Timur!), so I'll leave it up. But
+I'll stick to things that fit better in the future.
+
+Case in point about replays, here's an ugly URL to a pre-filled form:
+
+<A HREF="gemini://">gemini://</A>
+pboyd.io/cgi-bin/guestbook.pl/link/S2luZyBBcnRodXI=;Q2FtZWxvdA==;VGhlIExhZHkgb2YgdGhlIExha2UsIGhlciBhcm0gY2xhZCBpbiB0aGUgcHVyZXN0LCBzaGltbWVyaW5nIHNhbWl0ZSwgaGVsZCBhbG9mdCBFeGNhbGlidXIgZnJvbSB0aGUgYm9zb20gb2YgdGhlIHdhdGVyIHNpZ25pZnlpbmcgYnkgRGl2aW5lIFByb3ZpZGVuY2UgdGhhdCBJLCBBcnRodXIsIHdhcyB0byBjYXJyeSBFeGNhbGlidXIuIFRoYXQgaXMgd2h5IEkgYW0geW91ciBraW5nIQ==;?none
+
+Paul
+
+On Fri, Jul 17, 2020 at 2:59 PM Luke Emmet &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">luke at marmaladefoo.com</A>&gt; wrote:
+
+&gt;<i> A word of warning - as you probably have surmised, query string or
+</I>&gt;<i> otherwise manipulated URLs are not good for all types of application.
+</I>&gt;<i> They work just like HTTP GET queries and as such should really be
+</I>&gt;<i> limited to idempotent interactions with the server (like search queries
+</I>&gt;<i> or other peristent URLs).
+</I>&gt;<i>
+</I>&gt;<i> There is nothing yet equivalent to a non-cacheable data submission to
+</I>&gt;<i> the server (like HTTP POST) yet. I think it would be great if there
+</I>&gt;<i> could be one, but nothing on the horizon at the moment.
+</I>&gt;<i>
+</I>&gt;<i> So the complex URLs you can assemble in interactions with Gemini are
+</I>&gt;<i> subject to being linked to and replayed.
+</I>&gt;<i>
+</I>&gt;<i> For example if I have a page on my site with 100 parametrised links to a
+</I>&gt;<i> gemini based guest book, every time GUS comes to visit, there could end
+</I>&gt;<i> up being 100 new entries posted!
+</I>&gt;<i>
+</I>&gt;<i> Best wishes
+</I>&gt;<i>
+</I>&gt;<i>   - Luke
+</I>&gt;<i>
+</I>&gt;<i> On 17-Jul-2020 19:26, Paul Boyd wrote:
+</I>&gt;<i> &gt; Hmm.. interesting. I'm already packing data into the URL path, so
+</I>&gt;<i> &gt; yeah, I can just put the rest of the data in there. I'll have to try
+</I>&gt;<i> &gt; it out when I get a minute.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The protocol spec has a max URL size of 1024 bytes, but as long as the
+</I>&gt;<i> &gt; inputs are short I think it will work.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Paul
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; On Fri, Jul 17, 2020 at 1:37 PM Michael Lazar
+</I>&gt;<i> &gt; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">lazar.michael22 at gmail.com</A> &lt;mailto:<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">lazar.michael22 at gmail.com</A>&gt;&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     I like the form idea and I wrote something similar for gopher a
+</I>&gt;<i> &gt;     while back [0].
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> <A HREF="https://gopher.floodgap.com/gopher/gw?=mozz.us+7005+312f64656d6f2d666f726d">https://gopher.floodgap.com/gopher/gw?=mozz.us+7005+312f64656d6f2d666f726d</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     In my case, I used URL query parameters to keep track of
+</I>&gt;<i> &gt;     previously submitted
+</I>&gt;<i> &gt;     form values. This worked because query params do not have any
+</I>&gt;<i> &gt;     special meaning
+</I>&gt;<i> &gt;     in gopher URLs. For gemini the query component is reserved, but
+</I>&gt;<i> &gt;     you could
+</I>&gt;<i> &gt;     probably accomplish the same thing using a special path component
+</I>&gt;<i> &gt;     with the
+</I>&gt;<i> &gt;     encoded fields in it.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     <A HREF="gemini://example.com/cgi-bin/form/name%3Dpaul%26location%3Dcanada/">gemini://example.com/cgi-bin/form/name%3Dpaul%26location%3Dcanada/</A>
+</I>&gt;<i> &gt;     &lt;<A HREF="http://example.com/cgi-bin/form/name%3Dpaul%26location%3Dcanada/">http://example.com/cgi-bin/form/name%3Dpaul%26location%3Dcanada/</A>&gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     - mozz
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     [0]
+</I>&gt;<i> &gt;
+</I>&gt;<i> <A HREF="https://github.com/michael-lazar/flask-gopher/blob/master/demo/run_server.py#L154">https://github.com/michael-lazar/flask-gopher/blob/master/demo/run_server.py#L154</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200718/9399e640/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200718/9399e640/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002242.html">CGI
+</A></li>
+	<LI>Next message (by thread): <A HREF="002251.html">CGI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2250">[ date ]</a>
+              <a href="thread.html#2250">[ thread ]</a>
+              <a href="subject.html#2250">[ subject ]</a>
+              <a href="author.html#2250">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

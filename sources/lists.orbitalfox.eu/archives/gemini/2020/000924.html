@@ -1,0 +1,218 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Status codes
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Status%20codes&In-Reply-To=%3Caa7f26821143d1dc8b71c67eadaef603%40tilde.ninja%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000921.html">
+   <LINK REL="Next"  HREF="000913.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Status codes</H1>
+    <B>jan6 at tilde.ninja</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Status%20codes&In-Reply-To=%3Caa7f26821143d1dc8b71c67eadaef603%40tilde.ninja%3E"
+       TITLE="Status codes">jan6 at tilde.ninja
+       </A><BR>
+    <I>Wed May 20 22:13:34 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000921.html">Status codes
+</A></li>
+        <LI>Next message (by thread): <A HREF="000913.html">[ANN] New Gemfeed release
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#924">[ date ]</a>
+              <a href="thread.html#924">[ thread ]</a>
+              <a href="subject.html#924">[ subject ]</a>
+              <a href="author.html#924">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>May 20, 2020 11:16 PM, &quot;solderpunk&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at sdf.org</A>&gt; wrote:
+
+&gt;<i> I do kind of worry that the time to propose changes to &quot;core&quot; stuff is
+</I>&gt;<i> passed or passing. New implementations are being written at an
+</I>&gt;<i> astonishing rate and with so many clients and servers out there, every
+</I>&gt;<i> substantial change runs the risk of fracturing the nascent Geminispace
+</I>&gt;<i> into incompatible subspaces. Stuff that is very poorly implemented,
+</I>&gt;<i> like client certificiate stuff, doesn't have this risk so much, but
+</I>&gt;<i> anything fundamental I worry is already more or less &quot;set&quot; now. It's
+</I>&gt;<i> the downside to unexpected explosive growth
+</I>
+can't you simply set up different version revisions, though, for that?
+maybe just a &quot;gemini-stable&quot; and &quot;gemini-next&quot; branch, where gemini-next is explictly experimental and can change at any time,
+and ideas from there that work, can be cycled into gemini-stable at some kinda-set intervals?
+
+&gt;<i> 
+</I>&gt;&gt;<i> Suggestion #5: A comment, really
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> 5x codes are by design permanent errors but 51 (HTTP 404 equivalent) is
+</I>&gt;&gt;<i> actually a temporary problem according to the spec.
+</I>&gt;&gt;<i> In fact this is precisely what differentiates it from HTTP 410 GONE
+</I>&gt;&gt;<i> (gemini 52). So there seems to be a design error here but I don't really
+</I>&gt;&gt;<i> know what the correct solution is. Either 5x aren't really permanent
+</I>&gt;&gt;<i> errors (how would they be called then?) or 51 shouldn't be a 5x error
+</I>&gt;&gt;<i> to begin with.
+</I>&gt;<i> 
+</I>&gt;<i> It's true that &quot;not found&quot; is, in principle, temporary, or at least
+</I>&gt;<i> non permanent, in the sense that, yes, maybe tomorrow or next month or
+</I>&gt;<i> next year there will be something at that address.
+</I>&gt;<i> 
+</I>&gt;<i> The temporary/permanent error distinction in Gemini is intended mostly
+</I>&gt;<i> to be useful for non-human user agents, like search engine crawlers or
+</I>&gt;<i> feed aggregators or things like that, rather than people sitting in
+</I>&gt;<i> front of something like Bombadillo or Castor. If a bot tries to fetch a
+</I>&gt;<i> feed from a bad URL, it would be nice if it didn't continually try again
+</I>&gt;<i> every hour on the hour thinking that it's only a temporary failure and
+</I>&gt;<i> one day the feed will appear!
+</I>&gt;<i> 
+</I>
+I think it'd be best if it returned an (optional?) timeout/expiry info, for the tag (if not optional, 0 or -1 can signify infinite time), not sure what time unit, probably just seconds, though &quot;1h&quot; for 1 hour, and such is also possible
+that way the server can specify if it should be flagged as missing for the next hour, or next day, or forevermore, etc, 
+useful in cases that you temporarily take down a page for whatever reason, or where you might change urls every so often, or if you're simply prone to typos and sometimes fumble the links, and don't want to bother to manually ask for re-index... sometime you might not even know that a page is not crawled by some crawler...
+
+also while probably not necessarily part of the spec, what should be the case if there's a redirect to a nonexistant URL?
+should the url that was redirected FROM, be permanently &quot;not found&quot; as well?
+
+and if it's intended for non-human agents, maybe mention that, too? that human-controlled clients are allowed to re-request on demand and don't have to block it forever?
+
+&quot;client error&quot; makes more sense than &quot;permanent error&quot; in this case, too
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000921.html">Status codes
+</A></li>
+	<LI>Next message (by thread): <A HREF="000913.html">[ANN] New Gemfeed release
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#924">[ date ]</a>
+              <a href="thread.html#924">[ thread ]</a>
+              <a href="subject.html#924">[ subject ]</a>
+              <a href="author.html#924">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

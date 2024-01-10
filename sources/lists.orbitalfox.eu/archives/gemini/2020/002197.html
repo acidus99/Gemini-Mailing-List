@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Ansi colour markup - what encoding or mime type
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Ansi%20colour%20markup%20-%20what%20encoding%20or%20mime%20type&In-Reply-To=%3CCANmFPemD_D3GDU_ACBOvHbO1-GmTiFKZK0e2%2BG89%2BzNWCxfAEQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002194.html">
+   <LINK REL="Next"  HREF="002185.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Ansi colour markup - what encoding or mime type</H1>
+    <B>Hannu Hartikainen</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Ansi%20colour%20markup%20-%20what%20encoding%20or%20mime%20type&In-Reply-To=%3CCANmFPemD_D3GDU_ACBOvHbO1-GmTiFKZK0e2%2BG89%2BzNWCxfAEQ%40mail.gmail.com%3E"
+       TITLE="Ansi colour markup - what encoding or mime type">hannu.hartikainen+gemini at gmail.com
+       </A><BR>
+    <I>Sun Jul 12 23:15:32 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002194.html">Ansi colour markup - what encoding or mime type
+</A></li>
+        <LI>Next message (by thread): <A HREF="002185.html">Ansi colour markup - what encoding or mime type
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2197">[ date ]</a>
+              <a href="thread.html#2197">[ thread ]</a>
+              <a href="subject.html#2197">[ subject ]</a>
+              <a href="author.html#2197">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, 12 Jul 2020 at 11:50, Luke Emmet &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">luke at marmaladefoo.com</A>&gt; wrote:
+&gt;<i> ANSI escape sequences should not be interpreted within text/gemini
+</I>&gt;<i> content (after all when would it stop - there could be embedded html or
+</I>&gt;<i> other markup that clients will become expected to interpret). Similarly
+</I>&gt;<i> they should not be stripped out - since how would one know they were
+</I>&gt;<i> there, and should be intepreted rather than just presented.
+</I>
+IMHO if a client is outputting to an ANSI terminal, the client author
+should consider what will happen with ANSI sequences. It is reasonable
+to strip or escape all of them, or a subset of them, or decide to let
+them through. Consider that a terminal UI is itself built with ANSI
+escapes and rendering them within the page could break the UI (or
+worse, emulate the UI!). Moreover, you'd need to fully parse the
+sequences and emulate terminal state to implement a sandboxed version
+of ANSI sequences (unless you limit to a subset, say, SGR). I learned
+that when trying to render 80-column ANSI art on wider terminals
+(ansi.hrtk.in does that but background colors leak).
+
+Similarly, if I was writing a Gemini-over-HTML proxy I'd certainly
+escape all HTML tags and entities. First, it makes sense to show the
+content to the user instead of interpreting it as control sequences.
+Second, I've learned on the web that rendering any user-supplied
+content without sanitizing will result in a disaster.
+
+Gemini is still small and friendly, but when designing software it's
+smart to account for bad actors.
+
+-Hannu
+
+PS. I just added yet another ANSI streaming server,
+<A HREF="gemini://asciinema.hrtk.in/">gemini://asciinema.hrtk.in/</A> for playing back asciinema.org recordings.
+Probably only useful as a tech demo or a client test.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002194.html">Ansi colour markup - what encoding or mime type
+</A></li>
+	<LI>Next message (by thread): <A HREF="002185.html">Ansi colour markup - what encoding or mime type
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2197">[ date ]</a>
+              <a href="thread.html#2197">[ thread ]</a>
+              <a href="subject.html#2197">[ subject ]</a>
+              <a href="author.html#2197">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

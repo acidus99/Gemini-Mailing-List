@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client behavior when server doesn't close connection?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20behavior%20when%20server%20doesn%27t%20close%20connection%3F&In-Reply-To=%3CCAFTy05bRi%3D%3D896BWPukNH%3Dyf2KtLp%2BBvKFQ141hyEm%2Bc5trVeA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002176.html">
+   <LINK REL="Next"  HREF="002173.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client behavior when server doesn't close connection?</H1>
+    <B>Michael Lazar</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20behavior%20when%20server%20doesn%27t%20close%20connection%3F&In-Reply-To=%3CCAFTy05bRi%3D%3D896BWPukNH%3Dyf2KtLp%2BBvKFQ141hyEm%2Bc5trVeA%40mail.gmail.com%3E"
+       TITLE="Client behavior when server doesn't close connection?">lazar.michael22 at gmail.com
+       </A><BR>
+    <I>Thu Jul  9 18:31:41 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002176.html">Client behavior when server doesn't close connection?
+</A></li>
+        <LI>Next message (by thread): <A HREF="002173.html">Client behavior when server doesn't close connection?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2150">[ date ]</a>
+              <a href="thread.html#2150">[ thread ]</a>
+              <a href="subject.html#2150">[ subject ]</a>
+              <a href="author.html#2150">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Jul 9, 2020 at 8:28 AM juhani &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">juhani at envs.net</A>&gt; wrote:
+&gt;<i> Hi all,
+</I>&gt;<i>
+</I>&gt;<i> I'm juhani, new here, and implementing an Android gemini client.
+</I>
+Hi!
+
+&gt;<i> While testing with live sites for the first time I found that some sites worked,
+</I>&gt;<i> and on others the response handling hung. Comparison of tcp streams revealed
+</I>&gt;<i> that on the working sites the last packet from the server had FIN flag, and on
+</I>&gt;<i> the failing sites it didn't.
+</I>&gt;<i>
+</I>&gt;<i> I changed the client so it doesn't try to read the whole response before parsing
+</I>&gt;<i> the header. And added timeout to make sure the connection is closed.
+</I>
+There is an open issue with jetforce where it was determined that the server
+sends the TLS close_notify alert but doesn't ever close the TCP socket [1]. I
+haven't had the time to figure out exactly what is going on yet though. I think
+that either the server is waiting for the close_notify acknowledgement message
+from the client which it never receives, or the server is not reacting to the
+acknowledgement by shutting down the socket.
+
+I do find it strange that it still appears to work with 90% of gemini client
+implementations. I have found that if the client sends a close_notify for their
+write stream after they transmit the request, then the server will close the
+connection fully. The other possibility is that maybe your client isn't sending
+the acknowledgement to the server?
+
+My understanding of TLS is that it's not required for the server to wait for the
+acknowledgement from the client, so ideally the server should be sending the
+close_notify and then immediately closing the connection afterwards.
+
+The main point that I want to make here is that this is a lot more nuanced than
+waving it off as &quot;just close the connection&quot;. The TLS connection needs to be
+shut down safely to prevent truncation attacks, and to make things more
+complicated the rules are different between TLS 1.2 and 1.3.
+
+- mozz
+
+[1] <A HREF="https://github.com/michael-lazar/jetforce/issues/32">https://github.com/michael-lazar/jetforce/issues/32</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002176.html">Client behavior when server doesn't close connection?
+</A></li>
+	<LI>Next message (by thread): <A HREF="002173.html">Client behavior when server doesn't close connection?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2150">[ date ]</a>
+              <a href="thread.html#2150">[ thread ]</a>
+              <a href="subject.html#2150">[ subject ]</a>
+              <a href="author.html#2150">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

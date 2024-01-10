@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] GemIF - Simple Interactive Fiction engine for Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20GemIF%20-%20Simple%20Interactive%20Fiction%20engine%20for%20Gemini&In-Reply-To=%3C010001763617ecb5-7254797c-79fd-4c63-8841-9791b58ffe16-000000%40email.amazonses.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003746.html">
+   <LINK REL="Next"  HREF="003737.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] GemIF - Simple Interactive Fiction engine for Gemini</H1>
+    <B>Norm MacLennan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20GemIF%20-%20Simple%20Interactive%20Fiction%20engine%20for%20Gemini&In-Reply-To=%3C010001763617ecb5-7254797c-79fd-4c63-8841-9791b58ffe16-000000%40email.amazonses.com%3E"
+       TITLE="[ANN] GemIF - Simple Interactive Fiction engine for Gemini">norm at iwritethe.codes
+       </A><BR>
+    <I>Sun Dec  6 03:28:26 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003746.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="003737.html">variable indentation levels / hierarchy in lists
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3813">[ date ]</a>
+              <a href="thread.html#3813">[ thread ]</a>
+              <a href="subject.html#3813">[ subject ]</a>
+              <a href="author.html#3813">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, 2 Dec 2020, Nick Thomas wrote:
+&gt;<i> Hmm. Perhaps the best way to go about this would be a cgi-bin script
+</I>&gt;<i> that can take a compiled ink story (turns out it compiles to json) and
+</I>&gt;<i> use client certificates + a persistent server-side data store for user
+</I>&gt;<i> state. The script would be the same for every story, it'd &quot;just&quot; need a
+</I>&gt;<i> way to store per-user state.
+</I>
+That's a neat idea. I haven't yet had a chance to inspect Ink's file 
+format, but I'll keep that in mind once I finally get around to it. Right 
+now I'm working on the project foundation because, well, it's fun. But 
+also so the project is healthy and maintainable if/when I try to add Ink 
+integration.
+
+What I _have_ done is simplify the server-side by making use of state 
+tokens in the URL. Rather than tracking games and state in-memory server 
+side, the server instead serializes the game state out into a token
+(configurable as JSON or Protobuf) in the URL.
+
+That way, each action link on the page just contains a &quot;speculative&quot; state 
+token. This also wildly simplifies state rollback when the user navigates 
+backward in their client since the state token contains everything anyway.
+
+It also means games still work across server restarts (and theoretically 
+even across _servers_ with the same stories)  without having to 
+persist sessions anywhere.
+
+Another new addition is writing stories in `.gemif` format rather than 
+YAML format and &quot;compiling&quot; to YAML via a new `gemifc` command.
+
+Right now, it's just a very minor abstraction over the YAML, but it's a 
+start and does make writing a little more pleasant.
+
+Scene metadata and transitions are still written in YAML format in 
+(essentially) YAML frontmatter, while scene descriptions are now just 
+plaintext. Each `.gemif` file can contain one or more scenes and
+each story can contain one or more .gemif file.
+
+Anyway, you can see some examples in the repo [1], so I don't take up too 
+much space trying to explain it.
+
+The other thing the samples demonstrate is the use of conditions. 
+Transitions can attach conditions to the game state, which can then be 
+used for conditional rendering in the scene descriptions as well as 
+allowing or disallowing the use other transitions based on which 
+conditions are present.
+
+There's still a ways to go since I'm just learning a lot of these 
+technologies, but I'm pretty happy with how things are shaping up so far.
+
+[1] <A HREF="https://git.sr.ht/~nromdotcom/gemif/tree/master/stories/src/conditions">https://git.sr.ht/~nromdotcom/gemif/tree/master/stories/src/conditions</A>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003746.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="003737.html">variable indentation levels / hierarchy in lists
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3813">[ date ]</a>
+              <a href="thread.html#3813">[ thread ]</a>
+              <a href="subject.html#3813">[ subject ]</a>
+              <a href="author.html#3813">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

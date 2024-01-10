@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Three possible uses for IRIs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3C87zh2owme0.fsf%40locke.worr.haus%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003882.html">
+   <LINK REL="Next"  HREF="003894.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Three possible uses for IRIs</H1>
+    <B>William Orr</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3C87zh2owme0.fsf%40locke.worr.haus%3E"
+       TITLE="Three possible uses for IRIs">will at worrbase.com
+       </A><BR>
+    <I>Tue Dec  8 11:46:47 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003882.html">Three possible uses for IRIs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003894.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3891">[ date ]</a>
+              <a href="thread.html#3891">[ thread ]</a>
+              <a href="subject.html#3891">[ subject ]</a>
+              <a href="author.html#3891">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Philip Linde writes:
+
+&gt;<i> On Mon, 07 Dec 2020 20:06:27 -0800
+</I>&gt;<i> &quot;Emma Humphries&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">ech at emmah.net</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> I'm perplexed that &quot;ease of programming&quot; is considered more important than &quot;ease of adoption.&quot;
+</I>&gt;<i>
+</I>&gt;<i> Consider &quot;ease of programming&quot; and in particular stability a subset of
+</I>&gt;<i> &quot;ease of adoption&quot;. There are numerous client and server
+</I>&gt;<i> implementations because it is easy to implement, and easy to maintain
+</I>&gt;<i> because the protocol is relatively stable even in these early stages.
+</I>&gt;<i> The different software allows people with different goals to adopt the
+</I>&gt;<i> protocol, and helps in weeding out shortcomings of clarity in the
+</I>&gt;<i> specification by analysis of the subtle differences between
+</I>&gt;<i> implementations.
+</I>&gt;<i>
+</I>&gt;&gt;<i> You mention that not every language supports the libraries needed for internationalized URLs. 
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> What does that lose the project vs. accessibility and broader adoption by non-English-speaking users for who Gemini would be a boon with limited bandwidth and hardware?
+</I>&gt;<i>
+</I>&gt;<i> It seems more likely that a change to this end would hurt adoption.
+</I>&gt;<i> Numerous pieces of existing Gemini software would immediately be
+</I>&gt;<i> invalidated. Not all of them will be updated to accommodate the change.
+</I>&gt;<i> I could perhaps see a more pressing need for the change if internet
+</I>&gt;<i> users worldwide weren't already used to transliteration. It's such a
+</I>&gt;<i> small part as well. UTF-8 is acceptable (and default) in text/gemini
+</I>&gt;<i> documents, and the text content of a capsule can indeed be written in
+</I>&gt;<i> any of the scripts supported by Unicode.
+</I>
+Hey,
+
+I'm new to this list, and a new Gemini user, but this topic is fairly important to me. It's discouraging to see a lot of fear-mongering around this topic already.
+
+Some points that have come up a few times already in this thread as well as the IDN thread that I think are worth addressing:
+
+1. Homograph attacks
+
+Stephane has already mentioned in a different response that homograph attacks are fairly rare. I don't have the knowledge to say whether or not that's accurate, but I can speak to how they're mitigated.
+
+In general, browsers will render the domain in the URI bar if all of the characters in the each section belong to the same script. As an example, <A HREF="https://&#1072;pple.com">https://&#1072;pple.com</A> will not render correctly in Firefox in the URI bar, but <A HREF="https://&#1072;&#1088;&#1088;&#1083;&#1077;.com/">https://&#1072;&#1088;&#1088;&#1083;&#1077;.com/</A> will render correctly (both domains do not exist if you want to check).
+
+The other half of this comes down to domain registrars not allowing registrations of domains with homographs (depends on the TLD, of course).
+
+What this comes down to, is that Gemini clients, if they wish to mitigate this type of attack, should apply the same algorithm as web browsers. Again, given the preference for client certs for authenticating sessions, it doesn't seem like this attack would have dire consequences anyway.
+
+I also think I saw someone mention that they're worried about it from the IRI side as well? That attack doesn't seem like much of a realistic case, since if they direct you to a different page on the same server, you're well, still on the same server. This only becomes problematic in the case of shared hosting of untrusted tenants.
+
+2. Normalization
+
+There's been a bit of fear-mongering about normalization which I can totally understand, since a first look at Unicode technical reports and the 4 normalization forms looks intimidating at first glance.
+
+However, as pointed out in a few RFCs, NFC is more or less the only normalization form that you need to worry about in *most* circumstances. Typed URIs should be normalized in NFC, both on server-side and client-side. When resolving files to the filesystem, the filename should be normalized to NFC. (this all assumes that your fs supports Unicode paths).
+
+NFKC becomes more relevant in the case that you want to implement something like search, or find in page, or something. You may want a user to be able to type in something like 'e' have their find include everything whose NFKC form is basically an 'e' (see the full set here: <A HREF="https://util.unicode.org/UnicodeJsps/list-unicodeset.jsp?a=%5B%3ANFKC_Casefold%3De%3A%5D&amp;g=&amp;i=">https://util.unicode.org/UnicodeJsps/list-unicodeset.jsp?a=%5B%3ANFKC_Casefold%3De%3A%5D&amp;g=&amp;i=</A>).
+
+3. Language support
+
+Normalization is generally supported across different languages p easily.
+
+Python has it in its stdlib: <A HREF="https://docs.python.org/3/library/unicodedata.html#unicodedata.normalize">https://docs.python.org/3/library/unicodedata.html#unicodedata.normalize</A>
+
+Golang has support: <A HREF="https://pkg.go.dev/golang.org/x/text/unicode/norm">https://pkg.go.dev/golang.org/x/text/unicode/norm</A>
+
+Rust: <A HREF="https://unicode-rs.github.io/unicode-normalization/unicode_normalization/index.html">https://unicode-rs.github.io/unicode-normalization/unicode_normalization/index.html</A>
+
+C get its support through the venerable libicu library (you're already using libs for TLS): <A HREF="https://unicode-org.github.io/icu/userguide/transforms/normalization/">https://unicode-org.github.io/icu/userguide/transforms/normalization/</A>
+
+I will say that I don't know of any explicit IRI-handling libraries, nor do I know what the state of support is in different URI-handling libraries, but it will be something I play with as I work on gemini projects. I'm happy to share my experiences when I have more of them. :)
+
+-
+
+To address some non-technical points, I don't think that starting a new protocol and then deciding to ignore internationalization is necessarily the right way to go. In a lot of cases, internationalization sucks because of legacy support, and gemini doesn't *have* legacy to preserve compatibility. As I understand it, that's why TLS is mandatory, even though it arguably locks out some retro systems from being able to use it.
+
+Personally, I'd like to see the spec say something about how this is handled before any type of freeze takes place.
+
+--
+worr
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003882.html">Three possible uses for IRIs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003894.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3891">[ date ]</a>
+              <a href="thread.html#3891">[ thread ]</a>
+              <a href="subject.html#3891">[ subject ]</a>
+              <a href="author.html#3891">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

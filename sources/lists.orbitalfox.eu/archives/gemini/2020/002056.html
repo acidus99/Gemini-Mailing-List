@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Ditching mandatory TLS
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Ditching%20mandatory%20TLS&In-Reply-To=%3C2b0d0c70-7333-8276-ca30-6a3ffcced0fa%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002050.html">
+   <LINK REL="Next"  HREF="002045.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Ditching mandatory TLS</H1>
+    <B>Baschdel</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Ditching%20mandatory%20TLS&In-Reply-To=%3C2b0d0c70-7333-8276-ca30-6a3ffcced0fa%40disroot.org%3E"
+       TITLE="Ditching mandatory TLS">baschdel at disroot.org
+       </A><BR>
+    <I>Sun Jul  5 00:12:45 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002050.html">Ditching mandatory TLS
+</A></li>
+        <LI>Next message (by thread): <A HREF="002045.html">URL/META length
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2056">[ date ]</a>
+              <a href="thread.html#2056">[ thread ]</a>
+              <a href="subject.html#2056">[ subject ]</a>
+              <a href="author.html#2056">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 04.07.20 23:59, solderpunk wrote:
+&gt;<i> TLS is baked in pretty deep.
+</I>
+Someone who implements Gemini over &lt;TLS_alternative&gt; could if that 
+alternative didn't offer anything that can be a drop in replacement for 
+client certificates do a negotiation protocol before doing the usual 
+Gemini request.
+
+That negotiation would probably look something like this:
+
+server sends some data. (That could also be the servers public key and a 
+payload that verifys the servers identity)
+
+client signs it and reply's with the signature and its public key or a 
+well known placeholder that means &quot;no certificate&quot;
+
+(I not even spend two minutes of thinking on this, so don't assume this 
+is THE way to do it)
+
+
+What I want to say is that while not easy it also isn't impossible to 
+replace TLS.
+
+(If that someone wrote a good library for this in C (or at least with a 
+c API) it could be bound to most languages people are already writing 
+Gemini software in (the replacement crypto library has to be ported and 
+clients and servers be extended to handle the new underlying protocol 
+anyway).
+
+
+Just throwing the idea out there, have a nice Evening!
+
+- Baschdel
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002050.html">Ditching mandatory TLS
+</A></li>
+	<LI>Next message (by thread): <A HREF="002045.html">URL/META length
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2056">[ date ]</a>
+              <a href="thread.html#2056">[ thread ]</a>
+              <a href="subject.html#2056">[ subject ]</a>
+              <a href="author.html#2056">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

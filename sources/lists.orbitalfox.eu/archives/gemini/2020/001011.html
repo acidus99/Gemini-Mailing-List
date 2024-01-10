@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client certificate musings
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200524023029.GA39921%40allanon.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001008.html">
+   <LINK REL="Next"  HREF="001012.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client certificate musings</H1>
+    <B>Thomas Karpiniec</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200524023029.GA39921%40allanon.local%3E"
+       TITLE="Client certificate musings">tkarpiniec at icloud.com
+       </A><BR>
+    <I>Sun May 24 03:30:29 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001008.html">Client certificate musings
+</A></li>
+        <LI>Next message (by thread): <A HREF="001012.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1011">[ date ]</a>
+              <a href="thread.html#1011">[ thread ]</a>
+              <a href="subject.html#1011">[ subject ]</a>
+              <a href="author.html#1011">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, May 23, 2020 at 09:57:14PM -0400, Sean Conner wrote:
+&gt;<i> &gt; Or is it because the user will permanently lose access to their
+</I>&gt;<i> &gt; account if they ever lose that key?
+</I>&gt;<i> 
+</I>&gt;<i>   Of if they get logged out and forget the password?  That can happen now,
+</I>&gt;<i> so I don't think it's of much concern.
+</I>
+I don't think these are really the same. Even ignoring the many people
+who remember their passwords (against all good advice) there are well
+established password managers and it's likely that random gemini
+client X will require additional backup work to avoid losing its
+keys. Strong passwords can be easily written down somewhere safe and
+typed in, keys less so.
+
+It also means the only way to share an account between multiple
+devices is to copy the key material across, and coordinate renewals so
+that it is only done once.
+
+&gt;<i> &gt; With this in mind, my current opinion is that there should be no way
+</I>&gt;<i> &gt; for a server to request a non-disposable certificate. 
+</I>&gt;<i> 
+</I>&gt;<i>   I disagree.  I might want to serve up documents to a select few, and I can
+</I>&gt;<i> control that by given them a client certificate to use.
+</I>
+I think I made this statement broader than intended - it makes
+complete sense to support that use case the way it's working now. I
+didn't mean to say we should take that away.
+
+What I meant was in a regular browsing session, where a client and
+server meet each other for the first time, a server would not be able
+to rely on the client having a permanent certificate store. They may
+request (and get) a transient client certificate. They may encourage
+the user to hold onto it. But a server application must assume that
+the same person will need to reauthenticate with a new certificate at
+some point in the future. This would solve both the user-friendliness
+issue, and also the problem of client certificate renewal.
+
+Looking at it another way, suppose it was possible for a long-term
+client key to be generated, negotiated and stored, in-band via the
+gemini protocol. My hope would be that most server applications would
+eschew this in favour of user/pass authentication over transient
+keys. However if setting up a permanent client key became common
+practice (possibly because it's easier) I am worried that we would end
+up in a similar situation to cryptocurrencies where only &quot;hardcore&quot;
+users manage their own key material and others rely on some sort of
+managed service to keep things safe but available to them.
+
+Cheers,
+
+Tom
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001008.html">Client certificate musings
+</A></li>
+	<LI>Next message (by thread): <A HREF="001012.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1011">[ date ]</a>
+              <a href="thread.html#1011">[ thread ]</a>
+              <a href="subject.html#1011">[ subject ]</a>
+              <a href="author.html#1011">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CSRF in Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CSRF%20in%20Gemini&In-Reply-To=%3C20200616112912.3f28c5b0%40phi%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001736.html">
+   <LINK REL="Next"  HREF="001725.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CSRF in Gemini</H1>
+    <B>Francesco Gazzetta</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CSRF%20in%20Gemini&In-Reply-To=%3C20200616112912.3f28c5b0%40phi%3E"
+       TITLE="CSRF in Gemini">fgaz at fgaz.me
+       </A><BR>
+    <I>Tue Jun 16 10:29:12 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001736.html">CSRF in Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="001725.html">CSRF in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1735">[ date ]</a>
+              <a href="thread.html#1735">[ thread ]</a>
+              <a href="subject.html#1735">[ subject ]</a>
+              <a href="author.html#1735">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, 15 Jun 2020 17:05:33 +0200
+Felix Quei&#223;ner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">felix at masterq32.de</A>&gt; wrote:
+
+&gt;<i> I think one solution would be to force clients to remove queries from
+</I>&gt;<i> all URLs. It's not a really elegant solution and makes CGI stuff
+</I>&gt;<i> harder to implement, but will prevent a lot of URL-fuckery.
+</I>
+That coul be a good and clean solution, if we get microbotany, gus, etc
+to move the stuff they put in the query to a path fragment. Too bad
+this means that it's no longer possible to use cgi for that stuff.
+
+&gt;<i> While writing this, i got the following idea (which seams reasonable
+</I>&gt;<i> to me): Specify that a response to INPUT MUST be passed with a
+</I>&gt;<i> query-parameter &quot;?input=&#8230;&quot; where &quot;&#8230;&quot; is the data from the user. The
+</I>&gt;<i> data is fully urlencoded with all forbidden characters(space,?,=,&#8230;)
+</I>&gt;<i> replaced with their percent-encoding.
+</I>&gt;<i> 
+</I>&gt;<i> Also specify that clients SHOULD remove the &quot;input&quot;-parameter between
+</I>&gt;<i> redirects and in documents using the gemini-scheme.
+</I>
+Less clean, but preserves cgi functionality and it's stateless! I like
+this
+
+&gt;<i> This allows us to prevent passing accidential or malicious data via
+</I>&gt;<i> redirects, but doesn't help against a spam-bot that targets a site
+</I>&gt;<i> directly. It also makes client implementation a bit harder.
+</I>
+Eh, the spam problem is a problem on its own anyway, and I probably
+should have made a different example in my article.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001736.html">CSRF in Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="001725.html">CSRF in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1735">[ date ]</a>
+              <a href="thread.html#1735">[ thread ]</a>
+              <a href="subject.html#1735">[ subject ]</a>
+              <a href="author.html#1735">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

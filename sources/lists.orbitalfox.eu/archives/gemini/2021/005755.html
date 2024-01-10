@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Alt text and media types for preformatted text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Alt%20text%20and%20media%20types%20for%20preformatted%20text&In-Reply-To=%3Ca8ec9e0d-6cd6-c013-01fa-d3307f68d435%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005732.html">
+   <LINK REL="Next"  HREF="005765.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Alt text and media types for preformatted text</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Alt%20text%20and%20media%20types%20for%20preformatted%20text&In-Reply-To=%3Ca8ec9e0d-6cd6-c013-01fa-d3307f68d435%40marmaladefoo.com%3E"
+       TITLE="Alt text and media types for preformatted text">luke at marmaladefoo.com
+       </A><BR>
+    <I>Sun Feb 28 20:41:05 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005732.html">Alt text and media types for preformatted text
+</A></li>
+        <LI>Next message (by thread): <A HREF="005765.html">Alt text and media types for preformatted text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5755">[ date ]</a>
+              <a href="thread.html#5755">[ thread ]</a>
+              <a href="subject.html#5755">[ subject ]</a>
+              <a href="author.html#5755">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+On 28-Feb-2021 14:32, Caolan McMahon wrote:
+&gt;<i> Hello all,
+</I>&gt;<i>
+</I>&gt;<i> This is in response to the various alt-text / content type suggestions floating around.
+</I>&gt;<i>
+</I>&gt;<i> I'm uncomfortable with inventing a new syntax to combine these two pieces of data for two reasons. First, new syntax complicates the spec. Second, any ambiguity will reduce the usefulness both to a client.
+</I>&gt;<i>
+</I>&gt;<i> Ideally, the two would be separate. Most suggestions I've seen so far were to follow the opening ``` of a preformatted block with a mix of this data. However, there is also the option of adding data after the closing ``` marker, keeping the two separate.
+</I>I think this is a sensible way to disentangle these two concerns that 
+are covered by the spec. At present these two aspects are merged 
+together which means it is hard to write any client code to reliably 
+provide any UI to assist the user beyond all or nothing, or a text label.
+
+We had some discussion on this list a while back on some of this, and it 
+seems making use of the opening and closing marker was already proposed 
+by Sean Conner
+
+<A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/002671.html">https://lists.orbitalfox.eu/archives/gemini/2020/002671.html</A>
+
+linking on to:
+
+<A HREF="gemini://gemini.conman.org/test/preformat.gemini">gemini://gemini.conman.org/test/preformat.gemini</A>
+
+and
+
+<A HREF="gemini://gemini.conman.org/test/preformat-2.gemini">gemini://gemini.conman.org/test/preformat-2.gemini</A>
+&gt;<i> My suggestion would be to place type information after the opening ```, and alt-text after the closing ```, for the following reasons:
+</I>&gt;<i>
+</I>&gt;<i> 1. Even for accessibility, I suspect knowing the content type is more practically useful to the client in the majority of existing cases. Most ASCII art is purely decoration, and knowing the content type is text/x-ascii (or similar) upfront is important so the screen reader can simply skip it.
+</I>&gt;<i> 2. Knowing the content type upfront would allow clients to present streaming data correctly using appropriate colours and escape codes for code highlighting, for example.
+</I>&gt;<i> 3. Placing the content type after the opening ``` line is familar to markdown authors, which is not a reason in itself, but a welcome bonus nonetheless.
+</I>&gt;<i> 4. Placing the alt text after the closing ```, at the end of the preformatted block has a nice symmetry with links which place the human-friendly text at the end too.
+</I>
+Something very close to this was the scheme proposed by Sean in the 
+preformat-2 example:
+
+I don't have a strong view on which should be used for the top and which 
+for the bottom, I'd just be glad to see the roles clearly separated to 
+support both use cases presented in the spec.
+
+ From a parsing point of view I see the benefits in putting the text 
+type first as you indicate. There is an argument perhaps to put the alt 
+text first which is perhaps that so far the use of this label is mostly 
+free form so legacy content would map better to the human alt text 
+accessibility label.
+
+&gt;<i> For now, I have no opinion on the format of content type labels.
+</I>Given the label is of a text area, we could simply say one can use any 
+&quot;sub type&quot; of text media type, so a single word would be text/*
+
+javascript (means text/javascript)
+csv (means text/csv)
+lua (means text/lua)
+
+and so on. This would be my preference.
+
+Or optionally provide a proper media type if you want (e.g. 
+application/atom+xml)
+
+ &#160;- Luke
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005732.html">Alt text and media types for preformatted text
+</A></li>
+	<LI>Next message (by thread): <A HREF="005765.html">Alt text and media types for preformatted text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5755">[ date ]</a>
+              <a href="thread.html#5755">[ thread ]</a>
+              <a href="subject.html#5755">[ subject ]</a>
+              <a href="author.html#5755">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

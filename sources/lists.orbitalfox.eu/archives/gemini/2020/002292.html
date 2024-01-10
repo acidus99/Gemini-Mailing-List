@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Username/password authentication strategy
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Username/password%20authentication%20strategy&In-Reply-To=%3CC4CHDCP3U13Q.3AKQH0I8PA045%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002288.html">
+   <LINK REL="Next"  HREF="002293.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Username/password authentication strategy</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Username/password%20authentication%20strategy&In-Reply-To=%3CC4CHDCP3U13Q.3AKQH0I8PA045%40stilgar%3E"
+       TITLE="Username/password authentication strategy">solderpunk at posteo.net
+       </A><BR>
+    <I>Tue Jul 21 18:33:24 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002288.html">Username/password authentication strategy
+</A></li>
+        <LI>Next message (by thread): <A HREF="002293.html">Username/password authentication strategy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2292">[ date ]</a>
+              <a href="thread.html#2292">[ thread ]</a>
+              <a href="subject.html#2292">[ subject ]</a>
+              <a href="author.html#2292">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon Jul 20, 2020 at 11:27 PM CEST, Peter Vernigorov wrote:
+
+&gt;<i> But I think the bigger problem is that now I need to store usernames,
+</I>&gt;<i> pins,
+</I>&gt;<i> all of user&#8217;s cert fingerprints and their first seen and last seen
+</I>&gt;<i> dates, I
+</I>&gt;<i> would need to build an interface to delete old/lost fingerprints, etc.
+</I>
+Combining username/password authentication with multiple simultaneous,
+long-lived certificates seems like a maximum-complexity approach to me
+and I'm not sure there's much to be gained from it.
+
+If you want something light and simple using usernames and passwords, it
+makes sense to me to inform the user to generate a short-lived
+certificate, to then use a sequence of 10 and 11 status codes to request
+a username and password, and, if they are valid, to mark that
+certificate fingerprint as authorised for that account and at the same
+time immediately deauthorise (and forget about) any and all previous
+certificates used for that account.  A user &quot;logs out&quot; manually by
+deleting the certificate, or else their session naturally expires when
+the certificate's validity period lapses.
+
+I grant you this is less straightforward than HTTP basic auth.
+Multi-user applications with user-friendly interfaces aren't really
+straightforward in Gemini.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002288.html">Username/password authentication strategy
+</A></li>
+	<LI>Next message (by thread): <A HREF="002293.html">Username/password authentication strategy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2292">[ date ]</a>
+              <a href="thread.html#2292">[ thread ]</a>
+              <a href="subject.html#2292">[ subject ]</a>
+              <a href="author.html#2292">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

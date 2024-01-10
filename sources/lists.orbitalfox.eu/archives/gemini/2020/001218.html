@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Ambiguity in unordered list item definition
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Ambiguity%20in%20unordered%20list%20item%20definition&In-Reply-To=%3C20200531100946.GB10707%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001217.html">
+   <LINK REL="Next"  HREF="001219.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Ambiguity in unordered list item definition</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Ambiguity%20in%20unordered%20list%20item%20definition&In-Reply-To=%3C20200531100946.GB10707%40SDF.ORG%3E"
+       TITLE="Ambiguity in unordered list item definition">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Sun May 31 11:09:46 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001217.html">Ambiguity in unordered list item definition
+</A></li>
+        <LI>Next message (by thread): <A HREF="001219.html">Ambiguity in unordered list item definition
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1218">[ date ]</a>
+              <a href="thread.html#1218">[ thread ]</a>
+              <a href="subject.html#1218">[ subject ]</a>
+              <a href="author.html#1218">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, May 31, 2020 at 01:55:26PM +1000, Thomas Karpiniec wrote:
+&gt;<i> Hi,
+</I>&gt;<i> 
+</I>&gt;<i> While testing a GUI text/gemini renderer I noticed that if a line
+</I>&gt;<i> starts with an ASCII-emphasised word like this:
+</I>&gt;<i> 
+</I>&gt;<i> *Great* times are ahead
+</I>&gt;<i> 
+</I>&gt;<i> Then a spec-compliant browser will turn that into a bullet:
+</I>&gt;<i> 
+</I>&gt;<i>  &#8226;  Great* times are ahead
+</I>
+Yeah, I have noticed this too.  It's minor, like you say, but I will
+admit it grates on me.
+
+I guess there are a bunch of things we could do about this.
+
+Solutions that involve changing the spec:
+
+* We could introduce mandatory whitespace before the * character.
+* We could replace * with - for list items.
+
+Solutions that don't involve changing the spec:
+
+* Authors could take care to introduce a leading space before text lines
+  which begin with emphasised words.
+* Geminispace could adopt a convention of emphasising words like _this_
+  instead of like *this* (or any other way not involving *s).
+
+I think if we were starting from scratch I would probably use - instead
+of * for list items.  This maintains some familiarity from Markdown and
+allows *this kind of emphasis* to exist unambiguously alongside
+unordered items.  With the recent explosion of both software and content
+I'm a little reluctant to change this now as it will make (a little,
+yes) work for many people, and chances are good at least half of the
+people who made things excitedly on the first weekend after the HN
+article have now gotten bored and left and won't change anything, so
+we'll end up with long-term visible inconsistencies (which will give
+some people the idea that both * and - are valid, ala Markdown,
+perpetuating the situation).  It would be a shame to do that for the
+sake of something so minor.  Then again, maybe I should be less afraid
+of breaking things.  All the content that exists today will hopefully be
+a small percentage of all the content what will be created...
+
+&gt;<i> I note that this would make it different from the headings, which
+</I>&gt;<i> specify optional whitespace. It would make parsing slightly easier if
+</I>&gt;<i> that whitespace was mandatory here too - as it stands, you must check
+</I>&gt;<i> for &quot;###&quot;, &quot;##&quot; and &quot;#&quot; in that order so as to avoid &quot;###Hello&quot; being
+</I>&gt;<i> a top-level heading of value &quot;##Hello&quot;.
+</I>
+It's true the checking needs to be done in &quot;reverse&quot; order, but I'm not
+sure this is a big problem.  It doesn't need any *more* code than the
+other way around, and it's a pretty obvious mistake to notice and fix if
+people overlook it on their first try.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001217.html">Ambiguity in unordered list item definition
+</A></li>
+	<LI>Next message (by thread): <A HREF="001219.html">Ambiguity in unordered list item definition
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1218">[ date ]</a>
+              <a href="thread.html#1218">[ thread ]</a>
+              <a href="subject.html#1218">[ subject ]</a>
+              <a href="author.html#1218">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

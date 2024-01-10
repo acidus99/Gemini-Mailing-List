@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Crawlers on Gemini and best practices
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Crawlers%20on%20Gemini%20and%20best%20practices&In-Reply-To=%3C20201211082654.GB5933%40sources.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003973.html">
+   <LINK REL="Next"  HREF="004000.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Crawlers on Gemini and best practices</H1>
+    <B>Stephane Bortzmeyer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Crawlers%20on%20Gemini%20and%20best%20practices&In-Reply-To=%3C20201211082654.GB5933%40sources.org%3E"
+       TITLE="Crawlers on Gemini and best practices">stephane at sources.org
+       </A><BR>
+    <I>Fri Dec 11 08:26:54 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003973.html">Crawlers on Gemini and best practices
+</A></li>
+        <LI>Next message (by thread): <A HREF="004000.html">Crawlers on Gemini and best practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3991">[ date ]</a>
+              <a href="thread.html#3991">[ thread ]</a>
+              <a href="subject.html#3991">[ subject ]</a>
+              <a href="author.html#3991">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Dec 10, 2020 at 11:37:34PM +0530,
+ Sudipto Mallick &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">smallick.dev at gmail.com</A>&gt; wrote 
+ a message of 40 lines which said:
+
+&gt;<i> 'bots.txt' for gemini bots and crawlers.
+</I>
+Interesting. The good thing is that it moves away from robots.txt
+(underspecified, full of variants, impossible to know what a good bot
+should do).
+
+&gt;<i> - know who you are: archiver, indexer, feed-reader, researcher etc.
+</I>&gt;<i> - ask for /bots.txt
+</I>&gt;<i> - if 20 text/plain then
+</I>&gt;<i> -- allowed = set()
+</I>&gt;<i> -- denied = set()
+</I>&gt;<i> -- split response by newlines, for each line
+</I>&gt;<i> --- split by spaces and tabs into fields
+</I>&gt;<i> ---- paths = field[0] split by ','
+</I>&gt;<i> ---- if fields[2] is &quot;allowed&quot; and you in field[1] split by ',' then
+</I>&gt;<i> allowed = allowed union paths
+</I>&gt;<i> ----- if field[3] is &quot;but&quot; and field[5] is &quot;denied&quot; and you in
+</I>&gt;<i> field[4] split by ',' then denied = denied union paths
+</I>&gt;<i> ---- if fields[2] is &quot;denied&quot; and you in field[1] split by ',' then
+</I>&gt;<i> denied = denied union paths
+</I>&gt;<i> you always match all, never match none
+</I>&gt;<i> union of paths is special:
+</I>&gt;<i>     { &quot;/a/b&quot; } union { &quot;/a/b/c&quot; } ==&gt; { &quot;/a/b&quot; }
+</I>&gt;<i> 
+</I>&gt;<i> when you request for path, find the longest match from allowed and
+</I>&gt;<i> denied; if it is in allowed you're allowed, otherwise not;; when a
+</I>&gt;<i> tie: undefined behaviour, do what you want.
+</I>
+It seems perfect.
+
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003973.html">Crawlers on Gemini and best practices
+</A></li>
+	<LI>Next message (by thread): <A HREF="004000.html">Crawlers on Gemini and best practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3991">[ date ]</a>
+              <a href="thread.html#3991">[ thread ]</a>
+              <a href="subject.html#3991">[ subject ]</a>
+              <a href="author.html#3991">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

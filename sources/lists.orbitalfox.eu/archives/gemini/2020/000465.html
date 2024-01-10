@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Regarding `gemini://` over NaCL (replacing TLS)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Regarding%20%60gemini%3A//%60%20over%20NaCL%20%28replacing%20TLS%29&In-Reply-To=%3C20200302001842.GC5475%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000458.html">
+   <LINK REL="Next"  HREF="000467.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Regarding `gemini://` over NaCL (replacing TLS)</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Regarding%20%60gemini%3A//%60%20over%20NaCL%20%28replacing%20TLS%29&In-Reply-To=%3C20200302001842.GC5475%40brevard.conman.org%3E"
+       TITLE="Regarding `gemini://` over NaCL (replacing TLS)">sean at conman.org
+       </A><BR>
+    <I>Mon Mar  2 00:18:42 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000458.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+        <LI>Next message (by thread): <A HREF="000467.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#465">[ date ]</a>
+              <a href="thread.html#465">[ thread ]</a>
+              <a href="subject.html#465">[ subject ]</a>
+              <a href="author.html#465">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Ciprian Dorin Craciun once stated:
+&gt;<i> So I've taken Sean Conner advice and implemented a proof-of-concept
+</I>&gt;<i> client and server (only the protocol, transport and crypto part, not
+</I>&gt;<i> the actual file serving) in Python by replacing TLS with NaCL /
+</I>&gt;<i> `libsodium`.
+</I>
+  Wow.  For that I thank you.  Now there's something to actually look at. I
+do have a few questions about the code as I'm looking over it.  Prepare for
+lots of questions.  I had them for solderpunk as well.
+
+1) I assume the 32-bit length is sent bigendian (if I understand the
+argument to struct.pack() and struct.unpack() correctly---I'm not a Python
+programmer).  Why big endian?  99% of all computers on the Internet today is
+little endian (x86) so it seems to me that sending it little endian would be
+better.  [1][2]
+
+2) As I feared, this requires a more complicated implementation.  solderpunk
+wanted a protocol that could be implemented quickly and while TLS might be a
+bad protocol, it at least has the feature of being widely available and
+largly transparent if done correctly (like libtls, part of LibreSSL, does). 
+It handles not only the crypo portion, but the framing of data (invisibly to
+the rest of the application).  To tell the truth, I don't know the actual
+bytes of the TLS portion of the protcol as that is handled for me.
+
+  In fact, that's part of why HTTPS was so successful---it doesn't change
+the HTTP protocol at all.  It just slips in between TCP and HTTP and is
+transparent to both.
+
+  [ snip ]
+
+&gt;<i> I hope I haven't made too many mistakes, and I hope this is useful as
+</I>&gt;<i> a proof-of-concept that one could replace TLS for such simpler
+</I>&gt;<i> protocols,
+</I>
+  I know that given the self-sign certificate nature of Gemini decreases
+security a bit (TOFU and all that), not *all* Gemini servers are using
+self-signed certificates.  There's at least two that I know of that use
+actual signed certificates (from Let's Encrypt), and for my own server, I
+use a signed certificate from my own CA (technically, the certificate isn't
+self-signed, but the CA is self-certificed).  With a signed certificate, you
+get *some* assurance that the server you are talking to is the server you
+expect to be talking to, but it's still, technically, subject to a MITM
+attack (either at the corporate level, or at the state level---it's way less
+likely to come from some random hacker).
+
+  What's still missing from your proof-of-concept though, is support for
+client certificates.  Yes, you have the &quot;transient&quot; stuff working, but for
+my Gemini server, I have a second that is unavailable unless you have a
+signed certificate from me.  Send in a certificate request, I generate the
+certificate and send that back, and you can access the sooperseecret portion
+of my site [3] (no one has done that yet; then again, I haven't exactly
+advertised that I would do that either).
+
+  This way, I can control who has access to what on my Gemini server in a
+mostly stateless way (I don't have to maintain a database of userids and
+passwords, just pass out certificates which can be revoked if needed, and
+will expire after a period of my choosing).  Yes, that complicated *my* end,
+and may complicate a client that wants to support that, but it doesn't
+complicate the *protocol* at all---TLS provides all the machinery for that.
+
+  I'm still going over your code, but I'm not sure I can run it.  For one, I
+don't know which version of Python (I know there are major differences
+between 2 and 3 and I think I only have 2.something---I don't program in
+Python) and I don't have libsodium install (but I do have NaCL).  But again,
+I thank you for doing this work and giving us something tangible to look at
+and run.
+
+  -spc
+
+[1]	Okay, I happen to agree with the big endian choice, but that's
+	because I'm biased---binary based Internet protocols are all big
+	endian, and I have a soft spot for the Motorola CPUs of past.  I've
+	never been a fan of little endian personally.
+
+[2]	I'm also asking to reflect back to you the same argument you
+	presented with using CRLF.  Your big endian choice seems to be
+	&quot;because that's how all Internet protocols do it&quot;.
+
+[3]	<A HREF="gemini://gemini.conman.org/conman-labs-private/">gemini://gemini.conman.org/conman-labs-private/</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000458.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+	<LI>Next message (by thread): <A HREF="000467.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#465">[ date ]</a>
+              <a href="thread.html#465">[ thread ]</a>
+              <a href="subject.html#465">[ subject ]</a>
+              <a href="author.html#465">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

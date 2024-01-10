@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Does TOFU actually work?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Does%20TOFU%20actually%20work%3F&In-Reply-To=%3C20201128152344.GA30577%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003691.html">
+   <LINK REL="Next"  HREF="003626.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Does TOFU actually work?</H1>
+    <B>marc</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Does%20TOFU%20actually%20work%3F&In-Reply-To=%3C20201128152344.GA30577%40localhost.localdomain%3E"
+       TITLE="Does TOFU actually work?">marcx2 at welz.org.za
+       </A><BR>
+    <I>Sat Nov 28 15:23:44 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003691.html">Does TOFU actually work?
+</A></li>
+        <LI>Next message (by thread): <A HREF="003626.html">Standard fingerprint format for TLS certificates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3622">[ date ]</a>
+              <a href="thread.html#3622">[ thread ]</a>
+              <a href="subject.html#3622">[ subject ]</a>
+              <a href="author.html#3622">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Hi,
+</I>
+Hello
+
+&gt;<i> I wanted to set up my own Gemini server today. I think I got MITM-attacked
+</I>&gt;<i> by China.
+</I>
+snip
+
+&gt;<i> I am in Vilnius, Lithuania. My IP is in this range:
+</I>&gt;<i> inetnum:?????????????? 78.59.128.0 - 78.59.255.255
+</I>
+snip
+
+&gt;<i> 36.130.78.59 naujenai.lt /?? 57ms?????? 39 20 text/gemini
+</I>&gt;<i> 154.170.78.59 naujenai.lt /test.gmi?? 67ms???????? 0 51 Not found
+</I>
+So we can't blame the PRC on this. It is a bug in
+gmnisrv. I mailed Drew the following in September, but
+it seems my fix got ignored. I suppose it only affects 
+certain architectures, and only ipv4. What is happening
+is that the address decoding routine input is shifted 
+by 2bytes, hence your 78.59 appears in the wrong place, and 
+the first two bytes are bogus. 
+
+Your general point about TOFU/MITM still stands though. 
+We can reduce the risk by not expiring keys, and by
+maybe showing fingerprints in the browser, in 
+various caches and maybe even in the links occasionally.
+
+&gt;<i> I noticed on some platforms the logging logic for the
+</I>&gt;<i> server (log.c:23) uses addr-&gt;sa_data which is not aligned,
+</I>&gt;<i> as the short is only 2 bytes long, and the char[] happens
+</I>&gt;<i> immediately after that:
+</I>&gt;<i> 
+</I>&gt;<i>     eg addr=0xb6e01014, fam=0xb6e01014, data=0xb6e01016
+</I>&gt;<i> 
+</I>&gt;<i> and so doesn't map directly on to the address structure.
+</I>&gt;<i> I solved this with a horrible
+</I>&gt;<i> 
+</I>&gt;<i>     const char *addrs = inet_ntop(addr-&gt;sa_family, (void *)&amp;(((struct sockaddr_in *)addr)-&gt;sin_addr), abuf, sizeof(abuf));
+</I>
+For completeness, the proper fix would involve doing a 
+switch on sa_family, and grabbing the proper location 
+on a per address family basis - things that a type safe
+language would have insisted on, but which C (a very
+sharp tool requires sharp users) allows us to bypass.
+
+regards
+
+marc
+
+PS: Comments from the peanut gallery advocating for a 
+newer language are of course wrong. C is still the better 
+choice ;-) I suspect Emilis test system doesn't have enough
+RAM to be even supported by some shinier runtimes, nevermind
+the CPU architecture...
+
+-- CC-SA
+</PRE>
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003691.html">Does TOFU actually work?
+</A></li>
+	<LI>Next message (by thread): <A HREF="003626.html">Standard fingerprint format for TLS certificates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3622">[ date ]</a>
+              <a href="thread.html#3622">[ thread ]</a>
+              <a href="subject.html#3622">[ subject ]</a>
+              <a href="author.html#3622">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

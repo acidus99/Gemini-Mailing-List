@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] reverse proxy gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20reverse%20proxy%20gemini&In-Reply-To=%3C86f1890e-e6a0-4240-b890-ede00199aa20%40www.fastmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005393.html">
+   <LINK REL="Next"  HREF="005402.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] reverse proxy gemini</H1>
+    <B>Dave Cottlehuber</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20reverse%20proxy%20gemini&In-Reply-To=%3C86f1890e-e6a0-4240-b890-ede00199aa20%40www.fastmail.com%3E"
+       TITLE="[tech] reverse proxy gemini">dch at skunkwerks.at
+       </A><BR>
+    <I>Sun Feb 21 11:27:52 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005393.html">[tech] reverse proxy gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="005402.html">[tech] reverse proxy gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5394">[ date ]</a>
+              <a href="thread.html#5394">[ thread ]</a>
+              <a href="subject.html#5394">[ subject ]</a>
+              <a href="author.html#5394">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, 21 Feb 2021, at 09:40, Vincent A. wrote:
+&gt;<i> Hello,
+</I>&gt;<i> 
+</I>&gt;<i> My curiosity about Gemini lead me to think about how to host easily many
+</I>&gt;<i> different domain on the same server.
+</I>&gt;<i>
+</I>&gt;<i> Deploying a single hostname is ok. But I'm wondering how to deploy many
+</I>&gt;<i> hostnames using the same public IP(v4) address. With HTTP we are used to
+</I>&gt;<i> deploy a reverse proxy (nginx, haproxy, traefik...). It allowes then to
+</I>&gt;<i> split traffic based on the DNS name requested in the &quot;Host&quot; header.
+</I>
+With modern TLS, we use &quot;Server Name Indication&quot; to accommodate this. 
+The client stuffs the requested domain name into the TLS negotiation's
+ClientHello.
+
+&gt;<i>From the gemini spec:
+</I>
+4 TLS
+
+Use of TLS for Gemini transactions is mandatory. Use of the Server Name
+Indication (SNI) extension to TLS is also mandatory, to facilitate name-based
+virtual hosting. 
+
+See <A HREF="https://en.wikipedia.org/wiki/Server_Name_Indication">https://en.wikipedia.org/wiki/Server_Name_Indication</A> &amp; <A HREF="https://tools.ietf.org/html/rfc6066">https://tools.ietf.org/html/rfc6066</A> for more details.
+
+A+
+Dave
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005393.html">[tech] reverse proxy gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="005402.html">[tech] reverse proxy gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5394">[ date ]</a>
+              <a href="thread.html#5394">[ thread ]</a>
+              <a href="subject.html#5394">[ subject ]</a>
+              <a href="author.html#5394">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

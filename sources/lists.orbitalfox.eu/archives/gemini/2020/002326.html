@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPECS text/gemini] Heading lines proposal
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPECS%20text/gemini%5D%20Heading%20lines%20proposal&In-Reply-To=%3CCALRCexuToavQ0rkug4Yd%3Dkpz%2BNNXSnZEh02i_955RW_OF7_1gA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002323.html">
+   <LINK REL="Next"  HREF="002328.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPECS text/gemini] Heading lines proposal</H1>
+    <B>Mad Ogrit</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPECS%20text/gemini%5D%20Heading%20lines%20proposal&In-Reply-To=%3CCALRCexuToavQ0rkug4Yd%3Dkpz%2BNNXSnZEh02i_955RW_OF7_1gA%40mail.gmail.com%3E"
+       TITLE="[SPECS text/gemini] Heading lines proposal">madogrit0 at gmail.com
+       </A><BR>
+    <I>Fri Jul 24 15:14:17 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002323.html">[SPECS text/gemini] Heading lines proposal
+</A></li>
+        <LI>Next message (by thread): <A HREF="002328.html">[SPECS text/gemini] Heading lines proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2326">[ date ]</a>
+              <a href="thread.html#2326">[ thread ]</a>
+              <a href="subject.html#2326">[ subject ]</a>
+              <a href="author.html#2326">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Jul 23, 2020, 8:44 PM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+
+&gt;<i> It was thus said that the Great Mad Ogrit once stated:
+</I>&gt;<i> &gt; Requiring a space for structural formatting seems wise. I don't believe
+</I>&gt;<i> the
+</I>&gt;<i> &gt; proposal implied that navigational formatting (=&gt;) would require one.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; But regarding quotes, although the &gt; prefix may be visually familiar from
+</I>&gt;<i> &gt; text threads its use is inconsistent at best with regard to space before
+</I>&gt;<i> or
+</I>&gt;<i> &gt; after. Requiring a space will definitely break multiply-nested multi-line
+</I>&gt;<i> &gt; things (or make them redundant).
+</I>&gt;<i>
+</I>&gt;<i>   The gemtext spec doesn't allow nesting at all, so multply-nested
+</I>&gt;<i> multi-line things are already a problem (as I found out when trying to
+</I>&gt;<i> convert HTML to gemtext).
+</I>&gt;<i>
+</I>
+Right, so unless I'm willing to manually clean up copy-pasted material I
+end up with a bunch of individual lines treated as quote lines that then
+also contain superfluous text like &gt;&gt;&gt;, &gt;&gt; &gt; &gt;, and &gt;|&gt;&gt;|.
+
+&gt;<i>
+</I>&gt;<i> &gt; Which brings me to... If quotes are only meant for a single depth, but
+</I>&gt;<i> &gt; represent semantic rather than structural formatting (sourced content,
+</I>&gt;<i> &gt; could reasonably have an author or other meaningful attribution), would
+</I>&gt;<i> it
+</I>&gt;<i> &gt; make more sense to treat them like preformatted lines (line toggled) and
+</I>&gt;<i> &gt; retire the prefix entirely?
+</I>&gt;<i>
+</I>&gt;<i>   No.  My blog (phlog, gemlog) makes extensive use of both &lt;BLOCKQUOTE&gt; and
+</I>&gt;<i> &lt;PRE&gt; tags.  For instance this post from last year:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+Sorry, I think I was being imprecise. I wasn't proposing to not support
+quotes as a separate concept from pre, but rather add an additional line
+toggle, eg ___ or something unlikely to appear in nominal plaintext, which
+would be handled in the same manner as pre - a toggle for blockquote,
+allowing for things like:
+
+So I tried
+```lang=go
+func primes ()...
+```
+But Hofstadter's paper said
+___src=<A HREF="gemini://princip.ia/hoff.gmi?335">gemini://princip.ia/hoff.gmi?335</A>
+Remember to add a terminal case like
+```lang=python
+def isPrime()...
+```
+___
+
+(The src= is just a silly example and definitely serves a different purpose
+than lang=)
+
+Of course, you made me realize this would significantly complicate the
+toggle approach in the case of unmatched toggles overlapping and the
+inevitable nesting of alternating toggles.
+
+Come to think of it, I assume that pasting gemtext containing pre inside of
+pre toggles would still require some manual editing, for instance to add
+white space before the embedded pre. I'm guessing this is why nesting of
+any kind is not supported :-)
+
+I haven't fully grokked the archives yet so this may have already been
+discussed.
+
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>   True.  Trying to quote preformatted text is not easy with gemtext.
+</I>&gt;<i> That's
+</I>&gt;<i> one of the reasons I still prefer HTML (which Gemini *can* serve, by the
+</I>&gt;<i> way)
+</I>&gt;<i>
+</I>
+My hope with supporting and popularizing gemtext is specifically to
+counteract the ways in which HTML has become very easy to make very
+inaccessible - even just the semantics of layout and flow. I'm in it to
+make and support an accessible client with font sizes I can read /
+screen-read no matter what the content is :)
+
+Even markdown, as many things do, has become just this side of easy to make
+hard to read and hard to make easy to edit and copy paste universally, so I
+do really value the notion of an intrinsic format that is easy to
+understand and reliably forward only parse-able.
+
+I originally felt the line toggle approach seemed like an odd burden on the
+client given the simplicity and line orientedness of the rest of the
+format, but I recognize it has the benefit of not requiring an an author to
+touch up content, reducing the barrier to entry of copy paste or generally
+including things that are otherwise hard to reformat (eg turn a funky table
+into tsv and dump it in pre).
+
+Obviously, the above silly example could just be decomposed into a single
+quote line, a single pre-block, and a link. But doing that requires the
+person composing this text to think about and do that decomposition
+possibly from text that they are simply copy pasting an existing pre-block
+in existing  gemtext.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200724/5993b2de/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200724/5993b2de/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002323.html">[SPECS text/gemini] Heading lines proposal
+</A></li>
+	<LI>Next message (by thread): <A HREF="002328.html">[SPECS text/gemini] Heading lines proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2326">[ date ]</a>
+              <a href="thread.html#2326">[ thread ]</a>
+              <a href="subject.html#2326">[ subject ]</a>
+              <a href="author.html#2326">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

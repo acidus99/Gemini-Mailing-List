@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] IRIs, IDNs, and all that international jazz
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3C24B27595-8591-49DD-ACA1-A89859D6258E%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004443.html">
+   <LINK REL="Next"  HREF="004266.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] IRIs, IDNs, and all that international jazz</H1>
+    <B>Petite Abeille</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3C24B27595-8591-49DD-ACA1-A89859D6258E%40gmail.com%3E"
+       TITLE="[spec] IRIs, IDNs, and all that international jazz">petite.abeille at gmail.com
+       </A><BR>
+    <I>Sun Dec 27 01:40:37 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004443.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+        <LI>Next message (by thread): <A HREF="004266.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4444">[ date ]</a>
+              <a href="thread.html#4444">[ thread ]</a>
+              <a href="subject.html#4444">[ subject ]</a>
+              <a href="author.html#4444">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+&gt;<i> On Dec 27, 2020, at 02:19, Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i>  I meant:  If I gave your URL parsers the string
+</I>&gt;<i> 
+</I>&gt;<i> 	Research/A%2fB%20Testing/Results
+</I>&gt;<i> 
+</I>&gt;<i> what would I, as a user, get back?  Would I get a string back?  An array of
+</I>&gt;<i> segments?  An actual example would be be nice.
+</I>
+Ultimately, a list of path segments, yes. Similar to your first (correct) example. With both an absolute and directory indicator.
+
+In the case above, 3 segments. Not absolute, not a directory. These segments are then decoded to whatever string they represents, i.e. segment[ 2 ] would contain the string &quot;A/B Testing&quot;. As originally provided. The URL can always round trip. If not, something is very wrong.
+
+The same problematic applies, to, say, representing an URL in an URL.
+
+So, given the following path segments, &quot;cache&quot;, &quot;<A HREF="gemini://host/path">gemini://host/path</A>&quot;, and &quot;content&quot;, the resulting path should be:
+
+cache/gemini%3A%2F%2Fhost%2Fpath/content
+
+And not:
+
+cache%2Fgemini%3A%2F%2Fhost%2Fpath%2Fcontent
+
+Which is clearly nonsensical.
+
+&gt;<i> Ah.  See, I haven't needed that much functionality yet (and I suspect I
+</I>&gt;<i> could use my email parsers for that if I really needed it).
+</I>
+Yes, email.lua would handle a message/rfc822 part. It's a start :)
+
+<A HREF="https://github.com/spc476/LPeg-Parsers/blob/master/email.lua">https://github.com/spc476/LPeg-Parsers/blob/master/email.lua</A>
+
+
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004443.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+	<LI>Next message (by thread): <A HREF="004266.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4444">[ date ]</a>
+              <a href="thread.html#4444">[ thread ]</a>
+              <a href="subject.html#4444">[ subject ]</a>
+              <a href="author.html#4444">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

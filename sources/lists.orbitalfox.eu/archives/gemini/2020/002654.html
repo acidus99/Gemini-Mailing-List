@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Gemini proxy image display
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20proxy%20image%20display&In-Reply-To=%3C8f4e543f-859f-3c27-68cf-69f3dc08cbc4%40leveck.us%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002644.html">
+   <LINK REL="Next"  HREF="002666.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Gemini proxy image display</H1>
+    <B>Mr. Leveck</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20proxy%20image%20display&In-Reply-To=%3C8f4e543f-859f-3c27-68cf-69f3dc08cbc4%40leveck.us%3E"
+       TITLE="Gemini proxy image display">leveck at leveck.us
+       </A><BR>
+    <I>Thu Sep 10 20:08:27 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002644.html">Gemini proxy image display
+</A></li>
+        <LI>Next message (by thread): <A HREF="002666.html">HTML as an escape hatch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2654">[ date ]</a>
+              <a href="thread.html#2654">[ thread ]</a>
+              <a href="subject.html#2654">[ subject ]</a>
+              <a href="author.html#2654">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 9/10/20 11:50 AM, Mr. Leveck wrote:
+&gt;<i> On 9/10/20 11:38 AM, Charles E. Lehner wrote:
+</I>&gt;&gt;<i> Mr. Leveck,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I looked into it more, comparing this broken image:
+</I>&gt;&gt;<i> <A HREF="https://leveck.us/gemini/1436.ninja/the_servers.png">https://leveck.us/gemini/1436.ninja/the_servers.png</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> with the good original:
+</I>&gt;&gt;<i> <A HREF="gemini://1436.ninja/the_servers.png">gemini://1436.ninja/the_servers.png</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> The proxied one has this header &quot;&lt;!-- GEMINI! --&gt;&lt;!-- 
+</I>&gt;&gt;<i> 1436.ninja/the_servers.png --&gt;&lt;!-- 192.168.0.45 --&gt;&quot;. That breaks the 
+</I>&gt;&gt;<i> image. Also, in the content at byte 24576 (0x6000), the files diverge. 
+</I>&gt;&gt;<i> The proxied one seems to restart sending the PNG image there, with 
+</I>&gt;&gt;<i> some bytes missing. Maybe a variable is incorrectly set in your code?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Charles
+</I>
+This led me to it. Thank you very much!
+
+New code:
+
+status = stream_get_line($socket,512,&quot;\r\n&quot;);
+content = stream_get_contents($socket);
+
+The first line strips off 512 bytes, or until \r\n is encountered. The 
+second is much better for my intended use than fread at acquiring the 
+rest. Binary files now work.
+
+Now I need to iron out some other things like relative URLs...
+
+-- 
+jynx
+<A HREF="gopher://1436.ninja">gopher://1436.ninja</A>
+<A HREF="gemini://1436.ninja/">gemini://1436.ninja/</A>
+<A HREF="https://leveck.us">https://leveck.us</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002644.html">Gemini proxy image display
+</A></li>
+	<LI>Next message (by thread): <A HREF="002666.html">HTML as an escape hatch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2654">[ date ]</a>
+              <a href="thread.html#2654">[ thread ]</a>
+              <a href="subject.html#2654">[ subject ]</a>
+              <a href="author.html#2654">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

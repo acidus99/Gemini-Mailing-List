@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client certificates
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificates&In-Reply-To=%3Ced75980b1a96f14472c6697ad585e239f9463899.camel%40gnu.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000529.html">
+   <LINK REL="Next"  HREF="000530.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client certificates</H1>
+    <B>Alex Schroeder</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificates&In-Reply-To=%3Ced75980b1a96f14472c6697ad585e239f9463899.camel%40gnu.org%3E"
+       TITLE="Client certificates">alex at gnu.org
+       </A><BR>
+    <I>Fri Jul 17 10:24:42 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000529.html">Client certificates
+</A></li>
+        <LI>Next message (by thread): <A HREF="000530.html">Gemini mentioned on Hacker News and Lobsters
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2227">[ date ]</a>
+              <a href="thread.html#2227">[ thread ]</a>
+              <a href="subject.html#2227">[ subject ]</a>
+              <a href="author.html#2227">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>People on the #gemini IRC channel and on Mastodon might have seen me
+struggle with client certificates on the server side and it occured to
+me that I didn't post my solution to the list so here it is.
+
+Background: I'm using Perl, with a library that uses OpenSSL bindings
+in the background, so as you dig deeper, you soon end up reading the
+OpenSSL documentation...
+
+Longer write-up:
+<A HREF="gemini://alexschroeder.ch/page/2020-07-">gemini://alexschroeder.ch/page/2020-07-</A>
+13_Client_Certificates_and_IO%3A%3ASocket%3A%3ASSL_%28Perl%29
+
+Short version:
+
+In the TOFU world, the default OpenSSL setup doesn't quite work. The
+default is that clients don't send their client certificates to the
+server unless the server asks for them during the handshake. In the
+OpenSSL world, the server can be told to do this by telling it to
+verify the client certificate. When you do that, the server will then
+reject the connection because the client certificate is self-signed. In
+order to force the server to still accept it, you need to provide your
+own verification callback which simply returns 1 for all certificates
+in the chain of certificates the client presents you with.
+
+&quot;SSL_set_verify() sets the verification flags for ssl to be mode and
+specifies the verify_callback function to be used. If no callback
+function shall be specified, the NULL pointer can be used for
+verify_callback. In this case last verify_callback set specifically for
+this ssl remains.&quot;
+<A HREF="https://www.openssl.org/docs/manmaster/man3/SSL_set_verify.html">https://www.openssl.org/docs/manmaster/man3/SSL_set_verify.html</A>
+
+Keywords to look for in your SSL or TLS library's documentation are
+&quot;peer verification&quot;, &quot;verification mode&quot;, &quot;verification callback&quot;, etc.
+
+Once you have all that, then you can get the fingerprint of the client
+cert on the server side and compare it to the list of fingerprints you
+know (if you're trying to only allow some people access), or save the
+combination of fingerprint and common name in your database if you want
+to create an account (like astrobotany does), or send a 60 code back if
+there is no certificate, or a 61 code if the fingerprint doesn't match
+anything in your database, or a 62 if you decide to do further tests
+such as checking the validity start date or the expiry date of the
+client certificate.
+
+Hope that helps somebody
+Cheers
+Alex
+
+
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000529.html">Client certificates
+</A></li>
+	<LI>Next message (by thread): <A HREF="000530.html">Gemini mentioned on Hacker News and Lobsters
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2227">[ date ]</a>
+              <a href="thread.html#2227">[ thread ]</a>
+              <a href="subject.html#2227">[ subject ]</a>
+              <a href="author.html#2227">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

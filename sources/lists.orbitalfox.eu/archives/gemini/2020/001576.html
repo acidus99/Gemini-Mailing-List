@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3C20200612094112.GA6497%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001575.html">
+   <LINK REL="Next"  HREF="001577.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3C20200612094112.GA6497%40SDF.ORG%3E"
+       TITLE="CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Fri Jun 12 10:41:12 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001575.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+        <LI>Next message (by thread): <A HREF="001577.html">What is Gemini - a video by me
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1576">[ date ]</a>
+              <a href="thread.html#1576">[ thread ]</a>
+              <a href="subject.html#1576">[ subject ]</a>
+              <a href="author.html#1576">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Jun 12, 2020 at 08:13:28AM +0000, defdefred wrote:
+&gt;<i> Maybe adding version for whole gemini protocol ?
+</I>
+I am fairly staunchly against this, and always have been.  I'm not sure
+how popular a stance it is.  In my mind, having protocol versions which
+are signalled in-band is just an invitation to endlessly upgrade over
+time, and completely defeats the point of all the efforts to limit
+extensibility.
+
+I strongly believe that the computing world in general could really
+benefit from a healthy dose of the attitude that &quot;things should be
+allowed to be finished&quot;.
+
+I am hopeful that Gemini is simple enough that we can &quot;get it right&quot;, or
+right enough, the first time and then just enjoy building stuff within
+whatever limitations it imposes forever after.  Gopher is more than 25
+years old and people are still using it with very few changes to the
+official spec.  I don't see why we can't hope for similar longevity.
+Some of Gopher's biggest problems stem just from the fact that it was
+born very early - before URIs were invented and before
+internationalisation was taken seriously.  Had Gopher been born just a
+little later (or had those early major disruptions happened just a
+little sooner), it might be being used *exactly* as specced today (well,
+the `i` item type would probably still have evolved).
+
+Gopher's item types have not aged well, but we are using MIME types
+instead, which are extensible and therefore likely to be usable for the
+forseeable future.
+
+Exciting new internet protocols might gain major traction in the future,
+but it's a very safe bet they will come with URI schemes, so Gemini will
+be able to link to them, no problem.
+
+If there are major happenings in the cryptographic landscape, it is
+reasonable to expect new versions of TLS to address that for the
+forseeable future, and Gemini will come along for the ride.
+
+At the end of the day, the basic problems we are trying to solve are not
+difficult and have not changed for a long time.  Good solutions to these
+problems should have long lifespans.  Constant upgrades are a sign of
+bad solutions, or excessive ambition / scope creep: HTTP/2 has only come
+along because people are convinced that viewing a document online needs
+to involve downloading 1,000 inter-connected components from 100 hosts.
+Gemini rejects that as obvious nonsense, so it's fine to design with no
+intention of that every working well.
+
+Cheers,
+Solderpunk
+
+
+&gt;<i> 
+</I>&gt;<i> &#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208; Original Message &#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;
+</I>&gt;<i> On Friday 12 June 2020 01:39, Thomas Karpiniec &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">tkarpiniec at icloud.com</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; On Thu, Jun 11, 2020 at 07:50:18PM +0000, solderpunk wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; Ah, right, if everybody is already using SHA256 then, yes, we can stick
+</I>&gt;<i> &gt; &gt; to that and the different serialisations are convertible. And I don't
+</I>&gt;<i> &gt; &gt; see any reason not too. From what I can tell there (somewhat
+</I>&gt;<i> &gt; &gt; surprisingly) really isn't a standard notion of certificate
+</I>&gt;<i> &gt; &gt; fingerprinting, but SHA1 and SHA256 seem to be the most commonly used by
+</I>&gt;<i> &gt; &gt; web browsers.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; At the risk of overthinking things, I was reading RFC6709 &quot;Design
+</I>&gt;<i> &gt; Considerations for Protocol Extensions&quot; for non-Gemini reasons
+</I>&gt;<i> &gt; recently and this section seems relevant:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &quot;4.5. Cryptographic Agility
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; ... The ability to negotiate the use of a particular cryptographic
+</I>&gt;<i> &gt; algorithm provides resilience against compromise of a particular
+</I>&gt;<i> &gt; cryptographic algorithm.... This is usually accomplished by including
+</I>&gt;<i> &gt; an algorithm identifier and parameters in the protocol, and by
+</I>&gt;<i> &gt; specifying the algorithm requirements in the protocol specification.&quot;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; i.e. Instead of storing opaque bytes, also mention that it's SHA256
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; A stand-alone implementation of this concept:
+</I>&gt;<i> &gt; <A HREF="https://multiformats.io/multihash/">https://multiformats.io/multihash/</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Cheers, Tom
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I></PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001575.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+	<LI>Next message (by thread): <A HREF="001577.html">What is Gemini - a video by me
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1576">[ date ]</a>
+              <a href="thread.html#1576">[ thread ]</a>
+              <a href="subject.html#1576">[ subject ]</a>
+              <a href="author.html#1576">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

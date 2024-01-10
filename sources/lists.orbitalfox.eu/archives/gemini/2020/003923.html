@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Some reading on IRIs and IDNs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3C87blf3u20h.fsf%40dorothy.carcosa.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003992.html">
+   <LINK REL="Next"  HREF="003924.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Some reading on IRIs and IDNs</H1>
+    <B>Jason McBrayer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3C87blf3u20h.fsf%40dorothy.carcosa.net%3E"
+       TITLE="Some reading on IRIs and IDNs">jmcbray at carcosa.net
+       </A><BR>
+    <I>Wed Dec  9 02:49:50 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003992.html">Crawlers on Gemini and best practices
+</A></li>
+        <LI>Next message (by thread): <A HREF="003924.html">Some reading on IRIs and IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3923">[ date ]</a>
+              <a href="thread.html#3923">[ thread ]</a>
+              <a href="subject.html#3923">[ subject ]</a>
+              <a href="author.html#3923">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi, all. The discussion on IRIs and IDNs is a little intense, and I
+thought I would take a step back and do some reading on it. I'm not
+monolingual, but I am ISO-8859-1-lingual, if that makes sense, so some
+of the issues are new to me.
+
+So, there's an overview of all the issues involved here:
+<A HREF="https://www.w3.org/International/articles/idn-and-iri/.">https://www.w3.org/International/articles/idn-and-iri/.</A> This article
+(from 2008) goes over the things you need to do to implement support for
+IRIs, without going too much into the technical details. It makes things
+look pretty straightforward and cut-and-dried, but...
+
+In terms of actual standardization, things are kind of a mess. See this
+page: <A HREF="https://www.w3.org/International/wiki/IRIStatus.">https://www.w3.org/International/wiki/IRIStatus.</A> This page brings
+up the real issues with the standard.
+
+It seems like the effort to standardize IRIs in the same framework as
+URLs, URNs, and URIs fell apart in 2014. The effort was picked up by the
+HTML5 WHATWG, which has their own &quot;living standard&quot; called URL:
+<A HREF="http://url.spec.whatwg.org/.">http://url.spec.whatwg.org/.</A> The URL standard focuses somewhat on
+parsing/processing/serializing international URLs, which is useful to
+us, but it is also *extremely* WWW-centric. It doesn't really take into
+account non-HTTP(S) URLs, especially ones that are not very web-like,
+like mailto or schemes where the authority field is not a domain name. 
+Much of the spec focuses on things like how a web browser should
+represent URLs in the address bar and in text.
+
+This *probably* contributes to the lack of IRI-parsing libraries for
+various languages: there's no standard for them to implement!
+
+Given all that... maybe we should just consider our use cases and see
+what the minimum we have to do is?
+
+As I see it, the main requirement is that authors want to be able to use
+non-ASCII characters in both the domain part and the path part of the
+links in their documents, and have that work with no problems. IMO this
+is a *reasonable expectation* for a retrofuturistic protocol like
+Gemini.
+
+Now, what does that require of client authors and server authors?
+
+What is the *absolute minimum* we can require of client and server
+authors and have things work?
+
+-- 
++-----------------------------------------------------------+
+|<i> Jason F. McBrayer                    <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">jmcbray at carcosa.net</A>  |
+</I>|<i> A flower falls, even though we love it; and a weed grows, |
+</I>|<i> even though we do not love it.            -- Dogen        |
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003992.html">Crawlers on Gemini and best practices
+</A></li>
+	<LI>Next message (by thread): <A HREF="003924.html">Some reading on IRIs and IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3923">[ date ]</a>
+              <a href="thread.html#3923">[ thread ]</a>
+              <a href="subject.html#3923">[ subject ]</a>
+              <a href="author.html#3923">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Gemini privacy
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20privacy&In-Reply-To=%3C00258b7c-45f4-7db0-28b0-94de5e9f3822%40NorthTech.US%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006042.html">
+   <LINK REL="Next"  HREF="006069.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Gemini privacy</H1>
+    <B>Bradley D. Thornton</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20privacy&In-Reply-To=%3C00258b7c-45f4-7db0-28b0-94de5e9f3822%40NorthTech.US%3E"
+       TITLE="Gemini privacy">Bradley at NorthTech.US
+       </A><BR>
+    <I>Thu Mar 11 08:22:07 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006042.html">Gemini privacy
+</A></li>
+        <LI>Next message (by thread): <A HREF="006069.html">Gemini privacy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6057">[ date ]</a>
+              <a href="thread.html#6057">[ thread ]</a>
+              <a href="subject.html#6057">[ subject ]</a>
+              <a href="author.html#6057">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+On 3/10/2021 2:53 AM, Nathan Galt wrote:
+&gt;<i> On Wed, Mar 10, 2021, at 1:51 AM, Bradley D. Thornton wrote: 
+</I>
+&gt;&gt;<i> ...the kewlest
+</I>&gt;&gt;<i> part about that, and one reason I don't want webproxies on my lawn, is
+</I>&gt;&gt;<i> because I make those archives available exlusively via Gemini (Maybe
+</I>&gt;&gt;<i> Gopher too, I'll have to check lolz)
+</I>&gt;<i> 
+</I>&gt;<i> If you want to transfer files over an uncommon protocol that most people can't use, have you considered (S)FTP? Chrome dropped FTP support in version 88 and version 89 is the current version.
+</I>
+FTP is ubiquitous. What would be the point? And why would you suggest
+SFTP, when the standard is anonymous FTP?
+
+Some of those resources:
+
+<A HREF="ftp://ftp.osuosl.org/pub/archlinux/iso/">ftp://ftp.osuosl.org/pub/archlinux/iso/</A>
+
+<A HREF="ftp://cdimage.debian.org/debian-cd/current/amd64/iso-cd/">ftp://cdimage.debian.org/debian-cd/current/amd64/iso-cd/</A>
+
+<A HREF="ftp://sunsite.icm.edu.pl/pub/">ftp://sunsite.icm.edu.pl/pub/</A>
+(<A HREF="https://sunsite.icm.edu.pl/">https://sunsite.icm.edu.pl/</A> - most links point to <A HREF="ftp://">ftp://</A>)
+
+<A HREF="ftp://slackware.cs.utah.edu/slackware/">ftp://slackware.cs.utah.edu/slackware/</A>
+
+<A HREF="ftp://ftp.swin.edu.au/">ftp://ftp.swin.edu.au/</A>
+
+For webhosting customers, I require that they use SSH - SCP, SFTP - but
+but those SSH methods are intended for the manipulation of files, while
+anyone can browse and download from anonymous FTP or Gopher (or Gemini)
+
+Although it is *theoretically possible* to enable anonymous SFTP, how
+would you do it without incorporating PAM or letting someone who has
+never visited before to leave the password field blank? In anonymous FTP
+the password field by historical convention is your email address, or
+some/any email address, like... <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">billg at microsoft.com</A>, although browsers
+do it a bit differently.
+
+Now, you can surely enable FTPS, but then we're back to that whole
+garbage situation about whether this is explicit or implicit, and in
+deciding between these two control ports, are we going to be using TCP
+21 (explicit) or 990 (implicit), and data on 989, in a range between
+3000-3050, or port 20 (implicit &amp; active)???
+
+I even confuse myself when I try to remember how to firewall the
+clusterbucket that are the FTPS'es.
+
+Good ole anonymous FTP is well known (You say uncommon) and 20/21 work
+just fine.
+
+The only problems I've had with FTP during the past 40 years were due to
+acoustic couplers or shitty phone lines.
+
+Gopher satisfies this easily with a single connection over port 70.
+
+And Gemini does the same thing w/TLS over port 1965. That sounds like a
+winner to me.
+
+I probably should [not] mention that it appears as if <A HREF="gophers://">gophers://</A> may be
+doing the same over port 70 as well in many cases, in the not too
+distant future, but I might get flamed for even bringing that up at this
+time. Since I have taken it upon myself to mention that, port 70 is
+already registered and I personally like the idea of using that
+particular port for both <A HREF="gopher://">gopher://</A> and <A HREF="gophers://.">gophers://.</A>
+
+You're welcome anytime to access Vger through SSH or Telnet though. I
+actually do support that too.
+
+&gt;<i> 
+</I>&gt;<i> (Personally, I'm amused by how FTP has become _indie_ in the span of a year or two. NNTP and Gopher threw a great welcoming party.)
+</I>
+Nathan, pardon me, but I'm getting the sense that you're seeing things
+through the lens of a world where everything should occur within the
+confines of Faceplant and InstaSpam running inside of a JSRE (JavaScript
+Runtime Environment) - which is exactly what you've pointed out that
+Chrome versions &gt;= v88 have now effectively become... Which is also one
+of the big reasons that Project Gemini was spawned.
+
+As far as NNTP and Gopher are concerned, both Usenet and Gopher are
+alive and well, and enjoying a significantly relevant level of usage and
+traffic. For that matter, so is FidoNet - I'm still running the same
+node number I've had for the past 30 years (1:102/127).
+
+With the exception of the Google JSRE, SFTP, Gemini, and Good ole
+anonymous FTP, everything else mentioned is indeed *retro*, although
+that doesn't make those facilities non-relevant or insignificant, and
+they're actually thriving more now than any of them were ten years ago.
+&gt;<i> 
+</I>&gt;<i> Also: why would you want to burden Gemini-client implementers with having to handle transfer encodings when you can just gzip (or .xz, or whatever the new hotness is) for small numbers of largish files? 
+</I>
+It works fine now, and just like there will be a substantially greater
+presence of Gopher over TLS in the future, people who develop Gemini
+server and client software will innovate as well (there's been an awful
+lot of that in the past six months alone). Such innovations are
+inevitable - changing the spec is not even relevant in that regard, nor
+is it necessary.
+
+Please do note however, that in each of those FTP archives I posted
+links to above .iso images are *not*, as you encourage, tarballed. Nor
+are many of the other resources.
+
+Another nice thing about Gemini, Gopher, and FTP, is that in many
+clients you can actually view of the file types you're browsing right
+inside the client. I understand Google affected some changes to that in
+their JSRE prior to dropping support for FTP, necessarily forcing an
+external application load? Doesn't matter, moot point now anyway lolz.
+
+If you go back and reread what I wrote in my previous post, I'm not
+asking anyone to write or develop anything - I was simply musing. Like I
+just said, this sort of file transfer of repo data over Gemini works
+fine right now as it is.
+
+On another note, I am *still* encouraging the authors of Gemini client
+software to work towards a consensus for the handling of preformatted
+text blocks that people who are blind might consider to be *noise* -
+that's kinda a big deal to me, and Devin posted again just today on that
+important topic.
+
+Final thought: I haven't used Chrome at all in many years. Mostly
+Firefox, or Chromium, and surfing FTP repos continues to work just fine
+in Vivaldi too.
+
+I hope that helps :)
+
+Kindest regards,
+
+
+-- 
+Bradley D. Thornton
+Manager Network Services
+<A HREF="http://NorthTech.US">http://NorthTech.US</A>
+TEL: +1.310.421.8268
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006042.html">Gemini privacy
+</A></li>
+	<LI>Next message (by thread): <A HREF="006069.html">Gemini privacy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6057">[ date ]</a>
+              <a href="thread.html#6057">[ thread ]</a>
+              <a href="subject.html#6057">[ subject ]</a>
+              <a href="author.html#6057">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

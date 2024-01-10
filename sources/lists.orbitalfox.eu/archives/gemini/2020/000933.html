@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Questions about ``` lines
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Questions%20about%20%60%60%60%20lines&In-Reply-To=%3C20200521075223.GC28130%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000932.html">
+   <LINK REL="Next"  HREF="000935.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Questions about ``` lines</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Questions%20about%20%60%60%60%20lines&In-Reply-To=%3C20200521075223.GC28130%40SDF.ORG%3E"
+       TITLE="Questions about ``` lines">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Thu May 21 08:52:23 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000932.html">Questions about ``` lines
+</A></li>
+        <LI>Next message (by thread): <A HREF="000935.html">Questions about ``` lines
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#933">[ date ]</a>
+              <a href="thread.html#933">[ thread ]</a>
+              <a href="subject.html#933">[ subject ]</a>
+              <a href="author.html#933">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, May 21, 2020 at 08:31:19AM +0200, Katarina Eriksson wrote:
+&gt;<i> Hello Geminauts
+</I>
+Hello!
+
+&gt;<i> 1. Are ``` lines to be block markers or mode switches?
+</I> 
+&gt;<i> &gt;From the discussions on the the list, it seems like they are block markers.
+</I>&gt;<i> The current spec calls them &quot;toggle lines&quot; that toggle &quot;pre-formatted mode
+</I>&gt;<i> being on or off&quot; which suggests it's a mode switch.
+</I>
+They are definitely mode switches, as stated in the spec.
+
+People tend to speak quite informally on the list - sometimes too
+informally for my tastes!  I have noticed people referring to Gemini
+sites/servers as websites or webservers which always stuns me a bit...
+
+ 
+&gt;<i> The way I interpret the difference between the two is that blocks need to
+</I>&gt;<i> close before end-of-file to be valid and in the other case the file can end
+</I>&gt;<i> in any mode.
+</I>
+There's nothing invalid about a file ending with pre-formatted mode on
+according to the current spec and I don't really see a need for this to
+change.  Clients should set the value of pre-formatted mode to off
+when they begin pasing a new document.
+
+In general, there should be as few ways as possible for a text/gemini
+file to be &quot;invalid&quot;, it should be dirt simple.  To be honest, I'm kind
+of surprised by all the discussion around some kind of
+formatting/validating/linting tool for text/gemini.  It doesn't bother
+me and people who want them can certainly write them, but to me it seems
+like there is so little scope for messing things up writing it by hand
+that tools like that feel unnecessary and cumbersome.
+ 
+&gt;<i> 2. Is it desirable to close the window of extensibility?
+</I>&gt;<i> 
+</I>&gt;<i> When reading the archives, I noticed that ``` lines used to only work if
+</I>&gt;<i> they had no trailing characters. This was changed to be less surprising
+</I>&gt;<i> when someone writes
+</I>&gt;<i>     ```python
+</I>&gt;<i> as if it was a markdown code block.
+</I>
+That was the main motivation, but as a little side thing it also meant
+it became true that all line types can be unambiguously recognised by
+inspecting only their first 3 characters, and I liked having something
+that simple apply without exception.  If nothing is allowed after the
+``` you need to also check the line length to recognise toggles.
+
+&gt;<i>     ``` Visual browsers will
+</I>&gt;<i>     ``` not display these lines.
+</I>&gt;<i>     ``` So as long as there are
+</I>&gt;<i>     ``` an even number of them,
+</I>&gt;<i>     ``` I can get away with using
+</I>&gt;<i>     ``` them as comment lines.
+</I>
+My first thought: Oh, cute!  Cute and neat...
+ 
+&gt;<i>     ``` @embed image/png
+</I>&gt;<i>     ``` width=300 height=200
+</I>&gt;<i>     =&gt; path/to/image.png Alt. text
+</I>
+...followed by &quot;Oh, dear God, no!&quot; :O
+
+This is a real and frightening way that clients can sneak in support for
+arbitrarily complicated extra functionality, and it degrades absolutely
+invisibly in non-supporting clients, so there is no incentive against
+content authors using it.  I congratulate you for recognising this and
+thank you for bringing it to our attention!  In some ways, this is the
+logical conclusion of all the discussion around putting stuff for
+clients to parse in that space.
+
+&gt;<i> I don't think we need to close this window, but I also don't see a need to
+</I>&gt;<i> allow consecutive ``` lines.
+</I>
+I don't see a need to allow consecutive ``` lines either, but I am
+really, really attached to the current property of text/gemini that you
+can handle it correctly by handling each line independently of every
+other line in a single top-to-bottom pass with very minimal internal
+state.  Forbidding consecutive ``` lines would break that and require
+the parser to remember the type of the previous line.
+
+But I see no other way to close this window without reverting to toggle
+lines being strictly three-characters only, and then we lose the
+alt-text option.  To be honest, I could live without specifying
+programming languages to enable syntax highlighting in text/gemini - I
+get that that's *nice*, but it's not really essential.  But the alt-text
+thing kind of feels important to me, because people are right now using
+pre-formatted blocks to do things that ruin accessibility/searchability
+without it, and those things matter.
+
+I guess one could cynically ask &quot;what makes you think people doing that
+right now would use alt-text to fix the problem if you gave them the
+means to?&quot;, and conclude that we just have to let people suffer the
+consequences of not using text/gemini &quot;cleanly&quot;...
+ 
+&gt;<i> These are real questions with added context and not opinions or rhetoric
+</I>&gt;<i> dressed as questions.
+</I>
+Definitely real food for thought in here.  Thanks again for this post.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000932.html">Questions about ``` lines
+</A></li>
+	<LI>Next message (by thread): <A HREF="000935.html">Questions about ``` lines
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#933">[ date ]</a>
+              <a href="thread.html#933">[ thread ]</a>
+              <a href="subject.html#933">[ subject ]</a>
+              <a href="author.html#933">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

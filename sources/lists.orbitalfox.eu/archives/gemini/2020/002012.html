@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Minimal client
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Minimal%20client&In-Reply-To=%3CUXOs-4ENcxT9MTGupw7oKv451IpHkEIbS5JDWpt6o3u4KbXzXk36tc7lZoxXFsIAerHdYF-4uXqtu15sn98ew6yzQnxMAKZjqNR9dbTapq0%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002011.html">
+   <LINK REL="Next"  HREF="002013.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Minimal client</H1>
+    <B>defdefred</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Minimal%20client&In-Reply-To=%3CUXOs-4ENcxT9MTGupw7oKv451IpHkEIbS5JDWpt6o3u4KbXzXk36tc7lZoxXFsIAerHdYF-4uXqtu15sn98ew6yzQnxMAKZjqNR9dbTapq0%3D%40protonmail.com%3E"
+       TITLE="Minimal client">defdefred at protonmail.com
+       </A><BR>
+    <I>Wed Jul  1 23:11:10 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002011.html">Minimal client
+</A></li>
+        <LI>Next message (by thread): <A HREF="002013.html">Minimal client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2012">[ date ]</a>
+              <a href="thread.html#2012">[ thread ]</a>
+              <a href="subject.html#2012">[ subject ]</a>
+              <a href="author.html#2012">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>netcat ?
+
+freD.
+
+&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208; Original Message &#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;
+On Thursday 2 July 2020 00:06, Phil Leblanc &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">philanc at gmail.com</A>&gt; wrote:
+
+&gt;<i> Hi all,
+</I>&gt;<i>
+</I>&gt;<i> I am looking for a solution to build a small, statically linked,
+</I>&gt;<i> minimal gemini client. My focus at the moment is to implement the
+</I>&gt;<i> basic communication layer (including TLS!): just enough to send a
+</I>&gt;<i> request to a gemini host and receive a response.
+</I>&gt;<i>
+</I>&gt;<i> Has anybody already built such a client? any pointer or suggestion?
+</I>&gt;<i>
+</I>&gt;<i> Where I stand as of now:
+</I>&gt;<i>
+</I>&gt;<i> --- I discarded OpenSSL. Bad memories of building small static
+</I>&gt;<i> executables a long time ago. Maybe it has improved and I am just
+</I>&gt;<i> prejudiced.
+</I>&gt;<i>
+</I>&gt;<i> --- LibreSSL:
+</I>&gt;<i>
+</I>&gt;<i> -   not TLS v1.3 yet, but definitely alive and moving there.
+</I>&gt;<i> -   easily builds static libraries, but no modular build: I mean I
+</I>&gt;<i>     found no way to build libraries/executable with only a limited set of
+</I>&gt;<i>     crypto algorithms
+</I>&gt;<i>     =&gt; executables are large: The openssl command (similar to the
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> OpenSSL one) is 2.5 MB (built on Linux with Musl libc, fully static,
+</I>&gt;<i> -Os, stripped). They also include the OpenBSD 'nc' command which
+</I>&gt;<i> supports TLS connections - 2 MB (for reference I have a small static
+</I>&gt;<i> nc without TLS support which is 50KB)
+</I>&gt;<i>
+</I>&gt;<i> --- BearSSL
+</I>&gt;<i>
+</I>&gt;<i> -   very nice code. An impressive feat for a one-man project (Thomas Pornin)
+</I>&gt;<i> -   not yet at TLS-1.3. The code looks maintained but I don't know if
+</I>&gt;<i>     it is actively developed. I saw no sign of ed25519 cert signing, but
+</I>&gt;<i>     may be wrong here.
+</I>&gt;<i>
+</I>&gt;<i> -   code size: the whole libbearssl.a is ~ 860KB, basic client and
+</I>&gt;<i>     server examples are in the 150KB range, which is very nice.
+</I>&gt;<i>
+</I>&gt;<i>     --- WolfSSL
+</I>&gt;<i>
+</I>&gt;<i> -   supports TLS-1.3. Is actively maintained by a company targeting
+</I>&gt;<i>     embedded systems (but the code is GPL)
+</I>&gt;<i>
+</I>&gt;<i> -   I don't know yet how to properly build small code, but with a
+</I>&gt;<i>     default support for only TLS-1.3, and no ed25519 cert support, I could
+</I>&gt;<i>     build basic client/server examples at ~ 260 KB.
+</I>&gt;<i>
+</I>&gt;<i>     --- MatrixSSL
+</I>&gt;<i>
+</I>&gt;<i> -   supports TLS-1.3 but the code of the last public (GPL) version
+</I>&gt;<i>     hasn't changed in the last 6 months.
+</I>&gt;<i>
+</I>&gt;<i> -   I have not yet succeeded in building static working examples with
+</I>&gt;<i>     a cross compiler. So I don't have ballpark code size figures.
+</I>&gt;<i>
+</I>&gt;<i>     --- Busybox ssl_client
+</I>&gt;<i>
+</I>&gt;<i> -   some TLS support has been added in the recent busybox trees, based
+</I>&gt;<i>     on MatrixSSLcode. As they say, &quot;enough TLS to allow the busybox wget
+</I>&gt;<i>     applet to retrieve a kernel source&quot; from <A HREF="https://kernel.org/">https://kernel.org/</A>
+</I>&gt;<i>
+</I>&gt;<i> -   I built the ssl_client applet as a standalone static exe: 71 KB
+</I>&gt;<i> -   it supports TLS-1.2 with a very limited set of crypto algos. and
+</I>&gt;<i>     no cert validation.
+</I>&gt;<i>
+</I>&gt;<i> -   I tried for fun to retrieve with it the root pages from all the
+</I>&gt;<i>     gemini sites listed on Gus / known hosts: On a total of 116 sites, it
+</I>&gt;<i>     managed to
+</I>&gt;<i>     get 98 root pages and 18 TLS errors (I lack detailed error causes, but
+</I>&gt;<i>     apparently mostly missing algos, and maybe some unsupported curves for
+</I>&gt;<i>     ECDH(E).-- not so bad for such a small &quot;client&quot; - but clearly not
+</I>&gt;<i>     enough for real use.
+</I>&gt;<i>
+</I>&gt;<i>     Obviously, a big part of the equation is the evil number of
+</I>&gt;<i>     combinations of ciphers, hashes and key exchange algos. Any guideline
+</I>&gt;<i>     or best practice document about what ciphers/algos Gemini servers
+</I>&gt;<i>     should minimally support would help immensely!
+</I>&gt;<i>
+</I>&gt;<i>     Again, any suggestion on how to build a small, static SSL client is
+</I>&gt;<i>     more than welcome.Thanks in advance,
+</I>&gt;<i>
+</I>&gt;<i>     Phil
+</I>&gt;<i>
+</I>
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002011.html">Minimal client
+</A></li>
+	<LI>Next message (by thread): <A HREF="002013.html">Minimal client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2012">[ date ]</a>
+              <a href="thread.html#2012">[ thread ]</a>
+              <a href="subject.html#2012">[ subject ]</a>
+              <a href="author.html#2012">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

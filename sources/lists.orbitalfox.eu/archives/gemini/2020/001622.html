@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> gemini+submit:// (was Re: Uploading Gemini content)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bsubmit%3A//%20%28was%20Re%3A%20Uploading%20Gemini%20content%29&In-Reply-To=%3C5EE4CF68.20100%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001620.html">
+   <LINK REL="Next"  HREF="001632.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>gemini+submit:// (was Re: Uploading Gemini content)</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bsubmit%3A//%20%28was%20Re%3A%20Uploading%20Gemini%20content%29&In-Reply-To=%3C5EE4CF68.20100%40marmaladefoo.com%3E"
+       TITLE="gemini+submit:// (was Re: Uploading Gemini content)">luke at marmaladefoo.com
+       </A><BR>
+    <I>Sat Jun 13 14:06:48 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001620.html">Uploading Gemini content
+</A></li>
+        <LI>Next message (by thread): <A HREF="001632.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1622">[ date ]</a>
+              <a href="thread.html#1622">[ thread ]</a>
+              <a href="subject.html#1622">[ subject ]</a>
+              <a href="author.html#1622">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi everyone
+
+I've been thinking some more about this self-editing wiki concept, which 
+seems a great application to support writers of Gemini content. I think 
+there is an opportunity for a very simple addition to Gemini that would 
+support client based content submission.
+
+The mental model is quite simple - imagine a simple web page, having a 
+single text area and a single submit button. The user can edit the text 
+and submit the content. The client knows where to send the content (form 
+attribute) and how to send it (HTTP protocol using POST).
+
+Exactly what the name for this doesnt really matter, and it will need to 
+integrate with the authentication/certificates mechanisms we already are 
+establishing.
+
+Essentially there are a number of new elements
+
+1. New scheme extending gemini, only for those that want to. This is not 
+gemini, but something else. Whether it gets considered for gemini is a 
+separate conversation.
+
+2. An extended client behaviour working with the preformatted text 
+regions having suitable markers to be defined
+
+3. A simple text submit protocol (text/plain only, UTF-8 only)
+
+The elements could look like this
+
+1. The scheme name is gemini+<A HREF="submit://">submit://</A> or something, doesnt really 
+matter, but is distinct from <A HREF="gemini://.">gemini://.</A>
+
+2. Using the preformatted regions to specify the URL end point to post 
+to. Only end points having gemini+<A HREF="submit://">submit://</A> as the scheme would have an 
+active behaviour. This is done in a backwards compatible way so simpler 
+clients just render the content as preformatted text
+
+Note we use 4 back ticks to convey that the content may be edited and 
+submitted. There could be some other option to indicate this, the syntax 
+marker is not significant, can be changed to ```! or something else. 
+This gracefully degrades and is valid text/gemini
+
+````gemini+<A HREF="submit://domain/end-point/handler?any-params-you-like-probably-includes-asset-id-or-path">submit://domain/end-point/handler?any-params-you-like-probably-includes-asset-id-or-path</A>
+
+```` (could be 3 or 4 doesnt really matter)
+
+the 4 back ticks mean existing clients will just show the text.
+
+The URI will probably contain information for the server to know where 
+to put the content such as:
+
+asset-id=1234ae4f34ae
+
+or
+
+path=/path/on/filesystem/to/file.gmi
+
+3. The client allows the user to edit the content and then &quot;submit&quot; 
+(button or whatever) the content to the end point as follows:
+
+CONTENTLENGTH&lt;SPACE&gt;FULL_URI_FROM_TEXT_AREA&lt;CR&gt;&lt;LF&gt;
+&lt;client sends the byte content&gt;
+&lt;client closes connection&gt;
+
+Only text/plain is ever sent so we don't need to specify mime type. 
+Simple and restricted.
+Only UTF is ever sent, so we dont need to specify it. Simple and restricted.
+
+There is only ever one &quot;block&quot; of text submitted, which is the content 
+of the preformatted area (no multi-field forms).
+
+The end point on the server knows when content has arrived as the 
+content length is pre-notified in the header, replies with redirect to 
+success page probably.
+
+server may also respond requesting input,certificates
+
+on the server, the end point might be inside the server or could be a 
+CGI or similar application that might get the content via stdin (as per 
+POST for HTTP)
+
+It would be nice to adopt a common scheme for this together with 
+gemini+<A HREF="put://">put://</A> (for arbitrary binary upload) and gemini+<A HREF="delete://">delete://</A> 
+suggestions suggested earlier on this thread. For example to integrate 
+certificates, success or failure etc.
+
+Potentially this scheme can be used to edit simple text content of a 
+number of back end applications.
+
+There are no changes need to any client or server that is not interested 
+to implement this.
+
+I think this has a similar simplicity to the spirit of Gemini and does 
+not open huge doors for a horse and cart to come through.
+
+Best Wishes
+
+  - Luke
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001620.html">Uploading Gemini content
+</A></li>
+	<LI>Next message (by thread): <A HREF="001632.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1622">[ date ]</a>
+              <a href="thread.html#1622">[ thread ]</a>
+              <a href="subject.html#1622">[ subject ]</a>
+              <a href="author.html#1622">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Pondering interfaces over the Gemini 1x responses (was: CGI)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Pondering%20interfaces%20over%20the%20Gemini%201x%20responses%20%28was%3A%20CGI%29&In-Reply-To=%3CCANmFPe%3DwF0Lqd29Tu8JQksLBGq7m5SZhSgFpzRvbCLGodfZ07A%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002256.html">
+   <LINK REL="Next"  HREF="002262.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Pondering interfaces over the Gemini 1x responses (was: CGI)</H1>
+    <B>Hannu Hartikainen</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Pondering%20interfaces%20over%20the%20Gemini%201x%20responses%20%28was%3A%20CGI%29&In-Reply-To=%3CCANmFPe%3DwF0Lqd29Tu8JQksLBGq7m5SZhSgFpzRvbCLGodfZ07A%40mail.gmail.com%3E"
+       TITLE="Pondering interfaces over the Gemini 1x responses (was: CGI)">hannu.hartikainen+gemini at gmail.com
+       </A><BR>
+    <I>Sun Jul 19 10:28:03 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002256.html">CGI
+</A></li>
+        <LI>Next message (by thread): <A HREF="002262.html">Pondering interfaces over the Gemini 1x responses (was: CGI)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2261">[ date ]</a>
+              <a href="thread.html#2261">[ thread ]</a>
+              <a href="subject.html#2261">[ subject ]</a>
+              <a href="author.html#2261">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi!
+
+On Sat, 18 Jul 2020 at 16:47, Paul Boyd &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">boyd.paul2 at gmail.com</A>&gt; wrote:
+&gt;<i> Anyway, I'm probably not going to write something like this again. The guestbook is kind of fun (Hello K&#233;vin and Timur!), so I'll leave it up. But I'll stick to things that fit better in the future.
+</I>
+I think it's really valuable to *try* all kinds of things and
+different approaches to see *what* fits well. IMHO we have only
+scratched the surface of what is possible with the Gemini protocol
+(and what makes for good UX).
+
+To summarize what has been discussed here:
+1. Filling in multiple values is not trivial with the input response type
+2. One way is to generate a session id on the server. (This is
+stateful, which has some downsides but avoids replay issues.)
+3. Another way is to embed all the responses in the URL.
+
+Some ideas that haven't been mentioned:
+
+a. If you include all the fields at once, you could just ask for them
+in one request. Eg. &quot;10 name;location;link;comment&quot; which the user is
+smart enough to parse and respond with &quot;Hannu;;;This is cool!&quot;. Or for
+a better UX, make the fields newline-separated (ie. %0A in the URL)
+and have multiline-capable input fields in browsers. Note: this is
+against a strict interpretation of the spec but hasn't been discussed
+AFAIK.
+
+b. Instead of having different links for different fields, you could
+ask for the fields in succession (but this only works well for the
+session id based approach). Eg. /guestbook/sign responds with &quot;30
+/guestbook/sign/aF3d&quot;, then /guestbook/sign/aF3d responds with &quot;10
+Name&quot;, /guestbook/sign/aF3d?Hannu with &quot;10 Location (optional)&quot;, then
+&quot;10 Link (optional)&quot; and &quot;10 Comment&quot; in sequence, saving each query
+string to the server-side session. After the final response either
+save the comment or show the responses with a link to save.
+
+I personally think the Gemini protocol (as it currently is) can be as
+powerful as the UNIX command line (note: only CLI, not TUI). In fact,
+you could serve a remote shell over Gemini. Of course we're all
+spoiled by interactive software even in a terminal so Gemini feels
+quite limited.
+
+-Hannu
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002256.html">CGI
+</A></li>
+	<LI>Next message (by thread): <A HREF="002262.html">Pondering interfaces over the Gemini 1x responses (was: CGI)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2261">[ date ]</a>
+              <a href="thread.html#2261">[ thread ]</a>
+              <a href="subject.html#2261">[ subject ]</a>
+              <a href="author.html#2261">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

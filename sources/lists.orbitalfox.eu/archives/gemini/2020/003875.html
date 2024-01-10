@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Three possible uses for IRIs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3CvFMTQmjQK-noG5xFb3kzWBvY7qwuA3fxT9X5SjpbracBlxQlsSFzHc_WVRpESBtQRcERS9ZC2hAAwU6GZb2KHEKjAKXEccmduSJ6DI3Gorg%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003873.html">
+   <LINK REL="Next"  HREF="003876.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Three possible uses for IRIs</H1>
+    <B>colecmac at protonmail.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3CvFMTQmjQK-noG5xFb3kzWBvY7qwuA3fxT9X5SjpbracBlxQlsSFzHc_WVRpESBtQRcERS9ZC2hAAwU6GZb2KHEKjAKXEccmduSJ6DI3Gorg%3D%40protonmail.com%3E"
+       TITLE="Three possible uses for IRIs">colecmac at protonmail.com
+       </A><BR>
+    <I>Tue Dec  8 02:47:22 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003873.html">Three possible uses for IRIs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003876.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3875">[ date ]</a>
+              <a href="thread.html#3875">[ thread ]</a>
+              <a href="subject.html#3875">[ subject ]</a>
+              <a href="author.html#3875">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> (Starting a separate thread for this)
+</I>
+Thanks, that's helpful. Hopefully all IRI discussion can move here.
+
+&gt;<i> Case 3 is the difficult one.&#160; Should authors be allowed to write text/gemini
+</I>&gt;<i> links with IRI references?&#160;It's not that hard for a client to convert them
+</I>&gt;<i> to URI references.&#160; No normalization is needed except as part of punycoding.
+</I>&gt;<i> However, everyone has to agree on whether this should work or not; we don't
+</I>&gt;<i> want a user trying to follow a link and sending the Wrong Thing to the server.
+</I>
+&quot;It's not that hard for a client to convert them to URI references. No
+normalization is needed except as part of punycoding.&quot;
+
+I don't think that's true. To convert them to a URI reference, the domain needs
+to be extracted and punycoded, then the path and query string needs to be
+extracted and percent-encoded in the blessed Gemini way that doesn't allow plus
+signs. Doing all this requires parsing, and as I explained a couple times in the
+other thread, IRI parsing is not feasible across multiple programming languages
+at this time, the libraries just don't exist.
+
+And what if the IRI is a relative reference? As I explained in the other thread,
+this will definitely require IRI parsing.
+
+Furthermore, it's breaking change to Gemini. I don't think that's a good idea in
+any case with the possible exception of TLS security. Gemini must be reliable,
+and it's too late for a breaking change.
+
+&gt;<i> Gemini isn't just supposed to be easy to program for, it's supposed to be easy to
+</I>&gt;<i> author, too.&#160; Unfortunately these objectives are in conflict here.
+</I>
+Yes, and that's unfortunate. But I think it makes sense for the stability of Gemini
+and the ease of programming to come first.
+
+
+Cheers,
+makeworld
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003873.html">Three possible uses for IRIs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003876.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3875">[ date ]</a>
+              <a href="thread.html#3875">[ thread ]</a>
+              <a href="subject.html#3875">[ subject ]</a>
+              <a href="author.html#3875">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

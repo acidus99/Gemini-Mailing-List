@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposal about content-size and hash
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%20about%20content-size%20and%20hash&In-Reply-To=%3C20201103002129.GV30302%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003013.html">
+   <LINK REL="Next"  HREF="003180.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposal about content-size and hash</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%20about%20content-size%20and%20hash&In-Reply-To=%3C20201103002129.GV30302%40brevard.conman.org%3E"
+       TITLE="Proposal about content-size and hash">sean at conman.org
+       </A><BR>
+    <I>Tue Nov  3 00:21:29 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003013.html">Proposal about content-size and hash
+</A></li>
+        <LI>Next message (by thread): <A HREF="003180.html">Proposal about content-size and hash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3015">[ date ]</a>
+              <a href="thread.html#3015">[ thread ]</a>
+              <a href="subject.html#3015">[ subject ]</a>
+              <a href="author.html#3015">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Philip Linde once stated:
+&gt;<i> On Mon, 02 Nov 2020 18:54:32 +0000
+</I>&gt;<i> <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">prisonpotato at tilde.team</A> wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; a new response code, like 22: Response with size.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 20 text/gemini
+</I>&gt;<i> &gt; 22 100 text/gemini
+</I>&gt;<i> 
+</I>&gt;<i> The spec currently explicitly prohibits this kind of use of the status
+</I>&gt;<i> codes, but it could be a new first-digit response code, e.g. 7x. This
+</I>&gt;<i> would naturally take some time for the implementations to adopt.
+</I>&gt;<i> 
+</I>&gt;<i> I personally don't miss content-length in practice, but I think the
+</I>&gt;<i> fact that it wasn't included in the protocol from the beginning is the
+</I>&gt;<i> most compelling argument against it. That said, I'd happily implement,
+</I>&gt;<i> something like a new status code to account for such a change in my
+</I>&gt;<i> client. When would servers dare use it, though?
+</I>
+  Now.
+
+  As I'm wont to do, I will often code up some weird &quot;proof-of-concept&quot; for
+my Gemini server, and if anyone wants to play around with this concept,
+there's a server for that:
+
+	<A HREF="gemini://gemini.conman.org/test/testsize.gemini">gemini://gemini.conman.org/test/testsize.gemini</A>
+
+  The above page will return a normal 20, but all the links on it will
+return a 22 with a size, then MIME type.
+
+  -spc (Will implement dodgy specs on a whim for $200, Alex)
+
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003013.html">Proposal about content-size and hash
+</A></li>
+	<LI>Next message (by thread): <A HREF="003180.html">Proposal about content-size and hash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3015">[ date ]</a>
+              <a href="thread.html#3015">[ thread ]</a>
+              <a href="subject.html#3015">[ subject ]</a>
+              <a href="author.html#3015">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

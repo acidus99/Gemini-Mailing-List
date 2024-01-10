@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [announce] Delegation of responsibility for spec finalisation
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bannounce%5D%20Delegation%20of%20responsibility%20for%20spec%20finalisation&In-Reply-To=%3C404da8ea-d0e0-a9a5-bf72-aa4749c52452%40scotdoyle.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005827.html">
+   <LINK REL="Next"  HREF="005830.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[announce] Delegation of responsibility for spec finalisation</H1>
+    <B>Scot</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bannounce%5D%20Delegation%20of%20responsibility%20for%20spec%20finalisation&In-Reply-To=%3C404da8ea-d0e0-a9a5-bf72-aa4749c52452%40scotdoyle.com%3E"
+       TITLE="[announce] Delegation of responsibility for spec finalisation">gmi1 at scotdoyle.com
+       </A><BR>
+    <I>Mon Mar  1 21:18:22 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005827.html">[announce] Delegation of responsibility for spec finalisation
+</A></li>
+        <LI>Next message (by thread): <A HREF="005830.html">[announce] Delegation of responsibility for spec finalisation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5828">[ date ]</a>
+              <a href="thread.html#5828">[ thread ]</a>
+              <a href="subject.html#5828">[ subject ]</a>
+              <a href="author.html#5828">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 2/28/21 8:48 PM, Sean Conner wrote:
+&gt;<i>
+</I>&gt;<i>    I've created a few issues already, but gitlab is apparently having issues
+</I>&gt;<i> of its own right now, so for now, the mailing list is still the place to
+</I>&gt;<i> bring these up.  Anyway, while I'm here I might as well weigh in on some of
+</I>&gt;<i> the current proposals.
+</I>
+Regarding Gitlab issue #2 &quot;TLS Close&quot;, may we ease client and
+server implementations by:
+
+1. Not requiring client applications to send TLS close_notify,
+since they indicate end-of-data via the request &lt;CR&gt;&lt;LF&gt; ?
+
+2. Only requiring server applications to send TLS close_notify
+if all data has been sent? If the TCP or TLS connection is
+interrupted by the client or by an intermediary before the server
+application has transmitted all of its data, there doesn't
+seem to be a benefit to sending a close_notify to the client
+and it could also cause various delays which prohibit the server
+application from moving on to other work. For example, an
+unending streaming response would be closed by the client,
+in which case there is no need for a close_notify from the server.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005827.html">[announce] Delegation of responsibility for spec finalisation
+</A></li>
+	<LI>Next message (by thread): <A HREF="005830.html">[announce] Delegation of responsibility for spec finalisation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5828">[ date ]</a>
+              <a href="thread.html#5828">[ thread ]</a>
+              <a href="subject.html#5828">[ subject ]</a>
+              <a href="author.html#5828">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

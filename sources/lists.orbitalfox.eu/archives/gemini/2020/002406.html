@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> gemini+stream://
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bstream%3A//&In-Reply-To=%3C5F37AF38.2020503%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002404.html">
+   <LINK REL="Next"  HREF="002407.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>gemini+stream://</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bstream%3A//&In-Reply-To=%3C5F37AF38.2020503%40marmaladefoo.com%3E"
+       TITLE="gemini+stream://">luke at marmaladefoo.com
+       </A><BR>
+    <I>Sat Aug 15 10:47:36 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002404.html">gemini+stream://
+</A></li>
+        <LI>Next message (by thread): <A HREF="002407.html">gemini+stream://
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2406">[ date ]</a>
+              <a href="thread.html#2406">[ thread ]</a>
+              <a href="subject.html#2406">[ subject ]</a>
+              <a href="author.html#2406">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 15-Aug-2020 00:39, James Tomasino wrote:
+&gt;<i> Several of us had a fruitful discussion about gemini streaming over in the IRC channel tonight. For those of you who don't IRC, the full logs of the channel are available from my weechat logs, updated nightly at 0000UTC:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="gemini://tilde.black:1965/users/fox/irc/log.txt">gemini://tilde.black:1965/users/fox/irc/log.txt</A>
+</I>
+Yes fruitful and robust in a friendly way - I enjoyed it.
+
+Thanks for your write up which is a good and fair summary of some of the 
+key points.
+&gt;<i> I strongly believe there's tangible value in having streaming support for the text/gemini mime-type. We have the lovely chatroom proof-of-concept out there already, and a few minutes of brainstorming came up with speech-to-text broadcast radio using Watson's speech-to-text engine. The cool ideas already floating around solderpunk's head in his gemlog about Gemini applications haven't been forgotten either. There's an untapped goldmine here.
+</I>Personally I don't have a horse in the streaming race in terms of 
+needing it. I think perhaps a good degree of the use cases could be 
+captured by client based polling, but not all. I think things like live 
+streaming of audio over gemini and similar binary streaming is way out 
+of scope and there are better clients and protocols for that. Text 
+streaming maybe, but it is a bit niche IMO and there are other options 
+like IRC.
+&gt;<i> That being said, the protocol has a very simple flow defined currently wherein a client makes a request, the server responds, ends the connection, then the client processes it. Changing that fundamental behavior to support streaming is not an insignificant thing to ask of client authors, and some will have no desire to do so at all.
+</I>For me one of the key benefits and attractions of the gemini protocol is 
+its simplicity, which eases diverse implementation. Client 
+request-&gt;server response and close. You know to expect a fixed block of 
+content from the server that is the payload.
+
+Mixing in a stream mode with the standard document mode does muddy the 
+waters somewhat in terms of what expectations a client will have of the 
+server behaviour, but as you way perhaps the main challenge is that 
+client behaviour needs to be different in each mode. For example, if 
+streaming text, it might be better to use a fixed window size (10 lines 
+or 1 line even).
+
+And clients need to know the difference between a server that is 
+slow/timed out vs one that might push you some more content later.
+&gt;<i> We've talked in the past about possibly serving a different response code to signify to a client that this resource wants to stream, but that was countered with valid reasoning. Tonight I tried making the argument for a text/gemini+stream mime-type instead. Lukee challenged that, and ultimately I have to admit it leaves out one important aspect of serving streaming content: the user should be aware that the resource intends to stream.
+</I>
+Its not just that end users can benefit from advance knowledge of the 
+upcoming interaction, but it is clients too that can take appropriate 
+action, for example to switch rendering mode, to not abandon a long 
+timed stream that might otherwise seem to be broken, to offer a choice 
+to the user, or decide not to handle it further. As we know in gemini 
+there are no other headers we can use to indicate content length or what 
+modes the client can accept.
+
+&gt;<i> Whether we serve a mime-type, response code, or somehow talk solderpunk into content-length information, none of these will be available as information to the user before they select a link. The only way to make it clear to a user that a stream is intended for a link, then, is a protocol indicator.
+</I>&gt;<i>
+</I>&gt;<i> gemini+<A HREF="stream://">stream://</A>
+</I>&gt;<i>
+</I>&gt;<i> That's my recommendation for several reasons:
+</I>&gt;<i>
+</I>&gt;<i> &lt;snip&gt;
+</I>&gt;<i>
+</I>&gt;<i> I believe this answers all the concerns we've had voiced before about streaming. It allows for an optional extension of gemini that explicitly allows for a persistent streaming connection without breaking anything natural or inherent in the core protocol. But please chime in and correct me if I've missed something important.
+</I>I think this is a nice solution, in that it clearly indicates the 
+expectation the client should have about server behaviour and can act 
+accordingly. Similarly as users click/activate links in their clients 
+they will get an indication of a shift in server mode.
+
+I suspect there may still be some corner cases of a text streaming mode 
+that might need to be thought through. For example the streaming display 
+window from a UI point of view. Is this always in the gift of the client 
+or is it something the server/app author would want to determine? I can 
+think of both modes being appropriate for different use cases. One mode 
+might be a news ticker, another a sort of twitter feed (shudder), or a 
+third, to send a &quot;virtual screen&quot; of a formatted status picture.
+
+Similarly for other kinds of binary streaming (if you really want to go 
+down that road), are there other sorts of metadata necessary? I don't 
+know I'm not a specialist in this area at all.
+
+But generally I think its a good solution to give it another protocol name.
+
+Best wishes
+
+  - Luke
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002404.html">gemini+stream://
+</A></li>
+	<LI>Next message (by thread): <A HREF="002407.html">gemini+stream://
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2406">[ date ]</a>
+              <a href="thread.html#2406">[ thread ]</a>
+              <a href="subject.html#2406">[ subject ]</a>
+              <a href="author.html#2406">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

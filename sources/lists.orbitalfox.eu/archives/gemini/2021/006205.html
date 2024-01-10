@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] client certificate expiry
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20client%20certificate%20expiry&In-Reply-To=%3C20210326185448.kncyjy2m6sidiljm%40localhost%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006193.html">
+   <LINK REL="Next"  HREF="006212.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] client certificate expiry</H1>
+    <B>mbays</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20client%20certificate%20expiry&In-Reply-To=%3C20210326185448.kncyjy2m6sidiljm%40localhost%3E"
+       TITLE="[tech] client certificate expiry">mbays at sdf.org
+       </A><BR>
+    <I>Fri Mar 26 18:54:48 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006193.html">[tech] client certificate expiry
+</A></li>
+        <LI>Next message (by thread): <A HREF="006212.html">[tech] client certificate expiry
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6205">[ date ]</a>
+              <a href="thread.html#6205">[ thread ]</a>
+              <a href="subject.html#6205">[ subject ]</a>
+              <a href="author.html#6205">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>* Thursday, 2021-03-25 at 23:59 +0100 - almaember &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">almaember at disroot.org</A>&gt;:
+
+&gt;<i>On Thu, 25 Mar 2021 23:44:59 +0100 mbays &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">mbays at sdf.org</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Does it make sense to give a self-signed client certificate an
+</I>&gt;&gt;<i> expiration date? I think not, and therefore according to RFC5280
+</I>&gt;&gt;<i> section 4.1.2.5, notAfter should be set to 9999-12-31 23:59.
+</I>&gt;&gt;<i> =&gt; <A HREF="https://tools.ietf.org/html/rfc5280#section-4.1.2.5">https://tools.ietf.org/html/rfc5280#section-4.1.2.5</A>
+</I>&gt;<i>
+</I>&gt;<i>To me, it seems that certain clients (I haven't used all of them) allow
+</I>&gt;<i>the user to select an expiration date when generating the certificate.
+</I>&gt;<i>In my opinion, this is the best approach.
+</I>
+Under what circumstances would it make sense to set an expiration date? 
+What does it indicate? RFC5280 says &quot;The certificate validity period is 
+the time interval during which the CA warrants that it will maintain 
+information about the status of the certificate.&quot;. With a self-signed 
+certificate there's no CA, so this seems to be meaningless.
+
+&gt;&gt;<i> notAfter time gives a way to fingerprint clients.
+</I>&gt;<i>That fingerprinting would be highly ineffective (can only detect the
+</I>&gt;<i>client used), and is nothing in comparison to the most important
+</I>&gt;<i>privacy risk right now, which is your IP.
+</I>
+Sure, but I don't think that means it isn't worth dealing with.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 195 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210326/25e598ae/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20210326/25e598ae/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006193.html">[tech] client certificate expiry
+</A></li>
+	<LI>Next message (by thread): <A HREF="006212.html">[tech] client certificate expiry
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6205">[ date ]</a>
+              <a href="thread.html#6205">[ thread ]</a>
+              <a href="subject.html#6205">[ subject ]</a>
+              <a href="author.html#6205">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Username/password authentication strategy
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Username/password%20authentication%20strategy&In-Reply-To=%3CCAG-mZ3jXW1AUc5c-49dN0T_%2BypYVrC3oaxVmG82Rwn0W6HjbKg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002281.html">
+   <LINK REL="Next"  HREF="002286.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Username/password authentication strategy</H1>
+    <B>Peter Vernigorov</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Username/password%20authentication%20strategy&In-Reply-To=%3CCAG-mZ3jXW1AUc5c-49dN0T_%2BypYVrC3oaxVmG82Rwn0W6HjbKg%40mail.gmail.com%3E"
+       TITLE="Username/password authentication strategy">pitr.vern at gmail.com
+       </A><BR>
+    <I>Sun Jul 19 22:27:18 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002281.html">Username/password authentication strategy
+</A></li>
+        <LI>Next message (by thread): <A HREF="002286.html">Username/password authentication strategy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2282">[ date ]</a>
+              <a href="thread.html#2282">[ thread ]</a>
+              <a href="subject.html#2282">[ subject ]</a>
+              <a href="author.html#2282">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks for the reply Alex. My understanding is that your blog post
+talks about how to get the server to request that the client sends the
+certificate, and you are right that many Gemini servers don&#8217;t usually
+do that. When writing Gig framework - <A HREF="https://github.com/pitr/gig">https://github.com/pitr/gig</A> -
+and having the same issue, I noticed that most Go-based Gemini servers
+out there don&#8217;t do this but a quick search showed that it&#8217;s just a
+matter of one line change to get it working properly:
+
+&amp;tls.Config{
+  MinVersion: tls.VersionTLS12,
+  ClientAuth: tls.RequestClientCert // &lt;-- this line, default is NoClientCert
+}
+
+Anyhow, when the client DOES send the certificate, it seems to do it
+in plain text. See this excerpt from TLS handshaking:
+
+...
+- The server sends its ServerKeyExchange message (depending on the
+selected cipher suite, this may be omitted by the server).
+...
+- The client responds with a Certificate message, which contains the
+client's certificate.
+...
+- The client now sends a ChangeCipherSpec record, essentially telling
+the server, &quot;Everything I tell you from now on will be authenticated
+(and encrypted if encryption was negotiated).&quot;
+...
+
+Notice how the certificate is sent before client starts encrypting
+messages. This means that the CN (and other) fields are also in plain
+view and therefore cannot contain secret information.
+
+
+On Sun, Jul 19, 2020 at 10:03 PM Alex Schroeder &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">alex at gnu.org</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> On Sun, 2020-07-19 at 21:26 +0200, Peter Vernigorov wrote:
+</I>&gt;<i> &gt; I am trying to implement a simple authentication for my Gemini site,
+</I>&gt;<i> &gt; and was planning to use a client certificate CN field to pass
+</I>&gt;<i> &gt; username:password pair to server. However, upon reading closely about
+</I>&gt;<i> &gt; the TLS handshake -
+</I>&gt;<i> &gt; <A HREF="https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_handshake">https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_handshake</A>
+</I>&gt;<i> &gt; -
+</I>&gt;<i> &gt; it seems that the client (just like the server) certificate is sent
+</I>&gt;<i> &gt; before the ChangeCipherSpec record, i.e. insecure. That means to me
+</I>&gt;<i> &gt; that the CN field would be passed before the TLS session is started
+</I>&gt;<i> &gt; and therefore not suitable as an authentication medium. Is that
+</I>&gt;<i> &gt; correct?
+</I>&gt;<i>
+</I>&gt;<i> Well, my experience is that you tell the server that you want to verify
+</I>&gt;<i> peer certificates (which is typically off for servers); then the client
+</I>&gt;<i> sends you a server that won't validate if you do nothing else: you have
+</I>&gt;<i> to overwrite the default validation code and return True for
+</I>&gt;<i> everything. Then your code gets the client certificate and now you can
+</I>&gt;<i> do the real validation in your app instead of on the TLS layer.
+</I>&gt;<i>
+</I>&gt;<i> Here's a long blog post:
+</I>&gt;<i> <A HREF="https://alexschroeder.ch/wiki/2020-07-13_Client_Certificates_and_IO%3a%3aSocket%3a%3aSSL_(Perl">https://alexschroeder.ch/wiki/2020-07-13_Client_Certificates_and_IO%3a%3aSocket%3a%3aSSL_(Perl</A>)
+</I>&gt;<i>
+</I>&gt;<i> Here's where I tell my server that I want to verify peers (client
+</I>&gt;<i> certificates) and that I will provide my own verification code:
+</I>&gt;<i> <A HREF="https://alexschroeder.ch/cgit/gemini-wiki/tree/gemini-wiki#n758">https://alexschroeder.ch/cgit/gemini-wiki/tree/gemini-wiki#n758</A>
+</I>&gt;<i>
+</I>&gt;<i> Here's the verification code for the TLS library which accepts
+</I>&gt;<i> anything:
+</I>&gt;<i> <A HREF="https://alexschroeder.ch/cgit/gemini-wiki/tree/gemini-wiki#n775">https://alexschroeder.ch/cgit/gemini-wiki/tree/gemini-wiki#n775</A>
+</I>&gt;<i>
+</I>&gt;<i> Here's some example code that does actual validation, requests a client
+</I>&gt;<i> certificate if none is available, etc:
+</I>&gt;<i> <A HREF="https://alexschroeder.ch/cgit/gemini-wiki/about/#client-certificates">https://alexschroeder.ch/cgit/gemini-wiki/about/#client-certificates</A>
+</I>&gt;<i>
+</I>&gt;<i> Good luck!
+</I>&gt;<i>
+</I>&gt;<i> And yes, I'm using more traditional access tokens for my wiki per
+</I>&gt;<i> default.
+</I>&gt;<i>
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002281.html">Username/password authentication strategy
+</A></li>
+	<LI>Next message (by thread): <A HREF="002286.html">Username/password authentication strategy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2282">[ date ]</a>
+              <a href="thread.html#2282">[ thread ]</a>
+              <a href="subject.html#2282">[ subject ]</a>
+              <a href="author.html#2282">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

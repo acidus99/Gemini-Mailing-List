@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] A Gemini crawler, for statistics about the geminispace
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20A%20Gemini%20crawler%2C%20for%20statistics%20about%20the%20geminispace&In-Reply-To=%3CD40D494A-03E5-433B-9490-E3CE7F07D749%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004183.html">
+   <LINK REL="Next"  HREF="004124.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] A Gemini crawler, for statistics about the geminispace</H1>
+    <B>Petite Abeille</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20A%20Gemini%20crawler%2C%20for%20statistics%20about%20the%20geminispace&In-Reply-To=%3CD40D494A-03E5-433B-9490-E3CE7F07D749%40gmail.com%3E"
+       TITLE="[ANN] A Gemini crawler, for statistics about the geminispace">petite.abeille at gmail.com
+       </A><BR>
+    <I>Fri Dec 18 14:37:00 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004183.html">[ANN] A Gemini crawler, for statistics about the geminispace
+</A></li>
+        <LI>Next message (by thread): <A HREF="004124.html">[ANN] A Gemini crawler, for statistics about the geminispace
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4122">[ date ]</a>
+              <a href="thread.html#4122">[ thread ]</a>
+              <a href="subject.html#4122">[ subject ]</a>
+              <a href="author.html#4122">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+&gt;<i> On Dec 16, 2020, at 16:05, Stephane Bortzmeyer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stephane at sources.org</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> I'm running a Gemini crawler, which gathers metadata about the
+</I>&gt;<i> geminispace.
+</I>
+Along those lines, a couple of one-liners to gather various host &amp; content information:
+
+
+# IP address(es)
+# dig +short mozz.us
+174.138.124.169
+
+
+# geolocation
+# curl --silent <A HREF="https://tools.keycdn.com/geo.json?host=174.138.124.169">https://tools.keycdn.com/geo.json?host=174.138.124.169</A> | jq | gron
+json = {};
+json.data = {};
+json.data.geo = {};
+json.data.geo.asn = 14061;
+json.data.geo.city = &quot;North Bergen&quot;;
+json.data.geo.continent_code = &quot;NA&quot;;
+json.data.geo.continent_name = &quot;North America&quot;;
+json.data.geo.country_code = &quot;US&quot;;
+json.data.geo.country_name = &quot;United States&quot;;
+json.data.geo.datetime = &quot;2020-12-18 09:04:57&quot;;
+json.data.geo.host = &quot;174.138.124.169&quot;;
+json.data.geo.ip = &quot;174.138.124.169&quot;;
+json.data.geo.isp = &quot;DIGITALOCEAN-ASN&quot;;
+json.data.geo.latitude = 40.793;
+json.data.geo.longitude = -74.0247;
+json.data.geo.metro_code = 501;
+json.data.geo.postal_code = &quot;07047&quot;;
+json.data.geo.rdns = &quot;174.138.124.169&quot;;
+json.data.geo.region_code = &quot;NJ&quot;;
+json.data.geo.region_name = &quot;New Jersey&quot;;
+json.data.geo.timezone = &quot;America/New_York&quot;;
+json.description = &quot;Data successfully received.&quot;;
+json.status = &quot;success&quot;;
+
+
+# certificate info
+# cfssl certinfo -domain mozz.us | jq | gron
+json = {};
+json.authority_key_id = &quot;A8:4A:6A:63:04:7D:DD:BA:E6:D1:39:B7:A6:45:65:EF:F3:A8:EC:A1&quot;;
+json.issuer = {};
+json.issuer.common_name = &quot;Let's Encrypt Authority X3&quot;;
+json.issuer.country = &quot;US&quot;;
+json.issuer.names = [];
+json.issuer.names[0] = &quot;US&quot;;
+json.issuer.names[1] = &quot;Let's Encrypt&quot;;
+json.issuer.names[2] = &quot;Let's Encrypt Authority X3&quot;;
+json.issuer.organization = &quot;Let's Encrypt&quot;;
+json.not_after = &quot;2021-01-21T01:36:54Z&quot;;
+json.not_before = &quot;2020-10-23T01:36:54Z&quot;;
+json.pem = &quot;-----BEGIN CERTIFICATE-----\nMIIGJzCCBQ+gAwIBAgISBAK7/ku/XjgmczVT7mmM1cEcMA0GCSqGSIb3DQEBCwUA\nMEoxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MSMwIQYDVQQD\nExpMZXQncyBFbmNyeXB0IEF1dGhvcml0eSBYMzAeFw0yMDEwMjMwMTM2NTRaFw0y\nMTAxMjEwMTM2NTRaMBIxEDAOBgNVBAMTB21venoudXMwggEiMA0GCSqGSIb3DQEB\nAQUAA4IBDwAwggEKAoIBAQDZ4pi5q0QlIxAo8sKNBgInG1BGH584lRghCdnrBsZD\n68IuFlJ3V3wrnfsaNv8IZOHRkvxN2uxDo/oVxCCSNug/Ne4b+Pqw7U8thB9zL46A\nMbrHVtAmloykToDRlOHv/OLp2YRQiW7cD57lxot+9+TPlHsAuMccQXQDMbmhT6bf\nirO4m6F6gRf478YLLVOmpxkLd87dhHa7gO3NwmRroIB/DMLdQRAVAMbdDGTjdCrA\nlToWeHOnPNBLKPmI6M9DCqEXoTbIa9OhpJmo+txlS85O8/RHzXu2fVkgnEnBIcsE\n/ZEh5ytov1SogIXzNQgIJFesaWCqgBPLun4molEnfcq5AgMBAAGjggM9MIIDOTAO\nBgNVHQ8BAf8EBAMCBaAwHQYDVR0lBBYwFAYIKwYBBQUHAwEGCCsGAQUFBwMCMAwG\nA1UdEwEB/wQCMAAwHQYDVR0OBBYEFI3x/VWfHHCG1IfE32kGHZPG4RC6MB8GA1Ud\nIwQYMBaAFKhKamMEfd265tE5t6ZFZe/zqOyhMG8GCCsGAQUFBwEBBGMwYTAuBggr\nBgEFBQcwAYYiaHR0cDovL29jc3AuaW50LXgzLmxldHNlbmNyeXB0Lm9yZzAvBggr\nBgEFBQcwAoYjaHR0cDovL2NlcnQuaW50LXgzLmxldHNlbmNyeXB0Lm9yZy8wgfIG\nA1UdEQSB6jCB54ILYXBpLm1venoudXOCE2FzdHJvYm90YW55Lm1venoudXOCDGNo\nYXQubW96ei51c4ILZGV2Lm1venoudXOCDmdlbWluaS5tb3p6LnVzggtnaXQubW96\nei51c4IRZ29vZHZpYmVzLm1venoudXOCDmdvcGhlci5tb3p6LnVzghRtYWlsLWFy\nY2hpdmUubW96ei51c4IMbWFpbC5tb3p6LnVzgg9taWNoYWVsLm1venoudXOCB21v\nenoudXOCDnBvcnRhbC5tb3p6LnVzgg1wcm94eS5tb3p6LnVzggt3d3cubW96ei51\nczBMBgNVHSAERTBDMAgGBmeBDAECATA3BgsrBgEEAYLfEwEBATAoMCYGCCsGAQUF\nBwIBFhpodHRwOi8vY3BzLmxldHNlbmNyeXB0Lm9yZzCCAQQGCisGAQQB1nkCBAIE\ngfUEgfIA8AB3AJQgvB6O1Y1siHMfgosiLA3R2k1ebE+UPWHbTi9YTaLCAAABdVNQ\n7ygAAAQDAEgwRgIhALmUv4K/i3UcPYCIseckN2nfpk8g+Gi4MZRq6Ybr8/JXAiEA\n00kRkd+19OB2j4VASwsoQatWKasN+yTMnkQWOf2YMbsAdQB9PvL4j/+IVWgkwsDK\nnlKJeSvFDngJfy5ql2iZfiLw1wAAAXVTUO9TAAAEAwBGMEQCICOymh52Ogxx/wjJ\ngo5TEIgfEDtgXvKdfBsVtibLeZQWAiAyiUPq2MBPxn9+KJFhhxE8LRI9VIhpWnHV\n5JlOp2dIYzANBgkqhkiG9w0BAQsFAAOCAQEARqt9QyY4Fq7SBindKcHyrsQ9JtqB\nvfZy5yDKzFwuQZKmk2pxOzapCNRLNeyiEalfIFzrtHI11gr1ZEFHL1rA7pO3ud/j\nM2r0lmvNf8W+kUVf4Gng0TqGyRRh28RDNDCaz8uaYeg5C6BPUIZtHbO6qJBNme2W\noS4Qp0fjjAUvSQwTKDEh5GKnZv4AnJifMRqSXgZ+HgsamqydODRRTszwCMTMGBhO\naUOf+wF9l90T9N3MLDxSdixh4/qMuE0LpIsyeLJJ08ZsmOvOPtar0zxUw8AXMtGG\n62wmZhlY+vXD4Nk6cKTepSCVEHmCLTtckbHfn518wCQEvJZYYVApG0y1QQ==\n-----END CERTIFICATE-----\n&quot;;
+json.sans = [];
+json.sans[0] = &quot;api.mozz.us&quot;;
+json.sans[1] = &quot;astrobotany.mozz.us&quot;;
+json.sans[2] = &quot;chat.mozz.us&quot;;
+json.sans[3] = &quot;dev.mozz.us&quot;;
+json.sans[4] = &quot;gemini.mozz.us&quot;;
+json.sans[5] = &quot;git.mozz.us&quot;;
+json.sans[6] = &quot;goodvibes.mozz.us&quot;;
+json.sans[7] = &quot;gopher.mozz.us&quot;;
+json.sans[8] = &quot;mail-archive.mozz.us&quot;;
+json.sans[9] = &quot;mail.mozz.us&quot;;
+json.sans[10] = &quot;michael.mozz.us&quot;;
+json.sans[11] = &quot;mozz.us&quot;;
+json.sans[12] = &quot;portal.mozz.us&quot;;
+json.sans[13] = &quot;proxy.mozz.us&quot;;
+json.sans[14] = &quot;www.mozz.us&quot;;
+json.serial_number = &quot;349379594475839169414317025618006180741404&quot;;
+json.sigalg = &quot;SHA256WithRSA&quot;;
+json.subject = {};
+json.subject.common_name = &quot;mozz.us&quot;;
+json.subject.names = [];
+json.subject.names[0] = &quot;mozz.us&quot;;
+json.subject_key_id = &quot;8D:F1:FD:55:9F:1C:70:86:D4:87:C4:DF:69:06:1D:93:C6:E1:10:BA&quot;;
+
+
+# retrieve content type
+# openssl s_client -quiet -crlf -connect mozz.us:1965 &lt;&lt;&lt; <A HREF="gemini://mozz.us/">gemini://mozz.us/</A> 2&gt;/dev/null | head -1
+20 text/gemini; lang=en
+
+
+# double check content type
+# openssl s_client -quiet -crlf -connect mozz.us:1965 &lt;&lt;&lt; <A HREF="gemini://mozz.us/">gemini://mozz.us/</A> 2&gt;/dev/null | file --brief --mime-type --mime-encoding -
+text/plain; charset=utf-8
+
+
+# validate encoding
+# openssl s_client -quiet -crlf -connect mozz.us:1965 &lt;&lt;&lt; <A HREF="gemini://mozz.us/">gemini://mozz.us/</A> 2&gt;/dev/null | iconv -f utf-8 -t utf-8 &gt; /dev/null; echo $?
+0
+
+
+# guess language
+# echo $(openssl s_client -quiet -crlf -connect mozz.us:1965 &lt;&lt;&lt; <A HREF="gemini://mozz.us/">gemini://mozz.us/</A> 2&gt;/dev/null ) | polyglot detect | cut -d' ' -f1 | uniq
+English
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004183.html">[ANN] A Gemini crawler, for statistics about the geminispace
+</A></li>
+	<LI>Next message (by thread): <A HREF="004124.html">[ANN] A Gemini crawler, for statistics about the geminispace
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4122">[ date ]</a>
+              <a href="thread.html#4122">[ thread ]</a>
+              <a href="subject.html#4122">[ subject ]</a>
+              <a href="author.html#4122">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

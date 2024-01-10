@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tech] A broken server in the wild, tearing down connection when the  resource does not exist?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BTech%5D%20A%20broken%20server%20in%20the%20wild%2C%20tearing%20down%20connection%20when%0A%20the%20%20resource%20does%20not%20exist%3F&In-Reply-To=%3CYWBwF5XpqSRY2z0b%40sources.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007241.html">
+   <LINK REL="Next"  HREF="007227.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tech] A broken server in the wild, tearing down connection when the  resource does not exist?</H1>
+    <B>Stephane Bortzmeyer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BTech%5D%20A%20broken%20server%20in%20the%20wild%2C%20tearing%20down%20connection%20when%0A%20the%20%20resource%20does%20not%20exist%3F&In-Reply-To=%3CYWBwF5XpqSRY2z0b%40sources.org%3E"
+       TITLE="[Tech] A broken server in the wild, tearing down connection when the  resource does not exist?">stephane at sources.org
+       </A><BR>
+    <I>Fri Oct  8 17:21:43 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007241.html">[Tech] A broken server in the wild, tearing down connection when the resource does not exist?
+</A></li>
+        <LI>Next message (by thread): <A HREF="007227.html">Gemini Usenet Newsgroup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7280">[ date ]</a>
+              <a href="thread.html#7280">[ thread ]</a>
+              <a href="subject.html#7280">[ subject ]</a>
+              <a href="author.html#7280">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Sep 26, 2021 at 08:30:31PM +0200,
+ Stephane Bortzmeyer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stephane at sources.org</A>&gt; wrote 
+ a message of 8 lines which said:
+
+&gt;<i> It seems there is a specific brand of server that immediately resets
+</I>&gt;<i> the connection when you ask a non-existing file (such as robots.txt)
+</I>&gt;<i> instead of replying with 51.
+</I>&gt;<i> 
+</I>&gt;<i> You can find it for instance at fulton.software, blog.snowfrost.garden
+</I>&gt;<i> or cee64.us.
+</I>&gt;<i> 
+</I>&gt;<i> Any idea what it is?
+</I>
+Eleven capsules has apparently this issue (they probably all run the
+same software):
+
+ gemini.real-ity.com
+ gmni.kizaing.ca
+ stillspinning.cc
+ lertsenem.com
+ iich.space
+ capsule.adrianhesketh.com
+ gemini.barca.mi.it
+ tryops.net
+ fulton.software
+ lord.re
+ cee64.us
+
+Robert khuxkm Miles suggests:
+
+The culprit seems to be the blog software written by Fulton
+(presumably of fulton.software)[1]. While Fulton's `rfs` server
+correctly handles non-existant files[2], `blog` lacks the final
+`header 51 'File not found'` of `rfs`. Thus, when `blog` terminates
+with no input, the connection is reset with no output. I would presume
+that this is the same issue plaguing cee64.us, given the similarity of
+their main page to Fulton's own fulton.software, and the same issue
+plaguing blog.snowfrost.garden, which seems to be running a modified
+version of `blog`, if it is running one at all. If
+blog.snowfrost.garden isn't in fact running `blog`, I would presume
+the issue to be a similar omission of the final `header 51 'File not
+found'` in whatever their software is written in.
+
+[1]: <A HREF="https://git.sr.ht/~fultonbrowne/g9srv/tree/master/item/blog">https://git.sr.ht/~fultonbrowne/g9srv/tree/master/item/blog</A>
+[2]: <A HREF="https://git.sr.ht/~fultonbrowne/g9srv/tree/master/item/rfs">https://git.sr.ht/~fultonbrowne/g9srv/tree/master/item/rfs</A>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007241.html">[Tech] A broken server in the wild, tearing down connection when the resource does not exist?
+</A></li>
+	<LI>Next message (by thread): <A HREF="007227.html">Gemini Usenet Newsgroup
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7280">[ date ]</a>
+              <a href="thread.html#7280">[ thread ]</a>
+              <a href="subject.html#7280">[ subject ]</a>
+              <a href="author.html#7280">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

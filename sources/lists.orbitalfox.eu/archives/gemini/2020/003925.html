@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> IDN with Gemini?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C20201209081219.GA14045%40sources.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003920.html">
+   <LINK REL="Next"  HREF="003934.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>IDN with Gemini?</H1>
+    <B>Stephane Bortzmeyer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C20201209081219.GA14045%40sources.org%3E"
+       TITLE="IDN with Gemini?">stephane at sources.org
+       </A><BR>
+    <I>Wed Dec  9 08:12:20 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003920.html">IDN with Gemini?
+</A></li>
+        <LI>Next message (by thread): <A HREF="003934.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3925">[ date ]</a>
+              <a href="thread.html#3925">[ thread ]</a>
+              <a href="subject.html#3925">[ subject ]</a>
+              <a href="author.html#3925">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Dec 08, 2020 at 05:20:38PM -0500,
+ Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote 
+ a message of 29 lines which said:
+
+&gt;<i>   I was also surprised that UTF-8 characters *are* possible in DNS packets
+</I>&gt;<i> [2].
+</I>
+It is possible from the beginning, and it has been explicitely said in
+RFC 2181, twenty-three years ago. &quot;any binary string whatever can be
+used as the label of any resource record&quot;.
+
+<A HREF="gemini://gemini.bortzmeyer.org/rfc-mirror/rfc2181.txt">gemini://gemini.bortzmeyer.org/rfc-mirror/rfc2181.txt</A>
+
+&gt;<i> I was, however, a bit disappointed that &quot;g&#233;meaux.bortzmeyer.org&quot; and
+</I>&gt;<i> &quot;xn--gmeaux-bva.bortzmeyer.org&quot; didn't exist.
+</I>
+Then it means your DNS resolver is broken because
+xn--gmeaux-bva.bortzmeyer.org (the A-label, the Punycode form) is in
+the DNS.
+
+% dig AAAA +noidnout xn--gmeaux-bva.bortzmeyer.org  
+
+; &lt;&lt;&gt;&gt; DiG 9.11.5-P4-5.1+deb10u2-Debian &lt;&lt;&gt;&gt; AAAA +noidnout xn--gmeaux-bva.bortzmeyer.org
+;; global options: +cmd
+;; Got answer:
+;; -&gt;&gt;HEADER&lt;&lt;- opcode: QUERY, status: NOERROR, id: 18694
+;; flags: qr rd ra ad; QUERY: 1, ANSWER: 4, AUTHORITY: 7, ADDITIONAL: 7
+
+;; OPT PSEUDOSECTION:
+; EDNS: version: 0, flags: do; udp: 4096
+;; QUESTION SECTION:
+;xn--gmeaux-bva.bortzmeyer.org. IN AAAA
+
+;; ANSWER SECTION:
+xn--gmeaux-bva.bortzmeyer.org. 86400 IN	CNAME radia.bortzmeyer.org.
+xn--gmeaux-bva.bortzmeyer.org. 86400 IN	RRSIG CNAME 8 3 86400 (
+				20201218215750 20201204120249 10731 bortzmeyer.org.
+				gKtCZZKsjTLdFsSKYtgvz1S+pRkZbxweG+6XOxVhJgYG
+				gRzfWB8lhjSPaQ6BNK6YyGQreonObF1R43MDY5oQ66ti
+				hNOfPp3/gz4wm5eAy3uzFi7xiwclshsLd0yZEaOPsTo6
+				fYKfRp5XCG/yZOg85YdZxJB9LK9q+RIyOycGmI0= )
+radia.bortzmeyer.org.	86400 IN AAAA 2001:41d0:302:2200::180
+...
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003920.html">IDN with Gemini?
+</A></li>
+	<LI>Next message (by thread): <A HREF="003934.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3925">[ date ]</a>
+              <a href="thread.html#3925">[ thread ]</a>
+              <a href="subject.html#3925">[ subject ]</a>
+              <a href="author.html#3925">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

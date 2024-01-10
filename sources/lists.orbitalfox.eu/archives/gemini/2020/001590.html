@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] tanelorn.city: a public gemini host for writers
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20tanelorn.city%3A%20a%20public%20gemini%20host%20for%20writers&In-Reply-To=%3C20200612183916.15f5f495%40ventiloplattform.tastytea.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001588.html">
+   <LINK REL="Next"  HREF="001591.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] tanelorn.city: a public gemini host for writers</H1>
+    <B>tastytea</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20tanelorn.city%3A%20a%20public%20gemini%20host%20for%20writers&In-Reply-To=%3C20200612183916.15f5f495%40ventiloplattform.tastytea.de%3E"
+       TITLE="[ANN] tanelorn.city: a public gemini host for writers">tastytea+gemini at tastytea.de
+       </A><BR>
+    <I>Fri Jun 12 17:39:22 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001588.html">[ANN] tanelorn.city: a public gemini host for writers
+</A></li>
+        <LI>Next message (by thread): <A HREF="001591.html">[ANN] tanelorn.city: a public gemini host for writers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1590">[ date ]</a>
+              <a href="thread.html#1590">[ thread ]</a>
+              <a href="subject.html#1590">[ subject ]</a>
+              <a href="author.html#1590">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 2020-06-12 11:36-0400 Matthew Graybosch &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">hello at matthewgraybosch.com</A>&gt;
+wrote:
+
+&gt;<i> On Fri, 12 Jun 2020 15:08:36 +0000
+</I>&gt;<i> <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Amen. Happy to have another server!  
+</I>&gt;<i> 
+</I>&gt;<i> Thanks.
+</I>&gt;<i> 
+</I>&gt;<i> &gt; However, in Bombadillo I get the error &quot;Cert hostname does not
+</I>&gt;<i> &gt; match&quot;. Make sure you're serving up the right certificate!  
+</I>&gt;<i> 
+</I>&gt;<i> Sorry to hear that!
+</I>&gt;<i> 
+</I>&gt;<i> I just downloaded Bombadillo so I could see for myself, and checked my
+</I>&gt;<i> Gemserv config on kanajana. As far as I can tell my config is OK and
+</I>&gt;<i> I'm using the correct cert for each hostname, but the problem might be
+</I>&gt;<i> that kanajana isn't only serving tanelorn.city but demifiend.org and
+</I>&gt;<i> starbreaker.org as well.
+</I>&gt;<i> 
+</I>&gt;<i> I'm not sure what to do about it, though since all three sites are
+</I>&gt;<i> accessible using Castor and bollux.
+</I>&gt;<i> 
+</I>
+If I interpret the output from `openssl s_client`&#185; correctly, the CN of
+the certificate is set to &#8220;Matthew Graybosch&#8221;, not a &#8220;tanelorn.city&#8221;,
+as it is custom for HTTPS. However, while the specification states in
+4.2 that &#8220;Clients can validate TLS connections however they like&#8221;, it
+recommends a &#8220;lightweight &quot;TOFU&quot; certificate-pinning system&#8221; without
+mentioning hostname validation.
+
+Kristall and elpher also show no error, by the way.
+
+Kind regards, tastytea
+
+&#185; echo -e '<A HREF="gemini://tanelorn.city\r\n\r\n">gemini://tanelorn.city\r\n\r\n</A>' \
+  | openssl s_client -verify_hostname tanelorn.city tanelorn.city:1965
+
+-- 
+Get my PGP key with `gpg --locate-keys <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">tastytea at tastytea.de</A>` or at
+&lt;<A HREF="https://tastytea.de/tastytea.asc">https://tastytea.de/tastytea.asc</A>&gt;.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001588.html">[ANN] tanelorn.city: a public gemini host for writers
+</A></li>
+	<LI>Next message (by thread): <A HREF="001591.html">[ANN] tanelorn.city: a public gemini host for writers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1590">[ date ]</a>
+              <a href="thread.html#1590">[ thread ]</a>
+              <a href="subject.html#1590">[ subject ]</a>
+              <a href="author.html#1590">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

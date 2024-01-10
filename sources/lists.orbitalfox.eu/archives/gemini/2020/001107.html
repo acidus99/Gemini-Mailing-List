@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> The lang parameter to text/gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20The%20lang%20parameter%20to%20text/gemini&In-Reply-To=%3C20200528184321.GE21188%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001104.html">
+   <LINK REL="Next"  HREF="001109.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>The lang parameter to text/gemini</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20The%20lang%20parameter%20to%20text/gemini&In-Reply-To=%3C20200528184321.GE21188%40SDF.ORG%3E"
+       TITLE="The lang parameter to text/gemini">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Thu May 28 19:43:21 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001104.html">gemserv: Non-gemini files have mime type text/gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="001109.html">The lang parameter to text/gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1107">[ date ]</a>
+              <a href="thread.html#1107">[ thread ]</a>
+              <a href="subject.html#1107">[ subject ]</a>
+              <a href="author.html#1107">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ahoy!
+
+Let's pick this issue up again, in its own thread this time.
+
+My original proposal was that we add a new parameter to the text/gemini
+media type to specify the human language a document is written in.
+Following the lead of RFC1766, the parameter would be called &quot;lang&quot; and
+take values based on ISO 639 language codes and ISO 3166 country codes.
+
+As far as I recall, nobody actually objected to this as something we
+should do in principle, instead we just got distracted by various edge
+cases.  But I guess I may as well ask now: does anybody think this is a
+*bad* idea?
+
+The two concerete motivations for adding this were:
+
+1. Screenreaders need to know this information to know which settings to
+use for their text-to-speech engine: the same letters correspond to
+different sounds in different languages.
+
+2. Search engines may want to to offer their users the ability to ask
+for results only in a particular set of languages.
+
+Can anybody think of additional likey use cases besides these?
+
+Since these are the main motivations, that also means that &quot;normal
+clients&quot; (i.e. for use by sighted human users) have minimal use for this
+information and can more or less ignore it.  So, in considering the edge
+cases that came up, we should be thinking about screenreaders and search
+engines, not the stuff that most people here are presumably using day to
+day.
+
+The first question was what to do if the parameter is not specified.
+
+I was, and am, opposed to putting a default language in the spec.
+
+In the case of a screenreader, it seems entirely sensible to me that the
+user of any such screenreader should be able to specify their own
+default based on their primary reading languages, and that the software
+should make it easy to change this when it is clear there is a problem.
+It's not really the Gemini spec's job to say anything about this.
+
+The case of search engines is trickier, since their resulting database
+does not have just one user but many.  This was where autodetection
+first came up, which some people seemed to get carried away with.  Fully
+generalised autodetection of language is computationally expensive and
+it gives answers with some uncertainty.  A large search engine project
+*may* want to think about it - the idea of clients for humans users
+doing it as a routine response to a lack of a lang parameter is nuts.
+
+A simpler option for search engines might simply be to interpret a user
+request of &quot;only show me results in languages X&quot; as &quot;don't show results
+*known* to be in languages other than X&quot;.  i.e documents for which the
+language is not known are always possible search results.  This is
+imperfect, but, well, sometimes life is.
+
+In short, I am not sure that the lack of specified default behaviour is
+a good reason not to go ahead with this.
+
+The second question was what to do when a document contains text in
+multiple languages.  This is a trickier question.  I'd prefer not to
+define a new line type to handle it.  We could at least allow the lang
+parameter to accept multiple values separated by some delimiter.  It
+wouldn't be clear from that which parts were what, but it could at least
+act as a strong hint to screenreaders.  Search engines could include
+such pages in results if any of the delcared languages matched one the
+user had requested.  Actually, perhaps that's a perfectly adequate
+solution, in which case this is not trickier at all.
+
+There's also the question of directionality, which I think might require
+a separate parameter entirely.  But let's focus on the language thing
+for now.  How does the above sound to people?
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001104.html">gemserv: Non-gemini files have mime type text/gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="001109.html">The lang parameter to text/gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1107">[ date ]</a>
+              <a href="thread.html#1107">[ thread ]</a>
+              <a href="subject.html#1107">[ subject ]</a>
+              <a href="author.html#1107">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

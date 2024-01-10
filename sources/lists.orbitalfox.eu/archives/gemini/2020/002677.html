@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> HTML as an escape hatch
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20HTML%20as%20an%20escape%20hatch&In-Reply-To=%3C87v9gk9p85.fsf%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002674.html">
+   <LINK REL="Next"  HREF="002679.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>HTML as an escape hatch</H1>
+    <B>Gary Johnson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20HTML%20as%20an%20escape%20hatch&In-Reply-To=%3C87v9gk9p85.fsf%40disroot.org%3E"
+       TITLE="HTML as an escape hatch">lambdatronic at disroot.org
+       </A><BR>
+    <I>Fri Sep 11 18:51:06 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002674.html">HTML as an escape hatch
+</A></li>
+        <LI>Next message (by thread): <A HREF="002679.html">HTML as an escape hatch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2677">[ date ]</a>
+              <a href="thread.html#2677">[ thread ]</a>
+              <a href="subject.html#2677">[ subject ]</a>
+              <a href="author.html#2677">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It's true that the Gemini protocol is able to serve up a variety of file
+formats given its explicit requirement of mime-types in response
+metadata. I'm also happy with the simple stripped-down nature of the
+Gemtext format and am not looking for any major changes to be made to it
+at this time.
+
+However, I do want to throw in a counterpoint to recommending people
+abandon Gemtext and serve up more Markdown or HTML in Geminispace.
+
+While it is true that they can all be served up by the Gemini protocol,
+it is not currently the case that very many Gemini clients can render
+anything other than Gemtext. If enough people start to publish in
+Markdown and/or HTML, we may soon find our experience of surfing
+Geminispace to largely be about downloading Markdown and HTML pages
+whenever we click on links and then having to open the local files in
+our format-specific renderers of choice. HTML pages also reintroduce the
+issue of potentially requiring clients to download any number of
+auxiliary pages in order to render them. While we could hope that Gemini
+publishers will stick to a minimal subset of HTML (for each user's
+varying definition of &quot;minimal&quot;), there is no way to enforce this.
+
+This does not sound like much fun to me, and it would impose a much
+higher development cost on each browser developer as they would have to
+implement rendering engines for Gemtext, Markdown, HTML, etc. in order
+to provide their users with a more seamless browsing experience. Given
+uneven distribution of resources to maintain and extend clients, this
+could drive us down a path in which a smaller and smaller number of
+browsers come to dominate Geminispace as the number of requirements on
+what they have to render continues to increase.
+
+In a worst-case scenario, we ultimately end up recreating a post-web
+monopoly of Geminispace.
+
+Just my 2c, but I'd like to see more folks encouraging the use of
+text/gemini or text/plain in Geminispace rather than punting to more
+complex formats except in special cases. If anyone is feeling super
+restricted by Gemtext, I'd encourage them to spend some time on
+Astrobotany (<A HREF="gemini://astrobotany.mozz.us">gemini://astrobotany.mozz.us</A>) for inspiration.
+
+YMMV,
+  Gary
+
+
+Alex // nytpu &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">alex at nytpu.com</A>&gt; writes:
+
+&gt;&gt;<i> If there is a good middle ground between HTML and Gemini, I'll happily
+</I>&gt;&gt;<i> support that as its own MIME type
+</I>&gt;<i> While I understand the desire to have something novel, there really is
+</I>&gt;<i> no need to reinvent the wheel here. The whole point of having mimetypes
+</I>&gt;<i> in gemini is so you can use whatever format you want to serve content.
+</I>&gt;<i> If you want basic linking and sections, use gemtext. If you want rich
+</I>&gt;<i> formatting (emphasis, boldface, etc) use markdown or asciidoc or any of
+</I>&gt;<i> a million lightweight markup languages. If you want deep control over
+</I>&gt;<i> the presentation of the document, use html. If you want no formatting at
+</I>&gt;<i> all, use plaintext.  There's near certainty that there's an existing
+</I>&gt;<i> format that generally suits your needs unless you're doing something
+</I>&gt;<i> like math formulae, and even then you could just link to an image or use
+</I>&gt;<i> a pdf and LaTeX.
+</I>&gt;<i>
+</I>&gt;<i> The thing is, I think people have a misconstrued idea of what gemtext
+</I>&gt;<i> is. The long and short of it is that it's a gophermap with headers and
+</I>&gt;<i> code blocks. Sure, the syntax is different but at the end of the day
+</I>&gt;<i> that's all it is. If you can't live without stronger control over the
+</I>&gt;<i> styling and document structure you should just use a subset of html
+</I>&gt;<i> (There's absolutely nothing wrong with that! You can still browse gemini
+</I>&gt;<i> without having a gemini capsule yourself). You could even serve your
+</I>&gt;<i> html over gemini if you so chose, although I'm not sure how well it'd be
+</I>&gt;<i> supported by clients.
+</I>&gt;<i>
+</I>&gt;&gt;<i> but I think the final most important complexity that text/gemini
+</I>&gt;&gt;<i> should address is that it shouldn't be a &quot;living standard&quot;. That has a
+</I>&gt;&gt;<i> huge cost to site admins and developers.
+</I>&gt;<i> I think this should aim to be the highest priority over &quot;making gemtext
+</I>&gt;<i> better.&quot; Obviously there's an exception right now since it's in the
+</I>&gt;<i> early stages and not finalized yet, but even now there shouldn't be
+</I>&gt;<i> massive changes made to the spec at all, let alone changes that turn
+</I>&gt;<i> gemtext into an ad hoc, impossible-to-parse implementation of half of
+</I>&gt;<i> html.
+</I>
+
+-- 
+GPG Key ID: 7BC158ED
+Use `gpg --search-keys lambdatronic' to find me
+Protect yourself from surveillance: <A HREF="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</A>
+=======================================================================
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+Please avoid sending me MS-Office attachments.
+See <A HREF="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002674.html">HTML as an escape hatch
+</A></li>
+	<LI>Next message (by thread): <A HREF="002679.html">HTML as an escape hatch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2677">[ date ]</a>
+              <a href="thread.html#2677">[ thread ]</a>
+              <a href="subject.html#2677">[ subject ]</a>
+              <a href="author.html#2677">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

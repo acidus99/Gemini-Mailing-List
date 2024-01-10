@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC] Backwards-compatible metadata in Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3CCAD2gp_QkFoYTRXsfk1V01qmrvaKcniLK5T4%3DJiJbFyX%3DXF0WvQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005589.html">
+   <LINK REL="Next"  HREF="005581.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC] Backwards-compatible metadata in Gemini</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3CCAD2gp_QkFoYTRXsfk1V01qmrvaKcniLK5T4%3DJiJbFyX%3DXF0WvQ%40mail.gmail.com%3E"
+       TITLE="[SPEC] Backwards-compatible metadata in Gemini">cowan at ccil.org
+       </A><BR>
+    <I>Wed Feb 24 19:07:10 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005589.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="005581.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5579">[ date ]</a>
+              <a href="thread.html#5579">[ thread ]</a>
+              <a href="subject.html#5579">[ subject ]</a>
+              <a href="author.html#5579">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Feb 24, 2021 at 11:25 AM PJ vM &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">pjvm742 at disroot.org</A>&gt; wrote:
+
+
+&gt;<i> It is maybe important to note that much Gemini content is written with
+</I>&gt;<i> just a text editor, by people who might not want to neatly structure
+</I>&gt;<i> their metadata according to the convention. I'm not sure it would be a
+</I>&gt;<i> good thing for search engines to rely much on metadata - the term
+</I>&gt;<i> &quot;search engine optimisation&quot; comes to mind.
+</I>&gt;<i>
+</I>
+Yes, and the Geminisphere may come to that too.  But that depends on us.
+Since there's no obvious way to commercialize it (except by selling a
+whomped-up client or server, in which case it has to be really super-duper
+to beat the free competition), there aren't those kinds of pressures.
+
+Hits, after all, aren't a benefit to the server owner: they are a cost.
+The only way to benefit monetarily from a hit is if you sell something as a
+result.
+
+The user can also look for a line that says &quot;This work is licensed
+&gt;<i> under...&quot;. Metadata need not be structured for human users to understand
+</I>&gt;<i> it.
+</I>&gt;<i>
+</I>
+Of course.  Digital signatures aren't either: there was one case at Bell
+Labs where someone signed a letter by mentioning what the recipient ate
+last week at their shared lunch.  Nevertheless, people do find it handy to
+have their computers help them along.
+
+Anyway, I think there are uses for in-file metadata, particularly for
+&gt;<i> searching a large collection of documents. And sure, it could be useful
+</I>&gt;<i> to adopt a convention (either the &quot;-:&quot; line thing or the key-value pairs
+</I>&gt;<i> at the end of the file thing, or something else entirely) just so that
+</I>&gt;<i> people would have one way to do this that is commonly understood, and so
+</I>&gt;<i> that broadly usable tools could be written for using metadata. However,
+</I>&gt;<i> I don't think it is useful in most of Geminispace, and it should not be
+</I>&gt;<i> used in places where there isn't a need for it. I definitely think we
+</I>&gt;<i> should avoid it becoming an expectation for people who write stuff, or
+</I>&gt;<i> for Gemini clients.
+</I>&gt;<i>
+</I>
+I agree 100%.
+
+I also think we should choose a convention that is simple and not easily
+&gt;<i> extensible. The key-value pairs at the end of the file thing seems a bit
+</I>&gt;<i> better on non-extensibility - it's definitely better on readability.
+</I>&gt;<i>
+</I>
+Part of the problem there is without a signal like &quot;=: &quot; that isn't likely
+to be ordinary content, it's easy to get confused.  Consider this:
+
+=====CUT HERE=====
+This exchange of dialogue is an example of the rhetorical figure called
+&quot;stichomythia&quot;, where each character in a play says one line or part of a
+line and then the next character responds with the next line or part of a
+line; longer speeches are not allowed in such sequences.
+
+Ferdinand: How well he's read, to reason against reading!
+Dumain: Proceeded well, to stop all good proceeding!
+Longaville: He weeds the corn and still lets grow the weeding.
+Biron: The spring is near when green geese are a-breeding.
+Dumain: How follows that?
+Biron: Fit in his place and time.
+Dumain: In reason nothing
+Biron: Something then in rhyme.
+author: John Cowan
+author: William Shakespeare
+title: Stichomythia definition and illustration
+title: Love's Labor's Lost I.i
+=====CUT HERE=====
+
+It's obvious to a human that the last four lines are metadata and the rest
+is content.  But a metadata processor's job is much simplified if the last
+four lines are:
+
+=: author John Cowan
+=: author William Shakespeare
+=: title Stichomythia definition and illustration
+=: title Love's Labor's Lost I.i
+
+That makes it clear that &quot;Longaville&quot;, for example, is not a key.  This is
+Lars's proposal.  To it I add the convention that a link name beginning
+with =: contains metadata applicable to the linked resource.  And that's
+it.  I don't see that this is particularly more extensible than the
+&quot;unmarked key-value pairs at the end&quot; convention.  As for readability, if
+we can get used to seeing &quot;=&gt; &quot; as a link, we can get used to &quot;=: &quot; as
+metadata.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210224/5fa2e72e/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210224/5fa2e72e/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005589.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="005581.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5579">[ date ]</a>
+              <a href="thread.html#5579">[ thread ]</a>
+              <a href="subject.html#5579">[ subject ]</a>
+              <a href="author.html#5579">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

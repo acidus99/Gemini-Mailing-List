@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Specs and 0-length &lt;META&gt;
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Specs%20and%200-length%20%3CMETA%3E&In-Reply-To=%3C87361o43cd.fsf%40guixSD.i-did-not-set--mail-host-address--so-tickle-me%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003063.html">
+   <LINK REL="Next"  HREF="003006.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Specs and 0-length &lt;META&gt;</H1>
+    <B>Nicol&#242; Balzarotti</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Specs%20and%200-length%20%3CMETA%3E&In-Reply-To=%3C87361o43cd.fsf%40guixSD.i-did-not-set--mail-host-address--so-tickle-me%3E"
+       TITLE="Specs and 0-length &lt;META&gt;">anothersms at gmail.com
+       </A><BR>
+    <I>Thu Nov  5 08:25:54 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003063.html">Specs and 0-length &lt;META&gt;
+</A></li>
+        <LI>Next message (by thread): <A HREF="003006.html">Licensing content for your capsule
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3064">[ date ]</a>
+              <a href="thread.html#3064">[ thread ]</a>
+              <a href="subject.html#3064">[ subject ]</a>
+              <a href="author.html#3064">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Solderpunk,
+
+thanks for the reply.  
+
+&gt;<i> It seems to me that an empty &lt;META&gt; with a status code of 3x must
+</I>&gt;<i> necessarily be invalid as it makes no sense to redirect to nowhere.
+</I>&gt;<i>
+</I>I agree on it either be optional or mandatory.  And (unless implying
+some default-value like &quot;/&quot;, &quot;./&quot; or something) you are right on &quot;3X
+\r\n&quot; being meaningless.
+
+In the wild we saw 5X status without meta (example [1]).
+I myself when implementing a server after reading the specs decided that
+&quot;51 \r\n&quot; was fine (because adding &quot;Resource not found&quot; after 51 seemed
+to me like a repetition), but on the other side &quot;20 text/gemini&quot; was
+just better than &quot;20 &quot;.
+
+Indeed, removing the paragraph of Section 3.3 would help, but I'd also
+replace _may_ (i.e.  The contents of &lt;META&gt; _may_ provide additional
+information on the failure) with _should_.
+
+Thanks!
+Nicol&#242;
+
+[1] <A HREF="https://github.com/MasterQ32/kristall/issues/43">https://github.com/MasterQ32/kristall/issues/43</A>
+
+&quot;Solderpunk&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at posteo.net</A>&gt; writes:
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> Good questions!
+</I>&gt;<i>
+</I>&gt;<i> The spec says (at the end of Section 3.3) that:
+</I>&gt;<i>
+</I>&gt;&gt;<i> If &lt;META&gt; is an empty string, the MIME type MUST default to
+</I>&gt;&gt;<i> &quot;text/gemini; charset=utf-8&quot;. The text/gemini media type is defined in
+</I>&gt;&gt;<i> section 5.
+</I>&gt;<i>
+</I>&gt;<i> which implies quite clearly that an empty &lt;META&gt; is possible, at least
+</I>&gt;<i> in the case of a status code of 20.  It's pretty vague, though, about
+</I>&gt;<i> exactly what this means, and when else it might be allowed.
+</I>&gt;<i>
+</I>&gt;<i> Since a response header is defined as:
+</I>&gt;<i>
+</I>&gt;&gt;<i> &lt;STATUS&gt;&lt;SPACE&gt;&lt;META&gt;&lt;CR&gt;&lt;LF&gt;
+</I>&gt;<i>
+</I>&gt;<i> an empty &lt;META&gt; strictly means &quot;20 \r\n&quot;, with &quot;20\r\n&quot; being totally
+</I>&gt;<i> invalid.  This probably was not what I had in mind at the time.
+</I>&gt;<i>
+</I>&gt;<i> It seems to me that an empty &lt;META&gt; with a status code of 3x must
+</I>&gt;<i> necessarily be invalid as it makes no sense to redirect to nowhere.
+</I>&gt;<i>
+</I>&gt;<i> An empty &lt;META&gt; with a status code of 1x could in principle be handled
+</I>&gt;<i> by using a client-specific default input prompt, but I think it would be
+</I>&gt;<i> quite poor design to actually return such a response.  Users should
+</I>&gt;<i> always know what it is they're being asked to input, even if they visit
+</I>&gt;<i> the URL that leads to the prompt directly, without the context of some
+</I>&gt;<i> other URL which linked to it.
+</I>&gt;<i>
+</I>&gt;<i> Simplicity would dictate that either &lt;META&gt; may always be empty or must
+</I>&gt;<i> never be empty.  There are two good reasons above not to allow &lt;META&gt; to
+</I>&gt;<i> be empty in some cases, so maximum simplicity argues for it never be
+</I>&gt;<i> allowed.  We *could* just remove the final paragraph of Section 3.3
+</I>&gt;<i> which specifies a default media type for successful responses.  Has
+</I>&gt;<i> anybody written a server which actually makes use of this default?  Does
+</I>&gt;<i> anybody see a particularly compelling reason to keep it in there?  It
+</I>&gt;<i> saves only 11 bytes which is trivial compared to TLS overhead and TCP
+</I>&gt;<i> overhead.
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i> Solderpunk
+</I>&gt;<i>
+</I>&gt;<i> On Mon Nov 2, 2020 at 2:44 PM CET, Nicol&#242; Balzarotti wrote:
+</I>&gt;&gt;<i> Hello!
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> MasterQ32, ew0k, jcowan and I were wondering about the _minimum_ allowed
+</I>&gt;&gt;<i> length for the &lt;META&gt; field.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> MasterQ32: To my understanding, &lt;META&gt; should be non-empty in any case,
+</I>&gt;&gt;<i> but it may not contain useful information.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> ew0k: My interpretation after re-reading the specification is that 1) A
+</I>&gt;&gt;<i> browser should be able to handle a zero-length meta field, because the
+</I>&gt;&gt;<i> specification does not un-ambigously state a minimum length - and 2) you
+</I>&gt;&gt;<i> should post a request for clarification on the mailing list, so that the
+</I>&gt;&gt;<i> specification is updated to be clear on the topic
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> me: In section 3.1 there's a maximum length, but not a minimum, and
+</I>&gt;&gt;<i> under 3.2.4,5,6 there's &quot;may provide&quot;, and under 3.3 it says it can be
+</I>&gt;&gt;<i> an empty string.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Can the specs be changed so that it is stated exactly if/when an empty
+</I>&gt;&gt;<i> &lt;meta&gt; is allowed?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Thanks!
+</I>&gt;&gt;<i> Nicol&#242;
+</I></PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003063.html">Specs and 0-length &lt;META&gt;
+</A></li>
+	<LI>Next message (by thread): <A HREF="003006.html">Licensing content for your capsule
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3064">[ date ]</a>
+              <a href="thread.html#3064">[ thread ]</a>
+              <a href="subject.html#3064">[ subject ]</a>
+              <a href="author.html#3064">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

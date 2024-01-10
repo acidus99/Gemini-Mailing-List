@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Uploading content over gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Uploading%20content%20over%20gemini&In-Reply-To=%3CE8F426BA-854A-41C4-8BEE-B56A4466EDA9%40alexschroeder.ch%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007596.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Uploading content over gemini</H1>
+    <B>Alex Schroeder</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Uploading%20content%20over%20gemini&In-Reply-To=%3CE8F426BA-854A-41C4-8BEE-B56A4466EDA9%40alexschroeder.ch%3E"
+       TITLE="Uploading content over gemini">alex at alexschroeder.ch
+       </A><BR>
+    <I>Fri Nov 12 09:24:16 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007596.html">Uploading content over gemini
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7597">[ date ]</a>
+              <a href="thread.html#7597">[ thread ]</a>
+              <a href="subject.html#7597">[ subject ]</a>
+              <a href="author.html#7597">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I think that Titan exists and is on the same level of complexity as Gemini, and it&#8217;s used in Lagrange, Elpher with Gemini Write, and a bunch of command line tools.
+
+I think the details of POST requests are tricky: another encoding, parameters in the headers, parameters in the body. Even a PUT might be simpler. But again, you have header parameters to consider. In a way, Titan is just a PUT request with a fixed number of headers (parameters). It&#8217;s the perfect trade off.
+
+But as I wrote on <A HREF="https://alexschroeder.ch/wiki/2021-11-05_Capsules_for_Phoebe:">https://alexschroeder.ch/wiki/2021-11-05_Capsules_for_Phoebe:</A>
+
+&#8220;after yet another discussion on the Gemini IRC channel where people said that the Titan protocol was a bad fit for Gemini, or that it was only fit for the particular wiki needs I had, or that writing stuff on Gemini via the web or uploading files via FTP or SCP was good enough. Well, I disagree. And not only do I disagree, but I wrote plenty of solutions:
+
+Titan, obviously &#8211; I made it central to Phoebe; I wrote a command line client; I wrote an extension called Gemini Write for Elpher, an Emacs-based Gemini client
+Spartan &#8211; out of curiosity, I implemented a Spartan plugin for Phoebe; I wrote a command line client
+HTTPS &#8211; I implemented a web plugin for Phoebe, both for browsing and for editing
+WebDAV &#8211; I implemented a WebDAV plugin for Phoebe and made sure it worked for both cadaver and Gnome Files
+Hopefully it is understandable that I have little patience for people complaining about the existing solutions. There are so many of them, all I want to see is people supporting anything, anything at all, for their clients.
+
+Luckily, thankfully, @jk has added Titan support to Lagrange.&#8221;
+
+I would love for these endless circular discussions to end one day and for people to just write the client they want. Perhaps this is the main problem: people keep thinking about new ways to upload content because they don&#8217;t see many clients supporting it, thinking that the existing ideas must be too complex. But that is not true. I even implemented the Iapetus proposal for both client and server! All these proposals don&#8217;t need to be discussed, they just need to be implemented &#8211; and as I have shown, I think they can be implemented faster than they can be discussed on the mailing list, IRC, or anywhere else.
+
+Just do it.
+
+I ended up writing instructions on how to use it for my capsules (i.e. not wikis), in case you haven&#8217;t tried Lagrange:
+
+<A HREF="https://transjovian.org:1965/phoebe/page/Capsules">https://transjovian.org:1965/phoebe/page/Capsules</A>
+
+<A HREF="https://transjovian.org:1965/phoebe/page/Capsule%20update%20using%20Lagrange%20on%20the%20phone">https://transjovian.org:1965/phoebe/page/Capsule%20update%20using%20Lagrange%20on%20the%20phone</A>
+
+<A HREF="https://transjovian.org:1965/phoebe/page/Capsule%20update%20using%20Lagrange%20on%20the%20desktop">https://transjovian.org:1965/phoebe/page/Capsule%20update%20using%20Lagrange%20on%20the%20desktop</A>
+
+Here&#8217;s the Emacs Lisp code I used to add Titan to Elpher:
+
+<A HREF="https://alexschroeder.ch/cgit/gemini-write/about/">https://alexschroeder.ch/cgit/gemini-write/about/</A>
+
+Here&#8217;s a short video of how it can look:
+
+<A HREF="https://alexschroeder.ch/videos/gemini_write_demo.mp4">https://alexschroeder.ch/videos/gemini_write_demo.mp4</A>
+
+Cheers
+
+Alex
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007596.html">Uploading content over gemini
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7597">[ date ]</a>
+              <a href="thread.html#7597">[ thread ]</a>
+              <a href="subject.html#7597">[ subject ]</a>
+              <a href="author.html#7597">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

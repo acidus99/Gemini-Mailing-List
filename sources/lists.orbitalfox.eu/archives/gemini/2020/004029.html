@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> How do You publish to your gemlog?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20How%20do%20You%20publish%20to%20your%20gemlog%3F&In-Reply-To=%3CC7QTTNRSYHOD.73DKJMIO9WBV%40fistik%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004028.html">
+   <LINK REL="Next"  HREF="004034.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>How do You publish to your gemlog?</H1>
+    <B>Ecmel Berk Canl&#305;er</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20How%20do%20You%20publish%20to%20your%20gemlog%3F&In-Reply-To=%3CC7QTTNRSYHOD.73DKJMIO9WBV%40fistik%3E"
+       TITLE="How do You publish to your gemlog?">me at ecmelberk.com
+       </A><BR>
+    <I>Sat Dec 12 13:04:10 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004028.html">How do You publish to your gemlog?
+</A></li>
+        <LI>Next message (by thread): <A HREF="004034.html">How do You publish to your gemlog?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4029">[ date ]</a>
+              <a href="thread.html#4029">[ thread ]</a>
+              <a href="subject.html#4029">[ subject ]</a>
+              <a href="author.html#4029">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I probably have the hackiest setup here, based on shell scripts, duct
+tape, and some JS on the deployment parts.
+
+<A HREF="https://git.ebc.li/admicos/blog">https://git.ebc.li/admicos/blog</A>
+
+I create a new `.gmi` file under `pages/&lt;category&gt;` and add some
+boilerplate header and footer lines (for my shell-based templating
+thing)
+
+Then I edit the `post_list` file to add the new page. If I put the `.gmi`
+extension on the filename here, the page becomes Gemini-exclusive.
+
+Finally, I push my changes into the repo above, which pings a HTTP
+endpoint I am listening to via <A HREF="https://nodered.org,">https://nodered.org,</A> clones the repo and
+runs the shell script inside the `.makeshift.yml` file, that runs the
+site generator scripts and pushes the results into the proper place.
+
+I would make the Node-RED script thing public too, but the only proper
+way to do so locks you into a single project (And also there probably
+are some personal information in them). There is an outdated version
+at <A HREF="https://git.ebc.li/makeshift/makeshift,">https://git.ebc.li/makeshift/makeshift,</A> but it went through some
+changes at my end, mainly adding error handling and notifications.
+
+There are a few screenshots on my Mastodon if you want to visualize the
+jank going on here: <A HREF="https://toot.ebc.li/@admi/105132131906807252">https://toot.ebc.li/@admi/105132131906807252</A>
+
+--
+Have a nice /(day|night|week(end)?)/
+~ Ecmel B. Canl&#305;er
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004028.html">How do You publish to your gemlog?
+</A></li>
+	<LI>Next message (by thread): <A HREF="004034.html">How do You publish to your gemlog?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4029">[ date ]</a>
+              <a href="thread.html#4029">[ thread ]</a>
+              <a href="subject.html#4029">[ subject ]</a>
+              <a href="author.html#4029">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

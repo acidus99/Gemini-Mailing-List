@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A proposed scheme for parsing preformatted alt text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C87363ox4jc.fsf%40pop-os.i-did-not-set--mail-host-address--so-tickle-me%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002687.html">
+   <LINK REL="Next"  HREF="002676.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A proposed scheme for parsing preformatted alt text</H1>
+    <B>Meff</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C87363ox4jc.fsf%40pop-os.i-did-not-set--mail-host-address--so-tickle-me%3E"
+       TITLE="A proposed scheme for parsing preformatted alt text">meff at meff.me
+       </A><BR>
+    <I>Fri Sep 11 06:31:51 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002687.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+        <LI>Next message (by thread): <A HREF="002676.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2665">[ date ]</a>
+              <a href="thread.html#2665">[ thread ]</a>
+              <a href="subject.html#2665">[ subject ]</a>
+              <a href="author.html#2665">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>(Apologies for the double email Sean, I forgot to Reply All)
+
+Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; writes:
+
+&gt;<i>   And back in the mid-90s, there *were* plenty of web clients.  Easily a
+</I>&gt;<i> dozen that were easily available and that was back in time when it was easy
+</I>&gt;<i> enough to parse HTML, there was no CSS and no Javascript, and it was
+</I>&gt;<i> conceivable that someone could write a simple web browser in a weekend [1].
+</I>&gt;<i>
+</I>&gt;<i>   Then Sandra Snan sent the following link:
+</I>&gt;<i>
+</I>&gt;<i> 	<A HREF="https://drewdevault.com/2020/03/18/Reckless-limitless-scope.html">https://drewdevault.com/2020/03/18/Reckless-limitless-scope.html</A>
+</I>&gt;<i>
+</I>&gt;<i> Wherein it's mentioned that the current &quot;state of the web&quot; is described by
+</I>&gt;<i> 114,000,000 words spread across 1,217 standards documents.  You get here by
+</I>&gt;<i> incremental changes, all of which are &quot;easy&quot; and &quot;it would be so
+</I>&gt;<i> nice.&quot;
+</I>
+I agree with this. I understand that there's a couple points here that
+the alt-text discussion is trying to solve:
+
+* Formatting hints for non-human clients
+** Specifically this benefits users that may be visually impaired and
+   their use of tools such as screen readers
+* Hints or descriptions for human readers
+
+I don't see a way out of this without making Gemtext much more
+complicated than it is now. As it is, parsing Gemtext preformatted
+blocks requires holding onto state, which no other portion of Gemtext
+requires. Adding hints will make parsing these blocks even more
+complicated. And then the interpretation question comes in: how do we
+interpret these blocks that adorn preformatted text. Will these blocks
+be abused. Will complicated clients adopt a de-facto meaning for these,
+leaving simpler clients to wither?
+
+There are so many more questions that can come up. If I'm trying to
+represent data, should Gemtext convey semantic information? If I'm
+rendering the contents of longform text, should Gemtext convey layout
+information? And how do we reify layouts between different languages and
+their narrative structures? Should Gemtext support compression for large
+payloads? What about caching? (ETags come to mind.) I mean, if I'm
+distributing copies of Project Gutenberg books, I don't want to force
+someone to download uncompressed text when they can get the same content
+compressed in often half the time, especially in low/bad connectivity
+situations. Oh and how about math? I see lots of discussion about code,
+but how do we represent math? How do we give Gemini browsers rendering
+hints for math? The potential here to add complexity is endless!
+
+&gt;<i>
+</I>&gt;<i>   Also, don't forget that Gemini can *easily* serve up HTML documents.  And
+</I>&gt;<i> Markdown documents.  And PDF.  And a host of other documentation formats
+</I>&gt;<i> that all do what you want to do.  And then some.
+</I>&gt;<i>
+</I>&gt;<i>   But hey, I can play this game.  I added the following non-standard
+</I>&gt;<i> document:
+</I>&gt;<i>
+</I>&gt;<i> 	<A HREF="gemini://gemini.conman.org/test/preformat.gemini">gemini://gemini.conman.org/test/preformat.gemini</A>
+</I>&gt;<i>
+</I>&gt;<i> that contains &quot;machine readable text&quot; at the opening preformatted marker,
+</I>&gt;<i> and a &quot;human readable text&quot; on the ending preformatted marker, just to give
+</I>&gt;<i> an indication of what it might look like and what might be done with it. 
+</I>&gt;<i> Enough talk, *someone* has to do an implementation to scare the bejeezus out
+</I>&gt;<i> of everyone (not that it's particularly scary in what I did).
+</I>
+Thanks for putting the rubber to the road!
+
+I'm just not a fan of trying to bundle more in Gemtext. I'd rather we
+try to diversify the formats of content that are available. I think HTML
+is a great fallback that can answer almost all the questions I posed
+earlier, the questions that are under discussion for alt text, and 
+most questions of document presentation. HTML doesn't need to be deeply
+tied into a DOM with gobs of Javascript and CSS to work. And there's
+plaintext, PDFs, XML, JSON, tons of formats for all sorts of use
+cases. I'd rather not shove a round peg into a square hole, but that's
+just me.
+
+- meff
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002687.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+	<LI>Next message (by thread): <A HREF="002676.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2665">[ date ]</a>
+              <a href="thread.html#2665">[ thread ]</a>
+              <a href="subject.html#2665">[ subject ]</a>
+              <a href="author.html#2665">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

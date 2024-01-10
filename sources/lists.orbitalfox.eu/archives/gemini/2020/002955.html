@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Using netcat with gemini (was Re: A question regarding the spec)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Using%20netcat%20with%20gemini%20%28was%20Re%3A%20A%20question%20regarding%20the%20spec%29&In-Reply-To=%3C20201028174949.3aacb57db999f1cc8247b764%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002958.html">
+   <LINK REL="Next"  HREF="002956.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Using netcat with gemini (was Re: A question regarding the spec)</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Using%20netcat%20with%20gemini%20%28was%20Re%3A%20A%20question%20regarding%20the%20spec%29&In-Reply-To=%3C20201028174949.3aacb57db999f1cc8247b764%40gmail.com%3E"
+       TITLE="Using netcat with gemini (was Re: A question regarding the spec)">linde.philip at gmail.com
+       </A><BR>
+    <I>Wed Oct 28 16:49:49 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002958.html">Using netcat with gemini (was Re: A question regarding the spec)
+</A></li>
+        <LI>Next message (by thread): <A HREF="002956.html">Using netcat with gemini (was Re: A question regarding the spec)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2955">[ date ]</a>
+              <a href="thread.html#2955">[ thread ]</a>
+              <a href="subject.html#2955">[ subject ]</a>
+              <a href="author.html#2955">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, 28 Oct 2020 12:04:28 -0400
+&quot;Chris Vittal&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">chris at vittal.dev</A>&gt; wrote:
+
+&gt;<i> A properly formed gemini request is a fully qualified URL with a scheme
+</I>&gt;<i> and authority.
+</I>
+Not in this case. In a request, it is only necessary to specify the
+authority and optionally a path. From the spec (0.14.2):
+
+&gt;<i> If the scheme of the URL is not specified, a scheme of <A HREF="gemini://">gemini://</A> is
+</I>&gt;<i> implied.
+</I>
+So the server really should treat both requests as equivalent.
+
+Furthermore, I think it's wrong of the server not to serve the same
+resource for &quot;gemini.circumlunar.space&quot; and &quot;gemini.circumlunar.space/&quot;.
+The spec says that the URI is syntactically compatible with the generic
+URI syntax except that the userinfo subcomponent of the generic
+authority is not allowed. Serving different content for &quot;/&quot; and
+unspecified path is another difference from the generic URI syntax that
+is not specified. RFC 3986:
+
+&gt;<i> In general, a URI that uses the generic syntax for authority with an
+</I>&gt;<i> empty path should be normalized to a path of &quot;/&quot;.
+</I>
+This is a should and not a must, but I also think it's bad behavior
+practically to force a client to make another request for something
+that should really be an implementation detail in the server. I also
+don't see any practical reasons one might want to distinguish the two.
+
+-- 
+Philip
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201028/31efaa61/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201028/31efaa61/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002958.html">Using netcat with gemini (was Re: A question regarding the spec)
+</A></li>
+	<LI>Next message (by thread): <A HREF="002956.html">Using netcat with gemini (was Re: A question regarding the spec)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2955">[ date ]</a>
+              <a href="thread.html#2955">[ thread ]</a>
+              <a href="subject.html#2955">[ subject ]</a>
+              <a href="author.html#2955">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

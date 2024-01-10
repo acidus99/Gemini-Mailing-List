@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20sizes%2C%20the%20explosion%20of%20responise%20codes%20%28was%20Re%3A%0A%20Caching%20and%20status%20codes%29&In-Reply-To=%3CCAD2gp_RUcrJK3qHRy4Ncj2ENYLEhvKAUnLQgAR%3DeogvB5QcrkA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003183.html">
+   <LINK REL="Next"  HREF="003114.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20sizes%2C%20the%20explosion%20of%20responise%20codes%20%28was%20Re%3A%0A%20Caching%20and%20status%20codes%29&In-Reply-To=%3CCAD2gp_RUcrJK3qHRy4Ncj2ENYLEhvKAUnLQgAR%3DeogvB5QcrkA%40mail.gmail.com%3E"
+       TITLE="Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)">cowan at ccil.org
+       </A><BR>
+    <I>Mon Nov  9 22:52:36 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003183.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+        <LI>Next message (by thread): <A HREF="003114.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3186">[ date ]</a>
+              <a href="thread.html#3186">[ thread ]</a>
+              <a href="subject.html#3186">[ subject ]</a>
+              <a href="author.html#3186">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Nov 9, 2020 at 4:33 PM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+
+
+&gt;<i> The major problem here is timezones.  Time zone information is
+</I>&gt;<i> complicated, and from what I've seen, operating system specific (the C
+</I>&gt;<i> standard doesn't mention it; POSIX does it one way; Windows another) so
+</I>&gt;<i> that's a complication for both servers and clients.
+</I>&gt;<i>
+</I>
+ISO 8601 doesn't use named timezones, only offsets, but the best policy is
+to do everything in UTC, which is pretty universally available on all
+operating systems now.  It's perfectly fine to just write
+&quot;2020-11-09T22:14:05Z&quot;.
+
+
+&gt;<i> Also, does the concept apply to each path component?  Or only the end?
+</I>&gt;<i>
+</I>
+I would say &quot;The end&quot;, but I would write it as a query term:  <A HREF="gemini://">gemini://</A>
+example.com/test?since=2020-11-09T22:14:05Z.  After all, the path elements
+aren't necessarily actual objects with modification dates (in Amazon S3,
+for example, they are just part of the name).
+
+In addition, you could use the &quot;inode/x-empty&quot; MIME-type instead of a
+different protocol response.
+
+But, like you, I doubt this is worth doing.  Servers should advise clients
+about whether the author thinks the result should be cached, and clients
+can do what they like about it.  (There are any number of ways for the
+author to communicate this intent; it doesn't have to be part of the
+content.)
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+I am expressing my opinion.  When my honorable and gallant friend is
+called, he will express his opinion.  This is the process which we
+call Debate.                   --Winston Churchill
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201109/e35508dc/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201109/e35508dc/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003183.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+	<LI>Next message (by thread): <A HREF="003114.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3186">[ date ]</a>
+              <a href="thread.html#3186">[ thread ]</a>
+              <a href="subject.html#3186">[ subject ]</a>
+              <a href="author.html#3186">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] IRIs, IDNs, and all that international jazz
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3C20201223140009.qkdbaj53uibutp2e%40localhost%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004289.html">
+   <LINK REL="Next"  HREF="004326.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] IRIs, IDNs, and all that international jazz</H1>
+    <B>mbays at sdf.org</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3C20201223140009.qkdbaj53uibutp2e%40localhost%3E"
+       TITLE="[spec] IRIs, IDNs, and all that international jazz">mbays at sdf.org
+       </A><BR>
+    <I>Wed Dec 23 14:00:09 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004289.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+        <LI>Next message (by thread): <A HREF="004326.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4323">[ date ]</a>
+              <a href="thread.html#4323">[ thread ]</a>
+              <a href="subject.html#4323">[ subject ]</a>
+              <a href="author.html#4323">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>* Tuesday, 2020-12-22 at 16:13 +0100 - Solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at posteo.net</A>&gt;:
+
+&gt;<i>What I'd be most interested in hearing, at this point, is client 
+</I>&gt;<i>authors letting me know whether the standard library in the language 
+</I>&gt;<i>their client is implemented in can straightforwardly:
+</I>&gt;<i>
+</I>&gt;<i>1. Parse and relativise URLs with non-ASCII characters (so, yes, okay,
+</I>&gt;<i>   technically not URLs at all, you know what I mean) in paths and/or
+</I>&gt;<i>   domains?
+</I>&gt;<i>2. Transform back and forth between URIs and IRIs?
+</I>&gt;<i>3. Do DNS lookups of IDNs without them being punycoded first?  You can
+</I>&gt;<i>   test this with r&#228;ksm&#246;rg&#229;s.josefsson.org.
+</I>
+I've looked into the situation in Haskell. It isn't nearly as good as 
+I'd expected. The standard uri library 'network-uri' is strictly 3986. 
+There is an 'iri' library, but it isn't widely used and doesn't seem to 
+be very actively maintained: I can't even get it to install with recent 
+ghc (ghc-8.8.4). It only deals with parsing and rendering, afaict 
+there's no normalisation or &quot;absolutising&quot;, nor anything on transforming 
+between URIs and IRIs.
+
+As for question 3, the answer appears to be no. In ghci:
+&gt;<i> :set -package network
+</I>package flags have changed, resetting and loading new packages...
+&gt;<i> import Network.Socket
+</I>&gt;<i> getAddrInfo (Just $ defaultHints {addrSocketType = Stream}) (Just &quot;r&#228;ksm&#246;rg&#229;s.josefsson.org&quot;) (Just &quot;1965&quot;)
+</I>*** Exception: Network.Socket.getAddrInfo (called with preferred socket type/protocol: AddrInfo {addrFlags = [], addrFamily = AF_UNSPEC, addrSocketType = Stream, addrProtocol = 0, addrAddress = 0.0.0.0:0, addrCanonName = Nothing}, host name: Just &quot;r\228ksm\246rg\229s.josefsson.org&quot;, service name: Just &quot;1965&quot;): does not exist (Name or service not known)
+
+So library support isn't perfect. However: converting between 
+utf8-encoded IRIs and URIs seems pretty trivial to implement by hand 
+(Step 2 in section 3.1 of the rfc, and its inverse), and there are 
+punycode implementations in standard haskell libraries (e.g. in the 
+'encoding' package), so I am not at all scared by option 3. I'd just 
+convert IRIs to URIs for internal use and manipulation, then convert 
+back when displaying, and punycode when making requests. I'm not sure 
+I'm not being naive here -- someone please explain the subtleties (or 
+tell me to read the existing threads on this more carefully) if so!
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 195 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201223/ee90c268/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201223/ee90c268/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004289.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+	<LI>Next message (by thread): <A HREF="004326.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4323">[ date ]</a>
+              <a href="thread.html#4323">[ thread ]</a>
+              <a href="subject.html#4323">[ subject ]</a>
+              <a href="author.html#4323">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

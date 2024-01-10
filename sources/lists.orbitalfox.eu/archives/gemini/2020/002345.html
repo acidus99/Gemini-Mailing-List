@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Getting slammed by a client
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Getting%20slammed%20by%20a%20client&In-Reply-To=%3C732f7eca-c72c-340f-8b5e-e73572f10eb0%40riseup.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002340.html">
+   <LINK REL="Next"  HREF="002348.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Getting slammed by a client</H1>
+    <B>mojibake</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Getting%20slammed%20by%20a%20client&In-Reply-To=%3C732f7eca-c72c-340f-8b5e-e73572f10eb0%40riseup.net%3E"
+       TITLE="Getting slammed by a client">mojibake at riseup.net
+       </A><BR>
+    <I>Sat Jul 25 17:06:42 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002340.html">Getting slammed by a client
+</A></li>
+        <LI>Next message (by thread): <A HREF="002348.html">Getting slammed by a client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2345">[ date ]</a>
+              <a href="thread.html#2345">[ thread ]</a>
+              <a href="subject.html#2345">[ subject ]</a>
+              <a href="author.html#2345">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>That's great - Thanks Alex. Will try this.
+
+On 25/07/2020 14:32, Alex Schroeder wrote:
+&gt;<i> (Resending because it seems that my mail disappeared somewhere.)
+</I>&gt;<i>
+</I>&gt;<i> 2200 hits in the last few days...
+</I>&gt;<i>
+</I>&gt;<i> I'm going to setup a fail2ban rule.  Adapt the datepattern to your
+</I>&gt;<i> logfiles. Basically any successful connection counts as &quot;a failed login
+</I>&gt;<i> attempt&quot;. Of these, you may have 20 in a 40s time window, which is what
+</I>&gt;<i> I think is a reasonable upper limit for humans and bots. If you're
+</I>&gt;<i> crawling the site faster than that, you get banned for 10min by the
+</I>&gt;<i> firewall.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> /etc/fail2ban/jail.d/alex.conf:
+</I>&gt;<i>
+</I>&gt;<i> [alex-gemini]
+</I>&gt;<i> enabled = true
+</I>&gt;<i> port    = 1965
+</I>&gt;<i> logpath = /home/alex/farm/gemini-wiki.log
+</I>&gt;<i> findtime = 40
+</I>&gt;<i> maxretry = 20
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> /etc/fail2ban/filter.d/alex-gemini.conf:
+</I>&gt;<i>
+</I>&gt;<i> [Init]
+</I>&gt;<i> # 2018/08/25-09:08:55 CONNECT TCP Peer: &quot;[000.000.000.000]:56281&quot;
+</I>&gt;<i> Local: &quot;[000.000.000.000]:70&quot;
+</I>&gt;<i> datepattern = ^%%Y/%%m/%%d-%%H:%%M:%%S
+</I>&gt;<i>
+</I>&gt;<i> [Definition]
+</I>&gt;<i> # ANY match in the logfile counts!
+</I>&gt;<i> failregex = CONNECT TCP Peer: &quot;\[&lt;HOST&gt;\]:\d+&quot;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> I also activated the recidive rule in fail2ban. This means that people
+</I>&gt;<i> who get banned by fail2ban repeatedly get banned for even longer times
+</I>&gt;<i> (hours instead of minutes). This is in the first file again:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> /etc/fail2ban/jail.d/alex.conf:
+</I>&gt;<i>
+</I>&gt;<i> [recidive]
+</I>&gt;<i> enabled = true
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> I use this system for my websites, my gopher sites, and now for gemini,
+</I>&gt;<i> too.
+</I>&gt;<i>
+</I>&gt;<i> Cheers
+</I>&gt;<i> Alex
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002340.html">Getting slammed by a client
+</A></li>
+	<LI>Next message (by thread): <A HREF="002348.html">Getting slammed by a client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2345">[ date ]</a>
+              <a href="thread.html#2345">[ thread ]</a>
+              <a href="subject.html#2345">[ subject ]</a>
+              <a href="author.html#2345">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

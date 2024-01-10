@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> An observation about client certificates
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20observation%20about%20client%20certificates&In-Reply-To=%3C20200511092101.GJ7305%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000555.html">
+   <LINK REL="Next"  HREF="000562.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>An observation about client certificates</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20observation%20about%20client%20certificates&In-Reply-To=%3C20200511092101.GJ7305%40brevard.conman.org%3E"
+       TITLE="An observation about client certificates">sean at conman.org
+       </A><BR>
+    <I>Mon May 11 10:21:01 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000555.html">An observation about client certificates
+</A></li>
+        <LI>Next message (by thread): <A HREF="000562.html">An observation about client certificates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#558">[ date ]</a>
+              <a href="thread.html#558">[ thread ]</a>
+              <a href="subject.html#558">[ subject ]</a>
+              <a href="author.html#558">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great solderpunk once stated:
+&gt;<i> 
+</I>&gt;<i> Anyway, at some point yesterday I got tired of filling out `openssl`s
+</I>&gt;<i> prompts when making new certs and just gave blank answers to everything,
+</I>&gt;<i> which would be the requests you noticed.  Are you quite sure that your
+</I>&gt;<i> server handled them just fine as the logs indicate?
+</I>
+  If it doesn't, I have bigger issues.  But I was unable to reproduce what I
+was seeing, but I didn't actually get around to producing a certificate
+with an empty issuer and subject field.  
+
+&gt;<i> If I remember
+</I>&gt;<i> rightly the SSL handshake seemed to fail when I did this so I quickly
+</I>&gt;<i> reverted to putting something non-zero in there.
+</I>
+  Well, I told the TLS layer that I didn't want *it* to verify the
+certificate, and the only validation *I* do prior to request specific
+checks, is to check the date.  And for my &quot;/private&quot; subdirectory, all I do
+is return 'true'---I don't bother checking the actual certificate.
+
+&gt;<i> We should talk about logging formats some time.  Molly Brown keeps logs
+</I>&gt;<i> too (I keep meaning to make a nice graph showing the wave of traffice
+</I>&gt;<i> that came in after we hit HN), in an ad-hoc format that doesn't match
+</I>&gt;<i> yours below at all (unsurprisingly).  Having a standard format would
+</I>&gt;<i> facilitate tools to monitor/visualise logs.
+</I>
+  I log via syslog(), which handles the timestamps for me (and log rotation,
+and a whole bunch of other stuff related to logging).  I place the name of
+the fields to make later processing a bit easier, but as far as I can tell,
+the only thing I log that you don't is the issuer and subject from any
+certificates presented, and that was to satisfy my own curiousity (and to
+potentially troubleshoot any issues).
+
+  But there's really not much to log, other than remote address, request,
+status, and potentially the issuer/subject of any given certificate (and
+even that might be optional).  
+
+  -spc
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000555.html">An observation about client certificates
+</A></li>
+	<LI>Next message (by thread): <A HREF="000562.html">An observation about client certificates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#558">[ date ]</a>
+              <a href="thread.html#558">[ thread ]</a>
+              <a href="subject.html#558">[ subject ]</a>
+              <a href="author.html#558">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

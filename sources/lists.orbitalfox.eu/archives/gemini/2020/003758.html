@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Multiple Language support (was Re: [ANN] chess puzzles on gemini)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Multiple%20Language%20support%20%28was%20Re%3A%20%5BANN%5D%20chess%20puzzles%20on%20gemini%29&In-Reply-To=%3C20201202235334.GH24194%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003755.html">
+   <LINK REL="Next"  HREF="003759.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Multiple Language support (was Re: [ANN] chess puzzles on gemini)</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Multiple%20Language%20support%20%28was%20Re%3A%20%5BANN%5D%20chess%20puzzles%20on%20gemini%29&In-Reply-To=%3C20201202235334.GH24194%40brevard.conman.org%3E"
+       TITLE="Multiple Language support (was Re: [ANN] chess puzzles on gemini)">sean at conman.org
+       </A><BR>
+    <I>Wed Dec  2 23:53:34 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003755.html">[ANN] chess puzzles on gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="003759.html">Multiple Language support (was Re: [ANN] chess puzzles on gemini)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3758">[ date ]</a>
+              <a href="thread.html#3758">[ thread ]</a>
+              <a href="subject.html#3758">[ subject ]</a>
+              <a href="author.html#3758">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great C&#244;me Chilliet once stated:
+&gt;<i> Hello,
+</I>
+  Hello.
+
+&gt;<i> Has anyone worked on content available in multiple language on gemini?
+</I>&gt;<i> What is the most common practice, some /en at start/end of path, and links
+</I>&gt;<i> at the page bottom to switch language?
+</I>
+  I'm working on that right now for GLV-1.12556 [1].  The planned support
+(which should be available in an hour or so) is to allow a person to set
+both the default language [2] and character set [3][4] server wide, per
+host, per directory or per file [5] in the configuration file.
+
+  There are other ways of solving this (special file extensions, a map of
+filenames to languages, etc.) but that's how I'm solving this particular
+issue.
+
+  -spc
+
+[1]	<A HREF="https://github.com/spc476/GLV-1.12556">https://github.com/spc476/GLV-1.12556</A>
+
+[2]	No default.  If not set, the lang paramter for text/* MIME types
+	will not be set.
+
+[3]	Also no default, and I suspect no one will really use this except
+	for maybe at the directory or file level for legacy text files.  But
+	as long as I was doing the lang= parameter, I thought I might as
+	well do the charset= parameter.
+
+[4]	These two settings cascade down through the configuration file.  You
+	can set it server wide and override it at the host, directory or
+	file levels.
+
+[5]	Technically, per content handler.  The built-in handlers for
+	GLV-1.12556 include a directory handler, a file handler (so you can
+	reference individual files not in the main diretory) and
+	userdirectories.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003755.html">[ANN] chess puzzles on gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="003759.html">Multiple Language support (was Re: [ANN] chess puzzles on gemini)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3758">[ date ]</a>
+              <a href="thread.html#3758">[ thread ]</a>
+              <a href="subject.html#3758">[ subject ]</a>
+              <a href="author.html#3758">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

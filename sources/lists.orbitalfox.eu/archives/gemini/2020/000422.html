@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200201180034.GA2644%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000419.html">
+   <LINK REL="Next"  HREF="000361.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200201180034.GA2644%40SDF.ORG%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Sat Feb  1 18:00:34 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000419.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000361.html">Adding a content size meta?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#422">[ date ]</a>
+              <a href="thread.html#422">[ thread ]</a>
+              <a href="subject.html#422">[ subject ]</a>
+              <a href="author.html#422">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Okay, I'm going to update the spec-spec this weekend to replace the
+current RFC-1896 text wrapping with the new &quot;wrap long lines but don't
+join short lines&quot; approach with everybody seems either to agree is an
+improvement or to feel indifferent about, and which nobody objected to
+for the past week or so either on this list or to me directly.
+
+My plan is to replace the entirety of section 1.3.5.3 with the below.
+Does anybody want to suggest any minor changes to this text to remove
+ambiguity or anything like that?
+
+Cheers,
+Solderpunk
+
+```
+1.3.5.3 Text display
+
+Textual content for Gopher is typically &quot;hard-wrapped&quot;, i.e. composed
+of lines no longer than (typically) 80 characters.  Each line of text
+is printed to the screen as-is.  In contrast, in HTML content on the
+web, browsers ignore the length of lines of text and instead &quot;reflow&quot;
+text to a width appropriate for the display device - lines of text in
+a HTML file which are &quot;too long&quot; get split up, while consecutive
+lines which are &quot;too short&quot; get joined together.  Gemini adopts a
+strategy between these two approaches, designed to strike a balance 
+between implementation complexity, flexibility of display width, and
+support for common text formatting patterns.
+
+Lines of text in a text/gemini document which are not link lines (i.e.
+do not begin with &quot;=&gt;&quot;) which are longer than can fit on a client's
+display device SHOULD be &quot;wrapped&quot; to fit, i.e. long lines should be
+split (ideally at whitespace or at hyphens) into multiple consecutive
+lines of a device-appropriate width.  Recall that text/gemini
+processing is strictly line-based: the above wrapping is applied to
+each line of text independently.  Multiple consecutive lines which
+are shorter than the client's display device MUST NOT be combined.
+
+Blank lines receive no special treatment: they are ordinary text
+lines, with a display length of zero.  Thus, they fit on any
+client's display device and never need to be wrapped.  Each
+individual blank line in a text/gemini document MUST be rendered by
+the client as an individual blank line.
+
+In order to take full advantage of this method of text formatting,
+authors of text/gemini content SHOULD avoid hard-wrapping to a
+specific fixed width.  Most text editors can be configured to
+&quot;soft-wrap&quot;, i.e. to write this kind of file while displaying the long
+lines wrapped to fit the author's display device.
+
+Authors who insist on hard-wrapping their content MUST be aware that
+the content will display neatly on clients whose display device is as
+wide as the hard-wrapped length or wider, but will appear with
+irregular line widths on narrower clients.
+```
+
+On Thu, Jan 23, 2020 at 11:13:51AM +0000, solderpunk wrote:
+&gt;<i> On Wed, Jan 22, 2020 at 11:51:37PM +0100, Brian Evans wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; So long as it is not a mandate, but an optional part of the spec, I
+</I>&gt;<i> &gt; withdraw my objection.
+</I>&gt;<i> 
+</I>&gt;<i> I don't intend anything to be mandatory except link lines, ordinary text
+</I>&gt;<i> lines and possibly ``` raw/verbatim/preformatted handling (I'm not 100%
+</I>&gt;<i> sure on that last one, I think perhaps switching to wrapped long lines
+</I>&gt;<i> as the official recommendation removes many of the justifications we
+</I>&gt;<i> had for first proposing it - though certainly not all of them).
+</I>&gt;<i> 
+</I>&gt;<i> Anything to do with headings, lists, etc. will be strictly optional, and
+</I>&gt;<i> a major factor in whether I decide to adopt any of those things will be
+</I>&gt;<i> how well they degrade when viewed on a simple terminal-based client
+</I>&gt;<i> which completely ignores all optional components.
+</I>&gt;<i> 
+</I>&gt;<i> All I've ever wanted is to permit improvements to readability or
+</I>&gt;<i> navigation in advanced (possibly, but not necessarily, graphical)
+</I>&gt;<i> clients as much as possible without interfering in any non-trivial way
+</I>&gt;<i> with the usability of incredibly simple clients.
+</I>&gt;<i> 
+</I>&gt;<i> Cheers,
+</I>&gt;<i> Solderpunk
+</I></PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000419.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000361.html">Adding a content size meta?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#422">[ date ]</a>
+              <a href="thread.html#422">[ thread ]</a>
+              <a href="subject.html#422">[ subject ]</a>
+              <a href="author.html#422">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

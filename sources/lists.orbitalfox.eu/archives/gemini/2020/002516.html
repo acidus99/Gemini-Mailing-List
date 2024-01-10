@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [OT] RFC8890
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BOT%5D%20RFC8890&In-Reply-To=%3C20200829135924.gvbndumpy3hynibx%40localhost%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002511.html">
+   <LINK REL="Next"  HREF="002512.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[OT] RFC8890</H1>
+    <B>mbays at sdf.org</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BOT%5D%20RFC8890&In-Reply-To=%3C20200829135924.gvbndumpy3hynibx%40localhost%3E"
+       TITLE="[OT] RFC8890">mbays at sdf.org
+       </A><BR>
+    <I>Sat Aug 29 14:59:24 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002511.html">[OT] RFC8890
+</A></li>
+        <LI>Next message (by thread): <A HREF="002512.html">Announcing slice.breadpunk.club
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2516">[ date ]</a>
+              <a href="thread.html#2516">[ thread ]</a>
+              <a href="subject.html#2516">[ subject ]</a>
+              <a href="author.html#2516">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>* Friday, 2020-08-28 at 13:12 +0100 - Martin Keegan &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">martin at no.ucant.org</A>&gt;:
+
+&gt;<i> Peter Vernigorov wrote on this list recently that SSL is actually 
+</I>&gt;<i> a bit worse than most people expected: 
+</I>&gt;<i> <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/002282.html">https://lists.orbitalfox.eu/archives/gemini/2020/002282.html</A>
+</I>&gt;<i> 
+</I>&gt;<i> I ran a packet sniffer on some Gemini client (gcat?) and discovered to my 
+</I>&gt;<i> horror that he was right: the subject identity of the client certificate is 
+</I>&gt;<i> sent in plain text over the wire: SSL does indeed force the deanonymisation 
+</I>&gt;<i> of an endpoint wishing to be relied upon in return for encrypting the 
+</I>&gt;<i> non-metadata content of the communication.
+</I>&gt;<i> 
+</I>&gt;<i> The IETF draft RFC referenced the piece that the OP posted would seem to 
+</I>&gt;<i> address this issue, which is critical for Gemini, as Gemini places more 
+</I>&gt;<i> reliance on client certificates than is usual (hitherto) in customary 
+</I>&gt;<i> Internet applications.
+</I>
+If I understand correctly (I'm not entirely confident, so I'd appreciate 
+it if someone who is could confirm), this is already fixed in TLS 1.3.
+
+Meanwhile in TLS &lt;= 1.2, it seems it is possible to deal with the 
+problem by sending the client certificate as part of a renegotiation 
+after the initial handshake. But I don't know how common that is.
+
+I'm considering having my client require explicit user confirmation 
+before sending a client certificate to a TLS &lt;= 1.2 server, or at least 
+print a warning.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 195 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200829/c531371f/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20200829/c531371f/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002511.html">[OT] RFC8890
+</A></li>
+	<LI>Next message (by thread): <A HREF="002512.html">Announcing slice.breadpunk.club
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2516">[ date ]</a>
+              <a href="thread.html#2516">[ thread ]</a>
+              <a href="subject.html#2516">[ subject ]</a>
+              <a href="author.html#2516">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

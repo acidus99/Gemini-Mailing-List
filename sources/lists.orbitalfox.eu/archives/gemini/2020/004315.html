@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] IRIs, IDNs, and all that international jazz
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3C20201223100058.GA6184%40localhost.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004339.html">
+   <LINK REL="Next"  HREF="004318.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] IRIs, IDNs, and all that international jazz</H1>
+    <B>marc</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3C20201223100058.GA6184%40localhost.localdomain%3E"
+       TITLE="[spec] IRIs, IDNs, and all that international jazz">marcx2 at welz.org.za
+       </A><BR>
+    <I>Wed Dec 23 10:00:58 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004339.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+        <LI>Next message (by thread): <A HREF="004318.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4315">[ date ]</a>
+              <a href="thread.html#4315">[ thread ]</a>
+              <a href="subject.html#4315">[ subject ]</a>
+              <a href="author.html#4315">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi
+
+&gt;<i> My &quot;threshold&quot; for complexity is &quot;can I write a conforming, relatively
+</I>&gt;<i> strict and safe server only relying on the OpenBSD base system&quot;. It's
+</I>&gt;<i> kind of arbitrary, sure, but what isn't.
+</I>&gt;<i> 
+</I>&gt;<i> Mandatory IRI support (and there's no real way to keep it optional,
+</I>&gt;<i> considering queries) would push the implementation complexity a step too
+</I>&gt;<i> far for me.
+</I>
+TLDR:
+
+I am with bie on the matter. Option 3 is a bridge
+too far for me too.
+
+Wall Of Text:
+
+So I value the decency which wants to include all 
+human languages in the gemini ecosystem.
+
+But in an effort to be inclusive in one dimension
+one ends up being exclusive in another dimension,
+namely in the space of computer languages/host
+operating systems.
+
+It is one thing to find full I8N support in a language
+such as python (slow batteries included), but what
+about minorities such tcl, lua, m4 or sed ?
+
+Protocols define the interactions between
+computers. Computers don't speak any human language
+all, they are programmed in computer languages. And so
+it strikes me as weird to embed the (combinatorial)
+complexity of human languages deep in the protocol
+stack, but risk excluding niche computer languages or
+operating system... which in some cases are just
+one man efforts.
+
+While the OSI 7 layer network model has its
+deficiencies (&quot;all models are wrong, some are
+useful&quot;), it does help us think about a network,
+from inconvenienced electrons at the lowest layer to
+high level abstractions at the top.
+
+I think internationalisation concern belong in the
+very highest level of a stack. You expect me to
+say presentation or application-level, but remember
+the OSI model is wrong (For instance, things like HTTP
+or gemini are typically lumped into one application
+layer, when there many layers to them). The actual
+highest level is the naive computer uses who gets told
+to &quot;move the mouse over this and then click on this,
+like so...&quot;. At that level, it might make sense for
+a gemini browser to be fully localised, and render an
+url in the local language (maybe even left to right,
+or top to bottom).
+
+But even the layer just below that (the competent user
+level) this starts leaking. A gemini url starts with
+&quot;<A HREF="gemini://">gemini://</A>&quot; - that is ascii text, and even funnier,
+taken from latin. If a non-english user is confused by
+english (nay, latin, with no native speakers at all)
+words, then surely &quot;<A HREF="gemini://">gemini://</A>&quot; has to be rewritten as
+&quot;<A HREF="tweling://">tweling://</A>&quot; or &quot;<A HREF="zwilling://">zwilling://</A>&quot; or whatever farsi,
+japanese or mongolian use for &quot;twin&quot;. If not, then an
+full ascii text url should be manageable too... an
+url is primarily a computer address.
+
+Long ago I came across a version of (I think it was) Pascal
+had been localised into french with language keywords
+like &quot;begin&quot; and &quot;if&quot; replaced. I am sure somebody can
+justify this somehow, but I thought this was an impediment
+to interoperability, and view the internationalising
+of computer protocols (as opposed to the user interfaces) 
+in a similar way.
+
+regards
+
+marc
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004339.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+	<LI>Next message (by thread): <A HREF="004318.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4315">[ date ]</a>
+              <a href="thread.html#4315">[ thread ]</a>
+              <a href="subject.html#4315">[ subject ]</a>
+              <a href="author.html#4315">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

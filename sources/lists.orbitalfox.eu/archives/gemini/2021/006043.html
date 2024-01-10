@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] signing when rotating (Was: Re: Enhancing TOFU)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20signing%20when%20rotating%20%28Was%3A%20Re%3A%20Enhancing%20TOFU%29&In-Reply-To=%3C20210310110848.46d5my26depki6c6%40tilde.institute%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006033.html">
+   <LINK REL="Next"  HREF="006051.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] signing when rotating (Was: Re: Enhancing TOFU)</H1>
+    <B>N. Cherneshevsky</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20signing%20when%20rotating%20%28Was%3A%20Re%3A%20Enhancing%20TOFU%29&In-Reply-To=%3C20210310110848.46d5my26depki6c6%40tilde.institute%3E"
+       TITLE="[tech] signing when rotating (Was: Re: Enhancing TOFU)">nfc at tilde.institute
+       </A><BR>
+    <I>Wed Mar 10 11:08:48 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006033.html">[tech] signing when rotating (Was: Re: Enhancing TOFU)
+</A></li>
+        <LI>Next message (by thread): <A HREF="006051.html">[tech] signing when rotating (Was: Re: Enhancing TOFU)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6043">[ date ]</a>
+              <a href="thread.html#6043">[ thread ]</a>
+              <a href="subject.html#6043">[ subject ]</a>
+              <a href="author.html#6043">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Mar 10, 2021 at 07:50:32AM +0100, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">nothien at uber.space</A> wrote:
+&gt;<i> mbays &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">mbays at sdf.org</A>&gt; wrote:
+</I>&gt;<i> &gt; But there's a much simpler version which avoids chains.
+</I>&gt;<i> &gt; If your server is currently using certificate A and you want to switch 
+</I>&gt;<i> &gt; to a new certificate:
+</I>&gt;<i> &gt; * create a new self-signed certificate C with key K,
+</I>&gt;<i> &gt; * sign it with A to produce a signed certificate S,
+</I>&gt;<i> &gt;      (e.g. using openssl x509 -CA A.crt ...)
+</I>&gt;<i> &gt; * tell your server to use S and K.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; So why don't we make this a convention? Any subtleties I'm missing?
+</I>&gt;<i> 
+</I>&gt;<i> The big issue with this is, what if a client misses a certificate
+</I>&gt;<i> update?  If the server's first cert is A (self-signed because it has no
+</I>&gt;<i> previous certs), second cert is B (signed with A) and third cert is C
+</I>&gt;<i> (signed with B).  If a client connects to the server when it is using A,
+</I>&gt;<i> they will save A, which works fine.  But if they then don't connect to
+</I>&gt;<i> the server for a while, and the server now uses C, then there is no
+</I>&gt;<i> direct trust from A to C (unless you provide the entire B cert during
+</I>&gt;<i> the verification, which is just cert chains all over again), and the
+</I>&gt;<i> client cannot verify the server.
+</I>&gt;<i> 
+</I>
+OpenSSH has had host key rotation since March 2015. There's a LWN
+article which describes the strategy, <A HREF="https://lwn.net/Articles/637156/">https://lwn.net/Articles/637156/</A>
+
+I believe OpenSSH solves the issue you raise here by sending all its
+keys to the client. (I'm no expert here. I could be wrong.)
+</PRE>
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006033.html">[tech] signing when rotating (Was: Re: Enhancing TOFU)
+</A></li>
+	<LI>Next message (by thread): <A HREF="006051.html">[tech] signing when rotating (Was: Re: Enhancing TOFU)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6043">[ date ]</a>
+              <a href="thread.html#6043">[ thread ]</a>
+              <a href="subject.html#6043">[ subject ]</a>
+              <a href="author.html#6043">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

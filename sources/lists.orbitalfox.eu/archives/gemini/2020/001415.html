@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> implementing client certificate support
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20implementing%20client%20certificate%20support&In-Reply-To=%3CCAFTy05bKUV5JQioGiL8CWX157KAm3dzfj2GM0XPdYR5AJPnXEA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001412.html">
+   <LINK REL="Next"  HREF="001427.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>implementing client certificate support</H1>
+    <B>Michael Lazar</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20implementing%20client%20certificate%20support&In-Reply-To=%3CCAFTy05bKUV5JQioGiL8CWX157KAm3dzfj2GM0XPdYR5AJPnXEA%40mail.gmail.com%3E"
+       TITLE="implementing client certificate support">lazar.michael22 at gmail.com
+       </A><BR>
+    <I>Mon Jun  8 03:00:02 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001412.html">implementing client certificate support
+</A></li>
+        <LI>Next message (by thread): <A HREF="001427.html">implementing client certificate support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1415">[ date ]</a>
+              <a href="thread.html#1415">[ thread ]</a>
+              <a href="subject.html#1415">[ subject ]</a>
+              <a href="author.html#1415">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Jun 7, 2020 at 7:14 PM &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">mbays at sdf.org</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> This doesn't work entirely smoothly with astrobotony -- you might start
+</I>&gt;<i> using our certificate at <A HREF="gemini://astrobotany.mozz.us/plant/,">gemini://astrobotany.mozz.us/plant/,</A> so it then
+</I>&gt;<i> also takes effect for <A HREF="gemini://astrobotany.mozz.us/plant/water">gemini://astrobotany.mozz.us/plant/water</A> and so
+</I>&gt;<i> on, but if you try e.g. <A HREF="gemini://astrobotany.mozz.us/settings">gemini://astrobotany.mozz.us/settings</A> you have
+</I>&gt;<i> to select the identity again. You can manually &quot;identify
+</I>&gt;<i> <A HREF="gemini://astrobotany.mozz.us">gemini://astrobotany.mozz.us</A>&quot;, but that isn't so smooth. Probably marks
+</I>&gt;<i> should optionally have an identity associated -- that would help quite
+</I>&gt;<i> a bit, but needs some forethought from the user.
+</I>
+For what it's worth, I have been thinking about reorganizing the URL
+structure for astrobotany so that all of the authenticated endpoints
+live behind a single path. I am also planning on adding more
+unauthenticated content to the server, so I want to establish a
+clear separation between the sections that require a client certificate
+and the sections that do not.
+
+- <A HREF="gemini://astrobotany.mozz.us/">gemini://astrobotany.mozz.us/</A>
+- <A HREF="gemini://astrobotany.mozz.us/about">gemini://astrobotany.mozz.us/about</A>
+- <A HREF="gemini://astrobotany.mozz.us/app">gemini://astrobotany.mozz.us/app</A> (requires client certificate)
+- <A HREF="gemini://astrobotany.mozz.us/app/plant">gemini://astrobotany.mozz.us/app/plant</A>
+- <A HREF="gemini://astrobotany.mozz.us/app/directory">gemini://astrobotany.mozz.us/app/directory</A>
+- ...
+
+There are several other advantages to having a well designed path
+hierarchy. It's something that I often don't spend enough time
+thinking about up front and then I regret not doing it right later.
+
+- Michael (mozz)
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001412.html">implementing client certificate support
+</A></li>
+	<LI>Next message (by thread): <A HREF="001427.html">implementing client certificate support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1415">[ date ]</a>
+              <a href="thread.html#1415">[ thread ]</a>
+              <a href="subject.html#1415">[ subject ]</a>
+              <a href="author.html#1415">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Serious writing (in the Latin script) needs italics
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Serious%20writing%20%28in%20the%20Latin%20script%29%20needs%20italics&In-Reply-To=%3C20201111154636.GA653%40thrax.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003250.html">
+   <LINK REL="Next"  HREF="003284.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Serious writing (in the Latin script) needs italics</H1>
+    <B>Ivy Foster</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Serious%20writing%20%28in%20the%20Latin%20script%29%20needs%20italics&In-Reply-To=%3C20201111154636.GA653%40thrax.localdomain%3E"
+       TITLE="Serious writing (in the Latin script) needs italics">escondida at iff.ink
+       </A><BR>
+    <I>Wed Nov 11 15:46:36 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003250.html">Serious writing (in the Latin script) needs italics
+</A></li>
+        <LI>Next message (by thread): <A HREF="003284.html">Serious writing (in the Latin script) needs italics
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3278">[ date ]</a>
+              <a href="thread.html#3278">[ thread ]</a>
+              <a href="subject.html#3278">[ subject ]</a>
+              <a href="author.html#3278">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Matthew Ernisse &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">matt at going-flying.com</A>&gt; wrote:
+&gt;<i> On Mon, Nov 09, 2020 at 11:15:54PM +0000, Johann Galle said unto me:
+</I>&gt;<i> &gt; I don't know if this has been pointed out before, but you can get
+</I>&gt;<i> &gt; rendering similar to man pages (which has things like bold and
+</I>&gt;<i> &gt; underline IIRC) by using troff; it should I think be fairly easy to
+</I>&gt;<i> &gt; parse, although I have not tried it myself. The beautiful thing of
+</I>&gt;<i> &gt; troff in this context is that there is also a designated MIME type
+</I>&gt;<i> &gt; text/troff [RFC4263]; they also have a https-site [TROFF].
+</I>
+&gt;<i> I think that it's reasonable to suggest that clients implement a form
+</I>&gt;<i> of rich text other than text/gemini.  I don't think we need to bloat
+</I>&gt;<i> text/gemini to support every use case, instead I think we should
+</I>&gt;<i> encourage a set of alternatives.
+</I>
+The further discussion of this point has seemed to assume a need to
+implement all of troff (and then spun off into LaTeX). I'd like to
+propose an alternative: the tiniest subset of it. Specifically:
+
+.I &quot;italic text&quot; optional-suffix optional-prefix
+
+E.g., this contrived example with a poor use of parentheses:
+
+----
+&quot;I think we should represent italics
+.I &quot;somehow&quot; !&quot;
+she said.
+.I &quot;After all, this is a medium designed for writing.&quot; ) (
+----
+
+would yield (where *this* is italicized):
+
+----
+&quot;I think we should represent italics *somehow*!&quot; she said.
+(*After all, this is a medium designed for writing.*)
+----
+
+As with troff, .I would *not* add line breaks. Unlike troff, this
+should *only* have the line-based option, and not the option to make
+it apply to all further text until the next line beginning with &quot;.R&quot;.
+That does make writing a whole italicized paragraph or page more
+cumbersome, but that's a pretty unusual use case.
+
+Incidentally, troff is a topic likely to interest those into gemini:
+it's a far more lightweight typesetting system than LaTeX, though it
+has its limitations, and like text/gemini it is very much line-based.
+It also follows the rule that (almost) any formatting command should
+be short and at the start of the line.
+
+Also, I do recognize that this idea is going to get shot down as
+paving the way for more extensibility, though we already have things
+like verbatim blocks and what have you (which are more esoteric than
+italic, so I don't buy the &quot;we shouldn't support every use case&quot;
+argument. It's far more common to emphasize words, to write titles of
+works, and so forth, than it is to do ASCII art (not that there's
+anything wrong with ASCII art; it's great) or present code blocks (the
+current demographics of the medium notwithstanding)).
+
+As to using CAPS LOCK as a substitute for italics, that is just not
+feasible for anything longer than a word or two.
+
+OBSERVE, AS YOU READ THIS PARAGRAPH, THAT IT IS LESS COMFORTABLE TO
+READ THAN ONE WRITTEN WITH STANDARD TYPOGRAPHY. EVEN THE ROMANS
+FINALLY GAVE IN AND INVENTED MINISCULE LETTERS FOR THEIR ALPHABET, AND
+THAT'S AFTER RESISTING FOR CENTURIES THE IDEA OF EVEN USING SPACES
+OR CLAUDIAN DOTS BETWEEN WORDS, SO LITTLE DID THEY CARE ABOUT
+READABILITY.
+
+Using *emphasis* is a pretty acceptable solution most of the time, I
+think, but it does fall apart a bit with longer passages or titles:
+*Doctor Strangelove, or How I Learned to Stop Worrying and Love the
+Bomb*, for instance.
+
+Finally, before anybody asks, I would argue that we *don't* need bold
+text or bold italic. Bold is rarely used in serious writing; it's used
+far more often in graphic design and advertising, neither of which
+fields is going to have much fun with gemini, I'm glad to say. If they
+were to try, they'd basically just need to serve whole pictures,
+anyway.
+
+Just some thoughts on the matter.
+
+Cheers,
+Ivy Foster
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 833 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201111/9d1f467c/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201111/9d1f467c/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003250.html">Serious writing (in the Latin script) needs italics
+</A></li>
+	<LI>Next message (by thread): <A HREF="003284.html">Serious writing (in the Latin script) needs italics
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3278">[ date ]</a>
+              <a href="thread.html#3278">[ thread ]</a>
+              <a href="subject.html#3278">[ subject ]</a>
+              <a href="author.html#3278">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

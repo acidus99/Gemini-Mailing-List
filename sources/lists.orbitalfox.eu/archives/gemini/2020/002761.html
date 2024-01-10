@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Genini requests with ncat
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Genini%20requests%20with%20ncat&In-Reply-To=%3C1sRFt5B0es2XvX9aACukRujbuschab7DZy4Ss2_R9qTir7aRQix54BEB_9NiGLs5vTOqetOFGGS-x9LtKtM3Upr-Cf-eAWOet7SSZF-Kftw%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002760.html">
+   <LINK REL="Next"  HREF="002762.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Genini requests with ncat</H1>
+    <B>James Henderson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Genini%20requests%20with%20ncat&In-Reply-To=%3C1sRFt5B0es2XvX9aACukRujbuschab7DZy4Ss2_R9qTir7aRQix54BEB_9NiGLs5vTOqetOFGGS-x9LtKtM3Upr-Cf-eAWOet7SSZF-Kftw%3D%40protonmail.com%3E"
+       TITLE="Genini requests with ncat">henderson.j at protonmail.com
+       </A><BR>
+    <I>Tue Sep 22 19:47:03 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002760.html">Genini requests with ncat
+</A></li>
+        <LI>Next message (by thread): <A HREF="002762.html">[ANN] Scalar, an experiment for a minimalist chat protocol inspired by Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2761">[ date ]</a>
+              <a href="thread.html#2761">[ thread ]</a>
+              <a href="subject.html#2761">[ subject ]</a>
+              <a href="author.html#2761">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Aha I see what the problem was!
+
+As it happened I had the port in the command but just neglected it in the message, my bad.
+
+The fail was caused by putting the / on the end of the url being passed to ncat. With the / on the end of that the lookup fails it appears. Seeing your working command made it obvious.
+
+Thanks.
+
+On Tue, Sep 22, 2020 at 16:30, Julien Blanchard &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">julien at typed-hole.org</A>&gt; wrote:
+
+&gt;<i> On 22/09/2020 17:18, James Henderson wrote:
+</I>&gt;&gt;<i> Hi there,
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I am trying to make gemini requests with ncat and have hit a bit of a
+</I>&gt;&gt;<i> stumbling block that I am not sure how to solve so was wondering if
+</I>&gt;&gt;<i> anyone here knew what was going on.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> If i make a request as such:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> echo -e &#8220;<A HREF="gemini://gemini.conman.org\r\n&#8221;">gemini://gemini.conman.org\r\n&#8221;</A> | ncat &#8212;ssl &#8220;gemini.conman.org&#8221;
+</I>&gt;&gt;<i> &gt;page.out
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I get the expected index page from gemini.conman.org printed into a file.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> However if i try the same with
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> echo -e &#8220;<A HREF="gemini://gemini.circumlunar.space\r\n&#8221;">gemini://gemini.circumlunar.space\r\n&#8221;</A> | ncat &#8212;ssl
+</I>&gt;&gt;<i> &#8220;gemini.circumlunar.space&#8221; &gt;page.out
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I get a 31 redirect. If i try that redirect address which is the same
+</I>&gt;&gt;<i> but with a / on the end of the url then the requests fails Where in
+</I>&gt;&gt;<i> would expect the gemini.circumlunar.space home page to be output to a file.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I feel like there is something obvious I am missing.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Anyone done this and know whats wrong?
+</I>&gt;<i>
+</I>&gt;<i> echo -e &quot;<A HREF="gemini://gemini.circumlunar.space/\r\n">gemini://gemini.circumlunar.space/\r\n</A>&quot; | ncat --ssl
+</I>&gt;<i> &quot;gemini.circumlunar.space&quot; 1965 &gt;page.out
+</I>&gt;<i> works here, just added the slash and the port.
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200922/c4d07bc6/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200922/c4d07bc6/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002760.html">Genini requests with ncat
+</A></li>
+	<LI>Next message (by thread): <A HREF="002762.html">[ANN] Scalar, an experiment for a minimalist chat protocol inspired by Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2761">[ date ]</a>
+              <a href="thread.html#2761">[ thread ]</a>
+              <a href="subject.html#2761">[ subject ]</a>
+              <a href="author.html#2761">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

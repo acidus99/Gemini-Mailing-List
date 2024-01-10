@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client certificates
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificates&In-Reply-To=%3C20200421075150.GA3163%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000528.html">
+   <LINK REL="Next"  HREF="002227.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client certificates</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificates&In-Reply-To=%3C20200421075150.GA3163%40SDF.ORG%3E"
+       TITLE="Client certificates">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Tue Apr 21 08:51:50 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000528.html">Client certificates
+</A></li>
+        <LI>Next message (by thread): <A HREF="002227.html">Client certificates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#529">[ date ]</a>
+              <a href="thread.html#529">[ thread ]</a>
+              <a href="subject.html#529">[ subject ]</a>
+              <a href="author.html#529">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Apr 20, 2020 at 06:02:32PM -0400, Michael Lazar wrote:
+ 
+&gt;<i> - The client requests &quot;<A HREF="gemini://astrobotany.mozz.us/">gemini://astrobotany.mozz.us/</A>&quot; and receives a
+</I>&gt;<i>   &quot;62 AUTHORISED CERTIFICATE REQUIRED&quot; response.
+</I>&gt;<i> - The client generates a self-signed certificate and makes a second request to
+</I>&gt;<i>   the same endpoint. This certificate generation could be done through the
+</I>&gt;<i>   gemini client software itself, or the user could provide their own cert.
+</I>&gt;<i> - The server accepts the self-signed client certificate and saves a hashed
+</I>&gt;<i>   fingerprint of the peer cert. This fingerprint is now associated with that
+</I>&gt;<i>   user and represents a unique UUID that nobody else can spoof.
+</I>&gt;<i> - We kick the can down the road concerning the user needing to update or
+</I>&gt;<i>   re-associate their client certificate. We hope that they set an expiration
+</I>&gt;<i>   date far enough in the future for this to never matter.
+</I>
+Yes, this is more or less precisely as I imagined it working!
+
+With &quot;nice&quot; clients, the user basically gets a prompt like &quot;Would you
+like to create a persistent identity for this service? Y/N&quot;, and if Y,
+the client itself generates and saves a self-signed certificate to use
+without the user having to drop to the commandline and use openssl
+commands.  The cert is associated with a particular domain and, if the
+client is set up to do so, can be used automatically for all requests
+to that domain.  This gives a pretty fluid user experience: the user
+doesn't need to understand anything technical about TLS at all.  They
+just get a transparently working account which is basically bound to
+the device/client they used at sign up (advanced users of course can
+export/import cert-key pairs to multiple devices).  No passwords to
+forget, or to be brute-forced.  Even a full compromise of the server's
+database does not allow account hijacking, even with all the rainbow
+tables and time in the world, because the private key never leaves the
+client.  Of course, good backups of the cert-key pairs becomes
+essential to avoid getting locked out of things after a disk
+failure...
+
+You raise good points about cert expiry.  Let's think about that.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000528.html">Client certificates
+</A></li>
+	<LI>Next message (by thread): <A HREF="002227.html">Client certificates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#529">[ date ]</a>
+              <a href="thread.html#529">[ thread ]</a>
+              <a href="subject.html#529">[ subject ]</a>
+              <a href="author.html#529">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

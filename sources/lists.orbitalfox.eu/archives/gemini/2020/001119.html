@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Nano context highlighting for gmi file
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Nano%20context%20highlighting%20for%20gmi%20file&In-Reply-To=%3Calpine.NEB.2.21.2005282145260.20615%40sdf.lonestar.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001118.html">
+   <LINK REL="Next"  HREF="001120.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Nano context highlighting for gmi file</H1>
+    <B>Pete D.</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Nano%20context%20highlighting%20for%20gmi%20file&In-Reply-To=%3Calpine.NEB.2.21.2005282145260.20615%40sdf.lonestar.org%3E"
+       TITLE="Nano context highlighting for gmi file">peteyboy at SDF.ORG
+       </A><BR>
+    <I>Thu May 28 22:57:01 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001118.html">Some notes from the tildeverse
+</A></li>
+        <LI>Next message (by thread): <A HREF="001120.html">Nano context highlighting for gmi file
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1119">[ date ]</a>
+              <a href="thread.html#1119">[ thread ]</a>
+              <a href="subject.html#1119">[ subject ]</a>
+              <a href="author.html#1119">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>So, to make it more pleasant to write gmi files in shell, I created a 
+very simple &quot;gemini.nanorc&quot; file for text highlighting gemini files.
+
+I figure I'd just paste the file's contents and instructions here:
+Just open a new file in nayno (I assume that's what you are using if you 
+are going to use this feature), paste all the text between the two ``` 
+lines below into the file, and save as &quot;gemini.nanorc&quot;, either in 
+/usr/local/share/nano (if you are admin), ~/share/nano or whatever is 
+right for your installation.
+
+Then, again, depending on your installation, create or append to your 
+existing /etc/nanorc or ~/.nanorc a line like the following:
+
+include &quot;/etc/nanorc/gemini.nanorc&quot;
+
+Hope it's useful for somebody! Here's the contents:
+
+```
+## Here is an example for the gemini web scheme's gmi file format
+
+syntax gemini &quot;\.(gmi|GMI)$&quot;
+
+# links
+color magenta &quot;^=&gt;.*$&quot;u
+
+# preformatted
+color yellow  start=&quot;^```* ?$&quot; end=&quot;^```* ?$&quot;
+
+#headings
+color cyan &quot;^\#+.*$&quot;
+
+#bullets
+color green &quot;^\*+.*$&quot;
+```
+--
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">peteyboy at sdf.org</A>
+SDF Public Access UNIX System - <A HREF="http://sdf.org">http://sdf.org</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001118.html">Some notes from the tildeverse
+</A></li>
+	<LI>Next message (by thread): <A HREF="001120.html">Nano context highlighting for gmi file
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1119">[ date ]</a>
+              <a href="thread.html#1119">[ thread ]</a>
+              <a href="subject.html#1119">[ subject ]</a>
+              <a href="author.html#1119">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

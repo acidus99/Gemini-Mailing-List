@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC] Backwards-compatible metadata in Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3C02fb70d6-c4a7-6da2-8ec2-10453561a3fb%40gmx.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005521.html">
+   <LINK REL="Next"  HREF="005518.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC] Backwards-compatible metadata in Gemini</H1>
+    <B>Lars Nood&#233;n</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3C02fb70d6-c4a7-6da2-8ec2-10453561a3fb%40gmx.com%3E"
+       TITLE="[SPEC] Backwards-compatible metadata in Gemini">lars.nooden at gmx.com
+       </A><BR>
+    <I>Tue Feb 23 09:15:56 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005521.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="005518.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5508">[ date ]</a>
+              <a href="thread.html#5508">[ thread ]</a>
+              <a href="subject.html#5508">[ subject ]</a>
+              <a href="author.html#5508">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 2/23/21 10:05 AM, Stephane Bortzmeyer wrote:
+[snip]
+&gt;<i> The good point is that it already exists so we don't reinvent
+</I>&gt;<i> the wheel.
+</I>[snip]
+
+Greetings,
+
+Some of this depends on what kind of metadata we are talking about.
+
+I am reluctant to discuss extension.  I would have to say that the only
+ topic of potential interest to me [1] in that area would be about
+document metadata: Gemini is about transmission of information and
+metadata is information.  By document metadata I mean information
+/about/ the document content.
+
+As for the questions of network budget, fingerprinting, pressure to
+include, and complexity[2], those can be addressed.
+
+If the document metadata is in the body of the document, then there are
+no extra network requests.  That addresses fingerprinting and mostly
+addresses network budget.
+
+The metadata does not have to be marked up in a difficult manner to be
+both machine readable and human readable.  Borrowing from the link
+syntax [3],
+
+=:[&lt;whitespace&gt;]&lt;TERM&gt;&lt;whitespace&gt;&lt;METADATA&gt;
+
+which could look like this in the body, but would be up to the client as
+to how it is dealt with.  Left unprocessed, it would degrade gracefully
+and be quite readable.
+
+=:	dc.title	A Random Title
+=:	dc.date 	2021-02-23
+=:	keywords	cat; dog; bird
+
+Again, by being included anywhere inside the body, there would be no
+extra network calls.
+
+There should be no requirement as to what is in the metadata, which
+terms are allowed, or what the terms mean.  Any extension should say
+only how terms may be included and leave the rest up to the capsule and
+the client software.  Otherwise the details would lead to discussions
+which would last years [4] at best while also reinventing the wheel.
+
+If a tipping point is ever reached regarding use then there might be
+some pressure for clients to support it.  But if the trajectory follows
+that of HTML metadata, its use will be inconsistent, niche, and
+site-specific.
+
+Anyway, the type(s) of metadata would be up to the capsule owner to pick
+and for them follow a schema or vocabulary or not.
+
+All that said, there is usually more to gain by KISS than by extension
+or creeping featurism.
+
+/Lars
+
+[1] I (a retired digital libraries specialist) got into setting up a
+Gemini capsule only two weeks ago but used to run a gopher site both
+back when it was relevant and in more recent years as an Onion service.
+ As for the WWW, I did not get into running any Web sites until 1994,
+the second of which was briefly so visited by the end of that year that
+it caused a local network outage.
+
+
+[2] <A HREF="https://lists.orbitalfox.eu/archives/gemini/2021/005504.html">https://lists.orbitalfox.eu/archives/gemini/2021/005504.html</A>
+
+
+[3] Project Gemini : Speculative specification
+	<A HREF="gemini://gemini.circumlunar.space/docs/specification.gmi">gemini://gemini.circumlunar.space/docs/specification.gmi</A>
+
+
+[4] See also The Dublin Core Metadata Initiative.  What started out as a
+consensus of a common descriptive core, a simple, no-nonsense list of 15
+semantic metadata terms which could fit on a single web page,
+
+	<A HREF="https://en.wikipedia.org/wiki/Dublin_Core#Dublin_Core_Metadata_Element_Set">https://en.wikipedia.org/wiki/Dublin_Core#Dublin_Core_Metadata_Element_Set</A>
+
+has morphed since the 1990s into this egregious monstrosity:
+
+	<A HREF="https://dublincore.org/specifications/dublin-core/">https://dublincore.org/specifications/dublin-core/</A>
+	<A HREF="https://www.iso.org/standard/71339.html">https://www.iso.org/standard/71339.html</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005521.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="005518.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5508">[ date ]</a>
+              <a href="thread.html#5508">[ thread ]</a>
+              <a href="subject.html#5508">[ subject ]</a>
+              <a href="author.html#5508">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

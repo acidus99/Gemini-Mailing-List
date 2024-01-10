@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A proposed scheme for parsing preformatted alt text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C20200909173856.xjqha43dru34fh2w%40localhost%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002598.html">
+   <LINK REL="Next"  HREF="002611.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A proposed scheme for parsing preformatted alt text</H1>
+    <B>mbays at sdf.org</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C20200909173856.xjqha43dru34fh2w%40localhost%3E"
+       TITLE="A proposed scheme for parsing preformatted alt text">mbays at sdf.org
+       </A><BR>
+    <I>Wed Sep  9 18:38:56 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002598.html">Conversion of HTML to gemtext (was Re: A proposed scheme for parsing preformatted alt text)
+</A></li>
+        <LI>Next message (by thread): <A HREF="002611.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2610">[ date ]</a>
+              <a href="thread.html#2610">[ thread ]</a>
+              <a href="subject.html#2610">[ subject ]</a>
+              <a href="author.html#2610">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>* Monday, 2020-09-07 at 22:15 +0200 - Sandra Snan &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sandra.snan at idiomdrottning.org</A>&gt;:
+
+&gt;<i>This feels like the &quot;hot comment&quot; antipattern. Codifying a part of the
+</I>&gt;<i>language that was meant for humans.
+</I>&gt;<i><A HREF="http://wiki.c2.com/?HotComments">http://wiki.c2.com/?HotComments</A>
+</I>
+Yes. IIUC, gemtext deliberately avoided having a comment line type in 
+order to avoid this problem. It was designed to be non-extensible. But 
+preformatting toggle lines -- both the opening ones we're talking about 
+here, and (to my mind even more worryingly) the closing ones -- seem to 
+have ended up as potential extensibility hooks anyway, because most 
+clients ignore any data there. (I haven't researched this properly, but 
+I checked that at least Amfora, AV-98, and Bombadillo ignore it by 
+default.)
+
+So, with apologies for hijacking this thread with something totally 
+opposed to its original idea, I'd like to encourage client authors to 
+close this extensibility hole by not suppressing text after the &quot;```&quot; in 
+preformatting toggle lines.
+
+For the opening line that means displaying the alt text by default 
+somehow. Even if the alt text is primarily intended for screenreaders, 
+it could well be interesting to visual readers.
+
+For the closing line, the spec says
+&gt;<i> Any text following the leading &quot;```&quot; of a preformat toggle line which 
+</I>&gt;<i> toggles preformatted mode off MUST be ignored by clients.
+</I>I believe the intention is that having text there is an error (though 
+this could definitely be made clearer). So I suggest that when a client 
+encounters some text there, it displays some sort of (unobtrusive, but 
+not too unobtrusive) warning indicating that there is an error in the 
+gemtext. I know that with html it's traditional for renderers to be 
+forgiving about syntax errors, but since this and invalid uris are the 
+only ways gemtext can be invalid, I think it makes sense to be strict. 
+If most clients just ignore the error and suppress the extra text, one 
+day people will start using it as an extension mechanism, e.g. embedding 
+base64-encoded images.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 195 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200909/e397a6a3/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20200909/e397a6a3/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002598.html">Conversion of HTML to gemtext (was Re: A proposed scheme for parsing preformatted alt text)
+</A></li>
+	<LI>Next message (by thread): <A HREF="002611.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2610">[ date ]</a>
+              <a href="thread.html#2610">[ thread ]</a>
+              <a href="subject.html#2610">[ subject ]</a>
+              <a href="author.html#2610">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200117111158.GA10236%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000341.html">
+   <LINK REL="Next"  HREF="000343.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200117111158.GA10236%40SDF.ORG%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Fri Jan 17 11:11:58 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000341.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000343.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#342">[ date ]</a>
+              <a href="thread.html#342">[ thread ]</a>
+              <a href="subject.html#342">[ subject ]</a>
+              <a href="author.html#342">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Jan 16, 2020 at 03:26:13PM -0800, Aaron Janse wrote:
+&gt;<i> 
+</I>&gt;<i> Hmm, even allowing reflowing sounds like it could cause incompatibility
+</I>&gt;<i> issues. Should there be standardized markup for bullet points? What about
+</I>&gt;<i> poems, something I think are much easier to find on Gopher than on the
+</I>&gt;<i> HTML web? How about markdown title lines immediately followed by text?
+</I>
+Well, a lot of this is exactly what the recently proposed ``` was
+supposed to help fix.  Things precisely like the haiku example you
+provided would be enclosed within ``` lines so that they didn't get
+mangled by a reflowing client.
+
+A speedy recap of the history of text/gemini, excluding the link syntax
+debate which is thankfully past us:
+
+* Originally, the spec-spec said nothing about wrapping or flowing or
+  anything of the sort.  Everybody was producing hard-wrapped content
+  and/or writing clients which expected hard-wrapped content (probably
+  running on auto-pilot from Gopher experiece), so that was in some
+  sense the implicit standard.
+* Several people wrote to me and said Gopher's hard line wrapping was
+  one of their least favourite parts of Gopher because the days where
+  everybody was at an 80 char terminal are over and Gopher content often
+  looks mangled on their smartphones.
+* This seemed reasonable and easy to fix, so in what was now clearly a
+  mistake I updated the spec-spec to its current version, permitting
+  clients to reflow if they want to, because, hey, what's the worst that
+  could happen?
+* Very shortly after the first client implementation efforts happened it
+  became clear that this was a disaster, precisely because it breaks
+  bulleted lists (hence the subject of this thread), but also other
+  content like ASCII art, poems, source code, etc.
+* Everybody agreed there had to be some way to preserve these things, so
+  the hunt was on for a slightly extended syntax to allow clearly
+  signalling to reflowing clients &quot;thou shalt not reflow/wrap/mangle
+  these particular lines&quot; (even at this point, there were voices which
+  said this was all getting to hard and we should forget about
+  reflowing).
+* After a false start involving the idea of leading and/or trailing
+  whitespace signalling that text should not be reflowed (which I now
+  think is a bad idea for several reasons and don't want us to consider
+  again), the ``` line idea seems to have provoked no serious objections.
+  I thought there was light at the end of the tunnel..
+
+But as your email makes clear, the ``` syntax is not a panacea.  It will
+allow haikus, one-word-per-line text, source and other things, so it's
+an improvement over the current spec-spec.  However, it still doesn't
+really work, or works in a very inconvenient and ugly way, for many
+other things like lists, Markdown headings, etc.
+
+I don't hate bulleted lists, or Markdown headings.  On the contrary, I
+like them and use them a lot and it would be lovely if Gemini documents
+could include them.
+
+But I really, really don't want:
+
+1. To distract everybody's time and energy for the Gemini project for
+   even more months than we already have hammering this stuff out when
+   we could be discussing way more interesting and important stuff, or
+   writing software, or best of all writing content so this thing takes
+   off.
+
+2. To end up with a final spec where the section that explains precisely
+   how to render a text/gemini document involves more words than the
+   sections which explain the actual protocol itself.  text/gemini is
+   supposed to be a lightweight format!
+
+3. To end up with a text/gemini specification which is basically exactly
+   the same as Markdown except with a different link syntax.  That's
+   just using a lot of time to basically reinvent a wheel, and it's an
+   especially poor use of time when Gemini is already capable of just
+   serving actual Markdown with a MIME type to indicate that it's doing
+   that!  And it sucks for authors of non-graphical clients, because how
+   to properly render Markdown isn't actually defined beyond how to
+   properly transform it to HTML, and how to render HTML in a terminal
+   is not defined at all and there are few libraries for it.  It would
+   be an epic fail if simple terminal Gemini clients had to hand content
+   over to lynx as a external formatting tool.
+
+4. To compromise on the idea that writing a basic but usable client
+   should be really quick and easy.  I don't mind if text/gemini has
+   some voluntary extra complexity.  I really like the two digit status
+   code solution we chose for the response header - extra
+   information/power is there for when it is needed, but simple clients
+   can ignore it and still function correctly.  This has to be true for
+   handling text/gemini too.  Whatever extra complexity we add has to
+   degrade gracefully when ignored.  I get that really comfy,
+   full-featured &quot;flagship&quot; clients are inevitably going to be more
+   complicated, and that's fine.  But I don't want to repeat the
+   mistake of the web where flagship clients are basically compulsory,
+   and if you try to take something nice and simple like Dillo outside
+   of a very, very small subset of the web (maintained by people like
+   us) you end up with a badly broken user experience.  Something that
+   a single person can bang out on the same weekend they read the spec
+   for the first time should be able to render the majority of
+   Geminispace into something that's comfortable to read.  Not
+   necessarily perfect, but something that you might voluntarily use to
+   read content for half an hour.
+
+I just don't see how to simultaneously avoid all these things *and* end
+up with a text/gemini that nicely supports headings and lists and
+quotations which are robust against reflowing/wrapping.  I honestly
+think it's impossible to simultaneously satisfy all three of:
+
+1. Easy to describe and to parse
+2. Capable of &quot;richness&quot; like headings, lists, quotes, etc.
+3. Looks good on arbitrary screen widths
+
+Basically, you have to pick two.  If you really want 2. and 3. you have
+no choice but define a whole set of special syntax like in HTML or
+Markdown (which is really just a more syntactically lightweight form of
+a subset of HTML), and that kills 1.  Specifying a fixed character width
+for hard-wrapped lines gives you 1. and 2. (this is exactly how Gopher
+works, where people use all that richness all the time without even
+thinking about it), but breaks 3 because the fixed character width is
+always going to be too long or too short for some device.  And finally,
+the current spec-spec delivers 1. and 3.  It's not hard to reflow just
+plain paragraphs of text to arbitrary widths, the breakage only occurs
+when the text contains richness like headers, lists, quotes, etc.  By
+adding ``` to the spec-spec we can allow a tiny bit of richness in
+(poems, source code, ASCII art), but it's not enough to give us anything
+like a web-like or even gopher-like textual experience.
+
+Compromising on 1. means compromising on the entire point of Gemini, so
+that's not happening.
+
+We need to either compromise on 2. by giving up on the idea that
+text/gemini documents can reliably support headings, lists, etc. (and
+this will be a bit of a blow for the idea of boostrapping Geminispace by
+mirroring existing Gopher content, because a lot of that Gopher content
+is going to include exactly those things in Markdownesque format without
+any Gemini-specific ``` lines it, and so will be mangled by reflowing
+Gemini clients) or we need to compromise on 3. by defining a fixed
+character width (with doesn't necessarily have to be 40) and accepting
+that Gemini just won't look great on tiny screens.
+
+Right now I'm inclined to sacrifice 3. more than I am 2.  Not working
+nicely on smartphones will be a shame and probably upset a lot of
+people, but *something* has to give and it seems sensible for that to be
+devices which, at the end of the day, are obviously not well suited to
+displaying non-trivial quantities of text anyway.  There's a reason that
+newspapers, magazines, books, e-readers and even folded brochures are
+all wider than phones!  And it would just be embarrassing for Gemini
+documents to need to be structurally simpler than Gopher documents (by
+never using lists, etc.).
+
+&gt;<i> While providing the option of hard-wrapped text would appeal to retro
+</I>&gt;<i> users, it could come at the cost of a much more complex spec for how
+</I>&gt;<i> to reflow along with incompatibilities as clients act differently
+</I>&gt;<i> when confronted with un-specified situations.
+</I>
+At this point, hard-wrapping text for me has a lot of appeal which has
+*nothing* to do with being retro and is actually about *avoiding* a more
+complex spec.  If text/gemini is hard-wrapped and clients are forbidden
+from ever reflowing, then people can basically use Markdown syntax (or
+any other syntax they like!) to produce rich text content without the
+client needing to actually understand any of that syntax, and hence
+without the spec needing to describe any of it.  It gives you maximum
+expressive power for minimum spec or implemetation complexity, which is
+very Gemini.
+
+Before you started posting to this list I would have added &quot;and the
+*only* downside is that it ruins things on narrow phone screens&quot; and
+then smugly dismissed phones as junk and been happy.  But you have
+covinced me (and I thank you for it!) that this approach has real
+downsides too, in that it doesn't play as nicely with version control
+software and is, averaging across the space of all possible editors,
+actually more difficult for authors to write and to edit than the form
+where paragraphs are just very long single lines.  So, now I recognise
+this as a compromise solution and I'm not hugely enthusiastic about it.
+But I really do think that the solution *has* to be a compromise, and
+that this might be the best possible compromise, all things considered.
+
+If anybody really wants to change my mind on this, your time is probably
+best spent trying to come up with a text/gemini syntax which allows rich
+text features, degrades gracefully in very simple clients, can be
+rendered in no more than 100 LOC of Python (and less is better!) and can
+be succinctly but unambigiously described in the spec.  I consider the
+existence of such a syntax unlikely but not impossible.  I'll try to
+come up with one myself, but unless one materialises that nobody really
+hates and that can be shown to work well via actual running code by the
+end of January, I will declare text/gemini hard-wrapped and we can all
+move on to arguing about the One True Width to wrap at instead. :)
+
+Cheers,
+Solderpunk
+
+PS: I'll probably refrain from posting about *this* particular issue on
+the list over the weekend, otherwise I'll never get anything else done!
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000341.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000343.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#342">[ date ]</a>
+              <a href="thread.html#342">[ thread ]</a>
+              <a href="subject.html#342">[ subject ]</a>
+              <a href="author.html#342">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,240 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Elpher 2.7.0: the text/gemini update
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Elpher%202.7.0%3A%20the%20text/gemini%20update&In-Reply-To=%3Clztv0gg2it.fsf%40bs-mbpr348.d.ethz.ch%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000706.html">
+   <LINK REL="Next"  HREF="000708.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Elpher 2.7.0: the text/gemini update</H1>
+    <B>plugd</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Elpher%202.7.0%3A%20the%20text/gemini%20update&In-Reply-To=%3Clztv0gg2it.fsf%40bs-mbpr348.d.ethz.ch%3E"
+       TITLE="Elpher 2.7.0: the text/gemini update">plugd at thelambdalab.xyz
+       </A><BR>
+    <I>Sat May 16 01:13:46 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000706.html">Wikipedia mirror over gemini &quot;proxy&quot;
+</A></li>
+        <LI>Next message (by thread): <A HREF="000708.html">Elpher 2.7.0: the text/gemini update
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#704">[ date ]</a>
+              <a href="thread.html#704">[ thread ]</a>
+              <a href="subject.html#704">[ subject ]</a>
+              <a href="author.html#704">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+Anybody using elpher might be interested to know that I've just pushed a
+number of gemini-centric improvements/changes.
+
+Changes specific to text/gemini:
+
+* Text wraps at word boundaries near 80 columns or the window width,
+  whichever is smaller.
+
+* Text wrapping works sensibly with bullets, indenting wrapped lines.
+
+* Pre-formatted text blocks work.
+
+* Styles are applied to headers (different font sizes by default and
+  when possible.
+
+* Removed the left hand margin which used to contain link types, which
+  was a result of reusing gophermap rendering functions and doesn't
+  make as much sense in gemini (which lacks a finite set of link types).
+  Links are still coloured according to protocol, however.
+
+Changes relating to network connections:
+
+* I've optimized the functions responsible for retrieving gemini, gopher
+  and finger content, resulting in a massive improvement in transfer
+  rate.  (That's a very positive way to say that I've replaced a very
+  silly function with a more sensible one.)  It wasn't practical to
+  download mp3s previously, now it is.
+
+* Given the slew of new servers, I've altered the default server
+  certificate verification policy to, erm, not verify certificates.
+  Even though this behaviour is configurable, I feel a bit dirty about
+  this.  Hopefully I'll find a way to implement a proper tofu behaviour
+  in the future.
+
+Changes missing from this update:
+
+* !! Support for client certificates. :-( !!
+
+
+The new version is already up on MELPA and should be up on MELPA Stable
+within the hour.
+
+Cheers,
+
+Tim
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 487 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200516/72f57b91/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20200516/72f57b91/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000706.html">Wikipedia mirror over gemini &quot;proxy&quot;
+</A></li>
+	<LI>Next message (by thread): <A HREF="000708.html">Elpher 2.7.0: the text/gemini update
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#704">[ date ]</a>
+              <a href="thread.html#704">[ thread ]</a>
+              <a href="subject.html#704">[ subject ]</a>
+              <a href="author.html#704">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

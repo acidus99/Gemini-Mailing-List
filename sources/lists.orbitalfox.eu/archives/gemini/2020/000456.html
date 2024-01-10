@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> An outsider's view of the `gemini://` protocol
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20outsider%27s%20view%20of%20the%20%60gemini%3A//%60%20protocol&In-Reply-To=%3C20200229095029.GG16159%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000455.html">
+   <LINK REL="Next"  HREF="000459.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>An outsider's view of the `gemini://` protocol</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20outsider%27s%20view%20of%20the%20%60gemini%3A//%60%20protocol&In-Reply-To=%3C20200229095029.GG16159%40brevard.conman.org%3E"
+       TITLE="An outsider's view of the `gemini://` protocol">sean at conman.org
+       </A><BR>
+    <I>Sat Feb 29 09:50:29 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000455.html">An outsider's view of the `gemini://` protocol
+</A></li>
+        <LI>Next message (by thread): <A HREF="000459.html">An outsider's view of the `gemini://` protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#456">[ date ]</a>
+              <a href="thread.html#456">[ thread ]</a>
+              <a href="subject.html#456">[ subject ]</a>
+              <a href="author.html#456">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Ciprian Dorin Craciun once stated:
+&gt;<i> On Sat, Feb 29, 2020 at 1:42 AM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+</I>&gt;<i> &gt;   True, but there's the 800-pound gorilla to consider---Windows.  On
+</I>&gt;<i> &gt; Windows, a call like:
+</I>&gt;<i> &gt; [...]
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;   So there's a lot of protocols defined for the Internet that use CRLF.
+</I>&gt;<i> &gt; Could a switch be made to just LF?  Sure.  It's also about as likely as the
+</I>&gt;<i> &gt; Internet byte order being switched from big-endian to little-endian.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> OK, I'll drop the CRLF thing, but I find it odd that the only argument
+</I>&gt;<i> to this is &quot;because systems and protocols designed many years ago did
+</I>&gt;<i> this (i.e. CRLF)&quot;, and to that you add &quot;but anyway, all these systems
+</I>&gt;<i> just ignore all that and behave internally like it wasn't so (i.e.
+</I>&gt;<i> convert CRLF into LF)&quot;...
+</I>
+  I have support to check for both CRLF and LF because I do quite a bit of
+work with existing Internet protocols (which define the use of CRLF) and do
+extensive testing with Unix (which defines only using LF) and it makes my
+life easier to support both [1].  Besides, I think you are underestimating
+the extent of Windows development out there, and I think (I can't prove)
+that it's easier for a programmer under Unix to add the '\r' than it would
+be for a Windows programmer to force Windows *not* to add the '\r'.
+
+&gt;<i> &gt;   The linked page just talks about an API for signing and ecrypting data.
+</I>&gt;<i> &gt; It says nothing about negotiating the cipher, key size, or anything remotely
+</I>&gt;<i> &gt; like a protocol.
+</I>&gt;<i> 
+</I>&gt;<i> (I have a hunch that you are not &quot;acquainted&quot; with NaCL / `libsodium`;
+</I>
+  No, I'm aware of both NaCL (which as I stated before, I have installed on
+my home system) and libsodium (which I haven't installed, having NaCL
+already installed).
+
+&gt;<i>  the short story is this:  the designers of NaCL (again including
+</I>&gt;<i> Daniel J. Bernstein) wanted to design and implement a secure, simple
+</I>&gt;<i> to use, high level cryptographic library, that makes all the choices
+</I>&gt;<i> for its users, so that ciphers, key sizes, padding, nonces, etc.,
+</I>&gt;<i> aren't required to be handled by the user, and thus no mistakes would
+</I>&gt;<i> be made on this front.)
+</I>
+  Yes, and I just found the Lua module I wrote for NaCL (*not* libsodium)
+back in 2013 when I was last playing around with it.  
+
+&gt;<i> In fact that link does say at the end under the section `Algorithm
+</I>&gt;<i> details` what happens behind the scenes:
+</I>&gt;<i> 
+</I>&gt;<i> ~~~~
+</I>&gt;<i> Sealed boxes leverage the crypto_box construction (X25519, XSalsa20-Poly1305).
+</I>&gt;<i> 
+</I>&gt;<i> The format of a sealed box is:
+</I>&gt;<i> 
+</I>&gt;<i> ephemeral_pk || box(m, recipient_pk, ephemeral_sk,
+</I>&gt;<i> nonce=blake2b(ephemeral_pk || recipient_pk))
+</I>&gt;<i> ~~~~
+</I>
+  I was going by what I recalled of NaCL, written by the highly esteemed Dr.
+Daniel J. Bernstein, of having to make *some* choices in what underlying
+function to use for encryption and being a bit concerned that the entirety
+of NaCL had to be included in the Lua module due to linking issues [4].
+
+&gt;<i> &gt; I would ask that if you feel this strongly about it, *do
+</I>&gt;<i> &gt; it!*  Implement a client and server that uses these alternative crypto
+</I>&gt;<i> &gt; systems and then we'll have something to talk about.
+</I>&gt;<i> 
+</I>&gt;<i> What is the chance you'll change your mind about TLS?  0.01%?  
+</I>
+  Right now?  Sounds about right.  If you provide some &quot;proof-of-concept&quot;
+that can be looked at?  It goes up.  
+
+&gt;<i> Are you
+</I>&gt;<i> actually considering to compare TLS vs another proposal without bias
+</I>&gt;<i> towards &quot;legacy `<A HREF="gemini://`">gemini://`</A> implementations currently using TLS&quot;?
+</I>
+  What I'm considering is &quot;Hey!  We should implement my great idea!  And by
+'we' I mean, someone else!&quot; vibe I get when arguments like this pop up [5].
+
+&gt;<i> &gt;   You can argue for an idea.  But an idea *and an implementation* is
+</I>&gt;<i> &gt; stronger than just the idea.  I think that's why my Gemini server is so
+</I>&gt;<i> &gt; featureful---I went ahead and implemented my ideas to help argue for/against
+</I>&gt;<i> &gt; ideas, or even to just present *something* to talk about (when I have no
+</I>&gt;<i> &gt; opinion one way or the other).
+</I>&gt;<i> 
+</I>&gt;<i> Perhaps I'll throw a proof-of-concept in Python or Go.  (Although as
+</I>&gt;<i> said above, I think it won't change anything, as there is already a
+</I>&gt;<i> lot of &quot;investment&quot; in TLS...)
+</I>
+  So let me show you how much investment it took me to use TLS for my Gemini
+server:
+
+	local tls = require &quot;org.conman.nfl.tls&quot;
+	
+	local function main(ios)  -- main routine to handle a request
+	  local request = ios:read(&quot;*l&quot;)  -- mimics the Lua file IO API
+	  -- rest of code
+	end
+
+	local okay,err = tls.listen(CONF.network.addr,CONF.network.port,main,function(conf)
+	  conf:verify_client_optional()
+	  conf:insecure_no_verify_cert()
+	  return conf:cert_file(CONF.certificate.cert)
+	     and conf:key_file (CONF.certificate.key)
+	     and conf:protocols(&quot;all&quot;)
+	end)
+
+  That's it. [6]  Granted, I think I had an easier time of it than some
+others because of the library I picked (libtls, which makes using TLS very
+easy).  If the other non-TLS options are this easy then you might have a
+case. As solderpunk said, there are many, many, libraries and modules
+available for the most popular languages for TLS.  And &quot;ease of
+implementation&quot; was one of the goals of Gemini.  If these alternatives to
+TLS are just as easy to use, then a proof-of-concept should show that,
+right?
+
+  And for an indication of how easy it is for me to use TLS, a hypothetical
+TCP-only version of Gemini would look very similar:
+
+	local tcp = require &quot;org.conman.nfl.tcp&quot;
+
+	local function main(ios)
+	  local request = ios:read(&quot;*l&quot;)
+	  -- rest of code
+	end
+
+	local okay,err = tcp.listen(CONF.network.addr,CONF.network.port,main)
+
+  No other changes (except to remove the code to check for user
+certificates) would be required.  That's how easy it should be.
+
+&gt;<i> &gt;   It's easy enough to add machine readable annotations to HTML.  Heck, there
+</I>&gt;<i> &gt; are plenty of semantic tags in HTML to help with machine readability.  Yet
+</I>&gt;<i> &gt; why don't more people hand-code HTML?  Why is Markdown, which, I will add,
+</I>&gt;<i> &gt; has no defined way of adding metadata except by including HTML, so popular?
+</I>&gt;<i> 
+</I>&gt;<i> I don't know where the HTML micro-formats popped out in this
+</I>&gt;<i> discussion, as I advocated against this approach.  :)
+</I>
+  Machine readable formats, or at least, machine readable bits.
+
+&gt;<i> &gt; &gt; I'm not advocating for RDF (it was quite convoluted) or semantic web,
+</I>&gt;<i> &gt; &gt; or GraphQL, etc.  I'm just advocating something better than the Gopher
+</I>&gt;<i> &gt; &gt; map.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;   Okay, create a format and post it.  That's the best way to get this
+</I>&gt;<i> &gt; started.
+</I>&gt;<i> 
+</I>&gt;<i> OK, I'll try to take a stab at that.  (Although like in the case of
+</I>&gt;<i> TLS, I think there is already too much &quot;investment&quot; in the current way
+</I>&gt;<i> things are done.)
+</I>
+  Dude, have you *read* the thread about text formatting?  Literally half
+the messages to this list have been about that, and we're *still* talking
+about it.
+
+&gt;<i> &gt;   Again, what's stopping you from just doing it?  Waiting for consensus?
+</I>&gt;<i> 
+</I>&gt;<i> Yes, a little bit of consensus won't hurt anybody...  Else we end-up
+</I>&gt;<i> with TLS transient client certificates that act like cookies and which
+</I>&gt;<i> require about 2 or 3 separate status codes to signal their
+</I>&gt;<i> management...  :)
+</I>
+  Touch&#233;.
+
+  -spc
+
+[1]	Okay, I have code that parses SIP messages [2].  As defined by many
+	(many, many) RFCs, the transport over IP requires handling of CRLF. 
+	But test the parser, it's easier to support just LF, since the
+	testing I do is all under Unix [3].
+
+	I also have code that deals with email messages, again, which are
+	defined with CRLF, but on Unix, usually end with just LF.
+
+[2]	At work.  At home, I don't have to deal with the horrors of SIP.
+
+[3]	No Windows at all at home, or at work.
+
+[4]	I can go over this in detail if you wish, but I'd rather not as it
+	gets rather deep rather quickly.
+
+[5]	It happens quite regularly on the Lua mailing list I'm on.  So much
+	so that I outright ignore several people on that list.
+
+[6]	Okay, it took a bit to write the Lua module around libtls (from
+	LibreSSL), and some work to adapt it to my socket framework, but now
+	that that is done, other people can leverage that work.
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000455.html">An outsider's view of the `gemini://` protocol
+</A></li>
+	<LI>Next message (by thread): <A HREF="000459.html">An outsider's view of the `gemini://` protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#456">[ date ]</a>
+              <a href="thread.html#456">[ thread ]</a>
+              <a href="subject.html#456">[ subject ]</a>
+              <a href="author.html#456">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

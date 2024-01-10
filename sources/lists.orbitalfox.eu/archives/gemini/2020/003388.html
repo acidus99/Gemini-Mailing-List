@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Scheme Section 2 quibble
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3C20201117230708.i26wwzuxuwau6hl6%40GLaDOS%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003378.html">
+   <LINK REL="Next"  HREF="003390.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Scheme Section 2 quibble</H1>
+    <B>Alex // nytpu</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3C20201117230708.i26wwzuxuwau6hl6%40GLaDOS%3E"
+       TITLE="Scheme Section 2 quibble">alex at nytpu.com
+       </A><BR>
+    <I>Tue Nov 17 23:07:08 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003378.html">Scheme Section 2 quibble
+</A></li>
+        <LI>Next message (by thread): <A HREF="003390.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3388">[ date ]</a>
+              <a href="thread.html#3388">[ thread ]</a>
+              <a href="subject.html#3388">[ subject ]</a>
+              <a href="author.html#3388">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm going to use a real-world example here because people seem to not
+get why this may be a problem.
+
+Let's say I want to start hosting the git repo for my utility
+gemlog.sh[a] on gemini. I make a directory on my site, so the full url
+would be `<A HREF="gemini://nytpu.com/gemlog.sh/`.">gemini://nytpu.com/gemlog.sh/`.</A> Now, say I put a link in my
+root index.gmi (`/`) linking to `gemlog.sh`[b]. This is a perfectly
+valid link to a directory on my server, but this would instead be
+interpreted as the url `<A HREF="gemini://gemlog.sh/`">gemini://gemlog.sh/`</A> if you use the faulty
+method of parsing. (`.sh` is a valid TLD[c] so it wouldn't work even if
+you have a whitelist of tlds).
+
+
+Now, there's a few options to prevent this from happening:
+
+1) Ban periods in all file &amp; directory names. You'd also have to ban it
+in filenames, because what if I make the relative link to a file called
+`command.com`? Requires large, breaking spec changes.
+
+2) Instead of documents being served as-is and having clients parse
+urls, instead force servers to rewrite all urls, checking if it is a
+valid directory or not before serving. All clients only expect well-
+formed, full urls, and all existing server implementations are in
+violation. Requires large, breaking spec changes.
+
+3) Require that links to directories must not be relative if they could
+be confused as a uri host. This is an inconsistent, quick fix that is
+very ambiguous, because one client may think it's a valid host while
+others may not. It also puts the burden on the authors of documents,
+because now they have to remember when relative links are allowed and
+when they aren't, and test their documents on a variety of clients to
+ensure that it is compatible with all their parsing methods. Requires
+large, breaking spec changes.
+
+4) Follow the carefully and clearly defined specification[d] that is
+over 15 years old and is well-adopted by existing uri parsing libraries.
+Requires minimal, non-breaking spec changes, purely for clarity.
+
+
+I know which one I'd choose. Obviously option 1 is the only real option
+here, the outlandish ones like option 4 just make no sense.
+
+[a]: <A HREF="https://tildegit.org/nytpu/gemlog.sh">https://tildegit.org/nytpu/gemlog.sh</A>
+[b]: so the full line would read:
+     `=&gt; gemlog.sh a utility for managing gemlogs from the command line`
+[c]: <A HREF="https://en.wikipedia.org/wiki/.sh">https://en.wikipedia.org/wiki/.sh</A>
+[d]: <A HREF="https://tools.ietf.org/html/rfc3986">https://tools.ietf.org/html/rfc3986</A>
+
+-- 
+Alex // nytpu
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">alex at nytpu.com</A>
+GPG Key: <A HREF="https://www.nytpu.com/files/pubkey.asc">https://www.nytpu.com/files/pubkey.asc</A>
+Key fingerprint: 43A5 890C EE85 EA1F 8C88 9492 ECCD C07B 337B 8F5B
+<A HREF="https://useplaintext.email/">https://useplaintext.email/</A>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 833 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201117/be609ab7/attachment-0001.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201117/be609ab7/attachment-0001.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003378.html">Scheme Section 2 quibble
+</A></li>
+	<LI>Next message (by thread): <A HREF="003390.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3388">[ date ]</a>
+              <a href="thread.html#3388">[ thread ]</a>
+              <a href="subject.html#3388">[ subject ]</a>
+              <a href="author.html#3388">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

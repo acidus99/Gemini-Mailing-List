@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3C143C2FA5-FB1F-4E6C-BA30-625E6E944BC2%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001558.html">
+   <LINK REL="Next"  HREF="001566.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)</H1>
+    <B>Petite Abeille</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3C143C2FA5-FB1F-4E6C-BA30-625E6E944BC2%40gmail.com%3E"
+       TITLE="CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)">petite.abeille at gmail.com
+       </A><BR>
+    <I>Thu Jun 11 19:26:32 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001558.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+        <LI>Next message (by thread): <A HREF="001566.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1559">[ date ]</a>
+              <a href="thread.html#1559">[ thread ]</a>
+              <a href="subject.html#1559">[ subject ]</a>
+              <a href="author.html#1559">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+&gt;<i> On Jun 11, 2020, at 19:58, solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at SDF.ORG</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> Is this how cgi-bins are traditionally handled? 
+</I>
+Is there be any interest in D. J. Bernstein's ucspi-tcp [1] in this time and age? As a nimbler alternative to CGI perhaps?
+
+ucspi-tcp defines the following environment variables:
+
+$PROTO is the string TCP.
+$TCPLOCALIP is the IP address of the local host, in dotted-decimal form.
+$TCPLOCALPORT is the local TCP port number, in decimal.
+$TCPLOCALHOST is the name listed in DNS for the local host. If no name is available, $TCPLOCALHOST is not set. Beware that $TCPLOCALHOST can contain arbitrary characters.
+$TCPREMOTEIP is the IP address of the remote host, in dotted-decimal form.
+$TCPREMOTEPORT is the remote TCP port number, in decimal.
+$TCPREMOTEHOST is the name listed in DNS for the remote host. If no name is available, $TCPREMOTEHOST is not set. Beware that $TCPREMOTEHOST can contain arbitrary characters.
+$TCPREMOTEINFO is a connection-specific string supplied by the remote host via the 931/1413/IDENT/TAP protocol. If no information is available, $TCPREMOTEINFO is not set. Beware that $TCPREMOTEINFO can contain arbitrary characters.
+
+The TLS flavor [2] add these:
+
+SSL_PROTOCOL The TLS protocol version (SSLv3, TLSv1, ...).
+SSL_SESSION_ID The hex-encoded SSL session id.
+SSL_CIPHER  The cipher specification name.
+SSL_CIPHER_USEKEYSIZE Number of cipher bits (actually used).
+SSL_CIPHER_ALGKEYSIZE Number of cipher bits (possible).
+SSL_VERSION_INTERFACE The mod_ssl program version.
+SSL_VERSION_LIBRARY The OpenSSL program version.
+SSL_CLIENT_M_VERSION The version of the client certificate.
+SSL_CLIENT_M_SERIAL The serial of the client certificate.
+SSL_CLIENT_S_DN Subject DN in client's certificate.
+SSL_CLIENT_S_DN_x509 Component of client's Subject DN.
+SSL_CLIENT_I_DN Issuer DN of client's certificate.
+SSL_CLIENT_I_DN_x509 Component of client's Issuer DN.
+SSL_CLIENT_V_START Validity of client's certificate (start time).
+SSL_CLIENT_VERIFY NONE, SUCCESS, GENEROUS or FAILED:reason.
+SSL_SERVER_M_SERIAL The serial of the server certificate.
+SSL_SERVER_S_DN Subject DN in server's certificate.
+SSL_SERVER_S_DN_x509 Component of server's Subject DN.
+SSL_SERVER_I_DN Issuer DN of server's certificate.
+SSL_SERVER_I_DN_x509 Component of server's Issuer DN.
+SSL_SERVER_V_START Validity of server's certificate (start time).
+SSL_SERVER_V_END Validity of server's certificate (end time).
+SSL_SERVER_A_SIG Algorithm used for the signature of server's certificate.
+SSL_SERVER_A_KEY Algorithm used for the public key of server's certificate.
+SSL_SERVER_CERT PEM-encoded server certificate.
+
+For $SSL_CLIENT_x_DN_x509 and $SSL_SERVER_x_DN_x509, x509 denotes a
+component of the DN: C, ST, L, O, OU, CN, T, I, G, S, D, UID, Email.
+
+
+[1] <A HREF="https://cr.yp.to/ucspi-tcp/">https://cr.yp.to/ucspi-tcp/</A>
+[2] <A HREF="https://www.fehcom.de/ipnet/ucspi-ssl.html">https://www.fehcom.de/ipnet/ucspi-ssl.html</A>
+
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001558.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+	<LI>Next message (by thread): <A HREF="001566.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1559">[ date ]</a>
+              <a href="thread.html#1559">[ thread ]</a>
+              <a href="subject.html#1559">[ subject ]</a>
+              <a href="author.html#1559">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

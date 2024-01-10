@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3CCAFTy05bkVWY3ujKO8GppgzVg2FEPFVXwZYejgzp_%2BXaLffHsqQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001482.html">
+   <LINK REL="Next"  HREF="001485.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)</H1>
+    <B>Michael Lazar</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3CCAFTy05bkVWY3ujKO8GppgzVg2FEPFVXwZYejgzp_%2BXaLffHsqQ%40mail.gmail.com%3E"
+       TITLE="CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)">lazar.michael22 at gmail.com
+       </A><BR>
+    <I>Wed Jun 10 04:53:19 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001482.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+        <LI>Next message (by thread): <A HREF="001485.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1483">[ date ]</a>
+              <a href="thread.html#1483">[ thread ]</a>
+              <a href="subject.html#1483">[ subject ]</a>
+              <a href="author.html#1483">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Jun 9, 2020 at 10:09 PM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> It was thus said that the Great Michael Lazar once stated:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I have a CGI debug script setup here [2] if anybody wants to poke holes in my
+</I>&gt;<i> &gt; implementation.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; [1] <A HREF="https://tools.ietf.org/html/rfc3875#section-3.3">https://tools.ietf.org/html/rfc3875#section-3.3</A>
+</I>&gt;<i> &gt; [2] <A HREF="gemini://mozz.us/cgi-bin/debug.cgi">gemini://mozz.us/cgi-bin/debug.cgi</A>
+</I>
+&gt;<i>   I notice it doesn't set PATH_TRANSLATED
+</I>
+I just didn't see a compelling reason to add it.
+
+&gt;<i> and it always sets TLS_CIPHER and TLS_VERSION.
+</I>
+Why not? These are just as useful even if the client doesn't send a
+certificate.
+
+&gt;<i> And why HOSTNAME when you also have SERVER_NAME?
+</I>
+I can't remember why I added this. I thought I saw HOSTNAME referenced
+somewhere...
+
+Some other differences in my server's CGI implementation (I used GLV as a
+reference implementation, so there are a lot of similarities too):
+
+TLS_CLIENT_HASH
+
+I'm using a base64-encoded representation of the hash. I like your notation of
+SHA256:&lt;HEX&gt; better, but it's too late now and I don't want to break backwards
+compatibility.
+
+TLS_CLIENT_SERIAL_NUMBER
+
+The client certificate serial number. I'm surprised that this isn't available
+in libtls.
+
+TLS_CLIENT_AUTHORISED
+
+Even though jetforce accepts unverified client certificates now, it will still
+check if the certificate is authorised anyway. This means both valid and trusted
+by the server's CA store. So this will be set to &quot;1&quot; for trusted and &quot;0&quot; for
+untrusted. I like this variable because it gives each CGI script the option to
+implement authentication however they want.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001482.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+	<LI>Next message (by thread): <A HREF="001485.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1483">[ date ]</a>
+              <a href="thread.html#1483">[ thread ]</a>
+              <a href="subject.html#1483">[ subject ]</a>
+              <a href="author.html#1483">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

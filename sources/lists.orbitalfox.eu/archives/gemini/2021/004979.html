@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] [users] Two new capsules and a server
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20%5Busers%5D%20Two%20new%20capsules%20and%20a%20server&In-Reply-To=%3C20210131232821.GH5326%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004970.html">
+   <LINK REL="Next"  HREF="004984.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] [users] Two new capsules and a server</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20%5Busers%5D%20Two%20new%20capsules%20and%20a%20server&In-Reply-To=%3C20210131232821.GH5326%40brevard.conman.org%3E"
+       TITLE="[ANN] [users] Two new capsules and a server">sean at conman.org
+       </A><BR>
+    <I>Sun Jan 31 23:28:21 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004970.html">[ANN] [users] Two new capsules and a server
+</A></li>
+        <LI>Next message (by thread): <A HREF="004984.html">[ANN] [users] Two new capsules and a server
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4979">[ date ]</a>
+              <a href="thread.html#4979">[ thread ]</a>
+              <a href="subject.html#4979">[ subject ]</a>
+              <a href="author.html#4979">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Omar Polo once stated:
+&gt;<i> 
+</I>&gt;<i> Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; writes:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; It was thus said that the Great Omar Polo once stated:
+</I>&gt;<i> &gt;&gt; 
+</I>&gt;<i> &gt;&gt; Other than that, the other features are pretty much what you'd expect:
+</I>&gt;<i> &gt;&gt; virtual hosts, configuration file with per-location rules, CGI scripts,
+</I>&gt;<i> &gt;&gt; punycode, IRIs, directory listings ecc.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;   The CGI support seems ... not quite the CGI that I know.  It's closer to
+</I>&gt;<i> &gt; SCGI, but even then, it's not SCGI.  Looking at the code, any currently
+</I>&gt;<i> &gt; written CGI script for Gemini won't work out of the box.  You might want to
+</I>&gt;<i> &gt; think about calling it something else, or work to getting actual CGI or SCGI
+</I>&gt;<i> &gt; support going (SCGI is closer to what you are doing).
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;   -spc
+</I>&gt;<i> 
+</I>&gt;<i> Thanks for taking the time and read the code.  
+</I>
+  You're welcome.
+
+&gt;<i> By re-reading RFC3875 I assume that, except for the environment
+</I>&gt;<i> variables that I'll double check later, I only need to execute the
+</I>&gt;<i> script in the script directory instead of the vhost one.  The RFC
+</I>&gt;<i> mention passing data in stdin, but it seems only for POST requests and
+</I>&gt;<i> I'm assuming Gemini ones are ``GET''.  It also mention parsing the query
+</I>&gt;<i> and passing it as argument to the script: this is something interesting,
+</I>&gt;<i> but I'm not sure how to spilt it?  The &amp; doesn't seem widespread here,
+</I>&gt;<i> so I have to pass the whole query as first argument?
+</I>
+  You don't split the query.  You pass it in, as is, from the request, in
+QUERY_STRING.  Play around with:
+
+	<A HREF="gemini://gemini.conman.org/cgi">gemini://gemini.conman.org/cgi</A>
+
+It will show all the variables, command line arguments and a breakdown of
+the query string.
+
+&gt;<i> Of course I'd like to have a complete CGI support, and not something
+</I>&gt;<i> merely closer, so I'll take some time to read how other servers are
+</I>&gt;<i> handling them, starting from your GLV-1.12556.
+</I>
+  Warning about my server---the CGI implementation also allows one to run
+CGI scripts for a webserver (and Apache in particular) so be aware of that.
+
+&gt;<i> I'd like too, as pointed by John Cowan, to have a best-practices or a
+</I>&gt;<i> companion specification for CGI on Gemini, as RFC3875 seems quite
+</I>&gt;<i> HTTP-specific, but I don't think I'm the most qualified to write one :D
+</I>
+  It's not as HTTP-specific as it may seem---the only bit where it's an
+issue is the REQUEST_METHOD.  My server sets it to &quot;&quot; (as there is no method
+for Gemini, and what I think it should be, given RFC-3875 makes it
+mandatory); others set it to &quot;GET&quot;.  Aside from that, it's quite generic.
+
+  -spc
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004970.html">[ANN] [users] Two new capsules and a server
+</A></li>
+	<LI>Next message (by thread): <A HREF="004984.html">[ANN] [users] Two new capsules and a server
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4979">[ date ]</a>
+              <a href="thread.html#4979">[ thread ]</a>
+              <a href="subject.html#4979">[ subject ]</a>
+              <a href="author.html#4979">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Spec] Spec (un)freezes and the spec's future
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSpec%5D%20Spec%20%28un%29freezes%20and%20the%20spec%27s%20future&In-Reply-To=%3CCAD2gp_Q%2BLtXBVSEb6yU5o9xS9WzyvNDikEYynT8APy5f2PDh-g%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004189.html">
+   <LINK REL="Next"  HREF="004252.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Spec] Spec (un)freezes and the spec's future</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSpec%5D%20Spec%20%28un%29freezes%20and%20the%20spec%27s%20future&In-Reply-To=%3CCAD2gp_Q%2BLtXBVSEb6yU5o9xS9WzyvNDikEYynT8APy5f2PDh-g%40mail.gmail.com%3E"
+       TITLE="[Spec] Spec (un)freezes and the spec's future">cowan at ccil.org
+       </A><BR>
+    <I>Mon Dec 21 01:48:14 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004189.html">[Spec] Spec (un)freezes and the spec's future
+</A></li>
+        <LI>Next message (by thread): <A HREF="004252.html">[Spec] Spec (un)freezes and the spec's future
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4198">[ date ]</a>
+              <a href="thread.html#4198">[ thread ]</a>
+              <a href="subject.html#4198">[ subject ]</a>
+              <a href="author.html#4198">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Dec 20, 2020 at 9:58 AM Solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at posteo.net</A>&gt; wrote:
+
+Things don't need to be 100% perfect to be useful.  I think it's
+&gt;<i> arrogant to *aim* for perfection.
+</I>
+
+Author:  &quot;I know there are some mistakes in my book; after all, it is 777
+pages long!&quot;
+
+Editor: &quot;If you know there are mistakes, why don't you _fix_ them?&quot;
+
+I know it's very much going against
+&gt;<i> the grain to declare than any kind of software project is &quot;done&quot;; I know
+</I>&gt;<i> that people nowadays explicitly avoid using or recommending software for
+</I>&gt;<i> the sole reason that it is no longer being actively developed.
+</I>&gt;<i>
+</I>
+&quot;Some software is abandoned; other software is merely finished.&quot;  --me
+
+(If you don't care about companion protocols and Dioscuri, skip the rest.)
+
+
+&gt;<i> Our strongest possible defense here, IMHO, is keeping the core protocol so
+</I>
+easy to implement that there is always likely to be a wide variety of
+&gt;<i> clients in popular use.  That way, companion protocols cannot gain
+</I>&gt;<i> traction unless multiple independent client developers all agree they
+</I>&gt;<i> are worth supporting.
+</I>
+
+As someone whose proposed extension protocol has probably made the most
+noise, I would point out that Dioscuri clients and servers will typically
+*not* be Gemini clients and servers, as they don't share the same use cases
+at all.  Dioscuri native applications and front-end engines are not
+browsers, and Dioscuri servers are more like Tomcat than like Apache.
+
+To hold down on the number of posts, I'll just mention that the spec for
+Dioscuri is now at &lt;
+<A HREF="https://gist.github.com/johnwcowan/d3211496ad89125c77297c6586ebe176">https://gist.github.com/johnwcowan/d3211496ad89125c77297c6586ebe176</A>&gt;.  I
+will probably edit it further, especially if there are changes in the
+Gemini spec that also make sense for Dioscuri.  The TL;dr version of the
+protocol is that the client sends a media type along with the URL; and
+follows it with an appropriate body; otherwise it is the same as Gemini.
+
+I want to specially acknowledge Sandra Snan, who said that Dioscuri needed
+a server-served, client-executed programming language to make a front-end
+engine programmable.  I agree, and I'm now working on just such a
+language.  My sources so far are ABC (the ancestor of Python), PROMAL (a
+programming language for Apple II and Commodore systems), Perl 1.0,
+Microsoft Small Basic, and the libplot library, plus the ability to execute
+REST requests at least via Gemini and Dioscuri.  It will have much the same
+goals as Gemini (see the FAQ) insofar as they are applicable to language
+design, and will be aimed at beginning and perpetual-intermediate
+programmers without being too excruciating for advanced programmers.
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+Her he asked if O'Hare Doctor tidings sent from far coast and she with
+grameful sigh him answered that O'Hare Doctor in heaven was.  Sad was the
+man that word to hear that him so heavied in bowels ruthful.  All she
+there told him, ruing death for friend so young, algate sore unwilling
+God's rightwiseness to withsay.   Joyce, Ulysses, &quot;Oxen of the Sun&quot;
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201220/9718ffe3/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201220/9718ffe3/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004189.html">[Spec] Spec (un)freezes and the spec's future
+</A></li>
+	<LI>Next message (by thread): <A HREF="004252.html">[Spec] Spec (un)freezes and the spec's future
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4198">[ date ]</a>
+              <a href="thread.html#4198">[ thread ]</a>
+              <a href="subject.html#4198">[ subject ]</a>
+              <a href="author.html#4198">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

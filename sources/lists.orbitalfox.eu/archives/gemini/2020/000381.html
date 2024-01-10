@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3Cbddeeec4-5e79-415d-9b64-91d99b379457%40www.fastmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000379.html">
+   <LINK REL="Next"  HREF="000384.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>Aaron Janse</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3Cbddeeec4-5e79-415d-9b64-91d99b379457%40www.fastmail.com%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">aaron at ajanse.me
+       </A><BR>
+    <I>Sat Jan 18 22:18:39 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000379.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000384.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#381">[ date ]</a>
+              <a href="thread.html#381">[ thread ]</a>
+              <a href="subject.html#381">[ subject ]</a>
+              <a href="author.html#381">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Jan 18, 2020, at 1:33 PM, solderpunk wrote:
+&gt;<i> Hmm, I really would not have had any expectation that quoted Gemini
+</I>&gt;<i> syntax would do anything at all.
+</I>&gt;<i> 
+</I>&gt;<i> What sort of context would you expect this to occur in?
+</I>
+I often see quoted syntax (e.g. links, lists) on StackOverflow. However,
+I haven't seen quoted syntax in phlogs. Plus, supported mixing nested
+syntax could be a PITA to implement.
+
+Also seen in the wild:
+* nested lists of links (nice to have, but not sad if unsupported)
+* hyperlink headers (this sounds like a mess regarding `=&gt; #` vs `# =&gt;`)
+
+Either way, I'd still specify what nesting is/isn't allowed.
+
+&gt;<i> I guess this is harmless.  It feels a bit to me like we're adding it
+</I>&gt;<i> just because Markdown has it - unlike headings and lists and even,
+</I>&gt;<i> occasionally, quotes, I don't know that I've ever seen a horiozontal
+</I>&gt;<i> rule used in Gopherspace.  But I don't see a good reason to disallow it.
+</I>
+I see horizontal rules used in gopherspace all the time:
+
+=&gt; <A HREF="gopher://zaibatsu.circumlunar.space/0/~solderpunk/phlog/a-new-start.txt">gopher://zaibatsu.circumlunar.space/0/~solderpunk/phlog/a-new-start.txt</A>
+=&gt; <A HREF="gopher://zaibatsu.circumlunar.space/0/~tfurrows/phlog/2020-01-02_clickBaitGeneration.txt">gopher://zaibatsu.circumlunar.space/0/~tfurrows/phlog/2020-01-02_clickBaitGeneration.txt</A>
+=&gt; <A HREF="gopher://tilde.team/0/~ben/blog/weechat-setup.md">gopher://tilde.team/0/~ben/blog/weechat-setup.md</A>
+
+&gt;<i> It feels very strange to me for a syntax specification to explicitly
+</I>&gt;<i> list stuff from a different syntax specification which isn't allowed.
+</I>
+You make a good point here. Maybe, we instead specify that clients MUST NOT
+support non-specified syntax, in order to discourage pages with un-specified
+syntax from being published in the first place.
+
+&gt;<i> I don't want to explicitly ban hard-wrapped text, I don't see the need
+</I>&gt;<i> to.  I think this syntax actually degrades pretty gracefully when fed
+</I>&gt;<i> hard-wrapped text that is shorter than the viewport, and that's nice.
+</I>
+That makes sense. However, would it be unreasonable to state that users
+&quot;SHOULD NOT&quot; hard-wrap, since doing so degrades quite poorly on mobile?
+
+&gt;<i>  
+</I>&gt;<i> &gt; Are we really limited to a max depth of three? Even if we allow unlimited
+</I>&gt;<i> &gt; depth of headers and lists, clients would only need to read the first two
+</I>&gt;<i> &gt; chars of a line to determine its type (unless we add horizontal rules,
+</I>&gt;<i> &gt; in which case we'd need to read three characters).
+</I>&gt;<i> 
+</I>&gt;<i> Good catch, technically speaking once a line is detected, on the basis
+</I>&gt;<i> of the first three or fewer chars, as a header or list, it can be passed
+</I>&gt;<i> to a function than handles a header line or a list line, and that
+</I>&gt;<i> function has access to the whole line.
+</I>&gt;<i> 
+</I>&gt;<i> That said, maybe we should add a limit anyway.  Otherwise clients have
+</I>&gt;<i> to write totally generalised code to handle arbitrarily many levels,
+</I>&gt;<i> which could get tricky.
+</I>
+Hmmm. If max depth is one, that makes sense. Same if max depth is two. But
+once max depth is three, it sounds like clients would be using generalized
+code anyway. Plus, a shallow max depth might be very confusing for authors
+using text/gemini.
+
+&gt;<i>  
+</I>&gt;<i> &gt; Well, worst case scenario, if someone really badly wants comment threads,
+</I>&gt;<i> &gt; maybe they could use nested quote blocks (assuming we figure that out).
+</I>&gt;<i> 
+</I>&gt;<i> Well, it seems like the &gt; syntax generalises in exactly the same way as
+</I>&gt;<i> the heading and list syntaxes.
+</I>
+But for quotes, I beg that a space character is allowed between the
+greater-than symbols in nested quotes, so that we don't have to abandon
+the way quotes are used in emails. In fact, I think the spec should say
+that a single space after a `&gt;` symbol should always be stripped.
+
+&gt;<i> 
+</I>&gt;<i> Speaking of these...what happens when a client encounters this:
+</I>&gt;<i> 
+</I>&gt;<i> ** Foo
+</I>&gt;<i> ** Bar
+</I>&gt;<i> ** Baz
+</I>&gt;<i> 
+</I>&gt;<i> i.e. a bunch of allegedly nested list items which are not emedded in a
+</I>&gt;<i> higher-level list?
+</I>&gt;<i> 
+</I>&gt;<i> For a simple text-based client which only uses the nestedness level to
+</I>&gt;<i> determine how many spaces to stick in front of the line, this shouldn't
+</I>&gt;<i> post major problems.  But fancy clients planning on doing graphical
+</I>&gt;<i> things (I'm actually thinking more about quotes here than list items)
+</I>&gt;<i> might choke if not carefully written.  Should we explicitly require
+</I>&gt;<i> correct nesting?  Or explicitly say clients must be resilient against
+</I>&gt;<i> weird nesting?
+</I>
+I personally think resilients is a bad idea. It's partially to blame for so
+many web browser quirks nowadays. I think that if fancy clients refuse to
+render invalid syntax, that could be a good deterrant. OTOH, it's sometimes
+tough to contact gopher/gemini users, so maybe nobody would be able to tell
+them something's wrong. Unless we write scripts to verify that text is valid
+text/gemini, and/or integrate this functionality into servers?
+
+Cheers!
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000379.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000384.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#381">[ date ]</a>
+              <a href="thread.html#381">[ thread ]</a>
+              <a href="subject.html#381">[ subject ]</a>
+              <a href="author.html#381">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

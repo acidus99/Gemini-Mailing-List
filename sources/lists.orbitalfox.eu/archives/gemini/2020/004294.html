@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] Questions about cache
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Questions%20about%20cache&In-Reply-To=%3C0b292576-54e1-dbe1-75ab-2996a4acd20f%40drsudo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004287.html">
+   <LINK REL="Next"  HREF="004299.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] Questions about cache</H1>
+    <B>Stephen</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Questions%20about%20cache&In-Reply-To=%3C0b292576-54e1-dbe1-75ab-2996a4acd20f%40drsudo.com%3E"
+       TITLE="[tech] Questions about cache">stephen at drsudo.com
+       </A><BR>
+    <I>Tue Dec 22 23:31:43 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004287.html">[tech] Questions about cache
+</A></li>
+        <LI>Next message (by thread): <A HREF="004299.html">[tech] Questions about cache
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4294">[ date ]</a>
+              <a href="thread.html#4294">[ thread ]</a>
+              <a href="subject.html#4294">[ subject ]</a>
+              <a href="author.html#4294">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>    There was a thread about this in early November:
+</I>&gt;<i> 
+</I>&gt;<i> 	<A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/003077.html">https://lists.orbitalfox.eu/archives/gemini/2020/003077.html</A>
+</I>&gt;<i> 
+</I>&gt;<i>    It appears that half want caching, half don't.  It's a mess.
+</I>
+Well that's embarrassing. I don't know how I missed that *blush*. Thanks 
+for the link and sorry for the noise.
+
+In case anyone is curious, this is the solution I came up with to 
+prevent caching. I have a cgi script like this:
+
+if [ -z &quot;$QUERY_STRING&quot; ]; then
+   printf '30 %s?%s\r\n' \
+     &quot;$(basename &quot;$SCRIPT_PATH&quot;)&quot; \
+     &quot;$(date | tr ' :' __)&quot;
+else
+   printf '20 text/gemini\r\n'
+   generate_content
+fi
+
+Basically, if there is no query string on the path, it redirects you to 
+the same page with a cache busting query string constructed from the 
+current date and time. If there is a query string, it gives you the content.
+
+It's not perfect. A user could bookmark a page with a cache busting 
+string on it and then see the same static page until it went out of 
+their cache. I don't think there is a way around that though.
+
+~Stephen
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004287.html">[tech] Questions about cache
+</A></li>
+	<LI>Next message (by thread): <A HREF="004299.html">[tech] Questions about cache
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4294">[ date ]</a>
+              <a href="thread.html#4294">[ thread ]</a>
+              <a href="subject.html#4294">[ subject ]</a>
+              <a href="author.html#4294">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

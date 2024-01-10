@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20lang%20parameter%2C%20minor%20line%20type%20changes%2C%0A%20clarifications...&In-Reply-To=%3C20200607190638.94103f3d44ca8a9abbe928e0%40matthewgraybosch.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001408.html">
+   <LINK REL="Next"  HREF="001413.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...</H1>
+    <B>Matthew Graybosch</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20lang%20parameter%2C%20minor%20line%20type%20changes%2C%0A%20clarifications...&In-Reply-To=%3C20200607190638.94103f3d44ca8a9abbe928e0%40matthewgraybosch.com%3E"
+       TITLE="[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...">hello at matthewgraybosch.com
+       </A><BR>
+    <I>Mon Jun  8 00:06:38 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001408.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
+</A></li>
+        <LI>Next message (by thread): <A HREF="001413.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1411">[ date ]</a>
+              <a href="thread.html#1411">[ thread ]</a>
+              <a href="subject.html#1411">[ subject ]</a>
+              <a href="author.html#1411">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, 7 Jun 2020 16:27:23 +0000
+solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at SDF.ORG</A>&gt; wrote:
+
+&gt;<i> I have just pushed some changes to the Gemini specification.  You can
+</I>&gt;<i> see the new new v0.13.0 spec at:
+</I>
+Thanks for the work you've been doing. If you don't mind, I have a
+couple of questions as a content author.
+
+&gt;<i> Perhaps the biggest change, in conceptual terms, is the introduction
+</I>&gt;<i> of the &quot;lang&quot; parameter for text/gemini.  However, most clients will
+</I>&gt;<i> not need to make any changes whatsoever on account of this.
+</I>
+I just read the relevant part of the spec, but I'm still not clear on
+how I should go about specifying that my text is US English. Do I just
+have to add &quot;lang=en_US&quot; on the first line of a text/gemini file?
+
+&gt;<i> Lines beginning with &quot;&gt;&quot; are now defined to be quote lines, as per
+</I>&gt;<i> popular demand.
+</I>
+This will be handy, but now I'm wondering about pre-formatted quotes
+(mainly for poetry, song lyrics, screenplays, etc.)
+
+For example, if a Gemini content author wanted to quote from a modern
+poem like T. S. Eliot's _The Waste Land_ and preserve the original
+formatting, would they do something like this?
+
+```
+&gt;<i> &quot;What is that noise?&quot;
+</I>&gt;<i>                           The wind under the door.
+</I>&gt;<i> &quot;What is that noise now? What is the wind doing?&quot;
+</I>&gt;<i>                            Nothing again nothing.
+</I>&gt;<i>                                                         &quot;Do
+</I>&gt;<i> &quot;You know nothing? Do you see nothing? Do you remember
+</I>&gt;<i> &quot;Nothing?&quot;
+</I>```
+
+I suspect that most clients would interpret this block as just
+pre-formatted text and render it in monospace--which I acknowledge is
+correct behavior according to the current spec but not necessarily what
+a content author wants if they decide to load their own page to see how
+it looks in various clients.
+
+Furthermore, looking for quote characters inside a preformatted block
+and then rendering that block in a variable-width font instead (when
+applicable) sounds like a good way to introduce bugs.
+
+I'd like to suggest instead that we import the | character followed by
+a space to denote line blocks from reStructuredText as an advanced line
+type.
+
+=&gt;
+<A HREF="https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#line-blocks">https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#line-blocks</A>
+
+Of course, I suppose content authors could just use reStructuredText
+instead, which should probably be the goto format for text that uses
+footnotes/endnotes as well.
+
+-- 
+Matthew Graybosch           <A HREF="https://www.matthewgraybosch.com">https://www.matthewgraybosch.com</A>
+#include &lt;disclaimer.h&gt;	    <A HREF="gemini://starbreaker.org">gemini://starbreaker.org</A>
+Harrisburg,PA	 	    <A HREF="gemini://demifiend.org">gemini://demifiend.org</A>
+&quot;Out of order?! Even in the future nothing works.&quot;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001408.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
+</A></li>
+	<LI>Next message (by thread): <A HREF="001413.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1411">[ date ]</a>
+              <a href="thread.html#1411">[ thread ]</a>
+              <a href="subject.html#1411">[ subject ]</a>
+              <a href="author.html#1411">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

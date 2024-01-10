@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Unicode vs. the World
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3CCAJScK0%2BpT9z9HdsWKy9ok%2BH%3DswaHmN8ZuYxLOQ9Fu395HGG6ug%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004103.html">
+   <LINK REL="Next"  HREF="004109.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Unicode vs. the World</H1>
+    <B>Bj&#246;rn W&#228;rmedal</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3CCAJScK0%2BpT9z9HdsWKy9ok%2BH%3DswaHmN8ZuYxLOQ9Fu395HGG6ug%40mail.gmail.com%3E"
+       TITLE="Unicode vs. the World">bjorn.warmedal at gmail.com
+       </A><BR>
+    <I>Thu Dec 17 07:39:36 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004103.html">Unicode vs. the World
+</A></li>
+        <LI>Next message (by thread): <A HREF="004109.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4107">[ date ]</a>
+              <a href="thread.html#4107">[ thread ]</a>
+              <a href="subject.html#4107">[ subject ]</a>
+              <a href="author.html#4107">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>How does a client handle a link like the following:
+=&gt; essays/why-spaces-are-%20-in-URLs.gmi
+
+The assumption here is that the author has not percent encoded
+themselves -- this is the actual filename, %20 and all.
+
+How can the client tell if it's percent encoded or not? If you start
+by decoding it you distort the filename. If you just assume it isn't
+percent encoded and go ahead and do that you will handle this link
+correctly but break any links that are already percent encoded. I've
+only done this in python, using the urllib.parse library. I can tell
+that to encode or decode, but it will do what I tell it to without
+exception. It's up to me to build logic that avoids breaking the edge
+cases.
+
+We can decide to *always* percent encode links in gemtext (as the spec
+states now) or to *never* do it, but I don't see how we can reasonably
+have both. And never doing it means we can never link to a file with
+spaces in the URL, and will have to percent decode anything we copy
+paste from web browser's address bar. There will be extra work for
+authors either way.
+
+Consider another hypothetical case:
+=&gt; teddybearoftheyear.com/vote?ew0k%20The%20Great Vote for me!
+
+How would you solve that?
+
+However much I *want* to have IRIs and IDNs in gemtext and leave the
+work to clients and servers, I don't have a solution for that as an
+implementer.
+
+Cheers,
+ew0k
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004103.html">Unicode vs. the World
+</A></li>
+	<LI>Next message (by thread): <A HREF="004109.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4107">[ date ]</a>
+              <a href="thread.html#4107">[ thread ]</a>
+              <a href="subject.html#4107">[ subject ]</a>
+              <a href="author.html#4107">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

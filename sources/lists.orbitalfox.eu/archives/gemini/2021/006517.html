@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] Client history behavior with redirects
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Client%20history%20behavior%20with%20redirects&In-Reply-To=%3CCAFTy05bftqV7GRMqci%3Dxt80y5dk7%2Bf_KUF5fFVA8U%3Dnor4F%2BgA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006510.html">
+   <LINK REL="Next"  HREF="006518.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] Client history behavior with redirects</H1>
+    <B>Michael Lazar</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Client%20history%20behavior%20with%20redirects&In-Reply-To=%3CCAFTy05bftqV7GRMqci%3Dxt80y5dk7%2Bf_KUF5fFVA8U%3Dnor4F%2BgA%40mail.gmail.com%3E"
+       TITLE="[tech] Client history behavior with redirects">lazar.michael22 at gmail.com
+       </A><BR>
+    <I>Mon May 17 17:49:43 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006510.html">[users] Apogee, a new Gemini server
+</A></li>
+        <LI>Next message (by thread): <A HREF="006518.html">[tech] Client history behavior with redirects
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6517">[ date ]</a>
+              <a href="thread.html#6517">[ thread ]</a>
+              <a href="subject.html#6517">[ subject ]</a>
+              <a href="author.html#6517">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all,
+
+I have a question on a common design pattern in gemini. Say we have
+a guestbook, message board, etc. that accepts user comments via an
+input query. A normal session with a client might look like this:
+
+```
+C: /
+S: 20 text/gemini (display the home page)
+
+C: /guestbook
+S: 20 text/gemini (display the guestbook page)
+
+C: /guestbook/input
+S: 10 enter your message
+
+C: /guestbook/input?hello%20world
+S: 30 /guestbook (submit the user's message and redirect)
+
+C: /guestbook
+S: 20 text/gemini (display the guestbook page)
+```
+
+Now, what should happen at this point when the user clicks the
+&quot;back&quot; button in their client?
+
+A. The client resubmits &quot;/guestbook/input?hello%20world&quot;. This is not
+   desired because it will result in double posting the message. This
+   same problem is solved on the web using the Post/Redirect/Get
+   pattern [1]. I suppose the gemini equivalent would be &quot;don't store
+   requests that return 3x in the client's history&quot;. With this rule,
+   queries like GUS searches would still be cached because
+   &quot;<A HREF="gemini://geminispace.info/search?hello">gemini://geminispace.info/search?hello</A>&quot; returns a 20 response.
+
+B. The client re-prompts the user with &quot;enter your message&quot;. I've
+   seen a few (most?) clients do this and it's a pretty jarring
+   experience as a user, because I did not click on a link first
+   to prime the input prompt. IMO we should also make a rule &quot;don't
+   store requests that return a 1x in the client's history&quot;. There's
+   no web equivalent for this that I could find.
+
+C. The client loads &quot;/&quot;, which is the latest cached request before
+   the current page. This seems like the desired behavior to me.
+
+Thoughts?
+
+- Michael
+
+[1] <A HREF="https://en.wikipedia.org/wiki/Post/Redirect/Get">https://en.wikipedia.org/wiki/Post/Redirect/Get</A>
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006510.html">[users] Apogee, a new Gemini server
+</A></li>
+	<LI>Next message (by thread): <A HREF="006518.html">[tech] Client history behavior with redirects
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6517">[ date ]</a>
+              <a href="thread.html#6517">[ thread ]</a>
+              <a href="subject.html#6517">[ subject ]</a>
+              <a href="author.html#6517">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

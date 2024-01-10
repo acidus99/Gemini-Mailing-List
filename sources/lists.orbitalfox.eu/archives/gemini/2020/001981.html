@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Illusory latency due to trailing slash redirects
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Illusory%20latency%20due%20to%20trailing%20slash%20redirects&In-Reply-To=%3C20200627193746.dtbbnzmits75jnmt%40tilde.institute%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001986.html">
+   <LINK REL="Next"  HREF="001996.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Illusory latency due to trailing slash redirects</H1>
+    <B>Paper</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Illusory%20latency%20due%20to%20trailing%20slash%20redirects&In-Reply-To=%3C20200627193746.dtbbnzmits75jnmt%40tilde.institute%3E"
+       TITLE="Illusory latency due to trailing slash redirects">paper at tilde.institute
+       </A><BR>
+    <I>Sat Jun 27 20:37:46 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001986.html">Illusory latency due to trailing slash redirects
+</A></li>
+        <LI>Next message (by thread): <A HREF="001996.html">Illusory latency due to trailing slash redirects
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1981">[ date ]</a>
+              <a href="thread.html#1981">[ thread ]</a>
+              <a href="subject.html#1981">[ subject ]</a>
+              <a href="author.html#1981">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Jun 27, 2020 at 08:57:14AM +0000, solderpunk wrote:
+&gt;<i> Gemini servers (and servers for any other protocol supporting relative
+</I>&gt;<i> URLs, including HTTP) will use redirects to get clients to add a
+</I>&gt;<i> trailing slash to a URL which maps to a directory on the server's
+</I>&gt;<i> filesystem.  Handling this redirect is often invisible to the client
+</I>&gt;<i> user, with the result that what &quot;looks and feels&quot; like a single request
+</I>&gt;<i> is actually two immediately consecutive requests.  This makes latency
+</I>&gt;<i> appear to be much worse than it actually is.  Perhaps this underlies
+</I>&gt;<i> some people's perceptions that Gemini has unacceptable latency.
+</I>&gt;<i> 
+</I>&gt;<i> This basic problem is unavoidable, but there are many small things
+</I>&gt;<i> client and server authors can do to minimise how often it happens:
+</I>&gt;<i> 
+</I>&gt;<i> In general, the client can't add a missing trailing slash itself because
+</I>&gt;<i> it never knows if a given URL maps to something file-like or something
+</I>&gt;<i> directory-like.  An interesting exception is the root of the server.
+</I>&gt;<i> Molly Brown and Jetforce (but not GLV-1.12556) both seem to redirect
+</I>&gt;<i> gemini.example.com to gemini.example.com/, making the loading of
+</I>&gt;<i> &quot;homepages&quot; feel slower than it needs to.  I'm pretty sure it should be
+</I>&gt;<i> safe for clients to automatically append trailing slashes to URLs
+</I>&gt;<i> without paths.
+</I>
+I have a script which checks for redirects on websites and reports
+status codes. On web it is much smaller problem - the saved latency is
+much less. This way I can see dead links and links which could cause
+problems - http redirects instead of https or normal redirects which can be
+optimised. Maybe something similar could be done for gemini, so that content
+authors could check if their links are ok.
+
+I don't like this idea, because content authors should focus on writing
+content, not on how the content looks or if they are writing it the
+&quot;correct way&quot;. Linters for gemini code sound like a bad idea and a sign
+that something is wrong.
+
+&gt;<i> On the server side, server authors should take care when doing things
+</I>&gt;<i> like automatically generating directory listings to put trailing slashes
+</I>&gt;<i> in links to directories so that the redirect is not necessary.
+</I>That's the best solution I think.
+
+Paper
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001986.html">Illusory latency due to trailing slash redirects
+</A></li>
+	<LI>Next message (by thread): <A HREF="001996.html">Illusory latency due to trailing slash redirects
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1981">[ date ]</a>
+              <a href="thread.html#1981">[ thread ]</a>
+              <a href="subject.html#1981">[ subject ]</a>
+              <a href="author.html#1981">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> approachabe &amp; frugal &amp; composable
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20approachabe%20%26%20frugal%20%26%20composable&In-Reply-To=%3Ceh1BXtM5lj74SeEDU5-I8gpGjZMkzWC-MiJcIJ4vvWVr57IeRX9b4WJAC91mxOw5zlM7qMZKsmkfyQpyheinIpdTbO4eUEMnaYSm8IsJfuM%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001237.html">
+   <LINK REL="Next"  HREF="001240.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>approachabe &amp; frugal &amp; composable</H1>
+    <B>defdefred</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20approachabe%20%26%20frugal%20%26%20composable&In-Reply-To=%3Ceh1BXtM5lj74SeEDU5-I8gpGjZMkzWC-MiJcIJ4vvWVr57IeRX9b4WJAC91mxOw5zlM7qMZKsmkfyQpyheinIpdTbO4eUEMnaYSm8IsJfuM%3D%40protonmail.com%3E"
+       TITLE="approachabe &amp; frugal &amp; composable">defdefred at protonmail.com
+       </A><BR>
+    <I>Tue Jun  2 07:40:17 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001237.html">approachabe &amp; frugal &amp; composable 
+</A></li>
+        <LI>Next message (by thread): <A HREF="001240.html">approachabe &amp; frugal &amp; composable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1238">[ date ]</a>
+              <a href="thread.html#1238">[ thread ]</a>
+              <a href="subject.html#1238">[ subject ]</a>
+              <a href="author.html#1238">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Maybe Gemini is too open to protect users from the web as it is now...
+freD.
+
+&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208; Original Message &#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;
+On Tuesday 2 June 2020 03:14, Petite Abeille &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">petite.abeille at gmail.com</A>&gt; wrote:
+
+&gt;<i> As it stands, Gemini [1] -and especially Mercury [2]- is refreshingly approachable and  frugal.
+</I>&gt;<i>
+</I>&gt;<i> A -very minimal- one-liner Gemini client:
+</I>&gt;<i>
+</I>&gt;<i> # openssl s_client -quiet -crlf -connect gemini.conman.org:1965 &lt;&lt;&lt; <A HREF="gemini://gemini.conman.org/">gemini://gemini.conman.org/</A> 2&gt;/dev/null
+</I>&gt;<i> 20 text/gemini
+</I>&gt;<i> Welcome to Conman Laboraties Gemini Server!
+</I>&gt;<i>
+</I>&gt;<i> And that is that. The whole Gemini protocol in 3 lines.
+</I>&gt;<i>
+</I>&gt;<i> But what 3 lines!
+</I>&gt;<i>
+</I>&gt;<i> A request is a single line containing a fully specified URL.
+</I>&gt;<i> A successful response is a single line containing the numeric response code, a space, and a content-type.
+</I>&gt;<i> The canonical content, text/gemini, consists of two core line types: text and link.
+</I>&gt;<i> All UTF-8 encoded. Over TLS.
+</I>&gt;<i>
+</I>&gt;<i> And that is that.
+</I>&gt;<i>
+</I>&gt;<i> Quite spartan at first glance.
+</I>&gt;<i>
+</I>&gt;<i> But also, possibly, quite universal.
+</I>&gt;<i>
+</I>&gt;<i> Fancy jumping the shark over Zawinski's law [3] from the onset?
+</I>&gt;<i>
+</I>&gt;<i> Combine RFC5092 [4] for the request and RFC2045 [5] for the response:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="imap://minbari.example.org/gray-council/;uid=20">imap://minbari.example.org/gray-council/;uid=20</A>
+</I>&gt;<i> 20 message/rfc822
+</I>&gt;<i> Mime-Version: 1.0
+</I>&gt;<i> ...
+</I>&gt;<i>
+</I>&gt;<i> Fancy supporting multiple protocols at once?
+</I>&gt;<i>
+</I>&gt;<i> Look at conman's nifty sigil script [6], which supports HTTP, GEMINI, and GOPHER for good measure. From one CGI script.
+</I>&gt;<i>
+</I>&gt;<i> In other words, because a Gemini request is a full-fledged URL, it can support any number of protocols, as long as such protocol can be expressed as an URL [7].
+</I>&gt;<i>
+</I>&gt;<i> Ditto for the response, which can be any media type [8] a Gemini server cares to generate.
+</I>&gt;<i>
+</I>&gt;<i> In short, a Gemini URL request combined with a Gemini media type response is quite universal indeed.
+</I>&gt;<i>
+</I>&gt;<i> Ditto for the rather unassuming text/gemini content type.
+</I>&gt;<i>
+</I>&gt;<i> While at its core it only sports 2 line types, the presence of the link line, which is an URL, open the door to infinite composition.
+</I>&gt;<i>
+</I>&gt;<i> Fancy an atom feed? Add a feed URI [9] in your text/gemini:
+</I>&gt;<i>
+</I>&gt;<i> =&gt; <A HREF="feed://example.com/entries.atom">feed://example.com/entries.atom</A>
+</I>&gt;<i>
+</I>&gt;<i> Would you like to anchor your text/gemini in a point in time? Perhaps the tag URI can help:
+</I>&gt;<i>
+</I>&gt;<i> =&gt; tag:example.com,2004-01-01:1234
+</I>&gt;<i>
+</I>&gt;<i> Indicate a location? A geo URI may help:
+</I>&gt;<i>
+</I>&gt;<i> =&gt; geo:37.786971,-122.399677
+</I>&gt;<i>
+</I>&gt;<i> etc, etc, the possibilities are endless.
+</I>&gt;<i>
+</I>&gt;<i> Quite a lot of firepower for a two lines protocol, with a two line content type :)
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> PA
+</I>&gt;<i>
+</I>&gt;<i> [1] <A HREF="https://portal.mozz.us/gemini/gemini.circumlunar.space/docs/spec-spec.txt">https://portal.mozz.us/gemini/gemini.circumlunar.space/docs/spec-spec.txt</A>
+</I>&gt;<i> [2] <A HREF="https://portal.mozz.us/gemini/gemini.circumlunar.space/users/solderpunk/cornedbeef/the-mercury-protocol.gmi">https://portal.mozz.us/gemini/gemini.circumlunar.space/users/solderpunk/cornedbeef/the-mercury-protocol.gmi</A>
+</I>&gt;<i> [3] <A HREF="https://en.wikipedia.org/wiki/Jamie_Zawinski">https://en.wikipedia.org/wiki/Jamie_Zawinski</A>
+</I>&gt;<i> [4] <A HREF="https://tools.ietf.org/html/rfc5092">https://tools.ietf.org/html/rfc5092</A>
+</I>&gt;<i> [5] <A HREF="https://tools.ietf.org/html/rfc2045">https://tools.ietf.org/html/rfc2045</A>
+</I>&gt;<i> [6] <A HREF="https://portal.mozz.us/gemini/gemini.conman.org/sigil-cgi.lua">https://portal.mozz.us/gemini/gemini.conman.org/sigil-cgi.lua</A>
+</I>&gt;<i> [7] <A HREF="https://en.wikipedia.org/wiki/List_of_URI_schemes">https://en.wikipedia.org/wiki/List_of_URI_schemes</A>
+</I>&gt;<i> [8] <A HREF="https://en.wikipedia.org/wiki/Media_type">https://en.wikipedia.org/wiki/Media_type</A>
+</I>&gt;<i> [9] <A HREF="https://en.wikipedia.org/wiki/Feed_URI_scheme">https://en.wikipedia.org/wiki/Feed_URI_scheme</A>
+</I>&gt;<i> [10] <A HREF="https://en.wikipedia.org/wiki/Tag_URI_scheme">https://en.wikipedia.org/wiki/Tag_URI_scheme</A>
+</I>&gt;<i> [11] <A HREF="https://en.wikipedia.org/wiki/Geo_URI_scheme">https://en.wikipedia.org/wiki/Geo_URI_scheme</A>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200602/007a5d92/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200602/007a5d92/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001237.html">approachabe &amp; frugal &amp; composable 
+</A></li>
+	<LI>Next message (by thread): <A HREF="001240.html">approachabe &amp; frugal &amp; composable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1238">[ date ]</a>
+              <a href="thread.html#1238">[ thread ]</a>
+              <a href="subject.html#1238">[ subject ]</a>
+              <a href="author.html#1238">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

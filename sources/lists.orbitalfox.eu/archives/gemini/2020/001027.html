@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Big update to Bombadillo
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Big%20update%20to%20Bombadillo&In-Reply-To=%3C4844017.124546.1590346740735%40ichabod.co-bxl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001069.html">
+   <LINK REL="Next"  HREF="001028.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Big update to Bombadillo</H1>
+    <B>Brian Evans</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Big%20update%20to%20Bombadillo&In-Reply-To=%3C4844017.124546.1590346740735%40ichabod.co-bxl%3E"
+       TITLE="[ANN] Big update to Bombadillo">b__m__e at mailfence.com
+       </A><BR>
+    <I>Sun May 24 19:59:00 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001069.html">Query Strings
+</A></li>
+        <LI>Next message (by thread): <A HREF="001028.html">[ANN] Big update to Bombadillo
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1027">[ date ]</a>
+              <a href="thread.html#1027">[ thread ]</a>
+              <a href="subject.html#1027">[ subject ]</a>
+              <a href="author.html#1027">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I normally would not do an announcement on here for a new version (and do not generally plan to
+in the future). However, there was a lot of gemini related stuff updated in Bombadillo this time
+around and I thought gemini folks using it would want to know about the updates:
+
+Changelog:
+
+* Adds quick navigation to the first 10 links on a page (using the number keys 1 - 0, where 0 represents 10)
+* Fixes a bug where on some platforms terminal line wrapping was not properly turned back on when Bombadillo exits
+* Adds certificate expiration timestamps to the ini, next to the cert hash
+* Uses the newly stored certificate expiration datetimes to autorenew certificates, resulting in far fewer certificate issues for users to deal with manually
+* Fixes a bug in which two concurrent bits were trying to both read from stdin, resulting in a read being very buggy
+* Adds 'h' and 'l' as hot key aliases for back and forward, bringing things further in line with vi style keybindings and keeping fingers on the home row
+* Adds automatic requesting of new certificates on expiration (when the site is next visited)
+* Adds support for alt text in gemini preformatted blocks
+* Fixes a parsing error when parsing gemini preformatted blocks
+* Adds config value 'geminiblocks' to control how alt text displays
+* Improved handling of relative URLs for gemini
+* Updates the gemini redirect policy to auto-redirect if, and only if, the only change to the requested URL would be the addition of a terminal '/' character
+* Fixes issue where querystring values would chain instead of replace
+* Removes a dependency on external program 'stty' in favor of a pure Go solution via syscalls
+* Updates the man page with the relevant changes
+
+As you may have seen here on the mailing list there is an issue with escaping query strings that is
+currently present in all builds. I will be working out a fix after some thinking on the subject, so there
+will likely be a patch later in the week.
+
+Thanks to @dancek and @asdf for their contributions to this version and to @makeworld for
+helping us sort through the issues and giving good input/guidance
+
+If you build from source (by far the recommended route) you can just pull master and `sudo make install`.
+
+If you use precompiled binaries they are available here:
+<A HREF="http://bombadillo.colorfield.space/releases/binaries.html">http://bombadillo.colorfield.space/releases/binaries.html</A>
+
+
+As an added note: 
+
+If you are a BSD user we are looking for some help making the Makefile function
+under BSD (it runs fine for most Linux and OSX systems). At present it does not work under 
+FreeBSD 12-Release. 
+
+Additionally, if anyone is interested in getting involved as a maintainer for a package repo
+we would be very interested in that (currently the Arch AUR has a git build version, but not
+other repos currently have bombadillo).
+
+
+Thanks everyone! I have been loving the influx of clients, servers, tools, and especially content!!
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001069.html">Query Strings
+</A></li>
+	<LI>Next message (by thread): <A HREF="001028.html">[ANN] Big update to Bombadillo
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1027">[ date ]</a>
+              <a href="thread.html#1027">[ thread ]</a>
+              <a href="subject.html#1027">[ subject ]</a>
+              <a href="author.html#1027">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

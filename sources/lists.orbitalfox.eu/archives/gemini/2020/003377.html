@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Scheme Section 2 quibble
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3C20201117101952.968dfa718b19a2dfaaff7d86%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003376.html">
+   <LINK REL="Next"  HREF="003381.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Scheme Section 2 quibble</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3C20201117101952.968dfa718b19a2dfaaff7d86%40gmail.com%3E"
+       TITLE="Scheme Section 2 quibble">linde.philip at gmail.com
+       </A><BR>
+    <I>Tue Nov 17 09:19:52 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003376.html">Scheme Section 2 quibble
+</A></li>
+        <LI>Next message (by thread): <A HREF="003381.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3377">[ date ]</a>
+              <a href="thread.html#3377">[ thread ]</a>
+              <a href="subject.html#3377">[ subject ]</a>
+              <a href="author.html#3377">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, 17 Nov 2020 04:47:45 +0300
+Ali Fardan &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">raiz at stellarbound.space</A>&gt; wrote:
+
+&gt;<i> In my humble opinion, I think that &quot;//example.tld/&quot; is an
+</I>&gt;<i> implementation specific hack and has no place in the protocol, a URI
+</I>&gt;<i> like that is invalid and should not be respected by servers, what
+</I>&gt;<i> should actually work is providing authority and path like so:
+</I>&gt;<i> &quot;example.tld/path/&quot;, this is discouraged by RFC 3986 (section 4.5) but
+</I>&gt;<i> it actually makes sense if context is defined, in this case, context is
+</I>&gt;<i> gemini so a scheme of gemini is implied.
+</I>
+With respect to RFC3986, it's not a matter of opinion.
+
+It's very much not an implementation specific hack. It's defined in RFC
+3986 as &quot;relative-ref&quot;, a &quot;network-path reference&quot; specifically.
+Non-URIs of the &quot;example.com/hello&quot; style on the other hand are an
+implementation specific hack, as you've noted, discouraged by RFC 3986
+and not specified in any of the syntaxes it defines. It's obviously
+unsuitable for links because it's ambiguous with relative-ref.
+
+Gemini however explicitly only allows &quot;absolute URL&quot; in requests. It
+also says that &quot;If the scheme of the URL is not specified, a scheme of
+<A HREF="gemini://">gemini://</A> is implied.&quot;
+
+In terms of RFC 3986, this is nonsense. &quot;<A HREF="gemini://">gemini://</A>&quot; isn't the scheme.
+&quot;gemini&quot; is the scheme, &quot;//&quot; is the beginning of hier-part or
+relative-part, and &quot;:&quot; separates the scheme from hier-part.
+
+I've previously called for clarification on this point. One might read
+that last sentence as requests by suffix references are allowed,
+(which is what you get when you omit &quot;<A HREF="gemini://">gemini://</A>&quot;) or that some
+relative-ref are allowed (which is what you get if you literally omit
+the scheme and scheme separator).
+
+I'd prefer if the spec could just refer to an expected syntax as
+defined in RFC 3986. This would reduce confusion significantly. Skip
+all the hacks and allow only e.g. the URI syntax (which does not
+include relative-ref) for requests and URI-reference syntax (which
+includes URI and relative-ref) for links. Adopt the language of RFC
+3986 to describe them.
+
+Last I checked, if you connect to <A HREF="gemini://gemini.circumlunar.space">gemini://gemini.circumlunar.space</A> and
+request &quot;gemini.circumlunar.space/&quot; you get an error. You may however
+request &quot;//gemini.circumlunar.space/&quot; and get the appropriate 20
+response. Should gemini.circumlunar.space be considered to be running a
+canonical implementation of Gemini?
+
+-- 
+Philip
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201117/6ace088e/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201117/6ace088e/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003376.html">Scheme Section 2 quibble
+</A></li>
+	<LI>Next message (by thread): <A HREF="003381.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3377">[ date ]</a>
+              <a href="thread.html#3377">[ thread ]</a>
+              <a href="subject.html#3377">[ subject ]</a>
+              <a href="author.html#3377">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

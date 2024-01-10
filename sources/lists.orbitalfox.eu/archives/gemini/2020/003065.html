@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Problems with CRLF
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Problems%20with%20CRLF&In-Reply-To=%3CC6VF8K8M43A0.10XF7N6RP93S1%40nitro%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003054.html">
+   <LINK REL="Next"  HREF="003067.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Problems with CRLF</H1>
+    <B>Adnan Maolood</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Problems%20with%20CRLF&In-Reply-To=%3CC6VF8K8M43A0.10XF7N6RP93S1%40nitro%3E"
+       TITLE="Problems with CRLF">me at adnano.co
+       </A><BR>
+    <I>Thu Nov  5 15:05:43 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003054.html">Is anyone working on a libcurl PR for gemini support?
+</A></li>
+        <LI>Next message (by thread): <A HREF="003067.html">Problems with CRLF
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3065">[ date ]</a>
+              <a href="thread.html#3065">[ thread ]</a>
+              <a href="subject.html#3065">[ subject ]</a>
+              <a href="author.html#3065">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Using CRLF to terminate response headers allows a server to get away
+with the following response:
+
+	10 This META is more than one line long\n
+	I bet your client can't handle this\n
+	The end\r\n
+
+I propose that response headers should be LF-terminated lines.
+This would remove this loophole, but should also be a
+backwards-compatible change as the last CR could be ignored.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003054.html">Is anyone working on a libcurl PR for gemini support?
+</A></li>
+	<LI>Next message (by thread): <A HREF="003067.html">Problems with CRLF
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3065">[ date ]</a>
+              <a href="thread.html#3065">[ thread ]</a>
+              <a href="subject.html#3065">[ subject ]</a>
+              <a href="author.html#3065">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

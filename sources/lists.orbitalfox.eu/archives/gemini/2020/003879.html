@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Three possible uses for IRIs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3C20201208083619.GP24194%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003878.html">
+   <LINK REL="Next"  HREF="003881.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Three possible uses for IRIs</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3C20201208083619.GP24194%40brevard.conman.org%3E"
+       TITLE="Three possible uses for IRIs">sean at conman.org
+       </A><BR>
+    <I>Tue Dec  8 08:36:20 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003878.html">Three possible uses for IRIs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003881.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3879">[ date ]</a>
+              <a href="thread.html#3879">[ thread ]</a>
+              <a href="subject.html#3879">[ subject ]</a>
+              <a href="author.html#3879">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> once stated:
+&gt;<i> 
+</I>&gt;<i> The fact that writing URLs for non-English languages is difficult sucks. But
+</I>&gt;<i> due the complexity, and most of all the fact that this would be a breaking
+</I>&gt;<i> change, I don't see IRIs as an option.
+</I>
+  I thought I might see what's involved with handling IRIs.
+
+  The actual differences between RFC-3986 (URI) and RFC-3987 (IRI) besides
+one being a standard (URI) and one being a proposed standard (IRI) comes
+down to the characters that are accepted---the unreserved set 
+
+   unreserved    = ALPHA / DIGIT / &quot;-&quot; / &quot;.&quot; / &quot;_&quot; / &quot;~&quot;
+
+becomes
+
+   iunreserved    = ALPHA / DIGIT / &quot;-&quot; / &quot;.&quot; / &quot;_&quot; / &quot;~&quot; / ucschar
+   ucschar        = %xA0-D7FF / %xF900-FDCF / %xFDF0-FFEF
+                  / %x10000-1FFFD / %x20000-2FFFD / %x30000-3FFFD
+                  / %x40000-4FFFD / %x50000-5FFFD / %x60000-6FFFD
+                  / %x70000-7FFFD / %x80000-8FFFD / %x90000-9FFFD
+                  / %xA0000-AFFFD / %xB0000-BFFFD / %xC0000-CFFFD
+                  / %xD0000-DFFFD / %xE1000-EFFFD
+
+and the query portion changes from
+
+   query         = *( pchar / &quot;/&quot; / &quot;?&quot; )
+   pchar         = unreserved / pct-encoded / sub-delims / &quot;:&quot; / &quot;@&quot;
+
+
+to
+
+   iquery         = *( ipchar / iprivate / &quot;/&quot; / &quot;?&quot; )
+   ipchar         = iunreserved / pct-encoded / sub-delims / &quot;:&quot; / &quot;@&quot; 
+   iprivate       = %xE000-F8FF / %xF0000-FFFFD / %x100000-10FFFD
+
+and that's it as far as the RFCs go (aside from the rule name changes).  As
+a quick proof-of-concept, I just accepted all non-control UTF-8 characters
+as unreserved (including the private space) as that was the easiest thing to
+do, and yes, it works (but does allow potentially bad IRIs through).  
+
+  But the code to *build* a URL from the parsed representation [2] ssumes
+US-ASCII.  Again, it would take just a few small changes to allow UTF-8
+characters on input and escape them properly for a URL.  That's something
+I'll try working on tomorrow.
+
+  That still leaves the question of punycode [3] and Unicode normalization
+(ugh).
+
+&gt;<i> P.S. I'll admit I'm biased. I write more code for Gemini than I do content, and
+</I>&gt;<i> primarily use my native language English.
+</I>
+  I am biased too, as a monolingual US mutt, but I do want to try this stuff
+out.
+
+  -spc
+
+[1]	<A HREF="https://github.com/spc476/LPeg-Parsers/blob/master/url.lua">https://github.com/spc476/LPeg-Parsers/blob/master/url.lua</A>
+
+[2]	<A HREF="https://github.com/spc476/GLV-1.12556/blob/master/Lua/GLV-1/url-util.lua">https://github.com/spc476/GLV-1.12556/blob/master/Lua/GLV-1/url-util.lua</A>
+
+[3]	RFC-3492, which includes C code to encode and decode punycode text,
+	which is valgrind clean (I checked).
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003878.html">Three possible uses for IRIs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003881.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3879">[ date ]</a>
+              <a href="thread.html#3879">[ thread ]</a>
+              <a href="subject.html#3879">[ subject ]</a>
+              <a href="author.html#3879">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

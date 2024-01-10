@@ -1,0 +1,317 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Regarding `gemini://` over NaCL (replacing TLS)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Regarding%20%60gemini%3A//%60%20over%20NaCL%20%28replacing%20TLS%29&In-Reply-To=%3CCA%2BTk8fzOy%3Dn_KCNSYtC%3D%3DDOnXctTjXkS2VMmNLV7zJ_pZg33AA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000476.html">
+   <LINK REL="Next"  HREF="000474.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Regarding `gemini://` over NaCL (replacing TLS)</H1>
+    <B>Ciprian Dorin Craciun</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Regarding%20%60gemini%3A//%60%20over%20NaCL%20%28replacing%20TLS%29&In-Reply-To=%3CCA%2BTk8fzOy%3Dn_KCNSYtC%3D%3DDOnXctTjXkS2VMmNLV7zJ_pZg33AA%40mail.gmail.com%3E"
+       TITLE="Regarding `gemini://` over NaCL (replacing TLS)">ciprian.craciun at gmail.com
+       </A><BR>
+    <I>Mon Mar  2 13:11:12 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000476.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+        <LI>Next message (by thread): <A HREF="000474.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#469">[ date ]</a>
+              <a href="thread.html#469">[ thread ]</a>
+              <a href="subject.html#469">[ subject ]</a>
+              <a href="author.html#469">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Mar 2, 2020 at 2:18 AM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+&gt;<i> 1) I assume the 32-bit length is sent bigendian (if I understand the
+</I>&gt;<i> argument to struct.pack() and struct.unpack() correctly---I'm not a Python
+</I>&gt;<i> programmer).  Why big endian?  99% of all computers on the Internet today is
+</I>&gt;<i> little endian (x86) so it seems to me that sending it little endian would be
+</I>&gt;<i> better.  [1][2]
+</I>&gt;<i>
+</I>&gt;<i> [1]     Okay, I happen to agree with the big endian choice, but that's
+</I>&gt;<i>         because I'm biased---binary based Internet protocols are all big
+</I>&gt;<i>         endian, and I have a soft spot for the Motorola CPUs of past.  I've
+</I>&gt;<i>         never been a fan of little endian personally.
+</I>&gt;<i>
+</I>&gt;<i> [2]     I'm also asking to reflect back to you the same argument you
+</I>&gt;<i>         presented with using CRLF.  Your big endian choice seems to be
+</I>&gt;<i>         &quot;because that's how all Internet protocols do it&quot;.
+</I>
+
+There are a couple of reasons I like big endian for protocols:
+
+* (although not a strong argument, like in the case of CRLF, and as
+you've observed in [2]) most other protocols are big endian, thus
+there is a lot of tooling for this;  (for example Erlang even has
+built-in functions for this;)
+
+* it is logical;  for example although all integers are stored in
+little endian on x86, when we write numbers in code we use &quot;big
+endian&quot;;
+
+* (and most importantly) when dumping a protocol capture there are no
+&quot;surprises&quot;, I read the number left to right, and if I just take the
+bytes in hex and concatenate them I can get the constant, i.e. `[01 02
+03 04]` is just `0x01020304`;
+
+
+
+
+&gt;<i> 2) As I feared, this requires a more complicated implementation.  solderpunk
+</I>&gt;<i> wanted a protocol that could be implemented quickly and while TLS might be a
+</I>&gt;<i> bad protocol, it at least has the feature of being widely available and
+</I>&gt;<i> largly transparent if done correctly (like libtls, part of LibreSSL, does).
+</I>
+
+The current proof-of-concept in Python I've presented is &quot;feature
+complete&quot; in terms of what the current `<A HREF="gemini://`">gemini://`</A> specification
+requires;  except perhaps the certificate validation, but the specs
+says it should be handled SSH-like.
+
+My take on this is:  if we have a clear specification about what we
+require from the transport layer, then we can come-up with a design
+and implementation that provides it, nothing more.  At the moment the
+`<A HREF="gemini://`">gemini://`</A> specification requires nothing more than what I've
+implemented.
+
+
+
+
+&gt;<i> It handles not only the crypo portion, but the framing of data (invisibly to
+</I>&gt;<i> the rest of the application).  To tell the truth, I don't know the actual
+</I>&gt;<i> bytes of the TLS portion of the protcol as that is handled for me.
+</I>
+
+Here I want to argue that you are wrong on the following accounts:
+
+* TLS natively implements a &quot;message stream protocol&quot; (as opposed to
+&quot;byte streams&quot;) which it calls TLS records;  (though these
+unfortunately are limited to 16 KiB);
+
+* unfortunately libraries (like OpenSSL) doesn't explicitly expose
+this to the applications, although it warns the user in the man-page;
+however if one calls `SSL_read` with a large enough buffer, at most
+one record will be read at one time:
+
+~~~~
+<A HREF="https://www.openssl.org/docs/man1.0.2/man3/SSL_read.html">https://www.openssl.org/docs/man1.0.2/man3/SSL_read.html</A>
+
+SSL_read() works based on the SSL/TLS records. The data are received
+in records (with a maximum record size of 16kB for SSLv3/TLSv1). Only
+when a record has been completely received, it can be processed
+(decryption and check of integrity). Therefore data that was not
+retrieved at the last call of SSL_read() can still be buffered inside
+the SSL layer and will be retrieved on the next call to SSL_read(). If
+num is higher than the number of bytes buffered, SSL_read() will
+return with the bytes buffered. If no more bytes are in the buffer,
+SSL_read() will trigger the processing of the next record. Only when
+the record has been received and processed completely, SSL_read() will
+return reporting success. At most the contents of the record will be
+returned. As the size of an SSL/TLS record may exceed the maximum
+packet size of the underlying transport (e.g. TCP), it may be
+necessary to read several packets from the transport layer before the
+record is complete and SSL_read() can succeed.
+~~~~
+
+Thus the TLS framing is not &quot;invisible&quot; to the application, it just
+can be safely ignored.
+
+Thus most applications will build yet-another-framing-mechanism on-top
+of TLS.  (Just because `<A HREF="gemini://`">gemini://`</A> and other protocols use lines ended
+by `CRLF` doesn't mean these aren't &quot;frames&quot;, i.e. one frame is a
+sequence of one or multiple bytes followed by exactly one `CRLF` or
+perhaps `LF` or perhaps `CR` or perhaps `LFCR`.)
+
+
+That is why in my protocol proposal we don't need the `CRLF` framing
+any more, because we rely on the transport layer to both apply the
+framing and do the crypto.
+
+
+
+
+&gt;<i>   In fact, that's part of why HTTPS was so successful---it doesn't change
+</I>&gt;<i> the HTTP protocol at all.  It just slips in between TCP and HTTP and is
+</I>&gt;<i> transparent to both.
+</I>
+
+OK, just because HTTPS was &quot;so successful&quot; doesn't mean we need to
+copy it one-to-one.  In case of HTTPS the TLS layer &quot;just slips in
+between HTTP and TCP&quot; because it was an afterthought, and everybody
+wanted a quick solution, either in terms of TLS offloading / proxy and
+other &quot;hacks&quot;.
+
+On the other side a lot of HTTPS security issues stemmed from this
+ignorance of TLS, like for example cookie leaks due to TLS
+compression, etc.
+
+Thus my position is that a secure protocol can't be designed by
+ignoring the actual layer providing the &quot;security&quot;...
+
+
+
+
+&gt;<i>   [ snip ]
+</I>&gt;<i>
+</I>&gt;<i> &gt; I hope I haven't made too many mistakes, and I hope this is useful as
+</I>&gt;<i> &gt; a proof-of-concept that one could replace TLS for such simpler
+</I>&gt;<i> &gt; protocols,
+</I>&gt;<i>
+</I>&gt;<i>   I know that given the self-sign certificate nature of Gemini decreases
+</I>&gt;<i> security a bit (TOFU and all that), not *all* Gemini servers are using
+</I>&gt;<i> self-signed certificates.  There's at least two that I know of that use
+</I>&gt;<i> actual signed certificates (from Let's Encrypt), and for my own server, I
+</I>&gt;<i> use a signed certificate from my own CA (technically, the certificate isn't
+</I>&gt;<i> self-signed, but the CA is self-certificed).  With a signed certificate, you
+</I>&gt;<i> get *some* assurance that the server you are talking to is the server you
+</I>&gt;<i> expect to be talking to, but it's still, technically, subject to a MITM
+</I>&gt;<i> attack (either at the corporate level, or at the state level---it's way less
+</I>&gt;<i> likely to come from some random hacker).
+</I>
+
+Strictly regarding TLS certificates, my &quot;security&quot; of and &quot;trust&quot; in a
+site protected with a proper TLS certificate is proportional to the
+amount of effort that is required to:
+* break in into the server and steal the private key;
+* (in case of non LetsEncrypt certificates) at some point in time in
+the last year or two, one is able to social engineer someone at the
+company to validate the issuance of a certificate;
+* (in case of LetsEncrypt certificates) at some point in time in the
+last three months, one was able to hijack or spoof either the DNS,
+either the IP behind the domain I'm accessing, and thus validate the
+issuance of a certificate;
+
+Thus, personally I don't put a lot of weight in these certificates for
+important stuff, instead I put faith in the various &quot;extra checks&quot; the
+web and browsers community have implemented, from HTTPS certificate
+pinning, to hard-coded certificates in browsers (for Google domains
+for example), etc.
+
+
+So in the end I think the `<A HREF="gemini://`">gemini://`</A> design team should take a decision:
+* do we use only self-signed certificates, authenticating them
+SSH-like;  (and keep things simple;)
+* do we we implement a web-of-trust, like PGP allows;  (as HTTPS has
+done with various certificate related verifications outside the X.509
+standard;)
+* do we rely strictly on TLS certificates;
+
+So if `<A HREF="gemini://`">gemini://`</A> wants to be simple and secure, I would say a mix of
+the first two.
+
+
+
+
+&gt;<i>   What's still missing from your proof-of-concept though, is support for
+</I>&gt;<i> client certificates.  Yes, you have the &quot;transient&quot; stuff working, but for
+</I>&gt;<i> my Gemini server, I have a second that is unavailable unless you have a
+</I>&gt;<i> signed certificate from me.  Send in a certificate request, I generate the
+</I>&gt;<i> certificate and send that back, and you can access the sooperseecret portion
+</I>&gt;<i> of my site [3] (no one has done that yet; then again, I haven't exactly
+</I>&gt;<i> advertised that I would do that either).
+</I>
+
+On the contrary, the my current protocol does have support for
+&quot;permanent&quot; client certificates, as they are just a special case of
+&quot;transient&quot; ones;  just:
+* create off-line a private / secret key;
+* instead of sending a X.509 CSR (which in fact is nothing more than a
+self-signed document proving that you have access to the secret key
+bound to that public key, and perhaps additional information), send
+the public key;
+* on the server just whitelist that public key, like we do with
+`~/.ssh/authorized_keys`;
+
+Sure, now you'll say that with a proper TLS client certificate you
+don't need to store it on your server, because you can just verify
+that it has a proper signature from your own CA.  However how do you
+revoke such a certificate?  You create a CRL which you store in a
+file.
+
+Thus in case of TLS you still need to maintain a &quot;blacklist&quot;, while in
+my simpler proposal you need to maintain a &quot;whitelist&quot;.  :)
+
+
+
+
+My take on the whole &quot;certificates&quot; would be this:  given that
+`<A HREF="gemini://`">gemini://`</A> wants to be simple, let's also keep the crypto stuff
+simple;  i.e. no &quot;certificates&quot;, just like in case of SSH public /
+private keys.
+
+
+
+
+&gt;<i> [...]  Yes, that complicated *my* end,
+</I>&gt;<i> and may complicate a client that wants to support that, but it doesn't
+</I>&gt;<i> complicate the *protocol* at all---TLS provides all the machinery for that.
+</I>
+
+Because `<A HREF="gemini://`">gemini://`</A> mandates the usage of TLS, I think it's unfair to
+treat TLS as &quot;not part of the protocol&quot;;  you can ignore that it
+exists, but that is counter-productive I think.
+
+
+
+
+&gt;<i>   I'm still going over your code, but I'm not sure I can run it.  For one, I
+</I>&gt;<i> don't know which version of Python (I know there are major differences
+</I>&gt;<i> between 2 and 3 and I think I only have 2.something---I don't program in
+</I>&gt;<i> Python) and I don't have libsodium install (but I do have NaCL).  But again,
+</I>&gt;<i> I thank you for doing this work and giving us something tangible to look at
+</I>&gt;<i> and run.
+</I>
+You need Python 2.7 and I would suggest creating a virtualenv.  The
+only dependency I used is `pysodium` which requires `libsodium`.  (All
+the commands I run are written in the `z-run` file, which I think is
+self-explanatory.)
+
+Ciprian.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000476.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+	<LI>Next message (by thread): <A HREF="000474.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#469">[ date ]</a>
+              <a href="thread.html#469">[ thread ]</a>
+              <a href="subject.html#469">[ subject ]</a>
+              <a href="author.html#469">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CGI and client certificate, or do we need a CGI spec
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%20and%20client%20certificate%2C%20or%20do%20we%20need%20a%20CGI%20spec&In-Reply-To=%3C20201129202546.GX1721%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003645.html">
+   <LINK REL="Next"  HREF="003662.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CGI and client certificate, or do we need a CGI spec</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%20and%20client%20certificate%2C%20or%20do%20we%20need%20a%20CGI%20spec&In-Reply-To=%3C20201129202546.GX1721%40brevard.conman.org%3E"
+       TITLE="CGI and client certificate, or do we need a CGI spec">sean at conman.org
+       </A><BR>
+    <I>Sun Nov 29 20:25:46 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003645.html">CGI and client certificate, or do we need a CGI spec
+</A></li>
+        <LI>Next message (by thread): <A HREF="003662.html">CGI and client certificate, or do we need a CGI spec
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3649">[ date ]</a>
+              <a href="thread.html#3649">[ thread ]</a>
+              <a href="subject.html#3649">[ subject ]</a>
+              <a href="author.html#3649">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Remco once stated:
+&gt;<i> Here's what the expose.
+</I>&gt;<i> 
+</I>&gt;<i> # GLV-1.12556
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; <A HREF="https://github.com/spc476/GLV-1.12556/blob/13d52b63/Lua/GLV-1/gateway.lua#L156">https://github.com/spc476/GLV-1.12556/blob/13d52b63/Lua/GLV-1/gateway.lua#L156</A>
+</I>&gt;<i> 
+</I>&gt;<i> * AUTH_TYPE : &quot;Certificate&quot;
+</I>&gt;<i> * REMOTE_USER : client certificate X509 subject common name
+</I>&gt;<i> * TLS_CLIENT_HASH : certificate fingerprint
+</I>&gt;<i> * TLS_CLIENT_ISSUER : certificate X509 issuer
+</I>&gt;<i> * TLS_CLIENT_ISSUER_* : certificate X509 issuer sub fields
+</I>&gt;<i> * TLS_CLIENT_NOT_AFTER : certificate end date
+</I>&gt;<i> * TLS_CLIENT_NOT_BEFORE : certificate start date
+</I>&gt;<i> * TLS_CLIENT_REMAIN : certificate days left
+</I>&gt;<i> * TLS_CLIENT_SUBJECT : certificate X509 subject
+</I>&gt;<i> * TLS_CLIENT_SUBJECT_* : certificate X509 subject sub fields
+</I>
+  When I wrote the CGI module for GLV-1.12556, I modelled mine after what
+Apache did, but renamed the TLS environment variables to better names.  I
+figured why not?  And it's not as if all of it is needed, but I was able to
+send it.
+
+  Another aspect of GLV-1.12556 is that unless configured otherwise, a CGI
+script called with a client certificate will *only* get AUTH_TYPE and
+REMOTE_USER set.  AUTH_TYPE and REMOTE_USER are required by the CGI spec.
+
+&gt;<i> But that brings me to the real question here.  Does gemini need a CGI
+</I>&gt;<i> spec?  Given status code 42 for CGI errors, it kinda committed to
+</I>&gt;<i> something CGI-ish without actually stating what that is.  The only
+</I>&gt;<i> server making the effort to implement CGI/1.1 is GLV but, IMHO, that
+</I>&gt;<i> isn't the kind of simplicity I am here for and it's a bit of a hack to
+</I>&gt;<i> be honest.
+</I>
+  Don't be mislead by GLV-1.12556.  Supporting CGI/1.1 isn't hard---the
+complexity I have is in supporting CGI scripts meant for the web and
+possibly Apache.  I did add the following variables for convenience:
+
+	GEMINI_DOCUMENT_ROOT   = directory
+	GEMINI_SCRIPT_FILENAME = full_path_to_script
+	GEMINI_URL_PATH        = location.path
+	GEMINI_URL             = request
+
+&gt;<i> GLV does manage to make CGI scripts more portable, whereas other servers
+</I>&gt;<i> don't really make the effort.  For instance, some don't provide
+</I>&gt;<i> PATH_INFO but do provide PATH_TRANSLATED and others provide neither.  I
+</I>&gt;<i> would like to share my CGI-scripts and have them run anywhere but to
+</I>&gt;<i> make sharing easier something like a spec would be nice.  What do you
+</I>&gt;<i> think?
+</I>
+  I think it's easy enough to follow RFC-3875 (the CGI/1.1 spec).  It's not
+that hard.  It's just:
+
+	GATEWAY_INTERFACE      = &quot;CGI/1.1&quot;
+	QUERY_STRING           = location.query or &quot;&quot; -- Must be set
+	REMOTE_ADDR            = auth._remote
+	REMOTE_HOST            = auth._remote
+	SCRIPT_NAME            = base
+	SERVER_NAME            = location.host
+	SERVER_PORT            = tostring(location.port)
+	SERVER_SOFTWARE        = &quot;GLV-1.12556/1&quot;
+	AUTH_TYPE              = &quot;Certificate&quot; -- only if client cert
+	REMOTE_USER            = auth.subject.CN or &quot;&quot; -- only if client cert
+	PATH_INFO              = ... okay, some explanation required [1]
+	PATH_TRANSLATED        = ... okay, some explanation required [1]
+
+  Other variables are possible, but should be prefixed by the protocol name.
+
+  -spc
+
+[1]	These last two require a bit more explanation to set correctly that
+	I don't have time for in this message.  I'll circle back to this
+	later tonight when I have a bit more time.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003645.html">CGI and client certificate, or do we need a CGI spec
+</A></li>
+	<LI>Next message (by thread): <A HREF="003662.html">CGI and client certificate, or do we need a CGI spec
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3649">[ date ]</a>
+              <a href="thread.html#3649">[ thread ]</a>
+              <a href="subject.html#3649">[ subject ]</a>
+              <a href="author.html#3649">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

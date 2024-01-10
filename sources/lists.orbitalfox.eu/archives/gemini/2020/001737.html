@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CSRF in Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CSRF%20in%20Gemini&In-Reply-To=%3C20200616114011.73f2c51b%40phi%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001725.html">
+   <LINK REL="Next"  HREF="001743.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CSRF in Gemini</H1>
+    <B>Francesco Gazzetta</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CSRF%20in%20Gemini&In-Reply-To=%3C20200616114011.73f2c51b%40phi%3E"
+       TITLE="CSRF in Gemini">fgaz at fgaz.me
+       </A><BR>
+    <I>Tue Jun 16 10:40:11 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001725.html">CSRF in Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="001743.html">CSRF in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1737">[ date ]</a>
+              <a href="thread.html#1737">[ thread ]</a>
+              <a href="subject.html#1737">[ subject ]</a>
+              <a href="author.html#1737">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, 15 Jun 2020 21:28:08 -0400
+Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+
+&gt;<i> Authentication is done via
+</I>&gt;<i> certificates.
+</I>
+But unless confirmation is required for _every_ request with a
+certificate (is it? I'll have to re-read the spec) then the problem
+persists, since the request is done by the victim.
+
+&gt;<i> About the only valid issue is the SPAM issue you
+</I>&gt;<i> brought up, but I think it *is* possible to detect since the server
+</I>&gt;<i> will have the IP address of the sender---repeated requests could be
+</I>&gt;<i> blocked by blocking the IP address.
+</I>
+It's not detectable without nonces, because the spammer doesn't have to
+do any request, only the victims (with presumably different IPs)
+
+&gt;<i>   Another issue with the nonce (other than how to send it back) is
+</I>&gt;<i> that a malicious bot can just make a request that returns the nonce
+</I>&gt;<i> and use it, like like a Gemini client with a human driver will do.
+</I>
+Yes, but like in the web we can act on that first request an check for
+client cert (which the attacker won't have) and IP (which will always
+be the attacker's one)
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001725.html">CSRF in Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="001743.html">CSRF in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1737">[ date ]</a>
+              <a href="thread.html#1737">[ thread ]</a>
+              <a href="subject.html#1737">[ subject ]</a>
+              <a href="author.html#1737">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

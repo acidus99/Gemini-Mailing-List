@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> crawling, proxies, and robots.txt
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20crawling%2C%20proxies%2C%20and%20robots.txt&In-Reply-To=%3C20201012040559.GA11270%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002857.html">
+   <LINK REL="Next"  HREF="002863.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>crawling, proxies, and robots.txt</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20crawling%2C%20proxies%2C%20and%20robots.txt&In-Reply-To=%3C20201012040559.GA11270%40brevard.conman.org%3E"
+       TITLE="crawling, proxies, and robots.txt">sean at conman.org
+       </A><BR>
+    <I>Mon Oct 12 05:06:01 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002857.html">crawling, proxies, and robots.txt
+</A></li>
+        <LI>Next message (by thread): <A HREF="002863.html">crawling, proxies, and robots.txt
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2858">[ date ]</a>
+              <a href="thread.html#2858">[ thread ]</a>
+              <a href="subject.html#2858">[ subject ]</a>
+              <a href="author.html#2858">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Michael Lazar once stated:
+&gt;<i> Hi all,
+</I>&gt;<i> 
+</I>&gt;<i> Second, I have *slowly* been building a crawler for gemini [0]. My goal is to
+</I>&gt;<i> create a historical archive of geminispace and submit it somewhere for
+</I>&gt;<i> long-term preservation. This was inspired by Charles Lehner's recent email to
+</I>&gt;<i> the list [0]. I've spent a fair amount of time in gopher, and I am deeply
+</I>&gt;<i> saddened that so many of the important gopher servers from the 90's have been
+</I>&gt;<i> lost forever. Currently my crawler is respecting robots.txt files using the
+</I>&gt;<i> &quot;mozz-archiver&quot; user agent. I will probably standardize this to match my proxy
+</I>&gt;<i> (i.e. &quot;archiver&quot; and &quot;archiver-mozz&quot;). I am not 100% decided that I will even
+</I>&gt;<i> respect robots files for this project (archive.org doesn't [2]), but right now
+</I>&gt;<i> I'm leaning towards &quot;yes&quot;. If you are currently mirroring a large website like
+</I>&gt;<i> wikipedia over gemini, I would greatly appreciate if you setup a robots.txt to
+</I>&gt;<i> block one of the above user-agents from those paths to make my life a bit
+</I>&gt;<i> easier.
+</I>
+  So I've added the following:
+
+User-agent: archiver
+User-agent: archiver-mozz
+User-agent: mozz-archiver
+Disallow: /boston
+
+to my /robots.txt file.  I assume this will catch your archiver and prevent
+my blog from being archived, given that my blog is primarily web-based (and
+mirrored to Gemini and gopher) it is already archived (by existing web
+archives).
+
+  Now a question: when people can check the archive, how will the missing
+portions of a Gemini site be presented?  I'm blocking the above because it's
+a mirror of an existing web site (and might fit your &quot;large&quot; category, what
+with 20 years of content there), but there's no indication in the robots.txt
+file of that.
+
+  -spc
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002857.html">crawling, proxies, and robots.txt
+</A></li>
+	<LI>Next message (by thread): <A HREF="002863.html">crawling, proxies, and robots.txt
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2858">[ date ]</a>
+              <a href="thread.html#2858">[ thread ]</a>
+              <a href="subject.html#2858">[ subject ]</a>
+              <a href="author.html#2858">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] tanelorn.city: a public gemini host for writers
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20tanelorn.city%3A%20a%20public%20gemini%20host%20for%20writers&In-Reply-To=%3CSSB9UE8V9SAzWxRH7-sjfphPjiF0hOuRyyifQZbTXd5IjRuFDZv5eiydhEBksD-YJKVjTGFyu3cVvaDenGYkv_gE0sXgN4Bt6gGHo0avuaE%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001592.html">
+   <LINK REL="Next"  HREF="001607.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] tanelorn.city: a public gemini host for writers</H1>
+    <B>colecmac at protonmail.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20tanelorn.city%3A%20a%20public%20gemini%20host%20for%20writers&In-Reply-To=%3CSSB9UE8V9SAzWxRH7-sjfphPjiF0hOuRyyifQZbTXd5IjRuFDZv5eiydhEBksD-YJKVjTGFyu3cVvaDenGYkv_gE0sXgN4Bt6gGHo0avuaE%3D%40protonmail.com%3E"
+       TITLE="[ANN] tanelorn.city: a public gemini host for writers">colecmac at protonmail.com
+       </A><BR>
+    <I>Fri Jun 12 21:44:42 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001592.html">[ANN] tanelorn.city: a public gemini host for writers
+</A></li>
+        <LI>Next message (by thread): <A HREF="001607.html">[ANN] tanelorn.city: a public gemini host for writers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1598">[ date ]</a>
+              <a href="thread.html#1598">[ thread ]</a>
+              <a href="subject.html#1598">[ subject ]</a>
+              <a href="author.html#1598">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I think it should be noted, that to my knowledge,
+Kristall, Elpher, Castor and Bollux all do not check certs.
+
+makeworld
+
+&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208; Original Message &#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;
+On Friday, June 12, 2020 12:39 PM, tastytea &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">tastytea+gemini at tastytea.de</A>&gt; wrote:
+
+&gt;<i> On 2020-06-12 11:36-0400 Matthew Graybosch <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">hello at matthewgraybosch.com</A>
+</I>&gt;<i> wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; On Fri, 12 Jun 2020 15:08:36 +0000
+</I>&gt;<i> &gt; <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; Amen. Happy to have another server!
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Thanks.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; However, in Bombadillo I get the error &quot;Cert hostname does not
+</I>&gt;<i> &gt; &gt; match&quot;. Make sure you're serving up the right certificate!
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Sorry to hear that!
+</I>&gt;<i> &gt; I just downloaded Bombadillo so I could see for myself, and checked my
+</I>&gt;<i> &gt; Gemserv config on kanajana. As far as I can tell my config is OK and
+</I>&gt;<i> &gt; I'm using the correct cert for each hostname, but the problem might be
+</I>&gt;<i> &gt; that kanajana isn't only serving tanelorn.city but demifiend.org and
+</I>&gt;<i> &gt; starbreaker.org as well.
+</I>&gt;<i> &gt; I'm not sure what to do about it, though since all three sites are
+</I>&gt;<i> &gt; accessible using Castor and bollux.
+</I>&gt;<i>
+</I>&gt;<i> If I interpret the output from`openssl s_client`&#185; correctly, the CN of
+</I>&gt;<i> the certificate is set to &#8220;Matthew Graybosch&#8221;, not a &#8220;tanelorn.city&#8221;,
+</I>&gt;<i> as it is custom for HTTPS. However, while the specification states in
+</I>&gt;<i> 4.2 that &#8220;Clients can validate TLS connections however they like&#8221;, it
+</I>&gt;<i> recommends a &#8220;lightweight &quot;TOFU&quot; certificate-pinning system&#8221; without
+</I>&gt;<i> mentioning hostname validation.
+</I>&gt;<i>
+</I>&gt;<i> Kristall and elpher also show no error, by the way.
+</I>&gt;<i>
+</I>&gt;<i> Kind regards, tastytea
+</I>&gt;<i>
+</I>&gt;<i> &#185; echo -e '<A HREF="gemini://tanelorn.city\r\n\r\n">gemini://tanelorn.city\r\n\r\n</A>' \
+</I>&gt;<i> | openssl s_client -verify_hostname tanelorn.city tanelorn.city:1965
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+</I>&gt;<i>
+</I>&gt;<i> Get my PGP key with `gpg --locate-keys <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">tastytea at tastytea.de</A>` or at
+</I>&gt;<i> <A HREF="https://tastytea.de/tastytea.asc.">https://tastytea.de/tastytea.asc.</A>
+</I>
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001592.html">[ANN] tanelorn.city: a public gemini host for writers
+</A></li>
+	<LI>Next message (by thread): <A HREF="001607.html">[ANN] tanelorn.city: a public gemini host for writers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1598">[ date ]</a>
+              <a href="thread.html#1598">[ thread ]</a>
+              <a href="subject.html#1598">[ subject ]</a>
+              <a href="author.html#1598">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

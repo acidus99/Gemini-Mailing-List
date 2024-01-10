@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposal: Simple structured form specification
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%3A%20Simple%20structured%20form%20specification&In-Reply-To=%3CCAN4yCu-KPeJEn7DHw%2BN6zGsd0Ub5thPqEeWQ%2B7XOH%3DPgwMMKsQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004927.html">
+   <LINK REL="Next"  HREF="004938.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposal: Simple structured form specification</H1>
+    <B>Russtopia</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%3A%20Simple%20structured%20form%20specification&In-Reply-To=%3CCAN4yCu-KPeJEn7DHw%2BN6zGsd0Ub5thPqEeWQ%2B7XOH%3DPgwMMKsQ%40mail.gmail.com%3E"
+       TITLE="Proposal: Simple structured form specification">rmagee at gmail.com
+       </A><BR>
+    <I>Tue Jan 26 19:25:32 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004927.html">Proposal: Simple structured form specification
+</A></li>
+        <LI>Next message (by thread): <A HREF="004938.html">Proposal: Simple structured form specification
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4932">[ date ]</a>
+              <a href="thread.html#4932">[ thread ]</a>
+              <a href="subject.html#4932">[ subject ]</a>
+              <a href="author.html#4932">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, 26 Jan 2021 at 05:43, Jason McBrayer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">jmcbray at carcosa.net</A>&gt; wrote:
+
+&gt;<i> <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">nothien at uber.space</A> writes:
+</I>&gt;<i> &gt; Russtopia &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">rmagee at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt;&gt; [... form proposal ... ]
+</I>&gt;<i>
+</I>&gt;<i> &gt; The issue is that Gemini (and gemtext) is too close to being frozen
+</I>&gt;<i> &gt; forever. And most Gemini content out there doesn't need to use forms.
+</I>&gt;<i>
+</I>&gt;<i> This is my personal opinion, but I would go further and say that Gemini
+</I>&gt;<i> doesn't need forms. If you have fully featured forms, you can implement
+</I>&gt;<i> largely any kind of application (excluding very interactive ones), and
+</I>&gt;<i> in the history of the web, this lead to re-implementing the whole
+</I>&gt;<i> internet over port 80. I don't think Gemini needs to do that. The one
+</I>&gt;<i> input lets you select different dynamic versions of a page, like for
+</I>&gt;<i> different locales, or search results, or similar.
+</I>&gt;<i>
+</I>&gt;<i> Having more complex forms is a temptation to implement applications on
+</I>&gt;<i> Gemini, rather than using pairings of protocol+client that are more
+</I>&gt;<i> appropriate (e.g. using NNTP for a message board).
+</I>&gt;<i>
+</I>&gt;<i>
+</I>Point well taken -- I know it is a slippery slope, but I still think forms
+could be
+supported in a manner which keeps complexity down.
+
+This form-builder idea could be implemented with no protocol changes,
+100% client-side, within the existing =&gt; link syntax. To be user-friendly,
+it would
+require some sort of agreement by clients on the FORM-SPEC syntax.
+Consider if clients agreed to act on documents ending in .gmif
+('gemini-form'):
+
+=&gt; <A HREF="gemini://example.site/form.gmif">gemini://example.site/form.gmif</A> This is a form link, click to fill out
+
+.. clients could, by convention, parse such .gmiform files containing the
+FORM-SPEC
+using it to build a dynamic entry form. After form entry, the client would
+encode it and send back
+to the same endpoint (here, form.gmif) so the server could act on the
+values.
+
+For clients that did not choose to implement forms, they would by default
+simply display .gmif
+documents as any other plaintext resource.
+
+The .gmif document holding the &lt;FORM-SPEC&gt; could even have comments with
+instructions
+on how to manually create a query to the endpoint, for users of older
+clients eg:
+
+[form.gmif]
+
+s#DELAY#5#Delay in seconds
+&gt;<i> c#SIZE#small|big|huge#Size of something
+</I>&gt;<i> b#DEBUG#1#
+</I>&gt;<i>
+</I>&gt;<i> // If you are seeing this page, your gemini client does not support
+</I>&gt;<i> automatic dynamic forms.
+</I>&gt;<i> // You can still use this service by building a FORM-SPEC matching the
+</I>&gt;<i> above syntax and
+</I>&gt;<i> // pasting it to this page's URI, eg:
+</I>
+
+&gt;<i> //    <A HREF="gemini://example.site/form.gmif?DELAY=5&amp;SIZE=small&amp;DEBUG=1">gemini://example.site/form.gmif?DELAY=5&amp;SIZE=small&amp;DEBUG=1</A>
+</I>
+
+
+As ~nothien points out, there's a limit of ~1024 bytes on URLs which I
+think is a good thing;
+working within the protocol as-is will naturally force relatively small,
+simple forms.
+
+So I guess I'm now proposing an optional client-side '.gmif' form standard
+:<i>)
+</I>
+-Russ
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210126/f34c1343/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210126/f34c1343/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004927.html">Proposal: Simple structured form specification
+</A></li>
+	<LI>Next message (by thread): <A HREF="004938.html">Proposal: Simple structured form specification
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4932">[ date ]</a>
+              <a href="thread.html#4932">[ thread ]</a>
+              <a href="subject.html#4932">[ subject ]</a>
+              <a href="author.html#4932">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

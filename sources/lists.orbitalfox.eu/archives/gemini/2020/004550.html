@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> What is required to be IRI compliant?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20What%20is%20required%20to%20be%20IRI%20compliant%3F&In-Reply-To=%3C2f37d069-2a61-4a9d-ae51-6b7dc7873379%40worrbase.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004546.html">
+   <LINK REL="Next"  HREF="004531.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>What is required to be IRI compliant?</H1>
+    <B>William Orr</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20What%20is%20required%20to%20be%20IRI%20compliant%3F&In-Reply-To=%3C2f37d069-2a61-4a9d-ae51-6b7dc7873379%40worrbase.com%3E"
+       TITLE="What is required to be IRI compliant?">will at worrbase.com
+       </A><BR>
+    <I>Mon Dec 28 15:56:28 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004546.html">What is required to be IRI compliant?
+</A></li>
+        <LI>Next message (by thread): <A HREF="004531.html">What is required to be IRI compliant?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4550">[ date ]</a>
+              <a href="thread.html#4550">[ thread ]</a>
+              <a href="subject.html#4550">[ subject ]</a>
+              <a href="author.html#4550">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Yes, that's absolutely the case even if IRIs are not used. Hopefully URI libraries and IDNA libraries handle this correctly by doing normalization before percent encoding/punycoding, but I haven't checked any implementations personally.
+
+Normalization should come up in other contexts as well that would be common in gemini, like &quot;find in page,&quot; search indexing, etc. Those cases may even make use of other normalization schemes like NFKC.
+
+28 dic. 2020 15:01:41 Solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at posteo.net</A>&gt;:
+
+&gt;<i> On Mon Dec 28, 2020 at 1:12 PM CET, William Orr wrote:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> Normalization is the process of looking for all of these synonyms for
+</I>&gt;&gt;<i> characters, and standardizing them to the same set of codepoints. If you
+</I>&gt;&gt;<i> don't normalize, you could have a case where one user gets the intended
+</I>&gt;&gt;<i> host for &#233;crire.hostname and another user gets an NXDOMAIN, all
+</I>&gt;&gt;<i> depending on the sequence of bytes their input method produced.
+</I>&gt;<i> 
+</I>&gt;<i> ...and actually, now that I think about, this issue is not specific to
+</I>&gt;<i> IRI support, is it?&#160; Even if we followed the web's lead and declared
+</I>&gt;<i> that Gemini requests and text/gemini links must contain ASCII-only URLs,
+</I>&gt;<i> and people have to do punycoding of non-ASCII hostnames and
+</I>&gt;<i> percent-encoding of UTF-8 representations of non-ASCII paths, it's still
+</I>&gt;<i> possible for the server and client to have different ideas about how a
+</I>&gt;<i> hostname or path are represented, right?&#160; With one using a composed form
+</I>&gt;<i> and the other a decomposed form?&#160; Whether you send a UTF-8 string as-is
+</I>&gt;<i> or first punycode and/or percent-encode it so it's valid ASCII is
+</I>&gt;<i> totally orthogonal to that question.&#160; Or have I missed something
+</I>&gt;<i> important?
+</I>&gt;<i> 
+</I>&gt;<i> Cheers,
+</I>&gt;<i> Solderpunk
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004546.html">What is required to be IRI compliant?
+</A></li>
+	<LI>Next message (by thread): <A HREF="004531.html">What is required to be IRI compliant?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4550">[ date ]</a>
+              <a href="thread.html#4550">[ thread ]</a>
+              <a href="subject.html#4550">[ subject ]</a>
+              <a href="author.html#4550">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

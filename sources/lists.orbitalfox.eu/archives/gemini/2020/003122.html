@@ -1,0 +1,207 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Adding close_notify to the spec ?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Adding%20close_notify%20to%20the%20spec%20%3F&In-Reply-To=%3C51e34fb4-1718-046f-f172-295c8edd292d%40scotdoyle.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003270.html">
+   <LINK REL="Next"  HREF="003136.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Adding close_notify to the spec ?</H1>
+    <B>Scot</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Adding%20close_notify%20to%20the%20spec%20%3F&In-Reply-To=%3C51e34fb4-1718-046f-f172-295c8edd292d%40scotdoyle.com%3E"
+       TITLE="Adding close_notify to the spec ?">gmi1 at scotdoyle.com
+       </A><BR>
+    <I>Sun Nov  8 01:20:21 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003270.html">examples with Sympy
+</A></li>
+        <LI>Next message (by thread): <A HREF="003136.html">Adding close_notify to the spec ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3122">[ date ]</a>
+              <a href="thread.html#3122">[ thread ]</a>
+              <a href="subject.html#3122">[ subject ]</a>
+              <a href="author.html#3122">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Does anyone have any concerns about amending the spec to state that a TLS
+close_notify message should be sent before closing the TCP connection?
+While TLS guarantees the integrity of the data from the server, it does
+not guarantee completeness until a close_notify is received by the client.
+Interested and able clients could then determine that they received a
+complete response.
+
+The sending of close_notify is discussed in section 6.1 of RFC 8446 [1].
+
+This approach was previously discussed on the list by Michael Lazar and
+solderpunk [2] [3] and kooda [4].
+
+I have been testing various software and configurations to find out the
+feasibility of this approach. The ability to send close_notify is part of
+the TLS 1.2 and 1.3 specs, and is widely available for server authors to
+use. The OpenSSL C library provides the SSL_shutdown function which sends
+close_notify. The LibreSSL C library has had the same function since its
+first release. The libtls library included with LibreSSL provides this
+functionality in the tls_close function. I've verified the effectiveness of
+Python's SSLSocket.unwrap method. Ruby seems to handle this with
+SSLObject.sysclose and Go with the Close method in crypto/tls/conn.go.
+
+Every TLS 1.2 or 1.3 client I've seen will automatically handle TLS
+close_notify messages. Non-blocking clients will make a poll/select/etc
+call and wait for data from the server. When the close_notify message is
+received by the TLS library used by the client software, it will indicate
+that data is ready to be read/received. So whether the client is blocking
+or non-blocking, it will eventually perform a read/receive call since it
+cannot yet know that there is no more data from the server. The
+close_notify message from the server will causes the TLS library to return
+0 bytes from the read/receive call. Some libraries will also return an
+error message or status code indicating that a close_notify was received.
+In any case, the connection with the server is automatically closed
+(completely in TLS 1.2, and at a minimum from further reads in TLS 1.3).
+
+So, why can't we just use a read/receive of 0 bytes to always know that a
+close_notify was received? Because if the TCP connection is closed before a
+close_notify, the read/receive call will also return 0 bytes. Some clients
+do not have a way to distinguish between TCP disconnect and close_notify.
+
+But should a client author wish to use this feature, those written in C and
+using OpenSSL/LibreSSL can use the SSL_read and SSL_get_error functions to
+obtain the SSL_ERROR_ZERO_RETURN value. Those written in C and using libtls
+can use the tls_read and tls_get_error functions. Python clients can use
+the demonstrated method [6]. And while there is no assured way to do this
+in Ruby or Go currently, patching Ruby's SSLSocket.sysread or Go's
+crypto/tls/conn.go readRecord to use the information already available in
+those source files might be possible.
+
+You can inspect the TLS messages received from any server, including
+the close_notify message, with the included Python script [6].
+
+130 out of 208 servers listed on GUS [5] send the close_notify
+message before disconnecting.
+
+
+[1] <A HREF="https://tools.ietf.org/html/rfc8446">https://tools.ietf.org/html/rfc8446</A>
+[2] <A HREF="https://lists.orbitalfox.eu/archives/gemini/2019/000037.html">https://lists.orbitalfox.eu/archives/gemini/2019/000037.html</A>
+[3] <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/002150.html">https://lists.orbitalfox.eu/archives/gemini/2020/002150.html</A>
+[4] <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/002243.html">https://lists.orbitalfox.eu/archives/gemini/2020/002243.html</A>
+[5] <A HREF="gemini://gus.guru/known-hosts">gemini://gus.guru/known-hosts</A>
+[6] I dedicate this script to the public domain.
+ &#160;&#160;&#160; To query a different server, modify the second line.
+
+
+import socket, ssl, time
+server, port, path = 'gemini.circumlunar.space', 1965, '/'
+start, out, cn = time.time(), [], False
+def log(m): out.append('\n--- %f %s' % (time.time()-start, m))
+def callback(connection, direction, v, c, m, data):
+ &#160; p = [str(i)[str(i).find('.')+1:] for i in [direction, v, c, m]]
+ &#160; log(''.join([i.ljust(j, ' ').lower()
+ &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; for i, j in zip(p, [6, 8, 19, 20])]))
+ &#160; if m == ssl._TLSAlertType.CLOSE_NOTIFY and direction == 'read':
+ &#160;&#160;&#160; global cn; cn = True
+context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+context.verify_mode = ssl.CERT_NONE
+context.check_hostname = False
+context._msg_callback = callback
+sock = socket.socket(socket.AF_INET)
+sock.settimeout(5)
+connection = context.wrap_socket(sock, server_hostname=server)
+connection.connect((server, port))
+log('SENDING GEMINI REQUEST TO SERVER')
+connection.send(b'<A HREF="gemini://">gemini://</A>'+server.encode()+path.encode()+b'\r\n')
+log('RECEIVING GEMINI RESPONSE FROM SERVER')
+sameline = False
+while True:
+ &#160; try:
+ &#160;&#160;&#160; data = connection.recv().decode()
+ &#160;&#160;&#160; if len(data) &lt; 1:
+ &#160;&#160;&#160;&#160;&#160; if cn: log('COMPLETE RESPONSE RECEIVED')
+ &#160;&#160;&#160;&#160;&#160; if not cn: log('COMPLETE RESPONSE MAY NOT HAVE BEEN RECEIVED')
+ &#160;&#160;&#160;&#160;&#160; break
+ &#160;&#160;&#160; if not sameline:
+ &#160;&#160;&#160;&#160;&#160; data = '\n' + data
+ &#160;&#160;&#160; out.append(data.rstrip().replace('\n', '\n'+' '*4))
+ &#160;&#160;&#160; sameline, data = (data[-1] != '\n'), ''
+ &#160; except Exception as e:
+ &#160;&#160;&#160; log(str(e).upper())
+connection.close()
+print((''.join(out))[1:])
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003270.html">examples with Sympy
+</A></li>
+	<LI>Next message (by thread): <A HREF="003136.html">Adding close_notify to the spec ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3122">[ date ]</a>
+              <a href="thread.html#3122">[ thread ]</a>
+              <a href="subject.html#3122">[ subject ]</a>
+              <a href="author.html#3122">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Debugging Lagrange (was Re: [ANN] Lagrange - A Beautiful Gemini Client)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Debugging%20Lagrange%20%28was%20Re%3A%20%5BANN%5D%20Lagrange%20-%20A%20Beautiful%20Gemini%0A%20Client%29&In-Reply-To=%3C20201026172545.GA472190%40rawtext.club%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002924.html">
+   <LINK REL="Next"  HREF="002722.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Debugging Lagrange (was Re: [ANN] Lagrange - A Beautiful Gemini Client)</H1>
+    <B>avalos at rawtext.club</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Debugging%20Lagrange%20%28was%20Re%3A%20%5BANN%5D%20Lagrange%20-%20A%20Beautiful%20Gemini%0A%20Client%29&In-Reply-To=%3C20201026172545.GA472190%40rawtext.club%3E"
+       TITLE="Debugging Lagrange (was Re: [ANN] Lagrange - A Beautiful Gemini Client)">avalos at rawtext.club
+       </A><BR>
+    <I>Mon Oct 26 17:25:45 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002924.html">Debugging Lagrange (was Re: [ANN] Lagrange - A Beautiful Gemini Client)
+</A></li>
+        <LI>Next message (by thread): <A HREF="002722.html">Firefox Add-on protocol schema
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2931">[ date ]</a>
+              <a href="thread.html#2931">[ thread ]</a>
+              <a href="subject.html#2931">[ subject ]</a>
+              <a href="author.html#2931">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+&gt;<i> I've made some small tweaks to my TLS code. If you have a chance, could you try it with this commit: <A HREF="https://git.skyjake.fi/skyjake/lagrange/commit/f83ef8bfbaa5558aca5759c92c481642ac312000">https://git.skyjake.fi/skyjake/lagrange/commit/f83ef8bfbaa5558aca5759c92c481642ac312000</A> 
+</I>&gt;<i> 
+</I>&gt;<i> &gt; The OpenSSL command took a lot of time to finish and print the output.
+</I>&gt;<i> 
+</I>&gt;<i> Perhaps Lagrange thinks the connection has timed out? If you run it with the &quot;--echo&quot; option, is there a &quot;document.request.timeout&quot; logged when trying to open gus.guru?
+</I>
+I tried with that commit, and with --echo option. Both gus.guru and
+gemini.circumlunar.space get stuck in that command:
+
+[command] document.request.started doc:0xaaaadb096170 url:<A HREF="gemini://gus.guru">gemini://gus.guru</A>
+[command] document.request.started doc:0xaaaadb16b930 url:<A HREF="gemini://gemini.circumlunar.space/">gemini://gemini.circumlunar.space/</A>
+
+The program is still running, but it doesn't echo anything else
+related to the requests. The request only starts but never updates or
+finishes.
+
+For example, this is what my gemsite shows:
+
+[command] open url:<A HREF="gemini://avalos.me">gemini://avalos.me</A>
+[command] document.request.started doc:0xaaaadb1aa0d0 url:<A HREF="gemini://avalos.me">gemini://avalos.me</A>
+[command] document.request.updated doc:0xaaaadb1aa0d0
+request:0xaaaadb1577d0 ptr:0xaaaadb1aa0d0
+[command] document.request.finished doc:0xaaaadb1aa0d0
+request:0xaaaadb1577d0 ptr:0xaaaadb1aa0d0
+[command] open redirect:1 url:<A HREF="gemini://avalos.me/">gemini://avalos.me/</A>
+[command] document.request.started doc:0xaaaadb1aa0d0 url:<A HREF="gemini://avalos.me/">gemini://avalos.me/</A>
+[command] document.request.updated doc:0xaaaadb1aa0d0
+request:0xaaaadb1577d0 ptr:0xaaaadb1aa0d0
+[command] document.request.finished doc:0xaaaadb1aa0d0
+request:0xaaaadb1577d0 ptr:0xaaaadb1aa0d0
+[command] document.changed url:<A HREF="gemini://avalos.me/">gemini://avalos.me/</A>
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002924.html">Debugging Lagrange (was Re: [ANN] Lagrange - A Beautiful Gemini Client)
+</A></li>
+	<LI>Next message (by thread): <A HREF="002722.html">Firefox Add-on protocol schema
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2931">[ date ]</a>
+              <a href="thread.html#2931">[ thread ]</a>
+              <a href="subject.html#2931">[ subject ]</a>
+              <a href="author.html#2931">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

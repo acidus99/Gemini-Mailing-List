@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] The Duckling Proxy
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20The%20Duckling%20Proxy&In-Reply-To=%3C5F509715.8070103%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002542.html">
+   <LINK REL="Next"  HREF="002544.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] The Duckling Proxy</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20The%20Duckling%20Proxy&In-Reply-To=%3C5F509715.8070103%40marmaladefoo.com%3E"
+       TITLE="[ANN] The Duckling Proxy">luke at marmaladefoo.com
+       </A><BR>
+    <I>Thu Sep  3 08:11:17 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002542.html">[ANN] The Duckling Proxy
+</A></li>
+        <LI>Next message (by thread): <A HREF="002544.html">Gemini Archiving and WARC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2552">[ date ]</a>
+              <a href="thread.html#2552">[ thread ]</a>
+              <a href="subject.html#2552">[ subject ]</a>
+              <a href="author.html#2552">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Well I suppose you can't keep a good idea down!?
+
+Maybe there is still a role for a proxy where you can plug in command 
+line utilities, like html2gmi or others - could be a flexible solution, 
+or preferred if people want to hack on a python flavoured proxy server.
+
+I also fixed the link below which was broken for a while - the updated 
+page is now here:
+
+<A HREF="gemini://gemini.marmaladefoo.com/blog/1-Sep-2020_The_Duckling_Proxy.gmi">gemini://gemini.marmaladefoo.com/blog/1-Sep-2020_The_Duckling_Proxy.gmi</A>
+
+Best Wishes
+
+  - Luke
+
+On 01-Sep-2020 01:06, Jake wrote:
+&gt;<i> Literally just finished getting my own http proxy and AV98 patch 
+</I>&gt;<i> together and decided to check my emails and see that you've beaten me 
+</I>&gt;<i> to the punch! Your proxy is much better than mine (mine is basically 
+</I>&gt;<i> Agena with a subprocess call to html2gmi) so I might just shelve mine! ;)
+</I>&gt;<i> -------- Original Message --------
+</I>&gt;<i> On 1 Sep. 2020, 7:11 am, Luke Emmet &lt; <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">luke at marmaladefoo.com</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>     Hi All
+</I>&gt;<i>
+</I>&gt;<i>     I'm pleased to announce The Duckling Proxy &#129414; - a scheme-specific
+</I>&gt;<i>     proxy
+</I>&gt;<i>     to access HTTP resources from normal Gemini clients.
+</I>&gt;<i>
+</I>&gt;<i>     Motivated by my recent discussion on the merits of opening up
+</I>&gt;<i>     access to
+</I>&gt;<i>     the Small Web in a sane way. One option is to plug an adapter into
+</I>&gt;<i>     your
+</I>&gt;<i>     client, the other is to use a scheme specific proxy.
+</I>&gt;<i>
+</I>&gt;<i>     <A HREF="gemini://gemini.marmaladefoo.com/blog/31-Aug-2020_The_Duckling_Proxy.gmi">gemini://gemini.marmaladefoo.com/blog/31-Aug-2020_The_Duckling_Proxy.gmi</A>
+</I>&gt;<i>     &lt;<A HREF="http://marmaladefoo.com/blog/31-Aug-2020_The_Duckling_Proxy.gmi">http://marmaladefoo.com/blog/31-Aug-2020_The_Duckling_Proxy.gmi</A>&gt;
+</I>&gt;<i>
+</I>&gt;<i>     So any Gemini client that supports scheme specific proxies should be
+</I>&gt;<i>     able to connect to Duckling. Another example of a scheme-specific
+</I>&gt;<i>     proxy
+</I>&gt;<i>     is Solderpunk's Agena proxy which allows access to <A HREF="gopher://">gopher://</A>
+</I>&gt;<i>     resources.
+</I>&gt;<i>     Duckling works in a similar way.
+</I>&gt;<i>
+</I>&gt;<i>     Once your proxy is in place and running, and you have configured your
+</I>&gt;<i>     client to use it, you can request http resources using normal Gemini
+</I>&gt;<i>     request:
+</I>&gt;<i>
+</I>&gt;<i>     Client: &lt;http-url&gt;&lt;crlf&gt;
+</I>&gt;<i>     Server: 20 text/gemini
+</I>&gt;<i>     ...continues...
+</I>&gt;<i>
+</I>&gt;<i>     Duckling translates all web pages into gemtext, so it is just a normal
+</I>&gt;<i>     Gemini server, as far as your client is concerned.
+</I>&gt;<i>
+</I>&gt;<i>     View the Small Web using your favourite Gemini client, and benefit
+</I>&gt;<i>     from:
+</I>&gt;<i>
+</I>&gt;<i>     * No tracking or cookies
+</I>&gt;<i>     * No javascript
+</I>&gt;<i>     * No server styling, just content
+</I>&gt;<i>     * No client headers
+</I>&gt;<i>
+</I>&gt;<i>     Obviously, not every web site will work as expected, especially those
+</I>&gt;<i>     requiring client side javascript/cookies/forms in order to work
+</I>&gt;<i>     effectively. In this case, just launch your normal web browser. Or
+</I>&gt;<i>     maybe
+</I>&gt;<i>     give those pages a miss anyway?
+</I>&gt;<i>
+</I>&gt;<i>     Currently the following clients can be used with Duckling Proxy
+</I>&gt;<i>
+</I>&gt;<i>     * AV-98 - apply the patch from the source repo then use `set
+</I>&gt;<i>     http_proxy
+</I>&gt;<i>     machine:port` to access
+</I>&gt;<i>     * diohsc - edit diohscrc config file
+</I>&gt;<i>     * gemget - use -p option
+</I>&gt;<i>     * GemiNaut (unreleased build, coming soon, PM me if you want early
+</I>&gt;<i>     access)
+</I>&gt;<i>
+</I>&gt;<i>     Any other clients that implement proxy support in the future should be
+</I>&gt;<i>     able to use it. I understand Amfora will be able to connect to it
+</I>&gt;<i>     in an
+</I>&gt;<i>     upcoming release. Let me know if you implement proxy support in your
+</I>&gt;<i>     client and I'll add it to the list.
+</I>&gt;<i>
+</I>&gt;<i>     Best Wishes
+</I>&gt;<i>
+</I>&gt;<i>     - Luke
+</I>&gt;<i>
+</I></PRE>
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002542.html">[ANN] The Duckling Proxy
+</A></li>
+	<LI>Next message (by thread): <A HREF="002544.html">Gemini Archiving and WARC
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2552">[ date ]</a>
+              <a href="thread.html#2552">[ thread ]</a>
+              <a href="subject.html#2552">[ subject ]</a>
+              <a href="author.html#2552">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

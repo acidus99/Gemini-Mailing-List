@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Uploading Gemini content
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Uploading%20Gemini%20content&In-Reply-To=%3C20200613221906.GM11281%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001621.html">
+   <LINK REL="Next"  HREF="001657.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Uploading Gemini content</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Uploading%20Gemini%20content&In-Reply-To=%3C20200613221906.GM11281%40brevard.conman.org%3E"
+       TITLE="Uploading Gemini content">sean at conman.org
+       </A><BR>
+    <I>Sat Jun 13 23:19:06 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001621.html">Uploading Gemini content
+</A></li>
+        <LI>Next message (by thread): <A HREF="001657.html">Uploading Gemini content
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1639">[ date ]</a>
+              <a href="thread.html#1639">[ thread ]</a>
+              <a href="subject.html#1639">[ subject ]</a>
+              <a href="author.html#1639">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Felix Quei&#223;ner once stated:
+&gt;<i> Hey Sean and others!
+</I>&gt;<i> 
+</I>&gt;<i> &gt; *snips the whole protocol description*
+</I>&gt;<i> 
+</I>&gt;<i> I was too working on a gemini extension to allow arbitrary data uploads
+</I>&gt;<i> as &quot;10 INPUT&quot; is a bit too restricted to ~700 byte of data payload.
+</I>&gt;<i> 
+</I>&gt;<i> But now that i read your gemini+put and gemini+delete extension, i think
+</I>&gt;<i> i don't need to continue braining over my extension and it's flaws.
+</I>
+  I'm curious as to what you were planning.  Care to share?
+
+&gt;<i> I really like the proposal. It's easy to implement and integrate both on
+</I>&gt;<i> server and client side. The &quot;gemini+delete&quot; scheme is just the normal
+</I>&gt;<i> gemini handling routine and the upload routine can be put &quot;in front&quot; of a
+</I>&gt;<i> normal gemini request and can be handled with the normal response handler.
+</I>
+  I wouldn't be too sure about that.  My own &quot;proof-of-concept&quot; took about
+five hours to write, and it's a separate server of its own.  I did that
+because trying to integrate the new URL support would have been too invasive
+of a change in GLV-1.12556.
+
+  And while the protocol itself is easy, there were issues I had to be very
+cautious about to ensure nothing bad happened when a delete was called for. 
+For instance, I had to account for the deletion of a directory and
+everything below it.  I also had to handle the creation of multiple
+directories for the put method.
+
+  -spc
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001621.html">Uploading Gemini content
+</A></li>
+	<LI>Next message (by thread): <A HREF="001657.html">Uploading Gemini content
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1639">[ date ]</a>
+              <a href="thread.html#1639">[ thread ]</a>
+              <a href="subject.html#1639">[ subject ]</a>
+              <a href="author.html#1639">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

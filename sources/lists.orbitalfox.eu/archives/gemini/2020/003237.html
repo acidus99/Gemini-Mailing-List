@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Cache duration and response body size proposals
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cache%20duration%20and%20response%20body%20size%20proposals&In-Reply-To=%3C20201110172329.7b1474c0d199c534105e6051%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003231.html">
+   <LINK REL="Next"  HREF="003238.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Cache duration and response body size proposals</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cache%20duration%20and%20response%20body%20size%20proposals&In-Reply-To=%3C20201110172329.7b1474c0d199c534105e6051%40gmail.com%3E"
+       TITLE="Cache duration and response body size proposals">linde.philip at gmail.com
+       </A><BR>
+    <I>Tue Nov 10 16:23:29 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003231.html">Cache duration and response body size proposals
+</A></li>
+        <LI>Next message (by thread): <A HREF="003238.html">Cache duration and response body size proposals
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3237">[ date ]</a>
+              <a href="thread.html#3237">[ thread ]</a>
+              <a href="subject.html#3237">[ subject ]</a>
+              <a href="author.html#3237">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, 10 Nov 2020 15:36:01 +0000
+&quot;Robert \&quot;khuxkm\&quot; Miles&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">khuxkm at tilde.team</A>&gt; wrote:
+
+&gt;<i> But then this goes back to the whole discussion we had about caching: sure, the overhead of a TLS connection is low, but it's not zero. If I know for a fact that the response I got has as many bytes as I was told I had, then even in the absence of a close_notify, I know for a fact I have the whole response and can be sure in that.
+</I>
+Sure, but as an argument for inclusion this is not compelling enough to
+warrant the proposed change IMO. Knowing for sure that you don't know
+whether you have received a full response is almost as good as knowing
+for sure that you have in this context. It's only in the unlikely edge
+case that a server might want to send close_notify but the client fails
+to receive it (and only it) that it's useful to save an additional
+request, and considering the hacky piggybacking on MIME parameters the
+proposal entails (that RFC 2045 in the most forgiving interpretation at
+least advises against), it's a small win.
+
+A more compelling argument IMO is that knowing the expected size in
+advance, you can support progress bars and time estimates. Another
+compelling argument might be that a lot of servers apparently ignore
+the fact that they *have to* close_notify, which also seems like par for
+the course for web servers.
+
+-- 
+Philip
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201110/18ca7a46/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201110/18ca7a46/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003231.html">Cache duration and response body size proposals
+</A></li>
+	<LI>Next message (by thread): <A HREF="003238.html">Cache duration and response body size proposals
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3237">[ date ]</a>
+              <a href="thread.html#3237">[ thread ]</a>
+              <a href="subject.html#3237">[ subject ]</a>
+              <a href="author.html#3237">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> SRV records
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20SRV%20records&In-Reply-To=%3C86y2o7k0ww.fsf%40emacs.strotmann.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001995.html">
+   <LINK REL="Next"  HREF="002004.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>SRV records</H1>
+    <B>Carsten Strotmann</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20SRV%20records&In-Reply-To=%3C86y2o7k0ww.fsf%40emacs.strotmann.de%3E"
+       TITLE="SRV records">carsten at strotmann.de
+       </A><BR>
+    <I>Sun Jun 28 10:14:07 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001995.html">SRV records
+</A></li>
+        <LI>Next message (by thread): <A HREF="002004.html">Gemini Text Markup Language specification
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1997">[ date ]</a>
+              <a href="thread.html#1997">[ thread ]</a>
+              <a href="subject.html#1997">[ subject ]</a>
+              <a href="author.html#1997">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Evert,
+Hi List,
+
+Evert Pot &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">me at evertpot.com</A>&gt; writes:
+&gt;<i>
+</I>&gt;<i> It occurred to me that it would be nice if I could use DNS SRV 
+</I>&gt;<i> records
+</I>&gt;<i> to point <A HREF="gemini://">gemini://</A> clients to a different host. However, after 
+</I>&gt;<i> reading
+</I>&gt;<i> the spec it doesn't seem like there is support for this.
+</I>
+The SRV record might be superceded by the SVCB/HTTPSSVC record:
+
+Service binding and parameter specification via the DNS (DNS SVCB 
+and HTTPSSVC)
+&lt;<A HREF="https://tools.ietf.org/html/draft-ietf-dnsop-svcb-httpssvc">https://tools.ietf.org/html/draft-ietf-dnsop-svcb-httpssvc</A>&gt;
+
+Goolge is experimenting with this to be able to upgrade HTTPS 
+sessions
+to QUIC, while Apple seems to use it to discover DoT/DoH resolver 
+for
+the upcoming MacOS 11 and iOS 14.
+
+SVCB/HTTPSSVC is an Internet Draft, it will likely change (a lot) 
+until
+reaching RFC status, or it might expire (not reach RFC status at 
+all).
+
+The problems remains that OS resovler libraries (libc) do not 
+support DNS
+records other than A/AAAA and a handful of others.
+
+Libraries like GetDNSAPI &lt;<A HREF="https://getdnsapi.net/">https://getdnsapi.net/</A>&gt; need to be used 
+to retrieve
+these records.
+
+Gemini server discovery could be discussed in a document separate 
+of the
+Gemini protocol spec.
+
+Client implementations could optionally implement support for 
+finding
+Gemini server via SRV, SVCB, mDNS or other discovery protocols.
+
+Greetings
+
+Carsten
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001995.html">SRV records
+</A></li>
+	<LI>Next message (by thread): <A HREF="002004.html">Gemini Text Markup Language specification
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1997">[ date ]</a>
+              <a href="thread.html#1997">[ thread ]</a>
+              <a href="subject.html#1997">[ subject ]</a>
+              <a href="author.html#1997">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

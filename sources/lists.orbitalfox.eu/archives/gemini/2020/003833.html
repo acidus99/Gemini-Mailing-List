@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> IDN with Gemini?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C1648037.flocbd0D07%40tempete%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003832.html">
+   <LINK REL="Next"  HREF="003838.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>IDN with Gemini?</H1>
+    <B>C&#244;me Chilliet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C1648037.flocbd0D07%40tempete%3E"
+       TITLE="IDN with Gemini?">come at chilliet.eu
+       </A><BR>
+    <I>Mon Dec  7 09:59:06 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003832.html">IDN with Gemini?
+</A></li>
+        <LI>Next message (by thread): <A HREF="003838.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3833">[ date ]</a>
+              <a href="thread.html#3833">[ thread ]</a>
+              <a href="subject.html#3833">[ subject ]</a>
+              <a href="author.html#3833">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Le lundi 7 d&#233;cembre 2020, 10:29:34 CET bie a &#233;crit :
+&gt;<i> &gt; I get that we need to encode spaces and other special delimiter characters, but other than that, what's the rationnal in limiting to ascii?
+</I>&gt;<i> &gt; MCMic
+</I>&gt;<i> 
+</I>&gt;<i> There is one really good reason - it won't work well with existing
+</I>&gt;<i> servers and clients.
+</I>&gt;<i> 
+</I>&gt;<i> Most servers (and especially servers that follow the spec) currently
+</I>&gt;<i> only accept requests that provide a valid URI - so a request that
+</I>&gt;<i> contains something outside the set of valid 84 characters should not be
+</I>&gt;<i> accepted. Asking for servers to start accepting IRIs is a big change,
+</I>&gt;<i> and a breaking change in my opinion, one that adds a lot of complexity
+</I>&gt;<i> for very little value added.
+</I>
+I have to disagree that using my own language to name files and pages on my own server is of &#171;very little value&#187;.
+
+Servers already have to output utf-8, why not accept utf-8 in the input?
+
+&gt;<i> Allowing such links in text/gemini, but asking clients to handle the
+</I>&gt;<i> percent-encoding in the background has a similar problem - it goes
+</I>&gt;<i> against what every single client is doing now.
+</I>
+I am not asking clients to handle percent-encoding, I expect my server to receive the utf-8 I put in the link.
+I just tried, my server handles <A HREF="gemini://gemlog.lanterne.chilliet.eu/fran&#231;ais-test.gmi">gemini://gemlog.lanterne.chilliet.eu/fran&#231;ais-test.gmi</A> with no problem. (I coded the server myself, but I did not put any effort into supporting this, I never tried it before).
+Most clients will percent encode the request, but with lagrange if I enter it like this in the adress bar my server does receive the request not percent encoded and reacts well. (It also reacts well if percent encoded of course since it decodes to the same name).
+
+&gt;<i> The best solution, in my opinion, is to stick to URIs. If someone really
+</I>&gt;<i> wants to be able to type links like your example into their text/gemini
+</I>&gt;<i> files, there's even a solution for that - create as server that processes
+</I>&gt;<i> the .gmi files on the fly and sends punycode/percent-encoded links to
+</I>&gt;<i> the client.
+</I>
+Gemini has taken steps in the right direction by defaulting to uft-8 and specifying that there is no default value for lang. It would make a lot of sense to accept utf-8 in request as well and not arbitrarly limit to ascii, just because of web history.
+
+I understand that punycode will have to be used for the DNS lookup, but that&#8217;s on DNS specification, not Gemini&#8217;s reponsibility. But I fail to see why the Gemini request should be punycoded, or percent encoded except for special delimiter characters.
+
+MCMic
+
+
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003832.html">IDN with Gemini?
+</A></li>
+	<LI>Next message (by thread): <A HREF="003838.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3833">[ date ]</a>
+              <a href="thread.html#3833">[ thread ]</a>
+              <a href="subject.html#3833">[ subject ]</a>
+              <a href="author.html#3833">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

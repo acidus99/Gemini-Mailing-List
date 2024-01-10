@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposal: Simple structured form specification
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%3A%20Simple%20structured%20form%20specification&In-Reply-To=%3CMS3v4K---3-2%40edaha.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004935.html">
+   <LINK REL="Next"  HREF="004946.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposal: Simple structured form specification</H1>
+    <B>me at edaha.org</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%3A%20Simple%20structured%20form%20specification&In-Reply-To=%3CMS3v4K---3-2%40edaha.org%3E"
+       TITLE="Proposal: Simple structured form specification">me at edaha.org
+       </A><BR>
+    <I>Wed Jan 27 17:37:56 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004935.html">Proposal: Simple structured form specification
+</A></li>
+        <LI>Next message (by thread): <A HREF="004946.html">Proposal: Simple structured form specification
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4944">[ date ]</a>
+              <a href="thread.html#4944">[ thread ]</a>
+              <a href="subject.html#4944">[ subject ]</a>
+              <a href="author.html#4944">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+I've been following this discussion and while I'm on the side of &quot;gemini doesn't need forms&quot;, I thought it would be fun to see how far we could simplify the concept of a form :) I don't have any direct responses to anything said thus far, but my ideas below have been inspired by the back and forth.
+
+Ultimately, there are only a few data types that are truly needed for any form: binaries, choices, and text. This helps limit the scope of what would need to be implemented and what people would need to learn to be able to use forms. Keep it simple, smarty!
+
+With gemini's limitation on URLs, and the fact that data can only be passed via the URL, we have to keep in mind that we'd want to limit the amount of information needed to be passed. Thus, I'd say that, were forms to be implemented, they must pass arguments positionally instead of as named parameters.
+
+# Syntax
+To keep it simple (and have fun), I think an input's identifier can simply be the reverse of the link identifier: &lt;=
+
+Much like how =&gt; signifies &quot;going somewhere else&quot;, &lt;= signifies &quot;sending information here&quot;. 
+
+&lt;= lines take two parameters: type and label. Again, very similar to links :)
+
+&lt;= type label
+
+As mentioned, there are really only three types of data that are meaningful and distinct. The valid options for &quot;type&quot; would only be &quot;binary&quot; &quot;text&quot; and &quot;choice&quot;. &quot;submit&quot; is also a type that is needed as it's an action.
+
+# binary
+Binary options are best known as checkboxes on the web. They're simple on/off toggles. How they are displayed is up to the client
+
+&lt;= binary I have read this email and understand the binary option type
+
+When submitted, this would be a simple 0/1 value in the url.
+
+# text
+The bulk of data that we could ever ask for is just 'text'. Differentiating between &quot;tel&quot; &quot;num&quot; and &quot;text&quot; should be done server-side, as these are all still just text fields. &quot;password&quot; is deliberately not supported -- this is why gemini has client certs.
+
+&lt;= text What's your website?
+
+If an input should be multi-line, then the following could be used:
+
+&lt;= text Tell me what you like about gemini in a paragraph.
+&lt;= text
+
+A single `&lt;= text label` input can be followed by exactly one more `&lt;= text` line to signify that it should be multi-line input. It is up to the client to decide how many lines to display. If a third `&lt;= text` line were added, it would be interpreted as a new text input.
+
+# choice
+Choice is ultimately optional, IMO. This provides closed-ended responses for a user. Again, the idea of &quot;radio&quot; vs. &quot;dropdown&quot; vs. anything else does not matter, as those are entirely client-side decisions. What's important is that the user is only able to select one response.
+
+&lt;= choice Which of these protocols are we using?
+&lt;= choice gemini
+&lt;= choice gopher
+&lt;= choice HTTP
+
+After an initial `&lt;= choice` toggle, immediately adjacent ones are interpreted as options for a single input. The above could be displayed as a dropdown, or radio boxes, or anything the client decides.
+
+# submit
+Finally, submit. This one's easy:
+
+&lt;= submit /path/to/interpreter
+
+Note that there's no support for a custom label for the button -- again, by design :) We don't need them.
+
+# Putting it all together
+
+The last part is how it's passed. As mentioned at the beginning, I think (were gemini to support this, which I don't think it should) that form inputs are sent /positional/, not named. This is a requirement to reduce the chance of hitting the url limit.
+
+Using the above inputs as an example, upon clicking the submit button, the url would look like this (for my own sanity I'm not doing proper url encoding -- i leave that as an exercise to the reader):
+
+/path/to/interpreter?1&amp;edaha.org&amp;I like how simple and easy it is to use\nit's a lot of fun!&amp;gemini
+
+and that's it! I've got to get back to work now, but this was a fun thought experiment :)
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004935.html">Proposal: Simple structured form specification
+</A></li>
+	<LI>Next message (by thread): <A HREF="004946.html">Proposal: Simple structured form specification
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4944">[ date ]</a>
+              <a href="thread.html#4944">[ thread ]</a>
+              <a href="subject.html#4944">[ subject ]</a>
+              <a href="author.html#4944">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

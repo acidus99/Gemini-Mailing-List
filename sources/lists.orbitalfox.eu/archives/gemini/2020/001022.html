@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Query Strings
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Query%20Strings&In-Reply-To=%3C20200524171559.GA1739%40goldfish.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001020.html">
+   <LINK REL="Next"  HREF="001021.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Query Strings</H1>
+    <B>Natalie Pendragon</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Query%20Strings&In-Reply-To=%3C20200524171559.GA1739%40goldfish.localdomain%3E"
+       TITLE="Query Strings">natpen at natpen.net
+       </A><BR>
+    <I>Sun May 24 18:15:59 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001020.html">Query Strings
+</A></li>
+        <LI>Next message (by thread): <A HREF="001021.html">Query Strings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1022">[ date ]</a>
+              <a href="thread.html#1022">[ thread ]</a>
+              <a href="subject.html#1022">[ subject ]</a>
+              <a href="author.html#1022">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>GUS uses Jetforce, which unquotes queries before passing them along
+[1]. I'm not sure exactly what happened in your test cases Brian, but
+typically I see escaped queries in the server logs (which I assume is
+due to most clients automatically escaping their users' queries for
+them).
+
+[1] <A HREF="https://github.com/michael-lazar/jetforce/blob/b5f4235535d8eabad5a15cdf634f6d6149b37c29/jetforce/app/base.py#L64">https://github.com/michael-lazar/jetforce/blob/b5f4235535d8eabad5a15cdf634f6d6149b37c29/jetforce/app/base.py#L64</A>
+
+And them from testing myself just now, when I submit a GUS query using
+any of the big-name clients, I see my own query A) show up in GUS
+server logs as escaped, and B) show up in the GUS query results page
+as unescaped.
+
+In the server logs, I think I found your queries, and one thing I
+notice is that you're passing in pluses (`+`) for spaces, which I
+don't actually think get handled by the standard quoting/unquoting
+machinery (at least in Python). In Python, there's a separate
+`unquote_plus()` method [2] which says it is &quot;like unquote(), but also
+replaces plus signs by spaces, as required for unquoting HTML form
+values.&quot; So... I'm actually not sure if that's something Gemini should
+respect, given the lack of forms.
+
+[2] <A HREF="https://docs.python.org/3/library/urllib.parse.html#urllib.parse.unquote_plus">https://docs.python.org/3/library/urllib.parse.html#urllib.parse.unquote_plus</A>
+
+On Sun, May 24, 2020 at 04:42:42PM +0000, solderpunk wrote:
+&gt;<i> On Sun, May 24, 2020 at 06:33:56PM +0200, Brian Evans wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; I think it would be good to clearly state what is expected of clients and servers
+</I>&gt;<i> &gt; regarding the escaping of querystring values for gemini.
+</I>&gt;<i>
+</I>&gt;<i> Clients should definitely be URL escaping their queries, and servers
+</I>&gt;<i> should be unescaping them at their end.
+</I>&gt;<i>
+</I>&gt;<i> If this isn't done, then the thing that clients send to servers aren't
+</I>&gt;<i> genuine, RFC-compliant URLs.  I would actually expect that any server
+</I>&gt;<i> using a URL-parsing function from a decent library would get an error
+</I>&gt;<i> from that function if attempting to parse an unescaped URL, and would
+</I>&gt;<i> in turn give a permanent failure status back to the Gemini client.
+</I>&gt;<i>
+</I>&gt;<i> Yet another client torture test?
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i> Solderpunk
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001020.html">Query Strings
+</A></li>
+	<LI>Next message (by thread): <A HREF="001021.html">Query Strings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1022">[ date ]</a>
+              <a href="thread.html#1022">[ thread ]</a>
+              <a href="subject.html#1022">[ subject ]</a>
+              <a href="author.html#1022">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

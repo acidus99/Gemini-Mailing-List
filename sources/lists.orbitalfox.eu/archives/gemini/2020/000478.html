@@ -1,0 +1,312 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Regarding `gemini://` over NaCL (replacing TLS)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Regarding%20%60gemini%3A//%60%20over%20NaCL%20%28replacing%20TLS%29&In-Reply-To=%3C20200303191620.GB29986%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000477.html">
+   <LINK REL="Next"  HREF="000480.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Regarding `gemini://` over NaCL (replacing TLS)</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Regarding%20%60gemini%3A//%60%20over%20NaCL%20%28replacing%20TLS%29&In-Reply-To=%3C20200303191620.GB29986%40SDF.ORG%3E"
+       TITLE="Regarding `gemini://` over NaCL (replacing TLS)">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Tue Mar  3 19:16:20 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000477.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+        <LI>Next message (by thread): <A HREF="000480.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#478">[ date ]</a>
+              <a href="thread.html#478">[ thread ]</a>
+              <a href="subject.html#478">[ subject ]</a>
+              <a href="author.html#478">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Mar 03, 2020 at 02:20:57PM +0200, Ciprian Dorin Craciun wrote:
+ 
+&gt;<i> (Although I think the change of adopting anything besides TLS is
+</I>&gt;<i> closer to 0 at this moment, which I would say is a shame...)
+</I>
+You are pretty well right about this (and I won't even argue too
+strongly the fact that it's kind of a shame).
+
+I really hate to do anything like shutting this line of discussion down,
+especially after you have already invested so much effort into
+implementing a proof of concept.  But the truth is that I think it's too
+late in the game for this kind of change.
+
+Replacing TLS with *anything* else would completely break every existing
+piece of Gemini software, which is a non-trivial amount, written by many
+different people of varying degrees of continuing activity in the
+project.  There is a very real chance that this kind of change would
+introduce a permanent schism between &quot;New Gemini&quot; and &quot;Old Gemini&quot; when
+a subset of servers (in both senses of the word) and clients were not
+updated.  Not only would software break, but I imagine a lot of
+participants in the projet would be unhappy as well.  I worry that the
+community is too small and fraile to survive what would effectively be a
+fork.
+
+It's possible some kind of compatibility-maintaining change could be
+negotiated with the use of protocol verison numbers, but I have always,
+and still have been, opposed to the idea of versioning Gemini, because I
+see this as basically negating all the effort that was put into avoiding
+extensibility.  My intent has always been to get it right (or close
+enough) the first time, in a relatively short period, and then leave it
+fixed - more or less as per Gopher.  I realise that's a tall order.  The
+idea was that Gemini would be so simple that this would be possible.
+Unforseen problems requiring later changes are a symptom of
+overcomplication, which interferes with anticipating problems.
+
+I understand that there's a lot *not* to like about TLS.  And while I
+absolutely understand the importance of the &quot;don't roll your own crypto&quot;
+dogma, I do also understand that it *is* a dogma, which has a stagnating
+effect, especially when overextended - there is a real difference
+between combining established and well-tested primitives into a new
+protocol and a totally naive person who doesn't know block ciphers from
+stream ciphers coming up with something truly from scratch and assuming
+it's good because none of the three friends they asked could break it.
+
+But all that said, even if this were the very early days of Gemini
+again and we could be a bit more agile in core aspects of the
+protocol's design, I'm not convinced I wouldn't still choose TLS.  The
+most important argument in its favour, IMHO, is the simple fact that
+TLS is going to be used, studied, and improved/maintained by some of
+the best security people in the world for a long time to come, for
+reasons *entirely* unrelated to Gemini.  By going with TLS, we
+basically get to piggy-back on all of this, for free.  The moment we
+change to anything else, there is immediately a 90% reduction in the
+amount of attention being paid by anybody to our security system.
+That's very hard to argue against, I would say, even in the interests of
+simplicity.  And, for what it's worth, TLS *is* getting simpler.  TLS
+1.3 drastically reduced the amount of different configurations which are
+possible.  I really wanted to spec TLS 1.3 as the minimum supported for
+Gemini, but it's not yet supported in LibreSSL - which is itself all
+about simplifying TLS, so discouraging adoption of it would be counter
+productive on that front.  This is why we have TLS 1.2 as the minimum.
+If it softens the blow any, I'm absolutely open to the idea of
+explicitly disallowing some TLS 1.2 configurations.
+
+Cheers,
+Solderpunk
+
+
+&gt;<i> #### About &quot;pro-TLS&quot;, and &quot;don't roll your own&quot;
+</I>&gt;<i> 
+</I>&gt;<i> [I.e.  This part is a counter argument to my previous emails.  I still
+</I>&gt;<i> think we can do &quot;simpler&quot;, but I do like to be fair, and thus I'm
+</I>&gt;<i> debating myself...]  :)
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Bellow I'll point out three articles, written by three different
+</I>&gt;<i> people (which after searching the internet seem to be knowledgeable in
+</I>&gt;<i> this domain, perhaps not Schneier / Bernstein level, but still much
+</I>&gt;<i> better than the average developer), in a time span of about 10 years.
+</I>&gt;<i> (The section we are interested in is `client-server application
+</I>&gt;<i> security`, and not `website security` because the later actually means
+</I>&gt;<i> &quot;HTTPS security&quot;, thus TLS is mandatory, although the former
+</I>&gt;<i> completely ignores certificates, as in X.509, thus only SSH-like
+</I>&gt;<i> assumptions.)
+</I>&gt;<i> 
+</I>&gt;<i> * [2018]  <A HREF="https://latacora.micro.blog/2018/04/03/cryptographic-right-answers.html">https://latacora.micro.blog/2018/04/03/cryptographic-right-answers.html</A>
+</I>&gt;<i> * [2015]  <A HREF="https://gist.github.com/tqbf/be58d2d39690c3b366ad">https://gist.github.com/tqbf/be58d2d39690c3b366ad</A>
+</I>&gt;<i> * [2009]  <A HREF="http://www.daemonology.net/blog/2009-06-11-cryptographic-right-answers.html">http://www.daemonology.net/blog/2009-06-11-cryptographic-right-answers.html</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> &gt;From [2009] (although I would say it's an incomplete advice as it
+</I>&gt;<i> doesn't say what to do next):
+</I>&gt;<i> ~~~~
+</I>&gt;<i> One of the reasons OpenSSL has such a poor track record is that the
+</I>&gt;<i> SSL protocol itself is highly complex. Certificate chains, revocation
+</I>&gt;<i> lists, ASN.1, multiple different hashing and encryption schemes...
+</I>&gt;<i> when you have over a hundred thousand lines of code, it's no wonder
+</I>&gt;<i> that bugs creep in.
+</I>&gt;<i> ~~~~
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> &gt;From [2015] (Colin is the author of the [2009] article):
+</I>&gt;<i> ~~~~
+</I>&gt;<i> What happens when you design your own custom RSA protocol is that 1-18
+</I>&gt;<i> months afterward, hopefully sooner but often later, you discover that
+</I>&gt;<i> you made a mistake and your protocol had virtually no security. That
+</I>&gt;<i> happened to Colin, but a better example is Salt Stack. Salt managed to
+</I>&gt;<i> deploy e=1 RSA.
+</I>&gt;<i> 
+</I>&gt;<i> [...]
+</I>&gt;<i> 
+</I>&gt;<i> Most of these attacks can be mitigated by hardcoding TLS 1.2+, ECDHE
+</I>&gt;<i> and AES-GCM. That sounds tricky, and it is, but it's less tricky than
+</I>&gt;<i> designing your own transport protocol with ECDHE and AES-GCM!
+</I>&gt;<i> 
+</I>&gt;<i> In a custom transport scenario, you don't need to depend on CAs: you
+</I>&gt;<i> can self-sign a certificate and ship it with your code, just like
+</I>&gt;<i> Colin suggests you do with RSA keys.
+</I>&gt;<i> 
+</I>&gt;<i> Avoid: designing your own encrypted transport, which is a genuinely
+</I>&gt;<i> hard engineering problem; using TLS but in a default configuration,
+</I>&gt;<i> like, with &quot;curl&quot;; using &quot;curl&quot;, IPSEC.
+</I>&gt;<i> ~~~~
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> &gt;From [2018]:
+</I>&gt;<i> ~~~~
+</I>&gt;<i> In custom protocols, you don?t have to (and shouldn?t) depend on 3rd
+</I>&gt;<i> party CAs. You don?t even have to use CAs at all (though it?s not hard
+</I>&gt;<i> to set up your own); you can just use a whitelist of self-signed
+</I>&gt;<i> certificates ? which is approximately what SSH does by default, and
+</I>&gt;<i> what you?d come up with on your own.
+</I>&gt;<i> 
+</I>&gt;<i> Since you?re doing a custom protocol, you can use the best possible
+</I>&gt;<i> TLS cipher suites: TLS 1.2+, Curve25519, and ChaPoly. That eliminates
+</I>&gt;<i> most attacks on TLS. The reason everyone doesn?t do this is that they
+</I>&gt;<i> need backwards-compatibility, but in custom protocols you don?t need
+</I>&gt;<i> that.
+</I>&gt;<i> 
+</I>&gt;<i> [...]
+</I>&gt;<i> 
+</I>&gt;<i> Avoid: designing your own encrypted transport, which is a genuinely
+</I>&gt;<i> hard engineering problem; using TLS but in a default configuration,
+</I>&gt;<i> like, with ?curl?; using ?curl?, IPSEC.
+</I>&gt;<i> ~~~~
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> The takeaway:  if we go with TLS, let's mandate:
+</I>&gt;<i> * TLS 1.2 with TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256
+</I>&gt;<i>   <A HREF="https://ciphersuite.info/cs/TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256">https://ciphersuite.info/cs/TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256</A>
+</I>&gt;<i> * or, TLS 1.3 with TLS_CHACHA20_POLY1305_SHA256
+</I>&gt;<i>   <A HREF="https://ciphersuite.info/cs/TLS_CHACHA20_POLY1305_SHA256">https://ciphersuite.info/cs/TLS_CHACHA20_POLY1305_SHA256</A>
+</I>&gt;<i> * as for certificates only ECDSA, which seem to be available also via
+</I>&gt;<i> Lets Encrypt;
+</I>&gt;<i> 
+</I>&gt;<i> These options are also suggested by both Mozilla and CloudFlare:
+</I>&gt;<i> * <A HREF="https://wiki.mozilla.org/Security/Server_Side_TLS">https://wiki.mozilla.org/Security/Server_Side_TLS</A>
+</I>&gt;<i> * <A HREF="https://developers.cloudflare.com/ssl/ssl-tls/cipher-suites">https://developers.cloudflare.com/ssl/ssl-tls/cipher-suites</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> #### About the noise protocol
+</I>&gt;<i> 
+</I>&gt;<i> I've glossed over the Noise protocol specification, however before
+</I>&gt;<i> getting into that I've read the first link bellow:
+</I>&gt;<i> 
+</I>&gt;<i> * <A HREF="https://latacora.micro.blog/factoring-the-noise/">https://latacora.micro.blog/factoring-the-noise/</A>
+</I>&gt;<i> * <A HREF="https://noiseprotocol.org/noise.html">https://noiseprotocol.org/noise.html</A>  (this is the actual specification);
+</I>&gt;<i> 
+</I>&gt;<i> Basically I think the only Noise protocol instance that pertains to
+</I>&gt;<i> `<A HREF="gemini://`">gemini://`</A> is the `XX` exchange pattern, citing from the first link
+</I>&gt;<i> above:
+</I>&gt;<i> ~~~~
+</I>&gt;<i> XX and XK require an extra round trip before they send over the
+</I>&gt;<i> initiator?s static key. Flip side: they have the strongest possible
+</I>&gt;<i> privacy protection for the initiator, whose identity is only sent to
+</I>&gt;<i> the responder after they?ve been authenticated and forward secrecy has
+</I>&gt;<i> been established.
+</I>&gt;<i> ~~~~
+</I>&gt;<i> 
+</I>&gt;<i> In fact Alexey Ermishkin together with Trevor Perrin (the original
+</I>&gt;<i> author of the protocol) have started a project called NoiseSocket,
+</I>&gt;<i> which basically just focuses on the the `XX` pattern.  (As for
+</I>&gt;<i> credentials, Trevor Perrin worked for WhatsApp in designing the Noise
+</I>&gt;<i> protocol, which is still used today.)
+</I>&gt;<i> 
+</I>&gt;<i> * <A HREF="https://github.com/noisesocket/spec">https://github.com/noisesocket/spec</A>
+</I>&gt;<i> * <A HREF="https://noisesocket.org/post/1/">https://noisesocket.org/post/1/</A> -- I strongly suggest reading this
+</I>&gt;<i> document if one is interested in the Noise protocol;
+</I>&gt;<i> 
+</I>&gt;<i> The only disadvantage with Noise (or NoiseSocket) is that given the
+</I>&gt;<i> frame size is limited to 64K, in case of `<A HREF="gemini://`">gemini://`</A> we need to
+</I>&gt;<i> implement extra &quot;chunking&quot; for it to work for bodies.  (Alternatively
+</I>&gt;<i> we can just use it as we do TLS, namely a &quot;stupid pipe that just
+</I>&gt;<i> applies encryption&quot;...)
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ####  The part about other alternatives
+</I>&gt;<i> 
+</I>&gt;<i> I've found the following project that also does a &quot;state-of-the-art&quot;
+</I>&gt;<i> analysis (though granted in 2015):
+</I>&gt;<i> 
+</I>&gt;<i> * <A HREF="https://github.com/auditdrivencrypto/secure-channel">https://github.com/auditdrivencrypto/secure-channel</A>
+</I>&gt;<i> * <A HREF="https://github.com/auditdrivencrypto/secure-channel/blob/master/prior-art.md">https://github.com/auditdrivencrypto/secure-channel/blob/master/prior-art.md</A>
+</I>&gt;<i> * <A HREF="https://github.com/auditdrivencrypto/secure-channel/blob/master/properties.md">https://github.com/auditdrivencrypto/secure-channel/blob/master/properties.md</A>
+</I>&gt;<i> * <A HREF="https://github.com/auditdrivencrypto/secure-channel/blob/master/draft.md">https://github.com/auditdrivencrypto/secure-channel/blob/master/draft.md</A>
+</I>&gt;<i> * <A HREF="https://github.com/auditdrivencrypto/secure-channel/blob/master/draft2.md">https://github.com/auditdrivencrypto/secure-channel/blob/master/draft2.md</A>
+</I>&gt;<i> 
+</I>&gt;<i> (I don't know his credentials, thus I would assume nothing.)
+</I>&gt;<i> 
+</I>&gt;<i> The &quot;state-of-the-art&quot; is quite &quot;high-level&quot;, but it provides a nice
+</I>&gt;<i> starting point.  The properties document is a good check-list to
+</I>&gt;<i> analyze any proposal against.  (The only issue, is that he is
+</I>&gt;<i> interested in building a peer-to-peer network, thus at least the
+</I>&gt;<i> public key of the server is known in advance.)
+</I>&gt;<i> 
+</I>&gt;<i> The second draft (i.e. `draft2.md` above) is quite interesting,
+</I>&gt;<i> although as said it does one require to know beforehand the server's
+</I>&gt;<i> public key.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> ####  About my previous proposal
+</I>&gt;<i> 
+</I>&gt;<i> I'll have to think harder about it (within my limited cryptographic
+</I>&gt;<i> expertise), and perhaps submit it to a cryptographers community for
+</I>&gt;<i> feedback.
+</I>&gt;<i> 
+</I>&gt;<i> At the moment I can see only a minor privacy flaw in it:  the client
+</I>&gt;<i> discloses its identity (and proof of identity) to any server;  instead
+</I>&gt;<i> it should first wait for the server to disclose its identity (and
+</I>&gt;<i> proof of identity) before proceeding.
+</I>&gt;<i> 
+</I>&gt;<i> This issue stems from the fact that the `transport_prepare` function
+</I>&gt;<i> is &quot;symmetrical&quot; and tries to reduce network round-trips;  instead the
+</I>&gt;<i> client could first wait for the server verifier and then send its own
+</I>&gt;<i> (i.e. just a minor change to that function).
+</I>&gt;<i> 
+</I>&gt;<i> Ciprian.
+</I>&gt;<i> 
+</I></PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000477.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+	<LI>Next message (by thread): <A HREF="000480.html">Regarding `gemini://` over NaCL (replacing TLS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#478">[ date ]</a>
+              <a href="thread.html#478">[ thread ]</a>
+              <a href="subject.html#478">[ subject ]</a>
+              <a href="author.html#478">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>
