@@ -4,8 +4,8 @@ This is the rebuilt archive of the [Gemini](https://en.wikipedia.org/wiki/Gemini
 
 It is available as:
 
-* A comprehensive HTML archive of the full contents of all messages.
-* Clean, parsable mbox files containing the full contents all messages.
+* [Clean, complete, and parsable mbox files](mbox/) containing the full contents all messages.
+* (**Work in Progress**) A comprehensive HTML archive of the full contents of all messages 
 
 Various sources were used to completely reconstruct the mailing list and make it available.
 
@@ -33,3 +33,28 @@ Unfortunately, many of these sources are incomplete or have errors:
 * Later mbox files were uploaded by community members and contain MBs of superfluous MIME headers (spam score, DKIM, list action headers, etc.) which are many times larger than the message contents themselves. 
 
 ## Rebuilding the archive
+
+### Mbox files
+
+To create clean, complete, and parsable mbox files I:
+
+* Restored the "From " message delimiter lines and "From: " MIME header lines.
+* Removed 18 duplicate messages (messages with the same `Message-ID` header).
+* Created a single mbox file for 2021 by combining the official Orbital Fox mbox archive with message from community uploaded mbox files.
+* Restored 6 truncated messages due to "From " lines appears in message bodies.
+* Removed superfluous MIME headers from community uploaded mbox files  (spam score, DKIM, list action headers) and normalized them to match the few headers Orbital Fox's mbox files used: `From`, `Date`, `Subject`, `In-Reply-To`, `References`, and `Message-ID`.
+
+Additionally, I added a three custom MIME headers to help link messages in the mbox files to the corresponding message in the original HTML archive. Here is an example:
+
+```
+X-Orbital-Fox-Message-Number: 15
+X-Orbital-Fox-Url: https://lists.orbitalfox.eu/archives/gemini/2019/000015.html
+X-Orbital-Fox-Message-Number-Source: Wayback Machine
+```
+
+* `X-Orbital-Fox-Message-Number` - The message number what was assigned to this message by Orbital Fox's Mailman instance.
+* `X-Orbital-Fox-Url` - The URL for this message in the original Orbital Fox HTML archive.
+* `X-Orbital-Fox-Message-Number-Source` - How I determined the number used for this message. Most have a value of `Wayback Machine` because references in the HTMTL saved in the Wayback Machine identified it. For 62 messages at the very end 2022, the value is `Computed` as the message number could was determined based on its date, order, context, and other clues.
+
+
+
