@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] GemIF - Simple Interactive Fiction engine for Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20GemIF%20-%20Simple%20Interactive%20Fiction%20engine%20for%20Gemini&In-Reply-To=%3C010001762ae05f81-cc39600e-17af-498d-9628-d24aed47d0fa-000000%40email.amazonses.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003767.html">
+   <LINK REL="Next"  HREF="003775.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] GemIF - Simple Interactive Fiction engine for Gemini</H1>
+    <B>Norm MacLennan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20GemIF%20-%20Simple%20Interactive%20Fiction%20engine%20for%20Gemini&In-Reply-To=%3C010001762ae05f81-cc39600e-17af-498d-9628-d24aed47d0fa-000000%40email.amazonses.com%3E"
+       TITLE="[ANN] GemIF - Simple Interactive Fiction engine for Gemini">norm at iwritethe.codes
+       </A><BR>
+    <I>Thu Dec  3 23:11:56 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003767.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="003775.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3774">[ date ]</a>
+              <a href="thread.html#3774">[ thread ]</a>
+              <a href="subject.html#3774">[ subject ]</a>
+              <a href="author.html#3774">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, 3 Dec 2020, Luke Emmet wrote:
+&gt;<i>
+</I>&gt;<i> I'm firmly of the camp that thinks that although there are many things the 
+</I>&gt;<i> web got wrong ultimately, the hypertext model is basically right (see Roy 
+</I>&gt;<i> Fieldin thesis and HATEOS etc). And indeed it is the established mental model 
+</I>&gt;<i> for textual hypertext. Breaking the &quot;back&quot; button on the web is generally 
+</I>&gt;<i> considered a bad idea and I think it is true on Gemini too for the same 
+</I>&gt;<i> reasons.
+</I>&gt;<i>
+</I>&gt;<i> Rather, I think we should/can make a defacto assumption of idempotence in 
+</I>&gt;<i> Gemini. Gemini requests are incredibly similar to HTTP GET requests, which 
+</I>&gt;<i> are the &quot;idempotent&quot; and dominant method of hypertext on the web. We don't 
+</I>&gt;<i> have the equivalent of the non-idempotent POST methods in Gemini. But maybe 
+</I>&gt;<i> there are other solutions for that, or it might come one day.
+</I>&gt;<i>
+</I>&gt;<i> So repeatedly reloading the same resource, is the equivalent to a reload, 
+</I>&gt;<i> hence when you go &quot;back&quot; it is back to the previous URL.
+</I>&gt;<i>
+</I>&gt;<i> - Luke
+</I>&gt;<i>
+</I>
+I love a lot of the self-imposed &quot;limitations&quot; and simplicity of Gemini 
+and I definitely still have a lot of unlearning of HTTP-based habits 
+and instincts still to do.
+
+But I will also suggest that for some folks, the best part in working in 
+systems with self-imposed limitations is figuring out how to push the 
+boundaries, test the limits, and basically apply creative hacks to subvert 
+those limitations.
+
+All of that being said, in the particular case of GemIF, I've already 
+started &quot;Gemini-ifying&quot; it a bit. At the suggestion of a user who emailed 
+me directly rather than replying to the thread (perhaps accidentally), I've 
+converted to using &quot;state tokens&quot;. Serialized and encoded game state in 
+the URL simplifies the server side and _shouldn't_ break navigation.
+
+There's still a &quot;pseudo-PUT&quot; on every action you take to update your game 
+state and return to you your new state token in the form of a redirect. I 
+intend to have the server pre-calculate state tokens for every exit to 
+construct direct links on every page and prevent the extra 
+request/redirect each time.
+
+So in this case, I would say you are absolutely right and I just needed to 
+do some unlearning of habits from other protocols, but I'm not sure I'm 
+willing to categorically state all requests must be idempotent. Or perhaps
+I'm just willing to agree that such a thing makes sense for the spec and 
+then being surprised at the crazy things people come up with when they 
+start pushing the limits.
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003767.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="003775.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3774">[ date ]</a>
+              <a href="thread.html#3774">[ thread ]</a>
+              <a href="subject.html#3774">[ subject ]</a>
+              <a href="author.html#3774">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

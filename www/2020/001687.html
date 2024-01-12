@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Thoughts on TOFU
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Thoughts%20on%20TOFU&In-Reply-To=%3C20200615073231.GA16765%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001682.html">
+   <LINK REL="Next"  HREF="001712.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Thoughts on TOFU</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Thoughts%20on%20TOFU&In-Reply-To=%3C20200615073231.GA16765%40SDF.ORG%3E"
+       TITLE="Thoughts on TOFU">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Mon Jun 15 08:32:31 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001682.html">Thoughts on TOFU
+</A></li>
+        <LI>Next message (by thread): <A HREF="001712.html">Thoughts on TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1687">[ date ]</a>
+              <a href="thread.html#1687">[ thread ]</a>
+              <a href="subject.html#1687">[ subject ]</a>
+              <a href="author.html#1687">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Jun 14, 2020 at 11:09:05PM +0000, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+ 
+&gt;<i> Solderpunk, I'd appreciate if we could work towards some general solution for this,
+</I>&gt;<i> and official recommendations for how to handle TOFU and cert renewal.
+</I>
+I would *love* to!  And I have loads of ideas on this front.  I've just
+never had the time to write anything substantial on them because there
+is always some more urgent matter popping up, like surprise auto-cookies
+or people wanting to add upload capabilities.  If things ever settle
+down (tonight I will make official the spec changes I recently asked for
+feedback on and then freeze the thing again, perhaps that will help) we
+can tackle this.
+
+&gt;<i> I'm not sure what to do about this. Both options seem bad, and both will cause
+</I>&gt;<i> breakage. It seems that there is no good way to do TOFU with certs, unless
+</I>&gt;<i> you want to try and control how servers use certs, like specifying that keypairs
+</I>&gt;<i> should not change or something.
+</I>
+I don't think that keeping the same keypair forever is a good idea, but
+I *do* think that &quot;controlling how servers use certs&quot; is.  Without CAs
+in the picture it's trivial to automate cert changes, which makes this
+easy.  I also think that pushing Gemini servers to use the smallest
+certs they can (i.e. not RSA) is a good idea to reduce TLS overhead,
+which is another reason for people to take control of their own
+certificate generation.
+
+Quick sketches:
+
+* Servers can sign their new cert with their *previous* private key.
+Then TOFU clients which accepted the previous cert can validate the
+changeover - and then immediately stop trusting the previous cert so
+that anybody who stole the private key can't sign their own new cert.
+Basically, when you accept a new cert you also grant it one-use-only,
+very-limited-scope CA powers.
+
+* Servers can generate their new self-signed cert N months in advance
+and, for those N months, advertise the hash of the new cert at a
+well-known endpoint, access to which is secured by the current cert.
+TOFU clients can notice when an accepted cert is close to expiry and
+pre-fetch the future fingerprint.
+
+* Servers can use DANE (RFC6698) to advertise their self-signed cert
+over DNS, and TOFU clients can check this when receiving an unrecognised
+cert.  LOTS of details to discuss here re: DNS security.
+
+* We could built Perspectives/Convergence style &quot;notary&quot; servers that
+TOFU clients clients can consult when receiving an unrecognised cert.
+This was an idea that was developed before it's time, IMHO.  Today there
+is no reason that achieving broad network perspective requires trusted
+third parties and an effective &quot;shadow infrastructure&quot; alongside CAs.
+Just run your own certificate observatory on a dirt cheap VPS.  Share it
+with friends, who share theirs with you.  Pubnixes can run then for
+their users.  Unlike some of the other ideas, this works just as nicely
+with CA-signed certs (like those from Let's Encrypt) as self-signed
+certs.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001682.html">Thoughts on TOFU
+</A></li>
+	<LI>Next message (by thread): <A HREF="001712.html">Thoughts on TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1687">[ date ]</a>
+              <a href="thread.html#1687">[ thread ]</a>
+              <a href="subject.html#1687">[ subject ]</a>
+              <a href="author.html#1687">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

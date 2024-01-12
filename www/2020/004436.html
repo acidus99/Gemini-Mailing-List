@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] to postel or not to postel, that is the question
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20to%20postel%20or%20not%20to%20postel%2C%20that%20is%20the%20question&In-Reply-To=%3C20201226233450.GC3625%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004432.html">
+   <LINK REL="Next"  HREF="004437.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] to postel or not to postel, that is the question</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20to%20postel%20or%20not%20to%20postel%2C%20that%20is%20the%20question&In-Reply-To=%3C20201226233450.GC3625%40brevard.conman.org%3E"
+       TITLE="[tech] to postel or not to postel, that is the question">sean at conman.org
+       </A><BR>
+    <I>Sat Dec 26 23:34:50 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004432.html">[tech] to postel or not to postel, that is the question
+</A></li>
+        <LI>Next message (by thread): <A HREF="004437.html">[tech] to postel or not to postel, that is the question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4436">[ date ]</a>
+              <a href="thread.html#4436">[ thread ]</a>
+              <a href="subject.html#4436">[ subject ]</a>
+              <a href="author.html#4436">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Petite Abeille once stated:
+&gt;<i> Looking at the various implementations of the URL/URI/IRI stack in mainstream libraries, one has to face Jon Postel's robustness ghost &#185;.
+</I>&gt;<i> 
+</I>&gt;<i> Exhibit &#8470; 1: Google's own net/url/url.go &#178;
+</I>&gt;<i> 
+</I>&gt;<i> // See RFC 3986. This package generally follows RFC 3986, except where
+</I>&gt;<i> // it deviates for compatibility reasons.
+</I>&gt;<i> 
+</I>&gt;<i> Indeed. A very pragmatic approach to reality, taking the robustness
+</I>&gt;<i> principle to heart: pretty much anything goes. Such is life.
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Exhibit &#8470; 2: Sean Conner's own Parsing Expression Grammar &#179; &#8308; &#8309;
+</I>&gt;<i> 
+</I>&gt;<i> A work of unearthly beauty which actually follows the RFC to the letter. 
+</I>
+  Not quite.  I explicitly ignore this bit of RFC-3987:
+
+	... with the restriction that private UCS characters can
+	occur only in query parts.
+
+as that was a bridge too far even for me.  I will also decode a path like
+&quot;/foo%2Fbar/&quot; as &quot;/foo/bar/&quot;, ignoring the sematics of the encoded slash.
+
+&gt;<i> The anti-thesis of Postel's law, as strict as the MUST imperative.
+</I>&gt;<i> 
+</I>&gt;<i> Both pros and cons of Postel's injunction can be argued ad nauseam.
+</I>&gt;<i> 
+</I>&gt;<i> What does Gemini want, as a protocol? Leniency as provided by Exhibit &#8470; 1?
+</I>&gt;<i> Or strictness as demonstrated by Exhibit &#8470; 2?
+</I>&gt;<i> 
+</I>&gt;<i> It is my personal opinion that Postel's Law is the root of all evils as we
+</I>&gt;<i> know them to this day: any old garbage can travel over the pipe, and you
+</I>&gt;<i> must do your best to handle it. Good luck to you.
+</I>&gt;<i> 
+</I>&gt;<i> This is nonsensical. We know better by now.
+</I>&gt;<i> 
+</I>&gt;<i> Protocol MUST be strict. This is why we have them in the first place. To
+</I>&gt;<i> clearly define what's legal or not, protocol wise.
+</I>&gt;<i> 
+</I>&gt;<i> What does Gemini want?
+</I>
+  While I do agree with the sentiment [1], allow me to play the Devil's
+Advocate here and mention one word:  XHTML---HTML but with the strict
+parsing rules of XML.  To say it was unpopular is an understatment.  Not to
+mention that XML itself is unpopular (but perhaps for reasons other than its
+strict parsing rules).  Become too strict, and people complain.
+
+  -spc (But become too lax, and other people complain ... )
+
+&gt;<i> &#185; <A HREF="https://en.wikipedia.org/wiki/Robustness_principle">https://en.wikipedia.org/wiki/Robustness_principle</A>
+</I>&gt;<i> 
+</I>&gt;<i> &#178; <A HREF="https://github.com/golang/go/blob/master/src/net/url/url.go">https://github.com/golang/go/blob/master/src/net/url/url.go</A>
+</I>&gt;<i> Even though one would have hoped Google would have learned from Sun's mistakes. Apparently not. Perhaps the same team was involve in both Java and Go implementations. Go figure.
+</I>&gt;<i> 
+</I>&gt;<i> &#179; <A HREF="https://github.com/spc476/LPeg-Parsers/blob/master/iri.lua">https://github.com/spc476/LPeg-Parsers/blob/master/iri.lua</A>
+</I>&gt;<i> 
+</I>&gt;<i> &#8308; <A HREF="http://www.inf.puc-rio.br/~roberto/lpeg/">http://www.inf.puc-rio.br/~roberto/lpeg/</A>
+</I>&gt;<i> 
+</I>&gt;<i> &#8309; <A HREF="https://bford.info/packrat/">https://bford.info/packrat/</A>
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004432.html">[tech] to postel or not to postel, that is the question
+</A></li>
+	<LI>Next message (by thread): <A HREF="004437.html">[tech] to postel or not to postel, that is the question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4436">[ date ]</a>
+              <a href="thread.html#4436">[ thread ]</a>
+              <a href="subject.html#4436">[ subject ]</a>
+              <a href="author.html#4436">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposal about content-size and hash
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%20about%20content-size%20and%20hash&In-Reply-To=%3C20201030220642.GP30302%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002974.html">
+   <LINK REL="Next"  HREF="002982.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposal about content-size and hash</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%20about%20content-size%20and%20hash&In-Reply-To=%3C20201030220642.GP30302%40brevard.conman.org%3E"
+       TITLE="Proposal about content-size and hash">sean at conman.org
+       </A><BR>
+    <I>Fri Oct 30 22:06:42 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002974.html">Proposal about content-size and hash
+</A></li>
+        <LI>Next message (by thread): <A HREF="002982.html">Proposal about content-size and hash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2976">[ date ]</a>
+              <a href="thread.html#2976">[ thread ]</a>
+              <a href="subject.html#2976">[ subject ]</a>
+              <a href="author.html#2976">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Arav K. once stated:
+&gt;<i> Hi, Gemini peoples!
+</I>&gt;<i> 
+</I>&gt;<i> I have two main proposals for getting information like content-size
+</I>&gt;<i> (which, as has been discussed previously, would be very useful for even
+</I>&gt;<i> slightly big responses).
+</I>&gt;<i> 
+</I>&gt;<i> 1. Define specific additional MIME type parameters.  For example, one
+</I>&gt;<i>    could return '20 application/gzip; content-size=42069420' as the
+</I>&gt;<i>    response line.  This could also be used for giving the client a hash
+</I>&gt;<i>    of the data (parameter name e.g. 'content-hash-sha256'), useful for
+</I>&gt;<i>    verification and for checking against local caches of the same page.
+</I>
+  Ah yes ... this is something I proposed back in August of 2019:
+
+	<A HREF="gemini://gemini.conman.org/gRFC/0003">gemini://gemini.conman.org/gRFC/0003</A>
+
+  Solderpunk has always rejected it when it comes up, mumbling &quot;simplicity&quot;
+and &quot;not HTTP again&quot; under his breath.  Another issue with this is that the
+server might not know how big a given response is---think dynamic output
+(via CGI/SCGI or similar).  It would have to be optional in any case.
+
+&gt;<i> 2. Define an additional endpoint for retrieving meta info.
+</I>
+  I also proposed something along these lines in August of 2019:
+
+	<A HREF="https://lists.orbitalfox.eu/archives/gemini/2019/000016.html">https://lists.orbitalfox.eu/archives/gemini/2019/000016.html</A>
+
+  Read the thread to see how that turned out.
+
+  -spc
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002974.html">Proposal about content-size and hash
+</A></li>
+	<LI>Next message (by thread): <A HREF="002982.html">Proposal about content-size and hash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2976">[ date ]</a>
+              <a href="thread.html#2976">[ thread ]</a>
+              <a href="subject.html#2976">[ subject ]</a>
+              <a href="author.html#2976">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

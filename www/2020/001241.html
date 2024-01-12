@@ -1,0 +1,271 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> approachabe &amp; frugal &amp; composable
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20approachabe%20%26%20frugal%20%26%20composable&In-Reply-To=%3C20200602181922.GC16068%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001240.html">
+   <LINK REL="Next"  HREF="001246.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>approachabe &amp; frugal &amp; composable</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20approachabe%20%26%20frugal%20%26%20composable&In-Reply-To=%3C20200602181922.GC16068%40SDF.ORG%3E"
+       TITLE="approachabe &amp; frugal &amp; composable">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Tue Jun  2 19:19:22 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001240.html">approachabe &amp; frugal &amp; composable
+</A></li>
+        <LI>Next message (by thread): <A HREF="001246.html">approachabe &amp; frugal &amp; composable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1241">[ date ]</a>
+              <a href="thread.html#1241">[ thread ]</a>
+              <a href="subject.html#1241">[ subject ]</a>
+              <a href="author.html#1241">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Howdy,
+
+Thanks for this enthusiastic summary of your very positive feelings
+about Gemini!  I like the &quot;approchable and frugal&quot; characterisation.
+
+I fully share your enthusiasm about Gemini as a protocol, i.e. the use
+of nothing but URLs as requests as the the reduction of response headers
+to explicit status information and a media type.  I really think that
+good design decisions have been made in this part of the spec and I
+don't think there's really anything there to change (note that the
+intended addition of the `lang` parameter is *not* a change to this
+level of the protocol, but rather an extension of the text/gemini media
+type which is a separte thing).  On this front, I am content.
+
+I can't quite get as enthusiastic as you are about the range of
+possibilities for text/gemini.  I fully grant that everything you wrote
+about is totally valid as text/gemini is currently specced.  I will not
+even deny that many of your proposals seem genuinely super useful.  E.g.
+I am by now a well-documented fan of Atom feeds, and the feed: URI
+scheme could be used as a way to add autodiscovery of feeds to Gemini,
+circumventing the fact that we have no &lt;rel&gt; tags.  And the tag: URI
+scheme is also a nice way to put an unambiguous timestamp on a document.
+Not only could this be very useful for search purposes, but it would
+simplify the automatic generation of Atom feeds (it's now very clear
+that the use of filesystem timestamps as used by gemfeed is not robust
+against different people's workflows).
+
+However, it's also true that none of this is stuff I ever envisaged
+being in Gemini, because I had a naive mental model of what URIs were.
+
+I feel kind of powerless to prevent the use of these schemes.  I don't
+want the Gemini spec to include an explicit whitelist or blacklist or
+schemes (although I'm tempted to forbid data:).  This will lead to a
+maintenance nightmare as new schemes are proposed (I don't want to be
+constantly updating Gemini, I want to try to &quot;get it right&quot; and then
+just leave it be), feels authoritarian, and will anyway be unenforcible
+if popular opinion wants to use a certain scheme.  So, it seems this
+stuff is going to happen.
+
+My big concern is not simply that people will do things with Gemini that
+I didn't envision.  That was always going to happen to some extent
+anyway.  My concern is that this stuff substantially complicates the job
+of designing and implementing clients.
+
+When text/gemini was designed, I used the mental model of &quot;URIs as
+pointers to stuff you could fetch off the internet&quot;.  This is clearly
+what links lines were &quot;supposed to be&quot;.  The spec says that clients can
+render those lines however they like, but because of that limited sense
+of what a URI could be, it went without saying that:
+
+* Every link gets displayed to the user
+* Every link is treated identically for the purposes of display
+* The basic notion of what's happening is that the client is extending
+  an option to the user - &quot;Here is some stuff you can get, if you want
+  it&quot;.
+
+In short, there was supposed to be a single, concrete &quot;unit of
+interface&quot; with narrow scope that a client author has to decide how to
+implement.  Variation between clients in how that was done would not
+substantially change the overall user experience.
+
+With stuff like data:, feed:, tag:, geo:, and the myriad other
+&quot;non-locational schemes&quot;, all of this goes out the window.  What is a
+client supposed to do with all these?  If I want to write a minimal
+client that just knows how to follow <A HREF="gemini://">gemini://</A> links and nothing else,
+what the heck do I do with a tag: link?  Display it to the user, or
+hide it?  If I choose to display it using exactly the same code path I
+would use to to display a <A HREF="gemini://">gemini://</A> link, I need to go out of my way
+to make that code path robust against stuff that doesn't make sense for
+&quot;proper&quot; links, like there not being a &quot;netloc&quot; component (AV-98
+currently silently drops tag: links, for example, because they cause an
+Exception when I try to handle them as if they were a &quot;proper&quot; link).
+If I *do* successfully display them as if they were a proper link and
+the user tries to follow one, what is supposed to happen?  Assuming I
+fix the aforementioned problem, AV-98 will say &quot;Sorry, no support for
+tag&quot;, because it fills out a template that I designed thinking of cases
+like &quot;Sorry, no suport for ftp&quot;, which most users will understand.  *I*
+would be very confused by a &quot;no support for tag&quot; message, I'd think
+&quot;What, there *are* no tags in Gemini, what's going on here?&quot;.
+
+Basically the problem left to the discretion of client authors has
+changed from a simple and obvious one to one that is rather more
+open-ended, and the natural result will be greater variation in the
+actual user experience across clients, authors being confused when their
+content doesn't render the way they expect it to in some clients (a
+familiar experience with the web which it's tragic to recreate in
+Gemini!), and users being confused when their client talks about tags
+and geos as if they were network protocols.  None of this is a good
+thing!  Nothing is supposed to be this open-ended in Gemini!
+
+So, I'm not sure how to proceed here.  People should feel free to
+experiment with possibilities, because informed decisions are better
+than uninformed ones.  But I would advise people not to get fiercely
+attached to any idea of how non-locational URLs might work in Gemini.
+It's uncharted territory.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001240.html">approachabe &amp; frugal &amp; composable
+</A></li>
+	<LI>Next message (by thread): <A HREF="001246.html">approachabe &amp; frugal &amp; composable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1241">[ date ]</a>
+              <a href="thread.html#1241">[ thread ]</a>
+              <a href="subject.html#1241">[ subject ]</a>
+              <a href="author.html#1241">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

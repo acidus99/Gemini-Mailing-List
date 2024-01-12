@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> how to make an input field on a capsule page ?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20how%20to%20make%20an%20input%20field%20on%20a%20capsule%20page%20%3F&In-Reply-To=%3C87r1ejvyd3.fsf%40omarpolo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007032.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>how to make an input field on a capsule page ?</H1>
+    <B>Omar Polo</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20how%20to%20make%20an%20input%20field%20on%20a%20capsule%20page%20%3F&In-Reply-To=%3C87r1ejvyd3.fsf%40omarpolo.com%3E"
+       TITLE="how to make an input field on a capsule page ?">op at omarpolo.com
+       </A><BR>
+    <I>Tue Aug 24 13:02:33 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007032.html">how to make an input field on a capsule page ?
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7033">[ date ]</a>
+              <a href="thread.html#7033">[ thread ]</a>
+              <a href="subject.html#7033">[ subject ]</a>
+              <a href="author.html#7033">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+bussiere bussiere &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">bussiere at gmail.com</A>&gt; writes:
+
+&gt;<i> Hello,
+</I>&gt;<i>
+</I>&gt;<i> I'am looking to make an input field on a gemini capsule page like the gemini search engine,
+</I>&gt;<i>
+</I>&gt;<i> but i've read the gemtext doc and i cannot find how to do that ...
+</I>&gt;<i>
+</I>&gt;<i> can you point me to some doc on how to do this ?
+</I>&gt;<i>
+</I>&gt;<i> regards
+</I>
+text/gemini doesn't have anything like a text input.  Instead, you put a
+link to a page that replies with the 10 or 11 status code and that will
+make the browser showing a text field and send what the user typed as
+query part of the url.
+
+Using geminispace.info as example, they provide a link &quot;search&quot; that
+looks like this:
+
+	=&gt; /search Search
+
+When the server receives a request for ``/search'' it replies with 10:
+
+	% printf &quot;<A HREF="gemini://geminispace.info/search\r\n">gemini://geminispace.info/search\r\n</A>&quot; | \
+		nc -c -Tnoverify geminispace.info 1965
+	10 Search query
+	%
+
+usually browser will pop up a text field in this case, and then visit
+the page
+
+	/search?&lt;user query here&gt;
+
+So, if you search for &quot;kittens&quot; the browser will visit the page
+
+	<A HREF="gemini://geminispace.info/search?kittens">gemini://geminispace.info/search?kittens</A>
+
+
+HTH
+
+Omar Polo
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007032.html">how to make an input field on a capsule page ?
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7033">[ date ]</a>
+              <a href="thread.html#7033">[ thread ]</a>
+              <a href="subject.html#7033">[ subject ]</a>
+              <a href="author.html#7033">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

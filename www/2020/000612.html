@@ -1,0 +1,261 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Cognitive aspects of navigation in gemini space
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cognitive%20aspects%20of%20navigation%20in%20gemini%20space&In-Reply-To=%3C20200514182104.GL10556%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000625.html">
+   <LINK REL="Next"  HREF="000616.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Cognitive aspects of navigation in gemini space</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cognitive%20aspects%20of%20navigation%20in%20gemini%20space&In-Reply-To=%3C20200514182104.GL10556%40SDF.ORG%3E"
+       TITLE="Cognitive aspects of navigation in gemini space">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Thu May 14 19:21:04 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000625.html">Cognitive aspects of navigation in gemini space
+</A></li>
+        <LI>Next message (by thread): <A HREF="000616.html">Cognitive aspects of navigation in gemini space
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#612">[ date ]</a>
+              <a href="thread.html#612">[ thread ]</a>
+              <a href="subject.html#612">[ subject ]</a>
+              <a href="author.html#612">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Howdy,
+
+On Thu, May 14, 2020 at 04:55:56PM +0100, Luke Emmet wrote:
+
+&gt;<i> And I particularly have enjoyed reading the discussion about
+</I>&gt;<i> text formatting and bullets... no, seriously.
+</I>
+Seek help! :p
+
+Just kidding, welcome to Gemini!
+ 
+&gt;<i> My question is really about how we can support cognitive aspects of user
+</I>&gt;<i> navigation through gemini-space. I understand and largely endorse the
+</I>&gt;<i> reasons for the simple text based protocol and format. However at the
+</I>&gt;<i> moment, browsing gemini-space is a very homogenous experience (each page
+</I>&gt;<i> looks the same as others). So it is not so clear to the user whose page you
+</I>&gt;<i> are on.
+</I>
+I understand entirely where you are coming from.  An idea I've had for
+a while now (I don't remember if I've mentioned it here before) is that
+it would be nice if a graphical Gemini browser used a different
+foreground and background colour (and perhaps even a different font?)
+for different domains (subdomains)?  This would be something the client
+would do itself, with no possibility of control or influence from the
+server - it would just use the domain as the seed to a PRNG which chose
+a new scheme.  This would then give different sites their own subtly
+distinct look and feel, which a user could learn to recognise in time.
+I have no idea how feasible this is: programmatically generating
+genuinely pleasant colour schemes is certainly not straightforward.
+ 
+&gt;<i> Is there a simple and gemini-friendly way for us to (optionally!) convey
+</I>&gt;<i> this sense of place. For example, to set a simple global favicon or
+</I>&gt;<i> background colour for pages on a certain site. It could help with user's
+</I>&gt;<i> task of navigation and understanding exactly where they are. I know there
+</I>&gt;<i> are lots of CLI junkies around here, so maybe this hasn't been a priority so
+</I>&gt;<i> far.
+</I>
+The idea of favicons has been mentioned before in a gemlog post:
+
+<A HREF="gemini://mozz.us/journal/2020-04-17.gmi">gemini://mozz.us/journal/2020-04-17.gmi</A>
+
+I have a couple of big concerns here:
+
+One is that right now Gemini is strictly one-request-per-resource and a
+lot of people, myself included, consider that a really desirable
+property.  Anything like favicons or CSS would remove that property, no
+matter how light weight they were.  It's true that at least the second
+request would go to the same server as the first so this doesn't
+actually destroy predictability or control of which servers your client
+connects to, which is one of the arguments in favour of the one request
+thing.
+
+Another is that, philosophically, I kind of feel like styling *should*
+be under the control of the client and not the server.  Some people have
+strong preferences for light text on dark backgrounds, for example,
+because they have problems with eye strain the other way around.  Right
+now on the web this is really only possible if the author deigns to
+provide the option (as Stack Overflow recently did, to much fanfare).  I
+think that's totally backwards.  Give the power over styling to the
+people who actually have to read the content, let them read your stuff
+in the way that works best for their eyesight and that *they* find
+aesthetically pleasing.  I realise this reduces some of the scope for
+self-expression on the part of Gemini content authors, but there's more
+than enough scope for that in the actual *content* they produce (if not,
+there are bigger problems...).
+
+(of course, this is kind of a weak argument against CSS-light in Gemini,
+because actually honouring the settings would be optional and clients 
+could ignore them and use the user's preferences instead)
+
+The biggest concern is (no surprises to regular readers here!) is that
+it's really hard to do this in a way that's not extensible.  With the
+best of intentions we'll specify a strictly optional CSS-ultralight
+thing which can only choose background and foreground colours from a
+small fixed pallette...and then some client will implement one extra
+optional feature, and it'll be popular, so then other clients will copy
+it, and the whole thing snowballs until people start to think of these
+unofficial extensions as a real part of Gemini, and strictly
+spec-adherent clients which don't support them as &quot;broken&quot;.  This exact
+story happened many times over with the web and I'm terrified of the
+same things happening to Gemini.  It's why I've tried at every turn in
+this project to avoid adding in anything that feels like it will be
+really easy to extend in new directions.
+
+I'm not opposed to hearing ideas, but I have a hard time imagining much
+can be done in the way of ultralight optional styling which doesn't
+violate the non-extensibility principle.
+
+I'd be much more interested in us exploring innovative possibilities
+which are strictly under the control of the client, like keying the
+styling to the domain as I mentioned earlier.  I'm not saying that exact
+approach necessarily is the best way to do it, or even a good way.  But
+it's *a* way to do it which doesn't run afoul of any of the issues above
+and that kind of out-of-the-box thinking is a good direction to take,
+IMHO.
+
+Hope you're not too disappointed by this response, feel free to
+(politely, constuctively!) argue back against any of this.  Thanks for
+your interest and welcome to Gemini!
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000625.html">Cognitive aspects of navigation in gemini space
+</A></li>
+	<LI>Next message (by thread): <A HREF="000616.html">Cognitive aspects of navigation in gemini space
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#612">[ date ]</a>
+              <a href="thread.html#612">[ thread ]</a>
+              <a href="subject.html#612">[ subject ]</a>
+              <a href="author.html#612">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client certificate musings
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200528221344.GT23998%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001108.html">
+   <LINK REL="Next"  HREF="001033.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client certificate musings</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200528221344.GT23998%40brevard.conman.org%3E"
+       TITLE="Client certificate musings">sean at conman.org
+       </A><BR>
+    <I>Thu May 28 23:13:44 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001108.html">Client certificate musings
+</A></li>
+        <LI>Next message (by thread): <A HREF="001033.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1121">[ date ]</a>
+              <a href="thread.html#1121">[ thread ]</a>
+              <a href="subject.html#1121">[ subject ]</a>
+              <a href="author.html#1121">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great solderpunk once stated:
+&gt;<i> As some of you may have read at
+</I>&gt;<i> <A HREF="gemini://gemini.circumlunar.space/users/solderpunk/cornedbeef/the-mercury-protocol.gmi,">gemini://gemini.circumlunar.space/users/solderpunk/cornedbeef/the-mercury-protocol.gmi,</A>
+</I>
+  Ooh, I did not know this.
+
+  Anyway, I just read it, and having written both a gopher server [1] and a
+Gemini server [2], I think I can answer the questions you posed.
+
+&gt;<i> How much more difficult is Gemini to implement than Mercury?
+</I>
+  This, I think will depend upon the TLS libries used.  It would take me
+less than five minutes to adapt my Gemini server to a Mercury server.  At a
+minimum, I would just have to change
+
+	local tls = require &quot;org.conman.nfl.tls&quot;
+
+	local okay,err = tls.listen(addr,port,main,function(conf)
+	  -- options for TLS 
+	  ...
+	end)
+
+to
+
+	local tcp = require &quot;org.conman.nfl.tcp&quot;
+
+	local okay,err = tcp.listen(addr,post,main)
+
+and remove the authentication block from the configuration, and ta-daaah!  I
+have Mercury running.  But I was careful in my selection of TLS library and
+I specifically picked the one I used [3] because of the ease it made using
+TLS.  For the record, both my gopher server and Gemini server are *very*
+similar in construction, and largely have feature-parity (sans TLS).
+
+  I can't say for other TLS libraries---only the writers of other Gemini
+servers (or clients) can say for sure how much complexity was added due to
+TLS.  And as we're finding out, the client certificate support is a bit of
+a mess, regardless of TLS library.
+
+&gt;<i> What are the things Gemini can do which Mercury cannot?
+</I>
+  TLS.  And protection of an area of a Gemini site.
+
+&gt;<i> How much do we value those things?
+</I>
+  TLS is valued quite a bit from what I see.  People are *still*
+experiementing with TLS and gopher.
+
+  I don't have much else to say about your post, or this message.  I think
+the ease (or not) of TLS is an interesting conversation on its own right.
+
+  -spc
+
+[1]	<A HREF="https://github.com/spc476/port70">https://github.com/spc476/port70</A>
+
+[2]	<A HREF="https://github.com/spc476/GLV-1.12556">https://github.com/spc476/GLV-1.12556</A>
+
+[3]	It was a pain to install, but only because:
+
+	1. it's a fork of OpenSSL
+	2. I didn't want to blow out my current installation of OpenSSL
+
+	It can be done thouygh, and I should probably do a write up on it so
+	others may have a change of using GLV-1.12556, or even just know the
+	joys of using libtls.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001108.html">Client certificate musings
+</A></li>
+	<LI>Next message (by thread): <A HREF="001033.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1121">[ date ]</a>
+              <a href="thread.html#1121">[ thread ]</a>
+              <a href="subject.html#1121">[ subject ]</a>
+              <a href="author.html#1121">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

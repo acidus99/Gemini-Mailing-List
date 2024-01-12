@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> External SHA hashes instead? (was: Re: Content length, EOF -- ways to resolve whether we received everything)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20External%20SHA%20hashes%20instead%3F%20%28was%3A%20Re%3A%20Content%20length%2C%20EOF%20--%0A%20ways%20to%20resolve%20whether%20we%20received%20everything%29&In-Reply-To=%3CC6QYV30BCUG5.2OT6QRUIAFWOB%40gux%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003001.html">
+   <LINK REL="Next"  HREF="003007.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>External SHA hashes instead? (was: Re: Content length, EOF -- ways to resolve whether we received everything)</H1>
+    <B>Arav K.</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20External%20SHA%20hashes%20instead%3F%20%28was%3A%20Re%3A%20Content%20length%2C%20EOF%20--%0A%20ways%20to%20resolve%20whether%20we%20received%20everything%29&In-Reply-To=%3CC6QYV30BCUG5.2OT6QRUIAFWOB%40gux%3E"
+       TITLE="External SHA hashes instead? (was: Re: Content length, EOF -- ways to resolve whether we received everything)">nothien at uber.space
+       </A><BR>
+    <I>Sat Oct 31 09:25:09 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003001.html">External SHA hashes instead? (was: Re: Content length, EOF -- ways to resolve whether we received everything)
+</A></li>
+        <LI>Next message (by thread): <A HREF="003007.html">External SHA hashes instead?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2992">[ date ]</a>
+              <a href="thread.html#2992">[ thread ]</a>
+              <a href="subject.html#2992">[ subject ]</a>
+              <a href="author.html#2992">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri Oct 30, 2020 at 12:34 PM UTC, Nathan Galt wrote:
+&gt;<i> If you&#8217;re worried whether the occasional big(gish) file transferred
+</I>&gt;<i> correctly and don&#8217;t want to stand up an HTTP server, have you
+</I>&gt;<i> considered publishing SHA-256 or -512 hashes, like one does for
+</I>&gt;<i> Linux-distribution .iso files?
+</I>
+The issue with this is twofold:
+ * Clients generally don't want the hashes of all files, only of the
+   they are trying to download.  It is better to only provide this hash,
+   which can be done for individual files (either as a MIME type param
+   or from a special access point which takes the file name as input).
+ * The server would have to constantly update the hash list (or keep it
+   in memory and still keep updating it).  This is all the more
+   difficult for servers running CGI scripts, as their output can vary.
+   Further complications arise if servers change their output based on
+   client certs.  Better to serve the hash along with the content
+   itself, as then all the details about the content are known (e.g. the
+   client cert used to request the content, and the state of databases
+   and CGI output which affect the response).
+
+~aravk | ~nothien
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003001.html">External SHA hashes instead? (was: Re: Content length, EOF -- ways to resolve whether we received everything)
+</A></li>
+	<LI>Next message (by thread): <A HREF="003007.html">External SHA hashes instead?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2992">[ date ]</a>
+              <a href="thread.html#2992">[ thread ]</a>
+              <a href="subject.html#2992">[ subject ]</a>
+              <a href="author.html#2992">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

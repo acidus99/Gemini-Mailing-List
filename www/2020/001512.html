@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> &quot;Wide load&quot; status code(s)?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%22Wide%20load%22%20status%20code%28s%29%3F&In-Reply-To=%3C20200610201447.GJ10136%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001503.html">
+   <LINK REL="Next"  HREF="001509.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>&quot;Wide load&quot; status code(s)?</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%22Wide%20load%22%20status%20code%28s%29%3F&In-Reply-To=%3C20200610201447.GJ10136%40SDF.ORG%3E"
+       TITLE="&quot;Wide load&quot; status code(s)?">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Wed Jun 10 21:14:47 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001503.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+        <LI>Next message (by thread): <A HREF="001509.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1512">[ date ]</a>
+              <a href="thread.html#1512">[ thread ]</a>
+              <a href="subject.html#1512">[ subject ]</a>
+              <a href="author.html#1512">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Jun 10, 2020 at 08:04:54PM +0100, Luke Emmet wrote:
+ 
+&gt;<i> If we can
+</I>&gt;<i> have lang and mime-type in the response for 20 response, is it really that
+</I>&gt;<i> philosophically disturbing to include this important information that we
+</I>&gt;<i> know makes network bandwidth negotiation better for everyone?
+</I>
+Important distinction: we don't have lang *and* MIME type, we have MIME
+type.  The text/gemini MIME type has a lang parameter defined.  We're
+allowed to define parameters on text/gemini because it's our type (we
+can't prescribe parameters on any other text/* type, which by the way is
+the answer to some of the questions in
+<A HREF="gemini://mozz.us/journal/2020-06-08.gmi">gemini://mozz.us/journal/2020-06-08.gmi</A>).
+
+Adding a content-size parameter to text/gemini *is* deeply
+philosophically disturbing because MIME types are, well, *types*.
+Categories.  It makes no sense whatsoever to put details specific to a
+particular token as part of type declaration.
+
+So the only way to add an analogue of content-length would be to send a
+MIME type *and* content-length, and then we need some kind of delmiter.
+For the sake of argument, let's say a tab character.
+
+So you send &lt;MIME&gt;&lt;TAB&gt;&lt;CONTENT-LENGTH&gt; and then, boom, next week it's
+&lt;MIME&gt;&lt;TAB&gt;&lt;CONTENT-LENGTH&gt;&lt;TAB&gt;&lt;SOMETHING-ELSE&gt;, and it never stops.
+Exactly one parameter is a stable, defensible position (what Gemini has
+now).  Arbitrarily many delimited parameters is a stable, defensible
+position (what the web has now).  Anything in between is at very real
+risk, IMHO, of mutating into the latter over time.  Once a delimiter
+comes along, it's impossible to stop subsequent expansions.
+ 
+&gt;<i> If we have to, I think it could be a client option:
+</I> 
+&gt;<i> [ ] limit non-text content to 5Mb per request
+</I>&gt;<i> [x] download all text/* content
+</I>
+Well, this second option is actually already totally possible.  As far
+as I know, it's not implemented by anybody yet.  I kind of like the
+idea, I may add it to AV-98.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001503.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+	<LI>Next message (by thread): <A HREF="001509.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1512">[ date ]</a>
+              <a href="thread.html#1512">[ thread ]</a>
+              <a href="subject.html#1512">[ subject ]</a>
+              <a href="author.html#1512">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

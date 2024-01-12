@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Escaping in gemtext
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Escaping%20in%20gemtext&In-Reply-To=%3C34c79466-6962-05c7-870b-3bdc7f3d5ba5%40masterq32.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003205.html">
+   <LINK REL="Next"  HREF="003266.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Escaping in gemtext</H1>
+    <B>Felix Quei&#223;ner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Escaping%20in%20gemtext&In-Reply-To=%3C34c79466-6962-05c7-870b-3bdc7f3d5ba5%40masterq32.de%3E"
+       TITLE="Escaping in gemtext">felix at masterq32.de
+       </A><BR>
+    <I>Wed Nov 11 08:25:37 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003205.html">Escaping in gemtext
+</A></li>
+        <LI>Next message (by thread): <A HREF="003266.html">Escaping in gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3265">[ date ]</a>
+              <a href="thread.html#3265">[ thread ]</a>
+              <a href="subject.html#3265">[ subject ]</a>
+              <a href="author.html#3265">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hey!
+
+I just tested both of your approaches with Kristall:
+
+&gt;<i>   I was about to recommend the zero-width space, and I even created a
+</I>&gt;<i> document for this:
+</I>&gt;<i>
+</I>&gt;<i> 	<A HREF="gemini://gemini.conman.org/test/escape.gemini">gemini://gemini.conman.org/test/escape.gemini</A>
+</I>&gt;<i>
+</I>&gt;<i> but I did notice that when the text is selected, the zero-width space
+</I>&gt;<i> is also selected (as it should).
+</I>
+<A HREF="https://mq32.de/public/05851bad5b5e23d9e24bcaa7f259ab6de55c17d0.png">https://mq32.de/public/05851bad5b5e23d9e24bcaa7f259ab6de55c17d0.png</A>
+Looks okay, works as expected
+
+&gt;<i>I have a second file
+</I>&gt;<i>
+</I>&gt;<i> 	<A HREF="gemini://gemini.conman.org/test/escape2.gemini">gemini://gemini.conman.org/test/escape2.gemini</A>
+</I>&gt;<i>
+</I>&gt;<i> that uses &quot; \b&quot; (space, backspace character) which didn't work with
+</I>&gt;<i> cut-n-paste (at least on Firefox on Mac OS-X) but if I viewed the
+</I>&gt;<i> resulting file in a terminal and then did a cut-n-paste, the output
+</I>&gt;<i> was as expected.
+</I>
+<A HREF="https://mq32.de/public/2a35ca5e121d2373f9390315c4857dd58c198ca8.png">https://mq32.de/public/2a35ca5e121d2373f9390315c4857dd58c198ca8.png</A>
+
+I think the zero-width space solution is okay, using
+'&lt;SPACE&gt;&lt;BACKSPACE&gt;' is not, as it's not rendered correctly in anything
+that is not a plain terminal:
+
+vi, vim, and nano display that file as ' ^H'
+
+gedit will display ' ?' where ? is a replacement character:
+<A HREF="https://mq32.de/public/be09184d3c095251bf2f31ad2bd0685a8a2f0741.png">https://mq32.de/public/be09184d3c095251bf2f31ad2bd0685a8a2f0741.png</A>
+
+castor displays the same replacement character:
+<A HREF="https://mq32.de/public/408e8c8b1fdc92c70d601c6def64bb5121d64754.png">https://mq32.de/public/408e8c8b1fdc92c70d601c6def64bb5121d64754.png</A>
+
+Regards
+- xq
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003205.html">Escaping in gemtext
+</A></li>
+	<LI>Next message (by thread): <A HREF="003266.html">Escaping in gemtext
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3265">[ date ]</a>
+              <a href="thread.html#3265">[ thread ]</a>
+              <a href="subject.html#3265">[ subject ]</a>
+              <a href="author.html#3265">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

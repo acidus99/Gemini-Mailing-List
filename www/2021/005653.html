@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] [tech] Companion Specification Proposal for Metadata
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20%5Btech%5D%20Companion%20Specification%20Proposal%20for%20Metadata&In-Reply-To=%3C87mtvrr9b9.fsf%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005640.html">
+   <LINK REL="Next"  HREF="005697.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] [tech] Companion Specification Proposal for Metadata</H1>
+    <B>Gary Johnson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20%5Btech%5D%20Companion%20Specification%20Proposal%20for%20Metadata&In-Reply-To=%3C87mtvrr9b9.fsf%40disroot.org%3E"
+       TITLE="[spec] [tech] Companion Specification Proposal for Metadata">lambdatronic at disroot.org
+       </A><BR>
+    <I>Thu Feb 25 23:56:10 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005640.html">[spec] [tech] Companion Specification Proposal for Metadata
+</A></li>
+        <LI>Next message (by thread): <A HREF="005697.html">[spec] [tech] Companion Specification Proposal for Metadata
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5653">[ date ]</a>
+              <a href="thread.html#5653">[ thread ]</a>
+              <a href="subject.html#5653">[ subject ]</a>
+              <a href="author.html#5653">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Omar Polo &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">op at omarpolo.com</A>&gt; writes:
+
+&gt;<i> Thanks for putting into words exactly what I had in mind, way better
+</I>&gt;<i> than I could ever do.  Your proposal is exactly what I was trying to
+</I>&gt;<i> describe in the other thread.
+</I>&gt;<i>
+</I>&gt;<i> I loved your proposal, but only until here.  I think that what follows
+</I>&gt;<i> is overly-complicated by the fact that you're trying to provide a way to
+</I>&gt;<i> define the meaning of the metadata, something that can be avoided, at
+</I>&gt;<i> least in the scope of Gemini.
+</I>
+Hi Omar. I'm not sure I follow you here. Could you provide an example?
+
+My proposal did not (intentionally) associate any meaning with
+particular metadata fields. I merely wanted to provide a human-readable,
+Gemtext-format syntax for associating metadata (the bulleted list
+attribute:value pairs) with resources on a capsule (indicated by link
+lines).
+
+Do you have an alternative format that you would like to propose for
+discussion?
+
+&gt;<i> Let's keep the metadata generic.  We'll then start using common keys
+</I>&gt;<i> because, well, they're widespread (like Author, Date, ...) or expressive
+</I>&gt;<i> enough (`Tags: music punk-rock' is pretty self-exlpanatory), while still
+</I>&gt;<i> allowing authors to add whenever they want extra fields if they feel
+</I>&gt;<i> like (there are people writing poetry, maybe they want to add a metadata
+</I>&gt;<i> about the metrics?  or about a particular style?)
+</I>
+We are in agreement here. I do not mean to prescribe a list of
+standardized metadata attributes in this companion spec. My examples
+used a few that I made up on the spot (i.e., author, last-modified,
+copyright, tags). I'll leave deciding on &quot;the right set&quot; of attributes
+to those who actually intend to use metadata.
+
+&gt;<i> (as other pointed out several time in the past, $DOCUMENT_ROOT is not
+</I>&gt;<i> something set in stone.  We have single-user capsules, multi user
+</I>&gt;<i> capsule with different URLs style -- example.com/~op/ vs
+</I>&gt;<i> example.com/users/op vs ... -- etc)
+</I>
+That's a fair point, and one that John Cowan raised in his response as
+well. Thanks for reminding me of this. In that case, we should discuss
+how to remedy this issue.
+
+One approach could be to keep the metadata.gmi file at each capsule's
+document root as I originally proposed. This should be well-defined on a
+per-capsule basis even on a server hosting multiple capsules in the
+common pubnix style. It is simply the toplevel directory of your
+personal capsule (i.e. ~/public_gemini or equivalent for user capsules
+and whatever server-level document root is specified by the admin who
+launched it).
+
+This would put the burden on metadata bots to try and find these
+metadata.gmi files at the appropriate paths under a multi-hosting
+domain.
+
+Without additional server-provided information, the bots may simply
+resort to brute force checking every directory path on the domain for a
+.metadata.gmi file, which could lead to a lot of dead-end network
+requests.
+
+Instead, I can think of (at least) two ways the server could help the
+bot.
+
+1. BAD: Aggregate Metadata Up
+
+   Even though the visiting bot doesn't know which paths lead to the
+   document roots of our users' capsules, the Gemini server does. At
+   startup time, a metadata-exporting Gemini server could check each
+   user's document root for a .metadata.gmi file. Any that are found
+   could be concatenated together to form a single toplevel
+   <A HREF="gemini://cool.capsule.com/.metadata.gmi">gemini://cool.capsule.com/.metadata.gmi</A> file.
+
+   However, in order for this to work correctly, the server would need
+   to apply two transformations to each user-level metadata.gmi file
+   before concatenation:
+
+   1. All link lines would need to be prefixed by the URL path that the
+      server assigns to that capsule's document root (e.g.,
+      /~someuser/).
+
+   2. To prevent errant bulleted list attributes at the top of one
+      user's metadata.gmi file (with no prior link lines) from being
+      erroneously applied to the final link lines of the previous
+      metadata.gmi in the concatenation sequence, a single link line for
+      the current capsule's document root (e.g., =&gt; /~someuser/) would
+      need to prepended to the front of each user-level metadata.gmi
+      file prior to concatenation.
+
+   These are relatively simple text transformations, but they do place
+   additional burden on server authors, so this isn't my favorite
+   option.
+
+2. GOOD: Allow Metadata to Link to Other Metadata
+
+   In this case, we just extend the metadata.gmi parsing rules for bots
+   to say that if any of the link lines that they read in end with
+   .metadata.gmi, then these can and should be followed for further
+   metadata about parts of this site. This doesn't require any other
+   changes to the companion spec as written except for that note.
+
+   To make this work, at startup time a metadata-exporting Gemini server
+   could check each user's document root for a .metadata.gmi file. For
+   each such file that is found, the server can append a new link line
+   pointing to that metadata.gmi file (relative to the server's toplevel
+   document root) to its own toplevel $DOCUMENT_ROOT/.metadata.gmi if it
+   exists. If a toplevel $DOCUMENT_ROOT/.metadata.gmi file doesn't
+   exist, the server can create one containing just the links to the
+   users' .metadata.gmi files.
+
+   Note that this doesn't even have to happen at server start time.
+   Instead, the server could program $DOCUMENT_ROOT/.metadata.gmi as a
+   dynamic endpoint that checks for user-level .metadata.gmi files
+   whenever it is called, thereby making users' metadata available as
+   soon as the user publishes it to their capsule with no need for a
+   server restart. (This is by far my favorite option.)
+
+Okay, I think I've answered all your points. What do you think?
+
+Best,
+  Gary
+
+-- 
+GPG Key ID: 7BC158ED
+Use `gpg --search-keys lambdatronic' to find me
+Protect yourself from surveillance: <A HREF="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</A>
+=======================================================================
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+Why is HTML email a security nightmare? See <A HREF="https://useplaintext.email/">https://useplaintext.email/</A>
+
+Please avoid sending me MS-Office attachments.
+See <A HREF="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005640.html">[spec] [tech] Companion Specification Proposal for Metadata
+</A></li>
+	<LI>Next message (by thread): <A HREF="005697.html">[spec] [tech] Companion Specification Proposal for Metadata
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5653">[ date ]</a>
+              <a href="thread.html#5653">[ thread ]</a>
+              <a href="subject.html#5653">[ subject ]</a>
+              <a href="author.html#5653">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

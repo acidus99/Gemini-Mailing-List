@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Creating a Gemini site from an (advanced) Jekyll site
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Creating%20a%20Gemini%20site%20from%20an%20%28advanced%29%20Jekyll%20site&In-Reply-To=%3CCAMPYpA6vJ8LKx_sxp49_OhYKsSOBvrZVeXJhD8BRA8w0YfzOpA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000570.html">
+   <LINK REL="Next"  HREF="000629.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Creating a Gemini site from an (advanced) Jekyll site</H1>
+    <B>Travis Briggs</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Creating%20a%20Gemini%20site%20from%20an%20%28advanced%29%20Jekyll%20site&In-Reply-To=%3CCAMPYpA6vJ8LKx_sxp49_OhYKsSOBvrZVeXJhD8BRA8w0YfzOpA%40mail.gmail.com%3E"
+       TITLE="Creating a Gemini site from an (advanced) Jekyll site">audiodude at gmail.com
+       </A><BR>
+    <I>Wed May 13 01:28:48 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000570.html">Welcome, newcomers!
+</A></li>
+        <LI>Next message (by thread): <A HREF="000629.html">Creating a Gemini site from an (advanced) Jekyll site
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#573">[ date ]</a>
+              <a href="thread.html#573">[ thread ]</a>
+              <a href="subject.html#573">[ subject ]</a>
+              <a href="author.html#573">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+Thanks for the warm welcome in the other thread, solderpunk! I'm not sure
+if I read about Gemini on HN, but probably around the same time, being on
+tilde.club and other tildes.
+
+I just wanted to share some of the work I did to create the content for
+<A HREF="gemini://gem.bestalbumsintheuniverse.com.">gemini://gem.bestalbumsintheuniverse.com.</A>
+
+This site has existed for a number of years now, and probably isn't updated
+as much as it should be (like all blogs of course). My intuition was
+confirmed by solderpunk's call to content in the other thread, that
+Geminispace needs content that isn't about Gemini. So I thought I'd re-work
+my album listings as .gmi files.
+
+You can see the whole source of the website here:
+<A HREF="https://github.com/audiodude/best-albums">https://github.com/audiodude/best-albums</A>
+
+Currently I am running Jetforce, since I am primarily a Javascript and
+Python developer, though I have done Ruby as you can see in the repo linked
+above.
+
+The basic layout of the site is that it is a Jekyll site, but it uses
+advanced features of Jekyll to create an albums.json file, which is then
+dynamically loaded by the Javascript of the frontend of the website. For
+the Gemini version, I decided to use Pandoc (<A HREF="https://pandoc.org/">https://pandoc.org/</A>) to
+convert from my markdown files into what is essentially plain text, but
+with a custom template for putting a header hash and the like. Pandoc was
+really convenient for this because it automatically reads YAML
+&quot;frontmatter&quot; in Markdown files and makes them available in templates.
+
+I then wrote a simple script to take the albums.json file and generate an
+overall index.gmi file for the site (write_gemini_index.rb). Finally there
+is a Makefile that ties it all together and generates best-albums.tgz,
+which I then scp to the gemini host and copy to /var/gemini.
+
+While I think a general purpose Jekyll -&gt; Gemini converter would be useful
+for people, I don't have any desire to attempt such a project based on 1)
+not wanting to use Ruby and 2) the fact that Jekyll isn't particularly
+extensible. I wonder if there is a project to be created adding plugins for
+some other popular static site generator (Hugo? Gatsby?) to output Gemini
+content.
+
+Cheers,
+-Travis
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200512/0f387257/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200512/0f387257/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000570.html">Welcome, newcomers!
+</A></li>
+	<LI>Next message (by thread): <A HREF="000629.html">Creating a Gemini site from an (advanced) Jekyll site
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#573">[ date ]</a>
+              <a href="thread.html#573">[ thread ]</a>
+              <a href="subject.html#573">[ subject ]</a>
+              <a href="author.html#573">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

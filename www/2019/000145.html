@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Fwd: elpher now supports gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Fwd%3A%20elpher%20now%20supports%20gemini&In-Reply-To=%3Ce31903ff-4b55-4dcf-34dd-7a53af4ffb8a%40NorthTech.US%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000140.html">
+   <LINK REL="Next"  HREF="000146.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Fwd: elpher now supports gemini</H1>
+    <B>Bradley D. Thornton</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Fwd%3A%20elpher%20now%20supports%20gemini&In-Reply-To=%3Ce31903ff-4b55-4dcf-34dd-7a53af4ffb8a%40NorthTech.US%3E"
+       TITLE="Fwd: elpher now supports gemini">Bradley at NorthTech.US
+       </A><BR>
+    <I>Fri Sep 13 15:24:05 BST 2019</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000140.html">Fwd: elpher now supports gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="000146.html">Fwd: elpher now supports gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#145">[ date ]</a>
+              <a href="thread.html#145">[ thread ]</a>
+              <a href="subject.html#145">[ subject ]</a>
+              <a href="author.html#145">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+On 9/12/2019 12:02 AM, plugd wrote:
+&gt;<i> Hi Jason,
+</I>&gt;<i> 
+</I>&gt;<i> Jason McBrayer writes:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> Elpher, an emacs gopher client by lambdalabs, now supports Gemini. I
+</I>&gt;&gt;<i> saw the announcement here:
+</I>&gt;<i> 
+</I>&gt;<i> Thanks for posting this.  As I pointed out in that post the Gemini
+</I>&gt;<i> support is still highly &quot;experimental&quot;.  (I mean, there are only a
+</I>&gt;<i> handful of servers out there to test it on - hopefully this will
+</I>&gt;<i> change!)  So feedback is hugely welcome.
+</I>&gt;<i> 
+</I>
+This is a really nice client, aside from the ability to easily check the
+source that is served using the &quot;.&quot; binding, and that's golden when
+testing. I was thrown off a bit when I brought up zaibatsu and didn't
+recognize anything - when you wear one lense, you won't see what you
+already know because you're not looking through the lense that sees
+another aspect.
+
+Then it dawned on me that I was looking at a gophermap, so I figure it's
+a Gegobi server. Pretty kewl how it does that.
+
+The thing I like most about it includes my hope that my fav Gopher
+clients integrate seamless Gemini support as you have. When I first
+installed and fired it up, I stupidly made the assumption that, like
+most of the Gemini clients, I could just ask for the hostname and the
+URI would wrap it - duh! No! Obviously, because as soon as I typed in
+the hostname of my server the Gopher site came up instead of the Gemini
+site - as it should.
+
+It's not a big deal prepending <A HREF="gemini://">gemini://</A> anyway. I do wish it was easier
+to determine the URL I'm currently at though. That will take some
+getting used to not having it prominently displayed.
+
+I made some observations and took some notes about the various servers,
+and some of URLs being served up as well. First, before anyone starts
+looking at what might be askew with the servers, I need to say that
+while using the other Gemini client that I like so far, all sites come
+up with no problem at all in Asuka.
+
+1.) Okay first, I get a lot of this in Elpher:
+
+&lt;snip&gt;
+---- ERROR -----
+
+When attempting to retrieve <A HREF="gemini://vger.cloud:">gemini://vger.cloud:</A>
+Gemini server reports PERMANENT FAILURE for this request.
+
+----------------
+
+Press 'u' to return to the previous page.
+&lt;/snip&gt;
+
+2.) I experienced problems with gemini.conman.org loading beyond 1%.
+
+3.) zaibatsu.circumlunar.space comes up, but it takes a while. Like I
+said above, in Asuka, all sites come up rather quickly, although I can
+tell the difference in the resources being served. In Elpher it can take
+several seconds, however.
+
+A feature of Elpher that I find really kewl is that it doesn't presume
+it's okay to just plough ahead when it perceives there's something funky
+with the cert, as illustrated in this image (I'm unable to select this
+text in Elpher to paste it, if there's a way, please enlighten me):
+<A HREF="https://bit.ly/2kKJCrv">https://bit.ly/2kKJCrv</A>
+
+That originally came up for <A HREF="gemini://conman.org">gemini://conman.org</A> (certificate/host
+mismatch), because that's NOT the hostname the cert was issued for.
+Again, Asuka and the other clients don't complain, but prolly should ;)
+No warning when entering the correct URL of <A HREF="gemini://gemini.conman.org">gemini://gemini.conman.org</A>
+
+If I reject the certificate for zaibatsu here's the server response I get:
+
+&lt;snip&gt;
+
+
+---- ERROR -----
+
+When attempting to retrieve <A HREF="gemini://zaibatsu.circumlunar.space:">gemini://zaibatsu.circumlunar.space:</A>
+Wrong type argument: processp, nil.
+
+----------------
+
+Press 'u' to return to the previous page.
+
+&lt;/snip&gt;
+
+It would be nice if Elpher would return the actual two-digit Gemini
+error codes.
+
+4.) <A HREF="gemini://carcosa.net">gemini://carcosa.net</A> - The only thing I can say is that it comes up
+fast as lightning.
+
+5.) <A HREF="gemini://heavysquare.com">gemini://heavysquare.com</A> - very fast, but I do get the cert warning
+saying it was signed by sectigo, a CA I've never heard of. That cert
+warning in Elpher is really nice, if I haven't said so already!
+
+6.) <A HREF="gemini://mozz.us">gemini://mozz.us</A> - I get the following, and again, it would be nice
+if Elpher displayed the actual two digit error codes. I've been running
+Jetforce too, and my server uses a LetsEncrypt cert, so no surprise that
+even though the connections are refused, there's no cert warning in
+Elpher for either servers.
+
+&lt;snip&gt;
+
+
+---- ERROR -----
+
+When attempting to retrieve <A HREF="gemini://mozz.us:">gemini://mozz.us:</A>
+Gemini server reports PERMANENT FAILURE for this request.
+
+----------------
+
+&lt;/snip&gt;
+
+I can't help but wonder if this is because of an AAAA RR? My Jetforce
+server is currently listening on 0.0.0.0 and I'm not sure if I can put
+&quot;::&quot; in the startup script's configs like Sean mentioned earlier.
+
+7.) <A HREF="gemini://dgold.eu">gemini://dgold.eu</A> - refuses the connection as well.
+
+8.) <A HREF="gemini://typed-hole.org">gemini://typed-hole.org</A> - I don't know which one's faster in
+responding, this one or carcosa. I get a permanent failure on the links
+to the games in Elpher, but the guestbook and lobst.rs links work fine.
+This is a Pollux server.
+
+9.) <A HREF="gemini://consensus.circumlunar.space">gemini://consensus.circumlunar.space</A> - Connection refused (I could
+swear it came up for me before in Elpher).
+
+&lt;snip&gt;
+
+---- ERROR -----
+
+When attempting to retrieve <A HREF="gemini://consensus.circumlunar.space:">gemini://consensus.circumlunar.space:</A>
+make client process failed: Connection refused, :name, elpher-process,
+:<i>buffer, #&lt;killed buffer&gt;, :host, consensus.circumlunar.space, :service,
+</I>1965, :nowait, nil, :tls-parameters, nil.
+
+----------------
+
+&lt;/snip&gt;
+
+10.) tilde.black and tilde.pink - both servers return Permanent failure.
+Elpher warns  of a self-signed cert for tilde.pink (I'm don't remember,
+but I may have cached the cert with an &quot;a&quot; for tilde.black). I haven't
+tried either of those with Asuka yet, they've only been listed for less
+than a week.
+
+As far as the IPv4/IPv6 issue, I don't really think most of those
+options should really be left to the author of the client software to
+tackle, and think server support for binding &quot;::&quot; to the NIC to be the
+best solution. Alternately, perhaps temporarily dropping the AAAA RR
+temporarily, until the Gemini server supports IPv6 bindings, if there
+aren't other services listening on the host.
+
+I may have missed a few things here and there, but this is all really
+just the result of playing around with Elpher, which, if I'm not really
+careful, might get me to start saying nice things about Emacs ;)
+
+I hope that helps :)
+
+
+-- 
+Bradley D. Thornton
+Manager Network Services
+<A HREF="http://NorthTech.US">http://NorthTech.US</A>
+TEL: +1.310.421.8268
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000140.html">Fwd: elpher now supports gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="000146.html">Fwd: elpher now supports gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#145">[ date ]</a>
+              <a href="thread.html#145">[ thread ]</a>
+              <a href="subject.html#145">[ subject ]</a>
+              <a href="author.html#145">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Seeking for help with C Gemini client
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Seeking%20for%20help%20with%20C%20Gemini%20client&In-Reply-To=%3Cb6d7ddc4-392d-fd1d-f399-d81776a99af6%40pwarren.id.au%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002445.html">
+   <LINK REL="Next"  HREF="002448.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Seeking for help with C Gemini client</H1>
+    <B>Paul Warren</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Seeking%20for%20help%20with%20C%20Gemini%20client&In-Reply-To=%3Cb6d7ddc4-392d-fd1d-f399-d81776a99af6%40pwarren.id.au%3E"
+       TITLE="Seeking for help with C Gemini client">pwarren at pwarren.id.au
+       </A><BR>
+    <I>Wed Aug 19 12:36:18 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002445.html">Seeking for help with C Gemini client
+</A></li>
+        <LI>Next message (by thread): <A HREF="002448.html">Seeking for help with C Gemini client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2446">[ date ]</a>
+              <a href="thread.html#2446">[ thread ]</a>
+              <a href="subject.html#2446">[ subject ]</a>
+              <a href="author.html#2446">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>G'day!
+
+Gemini, while simple, isn't quite that simple. All protocol commands and
+responses are over TLS connections, so doing a send/recv on a raw
+network socket will not work!
+
+I'm not 100% sure on the best or simplest way to get a TLS stack going
+in C, I've done some bits with OpenSSL, but it was not simple!
+
+Cheers
+--
+Paul
+
+
+
+On 19/8/20 11:57 pm, - wrote:
+&gt;<i> Hello,
+</I>&gt;<i> 
+</I>&gt;<i> I've started writing a client for Gemini protocol, but since I've never been writing networking programs, I find myself at the dead end at the moment. Please could someone help me? When I send a request and get a response, the only thing I have in response is &quot;<A HREF="gemini://">gemini://</A>&quot; and nothing else. The code is given below:
+</I>&gt;<i> 
+</I>&gt;<i> #include &lt;arpa/inet.h&gt;
+</I>&gt;<i> #include &lt;locale.h&gt;
+</I>&gt;<i> #include &lt;netdb.h&gt;
+</I>&gt;<i> #include &lt;netinet/in.h&gt;
+</I>&gt;<i> #include &lt;stdio.h&gt;
+</I>&gt;<i> #include &lt;stdlib.h&gt;
+</I>&gt;<i> #include &lt;string.h&gt;
+</I>&gt;<i> #include &lt;sys/types.h&gt;
+</I>&gt;<i> #include &lt;sys/socket.h&gt;
+</I>&gt;<i> #include &lt;unistd.h&gt;
+</I>&gt;<i> 
+</I>&gt;<i> #define STATUS_CODE_INPUT 10
+</I>&gt;<i> #define STATUS_CODE_SENSITIVE_INPUT 11
+</I>&gt;<i> #define STATUS_CODE_SUCCESS 20
+</I>&gt;<i> #define STATUS_CODE_REDIRECT_TEMP 30
+</I>&gt;<i> #define STATUS_CODE_REDIRECT_PERM 31
+</I>&gt;<i> #define STATUS_CODE_TEMP_FAILURE 40
+</I>&gt;<i> #define STATUS_CODE_SERVER_UNAVAILABLE 41
+</I>&gt;<i> #define STATUS_CODE_CGI_ERROR 42
+</I>&gt;<i> #define STATUS_CODE_PROXY_ERROR 43
+</I>&gt;<i> #define STATUS_CODE_SLOW_DOWN 44
+</I>&gt;<i> #define STATUS_CODE_PERM_FAILURE 50
+</I>&gt;<i> #define STATUS_CODE_NOT_FOUND 51
+</I>&gt;<i> #define STATUS_CODE_GONE 52
+</I>&gt;<i> #define STATUS_CODE_PROXY_REQUEST_REFUSED 53
+</I>&gt;<i> #define STATUS_CODE_BAD_REQUEST 59
+</I>&gt;<i> #define STATUS_CODE_CLIENT_CERT_REQUIRED 60
+</I>&gt;<i> #define STATUS_CODE_CERT_NO_AUTH 61
+</I>&gt;<i> #define STATUS_CODE_CERT_NOT_VALID 62
+</I>&gt;<i> 
+</I>&gt;<i> #define GEMINI_PORT 1965
+</I>&gt;<i> 
+</I>&gt;<i> int main() {
+</I>&gt;<i> 	char *locale;
+</I>&gt;<i> 	locale = setlocale(LC_ALL, &quot;&quot;);
+</I>&gt;<i> 	
+</I>&gt;<i> 	int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+</I>&gt;<i> 	if (sockfd &lt; 0) {
+</I>&gt;<i> 		perror(&quot;socket&quot;);
+</I>&gt;<i> 		exit(1);
+</I>&gt;<i> 	}
+</I>&gt;<i> 	char *url = malloc(sizeof(char)*1024);
+</I>&gt;<i> 	strcpy(url, &quot;<A HREF="gemini://gemini.circumlunar.space/\r\n">gemini://gemini.circumlunar.space/\r\n</A>&quot;);
+</I>&gt;<i> 	char rec_buf[1029] = {0};
+</I>&gt;<i> 	struct hostent *host_entry;
+</I>&gt;<i> 	host_entry = gethostbyname(url);
+</I>&gt;<i> 	struct sockaddr_in addr;
+</I>&gt;<i> 	addr.sin_family = AF_INET;
+</I>&gt;<i> 	addr.sin_port = htons(GEMINI_PORT);
+</I>&gt;<i> 	addr.sin_addr.s_addr = htonl(INADDR_ANY);
+</I>&gt;<i> 	int opt = 1;
+</I>&gt;<i> 	if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &amp;opt, sizeof(opt)) &lt; 0) {
+</I>&gt;<i> 		perror(&quot;setsockopt&quot;);
+</I>&gt;<i> 		exit(1);
+</I>&gt;<i> 	}
+</I>&gt;<i> 	if (bind(sockfd, (struct sockaddr *)&amp;addr, sizeof(addr)) &lt; 0) {
+</I>&gt;<i> 		perror(&quot;bind&quot;);
+</I>&gt;<i> 		exit(2);
+</I>&gt;<i> 	}
+</I>&gt;<i> 	if (connect(sockfd, (struct sockaddr *)&amp;addr, sizeof(addr)) &lt; 0) {
+</I>&gt;<i> 		perror(&quot;connect&quot;);
+</I>&gt;<i> 		exit(3);
+</I>&gt;<i> 	}
+</I>&gt;<i> 	send(sockfd, url, sizeof(url), 0);
+</I>&gt;<i> 	recv(sockfd, rec_buf, sizeof(rec_buf), 0);
+</I>&gt;<i> 	printf(&quot;%s\n&quot;, rec_buf);
+</I>&gt;<i> 	close(sockfd);
+</I>&gt;<i> 	shutdown(sockfd, SHUT_RDWR);
+</I>&gt;<i> 	free(url);
+</I>&gt;<i> 	return 0;
+</I>&gt;<i> }
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 1003 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200819/d18da0bc/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20200819/d18da0bc/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002445.html">Seeking for help with C Gemini client
+</A></li>
+	<LI>Next message (by thread): <A HREF="002448.html">Seeking for help with C Gemini client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2446">[ date ]</a>
+              <a href="thread.html#2446">[ thread ]</a>
+              <a href="subject.html#2446">[ subject ]</a>
+              <a href="author.html#2446">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

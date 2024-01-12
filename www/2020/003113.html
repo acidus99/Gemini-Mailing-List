@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Caching and status codes
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3CCAD2gp_Q1sfGCKonkM%3Dc8xMm3vWzwrcOymEteFhAf_hWJvmvefg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003108.html">
+   <LINK REL="Next"  HREF="003121.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Caching and status codes</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3CCAD2gp_Q1sfGCKonkM%3Dc8xMm3vWzwrcOymEteFhAf_hWJvmvefg%40mail.gmail.com%3E"
+       TITLE="Caching and status codes">cowan at ccil.org
+       </A><BR>
+    <I>Sat Nov  7 18:42:57 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003108.html">Caching and status codes
+</A></li>
+        <LI>Next message (by thread): <A HREF="003121.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3113">[ date ]</a>
+              <a href="thread.html#3113">[ thread ]</a>
+              <a href="subject.html#3113">[ subject ]</a>
+              <a href="author.html#3113">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Nov 7, 2020 at 11:44 AM Ali Fardan &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">raiz at stellarbound.space</A>&gt; wrote:
+
+The rude thing here would be having to serve large files over Gemini
+&gt;<i> and expect them to be served often, the protocol operates under the
+</I>&gt;<i> assumption that caching does not exist
+</I>&gt;<i>
+</I>
+If clients aren't free to cache, then I'm not free to save a .gmi file on
+my file system.  That's all a client-side cache is.
+
+&gt;<i> Consider using
+</I>&gt;<i> connection queue and serving connections one by instead of forking or
+</I>&gt;<i> multithreading because the protocol allows such simple design by
+</I>&gt;<i> closing the connection right after the transaction, it's not like in
+</I>&gt;<i> HTTP land where you have keep-alive.
+</I>&gt;<i>
+</I>
+The advantages of not serving connections one by one is that it provides
+better service to clients on a heavily-used server.  Right now there are no
+heavily-used servers, but there's nothing in the Gemini ethos that says
+&quot;documents should only be of interest to a few&quot;.  That's sheer elitism.
+
+&gt;<i> Does everyone here require a lecture on why their desired features
+</I>&gt;<i> aren't in the protocol yet?
+</I>
+
+Client caching has nothing to do with the protocol.  The idea of 22 is that
+authors (not servers) may want to advise clients against caching in a
+particular case.
+
+Do you have anything else to help the community with?
+&gt;<i>
+</I>
+&quot;I'm thinking!  I'm thinking!&quot;  --Jack Benny during a holdup
+
+&gt;<i> If any feature does not add a great value at an acceptable cost to the
+</I>&gt;<i> simplicity of the protocol, consider it rejected before even proposing
+</I>&gt;<i> it, I don't want to have a different experience browsing Gemini space
+</I>&gt;<i> using netcat than using Kristall.
+</I>&gt;<i>
+</I>
+If you are browsing with netcat, caching is not even an issue.  If nobody
+wanted to serve dynamic content, 22 wouldn't be useful.  It is handy for
+those who do want to, to communicate their intent.  No client and no server
+has to implement this.
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+A witness cannot give evidence of his age unless he can remember being born.
+                --Judge Blagden
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201107/7ccd309e/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201107/7ccd309e/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003108.html">Caching and status codes
+</A></li>
+	<LI>Next message (by thread): <A HREF="003121.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3113">[ date ]</a>
+              <a href="thread.html#3113">[ thread ]</a>
+              <a href="subject.html#3113">[ subject ]</a>
+              <a href="author.html#3113">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

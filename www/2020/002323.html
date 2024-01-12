@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPECS text/gemini] Heading lines proposal
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPECS%20text/gemini%5D%20Heading%20lines%20proposal&In-Reply-To=%3C20200724004428.GB32353%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002322.html">
+   <LINK REL="Next"  HREF="002326.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPECS text/gemini] Heading lines proposal</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPECS%20text/gemini%5D%20Heading%20lines%20proposal&In-Reply-To=%3C20200724004428.GB32353%40brevard.conman.org%3E"
+       TITLE="[SPECS text/gemini] Heading lines proposal">sean at conman.org
+       </A><BR>
+    <I>Fri Jul 24 01:44:28 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002322.html">[SPECS text/gemini] Heading lines proposal
+</A></li>
+        <LI>Next message (by thread): <A HREF="002326.html">[SPECS text/gemini] Heading lines proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2323">[ date ]</a>
+              <a href="thread.html#2323">[ thread ]</a>
+              <a href="subject.html#2323">[ subject ]</a>
+              <a href="author.html#2323">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Mad Ogrit once stated:
+&gt;<i> Requiring a space for structural formatting seems wise. I don't believe the
+</I>&gt;<i> proposal implied that navigational formatting (=&gt;) would require one.
+</I>&gt;<i> 
+</I>&gt;<i> But regarding quotes, although the &gt; prefix may be visually familiar from
+</I>&gt;<i> text threads its use is inconsistent at best with regard to space before or
+</I>&gt;<i> after. Requiring a space will definitely break multiply-nested multi-line
+</I>&gt;<i> things (or make them redundant).
+</I>
+  The gemtext spec doesn't allow nesting at all, so multply-nested
+multi-line things are already a problem (as I found out when trying to
+convert HTML to gemtext).
+
+&gt;<i> Which brings me to... If quotes are only meant for a single depth, but
+</I>&gt;<i> represent semantic rather than structural formatting (sourced content,
+</I>&gt;<i> could reasonably have an author or other meaningful attribution), would it
+</I>&gt;<i> make more sense to treat them like preformatted lines (line toggled) and
+</I>&gt;<i> retire the prefix entirely?
+</I>
+  No.  My blog (phlog, gemlog) makes extensive use of both &lt;BLOCKQUOTE&gt; and
+&lt;PRE&gt; tags.  For instance this post from last year:
+
+	<A HREF="gemini://gemini.conman.org/2019/03/31.1">gemini://gemini.conman.org/2019/03/31.1</A>
+
+In the originial HTML (<A HREF="http://boston.conman.org/2019/03/31.1">http://boston.conman.org/2019/03/31.1</A>), the format is
+something long the lines of:
+
+&lt;BLOCKQUOTE&gt;
+  &lt;P&gt;...&lt;/P&gt;
+
+  &lt;P&gt;...&lt;/P&gt;
+
+&lt;/BLOCKQUOTE&gt;
+
+&lt;P&gt;...&lt;/P&gt;
+
+&lt;PRE&gt;
+...
+&lt;/PRE&gt;
+
+&lt;P&gt;...&lt;/P&gt;
+
+  And while I had to go back quite a bit to find an entry with both a
+blockquote and preformatted text, I do use blockquotes and preformatted text
+quite often, and they have different semantic meanings.
+
+  That post, by the way, shows how I deal with ordered lists in HTML (when
+gemtext only supports a type of unordered list).
+
+&gt;<i> * Quoted content when visually distinct has more in common with
+</I>&gt;<i> preformatted content in that, while it can be wrapped and flowed, you're
+</I>&gt;<i> often quoting something by copy-pasting at which point the original layout
+</I>&gt;<i> can be relevant
+</I>
+  True.  Trying to quote preformatted text is not easy with gemtext.  That's
+one of the reasons I still prefer HTML (which Gemini *can* serve, by the
+way).
+
+  -spc
+
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002322.html">[SPECS text/gemini] Heading lines proposal
+</A></li>
+	<LI>Next message (by thread): <A HREF="002326.html">[SPECS text/gemini] Heading lines proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2323">[ date ]</a>
+              <a href="thread.html#2323">[ thread ]</a>
+              <a href="subject.html#2323">[ subject ]</a>
+              <a href="author.html#2323">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

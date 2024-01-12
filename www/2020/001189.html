@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> More silly text/gemini spec proposals
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20More%20silly%20text/gemini%20spec%20proposals&In-Reply-To=%3C20200529212851.GE23998%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001188.html">
+   <LINK REL="Next"  HREF="001149.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>More silly text/gemini spec proposals</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20More%20silly%20text/gemini%20spec%20proposals&In-Reply-To=%3C20200529212851.GE23998%40brevard.conman.org%3E"
+       TITLE="More silly text/gemini spec proposals">sean at conman.org
+       </A><BR>
+    <I>Fri May 29 22:28:51 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001188.html">More silly text/gemini spec proposals
+</A></li>
+        <LI>Next message (by thread): <A HREF="001149.html">More silly text/gemini spec proposals
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1189">[ date ]</a>
+              <a href="thread.html#1189">[ thread ]</a>
+              <a href="subject.html#1189">[ subject ]</a>
+              <a href="author.html#1189">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great solderpunk once stated:
+&gt;<i> On Fri, May 29, 2020 at 09:35:20AM +0000, solderpunk wrote:
+</I>&gt;<i> &gt; On Fri, May 29, 2020 at 06:34:29AM +0200, Petite Abeille wrote:
+</I>&gt;<i> &gt;  
+</I>&gt;<i> &gt; &gt; Ohhh...  shiny! 
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; data: urls could be perhaps an interesting way to inline content in text/gemini... LOLcats at long last! :D
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; Let's see what else is hiding in those marvelous URI schemes:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; ...let's not take delight in actively trying to crush the spirit of this
+</I>&gt;<i> &gt; thing?  I mean, the web is right there if that's what you want.
+</I>&gt;<i> 
+</I>&gt;<i> Ugh, sorry about this email.  I was irritable from a lack of good sleep
+</I>&gt;<i> and waking up to a whole slew of posts here about extra complications,
+</I>&gt;<i> just as I was starting to feel we were at last approaching a kind of
+</I>&gt;<i> &quot;cross the t's and dot the lowercase j's&quot; state where there wasn't much
+</I>&gt;<i> left to add.  But I have no idea what your intended tone was and it may
+</I>&gt;<i> well have just been tongue in cheek.  Mostly I was just annoyed at
+</I>&gt;<i> learning that these <A HREF="data://">data://</A> URLs exist.  I hadn't been aware of them.
+</I>&gt;<i> And frankly...what the hell?  Who thought it was a good idea to turn a
+</I>&gt;<i> harmless way to indicate *where* some data can be found into a way to
+</I>&gt;<i> shoehorn in the data itself?  What are we supposed to use in a context
+</I>&gt;<i> where we don't want that to be a possibility?  Bah!
+</I>
+  As I mentioned in my previous email, data: URIs can be &quot;followed&quot; just as
+any other URI, it's just that the data has already been &quot;pre-cached&quot; so to
+speak.  And since it comes with a MIME-type as part of the scheme, it can be
+displayed in a client as any other MIME-type, just not automatically
+inlined.
+
+  And trying to whitelist &quot;acceptable&quot; URI schemes is pointless as there are
+scores of schemes that are defined:
+
+	<A HREF="https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml">https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml</A>
+
+not all of which actually point to a resource, like urn: (RFC-8141).  And
+speaking of urn:, it's specification states (section 4.1):
+
+   Because a URN is, syntactically, a URI under the &quot;urn&quot; scheme, in
+   theory a URN can be placed in any protocol slot that allows for a URI
+   (to name just a few, the &quot;href&quot; and &quot;src&quot; attributes in HTML, the
+   base element in HTML, the &quot;xml:base&quot; attribute in XML [XML-BASE], and
+   the &quot;xmlns&quot; attribute in XML for XML namespace names [XML-NAMES]).
+
+   However, this does not imply that, semantically, it always makes
+   sense in practice to place a URN in a given URI protocol slot; in
+   particular, because a URN might not specify the location of a
+   resource or even point indirectly to one, it might not be appropriate
+   to place a URN in a URI protocol slot that points to a resource
+   (e.g., the aforementioned &quot;href&quot; and &quot;src&quot; attributes).
+
+   Ultimately, guidelines regarding when it is appropriate to use URIs
+   under the &quot;urn&quot; scheme (or any other scheme) are the responsibility
+   of specifications for individual URI protocol slots (e.g., the
+   specification for the &quot;xml:base&quot; attribute in XML might recommend
+   that it is inappropriate to use URNs in that protocol slot).  This
+   specification cannot possibly anticipate all of the relevant cases,
+   and it is not the place of this specification to require or restrict
+   usage for individual protocol slots.
+
+  So it might be prudent to state in the Gemini spec that
+
+	1) urn: is not a valid URI type for links, and
+	2) NO INLINING OF LINKS ALLOWED [1].
+
+  -spc (You have my permission to do so 8-)
+
+[1]	I have more to say about this in an upcoming email.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001188.html">More silly text/gemini spec proposals
+</A></li>
+	<LI>Next message (by thread): <A HREF="001149.html">More silly text/gemini spec proposals
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1189">[ date ]</a>
+              <a href="thread.html#1189">[ thread ]</a>
+              <a href="subject.html#1189">[ subject ]</a>
+              <a href="author.html#1189">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

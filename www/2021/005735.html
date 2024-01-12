@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] Clarify purpose of alt-text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Clarify%20purpose%20of%20alt-text&In-Reply-To=%3C5e227d1a-ec14-c86c-ab49-7fb286fc9907%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005734.html">
+   <LINK REL="Next"  HREF="005740.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] Clarify purpose of alt-text</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Clarify%20purpose%20of%20alt-text&In-Reply-To=%3C5e227d1a-ec14-c86c-ab49-7fb286fc9907%40marmaladefoo.com%3E"
+       TITLE="[spec] Clarify purpose of alt-text">luke at marmaladefoo.com
+       </A><BR>
+    <I>Sun Feb 28 15:20:32 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005734.html">[spec] Clarify purpose of alt-text
+</A></li>
+        <LI>Next message (by thread): <A HREF="005740.html">[spec] Clarify purpose of alt-text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5735">[ date ]</a>
+              <a href="thread.html#5735">[ thread ]</a>
+              <a href="subject.html#5735">[ subject ]</a>
+              <a href="author.html#5735">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+On 28-Feb-2021 15:06, Adnan Maolood wrote:
+&gt;<i> Section 5.4.3 of the Gemini specification currently states:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Any text following the leading &quot;```&quot; of a preformat toggle line which toggles
+</I>&gt;&gt;<i> preformatted mode on MAY be interpreted by the client as &quot;alt text&quot; pertaining
+</I>&gt;&gt;<i> to the preformatted text lines which follow the toggle line. Use of alt text
+</I>&gt;&gt;<i> is at the client's discretion, and simple clients may ignore it. Alt text is
+</I>&gt;&gt;<i> recommended for ASCII art or similar non-textual content which, for example,
+</I>&gt;&gt;<i> cannot be meaningfully understood when rendered through a screen reader or
+</I>&gt;&gt;<i> usefully indexed by a search engine. Alt text may also be used for computer
+</I>&gt;&gt;<i> source code to identify the programming language which advanced clients may
+</I>&gt;&gt;<i> use for syntax highlighting.
+</I>&gt;<i> I propose that the final sentence be removed, and that MAY be replaced
+</I>&gt;<i> with MUST:
+</I>
+I disagree - at present the spec lends equal weight to the two possible 
+interpretations of the label of the preformatted text areas
+
+ &#160;- they may be interpreted as an alternative label for screen reader 
+(an accessibility label since ascii art is meaningless to non-visual users)
+ &#160;- they may be used for text type identification (to convey the type of 
+content shown, for syntax highlighting or possibly more useful semantic 
+purposes, for example a client may choose not to render ascii art at all)
+
+The spec does not restrict to a single application or interpretation of 
+the label for these preformatted areas. Both elements are important.
+
+It is a reduction in scope to turn the may to a must as you suggest. 
+ From an accessibility point of view, you could say that indicating the 
+content type is actually more important to screen readers as they can 
+definitively use that to choose whether to show the content or not.
+
+The problem is these are orthogonal uses and the spec has them entangled 
+together. So the solution is to disentangle. I think the proposal to use 
+the opening and closing labels for each purpose (on the other email 
+thread) is the best solution so far.
+
+ &#160;- Luke
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005734.html">[spec] Clarify purpose of alt-text
+</A></li>
+	<LI>Next message (by thread): <A HREF="005740.html">[spec] Clarify purpose of alt-text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5735">[ date ]</a>
+              <a href="thread.html#5735">[ thread ]</a>
+              <a href="subject.html#5735">[ subject ]</a>
+              <a href="author.html#5735">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Spec proposal
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Spec%20proposal&In-Reply-To=%3C074c84c3153c2bc50db694083768f6af%40stellarbound.space%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002925.html">
+   <LINK REL="Next"  HREF="002893.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Spec proposal</H1>
+    <B>Ali Fardan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Spec%20proposal&In-Reply-To=%3C074c84c3153c2bc50db694083768f6af%40stellarbound.space%3E"
+       TITLE="Spec proposal">raiz at stellarbound.space
+       </A><BR>
+    <I>Thu Oct 22 15:32:41 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002925.html">gus stopped indexing?
+</A></li>
+        <LI>Next message (by thread): <A HREF="002893.html">Spec proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2891">[ date ]</a>
+              <a href="thread.html#2891">[ thread ]</a>
+              <a href="subject.html#2891">[ subject ]</a>
+              <a href="author.html#2891">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Greetings follows, I just found out about gemini recently and I got
+interested in the project and wanted to be involved, In the process of
+setting up my gempod (that's how you call them?), I wanted to be able
+to have an HTML/HTTP mirror for my gempod and I haven't found a gemtext
+to HTML converter so I decided to write my own, and in the middle of
+the process I thought if I'm going write a full parser for gemtext,
+I might as well make the code reusable and package it as a library, so
+the project shifted from a gemtext to HTML tool to a gemtext processing
+library, and here I am.
+
+However, throughout implementing the parser, I got into many questions
+about the spec, I can't really recall all of them right now but here
+are a few:
+
+- In 5.5.2 it is stated that lines beginning with &quot;* &quot; are elements of
+an unordered list, and I assumed the space after '*' is required since 
+it
+is included in the double quotes, when I asked for clarification on IRC,
+others suggested I handle '*' with or without space afterwards, so I 
+did.
+
+- In 5.5.3, I had the same question with quotes, the spec says &quot;&gt;&quot; which
+sounds like there should be no space after &quot;&gt;&quot;, and if there is a space,
+I should treat it like a part of the quote, I asked on IRC if I should
+follow that behaviour but others also recommended that I should handle
+spaces after &quot;&gt;&quot; just in case, which leaves me to think again if the
+spec intended that or not.
+
+- In 5.5.1, It is not explicitly stated how many heading levels are
+allowed within the spec, I assumed it followed the same way markdown
+does it allowing up to 6 levels, however, after asking on IRC, I was
+told 3 is max, so I went with that.
+
+As of now, my implementation is complete, It is almost usable for
+anyone willing to test it, I wrote manpages for all functions currently
+implemented, but not for the data types yet, I'm going to work on that,
+and as part of my project, I want to write a manpage for the text/gemini
+format (gemtext(5)) and I want it to be precise and spec compliant,
+if you don't mind, I'll go ahead and write the manpage as a proposal to
+standardize some of the unclear cases of the spec, if the rest of the
+community agrees, maybe get the spec updated too?
+
+Attached is a tarball of my current implementation (WIP)
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: libgemtext.tar.gz
+Type: application/x-gzip
+Size: 59403 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201022/fef7c467/attachment-0001.bin">https://lists.orbitalfox.eu/archives/gemini/attachments/20201022/fef7c467/attachment-0001.bin</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002925.html">gus stopped indexing?
+</A></li>
+	<LI>Next message (by thread): <A HREF="002893.html">Spec proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2891">[ date ]</a>
+              <a href="thread.html#2891">[ thread ]</a>
+              <a href="subject.html#2891">[ subject ]</a>
+              <a href="author.html#2891">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

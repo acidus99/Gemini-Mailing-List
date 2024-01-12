@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Tech][Idea]Link syntax
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BTech%5D%5BIdea%5DLink%20syntax&In-Reply-To=%3CCAFa9yN%3DKzSyyzASJXHY%3D5MhP3SNa7Mznw%3DB4i%2BrfaBiq8B69Xw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006970.html">
+   <LINK REL="Next"  HREF="006971.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Tech][Idea]Link syntax</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BTech%5D%5BIdea%5DLink%20syntax&In-Reply-To=%3CCAFa9yN%3DKzSyyzASJXHY%3D5MhP3SNa7Mznw%3DB4i%2BrfaBiq8B69Xw%40mail.gmail.com%3E"
+       TITLE="[Tech][Idea]Link syntax">linde.philip at gmail.com
+       </A><BR>
+    <I>Tue Aug  3 11:08:51 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006970.html">[Tech][Idea]Link syntax
+</A></li>
+        <LI>Next message (by thread): <A HREF="006971.html">1. Re: [Tech][Idea]Link syntax (Rev. Fr. Robert Bower
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6980">[ date ]</a>
+              <a href="thread.html#6980">[ thread ]</a>
+              <a href="subject.html#6980">[ subject ]</a>
+              <a href="author.html#6980">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I accidentally sent this to just Robert, but it contains some
+observations that I think are interesting to others in the thread.
+
+On 7/28/21, Rev. Fr. Robert Bower &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">frrobert at frrobert.com</A>&gt; wrote:
+&gt;<i> This is an idea I have pondered for awhile and the deurbanizing thread got
+</I>&gt;<i> me thinking about it again.
+</I>&gt;<i>
+</I>&gt;<i> Gemini document syntax in many ways uses a subset of markdown.  The
+</I>&gt;<i> exception being the syntax for links.
+</I>
+This is not true. Gemini has no concept of paragraphs, which
+consequently allows for arbitrary functional line breaks anywhere in
+text. These are simply line breaks in the source, which different from
+any Markdown implementation I have used. In CommonMark, two spaces at
+the end of a paragraph line indicates that the following line break is
+a hard line break.
+
+text/gemini also does not require a space between a heading indicator
+and the heading content, for example, unlike CommonMark. The ambiguity
+of the original Markdown description however means that some Markdown
+parsers allow this anyway. That Markdown implementations currently
+can't seem to stick to a canonical specification (even with the
+existence of attempts like CommonMark) is further reason not to
+consider it, IMO.
+
+&gt;<i> Would it not be advantageous for content creators for Gemini to support both
+</I>&gt;<i> the standard Gemini syntax of =&gt; for links and also support the []()
+</I>&gt;<i> markdown syntax for links, limited to links on their own line?
+</I>
+No. It would be advantageous for authors that the formats remain as-is
+so that not every author potentially have to update their every
+document. It's also advantageous for implementors in that it doesn't
+completely invalidate their parsers. It would perhaps be useful for
+authors to have a tool that can translate between Markdown and
+text/gemini, however.
+
+&gt;<i> I am picturing a set of documents that could be delivered via Gemini as
+</I>&gt;<i> Gemini documents or delivered as markdown documents which then could be
+</I>&gt;<i> viewed as html or pdf.
+</I>
+What purpose does this fulfill? You can serve Markdown, HTML and PDF
+with Gemini. I imagine that a server implementation could
+automatically serve alternative versions of the text/gemini content
+rendered in these formats, which would result in no changes to the
+specification.
+
+&gt;<i> This may just be crazy but I thought I would throw it out there.
+</I>
+Not crazy, but perhaps untimely. Gemini exists and is in use in its
+current form. This suggests a breaking change that would invalidate
+many existing documents, not just WRT links but for the other reasons
+I've stated above. It would also invalidate a lot of existing client
+implementations.
+
+The Gemini FAQ states that &quot;The current (informal) specification of
+the protocol is largely frozen, modulo small changes to remove
+ambiguity and address edge cases. Suggestions for new features will
+not be considered, as the protocol is considered feature complete.&quot;
+This is an important advantage. I still feel like whenever I check the
+mailing list there are numerous suggestions for massively breaking
+changes. This seems unproductive.
+
+Best regards,
+Philip
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006970.html">[Tech][Idea]Link syntax
+</A></li>
+	<LI>Next message (by thread): <A HREF="006971.html">1. Re: [Tech][Idea]Link syntax (Rev. Fr. Robert Bower
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6980">[ date ]</a>
+              <a href="thread.html#6980">[ thread ]</a>
+              <a href="subject.html#6980">[ subject ]</a>
+              <a href="author.html#6980">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

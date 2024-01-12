@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client behavior when server doesn't close connection?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20behavior%20when%20server%20doesn%27t%20close%20connection%3F&In-Reply-To=%3CCFE13A8A-1690-4715-827A-34894EAE2B17%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002132.html">
+   <LINK REL="Next"  HREF="002135.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client behavior when server doesn't close connection?</H1>
+    <B>Petite Abeille</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20behavior%20when%20server%20doesn%27t%20close%20connection%3F&In-Reply-To=%3CCFE13A8A-1690-4715-827A-34894EAE2B17%40gmail.com%3E"
+       TITLE="Client behavior when server doesn't close connection?">petite.abeille at gmail.com
+       </A><BR>
+    <I>Thu Jul  9 13:52:11 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002132.html">Client behavior when server doesn't close connection?
+</A></li>
+        <LI>Next message (by thread): <A HREF="002135.html">Client behavior when server doesn't close connection?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2133">[ date ]</a>
+              <a href="thread.html#2133">[ thread ]</a>
+              <a href="subject.html#2133">[ subject ]</a>
+              <a href="author.html#2133">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+&gt;<i> On Jul 9, 2020, at 14:27, juhani &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">juhani at envs.net</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> the working sites the last packet from the server had FIN flag, and on the failing sites it didn't.
+</I>
+In principle, the server MUST close the connection. Gemini doesn't have the concept of persistent connection, or content length, or chunking, or what not. Nothing but close.
+
+If the server doesn't explicitly close the connection, then the client is toast, as there is no other mechanism to indicate end-of-transmission.
+
+&gt;<i> but what should the client do if it cant be sure it has the complete payload?
+</I>
+Pray. Punt. Apply any random heuristics you see fit. But really, no close, no cigar.
+
+&gt;<i> With line based content it's possible to show what you've got. The clients I've tried, so far, seem to do that, but is it correct?
+</I>
+It's a heuristic. Your milage may vary. The short of it is that there is no mechanism to indicate anything aside from the server cleanly closing the connection.
+
+&gt;<i> And what about binary content?
+</I>
+Use a different protocol.
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002132.html">Client behavior when server doesn't close connection?
+</A></li>
+	<LI>Next message (by thread): <A HREF="002135.html">Client behavior when server doesn't close connection?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2133">[ date ]</a>
+              <a href="thread.html#2133">[ thread ]</a>
+              <a href="subject.html#2133">[ subject ]</a>
+              <a href="author.html#2133">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Permanent freeze on non-trivial new features
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Permanent%20freeze%20on%20non-trivial%20new%20features&In-Reply-To=%3C20200615173813.GA17413%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001706.html">
+   <LINK REL="Next"  HREF="001709.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Permanent freeze on non-trivial new features</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Permanent%20freeze%20on%20non-trivial%20new%20features&In-Reply-To=%3C20200615173813.GA17413%40SDF.ORG%3E"
+       TITLE="Permanent freeze on non-trivial new features">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Mon Jun 15 18:38:13 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001706.html">Repeating the Web's Mistakes (was gemini+submit:// (was R Uploading Gemini content))
+</A></li>
+        <LI>Next message (by thread): <A HREF="001709.html">gemini servers and &quot;frameworks&quot;?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1708">[ date ]</a>
+              <a href="thread.html#1708">[ thread ]</a>
+              <a href="subject.html#1708">[ subject ]</a>
+              <a href="author.html#1708">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Greetings all,
+
+After today's change to the spec to introduce some new line types, I am 
+announcing a permanent freeze on the addition of non-trivial new 
+features to Gemini.
+
+This is a bit of a deviation from the big picture plan I sketched when
+announcing the last three month spec free, which was:
+
+&gt;<i> 1. INTERVAL = 3 months
+</I>&gt;<i> 2. Spend INTERVAL actually building Geminispace and associated tools,
+</I>&gt;<i>    with no major spec changes.
+</I>&gt;<i> 3. Ask &quot;What is the *single* biggest problem/shortcoming of the current
+</I>&gt;<i>    spec, based on everything that has actually been done or been tried
+</I>&gt;<i>    in the past INTERVAL?&quot;
+</I>&gt;<i> 4. Possibly (but not necessarily) change the spec to address the
+</I>&gt;<i>    answer to 3, if the problem is deemed bad enough and can be
+</I>&gt;<i>    addressed without adding too much extra complexity.
+</I>&gt;<i> 5. Set INTERVAL = 2*INTERVAL
+</I>&gt;<i> 6. GOTO 2, or END.
+</I>
+I still very much agree with the spirit of this plan and think this is a
+fine way to develop small and simple software with a clear purpose and
+to avoid the ever-present danger of feature creep.  That said, in terms 
+of the practical implications for Gemini, strictly following this plan 
+would cause things to stretch on too long.  Announcing a six month 
+freeze would bring us into next year, and to be honest I really want 
+this whole thing (as in, the specification of Gemini) to be absolutely 
+done and dusted by the end of this year.  That includes all the final
+fine-toothed combing and worrying about little details and edge cases.
+Which means actual work needs to stop as soon as possible.
+
+What we have specced right now is still small and simple, easy to learn
+and easy to implement.  IMHO we have done a good job smoothing off all
+the rough edges of Gopher and all of the project's original ambitions
+have been met.  The full capabilities of, and the full extent of
+problems with, even very simple systems like Gemini take years to be
+fully uncovered and understood (a point the demosceners amongst us
+will attest to!).  Things like Tomasino's recent post about the exciting
+possibilities of taking advantage of the fact that Gemtext can be 
+correctly processed line-by-line to &quot;stream&quot; content like chatrooms or 
+logs, and Francesco's post about CSRF in Gemini, both show that we have
+only just begun to scratch the surface of Gemini.  Adding anything
+further at this stage when there are still so very many practical points
+needing attention, and when we still don't even really know what we
+have, seems very unwise to me.
+
+This means there will never be any official mechanism for uploading
+Gemini content within Gemini itself, beyond what can be built on top of
+what we already have, with possibly a few trivial tweaks added to ease
+this.  I realise this will disappoint a lot of people and I'm honestly
+really unhappy about that.  But Gemini was never supposed to be all
+things to all people - I really don't believe any software which is
+really simple *can* be that, and I really believe that radical
+simplicity is necessary to make software possible to correctly reason
+about, which in turn is necessary to make it reliable and secure and for
+users to exercise their autonomy, and to make it easy to implement and
+deploy, which in turn is necessary to keep it from falling into familiar
+traps of centralisation, monopolisation, etc.
+
+If there are people in the community who want to independently develop a
+separate companion protocol in the spirit of Gemini to address the
+upload problem, I can't and won't attempt to discourage them, as I'm
+fully aware that I have absolutely no right to do so.
+
+As the focus of activity in the community begins to move away from
+defining the Gemini protocol and toward building things on top of the
+fixed foundation that its final form offers, there is honestly a really
+wide range of things that interested people can get their hands dirty
+with if they want to, and this includes lots of stuff related to making
+Gemini more accessible to people without the requisite technology
+background to make use of pubnix hosting and similar resources.  This
+includes development work (I think it's very clear that we have not even
+begun to scratch the surface of possible ways to ease the publishing
+process without adding anything to the protocol) and educational work
+(writing good Gemini-hosted content helping people acquire that
+technical backround).  This is very worthy work toward a very worthy
+goal and I fully support it.
+
+Those of you who just won't know what to do with yourselves without the
+thrill of arguing over specification details need not feel any sense of
+loss as the Gemini protocol begins to stabilise, even if you don't have
+the stomach for the less glamorous work of fiddly minor final detail
+wrangling: we still have a big pile of interesting &quot;side-specs&quot; that
+have not received full attention, most notably adapting robots.txt into
+an environment without User-Agents.
+
+I think we can rightfully be very proud of ourselves for what we've
+developed here so far, and I really look forward to us starting to make
+use of it in earnest!  Thanks to everybody who has contributed to the
+project in any way, large or small.  Despite the air of finality
+throughout this email, this really is just the very beginning of this
+whole thing.  Let's build an awesome Geminispace!
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001706.html">Repeating the Web's Mistakes (was gemini+submit:// (was R Uploading Gemini content))
+</A></li>
+	<LI>Next message (by thread): <A HREF="001709.html">gemini servers and &quot;frameworks&quot;?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1708">[ date ]</a>
+              <a href="thread.html#1708">[ thread ]</a>
+              <a href="subject.html#1708">[ subject ]</a>
+              <a href="author.html#1708">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

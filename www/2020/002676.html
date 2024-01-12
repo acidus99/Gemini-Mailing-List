@@ -1,0 +1,270 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A proposed scheme for parsing preformatted alt text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C87zh5w9q94.fsf%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002665.html">
+   <LINK REL="Next"  HREF="002678.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A proposed scheme for parsing preformatted alt text</H1>
+    <B>Gary Johnson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C87zh5w9q94.fsf%40disroot.org%3E"
+       TITLE="A proposed scheme for parsing preformatted alt text">lambdatronic at disroot.org
+       </A><BR>
+    <I>Fri Sep 11 18:28:55 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002665.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+        <LI>Next message (by thread): <A HREF="002678.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2676">[ date ]</a>
+              <a href="thread.html#2676">[ thread ]</a>
+              <a href="subject.html#2676">[ subject ]</a>
+              <a href="author.html#2676">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks for putting together a simple example Gemtext file using the
+machine-readable-on-top, alt-text-on-bottom approach I suggested
+yesterday.
+
+&gt;<i>From the recent mailing list responses, it looks like my proposal was
+</I>met with mixed feelings. Some of you liked it. Others didn't and
+suggested using HTML or Markdown instead. There also appear to be
+several folks harboring fears of a slippery slope situation in which the
+Gemini protocol, by means of supporting a machine-readable text line on
+its preformatted text blocks, is somehow going to become as complex as
+the modern-day web. I'll try to address some of these concerns here.
+
+Just stepping back to first principles, I believe Solderpunk's intention
+with the Gemtext spec was to provide a slightly more structured markup
+format than plain text that could look nice in a more complex client but
+which would still render just fine in a client that did nothing more
+than render text/gemini as text/plain.
+
+While I believe that Gemtext accomplishes this purpose very well in its
+current state, the preformatted text block is definitely overloaded at
+the moment in terms of its purpose. Currently, it is the only way to
+include images (as ASCII art), tables, or source-code blocks in a
+guaranteed mono-spaced font. All of these provide valuable information
+to readers of our Gemtext pages, and I personally am quite happy with
+how simple the preformatted blocks make it to include them.
+
+However, once of the issues I first wrote to Solderpunk about when I
+became aware of Gemini was whether Gemtext would support optional syntax
+highlighting (in advanced clients that chose to support it) by allowing
+us to use the ```some-programming-language syntax from Github-flavored
+Markdown on the opening line of preformatted blocks. He replied to me
+saying that this had been considered already and was intended as one of
+the uses of that slot. He also pointed me to the point in the Gemini
+spec which mentions this. Here is the relevant paragraph from Section
+5.4.3 Preformatting toggle lines:
+
+&gt;<i> Any text following the leading &quot;```&quot; of a preformat toggle line which
+</I>&gt;<i> toggles preformatted mode on MAY be interpreted by the client as &quot;alt
+</I>&gt;<i> text&quot; pertaining to the preformatted text lines which follow the
+</I>&gt;<i> toggle line. Use of alt text is at the client's discretion, and simple
+</I>&gt;<i> clients may ignore it. Alt text is recommended for ASCII art or
+</I>&gt;<i> similar non-textual content which, for example, cannot be meaningfully
+</I>&gt;<i> understood when rendered through a screen reader or usefully indexed
+</I>&gt;<i> by a search engine. Alt text may also be used for computer source code
+</I>&gt;<i> to identify the programming language which advanced clients may use
+</I>&gt;<i> for syntax highlighting.
+</I>
+For the three use cases of preformatted blocks that I mentioned above
+(ASCII art images, tables, source code), alt text (as an accessibility
+option) could clearly be useful and is also obviously the intended
+purpose of this slot. However, the last line of that paragraph indicates
+the intention that the ```some-programming-language is meant as one
+machine-readable use of the line's contents for the purpose syntax
+highlighting.
+
+To assuage any concerns about opening the door to endless possible
+syntaxes for machine-readable processing of preformatted blocks being
+introduced to Gemtext, I'll retract my previous suggestion of using the
+top line for (generic) machine-readable purposes and the bottom line for
+the alt text.
+
+The only real machine-readable behavior I want to see in Gemini is
+source code syntax highlighting anyway, and the spec already supports
+and encourages that. In all other cases, alt text (which can clearly be
+ignored or used &quot;at the client's discretion&quot; as per the spec) is just
+fine on the top line of preformatted blocks. I suppose I don't really
+see much machine-readable value in tagging a block as &quot;image&quot; or &quot;table&quot;
+currently anyway. YMMV
+
+To that end, maybe we just need some community agreement (and/or a
+clearer codification in the Gemini spec) of how to use alt text &quot;for
+computer source code to identify the programming language which advanced
+clients may use for syntax highlighting&quot;.
+
+===========================================================================
+
+Here's a simple proposal:
+
+```clojure Source code implementing a non-tail-recursive factorial function
+(defn fac [n]
+  (if (= n 0)
+    1
+    (* n (fac (- n 1)))))
+```
+
+If the first word in a preformatted text block's alt text is the name of
+a programming language recognized by the client, then it may (at its
+discretion) apply syntax highlighting for that language to the block's
+contents.
+
+===========================================================================
+
+This remains in line with both the spirit and content of Gemini
+specification Section 5.4.3 Preformatting toggle lines. It also
+explicitly allows clients to opt-in (or not). Whether or not syntax
+highlighting is applied, the entire alt text line can still be used as
+perfectly valid human-readable text for accessibility purposes.
+
+There is no possibility of a slippery slope happening in the Gemtext
+specification because this is just a non-extensible, optional-only
+feature that is already in the Gemini spec anyway and is just being more
+clearly codified, so it can be used reliably in the wild.
+
+I yield the floor.
+
+Thanks,
+  Gary
+
+
+Meff &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">meff at meff.me</A>&gt; writes:
+
+&gt;<i> (Apologies for the double email Sean, I forgot to Reply All)
+</I>&gt;<i>
+</I>&gt;<i> Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; writes:
+</I>&gt;<i>
+</I>&gt;&gt;<i>   And back in the mid-90s, there *were* plenty of web clients.  Easily a
+</I>&gt;&gt;<i> dozen that were easily available and that was back in time when it was easy
+</I>&gt;&gt;<i> enough to parse HTML, there was no CSS and no Javascript, and it was
+</I>&gt;&gt;<i> conceivable that someone could write a simple web browser in a weekend [1].
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>   Then Sandra Snan sent the following link:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> 	<A HREF="https://drewdevault.com/2020/03/18/Reckless-limitless-scope.html">https://drewdevault.com/2020/03/18/Reckless-limitless-scope.html</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Wherein it's mentioned that the current &quot;state of the web&quot; is described by
+</I>&gt;&gt;<i> 114,000,000 words spread across 1,217 standards documents.  You get here by
+</I>&gt;&gt;<i> incremental changes, all of which are &quot;easy&quot; and &quot;it would be so
+</I>&gt;&gt;<i> nice.&quot;
+</I>&gt;<i>
+</I>&gt;<i> I agree with this. I understand that there's a couple points here that
+</I>&gt;<i> the alt-text discussion is trying to solve:
+</I>&gt;<i>
+</I>&gt;<i> * Formatting hints for non-human clients
+</I>&gt;<i> ** Specifically this benefits users that may be visually impaired and
+</I>&gt;<i>    their use of tools such as screen readers
+</I>&gt;<i> * Hints or descriptions for human readers
+</I>&gt;<i>
+</I>&gt;<i> I don't see a way out of this without making Gemtext much more
+</I>&gt;<i> complicated than it is now. As it is, parsing Gemtext preformatted
+</I>&gt;<i> blocks requires holding onto state, which no other portion of Gemtext
+</I>&gt;<i> requires. Adding hints will make parsing these blocks even more
+</I>&gt;<i> complicated. And then the interpretation question comes in: how do we
+</I>&gt;<i> interpret these blocks that adorn preformatted text. Will these blocks
+</I>&gt;<i> be abused. Will complicated clients adopt a de-facto meaning for these,
+</I>&gt;<i> leaving simpler clients to wither?
+</I>&gt;<i>
+</I>&gt;<i> There are so many more questions that can come up. If I'm trying to
+</I>&gt;<i> represent data, should Gemtext convey semantic information? If I'm
+</I>&gt;<i> rendering the contents of longform text, should Gemtext convey layout
+</I>&gt;<i> information? And how do we reify layouts between different languages and
+</I>&gt;<i> their narrative structures? Should Gemtext support compression for large
+</I>&gt;<i> payloads? What about caching? (ETags come to mind.) I mean, if I'm
+</I>&gt;<i> distributing copies of Project Gutenberg books, I don't want to force
+</I>&gt;<i> someone to download uncompressed text when they can get the same content
+</I>&gt;<i> compressed in often half the time, especially in low/bad connectivity
+</I>&gt;<i> situations. Oh and how about math? I see lots of discussion about code,
+</I>&gt;<i> but how do we represent math? How do we give Gemini browsers rendering
+</I>&gt;<i> hints for math? The potential here to add complexity is endless!
+</I>&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>   Also, don't forget that Gemini can *easily* serve up HTML documents.  And
+</I>&gt;&gt;<i> Markdown documents.  And PDF.  And a host of other documentation formats
+</I>&gt;&gt;<i> that all do what you want to do.  And then some.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>   But hey, I can play this game.  I added the following non-standard
+</I>&gt;&gt;<i> document:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> 	<A HREF="gemini://gemini.conman.org/test/preformat.gemini">gemini://gemini.conman.org/test/preformat.gemini</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> that contains &quot;machine readable text&quot; at the opening preformatted marker,
+</I>&gt;&gt;<i> and a &quot;human readable text&quot; on the ending preformatted marker, just to give
+</I>&gt;&gt;<i> an indication of what it might look like and what might be done with it. 
+</I>&gt;&gt;<i> Enough talk, *someone* has to do an implementation to scare the bejeezus out
+</I>&gt;&gt;<i> of everyone (not that it's particularly scary in what I did).
+</I>&gt;<i>
+</I>&gt;<i> Thanks for putting the rubber to the road!
+</I>&gt;<i>
+</I>&gt;<i> I'm just not a fan of trying to bundle more in Gemtext. I'd rather we
+</I>&gt;<i> try to diversify the formats of content that are available. I think HTML
+</I>&gt;<i> is a great fallback that can answer almost all the questions I posed
+</I>&gt;<i> earlier, the questions that are under discussion for alt text, and 
+</I>&gt;<i> most questions of document presentation. HTML doesn't need to be deeply
+</I>&gt;<i> tied into a DOM with gobs of Javascript and CSS to work. And there's
+</I>&gt;<i> plaintext, PDFs, XML, JSON, tons of formats for all sorts of use
+</I>&gt;<i> cases. I'd rather not shove a round peg into a square hole, but that's
+</I>&gt;<i> just me.
+</I>&gt;<i>
+</I>&gt;<i> - meff
+</I>
+
+-- 
+GPG Key ID: 7BC158ED
+Use `gpg --search-keys lambdatronic' to find me
+Protect yourself from surveillance: <A HREF="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</A>
+=======================================================================
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+Please avoid sending me MS-Office attachments.
+See <A HREF="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002665.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+	<LI>Next message (by thread): <A HREF="002678.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2676">[ date ]</a>
+              <a href="thread.html#2676">[ thread ]</a>
+              <a href="subject.html#2676">[ subject ]</a>
+              <a href="author.html#2676">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

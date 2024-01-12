@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Should Gemini clients alert users upon redirect?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Should%20Gemini%20clients%20alert%20users%20upon%20redirect%3F&In-Reply-To=%3C20210226111610.af5dd5f307b72a0d3df994c7%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005330.html">
+   <LINK REL="Next"  HREF="005691.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Should Gemini clients alert users upon redirect?</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Should%20Gemini%20clients%20alert%20users%20upon%20redirect%3F&In-Reply-To=%3C20210226111610.af5dd5f307b72a0d3df994c7%40gmail.com%3E"
+       TITLE="Should Gemini clients alert users upon redirect?">linde.philip at gmail.com
+       </A><BR>
+    <I>Fri Feb 26 10:16:10 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005330.html">Should Gemini clients alert users upon redirect?
+</A></li>
+        <LI>Next message (by thread): <A HREF="005691.html">Should Gemini clients alert users upon redirect?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5667">[ date ]</a>
+              <a href="thread.html#5667">[ thread ]</a>
+              <a href="subject.html#5667">[ subject ]</a>
+              <a href="author.html#5667">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, 17 Feb 2021 10:16:47 +0100
+Stephane Bortzmeyer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stephane at sources.org</A>&gt; wrote:
+
+&gt;<i> On Tue, Feb 16, 2021 at 10:52:47PM -0500,
+</I>&gt;<i>  Michael Lazar &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">lazar.michael22 at gmail.com</A>&gt; wrote 
+</I>&gt;<i>  a message of 33 lines which said:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; <A HREF="gemini://example.com">gemini://example.com</A> and <A HREF="gemini://example.com/">gemini://example.com/</A> are canonically the
+</I>&gt;<i> &gt; same resource and should always return the same response.
+</I>&gt;<i> 
+</I>&gt;<i> Are you sure?
+</I>&gt;<i> 
+</I>&gt;<i> RFC 3986, section 6.2.3 says &quot;In general, a URI that uses the generic
+</I>&gt;<i> syntax for authority with an empty path should be normalized to a path
+</I>&gt;<i> of &quot;/&quot;.&quot; Note the &quot;in general&quot;. The rest of section 6.2.3 explains
+</I>&gt;<i> that is is scheme-specific.
+</I>
+In my interpretation I make the assumption that the Gemini spec notes
+where it deviates from the general shoulds and musts of the standard it
+refers to and leaves everything else wihout comment. Otherwise, the
+Gemini URI syntax is largely unspecified.
+
+Also because, according o RFC 3986, &quot;The syntax and semantics of URIs
+vary from scheme to scheme, as described by the defining specification
+for each scheme&quot; with the Gemini spec not noting any variation from
+the general case in 6.2.3.
+
+I've raised this issue at least twice before, because there are some (or
+one) Gemini server implementations that do not follow this, and will
+serve a redirect on &quot;<A HREF="gemini://host">gemini://host</A>&quot; to &quot;<A HREF="gemini://host/">gemini://host/</A>&quot;, and the
+expected content only on &quot;<A HREF="gemini://host/">gemini://host/</A>&quot;. Even ignoring the
+normalizations in RFC 3986, I don't know that there are any good reasons
+to do this, but last I checked even gemini.circumlunar.space does.
+
+So I think your assumption is fair, but also that the spec should be
+updated to be explicit about this case because some server authors
+obviously disagreed with us and we have to resort to RFC Sherlock
+Holmes type inference to make a point otherwise.
+
+-- 
+Philip
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210226/a3b316f5/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20210226/a3b316f5/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005330.html">Should Gemini clients alert users upon redirect?
+</A></li>
+	<LI>Next message (by thread): <A HREF="005691.html">Should Gemini clients alert users upon redirect?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5667">[ date ]</a>
+              <a href="thread.html#5667">[ thread ]</a>
+              <a href="subject.html#5667">[ subject ]</a>
+              <a href="author.html#5667">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

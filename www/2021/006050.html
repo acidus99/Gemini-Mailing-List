@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [users] General accessibility of Gemini browsers
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Busers%5D%20General%20accessibility%20of%20Gemini%20browsers&In-Reply-To=%3C880ca243-4d36-ebf0-1b5a-a3f3e5b8aab8%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006079.html">
+   <LINK REL="Next"  HREF="006067.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[users] General accessibility of Gemini browsers</H1>
+    <B>Devin Prater</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Busers%5D%20General%20accessibility%20of%20Gemini%20browsers&In-Reply-To=%3C880ca243-4d36-ebf0-1b5a-a3f3e5b8aab8%40gmail.com%3E"
+       TITLE="[users] General accessibility of Gemini browsers">r.d.t.prater at gmail.com
+       </A><BR>
+    <I>Wed Mar 10 17:27:49 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006079.html">[users] Gemini as a local note-taking / personal wiki thing? 
+</A></li>
+        <LI>Next message (by thread): <A HREF="006067.html">[users] General accessibility of Gemini browsers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6050">[ date ]</a>
+              <a href="thread.html#6050">[ thread ]</a>
+              <a href="subject.html#6050">[ subject ]</a>
+              <a href="author.html#6050">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi all. A few weeks ago, I launched a discussion about the accessibility
+of Gemini browsers, particularly of preformatted blocks. Now, I have
+begun exploring the general accessibility of browsers as a whole. Things
+I look at:
+
+
+* If the browser UI can be navigated and used: like the address bar,
+back/forward/tab buttons, and menu bar or menu popout button.
+
+* If the browser text can be read.
+
+* If the browser text exposes element types, like headings, links, block
+quotes, ETC. mainly headings and links are important, everything else I
+just assume to be paragraphs.
+
+* If using a &quot;normal&quot; screen reader, like NVDA (Windows), Orca (Linux),
+VoiceOver (iOS), or TalkBack and similar (Android), whether or not
+navigation keys, like &quot;h&quot; for heading, &quot;k&quot; for link ETC. works to
+quickly move throughout the page.
+
+* If preformatted blocks can be folded/hidden or made into one element
+to reduce noise.
+
+
+I don't know if there's anything else I should be looking at or testing,
+but Gemini browsers seem pretty simple thank goodness, so really that
+seems to be all I need to look for.
+
+
+# Testing so far
+
+
+So far, I've used Elpher, Elaho, and Ariane a bit. Until Ariane stopped
+and needed to be closed. I've also used Dragon Stone, Crystalle, and a
+few other Linux apps. Mainly, I'll discuss the things I've seen done
+right, and things that should be improved in browsers for accessibility.
+
+
+## Elpher
+
+
+Elpher is the Emacs Gopher and Gemini client. It works well with
+Emacspeak, except headings aren't announced or spoken as such.
+Everything else works fine: I can use the URL Entry command, move &quot;up&quot; a
+page, add bookmarks, and so on. I can move by links with Tab, although
+the link name isn't automatically spoken, like in EWW. However, since
+links are all one on each line, I can have Emacspeak read the current
+line to get the link name, and press Enter to open it. Emacspeak works
+with packages using the Advise Emacs system of &quot;scripting&quot; functions.
+That's how EWW works so well with Emacspeak. The problems I have with
+Elpher are small, and I can live with them. The link symbol of pointing
+arrows can be removed using Customize, leaving the link itself the only
+thing on the line.
+
+
+## Elaho
+
+
+Elaho, I think, is one of the best clients for accessibility right now.
+Not only does it expose all element types, has textual labels for all
+browse_r UI elements, and gives the ability for VoiceOver to move
+through item types, it compacts preformatted blocks into an &quot;image&quot;
+label and only shows the Alt-text, if available._
+
+_
+_
+
+_## Ariane_
+
+_
+_
+
+Ariane is pretty new to me, but it works well. I can read the UI, and
+the browser text. It even has the ability to hide preformatted blocks.
+But, it lacks one important part, labels for non-paragraph elements,
+like links and headings. I did turn on item type labels in its settings,
+but that didn't seem to work. That may be a bug or something, but it
+does help to know if something is a link or not. I'll have to keep
+working with this one and see how far I can get with it. As I said, it
+crashed on me last night, so I didn't get too far into it.
+
+
+## gemiNaut
+
+
+GemiNaut is really great too. I can use the UI, headings and links are
+labeled, I can read the text of a site just like a website, so screen
+reader navigation keys work. But, preformatted blocks aren't hidden, and
+I've not found a setting to do this in the browser. I'll have to look
+and see if there have been any updates to it in the last few weeks,
+though. Otherwise, it works great!
+
+
+## Others
+
+
+Chrystalle, as I remember from the last time I've tried it, was not
+usable at all. With DragonStone, I could read the text, but couldn't
+tell what is a link or heading and what was plain text. I have yet to
+mess with many terminal clients, but this is just a spark to start
+discussion, I'll add more findings later on.
+
+
+# Notes that may be helpful to programmers
+
+
+For programmers, if your framework has a browser system, like GTK web
+view or the Android web view, or iOS Safari thing you can embed in the
+app, try that. Otherwise, you may have to just have a static text view
+with a toggle in the app settings to show ingo like &quot;heading&quot; or &quot;link&quot;
+and such. Also, don't be afraid to try your browser out with the screen
+reader built into your OS. For Linux, there's Orca, or gnome-orca as it
+may be packaged. For Windows, there's Narrator already built into
+Windows. And if you have Windows 10, it works well enough for testing
+real applications. For Android, there's TalkBack, which is included in
+the Android Accessibility Suite. For iOS, there's VoiceOver, included in
+every iPhone, iPad, and iPod Touch since the iPhone 3Gs, so you're sure
+to have it. Hopefully. :) And for MacOS, VoiceOver is built in there, too.
+
+
+I hope this helps. :)
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210310/9ad50e08/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210310/9ad50e08/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006079.html">[users] Gemini as a local note-taking / personal wiki thing? 
+</A></li>
+	<LI>Next message (by thread): <A HREF="006067.html">[users] General accessibility of Gemini browsers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6050">[ date ]</a>
+              <a href="thread.html#6050">[ thread ]</a>
+              <a href="subject.html#6050">[ subject ]</a>
+              <a href="author.html#6050">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

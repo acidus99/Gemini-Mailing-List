@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Cache duration and response body size proposals
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cache%20duration%20and%20response%20body%20size%20proposals&In-Reply-To=%3C4180c3480c6a37ce5898158d15b8cdd8%40tilde.team%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003225.html">
+   <LINK REL="Next"  HREF="003230.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Cache duration and response body size proposals</H1>
+    <B>Robert &quot;khuxkm&quot; Miles</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cache%20duration%20and%20response%20body%20size%20proposals&In-Reply-To=%3C4180c3480c6a37ce5898158d15b8cdd8%40tilde.team%3E"
+       TITLE="Cache duration and response body size proposals">khuxkm at tilde.team
+       </A><BR>
+    <I>Tue Nov 10 15:11:54 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003225.html">Cache duration and response body size proposals
+</A></li>
+        <LI>Next message (by thread): <A HREF="003230.html">Cache duration and response body size proposals
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3227">[ date ]</a>
+              <a href="thread.html#3227">[ thread ]</a>
+              <a href="subject.html#3227">[ subject ]</a>
+              <a href="author.html#3227">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>November 10, 2020 9:34 AM, &quot;bie&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">bie at 202x.moe</A>&gt; wrote:
+
+&gt;<i> On Tue, Nov 10, 2020 at 02:17:13PM +0000, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">khuxkm at tilde.team</A> wrote:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> It's *possible* to serve large files over Gemini. I can make a script that generates a large image
+</I>&gt;&gt;<i> (or I can just have a large image to serve). Therefore, you should be able to use Gemini to serve
+</I>&gt;&gt;<i> large files. The main draw I can see for a Content-Length header is being able to see if the whole
+</I>&gt;&gt;<i> file comes across the wire. The ability to resume an interrupted download need not exist; just
+</I>&gt;&gt;<i> retry the request if all of the content doesn't get across.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> That being said, I am wary of making it even a SHOULD. If the file needs it (i.e; it's a big file
+</I>&gt;&gt;<i> that probably could get interrupted mid-download), then go ahead, but those of us who don't care
+</I>&gt;&gt;<i> about Content-Length or Cache duration shouldn't feel &quot;pressured&quot; to do it.
+</I>&gt;<i> 
+</I>&gt;<i> I'm far from a TLS expert, so I might be completely wrong here, but
+</I>&gt;<i> can't the client rely on the server's TLS close_notify signal to decide if
+</I>&gt;<i> the download was interrupted? As far as I can tell, the entire point of
+</I>&gt;<i> close_notify is to guard against data truncation...?
+</I>&gt;<i> 
+</I>&gt;<i> bie
+</I>
+I mean, yes, that's the point of close_notify, but what if the connection dies *after* the data is sent but *before* the close_notify can be sent? Then it turns into an unsolvable two-generals problem.
+
+I'm not *advocating* for either proposal, I'm just sick and tired of people acting like &quot;Gemini is meant for small text files&quot; is a good excuse to ignore proposals that could help UX when downloading larger files.
+
+Just my two cents,
+Robert &quot;khuxkm&quot; Miles
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003225.html">Cache duration and response body size proposals
+</A></li>
+	<LI>Next message (by thread): <A HREF="003230.html">Cache duration and response body size proposals
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3227">[ date ]</a>
+              <a href="thread.html#3227">[ thread ]</a>
+              <a href="subject.html#3227">[ subject ]</a>
+              <a href="author.html#3227">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

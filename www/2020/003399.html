@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Scheme Section 2 quibble
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3C20201118084257.GR19536%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003398.html">
+   <LINK REL="Next"  HREF="003400.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Scheme Section 2 quibble</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3C20201118084257.GR19536%40brevard.conman.org%3E"
+       TITLE="Scheme Section 2 quibble">sean at conman.org
+       </A><BR>
+    <I>Wed Nov 18 08:42:57 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003398.html">Scheme Section 2 quibble
+</A></li>
+        <LI>Next message (by thread): <A HREF="003400.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3399">[ date ]</a>
+              <a href="thread.html#3399">[ thread ]</a>
+              <a href="subject.html#3399">[ subject ]</a>
+              <a href="author.html#3399">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Sudipto Mallick once stated:
+&gt;<i> While you are discussing about the specs, please have a look at how
+</I>&gt;<i> the servers are currently responding to the edge cases.
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="http://ix.io/2EyQ">http://ix.io/2EyQ</A>
+</I>&gt;<i> 
+</I>&gt;<i> Request -&gt; Response (first line only)
+</I>&gt;<i> The list of known servers from <A HREF="gemini://gus.guru/known-hosts">gemini://gus.guru/known-hosts</A> : removed
+</I>&gt;<i> all non existent servers and *.flounder.online
+</I>&gt;<i> Test yourself: <A HREF="http://ix.io/2Etk">http://ix.io/2Etk</A>
+</I>&gt;<i> 
+</I>&gt;<i> And if you can, forgive my madness.
+</I>
+  Thank you for running this and reporting the results.  I can describe why
+you got the results for my server: gemini.conman.org
+
+	gemini.conman.org -&gt; 59 Bad Request
+	gemini.conman.org/ -&gt; 59 Bad Request
+	gemini.conman.org// -&gt; 59 Bad Request
+
+  These are bad because there's no scheme nor authority (missing a '//') and
+thus, these are marked as a bad request.
+
+	//gemini.conman.org -&gt; 20 text/gemini
+	//gemini.conman.org/ -&gt; 20 text/gemini
+	//gemini.conman.org// -&gt; 59 Bad Request
+
+  These are missing the scheme, but have an authority section [1].  The URL
+parser I use adds a '/' for the path if the path does not exist.  That's why
+my server does not do a 31-redirect with a missing '/' at the end.  The
+double slash at the end is being checked by a modified path-abempty rule. 
+The ABNF from the RFC is:
+
+	   path-abempty  = *( &quot;/&quot; segment )
+
+while the URL parser I'm using is doing:
+
+	   path_abempty &lt;- {~ ( '/' segment)+ ~}
+                        /  '' -&gt; '/'
+
+  The parsing code is in LPEG [2] and is equivalent to
+
+	   path-abempty = +( &quot;/&quot; segment)
+			/ 0&lt;pchar&gt; # and return a '/'
+
+and was written that way to fix an issue inherent with the ABNF of
+&quot;0&lt;pchar&gt;&quot; and how parsing works with LPEG.  I can go into details of LPEG
+if anyone is interested, but suffice to say, the path_abempty of LPEG is
+different from the ABNF of the RFC for a good reason, and this is why the
+trailing '//' from the authority section is not parsing.
+
+	<A HREF="gemini://gemini.conman.org">gemini://gemini.conman.org</A> -&gt; 20 text/gemini
+	<A HREF="gemini://gemini.conman.org/">gemini://gemini.conman.org/</A> -&gt; 20 text/gemini
+	<A HREF="gemini://gemini.conman.org//">gemini://gemini.conman.org//</A> -&gt; 59 Bad Request
+
+  A more normal request, and the same explanation from above.  No surprises
+for my server (at least, to me).  A more interesting response is from
+blekksprut.net and cadence.moe:
+
+	blekksprut.net -&gt; 20 text/gemini
+	blekksprut.net/ -&gt; 20 text/gemini
+	blekksprut.net// -&gt; 20 text/gemini
+	//blekksprut.net -&gt; 51 not found
+	//blekksprut.net/ -&gt; 51 not found
+	//blekksprut.net// -&gt; 51 not found
+	<A HREF="gemini://blekksprut.net">gemini://blekksprut.net</A> -&gt; 20 text/gemini
+	<A HREF="gemini://blekksprut.net/">gemini://blekksprut.net/</A> -&gt; 20 text/gemini
+	<A HREF="gemini://blekksprut.net//">gemini://blekksprut.net//</A> -&gt; 20 text/gemini
+
+	cadence.moe -&gt; 20 text/gemini; charset=utf-8; lang=en
+	cadence.moe/ -&gt; 20 text/gemini; charset=utf-8; lang=en
+	cadence.moe// -&gt; 20 text/gemini; charset=utf-8; lang=en
+	//cadence.moe -&gt; 50 Bliz server: Not found: //cadence.moe
+	//cadence.moe/ -&gt; 50 Bliz server: Not found: //cadence.moe/
+	//cadence.moe// -&gt; 50 Bliz server: Not found: //cadence.moe//
+	<A HREF="gemini://cadence.moe">gemini://cadence.moe</A> -&gt; 20 text/gemini; charset=utf-8; lang=en
+	<A HREF="gemini://cadence.moe/">gemini://cadence.moe/</A> -&gt; 20 text/gemini; charset=utf-8; lang=en
+	<A HREF="gemini://cadence.moe//">gemini://cadence.moe//</A> -&gt; 20 text/gemini; charset=utf-8; lang=en
+
+  These results probably stem from a same issue, but possibly different
+servers.  Just going quickly through the results, if there was no problem
+with the first grouping (just the domain name), it seems the servers *have* an
+issue with the second grouping (leading '//').  Odd.
+
+  Again, thanks for this.
+
+  -spc
+
+[1]	I've been debating if I should mark a missing scheme as a &quot;bad
+	request&quot; as I've come around to support that a Gemini server should
+	ONLY accept an absolute URL.  I haven't ... yet.
+
+[2]	Lua Parsing Expression Grammar
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003398.html">Scheme Section 2 quibble
+</A></li>
+	<LI>Next message (by thread): <A HREF="003400.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3399">[ date ]</a>
+              <a href="thread.html#3399">[ thread ]</a>
+              <a href="subject.html#3399">[ subject ]</a>
+              <a href="author.html#3399">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

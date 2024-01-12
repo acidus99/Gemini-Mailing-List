@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> On Web-proxies (was Re: Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised))
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20Web-proxies%20%28was%20Re%3A%20Assuming%20disallow-all%2C%0A%20and%20some%20research%20on%20robots.txt%20in%20Geminispace%20%28Was%3A%20Re%3A%20robots.txt%0A%20for%20Gemini%20formalised%29%29&In-Reply-To=%3C20201125233616.GL1721%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003554.html">
+   <LINK REL="Next"  HREF="003559.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>On Web-proxies (was Re: Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised))</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20Web-proxies%20%28was%20Re%3A%20Assuming%20disallow-all%2C%0A%20and%20some%20research%20on%20robots.txt%20in%20Geminispace%20%28Was%3A%20Re%3A%20robots.txt%0A%20for%20Gemini%20formalised%29%29&In-Reply-To=%3C20201125233616.GL1721%40brevard.conman.org%3E"
+       TITLE="On Web-proxies (was Re: Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised))">sean at conman.org
+       </A><BR>
+    <I>Wed Nov 25 23:36:16 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003554.html">Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+</A></li>
+        <LI>Next message (by thread): <A HREF="003559.html">Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3558">[ date ]</a>
+              <a href="thread.html#3558">[ thread ]</a>
+              <a href="subject.html#3558">[ subject ]</a>
+              <a href="author.html#3558">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Nick Thomas once stated:
+&gt;<i> &gt; 
+</I>&gt;<i> For clarity: I think it's fine to presume consent for browsing (whether
+</I>&gt;<i> through a proxy or not), and not fine to presume consent for archiving.
+</I>&gt;<i> If adopted, this represents a significant enhancement to capsule author
+</I>&gt;<i> privacy compared to web norms.
+</I>
+  The issue with proxying (especially via the web) is the web side.  Using a
+webproxy that runs locally to browse Gemini sites via a browser is fine, but
+it becomes problematic if said proxy is listening on a public IP address. 
+It's not a matter of *if* but *WHEN* webbots of all types start hitting it,
+and *those* are a mixture of indexer, archiver, research and other [1].  At
+the very least, any web proxy should respond to &quot;/robots.txt&quot; and either
+serve up a file, or have command line options to generate a response to
+&quot;/robots.txt&quot; or at the very least (or as a default), send this:
+
+	User-agent: *
+	Disallow: /
+
+  This is the crux of the diagreement between myself and Drew---I didn't
+explain my concerns very well, and he didn't pick up on the actual issue I
+had (so my fault here).  A web proxy can inadvertently allow indexers,
+archivers, researchers and others access to Gemini content.
+
+  -spc
+
+[1]	Indexers, archivers and research bots tend to respect robots.txt.
+	It's the &quot;other&quot; class that don't.  These &quot;other&quot; bots are typically
+	looking for exploits and there's not much you can do about these
+	other than outright ban the IP they're coming from [2].  
+
+[2]	And even then it's a game of &quot;whack-a-mole&quot;, although if a web proxy
+	sees a bunch of requests from a single IP address that result in a
+	bunch of &quot;not found&quot; errors from Gemini (say, a threshhold of 10
+	such results in a row) then that IP is automatically banned for a
+	period of time (say, 48 hours---enough to let it finish its job, but
+	not forever since the list of IPs will grow).
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003554.html">Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+</A></li>
+	<LI>Next message (by thread): <A HREF="003559.html">Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3558">[ date ]</a>
+              <a href="thread.html#3558">[ thread ]</a>
+              <a href="subject.html#3558">[ subject ]</a>
+              <a href="author.html#3558">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

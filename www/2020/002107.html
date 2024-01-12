@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Removing expiry dates for TOFU
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Removing%20expiry%20dates%20for%20TOFU&In-Reply-To=%3C6c0fae77-a0c4-5c1e-c34a-0918c572b9f6%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002171.html">
+   <LINK REL="Next"  HREF="002130.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Removing expiry dates for TOFU</H1>
+    <B>Baschdel</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Removing%20expiry%20dates%20for%20TOFU&In-Reply-To=%3C6c0fae77-a0c4-5c1e-c34a-0918c572b9f6%40disroot.org%3E"
+       TITLE="Removing expiry dates for TOFU">baschdel at disroot.org
+       </A><BR>
+    <I>Tue Jul  7 18:06:07 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002171.html">Removing expiry dates for TOFU
+</A></li>
+        <LI>Next message (by thread): <A HREF="002130.html">Removing expiry dates for TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2107">[ date ]</a>
+              <a href="thread.html#2107">[ thread ]</a>
+              <a href="subject.html#2107">[ subject ]</a>
+              <a href="author.html#2107">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I really like the way of announcing future certificates by putting them 
+in a well known location (not just their fingerprint, as this requires 
+either the server or the client (probably both) to support multiple 
+fingerprinting algorithms because even if we agree on one hash algorithm 
+today, there are already people trying to break it and updating that 
+will be a mess).
+
+That said the name of this well known location should include the name 
+tls somewhere to keep the door open for potential tls replacements (I 
+think TLS is a great choice, but if something else emerges I don't want 
+to bother with legacy magic paths).
+
+There are also three other certificates besides the future one that 
+could/should be served at a well known location:
+
+- Alternative (Backup) certificates for both the current and future 
+certificate, that can be used when the key behind the original 
+certificate was compromised, they have to be valid for the same 
+time-span as the originals and become the originals as soon as they are 
+used. The private keys of these of course should be kept in cold storage 
+until they are needed. Clients should at least notify the user when they 
+see a backup certificate being used and treat the original certificate 
+as untrusted but not delete it immanently (as it is possible that only 
+the backup key was compromised and still be used by the original 
+server). The user must have the ultimate choice which certificate to 
+trust after a backup certificate has been used as which certificate is 
+trustable should be communicated out of band in such a case.
+
+- The currently used certificate that could be checked by clients to 
+detect general purpose dragnet TLS interception, that knows nothing 
+about Gemini and its conventions (basically what I'd do if I was the 
+dictator of a surveillance state to monitor and censor internet access 
+for thousands or millions of people). This too could also be useful if 
+some TLS alternative emerges, you already trust one key the server uses, 
+so why not use that to get the other keys it uses. Another possible 
+usecase is that someone really concerned could use any niche proxy 
+protocol to fetch the certificate the server should have (I know 
+portal.mozz.us already has a feature that allows one to fetch the server 
+certificate but proxy.vulpes.one doesn't and a gemini to gemini proxy 
+would have to use a well known endpoint to fetch the certificate anyway 
+(but that wouldn't allow you to check if the proxy got MitMd by a lazy 
+TLS interception)) To make this even more of a pain for attackers each 
+server could have (a) secondary endpoint(s) that is/are only 
+communicated in human readable form (i.e. generating a captcha image 
+that contains the filename in a nonstandard location) that changes on a 
+regular basis) that too serve(s) the certificate used with the 
+possibility for a security focused client to have a tool that can 
+automatically check against the certificates it trusts and the one it 
+received from the server. (All of this can be realized by adding two 
+configuration options to a Gemini server, or if the server doesn't 
+support that symlinks should work as well).
+
+Again, I'm just throwing Ideas around hoping that they'll be considered 
+useful.
+
+Have a nice Evening
+
+- Baschdel
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200707/f3df19bb/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200707/f3df19bb/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002171.html">Removing expiry dates for TOFU
+</A></li>
+	<LI>Next message (by thread): <A HREF="002130.html">Removing expiry dates for TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2107">[ date ]</a>
+              <a href="thread.html#2107">[ thread ]</a>
+              <a href="subject.html#2107">[ subject ]</a>
+              <a href="author.html#2107">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

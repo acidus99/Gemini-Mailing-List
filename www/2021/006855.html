@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Gateway to DNS
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gateway%20to%20DNS&In-Reply-To=%3C20210706161359.GA6709%40sources.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006857.html">
+   <LINK REL="Next"  HREF="006858.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Gateway to DNS</H1>
+    <B>Stephane Bortzmeyer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gateway%20to%20DNS&In-Reply-To=%3C20210706161359.GA6709%40sources.org%3E"
+       TITLE="Gateway to DNS">stephane at sources.org
+       </A><BR>
+    <I>Tue Jul  6 17:13:59 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006857.html">[Tech] gemserv and SCGI, anyone?
+</A></li>
+        <LI>Next message (by thread): <A HREF="006858.html">Possible Events in Belgium for Presenting Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6855">[ date ]</a>
+              <a href="thread.html#6855">[ thread ]</a>
+              <a href="subject.html#6855">[ subject ]</a>
+              <a href="author.html#6855">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Highly experimental, here is a Gemini-to-DNS gateway. Just add a
+domain name to <A HREF="gemini://dns.gemini.bortzmeyer.org:1953/">gemini://dns.gemini.bortzmeyer.org:1953/</A> and you'll get
+the answer as a nice gemtext. Most of the time, the answers are links
+that you can follow (name-to-address, address-to-name, etc). You can
+also add the type (MX, NS, LOC, etc) after the domain name and a
+slash.
+
+Examples of interesting requests:
+
+=&gt; <A HREF="gemini://dns.gemini.bortzmeyer.org:1953/gemini.circumlunar.space">gemini://dns.gemini.bortzmeyer.org:1953/gemini.circumlunar.space</A> IP addresses of the reference site
+
+=&gt; <A HREF="gemini://dns.gemini.bortzmeyer.org:1953/cl/NS">gemini://dns.gemini.bortzmeyer.org:1953/cl/NS</A> Name servers of the chilean top-level domain
+
+=&gt; <A HREF="gemini://dns.gemini.bortzmeyer.org:1953/protonmail.com/MX">gemini://dns.gemini.bortzmeyer.org:1953/protonmail.com/MX</A> Email servers of ProtonMail
+
+=&gt; <A HREF="gemini://dns.gemini.bortzmeyer.org:1953/outlook.com/TXT">gemini://dns.gemini.bortzmeyer.org:1953/outlook.com/TXT</A> Microsoft loves TXT records
+
+=&gt; <A HREF="gemini://dns.gemini.bortzmeyer.org:1953/www.potamoch&#232;re.fr">gemini://dns.gemini.bortzmeyer.org:1953/www.potamoch&#232;re.fr</A> Of course, it works with IDNs (domain names in Unicode)
+
+=&gt; <A HREF="gemini://dns.gemini.bortzmeyer.org:1953/34000.cp.bortzmeyer.fr/LOC">gemini://dns.gemini.bortzmeyer.org:1953/34000.cp.bortzmeyer.fr/LOC</A> Location of cities in France from their zip code (here 34000)
+
+=&gt; <A HREF="gemini://dns.gemini.bortzmeyer.org:1953/76100.cp.bortzmeyer.fr/URI">gemini://dns.gemini.bortzmeyer.org:1953/76100.cp.bortzmeyer.fr/URI</A> The same, as an OpenStreetMap URI
+
+At this time, I'm not sure it will be maintained. Advices welcome.
+
+Sorry for the non-standard port, but I did not find yet a way to make
+SCGI work on gemserv so I had to install a stargrazer next to the main
+server (and stargrazer does not allow me to use my Let's Encrypt
+certificate, hence the self-signed certificate).
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006857.html">[Tech] gemserv and SCGI, anyone?
+</A></li>
+	<LI>Next message (by thread): <A HREF="006858.html">Possible Events in Belgium for Presenting Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6855">[ date ]</a>
+              <a href="thread.html#6855">[ thread ]</a>
+              <a href="subject.html#6855">[ subject ]</a>
+              <a href="author.html#6855">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [users] Announcing Antenna!
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Busers%5D%20Announcing%20Antenna%21&In-Reply-To=%3CCAJScK0Kd3qifQ41YC99JgT_q5m22b9Yic1UmUZEq5QhjFoqxyw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006825.html">
+   <LINK REL="Next"  HREF="006837.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[users] Announcing Antenna!</H1>
+    <B>Bj&#246;rn W&#228;rmedal</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Busers%5D%20Announcing%20Antenna%21&In-Reply-To=%3CCAJScK0Kd3qifQ41YC99JgT_q5m22b9Yic1UmUZEq5QhjFoqxyw%40mail.gmail.com%3E"
+       TITLE="[users] Announcing Antenna!">bjorn.warmedal at gmail.com
+       </A><BR>
+    <I>Wed Jun 30 10:31:12 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006825.html">[tech] [users] Erlang client library
+</A></li>
+        <LI>Next message (by thread): <A HREF="006837.html">[users] Announcing Antenna!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6823">[ date ]</a>
+              <a href="thread.html#6823">[ thread ]</a>
+              <a href="subject.html#6823">[ subject ]</a>
+              <a href="author.html#6823">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE><A HREF="gemini://warmedal.se/~antenna/">gemini://warmedal.se/~antenna/</A>
+
+Antenna is a feed aggregator that stays fresh, as long as we as a
+community want it to!
+
+A common feed aggregator polls all its known feeds at least once a day
+(often four to five times a day), but most feeds rarely update even
+daily and many feeds become stale or disappear. You could improve this
+by some exponential back-off strategy and maybe dropping feeds that
+have been repeatedly unreachable. But what if a gemlog that hasn't
+posted in months publishes a new post? Your back-off strategy could
+cause the feed to lag a long time behind before seeing this post.
+
+Antenna works differently. It doesn't remember feed URLs. It doesn't
+intermittently poll feeds. Instead it relies on publishers willingness
+to add an extra step to their publishing process: when your
+Atom/RSS/gemsub feed has been updated, make a gemini call to
+<A HREF="gemini://warmedal.se/~antenna/submit">gemini://warmedal.se/~antenna/submit</A> with the URL to your feed as the
+query string. I do it by using my gemcall:
+
+gemcall -u <A HREF="gemini://warmedal.se/~antenna/submit?warmedal.se/~bjorn/atom.xml">gemini://warmedal.se/~antenna/submit?warmedal.se/~bjorn/atom.xml</A>
+
+When you do, the URL will be added to a queue. Every ten minutes this
+queue is read, the feeds in it fetched, parsed, and added to the
+Antenna database. Then the queue is emptied and the page regenerated,
+showing all found entries from the past week.
+
+I've seeded it with all 311 feeds known to CAPCOM (of which only 223
+even still exist), but if we want to keep it fresh henceforth we'll
+have to keep sending it new content!
+
+As you may have noticed the page is formatted as a gemsub feed, so
+that your gemini browser can subscribe to it and thereby get all the
+news from geminispace in a timely fashion.
+
+Did you submit a feed but nothing happened? You can actually check the
+log, and maybe figure out what went wrong from that:
+
+<A HREF="gemini://warmedal.se/~antenna/~antenna/log">gemini://warmedal.se/~antenna/~antenna/log</A>
+
+The about page lists the most common errors I've found so far:
+
+<A HREF="gemini://warmedal.se/~antenna/~antenna/about.gmi">gemini://warmedal.se/~antenna/~antenna/about.gmi</A>
+
+I hope you're as excited about this as I am. See you on Antenna!
+
+Cheers,
+ew0k
+
+PS: I'm not subscribed to the mailing list anymore. Please &quot;Reply All&quot;
+if you want me to receive your response :)
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006825.html">[tech] [users] Erlang client library
+</A></li>
+	<LI>Next message (by thread): <A HREF="006837.html">[users] Announcing Antenna!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6823">[ date ]</a>
+              <a href="thread.html#6823">[ thread ]</a>
+              <a href="subject.html#6823">[ subject ]</a>
+              <a href="author.html#6823">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

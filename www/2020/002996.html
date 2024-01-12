@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> External SHA hashes instead? (was: Re: Content length, EOF -- ways to resolve whether we received everything)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20External%20SHA%20hashes%20instead%3F%20%28was%3A%20Re%3A%20Content%20length%2C%20EOF%20--%0A%20ways%20to%20resolve%20whether%20we%20received%20everything%29&In-Reply-To=%3CC6RZWDUBY17L.2U983D38AEJ2S%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002991.html">
+   <LINK REL="Next"  HREF="003001.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>External SHA hashes instead? (was: Re: Content length, EOF -- ways to resolve whether we received everything)</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20External%20SHA%20hashes%20instead%3F%20%28was%3A%20Re%3A%20Content%20length%2C%20EOF%20--%0A%20ways%20to%20resolve%20whether%20we%20received%20everything%29&In-Reply-To=%3CC6RZWDUBY17L.2U983D38AEJ2S%40stilgar%3E"
+       TITLE="External SHA hashes instead? (was: Re: Content length, EOF -- ways to resolve whether we received everything)">solderpunk at posteo.net
+       </A><BR>
+    <I>Sun Nov  1 14:26:32 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002991.html">External SHA hashes instead? (was: Re: Content length, EOF -- ways to resolve whether we received everything)
+</A></li>
+        <LI>Next message (by thread): <A HREF="003001.html">External SHA hashes instead? (was: Re: Content length, EOF -- ways to resolve whether we received everything)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2996">[ date ]</a>
+              <a href="thread.html#2996">[ thread ]</a>
+              <a href="subject.html#2996">[ subject ]</a>
+              <a href="author.html#2996">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat Oct 31, 2020 at 10:21 AM CET, Bj&#246;rn W&#228;rmedal wrote:
+&gt;<i> It wouldn't just be about content integrity; it's also about caching. If
+</I>&gt;<i> the client has fetched a file before, and it hasn't changed since,
+</I>&gt;<i> there's
+</I>&gt;<i> no need to waste time and bandwidth fetching it again.
+</I>
+I'm not philosophically opposed to caching or anything - far from it -
+but it comes with a complexity cost and whether or not that cost is
+worth paying depends upon the benefits it brings.
+
+On the web, caching is a win, because webpages are composed of many
+different parts (style sheets, background images, tracking scripts,
+sometimes even content!), some of those parts are re-used across
+multiple pages, and some of those parts can be fairly large.
+
+In Geminispace, the majority of content is small (a kilobyte or so),
+and visiting a single URL only means downloading an individual resource,
+so there's no way for a resource to be frequently re-used like a large
+background image might be on a website.  I'm not sure the cost to
+benefit ratio is quite so clearly favourable.
+
+It's true that frequent use of &quot;the back button&quot; or similar
+navigational strategies to get around Geminispace means that certain
+individual pages may be loaded several times within a browsing session
+(one might go back and forth between a page listing entries in a gemlog
+and those individual entries), and that can be a little wasteful.
+Smarter navigation tools (like AV-98's &quot;tours&quot;) can reduce this waste,
+but it's also easily fixed by clients doing something simple like
+keeping the 5 or 10 most recently visited pages cached in memory, with
+cached pages expiring after 10 minutes or so (AV-98 does this, although
+I don't think I've done a release since adding it).  Clients doing this
+would obviously have problems with content which updated more frequently
+than every 10 minutes, but that kind of content is - and I would argue
+*should* be - very rare in Geminispace.  Apps are the one obvious place
+where this strategy might fail, which is perhaps yet another argument in
+favour of having different clients optimised for reading and for apps.
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002991.html">External SHA hashes instead? (was: Re: Content length, EOF -- ways to resolve whether we received everything)
+</A></li>
+	<LI>Next message (by thread): <A HREF="003001.html">External SHA hashes instead? (was: Re: Content length, EOF -- ways to resolve whether we received everything)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2996">[ date ]</a>
+              <a href="thread.html#2996">[ thread ]</a>
+              <a href="subject.html#2996">[ subject ]</a>
+              <a href="author.html#2996">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

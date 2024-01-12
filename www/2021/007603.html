@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Uploading content over gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Uploading%20content%20over%20gemini&In-Reply-To=%3C20211115024413.fd83b1cfbab8eba98d1333a2%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007598.html">
+   <LINK REL="Next"  HREF="007609.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Uploading content over gemini</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Uploading%20content%20over%20gemini&In-Reply-To=%3C20211115024413.fd83b1cfbab8eba98d1333a2%40gmail.com%3E"
+       TITLE="Uploading content over gemini">linde.philip at gmail.com
+       </A><BR>
+    <I>Mon Nov 15 01:44:13 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007598.html">Uploading content over gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="007609.html">Uploading content over gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7603">[ date ]</a>
+              <a href="thread.html#7603">[ thread ]</a>
+              <a href="subject.html#7603">[ subject ]</a>
+              <a href="author.html#7603">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, 11 Nov 2021 23:03:02 -0500
+Alex &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">alex at alexwennerberg.com</A>&gt; wrote:
+
+&gt;<i> While both of these are technically feasible, they are a bit wonky, and for large files would involve many requests. What I&#8217;m wondering is whether these are ideas worth considering &#8212; ways to upload files without extending or replacing Gemini. Any thoughts?
+</I>
+Hi Alex,
+I think it's fine if Gemini remains a tool primarily to download and
+display text and other files. As such, there is no need to &quot;replace&quot;
+Gemini because it's out of scope of the protocol. That said, and I've
+think I've actually seen an example of this before, within the current
+spec you could implement a line oriented editor, in the style of ed(1)
+using 1x status responses. Documents could then not just be uploaded,
+but authored directly within Gemini.
+
+A sufficiently smart client&#8482; could format a local document as a
+sequence of inputs to such a line based editor. For that kind of use it
+doesn't need to be complex. Just a way to open an editing session, a
+way to open a new line, a way to append to the current line and a way
+to terminate the editing session. E.g.
+
+c: <A HREF="gemini://example.com/document/edit">gemini://example.com/document/edit</A>
+s: 3x to <A HREF="gemini://example.com/document/edit/session/afdef947f9">gemini://example.com/document/edit/session/afdef947f9</A>
+s: Repeated 1x responses until terminated or session timeout
+
+oHello! this is the first line, opened with &quot;o&quot;
++ and this is its continuation, added with &quot;+&quot;
+oThis is the next line.
+oThe next input after this terminates the session, with &quot;.&quot;:
+.
+
+This will of course generate many requests, but at the cost of sensible
+human use you could allow escape codes to indicate line feeding, so you
+could use all the space allowed in a request
+
+Another idea is to use email. Blog-by-email if you will, or
+comment-by-email could be implemented as an automatic process. But
+running an email server may not be a walk in the park. This seems more
+sensible to me, but I'm not looking to run my own mailserver. Maybe a
+tool could regularly connect to an existing IMAP server and work with
+that.
+
+-- 
+Philip
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007598.html">Uploading content over gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="007609.html">Uploading content over gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7603">[ date ]</a>
+              <a href="thread.html#7603">[ thread ]</a>
+              <a href="subject.html#7603">[ subject ]</a>
+              <a href="author.html#7603">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

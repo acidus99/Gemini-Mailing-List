@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A question regarding section 1.2 of the spec
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20question%20regarding%20section%201.2%20of%20the%20spec&In-Reply-To=%3Cb1b68a199c91baa1392081793b21d00f%40asciiking.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003337.html">
+   <LINK REL="Next"  HREF="003339.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A question regarding section 1.2 of the spec</H1>
+    <B>cbabcock at asciiking.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20question%20regarding%20section%201.2%20of%20the%20spec&In-Reply-To=%3Cb1b68a199c91baa1392081793b21d00f%40asciiking.com%3E"
+       TITLE="A question regarding section 1.2 of the spec">cbabcock at asciiking.com
+       </A><BR>
+    <I>Sun Nov 15 09:13:54 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003337.html">A question regarding section 1.2 of the spec
+</A></li>
+        <LI>Next message (by thread): <A HREF="003339.html">A question regarding section 1.2 of the spec
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3338">[ date ]</a>
+              <a href="thread.html#3338">[ thread ]</a>
+              <a href="subject.html#3338">[ subject ]</a>
+              <a href="author.html#3338">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>New here, but that never stops me from jumping in...
+
+November 15, 2020 1:34 AM, &quot;Ali Fardan&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">raiz at stellarbound.space</A>&gt; wrote:
+
+&gt;<i> 1.2:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> The path, query and fragment components are allowed and have no
+</I>&gt;&gt;<i> special meanings beyond those defined by the generic syntax.
+</I>&gt;<i> 
+</I>&gt;<i> We know that the query portion of URIs is reserved for response code 10
+</I>&gt;<i> and 11, but fragment is never used anywhere in the protocol.
+</I>
+Your use of &quot;reserved&quot; here probably reflects a misunderstanding. You can have a URI with a query indicator without getting a 1x response code first. The word &quot;reserved&quot; in the spec only ever refers to characters that must be escaped.
+
+&gt;<i> So both query and fragment are dealt with absolutely differently in the
+</I>&gt;<i> protocol, but both are categorized under the same &quot;allowed and have no
+</I>&gt;<i> special meanings&quot;, may I ask in what context do they have no special
+</I>&gt;<i> meanings? I'm confused a bit.
+</I>
+A URI is best thought of as an opaque identifier. If it happens to have semantic or functional purpose for the server that mechanisms can leverage to improve the reader experience, great, but it's just a way to identify the desired content for delivery. There's a feedback mechanism to refine a query, but no corresponding mechanism for fragments. If there was, it would be something like the anchor tag in HTML.
+
+&gt;<i> Also, what does &quot;defined by the generic syntax&quot; refer to? what syntax?
+</I>
+The generic URI syntax as defined in RFC 3986.
+
+Chris
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003337.html">A question regarding section 1.2 of the spec
+</A></li>
+	<LI>Next message (by thread): <A HREF="003339.html">A question regarding section 1.2 of the spec
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3338">[ date ]</a>
+              <a href="thread.html#3338">[ thread ]</a>
+              <a href="subject.html#3338">[ subject ]</a>
+              <a href="author.html#3338">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

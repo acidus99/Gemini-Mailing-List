@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Supporting TLS client certificate in PHP?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Supporting%20TLS%20client%20certificate%20in%20PHP%3F&In-Reply-To=%3C87y2hrblz4.fsf%40omarpolo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004204.html">
+   <LINK REL="Next"  HREF="004210.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Supporting TLS client certificate in PHP?</H1>
+    <B>Omar Polo</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Supporting%20TLS%20client%20certificate%20in%20PHP%3F&In-Reply-To=%3C87y2hrblz4.fsf%40omarpolo.com%3E"
+       TITLE="Supporting TLS client certificate in PHP?">op at omarpolo.com
+       </A><BR>
+    <I>Mon Dec 21 08:29:51 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004204.html">Supporting TLS client certificate in PHP?
+</A></li>
+        <LI>Next message (by thread): <A HREF="004210.html">Supporting TLS client certificate in PHP?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4206">[ date ]</a>
+              <a href="thread.html#4206">[ thread ]</a>
+              <a href="subject.html#4206">[ subject ]</a>
+              <a href="author.html#4206">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Omar Polo &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">op at omarpolo.com</A>&gt; writes:
+
+&gt;<i> C&#244;me Chilliet &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">come at chilliet.eu</A>&gt; writes:
+</I>&gt;&gt;<i> [snip]
+</I>&gt;&gt;<i> However, even if I was implementing this in C it is not clear to me how to request a client certificate without making it mandatory, is that what SSL_VERIFY_CLIENT_ONCE is for?
+</I>&gt;&gt;<i> Are there Gemini servers in C with client certificate support of which I could read the code out there?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> C&#244;me
+</I>&gt;<i>
+</I>&gt;<i> I've written my server[0] using LibreSSL (a fork of OpenSSL) and it
+</I>&gt;<i> supports client certs.  The code is quite short (a bit more than 1k
+</I>&gt;<i> lines) but the key points for your question are these two lines[1]:
+</I>&gt;<i>
+</I>&gt;<i> 	/* optionally accept client certs, but don't try to verify them */
+</I>&gt;<i> 	tls_config_verify_client_optional(conf);
+</I>&gt;<i> 	tls_config_insecure_noverifycert(conf);
+</I>&gt;<i>
+</I>&gt;<i> you need to enable optionally the client certs and the tell the library
+</I>&gt;<i> to not verify the certs.
+</I>&gt;<i>
+</I>&gt;<i> I don't know how to help you in PHP, but I hope this can help a bit :)
+</I>&gt;<i>
+</I>&gt;<i> [0]: <A HREF="https://github.com/omar-polo/gmid">https://github.com/omar-polo/gmid</A>
+</I>&gt;<i> [1]: <A HREF="https://github.com/omar-polo/gmid/blob/master/gmid.c#L1076-L1078">https://github.com/omar-polo/gmid/blob/master/gmid.c#L1076-L1078</A>
+</I>
+I forgot to address a point
+
+&gt;<i> I&#8217;m not sure if you can change the context once a connection is accepted, if yes maybe you can attempt stream_socket_enable_crypto once with verify_peer and if it fails run it again without it, but it feels non-optimized.
+</I>
+I don't think you can do this.  Once a connection is established, the
+certificates have already been checked, so you need to act before.
+
+and I also forgot to mention that I'm not using directly the libressl
+api, but I'm using instead libtls (a wrapper with nicer APIs)
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004204.html">Supporting TLS client certificate in PHP?
+</A></li>
+	<LI>Next message (by thread): <A HREF="004210.html">Supporting TLS client certificate in PHP?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4206">[ date ]</a>
+              <a href="thread.html#4206">[ thread ]</a>
+              <a href="subject.html#4206">[ subject ]</a>
+              <a href="author.html#4206">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

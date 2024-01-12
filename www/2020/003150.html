@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20sizes%2C%0A%20the%20explosion%20of%20responise%20codes%20%28was%20Re%3A%20Caching%20and%20status%20codes%29&In-Reply-To=%3C20201108222256.GI30302%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003137.html">
+   <LINK REL="Next"  HREF="003151.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20sizes%2C%0A%20the%20explosion%20of%20responise%20codes%20%28was%20Re%3A%20Caching%20and%20status%20codes%29&In-Reply-To=%3C20201108222256.GI30302%40brevard.conman.org%3E"
+       TITLE="Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)">sean at conman.org
+       </A><BR>
+    <I>Sun Nov  8 22:22:56 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003137.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+        <LI>Next message (by thread): <A HREF="003151.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3150">[ date ]</a>
+              <a href="thread.html#3150">[ thread ]</a>
+              <a href="subject.html#3150">[ subject ]</a>
+              <a href="author.html#3150">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Philip Linde once stated:
+&gt;<i> 
+</I>&gt;<i> The overflowing of 2x code resulting from a combinatorial hell is
+</I>&gt;<i> entirely self-inflicted through your choice to ignore this aspect of
+</I>&gt;<i> the existing specification.
+</I>
+  I don't agree that this is self-inflicted on me---what I'm trying (and
+failing) to point out is that adding mroe success calls *could* lead to 
+combinatorial hell.  HTTP already has 10 success codes in the 200 range, and
+none of them relate to caching status (since caching status is passed along 
+in headers).  Granted, none of the HTTP success statuses (with the exception
+of 200, which is mapped to 20 in Gemini) apply to Gemini, but in another
+universe where HTTP *did* have separate success code for caching
+information, I can see some combinatoric increase, say for 204, 205 and 206
+with nothing said, cache and no-caching of results (that's nine new ones   
+right there).
+
+&gt;<i> I've already suggested to you a way to avoid this (use a different 
+</I>&gt;<i> first digit). 
+</I>
+  No, that was to <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">prisonpotato at tilde.team---they</A> were the first to come up
+with the idea, not me.  I just implemented it first (much the same way I
+implemented the first Gemini server even before solderpunk did [1]).  Also,
+the size breaking code is only active on one link on my site, not everwhere.
+
+&gt;<i> This additionally avoids having to rewrite 3.2 of the
+</I>&gt;<i> spec and invalidate existing clients that take for granted that &quot;the   
+</I>&gt;<i> first digit alone provides enough information for a client to determine
+</I>&gt;<i> how to handle the response&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> Moreover, with TLS already having a mechanism to signal the intended
+</I>&gt;<i> end of a connection, I don't think that content size is a pressing
+</I>&gt;<i> issue. It would allow for download progress bars, but adds nothing
+</I>&gt;<i> over TLS in terms of ensuring that the content is fully received.
+</I>
+  The concern is over large responses.  It wasn't much of a concern until
+<A HREF="gemini://konpeito.media/">gemini://konpeito.media/</A> was created and serving up large audio files (and
+archives of said audio files).  I can envision a client being configured to
+abort the download if say, a 10 megabyte file is being downloaded.  It
+*sucked* when my DSL went down in late September/early October (yes, about
+three weeks) and I had to rely upon my cellphone hot spot.  I didn't have a
+large data plan for the cell phone becuase I didn't need it, until I did. 
+It would have been nice to configure my web browser to not download anything
+over 5M at that point.
+
+  -spc
+
+[1]     I did it completely ignoring the status codes defined at the time,
+        because I felt they were too limiting (single digit).  It took some
+        back and forth, along with a few other implementations (that did
+        follow the spec), before the current two-digit scheme was defined.
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003137.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+	<LI>Next message (by thread): <A HREF="003151.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3150">[ date ]</a>
+              <a href="thread.html#3150">[ thread ]</a>
+              <a href="subject.html#3150">[ subject ]</a>
+              <a href="author.html#3150">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

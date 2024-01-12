@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC] Backwards-compatible metadata in Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3CCAFkF85bV-yr2Xbu84uOo6FmC0q0JXbnhm9ern-RjptU9T%3DF55A%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005508.html">
+   <LINK REL="Next"  HREF="005565.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC] Backwards-compatible metadata in Gemini</H1>
+    <B>Oliver Simmons</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3CCAFkF85bV-yr2Xbu84uOo6FmC0q0JXbnhm9ern-RjptU9T%3DF55A%40mail.gmail.com%3E"
+       TITLE="[SPEC] Backwards-compatible metadata in Gemini">oliversimmo at gmail.com
+       </A><BR>
+    <I>Tue Feb 23 15:31:56 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005508.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="005565.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5518">[ date ]</a>
+              <a href="thread.html#5518">[ thread ]</a>
+              <a href="subject.html#5518">[ subject ]</a>
+              <a href="author.html#5518">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, 23 Feb 2021 at 09:16, Lars Nood&#233;n &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">lars.nooden at gmx.com</A>&gt; wrote:
+&gt;<i> Some of this depends on what kind of metadata we are talking about.
+</I>&gt;<i>
+</I>&gt;<i> Gemini is about transmission of information and
+</I>&gt;<i> metadata is information.  By document metadata I mean information
+</I>&gt;<i> /about/ the document content.
+</I>
+Only data about the document should be allowed, and it should not
+modify the document (i.e. no stylistic info).
+
+&gt;<i> =:[&lt;whitespace&gt;]&lt;TERM&gt;&lt;whitespace&gt;&lt;METADATA&gt;
+</I>&gt;<i>
+</I>&gt;<i> which could look like this in the body, but would be up to the client as
+</I>&gt;<i> to how it is dealt with.  Left unprocessed, it would degrade gracefully
+</I>&gt;<i> and be quite readable.
+</I>
+This syntax would allow for it to be placed anywhere in the document,
+which could enable it to be used to extend Gemini in unwanted ways,
+for example:
+
+=:    text-colour    red
+I'm blue!
+=:    text-colour    blue
+I'm red &gt;:)
+(this is a lame example, there are probably worse things it could do)
+
+Placing it at the end of the file, which my format would enforce,
+makes this impossible.
+If it did change the file (which wouldn't be allowed) it would have to
+be the entire file, making this harder.
+
+Also, using space as the delimiter causes some issues, for example:
+=: author Oliver Simmons
+A simple client might try to split on the spaces, which would split
+the name into two, using a colon or equals is more conventional for
+key/value things, and avoid this problem (wanting to use : or = in a
+key or value isn't likely).
+
+&gt;<i> Again, by being included anywhere inside the body, there would be no
+</I>&gt;<i> extra network calls.
+</I>
+Just pointing out that none of the three proposed formats do this,
+extension of the protocol is entirely out of the question.
+This is NOT like HTTP headers, it is strictly document metadata.
+
+&gt;<i> There should be no requirement as to what is in the metadata, which
+</I>&gt;<i> terms are allowed, or what the terms mean.  Any extension should say
+</I>&gt;<i> only how terms may be included and leave the rest up to the capsule and
+</I>&gt;<i> the client software.
+</I>
+100% agree
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005508.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="005565.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5518">[ date ]</a>
+              <a href="thread.html#5518">[ thread ]</a>
+              <a href="subject.html#5518">[ subject ]</a>
+              <a href="author.html#5518">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

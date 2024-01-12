@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Three possible uses for IRIs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3CCAD2gp_TbhcHxaf1r21YHgDnpfApPLwT95k1yLQPP%2Br597fF2_A%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003912.html">
+   <LINK REL="Next"  HREF="003918.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Three possible uses for IRIs</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3CCAD2gp_TbhcHxaf1r21YHgDnpfApPLwT95k1yLQPP%2Br597fF2_A%40mail.gmail.com%3E"
+       TITLE="Three possible uses for IRIs">cowan at ccil.org
+       </A><BR>
+    <I>Tue Dec  8 21:45:57 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003912.html">Three possible uses for IRIs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003918.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3916">[ date ]</a>
+              <a href="thread.html#3916">[ thread ]</a>
+              <a href="subject.html#3916">[ subject ]</a>
+              <a href="author.html#3916">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Dec 8, 2020 at 4:10 PM &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A>&gt; wrote:
+
+
+&gt;<i> The most difficult part of what you outlined is the Unicode normalization,
+</I>&gt;<i> which maybe not all languages have libraries for, and would also require
+</I>&gt;<i> updating every so often. But it wouldn't be a requirement for clients at
+</I>&gt;<i> all,
+</I>&gt;<i> just something nice to have.
+</I>&gt;<i>
+</I>
+If a client has an unnormalized IRI, it needs to normalize it before
+sending it to the server.  That said, a 2009 study looked at a sample of
+700 million HTML documents, of which only 0.02% were not in NFC already,
+which suggests that NFC text is already pretty dominant.
+
+I assume you mean NFC normalization?
+&gt;<i>
+</I>
+Yes.  When I speak of normalization, I mean NFC normalization exclusively.
+
+&gt;<i> What if the user named a domain/file/folder in a non-NFC way? Now does the
+</I>&gt;<i> server
+</I>&gt;<i> need to support NFC as well, and apply it to vhost recognition or local
+</I>&gt;<i> file paths
+</I>&gt;<i> to correctly match requests? That seems wrong. But so does the user
+</I>&gt;<i> entering
+</I>&gt;<i> something visually identical to what the sysadmin typed, and things not
+</I>&gt;<i> working.
+</I>&gt;<i>
+</I>
+I'm okay with that just failing, as file names are not really part of
+text/gemini content.  The difference will be obvious to the admin by
+checking the requested URIs from the server log against the %-encoded names
+of the folders.
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+                I am a member of a civilization. --David Brin
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201208/6b45b640/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201208/6b45b640/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003912.html">Three possible uses for IRIs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003918.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3916">[ date ]</a>
+              <a href="thread.html#3916">[ thread ]</a>
+              <a href="subject.html#3916">[ subject ]</a>
+              <a href="author.html#3916">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

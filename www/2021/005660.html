@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Clients] Gemini and accessibility regarding preformatted code blocks
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BClients%5D%20Gemini%20and%20accessibility%20regarding%20preformatted%20code%0A%20blocks&In-Reply-To=%3C20210226025106.GX9315%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005657.html">
+   <LINK REL="Next"  HREF="005704.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Clients] Gemini and accessibility regarding preformatted code blocks</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BClients%5D%20Gemini%20and%20accessibility%20regarding%20preformatted%20code%0A%20blocks&In-Reply-To=%3C20210226025106.GX9315%40brevard.conman.org%3E"
+       TITLE="[Clients] Gemini and accessibility regarding preformatted code blocks">sean at conman.org
+       </A><BR>
+    <I>Fri Feb 26 02:51:06 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005657.html">[Clients] Gemini and accessibility regarding preformatted code blocks
+</A></li>
+        <LI>Next message (by thread): <A HREF="005704.html">[Clients] Gemini and accessibility regarding preformatted code blocks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5660">[ date ]</a>
+              <a href="thread.html#5660">[ thread ]</a>
+              <a href="subject.html#5660">[ subject ]</a>
+              <a href="author.html#5660">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Rohan Kumar once stated:
+&gt;<i> On Thu, Feb 25, 2021 at 05:25:08PM -0500, Sean Conner wrote:
+</I>&gt;<i> &gt; I might suggest something like:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;	preformat = &quot;```&quot; [ [WSP] tag ] [ [WSP] alt-text] end-of-line
+</I>&gt;<i> &gt;	tag       = '@art' / '@code' / '@data' / '@poem'
+</I>&gt;<i> &gt;
+</I>&gt;<i> 
+</I>&gt;<i> I think that a small but significant change to the spec is necessary 
+</I>&gt;<i> here. My proposal:
+</I>
+  The proposal above does not require a change in the specification for
+text/gemini, and could be considered a convention used.
+
+&gt;<i> - Three backticks signify readable preformatted text (e.g. a code 
+</I>&gt;<i> 	snippet or a poem); screen-readers should not skip this.
+</I>&gt;<i> - Four backticks signify something that isn't readable, like ascii-art.
+</I>
+  I picked a format that should be easy to find, with a limited set of
+options that, in my opinion, seem to cover the majority of cases with
+preforamtted blocks.  Again with some examples, only with alt-text and NOT
+with my proposal:
+
+``` Python
+Python! There in the grass,
+ready to slide right up my ...
+```
+
+``` Python
+ ____        _   _
+|<i>  _ \ _   _| |_| |__   ___  _ __
+</I>|<i> |_) | | | |  _| '_ \ / _ \| ._ \
+</I>|<i>  __/| |_| | |_| | | | (_) | | | |
+</I>|<i>_|    \_,  |\__|_| |_|\___/|_| |_|
+</I>       |___/
+```
+
+``` Python
+@app.route('/')
+def index[]:
+    try:
+        session['num']
+    except:
+        session['success'] = False
+        session['num'] = random.randrager(1,100)
+    return render_template('index.html')
+```
+
+``` Python
+Genus		#species	common name
+-------------------------------------------
+Antaresia	4		Children's phythons
+Apodora		1		Papaun olive python
+Aspidites	2		Sheild pythons
+Bothrochilus	1		Bismark ringed python
+Liasis		3		water pythons
+```
+
+  I think that '@poem', '@art', '@code' and '@data' would be very helpful to
+a client program.  Adding an additional backtick for &quot;something that isn't
+readble&quot; just seems too little.
+
+  But anyone arguing for (or against) this, please feel free to use the
+above Python examples when making arguments.
+
+&gt;<i> This is consistent with the spirit of gemtext: characters at the 
+</I>&gt;<i> beginning of a line are the only way to describe semantics.
+</I>&gt;<i>   
+</I>&gt;<i> Benefits of this proposal:
+</I>&gt;<i> 
+</I>&gt;<i> - It doesn't break any existing sites; it just adds one feature.
+</I>&gt;<i> - It's very simple to implement: parsers scan for a single additional 
+</I>&gt;<i> 	backtick
+</I>&gt;<i> - Authors can still provide any alt-text they wish without worrying 
+</I>&gt;<i> 	about &quot;reserved words&quot; like the proposed tags
+</I>
+  Which of the above blocks should be read, and shouldn't be read?
+
+&gt;<i> - It provides *critical* semantic information: whether or not a block of 
+</I>&gt;<i> 	preformatted text should be treated as readable text.
+</I>
+  Not enough in my opinion.
+
+  -spc
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005657.html">[Clients] Gemini and accessibility regarding preformatted code blocks
+</A></li>
+	<LI>Next message (by thread): <A HREF="005704.html">[Clients] Gemini and accessibility regarding preformatted code blocks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5660">[ date ]</a>
+              <a href="thread.html#5660">[ thread ]</a>
+              <a href="subject.html#5660">[ subject ]</a>
+              <a href="author.html#5660">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

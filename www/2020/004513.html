@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] What to do of fragments when there is a redirection
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20What%20to%20do%20of%20fragments%20when%20there%20is%20a%20redirection&In-Reply-To=%3CC84BX11MHOKW.10GTTO95CQ8AD%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004508.html">
+   <LINK REL="Next"  HREF="004516.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] What to do of fragments when there is a redirection</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20What%20to%20do%20of%20fragments%20when%20there%20is%20a%20redirection&In-Reply-To=%3CC84BX11MHOKW.10GTTO95CQ8AD%40stilgar%3E"
+       TITLE="[spec] What to do of fragments when there is a redirection">solderpunk at posteo.net
+       </A><BR>
+    <I>Mon Dec 28 09:59:33 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004508.html">[spec] What to do of fragments when there is a redirection
+</A></li>
+        <LI>Next message (by thread): <A HREF="004516.html">[spec] What to do of fragments when there is a redirection
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4513">[ date ]</a>
+              <a href="thread.html#4513">[ thread ]</a>
+              <a href="subject.html#4513">[ subject ]</a>
+              <a href="author.html#4513">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thanks for weighing in on this thread.  Of all the outstanding issues,
+this is actually the one where I have the least clear idea of what we
+should do.
+
+On Mon Dec 28, 2020 at 4:25 AM CET, John Cowan wrote:
+
+&gt;<i> &gt; 3) If the original URL has a fragment and the redirect doesn't, the
+</I>&gt;<i> &gt; &gt; client
+</I>&gt;<i> &gt; &gt; MUST apply the original fragment when the redirected resource is
+</I>&gt;<i> &gt; &gt; retrieved.
+</I>&gt;<i> &gt;
+</I>&gt;<i>
+</I>&gt;<i> This part I do understand. Since the meaning of a fragment depends on
+</I>&gt;<i> the
+</I>&gt;<i> media type and not the rest of the URL, then if a server is redirecting
+</I>&gt;<i> a
+</I>&gt;<i> request to the document's new home, the client should carry over the
+</I>&gt;<i> fragment id from the original URL. In this case the fragment id doesn't
+</I>&gt;<i> participate in the protocol at all.
+</I>&gt;<i>
+</I>&gt;<i> This rule should exist even if text/gemini doesn't have a fragment
+</I>&gt;<i> definition, because Gemini protocol can host any media type including
+</I>&gt;<i> HTML.
+</I>
+Okay, so original URL fragments should be carried over to redirect URLs
+if the redirect URL has no fragment (which I still suspect perhaps
+should be the only valid case).
+
+What about queries?
+
+To some extent, the issue of a redirect URL having a query in it is
+similar to a link in a text/gemini document having a query in it, which
+was slightly controversial.  Not so much in the sense that people
+thought it should be disallowed, but that it was widely believed clients
+should handle such things very carefully and give the user a chance to
+confirm or edit the query string contents.
+
+Should redirect URLs be allowed to contain queries?
+
+If an original URL has a query in it but the client gets back a redirect
+URL without a query, should the original query be appended?
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004508.html">[spec] What to do of fragments when there is a redirection
+</A></li>
+	<LI>Next message (by thread): <A HREF="004516.html">[spec] What to do of fragments when there is a redirection
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4513">[ date ]</a>
+              <a href="thread.html#4513">[ thread ]</a>
+              <a href="subject.html#4513">[ subject ]</a>
+              <a href="author.html#4513">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

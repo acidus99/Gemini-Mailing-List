@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Does TOFU actually work?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Does%20TOFU%20actually%20work%3F&In-Reply-To=%3C8e5f15f2-946f-40e3-bbe5-b5418c701b74%40www.fastmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003620.html">
+   <LINK REL="Next"  HREF="003623.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Does TOFU actually work?</H1>
+    <B>Ben Burwell</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Does%20TOFU%20actually%20work%3F&In-Reply-To=%3C8e5f15f2-946f-40e3-bbe5-b5418c701b74%40www.fastmail.com%3E"
+       TITLE="Does TOFU actually work?">gemini at benburwell.com
+       </A><BR>
+    <I>Sat Nov 28 15:14:34 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003620.html">Does TOFU actually work?
+</A></li>
+        <LI>Next message (by thread): <A HREF="003623.html">Does TOFU actually work?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3621">[ date ]</a>
+              <a href="thread.html#3621">[ thread ]</a>
+              <a href="subject.html#3621">[ subject ]</a>
+              <a href="author.html#3621">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 2020-11-28 at 09:28 -05:00, Emilis &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">emilis at emilis.net</A>&gt; wrote:
+&gt;<i> can't TOFU be easily MITM-ed by state actors?
+</I>&gt;<i>
+</I>&gt;<i> Is it actually any better than CA certificates or does it only replace 
+</I>&gt;<i> trust in CAs with trust in all ISPs and hardware in between the server 
+</I>&gt;<i> and the client?
+</I>
+TOFU could be MITM'd. It replaces the CA mechanism by the assumption
+that the first time you connect to a host, you get the right key/cert,
+and will ensure that any subsequent connection uses the same key pair.
+
+So if the first connection is MITM'd, your client will accept the phony
+cert but all subsequent connections will need to be MITM'd with the
+same phony cert in order to keep you client quiet.
+
+If the first connection is NOT MITM'd, then any subsequent MITM attempt
+would then raise alarm bells.
+
+&gt;<i> How would TOFU work for someone out of a country that firewalls the 
+</I>&gt;<i> internet and can replace all self-signed certificates for port 1965 on 
+</I>&gt;<i> the fly?
+</I>&gt;<i> 
+</I>&gt;<i> If TOFU fails in this scenario (which is common for hundreds of millions 
+</I>&gt;<i> of people today) can we really say that Gemini protects privacy?
+</I>
+You're right - it wouldn't protect the privacy of people under that
+scenario (assuming the state actor is sufficiently motivated to do this
+interception/replacement under TOFU constraints).
+
+I'm not sure what a good solution to this is.
+
+&gt;<i> Note that IP addresses change between requests from the same browser to 
+</I>&gt;<i> the same server.
+</I>
+Those logs do look a little funky, but luckily we don't need to rely on
+IP addresses to check your hypothesis: all you need to do is match the
+fingerprint/hash of the cert being presented by Lagrange with the hash
+of the cert generated on your server. If they don't match, then you have
+definitively been MITM'd.
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003620.html">Does TOFU actually work?
+</A></li>
+	<LI>Next message (by thread): <A HREF="003623.html">Does TOFU actually work?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3621">[ date ]</a>
+              <a href="thread.html#3621">[ thread ]</a>
+              <a href="subject.html#3621">[ subject ]</a>
+              <a href="author.html#3621">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] IRIs, IDNs, and all that international jazz
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3C20201223222158.GB9267%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004394.html">
+   <LINK REL="Next"  HREF="004315.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] IRIs, IDNs, and all that international jazz</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3C20201223222158.GB9267%40brevard.conman.org%3E"
+       TITLE="[spec] IRIs, IDNs, and all that international jazz">sean at conman.org
+       </A><BR>
+    <I>Wed Dec 23 22:21:58 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004394.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+        <LI>Next message (by thread): <A HREF="004315.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4339">[ date ]</a>
+              <a href="thread.html#4339">[ thread ]</a>
+              <a href="subject.html#4339">[ subject ]</a>
+              <a href="author.html#4339">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great bie once stated:
+&gt;<i> 
+</I>&gt;<i> Should have specified the language (C), too. I'm not going to be pulling
+</I>&gt;<i> in perl, and writing a full-fledged IRI parser from scratch in C sounds
+</I>&gt;<i> profoundly uncomfortable.
+</I>
+  So what library or code are you using now to parse URIs?
+
+  When I wrote my IRI parser [1] I took my existing URL parser [2], and just
+  changed the unreserved rule:
+
+	ASCII:	ALPHA / DIGIT / '-' / '.' / '_' / '~'
+	UTF-8:	ALPHA / DIGIT / '-' / '.' / '_' / '~' / utf8
+
+where 'utf8' is any character 128 or higher.  I didn't bother with
+restricting the private UCS set to the query because sometimes I think RFC
+authors are too concerned with theory [3] than with practice and complicate
+things.
+
+  Now the conversion of a domain name to punycode on the other hand ... I
+left that to libidn.
+
+  -spc
+
+[1]	<A HREF="https://github.com/spc476/LPeg-Parsers/blob/master/iri.lua">https://github.com/spc476/LPeg-Parsers/blob/master/iri.lua</A>
+
+[2]	<A HREF="https://github.com/spc476/LPeg-Parsers/blob/master/url.lua">https://github.com/spc476/LPeg-Parsers/blob/master/url.lua</A>
+
+[3]	A charitable way of saying &quot;smoking crack.&quot;  I mean, RFC-822
+	(written in 1982) allows:
+
+		&quot;Look!  I'm smoking some good stuff&quot; (no really its good) @
+		berkeley (in California) . edu
+
+	as a valid email address!  (spaces and all) No, really, look it up!
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004394.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+	<LI>Next message (by thread): <A HREF="004315.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4339">[ date ]</a>
+              <a href="thread.html#4339">[ thread ]</a>
+              <a href="subject.html#4339">[ subject ]</a>
+              <a href="author.html#4339">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

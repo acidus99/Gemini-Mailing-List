@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> chat over gemini (or, let's play with streaming text)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20chat%20over%20gemini%20%28or%2C%20let%27s%20play%20with%20streaming%20text%29&In-Reply-To=%3Ca8ff6589-60bf-a7a9-96b9-f22913caa07d%40mailbox.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007274.html">
+   <LINK REL="Next"  HREF="007273.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>chat over gemini (or, let's play with streaming text)</H1>
+    <B>The Gnuserland</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20chat%20over%20gemini%20%28or%2C%20let%27s%20play%20with%20streaming%20text%29&In-Reply-To=%3Ca8ff6589-60bf-a7a9-96b9-f22913caa07d%40mailbox.org%3E"
+       TITLE="chat over gemini (or, let's play with streaming text)">gnuserland at mailbox.org
+       </A><BR>
+    <I>Tue Oct  5 15:37:29 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007274.html">chat over gemini (or, let's play with streaming text)
+</A></li>
+        <LI>Next message (by thread): <A HREF="007273.html">chat over gemini (or, let's play with streaming text)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7270">[ date ]</a>
+              <a href="thread.html#7270">[ thread ]</a>
+              <a href="subject.html#7270">[ subject ]</a>
+              <a href="author.html#7270">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Nice man!
+
+It is cool looking all you awesome dudes so inspired, let you continue 
+to rock with Gemini!!!
+
+Gemini == &lt;3
+
+TGL
+
+&gt;<i> Message: 6
+</I>&gt;<i> Date: Mon, 04 Oct 2021 18:10:27 +0200
+</I>&gt;<i> From: Omar Polo &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">op at omarpolo.com</A>&gt;
+</I>&gt;<i> To: <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gemini at lists.orbitalfox.eu</A>
+</I>&gt;<i> Subject: chat over gemini (or, let's play with streaming text)
+</I>&gt;<i> Message-ID: &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">87ilycsk8z.fsf at omarpolo.com</A>&gt;
+</I>&gt;<i> Content-Type: text/plain; charset=&quot;us-ascii&quot;
+</I>&gt;<i>
+</I>&gt;<i> Hello,
+</I>&gt;<i>
+</I>&gt;<i> One of the things that I love about text/gemini is how it's easy to
+</I>&gt;<i> parse, and being it line-based it's also really easy to stream it.  When
+</I>&gt;<i> I started working on telescope, the idea of being able to stream content
+</I>&gt;<i> was present in the design of the parser from the first draft -- it also
+</I>&gt;<i> fit nicely with separation in multiple processes (one process does the
+</I>&gt;<i> fetching, another one the rendering, and messages are sent from one proc
+</I>&gt;<i> to the other.)  But other than knowing from the code that it should
+</I>&gt;<i> work, I never played with this aspect of text/gemini.
+</I>&gt;<i>
+</I>&gt;<i> Fast forward various months, I've just watched the &quot;Why gemini&quot; video by
+</I>&gt;<i> Tomasino and I got an urge to build something with streaming text.  I'm
+</I>&gt;<i> attaching a very, very simple CGI script that streams text/gemini to
+</I>&gt;<i> build an interactive chatroom.
+</I>&gt;<i>
+</I>&gt;<i> The idea is similar to the one presented by solderpunk in &quot;A vision for
+</I>&gt;<i> gemini applications&quot;
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="gemini://gemini.circumlunar.space/users/solderpunk/gemlog/a-vision-for-gemini-applications.gmi">gemini://gemini.circumlunar.space/users/solderpunk/gemlog/a-vision-for-gemini-applications.gmi</A>
+</I>&gt;<i>
+</I>&gt;<i> and, frankly, I'm quite disappointed nobody has built something like
+</I>&gt;<i> this before.  (or at least I haven't been able to find it.  I know
+</I>&gt;<i> kensanata has made some experiments with a mush, but I haven't played
+</I>&gt;<i> with it (yet))
+</I>&gt;<i>
+</I>&gt;<i> The idea is to provide two pages: one that accepts input via the
+</I>&gt;<i> response code 10 and appends to a file, the second is a literal `tail
+</I>&gt;<i> -f'.  Simple, but it works, and it's immediate.  As soon as someone
+</I>&gt;<i> sends something, all the clients reading from `tail -f' gets the
+</I>&gt;<i> message.
+</I>&gt;<i>
+</I>&gt;<i> (the various `tail -f' gets eventually killed by a SIGPIPE when the
+</I>&gt;<i> client closes the connection and the server closes the script stdout.
+</I>&gt;<i> It could take a while due to the buffering, but can be worked out.  I
+</I>&gt;<i> don't know if servers are expected to kill the spawned scripts -- I
+</I>&gt;<i> don't recall anything from the RFC -- but I'm probably wrong.  gmid
+</I>&gt;<i> anyway doesn't kill the scripts, it let UNIX do its things with signals.
+</I>&gt;<i> Feature or bug?  dunno.)
+</I>&gt;<i>
+</I>&gt;<i> It doesn't require a client certificates, but uses the subject of it if
+</I>&gt;<i> provided.  There's a check that can be de-commented to enforce the usage
+</I>&gt;<i> of client certificates.
+</I>&gt;<i>
+</I>&gt;<i> I'm hosting a demo at
+</I>&gt;<i>
+</I>&gt;<i> 	<A HREF="gemini://gemini.omarpolo.com/cgi/lets-chat">gemini://gemini.omarpolo.com/cgi/lets-chat</A>
+</I>&gt;<i>
+</I>&gt;<i> but I don't promise to keep it online.  It's a quick-n-dirty script
+</I>&gt;<i> (less than 50 lines of -hopefully- portable sh), probably filled with
+</I>&gt;<i> bugs, wrote only to be a demonstration.  I don't want to moderate it
+</I>&gt;<i> if/when people write things.  It's really easy to host it locally, for
+</I>&gt;<i> e.g. using gmid (disclaimer: I'm the author)
+</I>&gt;<i>
+</I>&gt;<i> 	$ gmid -x '*' .
+</I>&gt;<i>
+</I>&gt;<i> from the same directory where you saved the script.
+</I>&gt;<i>
+</I>&gt;<i> It seems to work with Telescope, Tinmop and Lagrange.  Kristall and
+</I>&gt;<i> Amfora don't seem to support streaming, or maybe I have an old version.
+</I>&gt;<i> Elpher doesn't stream by design.
+</I>&gt;<i>
+</I>&gt;<i> I hope this inspires someone to build amazing things with the streaming
+</I>&gt;<i> capability of text/gemini.  There are a lot of possibilities, for
+</I>&gt;<i> instance capsules like station could stream the feed, or the
+</I>&gt;<i> notification page; it could be better than clients continously
+</I>&gt;<i> refreshing the page.  Think of it like some sort of &quot;websockets&quot; but for
+</I>&gt;<i> humans ;)
+</I>&gt;<i>
+</I>&gt;<i> Gemini clients could &quot;ring&quot; or use some other kind of mechanism to
+</I>&gt;<i> inform the user that more content is available in a page (for
+</I>&gt;<i> e.g. Telescope adds a `!'  before the tab title.)
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i>
+</I>&gt;<i> Omar Polo
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> P.S.: this is also a partial reply to the talkat spec.  I love seeing
+</I>&gt;<i> what creative things folks are building, and I really hope the best for
+</I>&gt;<i> mbays and their idea (if I got the paternity correctly :P), but I also
+</I>&gt;<i> like the idea of doing these sort of things over gemini.  On one hand I
+</I>&gt;<i> don't want to push gemini over its boundaries, on the other I love doing
+</I>&gt;<i> that :)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> -------------- next part --------------
+</I>&gt;<i> A non-text attachment was scrubbed...
+</I>&gt;<i> Name: lets-chat
+</I>&gt;<i> Type: application/octet-stream
+</I>&gt;<i> Size: 919 bytes
+</I>&gt;<i> Desc: not available
+</I>&gt;<i> URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20211004/c3f9575e/attachment.obj">https://lists.orbitalfox.eu/archives/gemini/attachments/20211004/c3f9575e/attachment.obj</A>&gt;
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------
+</I>&gt;<i>
+</I>&gt;<i> Subject: Digest Footer
+</I>&gt;<i>
+</I>&gt;<i> Gemini mailing list
+</I>&gt;<i> <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">Gemini at lists.orbitalfox.eu</A>
+</I>&gt;<i> <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">https://lists.orbitalfox.eu/listinfo/gemini</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ------------------------------
+</I>&gt;<i>
+</I>&gt;<i> End of Gemini Digest, Vol 27, Issue 5
+</I>&gt;<i> *************************************
+</I></PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007274.html">chat over gemini (or, let's play with streaming text)
+</A></li>
+	<LI>Next message (by thread): <A HREF="007273.html">chat over gemini (or, let's play with streaming text)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7270">[ date ]</a>
+              <a href="thread.html#7270">[ thread ]</a>
+              <a href="subject.html#7270">[ subject ]</a>
+              <a href="author.html#7270">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

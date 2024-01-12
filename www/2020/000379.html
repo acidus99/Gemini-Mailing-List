@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200118213303.GN4518%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000378.html">
+   <LINK REL="Next"  HREF="000381.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200118213303.GN4518%40SDF.ORG%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Sat Jan 18 21:33:03 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000378.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000381.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#379">[ date ]</a>
+              <a href="thread.html#379">[ thread ]</a>
+              <a href="subject.html#379">[ subject ]</a>
+              <a href="author.html#379">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Jan 18, 2020 at 11:20:10AM -0800, Aaron Janse wrote:
+&gt;<i> I think we made an oversight: syntax nested within quotes.
+</I>&gt;<i> 
+</I>&gt;<i> Client:
+</I>&gt;<i>  *doesn't know to make quoted link clickable*
+</I>&gt;<i>  *doesn't know to fancy-render the quoted list*
+</I>&gt;<i> ```
+</I>
+Hmm, I really would not have had any expectation that quoted Gemini
+syntax would do anything at all.
+
+What sort of context would you expect this to occur in?
+ 
+&gt;<i> * Preformatted text toggle lines only need to *start* with three
+</I>&gt;<i>   backticks. Specify the significance of text after the backticks.
+</I>
+I think I'm probably fine with this, does anybody have objections?
+ 
+&gt;<i> * Specify that preformatted code blocks are intended for content such as
+</I>&gt;<i>   ascii art and code, meaning that it should be easily copy-pasteable
+</I>&gt;<i>   into a text editor without needed to undergo extra steps to revert it
+</I>&gt;<i>   from its displayed form to its original form
+</I>
+Yeah, it might be a good idea to emphasise the intent to preserve
+copy-and-pastability.
+
+&gt;<i> * Add horizontal rule lines (three+ dashes)
+</I>
+I guess this is harmless.  It feels a bit to me like we're adding it
+just because Markdown has it - unlike headings and lists and even,
+occasionally, quotes, I don't know that I've ever seen a horiozontal
+rule used in Gopherspace.  But I don't see a good reason to disallow it.
+
+&gt;<i> * Specify that ordered lists MUST use plus sign markers
+</I>
+Yep.
+
+&gt;<i> * Specify Tomasino's nested list system
+</I>
+I think I'm still onboard with this, although I'm starting to wonder
+about how these nested lists will look when rendered by a basic client
+treating them as text lines.  I'm not sure it degrades to something
+terribly readable.
+
+&gt;<i> * Explicitly specify markdown syntax that is not allowed.
+</I>
+It feels very strange to me for a syntax specification to explicitly
+list stuff from a different syntax specification which isn't allowed.  I
+can see it being helpful to point this stuff out in a tutorial for
+people learning text/gemini, but in a formal specification of a markup
+format, it goes without saying that anything which isn't explicitly
+supported is unsupported.
+
+&gt;<i>   but maybe we could even advise clients to shame this syntax the same
+</I>&gt;<i>   way modern web browsers are shaming non-HTTP sites?
+</I>
+Wouldn't doing that (all questions about whether this is appropriate
+behaviour aside) require writing code to detect all the stuff that we're
+not supporting precisely because it's a pain to write code to reliably
+detect it?  Seems counterproductive!
+
+&gt;<i> Regardless, here
+</I>&gt;<i>   are some things that I think we should explicitly ban in text/gemini: 
+</I>&gt;<i>  ...
+</I>&gt;<i>   * Hard-wrapping text
+</I>
+I don't want to explicitly ban hard-wrapped text, I don't see the need
+to.  I think this syntax actually degrades pretty gracefully when fed
+hard-wrapped text that is shorter than the viewport, and that's nice.  I
+think the vast majoity of people will end up taking the long line
+approach because it will support a wider range of clients (especially
+narrow screens) and some things will render slightly nicer.  If a small
+percentage want to stick to the old ways for whatever reason, knowing
+and accepting the downsides, I see no reason not to let them.
+ 
+&gt;<i> Are we really limited to a max depth of three? Even if we allow unlimited
+</I>&gt;<i> depth of headers and lists, clients would only need to read the first two
+</I>&gt;<i> chars of a line to determine its type (unless we add horizontal rules,
+</I>&gt;<i> in which case we'd need to read three characters).
+</I>
+Good catch, technically speaking once a line is detected, on the basis
+of the first three or fewer chars, as a header or list, it can be passed
+to a function than handles a header line or a list line, and that
+function has access to the whole line.
+
+That said, maybe we should add a limit anyway.  Otherwise clients have
+to write totally generalised code to handle arbitrarily many levels,
+which could get tricky.
+ 
+&gt;<i> Well, worst case scenario, if someone really badly wants comment threads,
+</I>&gt;<i> maybe they could use nested quote blocks (assuming we figure that out).
+</I>
+Well, it seems like the &gt; syntax generalises in exactly the same way as
+the heading and list syntaxes.
+
+Speaking of these...what happens when a client encounters this:
+
+** Foo
+** Bar
+** Baz
+
+i.e. a bunch of allegedly nested list items which are not emedded in a
+higher-level list?
+
+For a simple text-based client which only uses the nestedness level to
+determine how many spaces to stick in front of the line, this shouldn't
+post major problems.  But fancy clients planning on doing graphical
+things (I'm actually thinking more about quotes here than list items)
+might choke if not carefully written.  Should we explicitly require
+correct nesting?  Or explicitly say clients must be resilient against
+weird nesting?
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000378.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000381.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#379">[ date ]</a>
+              <a href="thread.html#379">[ thread ]</a>
+              <a href="subject.html#379">[ subject ]</a>
+              <a href="author.html#379">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] Integrity checks for Gemini pages
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Integrity%20checks%20for%20Gemini%20pages&In-Reply-To=%3C82eee3tasl.fsf%40nassur.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006541.html">
+   <LINK REL="Next"  HREF="006539.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] Integrity checks for Gemini pages</H1>
+    <B>ew.gemini</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Integrity%20checks%20for%20Gemini%20pages&In-Reply-To=%3C82eee3tasl.fsf%40nassur.net%3E"
+       TITLE="[tech] Integrity checks for Gemini pages">ew.gemini at nassur.net
+       </A><BR>
+    <I>Wed May 19 08:40:16 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006541.html">[tech] Integrity checks for Gemini pages
+</A></li>
+        <LI>Next message (by thread): <A HREF="006539.html">[tech] Integrity checks for Gemini pages
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6535">[ date ]</a>
+              <a href="thread.html#6535">[ thread ]</a>
+              <a href="subject.html#6535">[ subject ]</a>
+              <a href="author.html#6535">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hello almaember,
+
+Almaember &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">almaember at disroot.org</A>&gt; writes:
+
+&gt;<i> Hello, everybody!
+</I>&gt;<i>
+</I>&gt;<i> I know that there is no way in Gemini right now to check the integrity
+</I>&gt;<i> of pages. However, it would be nice for this to possible.
+</I>
+Integrity in the sense of &quot;the file remained unchanged in
+transit&quot;? TLS should take care of that. In the sense &quot;the file
+is the one that the original author intented it to be&quot;?
+
+There are at least two attempts to deal with this:
+
+If you dare to check my capsule at
+=&gt; <A HREF="gemini://ew.srht.site/">gemini://ew.srht.site/</A>
+
+There are two links to openbsd-signify and NetSigil.
+
+When I publish a post, my Makefile takes care to create
+corresponding sha256 checksums. They are concatenated into one
+file, which is then signed using my gpg key. That's one option.
+
+The same information is packaged differently to
+.well-known/signature-bundle. This file is created using
+openbds-signify.
+
+There are a few threads on the mailing list, too ...
+<A HREF="https://lists.orbitalfox.eu/archives/gemini/2021/005550.html">https://lists.orbitalfox.eu/archives/gemini/2021/005550.html</A>
+<A HREF="https://lists.orbitalfox.eu/archives/gemini/2021/005374.html">https://lists.orbitalfox.eu/archives/gemini/2021/005374.html</A>
+<A HREF="https://lists.orbitalfox.eu/archives/gemini/2021/005331.html">https://lists.orbitalfox.eu/archives/gemini/2021/005331.html</A>
+
+Also see my first post about experimenting with this:
+=&gt; <A HREF="gemini://ew.srht.site/en/2020/20201217-towards-a-proper-flightlog-4.gmi">gemini://ew.srht.site/en/2020/20201217-towards-a-proper-flightlog-4.gmi</A>
+
+
+There are two parts to this, as I see it.
+
+1.
+Create the checksums/signature in some agreed upon format.
+Everyone editing a capsule has to do this. While a bit tedious,
+it still can be done manually on the shell (unix type
+environment assumed).
+
+2.
+Upon user request browsers have to check these agreed upon
+locations, download the signed file, possibly download the
+public key, cache these things properly and then do the
+verification. I am not aware that any gemini browsers have
+picked this up. But of course, I would be pleased to be proven
+wrong :)
+
+
+&gt;<i>snip&lt;
+</I>
+Hope this helps,
+~ew
+
+-- 
+Keep it simple!
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 861 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210519/2c6a38d3/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20210519/2c6a38d3/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006541.html">[tech] Integrity checks for Gemini pages
+</A></li>
+	<LI>Next message (by thread): <A HREF="006539.html">[tech] Integrity checks for Gemini pages
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6535">[ date ]</a>
+              <a href="thread.html#6535">[ thread ]</a>
+              <a href="subject.html#6535">[ subject ]</a>
+              <a href="author.html#6535">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

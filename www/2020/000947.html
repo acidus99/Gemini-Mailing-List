@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposed minor spec changes, for comment.
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C5EC6EEE3.9030909%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000946.html">
+   <LINK REL="Next"  HREF="000949.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposed minor spec changes, for comment.</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C5EC6EEE3.9030909%40gmail.com%3E"
+       TITLE="Proposed minor spec changes, for comment.">luke.emmet at gmail.com
+       </A><BR>
+    <I>Thu May 21 22:13:07 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000946.html">Proposed minor spec changes, for comment.
+</A></li>
+        <LI>Next message (by thread): <A HREF="000949.html">Proposed minor spec changes, for comment.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#947">[ date ]</a>
+              <a href="thread.html#947">[ thread ]</a>
+              <a href="subject.html#947">[ subject ]</a>
+              <a href="author.html#947">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+On 21-May-2020 21:47, solderpunk wrote:
+&gt;<i> On Tue, May 19, 2020 at 07:46:25AM +0000, solderpunk wrote:
+</I>&gt;&gt;<i> So now the question is which do we prefer, forcing servers to
+</I>&gt;&gt;<i> canonicalise (canonise?) everything, with client behaviour then being
+</I>&gt;&gt;<i> strictly limited, or letting servers just send whatever the author uses
+</I>&gt;&gt;<i> and forcing clients to accept any of CRLF, CR or LF?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> In general I have preferred pushing burden to server authors over client
+</I>&gt;&gt;<i> authors for Gemini...but I expect the client burden is pretty small here
+</I>&gt;&gt;<i> as most languages will have some kind of functionality for breaking
+</I>&gt;&gt;<i> strings into lines which already handles this...
+</I>&gt;<i> Some quick experimentation with Python revealed that str.splitlines()
+</I>&gt;<i> is, indeed, smart enough to handle CRLF, CR and LF as linebreaks.
+</I>&gt;<i> Encouraged by this, I made a single Gemini page that mixes all three
+</I>&gt;<i> styles in a single document:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="gemini://gemini.circumlunar.space/users/solderpunk/linebreaks.gmi">gemini://gemini.circumlunar.space/users/solderpunk/linebreaks.gmi</A>
+</I>&gt;<i>
+</I>&gt;<i> I visited it with a selection of clients, but the results weren't
+</I>&gt;<i> encouraging.
+</I>&gt;<i>
+</I>&gt;<i> It rendered just fine in AV-98, because apparently Python is awesome at
+</I>&gt;<i> this.
+</I>As a client author, I think we have to expect a mix of line endings, but 
+perhaps not commonly in the same document. But even this will happen at 
+some stage when you have multiple authors contributing to the same file. 
+Most text editors will handle this without complaint. I think it is not 
+to be surprising that servers will generally just serve up the GMI file 
+as is. End users/authors will simply use whatever text editor and os 
+defaults it uses.
+
+You can normalise them very simply just before display as follows (or 
+similar scheme)
+
+  - Replace all CRLF with LF in the document.
+  - Replace all plain CR with LF
+  - Then display, splitting at LF
+  - Job done.
+
+This is not onerous or a big performance hit as GMI files are in the 
+grand scheme of things *very small* text files.
+
+Works for me in my WIP client as a first approximation - the above link 
+looks fine. But if the language has a library for this, we should just 
+use it.
+
+Best Wishes
+
+   - Luke
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000946.html">Proposed minor spec changes, for comment.
+</A></li>
+	<LI>Next message (by thread): <A HREF="000949.html">Proposed minor spec changes, for comment.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#947">[ date ]</a>
+              <a href="thread.html#947">[ thread ]</a>
+              <a href="subject.html#947">[ subject ]</a>
+              <a href="author.html#947">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

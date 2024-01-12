@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] A possible client-side, community-based solution to the drawbacks of TOFU authentication
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20A%20possible%20client-side%2C%20community-based%20solution%20to%20the%0A%20drawbacks%20of%20TOFU%20authentication&In-Reply-To=%3CCAO4iYLgm97Tcta2ks5iN98haXsNGaFj_gFe_FrdzHUkiHay%2Bsw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006319.html">
+   <LINK REL="Next"  HREF="006323.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] A possible client-side, community-based solution to the drawbacks of TOFU authentication</H1>
+    <B>Benjamin Cronin</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20A%20possible%20client-side%2C%20community-based%20solution%20to%20the%0A%20drawbacks%20of%20TOFU%20authentication&In-Reply-To=%3CCAO4iYLgm97Tcta2ks5iN98haXsNGaFj_gFe_FrdzHUkiHay%2Bsw%40mail.gmail.com%3E"
+       TITLE="[spec] A possible client-side, community-based solution to the drawbacks of TOFU authentication">bcronin720 at gmail.com
+       </A><BR>
+    <I>Sun Apr 11 09:12:30 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006319.html">[spec] The security model for TLS is also discussed inside IETF
+</A></li>
+        <LI>Next message (by thread): <A HREF="006323.html">[spec] A possible client-side, community-based solution to the drawbacks of TOFU authentication
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6321">[ date ]</a>
+              <a href="thread.html#6321">[ thread ]</a>
+              <a href="subject.html#6321">[ subject ]</a>
+              <a href="author.html#6321">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>There are several issues with Gemini's utilization of TOFU that I believe
+can be solved using a system of a distributed certificate authority.
+
+The reasoning for having an extra step of security past TOFU is that upon
+first connection, the user does not know whether or not the certificate
+they receive is legitimate or malicious. TOFU always trusts the first
+certificate it receives without knowledge of whether or not the host is
+actually who they claim to be. Therefore, my proposition to mitigate this
+is to set up a distributed network of nodes that will act as a
+community-run CA/PKI.
+
+In essence, this distributed trust network (as I'm calling it) acts as a
+certificate authority which sites will register with to provide clients a
+way to ensure that the certificate they receive from a site when connecting
+is legitimate, acting as a precursor to TOFU's initial trust. This operates
+as a solely client-side process, with the only sysadmin's interaction being
+an initial registration and certificate updates, so it does not require any
+changes to the actual Gemini protocol. As TLS certificates are used by
+default in the Gemini protocol, it makes sense for a server's long-term
+certificate to be registered in a public place for new visitors of a site
+to check against.
+
+I have put a lot of thought and effort into ensuring that a network that
+would provide this service is resilient to malicious attacks while
+maintaining a low power consumption requirement, allowing it to run as a
+background process on a home server. This means no blockchain based
+technology or other popular distributed system of trust, due to the
+computing requirements that their proof of stake require. The network will
+constantly check to make sure its peers are acting properly, and will
+communicate any anomalies to the rest of the network.
+
+This may be compared in a slight way to a DHT, but I believe that it is
+fundamentally different in its operation, as it is built to provide not a
+lookup, but a true CA service.
+
+At the current moment, I have not found any specific research along these
+lines, so I am unsure of how original this idea is, and if there has
+already been a body of work created that I've missed. I can draw
+similarities to this from existing public key infrastructure, but I'm not
+entirely convinced that they're the same. I'd welcome feedback on this, and
+I am working hard to get a larger paper written up on it.
+
+Please let me know your thoughts!
+- Entflammen
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210411/3fd12014/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210411/3fd12014/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006319.html">[spec] The security model for TLS is also discussed inside IETF
+</A></li>
+	<LI>Next message (by thread): <A HREF="006323.html">[spec] A possible client-side, community-based solution to the drawbacks of TOFU authentication
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6321">[ date ]</a>
+              <a href="thread.html#6321">[ thread ]</a>
+              <a href="subject.html#6321">[ subject ]</a>
+              <a href="author.html#6321">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

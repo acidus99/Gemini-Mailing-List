@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Cognitive aspects of navigation in gemini space
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cognitive%20aspects%20of%20navigation%20in%20gemini%20space&In-Reply-To=%3C20200517171703.GA2317%40thrax.localdomain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000765.html">
+   <LINK REL="Next"  HREF="000800.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Cognitive aspects of navigation in gemini space</H1>
+    <B>Ivy Foster</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cognitive%20aspects%20of%20navigation%20in%20gemini%20space&In-Reply-To=%3C20200517171703.GA2317%40thrax.localdomain%3E"
+       TITLE="Cognitive aspects of navigation in gemini space">escondida at iff.ink
+       </A><BR>
+    <I>Sun May 17 18:17:03 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000765.html">Cognitive aspects of navigation in gemini space
+</A></li>
+        <LI>Next message (by thread): <A HREF="000800.html">Cognitive aspects of navigation in gemini space
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#767">[ date ]</a>
+              <a href="thread.html#767">[ thread ]</a>
+              <a href="subject.html#767">[ subject ]</a>
+              <a href="author.html#767">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 17 May 2020, at  5:19 pm +0200, Brian Evans wrote:
+&gt;<i> _jan6 writes:_
+</I>&gt;<i> &gt; I'm not a fan of the ending part having text too, slightly harder
+</I>&gt;<i> &gt; parser, and noticeably harder to read for humans, especially if
+</I>&gt;<i> &gt; there are several blocks back-to-back
+</I>
+&gt;<i> I'm not sure about this. It seems to me that someone parsing by line can
+</I>&gt;<i> just set a flag for `in_pre_block`.  When they get to a line beginning
+</I>&gt;<i> with ``` they know the pre block has ended. Sounds dead simple to me.
+</I>
+&gt;<i> As to harder for humans, the whole point is to make it easier for
+</I>&gt;<i> humans. The ``` and text should not appear to most users. It is not
+</I>&gt;<i> for them, it is for the client. Having the opening ``` with a type of
+</I>&gt;<i> some form allows a client to offer options such as &quot;show ascii art&quot;
+</I>&gt;<i> and &quot;show pre text&quot; as boolean options. If someone chose to set &quot;show
+</I>&gt;<i> ascii art&quot; to to false for the below:
+</I>
+&gt;<i> ``` art
+</I>&gt;<i> :-)
+</I>&gt;<i> ``` A simple smiley
+</I>&gt;<i> The client could display:
+</I>
+&gt;<i> [art: A simple smiley]
+</I>
+&gt;<i> I would go so far as to recommend this be a requirement for preformatted
+</I>&gt;<i> blocks in accessibility merits alone.  I think there should be three
+</I>&gt;<i> types: Art, Text, Code and that descriptions on the end blocks should
+</I>&gt;<i> be compulsory.
+</I>
+I like the idea of severely limiting the available block-type options.
+
+How about this for block syntax, with the understanding that the alt
+text is highly recommended for accessibility. Specifying the block
+type and the programming language or written language (as appropriate)
+would be strictly optional: those that wanted to make use of them
+could, those who did not want to make use of them would not have to.
+
+For the purposes of this proposal, there would be *no space* between
+the backticks and the optional content-type field, which field may not
+contain spaces. There must be at least one space on the line before
+the (recommended) alt text. That way, the client doesn't need to try
+and figure out where one ends and one begins: the instant the client
+sees a space, we're into alt-text territory for the rest of the line.
+
+```[art | code[:programming language] | text[:written language]] [alt text]
+...
+```
+
+So, e.g.,
+
+```code:c The Laziest Hello World
+#include &quot;real_hello_world.h&quot;
+```
+
+```text:fr_FR Antoine de Saint-Exup&#233;ry on perfection
+	Il semble que la perfection soit atteinte non quand il n'y a
+	plus rien &#224; ajouter, mais quand il n'y a plus rien &#224;
+	retrancher.
+		-- Terre des Hommes, 1939
+```
+
+``` This is a block with just alt text.
+You know, I think the alt text is better than the content this time.
+```
+
+What the client does with the alt text and the block type, if
+anything, is up to the author.
+
+I think this way, it would be both nicely readable to a human reading
+the source text/gemini, without sacrificing ease of parsing. Just
+throwing an idea at the wall to see whether it sticks.
+
+Cheers,
+Ivy Foster
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 833 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200517/d7fa247d/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20200517/d7fa247d/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000765.html">Cognitive aspects of navigation in gemini space
+</A></li>
+	<LI>Next message (by thread): <A HREF="000800.html">Cognitive aspects of navigation in gemini space
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#767">[ date ]</a>
+              <a href="thread.html#767">[ thread ]</a>
+              <a href="subject.html#767">[ subject ]</a>
+              <a href="author.html#767">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

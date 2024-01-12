@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> TLS 1.3 Early Data (0RTT)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20TLS%201.3%20Early%20Data%20%280RTT%29&In-Reply-To=%3CCAD1%3D23mqPuDQvMQVZTG5vhhxLGEro-GKMbgHHcreiB81mBayMA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001901.html">
+   <LINK REL="Next"  HREF="001903.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>TLS 1.3 Early Data (0RTT)</H1>
+    <B>Matt Brubeck</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20TLS%201.3%20Early%20Data%20%280RTT%29&In-Reply-To=%3CCAD1%3D23mqPuDQvMQVZTG5vhhxLGEro-GKMbgHHcreiB81mBayMA%40mail.gmail.com%3E"
+       TITLE="TLS 1.3 Early Data (0RTT)">mbrubeck at limpet.net
+       </A><BR>
+    <I>Thu Jun 25 01:36:24 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001901.html">Atom Feeds?
+</A></li>
+        <LI>Next message (by thread): <A HREF="001903.html">TLS 1.3 Early Data (0RTT)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1886">[ date ]</a>
+              <a href="thread.html#1886">[ thread ]</a>
+              <a href="subject.html#1886">[ subject ]</a>
+              <a href="author.html#1886">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>One of the acknowledged disadvantages of TLS for Gemini is latency.
+TLS 1.3 has a feature that could mitigate this problem in some
+circumstances.  To quote RFC 8470:
+
+&gt;<i> TLS 1.3 [TLS13] introduces the concept of early data (also known as
+</I>&gt;<i> zero round-trip time (0-RTT) data).  If the client has spoken to the
+</I>&gt;<i> same server recently, early data allows a client to send data to a
+</I>&gt;<i> server in the first round trip of a connection, without waiting for
+</I>&gt;<i> the TLS handshake to complete.
+</I>&gt;<i>
+</I>&gt;<i> When used with HTTP [HTTP], early data allows clients to send
+</I>&gt;<i> requests immediately, thus avoiding the one or two round-trip delays
+</I>&gt;<i> needed for the TLS handshake.  This is a significant performance
+</I>&gt;<i> enhancement; however, it has significant limitations.
+</I>&gt;<i>
+</I>&gt;<i> The primary risk of using early data is that an attacker might
+</I>&gt;<i> capture and replay the request(s) it contains.
+</I>
+Has anyone implemented a Gemini client and/or server with support for
+0-RTT data? Any thoughts on which requests can safely use it?  (For
+example, would it be reasonable to allow early data for all requests
+that don't use a client certificate?)
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001901.html">Atom Feeds?
+</A></li>
+	<LI>Next message (by thread): <A HREF="001903.html">TLS 1.3 Early Data (0RTT)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1886">[ date ]</a>
+              <a href="thread.html#1886">[ thread ]</a>
+              <a href="subject.html#1886">[ subject ]</a>
+              <a href="author.html#1886">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

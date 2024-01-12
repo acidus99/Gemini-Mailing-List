@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] IRIs, IDNs, and all that international jazz
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3C20201224133643.GA424%40202x.moe%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004352.html">
+   <LINK REL="Next"  HREF="004357.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] IRIs, IDNs, and all that international jazz</H1>
+    <B>bie</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3C20201224133643.GA424%40202x.moe%3E"
+       TITLE="[spec] IRIs, IDNs, and all that international jazz">bie at 202x.moe
+       </A><BR>
+    <I>Thu Dec 24 13:36:43 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004352.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+        <LI>Next message (by thread): <A HREF="004357.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4354">[ date ]</a>
+              <a href="thread.html#4354">[ thread ]</a>
+              <a href="subject.html#4354">[ subject ]</a>
+              <a href="author.html#4354">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Dec 24, 2020 at 01:39:16PM +0100, Omar Polo wrote:
+&gt;<i> I think we're in the same boat, as I have written from scratch my server
+</I>&gt;<i> using only stuff that's in base on OpenBSD too.
+</I>&gt;<i> 
+</I>&gt;<i> Initially I was totally for option #3 (but I've that I've just finished
+</I>&gt;<i> skimming through the RFC), but by reading your messages I was a little
+</I>&gt;<i> scared of the consequences.
+</I>&gt;<i> 
+</I>&gt;<i> Today I did some light testing, and it seems that (IF I'm understanding
+</I>&gt;<i> everything correctly -- please correct me otherwise) that option #3 is
+</I>&gt;<i> actually simpler for us.
+</I>&gt;<i> 
+</I>&gt;<i> Current state of the affairs: both Lagrange (0.13.1), amfora and elpher
+</I>&gt;<i> will encode &quot;gemini.omarpolo.com/caf&#232;.gmi&quot; as
+</I>&gt;<i> &quot;gemini.omarpolo.com/caf%C3%A8.gmi&quot;.  Obviously open(&quot;caf%C3%A8.gmi&quot;)
+</I>&gt;<i> fails, so my server return 51 because the actual file name is
+</I>&gt;<i> &quot;caf&#232;.gmi&quot;.  I have to write code that de-encode parts of the request if
+</I>&gt;<i> I want to serve a file named like that (spoiler: I'm not gonna write it).
+</I>&gt;<i> 
+</I>&gt;<i> With IRI: the request becomes &quot;<A HREF="gemini://gemini.omarpolo.com/caf&#232;.gmi">gemini://gemini.omarpolo.com/caf&#232;.gmi</A>&quot;,
+</I>&gt;<i> so open(&quot;caf&#232;.gmi&quot;) doesn't fail.  I think that we can continue to treat
+</I>&gt;<i> the request as a bytestring, extract the path and try to open(2) it.
+</I>&gt;<i> 
+</I>&gt;<i> I know that what I'm proposing is a really poor-man solution, because it
+</I>&gt;<i> doesn't matter we choose option #1, #2 or #3 as we can't really treat
+</I>&gt;<i> the path in the URL/IRL as a bytestring and call it a day.  UNIX file
+</I>&gt;<i> names are real bytestring with only two forbidden octet, URL/IRI
+</I>&gt;<i> aren't.
+</I>&gt;<i> 
+</I>&gt;<i> So, if I'm not missing anything, I'm all in for option #3.
+</I>
+You're kind of correct in the sense that if we just treat the request as
+arbitrary bytes and not as an IRI (no validation, no handling at all),
+it's simple, but I don't think that's the right way to look at this
+issue. Instead, it's about the complexity of proper URI handling vs
+proper IRI handling. Not to mention that IRIs can still have
+percent-encoded characters!
+
+After thinking about this for a while, the biggest issue for me is that
+this is a breaking change. Breaking in the sense that it breaks *every
+single compliant server we already have*! If gemini, which has been
+surprisingly good at resisting breaking spec changes, accepts this, I
+don't see any reason to believe that it won't happen again and again,
+for equally silly reasons.
+
+bie
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004352.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+	<LI>Next message (by thread): <A HREF="004357.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4354">[ date ]</a>
+              <a href="thread.html#4354">[ thread ]</a>
+              <a href="subject.html#4354">[ subject ]</a>
+              <a href="author.html#4354">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

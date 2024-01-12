@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Updated recommendations regarding TOFU &amp; TLS
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Updated%20recommendations%20regarding%20TOFU%20%26%20TLS&In-Reply-To=%3C20210305131347.81b8720d5165393d6153d1da%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005962.html">
+   <LINK REL="Next"  HREF="005953.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Updated recommendations regarding TOFU &amp; TLS</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Updated%20recommendations%20regarding%20TOFU%20%26%20TLS&In-Reply-To=%3C20210305131347.81b8720d5165393d6153d1da%40gmail.com%3E"
+       TITLE="Updated recommendations regarding TOFU &amp; TLS">linde.philip at gmail.com
+       </A><BR>
+    <I>Fri Mar  5 12:13:47 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005962.html">Updated recommendations regarding TOFU &amp; TLS
+</A></li>
+        <LI>Next message (by thread): <A HREF="005953.html">Updated recommendations regarding TOFU &amp; TLS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5952">[ date ]</a>
+              <a href="thread.html#5952">[ thread ]</a>
+              <a href="subject.html#5952">[ subject ]</a>
+              <a href="author.html#5952">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, 04 Mar 2021 11:43:49 -0500
+&quot;Drew DeVault&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sir at cmpwn.com</A>&gt; wrote:
+
+&gt;<i> - Use long-lived certificates with the expiration set to the far future
+</I>
+That makes perfect sense for TOFU. If for whatever reason you need to
+renew a certificate (e.g. to use stronger encryption) you can just swap
+it out. The clients will (hopefully) learn of the change and can choose
+whether to trust the new certificate.
+
+&gt;<i> - Client software should disregard notBefore/notAfter dates, and the
+</I>&gt;<i>   common name as well. Requiring strong algorithms and other technical
+</I>&gt;<i>   constraints is fine.
+</I>
+What is the motivation for ignoring CN?
+
+&gt;<i> Any server software which wants to migrate to long-lived certificates
+</I>&gt;<i> should let their current certificates expire and then automatically
+</I>&gt;<i> issue a long-lived certificate to replace it when the time comes, rather
+</I>&gt;<i> than switching immediately and causing your clients to flag your cert as
+</I>&gt;<i> untrusted.
+</I>
+Without a chain of trust, and ignoring notBefore/notAfter, there's no
+point in waiting.
+
+The client (according to the procedure you describe in your article)
+will find the old cert in known_hosts in step 2., see that the served
+certificate differs and consider the new certificate UNTRUSTED. That is
+true regardless of whether you immediately replace the certificate or
+wait until the old one has expired, unless the client *doen't* ignore
+notBefore/notAfter and uses those dates to vacuum known_hosts to remove
+expired certificates automatically (which is impossible given the store
+format you currently recommend).
+
+The procedure you describe does not provide for any other way to roll
+out new certificates than for the new one to be UNTRUSTED, nor do I
+think clients are able to provide this in general outside the use of
+certificate authorities or validity date based vacuuming of known_hosts.
+
+That's really how it has to be for TOFU: whenever a new certificate is
+used, a new trust has to be established. *Any* certificate that
+you haven't used is untrusted.
+
+IMO, UNKNOWN is really the same thing as UNTRUSTED. There is no
+UNKNOWN state; either I've asserted my trust in the certificate or I
+haven't. UNKNOWN and UNTRUSTED are just different cases of untrusted
+certificates, with latter giving you an additional piece of
+information: that you have already trusted a different certificate for
+the given host. I think it's better for clients if they are treated as
+such.
+
+In my client, the user gets a choice whenever they encounter a new
+certificate. If the trust store happens to contain a different
+certificate for the host, that information will be displayed to the
+user as well, so that they can use it as a basis for the decision
+whether to trust the new certificate. Manually editing known_hosts is
+just that, &quot;with extra steps&quot;.
+
+&gt;<i> To re-state one of my previous recommendations, which I still figure is
+</I>&gt;<i> a good idea: server software should handle certificate maintenance for
+</I>&gt;<i> the user. Making the sysadmin generate certificates is cumbersome and
+</I>&gt;<i> error prone, and because Gemini encourages TOFU and self-signed
+</I>&gt;<i> certificates, we can remove that burden from server operators entirely
+</I>&gt;<i> by generating certificates on-demand for the hosts we intend to service.
+</I>
+Agreed.
+
+&gt;<i> Aside: it might be a good idea to have a non-authoratitive TLS
+</I>&gt;<i> best-practices document on gemini.circumlunar.space somewhere. I'd be
+</I>&gt;<i> happy to draft up such a document if this is desirable.
+</I>
+Agreed. I think your article is a good starting point, but consider my
+criticism above.
+
+-- 
+Philip
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210305/17dbaf8c/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20210305/17dbaf8c/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005962.html">Updated recommendations regarding TOFU &amp; TLS
+</A></li>
+	<LI>Next message (by thread): <A HREF="005953.html">Updated recommendations regarding TOFU &amp; TLS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5952">[ date ]</a>
+              <a href="thread.html#5952">[ thread ]</a>
+              <a href="subject.html#5952">[ subject ]</a>
+              <a href="author.html#5952">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Spec] Spec (un)freezes and the spec's future
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSpec%5D%20Spec%20%28un%29freezes%20and%20the%20spec%27s%20future&In-Reply-To=%3C193C60BA-A55B-4933-932E-49F7CEAC9FA5%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004244.html">
+   <LINK REL="Next"  HREF="004265.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Spec] Spec (un)freezes and the spec's future</H1>
+    <B>Petite Abeille</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSpec%5D%20Spec%20%28un%29freezes%20and%20the%20spec%27s%20future&In-Reply-To=%3C193C60BA-A55B-4933-932E-49F7CEAC9FA5%40gmail.com%3E"
+       TITLE="[Spec] Spec (un)freezes and the spec's future">petite.abeille at gmail.com
+       </A><BR>
+    <I>Tue Dec 22 08:40:42 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004244.html">[Spec] Spec (un)freezes and the spec's future
+</A></li>
+        <LI>Next message (by thread): <A HREF="004265.html">[Spec] Spec (un)freezes and the spec's future
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4245">[ date ]</a>
+              <a href="thread.html#4245">[ thread ]</a>
+              <a href="subject.html#4245">[ subject ]</a>
+              <a href="author.html#4245">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+&gt;<i> On Dec 22, 2020, at 08:42, Stephane Bortzmeyer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stephane at sources.org</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> On Mon, Dec 21, 2020 at 11:10:46PM +0100,
+</I>&gt;<i> Petite Abeille &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">petite.abeille at gmail.com</A>&gt; wrote 
+</I>&gt;<i> a message of 44 lines which said:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> - Usually, a spec is not meant to mandate implementation
+</I>&gt;&gt;<i> details.. i.e. do that, don't do that... as it has no mean to
+</I>&gt;&gt;<i> enforce any of it... its role is rather to describe a normative
+</I>&gt;&gt;<i> interaction (the protocol) or format (text/gemini).
+</I>&gt;<i> 
+</I>&gt;<i> In another way: the spec of a network protocol is here to allow
+</I>&gt;<i> *interoperability*. Unilateral actions (such as logging) has no
+</I>&gt;<i> influence on interoperability.
+</I>
+Right. The specification should concern itself with interoperability.
+
+&gt;<i> 
+</I>&gt;&gt;<i> - The gemini protocol is not well tailored to handle anything
+</I>&gt;&gt;<i> sensitive.
+</I>&gt;<i> 
+</I>&gt;<i> Why? At least for privacy, it is certainly better than HTTPS.
+</I>
+I'm not a security expert, so I will spare myself the embarrassment of articulating a cogent answer, but by &quot;sensitive&quot; I understood &quot;secure&quot;. 
+
+There are different aspects to security: data at rest vs data in transit vs data in use, etc.
+
+A threat model helps as well: <A HREF="https://blog.ivanristic.com/2009/09/ssl-threat-model.html">https://blog.ivanristic.com/2009/09/ssl-threat-model.html</A>
+
+In any case, all above my pay grade. Perhaps someone with actual expertise in this domain could help out. 
+
+Privacy is something else altogether.
+
+&gt;<i> 
+</I>&gt;&gt;<i> That said, Gemini could sport a set of recommendation and/or &quot;best
+</I>&gt;&gt;<i> practices&quot; in a companion document, such as &quot;be mindful of what you
+</I>&gt;&gt;<i> log as it may contain sensitive information&quot; and &quot;consider using the
+</I>&gt;&gt;<i> underlying TLS mechanism for strong authentication&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> Good idea. A good example is RFC 8932. It is for DNS servers but its
+</I>&gt;<i> method can be applied to Gemini servers easily. For instance, it
+</I>&gt;<i> contains a very good and detailed discussion of IP addresses &quot;anonymization&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="gemini://gemini.bortzmeyer.org/rfc-mirror/rfc8932.txt">gemini://gemini.bortzmeyer.org/rfc-mirror/rfc8932.txt</A>
+</I>
+Nice.
+
+&gt;<i> 
+</I>&gt;&gt;<i> Guidelines for Writing RFC Text on Security Considerations
+</I>&gt;&gt;<i> <A HREF="https://tools.ietf.org/html/rfc3552">https://tools.ietf.org/html/rfc3552</A>
+</I>&gt;<i> 
+</I>&gt;<i> Or on the geminispace
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="gemini://gemini.bortzmeyer.org/rfc-mirror/rfc3552.txt">gemini://gemini.bortzmeyer.org/rfc-mirror/rfc3552.txt</A>
+</I>
+Let's split the difference:
+
+<A HREF="https://portal.mozz.us/gemini/gemini.bortzmeyer.org/rfc-mirror/rfc3552.txt">https://portal.mozz.us/gemini/gemini.bortzmeyer.org/rfc-mirror/rfc3552.txt</A>
+
+In general, would people prefer gemini links? or http ones?
+
+Accessibility is an issue. At this conjuncture, I do not have the proper tooling to systematically provide gemini links by default.  
+
+&gt;<i> 
+</I>&gt;&gt;<i> Finally, The National Institute of Standards and Technology has a rather comprehensive document on the matter:
+</I>&gt;<i> 
+</I>&gt;<i> Since one of the goals of Gemini is privacy, I don't think that
+</I>&gt;<i> relying on an US official document is a good idea.
+</I>&gt;<i> 
+</I>
+This is a technical document, not a political pamphlet. Let's keep it that way.
+
+By the same account, avoid ARPANET and its decedents. A creation of the United States Department of Defense.
+
+Let's not be overly childish.
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004244.html">[Spec] Spec (un)freezes and the spec's future
+</A></li>
+	<LI>Next message (by thread): <A HREF="004265.html">[Spec] Spec (un)freezes and the spec's future
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4245">[ date ]</a>
+              <a href="thread.html#4245">[ thread ]</a>
+              <a href="subject.html#4245">[ subject ]</a>
+              <a href="author.html#4245">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

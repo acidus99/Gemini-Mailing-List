@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Three month spec freeze
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20month%20spec%20freeze&In-Reply-To=%3C20200603161449.GV23998%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001299.html">
+   <LINK REL="Next"  HREF="001315.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Three month spec freeze</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20month%20spec%20freeze&In-Reply-To=%3C20200603161449.GV23998%40brevard.conman.org%3E"
+       TITLE="Three month spec freeze">sean at conman.org
+       </A><BR>
+    <I>Wed Jun  3 17:14:49 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001299.html">Three month spec freeze
+</A></li>
+        <LI>Next message (by thread): <A HREF="001315.html">Three month spec freeze
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1302">[ date ]</a>
+              <a href="thread.html#1302">[ thread ]</a>
+              <a href="subject.html#1302">[ subject ]</a>
+              <a href="author.html#1302">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Felix Quei&#223;ner once stated:
+&gt;<i> &gt; It was thus said that the Great Felix Quei&#223;ner once stated:
+</I>&gt;<i> &gt;   Secondly, Linux systems come with iconv.  Not only is this a program, but
+</I>&gt;<i> &gt; it's also a library which is dead simple to use as there are only three
+</I>&gt;<i> &gt; functions:
+</I>&gt;<i> 
+</I>&gt;<i> Yeah, i know these bindings and i know that libiconv is a thing. It's
+</I>&gt;<i> still a dependency that *all* Gemini programs need to incorporate to be
+</I>&gt;<i> *fully* compliant for displaying text/gemini files
+</I>
+  Yes, and because of the line breaking requirement of text/gemini, the
+Unicode Line Breaking Algorithm is *also* required---a nice document of
+20,000 words:
+
+	<A HREF="https://www.unicode.org/reports/tr14/">https://www.unicode.org/reports/tr14/</A>
+
+  Your client does implement that, right?  Also, what does your client do if
+it receives a BOM (byte order mark)?  That's illegal in UTF-8.  Also, what
+Unicode normalization forms does it support?  What does it do when it
+encounters an illegal byte in the document?
+
+  Or does it pass everything along to the operating system?
+
+&gt;<i> &gt;   RFC-1436 (the gopher RFC) suggests ISO Latin1 (ISO-8859-1 if I'm not
+</I>&gt;<i> &gt; mistaken) for 8-bit character sets and says *nothing* about UTF-8 (of
+</I>&gt;<i> &gt; course, it was written before UTF-8 was an RFC, three years later).  But
+</I>&gt;<i> &gt; most of the gopher sites I hit these days are UTF-8---it's rare that I
+</I>&gt;<i> &gt; actually encounter anything but UTF-8.
+</I>&gt;<i> 
+</I>&gt;<i> So, what you are saying is:
+</I>&gt;<i> Most people already use utf-8, so there's no reason to enforce utf-8?
+</I>
+  Yes.
+
+&gt;<i> I think it's even more an argument to enforce UTF-8. It makes the
+</I>&gt;<i> software way simpler and less error pronce, reducing the possibilities
+</I>&gt;<i> of attacks via badly implemented encodings and also reduces the risk of
+</I>&gt;<i> il-translated and badly displayed text.
+</I>
+  I don't agree fully, given some of my questions above.  Also, do you
+filter out control sequences?  MS-DOS supported control sequences to
+redefine the keyboard but I'm not sure if that is still the case with
+Windows.
+
+  -spc
+
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001299.html">Three month spec freeze
+</A></li>
+	<LI>Next message (by thread): <A HREF="001315.html">Three month spec freeze
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1302">[ date ]</a>
+              <a href="thread.html#1302">[ thread ]</a>
+              <a href="subject.html#1302">[ subject ]</a>
+              <a href="author.html#1302">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

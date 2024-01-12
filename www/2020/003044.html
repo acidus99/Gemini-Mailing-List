@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Gemini file downloading client - a thought experiment
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20file%20downloading%20client%20-%20a%20thought%20experiment&In-Reply-To=%3C20201104041502.230484e2%40home%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003058.html">
+   <LINK REL="Next"  HREF="003073.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Gemini file downloading client - a thought experiment</H1>
+    <B>Ali Fardan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20file%20downloading%20client%20-%20a%20thought%20experiment&In-Reply-To=%3C20201104041502.230484e2%40home%3E"
+       TITLE="Gemini file downloading client - a thought experiment">raiz at stellarbound.space
+       </A><BR>
+    <I>Wed Nov  4 01:15:02 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003058.html">Gemini file downloading client - a thought experiment
+</A></li>
+        <LI>Next message (by thread): <A HREF="003073.html">Gemini file downloading client - a thought experiment
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3044">[ date ]</a>
+              <a href="thread.html#3044">[ thread ]</a>
+              <a href="subject.html#3044">[ subject ]</a>
+              <a href="author.html#3044">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, 3 Nov 2020 22:35:14 +0100
+Katarina Eriksson &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gmym at coopdot.com</A>&gt; wrote:
+&gt;<i> Problem A: clients don't have enough information to show a progress
+</I>&gt;<i> bar
+</I>
+It is stated in
+<A HREF="gemini://gemini.circumlunar.space/docs/best-practices.gmi">gemini://gemini.circumlunar.space/docs/best-practices.gmi</A> that Gemini
+is not well suited for large files, and the transmission of these could
+be done using an external protocol.
+
+&gt;<i> Scenario 3: download a big file
+</I>&gt;<i> 
+</I>&gt;<i> Like scenario 2 except the user gets impatient enough to click the
+</I>&gt;<i> &quot;show progress&quot; button. The client makes a separate request to a
+</I>&gt;<i> standardized endpoint to get the needed information. If the server
+</I>&gt;<i> supports this standard, the information is sent and the client can
+</I>&gt;<i> show the progress bar to the user.
+</I>
+Implementing this would be tricky on the server side, this would add
+unnecessary complexity, what I would suggest instead if you really
+insist on using Gemini for large file transfers is specifying file size
+in the link label like so:
+
+=&gt; <A HREF="gemini://example.tld/large_file.bin">gemini://example.tld/large_file.bin</A> Download (140 MB)
+
+and then have the client show how much of the file is downloaded, now
+that you know the file size, and know how much is downloaded, you don't
+need a progress indicator to be implemented within the protocol.  Of
+course this is on the client to implement, but wouldn't be tricky at
+all.
+
+&gt;<i> Scenario 4: the TLS session terminated cleanly but we don't have full
+</I>&gt;<i> confidence the download succeed
+</I>&gt;<i> 
+</I>&gt;<i> Verify the file using the information we have (from scenario 3) or
+</I>&gt;<i> present the user with the option to fetch a hash from the
+</I>&gt;<i> standardized endpoint.
+</I>
+This does not have to be embedded in the protocol, just do this:
+
+SHA1: ad7ff785f989c9ff9cec92bd3d0bab035a54e997
+SHA256: d2af944fe8b3af5cf5a9d8c3226d06ac6369d036fc591363dedc85344bc4daa7
+=&gt; <A HREF="gemini://example.tld/large_file.bin">gemini://example.tld/large_file.bin</A> Download (140 MB)
+
+now the user can verify their downloaded file, this is done all the
+time even in HTTP land.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003058.html">Gemini file downloading client - a thought experiment
+</A></li>
+	<LI>Next message (by thread): <A HREF="003073.html">Gemini file downloading client - a thought experiment
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3044">[ date ]</a>
+              <a href="thread.html#3044">[ thread ]</a>
+              <a href="subject.html#3044">[ subject ]</a>
+              <a href="author.html#3044">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

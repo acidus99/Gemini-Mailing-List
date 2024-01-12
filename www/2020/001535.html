@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> authority's userinfo?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20authority%27s%20userinfo%3F&In-Reply-To=%3C20200611090254.GA21836%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001533.html">
+   <LINK REL="Next"  HREF="001537.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>authority's userinfo?</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20authority%27s%20userinfo%3F&In-Reply-To=%3C20200611090254.GA21836%40SDF.ORG%3E"
+       TITLE="authority's userinfo?">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Thu Jun 11 10:02:54 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001533.html">authority's userinfo?
+</A></li>
+        <LI>Next message (by thread): <A HREF="001537.html">authority's userinfo?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1535">[ date ]</a>
+              <a href="thread.html#1535">[ thread ]</a>
+              <a href="subject.html#1535">[ subject ]</a>
+              <a href="author.html#1535">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Jun 11, 2020 at 02:20:17AM +0200, Petite Abeille wrote:
+&gt;<i> &gt; On Jun 11, 2020, at 01:54, Thomas Karpiniec &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">tkarpiniec at icloud.com</A>&gt; wrote:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; This is possible regardless using query strings, or even more
+</I>&gt;<i> &gt; obnoxiously, dynamic paths/links.
+</I>&gt;<i> 
+</I>&gt;<i> Very true. They are all equivalent:
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="gemini://cookie@mozz.us/beer/">gemini://cookie@mozz.us/beer/</A>
+</I>&gt;<i> <A HREF="gemini://mozz.us/beer/?cookie">gemini://mozz.us/beer/?cookie</A>
+</I>&gt;<i> <A HREF="gemini://mozz.us/beer/#cookie">gemini://mozz.us/beer/#cookie</A>
+</I>&gt;<i> <A HREF="gemini://mozz.us/beer/cookie">gemini://mozz.us/beer/cookie</A>
+</I>
+But the userinfo case seems to be clearly the worst.  If a server uses a
+redeirect to attach a &quot;cookie&quot; token to the client's URL using a query
+or a fragment, that won't get carried across when relative links are
+absolutised, so the scope is limited to that one document, unless the
+client somehow plays along by recognising the cookie and propagating it
+itself (which no sane client will do).  The path option *will* survive
+absolutisation, (well, if you  <A HREF="gemini://mozz.us/beer/cookie/,">gemini://mozz.us/beer/cookie/,</A> with a 
+trailing slash) but to give every visitor a unique cookie and track them
+across the site this way (and, yes, I've always known this is
+unavoidable, it's mentioned in some of the very earliest Gemini
+writings, from before the project even had a name) requires all content
+at the site to be dynamically generated.  Which is possible, of course,
+but it's a barrier of sorts, at least. 
+
+The userinfo approach both survives absolutisation *and* works with a
+perfectly static text/gemini file using relative links.  It's an
+extremely easy and lightweight way to unambiguously track users within
+one server, and unlike guessing based off IP (which is also of course
+unavoidable) it is robust against multiple users sharing an IP at once.
+Of the four approaches outlined above, userinfo clearly has a much
+higher &quot;damage inflicted to effort required&quot; ratio than the others.
+
+I don't yet have a clear idea of to what extent URI schemes are
+permitted to &quot;pick and choose&quot; from the components of the generic URI
+scheme as presented in RFC3986.  It is clear that the &quot;authority&quot;
+component (what normal people think of as the hostname and port) is not
+required, but if a scheme does require an authority does it also *need*
+to permit the userinfo?  The gopher URI scheme (RFC4266) a defintion
+clearly does not allow one, but URIs for gopher are a tacked on
+after-thought and I don't know how carefully that scheme was designed.
+But if it's legitimate for me to declare that the <A HREF="gemini://">gemini://</A> URI scheme
+does not support userinfo, I'll do it in a flash.  This cookie redirect
+thought experiment proves that it's far too dangerous, it's just barely
+better than an actual HTTP cookie (in that it's not easily sent to third
+parties).
+
+Of course, just saying it's unsupported isn't enough, because servers
+can try to do it anyway, so every client now needs to explicitly check
+for this and either error out or remove the userinfo.
+
+&quot;URIs were a mistake&quot;, as the kids say.  Gopher's menu item format might
+be a total PITA for users, but you know exactly what the valid scope of
+each component is and there are no &quot;side channels&quot;.
+
+&gt;<i> &gt; At the end of the day all you can do
+</I>&gt;<i> &gt; is call out dodgy behaviour, and if site owners tried it anyway,
+</I>&gt;<i> &gt; attempt to make this sort of thing visible to client users.
+</I>&gt;<i> 
+</I>&gt;<i> Sure. 
+</I>
+Ultimately, yes, but one can try to reduce the number of places
+dodginess is possible to be as few as possible to reduce the burden of
+playing this whack-a-mole game.
+
+&gt;<i> Same as 6x (CLIENT CERTIFICATE REQUIRED), but less ceremonial.
+</I>
+And also less consensual.  The ceremony is there for a reason.  Gemini
+is supposed to be as close to anonymous by default as the limitations of
+running it over TCP/IP allow.  Turning that off, to partake of an
+application which maintains state, is *supposed* to be a song and dance.
+It should be impossible to not realise you're doing it.  I don't even
+mind if doing it is slightly inconvenient, because it should always be a
+conscious and considered choice.  It should also be extremely easy to
+write a client which is obviously totally incapable of doing it.
+
+Yes, this rules out the notion of &quot;lightweight content-negotiation&quot;.  So
+what?  Has anybody ever once missed that concept in Gopherspace, or in
+nascent Geminispace?  How much value does that idea have for a network
+where the majority of content is very minimally formatted plaintext?
+Could it ever possibly be worth the risk of introducing something which
+can be twisted to act as a cookie?
+
+Sometimes taking a strong stand against very clearly very bad things
+(pervasive and uncontrollable tracking) means choosing to live without
+some nice things that seem harmless on the surface.  It's a shame, but
+that's the way it is.  Thankfully it turns out most nice things are
+actually pretty easy to do without once you get rid of it.
+
+&gt;<i> I.e. automated cookie tagging is the equivalent of server driven 61 TRANSIENT CERTIFICATE REQUESTED.
+</I>
+Characterising 6x status codes as &quot;server driven&quot; is extremely
+misleading.  The server can only issue *requests* for a certificate.
+There is no mechanism for the server to just ram one down the client's
+throat.  The client has to opt in, and they can at any point opt-out.
+If I delete the private key matching a certificate, that's the end of
+that identity.  I'd call that &quot;client driven&quot;.  If I delete one of your
+userinfo cookies, the server can recognise my IP and feed me the same
+value again, resurrecting it.  Yes, there's a risk they'll get it wrong
+if that IP is a pubnix or VPN address, but probabilistic persistent
+tracking is better than no tracking at all, so they'll try it, and will
+be right some of the time.
+
+&gt;<i> Minus the yak shaving.
+</I>
+I guess some yaks are our friends.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001533.html">authority's userinfo?
+</A></li>
+	<LI>Next message (by thread): <A HREF="001537.html">authority's userinfo?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1535">[ date ]</a>
+              <a href="thread.html#1535">[ thread ]</a>
+              <a href="subject.html#1535">[ subject ]</a>
+              <a href="author.html#1535">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

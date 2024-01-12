@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Some reading on IRIs and IDNs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3C87a6ul404b.fsf%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003985.html">
+   <LINK REL="Next"  HREF="003987.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Some reading on IRIs and IDNs</H1>
+    <B>Gary Johnson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3C87a6ul404b.fsf%40disroot.org%3E"
+       TITLE="Some reading on IRIs and IDNs">lambdatronic at disroot.org
+       </A><BR>
+    <I>Fri Dec 11 01:12:04 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003985.html">Some reading on IRIs and IDNs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003987.html">Some reading on IRIs and IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3986">[ date ]</a>
+              <a href="thread.html#3986">[ thread ]</a>
+              <a href="subject.html#3986">[ subject ]</a>
+              <a href="author.html#3986">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; writes:
+
+&gt;<i>   Okay,  Here's a IRI:
+</I>&gt;<i>
+</I>&gt;<i> 	<A HREF="gemini://caf&#233;.mozz.us/files/&#119995;&#119990;&#120003;&#119992;&#120014;.txt">gemini://caf&#233;.mozz.us/files/&#119995;&#119990;&#120003;&#119992;&#120014;.txt</A>
+</I>&gt;<i>
+</I>&gt;<i>   Please specify what a client and server MUST do to properly handle this.
+</I>
+Well, if I'm following all of these conversations correctly to date, I
+believe the procedure looks like this:
+
+1. Punycode the hostname.
+
+2. Percent-encode reserved characters and non-US-ASCII characters in the
+   path, query, and fragment components.
+
+3. Make a DNS query with the punycoded hostname.
+
+4. Send the punycode + percent-encoded URI as the request to the Gemini
+   server.
+
+5. The server parses the URI into scheme, host, port, path, query, and
+   fragment components and then percent-decodes the path, query, and
+   fragment strings.
+
+6. The parsed and decoded URI information can then either be used to
+   perform a file retrieval, generate a directory listing, or run a CGI
+   script, ultimately sending back a valid Gemini response to the
+   client. Redirect responses should make sure to percent-encode the
+   path, query, and fragment components of the redirected URI.
+
+My Gemini server (Space Age) handles steps 5 and 6 as described here (as
+I suspect most Gemini servers do). Clients should already be performing
+step 2 as per the Gemini spec.
+
+I suspect the missing piece of the puzzle here is *just* having client
+authors implement steps 1, 3, and 4 (for some definition of &quot;just&quot;). I
+don't think these client changes would require any changes to the
+current Gemini spec.
+
+There is also the open question of whether servers should convert
+punycoded hostnames back into unicode hostnames for the purposes of
+virtual hosting (either via SNI or post-handshake). Since at least one
+poster has indicated that the widespread unevenness in DNS support for
+unicode has lead to the need to store A records in their punycoded form,
+this suggests to me that virtual hosting may be performed most
+universally by just directly matching the received punycoded domain
+names.
+
+Of course, YMMV.
+
+Happy hacking,
+  Gary
+
+-- 
+GPG Key ID: 7BC158ED
+Use `gpg --search-keys lambdatronic' to find me
+Protect yourself from surveillance: <A HREF="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</A>
+=======================================================================
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+Why is HTML email a security nightmare? See <A HREF="https://useplaintext.email/">https://useplaintext.email/</A>
+
+Please avoid sending me MS-Office attachments.
+See <A HREF="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003985.html">Some reading on IRIs and IDNs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003987.html">Some reading on IRIs and IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3986">[ date ]</a>
+              <a href="thread.html#3986">[ thread ]</a>
+              <a href="subject.html#3986">[ subject ]</a>
+              <a href="author.html#3986">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

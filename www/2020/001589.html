@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> &quot;Wide load&quot; status code(s)?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%22Wide%20load%22%20status%20code%28s%29%3F&In-Reply-To=%3C20200612163511.GB27304%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001584.html">
+   <LINK REL="Next"  HREF="001593.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>&quot;Wide load&quot; status code(s)?</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%22Wide%20load%22%20status%20code%28s%29%3F&In-Reply-To=%3C20200612163511.GB27304%40SDF.ORG%3E"
+       TITLE="&quot;Wide load&quot; status code(s)?">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Fri Jun 12 17:35:11 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001584.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+        <LI>Next message (by thread): <A HREF="001593.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1589">[ date ]</a>
+              <a href="thread.html#1589">[ thread ]</a>
+              <a href="subject.html#1589">[ subject ]</a>
+              <a href="author.html#1589">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Jun 12, 2020 at 09:25:55AM -0400, Natalie Pendragon wrote:
+&gt;<i> 
+</I>&gt;<i> Okay, here are some statistics for the most prevalent content types.
+</I>&gt;<i> Please do share any feedback you have, and I'll likely add this or
+</I>&gt;<i> something similar to the statistics page soon so it's continually
+</I>&gt;<i> available and up-to-date.
+</I>&gt;<i> 
+</I>&gt;<i> The number in parentheses after content_type is the number pages
+</I>&gt;<i> in Geminispace with that content_type, and I hope everything else is
+</I>&gt;<i> self-explanatory!
+</I>&gt;<i> 
+</I>&gt;<i> # text/gemini (10378)
+</I>&gt;<i> Mean   :    2.1 K
+</I>&gt;<i> Median :    1.2 K
+</I>&gt;<i> Max    :  753.3 K
+</I>&gt;<i> 
+</I>&gt;<i> # text/plain (1390)
+</I>&gt;<i> Mean   :    4.2 K
+</I>&gt;<i> Median :    1.4 K
+</I>&gt;<i> Max    :  333.8 K
+</I>
+Thanks for sharing these!  This is actually really useful information to
+have, for thinking about the role of TLS overhead in Gemini.  It
+actually seems like most text/gemini content is in fact about as big as
+the server's TLS certificate or smaller, which kind of blows the idea of
+Gemini being a good match for constrained networks out of the water -
+even if we did have those 2x status codes, you'd still need to download
+the server's cert, plus the (comparatively small) handshake traffic,
+before you could make the decision to terminate early.
+
+This overhead also scuttles lots of simple ideas to work around Gemini's
+lack of a HEAD request equivalent.  Defining a well-known endpoint where
+clients can fetch, e.g. a small file with the timestamps of the N most
+recently updated files the server hosts makes no sense whatsoever if the
+TLS overhead of fetching *that* list is, in fact, just as big as the
+possibly out-of-date file the client actually wants in the first place.
+
+It doesn't need to make it into the spec, but over time we should
+develop and publicise best practices for minimising this overhead.  This
+may include choosing signature schemes which are secure with smaller
+key sizes, like ed25519.  Self-signed certificates also have a strong
+advantage here by virtue of not needing to include a long chain of certs
+leading to a trusted root.
+
+These measures will bump heads with Petite Abeille's point about TLS
+fingerprinting and how it's good, from an anti-censorship point of view,
+to blend in with the crowd by not using &quot;unusual&quot; certificates.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001584.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+	<LI>Next message (by thread): <A HREF="001593.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1589">[ date ]</a>
+              <a href="thread.html#1589">[ thread ]</a>
+              <a href="subject.html#1589">[ subject ]</a>
+              <a href="author.html#1589">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

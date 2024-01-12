@@ -1,0 +1,230 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Server software recommendations
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Server%20software%20recommendations&In-Reply-To=%3C20200514150810.GB12880%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000590.html">
+   <LINK REL="Next"  HREF="000598.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Server software recommendations</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Server%20software%20recommendations&In-Reply-To=%3C20200514150810.GB12880%40SDF.ORG%3E"
+       TITLE="Server software recommendations">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Thu May 14 16:08:11 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000590.html">Server software recommendations
+</A></li>
+        <LI>Next message (by thread): <A HREF="000598.html">Server software recommendations
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#595">[ date ]</a>
+              <a href="thread.html#595">[ thread ]</a>
+              <a href="subject.html#595">[ subject ]</a>
+              <a href="author.html#595">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, May 14, 2020 at 12:35:45PM +0000, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">tiwesdaeg at tilde.pink</A> wrote:
+ 
+&gt;<i> I'm using molly-brown currently, because I like how it handles user
+</I>&gt;<i> public_gemini directories. Full cgi support would be nice.
+</I>
+I've been meaning to write a gemlog about this for ages, but never seem
+to have the time...
+
+GCI support in Molly Brown scares the pants off me.  Go doesn't reliably
+support setuid() and this totally breaks all the standard pradigms of
+unix server design.  In particular, I can find no way for MB to spawn a
+CGI process which doesn't run as the same user as MB itself, and
+therefore necessarily has the ability to read the TLS private key files
+and write to the log file, which is obviously a massive security hole.
+Because the MB process never runs as root, it's not possible to chroot
+the CGI processes somewhere they couldn't see those files, either.
+
+I'm frankly baffled that a language with Ken Thompson and Rob Pike as
+designers, created specifically to help Google engineers write server
+software, could turn out to be so terrible for...writing servers on
+unix.  I can only imagine this has happened because nobody at Google
+would ever do something so terribly mundane and non-scalable as fork
+off an entire whole new process on the same machine to generate some
+content.  Probably there'd be ten layers of containers and proxying and
+reverse-proxying and other Cloudian faff keeping the content-generating
+processes separated from the server processes so that uids were a quaint
+and irrelevant consideration.
+
+(if any Go wizards have recently joined the list and can correct me on
+any of the above I'd be thrilled)
+
+If you're just running your own server and you have control over the CGI
+code, then go for it and be careful.  In a pubnix type environment where
+you are letting third parties upload stuff, you basically need to be
+extremely careful, use the configuration to restrict CGI to directories
+writable only by people you really trust or will actively verify the
+code of.
+
+This was the reason that I pondered a few months back on this list some
+kind of FastCGI-esque system for a Gemini server to communicate with a
+process it didn't spawn itself over a domain socket or similar.  But
+maybe I should just give up on Go for servers (this exact same issue
+affects Shizaru, too.).
+
+Cheers,
+Solderpunk
+
+&gt;<i> Thanks for all the hard work all you software developers are doing!
+</I>&gt;<i> 
+</I>&gt;<i> On Thu, May 14, 2020 at 04:50:41AM -0400, Sean Conner wrote:
+</I>&gt;<i> &gt; It was thus said that the Great Ecmel Berk Canl?er once stated:
+</I>&gt;<i> &gt; &gt; Hello all!
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; I've been checking out the mailing list and reading about Gemini every
+</I>&gt;<i> &gt; &gt; now and then, and decided to try and host a Gemini server for my blog.
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; One question I had is: Which server software is the most mature one?
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt;   What do you mean by &quot;most mature&quot;?  By age, it's GLV-1.12556 (disclaimer:
+</I>&gt;<i> &gt; I wrote it).  By feature set, it's a toss-up between GLV-1.12556:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 		* support for any type of documents (from multiple directories)
+</I>&gt;<i> &gt; 		* CGI (both Gemini and HTTP specific, RFC-3875 compliant)
+</I>&gt;<i> &gt; 		* user directories
+</I>&gt;<i> &gt; 		* client certificate support
+</I>&gt;<i> &gt; 		* easy to extend with custom modules (if you know Lua)
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; and Gemserv:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 		* support for any type of document
+</I>&gt;<i> &gt; 		* CGI (Gemini only, not quite RFC-3875 compliant)
+</I>&gt;<i> &gt; 		* user directories
+</I>&gt;<i> &gt; 		* reverse proxy
+</I>&gt;<i> &gt; 		* virtual hosts
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Both have recent updates. By popularity, last time I checked, it was
+</I>&gt;<i> &gt; JetForce (which also has had recent updates).  Of the three mentioned,
+</I>&gt;<i> &gt; JetForce is in Python, Gemserv in Rust, and GLV-1.12556 in Lua.  The lack of
+</I>&gt;<i> &gt; virtual hosting in GLV-1.12556 is because I lack experience in dealing with
+</I>&gt;<i> &gt; server certificates with multple hosts, and because of that, I can't exactly
+</I>&gt;<i> &gt; test that feature.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; &gt; On the software list [1], there is no description about the state and
+</I>&gt;<i> &gt; &gt; feature set of any of the listed server software.
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; [1]: <A HREF="gemini://gemini.circumlunar.space/software/">gemini://gemini.circumlunar.space/software/</A> 
+</I>&gt;<i> &gt; &gt; 
+</I>&gt;<i> &gt; &gt; I only need to serve static files, as everything else happens on a
+</I>&gt;<i> &gt; &gt; static site generator before being uploaded.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt;   If that's the case, then most of the servers would probably work, it then
+</I>&gt;<i> &gt; comes down to which language do you have available for compiling/running the
+</I>&gt;<i> &gt; server.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt;   -spc
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000590.html">Server software recommendations
+</A></li>
+	<LI>Next message (by thread): <A HREF="000598.html">Server software recommendations
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#595">[ date ]</a>
+              <a href="thread.html#595">[ thread ]</a>
+              <a href="subject.html#595">[ subject ]</a>
+              <a href="author.html#595">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

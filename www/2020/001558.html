@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3C20200611175829.GD29628%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001560.html">
+   <LINK REL="Next"  HREF="001559.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3C20200611175829.GD29628%40SDF.ORG%3E"
+       TITLE="CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Thu Jun 11 18:58:29 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001560.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+        <LI>Next message (by thread): <A HREF="001559.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1558">[ date ]</a>
+              <a href="thread.html#1558">[ thread ]</a>
+              <a href="subject.html#1558">[ subject ]</a>
+              <a href="author.html#1558">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Jun 09, 2020 at 09:02:24PM -0400, Michael Lazar wrote:
+ 
+&gt;<i> I believe this is using SCRIPT_NAME incorrectly per RFC 3875. The SCRIPT_NAME
+</I>&gt;<i> should be the part of the URI path that comes before the PATH_INFO [1]. So in
+</I>&gt;<i> your example:
+</I>&gt;<i> 
+</I>&gt;<i> GEMINI_URL=<A HREF="gemini://lucy.roswell.area51/cgi-bin/beta/foobar?one=1&amp;two=2">gemini://lucy.roswell.area51/cgi-bin/beta/foobar?one=1&amp;two=2</A>
+</I>&gt;<i> SCRIPT_NAME=/cgi-bin/beta
+</I>&gt;<i> PATH_INFO=/foobar
+</I>
+Is this how cgi-bins are traditionally handled?  If a URI paths's prefix
+matches the configured cgi-bin path, the standard mapping from URI paths
+to the filesystem is interrupted, and the first component of the URI path
+*after* the cgi-bin prefix (here `beta`) is the only think looked for on
+the disk, with everything else passed along to PATH_INFO?  If there is,
+for example, a /var/gemini/cgi-bin/beta/ directory on the disk, the
+server does not check for an executable named `foobar` in it?
+
+Semi-related: when the server forks off the CGI process, is it
+conventional to set that process' working directory to the CGI bin?
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001560.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+	<LI>Next message (by thread): <A HREF="001559.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1558">[ date ]</a>
+              <a href="thread.html#1558">[ thread ]</a>
+              <a href="subject.html#1558">[ subject ]</a>
+              <a href="author.html#1558">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

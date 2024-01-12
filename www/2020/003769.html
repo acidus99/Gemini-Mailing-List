@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CGI and client certificate, or do we need a CGI spec
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%20and%20client%20certificate%2C%20or%20do%20we%20need%20a%20CGI%20spec&In-Reply-To=%3C87zh2uq2c8.fsf%40rwv.io%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003667.html">
+   <LINK REL="Next"  HREF="003646.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CGI and client certificate, or do we need a CGI spec</H1>
+    <B>Remco</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%20and%20client%20certificate%2C%20or%20do%20we%20need%20a%20CGI%20spec&In-Reply-To=%3C87zh2uq2c8.fsf%40rwv.io%3E"
+       TITLE="CGI and client certificate, or do we need a CGI spec">me at rwv.io
+       </A><BR>
+    <I>Thu Dec  3 16:30:31 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003667.html">CGI and client certificate, or do we need a CGI spec
+</A></li>
+        <LI>Next message (by thread): <A HREF="003646.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3769">[ date ]</a>
+              <a href="thread.html#3769">[ thread ]</a>
+              <a href="subject.html#3769">[ subject ]</a>
+              <a href="author.html#3769">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+2020/11/30 03:32, Michael Lazar:
+
+&gt;<i> On Sun, Nov 29, 2020 at 8:32 PM &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A>&gt; wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> One important thing to standardize is how TLS_CLIENT_HASH is
+</I>&gt;&gt;<i> calculated. Otherwise CGI scripts will not be able to recognize
+</I>&gt;&gt;<i> clients again if the server software changes.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> makeworld
+</I>&gt;<i>
+</I>&gt;<i> I think that jetforce is the odd duckling here. I'm the only one using base64
+</I>&gt;<i> for hashes. This was discussed a while ago on the mailing list and I declared
+</I>&gt;<i> that I would switch if a consensus was reached [0]. IIRC the discussion kind of
+</I>&gt;<i> petered out after that...
+</I>&gt;<i>
+</I>&gt;<i> So I will say right now, unless there's strong opposition, that I'm going to
+</I>&gt;<i> change TLS_CLIENT_HASH to &quot;SHA256:&lt;HASH&gt;&quot; where &lt;HASH&gt; is the uppercase hex
+</I>&gt;<i> representation of the certificate hash, with *no* colons in it. This change
+</I>&gt;<i> will be made in the next release of jetforce, with TLS_CLIENT_HASH_B64 being
+</I>&gt;<i> as a backwards compatible env var to make the transition easier for any existing
+</I>&gt;<i> CGI scripts.
+</I>
+I like the TLS_CLIENT_HASH to &quot;SHA256:&lt;HASH&gt;&quot; format and have
+implemented that.  Thanks for the link into the archives, I missed that.
+
+BTW, shouldn't your TLS_CLIENT_HASH_B64 be TLS_CLIENT_HASH_SHA256_B64?
+I am guessing it is a SHA256 hash?
+
+Cheers,
+R.
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003667.html">CGI and client certificate, or do we need a CGI spec
+</A></li>
+	<LI>Next message (by thread): <A HREF="003646.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3769">[ date ]</a>
+              <a href="thread.html#3769">[ thread ]</a>
+              <a href="subject.html#3769">[ subject ]</a>
+              <a href="author.html#3769">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] twinwiki, a Gemini wiki edited with sed commands
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20twinwiki%2C%20a%20Gemini%20wiki%20edited%20with%20sed%20commands&In-Reply-To=%3C6F6A614B-08D2-4906-B741-6A492E485BB3%40macaw.me%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002080.html">
+   <LINK REL="Next"  HREF="002084.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] twinwiki, a Gemini wiki edited with sed commands</H1>
+    <B>Frederick Yin</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20twinwiki%2C%20a%20Gemini%20wiki%20edited%20with%20sed%20commands&In-Reply-To=%3C6F6A614B-08D2-4906-B741-6A492E485BB3%40macaw.me%3E"
+       TITLE="[ANN] twinwiki, a Gemini wiki edited with sed commands">fkfd at macaw.me
+       </A><BR>
+    <I>Mon Jul  6 07:32:19 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002080.html">[ANN] twinwiki, a Gemini wiki edited with sed commands
+</A></li>
+        <LI>Next message (by thread): <A HREF="002084.html">[ANN] twinwiki, a Gemini wiki edited with sed commands
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2083">[ date ]</a>
+              <a href="thread.html#2083">[ thread ]</a>
+              <a href="subject.html#2083">[ subject ]</a>
+              <a href="author.html#2083">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On July 5, 2020 10:49:55 PM UTC, Hannu Hartikainen &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">hannu.hartikainen+gemini at gmail.com</A>&gt; wrote:
+&gt;<i>- Navigating back to a /_edit?&lt;sed_command&gt; URL will redo the edit,
+</I>&gt;<i>which
+</I>&gt;<i>is mostly not what you tried to do. This will probably be an issue on
+</I>&gt;<i>many
+</I>&gt;<i>gemini applications; browsers will need to consider it if applications
+</I>&gt;<i>become a thing.
+</I>
+Maybe we could try adding a volatile session token assigned to each edit request. Then, reject any other edit with the same (and other unauthorized) token.
+
+For example:
+* Client requests /twinwiki/Sandbox/_edit
+* Server generates session token, a random hex string, valid for this page and this ten minutes only
+* Client gets redirected to /twinwiki/Sandbox/_edit/&lt;session_token&gt; 
+* Client asks user for sed command.
+* User fills in sed command, sends request to &lt;session_token&gt;?&lt;sed_command&gt;.
+* Server checks validity of token. Once verified, apply change and destroy token. Otherwise, reject.
+
+Overall, twinwiki is way cooler than I could have imagined. If we are to continue this conversation we should probably move to the sr.ht list instead.
+
+
+~fkfd
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002080.html">[ANN] twinwiki, a Gemini wiki edited with sed commands
+</A></li>
+	<LI>Next message (by thread): <A HREF="002084.html">[ANN] twinwiki, a Gemini wiki edited with sed commands
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2083">[ date ]</a>
+              <a href="thread.html#2083">[ thread ]</a>
+              <a href="subject.html#2083">[ subject ]</a>
+              <a href="author.html#2083">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,193 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20lang%20parameter%2C%20minor%20line%20type%20changes%2C%0A%20clarifications...&In-Reply-To=%3C20200608073606.GC9769%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001430.html">
+   <LINK REL="Next"  HREF="001426.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20lang%20parameter%2C%20minor%20line%20type%20changes%2C%0A%20clarifications...&In-Reply-To=%3C20200608073606.GC9769%40SDF.ORG%3E"
+       TITLE="[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Mon Jun  8 08:36:06 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001430.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
+</A></li>
+        <LI>Next message (by thread): <A HREF="001426.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1418">[ date ]</a>
+              <a href="thread.html#1418">[ thread ]</a>
+              <a href="subject.html#1418">[ subject ]</a>
+              <a href="author.html#1418">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Jun 07, 2020 at 07:06:38PM -0400, Matthew Graybosch wrote:
+ 
+&gt;<i> I just read the relevant part of the spec, but I'm still not clear on
+</I>&gt;<i> how I should go about specifying that my text is US English. Do I just
+</I>&gt;<i> have to add &quot;lang=en_US&quot; on the first line of a text/gemini file?
+</I>
+No, the &quot;lang&quot; parameter is a parameter to the text/gemini MIME type
+which is part of the response header.  It doesn't go in the document
+itself.  Server software will need to provide admins and/or users some
+way to configure this.
+
+This will be fairly easy for people who run their own serer, and hence
+have access to the config file, and who write in only a single language
+- they can just set a single value which the server includes for all
+.gmi files (or whatever extension has been configured to serve as
+text/gemini).
+
+Multi-lingual sites would probably work best with content in different
+languages separated by the path hierarchy, and servers could let people
+designate different languages depending on which regex the path matches.
+
+Multi-user sites will be trickiest of all and will require users to
+either bother the admin, or for servers to implement something like
+Apache's .htaccess files.
+
+I don't deny that this is kind of painful.  But I don't see a way around
+it - if we say that the first line of a text/gemini file should be
+&quot;#lang: en-US&quot; or anything like that we have immediately opened the door
+to arbitrarly many additional options.  This basically gives us HTTP's
+open-ended response header structure and completely defeats the point of
+having a response header which is explicitly a single line.
+ 
+&gt;<i> &gt; Lines beginning with &quot;&gt;&quot; are now defined to be quote lines, as per
+</I>&gt;<i> &gt; popular demand.
+</I>&gt;<i> 
+</I>&gt;<i> This will be handy, but now I'm wondering about pre-formatted quotes
+</I>&gt;<i> (mainly for poetry, song lyrics, screenplays, etc.)
+</I>
+I would expect those to be handled just with pre-formatted lines.  I get
+that they're also a quote of sorts, but simplicity necessitates
+sacrifcing the ability for total semantic precision.  I hope we can live
+with this.
+
+(of course, something like an entire screenplay can always just be
+served in its own document as text/plain)
+
+&gt;<i> Furthermore, looking for quote characters inside a preformatted block
+</I>&gt;<i> and then rendering that block in a variable-width font instead (when
+</I>&gt;<i> applicable) sounds like a good way to introduce bugs.
+</I>
+It's also a clear violation of the spec!
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001430.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
+</A></li>
+	<LI>Next message (by thread): <A HREF="001426.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1418">[ date ]</a>
+              <a href="thread.html#1418">[ thread ]</a>
+              <a href="subject.html#1418">[ subject ]</a>
+              <a href="author.html#1418">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

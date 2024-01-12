@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] html2gemini and html2gmi-cli - A Go library and app for converting HTML to Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20html2gemini%20and%20html2gmi-cli%20-%20A%20Go%20library%20and%20app%20for%0A%20converting%20HTML%20to%20Gemini&In-Reply-To=%3C5F245AC1.8030507%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002365.html">
+   <LINK REL="Next"  HREF="002367.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] html2gemini and html2gmi-cli - A Go library and app for converting HTML to Gemini</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20html2gemini%20and%20html2gmi-cli%20-%20A%20Go%20library%20and%20app%20for%0A%20converting%20HTML%20to%20Gemini&In-Reply-To=%3C5F245AC1.8030507%40marmaladefoo.com%3E"
+       TITLE="[ANN] html2gemini and html2gmi-cli - A Go library and app for converting HTML to Gemini">luke at marmaladefoo.com
+       </A><BR>
+    <I>Fri Jul 31 18:54:09 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002365.html">[ANN] html2gemini and html2gmi-cli - A Go library and app for converting HTML to Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="002367.html">[ANN] html2gemini and html2gmi-cli - A Go library and app for converting HTML to Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2366">[ date ]</a>
+              <a href="thread.html#2366">[ thread ]</a>
+              <a href="subject.html#2366">[ subject ]</a>
+              <a href="author.html#2366">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+On 31-Jul-2020 14:34, Matthew Graybosch wrote:
+&gt;<i> Aside from all of the other stuff I want to do, I've been curious about
+</I>&gt;<i> learning Go for a while. I'm tempted to take your code and see if I can
+</I>&gt;<i> turn it around to generate HTML from gemini text.
+</I>&gt;<i>
+</I>&gt;<i> There's no reason I shouldn't be able to do it; the existence of
+</I>&gt;<i> portal.mozz.us proves that converting text/gemini to text/html is
+</I>&gt;<i> possible. It's just a matter of implementing the function as a tool I
+</I>&gt;<i> could use in a makefile.
+</I>Hello Matthew
+
+Gemini is a couple of orders of magnitude simpler than HTML, so you 
+don't need to start from such a complex base as looking at an HTML 
+parser and sanitiser. It is *much* simpler to go from Gemini to HTML.
+
+Here is a very simple pseudocode for a gemini to html converter, you can 
+tart it up as you wish:
+
+for each line in lines
+if the line starts with heading marker (#, ##, ###), output: &lt;h1&gt; 
+{{line}} &lt;/h1&gt; (for #, use h2 and h3 accordingly)
+if the line starts with bullet marker (*) , output: &lt;div&gt; &#8226; {{line}}&lt;/div&gt;
+if the line starts with link marker, split the line and output: &lt;div&gt;&lt;a 
+href=&quot;{{target}}&quot;&gt;{{display}}&lt;/a&gt;&lt;/div&gt;
+if the line starts ```, toggle a flag and output &lt;pre&gt; if the flag is 
+now on, or &lt;/pre&gt; if the flag is off
+otherwise output: &lt;div&gt;{{line}}&lt;/div&gt; unless the line is empty, 
+otherwise &lt;div&gt;&nbsp;&lt;/div&gt;
+next
+
+You'll need to escape the content (e.g. &amp;, &lt;,&gt; etc)
+
+You can play around with CSS styling if you want to make it look pretty.
+
+voila!
+
+Best Wishes
+
+- Luke
+
+P.S. I have a more detailed version of a gemini to html converter here, 
+used within GemiNaut, it might be of interest to look at. But its not in 
+Go, but Rebol:
+
+<A HREF="https://github.com/LukeEmmet/GemiNaut/blob/master/GemiNaut/GmiConverters/GmiToHtml.r3">https://github.com/LukeEmmet/GemiNaut/blob/master/GemiNaut/GmiConverters/GmiToHtml.r3</A>
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002365.html">[ANN] html2gemini and html2gmi-cli - A Go library and app for converting HTML to Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="002367.html">[ANN] html2gemini and html2gmi-cli - A Go library and app for converting HTML to Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2366">[ date ]</a>
+              <a href="thread.html#2366">[ thread ]</a>
+              <a href="subject.html#2366">[ subject ]</a>
+              <a href="author.html#2366">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

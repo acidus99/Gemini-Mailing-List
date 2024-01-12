@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> An unexpected favicon request
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20unexpected%20favicon%20request&In-Reply-To=%3C20200526204812.GQ23998%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001078.html">
+   <LINK REL="Next"  HREF="001049.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>An unexpected favicon request</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20unexpected%20favicon%20request&In-Reply-To=%3C20200526204812.GQ23998%40brevard.conman.org%3E"
+       TITLE="An unexpected favicon request">sean at conman.org
+       </A><BR>
+    <I>Tue May 26 21:48:12 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001078.html">An unexpected favicon request
+</A></li>
+        <LI>Next message (by thread): <A HREF="001049.html">Geddit, link aggregator for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1079">[ date ]</a>
+              <a href="thread.html#1079">[ thread ]</a>
+              <a href="subject.html#1079">[ subject ]</a>
+              <a href="author.html#1079">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Thomas Karpiniec once stated:
+&gt;<i> Thanks for the comments all. Clearly there is no consensus whatsoever
+</I>&gt;<i> on how favicons work so there is no right or wrong. It's interesting
+</I>&gt;<i> to hear about the special casing in GLV-1.12556.
+</I>
+  It's not that special of a special case.  I just added the feature to
+serve up a single page:
+
+	handlers =
+	{
+	  {
+	    path   = &quot;^/motd$&quot;,
+	    module = &quot;GLV-1.handlers.file&quot;,
+	    file   = &quot;/etc/motd&quot;
+	  },
+	  ...
+	}
+
+  In the above example, it's for serving up a page that might not live in
+a directory with the rest of the content.  The &quot;path&quot; defines the path
+portion of the URL to be matched, so for the favicon.ico, all I had to do
+was:
+
+	handlers =
+	{
+	  {
+	    path   = &quot;^/.*favicon.ico$&quot;,
+	    module = &quot;GLV-1.handlers.file&quot;,
+	    file   = &quot;/path/to/favicon.ico&quot;
+	  },
+	  ...
+	}
+
+and made sure this was the first path checked.
+
+  -spc
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001078.html">An unexpected favicon request
+</A></li>
+	<LI>Next message (by thread): <A HREF="001049.html">Geddit, link aggregator for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1079">[ date ]</a>
+              <a href="thread.html#1079">[ thread ]</a>
+              <a href="subject.html#1079">[ subject ]</a>
+              <a href="author.html#1079">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

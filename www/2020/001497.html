@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> authority's userinfo?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20authority%27s%20userinfo%3F&In-Reply-To=%3CB3E00F75-9446-4ADA-A669-2D70C4978E59%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001492.html">
+   <LINK REL="Next"  HREF="001515.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>authority's userinfo?</H1>
+    <B>Petite Abeille</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20authority%27s%20userinfo%3F&In-Reply-To=%3CB3E00F75-9446-4ADA-A669-2D70C4978E59%40gmail.com%3E"
+       TITLE="authority's userinfo?">petite.abeille at gmail.com
+       </A><BR>
+    <I>Wed Jun 10 13:18:47 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001492.html">authority's userinfo?
+</A></li>
+        <LI>Next message (by thread): <A HREF="001515.html">authority's userinfo?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1497">[ date ]</a>
+              <a href="thread.html#1497">[ thread ]</a>
+              <a href="subject.html#1497">[ subject ]</a>
+              <a href="author.html#1497">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+&gt;<i> On Jun 10, 2020, at 13:15, Felix Quei&#223;ner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">felix at masterq32.de</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> I don't think that user/password is the right way to handle
+</I>&gt;<i> authentication in Gemini.
+</I>
+Why not? Gemini mandates a secure communication channel (TLS) already. The userinfo is identical to the Basic Authentication scheme, but encoded the URL directly. Rather convenient altogether.
+
+&gt;<i> The URL RFC also specifies:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> Use of the format &quot;user:password&quot; in the userinfo field is
+</I>&gt;&gt;<i> deprecated.
+</I>
+This is more related to authentication over an open channel.
+
+&gt;<i> So only user@&#8230; is still a valid URL.
+</I>&gt;<i> 
+</I>&gt;<i> If your server handles user@ in a different way than without authority,
+</I>&gt;<i> i think that's totally in-spec, but authentication is probably not.
+</I>
+I guess user@ could be any magic token/ticket, for the client to maintain a state on the server.
+
+Perhaps a subset of 40 TEMPORARY FAILURE, e.g. 49 Unauthorized, would be an appropriate response if Authenticate: Basic is required by a resource. 
+
+&gt;<i> One possible usage for authority could be home-dirs instead of an
+</I>&gt;<i> official site:
+</I>
+I was more looking into a way for the client to maintain some states (e.g. preferences) on the server:
+
+C: <A HREF="gemini://token@mozz.us/?ua=lightweight">gemini://token@mozz.us/?ua=lightweight</A> -- user-agent store its preferences on the server
+S: 30 <A HREF="gemini://token@mozz.us/index.gmi--">gemini://token@mozz.us/index.gmi--</A> redirect to an appropriate resource
+C: <A HREF="gemini://token@mozz.us/index.gmi">gemini://token@mozz.us/index.gmi</A> -- lightweight version of the resource
+S: 20 text/gemini -- customized as per the user-agent stated preferences
+
+A bit of content negotiation in other words.
+
+For all practical purpose, it serves the same purpose as the various 6x (CLIENT CERTIFICATE REQUIRED) statuses. Minus the burden of the actual TLS gymnastic. 
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001492.html">authority's userinfo?
+</A></li>
+	<LI>Next message (by thread): <A HREF="001515.html">authority's userinfo?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1497">[ date ]</a>
+              <a href="thread.html#1497">[ thread ]</a>
+              <a href="subject.html#1497">[ subject ]</a>
+              <a href="author.html#1497">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

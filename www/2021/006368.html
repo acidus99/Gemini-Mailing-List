@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] IPv6 addresses in URLs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20IPv6%20addresses%20in%20URLs&In-Reply-To=%3C20210415183843.vhfxun67z4yhauue%40GLaDOS.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006367.html">
+   <LINK REL="Next"  HREF="006369.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] IPv6 addresses in URLs</H1>
+    <B>Alex // nytpu</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20IPv6%20addresses%20in%20URLs&In-Reply-To=%3C20210415183843.vhfxun67z4yhauue%40GLaDOS.local%3E"
+       TITLE="[tech] IPv6 addresses in URLs">alex at nytpu.com
+       </A><BR>
+    <I>Thu Apr 15 19:38:43 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006367.html">[tech] IPv6 addresses in URLs
+</A></li>
+        <LI>Next message (by thread): <A HREF="006369.html">[tech] IPv6 addresses in URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6368">[ date ]</a>
+              <a href="thread.html#6368">[ thread ]</a>
+              <a href="subject.html#6368">[ subject ]</a>
+              <a href="author.html#6368">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 2021-04-15 08:07PM, almaember wrote:
+&gt;<i> Please excuse my lack of knowledge about SNI, but can't clients send
+</I>&gt;<i> the IP address as a host too?
+</I>RFC-6066 mandates the use of fully qualified domain names, but says:
+&gt;<i> ...Currently, the only server names supported are DNS hostnames;
+</I>&gt;<i> however, this does not imply any dependency of TLS on DNS, and other
+</I>&gt;<i> name types may be added in the future...
+</I>
+It also says:
+&gt;<i> Literal IPv4 and IPv6 addresses are not permitted in &quot;HostName&quot;.
+</I><A HREF="https://tools.ietf.org/html/rfc6066#section-3">https://tools.ietf.org/html/rfc6066#section-3</A>
+
+TLS 1.3 simply says that it's mandatory to implement SNI as specified in
+RFC6066 &#167;3, so unfortunately no updates there
+<A HREF="https://tools.ietf.org/html/rfc8446#section-9.2">https://tools.ietf.org/html/rfc8446#section-9.2</A>
+
+* * *
+
+However, right before sending this, I realized that there's a key point that I
+didn't realize until reading the spec just now: the HostName field can be 0
+characters.  TLS 1.3 (and Gemini over TLS 1.2) mandates that the SNI extension
+/exists/ in the ClientHello, but the hostname field itself can be empty,
+indicating to use some &quot;default&quot; at the operators discresion.  If anyone has a
+gitlab account, this might be a good thing to open an issue to clarify.
+
+~nytpu
+
+-- 
+Alex // nytpu
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">alex at nytpu.com</A>
+GPG Key: <A HREF="https://www.nytpu.com/files/pubkey.asc">https://www.nytpu.com/files/pubkey.asc</A>
+Key fingerprint: 43A5 890C EE85 EA1F 8C88 9492 ECCD C07B 337B 8F5B
+<A HREF="https://useplaintext.email/">https://useplaintext.email/</A>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 833 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210415/64017df4/attachment-0001.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20210415/64017df4/attachment-0001.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006367.html">[tech] IPv6 addresses in URLs
+</A></li>
+	<LI>Next message (by thread): <A HREF="006369.html">[tech] IPv6 addresses in URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6368">[ date ]</a>
+              <a href="thread.html#6368">[ thread ]</a>
+              <a href="subject.html#6368">[ subject ]</a>
+              <a href="author.html#6368">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

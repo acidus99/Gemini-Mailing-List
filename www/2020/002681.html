@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A proposed scheme for parsing preformatted alt text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C2BC23E3A-CDAF-46ED-9193-E2149A345C5A%40ngalt.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002678.html">
+   <LINK REL="Next"  HREF="002683.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A proposed scheme for parsing preformatted alt text</H1>
+    <B>Nathan Galt</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C2BC23E3A-CDAF-46ED-9193-E2149A345C5A%40ngalt.com%3E"
+       TITLE="A proposed scheme for parsing preformatted alt text">mailinglists at ngalt.com
+       </A><BR>
+    <I>Fri Sep 11 20:56:08 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002678.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+        <LI>Next message (by thread): <A HREF="002683.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2681">[ date ]</a>
+              <a href="thread.html#2681">[ thread ]</a>
+              <a href="subject.html#2681">[ subject ]</a>
+              <a href="author.html#2681">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+&gt;<i> On Sep 11, 2020, at 11:36 AM, Luke Emmet &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">luke at marmaladefoo.com</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> On 11-Sep-2020 18:28, Gary Johnson wrote:
+</I>&gt;&gt;<i> [...]
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> To assuage any concerns about opening the door to endless possible
+</I>&gt;&gt;<i> syntaxes for machine-readable processing of preformatted blocks being
+</I>&gt;&gt;<i> introduced to Gemtext, I'll retract my previous suggestion of using the
+</I>&gt;&gt;<i> top line for (generic) machine-readable purposes and the bottom line for
+</I>&gt;&gt;<i> the alt text.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> The only real machine-readable behavior I want to see in Gemini is
+</I>&gt;&gt;<i> source code syntax highlighting anyway, and the spec already supports
+</I>&gt;&gt;<i> and encourages that. In all other cases, alt text (which can clearly be
+</I>&gt;&gt;<i> ignored or used &quot;at the client's discretion&quot; as per the spec) is just
+</I>&gt;&gt;<i> fine on the top line of preformatted blocks. I suppose I don't really
+</I>&gt;&gt;<i> see much machine-readable value in tagging a block as &quot;image&quot; or &quot;table&quot;
+</I>&gt;&gt;<i> currently anyway. YMMV
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> To that end, maybe we just need some community agreement (and/or a
+</I>&gt;&gt;<i> clearer codification in the Gemini spec) of how to use alt text &quot;for
+</I>&gt;&gt;<i> computer source code to identify the programming language which advanced
+</I>&gt;&gt;<i> clients may use for syntax highlighting&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> Whilst I think it is nice to support a practice of source code language labelling (to assist syntax highlighting), I think it would be insufficient to cover current usage practice.
+</I>&gt;<i> 
+</I>&gt;<i> In particular, I'm thinking of ANSI markup that some authors sprinkle in their content.
+</I>&gt;<i> 
+</I>&gt;<i> ANSI codes are effectively platform-specific formatting instructions (for example foreground, background colours) that are unique to a terminal type client.
+</I>&gt;<i> 
+</I>&gt;<i> If authors wish to use these in preformatted regions, they really should be hinting this to the client so that the client can take appropriate steps to render (or ignore) the terminal ANSI codes. The interpretation of these terminal escape codes is not treating the content as plain text, but rather to take a particular content interpretation, to drive the visual UI. Similar to embedded &lt;font&gt; tags, you might say.
+</I>&gt;<i> 
+</I>&gt;<i> So this in itself suggests the need to be able to hint at content-type in the preformatted region.
+</I>&gt;<i> 
+</I>&gt;<i> e.g.
+</I>&gt;<i> 
+</I>&gt;<i> ```text/x-ansi
+</I>&gt;<i> (ANSI marked up content in color etc)
+</I>&gt;<i> ``
+</I>&gt;<i> 
+</I>&gt;<i> (or perhaps ```content-type: text/x-ansi to label it correctly)
+</I>&gt;<i> 
+</I>&gt;<i> Or are we going to say these implementation terminal escape codes are left as an ad-hoc convention? That seems to have its own risks as discussed on this thread and elsewhere.
+</I>&gt;<i> 
+</I>&gt;<i> Best Wishes
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> - Luke
+</I>
+[shock and horror that people are using ANSI codes for color]
+
+Prior reading:
+
+=&gt; <A HREF="https://en.wikipedia.org/wiki/Escape_character#ASCII_escape_character">https://en.wikipedia.org/wiki/Escape_character#ASCII_escape_character</A>
+=&gt; <A HREF="https://the.exa.website/">https://the.exa.website/</A> a modern ls(1) replacement
+
+I think ANSI color codes are up to 24-bit color now. Not all terminals support them (Terminal.app doesn&#8217;t; iTerm2 does), but they&#8217;re out there. I was looking up color codes so I could make my EXA_COLORS variable nicer and the whole process wasn&#8217;t pleasant.
+
+Sounds like a good reason to explicitly disallow U+001B in the text/gemini spec and:
+
+- give dirty looks to any page author that uses it
+- give dirty looks to any client author that doesn&#8217;t strip it out before presenting it to the user (whether the client is terminal-based or in a GUI)
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002678.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+	<LI>Next message (by thread): <A HREF="002683.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2681">[ date ]</a>
+              <a href="thread.html#2681">[ thread ]</a>
+              <a href="subject.html#2681">[ subject ]</a>
+              <a href="author.html#2681">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

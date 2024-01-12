@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] Oustanding issues
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Oustanding%20issues&In-Reply-To=%3CC83IATQ52E1C.1EBSKT04414WU%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004446.html">
+   <LINK REL="Next"  HREF="004450.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] Oustanding issues</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Oustanding%20issues&In-Reply-To=%3CC83IATQ52E1C.1EBSKT04414WU%40stilgar%3E"
+       TITLE="[spec] Oustanding issues">solderpunk at posteo.net
+       </A><BR>
+    <I>Sun Dec 27 10:47:01 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004446.html">[ANN] announcing the outpost, a kinda sorta reddit-esque forum
+</A></li>
+        <LI>Next message (by thread): <A HREF="004450.html">[spec] Oustanding issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4447">[ date ]</a>
+              <a href="thread.html#4447">[ thread ]</a>
+              <a href="subject.html#4447">[ subject ]</a>
+              <a href="author.html#4447">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Greetings all,
+
+I'm trying to prepare a list of spec issues that I want to finalise as
+soon as possible.  I probably should have been more disciplined about
+this, but the high traffic rate of the mailing list combined with the
+fact that an awful lot of the discussion is about stuff that I'm not
+interested in means I've kind of lost track of the important things.
+Below is everything I'm aware of which has been previously raised which
+I think is worthy of some kind of consideration/response.  If you think
+I've forgotten something, please let me know.
+
+In arbitrary order:
+
+* Obviously, the ongoing IRI vs URI issue.
+* Clarification on the use of TLS close_notify has been requested.
+  This is actually mandated by both TLS 1.2 and 1.3 specs so technically
+  it's redundant to mention it in the Gemini spec, but given how poorly
+  implemented it is, some explicit reminding could not hurt.  I think
+  there's a tiny wrinkle to consider here on *when* the client should
+  send this (due to a change in semantics between TLS 1.2 and 1.3).
+* The question of how to handle fragments in redirects.  I suppose a
+  similar question applies for queries, actually.
+* The spec is a bit vague on under which circumstances the META part of
+  a response header may be empty, and on exactly what that means (e.g.
+  is a tab after the status code still required in any case?).  This
+  needs to be tightened up, and I'm pretty sure this should be done by
+  just making non-empty META a requirement.
+* There's been a request for recommendations on logging of queries.  I
+  think this is out of scope for the itself, but an entirely
+  appropriate thing to mention in either the Best Practices document or
+  a separate companion standard for standard logging format.
+* Sean has asked for the spec to require a redirect follow limit in
+  clients, rather than this just being a recommendation in the BP
+  document.
+* There was discussion of using a new 2x status code to convey
+  information about cacheability of content.  I'm pretty sure I don't
+  want this, but I do feel a need to actually give a justification for
+  it.
+* There was discussion of using a new 2x status code to convey that a
+  resource is a stream.  I'm not sure I want this (though less sure than
+  the cache thing), but at the very least the spec could use a bit of
+  clarity about the potential for content to be streamed.  I know
+  streams are not universally popular, but there is little practical
+  difference between a stream and a large but finite file served over a
+  &quot;jerky&quot; internet connection, and it's very hard to actually explicitly
+  disallow streams, so I think they are here to stay.  At the absolute
+  minimum, the BP document should mention that buffering responses up in
+  memory until they are complete and then processing them is a fragile
+  (but valid and, in practice, workable) approach.
+* There's this long-standing issue of the fact that none of the
+  character sequences which identify the start of a non-text line type
+  were originally defined with spaces after them, but we've added that
+  requirement hodge-podge as ambiguities have appeared, and now we're in
+  a situation where half the line types need them and half don't.
+  Consistency suggests we require spaces everywhere, but this has been
+  surprisingly controversial and may break some things.  But a final
+  ruling is required.
+
+Most of these are not anywhere near as major as the IRI issue.  I hope
+to get all the non-IRI things sorted out in the next week or so.  In
+some cases I may start new threads here asking for feedback.  In simpler
+cases I might just make decrees.
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004446.html">[ANN] announcing the outpost, a kinda sorta reddit-esque forum
+</A></li>
+	<LI>Next message (by thread): <A HREF="004450.html">[spec] Oustanding issues
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4447">[ date ]</a>
+              <a href="thread.html#4447">[ thread ]</a>
+              <a href="subject.html#4447">[ subject ]</a>
+              <a href="author.html#4447">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

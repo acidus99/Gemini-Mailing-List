@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] doubts (was Re: [spec] [rfc] SEDR 300 VOLUME I)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20doubts%20%28was%20Re%3A%20%5Bspec%5D%20%5Brfc%5D%20SEDR%20300%20VOLUME%20I%29&In-Reply-To=%3C20210108062709.GT3625%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004740.html">
+   <LINK REL="Next"  HREF="004785.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] doubts (was Re: [spec] [rfc] SEDR 300 VOLUME I)</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20doubts%20%28was%20Re%3A%20%5Bspec%5D%20%5Brfc%5D%20SEDR%20300%20VOLUME%20I%29&In-Reply-To=%3C20210108062709.GT3625%40brevard.conman.org%3E"
+       TITLE="[tech] doubts (was Re: [spec] [rfc] SEDR 300 VOLUME I)">sean at conman.org
+       </A><BR>
+    <I>Fri Jan  8 06:27:09 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004740.html">[tech] doubts (was Re: [spec] [rfc] SEDR 300 VOLUME I)
+</A></li>
+        <LI>Next message (by thread): <A HREF="004785.html">[tech] doubts (was Re: [spec] [rfc] SEDR 300 VOLUME I)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4778">[ date ]</a>
+              <a href="thread.html#4778">[ thread ]</a>
+              <a href="subject.html#4778">[ subject ]</a>
+              <a href="author.html#4778">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great John Cowan once stated:
+&gt;<i> On Sun, Jan 3, 2021 at 4:55 PM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> &gt; &gt; By the way, what happens on your implementation if I name the actual
+</I>&gt;<i> &gt; &gt; gemini/text like &quot;b%2Fw.gmi&quot;? Burn and crash?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;   No.  It will be sent as &quot;b/w.gmi&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> In what circumstances?  If the URL bar or text link says &quot;b%2Fw.gmi&quot;,
+</I>&gt;<i> that's what should be sent to the server; if it says &quot;b/w.gmi&quot;, then *that*
+</I>&gt;<i> is what should be sent to the server.  The server may treat those
+</I>&gt;<i> differently or the same.  The reason is that / is a reserved character.
+</I>&gt;<i> The server ought to treat <A HREF="http://abc.com:80/~smith/home.html">http://abc.com:80/~smith/home.html</A> and
+</I>&gt;<i> <A HREF="http://abc.com:80/%7Esmith/home.html">http://abc.com:80/%7Esmith/home.html</A> exactly the same, per RFC 2616.
+</I>
+  &quot;All non-trivial abstractions, to some degree, are leaky.&quot;
+		-- Joel Spolsky [1]
+
+  &quot;Doctor, it hurts when I do this.&quot;
+
+  &quot;Then stop doing that.&quot;
+		-- Old vaudville joke.
+
+  I've already rejected tons of replies to this, so I think I'll ask a
+question.  You are writing a client, and you come across this link:
+
+=&gt; %2E%2E/%52%3A%20%41%2F%42%20%31%25%20%40%20%24%33%3B%76%3D%31
+
+  This is a relative URI, so this needs to be resolved against the base URI,
+and for this question, the base URI is
+
+	<A HREF="gemini://example.com/%66%6F%6F/%62%61%72%3B%33/">gemini://example.com/%66%6F%6F/%62%61%72%3B%33/</A>
+
+  How should the client (or a URI/URL/IRI parser) deal with such links. 
+What, in your mind, should they manipulate or parse the URLs?  It's not a
+matter of &quot;no body should generate such links&quot; because you can't control
+that.  The client gets what it gets.
+
+  When I wrote my URL parser, I wrote it to be useful to me (with the hope
+that others would find it useful).  But it seems it does The Wrong Thing. 
+So in your opinion, what should it, nay, MUST it do?
+
+  Here's the list of references I've been pouring through the past week:
+
+	RFC-1630	Jun 1994
+	RFC-1738	Dec 1994
+	RFC-1808	Jun 1995
+	RFC-2396	Aug 1998
+	RFC-3986	Jan 2005
+	WHATWG URL	Jan 2021 (it keeps changing) [2]
+
+  Also, do ANY existing URL parsing library get it right?  Please make sure
+to justify your answer(s).
+
+  -spc
+
+[1]	<A HREF="https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/">https://www.joelonsoftware.com/2002/11/11/the-law-of-leaky-abstractions/</A>
+
+[2]	<A HREF="https://url.spec.whatwg.org/">https://url.spec.whatwg.org/</A>
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004740.html">[tech] doubts (was Re: [spec] [rfc] SEDR 300 VOLUME I)
+</A></li>
+	<LI>Next message (by thread): <A HREF="004785.html">[tech] doubts (was Re: [spec] [rfc] SEDR 300 VOLUME I)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4778">[ date ]</a>
+              <a href="thread.html#4778">[ thread ]</a>
+              <a href="subject.html#4778">[ subject ]</a>
+              <a href="author.html#4778">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

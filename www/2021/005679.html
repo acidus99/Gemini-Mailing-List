@@ -1,0 +1,229 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Metadata Without A Proposal
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Metadata%20Without%20A%20Proposal&In-Reply-To=%3C20210226131631.475b77ac21a45c54f5c589c7%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005674.html">
+   <LINK REL="Next"  HREF="005681.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Metadata Without A Proposal</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Metadata%20Without%20A%20Proposal&In-Reply-To=%3C20210226131631.475b77ac21a45c54f5c589c7%40gmail.com%3E"
+       TITLE="Metadata Without A Proposal">linde.philip at gmail.com
+       </A><BR>
+    <I>Fri Feb 26 12:16:31 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005674.html">Metadata Without A Proposal
+</A></li>
+        <LI>Next message (by thread): <A HREF="005681.html">Metadata Without A Proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5679">[ date ]</a>
+              <a href="thread.html#5679">[ thread ]</a>
+              <a href="subject.html#5679">[ subject ]</a>
+              <a href="author.html#5679">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, 26 Feb 2021 11:51:08 +0100
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">nothien at uber.space</A> wrote:
+
+&gt;<i> Hi!
+</I>&gt;<i> 
+</I>&gt;<i> I've lost track of the currently raging metadata thread entirely, and so
+</I>&gt;<i> I've started this as a new post.
+</I>&gt;<i> 
+</I>&gt;<i> Thus far, I think there's general consensus on the following needs for
+</I>&gt;<i> any metadata proposal:
+</I>&gt;<i> 
+</I>&gt;<i> 1. Must degrade gracefully for clients that don't understand metadata.
+</I>
+Agreed.
+
+&gt;<i> 2. Must not be English-specific.
+</I>
+What is the preferable alternative? We could use numbers to indicate
+element type, but ultimately numbers are dependent on numeral systems,
+which depend on language and culture.
+
+If instead of using English directly, we define opaque strings of
+characters for the tags, such that the tag &quot;author&quot; consistently means
+&quot;author&quot;, we really achieve the same thing. That is a simple solution
+that is language independent.
+
+Or we could use emoji, although I believe most computer users in the
+world would have a harder time typing out a given emoji than a given
+opaque, ASCII- and English-compatible string.
+
+&gt;<i> 3. Must be machine-parsable.
+</I>
+We should consider the difference between needs and wants here. If I
+have no interest in specifying another license to use my work than what
+is implied from my sharing it, that doesn't necessarily mean I don't
+want to specify date or author, so perhaps all or most elements should
+be optional.
+
+&gt;<i>   
+</I>&gt;<i> 4. Should affect presentation.
+</I>&gt;<i>   
+</I>&gt;<i>    gemtext as a whole is about separating content from presentation.
+</I>&gt;<i>    Some of the earlier metadata proposals referred to metadata for
+</I>&gt;<i>    presentation, e.g. to specify a color to view the text in.  This is
+</I>&gt;<i>    against the spirit of gemtext/Gemini (if not the spec).
+</I>
+Agreed, but as I understand it you do *not* want it to affect
+presentation.
+
+&gt;<i>   
+</I>&gt;<i> 5. Must be difficult to extend.
+</I>&gt;<i>   
+</I>&gt;<i>    Again, this comes from the general Gemini philosophy that anything
+</I>&gt;<i>    that can be misused will be misused.  This rules out lots of current
+</I>&gt;<i>    proposals because they specify tags, and the usage of tags can only be
+</I>&gt;<i>    controlled by convention, which is subject to change.
+</I>
+What do you propose that prevents conventional use from dictating
+reality? And why is it important that the specification can not be
+extended? Unlike e.g. text/gemini, if a client doesn't support some
+superset of the tags initially specified, there is no degradation. If
+in the future we want to extend a meta data format to support e.g.
+specifying where, in addition to when, it was written, the clients that
+don't support it shouldn't suffer from it.
+
+The only important concern to me is that there is a canonical
+description of tags. That description can be extended indefinitely as
+far as I'm concerned, for as long as the original meanings of the
+initial set of supported tags aren't changed or overloaded by newer
+tags.
+
+&gt;<i> 6. Must be accessible.
+</I>&gt;<i>   
+</I>&gt;<i>    Some proposals discussed the usage of emojis, and others have opted
+</I>&gt;<i>    for creating new unofficial line types.  These don't degrade
+</I>&gt;<i>    gracefully for things like screen readers, until they adopt the
+</I>&gt;<i>    metadata proposal.  That's not great.
+</I>
+Agreed.
+
+I think that instead of defining ourselves what fields are important we
+should start from a standard, e.g. DCMI with the element set defined in
+IETF RFC 5013.
+
+With that as a basis, if there is no suitable format already, we can
+define a human readable, text-compatible data format and a corresponding
+text/xyz MIME type. Then, a text/gemini document that feels like
+supplying additional metadata can link to a metadata file which the
+server serves with the above MIME type. A client that does not support
+the MIME type should defer to serving unknown text/* types as plain
+text. A client that does support it can localize the elements, including
+things like names and date and time formats. If the client is a
+crawler, it should find the linked metadata document as a matter of its
+normal operation because it is linked from the document.
+
+Such formats already exist, but there is little interest in authoring
+such files.
+
+In that way, no extension or change to Gemini is necessary. No
+specialized sub-formats for existing line types either.
+
+Personally I don't think this is a standard I would use either way.
+It's mostly for the benefit of robots that there's a point in
+formalizing information like this. Humans can interpret such
+information as indicated in the document itself in a much wider variety
+of formats. It's not my intention, primarily, to serve robots.
+
+-- 
+Philip
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210226/5de292a7/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20210226/5de292a7/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005674.html">Metadata Without A Proposal
+</A></li>
+	<LI>Next message (by thread): <A HREF="005681.html">Metadata Without A Proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5679">[ date ]</a>
+              <a href="thread.html#5679">[ thread ]</a>
+              <a href="subject.html#5679">[ subject ]</a>
+              <a href="author.html#5679">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200117172902.GA1432%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000347.html">
+   <LINK REL="Next"  HREF="000349.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200117172902.GA1432%40SDF.ORG%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Fri Jan 17 17:29:02 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000347.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000349.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#348">[ date ]</a>
+              <a href="thread.html#348">[ thread ]</a>
+              <a href="subject.html#348">[ subject ]</a>
+              <a href="author.html#348">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Jan 17, 2020 at 08:52:52AM -0800, Aaron Janse wrote:
+&gt;<i> 
+</I>&gt;<i> Definitely. Unless there is a problem I'm not seeing, this sounds very
+</I>&gt;<i> exciting!
+</I>
+I'm excited by this, too.  Because I can't control myself I've already
+started writing up a rough spec for this, included below for comment.  I
+definitely want to wait until more people have chimed in before getting
+too excited, and I'd especially like to hear from all, or at least most,
+of the authors of existing clients before making even a tentative
+decision.  But I have to say, in writing up the below, I get a very good
+feeling.  The description is not exactly short, but it's very *not
+fiddly* compared to how it would look if we were going to support
+&quot;reflow in both directions&quot;.  This &quot;half reflow&quot; approach seems to hit
+an amazing sweetspot of simplicity, richness and adaptability of display
+widths.  I have figured out how to get vim to let me write this kind of
+content in a pleasant and easy way, so I think I'm happy to switch.  And
+if anybody *really* hates it, they can still hard-wrap their files and
+wide clients following these rules will display it properly.  Narrow
+clients will end up with a mess, but that's just the price people will
+have to pay for sticking to their hard-wrapping guns.  Many of them will
+probably be happy to dismiss mobile clients out of hand, anyway!
+
+Feedback on the below very welcome!
+
+Cheers,
+Solderpunk
+
+---------
+
+The text/gemini syntax is inspired by and looks visually similar to
+Markdown, but it is significantly simpler (and consequently less
+powerful).  The syntax is strictly line-based: a file can be processed
+one line at a time and each line can be handled in a way which does
+not depend upon any previous or subsequent lines.  The only internal
+state a rendering engine needs to maintain is a single boolean
+variable (for preformatting mode, described below).
+
+The lines of a text/gemini file come in 8 different types.  It is
+possible to unambiguously determine the type of a line by only
+considering its first three characters.  Knowing a line's type is the
+only information necessary to know how to handle it correctly.
+
+Just like Gemini's status code system is designed so that simple
+clients can ignore the second digit of the code and still function
+correctly, the text/gemini syntax is designed so that simple clients
+can treat several different types of line identically and still
+provide a usable representation of the document.  A bare-minimum
+client need only recognise four different types of line.  These are:
+
+1. PREFORMATTED TOGGLE LINES
+
+Lines consisting of only and exactly three back ticks (```) are
+preformatted toggle lines.  These lines should not be displayed to the
+user and are instead used to toggle preformatted mode on and off (the
+mode is off when the parser is intialised).  When preformatted mode is
+on, the usual rules for identifying line types are suspended and all
+lines should be unconditionally identified as PREFORMATTED TEXT LINES.
+
+2. PREFORMATTED TEXT LINES
+
+Preformatted text lines should be presented to the user in a monowidth
+font exactly as they appear in the text/gemini file.  Lines longer
+than the client's viewport must not be wrapped, leading or trailing
+whitespace must not be removed, etc.  Handling of lines longer than the
+viewport is client-specific.  Advanced clients may display a
+horizontal scrollbar.  Simple clients may simply truncate the line.
+
+3. LINK LINES
+
+Lines beginning with the two characters =&gt; are link lines.  We all know
+how these work by now.
+
+4. TEXT LINES
+
+All other lines are TEXT LINES.  They should be presented to the user
+in a client-specific &quot;pleasing manner&quot;.  Lines longer than the
+client's viewport should be wrapped into multiple lines of a suitable
+length.  Variable width fonts may be used.  Blank lines are a special
+case of TEXT LINES and should be reproduced in the output.
+
+It is important to realise that while Markdown, HTML, LaTeX and many
+other document markup formats are &quot;block based&quot; or &quot;paragraph based&quot;,
+the text/gemini format is not.  Consecutive, non-blank lines of text
+which are much shorter than the client's viewport should *not* be
+combined into longer lines.  Equivalently, *every* newline character
+in a text/gemini file is significant, not only consecutive pairs of
+newline characters.  Clients ignoring this fact will produce incorrect
+output.
+
+Advanced clients may also recognise the following additional line
+types.  Simple clients may treat all line types below as TEXT LINES
+with no loss of essential function.
+
+5. HEADING LINES
+
+Lines beginning with one, two or three consecutive # characters are
+HEADING LINES, corresponding to headings, subheadings or susubheadings
+respectively.  The text following the # characters (with leading
+whitespace removed) constitute the heading and should be displayed to
+the user.  Clients MAY choose to apply special styling to headings to
+distinguish them from ordinary lines.  However, the primary purpose of
+HEADING LINES is to represent the internal structure of the document
+in a machine-readable way.  Advanced clients can use this information
+to, e.g. display a hierarchically formatted &quot;table of contents&quot; for a
+long document in a side-pane, allowing users to easily jump to
+specific sections without excessive scrolling.  Or CMS-style tools
+automatically generating menus or Atom/RSS feeds for a directory of
+text/gemini files can use the first heading in a file as a
+human-friendly label for links to it.
+
+6. UNORDERED LIST ITEMS
+
+Lines beginning with a * are UNORDERED LIST ITEMS.  This line type
+exists purely for stylistic reasons.  The * may be replaced in
+advanced clients by a bullet symbol.  Any text after the * character
+should be presented to the user as if it were a TEXT LINE, i.e.
+wrapped to fit the viewport.  Advanced clients can take the space of
+the bullet symbol into account when performing wrapping and ensure
+that all lines of text corresponding to the item are aligned with one
+another.
+
+7. ORDERED LIST ITEMS
+
+As above with obvious changes.
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000347.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000349.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#348">[ date ]</a>
+              <a href="thread.html#348">[ thread ]</a>
+              <a href="subject.html#348">[ subject ]</a>
+              <a href="author.html#348">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

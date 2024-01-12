@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Rendering html and markdown on Gemini (was Re: Translation service)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Rendering%20html%20and%20markdown%20on%20Gemini%20%28was%20Re%3A%20Translation%20service%29&In-Reply-To=%3C5FC0C56A.1000204%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003605.html">
+   <LINK REL="Next"  HREF="003612.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Rendering html and markdown on Gemini (was Re: Translation service)</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Rendering%20html%20and%20markdown%20on%20Gemini%20%28was%20Re%3A%20Translation%20service%29&In-Reply-To=%3C5FC0C56A.1000204%40marmaladefoo.com%3E"
+       TITLE="Rendering html and markdown on Gemini (was Re: Translation service)">luke at marmaladefoo.com
+       </A><BR>
+    <I>Fri Nov 27 09:22:50 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003605.html">Translation service
+</A></li>
+        <LI>Next message (by thread): <A HREF="003612.html">Rendering html and markdown on Gemini (was Re: Translation service)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3606">[ date ]</a>
+              <a href="thread.html#3606">[ thread ]</a>
+              <a href="subject.html#3606">[ subject ]</a>
+              <a href="author.html#3606">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+On 27-Nov-2020 09:00, Krispin Schulz wrote:
+ &gt;
+ &gt;
+ &gt; @all:  Does anyone know how to make links from gemini URLs in 
+Markdown files so it will render in the browser?
+ &gt; Is that even possible as long as the browser does not recognize the 
+gemini schema?
+ &gt;
+
+For markdown or html files to work correctly, they would have to be 
+rendered by the client. The default trick that most clients have to deal 
+with unknown mime format is to open them in an external application. But 
+that won't work properly - any relative path links won't work correctly.
+
+There is a fair amount of html being served in gemini and the occasional 
+bit of markdown too. GUS has some content type statistics here:
+
+   <A HREF="gemini://gus.guru/statistics">gemini://gus.guru/statistics</A>
+
+There are a couple of clients that directly support these formats, but 
+much less so compared to text/gemini which is supported by all. The ones 
+I know of (there may well be others) are:
+
+render text/html: Kristall, GemiNaut, Diohsc (via converter)
+render text/markdown: Kristall
+
+Client authors could plug in an converter into their pipeline if they 
+wish, as a way to display such content in a client that only supports 
+gemtext. There are converters you can use, such as md2gemini and 
+html2gmi for that.
+
+But I think for now, most clients will simply render text/html and 
+text/markdown as plain text (not interpreted).
+
+  - Luke
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003605.html">Translation service
+</A></li>
+	<LI>Next message (by thread): <A HREF="003612.html">Rendering html and markdown on Gemini (was Re: Translation service)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3606">[ date ]</a>
+              <a href="thread.html#3606">[ thread ]</a>
+              <a href="subject.html#3606">[ subject ]</a>
+              <a href="author.html#3606">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

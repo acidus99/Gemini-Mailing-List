@@ -1,0 +1,208 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Alternative transports, philosophy [was: Gemini server logging formats and practices]
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Alternative%20transports%2C%20philosophy%20%5Bwas%3A%20Gemini%20server%20logging%0A%20formats%20and%20practices%5D&In-Reply-To=%3C20200513211008.GA18145%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000576.html">
+   <LINK REL="Next"  HREF="000596.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Alternative transports, philosophy [was: Gemini server logging formats and practices]</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Alternative%20transports%2C%20philosophy%20%5Bwas%3A%20Gemini%20server%20logging%0A%20formats%20and%20practices%5D&In-Reply-To=%3C20200513211008.GA18145%40SDF.ORG%3E"
+       TITLE="Alternative transports, philosophy [was: Gemini server logging formats and practices]">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Wed May 13 22:10:08 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000576.html">Gemini server logging formats and practices
+</A></li>
+        <LI>Next message (by thread): <A HREF="000596.html">Alternative transports, philosophy [was: Gemini server logging formats and practices]
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#577">[ date ]</a>
+              <a href="thread.html#577">[ thread ]</a>
+              <a href="subject.html#577">[ subject ]</a>
+              <a href="author.html#577">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, May 13, 2020 at 09:07:00AM -0700, Dave Huseby wrote:
+&gt;<i> Now...let the trolling begin! Let's see who can flame each other better. ; )
+</I>
+It would be great if we could just refrain from trolling or flaming
+each other entirely -- even weird, happy-smiley pseudo-trolling -- and
+just have normal conversations, which can of course include polite and
+adult disagreement!
+
+Just weighing in on a few points quickly:
+ 
+&gt;<i> &gt; &gt; Right now the only thing we can do is willfully
+</I>&gt;<i> &gt; &gt; blind our servers. Eventually though, if all goes according to plan,
+</I>&gt;<i> &gt; &gt; Gemini servers will be running on a mixnet of some kind 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt;   Really?  I don't recall seeing such a plan myself.  Solderpunk, are you
+</I>&gt;<i> &gt; holding out on me?
+</I>&gt;<i> 
+</I>&gt;<i> You're not wrong. I made a mistake implying the Gemini had *anything* to do
+</I>&gt;<i> with my efforts fix the Internet status quo.
+</I>
+I'll admit that I've never given serious thought to alternative
+transports, but the spec *does* take care to say &quot;When Gemini is served
+over TCP/IP, servers should listen on port 1965&quot;, implying that it might
+be done over things other than TCP/IP.  I could have *sworn* I also
+explicitly called it an &quot;application layer&quot; protocol, but apparently not.
+I *will* fix that, it's always been my intent.
+
+If people want to run Gemini over some sort of new-fangled mixnet
+transport layer that's absolutely fine by me, and I'd regard such
+experiments with keen interest.  But as far as I'm concerned that's
+largely orthogonal to the Gemini spec proper.
+
+To some extent, the spec privileges TCP/IP, or rather transport and
+internet layer protocols which don't provide any encryption.  TLS is
+designed in deeply enough that removing it would be problematic, which
+means means that there is guaranteed to be some redundancy if the
+higher layers provide security features of their own.
+
+I would rather address this when and if any such alternative layers
+achieve significant traction by introducing a separate, relatively
+simple new specification - in the spirit of DNS over TLS or HTTP -
+rather than trying to totally generalise the spec now.  If these new
+layers are so radically different that refactoring Gemini to work over
+them isn't trivial, then people can just define a new protocol native to
+that transport which is heavily Gemini-inspired, in the way that Gemini
+is heavily Gopher-inspired.
+
+This reflects my general stance on the appropriate balance for Gemini
+to strike between philosophical and technical considerations.  I don't
+think it will come as a surprise to anybody that I'm an idealist.  I am
+interested in making the internet a better place, and I consider Gemini
+to be doing precisely that.  However, I have pretty humble ambitions
+with this project.
+
+By the standards of a lot of projects concerned with &quot;making the
+internet a better place&quot;, Gemini looks decidedly old-fashioned or
+conservative.  It's client-server and not peer-to-peer, content is
+hosted in one place on the originating server and is not replicated
+across requesting clients, and stuff is addressed by location and not
+content.  Heck, it doesn't even have a blockchain in it!
+
+These decisions obviously place a limit on just how revolutionary we can
+be in fixing the ills of the web.  But I also think these decisions are
+one of Gemini's great strengths.  Gemini should feel overwhelmingly
+familiar to most technical people, both in terms of the primitives it's
+built from (URLs, MIME types, TLS) and the conceptual ideas that join
+them together.  I think this fact is in no small part responsible for
+Gemini, despite being small and young, already having no shortage of
+implementations.  Meanwhile, the internet is full of - and has been for
+a long, long time - more ambitious, radical projects with a lot more
+&quot;cognitive friction&quot; which haven't taken off.
+
+I welcome input from hardcore idealists and philosophers, because I
+think it's good to keep one eye on the stars (an appropriate
+metaphor for this project!).  But I'm going to meet those ideals
+only as far as I think we can while keeping Gemini conceptually light
+and easy for people to pickup and begin working with.  We won't
+completely solve every single problem with the web this way, but
+we'll make real improvements.  Incremental progress is still progress,
+and widely-deployed progress is the best kind.
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000576.html">Gemini server logging formats and practices
+</A></li>
+	<LI>Next message (by thread): <A HREF="000596.html">Alternative transports, philosophy [was: Gemini server logging formats and practices]
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#577">[ date ]</a>
+              <a href="thread.html#577">[ thread ]</a>
+              <a href="subject.html#577">[ subject ]</a>
+              <a href="author.html#577">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

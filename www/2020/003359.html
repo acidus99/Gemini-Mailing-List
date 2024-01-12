@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Regarding non-finite response bodies
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Regarding%20non-finite%20response%20bodies&In-Reply-To=%3CC7528Y7BF1AR.BMLOTJSTZSUO%40taiga%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003479.html">
+   <LINK REL="Next"  HREF="003360.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Regarding non-finite response bodies</H1>
+    <B>Drew DeVault</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Regarding%20non-finite%20response%20bodies&In-Reply-To=%3CC7528Y7BF1AR.BMLOTJSTZSUO%40taiga%3E"
+       TITLE="Regarding non-finite response bodies">sir at cmpwn.com
+       </A><BR>
+    <I>Mon Nov 16 23:01:38 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003479.html">On input and uploading of user content
+</A></li>
+        <LI>Next message (by thread): <A HREF="003360.html">Regarding non-finite response bodies
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3359">[ date ]</a>
+              <a href="thread.html#3359">[ thread ]</a>
+              <a href="subject.html#3359">[ subject ]</a>
+              <a href="author.html#3359">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>A discussion took place in August that was revisited on IRC today:
+
+<A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/002404.html">https://lists.orbitalfox.eu/archives/gemini/2020/002404.html</A>
+
+I disagree very strongly with the suggestion of gemini+<A HREF="stream://.">stream://.</A> It
+relies upon a presumption about the specification which is poorly
+supported: that all Gemini requests are finite.
+
+The supporting text for this is supposedly that section 1.1 lists &quot;C:
+Handles response&quot; last. However:
+
+1. Section 1.1 reads like an informative summary of the authoritative
+   text which follows
+2. There is no explicit specification that these steps are ordered or
+   cannot be completed in parallel, and aren't even numbered.
+
+The other relevant piece of text is in 3.3:
+
+&gt;<i> The server closes the connection after the final byte, there is no
+</I>&gt;<i> &quot;end of response&quot; signal like gopher's lonely dot.
+</I>
+There is no statement anywhere that there actually has to *be* a final
+byte; only a clarification on how the final byte is signalled if
+present.
+
+Nothing in the specification prohibits Gemini responses from being
+non-finite, and in fact if clients presume this will be the case then
+they'll be easily exploited by servers which simply forward /dev/zero
+into the connection and never terminate, leading to OOM crashes or disk
+space exhaustion.
+
+If you want to stream content, the protocol permits it as-is. And
+remember the one big rule:
+
+Do not.
+Extend.
+Gemini.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003479.html">On input and uploading of user content
+</A></li>
+	<LI>Next message (by thread): <A HREF="003360.html">Regarding non-finite response bodies
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3359">[ date ]</a>
+              <a href="thread.html#3359">[ thread ]</a>
+              <a href="subject.html#3359">[ subject ]</a>
+              <a href="author.html#3359">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

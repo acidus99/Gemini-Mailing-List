@@ -1,0 +1,157 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Scheme Section 2 quibble
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3CCAD2gp_QaK%2Bqvkph2ykywg7B_--Em51%2Bkei2tgdSVmOQOn0txGA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003385.html">
+   <LINK REL="Next"  HREF="003389.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Scheme Section 2 quibble</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3CCAD2gp_QaK%2Bqvkph2ykywg7B_--Em51%2Bkei2tgdSVmOQOn0txGA%40mail.gmail.com%3E"
+       TITLE="Scheme Section 2 quibble">cowan at ccil.org
+       </A><BR>
+    <I>Tue Nov 17 22:45:50 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003385.html">Scheme Section 2 quibble
+</A></li>
+        <LI>Next message (by thread): <A HREF="003389.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3386">[ date ]</a>
+              <a href="thread.html#3386">[ thread ]</a>
+              <a href="subject.html#3386">[ subject ]</a>
+              <a href="author.html#3386">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Nov 17, 2020 at 5:10 PM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+
+  The path parsing rules state a single slash.  Not '/'+, nor '/'*, but a
+&gt;<i> single '/'.  The only place where more than a single slash is allowed PER
+</I>&gt;<i> THE @#%@#$@$ ABNF is just prior to the authority, which contains the
+</I>&gt;<i> hostname.  THE ONLY PLACE!
+</I>&gt;<i>
+</I>
+Correct.
+
+&gt;<i> I will also draw your attention to the URI-reference rule, which is there
+</I>&gt;<i> for some reason, which allows both a full URI, or a RELATIVE URI, which
+</I>&gt;<i> means that
+</I>&gt;<i>
+</I>&gt;<i>                 //example.com/path/to/resource
+</I>&gt;<i>
+</I>&gt;<i> IS A VALID URI!  IT IS NOT A HACK!  What part of the ABNF do you not
+</I>&gt;<i> understand?
+</I>&gt;<i>
+</I>
+Nope.  It is a valid URI reference, because it is a valid relative
+reference.  It is *not* a valid URI.
+
+In what follows, I am going to assume that &quot;URL&quot; and &quot;URI&quot; are synonymous,
+which they have been for 15 years since RFC 3986 was published.
+
+&gt;<i> No, the spec allows both the full URI, and a relative URI as long as it
+</I>&gt;<i> starts with '//' (it has the authority section).  The wording in the spec
+</I>&gt;<i> is
+</I>&gt;<i> bad and should be changed to clarify it, but that's the current
+</I>&gt;<i> specification.
+</I>&gt;<i>
+</I>
+There are two cases:
+
+1) In a Gemini-protocol request line (section 2), the second sentence says
+that an absolute URL (that is, a URI without a fragment identifier) is
+required.  The third sentence says that if the &quot;<A HREF="scheme://">scheme://</A>&quot; portion is
+missing (in which case it is not a URI, much less an absolute URI), it
+should be prefixed with &quot;<A HREF="gemini://">gemini://</A>&quot; and presumably reparsed.  That's
+straightforward.
+
+2) In a link line (section 5.4.2), we are told that there may be an
+absolute or a relative URL.  There are no relative URIs, so we can only
+interpret this as meaning a relative reference.  We are also told that if
+the URL lacks a scheme (which is impossible: a URI always has a scheme)
+then the scheme is &quot;gemini&quot;.
+
+Now suppose a link line in a resource that is available from &quot;<A HREF="gemini://">gemini://</A>
+example.com/public/this.gmi&quot; has the form &quot;foo/bar/baz.gmi&quot;.  We can
+interpret this in one of two incompatible ways:
+
+2a) a truncated version of &quot;<A HREF="gemini://foo/bar/baz.gmi">gemini://foo/bar/baz.gmi</A>&quot;.  Note that &quot;foo&quot; is
+a perfectly valid host name.
+
+2b) a relative reference, in which case it resolves to &quot;<A HREF="gemini://">gemini://</A>
+example.com/public/foo/bar/baz.gmi&quot;.
+
+So the spec is self-contradictory.  In my view interpretation 2a is bogus
+and the sentence &quot;If the URL does not include a scheme, a scheme of
+<A HREF="gemini://">gemini://</A> is implied&quot; in section 5.4.2 should be removed.  What is more, I
+would like to see the equivalent sentence &quot;If the scheme of the URL is not
+specified, a scheme of <A HREF="gemini://">gemini://</A> is implied&quot; removed as well.
+
+&gt;<i> but that's what it is, other URI parsers that are more strict with
+</I>&gt;<i> &gt; compliance to the RFC will refuse to parse a URI without scheme
+</I>&gt;<i> &gt; present,
+</I>&gt;<i>
+</I>&gt;<i>   If it does, it's broken by design.  Again, see the ABNF above.
+</I>&gt;<i>
+</I>
+It is precisely the ABNF line in RFC 3986 section 3 that says a URI (as
+opposed to a URI reference) has to begin with a scheme.
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+It's the old, old story.  Droid meets droid.  Droid becomes chameleon.
+Droid loses chameleon, chameleon becomes blob, droid gets blob back
+again.  It's a classic tale.  --Kryten, Red Dwarf
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201117/9818505a/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201117/9818505a/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003385.html">Scheme Section 2 quibble
+</A></li>
+	<LI>Next message (by thread): <A HREF="003389.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3386">[ date ]</a>
+              <a href="thread.html#3386">[ thread ]</a>
+              <a href="subject.html#3386">[ subject ]</a>
+              <a href="author.html#3386">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

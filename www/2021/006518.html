@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] Client history behavior with redirects
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Client%20history%20behavior%20with%20redirects&In-Reply-To=%3C4dbe730c-eae8-43a2-81e3-35a157a51a87%40linux4specialists.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006517.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] Client history behavior with redirects</H1>
+    <B>Frank J&#252;des</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Client%20history%20behavior%20with%20redirects&In-Reply-To=%3C4dbe730c-eae8-43a2-81e3-35a157a51a87%40linux4specialists.com%3E"
+       TITLE="[tech] Client history behavior with redirects">Frank.Juedes at linux4specialists.com
+       </A><BR>
+    <I>Mon May 17 18:01:37 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006517.html">[tech] Client history behavior with redirects
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6518">[ date ]</a>
+              <a href="thread.html#6518">[ thread ]</a>
+              <a href="subject.html#6518">[ subject ]</a>
+              <a href="author.html#6518">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Michael,
+
+first thing is that every gemini-site should avoid to put the user into 
+a situation where the &quot;back&quot; button is the only way out, by providing 
+arbitrary links.
+
+And i agree with you, option &quot;c&quot; looks like what i would expect to see 
+when clicking on the &quot;back&quot; button.
+
+Another option is to give the end-user the choice of where back in the 
+history to go, like if you right-click on the &quot;back&quot; button in the 
+chromium browser.
+
+Best regards from Charleston (WV),
+ &#160;&#160;&#160;&#160; Frank/2
+
+On 2021-05-17 12:49, Michael Lazar wrote:
+&gt;<i> Hi all,
+</I>&gt;<i>
+</I>&gt;<i> I have a question on a common design pattern in gemini. Say we have
+</I>&gt;<i> a guestbook, message board, etc. that accepts user comments via an
+</I>&gt;<i> input query. A normal session with a client might look like this:
+</I>&gt;<i>
+</I>&gt;<i> ```
+</I>&gt;<i> C: /
+</I>&gt;<i> S: 20 text/gemini (display the home page)
+</I>&gt;<i>
+</I>&gt;<i> C: /guestbook
+</I>&gt;<i> S: 20 text/gemini (display the guestbook page)
+</I>&gt;<i>
+</I>&gt;<i> C: /guestbook/input
+</I>&gt;<i> S: 10 enter your message
+</I>&gt;<i>
+</I>&gt;<i> C: /guestbook/input?hello%20world
+</I>&gt;<i> S: 30 /guestbook (submit the user's message and redirect)
+</I>&gt;<i>
+</I>&gt;<i> C: /guestbook
+</I>&gt;<i> S: 20 text/gemini (display the guestbook page)
+</I>&gt;<i> ```
+</I>&gt;<i>
+</I>&gt;<i> Now, what should happen at this point when the user clicks the
+</I>&gt;<i> &quot;back&quot; button in their client?
+</I>&gt;<i>
+</I>&gt;<i> A. The client resubmits &quot;/guestbook/input?hello%20world&quot;. This is not
+</I>&gt;<i>     desired because it will result in double posting the message. This
+</I>&gt;<i>     same problem is solved on the web using the Post/Redirect/Get
+</I>&gt;<i>     pattern [1]. I suppose the gemini equivalent would be &quot;don't store
+</I>&gt;<i>     requests that return 3x in the client's history&quot;. With this rule,
+</I>&gt;<i>     queries like GUS searches would still be cached because
+</I>&gt;<i>     &quot;<A HREF="gemini://geminispace.info/search?hello">gemini://geminispace.info/search?hello</A>&quot; returns a 20 response.
+</I>&gt;<i>
+</I>&gt;<i> B. The client re-prompts the user with &quot;enter your message&quot;. I've
+</I>&gt;<i>     seen a few (most?) clients do this and it's a pretty jarring
+</I>&gt;<i>     experience as a user, because I did not click on a link first
+</I>&gt;<i>     to prime the input prompt. IMO we should also make a rule &quot;don't
+</I>&gt;<i>     store requests that return a 1x in the client's history&quot;. There's
+</I>&gt;<i>     no web equivalent for this that I could find.
+</I>&gt;<i>
+</I>&gt;<i> C. The client loads &quot;/&quot;, which is the latest cached request before
+</I>&gt;<i>     the current page. This seems like the desired behavior to me.
+</I>&gt;<i>
+</I>&gt;<i> Thoughts?
+</I>&gt;<i>
+</I>&gt;<i> - Michael
+</I>&gt;<i>
+</I>&gt;<i> [1] <A HREF="https://en.wikipedia.org/wiki/Post/Redirect/Get">https://en.wikipedia.org/wiki/Post/Redirect/Get</A>
+</I>-- 
+------------------------------------------------------------------------
+My Gemini Capsule's orbit is <A HREF="gemini://h2903872.stratoserver.net">gemini://h2903872.stratoserver.net</A>
+------------------------------------------------------------------------
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210517/c473647c/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210517/c473647c/attachment.htm</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: Frank_Juedes.vcf
+Type: text/x-vcard
+Size: 253 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210517/c473647c/attachment.vcf">https://lists.orbitalfox.eu/archives/gemini/attachments/20210517/c473647c/attachment.vcf</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006517.html">[tech] Client history behavior with redirects
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6518">[ date ]</a>
+              <a href="thread.html#6518">[ thread ]</a>
+              <a href="subject.html#6518">[ subject ]</a>
+              <a href="author.html#6518">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

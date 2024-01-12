@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Tiny ad-hoc server
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Tiny%20ad-hoc%20server&In-Reply-To=%3C1DXsRDdaU_9fYcgkeozAbwq4h0TlL-HVZ4LX-g3OELw0Oxp4CcYf09nZ-3212g6M-DQrVb_dnwAXe_H2eyqJY0euPUBE17teb0QA4NuCZ0I%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001897.html">
+   <LINK REL="Next"  HREF="001894.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Tiny ad-hoc server</H1>
+    <B>defdefred</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Tiny%20ad-hoc%20server&In-Reply-To=%3C1DXsRDdaU_9fYcgkeozAbwq4h0TlL-HVZ4LX-g3OELw0Oxp4CcYf09nZ-3212g6M-DQrVb_dnwAXe_H2eyqJY0euPUBE17teb0QA4NuCZ0I%3D%40protonmail.com%3E"
+       TITLE="[ANN] Tiny ad-hoc server">defdefred at protonmail.com
+       </A><BR>
+    <I>Thu Jun 25 12:34:05 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001897.html">[ANN] Tiny ad-hoc server
+</A></li>
+        <LI>Next message (by thread): <A HREF="001894.html">SPOOFED: Re: [ANN] Tiny ad-hoc server
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1892">[ date ]</a>
+              <a href="thread.html#1892">[ thread ]</a>
+              <a href="subject.html#1892">[ subject ]</a>
+              <a href="author.html#1892">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello!
+
+I don't understand how the infinite while works in this case...
+Is it consuming cpu all the time?
+
+I play once with ncat and the program was rather in two parts:
+
+1: the-worker
+#!/bin/sh
+printf &quot;20 text/gemini; charset=utf-8\r\n&quot;
+printf &quot;Page generated: %s\n\n&quot; &quot;$(date)&quot;
+cat file-to-serve
+
+2: the-listener
+#!/bin/sh
+
+port=&quot;1965&quot;
+cert=&quot;cert.pem&quot;
+key=&quot;key.pem&quot;
+
+printf &quot;Starting gemini server on port %s...\n&quot; &quot;$port&quot;
+ncat --ssl --ssl-cert &quot;$cert&quot; --ssl-key &quot;$key&quot; --listen &quot;$port&quot; -k -c ./the-worker
+
+freD.
+
+
+&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208; Original Message &#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;
+On Friday 19 June 2020 19:28, James Tomasino &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">tomasino at lavabit.com</A>&gt; wrote:
+
+&gt;<i> I put up a tiny experiment of an ad-hoc server over on <A HREF="gemini://tomasino.org.">gemini://tomasino.org.</A> The code for the server is on that gemini page for you to inspect and play with. Credit to xq for the concept. It's trivial to implement and may open the door for some folks who don't have a plan of running a big server. It may even be able to work with solderpunk's micro-instance ideas. I'm not sure if there's a way to validate client certs by building on to it, but that would make for easy micro-services.
+</I>&gt;<i>
+</I>&gt;<i> -   tomasino
+</I>
+&lt;/<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">tomasino at lavabit.com</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001897.html">[ANN] Tiny ad-hoc server
+</A></li>
+	<LI>Next message (by thread): <A HREF="001894.html">SPOOFED: Re: [ANN] Tiny ad-hoc server
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1892">[ date ]</a>
+              <a href="thread.html#1892">[ thread ]</a>
+              <a href="subject.html#1892">[ subject ]</a>
+              <a href="author.html#1892">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

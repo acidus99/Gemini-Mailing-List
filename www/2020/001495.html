@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> &quot;Wide load&quot; status code(s)?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%22Wide%20load%22%20status%20code%28s%29%3F&In-Reply-To=%3C59b701f8-1fe8-2977-ae74-591c2f47931e%40meff.me%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001486.html">
+   <LINK REL="Next"  HREF="001488.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>&quot;Wide load&quot; status code(s)?</H1>
+    <B>Koushik Roy</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%22Wide%20load%22%20status%20code%28s%29%3F&In-Reply-To=%3C59b701f8-1fe8-2977-ae74-591c2f47931e%40meff.me%3E"
+       TITLE="&quot;Wide load&quot; status code(s)?">koushik at meff.me
+       </A><BR>
+    <I>Wed Jun 10 08:41:54 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001486.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+        <LI>Next message (by thread): <A HREF="001488.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1495">[ date ]</a>
+              <a href="thread.html#1495">[ thread ]</a>
+              <a href="subject.html#1495">[ subject ]</a>
+              <a href="author.html#1495">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Sorry replying to the list address this time...
+
+How about letting the server decide? I can imagine a scenario where the 
+server defaults to sending text/* mime types as 20 responses and 
+everything else as 21 responses. Then servers can let configuration or 
+(s)CGI output determine how to decide on 20 vs 21. While leaving it up 
+to the server is subjective, I think most content authors understand 
+whether something is meant to be quickly digested and rendered or 
+whether something should be downloaded/queued/status line shown.
+
+- meff
+
+
+On 6/10/20 12:32 AM, solderpunk wrote:
+&gt;<i> Hey all,
+</I>&gt;<i> 
+</I>&gt;<i> Just throwing out a quick idea I had last night while trying to sleep,
+</I>&gt;<i> to see how people feel about it.  It's simple and easily ignorable and I
+</I>&gt;<i> think it's kind of neat.
+</I>&gt;<i> 
+</I>&gt;<i> It's been a small pain point for some people for a while now that there
+</I>&gt;<i> is no way for a Gemini client to know how large a file it's downloading
+</I>&gt;<i> is without simply downloading the whole thing.  This is inconvenient
+</I>&gt;<i> from a UI perspective, as there is no way to display a progress bar, and
+</I>&gt;<i> simple clients like AV-98 which simply download a complete file and then
+</I>&gt;<i> pass it off to a handler program appear to &quot;freeze&quot; on large downloads
+</I>&gt;<i> with no clear indication that anything is happening.  This is a much
+</I>&gt;<i> bigger problem for people on limited machines (e.g. low memory diskless
+</I>&gt;<i> systems are perfectly viable for reading text/gemini content and
+</I>&gt;<i> displaying small images but not for downloading large binaries, but they
+</I>&gt;<i> can't gracefully opt out of the big stuff and are forced to simply
+</I>&gt;<i> terminate the connection once a threshold amount of content has been
+</I>&gt;<i> downloaded, and then wastefully discard that partial content) or
+</I>&gt;<i> internet connections (e.g. people at sea using satellite data plans
+</I>&gt;<i> which are billed per megabyte).
+</I>&gt;<i> 
+</I>&gt;<i> People usually want to address this by having the server somehow declare
+</I>&gt;<i> the file size upfront in the header, as per HTTP's &quot;Content-Length&quot;, but
+</I>&gt;<i> I've resisted that tooth and nail because there's no sensible way to do
+</I>&gt;<i> it which doesn't turn the response header into an infinitely extensible
+</I>&gt;<i> thing which people can tack their own variables onto, leaving us no
+</I>&gt;<i> better off than HTTP (so, please, no more ideas on this front)...
+</I>&gt;<i> 
+</I>&gt;<i> I was very happy to realise that a lot of these problems can be solved,
+</I>&gt;<i> or at least ameliorated, in a very simple way with an additional 2x
+</I>&gt;<i> status code.  Since I plan to deprecate the current 21 code for ending a
+</I>&gt;<i> transient certificate session, we could reuse 21 to mean &quot;SUCCESS, a
+</I>&gt;<i> response body follows, and it's larger than $THRESHOLD MiB&quot; (note I am
+</I>&gt;<i> proposing no change to the existing code 20 - 20 does NOT mean &quot;what's
+</I>&gt;<i> coming in less than $THRESHOLD&quot;).  Simple clients could simply treat 21
+</I>&gt;<i> as 20 and be in exactly the situation they are in now, so the graceful
+</I>&gt;<i> degredation of status codes to their x0 form works nicely here.  But
+</I>&gt;<i> e.g. AV-98 could print &quot;Downloading large file, please wait...&quot; upon
+</I>&gt;<i> receving a 21, and then proceed as usual.  This is a very low effort
+</I>&gt;<i> client change, but it solves the problem of people thinking something
+</I>&gt;<i> has gone wrong when they unknowingly start a large download.  More
+</I>&gt;<i> importantly, users in resource-limited environments could use clients
+</I>&gt;<i> which simply terminate the connection immediately on seeing a header
+</I>&gt;<i> starting with 21, providing a quick and low-waste &quot;opt out&quot; of large
+</I>&gt;<i> content.
+</I>&gt;<i> 
+</I>&gt;<i> On the server side, again, a dirt simple server could just always serve
+</I>&gt;<i> up 20 without actually breaking anything.  I realise that knowing
+</I>&gt;<i> whether to use 20 or 21 for dynamically generated content may not be
+</I>&gt;<i> straightforward - no problem, it is *always* valid to just send 20 when
+</I>&gt;<i> in doubt.  21 is nothing more than a helpful hint to clients who might
+</I>&gt;<i> need it.  It doesn't need to be 100% reliable to still have value.
+</I>&gt;<i> 
+</I>&gt;<i> This feels like a good idea to me.  It's totally optional and very easy
+</I>&gt;<i> to handle on both the client and server sides, and I feel like being
+</I>&gt;<i> friendly to small/slow computers and slow/intermittent network
+</I>&gt;<i> connections is a good fit with the overall &quot;vibe&quot; of Gemini, provided
+</I>&gt;<i> doing so does not conflict with overall simplicity.
+</I>&gt;<i> 
+</I>&gt;<i> Naturally, deciding to do this will lead immediately to a weeks-long
+</I>&gt;<i> heated debate on what the appropriate value of $THRESHOLD should be.  We
+</I>&gt;<i> *could* wade into those waters, but I'll just also throw out that we
+</I>&gt;<i> could use 21, 22 and 23 to indicate payloads exceeding 1MiB, 10MiB or
+</I>&gt;<i> 100MiB respectively and leave it at that.  Clients targetting
+</I>&gt;<i> resource-limited environments could let their users configure their own
+</I>&gt;<i> threshold for early termination of downloads.
+</I>&gt;<i> 
+</I>&gt;<i> Cheers,
+</I>&gt;<i> Solderpunk
+</I>&gt;<i> 
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001486.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+	<LI>Next message (by thread): <A HREF="001488.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1495">[ date ]</a>
+              <a href="thread.html#1495">[ thread ]</a>
+              <a href="subject.html#1495">[ subject ]</a>
+              <a href="author.html#1495">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

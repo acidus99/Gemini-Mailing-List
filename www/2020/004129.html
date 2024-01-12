@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Unicode vs. the World
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3C87mtya8z1s.fsf%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004126.html">
+   <LINK REL="Next"  HREF="004149.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Unicode vs. the World</H1>
+    <B>Gary Johnson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3C87mtya8z1s.fsf%40disroot.org%3E"
+       TITLE="Unicode vs. the World">lambdatronic at disroot.org
+       </A><BR>
+    <I>Fri Dec 18 23:38:55 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004126.html">Unicode vs. the World
+</A></li>
+        <LI>Next message (by thread): <A HREF="004149.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4129">[ date ]</a>
+              <a href="thread.html#4129">[ thread ]</a>
+              <a href="subject.html#4129">[ subject ]</a>
+              <a href="author.html#4129">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Petite Abeille &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">petite.abeille at gmail.com</A>&gt; writes:
+&gt;<i> Perhaps of interest:
+</I>&gt;<i> xbib/net: Sane URL, URI, IRI implementations for Java
+</I>&gt;<i> <A HREF="https://github.com/xbib/net">https://github.com/xbib/net</A>
+</I>
+Thanks for the link. I gave it a shot, but it appears to be buggy and
+doesn't have any documentation. I ended up reading through the source
+code on Github to figure out how to call its API, but sadly it looks
+like it can't correctly identify the host part of the incoming string.
+Instead, it thinks it is part of the path, which is obviously no good.
+
+space-age.requests&gt; (parse-url &quot;<A HREF="gemini://&#128007;.mozz.us/%20&#128007;.gmi?some-key=&#128007;&amp;&#128007;=some-value#&#128007;-fragment">gemini://&#128007;.mozz.us/%20&#128007;.gmi?some-key=&#128007;&amp;&#128007;=some-value#&#128007;-fragment</A>&quot;)
+{:path &quot;/&#128007;.mozz.us/ &#128007;.gmi&quot;,
+ :raw-query &quot;some-key=%F0%9F%90%87&amp;%F0%9F%90%87=some-value&quot;,
+ :fragment &quot;&#128007;-fragment&quot;,
+ :params [&quot;some-key=&#128007;&quot; &quot;&#128007;=some-value&quot;],
+ :port 1965,
+ :host &quot;&quot;,
+ :raw-fragment &quot;%F0%9F%90%87-fragment&quot;,
+ :uri
+ &quot;<A HREF="gemini://&#128007;.mozz.us/%20&#128007;.gmi?some-key=&#128007;&amp;&#128007;=some-value#&#128007;-fragment">gemini://&#128007;.mozz.us/%20&#128007;.gmi?some-key=&#128007;&amp;&#128007;=some-value#&#128007;-fragment</A>&quot;,
+ :query &quot;some-key=&#128007;&amp;&#128007;=some-value&quot;,
+ :raw-path &quot;/%F0%9F%90%87.mozz.us/%20%F0%9F%90%87.gmi&quot;,
+ :raw-host &quot;&quot;,
+ :scheme &quot;gemini&quot;}
+
+Oh well, I guess I'll stick with java.net.URI for now.
+
+Cheers,
+  Gary
+
+-- 
+GPG Key ID: 7BC158ED
+Use `gpg --search-keys lambdatronic' to find me
+Protect yourself from surveillance: <A HREF="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</A>
+=======================================================================
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+Why is HTML email a security nightmare? See <A HREF="https://useplaintext.email/">https://useplaintext.email/</A>
+
+Please avoid sending me MS-Office attachments.
+See <A HREF="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</A>
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004126.html">Unicode vs. the World
+</A></li>
+	<LI>Next message (by thread): <A HREF="004149.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4129">[ date ]</a>
+              <a href="thread.html#4129">[ thread ]</a>
+              <a href="subject.html#4129">[ subject ]</a>
+              <a href="author.html#4129">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

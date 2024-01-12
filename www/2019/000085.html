@@ -1,0 +1,181 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Questions on INPUT behavior
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Questions%20on%20INPUT%20behavior&In-Reply-To=%3C20190826173519.GB12090%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000083.html">
+   <LINK REL="Next"  HREF="000086.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Questions on INPUT behavior</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Questions%20on%20INPUT%20behavior&In-Reply-To=%3C20190826173519.GB12090%40SDF.ORG%3E"
+       TITLE="Questions on INPUT behavior">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Mon Aug 26 18:35:19 BST 2019</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000083.html">Questions on INPUT behavior
+</A></li>
+        <LI>Next message (by thread): <A HREF="000086.html">Questions on INPUT behavior
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#85">[ date ]</a>
+              <a href="thread.html#85">[ thread ]</a>
+              <a href="subject.html#85">[ subject ]</a>
+              <a href="author.html#85">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>   I think that should read &quot;there is no request body&quot;---the response can
+</I>&gt;<i> include content, dependent upon the status code.
+</I>
+Once the user *submits* their input, the response to *that* request can
+of course have any status code and a possible response body, but in that
+part of the spec (maybe it's unclear and needs changing) I'm talking
+about the response with code 10, which I shouldn't have a body, as it's
+just delivering a prompt and the information that this resource wants an
+input.
+
+&gt;<i> &gt;    A. &quot;<A HREF="gemini://hostname.com/input?q=AbrahamLincoln">gemini://hostname.com/input?q=AbrahamLincoln</A>&quot;
+</I>&gt;<i> &gt;    vs.
+</I>&gt;<i> &gt;    B. &quot;<A HREF="gemini://hostname.com/input?AbrahamLincoln">gemini://hostname.com/input?AbrahamLincoln</A>&quot;
+</I>&gt;<i> 
+</I>&gt;<i>   B, unless there's a way to designate the variable name (which I did
+</I>&gt;<i> suggest to solderpunk---perhaps I should float it here).
+</I>
+What I had in mind, and what I think most implementations do so far, is
+indeed B.  It's possible I coud be convinced otherwise, but I don't
+really see the value in speccing a fixed variable named like `q`.  It's
+perfectly cromulent according to the URL RFC to use treat the query as a
+string.  The key=value pair syntax is common in the web world mostly as
+a way to make HTML forms work, and we don't have forms.
+
+I *did* consider a 1x status code whose &lt;META&gt; was some kind of
+machine-readable description of a form, but that doesn't degrade nicely
+in simple clients which ignore the second status digit, as then the
+human user has to imagine the form in their head and type a suitable
+response.
+
+&gt;<i>   The following characters in the query should be escaped:
+</I>&gt;<i> 
+</I>&gt;<i> 	SPACE # % &lt; &gt; [ \ ] ^ { | } &quot;
+</I>&gt;<i> 
+</I>&gt;<i> and unless you are sending name/value pairs, 
+</I>&gt;<i> 
+</I>&gt;<i> 	= &amp;
+</I>&gt;<i> 
+</I>&gt;<i> should also be escaped (this per RFC-3986).
+</I>
+Yes, this is right.  Remember, Gemini requests are URLs, and we don't
+make the rules for URLs, we (hopefully!) follow them.
+
+&gt;<i> &gt;    A. &quot;=&gt;/input?Hello%20world&quot;
+</I>&gt;<i> 
+</I>&gt;<i>   I don't see why not.
+</I>&gt;<i> 
+</I>&gt;<i> 	<A HREF="gemini://gemini.conman.org/cgi?Hello%20World">gemini://gemini.conman.org/cgi?Hello%20World</A>
+</I>&gt;<i> 
+</I>
+I don't see why not either.
+
+&gt;<i> &gt;    A. &quot;<A HREF="gemini://hostname.com/items?page=2&amp;limit=20">gemini://hostname.com/items?page=2&amp;limit=20</A>&quot;
+</I>&gt;<i> 
+</I>&gt;<i>   Again, I don't see why not.  The query string is part of a URL, and
+</I>&gt;<i> clients send URLs so this should be an issue client side.  What the server
+</I>&gt;<i> side does with the query is up to the server.
+</I>
+Agreed.
+
+&gt;<i> &gt; 5. In the above example, what happens if a request to that URL returns a status
+</I>&gt;<i> &gt;    code of 10? Should the client strip the existing query components from the
+</I>&gt;<i> &gt;    URL, or append a new key=value pair to the end?
+</I>
+Hmm.  If a client requests the URL above, it should include the query
+string in the request.  So why would the server respond with a status 10
+in that case?  I mean, it's currently not prohibited in the spec for a
+server to do that, so this is a fair question.  I'm not sure whether we
+*should* forbid it or spec some sensible client response.  Did you have
+a use case in mind or are you just keeping an eye out for edge cases?
+ 
+&gt;<i> &gt; 6. What widget should the client use to display the input prompt? A single line
+</I>&gt;<i> &gt;    input, or a multi-line text box? Should newline characters even be allowed?
+</I>&gt;<i> 
+</I>&gt;<i>   It would depend upon the client.  I think the expectation is a single line
+</I>&gt;<i> input, but I can see a multi-line box being useful as well.  
+</I>
+Good question, I think I agree with Sean above but I'll think on this...
+
+&gt;<i> &gt; 7. Should there be a maximum input length? Currently it is implicitly defined
+</I>&gt;<i> &gt;    as 1024 bytes minus the length of the URL.
+</I>
+Hmm,  Do we think it's useful/worthwhile to spec a shorter explicit
+limit?  I guess this is hard to answer without canonical applications of
+user input being established...
+
+Answers to all the stuff about inputs, XSS, etc. in the future...thanks
+for the good questions!
+
+- Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000083.html">Questions on INPUT behavior
+</A></li>
+	<LI>Next message (by thread): <A HREF="000086.html">Questions on INPUT behavior
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#85">[ date ]</a>
+              <a href="thread.html#85">[ thread ]</a>
+              <a href="subject.html#85">[ subject ]</a>
+              <a href="author.html#85">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

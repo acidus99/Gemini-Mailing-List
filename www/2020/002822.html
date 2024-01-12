@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Using normal tls certificates with gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Using%20normal%20tls%20certificates%20with%20gemini&In-Reply-To=%3CNmAH95DQUW0qPfRCtyX2yRk0atcJ6XaAmHeX9eIb6TGhWAboo4bH7K6-q-r8TU7jf1iwLbtUJ2MalYGLd_tpWDHlyIXLNA0XnQSXXOTvmGw%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002756.html">
+   <LINK REL="Next"  HREF="002823.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Using normal tls certificates with gemini</H1>
+    <B>colecmac at protonmail.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Using%20normal%20tls%20certificates%20with%20gemini&In-Reply-To=%3CNmAH95DQUW0qPfRCtyX2yRk0atcJ6XaAmHeX9eIb6TGhWAboo4bH7K6-q-r8TU7jf1iwLbtUJ2MalYGLd_tpWDHlyIXLNA0XnQSXXOTvmGw%3D%40protonmail.com%3E"
+       TITLE="Using normal tls certificates with gemini">colecmac at protonmail.com
+       </A><BR>
+    <I>Thu Oct  1 22:38:37 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002756.html">Using normal tls certificates with gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="002823.html">Using normal tls certificates with gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2822">[ date ]</a>
+              <a href="thread.html#2822">[ thread ]</a>
+              <a href="subject.html#2822">[ subject ]</a>
+              <a href="author.html#2822">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> For my gemini capsule's tls setup, I just used my Let's Encrypt
+</I>&gt;<i> certificate since I already had it set up for my web site. However,
+</I>&gt;<i> after reading deeper into server setup with gemini, I discovered that
+</I>&gt;<i> I'm probably adding a lot of extra request overhead by using a
+</I>&gt;<i> certificate from a CA instead of self-signed. Now my problem is that if
+</I>&gt;<i> I change out the certificate, then people that have previously visited
+</I>&gt;<i> my site may think it is compromised because the certificate changed and
+</I>&gt;<i> most clients are TOFU. Should I change out the certificate or is it fine
+</I>&gt;<i> to leave it as is?
+</I>
+I had the same problem for my capsule, <A HREF="gemini://makeworld.gq.">gemini://makeworld.gq.</A> What I did
+was wait until the Let's Encrypt cert expired for a clean transition, and
+then created my own small 5-year cert. See my gemlog post for details on
+how to generate these:
+
+<A HREF="gemini://makeworld.gq/gemlog/2020-07-06-openssl.gmi">gemini://makeworld.gq/gemlog/2020-07-06-openssl.gmi</A>
+
+There is also the gemcert tool:
+<A HREF="https://tildegit.org/solderpunk/gemcert">https://tildegit.org/solderpunk/gemcert</A>
+
+
+&gt;<i> As an additional question, if I was writing a more advanced gemini
+</I>&gt;<i> client, should I validate cert chains if they're availaible or only use
+</I>&gt;<i> TOFU on the fingerprint and ignore chains entirely? The spec just says
+</I>&gt;<i> to validate however you want, but what's the community's recommendation?
+</I>
+Only validate the certificate in the chain that applies to the host you're
+visiting, ignore all the others. Most servers do not send chains anyway,
+as it adds needless extra bytes. But that does not mean fingerprints shouldn't
+be used, you can still take the fingerprint of the last cert in the chain.
+
+Cheers,
+makeworld
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002756.html">Using normal tls certificates with gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="002823.html">Using normal tls certificates with gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2822">[ date ]</a>
+              <a href="thread.html#2822">[ thread ]</a>
+              <a href="subject.html#2822">[ subject ]</a>
+              <a href="author.html#2822">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Gemini Server with multiple Language support
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20Server%20with%20multiple%20Language%20support&In-Reply-To=%3C877dngdoms.fsf%40omarpolo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005126.html">
+   <LINK REL="Next"  HREF="005129.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Gemini Server with multiple Language support</H1>
+    <B>Omar Polo</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20Server%20with%20multiple%20Language%20support&In-Reply-To=%3C877dngdoms.fsf%40omarpolo.com%3E"
+       TITLE="Gemini Server with multiple Language support">op at omarpolo.com
+       </A><BR>
+    <I>Wed Feb 10 13:43:39 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005126.html">Gemini Server with multiple Language support
+</A></li>
+        <LI>Next message (by thread): <A HREF="005129.html">Gemini Server with multiple Language support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5127">[ date ]</a>
+              <a href="thread.html#5127">[ thread ]</a>
+              <a href="subject.html#5127">[ subject ]</a>
+              <a href="author.html#5127">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">devel at datenbrei.de</A> &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">devel at datenbrei.de</A>&gt; writes:
+
+&gt;<i> Hi all!
+</I>&gt;<i>
+</I>&gt;<i> I'm Martin from Augsburg, in the south of Germany. At first I'm happy
+</I>&gt;<i> to have found this nice community. I'm reading this list for a few
+</I>&gt;<i> days now. :-)
+</I>&gt;<i>
+</I>&gt;<i> I'm planning to set up a server with English and German language
+</I>&gt;<i> support. I had some experiments with Agate, but in Agate one can set a
+</I>&gt;<i> language definition just for each and every single file or for the
+</I>&gt;<i> whole server.
+</I>&gt;<i>
+</I>&gt;<i> Is there a Gemini server with language setting on directory level or
+</I>&gt;<i> such and otherwise just for hosting gemtext??
+</I>
+Shameless self-promotion: gmid[0][1] supports location rules and lets
+you customize the language.  A configuration like this would do the job:
+
+    server &quot;example.com&quot; {
+        cert &quot;...&quot;
+        key  &quot;...&quot;
+        root &quot;...&quot;
+
+        # default lang...
+        lang &quot;en&quot;
+
+        # ... except for documents under the &quot;de&quot; directory.
+        location &quot;/de/*&quot; {
+            lang &quot;de&quot;
+        }
+    }
+
+Cheers!
+
+[0]: <A HREF="https://github.com/omar-polo/gmid">https://github.com/omar-polo/gmid</A>
+[1]: <A HREF="gemini://gemini.omarpolo.com/pages/gmid.gmi">gemini://gemini.omarpolo.com/pages/gmid.gmi</A>
+
+&gt;<i> For me it seems, that there is nearly no German language content up to
+</I>&gt;<i> now, or at least I did not find it. So to lower the barrier for new
+</I>&gt;<i> German people interested in Gemini I'd like to provide some content
+</I>&gt;<i> instead just on my own weblog, where btw I did write an article about
+</I>&gt;<i> Gemini in German language:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="https://herrdoering.de/de/gemini-minismalistisches-parallel-web/">https://herrdoering.de/de/gemini-minismalistisches-parallel-web/</A>
+</I>&gt;<i>
+</I>&gt;<i> Writing the link on an extra line is just to not confuse anybody ;-)
+</I>&gt;<i>
+</I>&gt;<i> Later I'd like to learn Go and try coding a small game or bot or
+</I>&gt;<i> such. Since the protocol allows single line input this could be a fun
+</I>&gt;<i> thing.
+</I>&gt;<i>
+</I>&gt;<i> Martin
+</I>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005126.html">Gemini Server with multiple Language support
+</A></li>
+	<LI>Next message (by thread): <A HREF="005129.html">Gemini Server with multiple Language support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5127">[ date ]</a>
+              <a href="thread.html#5127">[ thread ]</a>
+              <a href="subject.html#5127">[ subject ]</a>
+              <a href="author.html#5127">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

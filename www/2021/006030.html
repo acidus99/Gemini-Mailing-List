@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] signing when rotating (Was: Re: Enhancing TOFU)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20signing%20when%20rotating%20%28Was%3A%20Re%3A%20Enhancing%20TOFU%29&In-Reply-To=%3C20210309210241.zn7uynvni44b37yc%40localhost%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005969.html">
+   <LINK REL="Next"  HREF="006033.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] signing when rotating (Was: Re: Enhancing TOFU)</H1>
+    <B>mbays</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20signing%20when%20rotating%20%28Was%3A%20Re%3A%20Enhancing%20TOFU%29&In-Reply-To=%3C20210309210241.zn7uynvni44b37yc%40localhost%3E"
+       TITLE="[tech] signing when rotating (Was: Re: Enhancing TOFU)">mbays at sdf.org
+       </A><BR>
+    <I>Tue Mar  9 21:02:41 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005969.html">Enhancing TOFU
+</A></li>
+        <LI>Next message (by thread): <A HREF="006033.html">[tech] signing when rotating (Was: Re: Enhancing TOFU)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6030">[ date ]</a>
+              <a href="thread.html#6030">[ thread ]</a>
+              <a href="subject.html#6030">[ subject ]</a>
+              <a href="author.html#6030">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>* Friday, 2021-03-05 at 19:14 +0100 - <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">mbays at sdf.org</A> &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">mbays at sdf.org</A>&gt;:
+
+&gt;<i>* Friday, 2021-03-05 at 13:33 +0100 - <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">nothien at uber.space</A> &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">nothien at uber.space</A>&gt;:
+</I>&gt;<i>
+</I>&gt;&gt;<i>I think that people find TOFU controversial because it [...] 
+</I>&gt;&gt;<i>prevents servers from ever being able to change certificates.
+</I>&gt;<i>I think we can solve this neatly by using certificate chains.
+</I>
+I experimented a bit more with this, and discovered that chains can be 
+awkward. Not all servers support sending a certificate chain, TLS 
+libraries may complain if the root cert isn't set as a CA, and we lose 
+the efficiency savings of only transmitting a single cert.
+
+But there's a much simpler version which avoids chains.
+If your server is currently using certificate A and you want to switch 
+to a new certificate:
+* create a new self-signed certificate C with key K,
+* sign it with A to produce a signed certificate S,
+     (e.g. using openssl x509 -CA A.crt ...)
+* tell your server to use S and K.
+
+The signature on a self-signed certificate is worthless, so we lose 
+nothing by replacing it with a signature from the old certificate in 
+this way.
+
+Clients can check for this as follows:
+* When TOFU-trusting a certificate for a host, save its pubkey.
+* If later a new cert is provided for the host, check if it was 
+correctly signed by the pubkey of the old certificate.
+* If so, accept the new certificate and delete the old one. Arguably 
+there should be a warning if the old certificate had expired.
+
+I experimented a bit with this, and the only small complication I ran 
+into is that tls libraries may complain if the Distinguished Names of 
+the two certificates are identical (at least, the haskell tls library 
+I tested with does). But it isn't hard to include a field in the DN of 
+the new certificate to make it unique.
+
+So why don't we make this a convention? Any subtleties I'm missing?
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 195 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210309/98e30cd9/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20210309/98e30cd9/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005969.html">Enhancing TOFU
+</A></li>
+	<LI>Next message (by thread): <A HREF="006033.html">[tech] signing when rotating (Was: Re: Enhancing TOFU)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6030">[ date ]</a>
+              <a href="thread.html#6030">[ thread ]</a>
+              <a href="subject.html#6030">[ subject ]</a>
+              <a href="author.html#6030">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

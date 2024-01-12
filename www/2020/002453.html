@@ -1,0 +1,272 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Seeking for help with C Gemini client
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Seeking%20for%20help%20with%20C%20Gemini%20client&In-Reply-To=%3C20200819212601.1c618ea45391e2f0f3a9b848%40yandex.ru%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002448.html">
+   <LINK REL="Next"  HREF="002447.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Seeking for help with C Gemini client</H1>
+    <B>-</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Seeking%20for%20help%20with%20C%20Gemini%20client&In-Reply-To=%3C20200819212601.1c618ea45391e2f0f3a9b848%40yandex.ru%3E"
+       TITLE="Seeking for help with C Gemini client">anridellal at yandex.ru
+       </A><BR>
+    <I>Wed Aug 19 19:26:01 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002448.html">Seeking for help with C Gemini client
+</A></li>
+        <LI>Next message (by thread): <A HREF="002447.html">Seeking for help with C Gemini client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2453">[ date ]</a>
+              <a href="thread.html#2453">[ thread ]</a>
+              <a href="subject.html#2453">[ subject ]</a>
+              <a href="author.html#2453">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Thank you.
+I managed to make it work with LibreSSL's libtls:
+
+<A HREF="https://man.openbsd.org/tls_init.3">https://man.openbsd.org/tls_init.3</A>
+
+Sharing the code in case someone wants to take a look at an implementation (the code is far from perfection, but I'll fix it later):
+
+#include &lt;arpa/inet.h&gt;
+#include &lt;locale.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+#include &lt;sys/types.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;tls.h&gt;
+#include &lt;unistd.h&gt;
+
+#define STATUS_CODE_INPUT &quot;10&quot;
+#define STATUS_CODE_SENSITIVE_INPUT &quot;11&quot;
+#define STATUS_CODE_SUCCESS &quot;20&quot;
+#define STATUS_CODE_REDIRECT_TEMP &quot;30&quot;
+#define STATUS_CODE_REDIRECT_PERM &quot;31&quot;
+#define STATUS_CODE_TEMP_FAILURE &quot;40&quot;
+#define STATUS_CODE_SERVER_UNAVAILABLE &quot;41&quot;
+#define STATUS_CODE_CGI_ERROR &quot;42&quot;
+#define STATUS_CODE_PROXY_ERROR &quot;43&quot;
+#define STATUS_CODE_SLOW_DOWN &quot;44&quot;
+#define STATUS_CODE_PERM_FAILURE &quot;50&quot;
+#define STATUS_CODE_NOT_FOUND &quot;51&quot;
+#define STATUS_CODE_GONE &quot;52&quot;
+#define STATUS_CODE_PROXY_REQUEST_REFUSED &quot;53&quot;
+#define STATUS_CODE_BAD_REQUEST &quot;59&quot;
+#define STATUS_CODE_CLIENT_CERT_REQUIRED &quot;60&quot;
+#define STATUS_CODE_CERT_NO_AUTH &quot;61&quot;
+#define STATUS_CODE_CERT_NOT_VALID &quot;62&quot;
+
+#define GEMINI_PORT &quot;1965&quot;
+
+int main() {
+	char *locale;
+	locale = setlocale(LC_ALL, &quot;&quot;);
+	
+	tls_init();
+	struct tls_config *tlsconf = tls_config_new();
+
+	struct tls *client = tls_client();
+	tls_config_set_protocols(tlsconf, TLS_PROTOCOL_TLSv1_3);
+	tls_configure(client, tlsconf);
+
+	const char *hostname = &quot;gemini.circumlunar.space&quot;;
+
+	char *url = malloc(sizeof(char)*1024);
+	strcpy(url, &quot;<A HREF="gemini://gemini.circumlunar.space/">gemini://gemini.circumlunar.space/</A>&quot;);
+	char rec_buf[1029];
+	int writebytes = sprintf(url, &quot;%s\r\n&quot;, url);
+	tls_connect(client, hostname, GEMINI_PORT);
+	while (writebytes &gt; 0) {
+		ssize_t outbytes;
+
+		outbytes = tls_write(client, url, (size_t)writebytes);
+		if (outbytes == TLS_WANT_POLLIN || outbytes == TLS_WANT_POLLOUT)
+			continue;
+		if (outbytes == -1) {
+			perror(&quot;tls_write&quot;);
+		}
+		url += outbytes;
+		writebytes -= outbytes;
+	}
+	// read header
+	tls_read(client, rec_buf, sizeof(rec_buf));
+	printf(&quot;%s\n&quot;, rec_buf);
+	char status_code[3];
+	strncpy(status_code, rec_buf, 2);
+	if (strcmp(status_code, STATUS_CODE_SUCCESS) == 0) {
+		writebytes = tls_read(client, rec_buf, (size_t)sizeof(rec_buf));
+		printf(&quot;%d\n&quot;, writebytes);
+		while (writebytes &gt; 0) {
+			printf(rec_buf);
+			writebytes = tls_read(client, rec_buf, (size_t)writebytes);
+			printf(&quot;\n%d\n&quot;, writebytes);
+		}
+		printf(&quot;\r\n&quot;);
+	}
+
+	tls_close(client);
+	tls_free(client);
+	return 0;
+}
+
+On Wed, 19 Aug 2020 15:55:00 +0100
+Kevin Sangeelee &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">kevin at susa.net</A>&gt; wrote:
+
+&gt;<i> This is something I had been tinkering with, before getting distracted
+</I>&gt;<i> onto something else(!). I found two examples of simple echo servers,
+</I>&gt;<i> one for GnuTLS and one OpenSSL. The code is here
+</I>&gt;<i> 
+</I>&gt;<i>     <A HREF="gemini://gemini.susa.net/c/">gemini://gemini.susa.net/c/</A>
+</I>&gt;<i> 
+</I>&gt;<i> Both certainly compiled (I have binaries on disk), but I can't recall
+</I>&gt;<i> any more detail than that, so just sharing this as a pointer to the
+</I>&gt;<i> original poster.
+</I>&gt;<i> 
+</I>&gt;<i> Kevin
+</I>&gt;<i> 
+</I>&gt;<i> On Wed, 19 Aug 2020 at 12:36, Paul Warren &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">pwarren at pwarren.id.au</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; G'day!
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Gemini, while simple, isn't quite that simple. All protocol commands and
+</I>&gt;<i> &gt; responses are over TLS connections, so doing a send/recv on a raw
+</I>&gt;<i> &gt; network socket will not work!
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I'm not 100% sure on the best or simplest way to get a TLS stack going
+</I>&gt;<i> &gt; in C, I've done some bits with OpenSSL, but it was not simple!
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Cheers
+</I>&gt;<i> &gt; --
+</I>&gt;<i> &gt; Paul
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; On 19/8/20 11:57 pm, - wrote:
+</I>&gt;<i> &gt; &gt; Hello,
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; I've started writing a client for Gemini protocol, but since I've never been writing networking programs, I find myself at the dead end at the moment. Please could someone help me? When I send a request and get a response, the only thing I have in response is &quot;<A HREF="gemini://">gemini://</A>&quot; and nothing else. The code is given below:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; #include &lt;arpa/inet.h&gt;
+</I>&gt;<i> &gt; &gt; #include &lt;locale.h&gt;
+</I>&gt;<i> &gt; &gt; #include &lt;netdb.h&gt;
+</I>&gt;<i> &gt; &gt; #include &lt;netinet/in.h&gt;
+</I>&gt;<i> &gt; &gt; #include &lt;stdio.h&gt;
+</I>&gt;<i> &gt; &gt; #include &lt;stdlib.h&gt;
+</I>&gt;<i> &gt; &gt; #include &lt;string.h&gt;
+</I>&gt;<i> &gt; &gt; #include &lt;sys/types.h&gt;
+</I>&gt;<i> &gt; &gt; #include &lt;sys/socket.h&gt;
+</I>&gt;<i> &gt; &gt; #include &lt;unistd.h&gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_INPUT 10
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_SENSITIVE_INPUT 11
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_SUCCESS 20
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_REDIRECT_TEMP 30
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_REDIRECT_PERM 31
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_TEMP_FAILURE 40
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_SERVER_UNAVAILABLE 41
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_CGI_ERROR 42
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_PROXY_ERROR 43
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_SLOW_DOWN 44
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_PERM_FAILURE 50
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_NOT_FOUND 51
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_GONE 52
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_PROXY_REQUEST_REFUSED 53
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_BAD_REQUEST 59
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_CLIENT_CERT_REQUIRED 60
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_CERT_NO_AUTH 61
+</I>&gt;<i> &gt; &gt; #define STATUS_CODE_CERT_NOT_VALID 62
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; #define GEMINI_PORT 1965
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt; int main() {
+</I>&gt;<i> &gt; &gt;       char *locale;
+</I>&gt;<i> &gt; &gt;       locale = setlocale(LC_ALL, &quot;&quot;);
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;       int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+</I>&gt;<i> &gt; &gt;       if (sockfd &lt; 0) {
+</I>&gt;<i> &gt; &gt;               perror(&quot;socket&quot;);
+</I>&gt;<i> &gt; &gt;               exit(1);
+</I>&gt;<i> &gt; &gt;       }
+</I>&gt;<i> &gt; &gt;       char *url = malloc(sizeof(char)*1024);
+</I>&gt;<i> &gt; &gt;       strcpy(url, &quot;<A HREF="gemini://gemini.circumlunar.space/\r\n">gemini://gemini.circumlunar.space/\r\n</A>&quot;);
+</I>&gt;<i> &gt; &gt;       char rec_buf[1029] = {0};
+</I>&gt;<i> &gt; &gt;       struct hostent *host_entry;
+</I>&gt;<i> &gt; &gt;       host_entry = gethostbyname(url);
+</I>&gt;<i> &gt; &gt;       struct sockaddr_in addr;
+</I>&gt;<i> &gt; &gt;       addr.sin_family = AF_INET;
+</I>&gt;<i> &gt; &gt;       addr.sin_port = htons(GEMINI_PORT);
+</I>&gt;<i> &gt; &gt;       addr.sin_addr.s_addr = htonl(INADDR_ANY);
+</I>&gt;<i> &gt; &gt;       int opt = 1;
+</I>&gt;<i> &gt; &gt;       if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &amp;opt, sizeof(opt)) &lt; 0) {
+</I>&gt;<i> &gt; &gt;               perror(&quot;setsockopt&quot;);
+</I>&gt;<i> &gt; &gt;               exit(1);
+</I>&gt;<i> &gt; &gt;       }
+</I>&gt;<i> &gt; &gt;       if (bind(sockfd, (struct sockaddr *)&amp;addr, sizeof(addr)) &lt; 0) {
+</I>&gt;<i> &gt; &gt;               perror(&quot;bind&quot;);
+</I>&gt;<i> &gt; &gt;               exit(2);
+</I>&gt;<i> &gt; &gt;       }
+</I>&gt;<i> &gt; &gt;       if (connect(sockfd, (struct sockaddr *)&amp;addr, sizeof(addr)) &lt; 0) {
+</I>&gt;<i> &gt; &gt;               perror(&quot;connect&quot;);
+</I>&gt;<i> &gt; &gt;               exit(3);
+</I>&gt;<i> &gt; &gt;       }
+</I>&gt;<i> &gt; &gt;       send(sockfd, url, sizeof(url), 0);
+</I>&gt;<i> &gt; &gt;       recv(sockfd, rec_buf, sizeof(rec_buf), 0);
+</I>&gt;<i> &gt; &gt;       printf(&quot;%s\n&quot;, rec_buf);
+</I>&gt;<i> &gt; &gt;       close(sockfd);
+</I>&gt;<i> &gt; &gt;       shutdown(sockfd, SHUT_RDWR);
+</I>&gt;<i> &gt; &gt;       free(url);
+</I>&gt;<i> &gt; &gt;       return 0;
+</I>&gt;<i> &gt; &gt; }
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt;
+</I>
+
+-- 
+- &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">anridellal at yandex.ru</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002448.html">Seeking for help with C Gemini client
+</A></li>
+	<LI>Next message (by thread): <A HREF="002447.html">Seeking for help with C Gemini client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2453">[ date ]</a>
+              <a href="thread.html#2453">[ thread ]</a>
+              <a href="subject.html#2453">[ subject ]</a>
+              <a href="author.html#2453">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Gemini browser for iOS
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS&In-Reply-To=%3C20200609021006.GU23998%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001435.html">
+   <LINK REL="Next"  HREF="001439.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Gemini browser for iOS</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS&In-Reply-To=%3C20200609021006.GU23998%40brevard.conman.org%3E"
+       TITLE="[ANN] Gemini browser for iOS">sean at conman.org
+       </A><BR>
+    <I>Tue Jun  9 03:10:06 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001435.html">[ANN] Gemini browser for iOS
+</A></li>
+        <LI>Next message (by thread): <A HREF="001439.html">[ANN] Gemini browser for iOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1438">[ date ]</a>
+              <a href="thread.html#1438">[ thread ]</a>
+              <a href="subject.html#1438">[ subject ]</a>
+              <a href="author.html#1438">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Martin Keegan once stated:
+&gt;<i> On Mon, 8 Jun 2020, solderpunk wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt;CGI and SCGI support to Molly Brown, including passing information about
+</I>&gt;<i> &gt;client certs on to aps through the variables (following Sean's lead for
+</I>&gt;<i> &gt;now, although I need to bring up some points for discussion about this
+</I>&gt;<i> &gt;in the near future).  Very soon I will take advantage of this to start
+</I>&gt;<i> 
+</I>&gt;<i> My implementation is that $REMOTE_USER is set to the common name in the 
+</I>&gt;<i> cert subject. I think this is a good idea, but I don't think it's common 
+</I>&gt;<i> practice in the Gemini universe.
+</I>
+Of the dozen Gemini servers (software) out there, five (a little under half)
+support CGI.  Out of those, blizanci, GLV-1.12556 and getforce (a little
+over half) set REMOTE_USER to the common name of the certifiate.  The other
+two don't set REMOTE_USER at all.  
+
+The CGI standard (RFC-3875) states that REMOTE_USER is set only if
+authentication is used.  blizanci sets is reguardless (&quot;&quot; if not there),
+GLV-1.12556 and jetforce only set it if a certificate is used.
+
+MollyBrown does not set REMOTE_USER, but does set TLS_CLIENT_SUBJECT_CN if a
+certificate is used.  GLV-1.12556 will also set TLS_CLIENT_SUBJECT_CN if
+TLS environment variables are enabled (and a certificate is used).
+
+One open question---what if the certificate doesn't sent a common name?  I
+think a subject *is* required, but I'm unsure of the mandatory subfields of
+the subject.
+
+&gt;<i> (I remain skeptical about whether SSL is the right choice - I reckon
+</I>&gt;<i> Gemini's simplicity goal is going to run up against the practice of
+</I>&gt;<i> trying to reuse as much existing infrastructure as possible.)
+</I>
+  Okay, what encryption system would you have us poor non-cryptographer
+programmers who write servers use and poorly implement?  Feel free to bring
+to the table a working server and client to show us how easy it is [1].
+
+  -spc
+
+[1]	If this comes across as too snarky or mean, this has come up at
+	least twice on this list already.  The proposers were not, to my
+	knowledge, professional cryptographers, yet were quite insistent on
+	their proposals were sound.  I don't think anyone else on the list
+	is a professional cryptographer and thus, can't say if the proposals
+	were sound or not.  And the conventional wisdom is &quot;Don't roll your
+	own cryptography!&quot; Using an existing and widely used solution is
+	better than any other option at this point in time.
+
+	Please keep this in mind when criticizing the choice of TLS.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001435.html">[ANN] Gemini browser for iOS
+</A></li>
+	<LI>Next message (by thread): <A HREF="001439.html">[ANN] Gemini browser for iOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1438">[ date ]</a>
+              <a href="thread.html#1438">[ thread ]</a>
+              <a href="subject.html#1438">[ subject ]</a>
+              <a href="author.html#1438">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Minimum requirements for client certificates
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Minimum%20requirements%20for%20client%20certificates&In-Reply-To=%3C9a4871d4-34da-b42e-62a6-afdbf8ca6500%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002541.html">
+   <LINK REL="Next"  HREF="002548.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Minimum requirements for client certificates</H1>
+    <B>Baschdel</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Minimum%20requirements%20for%20client%20certificates&In-Reply-To=%3C9a4871d4-34da-b42e-62a6-afdbf8ca6500%40disroot.org%3E"
+       TITLE="Minimum requirements for client certificates">baschdel at disroot.org
+       </A><BR>
+    <I>Tue Sep  1 17:53:27 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002541.html">Minimum requirements for client certificates
+</A></li>
+        <LI>Next message (by thread): <A HREF="002548.html">Minimum requirements for client certificates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2543">[ date ]</a>
+              <a href="thread.html#2543">[ thread ]</a>
+              <a href="subject.html#2543">[ subject ]</a>
+              <a href="author.html#2543">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Sorry, that could have been me, dragonstone still generates certificates 
+without a subject (And it won't be updated since I'm currently working 
+on it successor).
+Also there should be s little information as possible stored in the 
+client certificates since they get transmitted in the clear to avoid 
+giving away extra data to someone who is &quot;just&quot; eavesdropping without 
+messing with the connection itself (and therefore having a pretty good 
+chance of staying undetected).
+
+Have a nice day!
+-&#160; Baschdel
+
+P.s. Apologies to Sean for sending a duplicated mail, I apparently still 
+manage to hit the wrong reply button in thunderbird
+
+On 31.08.20 02:11, Sean Conner wrote:
+&gt;<i>    I just encounted this issue with my Gemini server (running GLV-1.12556)
+</I>&gt;<i> and caused it to stop receiving requests.  Diagnosing the issue, I found it
+</I>&gt;<i> was most likely caused by a request to an area requiring a client
+</I>&gt;<i> certificate, only the client certificate did NOT have a subject field.  The
+</I>&gt;<i> Gemini protocol specification does NOT state what must be in a client
+</I>&gt;<i> certificate, and my server made the assumption that a client certificate
+</I>&gt;<i> will always have one (and did not check to see if it was missing).  It will
+</I>&gt;<i> now return an error of '62' if the subject field is missing.
+</I>&gt;<i>
+</I>&gt;<i>    So that brings me to my question---what *IS* the minimum we can expect to
+</I>&gt;<i> be in a client certificate?  Is a client certificate without a subject
+</I>&gt;<i> field even legal?  What about a missing issuer?
+</I>&gt;<i>
+</I>&gt;<i>    -spc
+</I>&gt;<i>
+</I>&gt;<i>
+</I>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200901/f09a0384/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200901/f09a0384/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002541.html">Minimum requirements for client certificates
+</A></li>
+	<LI>Next message (by thread): <A HREF="002548.html">Minimum requirements for client certificates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2543">[ date ]</a>
+              <a href="thread.html#2543">[ thread ]</a>
+              <a href="subject.html#2543">[ subject ]</a>
+              <a href="author.html#2543">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

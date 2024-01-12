@@ -1,0 +1,267 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Spec] &lt;META&gt; in the response header is too vague
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSpec%5D%20%3CMETA%3E%20in%20the%20response%20header%20is%20too%20vague&In-Reply-To=%3CCAFwUW92jFJ0gn%3D18H3d9cz92cDMvc5P%3DoR38hqmhBHQjSo1dUg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005416.html">
+   <LINK REL="Next"  HREF="005421.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Spec] &lt;META&gt; in the response header is too vague</H1>
+    <B>Mansfield</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSpec%5D%20%3CMETA%3E%20in%20the%20response%20header%20is%20too%20vague&In-Reply-To=%3CCAFwUW92jFJ0gn%3D18H3d9cz92cDMvc5P%3DoR38hqmhBHQjSo1dUg%40mail.gmail.com%3E"
+       TITLE="[Spec] &lt;META&gt; in the response header is too vague">mansfield at ondollo.com
+       </A><BR>
+    <I>Sun Feb 21 22:17:58 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005416.html">[Spec] &lt;META&gt; in the response header is too vague
+</A></li>
+        <LI>Next message (by thread): <A HREF="005421.html">[Spec] &lt;META&gt; in the response header is too vague
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5417">[ date ]</a>
+              <a href="thread.html#5417">[ thread ]</a>
+              <a href="subject.html#5417">[ subject ]</a>
+              <a href="author.html#5417">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Feb 21, 2021 at 3:05 PM Solene Rapenne &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solene at perso.pw</A>&gt; wrote:
+
+&gt;<i> From the specification in &quot;3.1 Response headers&quot; it seems there are no
+</I>&gt;<i> current limitation to what could be used in META:
+</I>&gt;<i>
+</I>&gt;<i> &lt;STATUS&gt;&lt;SPACE&gt;&lt;META&gt;&lt;CR&gt;&lt;LF&gt;
+</I>&gt;<i>
+</I>&gt;<i> &gt; &lt;META&gt; is a UTF-8 encoded string of maximum length 1024 bytes,
+</I>&gt;<i> &gt; whose meaning is &lt;STATUS&gt; dependent.
+</I>&gt;<i>
+</I>&gt;<i> There is currently only the content type in it and possibiliy the lang
+</I>&gt;<i> metadata added for text/gemini types.
+</I>&gt;<i>
+</I>&gt;<i> Maybe I missed something about it in the spec, but it's really vague,
+</I>&gt;<i>
+</I>&gt;<i> - Is it ok to add many data in the response and up to the client to do
+</I>&gt;<i> something with them?
+</I>&gt;<i> - Should clients be strict and error in case of unknown fields?
+</I>&gt;<i> - What is planned for? It has 1024 bytes and doesn't use much, it seems to
+</I>&gt;<i> be ready for something else &quot;just in case&quot;.
+</I>&gt;<i>
+</I>
+ My implementations of server/client use the META field to communicate
+between the server and the user (through the client) - and in many cases,
+the value in META *is* limited and well defined by the current spec.
+
+See the 10 and 11 status codes - the prompt that the user should be shown
+is the value of the META field.
+
+The 3x status codes - the META is the location the server is redirecting
+the client to.
+
+Etc. (there are other places that META has specific meaning - even if the
+exact value is left up to the implementor , like on status 10 - as the spec
+says, the meaning of META is &lt;STATUS&gt; dependent)
+
+Does that help?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210221/7e46ed58/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210221/7e46ed58/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005416.html">[Spec] &lt;META&gt; in the response header is too vague
+</A></li>
+	<LI>Next message (by thread): <A HREF="005421.html">[Spec] &lt;META&gt; in the response header is too vague
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5417">[ date ]</a>
+              <a href="thread.html#5417">[ thread ]</a>
+              <a href="subject.html#5417">[ subject ]</a>
+              <a href="author.html#5417">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

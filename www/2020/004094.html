@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Synchronizing bookmarks - Request for comments
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Synchronizing%20bookmarks%20-%20Request%20for%20comments&In-Reply-To=%3C2261352.L1yFFNoKtc%40tempete%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004088.html">
+   <LINK REL="Next"  HREF="004104.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Synchronizing bookmarks - Request for comments</H1>
+    <B>C&#244;me Chilliet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Synchronizing%20bookmarks%20-%20Request%20for%20comments&In-Reply-To=%3C2261352.L1yFFNoKtc%40tempete%3E"
+       TITLE="Synchronizing bookmarks - Request for comments">come at chilliet.eu
+       </A><BR>
+    <I>Wed Dec 16 18:26:27 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004088.html">Synchronizing bookmarks - Request for comments
+</A></li>
+        <LI>Next message (by thread): <A HREF="004104.html">Synchronizing bookmarks - Request for comments
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4094">[ date ]</a>
+              <a href="thread.html#4094">[ thread ]</a>
+              <a href="subject.html#4094">[ subject ]</a>
+              <a href="author.html#4094">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Le mercredi 16 d&#233;cembre 2020, 07:57:49 CET skyjake a &#233;crit :
+&gt;<i> I think this is a valid use case, and it's something I have been thinking about myself just running Lagrange on a number of different computers. When you bring in a mix of different clients and desktop/mobile operating systems, sync is even more important.
+</I>&gt;<i> 
+</I>&gt;<i> The lowest common denominator should be export to/import from a .gmi file. Such a file (that Adnan Maolood suggested, for example) is guaranteed to be at least viewable by all clients. It supports folders, has no line length limitations, and can support tags as well (e.g., an optional line/bullet/quote following a link).  The user can then manually manage the files via any means they see fit.
+</I>
+I did not put folders and tag in the specification to start with something as simple as possible, but it could of course be added, to the gmi format at least.
+
+&gt;<i> However, the UX of doing that on an ongoing basis to sync your bookmarks/feeds isn't great. An automated mechanism is certainly more desirable.
+</I>&gt;<i> 
+</I>&gt;<i> When it comes to basing sync on the Gemini protocol, it makes a certain amount of sense (clients know how to do Gemini requests) but it's not a perfect fit:
+</I>&gt;<i> 
+</I>&gt;<i> * one add/del per request &#8212; what if you have a 100 bookmarks to sync?
+</I>
+This seems like an uncommon case, most likely you will sync 100 bookmarks from server to client, not the other way. It does not bother me if the initialization of the system is a bit under-optimized if after this it&#8217;s okay for everyday use.
+
+&gt;<i> * request URL length limit
+</I>
+Yeah that may be a problem, especially if we start adding tags and such. It&#8217;s not clear how big a limit that would be.
+
+&gt;<i> * does not address tags, folders, manual ordering
+</I>
+I did not think of ordering, indeed it may be needed.
+
+&gt;<i> &gt; * Would you consider implementing support for something like this?
+</I>&gt;<i> 
+</I>&gt;<i> Something like this, yes.
+</I>&gt;<i> 
+</I>&gt;<i> The current proposal needs revising, though. I suggest creating a mechanism that allows using Gemini subscriptions as a core part of the sync. A client would view and/or subscribe to a bookmarks page served by the bookmark sync server. Client-side, the subscription would track all links instead of dated links, and ensure that all links on the bookmarks page have copies in the local set of bookmarks. (And somehow get rid of deleted bookmarks, too.)
+</I>&gt;<i> 
+</I>&gt;<i> This way,  a public bookmarks feed could be served as a static file by any Gemini server.
+</I>
+This is intended by the spec and is why the only MUST is the text/gemini link list.
+
+&gt;<i> It's a good idea that a client cert is used to ensure privacy of the served bookmarks, unless they are meant to be public.
+</I>&gt;<i> 
+</I>&gt;<i> The upload part is where it's gets tricky, and I don't think the Gemini protocol should be used for that. As a client author what I'd like to see is that I just export the bookmarks .gmi file as usual, and then send it to the server, perhaps via a TLS socket at a port specifically reserved for uploads &#8212; just open a socket, set a client cert, and write the .gmi file to the socket. The client cert would be required for user identification. It would be up to the server to merge the bookmarks and get rid of deleted ones on server-side.
+</I>&gt;<i> 
+</I>&gt;<i> This does make things a bit more difficult for the server implementation, but keeping things easy for clients at least encourages wider support.
+</I>
+I thought it was easier for clients if they can reuse their Gemini handling code instead of adding support for another protocol. Same thing for server actually.
+
+&gt;<i> &gt; * Does your client have some kind of plugin system which would allow a third-party to add support?
+</I>&gt;<i> 
+</I>&gt;<i> Not currently. However, Lagrange's MIME hooks could be extended to allow manual activation, so you could run an external program on your &quot;about:bookmarks&quot; page to do the sync. It would need to edit the internal bookmarks.txt file, and Lagrange would then need to detect that the file has changed after the hook program finishes. I wouldn't prefer going down this route, though. It's better to have a mechanism that benefits all clients equally.
+</I>&gt;<i> 
+</I>&gt;<i> So let's keep working on this! Automatic bookmark (and client cert?) sync would be great features for Gemini clients.
+</I>
+If I&#8217;m not mistaking, lagrange has no support for folders, ordering and tagging bookmarks/feeds?
+This is also why I did not put such things in the spec, to start with the minimal common denominator among clients features.
+
+C&#244;me
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004088.html">Synchronizing bookmarks - Request for comments
+</A></li>
+	<LI>Next message (by thread): <A HREF="004104.html">Synchronizing bookmarks - Request for comments
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4094">[ date ]</a>
+              <a href="thread.html#4094">[ thread ]</a>
+              <a href="subject.html#4094">[ subject ]</a>
+              <a href="author.html#4094">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200116202640.GA25554%40briz%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000329.html">
+   <LINK REL="Next"  HREF="000331.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>lel</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200116202640.GA25554%40briz%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">lel at envs.net
+       </A><BR>
+    <I>Thu Jan 16 20:26:40 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000329.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000331.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#330">[ date ]</a>
+              <a href="thread.html#330">[ thread ]</a>
+              <a href="subject.html#330">[ subject ]</a>
+              <a href="author.html#330">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Jan 16, 2020 at 11:48:09AM -0800, Aaron Janse wrote:
+&gt;<i> On Thu, Jan 16, 2020, at 10:27 AM, Sean Conner wrote:
+</I>&gt;<i> &gt;   First question---how to tell the server the width?  Well, one solution:
+</I>&gt;<i> 
+</I>&gt;<i> On one hand, I like the idea of the server doing the wrapping.
+</I>&gt;<i> 
+</I>&gt;<i> It would allow viewport-specific fixed text. For example, two things
+</I>&gt;<i> that server-side wrapping would allow that are currently used in the
+</I>&gt;<i> Gemini speculative spec:
+</I>&gt;<i> 
+</I>&gt;<i> - viewport-width-specific dividers (a bunch of dashes)
+</I>&gt;<i> - indented paragraphs or trailing-indent bullet points
+</I>&gt;<i> 
+</I>&gt;<i> On the other hand, server-side wrapping has the following drawbacks:
+</I>&gt;<i> 
+</I>&gt;<i> - broadcasting viewport width goes against Gemini privacy values
+</I>&gt;<i> - clients can no longer download a gemini blog then view it at
+</I>&gt;<i>   different widths
+</I>&gt;<i> - this could open up room to server-side trickery, such as indenting
+</I>&gt;<i>   fixed-width content, which I don't think is a good idea
+</I>&gt;<i> 
+</I>&gt;<i> Also, speaking of privacy, does Gemini work over Tor?
+</I>
+Yeah, I don't think this does it because not only does it complicate server
+implementation, but it does so in a way that seeks to allow servers to learn
+about clients.
+
+That being said, as far as I'm concerned, literally anything at
+all is preferable to hard-wrapping at 40 characters -- less than a quarter of
+my *laptop* screen with a mid-size font; I can only imagine how it looks on an
+actual monitor. Limiting lines to 5-6 words would seem to limit, on a
+fundamental level, the types of content that can even be served over gemini.
+
+Adding an arbitrary cap to line lengths purely so that a hypothetical
+mobile client doesn't require 10-20 lines of wrapping code (code that
+Google suggests already exists in the Android SDK and merely has to be
+invoked) seems absurd to me, particularly when the wrapping itself is
+trivial, and this is entirely because word-wrapping is considered
+preferable to naive, occasionally-mid-word wrapping.
+
+The argument I'm reading is that nobody would use a client that
+occasionally wraps in the middle of words, and the gemini spec is
+explicitly geared toward making client implementations as simple as
+possible. 
+
+I understand this, yet I think there exists a world of
+difference between &quot;it should be trivial to write a client&quot;
+and &quot;it should be trivial to write a client that formats
+every line beautifully and that we would all love using,&quot;
+particularly when the point of difference between the two is
+whether or not some words are line-broken some of the time.
+
+This is just my two cents, but I feel like that's
+something that it makes more sense to leave up to
+the client. The actual client-side process of
+interacting with the server is still simple, but
+printing it can be done in a simple way (wrap,
+occasionally breaking words) or with a few lines
+and a couple conditions to guard edge-cases (to
+word-wrap).
+
+I don't know, I understand that some arguments
+in favor of a 40 character hard-wrap have been
+made from a reading level, and I understand
+them, but I don't think that justifies
+hard-capping all lines at only a few words. If
+you want to be able to speed-read lines, you
+could write a client that word-wraps at 40
+characters very, very easily. You could write a
+client that flashes words at you one at a time
+quickly like those speed-reading programs if you
+want to take that idea to an extreme. But I feel
+like this is a very drastic response to a
+non-issue. Maybe I wouldn't feel so bad about it
+if the limit being suggested weren't as puny as
+40 characters. But no matter what the limit is,
+there are still screens, or fonts, or what have
+you, where any hard-wrapping solution does not
+solve the problem. And if aesthetics are the
+main concern, and we can't stomach a few split
+words, then I really don't get why the best
+solution is to squash every single gemini site
+into the left 25% of our screens.
+
+I'm sure whatever flagship gemini client
+eventually emerges on top is going to be
+beautiful and not wrap in the middle of
+words, but I also don't think that the
+spec should be specced based upon the
+hypothetical flagship client -- client
+implementation can be simple, and it
+will no doubt remain so for gemini;
+but flagship client implementation is
+not, cannot, and will never be, for any
+protocol.
+
+I'm not trying to be insulting to
+anyone, and I get that y'all will
+likely disagree. I fully understand the
+reasons behind what everyone in favor
+of the 40 char limit is suggesting, but
+I think that practically speaking, it's
+not liveable for anyone trying to use
+gemini, and it causes more problems
+than it solves.
+
+idk
+~ lel
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000329.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000331.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#330">[ date ]</a>
+              <a href="thread.html#330">[ thread ]</a>
+              <a href="subject.html#330">[ subject ]</a>
+              <a href="author.html#330">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

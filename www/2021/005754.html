@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Re: [spec] mercury highlights &#9791;&#65039;
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%3D%3FUTF-8%3FB%3FUmU6IFtzcGVjXSBtZXJjdXJ5IGhpZ2hsaWdodHMg4pi/77iP%3F%3D&In-Reply-To=%3C3efaeff0-7de9-f099-5060-7f53ce5621fa%40NorthTech.US%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005764.html">
+   <LINK REL="Next"  HREF="005756.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Re: [spec] mercury highlights &#9791;&#65039;</H1>
+    <B>Bradley D. Thornton</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%3D%3FUTF-8%3FB%3FUmU6IFtzcGVjXSBtZXJjdXJ5IGhpZ2hsaWdodHMg4pi/77iP%3F%3D&In-Reply-To=%3C3efaeff0-7de9-f099-5060-7f53ce5621fa%40NorthTech.US%3E"
+       TITLE="Re: [spec] mercury highlights &#9791;&#65039;">Bradley at NorthTech.US
+       </A><BR>
+    <I>Sun Feb 28 20:28:07 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005764.html">Re: [spec] mercury highlights &#9791;&#65039;
+</A></li>
+        <LI>Next message (by thread): <A HREF="005756.html">Re: [spec] mercury highlights &#9791;&#65039;
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5754">[ date ]</a>
+              <a href="thread.html#5754">[ thread ]</a>
+              <a href="subject.html#5754">[ subject ]</a>
+              <a href="author.html#5754">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+On 2/28/2021 11:23 AM, Ben wrote:
+&gt;<i> Any reason why port 1958 is chosen? I was thinking if it's adjacent to
+</I>&gt;<i> Gemini (minus TLS) then why not something like 1964? Not unlike XMPP's
+</I>&gt;<i> use of 5222 and 5223.
+</I>
+Project Mercury ran from 1958 - 1963. Gemini uses port 1965 based on
+this same homage to the manned space programs leading up the the Apollo
+moon landing.
+
+More info on that here:
+
+<A HREF="https://en.wikipedia.org/wiki/Project_Mercury">https://en.wikipedia.org/wiki/Project_Mercury</A>
+
+And since we're talking port numbers, that brings up another matter.
+Stephanie posted (or maybe I just read it  on her page?) about a
+collision w/Tivoli on TCP 1965. She referred to  it as a 'serious' conflict.
+
+No offense, but I don't see that as an issue at all. It's a
+non-privileged port and there are  several instances where different
+types of services use the same ports with respect to UDP or TCP (even in
+/etc/services).
+
+I checked /etc/services on Debian Bullseye and Slackware -current just
+now and don't see port 1965 or Tivoli even mentioned.
+
+NOTE: This is not to say that it's not relevant or perhaps important to
+address, as Stephanie suggests.
+
+Here's something pertinent to that, as well as user accessibility:
+
+```: A shitload of gobbledygook (noise) that prolly nobody wants to hear
+
+# From ``Assigned Numbers'':
+#
+#&gt; The Registered Ports are not controlled by the IANA and on most systems
+#&gt; can be used by ordinary user processes or programs executed by ordinary
+#&gt; users.
+#
+#&gt; Ports are used in the TCP [45,106] to name the ends of logical
+#&gt; connections which carry long term conversations.  For the purpose of
+#&gt; providing services to unknown callers, a service contact port is
+#&gt; defined.  This list specifies the port used by the server process as its
+#&gt; contact port.  While the IANA can not control uses of these ports it
+#&gt; does register or list uses of these ports as a convienence to the
+#&gt; community.
+#
+socks           1080/tcp                        # socks proxy server
+socks           1080/udp
+proofd          1093/tcp
+proofd          1093/udp
+rootd           1094/tcp
+rootd           1094/udp
+openvpn         1194/tcp
+openvpn         1194/udp
+rmiregistry     1099/tcp                        # Java RMI Registry
+rmiregistry     1099/udp
+kazaa           1214/tcp
+kazaa           1214/udp
+nessus          1241/tcp                        # Nessus vulnerability
+nessus          1241/udp                        #  assessment scanner
+lotusnote       1352/tcp        lotusnotes      # Lotus Note
+lotusnote       1352/udp        lotusnotes
+ms-sql-s        1433/tcp                        # Microsoft SQL Server
+ms-sql-s        1433/udp
+ms-sql-m        1434/tcp                        # Microsoft SQL Monitor
+ms-sql-m        1434/udp
+ingreslock      1524/tcp
+ingreslock      1524/udp
+datametrics     1645/tcp        old-radius
+datametrics     1645/udp        old-radius
+sa-msg-port     1646/tcp        old-radacct
+sa-msg-port     1646/udp        old-radacct
+kermit          1649/tcp
+groupwise       1677/tcp
+groupwise       1677/udp
+l2f             1701/tcp        l2tp
+l2f             1701/udp        l2tp
+radius          1812/tcp
+radius          1812/udp
+radius-acct     1813/tcp        radacct         # Radius Accounting
+radius-acct     1813/udp        radacct
+msnp            1863/tcp                        # MSN Messenger
+msnp            1863/udp
+unix-status     1957/tcp                        # remstats unix-status
+server
+log-server      1958/tcp                        # remstats log server
+remoteping      1959/tcp                        # remstats remoteping server
+cisco-sccp      2000/tcp                        # Cisco SCCP
+cisco-sccp      2000/udp
+search          2010/tcp        ndtp
+pipe-server     2010/tcp        pipe_server
+nfs             2049/tcp                        # Network File System
+nfs             2049/udp                        # Network File System
+gnunet          2086/tcp
+gnunet          2086/udp
+rtcm-sc104      2101/tcp                        # RTCM SC-104 IANA 1/29/99
+rtcm-sc104      2101/udp
+gsigatekeeper   2119/tcp
+gsigatekeeper   2119/udp
+gris            2135/tcp                # Grid Resource Information Server
+gris            2135/udp
+cvspserver      2401/tcp                        # CVS client/server
+operations
+cvspserver      2401/udp
+venus           2430/tcp                        # codacon port
+venus           2430/udp                        # Venus callback/wbc
+interface
+venus-se        2431/tcp                        # tcp side effects
+venus-se        2431/udp                        # udp sftp side effect
+codasrv         2432/tcp                        # not used
+codasrv         2432/udp                        # server port
+codasrv-se      2433/tcp                        # tcp side effects
+codasrv-se      2433/udp                        # udp sftp side effect
+mon             2583/tcp                        # MON traps
+mon             2583/udp
+dict            2628/tcp                        # Dictionary server
+dict            2628/udp
+
+
+```
+
+I dunno about anyone else here, but if I was blind, I sure as hell
+wouldn't want to listen to all of that. And as I pointed out in my
+immediately previous post, this isn't ASCII-art either.
+
+Remember folks, at this very moment in Gemini space, there are AT LEAST
+113,310 pages of content, and that growth is logarithmic ;)
+
+I hope that helps :)
+
+Kindest regards,
+
+
+-- 
+Bradley D. Thornton
+Manager Network Services
+<A HREF="http://NorthTech.US">http://NorthTech.US</A>
+TEL: +1.310.421.8268
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005764.html">Re: [spec] mercury highlights &#9791;&#65039;
+</A></li>
+	<LI>Next message (by thread): <A HREF="005756.html">Re: [spec] mercury highlights &#9791;&#65039;
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5754">[ date ]</a>
+              <a href="thread.html#5754">[ thread ]</a>
+              <a href="subject.html#5754">[ subject ]</a>
+              <a href="author.html#5754">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

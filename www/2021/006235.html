@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> How do you buffer a Gemini connection?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20How%20do%20you%20buffer%20a%20Gemini%20connection%3F&In-Reply-To=%3C20210328220738.00002a51%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006239.html">
+   <LINK REL="Next"  HREF="006236.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>How do you buffer a Gemini connection?</H1>
+    <B>almaember</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20How%20do%20you%20buffer%20a%20Gemini%20connection%3F&In-Reply-To=%3C20210328220738.00002a51%40disroot.org%3E"
+       TITLE="How do you buffer a Gemini connection?">almaember at disroot.org
+       </A><BR>
+    <I>Sun Mar 28 21:07:38 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006239.html">Italian Translation
+</A></li>
+        <LI>Next message (by thread): <A HREF="006236.html">How do you buffer a Gemini connection?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6235">[ date ]</a>
+              <a href="thread.html#6235">[ thread ]</a>
+              <a href="subject.html#6235">[ subject ]</a>
+              <a href="author.html#6235">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+I'm planning on creating my own Gemini client (with C99 and OpenSSL, if
+you want to know). However, I have a problem with how I should be
+implementing the downloading part.
+
+So, how should I be buffering a Gemini connection? Since there is no
+size indicator, I can't be sure everything even fits into memory, or
+how much time it's going to take to download, or if it's even going to
+end at all.
+
+Another problem is long-polling. Through my exploration of Geminispace,
+I found a few capsules that used a hack to push live updates to the
+client. Specifically, these servers didn't close the connection, but
+instead kept it open and just sent new data when something happened.
+
+Since the spec says nothing (or I'm blind) about buffering, so I want
+to ask others about what I should be doing, while still being able to
+actually parse the output.
+
+My ideas as of right now:
+
+ - Have a big buffer and store everything in it until the connection is
+   closed. The connection would be terminated if:
+    - the connection closes
+    - the server didn't send anything for X seconds
+ - Buffer by line and don't close the connection unless the user
+   terminates it (by pressing the stop key or by loading another
+   capsule). Compatible with long polling.
+
+Thanks in advance for any help!
+
+
+~almaember
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 659 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210328/6c95f4cb/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20210328/6c95f4cb/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006239.html">Italian Translation
+</A></li>
+	<LI>Next message (by thread): <A HREF="006236.html">How do you buffer a Gemini connection?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6235">[ date ]</a>
+              <a href="thread.html#6235">[ thread ]</a>
+              <a href="subject.html#6235">[ subject ]</a>
+              <a href="author.html#6235">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Gemini browser for iOS
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS&In-Reply-To=%3CCAG-mZ3iXBiQO2k8Wssi%3DOBkjxBwnbtpHk2rGea0eu_TT%2BGg8Aw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001250.html">
+   <LINK REL="Next"  HREF="001421.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Gemini browser for iOS</H1>
+    <B>Peter Vernigorov</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS&In-Reply-To=%3CCAG-mZ3iXBiQO2k8Wssi%3DOBkjxBwnbtpHk2rGea0eu_TT%2BGg8Aw%40mail.gmail.com%3E"
+       TITLE="[ANN] Gemini browser for iOS">pitr.vern at gmail.com
+       </A><BR>
+    <I>Mon Jun  8 08:39:37 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001250.html">[ANN] Gemini browser for iOS
+</A></li>
+        <LI>Next message (by thread): <A HREF="001421.html">[ANN] Gemini browser for iOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1419">[ date ]</a>
+              <a href="thread.html#1419">[ thread ]</a>
+              <a href="subject.html#1419">[ subject ]</a>
+              <a href="author.html#1419">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I&#8217;ve added support for client certificates in the latest build, basing
+mostly on implementation of AV-98. There&#8217;s a weird bug when using
+<A HREF="gemini://astrobotany.mozz.us/">gemini://astrobotany.mozz.us/</A> which requires restart of client for
+certificate to work (and for it be deactivated) but
+<A HREF="gemini://gemini.conman.org/private/">gemini://gemini.conman.org/private/</A> works properly. Are there any other
+servers requiring client certificates that I can test against?
+
+I also updated code to comply with updates to Gemini protocol. Looking
+forward to seeing status code 11 in the wild :)
+
+On Tue, Jun 2, 2020 at 21:44 Peter Vernigorov &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">pitr.vern at gmail.com</A>&gt; wrote:
+
+&gt;<i> Thanks. These responses and re-reading the spec clarified my initial
+</I>&gt;<i> concern. Spec clearly states that transient certificates should not be
+</I>&gt;<i> shared across domains. And there is no point using permanent certificates
+</I>&gt;<i> across domains as it is assumed that these certificates have a special
+</I>&gt;<i> meaning for specific domains.
+</I>&gt;<i>
+</I>&gt;<i> I am still unclear as to what happens after a transient certificate has
+</I>&gt;<i> been created. Should browser automatically use it for the page that
+</I>&gt;<i> requested it and any other pages on that domain? I don&#8217;t see a good
+</I>&gt;<i> solution here. Either certificate is sent only when server requests it,
+</I>&gt;<i> which would double number of requests (assuming user stays in private
+</I>&gt;<i> section of the site), or certificate is always sent, which adds overhead to
+</I>&gt;<i> all requests. Should browser remember which pages need a certificate and
+</I>&gt;<i> always use it for them?
+</I>&gt;<i>
+</I>&gt;<i> And additionally, should browser ask user for every page that requires a
+</I>&gt;<i> certificate if existing one can be used?
+</I>&gt;<i>
+</I>&gt;<i> Thanks for replying to my earlier questions. I want to make sure that my
+</I>&gt;<i> support for certificates doesn&#8217;t violate the spec or creates a bad user
+</I>&gt;<i> experience.
+</I>&gt;<i>
+</I>&gt;<i> On Tue, Jun 2, 2020 at 20:31 solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at sdf.org</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> On Tue, Jun 02, 2020 at 01:31:09AM +0200, Peter Vernigorov wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> &gt; Question about client certificates: not sure how other clients implement
+</I>&gt;&gt;<i> &gt; this, but I was thinking of generating and using the same client cert
+</I>&gt;&gt;<i> for
+</I>&gt;&gt;<i> &gt; all sites, and giving an option to create a cert for specific domain.
+</I>&gt;&gt;<i> Does
+</I>&gt;&gt;<i> &gt; that make sense? Potential problem I see is that main certificate is
+</I>&gt;&gt;<i> &gt; something user could be identified by across websites.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> It's not super clear to me what you're suggesting.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> If it's that the client generates a single self-signed client cert the
+</I>&gt;&gt;<i> first time it starts up and then just sends that cert to every single
+</I>&gt;&gt;<i> host as part of every single request: PLEASE DON'T DO THAT!  This is
+</I>&gt;&gt;<i> about as wrong an implementation of Gemini's idea of client certificates
+</I>&gt;&gt;<i> as possible.  The vast majority of URLs will not require or expect a
+</I>&gt;&gt;<i> client cert (which is why there's a way for servers to explicitly
+</I>&gt;&gt;<i> request one in the unusual circumstance it's needed), and any you send
+</I>&gt;&gt;<i> will just be ignored.  You will be needlessly increasing the TLS overhead
+</I>&gt;&gt;<i> (which is already pretty heavy relative to typical text/gemini payload
+</I>&gt;&gt;<i> sizes) for no gain.  Worse, admins of unrelated servers would be able to
+</I>&gt;&gt;<i> compare their logs and track you across Geminispace.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> If it's that you generate a single certificate the first time it starts
+</I>&gt;&gt;<i> up but only send it out in response to a status code of 62 that's a
+</I>&gt;&gt;<i> different matter (I assume it goes without saying you shouldn't ever use
+</I>&gt;&gt;<i> it in response to a status code of 61 because the behaviour for
+</I>&gt;&gt;<i> transient certs is extremely clearly specced and this would fly in the
+</I>&gt;&gt;<i> face of just about every part of it).  I still think it's the wrong
+</I>&gt;&gt;<i> thing to do, but it's slightly less disasterous than the first option.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Client certificates should be handled in a very deliberate manner - the
+</I>&gt;&gt;<i> user needs make the clear decision to opt in, on their own terms, to
+</I>&gt;&gt;<i> being identified to some server(s).  It's an exceptional condition and
+</I>&gt;&gt;<i> should never be automated or hidden from the user for the sake of
+</I>&gt;&gt;<i> convenience.  Sharing a single certificate across domains isn't
+</I>&gt;&gt;<i> something anybody should ever do lightly.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Cheers,
+</I>&gt;&gt;<i> Solderpunk
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200608/e76c5928/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200608/e76c5928/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001250.html">[ANN] Gemini browser for iOS
+</A></li>
+	<LI>Next message (by thread): <A HREF="001421.html">[ANN] Gemini browser for iOS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1419">[ date ]</a>
+              <a href="thread.html#1419">[ thread ]</a>
+              <a href="subject.html#1419">[ subject ]</a>
+              <a href="author.html#1419">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

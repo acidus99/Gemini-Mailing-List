@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] LibreSSL and ed25519 (Re: [users] Announcing Gemini Discovery at gemini://discovery.geminiprotocol.com/)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20LibreSSL%20and%20ed25519%20%28Re%3A%20%5Busers%5D%20Announcing%20Gemini%20Discovery%0A%20at%20gemini%3A//discovery.geminiprotocol.com/%29&In-Reply-To=%3CvILwDDr50kQTR3d4NsEw-R--eZpIdhqHkecXQ5wJK17ABjThEn4pMg-1bjJ664eW8O33iIKMJbdx2VWF-2mSYLMbm0qGB53Cfd0l0jfT_f0%3D%40coopdot.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006132.html">
+   <LINK REL="Next"  HREF="006137.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] LibreSSL and ed25519 (Re: [users] Announcing Gemini Discovery at gemini://discovery.geminiprotocol.com/)</H1>
+    <B>Katarina Eriksson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20LibreSSL%20and%20ed25519%20%28Re%3A%20%5Busers%5D%20Announcing%20Gemini%20Discovery%0A%20at%20gemini%3A//discovery.geminiprotocol.com/%29&In-Reply-To=%3CvILwDDr50kQTR3d4NsEw-R--eZpIdhqHkecXQ5wJK17ABjThEn4pMg-1bjJ664eW8O33iIKMJbdx2VWF-2mSYLMbm0qGB53Cfd0l0jfT_f0%3D%40coopdot.com%3E"
+       TITLE="[tech] LibreSSL and ed25519 (Re: [users] Announcing Gemini Discovery at gemini://discovery.geminiprotocol.com/)">gmym at coopdot.com
+       </A><BR>
+    <I>Tue Mar 16 16:07:32 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006132.html">[users] Announcing Gemini Discovery at gemini://discovery.geminiprotocol.com/
+</A></li>
+        <LI>Next message (by thread): <A HREF="006137.html">[tech] LibreSSL and ed25519 (Re: [users] Announcing Gemini Discovery  at gemini://discovery.geminiprotocol.com/)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6136">[ date ]</a>
+              <a href="thread.html#6136">[ thread ]</a>
+              <a href="subject.html#6136">[ subject ]</a>
+              <a href="author.html#6136">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tuesday, March 16, 2021 11:40 AM, Stephane Bortzmeyer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stephane at sources.org</A>&gt; wrote:
+
+&gt;<i> On Tue, Mar 16, 2021 at 11:30:14AM +0100,
+</I>&gt;<i> Omar Polo <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">op at omarpolo.com</A> wrote
+</I>&gt;<i> a message of 44 lines which said:
+</I>&gt;<i>
+</I>&gt;<i> &gt; not a tls experts, but I think my issues are caused by the ed25519 key.
+</I>&gt;<i> &gt; I recall reading something that libressl don't support those keys yet
+</I>&gt;<i>
+</I>&gt;<i> If so, this is certainly a serious problem with LibreSSL. RFC 8410,
+</I>&gt;<i> which added these keys in certificates, is already 2.5 years old.
+</I>&gt;<i>
+</I>&gt;<i> According to Lupa
+</I>&gt;<i> <A HREF="gemini://gemini.bortzmeyer.org/software/lupa/stats.gmi,">gemini://gemini.bortzmeyer.org/software/lupa/stats.gmi,</A> 8 capsules
+</I>&gt;<i> use this type of key. Can you connect to them:
+</I>
+There are a bunch of &quot;no shared cipher&quot; in the log, so I guess we'll have to switch to ECDSA then.  I thought ED25519 would be more widespread in capsules by now, that's what I get for forgetting valuable tools such as Lupa exists.
+
+LibreSSL should have support for ED25519 since this commit:
+
+<A HREF="https://github.com/openbsd/src/commit/0ad90c3e6b15b9b6b8463a8a0f87d70c83a07ef4">https://github.com/openbsd/src/commit/0ad90c3e6b15b9b6b8463a8a0f87d70c83a07ef4</A>
+
+--
+Katarina
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006132.html">[users] Announcing Gemini Discovery at gemini://discovery.geminiprotocol.com/
+</A></li>
+	<LI>Next message (by thread): <A HREF="006137.html">[tech] LibreSSL and ed25519 (Re: [users] Announcing Gemini Discovery  at gemini://discovery.geminiprotocol.com/)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6136">[ date ]</a>
+              <a href="thread.html#6136">[ thread ]</a>
+              <a href="subject.html#6136">[ subject ]</a>
+              <a href="author.html#6136">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

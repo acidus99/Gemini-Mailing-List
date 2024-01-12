@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Flounder - a Gemini site builder/host
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Flounder%20-%20a%20Gemini%20site%20builder/host&In-Reply-To=%3Cn_3OGdUsxgGhuZ-Z9cgkIf_9b7GTGMxgJdZYpYhNWZhBSw3pBltLpVicysiQBuHrcGzcmj1FLytnqSHhL47qOeRoZhx5KRe4XhCMQs54St4%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002412.html">
+   <LINK REL="Next"  HREF="002415.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Flounder - a Gemini site builder/host</H1>
+    <B>colecmac at protonmail.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Flounder%20-%20a%20Gemini%20site%20builder/host&In-Reply-To=%3Cn_3OGdUsxgGhuZ-Z9cgkIf_9b7GTGMxgJdZYpYhNWZhBSw3pBltLpVicysiQBuHrcGzcmj1FLytnqSHhL47qOeRoZhx5KRe4XhCMQs54St4%3D%40protonmail.com%3E"
+       TITLE="[ANN] Flounder - a Gemini site builder/host">colecmac at protonmail.com
+       </A><BR>
+    <I>Sat Aug 15 18:41:39 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002412.html">[ANN] Flounder - a Gemini site builder/host
+</A></li>
+        <LI>Next message (by thread): <A HREF="002415.html">[ANN] Flounder - a Gemini site builder/host
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2414">[ date ]</a>
+              <a href="thread.html#2414">[ thread ]</a>
+              <a href="subject.html#2414">[ subject ]</a>
+              <a href="author.html#2414">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> &gt; That would be great, the first thing I tried to do was visit
+</I>&gt;<i> &gt; flounder.online in my Gemini browser but it didn't work of course.
+</I>&gt;<i> &gt; Otherwise it's a bit confusing.
+</I>&gt;<i>
+</I>&gt;<i> Based on my research, it looks like the most mature tool for this
+</I>&gt;<i> is Molly Brown with CGI -- getting it working might be a weekend
+</I>&gt;<i> project for me.
+</I>
+Good luck! There's also the Jetforce server which supports CGI very
+well. It's written in Python.
+
+&gt;<i> [url discussion]
+</I>
+I think encouraging all users to write <A HREF="gemini://">gemini://</A> is not the way to go.
+I feel like it's a potentially annoying UX point, and isn't meaningful
+to anyone using flounder but not Gemini.
+
+Personally I'd suggest letting people use whatever they want, and
+translating on the fly if they're using the &quot;wrong&quot; protocol for the
+request.
+
+&gt;<i> a way to let people use simple tags like @alex and then translate that
+</I>&gt;<i> into a gemini URL on gemini or an https url on https.
+</I>
+This sounds pretty cool! I still the above is useful though.
+
+gemlog.blue source code is here btw:
+<A HREF="https://git.rawtext.club/sloum/gemlog.blue">https://git.rawtext.club/sloum/gemlog.blue</A>
+
+
+Cheers,
+makeworld
+
+&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208; Original Message &#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;
+On Saturday, August 15, 2020 12:13 PM, alex wennerberg &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">alex at alexwennerberg.com</A>&gt; wrote:
+
+&gt;<i> &gt; Flounder looks awesome, nice work. It's a beautiful website, and
+</I>&gt;<i> &gt; looks great on Gemini too. To my knowledge this is the first time
+</I>&gt;<i> &gt; gemtext has been used like this outside Gemini, like as a generic
+</I>&gt;<i> &gt; format.
+</I>&gt;<i>
+</I>&gt;<i> Thank you!
+</I>&gt;<i> &gt; That would be great, the first thing I tried to do was visit
+</I>&gt;<i> &gt; flounder.online in my Gemini browser but it didn't work of course.
+</I>&gt;<i> &gt; Otherwise it's a bit confusing.
+</I>&gt;<i>
+</I>&gt;<i> Based on my research, it looks like the most mature tool for this is Molly Brown with CGI --
+</I>&gt;<i> getting it working might be a weekend project for me.
+</I>&gt;<i>
+</I>&gt;<i> &gt; Could you explain more? I don't know Rust but I'd be happy to
+</I>&gt;<i> &gt; help idea-wise.
+</I>&gt;<i>
+</I>&gt;<i> Basically the issue is -- a common use case would be for someone to want to link another flounder page from their page, for example I might link
+</I>&gt;<i> my friend juliet.flounder.online's page from alex.flounder.online. A user who is using Flounder through a web app may use the link <A HREF="https://juliet.flounder.online">https://juliet.flounder.online</A>
+</I>&gt;<i> which isn't ideal when accessing it through gemini, since the link brings them out of Gemini. I think the solution is to instruct users to use
+</I>&gt;<i> <A HREF="gemini://">gemini://</A> links for other Flounder pages (and maybe put something in the UI that encourages this) and then convert <A HREF="gemini://x.flounder.online">gemini://x.flounder.online</A>
+</I>&gt;<i> to <A HREF="https://x.flounder.online">https://x.flounder.online</A> when rendering it over https (right now I use the mozz.us proxy). I could also force this translation by modifying users' text when they save a file with
+</I>&gt;<i> an <A HREF="https://x.flounder.online">https://x.flounder.online</A> link but I'm not a fan of that. Maybe I could create some sort of warning that explains this, or even better I could come up
+</I>&gt;<i> with a way to let people use simple tags like @alex and then translate that into a gemini URL on gemini or an https url on https.
+</I>&gt;<i>
+</I>&gt;<i> &#160;&gt; The twtxt protocol sounds cool, and good addition to the small web.
+</I>&gt;<i>
+</I>&gt;<i> I think there was a discussion earlier in the mailing list that inspired my idea!
+</I>&gt;<i>
+</I>&gt;<i> &gt; Finally, you should check out gemlog.blue if you haven't already, on
+</I>&gt;<i> &gt; the Web and Gemini. It's a similar project, but with a slightly different
+</I>&gt;<i> &gt; focus, as the posts are only available on Gemini.
+</I>&gt;<i>
+</I>&gt;<i> This is very cool! I'll definitely have to glean some ideas from this
+</I>&gt;<i>
+</I>&gt;<i> Alex
+</I>
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002412.html">[ANN] Flounder - a Gemini site builder/host
+</A></li>
+	<LI>Next message (by thread): <A HREF="002415.html">[ANN] Flounder - a Gemini site builder/host
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2414">[ date ]</a>
+              <a href="thread.html#2414">[ thread ]</a>
+              <a href="subject.html#2414">[ subject ]</a>
+              <a href="author.html#2414">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

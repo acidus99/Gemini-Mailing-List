@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20sizes%2C%20the%20explosion%20of%20responise%20codes%20%28was%20Re%3A%0A%20Caching%20and%20status%20codes%29&In-Reply-To=%3C20201109171821.135855a1ebda5aa7dafbdf08%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003151.html">
+   <LINK REL="Next"  HREF="003170.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20sizes%2C%20the%20explosion%20of%20responise%20codes%20%28was%20Re%3A%0A%20Caching%20and%20status%20codes%29&In-Reply-To=%3C20201109171821.135855a1ebda5aa7dafbdf08%40gmail.com%3E"
+       TITLE="Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)">linde.philip at gmail.com
+       </A><BR>
+    <I>Mon Nov  9 16:18:21 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003151.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+        <LI>Next message (by thread): <A HREF="003170.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3165">[ date ]</a>
+              <a href="thread.html#3165">[ thread ]</a>
+              <a href="subject.html#3165">[ subject ]</a>
+              <a href="author.html#3165">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, 8 Nov 2020 17:22:56 -0500
+Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+
+&gt;<i>   I don't agree that this is self-inflicted on me---what I'm trying (and
+</I>&gt;<i> failing) to point out is that adding mroe success calls *could* lead to 
+</I>&gt;<i> combinatorial hell.
+</I>
+This is unavoidable in any case of adding a sufficient number of
+features that can be combined. If every feature proposal should be
+evaluated in terms of the slippery slope of &quot;what if we add more&quot; there
+wouldn't be a point to discussing additions to the protocol, a notion
+that I'm actually partial to, but that I think shouldn't be used as a
+basis for judging against individual feature proposals.
+
+&gt;<i>   No, that was to <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">prisonpotato at tilde.team---they</A> were the first to come up
+</I>&gt;<i> with the idea, not me.  I just implemented it first (much the same way I
+</I>&gt;<i> implemented the first Gemini server even before solderpunk did [1]).  Also,
+</I>&gt;<i> the size breaking code is only active on one link on my site, not everwhere.
+</I>
+Okay, I'm glad that you picked it up even when it wasn't addressed
+directly at you. Consider the option, and why I believe that using the
+2x range is inappropriate.
+
+&gt;<i>   The concern is over large responses.  It wasn't much of a concern until
+</I>&gt;<i> <A HREF="gemini://konpeito.media/">gemini://konpeito.media/</A> was created and serving up large audio files (and
+</I>&gt;<i> archives of said audio files).  I can envision a client being configured to
+</I>&gt;<i> abort the download if say, a 10 megabyte file is being downloaded.  It
+</I>&gt;<i> *sucked* when my DSL went down in late September/early October (yes, about
+</I>&gt;<i> three weeks) and I had to rely upon my cellphone hot spot.  I didn't have a
+</I>&gt;<i> large data plan for the cell phone becuase I didn't need it, until I did. 
+</I>&gt;<i> It would have been nice to configure my web browser to not download anything
+</I>&gt;<i> over 5M at that point.
+</I>
+That would be a nice feature, but is it nice enough to warrant breakage
+across the growing number of implementations? text/gemini documents can
+display an estimated size for linked files, and a user can configure
+their automatic client to abort at a certain point or choose in their
+interactive client to cancel a request. Not a complete solution by any
+means, but worth considering as it is much cheaper.
+
+No-cache/please-cache 2x responses however seem like they can add a lot
+of value for very little cost. Existing client implementations will be
+compatible, and the idea of the second digit as a hint from the server
+that can be ignored by a simpler client is retained.
+
+-- 
+Philip
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201109/695c2fca/attachment-0001.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201109/695c2fca/attachment-0001.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003151.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+	<LI>Next message (by thread): <A HREF="003170.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3165">[ date ]</a>
+              <a href="thread.html#3165">[ thread ]</a>
+              <a href="subject.html#3165">[ subject ]</a>
+              <a href="author.html#3165">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,236 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3C20200611194558.GA11281%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001561.html">
+   <LINK REL="Next"  HREF="001489.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3C20200611194558.GA11281%40brevard.conman.org%3E"
+       TITLE="CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)">sean at conman.org
+       </A><BR>
+    <I>Thu Jun 11 20:45:58 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001561.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+        <LI>Next message (by thread): <A HREF="001489.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1563">[ date ]</a>
+              <a href="thread.html#1563">[ thread ]</a>
+              <a href="subject.html#1563">[ subject ]</a>
+              <a href="author.html#1563">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great solderpunk once stated:
+&gt;<i> On Tue, Jun 09, 2020 at 09:02:24PM -0400, Michael Lazar wrote:
+</I>&gt;<i>  
+</I>&gt;<i> &gt; I believe this is using SCRIPT_NAME incorrectly per RFC 3875. The SCRIPT_NAME
+</I>&gt;<i> &gt; should be the part of the URI path that comes before the PATH_INFO [1]. So in
+</I>&gt;<i> &gt; your example:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; GEMINI_URL=<A HREF="gemini://lucy.roswell.area51/cgi-bin/beta/foobar?one=1&amp;two=2">gemini://lucy.roswell.area51/cgi-bin/beta/foobar?one=1&amp;two=2</A>
+</I>&gt;<i> &gt; SCRIPT_NAME=/cgi-bin/beta
+</I>&gt;<i> &gt; PATH_INFO=/foobar
+</I>&gt;<i> 
+</I>&gt;<i> Is this how cgi-bins are traditionally handled?  
+</I>
+  Yes.
+
+&gt;<i> If a URI paths's prefix
+</I>&gt;<i> matches the configured cgi-bin path, the standard mapping from URI paths
+</I>&gt;<i> to the filesystem is interrupted, and the first component of the URI path
+</I>&gt;<i> *after* the cgi-bin prefix (here `beta`) is the only think looked for on
+</I>&gt;<i> the disk, with everything else passed along to PATH_INFO?  If there is,
+</I>&gt;<i> for example, a /var/gemini/cgi-bin/beta/ directory on the disk, the
+</I>&gt;<i> server does not check for an executable named `foobar` in it?
+</I>
+  To answer that last question, no.
+
+  To explain, let me explain my setup.  GLV-1.12556 allows one to use
+multiple directories per virtual host for content.  I have the following
+set up on my development box:
+
+      {
+        path      = &quot;^(/cgi%-bin/)(.*)&quot;, -- [5]
+        module    = &quot;GLV-1.handlers.filesystem&quot;,
+        directory = &quot;/home/spc/projects/gemini/non-checkin/cgi-bin&quot;,
+        -- ... there are some other directives, not important right now
+      },
+
+      {
+        path      = &quot;.*&quot;, -- [5]
+        module    = &quot;GLV-1.handlers.filesystem&quot;,
+        directory = &quot;/home/spc/projects/gemini/non-checkin/lucy.roswell.area51&quot;,
+        -- ... more directives ...
+      }
+
+Note that depending upon how things are configured, CGI [1] can be in any
+directory or restricted to a single directory [2].  With GLV-1.12556, any
+file with the 'execute' bit will be treated as a CGI script [3][4].  I just
+added a CGI to my main Gemini server:
+
+	<A HREF="gemini://gemini.conman.org/test/a-script/foobar?one=1&amp;two=2">gemini://gemini.conman.org/test/a-script/foobar?one=1&amp;two=2</A>
+
+the URL is broken up:
+
+	location =
+	{
+	  host = &quot;gemini.conman.org&quot;,
+	  port = 1965.000000,
+	  path = &quot;/test/a-script/foobar&quot;,
+	  scheme = &quot;gemini&quot;,
+	  query = &quot;one=1&amp;two=2&quot;,
+	}
+
+the path is matched against each handler's path (in order, first match wins)
+and the matching one is handed the request.  Per the configuration, this
+match result will be:
+
+	match =
+	{
+	  &quot;/&quot;,
+	  &quot;test/a-script/foobar&quot;,
+	}
+
+  The filesystem handler will breakdown the second match element (the first
+is considered the &quot;URL filesystem space&quot;---remember, GLV-1.12556 supports
+multiple directories per vhost) and check each segment (for permissions, CGI
+script or SCGI script).  So the first check is for:
+
+	&lt;directory&gt; .. &quot;test&quot;
+
+  This is a directory, so it continues, walking down the path.   Next it
+tries:
+
+	&lt;directory&gt; .. &quot;test/&quot; .. &quot;a-script&quot;
+
+  This is a file with the execute bit set, so it's run.  The rest of the
+match is used to construct the PATH_INFO
+
+	PATH_INFO=&quot;/foobar&quot;
+
+and PATH_TRANSLATED
+
+	PATH_TRANSLATED=&lt;directory&gt; .. &quot;/foobar&quot;
+
+This does not imply that such a directory exists.  If there is no more to
+the path (say, the request was to &quot;/test/a-script&quot;) then the PATH_INFO and
+PATH_TRASLATED would not be set.
+
+  A Gemini server doesn't have to do what I do.  It is certainly in line
+with Apache to require CGI scripts to have a particular extension, look for
+said extension and handle things that way without having to walk down the
+filesystem checking each component.  So hypothetically speaking, a request
+like:
+
+	<A HREF="gemini://example.net/foo/bar.cgi">gemini://example.net/foo/bar.cgi</A>
+
+the server can scan for &quot;.cgi&quot;, find it, know it's going to execute a CGI
+script, but there is nothing more of the URL path, so not set PATH_INFO and
+PATH_TRANSLATE.  But for this:
+
+	<A HREF="gemini://example.net/foo/bar.cgi/baz">gemini://example.net/foo/bar.cgi/baz</A>
+
+find the .cgi extension, extract the path up through the extension
+(&quot;/foo/bar.cgi&quot;) and because there's more, set up PATH_INFO and
+PATH_TRANSLATE.  There's another message on this list where I give a real
+life example where I use PATH_INFO and PATH_TRANSLATED here:
+
+	<A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/001485.html">https://lists.orbitalfox.eu/archives/gemini/2020/001485.html</A>
+
+&gt;<i> Semi-related: when the server forks off the CGI process, is it
+</I>&gt;<i> conventional to set that process' working directory to the CGI bin?
+</I>
+  It would be conventional to set the working directory to the main
+directory for the host.  In my case, given that a host can have multiple
+directories, I set the working directory to the handler's directory setting. 
+That value is also set in GEMINI_DOCUMENT_ROOT.
+
+  -spc
+
+[1]	And SCGI, I support this as well.
+
+[2]	That's why I have 'cgi-bin'---to test that configuration.
+
+[3]	I didn't bother with extensions for this.  I felt that checking for
+	the 'execute' bit was more elegant than just an extension.  Also, if
+	CGI has been disabled (server wide, host or directory---the
+	configuration is very fine grained) then I return an error to the
+	client.
+
+[4]	There's another method for SCGI.
+
+[5]	This is a Lua style regex.  The patterns in () are groupings and the
+	filesystem handler wants two groups---the first is the leading
+	portion in URL space that doesn't map to a file system, the second
+	is the portion that does map to a filesystem.  The original syntax
+	for this only required one match and I kept that---in that case, the
+	match is redone slightly so that the leading '/' from the URL
+	portion is the first match, then the rest.  So the '.*' pattern
+	(which is basically &quot;match all&quot;) becomes the pattern &quot;^(/)(.*)&quot;. 
+	This is an implementation detail of GLV-1.12556, but I thought I
+	should mention it.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001561.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+	<LI>Next message (by thread): <A HREF="001489.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1563">[ date ]</a>
+              <a href="thread.html#1563">[ thread ]</a>
+              <a href="subject.html#1563">[ subject ]</a>
+              <a href="author.html#1563">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

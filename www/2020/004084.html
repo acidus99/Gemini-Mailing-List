@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Hosting several sites on the same host
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Hosting%20several%20sites%20on%20the%20same%20host&In-Reply-To=%3C20201215223854.4C915804B8B%40smtp.hushmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003732.html">
+   <LINK REL="Next"  HREF="003738.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Hosting several sites on the same host</H1>
+    <B>Adrian Hesketh</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Hosting%20several%20sites%20on%20the%20same%20host&In-Reply-To=%3C20201215223854.4C915804B8B%40smtp.hushmail.com%3E"
+       TITLE="Hosting several sites on the same host">adrianhesketh at hushmail.com
+       </A><BR>
+    <I>Tue Dec 15 22:38:54 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003732.html">Hosting several sites on the same host
+</A></li>
+        <LI>Next message (by thread): <A HREF="003738.html">Hosting several sites on the same host
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4084">[ date ]</a>
+              <a href="thread.html#4084">[ thread ]</a>
+              <a href="subject.html#4084">[ subject ]</a>
+              <a href="author.html#4084">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I don't know if it will help you, but here's a walkthrough of how my
+Go implementation. It's quite tied to the Go implementation, but there
+may be similar capabilities in PHP.
+Firstly, the server keeps a map of the domain name to the underlying
+Gemini handler (the code that processes the request), and the TLS
+certificate to be used for that domain. The Go TLS library allows a
+&quot;GetCertificate&quot; function to be added to the TLS configuration. This
+&quot;GetCertificate&quot; function is called during the TLS handshake and
+returns the certificate to present to the client (dh.KeyPair) based on
+the hostname being requested during the handshake.
+<A HREF="https://github.com/a-h/gemini/blob/598044444c08befc3c01bafe5558a5decb83ab40/server.go#L180">https://github.com/a-h/gemini/blob/598044444c08befc3c01bafe5558a5decb83ab40/server.go#L180</A>
+With that configuration in place, the server enters a loop that
+listens for new incoming connections:
+<A HREF="https://github.com/a-h/gemini/blob/598044444c08befc3c01bafe5558a5decb83ab40/server.go#L197">https://github.com/a-h/gemini/blob/598044444c08befc3c01bafe5558a5decb83ab40/server.go#L197</A>
+When a new connection is received, it's handled in another goroutine
+(similar to a thread) by the handleTLS function. This allows the loop
+to listen for new connections while content is being served by the
+goroutine.
+<A HREF="https://github.com/a-h/gemini/blob/598044444c08befc3c01bafe5558a5decb83ab40/server.go#L211">https://github.com/a-h/gemini/blob/598044444c08befc3c01bafe5558a5decb83ab40/server.go#L211</A>
+Now that the handshake is over, but the Gemini request/response needs
+to take place, the handleTLS function has to read the domain name
+again to look up which Gemini handler to use for the domain that was
+accessed:
+<A HREF="https://github.com/a-h/gemini/blob/598044444c08befc3c01bafe5558a5decb83ab40/server.go#L235">https://github.com/a-h/gemini/blob/598044444c08befc3c01bafe5558a5decb83ab40/server.go#L235</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201215/7988798b/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201215/7988798b/attachment-0001.htm</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003732.html">Hosting several sites on the same host
+</A></li>
+	<LI>Next message (by thread): <A HREF="003738.html">Hosting several sites on the same host
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4084">[ date ]</a>
+              <a href="thread.html#4084">[ thread ]</a>
+              <a href="subject.html#4084">[ subject ]</a>
+              <a href="author.html#4084">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

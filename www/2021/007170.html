@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A simple/toy client in C
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20simple/toy%20client%20in%20C&In-Reply-To=%3C875yut26wb.fsf%40omarpolo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007173.html">
+   <LINK REL="Next"  HREF="007177.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A simple/toy client in C</H1>
+    <B>Omar Polo</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20simple/toy%20client%20in%20C&In-Reply-To=%3C875yut26wb.fsf%40omarpolo.com%3E"
+       TITLE="A simple/toy client in C">op at omarpolo.com
+       </A><BR>
+    <I>Tue Sep 21 18:01:39 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007173.html">A simple/toy client in C
+</A></li>
+        <LI>Next message (by thread): <A HREF="007177.html">A simple/toy client in C
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7170">[ date ]</a>
+              <a href="thread.html#7170">[ thread ]</a>
+              <a href="subject.html#7170">[ subject ]</a>
+              <a href="author.html#7170">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stack at tilde.club</A> writes:
+
+&gt;<i> [...]
+</I>&gt;<i>
+</I>&gt;<i> I am using BearSSL (for its minimalism). I started with the sample
+</I>&gt;<i> provided, modified for the Gemini request.  I keep getting stuck with
+</I>&gt;<i> error 62 (probably because I don't understand how to deal with TLS).
+</I>&gt;<i> I attempted to generate the CA boilerplate code, but there are some
+</I>&gt;<i> ominous hints that the code is HTTPS-specific.
+</I>
+It's just a wild guess, I never touched BearSSL, but smell like a
+possible failure in verifying the certificates.  In geminispace the
+usage of TOFU and self-signed certificates is way more popular than in
+the web, and TLS libraries by defaults try to verify the certificate
+against the installed CAs.  For the record, on libtls is the function is
+tls_config_insecure_noverifycert.
+
+regarding the other mail: the code in gemini.c for telescope &lt;= 0.4 is
+probably a bit easier to grasp.  With telescope 0.5 gemini.c renamed
+net.c and handles gopher and finger too.  Moreover, both telescope and
+gmid use async I/O and relies a lot on libevent, so the code may seem a
+bit harder to follow at first given how it's splitted in more functions.
+
+The code in the test program gg.c uses blocking I/O and is a single
+function in contrast.
+
+HTH
+
+Omar Polo
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007173.html">A simple/toy client in C
+</A></li>
+	<LI>Next message (by thread): <A HREF="007177.html">A simple/toy client in C
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7170">[ date ]</a>
+              <a href="thread.html#7170">[ thread ]</a>
+              <a href="subject.html#7170">[ subject ]</a>
+              <a href="author.html#7170">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

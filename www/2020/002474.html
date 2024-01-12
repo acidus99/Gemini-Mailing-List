@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Thoughts about the Gemini protocol
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Thoughts%20about%20the%20Gemini%20protocol&In-Reply-To=%3CCAEzvDCXV9DumH08mVDrqeRKDgOJNDBwYvq%2B4bDWQprydoOCHFw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002444.html">
+   <LINK REL="Next"  HREF="002401.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Thoughts about the Gemini protocol</H1>
+    <B>A. E. Spencer-Reed</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Thoughts%20about%20the%20Gemini%20protocol&In-Reply-To=%3CCAEzvDCXV9DumH08mVDrqeRKDgOJNDBwYvq%2B4bDWQprydoOCHFw%40mail.gmail.com%3E"
+       TITLE="Thoughts about the Gemini protocol">easrng at gmail.com
+       </A><BR>
+    <I>Fri Aug 21 22:34:02 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002444.html">Thoughts about the Gemini protocol
+</A></li>
+        <LI>Next message (by thread): <A HREF="002401.html">Installing CAPCOM on FreeBSD 12.1 (need gusmobile)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2474">[ date ]</a>
+              <a href="thread.html#2474">[ thread ]</a>
+              <a href="subject.html#2474">[ subject ]</a>
+              <a href="author.html#2474">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Yeah, I think what we need is a system with using sandboxed WASI with some
+kind of file based GUI API. Apps would be run in a sandbox with a temporary
+folder and a size limited persistent folder. I think the name Gravity
+Runtime is good.
+
+On Tue, Aug 18, 2020, 2:51 PM Dave Gauer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">dave at ratfactor.com</A>&gt; wrote:
+
+&gt;<i> On 8/14/20 4:59 AM, /dev/urandom wrote:
+</I>&gt;<i> &gt; I was thinking about an idea similar to Gemini that could work as a
+</I>&gt;<i> &gt; protocol for not just websites, but also simple and functional web
+</I>&gt;<i> &gt; applications as well that could, to a reasonable extent, look and work
+</I>&gt;<i> &gt; well on lots of different devices (desktops, smartphones, feature
+</I>&gt;<i> &gt; phones, text-mode interfaces).
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Gemini has hard conceptual/technical boundaries which make it pretty
+</I>&gt;<i> unsuitable for building general purpose applications. And that is, of
+</I>&gt;<i> course, on purpose.
+</I>&gt;<i>
+</I>&gt;<i> I've thought for years that browsers should have entirely separate modes
+</I>&gt;<i> of operation: one presents content and the other is an application
+</I>&gt;<i> client. The user would have strict control over which mode was being
+</I>&gt;<i> used, so I could say that reddit.com can only do &quot;displaying content&quot;
+</I>&gt;<i> things, but gmail.com can do &quot;application&quot; things.
+</I>&gt;<i>
+</I>&gt;<i> But I like even more the idea of having separate clients (and protocols)
+</I>&gt;<i> for these purposes.
+</I>&gt;<i>
+</I>&gt;<i> I feel like Gemini &quot;solves&quot; the content mode.
+</I>&gt;<i>
+</I>&gt;<i> We still need the application mode. Universal distributed applications
+</I>&gt;<i> are incredibly useful and cool (and that use of the Web keeps me
+</I>&gt;<i> employed). But the Web _sucks_ for making applications.
+</I>&gt;<i>
+</I>&gt;<i> So, if I were to build the &quot;Gemini of applications&quot;, I think I would
+</I>&gt;<i> take a hard look at two things:
+</I>&gt;<i>
+</I>&gt;<i> * WASM for execution
+</I>&gt;<i> * Existing UI languages for layout
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="https://en.wikipedia.org/wiki/WebAssembly">https://en.wikipedia.org/wiki/WebAssembly</A>
+</I>&gt;<i> <A HREF="https://en.wikipedia.org/wiki/List_of_user_interface_markup_languages">https://en.wikipedia.org/wiki/List_of_user_interface_markup_languages</A>
+</I>&gt;<i>
+</I>&gt;<i> I like your abstract input examples.  The client should be able to
+</I>&gt;<i> determine the best way to present this to the user.  Entering a date on
+</I>&gt;<i> a desktop computer should not use the same UI as a touchscreen kiosk or
+</I>&gt;<i> a voice-activated home assistant!  Nor should the application developer
+</I>&gt;<i> need to create these UIs from scratch each and every time.
+</I>&gt;<i>
+</I>&gt;<i> Hmm, now we just need a good name for a &quot;Gemini of applications&quot;...
+</I>&gt;<i>
+</I>&gt;<i> :-)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &gt; 2. Continuous connections
+</I>&gt;<i> &gt; 3. Append mode
+</I>&gt;<i>
+</I>&gt;<i> #3 is intriguing.  I suppose it's to allow the server to respond with
+</I>&gt;<i> messages such as &quot;I didn't understand 'asdfklj' as a date!&quot; or provide
+</I>&gt;<i> interactive feedback, such as a session with an Eliza-like chatbot or
+</I>&gt;<i>
+</I>&gt;<i> -Dave
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200821/85a700dc/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200821/85a700dc/attachment-0001.htm</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002444.html">Thoughts about the Gemini protocol
+</A></li>
+	<LI>Next message (by thread): <A HREF="002401.html">Installing CAPCOM on FreeBSD 12.1 (need gusmobile)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2474">[ date ]</a>
+              <a href="thread.html#2474">[ thread ]</a>
+              <a href="subject.html#2474">[ subject ]</a>
+              <a href="author.html#2474">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

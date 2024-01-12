@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Schapcom
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Schapcom&In-Reply-To=%3C87o8i16rzy.fsf%40idiomdrottning.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004753.html">
+   <LINK REL="Next"  HREF="004749.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Schapcom</H1>
+    <B>Sandra Snan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Schapcom&In-Reply-To=%3C87o8i16rzy.fsf%40idiomdrottning.org%3E"
+       TITLE="[ANN] Schapcom">sandra.snan at idiomdrottning.org
+       </A><BR>
+    <I>Thu Jan  7 09:00:49 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004753.html">[ANN] Schapcom
+</A></li>
+        <LI>Next message (by thread): <A HREF="004749.html">[tech] Gemini Acentred Messaging System
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4766">[ date ]</a>
+              <a href="thread.html#4766">[ thread ]</a>
+              <a href="subject.html#4766">[ subject ]</a>
+              <a href="author.html#4766">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>OK, Schapcom now updated to not dispatch on file extensions. (It now
+looks at the contents of the file so even the mime types can be
+wrong&#8212;this is not a deliberate design decision, it just ended up being
+the way easier implementation.)
+
+Grumble grumble&#8230; This is one of the reasons I was so grumpy about the
+gmisub format: it adds work! Now every aggregator app writer needs to be
+able to handle two standards. If gmisub had been a tool that read
+capsules and output atom, that would've been awesome&#9829; Instead, it's a
+protocol&#8212;an interfacing touch point that we all must now be mindful of.
+
+File extensions does still matter in one circumstance&#8212;if a log is
+subscribed to in duplicate, Schapcom prioritizes entries from logs that
+end with .xml (or, now, .atom). This only matters when the same log &#8212;
+the same entries &#8212; is subscribed to in both gmisub and atom.
+
+Put another way, gmisub entries are assumed to be made at noon while
+atom entries have a more detailed time description. If the same
+duplicate entry shows up, Schapcom uses the file extension to determine
+if it's in atom or not. So if you have an atom feed named .broccoli and
+a gemsub feed named .asparagus and they contain the same entries, they
+might get interpreted as being posted at noon (at that point, it'd
+depend on which feed is fetched first). Author of gmisub argues that
+this noon thing rarely matters. An argument that I can defer to without
+having to agree with&#9829;
+
+The reason it has to look at file extensions for this instead of making
+requests to get the headers is because it does this by sorting the url
+list.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004753.html">[ANN] Schapcom
+</A></li>
+	<LI>Next message (by thread): <A HREF="004749.html">[tech] Gemini Acentred Messaging System
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4766">[ date ]</a>
+              <a href="thread.html#4766">[ thread ]</a>
+              <a href="subject.html#4766">[ subject ]</a>
+              <a href="author.html#4766">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

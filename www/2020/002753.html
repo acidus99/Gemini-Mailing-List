@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Announcing gmni, a line-mode gemini browser and curl-esque utility program
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Announcing%20gmni%2C%20a%20line-mode%20gemini%20browser%20and%20curl-esque%0A%20utility%20program&In-Reply-To=%3Ce363f0a8-46b1-42c2-91b0-9655b06edf10%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002751.html">
+   <LINK REL="Next"  HREF="002754.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Announcing gmni, a line-mode gemini browser and curl-esque utility program</H1>
+    <B>Terry Brennan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Announcing%20gmni%2C%20a%20line-mode%20gemini%20browser%20and%20curl-esque%0A%20utility%20program&In-Reply-To=%3Ce363f0a8-46b1-42c2-91b0-9655b06edf10%40gmail.com%3E"
+       TITLE="Announcing gmni, a line-mode gemini browser and curl-esque utility program">tcb913 at gmail.com
+       </A><BR>
+    <I>Mon Sep 21 20:26:05 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002751.html">Announcing gmni, a line-mode gemini browser and curl-esque utility program
+</A></li>
+        <LI>Next message (by thread): <A HREF="002754.html">Announcing gmni, a line-mode gemini browser and curl-esque utility program
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2753">[ date ]</a>
+              <a href="thread.html#2753">[ thread ]</a>
+              <a href="subject.html#2753">[ subject ]</a>
+              <a href="author.html#2753">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi! I read this message and thought I'd install the browser. To make a 
+long story short:
+
+I built and installed scdoc with no problems.
+
+I ran configure in the gmni directory with no problems.
+
+When I ran &quot;make&quot; in gmni directory, I got four errors:
+
+     in client.c, line 126: implicit declaration of SSL_CTX_up_ref
+
+     in client.c, line 128: implicit declaration of TLS_method
+
+     in client.c, line 128: implicit conversion from int to pointer in 
+arg to SSL_CTX_new
+
+     in client.c, line 135: implicit declaration of SSL_up_ref
+
+Seems like something's missing. I find no
+
+BTW, you define CC as cc in config.sh. On my system cc is an alias for 
+gcc-5.3.0. That should not be a problem.
+
+Terry Brennan
+
+On 09/20/2020 10:12 PM, Drew DeVault wrote:
+&gt;<i> Hiya! I felt that the Gemini space has a lot of cool browers, but was
+</I>&gt;<i> missing the basic works-everywhere client with few-to-no dependencies.
+</I>&gt;<i>
+</I>&gt;<i> gmni fills that role:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="https://sr.ht/~sircmpwn/gmni">https://sr.ht/~sircmpwn/gmni</A>
+</I>&gt;<i>
+</I>&gt;<i> Here's a recording which shows off some of its features:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="https://asciinema.org/a/Y7viodM01e0AXYyf40CwSLAVA">https://asciinema.org/a/Y7viodM01e0AXYyf40CwSLAVA</A>
+</I>&gt;<i>
+</I>&gt;<i> Two tools are provided: gmni, a curl-like utility which executes Gemini
+</I>&gt;<i> requests and writes the response to stdout, and gmnlm, a line-mode
+</I>&gt;<i> interactive browser. The latter is demonstrated in the recording above.
+</I>&gt;<i>
+</I>&gt;<i> The whole thing clocks in at approximately 3,000 lines of C11. It'll
+</I>&gt;<i> grow a little bit with TOFU and client-side certificate support, but
+</I>&gt;<i> otherwise it's pretty close to done. The only dependencies are a
+</I>&gt;<i> POSIX-like system and OpenSSL.
+</I>&gt;<i>
+</I>&gt;<i> The Gemini protocol implementation is pretty concise and
+</I>&gt;<i> straightforward:
+</I>&gt;<i>
+</I>&gt;<i> <A HREF="https://git.sr.ht/~sircmpwn/gmni/tree/master/include/gmni.h">https://git.sr.ht/~sircmpwn/gmni/tree/master/include/gmni.h</A>
+</I>&gt;<i> <A HREF="https://git.sr.ht/~sircmpwn/gmni/tree/master/src/client.c">https://git.sr.ht/~sircmpwn/gmni/tree/master/src/client.c</A>
+</I>&gt;<i> <A HREF="https://git.sr.ht/~sircmpwn/gmni/tree/master/src/parser.c">https://git.sr.ht/~sircmpwn/gmni/tree/master/src/parser.c</A>
+</I>&gt;<i>
+</I>&gt;<i> If there's any demand for it, I'll package these up into a library you
+</I>&gt;<i> can link to. I also plan on writing a Gemini server in C with a similar
+</I>&gt;<i> design approach.
+</I>&gt;<i>
+</I>&gt;<i> Enjoy!
+</I>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002751.html">Announcing gmni, a line-mode gemini browser and curl-esque utility program
+</A></li>
+	<LI>Next message (by thread): <A HREF="002754.html">Announcing gmni, a line-mode gemini browser and curl-esque utility program
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2753">[ date ]</a>
+              <a href="thread.html#2753">[ thread ]</a>
+              <a href="subject.html#2753">[ subject ]</a>
+              <a href="author.html#2753">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

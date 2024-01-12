@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Dioscuri, another application layer protocol
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Dioscuri%2C%20another%20application%20layer%20protocol&In-Reply-To=%3CCAD2gp_SY4FVu3XwgLwofx196KCT9s_sETL1iax4QJ9WS8OBkKA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002797.html">
+   <LINK REL="Next"  HREF="002804.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Dioscuri, another application layer protocol</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Dioscuri%2C%20another%20application%20layer%20protocol&In-Reply-To=%3CCAD2gp_SY4FVu3XwgLwofx196KCT9s_sETL1iax4QJ9WS8OBkKA%40mail.gmail.com%3E"
+       TITLE="Dioscuri, another application layer protocol">cowan at ccil.org
+       </A><BR>
+    <I>Mon Sep 28 14:07:01 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002797.html">Dioscuri, another application layer protocol
+</A></li>
+        <LI>Next message (by thread): <A HREF="002804.html">Dioscuri, another application layer protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2802">[ date ]</a>
+              <a href="thread.html#2802">[ thread ]</a>
+              <a href="subject.html#2802">[ subject ]</a>
+              <a href="author.html#2802">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Sep 28, 2020 at 3:15 AM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+
+Nope.  The Rubicon was passed earlier this year with talk of the titan:
+&gt;<i> protocol which allowed people to upload content to a Gemini server and has
+</I>&gt;<i> already been implemented by at least one Gemini server.
+</I>
+
+You could with equal justice say that publishing Gemini crossed the
+Rubicon, since I would certainly never have thought of Dioscuri without
+first hearing of Gemini (and being fascinated, since it was clearly a very
+nice extension of Gopher's ideas, which I have always loved).
+
+
+&gt;<i>   What I find sad is that this appears to be separate approach from the
+</I>&gt;<i> titan: proposal, which either means the designers of this were not aware of
+</I>&gt;<i> of the previous work, or have rejected the previous work for some unstated
+</I>&gt;<i> reason---I'm hoping it's the former.
+</I>&gt;<i>
+</I>
+I wrote down an early version of Dioscuri when I had barely heard of
+Titan.  Later, #gemini pointed me to Titan and I looked at it.  I wasn't
+able to find a protocol description and had to reverse engineer it from the
+Bash code, but it seemed to me that it was too limited: it provided upload
+only, rather than a conversational protocol like I wanted in which
+responses were symmetrical with requests.  So I have not so much rejected
+Titan as decided that my goals were sufficiently different.
+
+
+&gt;<i> &gt; The question raised by this isn't just &quot;why Dioscuri?&quot; It's &quot;why should
+</I>&gt;<i> &gt; we not use sftp, https, JSON, XML, sexp, IRC, SMTP, foo bar baz frotz
+</I>&gt;<i> &gt; for this problem?&quot; That isn't rhetorical. There could be good answers. I
+</I>&gt;<i> &gt; just can't think of them.
+</I>&gt;<i>
+</I>
+(S)FTP was in fact part of the inspiration for Dioscuri, but I wanted
+something much similar.  My earlier version of D. had GET/PUT/POST/DELETE
+verbs and the possibility of extensions, but #gemini participants convinced
+me that POST was sufficient, provided three cases were well handled:  (a)
+no request body (b) no response body (c) the ability to respond with an URL
+rather than an anonymous body.  I think I have done that.
+
+JSON, XML, and S-expressions are formats and are all fine: I mentioned JSON
+for familiarity, but exchanging information in .INI file format is
+perfectly fine (and in fact it can be made isomorphic with XML).
+
+Above all, DIoscuri is both simple and general.  That's not an easy target
+to hit, and it's clear to me that Gemini has hit it.  I might quibble about
+some details, but I won't.  I have done my best to hit the (slightly
+different) target too.
+
+  Again, check the history of this list. It has been discussed before.
+&gt;<i>
+</I>
+I read through as much of this year's archives as I could, and I haven't
+seen anything bidirectional like this.  Please point me to appropriate
+emails if there are any.
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+He who would do good to another must do it in Minute Particulars;
+General Good is the plea of the scoundrel, hypocrite and flatterer:
+For Art and Science cannot exist but in minutely organized Particulars.
+  --William Blake, il miglior fabbro
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200928/9c15807f/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200928/9c15807f/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002797.html">Dioscuri, another application layer protocol
+</A></li>
+	<LI>Next message (by thread): <A HREF="002804.html">Dioscuri, another application layer protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2802">[ date ]</a>
+              <a href="thread.html#2802">[ thread ]</a>
+              <a href="subject.html#2802">[ subject ]</a>
+              <a href="author.html#2802">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

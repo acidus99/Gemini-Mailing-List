@@ -1,0 +1,175 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> &quot;Wide load&quot; status code(s)?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%22Wide%20load%22%20status%20code%28s%29%3F&In-Reply-To=%3C20200610222136.GG23998%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001511.html">
+   <LINK REL="Next"  HREF="001534.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>&quot;Wide load&quot; status code(s)?</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%22Wide%20load%22%20status%20code%28s%29%3F&In-Reply-To=%3C20200610222136.GG23998%40brevard.conman.org%3E"
+       TITLE="&quot;Wide load&quot; status code(s)?">sean at conman.org
+       </A><BR>
+    <I>Wed Jun 10 23:21:36 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001511.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+        <LI>Next message (by thread): <A HREF="001534.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1526">[ date ]</a>
+              <a href="thread.html#1526">[ thread ]</a>
+              <a href="subject.html#1526">[ subject ]</a>
+              <a href="author.html#1526">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great solderpunk once stated:
+&gt;<i> Hey all,
+</I>&gt;<i> 
+</I>&gt;<i> Just throwing out a quick idea I had last night while trying to sleep,
+</I>&gt;<i> to see how people feel about it.  It's simple and easily ignorable and I
+</I>&gt;<i> think it's kind of neat.
+</I>
+  [ snip ]
+
+&gt;<i> Naturally, deciding to do this will lead immediately to a weeks-long
+</I>&gt;<i> heated debate on what the appropriate value of $THRESHOLD should be.  We
+</I>&gt;<i> *could* wade into those waters, but I'll just also throw out that we
+</I>&gt;<i> could use 21, 22 and 23 to indicate payloads exceeding 1MiB, 10MiB or
+</I>&gt;<i> 100MiB respectively and leave it at that.  Clients targetting
+</I>&gt;<i> resource-limited environments could let their users configure their own
+</I>&gt;<i> threshold for early termination of downloads.
+</I>
+  I'm replying here because I think this is the best play to reply with my
+thoughts.  I have read the rest of this thread and will be referencing some
+later emails.  You have been warned.
+
+  Dispite being the one who pushed for larger status codes, I'm not a fan of
+this proposal, but I can't fully explain *why* other than to say &quot;where does
+it stop?&quot;  Like Tadeusz Sosnierz alluded too, what's huge today may be small
+tomorrow [1].  Personally, I think adding the filesize to the MIME type *is*
+the best answer, but I can see and even agree with the arguemnts against it.
+And I think I'm justified in saying that [2].
+
+  Petite Abeille has listed the options that are open today, but solderpunk
+didn't like the suggestion(s) as they might complicate the client.  But a
+client that simply reads the entire response with a single call, while
+simple, is a problem waiting to happen.  What if the response doesn't fit
+into memory?  It may be reasonable to say that &quot;text/*&quot; can fit into memory,
+but video/*?  image/*?  (seriously, I have a 306MB beautiful image of the
+moon, probably from NASA).
+
+  I'm not sure what the best solution is though.
+
+  -spc
+
+[1]	The first real editor I used was 40k in size.  Today, there are
+	people who use editors that consume over 1G of RAM when running.
+
+[2]	Visual pun, but you have to use a monosopace font to see it.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001511.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+	<LI>Next message (by thread): <A HREF="001534.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1526">[ date ]</a>
+              <a href="thread.html#1526">[ thread ]</a>
+              <a href="subject.html#1526">[ subject ]</a>
+              <a href="author.html#1526">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

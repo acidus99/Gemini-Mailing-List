@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] [psa] robustness (was Re: [ANN] A Gemini crawler, for statistics about the geminispace)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20%5Bpsa%5D%20robustness%20%28was%20Re%3A%20%5BANN%5D%20A%20Gemini%20crawler%2C%20for%0A%20statistics%20about%20the%20geminispace%29&In-Reply-To=%3CBB8F2EE7-2508-4828-9C1F-1D794AA78210%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004251.html">
+   <LINK REL="Next"  HREF="004256.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] [psa] robustness (was Re: [ANN] A Gemini crawler, for statistics about the geminispace)</H1>
+    <B>Petite Abeille</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20%5Bpsa%5D%20robustness%20%28was%20Re%3A%20%5BANN%5D%20A%20Gemini%20crawler%2C%20for%0A%20statistics%20about%20the%20geminispace%29&In-Reply-To=%3CBB8F2EE7-2508-4828-9C1F-1D794AA78210%40gmail.com%3E"
+       TITLE="[tech] [psa] robustness (was Re: [ANN] A Gemini crawler, for statistics about the geminispace)">petite.abeille at gmail.com
+       </A><BR>
+    <I>Tue Dec 22 15:26:02 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004251.html">[tech] [psa] robustness (was Re: [ANN] A Gemini crawler, for statistics about the geminispace)
+</A></li>
+        <LI>Next message (by thread): <A HREF="004256.html">[tech] [psa] robustness (was Re: [ANN] A Gemini crawler, for statistics about the geminispace)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4255">[ date ]</a>
+              <a href="thread.html#4255">[ thread ]</a>
+              <a href="subject.html#4255">[ subject ]</a>
+              <a href="author.html#4255">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+&gt;<i> On Dec 22, 2020, at 13:53, Peter Vernigorov &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">pitr.vern at gmail.com</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> I don&#8217;t think details are boring here.
+</I>
+Really? Didn't get that vibe. Anyway.
+
+&gt;<i> Would you mind listing some of the problems and possible solutions/workarounds?
+</I>
+Two simple examples: resource exhaustion and content poisoning. 
+
+Exhaustion is the most trivial one, The adversary (a technical term, not a value judgment) tries to slow you down or fill you up or reach various limits on your side. E.g. throttling connection, infinite output, hanged connection, any combinations of the above, etc, etc...
+
+This is easy to deal with: always limit everything you do, be it reading, writing, waiting, computing, whatnot. Eventually something will reach these limits and let you out of the trap. You can then mark the site as hostile and/or dysfunctional. Not always clear which one is which: incompetence or malice. 
+
+For example, assuming the network stack goes through, a client has to read at most the first 1024 + some bytes of a server response to figure out what to do. Nothing more. Don't expect a well-formed response line. Assert it. Always validate. Continuously. Drop the connection as soon as something is not right. Always remember what happened.
+
+Of course, there are downsides  to resource exhaustion for the adversary, as it's a sort of self-inflicted denial of service. Oh well.
+
+Content poisoning is more fun. It can be anything from feeding you continuous junk (exhaustion + poisoning), well formed, but ill-intentioned logic bombs, busy beaver, wild goose chase, the list goes on.
+
+For example, a trivial chase is infinite redirects. Got to stop eventually. Another limit.
+
+Another one could be well formed text/gemini, but with  junky links. Same as above.
+
+Again this is easy to identify statistically, marking the adversary as dysfunctional. 
+
+You can them move on, or retaliate, depending on the mood. 
+
+User-agents could also federate such information and use them in meaningful, if ominous, ways.
+
+This is not a one way street: user-agents, specially bots, can do a lot of damage at scale.
+
+Always keep in mind Hanlon's razor: &quot;never attribute to malice that which is adequately explained by stupidity&quot;.
+
+<A HREF="https://en.wikipedia.org/wiki/Hanlon%27s_razor">https://en.wikipedia.org/wiki/Hanlon%27s_razor</A>
+
+Just my 2&#162;. Have fun.
+
+
+
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004251.html">[tech] [psa] robustness (was Re: [ANN] A Gemini crawler, for statistics about the geminispace)
+</A></li>
+	<LI>Next message (by thread): <A HREF="004256.html">[tech] [psa] robustness (was Re: [ANN] A Gemini crawler, for statistics about the geminispace)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4255">[ date ]</a>
+              <a href="thread.html#4255">[ thread ]</a>
+              <a href="subject.html#4255">[ subject ]</a>
+              <a href="author.html#4255">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

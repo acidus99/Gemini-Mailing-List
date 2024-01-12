@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Scalar, an experiment for a minimalist chat protocol inspired by Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Scalar%2C%0A%20an%20experiment%20for%20a%20minimalist%20chat%20protocol%20inspired%20by%20Gemini&In-Reply-To=%3C20200922235435.GA5996%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002762.html">
+   <LINK REL="Next"  HREF="002769.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Scalar, an experiment for a minimalist chat protocol inspired by Gemini</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Scalar%2C%0A%20an%20experiment%20for%20a%20minimalist%20chat%20protocol%20inspired%20by%20Gemini&In-Reply-To=%3C20200922235435.GA5996%40brevard.conman.org%3E"
+       TITLE="[ANN] Scalar, an experiment for a minimalist chat protocol inspired by Gemini">sean at conman.org
+       </A><BR>
+    <I>Wed Sep 23 00:54:35 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002762.html">[ANN] Scalar, an experiment for a minimalist chat protocol inspired by Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="002769.html">[ANN] Scalar, an experiment for a minimalist chat protocol inspired by Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2764">[ date ]</a>
+              <a href="thread.html#2764">[ thread ]</a>
+              <a href="subject.html#2764">[ subject ]</a>
+              <a href="author.html#2764">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Simon Heath once stated:
+&gt;<i> Hi, all.  Pardon me if this is a little off-topic, it was suggested I
+</I>&gt;<i> share this here.
+</I>
+  A bit off topic, but I don't mind.  I can't answer for others though.  
+
+&gt;<i> I got annoyed at Matrix's complexity and IRC's
+</I>&gt;<i> idiosyncracies, and said &quot;I wish there were something like Gemini for
+</I>&gt;<i> chat protocols&quot;. ...
+</I>&gt;<i> I ended up with something I call Scalar: 
+</I>&gt;<i> <A HREF="https://sr.ht/~icefox/scalar/">https://sr.ht/~icefox/scalar/</A>
+</I>&gt;<i> 
+</I>&gt;<i> It's very WIP still, but there's a minimum viable product specification
+</I>&gt;<i> and implementation, with much more emphasis on &quot;minimum&quot; than &quot;viable&quot;.
+</I>
+  Very minimum, and it doesn't even both with DNS SRV records.  The use of
+CBOR is neat (I think it's underrated personally) but you seem to be having
+second thoughts about it:
+
+	 One of the annoying things about CBOR is the variable-length
+	encoding means it's hard to know what the heck you're doing with
+	this until you've actually encoded your message.
+
+  I don't understand what you complaining about here.  Is it the fact you
+don't know how much space to use when encoding?  When decoding?  How do
+decode in a language like Rust of C that make it difficult to deal with
+dynamic data?
+
+	Blob?: Now that I think of it, not sure there's anything terribly
+	wrong with sticking small binary data in a message or such? CBOR can
+	distinguish the two, though it's a bit of a pain. Consider it.
+
+  Actually, that's one of the easier things to deal with because TEXT is
+distinct from BIN in CBOR.  
+
+    /// ALSO TODO: It might be nice to use serde's &quot;internally tagged&quot; format, for brevity, but
+    /// that messes up with `cbor_serde`'s packed format, probably because serde's tags want to be
+    /// strings and cb's packed format wants them to be integers.  We may just be hitting the
+    /// limits of serde, cbor, or both.  Keep thinking about it!
+
+  CBOR tags are integers, but they are semantic tags, not name tags. 
+They're there to say &quot;the following string is to be used as a timestamp in
+RFC-3339 format&quot; or &quot;the following binary string is a positive big integer&quot;. 
+I get the feeling you think tags are supposed to be like field names.
+
+&gt;<i> However, it's proof that the idea works, and carrying on the design of
+</I>&gt;<i> the protocol is pretty straightforward. I can't *quite* bring myself to
+</I>&gt;<i> design something as hardcore minimalist as Gemini, 
+</I>
+  Gemini is basically HTTP/0.9 with 2 digit status codes.  Hardcore
+minimalist is Gopher, which doesn't support MIME types, nor status codes.  A
+hardcore, minimalist chat protocol would be &quot;one server, one 'room'
+everybody chats in.&quot;  I've done that in 100 lines of Lua.
+
+&gt;<i> but I still hope it
+</I>&gt;<i> meets Gemini's design criteria.  No idea if I will keep working on it
+</I>&gt;<i> in the immediate future, but maybe it will inspire interesting
+</I>&gt;<i> discussion.
+</I>
+  Perhaps.  But as it stands now, there's not enough to even make a
+&quot;proof-of-concept&quot;.  Well, maybe, if one just goes ahead to design the
+protocol themselves.
+
+  Another comment I have is the use of DNS SRV records.  It's a great idea
+(I like it personally) but it makes it just that much harder to use as a
+protocol.  Setting up a Scalar server also means updating DNS records.  As
+someone who runs their own DNS infrastructure [1] it's easy for me to add
+SRV records.  I don't know about that in general (someone else might have to
+speak up about that).
+
+  Second, using SRV records in a client isn't easy either.  There's a
+(POSIX) standard function getaddrinfo() for returning an A or AAAA record
+(IP address), but not one for SRV records.  I think libc on Linux contains
+functions one could use to get SRV records, but I don't know off the top of
+my head what they might be.  I know there are libraries out there that can
+deal with SRV records, but most are crap [2].
+
+  Gemini's only real external requirement is a library for TLS.  So far,
+Scalar requires CBOR and DNS, so it might not be so simple.
+
+  -spc
+
+[1]	Yes, I do.  I even had a hand in setting up my server provider's DNS
+	infrastructure.  
+
+[2]	I'm biased here.  I looked into half a dozen DNS libraries and found
+	them all to be pure crap.  That's why I ended up writing my own [3],
+	like I do [4].
+
+[3]	<A HREF="https://github.com/spc476/SPCDNS">https://github.com/spc476/SPCDNS</A>
+
+[4]	I even have a CBOR library:
+	<A HREF="https://github.com/spc476/CBOR">https://github.com/spc476/CBOR</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002762.html">[ANN] Scalar, an experiment for a minimalist chat protocol inspired by Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="002769.html">[ANN] Scalar, an experiment for a minimalist chat protocol inspired by Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2764">[ date ]</a>
+              <a href="thread.html#2764">[ thread ]</a>
+              <a href="subject.html#2764">[ subject ]</a>
+              <a href="author.html#2764">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

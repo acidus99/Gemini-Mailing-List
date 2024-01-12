@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client certificate musings
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200528154049.GB21188%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001030.html">
+   <LINK REL="Next"  HREF="001105.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client certificate musings</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200528154049.GB21188%40SDF.ORG%3E"
+       TITLE="Client certificate musings">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Thu May 28 16:40:49 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001030.html">Client certificate musings
+</A></li>
+        <LI>Next message (by thread): <A HREF="001105.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1103">[ date ]</a>
+              <a href="thread.html#1103">[ thread ]</a>
+              <a href="subject.html#1103">[ subject ]</a>
+              <a href="author.html#1103">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, May 24, 2020 at 02:27:26PM +0000, solderpunk wrote:
+&gt;<i> On Sun, May 24, 2020 at 09:04:29AM +1000, Thomas Karpiniec wrote:
+</I>&gt;<i>  
+</I>&gt;<i> &gt; With this in mind, my current opinion is that there should be no way
+</I>&gt;<i> &gt; for a server to request a non-disposable certificate. Where
+</I>&gt;<i> &gt; authentication is required, it should be done in-band via a password
+</I>&gt;<i> &gt; or username/password 10 responses as you noted, which is then
+</I>&gt;<i> &gt; associated on the server with the transient certificate. It then
+</I>&gt;<i> &gt; becomes the responsibility of clients to ask the user &quot;how long do you
+</I>&gt;<i> &gt; want to stay authenticated to this website?&quot; If it times out, they can
+</I>&gt;<i> &gt; simply repeat their authentication.
+</I>&gt;<i> 
+</I>&gt;<i> Hmm, interesting.  I'll ponder this, thanks for your thoughts.  My first
+</I>&gt;<i> reaction is that that I'm reluctant to remove a dedicated mechanism for
+</I>&gt;<i> creating something which is unavoidably and non-negotiably very short
+</I>&gt;<i> lived.  Maybe you didn't mean for that to happen, though?
+</I>
+I really like the &quot;put all control into the hands of the user&quot; aspect of
+this design, I have to admit.  And only having support for one kind of
+on-demand client certificate simplifies things.  I just keep coming back
+to the thought that it's hard for the user to have all the information
+they need to make that decision.  There's no way to stop people using
+certificate fingerprinting to do a bitcoin-esque tying of account
+identity to a private key.  Some people might really think that's better
+than using in-band username and password (which is subject to weak
+passwords, brute-forcing, theft of password database, etc.).  So in all
+likelihood both patterns will end up being used &quot;in the wild&quot;.  And
+unless I know in advance what's coming up after I generate a
+certificate, it's hard to know what to do.  If I'm about to be asked to
+supply a username and password, I probably would have been happy with a
+short-lived certificate which gets deleted when I close my client.  If
+I'm about to be told &quot;okay, great, we've taken your cert fingerprint,
+this is now your idea, please back it up and be careful&quot;, I definitely
+want to pick something longer lived.  This either requires different
+status codes for different authentication models so that clients can
+suggest sensible defaults and users can make informed decisions, *or* it
+requires good communication from app designers at some point in the
+&quot;sign in/up&quot; workflow before the client request comes along (and good
+understanding from the user).
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001030.html">Client certificate musings
+</A></li>
+	<LI>Next message (by thread): <A HREF="001105.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1103">[ date ]</a>
+              <a href="thread.html#1103">[ thread ]</a>
+              <a href="subject.html#1103">[ subject ]</a>
+              <a href="author.html#1103">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC-CHANGE] Mandatory scheme in request and link URLs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Mandatory%20scheme%20in%20request%20and%20link%20URLs&In-Reply-To=%3C7784a0d2afdf26d812b0c02e03d49549d0903610.camel%40activ.ism.rocks%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003661.html">
+   <LINK REL="Next"  HREF="003689.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC-CHANGE] Mandatory scheme in request and link URLs</H1>
+    <B>Waweic</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Mandatory%20scheme%20in%20request%20and%20link%20URLs&In-Reply-To=%3C7784a0d2afdf26d812b0c02e03d49549d0903610.camel%40activ.ism.rocks%3E"
+       TITLE="[SPEC-CHANGE] Mandatory scheme in request and link URLs">waweic at activ.ism.rocks
+       </A><BR>
+    <I>Mon Nov 30 05:51:23 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003661.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003689.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3673">[ date ]</a>
+              <a href="thread.html#3673">[ thread ]</a>
+              <a href="subject.html#3673">[ subject ]</a>
+              <a href="author.html#3673">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I can't find the change concerning the text/gemini media type reflected
+in the spec. Is there some version history which I could diff? This
+would simplify things a bit.
+So far, this part of the spec seems fine in my opinion, I would
+disagree with said change. RFC 3986 has a section on reference
+resolution (section 5) and even a pseudocode algorithm and a regex,
+this should be implemented anyway. I do not think the right way to go
+here is adapting the spec to mistakes people make, I rather think those
+mistakes should be fixed.
+
+RFC 3986 defines an unambigous set of valid URIs and their meaning. As
+I see it, the difference between URIs and URI References is important
+here. In Gemini requests, we ask for a specific, resource, so only a
+URI makes sense here, complete with a scheme, authority, path and
+query. This is now reflected in the spec, which I quite like!
+
+In Gemini documents however, where we refer to different resources, we
+use an URI Reference. Here, omitting the scheme has valid usecases, as
+have relative URI References. This is unambiguously defined in RFC
+3986, I do not see a point in adding limitations where there is no
+ambiguity.
+
+In theory, software which generates Gemini content doesn't know over
+what protocol this content will be served, it may, for example, be
+HTTP. Thus, it can't possibly add an explicit scheme
+
+Furthermore, I do not know whether RFC 3986 even allows this
+limitation. It may well be that this is not our decision to make,
+following the RFC, although this is just speculation.
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003661.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003689.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3673">[ date ]</a>
+              <a href="thread.html#3673">[ thread ]</a>
+              <a href="subject.html#3673">[ subject ]</a>
+              <a href="author.html#3673">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

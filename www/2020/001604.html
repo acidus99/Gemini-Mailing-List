@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Thoughts on TOFU
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Thoughts%20on%20TOFU&In-Reply-To=%3C3f96a5ee-3ade-cb1d-40a0-ea6c77ed1441%40masterq32.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001603.html">
+   <LINK REL="Next"  HREF="001606.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Thoughts on TOFU</H1>
+    <B>Felix Quei&#223;ner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Thoughts%20on%20TOFU&In-Reply-To=%3C3f96a5ee-3ade-cb1d-40a0-ea6c77ed1441%40masterq32.de%3E"
+       TITLE="Thoughts on TOFU">felix at masterq32.de
+       </A><BR>
+    <I>Fri Jun 12 23:41:44 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001603.html">[ANN] gemini-textboard.fgaz.me: a simple textboard
+</A></li>
+        <LI>Next message (by thread): <A HREF="001606.html">Thoughts on TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1604">[ date ]</a>
+              <a href="thread.html#1604">[ thread ]</a>
+              <a href="subject.html#1604">[ subject ]</a>
+              <a href="author.html#1604">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hey List!
+
+While planning out the implementation of TOFU for Kristall, i noticed
+something weird:
+
+Quoting the spec:
+----------------------------------------------------------------------
+TOFU stands for &quot;Trust On First Use&quot; and is public-key security model
+similar to that used by OpenSSH.  The first time a Gemini client
+connects to a server, it accepts whatever certificate it is presented.
+That certificate's fingerprint and expiry date are saved in a persistent
+database (like the .known_hosts file for SSH), associated with the
+server's hostname.  On all subsequent connections to that hostname, the
+received certificate's fingerprint is computed and compared to the one
+in the database.  If the certificate is not the one previously received,
+but the previous certificate's expiry date has not passed, the user is
+shown a warning, analogous to the one web browser users are shown when
+receiving a certificate without a signature chain leading to a trusted CA.
+----------------------------------------------------------------------
+
+This means that trust in a server is lost as soon as a certificate is
+expired and a subsequent renewal of the certificate with the same
+private key is the same as visiting the host for the first time. But
+when i refresh my server certificate before it expires (which is
+recommended), we will have the situation that the client will not trust
+the server anymore (same situation as when an attacker is doing a MITM
+attack) which i think is not a good situation.
+
+My proposal for both server certificates is the following:
+An endpoint stores the public key of the servers certificate as well as
+the host name. As long as this host continues to use the same identity
+(pub+privkey), it will be trusted. Certificates that aren't refreshed
+will error to the client, having another pubkey presented will error
+&quot;harder&quot; (as in: this is a possible MITM attack)
+
+The same behaviour could be used for client certificates as well,
+allowing the renewal of client certificates with the same private key
+(which would solve the &quot;how do i have persistent identities&quot;)
+
+What do you guys think?
+
+Regards
+- xq
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001603.html">[ANN] gemini-textboard.fgaz.me: a simple textboard
+</A></li>
+	<LI>Next message (by thread): <A HREF="001606.html">Thoughts on TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1604">[ date ]</a>
+              <a href="thread.html#1604">[ thread ]</a>
+              <a href="subject.html#1604">[ subject ]</a>
+              <a href="author.html#1604">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

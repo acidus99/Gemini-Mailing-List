@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> On certificates and validation
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20certificates%20and%20validation&In-Reply-To=%3CCAJScK0%2B9YCSqYXVntp5qZgE6WB65cnWcjcp9cX-gqPsJ0ubByA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003598.html">
+   <LINK REL="Next"  HREF="003601.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>On certificates and validation</H1>
+    <B>Bj&#246;rn W&#228;rmedal</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20certificates%20and%20validation&In-Reply-To=%3CCAJScK0%2B9YCSqYXVntp5qZgE6WB65cnWcjcp9cX-gqPsJ0ubByA%40mail.gmail.com%3E"
+       TITLE="On certificates and validation">bjorn.warmedal at gmail.com
+       </A><BR>
+    <I>Thu Nov 26 19:41:15 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003598.html">On certificates and validation
+</A></li>
+        <LI>Next message (by thread): <A HREF="003601.html">On certificates and validation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3599">[ date ]</a>
+              <a href="thread.html#3599">[ thread ]</a>
+              <a href="subject.html#3599">[ subject ]</a>
+              <a href="author.html#3599">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> These are configurable parameters. If they are configured incorrectly,
+</I>&gt;<i> then we should reject the certificate.
+</I>
+First of all, you're completely right. They are configurable
+parameters. Which also means that a matching hostname or valid date
+range means absolute zilch, sadly. It's just letters and numbers.
+
+Secondly, I'd be much obliged if you could define &quot;incorrectly&quot; in
+some objective manner. I see how it's more informative to use my
+hostname as Common Name or SAN, but I don't see that it gives any more
+*security* or objective *correctness* than, say, &quot;ew0k's Server&quot; or
+even just &quot;ew0k&quot;. If I decide that my client requires the hostname to
+match one of those provided by the cert that's an entirely arbitrary
+decision. In the best case it just gives me some more code to write,
+while in the worst case it lulls users into a false sense of security.
+
+&gt;<i> Someone may have configured them
+</I>&gt;<i> with an expiration, for example, by design, knowing that their server
+</I>&gt;<i> would soon disappear, and that certificate reuse signals that something
+</I>&gt;<i> stinky is going on.
+</I>
+Let's say I as a sysadmin did that. Then my cert and domain
+registration expired, and someone else snatched it up and presented
+their own certificate. The gemini browsers would now tell users that
+&quot;there's a new cert here, and the previous had expired&quot;. What security
+did we achieve in this scenario?
+
+&gt;<i> Or the common name could be set because the admin
+</I>&gt;<i> has chosen to set up their own certificate authority, perhaps complete
+</I>&gt;<i> with signed client-side certificates, and the common name is used to
+</I>&gt;<i> strongly identify the server.
+</I>
+I don't see how this is an argument for clients attempting to validate
+the server certs... Did I misunderstand something here?
+
+Consider this scenario: I have the domain tinyrabbit.ml (not serving
+much of anything on any protocol, but still). Say I create a cert with
+the CN &quot;tinyrabbit.ml&quot; and set up a gemini server there. I get
+recurring visitors. After a few months I want to set up a subdomain
+app.tinyrabbit.ml. Oh, shoot, I should have made that cert a wildcard.
+Oh, well.
+
+My choices are now to either create another certificate strictly for
+app.tinyrabbit.ml, and then have two certs to keep track of. Or I
+create a new certificate for &quot;*.tinyrabbit.ml&quot; to future proof it, and
+serve this on the full domain. But now I opened a window for a MitM
+attack -- or at least a lot of questions from concerned users who
+wonder why my cert suddenly changed. Both of these are avoided if I
+can just keep using the old certificate for the full domain, and no
+security is lost.
+
+&gt;<i> Mostly correct. What we have is TOFU on top of TLS, not just TOFU. And
+</I>&gt;<i> because these parameters are present, it's likely that someone may rely
+</I>&gt;<i> on them. And if they do, and put their personal security on the line for
+</I>&gt;<i> it, then we can hardly call that a mistake.
+</I>&gt;<i>
+</I>&gt;<i> Gemini uses TLS. That comes with warts. That's life.
+</I>
+I probably have huge blindspots concerning cert handling in TLS
+specifically, but I don't understand at all what this means in this
+case o.&#245;
+
+&gt;<i> Consider that the stakes are leaking your user's private information and
+</I>&gt;<i> do your goddamn job as a responsible steward of their needs.
+</I>
+I'm trying to do it. No need to be snarky.
+
+Cheers,
+ew0k
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003598.html">On certificates and validation
+</A></li>
+	<LI>Next message (by thread): <A HREF="003601.html">On certificates and validation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3599">[ date ]</a>
+              <a href="thread.html#3599">[ thread ]</a>
+              <a href="subject.html#3599">[ subject ]</a>
+              <a href="author.html#3599">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

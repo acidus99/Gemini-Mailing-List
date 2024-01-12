@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> IDN with Gemini?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C20201207233751.GN24194%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003866.html">
+   <LINK REL="Next"  HREF="003886.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>IDN with Gemini?</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C20201207233751.GN24194%40brevard.conman.org%3E"
+       TITLE="IDN with Gemini?">sean at conman.org
+       </A><BR>
+    <I>Mon Dec  7 23:37:51 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003866.html">Crocker's Rules (was Re: IDN with Gemini?)
+</A></li>
+        <LI>Next message (by thread): <A HREF="003886.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3867">[ date ]</a>
+              <a href="thread.html#3867">[ thread ]</a>
+              <a href="subject.html#3867">[ subject ]</a>
+              <a href="author.html#3867">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great C&#244;me Chilliet once stated:
+&gt;<i> Hi,
+</I>&gt;<i> 
+</I>&gt;<i> Some thoughts on answers on the topic of unicode links. (I will focus on
+</I>&gt;<i> unicode in path rather than in domain here).
+</I>&gt;<i> 
+</I>&gt;<i> First, I wanted to point out that almost no-one uses them on the french
+</I>&gt;<i> Web. Some used that as an argument against having unicode in URIs, but I
+</I>&gt;<i> think no one uses them because of the punycode and percent encoding
+</I>&gt;<i> weirdness.
+</I>&gt;<i> 
+</I>&gt;<i> I read part of the RFC 3987 (IRI) and part of RFC 3986 (URI) and still do
+</I>&gt;<i> not understand what is the horrible added complexity you are talking
+</I>&gt;<i> about. Could people asserting IRI is a complex hell impossible to
+</I>&gt;<i> implement point to the exact problems with IRI?
+</I>
+  I'm reading through RFC-3987, and sections 4 and 5 give me pause.  Section
+4 relates to bidirectional IRIs (right-to-left languages).  This is mostly a
+client issue (I think) with the displaying of such.
+
+  Section 5 is the scarier of the two---normalization and comparison, and
+would most likely affect servers than clients (again, I think).  There are
+two examples given:
+
+	<A HREF="http://www.example.org/r&amp;#xE9;sum&amp;#xE9;.html">http://www.example.org/r&amp;#xE9;sum&amp;#xE9;.html</A>
+	<A HREF="http://www.example.org/re&amp;#x301;sume&amp;#x301;.html">http://www.example.org/re&amp;#x301;sume&amp;#x301;.html</A>
+
+  The first uses a precomposed character and the second uses a combining
+character.  I'm looking at the Unicode normalization standard [1], and the
+first thing that struck me was I had *not* thought of the order of multiple
+combining characters.  Oh, there's also Hangul and conjoining jamo.  And
+then ... well, I'll spare the horrors of that 32k document, but the upshot
+is---yes, that's yet *another* library I have to track down (and update as
+the Unicode standard is regularly updated).
+
+  Also, related question---what's the filename on the server?
+
+  The &quot;horrible added complexity&quot; is not RFC-3987 per se, but the &quot;horrible
+added complexity&quot; of Unicode normalization that is required.  Is that a
+valid excuse?  Perhaps not.  But there *is* the issue that a lot of people
+are having with Python 3 and filenames.  If you hit a filename that isn't
+UTF-8 and the Python 3 script breaks badly.  Yes, there *is* a link in my
+mind between these two issues but I'm not sure I can verbalize it coherently
+at this time.  Perhaps &quot;I will focus on unicode in the path&quot; reminided me of
+the Python 3 issue.
+
+&gt;<i> Regarding the breaking change argument, I think it is a bit weak, testing
+</I>&gt;<i> shows there is no consistency in how different clients/servers handles
+</I>&gt;<i> unicode currently.
+</I>
+ ...
+
+&gt;<i> (Note that these are real non-rethorical questions, I&#8217;m not trying to deny
+</I>&gt;<i> that handling IRI would be hard, I&#8217;m trying to understand why)
+</I>
+  Methinks you inadverantly answered your own question---Unicode is *not*
+easy [1][2][3][4].
+
+  -spc
+
+[1]	<A HREF="https://www.unicode.org/reports/tr15/tr15-50.html">https://www.unicode.org/reports/tr15/tr15-50.html</A>
+
+[2]	<A HREF="https://www.unicode.org/reports/tr9/tr9-42.html">https://www.unicode.org/reports/tr9/tr9-42.html</A>
+
+[3]	<A HREF="https://www.unicode.org/reports/tr14/tr14-45.html">https://www.unicode.org/reports/tr14/tr14-45.html</A>
+
+[4]	Among others.  The full current standard:
+
+	<A HREF="http://www.unicode.org/versions/Unicode13.0.0/">http://www.unicode.org/versions/Unicode13.0.0/</A>
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003866.html">Crocker's Rules (was Re: IDN with Gemini?)
+</A></li>
+	<LI>Next message (by thread): <A HREF="003886.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3867">[ date ]</a>
+              <a href="thread.html#3867">[ thread ]</a>
+              <a href="subject.html#3867">[ subject ]</a>
+              <a href="author.html#3867">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

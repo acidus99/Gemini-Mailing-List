@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Scheme Section 2 quibble
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3C1af8862a-24db-413d-aa4a-ffee87ac9a33%40www.fastmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003380.html">
+   <LINK REL="Next"  HREF="003364.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Scheme Section 2 quibble</H1>
+    <B>acdw</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3C1af8862a-24db-413d-aa4a-ffee87ac9a33%40www.fastmail.com%3E"
+       TITLE="Scheme Section 2 quibble">acdw at acdw.net
+       </A><BR>
+    <I>Mon Nov 16 23:39:19 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003380.html">Regarding non-finite response bodies
+</A></li>
+        <LI>Next message (by thread): <A HREF="003364.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3361">[ date ]</a>
+              <a href="thread.html#3361">[ thread ]</a>
+              <a href="subject.html#3361">[ subject ]</a>
+              <a href="author.html#3361">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi gemilist (listini?),
+
+I've got a minor quibble with the spec, section 2, paragraph ... 3(?), which I'll quote here.
+
+&gt;<i> &lt;URL&gt; is a UTF-8 encoded absolute URL, of maximum length 1024 bytes. If the scheme of the URL is not specified, a scheme of <A HREF="gemini://">gemini://</A> is implied.
+</I>
+Specifically, the &quot;scheme of <A HREF="gemini://">gemini://</A> is implied&quot; clause is confusing.  According to the URL spec (<A HREF="https://tools.ietf.org/html/rfc3986">https://tools.ietf.org/html/rfc3986</A>), 
+
+&gt;<i> The authority component is preceded by a double slash (&quot;//&quot;) and is terminated by the next slash (&quot;/&quot;), question mark (&quot;?&quot;), or number sign (&quot;#&quot;) character, or by the end of the URI.
+</I>
+Meaning that the scheme does not, in fact, include a &quot;//&quot; at the end, but rather that &quot;//&quot; is a separator between the scheme and the authority.  In fact, to actually encode a scheme-agnostic URL in a link, an author needs to write &quot;//example.com/path&quot;.  For an example, see the links in flounder.online.
+
+I bring this issue up because there have been instances of geminauts linking like this:
+
+=&gt; example.com/path An example link
+
+Which resolves, not to <A HREF="gemini://example.com/path,">gemini://example.com/path,</A> but to ./example.com/path on the current server.
+
+To resolve this confusion, I propose is to either
+
+(a) strip the &quot;//&quot; (and probably &quot;:&quot;, though I found no particular reference to it in the spec) from the &quot;scheme of <A HREF="gemini://">gemini://</A> is implied&quot; portion of the above paragraph, or
+
+(b) remove the scheme bit altogether.  I personally prefer this because it's maximally precise.
+
+I'd love to hear your thoughts on the matter.
+
+-- 
+~ acdw
+acdw.net | breadpunk.club/~breadw 
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003380.html">Regarding non-finite response bodies
+</A></li>
+	<LI>Next message (by thread): <A HREF="003364.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3361">[ date ]</a>
+              <a href="thread.html#3361">[ thread ]</a>
+              <a href="subject.html#3361">[ subject ]</a>
+              <a href="author.html#3361">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

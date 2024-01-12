@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Pondering interfaces over the Gemini 1x responses (was: CGI)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Pondering%20interfaces%20over%20the%20Gemini%201x%20responses%20%28was%3A%20CGI%29&In-Reply-To=%3CCABuFWiJYP0KBBgOZ14ucfv9EMB8kyh00BxchRaqFV_Une23xvQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002261.html">
+   <LINK REL="Next"  HREF="002268.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Pondering interfaces over the Gemini 1x responses (was: CGI)</H1>
+    <B>Paul Boyd</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Pondering%20interfaces%20over%20the%20Gemini%201x%20responses%20%28was%3A%20CGI%29&In-Reply-To=%3CCABuFWiJYP0KBBgOZ14ucfv9EMB8kyh00BxchRaqFV_Une23xvQ%40mail.gmail.com%3E"
+       TITLE="Pondering interfaces over the Gemini 1x responses (was: CGI)">boyd.paul2 at gmail.com
+       </A><BR>
+    <I>Sun Jul 19 13:59:21 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002261.html">Pondering interfaces over the Gemini 1x responses (was: CGI)
+</A></li>
+        <LI>Next message (by thread): <A HREF="002268.html">Pondering interfaces over the Gemini 1x responses (was: CGI)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2262">[ date ]</a>
+              <a href="thread.html#2262">[ thread ]</a>
+              <a href="subject.html#2262">[ subject ]</a>
+              <a href="author.html#2262">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I did consider a succession of inputs. I think we can all agree that a
+succession of modal inputs is irritating, and the UI would be exactly that
+on most clients.
+
+Asking the user to use a separator seemed error prone, so I didn't want to
+do that either. I know it can work. makeworld's gemlikes has a prompt of:
+
+&gt;<i> Enter your username, a space, and your comment
+</I>
+Usernames don't have spaces, and comments do, so this works great here. I'm
+just not sure people are going to get &quot;name;location;link;comment&quot; right
+consistently. I certainly wouldn't, I'd end up with &quot;paul;;my comment&quot;
+instead of &quot;paul;;;my comment&quot; and get my comment in the link field.
+
+Your UNIX command-line comment is interesting. One set of input args is
+enough for UNIX, so maybe getopt style flags?
+
+--name John --location &quot;From Beyond&quot; --comment &quot;This is what I have to say&quot;
+
+A form still seems right for a guestbook (the real-life version is a form
+after all). But there ought to be something interesting we can do with
+flags on the input line. Maybe an ASCII art drawing program? With inputs
+like &quot;line --from 0,0 --to 10,10&quot;.
+
+Paul
+
+On Sun, Jul 19, 2020 at 5:28 AM Hannu Hartikainen &lt;
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">hannu.hartikainen+gemini at gmail.com</A>&gt; wrote:
+
+&gt;<i> Hi!
+</I>&gt;<i>
+</I>&gt;<i> On Sat, 18 Jul 2020 at 16:47, Paul Boyd &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">boyd.paul2 at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; Anyway, I'm probably not going to write something like this again. The
+</I>&gt;<i> guestbook is kind of fun (Hello K&#233;vin and Timur!), so I'll leave it up. But
+</I>&gt;<i> I'll stick to things that fit better in the future.
+</I>&gt;<i>
+</I>&gt;<i> I think it's really valuable to *try* all kinds of things and
+</I>&gt;<i> different approaches to see *what* fits well. IMHO we have only
+</I>&gt;<i> scratched the surface of what is possible with the Gemini protocol
+</I>&gt;<i> (and what makes for good UX).
+</I>&gt;<i>
+</I>&gt;<i> To summarize what has been discussed here:
+</I>&gt;<i> 1. Filling in multiple values is not trivial with the input response type
+</I>&gt;<i> 2. One way is to generate a session id on the server. (This is
+</I>&gt;<i> stateful, which has some downsides but avoids replay issues.)
+</I>&gt;<i> 3. Another way is to embed all the responses in the URL.
+</I>&gt;<i>
+</I>&gt;<i> Some ideas that haven't been mentioned:
+</I>&gt;<i>
+</I>&gt;<i> a. If you include all the fields at once, you could just ask for them
+</I>&gt;<i> in one request. Eg. &quot;10 name;location;link;comment&quot; which the user is
+</I>&gt;<i> smart enough to parse and respond with &quot;Hannu;;;This is cool!&quot;. Or for
+</I>&gt;<i> a better UX, make the fields newline-separated (ie. %0A in the URL)
+</I>&gt;<i> and have multiline-capable input fields in browsers. Note: this is
+</I>&gt;<i> against a strict interpretation of the spec but hasn't been discussed
+</I>&gt;<i> AFAIK.
+</I>&gt;<i>
+</I>&gt;<i> b. Instead of having different links for different fields, you could
+</I>&gt;<i> ask for the fields in succession (but this only works well for the
+</I>&gt;<i> session id based approach). Eg. /guestbook/sign responds with &quot;30
+</I>&gt;<i> /guestbook/sign/aF3d&quot;, then /guestbook/sign/aF3d responds with &quot;10
+</I>&gt;<i> Name&quot;, /guestbook/sign/aF3d?Hannu with &quot;10 Location (optional)&quot;, then
+</I>&gt;<i> &quot;10 Link (optional)&quot; and &quot;10 Comment&quot; in sequence, saving each query
+</I>&gt;<i> string to the server-side session. After the final response either
+</I>&gt;<i> save the comment or show the responses with a link to save.
+</I>&gt;<i>
+</I>&gt;<i> I personally think the Gemini protocol (as it currently is) can be as
+</I>&gt;<i> powerful as the UNIX command line (note: only CLI, not TUI). In fact,
+</I>&gt;<i> you could serve a remote shell over Gemini. Of course we're all
+</I>&gt;<i> spoiled by interactive software even in a terminal so Gemini feels
+</I>&gt;<i> quite limited.
+</I>&gt;<i>
+</I>&gt;<i> -Hannu
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200719/840f7d8a/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200719/840f7d8a/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002261.html">Pondering interfaces over the Gemini 1x responses (was: CGI)
+</A></li>
+	<LI>Next message (by thread): <A HREF="002268.html">Pondering interfaces over the Gemini 1x responses (was: CGI)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2262">[ date ]</a>
+              <a href="thread.html#2262">[ thread ]</a>
+              <a href="subject.html#2262">[ subject ]</a>
+              <a href="author.html#2262">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

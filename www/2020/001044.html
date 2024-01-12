@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Gemini and CGI hosting
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20and%20CGI%20hosting&In-Reply-To=%3C20200525210658.GN23998%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001043.html">
+   <LINK REL="Next"  HREF="000980.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Gemini and CGI hosting</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20and%20CGI%20hosting&In-Reply-To=%3C20200525210658.GN23998%40brevard.conman.org%3E"
+       TITLE="Gemini and CGI hosting">sean at conman.org
+       </A><BR>
+    <I>Mon May 25 22:06:58 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001043.html">Gemini and CGI hosting
+</A></li>
+        <LI>Next message (by thread): <A HREF="000980.html">Updates to Gemini FAQ
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1044">[ date ]</a>
+              <a href="thread.html#1044">[ thread ]</a>
+              <a href="subject.html#1044">[ subject ]</a>
+              <a href="author.html#1044">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">peteyboy at sdf.org</A> once stated:
+&gt;<i> Cool, i will check that out. But is that a custom app, then? There's no
+</I>&gt;<i> .cgi file or anything you're pointing to. How'd you implement it?
+</I>
+  You are right it's not a CGI script [1].  It's a custom module I added to
+the server [2].  The source code is here:
+
+	<A HREF="gemini://gemini.conman.org/extensions/GLV-1/handlers/hilo.lua">gemini://gemini.conman.org/extensions/GLV-1/handlers/hilo.lua</A>
+
+and most of it is just error checking, I can still walk you through the code
+though.  
+
+	function handler(_,_,loc,match)
+
+  The handler gets four parameters, but I don't care about the first two
+(the first is the configuration paremeters for the handler, which for this
+handler I don't care about, and the second is the client certificate info,
+again, there is none).  The third one is the broken down URL, for example:
+
+	{
+	  scheme = &quot;gemini&quot;,
+	  path = &quot;/hilo/1082&quot;,
+	  query = &quot;33&quot;,
+	  host = &quot;gemini.conman.org&quot;,
+	  port = 1965.000000,
+	}
+
+  The last parameter is the path portion of the URL broken up into two
+components (it's specified in the configuration portion how to split the
+path up) and for the example above, it would be:
+
+	{ &quot;/hilo/&quot; , &quot;1082&quot; }
+
+  When you first enter the game, the second element of the match paramter
+will be &quot;&quot;, so that starts a game, which generates a random number and
+generates a link that contains the encoded number (I wanted something simple
+to demonstrate the 10 status codes, I didn't want to make this bulletproof).
+
+  If there's no query portion to the URL, then I return a status code of 10
+with a prompt.  If there *is* a query portion, I decode the query string and
+do some error checking (making sure it's formatted properly and a number). 
+I then convert the second portion of the match paramter to a value to
+recover the original number, compare it to the guess and return a 10 status
+code if it's not right, or a 20 if you guessed it.
+
+  It could very well be a CGI script, and I could make it look exactly the
+same with the same URLs and everything [3], but I went this route because I
+could, and it was a bit easier to implement.
+
+  -spc
+
+[1]	The server it's running on does support CGI.
+
+[2]	Because its' easy enough to write a custom module (or handler) for
+	GLV-1.12556.
+
+[3]	In my server, when it comes across a file that is marked executable,
+	and CGI is enabled, will then treat the file as a CGI script.  No
+	special extensions required.  For example:
+
+		<A HREF="gemini://gemini.conman.org/cgi/test">gemini://gemini.conman.org/cgi/test</A>
+		<A HREF="gemini://gemini.conman.org/cgi/test/1082">gemini://gemini.conman.org/cgi/test/1082</A>
+		<A HREF="gemini://gemini.conman.org/cgi/test/1082?33">gemini://gemini.conman.org/cgi/test/1082?33</A>
+
+	Here, the CGI script is called &quot;test&quot;.  
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001043.html">Gemini and CGI hosting
+</A></li>
+	<LI>Next message (by thread): <A HREF="000980.html">Updates to Gemini FAQ
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1044">[ date ]</a>
+              <a href="thread.html#1044">[ thread ]</a>
+              <a href="subject.html#1044">[ subject ]</a>
+              <a href="author.html#1044">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

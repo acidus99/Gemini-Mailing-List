@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Caching and status codes
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3C20201107194358.61b66e19%40home%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003105.html">
+   <LINK REL="Next"  HREF="003108.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Caching and status codes</H1>
+    <B>Ali Fardan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3C20201107194358.61b66e19%40home%3E"
+       TITLE="Caching and status codes">raiz at stellarbound.space
+       </A><BR>
+    <I>Sat Nov  7 16:43:58 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003105.html">Caching and status codes
+</A></li>
+        <LI>Next message (by thread): <A HREF="003108.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3107">[ date ]</a>
+              <a href="thread.html#3107">[ thread ]</a>
+              <a href="subject.html#3107">[ subject ]</a>
+              <a href="author.html#3107">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, 07 Nov 2020 10:17:20 +0300
+&quot;Leo&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">list at gkbrk.com</A>&gt; wrote:
+&gt;<i> I don't understand why a client caching responses is rude. Or rather,
+</I>&gt;<i> I don't understand who it is being rude to. When I configure my HTTP
+</I>&gt;<i> or Gemini browser to cache every response, is my browser now being
+</I>&gt;<i> rude to me? Is it being rude to the server?
+</I>
+The rude thing here would be having to serve large files over Gemini
+and expect them to be served often, the protocol operates under the
+assumption that caching does not exist, it's by convention, this
+simplifies the client a LOT and removes such uncertainty when writing
+dynamic content for Gemini.  Consider reading 2.1.1 in
+<A HREF="gemini://gemini.circumlunar.space/docs/faq.gmi">gemini://gemini.circumlunar.space/docs/faq.gmi</A>
+
+&gt;<i> How can something that causes less resource usage on the server be
+</I>&gt;<i> rude to the server, or something I configured or downloaded as a
+</I>&gt;<i> &quot;client that has caching&quot; be rude to me for using it?
+</I>
+Because the server operates under the assumption that content is not
+cached, if you're serving large files over Gemini you should look
+somewhere else, this is not bittorrent, and if your server is eating up
+a lot of resources, you're doing Gemini wrong, Gemini servers don't
+have to be complicated, that's your own problem.  Consider using
+connection queue and serving connections one by instead of forking or
+multithreading because the protocol allows such simple design by
+closing the connection right after the transaction, it's not like in
+HTTP land where you have keep-alive.
+
+&gt;<i> Is not doing everything a server sends being rude to the server
+</I>&gt;<i> operator? If a server sends a 100000000x100000000 image, is my image
+</I>&gt;<i> viewer being rude for refusing to decode/display it?
+</I>
+No, its being sane, this does not apply here.
+
+Does everyone here require a lecture on why their desired features
+aren't in the protocol yet? seems to be the common point of discussion
+here, as if the protocol is NOT ENOUGH, I don't know what brought your
+interest here, did you see it as a great way of avoiding the current
+scope creep of the modern web, or as a playground to satisfy your bad
+ideas?
+
+Do you have anything else to help the community with? perhaps hosting
+content in the Gemini space? or helping in the development of tools
+interacting with the protocol? or is your interest just satisfied when
+the spec becomes ten times of its current size, then you can MAYBE
+decide to use the protocol for yourself.
+
+If any feature does not add a great value at an acceptable cost to the
+simplicity of the protocol, consider it rejected before even proposing
+it, I don't want to have a different experience browsing Gemini space
+using netcat than using Kristall.
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003105.html">Caching and status codes
+</A></li>
+	<LI>Next message (by thread): <A HREF="003108.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3107">[ date ]</a>
+              <a href="thread.html#3107">[ thread ]</a>
+              <a href="subject.html#3107">[ subject ]</a>
+              <a href="author.html#3107">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

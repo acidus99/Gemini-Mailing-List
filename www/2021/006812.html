@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> GDPR and the protocol implications
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20GDPR%20and%20the%20protocol%20implications&In-Reply-To=%3Ca05e9542-5540-05b5-47d0-1093a845edba%40qwertqwefsday.eu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006800.html">
+   <LINK REL="Next"  HREF="006801.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>GDPR and the protocol implications</H1>
+    <B>Johann Galle</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20GDPR%20and%20the%20protocol%20implications&In-Reply-To=%3Ca05e9542-5540-05b5-47d0-1093a845edba%40qwertqwefsday.eu%3E"
+       TITLE="GDPR and the protocol implications">johann+gemini at qwertqwefsday.eu
+       </A><BR>
+    <I>Mon Jun 28 12:41:53 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006800.html">GDPR and the protocol implications
+</A></li>
+        <LI>Next message (by thread): <A HREF="006801.html">[USER][IDEA] Gemini Database of Places and Restaurants
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6812">[ date ]</a>
+              <a href="thread.html#6812">[ thread ]</a>
+              <a href="subject.html#6812">[ subject ]</a>
+              <a href="author.html#6812">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>(note: I am not a lawyer)
+
+On 2021-06-25, Matthias Geier wrote:
+&gt;<i> About gdpr and certificates. If I am not mistaken, before I even request the TLS certificate, I'd need to get a user consent, not to mention storing it.
+</I>
+The certificate is not technically required to contain personally identifying information, people can just input nothing or random data when they generate it. The main interesting part of the certificate would be the public key. Of course a specific service might not accept certificates where fields do not contain some expected form of content.
+
+If they want to, users can choose to input their own personally identifying information but in that case I think it could maybe qualify as consent. I would question if this consent is &quot;active&quot; enough though.
+
+&gt;<i> I can't show a gdpr warning on the cert missing error, since the spec doesn't allow me to.
+</I>
+If you really wanted to you could make your server redirect people connecting without a certificate to a full document to tell them that they need a certificate, if you want to be sure.
+
+Similarly for people visiting the site with an unknown/new certificate (maybe something like &quot;You are connecting with a certificate which may contain personally identifying information. Under GDPR we must ask you to stop using this certificate for browsing this capsule or continue this way to consent to let us process that data.&quot;) Seeing how web pages request consent to use cookies I think it would be fine to request a certificate from the client and then show some consent page if the certificate is new/unknown. Otherwise how would you know whether this user has already consented or not? IP addresses will usually be dynamic or a user might move to a different connection. I don't know if any current server allows for something like this though.
+
+To be even more sure you could outright reject client certificates that contain more than just the public key, depending on your applications needs.
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006800.html">GDPR and the protocol implications
+</A></li>
+	<LI>Next message (by thread): <A HREF="006801.html">[USER][IDEA] Gemini Database of Places and Restaurants
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6812">[ date ]</a>
+              <a href="thread.html#6812">[ thread ]</a>
+              <a href="subject.html#6812">[ subject ]</a>
+              <a href="author.html#6812">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

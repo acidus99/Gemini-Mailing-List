@@ -1,0 +1,251 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Gateway Interfaces for Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gateway%20Interfaces%20for%20Gemini&In-Reply-To=%3C20200525231103.GO23998%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001042.html">
+   <LINK REL="Next"  HREF="001067.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Gateway Interfaces for Gemini</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gateway%20Interfaces%20for%20Gemini&In-Reply-To=%3C20200525231103.GO23998%40brevard.conman.org%3E"
+       TITLE="Gateway Interfaces for Gemini">sean at conman.org
+       </A><BR>
+    <I>Tue May 26 00:11:04 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001042.html">jetforce security vulnerability, affecting versions &lt; 0.2.3
+</A></li>
+        <LI>Next message (by thread): <A HREF="001067.html">Gateway Interfaces for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1045">[ date ]</a>
+              <a href="thread.html#1045">[ thread ]</a>
+              <a href="subject.html#1045">[ subject ]</a>
+              <a href="author.html#1045">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+  I just finished support for SCGI for GLV-1.12556, which makes it the
+second gateway interface it supports (the other being CGI).  And I feel this
+is probably the time to talk variables---what informatino can be expected
+for CGI and SCGI programs when then run under Gemini.  The CGI specification
+[1] calls such information &quot;meta-variables&quot;.  The SCGI specification [2]
+calls them &quot;headers&quot;.  Most people know them as &quot;environment variables&quot; [3],
+but whatever, it would be nice to know what a gateway interface program can
+expect in the way of data from the server.
+
+  As I've mentioned before, for CGI, I follow the spec (with some minor
+variations due to Gemini).  For SCGI, I decided to pass along the same
+information but with a minor variation.  So, for BOTH, the data I pass
+along:
+
+	GEMINI_DOCUMENT_ROOT	Path to the domain's main content directory
+	GEMINI_URL		The requested URL
+	GEMINI_URL_PATH		The path portion of the requested URL
+	PATH_INFO		optional per CGI
+	PATH_TRANSLATED		optional per CGI
+	QUERY_STRING		Query string portion of request, or &quot;&quot; [a]
+	REMOTE_ADDR		Remote address [b]
+	REMOTE_HOST		Remote hostname [b][c]
+	SCRIPT_NAME		Name of the script [d]
+	SERVER_NAME		Hostname of the request
+	SERVER_PORT		Port number from the request
+	SERVER_SOFTWARE		&quot;GLV-1.12556/1&quot;
+
+	AUTH_TYPE		&quot;Certificate&quot; [e]
+	REMOTE_USER		The subject CN from the client cert [e]
+
+	TLS_CIPHER		TLS cipher used [e][f]
+	TLS_CLIENT_HASH		TLS hash [e][f]
+	TLS_CLIENT_ISSUER	The issuer field [e][f][g]
+	TLS_CLIENT_ISSUER_*	Subfields from the isser (like C, CN, etc.) [e][f]
+	TLS_CLIENT_NOT_AFTER	Expiration date [e][f]
+	TLS_CLIENT_NOT_BEFORE	Valid date [e][f]
+	TLS_CLIENT_REMAIN	Number of days until cert expires [e][f]
+	TLS_CLIENT_SUBJECT	The subject field [e][f]
+	TLS_CLIENT_SUBJECT_*	Subfields from the subject(like CN, etc.) [e][f][g]
+	TLS_VERSION		TLS version being used [e][f]
+
+[a]	Mandatory per RFC-3875
+[b]	Mandatory per RFC-3875---the more security conscience of you might
+	not like this, but in that case, I can recommend the value of
+	&quot;127.0.0.1&quot; or &quot;::1&quot; 
+[c]	Can be the IP address, which is what I do
+[d]	In my case, it's the full path to the file (CGI) or symbolic link
+	(SCGI) 
+[e]	Only set if a client certificate is sent
+[f]	Only set if configured to do so.
+[g]	For example, TLS_CLIENT_SUBJECT_CN, TLS_CLIENT_SUBJECT_OU
+
+  I added GEMINI_DOCUMENT_ROOT to mimic Apache's DOCUMENT_ROOT, and
+GEMINI_URL and GEMINI_URL_PATH because I found a few servers that defined
+GEMINI_URL and passed either the full URL or the path portion, and I wanted
+to cover both cases with something.
+
+  For CGI, the program will also receive the following variable:
+
+	GATEWAY_INTERFACE	&quot;CGI/1.1&quot; (mandatory per RFC-3875)
+
+  And for SCGI, the program will receive the following variables:
+
+	CONTENT_LENGTH		&quot;0&quot; (mandatory per spec)
+	SCGI			&quot;1&quot; (mandatory per spec)
+
+  Why SCGI didn't use GATEWAY_INTERFACE=&quot;SCGI/1&quot; is beyond me, but anyway,
+there's the variables I pass along for both CGI and SCGI.  You can see
+actual values used by following these links:
+
+	<A HREF="gemini://gemini.conman.org/cgi/test">gemini://gemini.conman.org/cgi/test</A>
+	<A HREF="gemini://gemini.conman.org/cgi/test/path/file">gemini://gemini.conman.org/cgi/test/path/file</A>
+	<A HREF="gemini://gemini.conman.org/scgi-sample">gemini://gemini.conman.org/scgi-sample</A>
+	<A HREF="gemini://gemini.conman.org/scgi-sample/path/file">gemini://gemini.conman.org/scgi-sample/path/file</A>
+
+  If you see some extra data, it's because I allow extra values to be set.
+
+  And my question to you is---what variables should a CGI/SCGI program
+depend upon to exist?
+
+  -spc
+
+[1]	RFC-3875
+
+[2]	<A HREF="https://web.archive.org/web/20020403050958/http://python.ca/nas/scgi/protocol.txt">https://web.archive.org/web/20020403050958/http://python.ca/nas/scgi/protocol.txt</A>
+
+[3]	Because how they're passed to CGI scripts.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001042.html">jetforce security vulnerability, affecting versions &lt; 0.2.3
+</A></li>
+	<LI>Next message (by thread): <A HREF="001067.html">Gateway Interfaces for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1045">[ date ]</a>
+              <a href="thread.html#1045">[ thread ]</a>
+              <a href="subject.html#1045">[ subject ]</a>
+              <a href="author.html#1045">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

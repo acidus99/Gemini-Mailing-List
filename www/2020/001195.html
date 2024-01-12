@@ -1,0 +1,241 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> The Problems of Transclusion (was Re: More silly text/gemini spec proposals)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20The%20Problems%20of%20Transclusion%20%28was%20Re%3A%20More%20silly%20text/gemini%20spec%0A%20proposals%29&In-Reply-To=%3C20200530024137.GI23998%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001203.html">
+   <LINK REL="Next"  HREF="001197.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>The Problems of Transclusion (was Re: More silly text/gemini spec proposals)</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20The%20Problems%20of%20Transclusion%20%28was%20Re%3A%20More%20silly%20text/gemini%20spec%0A%20proposals%29&In-Reply-To=%3C20200530024137.GI23998%40brevard.conman.org%3E"
+       TITLE="The Problems of Transclusion (was Re: More silly text/gemini spec proposals)">sean at conman.org
+       </A><BR>
+    <I>Sat May 30 03:41:37 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001203.html">MAKER'S MAP (was Re: More silly text/gemini spec proposals)
+</A></li>
+        <LI>Next message (by thread): <A HREF="001197.html">The Problems of Transclusion (was Re: More silly text/gemini spec proposals)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1195">[ date ]</a>
+              <a href="thread.html#1195">[ thread ]</a>
+              <a href="subject.html#1195">[ subject ]</a>
+              <a href="author.html#1195">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">poomklao at yahoo.com</A> once stated:
+&gt;<i> I have a couple of silly ideas for extra formatting:
+</I>&gt;<i> 
+</I>&gt;<i> # Images
+</I>&gt;<i> 
+</I>&gt;<i> Elegant form:
+</I>&gt;<i> 
+</I>&gt;<i> IMG /static/fun.png &quot;Alt text to display if you're in a terminal&quot;
+</I>&gt;<i> 
+</I>&gt;<i> Backwards-compatible form:
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; image:/static/fun.png &quot;Image: My cute little cat&quot;
+</I>
+  I'm picking this message as a starting point.  I'm not trying to shame
+poomklao for this idea, as people have been wanting something like this for
+years [1].  And I promised an email about this earlier to day, when I said:
+
+&gt;<i> NO INLINING OF LINKS ALLOWED
+</I>
+and here is the rational I have for this.
+
+  The idea is technically called &quot;transclusion&quot; and was coined by Ted
+Nelson.  &quot;Transclusion&quot; is the automatic inclusion of content into one
+document from another one and was meant as a means of presenting a quote
+(&lt;blockquote&gt; in HTML) from a particular version of a particular document
+(with royalties and all that mess).  We have a very limited form of it on
+the Web---the only three mediums that can be directly transcluded are
+images, video and sounds, none of which support transclusion themselves. 
+You also have a limited from with frames in HTML, but ...
+
+  Like all formal, well specified systems, things tend to go pear shaped [2]
+when you allow self-referential references, and that's what transclusion (in
+general) brings to the table.  In the Hacker News thread about Gemini [4], a
+person brought up transclusion [5] in text/gemini files with the following
+syntax:
+
+	&lt;= <A HREF="gemini://example.com/path/to/resource">gemini://example.com/path/to/resource</A>
+
+and for the sake of argument, let's assume this does what it
+indicates---that the document at the given link is inserted at that point
+into the document being rendered [6].  For the example, let's say we are
+obtaining the document &lt;<A HREF="gemini://example.com/document.gemini">gemini://example.com/document.gemini</A>&gt;, and in that
+document you have:
+
+	&lt;= <A HREF="gemini://example.com/document.gemini">gemini://example.com/document.gemini</A>
+
+  And thus the problem is revealed.  
+
+  &quot;But surely, you can keep track of all transcluded files to prevent this
+from happening,&quot; you say.  And yes, that is possible.  But as the creator of
+the Client Torture Test, I can assure you that I can create an endless
+stream of unique documents that transclude an endless stream of unique
+documents that transclude an endless stream of unique documents that
+transclude an endless stream of unique documents th
+
+Core error-bus dumped.
+
+  Where was I?
+
+  Oh yes, self-referential transclusion, or an infinite amount of
+transclusion.
+
+  &quot;But surely, like rediection, you can limit the depth of transclusion,&quot;
+you say.  Yes, you can limit the level of transclusion, but that just adds
+to the complexity of the implementation.  An implementation would have to
+both track the documents being transcluded plus the depth of transclusion.
+Unlike rediects, where you just track the number of times you are being
+redirected, transclusion is a bit more complex:
+
+	doc1 &lt;= doc2 &lt;= doc3 &lt;= doc4  &lt;= doc5
+				      &lt;= doc6
+				      &lt;= doc7
+			     &lt;= doc8  &lt;= doc9
+				      &lt;= doc10
+				      &lt;= doc11
+			     &lt;= doc12 &lt;= doc13 
+
+  Just limited the depth of transclusion to 5 levels still leads to a
+potential 626 documents being transcluded (if I did my math correctly).  And
+implementing just one level is annoying for little in return.
+
+  So while I like the idea of transclusion, I have to admit there are issues
+when you can possibly transclude documents that transclude other documents.
+So in this, I say:
+
+                        NO INLINING OF LINKS ALLOWED!
+
+  -spc
+
+[1]	Starting in the 60s, with Ted Nelson and his Xanadu project.
+
+[2]	English (perhaps an Americanism) for &quot;Situation Normal All Fouled
+	Up&quot; [3]
+
+[3]	aka SNAFU.
+ 
+[4]	<A HREF="https://news.ycombinator.com/item?id=23042424">https://news.ycombinator.com/item?id=23042424</A>
+
+[5]	<A HREF="https://news.ycombinator.com/item?id=23046008">https://news.ycombinator.com/item?id=23046008</A>
+
+[6]	In the Hacker News comment, the transclusion is meant to be done by
+	the server, not the client.  For my argument, it doesn't make a
+	difference *who* does the translusion.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001203.html">MAKER'S MAP (was Re: More silly text/gemini spec proposals)
+</A></li>
+	<LI>Next message (by thread): <A HREF="001197.html">The Problems of Transclusion (was Re: More silly text/gemini spec proposals)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1195">[ date ]</a>
+              <a href="thread.html#1195">[ thread ]</a>
+              <a href="subject.html#1195">[ subject ]</a>
+              <a href="author.html#1195">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

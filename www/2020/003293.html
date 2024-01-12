@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Supporting optional underscores for italics
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Supporting%20optional%20underscores%20for%20italics&In-Reply-To=%3C20201113020229.GV30302%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003292.html">
+   <LINK REL="Next"  HREF="003294.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Supporting optional underscores for italics</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Supporting%20optional%20underscores%20for%20italics&In-Reply-To=%3C20201113020229.GV30302%40brevard.conman.org%3E"
+       TITLE="Supporting optional underscores for italics">sean at conman.org
+       </A><BR>
+    <I>Fri Nov 13 02:02:30 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003292.html">Supporting optional underscores for italics
+</A></li>
+        <LI>Next message (by thread): <A HREF="003294.html">Supporting optional underscores for italics
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3293">[ date ]</a>
+              <a href="thread.html#3293">[ thread ]</a>
+              <a href="subject.html#3293">[ subject ]</a>
+              <a href="author.html#3293">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+  Oooh!  A bike sheeding thread!  I know Drew DeVault might complain, but
+hey, this list wouldn't be this list unless the majority of messages were
+about text formatting (seriously---over half the messages are not about the
+protocol at all, but about text formatting).
+
+  So with my introduction out of the way, let me nitpick [1] this proposal
+with a bunch of corner cases I can already see ...
+
+It was thus said that the Great John Cowan once stated:
+&gt;<i> Given that we are *not* going to change the definition of text/gemini, but
+</I>                    ^^^^^ shouldn't that be _not_?  Or are you going for
+strong emphasis here?  
+
+&gt;<i> 1.  If an underscore appears outside an emphasized text section, and is at
+</I>&gt;<i> the beginning of a text line or after the # characters in a header line, or
+</I>&gt;<i> is preceded by a whitespace character, then it marks the beginning of an
+</I>&gt;<i> emphasized-text section
+</I>
+  Pattern wise, it's like:
+
+	(start_of_line ?('#'*) | whitespace) '_'
+
+&gt;<i> (rendered as italics or in some other way).
+</I>
+  Such as bold, a larger font, a smaller font, or some other way other than
+using italics.  Okay, got it.  
+
+&gt;<i> 2.  If an underscore appears inside an emphasized text section, and is at
+</I>&gt;<i> the end of a line, or is followed by whitespace, sentence-terminating
+</I>&gt;<i> punctuation, or parenthesis- or quotation-terminating punctuation, then it
+</I>&gt;<i> marks the end of the emphasized-text section.
+</I>
+  I've found that terminating italic sections before sentence-terminating
+punctuation can lead to very ugly output.  For example:
+
+	He asked about _blandit_?
+
+  Here, the italic t will run into the trailing question mark, which I feel
+looks terrible.  That's why I tend to include sentence terminating marks
+within the italic section:
+
+	He asked about _blandit?_
+
+This is of less concern with periods and commas, since there isn't much of a
+difference, stylistic wise, between a normal period and italic period.
+
+  It also sounds like you are expecting users to write stuff like
+
+	_lorem ipsum dolor sit amet_
+
+or
+
+	_lorem_ipsum_dolor_sit_amet_
+
+else, why not just say that once in an emphasized text section, the next
+underscore ends it.  Much easier to deal with, and a bit easier to deal with
+when wrapping text (although I suppose one can add '_' to the list, along
+with whitespace and hypens).
+
+&gt;<i> These rules exclude underscores in things like snake_case_variables, while
+</I>&gt;<i> supporting most actual uses.
+</I>&gt;<i> 
+</I>&gt;<i> 3.  An emphasized-text section ends unconditionally at the end of a line.
+</I>
+  Odd, but I can see why you say so, given the nature of parsing gemtext. 
+But one unaware of that might end up writing:
+
+	blah blabh _lorem ipsum dolor
+	sit amet_ blah blah blah
+
+  and wonder why the italicised text is all wrong.
+
+&gt;<i> The attached file specifies all the Unicode whitespace and terminating
+</I>&gt;<i> punctuation, from the Unicode Character Database.  There are quite a few,
+</I>&gt;<i> but you don't even need a regular expression, just a list of the characters.
+</I>
+  All 352 of the characters.  
+
+  For now.
+
+  That might be updated at the next Unicode revision.
+
+  Got it.
+
+&gt;<i> I hope this is helpful and/or inspirational.
+</I>
+  -spc (Unicode is hard!  Let's do rocketry!)
+
+[1]	Can we still say that term?
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003292.html">Supporting optional underscores for italics
+</A></li>
+	<LI>Next message (by thread): <A HREF="003294.html">Supporting optional underscores for italics
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3293">[ date ]</a>
+              <a href="thread.html#3293">[ thread ]</a>
+              <a href="subject.html#3293">[ subject ]</a>
+              <a href="author.html#3293">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

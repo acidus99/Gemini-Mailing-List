@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] [users] Two new capsules and a server
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20%5Busers%5D%20Two%20new%20capsules%20and%20a%20server&In-Reply-To=%3C87im7bc2vl.fsf%40omarpolo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004979.html">
+   <LINK REL="Next"  HREF="004985.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] [users] Two new capsules and a server</H1>
+    <B>Omar Polo</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20%5Busers%5D%20Two%20new%20capsules%20and%20a%20server&In-Reply-To=%3C87im7bc2vl.fsf%40omarpolo.com%3E"
+       TITLE="[ANN] [users] Two new capsules and a server">op at omarpolo.com
+       </A><BR>
+    <I>Mon Feb  1 13:51:42 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004979.html">[ANN] [users] Two new capsules and a server
+</A></li>
+        <LI>Next message (by thread): <A HREF="004985.html">[ANN] [users] Two new capsules and a server
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4984">[ date ]</a>
+              <a href="thread.html#4984">[ thread ]</a>
+              <a href="subject.html#4984">[ subject ]</a>
+              <a href="author.html#4984">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; writes:
+
+&gt;<i> [...]
+</I>&gt;<i>
+</I>&gt;<i>   You don't split the query.  You pass it in, as is, from the request, in
+</I>&gt;<i> QUERY_STRING.  Play around with:
+</I>&gt;<i>
+</I>&gt;<i> 	<A HREF="gemini://gemini.conman.org/cgi">gemini://gemini.conman.org/cgi</A>
+</I>&gt;<i>
+</I>&gt;<i> It will show all the variables, command line arguments and a breakdown of
+</I>&gt;<i> the query string.
+</I>
+Thanks for providing that page.  I played a bit with it while fixing my
+CGI implementation and now I believe gmid behaves just like GLV-1.12556
+does (minus the argument list).  I have to do some changes in order to
+access the raw query string when I'm about to execute the CGI script.
+
+One thing that your page doesn't show are the TLS-related environment
+variables.  I remember you wrote about them in a previous message on
+this list.
+
+I built a similar page, hosted at
+
+	<A HREF="gemini://gemini.omarpolo.com/cgi/env">gemini://gemini.omarpolo.com/cgi/env</A>
+
+&gt;&gt;<i> Of course I'd like to have a complete CGI support, and not something
+</I>&gt;&gt;<i> merely closer, so I'll take some time to read how other servers are
+</I>&gt;&gt;<i> handling them, starting from your GLV-1.12556.
+</I>&gt;<i>
+</I>&gt;<i>   Warning about my server---the CGI implementation also allows one to run
+</I>&gt;<i> CGI scripts for a webserver (and Apache in particular) so be aware of that.
+</I>&gt;<i>
+</I>&gt;&gt;<i> I'd like too, as pointed by John Cowan, to have a best-practices or a
+</I>&gt;&gt;<i> companion specification for CGI on Gemini, as RFC3875 seems quite
+</I>&gt;&gt;<i> HTTP-specific, but I don't think I'm the most qualified to write one :D
+</I>&gt;<i>
+</I>&gt;<i>   It's not as HTTP-specific as it may seem---the only bit where it's an
+</I>&gt;<i> issue is the REQUEST_METHOD.  My server sets it to &quot;&quot; (as there is no method
+</I>&gt;<i> for Gemini, and what I think it should be, given RFC-3875 makes it
+</I>&gt;<i> mandatory); others set it to &quot;GET&quot;.  Aside from that, it's quite generic.
+</I>&gt;<i>
+</I>&gt;<i>   -spc
+</I>
+Right, skimming through it gave me the wrong impression.  That are
+various places were HTTP is blatantly assumed (just grep 404), but
+otherwise it seems easily applicable to Gemini.
+
+Thanks
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004979.html">[ANN] [users] Two new capsules and a server
+</A></li>
+	<LI>Next message (by thread): <A HREF="004985.html">[ANN] [users] Two new capsules and a server
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4984">[ date ]</a>
+              <a href="thread.html#4984">[ thread ]</a>
+              <a href="subject.html#4984">[ subject ]</a>
+              <a href="author.html#4984">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

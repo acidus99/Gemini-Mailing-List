@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] to postel or not to postel, that is the question
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20to%20postel%20or%20not%20to%20postel%2C%20that%20is%20the%20question&In-Reply-To=%3C1906931F-AD9A-4555-83D2-A76E4BEA0A1A%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004423.html">
+   <LINK REL="Next"  HREF="004436.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] to postel or not to postel, that is the question</H1>
+    <B>Petite Abeille</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20to%20postel%20or%20not%20to%20postel%2C%20that%20is%20the%20question&In-Reply-To=%3C1906931F-AD9A-4555-83D2-A76E4BEA0A1A%40gmail.com%3E"
+       TITLE="[tech] to postel or not to postel, that is the question">petite.abeille at gmail.com
+       </A><BR>
+    <I>Sat Dec 26 23:25:04 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004423.html">[user] psa: killfile
+</A></li>
+        <LI>Next message (by thread): <A HREF="004436.html">[tech] to postel or not to postel, that is the question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4432">[ date ]</a>
+              <a href="thread.html#4432">[ thread ]</a>
+              <a href="subject.html#4432">[ subject ]</a>
+              <a href="author.html#4432">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Looking at the various implementations of the URL/URI/IRI stack in mainstream libraries, one has to face Jon Postel's robustness ghost &#185;.
+
+
+Exhibit &#8470; 1: Google's own net/url/url.go &#178;
+
+// See RFC 3986. This package generally follows RFC 3986, except where
+// it deviates for compatibility reasons.
+
+Indeed. A very pragmatic approach to reality, taking the robustness principle to heart: pretty much anything goes. Such is life. 
+
+
+Exhibit &#8470; 2: Sean Conner's own Parsing Expression Grammar &#179; &#8308; &#8309;
+
+A work of unearthly beauty which actually follows the RFC to the letter. 
+
+The anti-thesis of Postel's law, as strict as the MUST imperative.
+
+
+Both pros and cons of Postel's injunction can be argued ad nauseam.
+
+
+What does Gemini want, as a protocol? Leniency as provided by Exhibit &#8470; 1? Or strictness as demonstrated by Exhibit &#8470; 2?
+
+
+It is my personal opinion that Postel's Law is the root of all evils as we know them to this day: any old garbage can travel over the pipe, and you must do your best to handle it. Good luck to you.
+
+This is nonsensical. We know better by now.
+
+Protocol MUST be strict. This is why we have them in the first place. To clearly define what's legal or not, protocol wise.
+
+What does Gemini want?
+ 
+
+
+&#185; <A HREF="https://en.wikipedia.org/wiki/Robustness_principle">https://en.wikipedia.org/wiki/Robustness_principle</A>
+
+&#178; <A HREF="https://github.com/golang/go/blob/master/src/net/url/url.go">https://github.com/golang/go/blob/master/src/net/url/url.go</A>
+Even though one would have hoped Google would have learned from Sun's mistakes. Apparently not. Perhaps the same team was involve in both Java and Go implementations. Go figure.
+
+&#179; <A HREF="https://github.com/spc476/LPeg-Parsers/blob/master/iri.lua">https://github.com/spc476/LPeg-Parsers/blob/master/iri.lua</A>
+
+&#8308; <A HREF="http://www.inf.puc-rio.br/~roberto/lpeg/">http://www.inf.puc-rio.br/~roberto/lpeg/</A>
+
+&#8309; <A HREF="https://bford.info/packrat/">https://bford.info/packrat/</A>
+
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004423.html">[user] psa: killfile
+</A></li>
+	<LI>Next message (by thread): <A HREF="004436.html">[tech] to postel or not to postel, that is the question
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4432">[ date ]</a>
+              <a href="thread.html#4432">[ thread ]</a>
+              <a href="subject.html#4432">[ subject ]</a>
+              <a href="author.html#4432">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

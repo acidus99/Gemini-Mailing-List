@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Three possible uses for IRIs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3C20201208102932.0af192497ecadb3c6ab6c691%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003876.html">
+   <LINK REL="Next"  HREF="003877.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Three possible uses for IRIs</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3C20201208102932.0af192497ecadb3c6ab6c691%40gmail.com%3E"
+       TITLE="Three possible uses for IRIs">linde.philip at gmail.com
+       </A><BR>
+    <I>Tue Dec  8 09:29:32 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003876.html">Three possible uses for IRIs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003877.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3880">[ date ]</a>
+              <a href="thread.html#3880">[ thread ]</a>
+              <a href="subject.html#3880">[ subject ]</a>
+              <a href="author.html#3880">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, 7 Dec 2020 23:00:01 -0500
+John Cowan &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>&gt; wrote:
+ 
+&gt;<i> Agreed.  But if you have a Punycode encoder, then the following steps will
+</I>&gt;<i> convert an IRI reference to a URI reference, without regard to whether it
+</I>&gt;<i> is an IRI or a relative reference:
+</I>&gt;<i> 
+</I>&gt;<i> 1) Look in the IRI reference for a &quot;//&quot; and a following &quot;/&quot;; if they exist,
+</I>&gt;<i> pass the characters in between through your encoder and substitute the
+</I>&gt;<i> result into the IRI reference.
+</I>&gt;<i> 
+</I>&gt;<i> 2) Start over from the beginning.  If a character is ASCII, leave it
+</I>&gt;<i> unchanged.  Otherwise, take the character, convert it to UTF-8 bytes (easy)
+</I>&gt;<i> and each byte to hex digits (trivial), decorate it with leading %
+</I>&gt;<i> (trivial), and move on.  When you come to the end, stop.
+</I>
+There's a &quot;drawl the owl&quot; step somewhere here regarding Unicode
+normalization. Does the server like your &#228;:s fully composed or
+decomposed, or should the server itself be responsible for
+normalization?
+
+-- 
+Philip
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201208/cf4dc147/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201208/cf4dc147/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003876.html">Three possible uses for IRIs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003877.html">Three possible uses for IRIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3880">[ date ]</a>
+              <a href="thread.html#3880">[ thread ]</a>
+              <a href="subject.html#3880">[ subject ]</a>
+              <a href="author.html#3880">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

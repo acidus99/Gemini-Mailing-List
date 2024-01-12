@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client behavior when server doesn't close connection?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20behavior%20when%20server%20doesn%27t%20close%20connection%3F&In-Reply-To=%3C87a707cyn4.fsf%40dorothy.carcosa.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002150.html">
+   <LINK REL="Next"  HREF="002151.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client behavior when server doesn't close connection?</H1>
+    <B>Jason McBrayer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20behavior%20when%20server%20doesn%27t%20close%20connection%3F&In-Reply-To=%3C87a707cyn4.fsf%40dorothy.carcosa.net%3E"
+       TITLE="Client behavior when server doesn't close connection?">jmcbray at carcosa.net
+       </A><BR>
+    <I>Fri Jul 10 14:01:19 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002150.html">Client behavior when server doesn't close connection?
+</A></li>
+        <LI>Next message (by thread): <A HREF="002151.html">What's the status of gemini browsers and image handling?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2173">[ date ]</a>
+              <a href="thread.html#2173">[ thread ]</a>
+              <a href="subject.html#2173">[ subject ]</a>
+              <a href="author.html#2173">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>juhani &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">juhani at envs.net</A>&gt; writes:
+
+&gt;<i> I'm juhani, new here, and implementing an Android gemini client.
+</I>
+Hi, juhani!
+
+&gt;<i> While testing with live sites for the first time I found that some sites worked,
+</I>&gt;<i> and on others the response handling hung. Comparison of tcp streams revealed
+</I>&gt;<i> that on the working sites the last packet from the server had FIN flag, and on
+</I>&gt;<i> the failing sites it didn't.
+</I>
+Can you tell us what server software the failing sites are running?
+Probably the most helpful thing is to get those servers fixed.
+
+&gt;<i> I changed the client so it doesn't try to read the whole response before parsing
+</I>&gt;<i> the header. And added timeout to make sure the connection is closed.
+</I>
+That also sounds reasonable; just don't make the timeout *too* short.
+
+&gt;<i> These changes make sense to me, but what should the client do if it cant be sure
+</I>&gt;<i> it has the complete payload? With line based content it's possible to show what
+</I>&gt;<i> you've got. The clients I've tried, so far, seem to do that, but is it correct?
+</I>&gt;<i> And what about binary content?
+</I>
+For binary files, I'd say treat it as an error; Gemini doesn't have
+resumable downloads, so it's either that or retry, and I think you
+should leave retrying up to the user. For text, you can show what you
+have, and leave it to the user to decide if they got the full document
+or not, I guess...
+
+-- 
++-----------------------------------------------------------+
+|<i> Jason F. McBrayer                    <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">jmcbray at carcosa.net</A>  |
+</I>|<i> A flower falls, even though we love it; and a weed grows, |
+</I>|<i> even though we do not love it.            -- Dogen        |
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002150.html">Client behavior when server doesn't close connection?
+</A></li>
+	<LI>Next message (by thread): <A HREF="002151.html">What's the status of gemini browsers and image handling?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2173">[ date ]</a>
+              <a href="thread.html#2173">[ thread ]</a>
+              <a href="subject.html#2173">[ subject ]</a>
+              <a href="author.html#2173">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

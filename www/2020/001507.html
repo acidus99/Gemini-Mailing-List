@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> redirect opt-in?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20redirect%20opt-in%3F&In-Reply-To=%3C20200610195357.GD10136%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001490.html">
+   <LINK REL="Next"  HREF="001499.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>redirect opt-in?</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20redirect%20opt-in%3F&In-Reply-To=%3C20200610195357.GD10136%40SDF.ORG%3E"
+       TITLE="redirect opt-in?">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Wed Jun 10 20:53:57 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001490.html">redirect opt-in?
+</A></li>
+        <LI>Next message (by thread): <A HREF="001499.html">60 &amp; 61 &amp; 62 vs. userinfo
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1507">[ date ]</a>
+              <a href="thread.html#1507">[ thread ]</a>
+              <a href="subject.html#1507">[ subject ]</a>
+              <a href="author.html#1507">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Jun 10, 2020 at 12:49:11PM +0200, Petite Abeille wrote:
+&gt;<i> Given that user-agents should refrain from initiating network connection on their own, should redirects (3x)  be manually confirmed? With explicit user consent?
+</I>
+The recent change in the spec regarding automatic initiation of network
+connections is very clearly limited in scope to the displaying of link
+lines, so redirects are not covered by it.
+
+&gt;<i> Perhaps user-agents SHOULD prompt for decisions as to whether to follow a redirect, or MAY follow redirects automatically.  
+</I>
+Bombadillo is an example of a client which always prompts for a decision
+on redirects with (to my knowledge) a single exception (maybe this is
+still just planned, not implemented - I don't use Bombadillo often, but
+Sloum and I talk about client design a lot).  If a client requests a URL
+not ending in a slash, and the server maps it to a directory, the server
+must issue a redirect which appends the slash to the URL, otherwise
+relative links will not work.  Manually confirming *that* every time
+will be annoying and serve no good purpose.
+
+AV-98 is slightly more pragmatic.  If can be configured to prompt on
+every redirect, but by defaut it automatically follows all redirects
+*except* those which involve moving between domains or between
+protocols, which are the most suspicious kinds.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001490.html">redirect opt-in?
+</A></li>
+	<LI>Next message (by thread): <A HREF="001499.html">60 &amp; 61 &amp; 62 vs. userinfo
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1507">[ date ]</a>
+              <a href="thread.html#1507">[ thread ]</a>
+              <a href="subject.html#1507">[ subject ]</a>
+              <a href="author.html#1507">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

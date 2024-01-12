@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Username/password authentication strategy
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Username/password%20authentication%20strategy&In-Reply-To=%3CCAPk6LxQAzhiFr4rBYJw8np2_aynJt81XaHK8AP4Ds_wFaLHpWA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002287.html">
+   <LINK REL="Next"  HREF="002292.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Username/password authentication strategy</H1>
+    <B>Kevin Sangeelee</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Username/password%20authentication%20strategy&In-Reply-To=%3CCAPk6LxQAzhiFr4rBYJw8np2_aynJt81XaHK8AP4Ds_wFaLHpWA%40mail.gmail.com%3E"
+       TITLE="Username/password authentication strategy">kevin at susa.net
+       </A><BR>
+    <I>Mon Jul 20 23:34:54 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002287.html">Username/password authentication strategy
+</A></li>
+        <LI>Next message (by thread): <A HREF="002292.html">Username/password authentication strategy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2288">[ date ]</a>
+              <a href="thread.html#2288">[ thread ]</a>
+              <a href="subject.html#2288">[ subject ]</a>
+              <a href="author.html#2288">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Peter,
+
+The only simplification that I had in mind was to disregard the CN entirely
+and replace the PIN with a unique auth-token that they'd have to use to add
+a new certificate to their profile.
+
+The storage/processing is not much more complex than with
+username/passwords - a profile is just a unique auth-token and a list of
+hash strings. Realistically, there's no need to delete anything unless you
+revoke their account (delete everything) or a certificate has expired
+(remove its hash to force a re-auth).
+
+You could have all auth requests go through a single CGI script, which
+would allow you to separate authentication from the actual content. For
+example, I have a CGI script called 'serverinfo', and when I make a request
+to the script with extra path info, the script is invoked and the extra
+path is made available to the script. e.g. <A HREF="gemini://">gemini://</A>
+gemini.susa.net/cgi-bin/serverinfo/something/else.gmi yields variables: -
+
+&#8226; GEMINI_URL: <A HREF="gemini://gemini.susa.net/cgi-bin/serverinfo/something/else.gmi">gemini://gemini.susa.net/cgi-bin/serverinfo/something/else.gmi</A>
+&#8226; SERVER_NAME: gemini.susa.net
+&#8226; SERVER_PROTOCOL: GEMINI
+&#8226; SERVER_SOFTWARE: gemserv
+&#8226; SCRIPT_NAME: /cgi-bin/serverinfo
+&#8226; QUERY_STRING:
+&#8226; PATH_INFO: /something/else.gmi
+
+The PATH_INFO could then be used by subsequent code to 'direct' the CGI
+script to generate the correct content, meaning that all your 'handler'
+code could assume that validation has passed, a little more like typical
+HTTP based code.
+
+Kevin
+
+On Mon, 20 Jul 2020 at 22:27, Peter Vernigorov &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">pitr.vern at gmail.com</A>&gt; wrote:
+
+&gt;<i> Hey Kevin,
+</I>&gt;<i>
+</I>&gt;<i> Yes this solution sounds good, pin is passed as part of query string.
+</I>&gt;<i> Username is still visible outside tls session of course.
+</I>&gt;<i>
+</I>&gt;<i> But I think the bigger problem is that now I need to store usernames,
+</I>&gt;<i> pins, all of user&#8217;s cert fingerprints and their first seen and last seen
+</I>&gt;<i> dates, I would need to build an interface to delete old/lost fingerprints,
+</I>&gt;<i> etc. Compare that to basic auth in http, which while might not be pretty,
+</I>&gt;<i> involves very little code to implement: check username/password hash
+</I>&gt;<i> against ones in db on every request (in a before filter if framework
+</I>&gt;<i> supports it) and I&#8217;m done.
+</I>&gt;<i>
+</I>&gt;<i> By the way, your solution is very similar to how client ssh usually works,
+</I>&gt;<i> one would login using username/password into a new server or from a new
+</I>&gt;<i> client, and then add their client certificate to ~/.authorized_keys. So far
+</I>&gt;<i> yours is the best solution, but I wonder if there&#8217;s a simpler, more elegant
+</I>&gt;<i> way.
+</I>&gt;<i>
+</I>&gt;<i> On Mon, Jul 20, 2020 at 16:50 Kevin Sangeelee &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">kevin at susa.net</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> I see this as the same issue that exists for clients - without a trusted
+</I>&gt;&gt;<i> CA, there's nothing to stop me masquerading as anyone else, other than the
+</I>&gt;&gt;<i> certificate (e.g. fingerprint) pinning, so I believe the process absolutely
+</I>&gt;&gt;<i> needs a (one-time) login prompt to pin the certificate - I can't see a way
+</I>&gt;&gt;<i> to avoid it.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Your question made me think about what would be the minimum steps
+</I>&gt;&gt;<i> required to implement client TOFU with PIN or password verification, and
+</I>&gt;&gt;<i> the code below is my take on what I think has to happen. Note the code is
+</I>&gt;&gt;<i> only meant as a concise way to discuss the process.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> So, for example, a request to a private resource, such as: -
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> <A HREF="gemini://susa.net/cgi-bin/private.sh?articleId=1234">gemini://susa.net/cgi-bin/private.sh?articleId=1234</A>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Might be handled something like this: -
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> $ cat private.sh
+</I>&gt;&gt;<i> #!/bin/bash
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> # If we have no client certificate, request one.
+</I>&gt;&gt;<i> if [[ &quot;${TLS_CLIENT_HASH}&quot; == &quot;&quot; ]]; then
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>     echo -ne &quot;60 CLIENT CERTIFICATE REQUIRED\r\n&quot;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> elif [[ $(grep &quot;${TLS_CLIENT_HASH}&quot; /tmp/${REMOTE_USER}_sigs) == &quot;&quot; ]];
+</I>&gt;&gt;<i> then
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>     # We've never seen this user's client hash, so challenge for a PIN
+</I>&gt;&gt;<i>     # (we could store this current URL for onward forwarding)
+</I>&gt;&gt;<i>     echo -ne &quot;30 /cgi-bin/login.sh\r\n&quot;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> else
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>     echo -ne &quot;20 text/gemini\r\n&quot;
+</I>&gt;&gt;<i>     echo &quot;This is the prize inside the protected resource!&quot;
+</I>&gt;&gt;<i> fi
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> I think a redirect to a login process is unavoidable, because any
+</I>&gt;&gt;<i> originating request might have its own query_string, yet we're going to
+</I>&gt;&gt;<i> need one for the password prompt response. So the login.sh would be our
+</I>&gt;&gt;<i> one-time verification to pin the certificate to a CN based user-id.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> $ cat login
+</I>&gt;&gt;<i> #!/bin/bash
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> # If we have no client certificate, request one.
+</I>&gt;&gt;<i> if [[ &quot;${TLS_CLIENT_HASH}&quot; == &quot;&quot; ]]; then
+</I>&gt;&gt;<i>     echo -ne &quot;60 CLIENT CERTIFICATE REQUIRED\r\n&quot;
+</I>&gt;&gt;<i>     exit
+</I>&gt;&gt;<i> fi
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> # If the certificate has no CN, then reject it
+</I>&gt;&gt;<i> if [[ &quot;${REMOTE_USER}&quot; == &quot;&quot; ]]; then
+</I>&gt;&gt;<i>     echo -ne &quot;20 text/gemini\r\n&quot;
+</I>&gt;&gt;<i>     echo &quot;Your CN can't be used as a user-id!&quot;
+</I>&gt;&gt;<i>     exit
+</I>&gt;&gt;<i> fi
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> # We have a client certificate, is it already authorised?
+</I>&gt;&gt;<i> if [[ $(grep &quot;${TLS_CLIENT_HASH}&quot; /tmp/${REMOTE_USER}_sigs) != &quot;&quot; ]]; then
+</I>&gt;&gt;<i>     echo -ne &quot;20 text/gemini\r\n&quot;
+</I>&gt;&gt;<i>     echo &quot;You are already authorised!&quot;
+</I>&gt;&gt;<i>     exit
+</I>&gt;&gt;<i> fi
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> # We have a certificate and a valid user-id (CN), so either prompt for
+</I>&gt;&gt;<i> # a PIN, or verify PIN if we've been given a QUERY_STRING.
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> # Grep the remote user's line from the passwd file (format CN:PIN)
+</I>&gt;&gt;<i> PWD_ENTRY=$(grep &quot;^${REMOTE_USER}:&quot; login_passwd)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> # Strip the CN value and separator, leaving the PIN
+</I>&gt;&gt;<i> MY_PIN=&quot;${PWD_ENTRY#${REMOTE_USER}:}&quot;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> # Check for our PIN in the query string (which may be empty)
+</I>&gt;&gt;<i> if [[ &quot;${QUERY_STRING}&quot; == &quot;${MY_PIN}&quot; ]]; then
+</I>&gt;&gt;<i>     echo -ne &quot;20 text/gemini\r\n&quot;
+</I>&gt;&gt;<i>     echo &quot;Your PIN checks out, ${REMOTE_USER}!&quot;
+</I>&gt;&gt;<i>     echo &quot;${TLS_CLIENT_HASH}&quot; &gt;&gt;/tmp/${REMOTE_USER}_sigs
+</I>&gt;&gt;<i>     echo &quot;Your hash has been stored in '/tmp/${REMOTE_USER}_sigs'&quot;
+</I>&gt;&gt;<i>     exit
+</I>&gt;&gt;<i> fi
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> echo -ne &quot;11 Please enter your PIN, ${REMOTE_USER}\r\n&quot;
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> On Sun, 19 Jul 2020 at 20:26, Peter Vernigorov &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">pitr.vern at gmail.com</A>&gt;
+</I>&gt;&gt;<i> wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> I am trying to implement a simple authentication for my Gemini site,
+</I>&gt;&gt;&gt;<i> and was planning to use a client certificate CN field to pass
+</I>&gt;&gt;&gt;<i> username:password pair to server. However, upon reading closely about
+</I>&gt;&gt;&gt;<i> the TLS handshake -
+</I>&gt;&gt;&gt;<i> <A HREF="https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_handshake">https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_handshake</A> -
+</I>&gt;&gt;&gt;<i> it seems that the client (just like the server) certificate is sent
+</I>&gt;&gt;&gt;<i> before the ChangeCipherSpec record, i.e. insecure. That means to me
+</I>&gt;&gt;&gt;<i> that the CN field would be passed before the TLS session is started
+</I>&gt;&gt;&gt;<i> and therefore not suitable as an authentication medium. Is that
+</I>&gt;&gt;&gt;<i> correct?
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Another alternative to implement username/password type authentication
+</I>&gt;&gt;&gt;<i> in Gemini would be the sensitive input status code, but then I would
+</I>&gt;&gt;&gt;<i> have to store a list of certificate fingerprint and username pairs,
+</I>&gt;&gt;&gt;<i> greatly complicating the system.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> Given that Gemini protocol strives to be minimal/low-cost for both
+</I>&gt;&gt;&gt;<i> users and client/server devs, has anyone found a simple way to
+</I>&gt;&gt;&gt;<i> implement username/password type authentication systems? To be fair, I
+</I>&gt;&gt;&gt;<i> have attempted to use client short-/long-lived client certificates as
+</I>&gt;&gt;&gt;<i> per recommendation in Gemini protocol specification; however, if
+</I>&gt;&gt;&gt;<i> access to the same &quot;account&quot; from multiple devices and being able to
+</I>&gt;&gt;&gt;<i> survive certificate loss without permanently losing access is my
+</I>&gt;&gt;&gt;<i> account are requirements, this authentication method quickly becomes a
+</I>&gt;&gt;&gt;<i> mess. For example, think about how one would go about getting access
+</I>&gt;&gt;&gt;<i> to their astrobotany plant on a new device. This is why I ended up
+</I>&gt;&gt;&gt;<i> going back to username/password authentication, but having
+</I>&gt;&gt;&gt;<i> difficulties making sure that everything is secure. In need of
+</I>&gt;&gt;&gt;<i> help/suggestions/ideas, thanks.
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200720/c699483b/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200720/c699483b/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002287.html">Username/password authentication strategy
+</A></li>
+	<LI>Next message (by thread): <A HREF="002292.html">Username/password authentication strategy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2288">[ date ]</a>
+              <a href="thread.html#2288">[ thread ]</a>
+              <a href="subject.html#2288">[ subject ]</a>
+              <a href="author.html#2288">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

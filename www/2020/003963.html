@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Crawlers on Gemini and best practices
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Crawlers%20on%20Gemini%20and%20best%20practices&In-Reply-To=%3C20201210152035.a98827e3750ada180d0d9f35%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003968.html">
+   <LINK REL="Next"  HREF="003969.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Crawlers on Gemini and best practices</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Crawlers%20on%20Gemini%20and%20best%20practices&In-Reply-To=%3C20201210152035.a98827e3750ada180d0d9f35%40gmail.com%3E"
+       TITLE="Crawlers on Gemini and best practices">linde.philip at gmail.com
+       </A><BR>
+    <I>Thu Dec 10 14:20:35 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003968.html">Crawlers on Gemini and best practices
+</A></li>
+        <LI>Next message (by thread): <A HREF="003969.html">Crawlers on Gemini and best practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3963">[ date ]</a>
+              <a href="thread.html#3963">[ thread ]</a>
+              <a href="subject.html#3963">[ subject ]</a>
+              <a href="author.html#3963">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, 10 Dec 2020 14:43:11 +0100
+Stephane Bortzmeyer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stephane at sources.org</A>&gt; wrote:
+
+&gt;<i> The spec is quite vague about the *order* of directives. For instance,
+</I>&gt;<i> &lt;<A HREF="gemini://gempaper.strangled.net/robots.txt">gemini://gempaper.strangled.net/robots.txt</A>&gt; is:
+</I>&gt;<i> 
+</I>&gt;<i> User-agent: *
+</I>&gt;<i> Disallow: /credentials.txt
+</I>&gt;<i> User-agent: archiver
+</I>&gt;<i> Disallow: /
+</I>&gt;<i> 
+</I>&gt;<i> The intented semantics is probably to disallow archivers but my parser
+</I>&gt;<i> regarded the site as available because it stopped at the first match,
+</I>&gt;<i> the star. Who is right?
+</I>
+According to the spec, lines beginning with &quot;User-agent:&quot; indicate a
+user agent to which subsequent lines apply
+
+My interpretation is that your example expresses:
+
+For any user agent:
+disallow access to /credentials.txt
+For archiver user agents:
+disallow access to /
+
+It is unclear from that specification alone whether the user agent
+applies to all Disallow lines after it, or only until the next
+User-agent line. The spec refers to the web standard for robot
+exclusion. In the web standard, you can think of 1+ User-agent lines
+followed by 1+ Allow/Disallow lines as a single record which specifies
+that all the the user agents should follow the Allow/Disallow rules
+that follow them. For example:
+
+User-agent: archiver
+User-agent: search engine
+Disallow /articles
+Disallow /uploads
+User-agent: something
+User-agent: someother
+Disallow /whatever
+
+This expresses:
+
+For user agent archiver or search engine:
+disallow access to /articles,
+disallow access to /uploads
+For user agent something or someother:
+disallow access to /whatever
+
+Refer to: <A HREF="http://www.robotstxt.org/norobots-rfc.txt">http://www.robotstxt.org/norobots-rfc.txt</A>
+
+The way &quot;robots.txt for Gemini&quot; specifies it is rather confusing. It's
+not indicated exactly how it differs from the web robot exclusion
+standard and taken alone it is ambiguous.
+
+-- 
+Philip
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201210/4885ad20/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201210/4885ad20/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003968.html">Crawlers on Gemini and best practices
+</A></li>
+	<LI>Next message (by thread): <A HREF="003969.html">Crawlers on Gemini and best practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3963">[ date ]</a>
+              <a href="thread.html#3963">[ thread ]</a>
+              <a href="subject.html#3963">[ subject ]</a>
+              <a href="author.html#3963">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

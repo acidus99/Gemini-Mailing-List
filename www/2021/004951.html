@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposal: Simple structured form specification
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%3A%20Simple%20structured%20form%20specification&In-Reply-To=%3CCAObwWNjSyJmOBVMtjHfuUzTRTGfmJg5q-xsbqjPqzQzKr1mx_Q%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004946.html">
+   <LINK REL="Next"  HREF="004945.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposal: Simple structured form specification</H1>
+    <B>Katarina Eriksson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%3A%20Simple%20structured%20form%20specification&In-Reply-To=%3CCAObwWNjSyJmOBVMtjHfuUzTRTGfmJg5q-xsbqjPqzQzKr1mx_Q%40mail.gmail.com%3E"
+       TITLE="Proposal: Simple structured form specification">gmym at coopdot.com
+       </A><BR>
+    <I>Thu Jan 28 17:00:25 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004946.html">Proposal: Simple structured form specification
+</A></li>
+        <LI>Next message (by thread): <A HREF="004945.html">Proposal: Simple structured form specification
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4951">[ date ]</a>
+              <a href="thread.html#4951">[ thread ]</a>
+              <a href="subject.html#4951">[ subject ]</a>
+              <a href="author.html#4951">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>When this topic have come up in the past, we have concluded that Gemini can
+support forms with serial input fields, as opposed to the parallel input
+fields people are used to from web forms.
+
+One way to do this is to send status 10 until all the fields are satisfied,
+like a CLI. Another way is to have a page with links pointing to one field
+at a time.
+
+Johann Galle &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">johann at qwertqwefsday.eu</A>&gt; wrote:
+
+&gt;<i> The basic idea is the following: Each form field is presented on a
+</I>&gt;<i> separate &quot;page&quot; and the server keeps track of where the client is in the
+</I>&gt;<i> form. Ideally the URL (URI/IRI?) contains all the data necessary, thus
+</I>&gt;<i> &quot;saving&quot; the data on the client so it might be continued at a later date.
+</I>&gt;<i> If the amount of data expected is larger than would fit in the URL, server
+</I>&gt;<i> side state with client certificates would be an alternative.
+</I>&gt;<i>
+</I>
+I haven't seen this approach yet, seems just as valid as the other ones.
+
+Now to the different types of input fields. I assume the form's base is
+&gt;<i> <A HREF="gemini://example.com/form/">gemini://example.com/form/</A> which might display some information about the
+</I>&gt;<i> form and the first input field.
+</I>&gt;<i>
+</I>&gt;<i> On 27.01.2021 18:37, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">me at edaha.org</A> wrote among other things:
+</I>&gt;<i>  &gt; # binary
+</I>&gt;<i>  &gt; Binary options are best known as checkboxes on the web. They're simple
+</I>&gt;<i> on/off toggles. How they are displayed is up to the client
+</I>&gt;<i>
+</I>&gt;<i> A check box can be simply implemented with two links for yes and no like
+</I>&gt;<i> this for example:
+</I>&gt;<i> ```
+</I>&gt;<i> Does Gemini need forms?
+</I>&gt;<i> =&gt; 0/ No, it does not.
+</I>&gt;<i> =&gt; 1/ Yes, it does.
+</I>&gt;<i> ```
+</I>&gt;<i>
+</I>
+Asking a question like this is not a good example for showing off
+checkboxes but another way is to send this:
+```
+10 Does Gemini need forms? [yes/no]
+```
+...and repeat until the user supply a valid answer.
+
+Multiple choice checkboxes can be combined into one input:
+```
+10 My server supports: [c: CGI, v: virtual host, s: sessions]
+```
+...and the user can answer &quot;sv&quot; or &quot;cs&quot; or &quot;v&quot; or whatever other valid
+combination.
+
+[...]
+
+ &gt; # choice
+
+
+[...]
+This refers to a single choice among a list of things.
+
+ &gt; &lt;= choice Which of these protocols are we using?
+
+ &gt; &lt;= choice gemini
+&gt;<i>  &gt; &lt;= choice gopher
+</I>&gt;<i>  &gt; &lt;= choice HTTP
+</I>&gt;<i>
+</I>&gt;<i> This could be implemented just like a checkbox, just with more options.
+</I>&gt;<i> Coincidentally the syntax is very similar to the one proposed.
+</I>&gt;<i> ```
+</I>&gt;<i> Which of these protocols are we using?
+</I>&gt;<i> =&gt; gemini/ gemini
+</I>&gt;<i> =&gt; gopher/ gopher
+</I>&gt;<i> =&gt; http/ HTTP
+</I>&gt;<i> ```
+</I>&gt;<i>
+</I>
+This would be:
+```
+10 Which of these protocols are we using? [gemini/gopher/http]
+```
+...in that same example. Though, I do like the links better.
+
+ &gt; # submit
+&gt;<i>  &gt; Finally, submit. This one's easy:
+</I>&gt;<i>
+</I>&gt;<i> ... because it is not necessary. The server will just show you the result
+</I>&gt;<i> or take the respective action after the last form field is filled. Maybe a
+</I>&gt;<i> final checkbox of &quot;Are you sure&quot; would be nice to let the user know that
+</I>&gt;<i> this will result in some action.
+</I>&gt;<i>
+</I>
+Or just &quot;Confirm sending this information&quot;
+
+-- 
+Katarina
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210128/272c292c/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210128/272c292c/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004946.html">Proposal: Simple structured form specification
+</A></li>
+	<LI>Next message (by thread): <A HREF="004945.html">Proposal: Simple structured form specification
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4951">[ date ]</a>
+              <a href="thread.html#4951">[ thread ]</a>
+              <a href="subject.html#4951">[ subject ]</a>
+              <a href="author.html#4951">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

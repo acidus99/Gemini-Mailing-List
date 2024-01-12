@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC] Backwards-compatible metadata in Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3C87r1l4zeuz.fsf%40omarpolo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005680.html">
+   <LINK REL="Next"  HREF="005613.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC] Backwards-compatible metadata in Gemini</H1>
+    <B>Omar Polo</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3C87r1l4zeuz.fsf%40omarpolo.com%3E"
+       TITLE="[SPEC] Backwards-compatible metadata in Gemini">op at omarpolo.com
+       </A><BR>
+    <I>Thu Feb 25 09:16:52 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005680.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="005613.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5612">[ date ]</a>
+              <a href="thread.html#5612">[ thread ]</a>
+              <a href="subject.html#5612">[ subject ]</a>
+              <a href="author.html#5612">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Oliver Simmons &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">oliversimmo at gmail.com</A>&gt; writes:
+
+&gt;<i> On Wed, 24 Feb 2021 at 19:15, PJ vM &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">pjvm742 at disroot.org</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i> Whilst it's true anyone could use any key/values, I would hope that we
+</I>&gt;<i> are civilised enough to be able to agree on what keys and values we
+</I>&gt;<i> use.
+</I>&gt;<i>
+</I>&gt;<i> I'm a contributor to OSM, and their saying goes:
+</I>&gt;&gt;<i> Feel free to invent new tags! Though it is not &quot;feel free to ignore existing tagging schemes&quot;.
+</I>&gt;<i> Simple. if you start using your own key/value, nothing is going to
+</I>&gt;<i> support it, so you might as well use what everyone else uses.
+</I>&gt;<i> BUT, as is obvious with OSM, if we don't get the keys/values organised
+</I>&gt;<i> **from the start**, we will end up with different ways of doing that
+</I>&gt;<i> same thing and, and I think anyone would agree, that is awful to work
+</I>&gt;<i> with. If we get keys/values organised at the start though this isn't
+</I>&gt;<i> really an issue.
+</I>
+I think this is a bogus point.  I never contributed to OSM, but from
+what you're saying I suppose they use something like XML/SGML/...  Those
+things are *meant* for extensions (the 'X' in XML stands for that),
+whilst everything around Gemini is focused on non-extensibility and
+simplicity, even at cost of missing features.
+
+Let's think about that again, for a moment.
+
+There are various people here, myself included, that would like to add
+&quot;only a small change&quot; to the spec.  Everyone has their 20% of things
+that would like to add to Gemini or text/gemini[0] because with that it
+would be, oh, so much better.
+
+But instead of thinking about what we may add, let's think about what we
+have:
+ - we have TLS because it's fundamental to guarantee confidentiality
+   between servers and clients
+ - we have status codes, because a page that says &quot;an error occurred&quot;
+   or &quot;certificate required&quot; cannot be interpreted correctly otherwise
+ - we have a media-type in the response, so users know what kind of
+   document they're getting
+ - we have links, so we can connect different pages, even across
+   different capsules
+ - we have titles, paragraphs, quotes and lists to express and organize
+   our writings
+ - we have pre-formatted blocks to allow certain types of
+   explanations/presentations that otherwise would have been impossible
+   (how do we teach how to write text/gemini in text/gemini?)
+
+&gt;<i>From here you can notice how humanly-centric Gemini is.  We don't have
+</I>features for bots (more than what it's absolutely needed at least) and
+even more importantly we only have basic and necessary stuff.  There's
+no fluff in Gemini.
+
+If you think about it, we only have features that we can't objectively
+live without (no links? no paragraphs? no media-types? ...) while we're
+lacking various things that would be &quot;nice to have&quot;.
+
+We don't have headers, because with them comes extensibility and
+complexities, and we're getting just fine without them.  We don't have
+inline formatting because it's difficult to handle client-side and we're
+doing really fine without, etc.
+
+Now, replying to the two proposals specifically, I'm against both of
+them for various reason:
+ - we're doing fine without them, so we can continue do so
+ - they're bring extensibility which is against the &quot;spirit&quot; of Gemini
+   (at least until now) and thus dangerous.
+
+Specifically they have their own faults in my opinion:
+
+ - the one adding the line-type =: (or whatever): you have to parse the
+   whole document to extract the metadata and it allows for possibly
+   unreadable text/gemini files[1]
+
+    =: foo: bar
+    # a document
+    =: title: a document
+    =: author: Omar Polo
+    lorem ipsum dolor sit amet...
+    =: x-best-viewed-with: tinmop
+    Quia ullam quae repellat. Dicta occaecati beatae qui...
+    =: script: <A HREF="gemini://evil.corp/analytics.gms">gemini://evil.corp/analytics.gms</A>
+    =: document-class: article
+    =: x-song-im-listening-title: &quot;Norwegian Wood&quot;
+    =: x-song-im-listening-by: &quot;The Beatles&quot;
+    =: licence: CC-BY-SA
+    another pragraph? dunno
+    --
+    text: CC-BY-SA, code: MIT    (a lot of capsules have lines like this)
+    =: prefetch-page: /some/other/page
+    =: x-some-even-more-funny-meta-because-why-not yay!
+    ...
+    =: preferred-color: black-text-on-white-background
+
+   An user on a non-sophisticate client cannot (easily) understand
+   that.  It's just full of bloat.  (with non-sophisticate I mean
+   something more elaborate than &quot;printf $url\r\n | nc ... | less&quot;.)
+
+ - (your?) proposal of the ^^^ toggle line, while eastetically nice
+   (I'll give you that!) has the additional drawbacks of breaking the
+   concatenation.  As things stands, I know I can
+
+    cat file1.gmi file2.gmi ... &gt; result.gmi
+
+   and obtain a valid text/gemini file.  With your proposal, I have to
+   write a parser that analyzes every file.  There are a lot of people
+   who uses simple scripts/makefiles to generate their capsules with
+   standard UNIX tools, this would (possibly) break them.  And even
+   worst, the cat(1) example I gave before will break only *sometimes*,
+   depending on the content of the files.  (let's not talk about how to
+   merge metadata from multiple files...)
+
+Also, the examples you gave in support of your proposals seems bogus
+too.  Serving a mailing list archive over Gemini?  Cool, but why convert
+the mails to text/gemini?  Wrapping them in ``` (with headers visible)
+or serving them &quot;raw&quot; is not enough?
+
+What I think is missing in all these discussions is a valid reason to
+outweight the cons.
+
+However, I feel that denying and turning down feature requests for
+addition is not a good thing.  I think we should reflect on what's the
+actual problem and solve it, because this smells like a XY problem[2] to
+me.
+
+If we want to give people ways to manage their local data, maybe because
+they want to search across documents or do some kind of publications
+over Gemini, then centralising metadata in one place is an option.
+That's what I'm currently doing with my blog: all entries are pure
+text/gemini files and there's a posts.edn[3] file with all the metas
+(title, tags, date, song I was listening to, relevant XKCD, ...), and
+I'm happy with the outcome.  It's easy to generate pages for either the
+Web or Gemini, and I can easily adjust the &quot;layout&quot; when I want to.
+
+If we want to build a better GUS I don't think that adding metadata to
+text/gemini will solve anything, it will actually make things worst.
+The point is, you can't trust 3rd-parties metadata.  Sure, I can stick a
+description of &quot;About the interpretation of the Will of power in
+Nietzsche&quot; with tags &quot;philosophy, nietzsche, will-to-power&quot; and a
+category of &quot;essay&quot;, but you cannot trust me to talk about those
+arguments in the page, maybe it only contains link to pics of cute
+kittens :)
+
+Why I think metadata will make things like GUS worst?  While full-text
+search is not without its drawbacks, as Bortzmeyer reminded us, people
+will abuse the metadata to &quot;go up&quot; in the search results, and the
+outcome of that is crystal-clear on the Web, other than making the life
+of who makes a SE more difficult, as now they also have to try to
+understand if the metadata is actually relevant or not.
+
+(sorry for the long mail)
+
+[0]: mine?  I would love to have a syntax for definition lists and
+     3-levels of un-ordered lists.
+[1]: .gms is GeminiScript of course.  A minimal, non-estensibile and
+     simple scripting language for your preferred client, hoping it
+     doesn't lack support for it /s 
+[2]: When people asks for Y because they think that will solve the
+     problem X, instead of asking directly for X.
+     <A HREF="https://en.wikipedia.org/wiki/XY_problem">https://en.wikipedia.org/wiki/XY_problem</A>
+[3]: edn is like json, but for clojure, kinda.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005680.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="005613.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5612">[ date ]</a>
+              <a href="thread.html#5612">[ thread ]</a>
+              <a href="subject.html#5612">[ subject ]</a>
+              <a href="author.html#5612">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

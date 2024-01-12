@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] [tech] Companion Specification Proposal for Metadata
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20%5Btech%5D%20Companion%20Specification%20Proposal%20for%20Metadata&In-Reply-To=%3C871rd3kf6r.fsf%40omarpolo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005636.html">
+   <LINK REL="Next"  HREF="005653.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] [tech] Companion Specification Proposal for Metadata</H1>
+    <B>Omar Polo</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20%5Btech%5D%20Companion%20Specification%20Proposal%20for%20Metadata&In-Reply-To=%3C871rd3kf6r.fsf%40omarpolo.com%3E"
+       TITLE="[spec] [tech] Companion Specification Proposal for Metadata">op at omarpolo.com
+       </A><BR>
+    <I>Thu Feb 25 21:31:08 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005636.html">[spec] [tech] Companion Specification Proposal for Metadata
+</A></li>
+        <LI>Next message (by thread): <A HREF="005653.html">[spec] [tech] Companion Specification Proposal for Metadata
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5640">[ date ]</a>
+              <a href="thread.html#5640">[ thread ]</a>
+              <a href="subject.html#5640">[ subject ]</a>
+              <a href="author.html#5640">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Gary Johnson &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">lambdatronic at disroot.org</A>&gt; writes:
+
+&gt;<i> Howdy Geminauts,
+</I>&gt;<i>
+</I>&gt;<i> [snip]
+</I>&gt;<i>
+</I>&gt;<i> # Proposal
+</I>&gt;<i>
+</I>&gt;<i> Considering that:
+</I>&gt;<i>
+</I>&gt;<i> 1. Metadata /within/ a Gemtext file carries a number of liabilities that
+</I>&gt;<i>    make some of our community members nervous (understandably so IMO).
+</I>&gt;<i>
+</I>&gt;<i> 2. The subset of metadata that is meant to be read and understood by a
+</I>&gt;<i>    human reader using a typical Gemini client can already be expressed
+</I>&gt;<i>    in natural language without any community-approved tag
+</I>&gt;<i>    standardization.
+</I>&gt;<i>
+</I>&gt;<i> 3. The main value to attaching standardized metadata tags to Gemtext
+</I>&gt;<i>    pages is likely to simply aid automated bots supporting search
+</I>&gt;<i>    engines and archiving.
+</I>&gt;<i>
+</I>&gt;<i> 4. Geminispace is filled with files in more formats than just Gemtext,
+</I>&gt;<i>    many (all?) of which could benefit from similar bot-assisting
+</I>&gt;<i>    metadata.
+</I>&gt;<i>
+</I>&gt;<i> 5. Both aggregators and proxies already have companion specifications
+</I>&gt;<i>    that have been (somewhat) adopted by the community and seem to fare
+</I>&gt;<i>    better in our community than direct changes to the Gemini protocol or
+</I>&gt;<i>    Gemtext specifications.
+</I>&gt;<i>
+</I>&gt;<i> We propose a companion specification for metadata, in which all the
+</I>&gt;<i> metadata about the static files and/or dynamic endpoints (of any format)
+</I>&gt;<i> in a capsule be included in a separate file accessible at a well-known
+</I>&gt;<i> location that a bot could check as it crawls through Geminispace.
+</I>&gt;<i>
+</I>&gt;<i> As placeholders, let's put forward these candidates for discussion:
+</I>&gt;<i>
+</I>&gt;<i> 1. $DOCUMENT_ROOT/.metadata.gmi
+</I>&gt;<i> 2. $DOCUMENT_ROOT/.well-known/metadata.gmi
+</I>
+Thanks for putting into words exactly what I had in mind, way better
+than I could ever do.  Your proposal is exactly what I was trying to
+describe in the other thread.
+
+I loved your proposal, but only until here.  I think that what follows
+is overly-complicated by the fact that you're trying to provide a way to
+define the meaning of the metadata, something that can be avoided, at
+least in the scope of Gemini.
+
+Let's keep the metadata generic.  We'll then start using common keys
+because, well, they're widespread (like Author, Date, ...) or expressive
+enough (`Tags: music punk-rock' is pretty self-exlpanatory), while still
+allowing authors to add whenever they want extra fields if they feel
+like (there are people writing poetry, maybe they want to add a metadata
+about the metrics?  or about a particular style?)
+
+(as other pointed out several time in the past, $DOCUMENT_ROOT is not
+something set in stone.  We have single-user capsules, multi user
+capsule with different URLs style -- example.com/~op/ vs
+example.com/users/op vs ... -- etc)
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005636.html">[spec] [tech] Companion Specification Proposal for Metadata
+</A></li>
+	<LI>Next message (by thread): <A HREF="005653.html">[spec] [tech] Companion Specification Proposal for Metadata
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5640">[ date ]</a>
+              <a href="thread.html#5640">[ thread ]</a>
+              <a href="subject.html#5640">[ subject ]</a>
+              <a href="author.html#5640">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

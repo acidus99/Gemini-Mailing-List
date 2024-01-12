@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Gemini =&gt; HTTP Proxy image choking
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20%3D%3E%20HTTP%20Proxy%20image%20choking&In-Reply-To=%3C3835fe12-6b10-03a0-3091-608e42f34184%40leveck.us%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002618.html">
+   <LINK REL="Next"  HREF="002588.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Gemini =&gt; HTTP Proxy image choking</H1>
+    <B>Mr. Leveck</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20%3D%3E%20HTTP%20Proxy%20image%20choking&In-Reply-To=%3C3835fe12-6b10-03a0-3091-608e42f34184%40leveck.us%3E"
+       TITLE="Gemini =&gt; HTTP Proxy image choking">leveck at leveck.us
+       </A><BR>
+    <I>Thu Sep 10 00:08:12 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002618.html">Gemini =&gt; HTTP Proxy image choking
+</A></li>
+        <LI>Next message (by thread): <A HREF="002588.html">For consideration: JSON Feed
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2619">[ date ]</a>
+              <a href="thread.html#2619">[ thread ]</a>
+              <a href="subject.html#2619">[ subject ]</a>
+              <a href="author.html#2619">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 9/9/20 5:01 PM, Mr. Leveck wrote:
+&gt;<i> Greetings All!
+</I>&gt;<i> 
+</I>&gt;<i> My www site has for sometime been displaying a homespun gopher proxy 
+</I>&gt;<i> (IE: my website displays my gopherhole). Since I recently installed a 
+</I>&gt;<i> gemini server on my home network, I wanted to expand my proxy to gemini 
+</I>&gt;<i> too. This is complete: <A HREF="https://leveck.us/gemini/1436.ninja/">https://leveck.us/gemini/1436.ninja/</A>
+</I>&gt;<i> 
+</I>&gt;<i> I am having issues, however. With the gopher proxy, I hand binary files 
+</I>&gt;<i> over to curl via php after sending the appropriate header. Curl doesn't 
+</I>&gt;<i> currently support gemini, and I have been chasing my tail on getting 
+</I>&gt;<i> images (and binary files such as my RPoD Palm OS Software Horde) to work 
+</I>&gt;<i> with my proxy.
+</I>&gt;<i> 
+</I>&gt;<i> Anyone got ideas?
+</I>&gt;<i> 
+</I>&gt;<i> Here is the networky portion of the proxy source:
+</I>&gt;<i> 28&#160; //Gemini Protocol Code
+</I>&gt;<i> 29&#160; //Nathaniel Leveck September 2020
+</I>&gt;<i> 30&#160; $host = $host;
+</I>&gt;<i> 31&#160; $port = 1965;
+</I>&gt;<i> 32&#160; $cert = '/var/www/cert/cert.pem';
+</I>&gt;<i> 33&#160; $context = stream_context_create(); 
+</I>&gt;<i> 34  stream_context_set_option($context, 'ssl', 'local_cert', $cert);
+</I>&gt;<i> 35&#160; stream_context_set_option($context, 'ssl', 'verify_peer', false);
+</I>&gt;<i> 36&#160; stream_context_set_option($context, 'ssl', 'verify_peer_name', false);
+</I>&gt;<i> 37&#160; stream_context_set_option($context, 'ssl', 'allow_self_signed', true);
+</I>&gt;<i> 38&#160; $socket = stream_socket_client('<A HREF="ssl://">ssl://</A>'.$host.':'.$port, $error, $errorString, 2,
+</I>&gt;<i> 39&#160; STREAM_CLIENT_CONNECT, $context);
+</I>&gt;<i> 40&#160; fwrite($socket, &quot;<A HREF="gemini://">gemini://</A>&quot; . $url . &quot;\r\n&quot;);
+</I>&gt;<i> 41&#160; fread($socket,8192); //disregard the status + meta
+</I>&gt;<i> 42&#160; $content = fread($socket,8192000); //read a suitably large number of bytes
+</I>&gt;<i> 
+</I>&gt;<i> fread, I assume, is my issue. socketread showed me no love...
+</I>&gt;<i> 
+</I>
+The code was ill formatted. How about a retry?
+
+-- 
+jynx
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002618.html">Gemini =&gt; HTTP Proxy image choking
+</A></li>
+	<LI>Next message (by thread): <A HREF="002588.html">For consideration: JSON Feed
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2619">[ date ]</a>
+              <a href="thread.html#2619">[ thread ]</a>
+              <a href="subject.html#2619">[ subject ]</a>
+              <a href="author.html#2619">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

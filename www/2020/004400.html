@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] IRIs, IDNs, and all that international jazz
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3CC82O517SM9LU.3UJUE8UO0XVA6%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004391.html">
+   <LINK REL="Next"  HREF="004403.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] IRIs, IDNs, and all that international jazz</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3CC82O517SM9LU.3UJUE8UO0XVA6%40stilgar%3E"
+       TITLE="[spec] IRIs, IDNs, and all that international jazz">solderpunk at posteo.net
+       </A><BR>
+    <I>Sat Dec 26 11:08:54 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004391.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+        <LI>Next message (by thread): <A HREF="004403.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4400">[ date ]</a>
+              <a href="thread.html#4400">[ thread ]</a>
+              <a href="subject.html#4400">[ subject ]</a>
+              <a href="author.html#4400">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat Dec 26, 2020 at 1:32 AM CET, Omar Polo wrote:
+
+&gt;<i> In the last two days I took the time to write first a proper URL
+</I>&gt;<i> parser[0], and than extending it to support IRIs[1]. Turns out, once
+</I>&gt;<i> you have a URL parser (not hard to do at all), you almost have a
+</I>&gt;<i> complete IRI parser. As Sean wrote, you basically have to replace the
+</I>&gt;<i> unreserved rule to allow other utf8 characters and you're done. And
+</I>&gt;<i> even if you're uncomfortable doing this, the RFC lists the valid ranges,
+</I>&gt;<i> so adding a couple of checks isn't the end of the world (if you want to
+</I>&gt;<i> be 100% compliant, whatever that means).
+</I>&gt;<i>
+</I>&gt;<i> (And all of this comes from one that has never, ever, implemented a
+</I>&gt;<i> IRI/URI parser before, that has read for the first time the rfc3986
+</I>&gt;<i> while writing the code and has successfully -- I believe -- implemented
+</I>&gt;<i> a full IRI parser in less than 500 lines of C, with comments and
+</I>&gt;<i> everything, without using anything other than the standard library.
+</I>&gt;<i> Heck, the parser doesn't even allocates memory.)
+</I>
+This is, more and more, how I'm conceptualising things.
+Parsing/validating IRIs is not actually remotely difficult at all.
+Algorithmically it's an extremely minor change to parsing/validating
+URIs.  The apparent pain exists only because the world has apparently
+been very slow about packaging code up for this into major
+libraries/languages, probably because HTTP's ASCII-only nature reduces
+demand.  If we adopt IRIs, I would actually encourage Gemini software
+authors who find their language lacking tools for this not to write
+custom code for it that lives only in their software, but to actually
+try to get the functionality accepted upstream into standard libraries,
+or widely used third-party libraries.  This is generally useful
+functionality that's in no way Gemini-specific, and having easy support
+for it everywhere makes the world a better place regardless of whether
+Gemini thrives or declines.
+
+I don't really think the alleged difficulty of handling IRIs is a good
+argument against accepting them.  I'm now more interested in
+learning/thinking about normalisation issues, which have been relatively
+under discussed so far.  It's possible this is where the real trouble
+lies.  Breaking a UTF-8 IRI up into (scheme, authority, path) is not a
+substantial hurdle.
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004391.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+	<LI>Next message (by thread): <A HREF="004403.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4400">[ date ]</a>
+              <a href="thread.html#4400">[ thread ]</a>
+              <a href="subject.html#4400">[ subject ]</a>
+              <a href="author.html#4400">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

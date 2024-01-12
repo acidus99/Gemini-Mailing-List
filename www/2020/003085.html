@@ -1,0 +1,156 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Caching and status codes
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3C20201106114141.ca8321368a69b40160c4b477%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003084.html">
+   <LINK REL="Next"  HREF="003090.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Caching and status codes</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3C20201106114141.ca8321368a69b40160c4b477%40gmail.com%3E"
+       TITLE="Caching and status codes">linde.philip at gmail.com
+       </A><BR>
+    <I>Fri Nov  6 10:41:41 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003084.html">Caching and status codes
+</A></li>
+        <LI>Next message (by thread): <A HREF="003090.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3085">[ date ]</a>
+              <a href="thread.html#3085">[ thread ]</a>
+              <a href="subject.html#3085">[ subject ]</a>
+              <a href="author.html#3085">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, 6 Nov 2020 14:52:17 +0900
+bie &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">bie at 202x.moe</A>&gt; wrote:
+
+&gt;<i> Another suggestion made on irc was to do the opposite and create a &quot;do
+</I>&gt;<i> not cache&quot; 2x status code, but I'm not really sold on that. Caching
+</I>&gt;<i> introduces a lot of complexity even without a separate status code (how
+</I>&gt;<i> should query strings be handled, 1x responses, redirects?) and these
+</I>&gt;<i> issues don't go away if you add a &quot;do not cache&quot; code.
+</I>&gt;<i> 
+</I>&gt;<i> Any thoughts...?
+</I>
+My own (end-user facing) client is a browser plugin and I inherit the
+caching policy from it. Practically, this means for me that everything
+is cached throughout the browsing session. An entry can be purged from
+the cache by a &quot;force reload&quot; that the user can issue. I find this to
+be a good all round policy for documents. For CGI I usually have to
+issue a force reload. There could be three 2x codes:
+
+20 (unspecified caching; unchanged from current spec)
+21 (&quot;permanent&quot; caching)
+22 (no caching)
+
+A server that knows 21 and 22 can use them as appropriate on documents
+that will never change and will always change respectively. A client
+that doesn't understand them will still behave well because 2x is still
+2x.
+
+Then there's the question of whether this is something I've missed as a
+user and implementer. Not really? I suppose being able to specify &quot;no
+caching&quot; in particular is useful for CGI, but I spend most of my time
+on Gemini reading documents that rarely change.
+
+-- 
+Philip
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201106/87229e49/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201106/87229e49/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003084.html">Caching and status codes
+</A></li>
+	<LI>Next message (by thread): <A HREF="003090.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3085">[ date ]</a>
+              <a href="thread.html#3085">[ thread ]</a>
+              <a href="subject.html#3085">[ subject ]</a>
+              <a href="author.html#3085">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

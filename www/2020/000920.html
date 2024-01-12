@@ -1,0 +1,318 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Status codes
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Status%20codes&In-Reply-To=%3C20200520201527.GI30203%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000912.html">
+   <LINK REL="Next"  HREF="000921.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Status codes</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Status%20codes&In-Reply-To=%3C20200520201527.GI30203%40brevard.conman.org%3E"
+       TITLE="Status codes">sean at conman.org
+       </A><BR>
+    <I>Wed May 20 21:15:27 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000912.html">Status codes
+</A></li>
+        <LI>Next message (by thread): <A HREF="000921.html">Status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#920">[ date ]</a>
+              <a href="thread.html#920">[ thread ]</a>
+              <a href="subject.html#920">[ subject ]</a>
+              <a href="author.html#920">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Dominik Dalek once stated:
+&gt;<i> Howdy!
+</I>
+  Hello.
+
+  [bit ol' snip]
+
+&gt;<i> Suggestion #1: Remove proxy related codes
+</I>
+  [ snip ]
+
+&gt;<i> How server and client certs are handled in the proxy scenario is also
+</I>&gt;<i> something that I don't think is trivial and as such would require some
+</I>&gt;<i> legwork to get up and running. So, yeah, I'd cut any mention of proxy
+</I>&gt;<i> at the moment and with that's codes 43 and 53.
+</I>
+  There are at least two Gemini servers that handle proxying to various
+degrees (to my knowledge).  I expect changes, but not removal.
+
+&gt;<i> Suggestion #2: Deduplicate client cert errors
+</I>&gt;<i> 
+</I>&gt;<i> Only a single client cert can be sent when establishing the communication
+</I>&gt;<i> channel. My mental model (correct me if I'm wrong!) is that transient
+</I>&gt;<i> cert is a session substitute and permanent cert is authentication
+</I>&gt;<i> mechanism (roughly speaking at least).
+</I>&gt;<i> 
+</I>&gt;<i> Current spec has 3 cert request mechanisms, 3 rejection codes and
+</I>&gt;<i> a revocation code. This creates numerous corner cases for clients
+</I>&gt;<i> to handle properly, e.g.
+</I>&gt;<i> * what do you do if you get 21 in response to a request that included
+</I>&gt;<i> your permanent key? I sure hope the browser doesn't actually delete
+</I>&gt;<i> the permanent key from the store :)
+</I>&gt;<i> * what do you do if you get 64 but your cert is not from the future?
+</I>&gt;<i> * what do you do if you get 65 but your cert hasn't expired?
+</I>
+  Both of those indicate either
+
+	1) a buggy server
+	2) a buggy client
+	2) the client clock is incorrect
+	3) the server clock is incorrect
+
+  I would only really expect to see these around the time of certificate
+expiry (or certificate creation).
+
+&gt;<i> I'd like to see a single &quot;client certificate rejected&quot; code eliminating
+</I>&gt;<i> responses that would potentially make no sense.
+</I>&gt;<i> 
+</I>&gt;<i> I feel that differentiating between the types of rejection opens some
+</I>&gt;<i> opportunity for oracle attacks (i.e. rogue clients can inspect server
+</I>&gt;<i> cert processing bugs by observing how responses differ for various
+</I>&gt;<i> crafted requests). In essence I'd cut 64 and 65.
+</I>
+  I don't agree.  I don't have a fully fleshed out response to the &quot;but muh
+security!&quot; argument (well, there is &quot;security through obscurity&quot; isn't) but
+it's rooted around the following story:
+
+	Ken Thompson [creator of C and Unix] has an automobile which he
+	helped design.  Unlike most automobiles, it has neither speedometer,
+	nor gas gage, nor any of the numerous idiot lights which plague the
+	modern driver.  Rather, if the driver makes any mistake, a giant &quot;?&quot;
+	lights up in the center of the dashboard.  &quot;The experienced driver&quot;,
+	he says, &quot;will usually know what's wrong.&quot;
+
+  I've done tech support and have had to deal with &quot;it's broke---fix it!&quot;
+questions with nothing more than that.  I'd rather not do that again.
+
+&gt;<i> Suggestion #3: Change end of cert session (21) into a redirection
+</I>&gt;<i> 
+</I>&gt;<i> This will probably be a very controversial one but the way I see it
+</I>&gt;<i> the end of session typically results in the redirection. This lets you
+</I>&gt;<i> chain requests on logout in a way that enables permanent client key
+</I>&gt;<i> delivery or temporary key replacement. With current design you serve
+</I>&gt;<i> a page in a response to a request that displays something and asks
+</I>&gt;<i> the client to delete the transient cert. If you want to re-establish
+</I>&gt;<i> some sort of validation from the client, you need a manual intervention
+</I>&gt;<i> from the user to do that. I'm not sure if my explanation is clear enough,
+</I>&gt;<i> I can try and expand upon it if needed.
+</I>
+  It might help to test against a server that actually implements this.  I
+kind of see what you are getting at, and a &quot;logout&quot; mechanism is solely
+missing from HTTP (if you are using the actual authentication mechanism and
+not HTTP cookies), but I'm not exactly sure what your objection here is.
+
+&gt;<i> Suggestion #4: Merge different types of server error to prevent leaking
+</I>&gt;<i> what happened under the hood
+</I>
+  See above---we'll have to agree to disagree on this.
+
+&gt;<i> HTTP 500 is often seen as an indication of something wrong in the server
+</I>&gt;<i> application logic. This would be the primary attack vector for someone
+</I>&gt;<i> trying to compromise the server (even if only DOS it). I don't think it
+</I>&gt;<i> makes sense to differentiate codes 40-42 with the exception maybe of
+</I>&gt;<i> a planned maintenance. Basically I'm sort of allergic to disclosing
+</I>&gt;<i> information about the server state.
+</I>
+  Nothing to stop a server from just serving up '40' for everything.
+
+&gt;<i> Suggestion #5: A comment, really
+</I>
+  The 40 range of codes map to HTTP 500 range (server errors), and the 50
+range of codes map to HTTP 400 range (client errors), and when I first wrote
+GLV-1.12556, I used HTTP status codes (because I felt the original status
+codes were ... less than optimal), but later solderpunk renamed &quot;client
+errors&quot; to &quot;permanent errors&quot; and &quot;server errors&quot; to &quot;temporary errors&quot; (I
+think he gave some justification for this, but I don't recall what it was).
+
+&gt;<i> 5x codes are by design permanent errors but 51 (HTTP 404 equivalent) is
+</I>&gt;<i> actually a temporary problem according to the spec.
+</I>&gt;<i> In fact this is precisely what differentiates it from HTTP 410 GONE
+</I>&gt;<i> (gemini 52). So there seems to be a design error here but I don't really
+</I>&gt;<i> know what the correct solution is. Either 5x aren't really permanent
+</I>&gt;<i> errors (how would they be called then?) or 51 shouldn't be a 5x error
+</I>&gt;<i> to begin with.
+</I>
+  It starts to make sense when you realize they were originally server and
+client errors.
+
+  But let me be fair, and report back all the errors that GLV-1.12556 can
+return (modulo what a CGI scripts and the torture test):
+
+	10	prompt for input
+	20	okay
+	30	temporary redirect
+	31	permament redirect
+	40	temporary error
+	51	not found
+	52	gone
+	59	bad request
+	61	transient certificate
+	62	authorized certificate
+	63	certificate rejected
+	64	future certificate
+	65	expired certificate
+
+  Even my CGI module only returns 40 (if it can't run a CGI script for
+whatever reason).  
+
+&gt;<i> This sums up my thoughts about the status codes. I know this reads very
+</I>&gt;<i> much like &quot;too complex, cut!&quot; and that kinda is exactly that. But if you
+</I>&gt;<i> can make things simpler, why not do it? :)
+</I>
+  It broke.  Fix it. 8-P
+
+  -spc
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000912.html">Status codes
+</A></li>
+	<LI>Next message (by thread): <A HREF="000921.html">Status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#920">[ date ]</a>
+              <a href="thread.html#920">[ thread ]</a>
+              <a href="subject.html#920">[ subject ]</a>
+              <a href="author.html#920">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

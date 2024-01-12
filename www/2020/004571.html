@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] Limit valid encodings of text/gemini to UTF-8
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Limit%20valid%20encodings%20of%20text/gemini%20to%20UTF-8&In-Reply-To=%3CCAG-mZ3hRYfHbiZL_jVerTdeoOujdZiWJWzbW_TRd5%3Do4QRZeLA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004560.html">
+   <LINK REL="Next"  HREF="004572.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] Limit valid encodings of text/gemini to UTF-8</H1>
+    <B>Peter Vernigorov</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Limit%20valid%20encodings%20of%20text/gemini%20to%20UTF-8&In-Reply-To=%3CCAG-mZ3hRYfHbiZL_jVerTdeoOujdZiWJWzbW_TRd5%3Do4QRZeLA%40mail.gmail.com%3E"
+       TITLE="[spec] Limit valid encodings of text/gemini to UTF-8">pitr.vern at gmail.com
+       </A><BR>
+    <I>Tue Dec 29 21:24:14 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004560.html">[spec] Limit valid encodings of text/gemini to UTF-8
+</A></li>
+        <LI>Next message (by thread): <A HREF="004572.html">[spec] Limit valid encodings of text/gemini to UTF-8
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4571">[ date ]</a>
+              <a href="thread.html#4571">[ thread ]</a>
+              <a href="subject.html#4571">[ subject ]</a>
+              <a href="author.html#4571">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Dec 29, 2020 at 10:11 AM Petite Abeille
+&lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">petite.abeille at gmail.com</A>&gt; wrote:
+&gt;<i> &gt; On Dec 29, 2020, at 10:03, Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;  Per this wording, any client that receives &quot;text/plain; charset=us-ascii&quot;
+</I>&gt;<i> &gt; is allowed to just drop it on the floor and do absolutely nothing with it.
+</I>&gt;<i> Nonsense. A compliant client MUST support UTF-8. US-ASCII is a strict subset of UTF-8. Therefore a compliant client supports US-ASCII out-of-the-box.  Nothing more, and nothing less.
+</I>
+A car contains people. Therefore people are cars.
+
+Petite, you are confusing Is-A and Has-A relationships [1][2]. UTF-8
+is a (&quot;separate&quot; from US-ASCII) character encoding that contains ASCII
+charset. If the spec said &quot;clients MUST support ONLY UTF-8&quot; then any
+pages specifying &quot;charset=us-ascii&quot; must result in an error.
+
+[1] <A HREF="https://en.wikipedia.org/wiki/Is-a">https://en.wikipedia.org/wiki/Is-a</A>
+[2] <A HREF="https://en.wikipedia.org/wiki/Has-a">https://en.wikipedia.org/wiki/Has-a</A>
+
+Back to a more productive topic, the wording in the spec - &quot;clients
+MUST support UTF-8 encoded responses&quot; - is ambiguous and doesn't
+actually mean that acceptable value for &quot;charset&quot; must include
+&quot;utf-8&quot;, and says nothing about what values of &quot;charset&quot; are
+acceptable. It says that clients must at the very least try to decode
+response using UTF-8 charset decoder. Responses encoded with US-ASCII
+and UTF-8 (and UTF-PETER, which is a random subset of UTF-8) will
+indeed work.
+
+Looking at latest stats on
+<A HREF="gemini://gemini.bortzmeyer.org/software/lupa/stats.gmi">gemini://gemini.bortzmeyer.org/software/lupa/stats.gmi</A> it looks like
+UTF-8 (this includes unspecified charsets which per spec default to
+UTF-8) is used by 81% of pages, US-ASCII accounts for 17%.
+
+Given this, I suggest the spec be rephrased such that it instead
+specifies minimum acceptable values of &quot;charset&quot; (specifically
+us-ascii and utf-8).
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004560.html">[spec] Limit valid encodings of text/gemini to UTF-8
+</A></li>
+	<LI>Next message (by thread): <A HREF="004572.html">[spec] Limit valid encodings of text/gemini to UTF-8
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4571">[ date ]</a>
+              <a href="thread.html#4571">[ thread ]</a>
+              <a href="subject.html#4571">[ subject ]</a>
+              <a href="author.html#4571">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

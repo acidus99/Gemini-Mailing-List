@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> robots.txt for Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20robots.txt%20for%20Gemini&In-Reply-To=%3C20200326195717.GA499%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000519.html">
+   <LINK REL="Next"  HREF="000521.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>robots.txt for Gemini</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20robots.txt%20for%20Gemini&In-Reply-To=%3C20200326195717.GA499%40SDF.ORG%3E"
+       TITLE="robots.txt for Gemini">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Thu Mar 26 19:57:17 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000519.html">robots.txt for Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="000521.html">robots.txt for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#520">[ date ]</a>
+              <a href="thread.html#520">[ thread ]</a>
+              <a href="subject.html#520">[ subject ]</a>
+              <a href="author.html#520">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Mar 24, 2020 at 05:35:08PM -0400, Sean Conner wrote:
+ 
+&gt;<i>   Two possible solutions for robot identification:
+</I>&gt;<i> 
+</I>&gt;<i> 1) Allow IP addresses to be used where a user-agent would be specificifed. 
+</I>&gt;<i> Some examples:
+</I>&gt;<i> 
+</I>&gt;<i> 	User-agent: 172.16.89.3
+</I>&gt;<i> 	User-agent: 172.17.24.0/27
+</I>&gt;<i> 	User-agent: fde7:a680:47d3/48
+</I>&gt;<i> 
+</I>&gt;<i> Yes, I'm including CIDR (Classless Inter-Domain Routing) notation to specify
+</I>&gt;<i> a range of IP addresses.  And for a robot, if your IP addresss matches an IP
+</I>&gt;<i> address (or range), then you need to follow the following rules.
+</I>
+Hmm, I'm not a huge fan of this idea (although I recognise it as a valid
+technical solution to the problem at hand, which is perhaps all you
+meant it to be).  Mostly because I don't like to encourage people to
+think of IP addresses as permanently mapping to, well, just anything.
+The address of a VPN running an abusive bot today might be handed out to
+a different customer running a well-behaved bot next year.
+ 
+&gt;<i> 2) Use the fragment portion of a URL to designate a robot.  The fragment
+</I>&gt;<i> portion of a URL has no meaning for a server (it does for a client).  A
+</I>&gt;<i> robot could use this fact to skip it its identifier when making a request. 
+</I>&gt;<i> The server MUST NOT use this information, but the logs could show it.  For
+</I>&gt;<i> example, a robot could request:
+</I>&gt;<i> 
+</I>&gt;<i> 	<A HREF="gemini://example.com/robots.txt#GUS">gemini://example.com/robots.txt#GUS</A>
+</I>&gt;<i> 
+</I>&gt;<i> A review of the logs would reveal that GUS is a robot, and the text &quot;GUS&quot;
+</I>&gt;<i> could be placed in the User-agent: field to control it.  It SHOULD be the
+</I>&gt;<i> text the robot would recognize in robots.txt.
+</I>
+Hmm, nice out-of-the-box thinking.  Since the suggestion has come from
+you I will assume it does not violate the letter of any RFCs, even
+though I can't shake a strange feeling that this is &quot;abusing&quot; the
+fragment concept a little...
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000519.html">robots.txt for Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="000521.html">robots.txt for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#520">[ date ]</a>
+              <a href="thread.html#520">[ thread ]</a>
+              <a href="subject.html#520">[ subject ]</a>
+              <a href="author.html#520">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

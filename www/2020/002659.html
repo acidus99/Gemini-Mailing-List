@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A proposed scheme for parsing preformatted alt text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C20200911001631.GF1964344%40tilde.team%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002651.html">
+   <LINK REL="Next"  HREF="002662.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A proposed scheme for parsing preformatted alt text</H1>
+    <B>easeout at tilde.team</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C20200911001631.GF1964344%40tilde.team%3E"
+       TITLE="A proposed scheme for parsing preformatted alt text">easeout at tilde.team
+       </A><BR>
+    <I>Fri Sep 11 01:16:31 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002651.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+        <LI>Next message (by thread): <A HREF="002662.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2659">[ date ]</a>
+              <a href="thread.html#2659">[ thread ]</a>
+              <a href="subject.html#2659">[ subject ]</a>
+              <a href="author.html#2659">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Sep 10, 2020 at 09:55:34AM -0600, Alex // nytpu wrote:
+&gt;<i> &gt;I strongly recommend against this. The W3C has been trying to get HTML
+</I>&gt;<i> &gt;authors and browser makers to _only_ display, in tooltips, text in
+</I>&gt;<i> &gt;`title` attributes.  Previously, HTML authors would write `alt`
+</I>&gt;<i> &gt;attribute values intending them to be read by sighted HTML readers who
+</I>&gt;<i> &gt;can already see the image.
+</I>&gt;<i> I strongly agree. While I don't view the W3C's recommendations as the
+</I>&gt;<i> gold standard of things gemini should look to emulate (EME anyone?), I
+</I>&gt;<i> agree that if we make the alt text easily visible it will no longer be
+</I>&gt;<i> accessibility text and will turn into a miscellaneous-purpose field.
+</I>
+Great points. My main goal is to address the fact that the spec
+underdefines the alt text field. I want it to decide on one use such
+that clients could depend on it always being suitable for that use.
+
+Thanks for pointing out that what we think of as &quot;alt text&quot; in HTML is
+not the same thing as the alternative representation used by screen
+readers. In that light, I don't want Gemini's preformat alt text to be
+machine-readable, nor do I want it to be an HTML alt text style tooltip
+or caption.
+
+I think it should behave like the &quot;title&quot; attribute. I want Gemini to
+offer accessibility affordances where the nature of plain text does not
+already provide them, and this seems like the right use for that. I
+think it would also be suitable to change the name from &quot;alt text&quot; to
+something like &quot;accessibile description&quot;.
+
+&gt;<i> &gt;(You might be thinking &#8220;well, what about that Markdown meme where
+</I>&gt;<i> &gt;people write &#8216;```javascript&#8217; to start off a JavaScript code block, with
+</I>&gt;<i> &gt;the idea that a syntax highlighter will read it and colorize the
+</I>&gt;<i> &gt;output?&#8221;
+</I>&gt;<i> The original point of suggesting that it be displayed for all users was
+</I>&gt;<i> to discourage turning text intended for humans into text intended for
+</I>&gt;<i> machines anyways, but I believe an alternate solution other than
+</I>&gt;<i> displaying it for everybody would still be preferable.
+</I>
+Yep, that is what I meant, to drop machine-readability in favor of human
+readability.
+
+&gt;<i> Rewriting that portion of the spec to emphasize that it is not to be
+</I>&gt;<i> parsed in any way other than as natural language?  Maybe say that a
+</I>&gt;<i> client *should be able to* completely replace the preformatted block
+</I>&gt;<i> with the contents of the alt text without the document losing
+</I>&gt;<i> significant meaning? That would work for ascii art and short code
+</I>&gt;<i> snippets, but it might not be doable for longer code blocks.
+</I>
+An accessible description for a long code block seems like a non-goal,
+though, because when code is text, I imagine that makes it accessible to
+a screen reader.
+
+When considering these details it is helping me to draw a clear line
+between an accessible content description and a caption. I think we want
+the former, not the latter.
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002651.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+	<LI>Next message (by thread): <A HREF="002662.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2659">[ date ]</a>
+              <a href="thread.html#2659">[ thread ]</a>
+              <a href="subject.html#2659">[ subject ]</a>
+              <a href="author.html#2659">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

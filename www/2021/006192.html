@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] client certificate expiry
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20client%20certificate%20expiry&In-Reply-To=%3C20210325224459.xapbcn27obvnkttx%40localhost%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006189.html">
+   <LINK REL="Next"  HREF="006193.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] client certificate expiry</H1>
+    <B>mbays</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20client%20certificate%20expiry&In-Reply-To=%3C20210325224459.xapbcn27obvnkttx%40localhost%3E"
+       TITLE="[tech] client certificate expiry">mbays at sdf.org
+       </A><BR>
+    <I>Thu Mar 25 22:44:59 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006189.html">[tech] Environment variables for proxies
+</A></li>
+        <LI>Next message (by thread): <A HREF="006193.html">[tech] client certificate expiry
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6192">[ date ]</a>
+              <a href="thread.html#6192">[ thread ]</a>
+              <a href="subject.html#6192">[ subject ]</a>
+              <a href="author.html#6192">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Does it make sense to give a self-signed client certificate an 
+expiration date? I think not, and therefore according to RFC5280 section 
+4.1.2.5, notAfter should be set to 9999-12-31 23:59.
+=&gt; <A HREF="https://tools.ietf.org/html/rfc5280#section-4.1.2.5">https://tools.ietf.org/html/rfc5280#section-4.1.2.5</A>
+
+The same goes for self-signed server certificates, but I mention this in 
+the context of client certs because the notAfter time gives a way to 
+fingerprint clients. So it would be good for clients which generate 
+client certs to agree on this.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 195 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210325/d864cb62/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20210325/d864cb62/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006189.html">[tech] Environment variables for proxies
+</A></li>
+	<LI>Next message (by thread): <A HREF="006193.html">[tech] client certificate expiry
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6192">[ date ]</a>
+              <a href="thread.html#6192">[ thread ]</a>
+              <a href="subject.html#6192">[ subject ]</a>
+              <a href="author.html#6192">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

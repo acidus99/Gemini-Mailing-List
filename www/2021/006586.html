@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] GemThread: an experimental conversation server
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20GemThread%3A%20an%20experimental%20conversation%20server&In-Reply-To=%3CCBOF84E7S2TT.2KA782NM2FR1W%40tinytopper%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006585.html">
+   <LINK REL="Next"  HREF="006588.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] GemThread: an experimental conversation server</H1>
+    <B>Raph M.</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20GemThread%3A%20an%20experimental%20conversation%20server&In-Reply-To=%3CCBOF84E7S2TT.2KA782NM2FR1W%40tinytopper%3E"
+       TITLE="[ANN] GemThread: an experimental conversation server">raph at raphm.com
+       </A><BR>
+    <I>Fri May 28 00:36:21 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006585.html">[tech] Gemini reverse proxy
+</A></li>
+        <LI>Next message (by thread): <A HREF="006588.html">[ANN] GemThread: an experimental conversation server
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6586">[ date ]</a>
+              <a href="thread.html#6586">[ thread ]</a>
+              <a href="subject.html#6586">[ subject ]</a>
+              <a href="author.html#6586">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi, everyone.
+
+I was reading carcosa.net's &quot;Re: Comments and pingbacks&quot; article [1],
+and I ended up thinking about what sort of conversation pattern makes
+sense in Gemini-space.
+
+Gemini is decentralized (which is different from &quot;federated&quot;, and I'm
+happy about that), and this implies to me that a conversation pattern
+that fits into Gemini-space should necessarily be decentralized.
+
+Gemini is human-focused, which implies to me that building a complicated
+network of automated pingback/webmention/trackback-like things might
+also be a poor fit. &quot;Overkill&quot; is the word that comes to mind.
+
+I wanted something decentralized, lightweight, and participatory. It
+should require only a small amount of interaction from each person that
+wants to use it. And it should be something that can be self-hosted, but
+doesn't have to be.
+
+After a bit of searching, I came across the GAMS specification [2]. I
+liked the spec, but wondered if it might be possible to make an even
+simpler conversation system.
+
+So as an experiment, I made one. 
+
+It is called &quot;GemThread&quot;, and the current implementation is an SCGI
+service designed to run under Molly Brown. Anyone _can_ run an instance
+of it, but nobody _must_ run one.
+
+The interaction pattern should feel relatively straightforward.
+
+To create a new thread: 
+
+* write your post and publish it on your own gemini server
+* visit the gemthread service (see below)
+* find the &quot;Add a new thread&quot; link (under &quot;Quick Links&quot;)
+* enter the <A HREF="gemini://">gemini://</A> URL of your post
+* if you'd like to, add the link to the thread to your original post to
+* let people know that they can respond
+
+To respond to a thread:
+
+* write your reponse and publish it on your gemini server
+* visit the gemthread servce
+* click the &quot;Add a response to this thread&quot; link at the bottom of the
+* thread that you want to respond to
+* enter the <A HREF="gemini://">gemini://</A> URL of your response post.
+
+There are more details available in the help file, which is published at
+the root of the gemthread service.
+
+Comments, criticism, and feedback are all welcome. I set up a mailing
+list for it at <A HREF="mailto://~raphm/gemthread@lists.sr.ht">mailto://~raphm/gemthread@lists.sr.ht</A> . 
+
+It could be that this is a poor fit for Gemini, but I think it checks
+off the boxes I had in my head. At the very least it's a stake in the
+ground for us to find a way to build out a way to have conversations
+without losing posts or having to monitor aggregators and hope we catch
+all the responses. :)
+
+The first instance of the service is here:
+
+=&gt; <A HREF="gemini://twistedcarrot.com/gemthread">gemini://twistedcarrot.com/gemthread</A> GemThread Service
+
+The code is hosted at:
+
+=&gt; <A HREF="https://git.sr.ht/~raphm/gemthread">https://git.sr.ht/~raphm/gemthread</A>
+
+It is also mirrored at:
+
+=&gt; <A HREF="https://github.com/raphm/gemthread">https://github.com/raphm/gemthread</A>
+
+Thank you for reading! 
+
+Raph
+
+
+---
+References:
+
+=&gt; <A HREF="gemini://carcosa.net/journal/20210421-comments-and-pingbacks.gmi">gemini://carcosa.net/journal/20210421-comments-and-pingbacks.gmi</A> [1]
+Re: Comments and pingbacks
+=&gt; <A HREF="gemini://gemlog.lanterne.chilliet.eu/GAMS.en.gmi">gemini://gemlog.lanterne.chilliet.eu/GAMS.en.gmi</A> [2] GAMS: Gemini
+Acentred Messaging System
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006585.html">[tech] Gemini reverse proxy
+</A></li>
+	<LI>Next message (by thread): <A HREF="006588.html">[ANN] GemThread: an experimental conversation server
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6586">[ date ]</a>
+              <a href="thread.html#6586">[ thread ]</a>
+              <a href="subject.html#6586">[ subject ]</a>
+              <a href="author.html#6586">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

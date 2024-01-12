@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] IPv6 addresses in URLs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20IPv6%20addresses%20in%20URLs&In-Reply-To=%3C20210418111714.zahifqxqgfn3qm5c%40localhost%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006384.html">
+   <LINK REL="Next"  HREF="006372.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] IPv6 addresses in URLs</H1>
+    <B>mbays</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20IPv6%20addresses%20in%20URLs&In-Reply-To=%3C20210418111714.zahifqxqgfn3qm5c%40localhost%3E"
+       TITLE="[tech] IPv6 addresses in URLs">mbays at sdf.org
+       </A><BR>
+    <I>Sun Apr 18 12:17:14 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006384.html">[tech] IPv6 addresses in URLs
+</A></li>
+        <LI>Next message (by thread): <A HREF="006372.html">[tech] IPv6 addresses in URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6385">[ date ]</a>
+              <a href="thread.html#6385">[ thread ]</a>
+              <a href="subject.html#6385">[ subject ]</a>
+              <a href="author.html#6385">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>* Sunday, 2021-04-18 at 09:12 +0000 - nervuri &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">nervuri at disroot.org</A>&gt;:
+
+&gt;<i> On Sat, 2021-04-17, Stephane Bortzmeyer wrote:
+</I>&gt;<i> &gt; &gt; No SNI vs empty SNI - we could test to see if servers have a problem
+</I>&gt;<i> &gt; &gt; with either.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; For instance, egsam.glv.one reacts badly when you don't send a SNI:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; % gnutls-cli -p 1965 --disable-sni --insecure egsam.glv.one
+</I>&gt;<i> 
+</I>&gt;<i> Sure, but I was only referring to capsules accessible using an IP
+</I>&gt;<i> address instead of a DNS name.  Makeworld figured it out:
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="https://gitlab.com/gemini-specification/protocol/-/issues/33">https://gitlab.com/gemini-specification/protocol/-/issues/33</A>
+</I>
+For the benefit of those who don't want to fire up a javascript browser 
+just to see this: I (grudgingly) did it for you, and here's Makeworld's 
+comment.
+
+&gt;<i>Ok, I figured it out.
+</I>&gt;<i>
+</I>&gt;<i>I used Wireshark to analyze curl traffic to <A HREF="https://1.1.1.1">https://1.1.1.1</A> and 
+</I>&gt;<i><A HREF="https://example.com.">https://example.com.</A> curl only sends the SNI for the latter connection. 
+</I>&gt;<i>For the former it omits it entirely. As further clarified in the 
+</I>&gt;<i>OpenSSL wiki:
+</I>&gt;<i>
+</I>&gt;<i>   SNI has been made mandatory to implement in TLS 1.3 but not mandatory to use.
+</I>&gt;<i>
+</I>&gt;<i>I'm not sure if an empty SNI is valid or accepted by spec or existing 
+</I>&gt;<i>code, but omitting it certainly is. Most of the TLS libraries geminauts 
+</I>&gt;<i>are using would be doing all this by default, and so the spec should 
+</I>&gt;<i>reflect that. SNI should be omitted for IP addresses.
+</I>-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 195 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210418/f5aad62e/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20210418/f5aad62e/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006384.html">[tech] IPv6 addresses in URLs
+</A></li>
+	<LI>Next message (by thread): <A HREF="006372.html">[tech] IPv6 addresses in URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6385">[ date ]</a>
+              <a href="thread.html#6385">[ thread ]</a>
+              <a href="subject.html#6385">[ subject ]</a>
+              <a href="author.html#6385">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> On the use of %20 instead of + in URIs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20the%20use%20of%20%2520%20instead%20of%20%2B%20in%20URIs&In-Reply-To=%3CC7E6LTVIEYQD.1U6TTI8XYMW1G%40nitro%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003608.html">
+   <LINK REL="Next"  HREF="003614.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>On the use of %20 instead of + in URIs</H1>
+    <B>Adnan Maolood</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20the%20use%20of%20%2520%20instead%20of%20%2B%20in%20URIs&In-Reply-To=%3CC7E6LTVIEYQD.1U6TTI8XYMW1G%40nitro%3E"
+       TITLE="On the use of %20 instead of + in URIs">me at adnano.co
+       </A><BR>
+    <I>Fri Nov 27 16:20:31 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003608.html">On the use of %20 instead of + in URIs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003614.html">On the use of %20 instead of + in URIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3611">[ date ]</a>
+              <a href="thread.html#3611">[ thread ]</a>
+              <a href="subject.html#3611">[ subject ]</a>
+              <a href="author.html#3611">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri Nov 27, 2020 at 6:37 AM EST, James Tomasino wrote:
+&gt;<i> On 11/27/20 11:10 AM, Philip Linde wrote:
+</I>&gt;<i> &gt; &quot;+&quot; doesn't generally have a special meaning that implies synonymity
+</I>&gt;<i> &gt; with spaces. The sentence you're referring to should be considered a
+</I>&gt;<i> &gt; clarifying point (because it's an easy mistake to make I guess), not a
+</I>&gt;<i> &gt; difference from the standard it adopts (RFC 3986)
+</I>&gt;<i>
+</I>&gt;<i> Philip is correct, but to add on, the '+' specifically has a semantic
+</I>&gt;<i> meaning as a space in query strings and form encodings
+</I>&gt;<i> (application/x-www-form-urlencoded) according to RFC 1866, but NOT in
+</I>&gt;<i> the rest of the URL itself. If you have a URL library that is parsing
+</I>&gt;<i> +'s as spaces in the URL outside of a query string, that library is
+</I>&gt;<i> incorrect. Only %20 is valid as a space in that context.
+</I>&gt;<i>
+</I>&gt;<i> + signs are listed as a sub-delimiter (RFC 3986 Section 2.2) and part of
+</I>&gt;<i> the reserved character set, meaning they should be encoded if not doing
+</I>&gt;<i> so would create confusion in the URL schema. Encoding a + sign would be
+</I>&gt;<i> %2B. You're welcome to do that if you want to avoid confusion, but it
+</I>&gt;<i> really shouldn't be necessary.
+</I>
+The Go URL library encodes spaces in the query string as '+'. Is this
+correct behavior?
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003608.html">On the use of %20 instead of + in URIs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003614.html">On the use of %20 instead of + in URIs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3611">[ date ]</a>
+              <a href="thread.html#3611">[ thread ]</a>
+              <a href="subject.html#3611">[ subject ]</a>
+              <a href="author.html#3611">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

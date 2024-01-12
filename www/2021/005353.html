@@ -1,0 +1,252 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC] Experimenting with a status code of 12
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Experimenting%20with%20a%20status%20code%20of%2012&In-Reply-To=%3CCAFwUW91UjDz7tr8x7b%2BAcySRQ2ZF8dmRAL3q5PMNjwu8ZkMK%2BA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005351.html">
+   <LINK REL="Next"  HREF="005356.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC] Experimenting with a status code of 12</H1>
+    <B>Mansfield</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Experimenting%20with%20a%20status%20code%20of%2012&In-Reply-To=%3CCAFwUW91UjDz7tr8x7b%2BAcySRQ2ZF8dmRAL3q5PMNjwu8ZkMK%2BA%40mail.gmail.com%3E"
+       TITLE="[SPEC] Experimenting with a status code of 12">mansfield at ondollo.com
+       </A><BR>
+    <I>Fri Feb 19 03:30:05 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005351.html">[ANN] Planet m68k Gemini capsule
+</A></li>
+        <LI>Next message (by thread): <A HREF="005356.html">[SPEC] Experimenting with a status code of 12
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5353">[ date ]</a>
+              <a href="thread.html#5353">[ thread ]</a>
+              <a href="subject.html#5353">[ subject ]</a>
+              <a href="author.html#5353">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Good evening!
+
+(I know this is a long email - I'm excited to share some of what I've been
+experimenting with. Hopefully it's coherent.)
+
+I've been experimenting with a non-standard status code and I wanted to
+share some details. I am running this experiment to find a way for users to
+manage content using only a Gemini client and server. No ssh, rsync, vim,
+emacs, nano, or anything else.
+
+
+# High Level Concepts
+
+I see status code 10 as the server telling the client that the user can,
+&quot;provide short input&quot;.
+
+I see status code 11 as the server telling the client that the user can,
+&quot;provide short secured input&quot;.
+
+I've been using a status code of 12 for having the ondollo.com server tell
+the Mansfield client that the user can, &quot;provide long input&quot;.
+
+The simplest conceptual adjustment is that there's no character limit on
+the input a client might provide in request/response input cycle involving
+a status code of 12. Status codes 10 and 11 have specified limits around 1k
+bytes (I'm fudging the details there). Status codes 10 and 11 also have the
+specified behavior of putting the user input into the URL as the value of
+the query component. So... the simple part is that there's no limit to the
+number of bytes sent from a client to a server in a request/response input
+cycle involving a status code of 12.
+
+To escape the 1k limits of the URL in responses to 10 and 11, my
+exploration of status code 12 places the user input in the body. This meant
+I had to change my server from only understanding how to process the single
+request line of standard requests to processing the request line *and* the
+body when it sees a response to a 12. So I needed to tell the difference
+between requests with a body and ones without.
+
+
+# Some of the Consequences of the Above Approach
+
+Since I then needed to be able to tell the difference between requests that
+didn't have a body and those that should, I modified the server to provide
+unique links to the client. These unique links use a UUIDv4 that is tracked
+on the server and expire after a day. These are, IMO, the
+geminispace equivalent of server side sessions. I say the
+geminispace equivalent since they do as little as possible and only for the
+purpose of getting simple content from the writer to the reader. (The
+current spec says as much and explains additional privacy benefits of this
+concept of server-side sessions.) Because the goal is to help users manage
+content (or resources) using only a Gemini client, internally the UUID is
+paired with the clients certificate fingerprint and originally requested
+resource. In practical details, the resource is the page the user is
+editing.
+
+So. If a client provides a certificate and a URL that contain the
+fingerprint and UUID (respectively) that the server is tracking, the server
+will accept the body of the request as the value of the originally
+requested resource.
+
+To make the impact of certificate fingerprints line up more with *all* of
+the content a user might want to manage, the user must create an account on
+the ondollo.com server first. This account creation process is very very
+simple. The only step is to visit this link [1]:
+
+=&gt; <A HREF="gemini://ondollo.com/internal/account/create">gemini://ondollo.com/internal/account/create</A>
+
+The certificate used when visiting that url is the certificate required to
+be provided when managing content in that account, since it's the
+certificate that will be paired with the UUID and originally requested
+resource on any resource that provides edit or create links. (This concept
+is also explored a bit in the current spec, and mentioned that it could be
+thought of as analogous to the .authorized_keys file on an SSH server.)
+
+[1] - After creating an account you'll get a status code of 20 in response,
+with unique links as described above - if you use those links you'll get a
+status code of 12 containing the current value of the resource as the body
+of the response and letting you manage your content as this email describes
+(assuming your client supports sending requests with a body).
+
+
+# Concerns About Certificates in Geminispace
+
+This puts additional emphasis on the geminispace use of certificates. We
+feel we've lined up with the current spec quite well on this. If a client
+created content with a certificate and then lost the certificate, the
+content would no longer be accessible for writing. If an account were
+created with a certificate and then the user lost that certificate, the
+account would no longer be accessible. If a client allowed more than one
+certificate to be locked to ondollo.com, then the user could choose between
+more than one account anytime they visited. If a user chose a certificate
+that had never been registered with an ondollo.com account, the server
+would have no way of knowing that that user might already have an account
+under a different certificate.
+
+There is an additional concern about 'leaking' the certificate. If a
+certificate is used to create an account, it becomes a form of
+username/password. If that same certificate were presented to other servers
+as a user were browsing through geminispace, the other servers would have
+access to any resources in that account that had been limited to only those
+who can present the original certificate. (At least, I think that's true
+from my limited understanding of certificates. I'd *love* to be proven
+wrong on this.) IMO this means that Gemini Clients must allow and encourage
+users to 'lock' certificates to specific sites (urls? hostnames? domains?).
+(Here, again, the current gemini specification seems to agree and mentions
+this as a concern that client implementers should watch for and enable
+users to manage - by hostname+path, locking all urls with that pair as a
+prefix.) The Mansfield client was modified in two ways to support the above.
+
+The first was simple - allow a user to lock a certificate to a hostname.
+Then, every time the client navigated anywhere, it would check the
+lockfiles to see if the hostname it was about to open a connection to had
+already been locked to a cert. If it had been locked to a cert, that cert
+would be used for all communication with that hostname, including the
+initial connection. (We're still on the fence about locking to the
+hostname+path pair, but we lean on the side of considering it a
+'good-thing' that we'll probably implement.)
+
+The second adjustment to support user privacy is that the Mansfield client,
+on start-up, generates an in-memory-only cert. This isn't secure memory, or
+memory that can not be flushed to disk, this is just a certificate that
+can't be reused after the client is shutdown. This is done so that if the
+user navigates to any hostname that is *not* locked to any other
+certificate, the in-memory cert created at startup will be used. This
+removes the possibility of leaking a locked cert. We think that a
+recommendation along the lines of generating an in-memory cert like this
+might improve the current gemini spec.
+
+
+# After-thoughts
+
+One additional point - the account name used when following this cert-based
+process is based on the subject-common-name element in the cert. To deal
+with collisions, the first few characters from the certificate fingerprint
+are combined with the above common-name. We plan to eventually add
+functionality that allows users to register a pseudonym that takes the
+place of that common-name+fingerprint-prefix pair and would be more human
+friendly.
+
+Ah... and another point... how does the server know when to stop reading
+the body of a request that pairs up with a 12? Well... there's a deadline
+on the connection. You'll want to get all your data across before then. We
+don't really like that that's all we have... we've thought about
+implementing something more, but other options currently feel just as
+arbitrary... some max byte size?
+
+Finally - thanks for reading all this. I need to stop typing... I've been
+typing this for the last hour and a half! :-D
+
+If a status code of 12 makes it in to the spec or not is fine with us. We'd
+love to see more servers and clients fight for the user. (Yes, I've been
+watching certain movies recently.) We believe creation of content should be
+as simple as consumption, and we're enjoying exploring this approach as an
+option.
+
+Thanks!
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210218/4fe7d26c/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210218/4fe7d26c/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005351.html">[ANN] Planet m68k Gemini capsule
+</A></li>
+	<LI>Next message (by thread): <A HREF="005356.html">[SPEC] Experimenting with a status code of 12
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5353">[ date ]</a>
+              <a href="thread.html#5353">[ thread ]</a>
+              <a href="subject.html#5353">[ subject ]</a>
+              <a href="author.html#5353">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

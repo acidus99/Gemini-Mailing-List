@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Caching and status codes
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3CCAJScK0%2BtVmGf0yPRiQxj4pSMp0utk8QrHwQgTaB4t3wH-Qfj3Q%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003124.html">
+   <LINK REL="Next"  HREF="003081.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Caching and status codes</H1>
+    <B>Bj&#246;rn W&#228;rmedal</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3CCAJScK0%2BtVmGf0yPRiQxj4pSMp0utk8QrHwQgTaB4t3wH-Qfj3Q%40mail.gmail.com%3E"
+       TITLE="Caching and status codes">bjorn.warmedal at gmail.com
+       </A><BR>
+    <I>Fri Nov  6 07:43:39 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003124.html">Caching and status codes
+</A></li>
+        <LI>Next message (by thread): <A HREF="003081.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3079">[ date ]</a>
+              <a href="thread.html#3079">[ thread ]</a>
+              <a href="subject.html#3079">[ subject ]</a>
+              <a href="author.html#3079">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I *love* it when clients cache stuff, for performance and environmental reasons.
+
+But I think that's something that each individual client (or client
+dev, I suppose) should deal with in their own fashion and only if they
+want to. As mentioned before most files served on <A HREF="gemini://">gemini://</A> are small
+text files, and it's likely to remain that way for the foreseeable
+future. I don't think caching is something that the protocol should
+care about or cater to specifically, as it adds complexity and
+ambiguity.
+
+&gt;<i> Now, I don't see the need for caching at all when it comes to
+</I>&gt;<i> gemini, but if it's something the gemini community wants or needs then
+</I>&gt;<i> I'd like to suggest a 2x status code that let's a client know that the
+</I>&gt;<i> response is unlikely to change and thus cacheable. This could even kind
+</I>&gt;<i> of match how the temporary/permanent redirect status codes are defined:
+</I>&gt;<i>
+</I>&gt;<i> 20 - SUCCESS
+</I>&gt;<i> 21 - &quot;PERMANENT&quot; SUCCESS (Feel free to cache this)
+</I>
+Adding a response code like that is counterproductive, I believe, as
+there's really no way for a server to determine what sort of file or
+data is unlikely to change, and there's no way for a client to
+determine what a flag of &quot;unlikely to change&quot; means. Does it mean it
+won't change in the next hour? The next month?
+
+As mentioned in previous discussions on caching and checksums, there's
+not really room in the protocol specification for the needed
+information unless you start misusing MIME type info. I've come around
+to thinking that the added complexity, ambiguity, and possibly
+breaking changes far outweigh the added benefit.
+
+On a side note I am (somewhat slowly) playing around with
+python3/Tkinter to make a client, and my current thinking for the
+design of that is that when the user clicks a link that returns an
+image I'll display it inline and cache it (based on its path)
+*forever*, though it will be clearly marked as a cached resource in
+the UI somehow as of yet undetermined. As for text/gemini I don't see
+a reason to cache them for more than very short periods: they're too
+small and frequently changed. No changes are needed in the protocol
+for this sort of behaviour, and I'm not really convinced it's a
+behaviour most clients should adopt either. Client-side caching is
+something that users have strong opinions about.
+
+The only real benefit of caching would be on the server side; whether
+it's in a proxying situation or some type of mirror, or just a server
+that wants to be speedier when serving dynamic data. I don't see a
+need for a protocol change for that, though; if someone wants to make
+a super fancy app server they're free to do it as long as it looks the
+same to clients :)
+
+Cheers,
+ew0k
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003124.html">Caching and status codes
+</A></li>
+	<LI>Next message (by thread): <A HREF="003081.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3079">[ date ]</a>
+              <a href="thread.html#3079">[ thread ]</a>
+              <a href="subject.html#3079">[ subject ]</a>
+              <a href="author.html#3079">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Rethinking the link line
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Rethinking%20the%20link%20line&In-Reply-To=%3C20211104010157.70b4d4dc53efd19984436930%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007525.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Rethinking the link line</H1>
+    <B>Philip Linde</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Rethinking%20the%20link%20line&In-Reply-To=%3C20211104010157.70b4d4dc53efd19984436930%40gmail.com%3E"
+       TITLE="Rethinking the link line">linde.philip at gmail.com
+       </A><BR>
+    <I>Thu Nov  4 00:01:57 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007525.html">Rethinking the link line
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7529">[ date ]</a>
+              <a href="thread.html#7529">[ thread ]</a>
+              <a href="subject.html#7529">[ subject ]</a>
+              <a href="author.html#7529">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi TGL!
+
+On Tue, 2 Nov 2021 09:46:17 -0400
+The Gnuserland &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gnuserland at mailbox.org</A>&gt; wrote:
+
+&gt;<i> This flavor forbids any suitable content to be displayed in line even if 
+</I>&gt;<i> the client is capable and should not used to provide link to GMI files.
+</I>
+Note that according to the current specification, clients &quot;MUST NOT
+automatically make any network connections as part of displaying links
+whose scheme corresponds to a network protocol&quot;. The notion that a
+client should automatically make additional requests to display content
+in-line is already antithetical to Gemini and is forbidden by the spec.
+
+I suppose that such a feature could be useful for clients that may
+display resources in-line only upon activating a link, but a common way
+to address the problem of downloading such resources in web browsers is
+to allow saving of the currently open resource or a linked resource via
+a context menu. I think that something to that effect could work for a
+Gemini client.
+
+You note elsewhere that this wouldn't be a major breaking change. I
+completely disagree. No existing clients can currently parse &quot;&lt;=&quot;
+links. For that reason, new pages adopting the proposed feature would
+break every existing client. Moreover, any content that for any reason
+currently has a line starting with &quot;&lt;=&quot; with no intention of using
+this feature would incorrectly be interpreted as a link by a client
+implementing this feature, although this seems less likely.
+
+A good work-around is mentioned elsewhere. Give the content some
+content-type that couldn't reasonably be rendered by any client for
+its ambiguity, like application/octet-stream.
+
+-- 
+Philip
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007525.html">Rethinking the link line
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7529">[ date ]</a>
+              <a href="thread.html#7529">[ thread ]</a>
+              <a href="subject.html#7529">[ subject ]</a>
+              <a href="author.html#7529">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

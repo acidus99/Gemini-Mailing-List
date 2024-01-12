@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Garden Gnome Society!
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Garden%20Gnome%20Society%21&In-Reply-To=%3CCAJScK0Kqq%3DH_XyJ6MweiWHZY%2BR3Ey_kTX-xF960kF_%3Dt9g-c8Q%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003800.html">
+   <LINK REL="Next"  HREF="003806.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Garden Gnome Society!</H1>
+    <B>Bj&#246;rn W&#228;rmedal</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Garden%20Gnome%20Society%21&In-Reply-To=%3CCAJScK0Kqq%3DH_XyJ6MweiWHZY%2BR3Ey_kTX-xF960kF_%3Dt9g-c8Q%40mail.gmail.com%3E"
+       TITLE="[ANN] Garden Gnome Society!">bjorn.warmedal at gmail.com
+       </A><BR>
+    <I>Fri Dec  4 07:10:07 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003800.html">[ANN] Garden Gnome Society!
+</A></li>
+        <LI>Next message (by thread): <A HREF="003806.html">[ANN] Garden Gnome Society!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3777">[ date ]</a>
+              <a href="thread.html#3777">[ thread ]</a>
+              <a href="subject.html#3777">[ subject ]</a>
+              <a href="author.html#3777">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Brilliant work, Bj&#246;rn! I try to water another community garden plant
+</I>&gt;<i> each day, but I usually have to pick a bunch of them at random before I
+</I>&gt;<i> find one that needs watering. Thanks for making this a MUCH easier
+</I>&gt;<i> process.
+</I>
+Thank you, Gary! It was exactly that problem I intended to solve :)
+
+&gt;<i> This is awesome! I know botany from the tildeverse, but have never used
+</I>&gt;<i> it! I was wondering, could you, or someone else, teach me how to attach
+</I>&gt;<i> my output from astrobotany to my index page of my gemini capsule?
+</I>
+Hey, Vidak! Good question, and I'm happy to help :)
+
+It's surprisingly simple, actually! There are a few curl-like command
+line utilities for gemini out there. When I was planning on making
+this I looked at <A HREF="https://github.com/makeworld-the-better-one/gemget">https://github.com/makeworld-the-better-one/gemget</A> at
+first. It ended up not working for me for two reasons: it doesn't
+(yet) support client certificates -- which AstroBotany requires to let
+you walk the community garden or visit your own plant -- and the Go
+version on my Raspberry Pi was incompatible (that's probably a
+solvable problem, but I would still need the client cert support).
+
+I ended up writing my own in python3:
+<A HREF="https://github.com/makeworld-the-better-one/gemget">https://github.com/makeworld-the-better-one/gemget</A>
+
+Python3 is great for me, because it works on my laptop and my RPi
+without needing to compile anything. This tool is *really* basic for
+now. There's no error checking, it decodes everything to UTF-8 before
+pushing it to stdout, and the response header line is included in the
+output. And there's no server cert validation of any kind (i.e. no
+known-hosts database). But it works for the purpose of fetching
+AstroBotany info!
+
+Basically: find where your browser keeps your client cert, run
+&quot;gemcall -c &lt;path to cert&gt; -k &lt;path to cert key&gt; -u
+<A HREF="gemini://astrobotany.mozz.us/app/plant">gemini://astrobotany.mozz.us/app/plant</A>&quot; and you'll get text output. Be
+sure to not have the colour setting turned on for that client cert, as
+that will ruin the experience for some people visiting your capsule.
+Then you just have to figure out which lines from the output you want!
+Put it in a cron job or systemd.timer if you can, and it's fully
+automated.
+
+Cheers,
+ew0k
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003800.html">[ANN] Garden Gnome Society!
+</A></li>
+	<LI>Next message (by thread): <A HREF="003806.html">[ANN] Garden Gnome Society!
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3777">[ date ]</a>
+              <a href="thread.html#3777">[ thread ]</a>
+              <a href="subject.html#3777">[ subject ]</a>
+              <a href="author.html#3777">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

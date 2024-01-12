@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3C20200611233951.GA41155%40MacBook-Pro.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001569.html">
+   <LINK REL="Next"  HREF="001574.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)</H1>
+    <B>Thomas Karpiniec</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3C20200611233951.GA41155%40MacBook-Pro.local%3E"
+       TITLE="CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)">tkarpiniec at icloud.com
+       </A><BR>
+    <I>Fri Jun 12 00:39:51 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001569.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+        <LI>Next message (by thread): <A HREF="001574.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1573">[ date ]</a>
+              <a href="thread.html#1573">[ thread ]</a>
+              <a href="subject.html#1573">[ subject ]</a>
+              <a href="author.html#1573">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Jun 11, 2020 at 07:50:18PM +0000, solderpunk wrote:
+&gt;<i> Ah, right, if everybody is already using SHA256 then, yes, we can stick
+</I>&gt;<i> to that and the different serialisations are convertible.  And I don't
+</I>&gt;<i> see any reason not too.  From what I can tell there (somewhat
+</I>&gt;<i> surprisingly) really isn't a standard notion of certificate
+</I>&gt;<i> fingerprinting, but SHA1 and SHA256 seem to be the most commonly used by
+</I>&gt;<i> web browsers.
+</I>
+At the risk of overthinking things, I was reading RFC6709 &quot;Design
+Considerations for Protocol Extensions&quot; for non-Gemini reasons
+recently and this section seems relevant:
+
+&quot;4.5.  Cryptographic Agility
+
+... The ability to negotiate the use of a particular cryptographic
+algorithm provides resilience against compromise of a particular
+cryptographic algorithm....  This is usually accomplished by including
+an algorithm identifier and parameters in the protocol, and by
+specifying the algorithm requirements in the protocol specification.&quot;
+
+i.e. Instead of storing opaque bytes, also mention that it's SHA256
+
+A stand-alone implementation of this concept:
+<A HREF="https://multiformats.io/multihash/">https://multiformats.io/multihash/</A>
+
+Cheers, Tom
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001569.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+	<LI>Next message (by thread): <A HREF="001574.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1573">[ date ]</a>
+              <a href="thread.html#1573">[ thread ]</a>
+              <a href="subject.html#1573">[ subject ]</a>
+              <a href="author.html#1573">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

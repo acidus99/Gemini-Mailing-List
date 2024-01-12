@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CSRF in Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CSRF%20in%20Gemini&In-Reply-To=%3CCAG-mZ3juGAxLYb8wBmiJpaCFh%3DxiT0gtmef4-GqTnRNn7UbhEA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001700.html">
+   <LINK REL="Next"  HREF="001736.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CSRF in Gemini</H1>
+    <B>Peter Vernigorov</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CSRF%20in%20Gemini&In-Reply-To=%3CCAG-mZ3juGAxLYb8wBmiJpaCFh%3DxiT0gtmef4-GqTnRNn7UbhEA%40mail.gmail.com%3E"
+       TITLE="CSRF in Gemini">pitr.vern at gmail.com
+       </A><BR>
+    <I>Mon Jun 15 23:11:35 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001700.html">CSRF in Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="001736.html">CSRF in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1720">[ date ]</a>
+              <a href="thread.html#1720">[ thread ]</a>
+              <a href="subject.html#1720">[ subject ]</a>
+              <a href="author.html#1720">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This type of attack impacts more than just endpoints that rely on
+query parameter. For example, one can delete their astrobotany plant
+simply by getting redirected to /app/plant/harvest/confirm (although
+that is not strictly deletion). If a certificate is already activated
+for this site, then this will not help stop the attack.
+
+However, the difference I see between HTTP/HTML and Gemini is that
+this attack is not happening in an invisible iframe/xhr request, but
+in plain sight of the user. Once they are redirected to any of the
+impacted pages, they will see a message from server informing them of
+their actions. &quot;you posted a comment&quot;, &quot;you harvested/deleted your
+plant&quot;. Perhaps an easy workaround is to let user undo their action?
+&quot;you posted a comment, would you like to undo?&quot; This has an additional
+positive side effect of an easy undo of human errors, in case the
+comment was submitted prematurely, or contains an error.
+
+On Mon, Jun 15, 2020 at 5:05 PM Felix Quei&#223;ner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">felix at masterq32.de</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Hey!
+</I>&gt;<i>
+</I>&gt;<i> &gt; I just wrote down a few thoughts about cross-site request forgery in Gemini:
+</I>&gt;<i>
+</I>&gt;<i> Good read! I thought about that as well&#8230;
+</I>&gt;<i>
+</I>&gt;<i> &gt;&gt; CSRF protection via non-native nonces is ugly, can we do better than
+</I>&gt;<i> &gt;&gt; the web?
+</I>&gt;<i> I think one solution would be to force clients to remove queries from
+</I>&gt;<i> all URLs. It's not a really elegant solution and makes CGI stuff harder
+</I>&gt;<i> to implement, but will prevent a lot of URL-fuckery. I'm also always
+</I>&gt;<i> scared when clicking links in interactive things, because double
+</I>&gt;<i> postings are really easy to achieve with the query appended to URLs.
+</I>&gt;<i> Hitting refresh in your browser to see new posts? You create a new post
+</I>&gt;<i> in the guestbook!
+</I>&gt;<i>
+</I>&gt;<i> While writing this, i got the following idea (which seams reasonable to me):
+</I>&gt;<i> Specify that a response to INPUT MUST be passed with a query-parameter
+</I>&gt;<i> &quot;?input=&#8230;&quot; where &quot;&#8230;&quot; is the data from the user. The data is fully
+</I>&gt;<i> urlencoded with all forbidden characters(space,?,=,&#8230;) replaced with
+</I>&gt;<i> their percent-encoding.
+</I>&gt;<i>
+</I>&gt;<i> Also specify that clients SHOULD remove the &quot;input&quot;-parameter between
+</I>&gt;<i> redirects and in documents using the gemini-scheme.
+</I>&gt;<i>
+</I>&gt;<i> This allows us to prevent passing accidential or malicious data via
+</I>&gt;<i> redirects, but doesn't help against a spam-bot that targets a site
+</I>&gt;<i> directly. It also makes client implementation a bit harder.
+</I>&gt;<i>
+</I>&gt;<i> Regards
+</I>&gt;<i> - xq
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001700.html">CSRF in Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="001736.html">CSRF in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1720">[ date ]</a>
+              <a href="thread.html#1720">[ thread ]</a>
+              <a href="subject.html#1720">[ subject ]</a>
+              <a href="author.html#1720">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

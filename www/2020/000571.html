@@ -1,0 +1,213 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Gemini server logging formats and practices
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20server%20logging%20formats%20and%20practices&In-Reply-To=%3C20200512213908.GO7305%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000568.html">
+   <LINK REL="Next"  HREF="000574.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Gemini server logging formats and practices</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20server%20logging%20formats%20and%20practices&In-Reply-To=%3C20200512213908.GO7305%40brevard.conman.org%3E"
+       TITLE="Gemini server logging formats and practices">sean at conman.org
+       </A><BR>
+    <I>Tue May 12 22:39:08 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000568.html">Gemini server logging formats and practices
+</A></li>
+        <LI>Next message (by thread): <A HREF="000574.html">Gemini server logging formats and practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#571">[ date ]</a>
+              <a href="thread.html#571">[ thread ]</a>
+              <a href="subject.html#571">[ subject ]</a>
+              <a href="author.html#571">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great solderpunk once stated:
+&gt;<i> On Mon, May 11, 2020 at 05:21:01AM -0400, Sean Conner wrote:
+</I>&gt;<i>  
+</I>&gt;<i> &gt;   But there's really not much to log, other than remote address, request,
+</I>&gt;<i> &gt; status, and potentially the issuer/subject of any given certificate (and
+</I>&gt;<i> &gt; even that might be optional).  
+</I>&gt;<i> 
+</I>&gt;<i> I agree, there's not much to log, far less than HTTP.  But there's some
+</I>&gt;<i> real utility in having, err, utilities which can parse a log and
+</I>&gt;<i> generate basic statistics an admin might like to know: most popular
+</I>&gt;<i> resources, frequent requests resulting in 51 Not Found responses,
+</I>&gt;<i> average requests per day.  And people are more likely to write things
+</I>&gt;<i> like this if there's one format to worry about and not one per server.
+</I>&gt;<i> 
+</I>&gt;<i> This isn't a hard side-project by any means.  Something very simple and
+</I>&gt;<i> easy to read into existing data processing tools, like a comma separated
+</I>&gt;<i> or tab separated value file with standardised names and/or order for the
+</I>&gt;<i> columns and an agreed-upon representation of time would do the trick.
+</I>&gt;<i> 
+</I>&gt;<i> I am understanding of and sympathetic towards both admins who want to
+</I>&gt;<i> log IPs for debugging or abuse-detection purposes and towards those who
+</I>&gt;<i> don't want to so they can (rightfully) boast about their severs' respect
+</I>&gt;<i> for privacy.  So the standard format should include a column for remote
+</I>&gt;<i> IP and also have a clearly defined behaviour for anonymised logs which
+</I>&gt;<i> log analysers can recognise and handle gracefully (as simple as
+</I>&gt;<i> specifying a standard character, like &quot;-&quot;, to be placed in that column).
+</I>&gt;<i> We could also define a half-way format, where a compact hash of the IP is
+</I>&gt;<i> logged, so that unique visitor statistics can be calcualted for those
+</I>&gt;<i> who want them, or e.g. malfunctioning bots can be spotted, but nothing.
+</I>
+  Okay, here's the format I'm using, and some notes about it:
+
+remote=---.---.---.--- status=20 request=&quot;<A HREF="gemini://gemini.conman.org/private/">gemini://gemini.conman.org/private/</A>&quot; bytes=213 subject=&quot;/CN=AV-98 cert test&quot; issuer=&quot;/CN=AV-98 cert test&quot; 
+remote=---.---.---.--- status=20 request=&quot;<A HREF="gemini://gemini.conman.org/">gemini://gemini.conman.org/</A>&quot; bytes=3026 subject=&quot;&quot; issuer=&quot;&quot;
+
+(NOTE: I'm blanking out the IP address)
+
+  As stated before, I'm using syslog() for logging, so I'm not logging the
+time since that's added by syslog().  The request, subject and issuer fields
+are quoted, so any double quote that appears inside has to be escaped with
+'\' [1].  The fields are named, so they are (assuming you know English)
+self-describing (to a degree).  I include bytes, but that's because I have
+that information (even for dynamic output) due to how I wrote the server.
+
+  Aside from the time field (which could be added, but for me, would be
+redundant since syslog() does that for me), I would say the pros of format
+is:
+
+	* it's self describing
+	* technically, the fields could be in any order
+	* the fields could be made optional
+	* new fields can be added (parsers should ignore fields they don't know)
+	* there are tools that already exist tha can handle field=value data
+	  (for example, Splunk, which we use at work)
+
+The cons:
+
+	* it takes more space due to the field names
+	* it's slightly more complex to parse [2]
+	* the double quote will need to be escaped in some fields [2]
+
+  Thinking about it, a tool to process logs could require a module (or
+plugin) to handle reading the data, so for instance, I write a module for
+this tool to handle GLV-1.12556, and you could write one for Molly Brown. 
+The data these modules include should be (and format):
+
+	timestamp	ISO-8601 format, e.g. 2020-05-12T17:33-0500
+	remote address 	opaque token (could be IPv4, IPv6, hash value)
+	request		string
+	bytes		number
+
+and optionally:
+
+	client certificate issuer	string
+	client certificate subject	string
+
+  -spc (refuses to give up syslog)
+
+[1]	Which for me, is handled automatically by Lua, the language my
+	server is written in.  
+
+[2]	But not horrible either.  If you use a CSV format, you have to deal
+	with escaping commas that might appear in a field *anyway* [3].  At
+	least with a TSV (tab-separated values) there's less chance of
+	actual tabs being in the data, but you have to be careful when
+	parsing to handle two consecutive tabs (or two consecutive commas
+	when using CSV).
+
+[3]	And if you think CSV is a well-defined format, you haven't been out
+	much.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000568.html">Gemini server logging formats and practices
+</A></li>
+	<LI>Next message (by thread): <A HREF="000574.html">Gemini server logging formats and practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#571">[ date ]</a>
+              <a href="thread.html#571">[ thread ]</a>
+              <a href="subject.html#571">[ subject ]</a>
+              <a href="author.html#571">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

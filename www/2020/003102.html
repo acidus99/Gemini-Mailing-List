@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Caching and status codes
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3C20201107043256.GA38951%40202x.moe%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003099.html">
+   <LINK REL="Next"  HREF="003105.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Caching and status codes</H1>
+    <B>bie</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3C20201107043256.GA38951%40202x.moe%3E"
+       TITLE="Caching and status codes">bie at 202x.moe
+       </A><BR>
+    <I>Sat Nov  7 04:32:56 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003099.html">Caching and status codes
+</A></li>
+        <LI>Next message (by thread): <A HREF="003105.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3102">[ date ]</a>
+              <a href="thread.html#3102">[ thread ]</a>
+              <a href="subject.html#3102">[ subject ]</a>
+              <a href="author.html#3102">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Nov 06, 2020 at 10:55:50PM -0500, John Cowan wrote:
+&gt;<i> On Fri, Nov 6, 2020 at 10:48 PM bie &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">bie at 202x.moe</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> &gt; This reduces gemini to a simple file sharing protocol and basically says
+</I>&gt;<i> &gt; that dynamic content is out (unless only targeting advanced clients).
+</I>&gt;<i> &gt;
+</I>&gt;<i> 
+</I>&gt;<i> Here are my assumptions.
+</I>&gt;<i> 
+</I>&gt;<i> 1) Clients are going to cache, like it or not.  Some already do.
+</I>&gt;<i> 
+</I>&gt;<i> 2) Servers are in the best position to say whether content is dynamic or
+</I>&gt;<i> not. &quot;Dynamic&quot; in this case is not just CGI-generated; it's also static
+</I>&gt;<i> files that change often.  (I post a static file on the Web that is
+</I>&gt;<i> recomputed every ten minutes by a cron job.)
+</I>&gt;<i> 
+</I>&gt;<i> 3) If the server can communicate &quot;don't cache this&quot;, the client can provide
+</I>&gt;<i> a better UX.
+</I>
+1) Rude clients are going to cache, yes.
+
+2/3) Totally agree, just not about what the default should be &#129300;
+
+And just to keep this &quot;grounded&quot;, here are some examples of stuff that
+arbitrary caching would break:
+
+- Adventure games that keep state in the client cert and update the
+  response not only on user input
+- The URL on my personal gemini site that responds with a random photo
+- Guestbooks
+- Streaming content
+
+Meanwhile, a default of not caching anything doesn't break anything. All
+it does is degrade the UX (minimally, IMO).
+
+&gt;<i> Ultimately, I like the gemini protocol just the way it is (and wouldn'
+</I>&gt;<i> &gt; be opposed to even a 1000 year feature freeze) but arbitrary caching by
+</I>&gt;<i> &gt; clients kills a whole host of use-cases around generated and dynamic
+</I>&gt;<i> &gt; responses.
+</I>&gt;<i> &gt;
+</I>&gt;<i> 
+</I>&gt;<i> That horse has sailed and that ship is out of the barn.  &quot;The world will go
+</I>&gt;<i> as it will, and not as you or I would have it.&quot;
+</I>
+Well, yes, fair enough. But gemini is only a tiny part of the world. If
+the aesthetic sensibilities of the community turn out to conflict with
+mine it's easy to look away ;)
+
+bie
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003099.html">Caching and status codes
+</A></li>
+	<LI>Next message (by thread): <A HREF="003105.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3102">[ date ]</a>
+              <a href="thread.html#3102">[ thread ]</a>
+              <a href="subject.html#3102">[ subject ]</a>
+              <a href="author.html#3102">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

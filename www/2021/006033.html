@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] signing when rotating (Was: Re: Enhancing TOFU)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20signing%20when%20rotating%20%28Was%3A%20Re%3A%20Enhancing%20TOFU%29&In-Reply-To=%3C3GR3OP0PNTJ9L.38E4X85TTUZPL%40nothien.uber.space%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006030.html">
+   <LINK REL="Next"  HREF="006043.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] signing when rotating (Was: Re: Enhancing TOFU)</H1>
+    <B>nothien at uber.space</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20signing%20when%20rotating%20%28Was%3A%20Re%3A%20Enhancing%20TOFU%29&In-Reply-To=%3C3GR3OP0PNTJ9L.38E4X85TTUZPL%40nothien.uber.space%3E"
+       TITLE="[tech] signing when rotating (Was: Re: Enhancing TOFU)">nothien at uber.space
+       </A><BR>
+    <I>Wed Mar 10 06:50:32 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006030.html">[tech] signing when rotating (Was: Re: Enhancing TOFU)
+</A></li>
+        <LI>Next message (by thread): <A HREF="006043.html">[tech] signing when rotating (Was: Re: Enhancing TOFU)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6033">[ date ]</a>
+              <a href="thread.html#6033">[ thread ]</a>
+              <a href="subject.html#6033">[ subject ]</a>
+              <a href="author.html#6033">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>mbays &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">mbays at sdf.org</A>&gt; wrote:
+&gt;<i> But there's a much simpler version which avoids chains.
+</I>&gt;<i> If your server is currently using certificate A and you want to switch 
+</I>&gt;<i> to a new certificate:
+</I>&gt;<i> * create a new self-signed certificate C with key K,
+</I>&gt;<i> * sign it with A to produce a signed certificate S,
+</I>&gt;<i>      (e.g. using openssl x509 -CA A.crt ...)
+</I>&gt;<i> * tell your server to use S and K.
+</I>&gt;<i> 
+</I>&gt;<i> So why don't we make this a convention? Any subtleties I'm missing?
+</I>
+The big issue with this is, what if a client misses a certificate
+update?  If the server's first cert is A (self-signed because it has no
+previous certs), second cert is B (signed with A) and third cert is C
+(signed with B).  If a client connects to the server when it is using A,
+they will save A, which works fine.  But if they then don't connect to
+the server for a while, and the server now uses C, then there is no
+direct trust from A to C (unless you provide the entire B cert during
+the verification, which is just cert chains all over again), and the
+client cannot verify the server.
+
+One solution to this is what I had originally proposed on this thread:
+get 'trust servers' to periodically check in on servers (either using my
+original /.pubkey based idea or checking if the server cert is signed
+with the previous one), and to share lists of verified servers with
+clients.  This /still/ doesn't solve the issue where a server's cert is
+compromised.
+
+~aravk | ~nothien
+</PRE>
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006030.html">[tech] signing when rotating (Was: Re: Enhancing TOFU)
+</A></li>
+	<LI>Next message (by thread): <A HREF="006043.html">[tech] signing when rotating (Was: Re: Enhancing TOFU)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6033">[ date ]</a>
+              <a href="thread.html#6033">[ thread ]</a>
+              <a href="subject.html#6033">[ subject ]</a>
+              <a href="author.html#6033">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

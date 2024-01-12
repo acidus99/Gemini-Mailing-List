@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Discussion] Why isn't there a horizontal rule?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BDiscussion%5D%20Why%20isn%27t%20there%20a%20horizontal%20rule%3F&In-Reply-To=%3C6138d069677929da957529b94b74e7cb%40libre.brussels%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007208.html">
+   <LINK REL="Next"  HREF="007205.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Discussion] Why isn't there a horizontal rule?</H1>
+    <B>Jonathan McHugh</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BDiscussion%5D%20Why%20isn%27t%20there%20a%20horizontal%20rule%3F&In-Reply-To=%3C6138d069677929da957529b94b74e7cb%40libre.brussels%3E"
+       TITLE="[Discussion] Why isn't there a horizontal rule?">indieterminacy at libre.brussels
+       </A><BR>
+    <I>Thu Sep 23 11:38:46 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007208.html">[Discussion] Why isn't there a horizontal rule?
+</A></li>
+        <LI>Next message (by thread): <A HREF="007205.html">[Discussion] Any Clients Outputting Content in Columns?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7210">[ date ]</a>
+              <a href="thread.html#7210">[ thread ]</a>
+              <a href="subject.html#7210">[ subject ]</a>
+              <a href="author.html#7210">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Omar,
+
+I recognised the use of the form feed ^L (ASCII 12) from Emacs. I was wondering about that too.
+
+I checked the perspective from Xah Lee, who has evaluated its applicability:
+=&gt; <A HREF="http://ergoemacs.org/emacs/modernization_formfeed.html">http://ergoemacs.org/emacs/modernization_formfeed.html</A>
+
+He highlights technical limitations of form feed's reliance on ^L:
+```
+# Cygwin Bash
+Cygwin Bash will generate this error if your shell script contains the Form Feed char that's not in comment.
+
+bash: $'\f': command not found
+
+# AutoHotkey
+AutoHotkey scripting language generates compiler error if you have a uncommented Form Feed char in source code.
+
+# PHP
+PHP would print a warning about it: &#8220;Warning: Unexpected character in the input: '^L' (ASCII=12)&#8221;. This is in PHP bug database
+```
+
+His suggestion is an abbrev is to modernise the technique and encourage interprability
+&gt;<i> So, a workaround i came up is to use the Unicode SECTION SIGN &#167;, followed by the Unicode BOX DRAWINGS LIGHT HORIZONTAL (U+2500) &#9472;.
+</I>``` elisp
+(&quot;ss&quot; &quot;&#167; &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472; &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472; &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472; &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472; &#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&#9472;&quot;)
+
+```
+This approach could satisfy my desire for columns, given that the number of box drawings could be interpreted by a (friendly and amenable) client to split content into required columns
+=&gt; <A HREF="https://lists.orbitalfox.eu/archives/gemini/2021/007205.html">https://lists.orbitalfox.eu/archives/gemini/2021/007205.html</A>
+
+Incidentally, should a browser ever consider navigating sections Xah Lee cites the use of `[` and `]` characters but proposes `PageUp` and  `PageDown`.
+
+
+====================
+Jonathan McHugh
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">indieterminacy at libre.brussels</A>
+
+September 23, 2021 10:43 AM, &quot;Omar Polo&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">op at omarpolo.com</A>&gt; wrote:
+
+&gt;<i> Draco Metallium(Rodrigo S. Ca&#241;ibano) &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">draco.kun at gmail.com</A>&gt; writes:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> Hi!
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> I was going to send a long and passionate defence for the inclusion of
+</I>&gt;&gt;<i> the horizontal rule (or &quot;The Thematic Break&quot; according to mozilla web
+</I>&gt;&gt;<i> docs) when a line started with three hyphens. But on the last
+</I>&gt;&gt;<i> paragraph I just realize I had to check the mailing list archive
+</I>&gt;&gt;<i> before, and it turns out it had been already proposed, and not only
+</I>&gt;&gt;<i> that, but I can't find a counter argument:
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> =&gt; <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/000375.html">https://lists.orbitalfox.eu/archives/gemini/2020/000375.html</A>
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> I'm wondering now: why wasn't it accepted? Was it just forgotten?
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> Thanks for your time!
+</I>&gt;&gt;<i> ---
+</I>&gt;&gt;<i> Draco Metallium
+</I>&gt;<i> 
+</I>&gt;<i> I can agree that having a horizontal rule would be nice. On the
+</I>&gt;<i> geminispace there are pages that uses either
+</I>&gt;<i> 
+</I>&gt;<i> ----
+</I>&gt;<i> 
+</I>&gt;<i> or
+</I>&gt;<i> 
+</I>&gt;<i> ```
+</I>&gt;<i> ---
+</I>&gt;<i> ```
+</I>&gt;<i> 
+</I>&gt;<i> which I personally dislike.
+</I>&gt;<i> 
+</I>&gt;<i> Some time ago I experimented with this a little. The
+</I>&gt;<i> proposal/break-page branch of telescope has some code which renders ^L
+</I>&gt;<i> (form feed, used to separate &quot;pages&quot;) with a nice separator. (I went
+</I>&gt;<i> with ^L to avoid false positive with lines starting with `---' or
+</I>&gt;<i> similar)
+</I>&gt;<i> 
+</I>&gt;<i> But then I left that branch rotting. I guess that part of the reason
+</I>&gt;<i> something like this wasn't included before is because of the saying
+</I>&gt;<i> &quot;perfection is when you can't remove anything&quot; (or something similar,
+</I>&gt;<i> but the gist is that.) Horizontal rule can be avoided by properly using
+</I>&gt;<i> paragraphs and headings in most cases.
+</I>&gt;<i> 
+</I>&gt;<i> Cheers,
+</I>&gt;<i> 
+</I>&gt;<i> Omar Polo
+</I></PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007208.html">[Discussion] Why isn't there a horizontal rule?
+</A></li>
+	<LI>Next message (by thread): <A HREF="007205.html">[Discussion] Any Clients Outputting Content in Columns?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7210">[ date ]</a>
+              <a href="thread.html#7210">[ thread ]</a>
+              <a href="subject.html#7210">[ subject ]</a>
+              <a href="author.html#7210">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

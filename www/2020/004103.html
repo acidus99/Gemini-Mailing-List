@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Unicode vs. the World
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3CQeE6KgToaR9dpBWXKntJFef_rpsHZwoSC09j_1Rfz7rnWqD0w1wertogaCrQC2dlnlLJYhp2zRvP3_76edQGUh_aAMg1SDrV27PiMgKRhBQ%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004102.html">
+   <LINK REL="Next"  HREF="004107.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Unicode vs. the World</H1>
+    <B>colecmac at protonmail.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3CQeE6KgToaR9dpBWXKntJFef_rpsHZwoSC09j_1Rfz7rnWqD0w1wertogaCrQC2dlnlLJYhp2zRvP3_76edQGUh_aAMg1SDrV27PiMgKRhBQ%3D%40protonmail.com%3E"
+       TITLE="Unicode vs. the World">colecmac at protonmail.com
+       </A><BR>
+    <I>Wed Dec 16 23:57:15 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004102.html">Unicode vs. the World
+</A></li>
+        <LI>Next message (by thread): <A HREF="004107.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4103">[ date ]</a>
+              <a href="thread.html#4103">[ thread ]</a>
+              <a href="subject.html#4103">[ subject ]</a>
+              <a href="author.html#4103">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> It would be instructive to know how clients are handling this---do they
+</I>&gt;<i> decode percent-encoded data, merge the base link to the relative link and
+</I>&gt;<i> re-encode? Or something different?
+</I>&gt;<i>
+</I>&gt;<i> -spc
+</I>
+
+My clients (gemget, Amfora) are in Go, so I just `Parse` both the base link
+and the relative link, and then use `base.ResolveReference(rel)`. This means
+I don't have to do any decoding or anything at all.
+
+URL.Path and URL.RawPath can be used to get the decoded and encoded path
+respectively, although I have no need in this context.
+
+<A HREF="https://golang.org/pkg/net/url/#URL">https://golang.org/pkg/net/url/#URL</A>
+<A HREF="https://golang.org/pkg/net/url/#Parse">https://golang.org/pkg/net/url/#Parse</A>
+<A HREF="https://golang.org/pkg/net/url/#URL.ResolveReference">https://golang.org/pkg/net/url/#URL.ResolveReference</A>
+
+
+makeworld
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004102.html">Unicode vs. the World
+</A></li>
+	<LI>Next message (by thread): <A HREF="004107.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4103">[ date ]</a>
+              <a href="thread.html#4103">[ thread ]</a>
+              <a href="subject.html#4103">[ subject ]</a>
+              <a href="author.html#4103">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

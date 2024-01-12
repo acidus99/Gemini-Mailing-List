@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [users] Any live gmnigit capsules?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Busers%5D%20Any%20live%20gmnigit%20capsules%3F&In-Reply-To=%3C87sfv2qhzl.fsf%40omarpolo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007666.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[users] Any live gmnigit capsules?</H1>
+    <B>Omar Polo</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Busers%5D%20Any%20live%20gmnigit%20capsules%3F&In-Reply-To=%3C87sfv2qhzl.fsf%40omarpolo.com%3E"
+       TITLE="[users] Any live gmnigit capsules?">op at omarpolo.com
+       </A><BR>
+    <I>Thu Dec  9 08:43:17 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007666.html">[users] Any live gmnigit capsules?
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7667">[ date ]</a>
+              <a href="thread.html#7667">[ thread ]</a>
+              <a href="subject.html#7667">[ subject ]</a>
+              <a href="author.html#7667">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&quot;Byron Torres&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">b at torresjrjr.com</A>&gt; writes:
+
+&gt;<i> Does anyone know of a live [gmnigit] instance? I'd like to see one for
+</I>&gt;<i> myself.
+</I>&gt;<i>
+</I>&gt;<i> I've been looking for a Gemini version of [stagit], and I came across
+</I>&gt;<i> gmnigit from the [archives]. The author's entire website and capsule,
+</I>&gt;<i> including the supposed gmnigit [demo], is down.
+</I>&gt;<i>
+</I>&gt;<i> =&gt; <A HREF="https://git.sr.ht/~kornellapacz/gmnigit">https://git.sr.ht/~kornellapacz/gmnigit</A> gmnigit
+</I>&gt;<i> =&gt; <A HREF="https://codemadness.org/stagit.html">https://codemadness.org/stagit.html</A> stagit
+</I>&gt;<i> =&gt; <A HREF="https://lists.orbitalfox.eu/archives/gemini/2021/006404.html">https://lists.orbitalfox.eu/archives/gemini/2021/006404.html</A> archives
+</I>&gt;<i> =&gt; <A HREF="gemini://lapacz-kornel.dev/git/gmnigit/">gemini://lapacz-kornel.dev/git/gmnigit/</A> demo
+</I>
+Hello,
+
+I'm using gmnigit at:
+
+	<A HREF="gemini://git.omarpolo.com">gemini://git.omarpolo.com</A>
+
+and gitolite to manage the repositories.  My setup is like this: in
+gitolite.conf I have a rule like:
+
+repo @gemini
+    option hook.post-receive = gmnigit
+
+and then a bunch of repositories using that rule
+
+@gemini = a68-mode
+@gemini = acmetag
+@gemini = blog
+@gemini = dots
+# ...
+
+In gitolite-admin/local/hooks/repo-specific/gmnigit I have
+
+#!/bin/sh
+
+while read -r _ _ ref; do
+	if [ &quot;$ref&quot; != &quot;refs/heads/master&quot; -a \
+	     &quot;$ref&quot; != &quot;refs/heads/main&quot; ]; then
+		continue
+	fi
+
+	name=&quot;$(basename $PWD)&quot;
+	gmnigit -repo . \
+		-refs \
+		-name &quot;${name%%.git}&quot; \
+		-dist ~/public/&quot;${name%%.git}&quot; \
+		-url &quot;<A HREF="https://git.omarpolo.com/${name">https://git.omarpolo.com/${name</A>}&quot;
+	if [ $? -ne 0 ]; then
+		echo &quot;gmnigit failed for $PWD (ref=$ref)&quot;
+		exit 1
+	fi
+done
+
+that generates the repositories.
+
+My only annoyance with gmnigit is its speed: it could save some time by
+limiting the number of commits exported, like the last 500 or so, but it
+currently exports all of them and that could take a while for medium
+repositories.
+
+Overall thought, I'm happy about it, it's been working fine for various
+months already.
+
+Cheers,
+
+Omar Polo
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007666.html">[users] Any live gmnigit capsules?
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7667">[ date ]</a>
+              <a href="thread.html#7667">[ thread ]</a>
+              <a href="subject.html#7667">[ subject ]</a>
+              <a href="author.html#7667">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

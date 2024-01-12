@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Unicode vs. the World
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3CCAObwWNhQFH6wFC-0GODkv3sZ_29ZD%3DUUZobAn32mcx-%2BrJRwyw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004077.html">
+   <LINK REL="Next"  HREF="004118.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Unicode vs. the World</H1>
+    <B>Katarina Eriksson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3CCAObwWNhQFH6wFC-0GODkv3sZ_29ZD%3DUUZobAn32mcx-%2BrJRwyw%40mail.gmail.com%3E"
+       TITLE="Unicode vs. the World">gmym at coopdot.com
+       </A><BR>
+    <I>Fri Dec 18 06:13:24 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004077.html">Unicode vs. the World
+</A></li>
+        <LI>Next message (by thread): <A HREF="004118.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4116">[ date ]</a>
+              <a href="thread.html#4116">[ thread ]</a>
+              <a href="subject.html#4116">[ subject ]</a>
+              <a href="author.html#4116">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Help! I'm getting pulled in!
+
+On IRC, I wrote:
+
+[2020-12-14T21:26:44Z] &lt;CoopDot&gt; I'm staying out of debating IDN/IRI on the
+ML. What I've had to say has already been said more than once. My position
+have even shifted a bit since the threads started
+
+Some discussion happened and then I wrote something that got quoted here:
+
+
+Petite Abeille &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">petite.abeille at gmail.com</A>&gt; wrote:
+
+For example:
+
+[2020-12-14T22:12:14.914Z] &lt;remyabel&gt; I lurk this channel and the mailing
+lists and keep seeing people trying to extend gemini or make it web-like,
+there's just no point in arguing against it
+[2020-12-14T22:12:28.578Z] &lt;CoopDot&gt; I used to be in the US-ASCII only camp
+but now it's more &quot;do the bare mininum to not forbid UTF-8 'URLs' in the
+spec and make strong recommendations in best-practices.gmi&quot;
+
+^Those are the &quot;cannot be arsed&quot; camp: things are the way they are, and
+cannot be bothered to changed anything, technically speaking... we are
+done. The &quot;not-my-problem&quot; camp.
+
+
+I'm assuming including me here was intentional. I truly can't tell if that
+is an accurate description of my possession.
+
+&quot;I used to be in the US-ASCII only camp&quot; refers to me no longer thinking
+requiring everything to be encoded to pass as US-ASCII is the best idea.
+This is me moving away from the status quo towards a possible compromise.
+Or am I missing where we're going?
+
+&quot;Do [...] not forbid UTF-8 'URLs' in the spec&quot;. Not forbidding is almost
+like allowing. We should attempt to not paint our selfs into a corner or
+bet on the wrong horse. &#128052;
+
+&quot;Make strong recommendations in best-practices.gmi&quot; because we have to
+address it somewhere.
+
+Earlier in the same email, Petite Abeille &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">petite.abeille at gmail.com</A>&gt; wrote:
+
+It boils down to this:
+
+ =&gt; <A HREF="gemini://&#128048;.mozz.us/&#128007;.gmi">gemini://&#128048;.mozz.us/&#128007;.gmi</A> &#129365;Hoppity hop&#129365;
+
+What do do with such a construct? Possible? Not possible? Allowed? Not
+allowed? First class citizen? Afterthought? How do deal with it, if at all?
+
+
+[...]
+
+=&gt; <A HREF="gemini://&#128048;.mozz.us/&#128007;.gmi">gemini://&#128048;.mozz.us/&#128007;.gmi</A> &#129365;Hoppity hop&#129365;
+vs.
+=&gt; <A HREF="gemini://xn--4o8h.mozz.us/%F0%9F%90%87.gmi">gemini://xn--4o8h.mozz.us/%F0%9F%90%87.gmi</A> &#129365;Hoppity hop&#129365;
+
+As it stands, the first variant cannot be handled by gemini -neither in
+text/gemini, nor in the protocol itself- with further technical gotchas
+such as address resolution and what not along the way.
+
+It must be converted to the second variant, the US-ASCII one.
+
+
+Let's examine the situation: &#128690;
+
+The capsule author writes this link line in their text editor:
+
+=&gt; <A HREF="gemini://&#128048;.mozz.us/&#128007;.gmi">gemini://&#128048;.mozz.us/&#128007;.gmi</A> &#129365;Hoppity hop&#129365;
+
+The text editor may or may not change the syntax highlight to indicate an
+error with the URL. When saving the file, the text editor has an
+opportunity to &quot;correct&quot; the error by itself.
+
+Let's say the text editor is oblivious and the capsule author doesn't run
+the file through a linter. The file is ready to be served.
+
+A visitor requests the file. The server has an opportunity to scan the file
+before serving, but that would in most cases be a complete waste of
+resources, so it doesn't.
+
+The client parses the file. It has a choice to render the link line as a
+link or as text. (It could also brake at the first sight of bunny, but
+let's assume it doesn't.) The link is only a problem if the visitor is
+following it.
+
+At this point, it doesn't matter if the visitor follows a link or writes
+the URL in the address bar. The client has a choice to translate or not
+translate the URL before making the request.
+
+Domain name resolution is outside of the scope of the Gemini specification,
+we don't know if it can handle UTF-8 or not. If the visitor's network
+administrator has set up name resolution to accept UTF-8, they should
+probably also accept the punycoded version for compatibility.
+
+Let's assume &quot;always punycode&quot; is a safe option, the client has a choice of
+being proactive and do the translation or ignore it and let it fail if it
+will. I say both options are valid and the Gemini specification should at
+most refer to other specifications on this. (The third option to just
+refuse to connect is bad.)
+
+Moving on: (We will go back later.)
+
+We have the IP address and the request has reached the server. Let's assume
+this is over the regular internet and a punycoded domain is a must.
+
+The server compares &quot;xn--4o8h.mozz.us
+&lt;<A HREF="http://xn--4o8h.mozz.us/%F0%9F%90%87.gmi">http://xn--4o8h.mozz.us/%F0%9F%90%87.gmi</A>&gt;&quot; with whatever virtual hosts the
+server administrator has set up in the configuration file. Is it
+unreasonable for the administrator to expect the server software to match
+&quot;&#128048;.mozz.us&quot; in the configuration file to &quot;xn--4o8h.mozz.us
+&lt;<A HREF="http://xn--4o8h.mozz.us/%F0%9F%90%87.gmi">http://xn--4o8h.mozz.us/%F0%9F%90%87.gmi</A>&gt;&quot; coming in over the wire?
+
+How about the other way around? It's a local network and ASCII
+non-conforming bunnies hops into the server and the administratior has only
+specified the punicode in the configuration file. Is it unreasonable to
+expect it to match?
+
+Reasonable or not, let's assume the virtual host is set up properly and go
+back in time to the client making the request. What do we do about the path?
+
+Should the client &quot;help&quot; the visitor by %-encoding non-ASCII bytes or send
+it as is and hope for the best?
+
+Should the client %-encode reserved characters the visitor writes in the
+address bar or let them fail?
+
+Anyway, the request reaches the server. &quot;%20&quot; become space and &quot;%2b&quot; become
+plus. I see no reason why it would be hard to also convert
+&quot;%F0%9F%90%87&quot; into bytes, so I will assume it isn't and wait for server
+software programmers to tell me how wrong I am.
+
+So now we have a string of bytes that we can use to fetch the bunny file.
+Wait. What happened with the case where the bunny isn't %-encoded? Why
+can't servers just blindly accept non-ASCII bytes as is? Is it a library
+thing? Anyway, I really should test this in a bunch of languages but I'm
+writing this on my phone on my way to work, so instead I present you this
+pseudo code:
+
+```
+&quot;%F0%9F%90%87&quot;.url_decode() == &quot;\xF0\x9F\x90\x87&quot;.url_decode()
+&quot;%F0%9F%90%87&quot;.url_decode() == &quot;\xF0\x9F\x90\x87&quot;
+&quot;\xF0\x9F\x90\x87&quot; == &quot;&#128007;&quot;
+```
+
+If these 3 lines are all true for the server software, I see no reason to
+%-encode those non-ASCII bytes in the client or anywhere else. Surely I
+have missed something obvious somewhere. Can anyone help me?
+
+Maybe I just need coffee... &#9749;
+
+-- 
+Katarina
+(Please regard these ramblings as non-rhetorical)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201218/0a0ba47e/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201218/0a0ba47e/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004077.html">Unicode vs. the World
+</A></li>
+	<LI>Next message (by thread): <A HREF="004118.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4116">[ date ]</a>
+              <a href="thread.html#4116">[ thread ]</a>
+              <a href="subject.html#4116">[ subject ]</a>
+              <a href="author.html#4116">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

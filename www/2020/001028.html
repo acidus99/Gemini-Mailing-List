@@ -1,0 +1,242 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Big update to Bombadillo
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Big%20update%20to%20Bombadillo&In-Reply-To=%3C20200524094739.114f55ca%40pricklypear%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001027.html">
+   <LINK REL="Next"  HREF="001039.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Big update to Bombadillo</H1>
+    <B>Tiwesdaeg Twohands</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Big%20update%20to%20Bombadillo&In-Reply-To=%3C20200524094739.114f55ca%40pricklypear%3E"
+       TITLE="[ANN] Big update to Bombadillo">tiwesdaeg at tilde.pink
+       </A><BR>
+    <I>Sun May 24 15:47:39 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001027.html">[ANN] Big update to Bombadillo
+</A></li>
+        <LI>Next message (by thread): <A HREF="001039.html">[ANN] Big update to Bombadillo
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1028">[ date ]</a>
+              <a href="thread.html#1028">[ thread ]</a>
+              <a href="subject.html#1028">[ subject ]</a>
+              <a href="author.html#1028">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm getting a weird issue on bombadillo. For <A HREF="gemini://tilde.pink/">gemini://tilde.pink/</A> and
+<A HREF="gemini://tilde.pink/~tiwesdaeg/">gemini://tilde.pink/~tiwesdaeg/</A> it's not displaying the url line at the
+top, except for a split second each time I press j and k to scroll up
+and down. It shows up correctly on some of the other user gemini sites
+on tilde.pink.
+
+-Tiwesdaeg
+
+On Sun, 24 May 2020 20:59:00 +0200 (CEST)
+Brian Evans &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">b__m__e at mailfence.com</A>&gt; wrote:
+
+&gt;<i> I normally would not do an announcement on here for a new version
+</I>&gt;<i> (and do not generally plan to in the future). However, there was a
+</I>&gt;<i> lot of gemini related stuff updated in Bombadillo this time around
+</I>&gt;<i> and I thought gemini folks using it would want to know about the
+</I>&gt;<i> updates:
+</I>&gt;<i> 
+</I>&gt;<i> Changelog:
+</I>&gt;<i> 
+</I>&gt;<i> * Adds quick navigation to the first 10 links on a page (using the
+</I>&gt;<i> number keys 1 - 0, where 0 represents 10)
+</I>&gt;<i> * Fixes a bug where on some platforms terminal line wrapping was not
+</I>&gt;<i> properly turned back on when Bombadillo exits
+</I>&gt;<i> * Adds certificate expiration timestamps to the ini, next to the cert
+</I>&gt;<i> hash
+</I>&gt;<i> * Uses the newly stored certificate expiration datetimes to autorenew
+</I>&gt;<i> certificates, resulting in far fewer certificate issues for users to
+</I>&gt;<i> deal with manually
+</I>&gt;<i> * Fixes a bug in which two concurrent bits were trying to both read
+</I>&gt;<i> from stdin, resulting in a read being very buggy
+</I>&gt;<i> * Adds 'h' and 'l' as hot key aliases for back and forward, bringing
+</I>&gt;<i> things further in line with vi style keybindings and keeping fingers
+</I>&gt;<i> on the home row
+</I>&gt;<i> * Adds automatic requesting of new certificates on expiration (when
+</I>&gt;<i> the site is next visited)
+</I>&gt;<i> * Adds support for alt text in gemini preformatted blocks
+</I>&gt;<i> * Fixes a parsing error when parsing gemini preformatted blocks
+</I>&gt;<i> * Adds config value 'geminiblocks' to control how alt text displays
+</I>&gt;<i> * Improved handling of relative URLs for gemini
+</I>&gt;<i> * Updates the gemini redirect policy to auto-redirect if, and only
+</I>&gt;<i> if, the only change to the requested URL would be the addition of a
+</I>&gt;<i> terminal '/' character
+</I>&gt;<i> * Fixes issue where querystring values would chain instead of replace
+</I>&gt;<i> * Removes a dependency on external program 'stty' in favor of a pure
+</I>&gt;<i> Go solution via syscalls
+</I>&gt;<i> * Updates the man page with the relevant changes
+</I>&gt;<i> 
+</I>&gt;<i> As you may have seen here on the mailing list there is an issue with
+</I>&gt;<i> escaping query strings that is currently present in all builds. I
+</I>&gt;<i> will be working out a fix after some thinking on the subject, so
+</I>&gt;<i> there will likely be a patch later in the week.
+</I>&gt;<i> 
+</I>&gt;<i> Thanks to @dancek and @asdf for their contributions to this version
+</I>&gt;<i> and to @makeworld for helping us sort through the issues and giving
+</I>&gt;<i> good input/guidance
+</I>&gt;<i> 
+</I>&gt;<i> If you build from source (by far the recommended route) you can just
+</I>&gt;<i> pull master and `sudo make install`.
+</I>&gt;<i> 
+</I>&gt;<i> If you use precompiled binaries they are available here:
+</I>&gt;<i> <A HREF="http://bombadillo.colorfield.space/releases/binaries.html">http://bombadillo.colorfield.space/releases/binaries.html</A>
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> As an added note: 
+</I>&gt;<i> 
+</I>&gt;<i> If you are a BSD user we are looking for some help making the
+</I>&gt;<i> Makefile function under BSD (it runs fine for most Linux and OSX
+</I>&gt;<i> systems). At present it does not work under FreeBSD 12-Release. 
+</I>&gt;<i> 
+</I>&gt;<i> Additionally, if anyone is interested in getting involved as a
+</I>&gt;<i> maintainer for a package repo we would be very interested in that
+</I>&gt;<i> (currently the Arch AUR has a git build version, but not other repos
+</I>&gt;<i> currently have bombadillo).
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> Thanks everyone! I have been loving the influx of clients, servers,
+</I>&gt;<i> tools, and especially content!!
+</I>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001027.html">[ANN] Big update to Bombadillo
+</A></li>
+	<LI>Next message (by thread): <A HREF="001039.html">[ANN] Big update to Bombadillo
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1028">[ date ]</a>
+              <a href="thread.html#1028">[ thread ]</a>
+              <a href="subject.html#1028">[ subject ]</a>
+              <a href="author.html#1028">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

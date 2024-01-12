@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> gemini+submit:// (was Re: Uploading Gemini content)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bsubmit%3A//%20%28was%20Re%3A%20Uploading%20Gemini%20content%29&In-Reply-To=%3C2C817A43-1AD9-4011-A0EF-13264F0B75D5%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001637.html">
+   <LINK REL="Next"  HREF="001672.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>gemini+submit:// (was Re: Uploading Gemini content)</H1>
+    <B>Petite Abeille</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bsubmit%3A//%20%28was%20Re%3A%20Uploading%20Gemini%20content%29&In-Reply-To=%3C2C817A43-1AD9-4011-A0EF-13264F0B75D5%40gmail.com%3E"
+       TITLE="gemini+submit:// (was Re: Uploading Gemini content)">petite.abeille at gmail.com
+       </A><BR>
+    <I>Sun Jun 14 01:33:52 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001637.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+        <LI>Next message (by thread): <A HREF="001672.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1644">[ date ]</a>
+              <a href="thread.html#1644">[ thread ]</a>
+              <a href="subject.html#1644">[ subject ]</a>
+              <a href="author.html#1644">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+&gt;<i> On Jun 14, 2020, at 00:07, solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at SDF.ORG</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;&gt;<i>  I'll respond to the rest in another email, but I want to say that this is
+</I>&gt;&gt;<i> a *brilliant* idea and could be done today. 
+</I>&gt;<i> 
+</I>&gt;<i> Thanks :)  I'm very pleased with it.
+</I>
+A bit like the 'Mode Switching' in NNTP of yore. 
+
+Such mode switch -where client and server trade places- would be a very nice use of the protocol capabilities. Very cool idea. Like it.
+
+Eddie Murphy would be proud [1].
+
+If only NAT traversal was a solved problem though. Sigh. Where is my overlay network when I need it.
+
+Meanwhile, perhaps a simple 'patch' command would do.
+
+For example, to turn specification.gmi into specification-modified.gmi, one could issue a patch command transforming the former into the latter:
+
+<A HREF="gemini://gemini.circumlunar.space/docs/specification.gmi?data:text/x-patch...">gemini://gemini.circumlunar.space/docs/specification.gmi?data:text/x-patch...</A>
+
+Unfortunately, the 1024 bytes limit doesn't get  us very far. The diff itself is ~14K. ~5K compressed. Too big for one request.
+
+Fossil delta format [2] is much more compact than diff -u, but still weights ~4K, 2K compressed. And this is not accounting for data: encoding overhead.
+
+So, hmmm, 1024 bytes is quite a limiting factor if one must use only one request.
+
+Perhaps this could be worked around using a sequence of requests, ala chunked transfer encoding [3]:
+
+<A HREF="gemini://gemini.circumlunar.space/docs/specification.gmi?data:...">gemini://gemini.circumlunar.space/docs/specification.gmi?data:...</A> chunk1
+<A HREF="gemini://gemini.circumlunar.space/docs/specification.gmi?data:...">gemini://gemini.circumlunar.space/docs/specification.gmi?data:...</A> chunk2
+<A HREF="gemini://gemini.circumlunar.space/docs/specification.gmi?data:...">gemini://gemini.circumlunar.space/docs/specification.gmi?data:...</A> chunk3
+
+The server would then reassemble the various parts and apply the delta.
+
+A bit clunky, but workable :D
+
+[1] <A HREF="https://en.wikipedia.org/wiki/Trading_Places">https://en.wikipedia.org/wiki/Trading_Places</A>
+[2] <A HREF="https://www.fossil-scm.org/xfer/doc/trunk/www/delta_format.wiki">https://www.fossil-scm.org/xfer/doc/trunk/www/delta_format.wiki</A> 
+[3] <A HREF="https://en.wikipedia.org/wiki/Chunked_transfer_encoding">https://en.wikipedia.org/wiki/Chunked_transfer_encoding</A>
+
+
+P.S. FWIW, attached is the fossil delta between specification.gmi and specification-modified.gmi
+
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: specification.delta.txt
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200614/26e687af/attachment.txt">https://lists.orbitalfox.eu/archives/gemini/attachments/20200614/26e687af/attachment.txt</A>&gt;
+-------------- next part --------------
+
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001637.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+	<LI>Next message (by thread): <A HREF="001672.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1644">[ date ]</a>
+              <a href="thread.html#1644">[ thread ]</a>
+              <a href="subject.html#1644">[ subject ]</a>
+              <a href="author.html#1644">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

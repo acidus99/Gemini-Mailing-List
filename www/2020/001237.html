@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> approachabe &amp; frugal &amp; composable 
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20approachabe%20%26%20frugal%20%26%20composable%20&In-Reply-To=%3C5E087B4C-72B9-4896-B289-D9CD458D54A1%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001234.html">
+   <LINK REL="Next"  HREF="001238.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>approachabe &amp; frugal &amp; composable </H1>
+    <B>Petite Abeille</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20approachabe%20%26%20frugal%20%26%20composable%20&In-Reply-To=%3C5E087B4C-72B9-4896-B289-D9CD458D54A1%40gmail.com%3E"
+       TITLE="approachabe &amp; frugal &amp; composable ">petite.abeille at gmail.com
+       </A><BR>
+    <I>Tue Jun  2 02:14:39 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001234.html">GUS database (was: Re: Ambiguity in unordered list item definition)
+</A></li>
+        <LI>Next message (by thread): <A HREF="001238.html">approachabe &amp; frugal &amp; composable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1237">[ date ]</a>
+              <a href="thread.html#1237">[ thread ]</a>
+              <a href="subject.html#1237">[ subject ]</a>
+              <a href="author.html#1237">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>As it stands, Gemini [1] -and especially Mercury [2]- is refreshingly approachable and  frugal.
+
+A -very minimal- one-liner Gemini client:
+
+# openssl s_client -quiet -crlf -connect gemini.conman.org:1965 &lt;&lt;&lt; <A HREF="gemini://gemini.conman.org/">gemini://gemini.conman.org/</A> 2&gt;/dev/null
+20 text/gemini
+Welcome to Conman Laboraties Gemini Server!
+
+And that is that. The whole Gemini protocol in 3 lines.
+
+But what 3 lines!
+
+A request is a single line containing a fully specified URL.
+A successful response is a single line containing the numeric response code, a space, and a content-type.
+The canonical content, text/gemini, consists of two core line types: text and link. 
+All UTF-8 encoded. Over TLS.
+
+And that is that.
+
+Quite spartan at first glance.
+
+But also, possibly, quite universal.
+
+Fancy jumping the shark over Zawinski's law [3] from the onset?
+
+Combine RFC5092 [4] for the request and RFC2045 [5] for the response:
+
+<A HREF="imap://minbari.example.org/gray-council/;uid=20">imap://minbari.example.org/gray-council/;uid=20</A> &lt;<A HREF="imap://minbari.example.org/gray-council/;uid=20">imap://minbari.example.org/gray-council/;uid=20</A>&gt;
+20 message/rfc822
+Mime-Version: 1.0 
+...
+
+Fancy supporting multiple protocols at once?
+
+Look at conman's nifty sigil script [6], which supports HTTP, GEMINI, and GOPHER for good measure. From one CGI script.
+
+In other words, because a Gemini request is a full-fledged URL, it can support any number of protocols, as long as such protocol can be expressed as an URL [7].
+
+Ditto for the response, which can be any media type [8] a Gemini server cares to generate. 
+
+In short, a Gemini URL request combined with a Gemini media type response is quite universal indeed. 
+
+
+Ditto for the rather unassuming text/gemini content type.
+
+While at its core it only sports 2 line types, the presence of the link line, which is an URL, open the door to infinite composition.
+
+Fancy an atom feed? Add a feed URI [9] in your text/gemini:
+
+=&gt; <A HREF="feed://example.com/entries.atom">feed://example.com/entries.atom</A>
+
+Would you like to anchor your text/gemini in a point in time? Perhaps the tag URI can help:
+
+=&gt; tag:example.com,2004-01-01:1234
+
+Indicate a location? A geo URI may help:
+
+=&gt; geo:37.786971,-122.399677
+
+etc, etc, the possibilities are endless.
+
+Quite a lot of firepower for a two lines protocol, with a two line content type :)
+
+--
+PA
+
+
+[1] <A HREF="https://portal.mozz.us/gemini/gemini.circumlunar.space/docs/spec-spec.txt">https://portal.mozz.us/gemini/gemini.circumlunar.space/docs/spec-spec.txt</A> &lt;<A HREF="https://portal.mozz.us/gemini/gemini.circumlunar.space/docs/spec-spec.txt">https://portal.mozz.us/gemini/gemini.circumlunar.space/docs/spec-spec.txt</A>&gt;
+[2] <A HREF="https://portal.mozz.us/gemini/gemini.circumlunar.space/users/solderpunk/cornedbeef/the-mercury-protocol.gmi">https://portal.mozz.us/gemini/gemini.circumlunar.space/users/solderpunk/cornedbeef/the-mercury-protocol.gmi</A> &lt;<A HREF="https://portal.mozz.us/gemini/gemini.circumlunar.space/users/solderpunk/cornedbeef/the-mercury-protocol.gmi">https://portal.mozz.us/gemini/gemini.circumlunar.space/users/solderpunk/cornedbeef/the-mercury-protocol.gmi</A>&gt;
+[3] <A HREF="https://en.wikipedia.org/wiki/Jamie_Zawinski">https://en.wikipedia.org/wiki/Jamie_Zawinski</A> &lt;<A HREF="https://en.wikipedia.org/wiki/Jamie_Zawinski">https://en.wikipedia.org/wiki/Jamie_Zawinski</A>&gt;
+[4] <A HREF="https://tools.ietf.org/html/rfc5092">https://tools.ietf.org/html/rfc5092</A> &lt;<A HREF="https://tools.ietf.org/html/rfc5092">https://tools.ietf.org/html/rfc5092</A>&gt;
+[5] <A HREF="https://tools.ietf.org/html/rfc2045">https://tools.ietf.org/html/rfc2045</A> &lt;<A HREF="https://tools.ietf.org/html/rfc2045">https://tools.ietf.org/html/rfc2045</A>&gt;
+[6] <A HREF="https://portal.mozz.us/gemini/gemini.conman.org/sigil-cgi.lua">https://portal.mozz.us/gemini/gemini.conman.org/sigil-cgi.lua</A> &lt;<A HREF="https://portal.mozz.us/gemini/gemini.conman.org/sigil-cgi.lua">https://portal.mozz.us/gemini/gemini.conman.org/sigil-cgi.lua</A>&gt;
+[7] <A HREF="https://en.wikipedia.org/wiki/List_of_URI_schemes">https://en.wikipedia.org/wiki/List_of_URI_schemes</A> &lt;<A HREF="https://en.wikipedia.org/wiki/List_of_URI_schemes">https://en.wikipedia.org/wiki/List_of_URI_schemes</A>&gt;
+[8] <A HREF="https://en.wikipedia.org/wiki/Media_type">https://en.wikipedia.org/wiki/Media_type</A> &lt;<A HREF="https://en.wikipedia.org/wiki/Media_type">https://en.wikipedia.org/wiki/Media_type</A>&gt;
+[9] <A HREF="https://en.wikipedia.org/wiki/Feed_URI_scheme">https://en.wikipedia.org/wiki/Feed_URI_scheme</A> &lt;<A HREF="https://en.wikipedia.org/wiki/Feed_URI_scheme">https://en.wikipedia.org/wiki/Feed_URI_scheme</A>&gt;
+[10] <A HREF="https://en.wikipedia.org/wiki/Tag_URI_scheme">https://en.wikipedia.org/wiki/Tag_URI_scheme</A> &lt;<A HREF="https://en.wikipedia.org/wiki/Tag_URI_scheme">https://en.wikipedia.org/wiki/Tag_URI_scheme</A>&gt;
+[11] <A HREF="https://en.wikipedia.org/wiki/Geo_URI_scheme">https://en.wikipedia.org/wiki/Geo_URI_scheme</A> &lt;<A HREF="https://en.wikipedia.org/wiki/Geo_URI_scheme">https://en.wikipedia.org/wiki/Geo_URI_scheme</A>&gt;
+
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200602/33926e11/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200602/33926e11/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001234.html">GUS database (was: Re: Ambiguity in unordered list item definition)
+</A></li>
+	<LI>Next message (by thread): <A HREF="001238.html">approachabe &amp; frugal &amp; composable
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1237">[ date ]</a>
+              <a href="thread.html#1237">[ thread ]</a>
+              <a href="subject.html#1237">[ subject ]</a>
+              <a href="author.html#1237">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

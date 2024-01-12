@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Documents with mixed languages
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Documents%20with%20mixed%20languages&In-Reply-To=%3CCAFTy05YftRMJB9RV2Q2W33gboA9vw0soCV9%3D%3Dna7%3DL6rQDLuJA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007672.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Documents with mixed languages</H1>
+    <B>Michael Lazar</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Documents%20with%20mixed%20languages&In-Reply-To=%3CCAFTy05YftRMJB9RV2Q2W33gboA9vw0soCV9%3D%3Dna7%3DL6rQDLuJA%40mail.gmail.com%3E"
+       TITLE="Documents with mixed languages">lazar.michael22 at gmail.com
+       </A><BR>
+    <I>Sat Dec 11 18:06:25 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007672.html">Documents with mixed languages
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7673">[ date ]</a>
+              <a href="thread.html#7673">[ thread ]</a>
+              <a href="subject.html#7673">[ subject ]</a>
+              <a href="author.html#7673">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Dec 11, 2021 at 8:31 AM Wolf &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">wolf at wolfsden.cz</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Hello,
+</I>
+Greetings!
+
+&gt;<i> I'm considering implementing a gemini client over the Christmas, so I've
+</I>&gt;<i> started to read the spec. And I think I've notice a missing thing in
+</I>&gt;<i> text/gemini format.
+</I>
+Many things are missing from the text/gemini format, as it was
+intended to be a simple markup format. Instead of &quot;is this possible?&quot;,
+think &quot;does this extension meet the power-to-weight ratio?&quot;.
+
+&gt;<i> What I think is missing is
+</I>&gt;<i> an ability to set language for a specific part of the document itself.
+</I>
+Do you have any examples of existing gemini pages in the wild that
+suffer from this problem? Or examples of pages that you intend to
+publish on gemini? I'm interested in the real world use-cases (in
+gemini) and not contrived scenarios.
+
+&gt;<i> I'm not sure if the spec is permanently frozen or can still be extended,
+</I>&gt;<i> but I would like to propose adding a language toggle command to
+</I>&gt;<i> text/gemini.
+</I>
+I can tell you there's approximately zero chance of this being added
+to the official spec. Your best bet, if you're serious about this, is
+to go ahead and implement your proposal in your client. If others find
+it useful they will start using it too (see: how titan is being
+adopted).
+
+&gt;<i> Not sure about specific syntax, basically anything would work, ideally
+</I>&gt;<i> something that would be not very disrupting if just render by clients
+</I>&gt;<i> that do not know about it. So for example:
+</I>&gt;<i>
+</I>&gt;<i>     Here are some examples in Japanese and Chinese:
+</I>&gt;<i>
+</I>&gt;<i>     !lang=ja
+</I>&gt;<i>     &#12371;&#12435;&#12395;&#12385;&#12399;&#12290;
+</I>&gt;<i>
+</I>&gt;<i>     !lang=zh
+</I>&gt;<i>     &#20320;&#22909;&#12290;
+</I>&gt;<i>
+</I>&gt;<i>     !lang=en
+</I>&gt;<i>     And back to the original language.
+</I>&gt;<i>
+</I>&gt;<i> This is just proposal, I don't really care if it is a switch (like mine
+</I>&gt;<i> example) or some kind of block.
+</I>
+This doesn't allow for mixed languages inside of a single
+line/paragraph though.
+
+&gt;<i> Now, why is this necessary. For Japanese and Chinese in particular,
+</I>&gt;<i> Unicode is simply not enough. Same code point can be rendered very
+</I>&gt;<i> differently depending on the language. So for proper rendering of the
+</I>&gt;<i> text, you need to know the language. If the document has just one, there
+</I>&gt;<i> is currently available way to do so (document language), but for
+</I>&gt;<i> mixture, it is simply not possible. And I think that is a shame.
+</I>
+I'm curious how this actually works with text rendering engines. Do
+they expose an API that allows you to specify the language? Which one
+are you planning on using, and could you point me to the relevant
+docs?
+
+&gt;<i>
+</I>&gt;<i> Thanks for considering.
+</I>&gt;<i>
+</I>&gt;<i> W.
+</I>&gt;<i>
+</I>&gt;<i> PS: I'm not subscribed, so please CC.
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> There are only two hard things in Computer Science:
+</I>&gt;<i> cache invalidation, naming things and off-by-one errors.
+</I></PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007672.html">Documents with mixed languages
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7673">[ date ]</a>
+              <a href="thread.html#7673">[ thread ]</a>
+              <a href="subject.html#7673">[ subject ]</a>
+              <a href="author.html#7673">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

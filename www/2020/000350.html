@@ -1,0 +1,583 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200118021627.GF3354%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000382.html">
+   <LINK REL="Next"  HREF="000362.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200118021627.GF3354%40brevard.conman.org%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">sean at conman.org
+       </A><BR>
+    <I>Sat Jan 18 02:16:27 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000382.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000362.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#350">[ date ]</a>
+              <a href="thread.html#350">[ thread ]</a>
+              <a href="subject.html#350">[ subject ]</a>
+              <a href="author.html#350">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great solderpunk once stated:
+&gt;<i> 
+</I>&gt;<i> Feedback on the below very welcome!
+</I>
+  Red alert!  Raise shields!  Strap in!  This is going to be a bumpy ride.
+
+  Attached is a sample document that I created that I'm trying to format per
+the spec below.  I'm already running into trouble, else I would have not
+replied with this particular response.
+
+&gt;<i> The text/gemini syntax is inspired by and looks visually similar to
+</I>&gt;<i> Markdown, but it is significantly simpler (and consequently less
+</I>&gt;<i> powerful).  The syntax is strictly line-based: a file can be processed
+</I>&gt;<i> one line at a time and each line can be handled in a way which does
+</I>&gt;<i> not depend upon any previous or subsequent lines.  The only internal
+</I>&gt;<i> state a rendering engine needs to maintain is a single boolean
+</I>&gt;<i> variable (for preformatting mode, described below).
+</I>&gt;<i> 
+</I>&gt;<i> The lines of a text/gemini file come in 8 different types.  
+</I>
+  I only see 7 listed below.
+
+&gt;<i> It is
+</I>&gt;<i> possible to unambiguously determine the type of a line by only
+</I>&gt;<i> considering its first three characters.  Knowing a line's type is the
+</I>&gt;<i> only information necessary to know how to handle it correctly.
+</I>
+  Not quite true, even according to this document.  Leading white space in
+lists is the glaring exception here.
+
+&gt;<i> Just like Gemini's status code system is designed so that simple
+</I>&gt;<i> clients can ignore the second digit of the code and still function
+</I>&gt;<i> correctly, the text/gemini syntax is designed so that simple clients
+</I>&gt;<i> can treat several different types of line identically and still
+</I>&gt;<i> provide a usable representation of the document.  A bare-minimum
+</I>&gt;<i> client need only recognise four different types of line.  These are:
+</I>
+  Yet seven are listed.  
+
+&gt;<i> 1. PREFORMATTED TOGGLE LINES
+</I>&gt;<i> 
+</I>&gt;<i> Lines consisting of only and exactly three back ticks (```) are
+</I>&gt;<i> preformatted toggle lines.  These lines should not be displayed to the
+</I>&gt;<i> user and are instead used to toggle preformatted mode on and off (the
+</I>&gt;<i> mode is off when the parser is intialised).  When preformatted mode is
+</I>&gt;<i> on, the usual rules for identifying line types are suspended and all
+</I>&gt;<i> lines should be unconditionally identified as PREFORMATTED TEXT LINES.
+</I>&gt;<i> 
+</I>&gt;<i> 2. PREFORMATTED TEXT LINES
+</I>&gt;<i> 
+</I>&gt;<i> Preformatted text lines should be presented to the user in a monowidth
+</I>&gt;<i> font exactly as they appear in the text/gemini file.  Lines longer
+</I>&gt;<i> than the client's viewport must not be wrapped, leading or trailing
+</I>&gt;<i> whitespace must not be removed, etc.  Handling of lines longer than the
+</I>&gt;<i> viewport is client-specific.  Advanced clients may display a
+</I>&gt;<i> horizontal scrollbar.  Simple clients may simply truncate the line.
+</I>
+  No real problems so far.
+
+&gt;<i> 3. LINK LINES
+</I>&gt;<i> 
+</I>&gt;<i> Lines beginning with the two characters =&gt; are link lines.  We all know
+</I>&gt;<i> how these work by now.
+</I>
+  Again, no real problem.
+
+&gt;<i> 4. TEXT LINES
+</I>&gt;<i> 
+</I>&gt;<i> All other lines are TEXT LINES.  They should be presented to the user
+</I>&gt;<i> in a client-specific &quot;pleasing manner&quot;.  Lines longer than the
+</I>&gt;<i> client's viewport should be wrapped into multiple lines of a suitable
+</I>&gt;<i> length.  Variable width fonts may be used.  Blank lines are a special
+</I>&gt;<i> case of TEXT LINES and should be reproduced in the output.
+</I>&gt;<i> 
+</I>&gt;<i> It is important to realise that while Markdown, HTML, LaTeX and many
+</I>&gt;<i> other document markup formats are &quot;block based&quot; or &quot;paragraph based&quot;,
+</I>&gt;<i> the text/gemini format is not.  Consecutive, non-blank lines of text
+</I>&gt;<i> which are much shorter than the client's viewport should *not* be
+</I>&gt;<i> combined into longer lines.  Equivalently, *every* newline character
+</I>&gt;<i> in a text/gemini file is significant, not only consecutive pairs of
+</I>&gt;<i> newline characters.  Clients ignoring this fact will produce incorrect
+</I>&gt;<i> output.
+</I>
+  Fair enough. And so far, things are okay.
+
+&gt;<i> Advanced clients may also recognise the following additional line
+</I>&gt;<i> types.  Simple clients may treat all line types below as TEXT LINES
+</I>&gt;<i> with no loss of essential function.
+</I>
+  It's here we start running into trouble.
+
+&gt;<i> 5. HEADING LINES
+</I>&gt;<i> 
+</I>&gt;<i> Lines beginning with one, two or three consecutive # characters are
+</I>&gt;<i> HEADING LINES, corresponding to headings, subheadings or susubheadings
+</I>&gt;<i> respectively.  The text following the # characters (with leading
+</I>&gt;<i> whitespace removed) 
+</I>
+  The parenthetical here is ambiguous.  Does it refer to this issue?
+
+#A title
+## A title with space between the '#' and text
+###	Even more white space
+
+or
+
+#A title
+  ##A title with leading space before the '#'
+	###Even more white space
+
+  I'm thinking the former now that I'm replying, but my code deals with both
+cases combined, so I can handle:
+
+# A title
+  ##     A title with spaces
+	###	Yippee!  Spaces galore!
+
+  Almost---tabs (and yes, I do use tabs---I like me the tabs) are an issue
+and while I can handle them (I have code that will expand them up to 8
+spaces) not everybody has code to deal with this.  So question:
+
+	WHAT ABOUT TABS?
+
+  They WILL show up.
+
+&gt;<i> constitute the heading and should be displayed to
+</I>&gt;<i> the user.  Clients MAY choose to apply special styling to headings to
+</I>&gt;<i> distinguish them from ordinary lines.  However, the primary purpose of
+</I>&gt;<i> HEADING LINES is to represent the internal structure of the document
+</I>&gt;<i> in a machine-readable way.  Advanced clients can use this information
+</I>&gt;<i> to, e.g. display a hierarchically formatted &quot;table of contents&quot; for a
+</I>&gt;<i> long document in a side-pane, allowing users to easily jump to
+</I>&gt;<i> specific sections without excessive scrolling.  Or CMS-style tools
+</I>&gt;<i> automatically generating menus or Atom/RSS feeds for a directory of
+</I>&gt;<i> text/gemini files can use the first heading in a file as a
+</I>&gt;<i> human-friendly label for links to it.
+</I>
+  So another question.  I have some headings like this:
+
+### Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sodales eget nisi quis condimentum. Donec ipsum arcu, fermentum eu ullamcorper sit amet, facilisis id nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam tempus nulla ut dolor luctus malesuada. Suspendisse orci sem, semper at maximus non, pharetra et justo. Quisque lectus arcu, viverra ac convallis eu, vulputate ut enim. Nulla aliquam, lacus consequat suscipit facilisis, nisl tortor facilisis nisi, vel mattis eros arcu sed tellus. Duis quis lectus pellentesque, posuere dolor ut, sodales massa. Proin vel blandit mauris.
+
+Given a screen width of 40, which of the four below should be displayed?
+
+### Lorem ipsum dolor sit amet, consect
+
+### Lorem ipsum dolor sit amet, cons...
+
+### Lorem ipsum dolor sit amet,
+### consectetur adipiscing elit. Cras
+### sodales eget nisi quis condimentum.
+### Donec ipsum arcu, fermentum eu
+### ullamcorper sit amet, facilisis id
+### nunc. Class aptent taciti sociosqu
+### ad litora torquent per conubia
+### nostra, per inceptos himenaeos. Nam
+### tempus nulla ut dolor luctus
+### malesuada. Suspendisse orci sem,
+### semper at maximus non, pharetra et
+### justo. Quisque lectus arcu, viverra
+### ac convallis eu, vulputate ut enim.
+### Nulla aliquam, lacus consequat
+### suscipit facilisis, nisl tortor
+### facilisis nisi, vel mattis eros
+### arcu sed tellus. Duis quis lectus
+### pellentesque, posuere dolor ut,
+### sodales massa. Proin vel blandit
+### mauris.
+
+### Lorem ipsum dolor sit amet,
+    consectetur adipiscing elit. Cras
+    sodales eget nisi quis condimentum.
+    Donec ipsum arcu, fermentum eu
+    ullamcorper sit amet, facilisis id
+    nunc. Class aptent taciti sociosqu
+    ad litora torquent per conubia
+    nostra, per inceptos himenaeos. Nam
+    tempus nulla ut dolor luctus
+    malesuada. Suspendisse orci sem,
+    semper at maximus non, pharetra et
+    justo. Quisque lectus arcu, viverra
+    ac convallis eu, vulputate ut enim.
+    Nulla aliquam, lacus consequat
+    suscipit facilisis, nisl tortor
+    facilisis nisi, vel mattis eros
+    arcu sed tellus. Duis quis lectus
+    pellentesque, posuere dolor ut,
+    sodales massa. Proin vel blandit
+    mauris.
+
+### Lorem ipsum dolor sit amet,
+consectetur adipiscing elit. Cras
+sodales eget nisi quis condimentum.
+Donec ipsum arcu, fermentum eu
+ullamcorper sit amet, facilisis id
+nunc. Class aptent taciti sociosqu ad
+litora torquent per conubia nostra, per
+inceptos himenaeos. Nam tempus nulla ut
+dolor luctus malesuada. Suspendisse
+orci sem, semper at maximus non,
+pharetra et justo. Quisque lectus arcu,
+viverra ac convallis eu, vulputate ut
+enim. Nulla aliquam, lacus consequat
+suscipit facilisis, nisl tortor
+facilisis nisi, vel mattis eros arcu
+sed tellus. Duis quis lectus
+pellentesque, posuere dolor ut, sodales
+massa. Proin vel blandit mauris.
+
+  Or is this way into the &quot;you have *got* to be kidding!&quot; territory?  I
+swear, I'm not trying to take these things to the extreme ... well, okay, I
+*am* trying to take these things to the exteme, but only to find out where
+the borders are.
+
+&gt;<i> 6. UNORDERED LIST ITEMS
+</I>&gt;<i> 
+</I>&gt;<i> Lines beginning with a * are UNORDERED LIST ITEMS.  This line type
+</I>&gt;<i> exists purely for stylistic reasons.  The * may be replaced in
+</I>&gt;<i> advanced clients by a bullet symbol.  Any text after the * character
+</I>&gt;<i> should be presented to the user as if it were a TEXT LINE, i.e.
+</I>&gt;<i> wrapped to fit the viewport.  Advanced clients can take the space of
+</I>&gt;<i> the bullet symbol into account when performing wrapping and ensure
+</I>&gt;<i> that all lines of text corresponding to the item are aligned with one
+</I>&gt;<i> another.
+</I>
+  Okay, several questions here.  First off, replace the '###' with '*' in
+the above example---how to properly format a list item that is ridiculously
+long.
+
+  Second question---this list:
+
+* lorem
+ * ipsum
+  * dolor
+   * Fusce faucibus ... (I'll save you the text)
+   * Nunc pharetra ...
+  * consectetur
+  * adipiscing
+  * elit
+ * Cras
+ * sodales
+* eget
+* nisi
+
+  This is a nested list, so the lines start with a blank line.  This list
+indents one space, but it could be two spaces per index, three, eight. 
+Also, this list:
+
+* lorem
+	* ipsum
+		* dolor
+			* Fusce faucibus ...
+			* Nunc pharetra ... 
+		* consectetur
+		* adipiscing
+		* elit
+	* Cras
+	* sodales
+* eget
+* nisi
+
+  Uses tabs (ah, lovely tabs).  Are indents preserved?  Transformed?  What
+if there's mixed spaces and tabs (one line is a tab and two space, another
+line is 10 spaces---with a default tab stop of 8, they both line up)? 
+
+&gt;<i> 7. ORDERED LIST ITEMS
+</I>&gt;<i> 
+</I>&gt;<i> As above with obvious changes.
+</I>
+  Not so fast there!  Again, the same issues as above, but now here are some
+ordered lists that are obvious *to me* but maybe not to others:
+
+1 lorem
+ 1 ipsum
+  1 dolor
+   1 Fusce faucibus ...
+   2 Nunc pharetra ...
+  2 consectetur
+  3 adipiscing
+  4 elit
+ 2 Cras
+ 3 sodales
+2 eget
+3 nisi
+
+  The following is how I learned outlining in school:
+
+1 lorem
+ A ipsum
+  i dolor
+   a Fusce faucibus ...
+   b Nunc pharetra ...
+  ii consectetur
+  iii adipiscing
+  iv elit
+ B Cras
+ C sodales
+2 eget
+3 nisi
+
+  And in case you don't want to support Roman numerals:
+
+1 lorem
+ A ipsum
+  1 dolor
+   A Fusce faucibus ...
+   B Nunc pharetra ...
+  2 consectetur
+  3 adipiscing
+  4 elit
+ B Cras
+ C sodales
+2 eget
+3 nisi
+
+  And again, all the same questions apply from unordered lists.
+
+  That's it for now.  I'm going to hold off on my implementation until some
+of this is cleared up, but please do check out the attached document as a
+warning of what might be possible with this format.
+
+  -spc (Will torture specs for food ...)
+
+-------------- next part --------------
+# Sample Gemini Text File
+## Very long lines, blank lines between them
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sodales eget nisi quis condimentum. Donec ipsum arcu, fermentum eu ullamcorper sit amet, facilisis id nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam tempus nulla ut dolor luctus malesuada. Suspendisse orci sem, semper at maximus non, pharetra et justo. Quisque lectus arcu, viverra ac convallis eu, vulputate ut enim. Nulla aliquam, lacus consequat suscipit facilisis, nisl tortor facilisis nisi, vel mattis eros arcu sed tellus. Duis quis lectus pellentesque, posuere dolor ut, sodales massa. Proin vel blandit mauris.
+
+Aenean vehicula eu eros vel feugiat. Quisque sagittis metus eu nisl dapibus condimentum. Aenean ipsum justo, sagittis vel ipsum sit amet, fermentum convallis elit. Ut congue scelerisque velit, nec euismod nulla gravida quis. Duis faucibus tempus ligula, non malesuada neque lobortis quis. Nam neque magna, ornare eu dui ut, porttitor tincidunt purus. Duis id malesuada ante. Suspendisse gravida condimentum nisl, eget gravida dui pellentesque et.
+
+Fusce tempor leo nulla, non posuere sem maximus eget. Integer non maximus quam. Nam ac felis ut elit aliquam aliquam. Curabitur laoreet metus nulla, a ornare lorem molestie a. Sed id libero vel nunc lobortis lacinia sed quis metus. Sed feugiat eget ipsum et commodo. Fusce condimentum est ut arcu imperdiet, vel porta felis tincidunt. Aliquam quis molestie libero, sit amet luctus quam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse potenti. Integer quis eros neque. Sed vulputate condimentum est et cursus. Nunc urna ante, euismod quis tempus ac, aliquam at felis. Sed hendrerit ex eu odio sodales fermentum.
+
+Fusce faucibus dui et consectetur aliquet. Nullam augue magna, bibendum sit amet commodo at, sagittis non leo. Sed eget mauris eget arcu vulputate vulputate. Morbi non gravida dolor, in mollis turpis. Ut quis tempor elit. Aenean nec arcu vitae justo gravida placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel suscipit nisi. Curabitur vitae elit ultricies, ultrices dolor sed, vehicula augue. Phasellus euismod ligula sit amet mi volutpat tempor. Nunc scelerisque mauris dui, sed placerat nibh tempus non. Mauris eleifend purus nec tincidunt dapibus. Maecenas tincidunt volutpat varius. Phasellus eu congue risus. Nam venenatis erat non auctor ullamcorper.
+
+Nunc pharetra sem nec velit tempus, sed malesuada felis accumsan. Vestibulum egestas ex nisl, sit amet rhoncus mauris laoreet at. Ut neque lorem, tempus et dictum non, laoreet ac mauris. Maecenas consectetur blandit neque eget maximus. Duis tincidunt elementum lorem, at varius nisl dapibus vel. In blandit ipsum sed molestie commodo. Quisque aliquet nunc eget pretium viverra. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi ligula nisi, sollicitudin tincidunt efficitur nec, lobortis eu diam. Vestibulum convallis erat velit, semper semper augue sodales in.
+
+## Very long lines, one after the other
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sodales eget nisi quis condimentum. Donec ipsum arcu, fermentum eu ullamcorper sit amet, facilisis id nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam tempus nulla ut dolor luctus malesuada. Suspendisse orci sem, semper at maximus non, pharetra et justo. Quisque lectus arcu, viverra ac convallis eu, vulputate ut enim. Nulla aliquam, lacus consequat suscipit facilisis, nisl tortor facilisis nisi, vel mattis eros arcu sed tellus. Duis quis lectus pellentesque, posuere dolor ut, sodales massa. Proin vel blandit mauris.
+Aenean vehicula eu eros vel feugiat. Quisque sagittis metus eu nisl dapibus condimentum. Aenean ipsum justo, sagittis vel ipsum sit amet, fermentum convallis elit. Ut congue scelerisque velit, nec euismod nulla gravida quis. Duis faucibus tempus ligula, non malesuada neque lobortis quis. Nam neque magna, ornare eu dui ut, porttitor tincidunt purus. Duis id malesuada ante. Suspendisse gravida condimentum nisl, eget gravida dui pellentesque et.
+Fusce tempor leo nulla, non posuere sem maximus eget. Integer non maximus quam. Nam ac felis ut elit aliquam aliquam. Curabitur laoreet metus nulla, a ornare lorem molestie a. Sed id libero vel nunc lobortis lacinia sed quis metus. Sed feugiat eget ipsum et commodo. Fusce condimentum est ut arcu imperdiet, vel porta felis tincidunt. Aliquam quis molestie libero, sit amet luctus quam. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Suspendisse potenti. Integer quis eros neque. Sed vulputate condimentum est et cursus. Nunc urna ante, euismod quis tempus ac, aliquam at felis. Sed hendrerit ex eu odio sodales fermentum.
+Fusce faucibus dui et consectetur aliquet. Nullam augue magna, bibendum sit amet commodo at, sagittis non leo. Sed eget mauris eget arcu vulputate vulputate. Morbi non gravida dolor, in mollis turpis. Ut quis tempor elit. Aenean nec arcu vitae justo gravida placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel suscipit nisi. Curabitur vitae elit ultricies, ultrices dolor sed, vehicula augue. Phasellus euismod ligula sit amet mi volutpat tempor. Nunc scelerisque mauris dui, sed placerat nibh tempus non. Mauris eleifend purus nec tincidunt dapibus. Maecenas tincidunt volutpat varius. Phasellus eu congue risus. Nam venenatis erat non auctor ullamcorper.
+Nunc pharetra sem nec velit tempus, sed malesuada felis accumsan. Vestibulum egestas ex nisl, sit amet rhoncus mauris laoreet at. Ut neque lorem, tempus et dictum non, laoreet ac mauris. Maecenas consectetur blandit neque eget maximus. Duis tincidunt elementum lorem, at varius nisl dapibus vel. In blandit ipsum sed molestie commodo. Quisque aliquet nunc eget pretium viverra. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi ligula nisi, sollicitudin tincidunt efficitur nec, lobortis eu diam. Vestibulum convallis erat velit, semper semper augue sodales in.
+
+## Very short lines (how I tend to blog)
+
+Lorem ipsum dolor sit amet,
+consectetur adipiscing elit.
+Cras sodales eget nisi quis condimentum.
+Donec ipsum arcu,
+fermentum eu ullamcorper sit amet,
+facilisis id nunc.
+Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+per inceptos himenaeos.
+Nam tempus nulla ut dolor luctus malesuada. 
+Suspendisse orci sem,
+semper at maximus non,
+pharetra et justo.
+Quisque lectus arcu,
+viverra ac convallis eu,
+vulputate ut enim.
+Nulla aliquam,
+lacus consequat suscipit facilisis,
+nisl tortor facilisis nisi,
+vel mattis eros arcu sed tellus.
+Duis quis lectus pellentesque,
+posuere dolor ut,
+sodales massa.
+Proin vel blandit mauris.
+
+## Links
+
+=&gt; <A HREF="gemini://example.net/">gemini://example.net/</A> Lorem ipsum dolor sit amet
+=&gt; <A HREF="gemini://example.net/">gemini://example.net/</A> Class aptent taciti sociosqu ad litora torquent per conubia nostra
+=&gt; <A HREF="gemini://example.net/">gemini://example.net/</A> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sodales eget nisi quis condimentum. Donec ipsum arcu, fermentum eu ullamcorper sit amet, facilisis id nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam tempus nulla ut dolor luctus malesuada. Suspendisse orci sem, semper at maximus non, pharetra et justo. Quisque lectus arcu, viverra ac convallis eu, vulputate ut enim. Nulla aliquam, lacus consequat suscipit facilisis, nisl tortor facilisis nisi, vel mattis eros arcu sed tellus. Duis quis lectus pellentesque, posuere dolor ut, sodales massa. Proin vel blandit mauris.
+=&gt; <A HREF="gemini://example.net/">gemini://example.net/</A>
+=&gt; <A HREF="gemini://example.net/lorem/ipsum/dolor/sit/amet/consectetur/adipiscing/elit/cras/sodales/eget/nisi/quis/condimentum/donec/ipsum/arcu/fermentum/eu/ullamcorper/sit/amet/facilisis/id/nunc/class/aptent/taciti/sociosqu/ad/litora/torquent/per/conubia/nostra/per/inceptos/himenaeos/nam/tempus/nulla/ut/dolor/luctus/">gemini://example.net/lorem/ipsum/dolor/sit/amet/consectetur/adipiscing/elit/cras/sodales/eget/nisi/quis/condimentum/donec/ipsum/arcu/fermentum/eu/ullamcorper/sit/amet/facilisis/id/nunc/class/aptent/taciti/sociosqu/ad/litora/torquent/per/conubia/nostra/per/inceptos/himenaeos/nam/tempus/nulla/ut/dolor/luctus/</A>
+
+## Preformatted Text Lines
+
+```
+quis x1  = facilisis &quot;lpeg&quot;
+quis x2  = &quot;...&quot;
+quis x3  = x1.x4(x1.x5(&quot;AZ&quot;,&quot;az&quot;)^1)
+         + (x1.x6(1) - x1.x5(&quot;AZ&quot;,&quot;ax&quot;))^1
+quis x7  = x1.x8(x3^1)
+quis x9  = x7:lobortis(x2)
+quis x10 = 1
+
+-- Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Cras sodales
+-- eget nisi quis condimentum.  Donec ipsum arcu, fermentum eu ullamcorper
+-- sit amet, facilisis id nunc.  Class aptent taciti sociosqu ad litora
+-- torquent per conubia nostra, per inceptos himenaeos.  Nam tempus nulla ut
+-- dolor luctus malesuada.  Suspendisse orci sem, semper at maximus non,
+-- pharetra et justo.  Quisque lectus arcu, viverra ac convallis eu,
+-- vulputate ut enim.  Nulla aliquam, lacus consequat suscipit facilisis,
+-- nisl tortor facilisis nisi, vel mattis eros arcu sed tellus.  Duis quis
+-- lectus pellentesque, posuere dolor ut, sodales massa.  Proin vel blandit
+-- mauris.
+
+elit x11 nisi sed.liguia() dolor
+  eget x11 ~= &quot;&quot; eu
+    sed.aliquam:nunc(lectus.amet('  [%q]=%q,\n',x11,x9[i]:lobortis()))
+    x10 = x10 + 1
+  sit
+    sed.aliquam:nunc(x11,'\n')
+  consectetur
+consectetur
+```
+
+## Lists
+### Bullet List 1
+
+* lorem
+ * ipsum
+  * dolor
+   * Fusce faucibus dui et consectetur aliquet. Nullam augue magna, bibendum sit amet commodo at, sagittis non leo. Sed eget mauris eget arcu vulputate vulputate. Morbi non gravida dolor, in mollis turpis. Ut quis tempor elit. Aenean nec arcu vitae justo gravida placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel suscipit nisi. Curabitur vitae elit ultricies, ultrices dolor sed, vehicula augue. Phasellus euismod ligula sit amet mi volutpat tempor. Nunc scelerisque mauris dui, sed placerat nibh tempus non. Mauris eleifend purus nec tincidunt dapibus. Maecenas tincidunt volutpat varius. Phasellus eu congue risus. Nam venenatis erat non auctor ullamcorper.
+   * Nunc pharetra sem nec velit tempus, sed malesuada felis accumsan. Vestibulum egestas ex nisl, sit amet rhoncus mauris laoreet at. Ut neque lorem, tempus et dictum non, laoreet ac mauris. Maecenas consectetur blandit neque eget maximus. Duis tincidunt elementum lorem, at varius nisl dapibus vel. In blandit ipsum sed molestie commodo. Quisque aliquet nunc eget pretium viverra. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi ligula nisi, sollicitudin tincidunt efficitur nec, lobortis eu diam. Vestibulum convallis erat velit, semper semper augue sodales in.
+  * consectetur
+  * adipiscing
+  * elit
+ * Cras
+ * sodales
+* eget
+* nisi
+
+### Bullet List 2
+
+* lorem
+	* ipsum
+		* dolor
+			* Fusce faucibus dui et consectetur aliquet. Nullam augue magna, bibendum sit amet commodo at, sagittis non leo. Sed eget mauris eget arcu vulputate vulputate. Morbi non gravida dolor, in mollis turpis. Ut quis tempor elit. Aenean nec arcu vitae justo gravida placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel suscipit nisi. Curabitur vitae elit ultricies, ultrices dolor sed, vehicula augue. Phasellus euismod ligula sit amet mi volutpat tempor. Nunc scelerisque mauris dui, sed placerat nibh tempus non. Mauris eleifend purus nec tincidunt dapibus. Maecenas tincidunt volutpat varius. Phasellus eu congue risus. Nam venenatis erat non auctor ullamcorper.
+			* Nunc pharetra sem nec velit tempus, sed malesuada felis accumsan. Vestibulum egestas ex nisl, sit amet rhoncus mauris laoreet at. Ut neque lorem, tempus et dictum non, laoreet ac mauris. Maecenas consectetur blandit neque eget maximus. Duis tincidunt elementum lorem, at varius nisl dapibus vel. In blandit ipsum sed molestie commodo. Quisque aliquet nunc eget pretium viverra. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi ligula nisi, sollicitudin tincidunt efficitur nec, lobortis eu diam. Vestibulum convallis erat velit, semper semper augue sodales in.
+		* consectetur
+		* adipiscing
+		* elit
+	* Cras
+	* sodales
+* eget
+* nisi
+
+### Ordered List 1
+
+1 lorem
+ 1 ipsum
+  1 dolor
+   1 Fusce faucibus dui et consectetur aliquet. Nullam augue magna, bibendum sit amet commodo at, sagittis non leo. Sed eget mauris eget arcu vulputate vulputate. Morbi non gravida dolor, in mollis turpis. Ut quis tempor elit. Aenean nec arcu vitae justo gravida placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel suscipit nisi. Curabitur vitae elit ultricies, ultrices dolor sed, vehicula augue. Phasellus euismod ligula sit amet mi volutpat tempor. Nunc scelerisque mauris dui, sed placerat nibh tempus non. Mauris eleifend purus nec tincidunt dapibus. Maecenas tincidunt volutpat varius. Phasellus eu congue risus. Nam venenatis erat non auctor ullamcorper.
+   2 Nunc pharetra sem nec velit tempus, sed malesuada felis accumsan. Vestibulum egestas ex nisl, sit amet rhoncus mauris laoreet at. Ut neque lorem, tempus et dictum non, laoreet ac mauris. Maecenas consectetur blandit neque eget maximus. Duis tincidunt elementum lorem, at varius nisl dapibus vel. In blandit ipsum sed molestie commodo. Quisque aliquet nunc eget pretium viverra. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi ligula nisi, sollicitudin tincidunt efficitur nec, lobortis eu diam. Vestibulum convallis erat velit, semper semper augue sodales in.
+  2 consectetur
+  3 adipiscing
+  4 elit
+ 2 Cras
+ 3 sodales
+2 eget
+3 nisi
+
+### Ordered List 2
+
+1 lorem
+ A ipsum
+  i dolor
+   a Fusce faucibus dui et consectetur aliquet. Nullam augue magna, bibendum sit amet commodo at, sagittis non leo. Sed eget mauris eget arcu vulputate vulputate. Morbi non gravida dolor, in mollis turpis. Ut quis tempor elit. Aenean nec arcu vitae justo gravida placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel suscipit nisi. Curabitur vitae elit ultricies, ultrices dolor sed, vehicula augue. Phasellus euismod ligula sit amet mi volutpat tempor. Nunc scelerisque mauris dui, sed placerat nibh tempus non. Mauris eleifend purus nec tincidunt dapibus. Maecenas tincidunt volutpat varius. Phasellus eu congue risus. Nam venenatis erat non auctor ullamcorper.
+   b Nunc pharetra sem nec velit tempus, sed malesuada felis accumsan. Vestibulum egestas ex nisl, sit amet rhoncus mauris laoreet at. Ut neque lorem, tempus et dictum non, laoreet ac mauris. Maecenas consectetur blandit neque eget maximus. Duis tincidunt elementum lorem, at varius nisl dapibus vel. In blandit ipsum sed molestie commodo. Quisque aliquet nunc eget pretium viverra. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi ligula nisi, sollicitudin tincidunt efficitur nec, lobortis eu diam. Vestibulum convallis erat velit, semper semper augue sodales in.
+  ii consectetur
+  iii adipiscing
+  iv elit
+ B Cras
+ C sodales
+2 eget
+3 nisi
+
+### Ordered List 3
+
+1 lorem
+ A ipsum
+  1 dolor
+   A Fusce faucibus dui et consectetur aliquet. Nullam augue magna, bibendum sit amet commodo at, sagittis non leo. Sed eget mauris eget arcu vulputate vulputate. Morbi non gravida dolor, in mollis turpis. Ut quis tempor elit. Aenean nec arcu vitae justo gravida placerat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vel suscipit nisi. Curabitur vitae elit ultricies, ultrices dolor sed, vehicula augue. Phasellus euismod ligula sit amet mi volutpat tempor. Nunc scelerisque mauris dui, sed placerat nibh tempus non. Mauris eleifend purus nec tincidunt dapibus. Maecenas tincidunt volutpat varius. Phasellus eu congue risus. Nam venenatis erat non auctor ullamcorper.
+   B Nunc pharetra sem nec velit tempus, sed malesuada felis accumsan. Vestibulum egestas ex nisl, sit amet rhoncus mauris laoreet at. Ut neque lorem, tempus et dictum non, laoreet ac mauris. Maecenas consectetur blandit neque eget maximus. Duis tincidunt elementum lorem, at varius nisl dapibus vel. In blandit ipsum sed molestie commodo. Quisque aliquet nunc eget pretium viverra. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Morbi ligula nisi, sollicitudin tincidunt efficitur nec, lobortis eu diam. Vestibulum convallis erat velit, semper semper augue sodales in.
+  2 consectetur
+  3 adipiscing
+  4 elit
+ B Cras
+ C sodales
+2 eget
+3 nisi
+
+## Long Titles
+
+### Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sodales eget nisi quis condimentum. Donec ipsum arcu, fermentum eu ullamcorper sit amet, facilisis id nunc. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nam tempus nulla ut dolor luctus malesuada. Suspendisse orci sem, semper at maximus non, pharetra et justo. Quisque lectus arcu, viverra ac convallis eu, vulputate ut enim. Nulla aliquam, lacus consequat suscipit facilisis, nisl tortor facilisis nisi, vel mattis eros arcu sed tellus. Duis quis lectus pellentesque, posuere dolor ut, sodales massa. Proin vel blandit mauris.
+
+### Aenean vehicula eu eros vel feugiat. Quisque sagittis metus eu nisl dapibus condimentum. Aenean ipsum justo, sagittis vel ipsum sit amet, fermentum convallis elit. Ut congue scelerisque velit, nec euismod nulla gravida quis. Duis faucibus tempus ligula, non malesuada neque lobortis quis. Nam neque magna, ornare eu dui ut, porttitor tincidunt purus. Duis id malesuada ante. Suspendisse gravida condimentum nisl, eget gravida dui pellentesque et.
+
+And this should provide for some long discussions.  I hope.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000382.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000362.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#350">[ date ]</a>
+              <a href="thread.html#350">[ thread ]</a>
+              <a href="subject.html#350">[ subject ]</a>
+              <a href="author.html#350">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

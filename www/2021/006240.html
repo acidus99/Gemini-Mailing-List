@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> How do you buffer a Gemini connection?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20How%20do%20you%20buffer%20a%20Gemini%20connection%3F&In-Reply-To=%3C875z1aqsx8.fsf%40omarpolo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006243.html">
+   <LINK REL="Next"  HREF="006244.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>How do you buffer a Gemini connection?</H1>
+    <B>Omar Polo</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20How%20do%20you%20buffer%20a%20Gemini%20connection%3F&In-Reply-To=%3C875z1aqsx8.fsf%40omarpolo.com%3E"
+       TITLE="How do you buffer a Gemini connection?">op at omarpolo.com
+       </A><BR>
+    <I>Mon Mar 29 09:13:07 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006243.html">How do you buffer a Gemini connection?
+</A></li>
+        <LI>Next message (by thread): <A HREF="006244.html">Italian Translation (Stephane Bortzmeyer)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6240">[ date ]</a>
+              <a href="thread.html#6240">[ thread ]</a>
+              <a href="subject.html#6240">[ subject ]</a>
+              <a href="author.html#6240">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+almaember &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">almaember at disroot.org</A>&gt; writes:
+
+&gt;<i> Hello,
+</I>&gt;<i>
+</I>&gt;<i> I'm planning on creating my own Gemini client (with C99 and OpenSSL, if
+</I>&gt;<i> you want to know). However, I have a problem with how I should be
+</I>&gt;<i> implementing the downloading part.
+</I>&gt;<i>
+</I>&gt;<i> So, how should I be buffering a Gemini connection? Since there is no
+</I>&gt;<i> size indicator, I can't be sure everything even fits into memory, or
+</I>&gt;<i> how much time it's going to take to download, or if it's even going to
+</I>&gt;<i> end at all.
+</I>&gt;<i>
+</I>&gt;<i> Another problem is long-polling. Through my exploration of Geminispace,
+</I>&gt;<i> I found a few capsules that used a hack to push live updates to the
+</I>&gt;<i> client. Specifically, these servers didn't close the connection, but
+</I>&gt;<i> instead kept it open and just sent new data when something happened.
+</I>&gt;<i>
+</I>&gt;<i> Since the spec says nothing (or I'm blind) about buffering, so I want
+</I>&gt;<i> to ask others about what I should be doing, while still being able to
+</I>&gt;<i> actually parse the output.
+</I>&gt;<i>
+</I>&gt;<i> My ideas as of right now:
+</I>&gt;<i>
+</I>&gt;<i>  - Have a big buffer and store everything in it until the connection is
+</I>&gt;<i>    closed. The connection would be terminated if:
+</I>&gt;<i>     - the connection closes
+</I>&gt;<i>     - the server didn't send anything for X seconds
+</I>&gt;<i>  - Buffer by line and don't close the connection unless the user
+</I>&gt;<i>    terminates it (by pressing the stop key or by loading another
+</I>&gt;<i>    capsule). Compatible with long polling.
+</I>&gt;<i>
+</I>&gt;<i> Thanks in advance for any help!
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> ~almaember
+</I>
+I'm working on a client and doing exactly as Ecmel Berk Canl&#305;er outlined
+in his mail.  I'm fetching the page one chunk at the time (it allows me
+to use a fixed buffer and plays nice with asynchronous I/O) then get
+sent to a proper renderer (atm only text/gemini and one generic text/*
+handler).  There it gets parsed and split line by line.
+
+The only part where I have to actually keep a dynamic buffer is when
+splitting in lines, because a line can (and often is) splitted across
+chunks, and possibly also bigger than one chunk.
+
+I'm using LibreSSL (plus some other OpenBSD goodies), but if it saves
+you some time here is:
+
+* the protocol code: <A HREF="https://github.com/omar-polo/telescope/blob/main/gemini.c">https://github.com/omar-polo/telescope/blob/main/gemini.c</A>
+* generic code shared by the parsers: <A HREF="https://github.com/omar-polo/telescope/blob/main/parser.c">https://github.com/omar-polo/telescope/blob/main/parser.c</A>
+* text/plain &quot;parser&quot;: <A HREF="https://github.com/omar-polo/telescope/blob/main/textplain.c">https://github.com/omar-polo/telescope/blob/main/textplain.c</A>
+
+Warning: the client is not yet 100% functional, but I'm quite found of
+this design.  One additional benefit is that you can also render the
+page on the go, and that enables also to stream text/* stuff.
+
+Cheers,
+
+Omar Polo
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006243.html">How do you buffer a Gemini connection?
+</A></li>
+	<LI>Next message (by thread): <A HREF="006244.html">Italian Translation (Stephane Bortzmeyer)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6240">[ date ]</a>
+              <a href="thread.html#6240">[ thread ]</a>
+              <a href="subject.html#6240">[ subject ]</a>
+              <a href="author.html#6240">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

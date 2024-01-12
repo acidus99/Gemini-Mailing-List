@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Request for feedback from server/client implementers using non-OpenSSL TLS stacks
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Request%20for%20feedback%20from%20server/client%20implementers%20using%0A%20non-OpenSSL%20TLS%20stacks&In-Reply-To=%3C20211107170106.p4dex2k6rdiz3ocr%40GLaDOS.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007546.html">
+   <LINK REL="Next"  HREF="007548.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Request for feedback from server/client implementers using non-OpenSSL TLS stacks</H1>
+    <B>Alex // nytpu</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Request%20for%20feedback%20from%20server/client%20implementers%20using%0A%20non-OpenSSL%20TLS%20stacks&In-Reply-To=%3C20211107170106.p4dex2k6rdiz3ocr%40GLaDOS.local%3E"
+       TITLE="Request for feedback from server/client implementers using non-OpenSSL TLS stacks">alex at nytpu.com
+       </A><BR>
+    <I>Sun Nov  7 17:01:15 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007546.html">Request for feedback from server/client implementers using non-OpenSSL TLS stacks
+</A></li>
+        <LI>Next message (by thread): <A HREF="007548.html">Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7547">[ date ]</a>
+              <a href="thread.html#7547">[ thread ]</a>
+              <a href="subject.html#7547">[ subject ]</a>
+              <a href="author.html#7547">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>As of late 2019 client-side TLS 1.3 for LibreSSL was implemented, which
+I can confirm.  Server support was completed by mid-to-late 2020 but 1.3
+support for their OpenSSL API clone wasn't finished yet.
+
+Apparently in the latest LibreSSL release (3.4.1, October 14th) they
+completed their implementation of the OpenSSL TLS 1.3 API, which means
+that an up-to-date LibreSSL should have full support for TLS 1.3 through
+all of their various APIs as of now---although I can't confirm it since
+I use LibreSSL very intermittently and usually just for testing of
+cross-compilation to a BSD.
+
+I've been using GnuTLS a little bit in Ada and it seems to support 1.3
+fine although my testing was at the absolute most basic level.
+According to various developer's blogs and the changelog GnuTLS got TLS
+1.3 support before the RFC draft was even finalized (even as far back as
+2016 when it was in an ultra-draft state), so one can feel pretty safe
+in assuming that any broken functionality would've been fixed by now.
+
+I don't have experience with any other TLS libraries, sorry.
+
+---
+
+Vaguely related question: prior to the specification being finalized, is
+there any plan to ensure that support for future TLS versions to be
+supported implicitly?  Something simple like &quot;Clients MAY/MUST use TLS
+1.3 (or the latest TLS version should TLS 1.3 be deprecated)&quot; would be
+better than being stuck at TLS 1.3 forever.
+
+~nytpu
+
+-- 
+Alex // nytpu
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">alex at nytpu.com</A>
+gpg --locate-external-key <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">alex at nytpu.com</A>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 833 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20211107/527baaca/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20211107/527baaca/attachment.sig</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007546.html">Request for feedback from server/client implementers using non-OpenSSL TLS stacks
+</A></li>
+	<LI>Next message (by thread): <A HREF="007548.html">Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7547">[ date ]</a>
+              <a href="thread.html#7547">[ thread ]</a>
+              <a href="subject.html#7547">[ subject ]</a>
+              <a href="author.html#7547">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

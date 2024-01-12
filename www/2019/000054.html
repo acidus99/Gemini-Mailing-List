@@ -1,0 +1,113 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client testing (was Re: Text reflow woes (or: I want bullets back!))
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20testing%20%28was%20Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%0A%20back%21%29%29&In-Reply-To=%3C20190819172114.GD28055%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000047.html">
+   <LINK REL="Next"  HREF="000063.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client testing (was Re: Text reflow woes (or: I want bullets back!))</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20testing%20%28was%20Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%0A%20back%21%29%29&In-Reply-To=%3C20190819172114.GD28055%40SDF.ORG%3E"
+       TITLE="Client testing (was Re: Text reflow woes (or: I want bullets back!))">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Mon Aug 19 18:21:14 BST 2019</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000047.html">Client testing (was Re: Text reflow woes (or: I want bullets back!))
+</A></li>
+        <LI>Next message (by thread): <A HREF="000063.html">Client testing (was Re: Text reflow woes (or: I want bullets back!))
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#54">[ date ]</a>
+              <a href="thread.html#54">[ thread ]</a>
+              <a href="subject.html#54">[ subject ]</a>
+              <a href="author.html#54">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i>   I've made a stab at some initial tests at:
+</I>&gt;<i> 
+</I>&gt;<i> 	<A HREF="gemini://gemini.conman.org/test/torture/">gemini://gemini.conman.org/test/torture/</A>
+</I>&gt;<i> 
+</I>&gt;<i>   There are currently 19 tests (0001 through 0019) and they only cover
+</I>&gt;<i> resolving links (full URL, full path, relative path, relative path with &quot;..&quot;
+</I>&gt;<i> and &quot;.&quot; components), plus parsing of the MIME type.  Comments welcome,
+</I>&gt;<i> especially with tests that may be unfair or are problematic.
+</I>
+Thanks for this!  I'm happy to report that AV-98 passes with flying
+colours.
+
+I've started a test client which you provide a hostname and it throws
+various requests at that host and checks the response status against its
+expectations.  It's not quite ready for prime time yet, though.
+
+Although, it's already made me realise something that we haven't specced
+any behaviour for at all: how should a server respond to an empty
+request?  i.e. just CRLF.  Is this invalid, such that it should trigger
+a 59 response?  Some servers do this, but others seem to treat it as a
+request for the root document.
+
+-Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000047.html">Client testing (was Re: Text reflow woes (or: I want bullets back!))
+</A></li>
+	<LI>Next message (by thread): <A HREF="000063.html">Client testing (was Re: Text reflow woes (or: I want bullets back!))
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#54">[ date ]</a>
+              <a href="thread.html#54">[ thread ]</a>
+              <a href="subject.html#54">[ subject ]</a>
+              <a href="author.html#54">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

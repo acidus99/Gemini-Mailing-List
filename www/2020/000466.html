@@ -1,0 +1,279 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> An outsider's view of the `gemini://` protocol
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20outsider%27s%20view%20of%20the%20%60gemini%3A//%60%20protocol&In-Reply-To=%3C20200302013918.GD5475%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000461.html">
+   <LINK REL="Next"  HREF="000471.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>An outsider's view of the `gemini://` protocol</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20outsider%27s%20view%20of%20the%20%60gemini%3A//%60%20protocol&In-Reply-To=%3C20200302013918.GD5475%40brevard.conman.org%3E"
+       TITLE="An outsider's view of the `gemini://` protocol">sean at conman.org
+       </A><BR>
+    <I>Mon Mar  2 01:39:18 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000461.html">An outsider's view of the `gemini://` protocol
+</A></li>
+        <LI>Next message (by thread): <A HREF="000471.html">An outsider's view of the `gemini://` protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#466">[ date ]</a>
+              <a href="thread.html#466">[ thread ]</a>
+              <a href="subject.html#466">[ subject ]</a>
+              <a href="author.html#466">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Ciprian Dorin Craciun once stated:
+&gt;<i> 
+</I>&gt;<i> * either it's not enough, given that we've already used 50% of the
+</I>&gt;<i> &quot;generic class of conditions&quot; (i.e. first digits 1 through 6);  soon
+</I>&gt;<i> enough, as the protocol progresses and matures, we'll identify new
+</I>&gt;<i> classes of conditions, and we'll have to start to either introduce a
+</I>&gt;<i> &quot;miscellaneous&quot; category, or use values from other categories,
+</I>&gt;<i> breaking thus the clear hierarchy;
+</I>
+  Before the mailing list, solderpunk and I went back and forth over the
+status codes.  solderpunk was intent on using single digit codes, whereas I
+was pushing for three digit codes.  As I wrote to him back in July of 2019:
+
+&gt;<i>   With a two digit scehem, you have at most 100 error codes (00 through 99),
+</I>&gt;<i> with very clearly delineated classes that makes it easy for a client to act
+</I>&gt;<i> upon just the first digit.
+</I>&gt;<i> 
+</I>&gt;<i>   With your one character scheme (and yes, I'm calling it &quot;one character&quot;
+</I>&gt;<i> and not &quot;one hexidecimal&quot;) the grouping is less clear, and it can *still* be
+</I>&gt;<i> extended out to a total of 94 codes (if you use other characters).  Also,
+</I>&gt;<i> what should happen when a client receives a code of 'a' through 'f'?  Is it
+</I>&gt;<i> only upper case allowed?  Or the lower case version as well?  Because in
+</I>&gt;<i> hexidecimal, 0xF and 0xf are the same value.
+</I>&gt;<i> 
+</I>&gt;<i>   What are you really afraid of?  Expansion?  Gopher gives you two
+</I>&gt;<i> results---the content or nothing.  A bit brutal, but simple.  You can cut
+</I>&gt;<i> this down to just four cases:
+</I>&gt;<i> 
+</I>&gt;<i>         success
+</I>&gt;<i>         transitory error
+</I>&gt;<i>         permanent error
+</I>&gt;<i>         need authorization
+</I>&gt;<i> 
+</I>&gt;<i> but that's still a bit brutal.  Just because you have 100, or 400, error
+</I>&gt;<i> codes doesn't mean they all will get used.  I'm sure the top three codes
+</I>&gt;<i> seen in the wild for HTTP are:
+</I>&gt;<i> 
+</I>&gt;<i>         200     Okay
+</I>&gt;<i>         304     Not modified
+</I>&gt;<i>         404     Not found
+</I>&gt;<i> 
+</I>&gt;<i> with the following codes just enough to show up:
+</I>&gt;<i> 
+</I>&gt;<i>         302     Move temp
+</I>&gt;<i>         301     Move perm
+</I>&gt;<i>         403     Not authorized
+</I>&gt;<i>         500     Internal error
+</I>&gt;<i> 
+</I>&gt;<i> and the rest are rounding errors.  I can't seem to find any evidence to back
+</I>&gt;<i> this up, but that's my gut feeling.  I think a single character response
+</I>&gt;<i> code is just too llmiting and yet, ripe for more abuse than with a two-digit
+</I>&gt;<i> numeric range.
+</I>
+  Also, the use of three digit status codes goes back a long time.  In fact,
+it was first proposed in RFC-360, dated June 24, 1972! [1] And guess what? 
+It was almost a one-to-one mapping of current HTTP status code.  2xx where
+okay, 3xx were different, but I could see the mapping, 4xx were client
+errors and 5xx were server errors.  There were also 1xx, but HTTP/1.1
+defined 1xx status as well.
+
+  And if anything, the fact that no new status classifications have come up
+in 48 years says that your fears of new categories might not be warranted.
+
+&gt;<i> * some conditions don't fall particularly well into clear categories;
+</I>&gt;<i> for example `21 success with end of client certificate session` has to
+</I>&gt;<i> do with TLS transient certificates management (which is `6x`);  
+</I>
+  Fair enough, but solderpunk would have to fix that one.
+
+&gt;<i> in
+</I>&gt;<i> fact this shouldn't even be a status code, but a &quot;signal&quot;, because for
+</I>&gt;<i> example a redirect or other failure could as well require the end of
+</I>&gt;<i> client certificate session;
+</I>
+  Again, fair enough.  I'm sure some of this is speculative anyway, since I
+don't think any servers have actually implemented this feature (I know I
+haven't).
+
+&gt;<i> * another example of &quot;unclear&quot; status codes are `42 CGI error` and `43
+</I>&gt;<i> proxy error`, which are part of the `4x temporary failure` group, but
+</I>&gt;<i> might be in fact (especially in the case of 43, although granted we
+</I>&gt;<i> have 53) permanent errors;  (even `51 not found` can be seen as a
+</I>&gt;<i> temporary error, because perhaps the resource will exist tomorrow;)
+</I>
+  Yes, solderpunk changed from client errors/server errors to
+temporary/permanent errors.  I didn't fight it that much since I can see the
+logic in it.
+
+&gt;<i> * and speaking of proxies, we have `43 temporary proxy error` and `53
+</I>&gt;<i> proxy request refused`, but we have no other proxy related statuses
+</I>&gt;<i> like for example `6y` that states `proxy requires authentication`,
+</I>&gt;<i> etc.;
+</I>
+  I can see the argument for a &quot;AUTHORIZATION FOR PROXY&quot; error, but by the
+same token, what type of certificate? (and even there, I think having three
+different types of certificates is certainly a bit of confusion).  This may
+require some clarification from solderpunk in the mean time.
+
+&gt;<i> So, if we really want to keep things simple why not change this into:
+</I>&gt;<i> 
+</I>&gt;<i> * (we only use one digit to denote success or failure);
+</I>&gt;<i> * `0` (i.e. like in UNIX) means success, here is your document;
+</I>&gt;<i> * `1` (i.e. again like in UNIX) means &quot;undefined failure&quot;, the client
+</I>&gt;<i> MUST display the meta field to the user as plain text;  (please note
+</I>&gt;<i> that this &quot;soft&quot;-forbids the client and server to implement any clever
+</I>&gt;<i> &quot;extensions&quot;;)
+</I>
+  I still like numeric values as they are language agnostic.  I mean, what
+If I get back:
+
+	Bh&#237; teip ann an cl&#225;r a chur i bhfeidhm
+
+Would you even know what language to translate from?
+
+  Yes, most likely this would be English, but I am ornery enough to follow
+the letter of the law if not the spirit.
+
+&gt;<i> * `2` not found / gone;  (i.e. the server is working fine, but what
+</I>&gt;<i> you are searching for does not exist at the moment;  perhaps it
+</I>&gt;<i> existed in the past, perhaps later it will exist;)
+</I>
+  There is a distinction between &quot;gone&quot; and &quot;not found&quot;.  &quot;Gone&quot; means &quot;it
+was once here, but has since been removed, please stop referencing this
+resource&quot; (i.e. &quot;remove it from your bookmarks file&quot;), while &quot;not found&quot;
+means just that---it's not here.
+
+  I mentioned to solderpunk that I wish gopher had a &quot;gone&quot; message (along
+with redirect, which I'll get to below), since there is a good reason to
+mark something as &quot;gone&quot; and not just &quot;not found&quot;.
+
+&gt;<i> * `3` redirect;  neither temporary nor permanent; (because in fact
+</I>&gt;<i> there isn't a clear definition and usage of temporary vs permanent;)
+</I>
+  I think there is:
+
+	* permanent---this resource has permanently moved, and any future
+		reference should use the new location (i.e. update your
+		index or bookmark file!)
+
+	* temporary---this reference is still a valid reference, but the
+		acutual content is, for whatever reason, located there.
+
+  A valid reason for a temorary redirect might be to redirect users to the
+most current resource available, say, a specification.  A base link like:
+
+	<A HREF="gemini://gemini.example.com/foobar-spec">gemini://gemini.example.com/foobar-spec</A>
+
+could in fact do a temporary redirect to
+
+	<A HREF="gemini://gemini.example.com/foobar-spec.1.3.2">gemini://gemini.example.com/foobar-spec.1.3.2</A>
+
+One can always link directly to a specific version, but the current will
+*always* be found at a known location.
+
+  The actions are the same, but the semantics are different.
+
+&gt;<i> &gt; I do fail to see why what appears to me to be a whole lot of work to
+</I>&gt;<i> &gt; implement what you suggest,
+</I>&gt;<i> 
+</I>&gt;<i> Now getting back to my &quot;symbolic&quot; status codes proposal, it's no more
+</I>&gt;<i> work, because currently the code looks like:
+</I>&gt;<i> 
+</I>&gt;<i> ````
+</I>&gt;<i> if (status[0] == '1') {
+</I>&gt;<i>    ...
+</I>&gt;<i> } else if (status[0] == '2') {
+</I>&gt;<i>    ...
+</I>&gt;<i> }
+</I>&gt;<i> ````
+</I>&gt;<i> 
+</I>&gt;<i> Meanwhile my proposal would require one to:
+</I>&gt;<i> ````
+</I>&gt;<i> if (hasprefix (status, &quot;success:&quot;)) {
+</I>&gt;<i>    ...
+</I>&gt;<i> } else if (hasprefix (status, &quot;redirect:&quot;)) {
+</I>&gt;<i>    ...
+</I>&gt;<i> }
+</I>&gt;<i> ````
+</I>&gt;<i> 
+</I>&gt;<i> Granted now one has to implement, or find already implemented the
+</I>&gt;<i> `hasprefix`, but all languages have it, and even in C one can
+</I>&gt;<i> implement it as `strncmp (status, expected, strlen (expected)) == 0`.
+</I>
+  Nice, but you still need a function to check the second (and possibly)
+third fields.  There's strtok() (a standard C function) but that can't be
+used in multithreaded applications ... 
+
+&gt;<i> &gt; , especially considering that most servers
+</I>&gt;<i> &gt; will invariably choose to implement their own custom handlers for
+</I>&gt;<i> &gt; status/error codes, much like one does in Apache so the server operator
+</I>&gt;<i> &gt; themselves gets to choose what content to deliver as a result of a 404.
+</I>&gt;<i> 
+</I>&gt;<i> No this proliferation of &quot;status codes&quot; won't happen because the
+</I>&gt;<i> protocol won't allow for it.  (Although even today with numeric status
+</I>&gt;<i> codes people can just invent their own, unless we clearly define
+</I>&gt;<i> conditions for all 100 codes, and even then people can disregard their
+</I>&gt;<i> definitions...)
+</I>
+  That can be done now.  I can program a web server to return a status of
+700.  Now what clients will do in that case ... hmm ... okay, a quick test
+revealed the following:
+
+	Firefox		- treated a status code of 700 as a 200 and
+			displayed the page
+
+	Safari		- treated a status code of 700 as a 200 and 
+			displayed the page
+
+	Lynx		- warned of the nonstandard status code, and then
+			proceeded to treat 700 as 200 and displayed the page.
+
+  -spc
+
+[1]	There is also RFC-354, an earlier RFC but one dated two weeks after
+	RFC-360, that also uses three digit status codes similar to RFC-360.
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000461.html">An outsider's view of the `gemini://` protocol
+</A></li>
+	<LI>Next message (by thread): <A HREF="000471.html">An outsider's view of the `gemini://` protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#466">[ date ]</a>
+              <a href="thread.html#466">[ thread ]</a>
+              <a href="subject.html#466">[ subject ]</a>
+              <a href="author.html#466">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

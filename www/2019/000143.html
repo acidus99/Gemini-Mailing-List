@@ -1,0 +1,129 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> IPv6 and gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IPv6%20and%20gemini&In-Reply-To=%3C20190913084512.GD18107%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000142.html">
+   <LINK REL="Next"  HREF="000144.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>IPv6 and gemini</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IPv6%20and%20gemini&In-Reply-To=%3C20190913084512.GD18107%40brevard.conman.org%3E"
+       TITLE="IPv6 and gemini">sean at conman.org
+       </A><BR>
+    <I>Fri Sep 13 09:45:12 BST 2019</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000142.html">IPv6 and gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="000144.html">IPv6 and gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#143">[ date ]</a>
+              <a href="thread.html#143">[ thread ]</a>
+              <a href="subject.html#143">[ subject ]</a>
+              <a href="author.html#143">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great plugd once stated:
+&gt;<i> Hi all,
+</I>&gt;<i> 
+</I>&gt;<i> I've been having intermittent connection issues with some of the gemini
+</I>&gt;<i> servers.  While this is of course to be expected at this point, it
+</I>&gt;<i> seemed odd that, for instance, <A HREF="gemini://zaibatsu.circumlunar.space">gemini://zaibatsu.circumlunar.space</A>
+</I>&gt;<i> seemed to be offline more often than not.  I finally got around to
+</I>&gt;<i> looking at this more carefully, and noticed that using gnutls-cli to
+</I>&gt;<i> open a connection to the IPv4 address always succeeds, whereas
+</I>&gt;<i> connections to the IPv6 address that the resolver returns do not.
+</I>&gt;<i> Since the network that I'm using supports IPv6 and falls back to IPv4
+</I>&gt;<i> when necessary, this was causing a problem.
+</I>&gt;<i> 
+</I>&gt;<i> Furthermore, because of the requirement that clients transmit the full
+</I>&gt;<i> URL to the server, it's not trivial to get around this by just directing
+</I>&gt;<i> the client to the IPv4 address: the server probably won't recognise the
+</I>&gt;<i> URL and will respond with an error code.
+</I>
+  Worse than that:
+
+[spc]lucy:~/projects/gemini/Lua&gt;lua client.lua <A HREF="gemini://127.0.0.1/">gemini://127.0.0.1/</A>
+ios:write() = name `127.0.0.1' not present in server certificate
+
+  Of course, an option could be added to the client to overwrite the
+hostname from the URL, so for example:
+
+GenericUnixPrompt&gt; geminiclient -h example.com <A HREF="gemini://127.0.0.1/">gemini://127.0.0.1/</A>
+
+so it would use the IP address to connect, but instead of sending
+'127.0.0.1' as the host, it would use the one passed in as an option.  That
+might be easier said than done though [1].
+
+&gt;<i> There seem to be four options:
+</I>
+  [ snip ]
+
+&gt;<i> 4. Have servers ensure that if they have an AAAA record they also listen
+</I>&gt;<i> for IPv6 gemini connections.
+</I>&gt;<i>   - Pros: future-proof, no client-side changes necessary.
+</I>&gt;<i>   - Con: some additional work necessary on the server side.
+</I>
+  It depends.  On GLV-1.12556, all that takes is to use an address of &quot;::&quot;
+to listen on all IPv4 and IPv6 interfaces, and that should work with any
+modern IP stack.
+
+  There is also a fifth option:
+
+	5. Have clients attempt to connect to both addresses and use the one
+	that connects first.
+	- Pro: should always work
+	- Con: complicates the client
+
+&gt;<i> Obviously 4 is my favourite because it's less (no) work for me. :)
+</I>
+  I like 4 as well.
+
+  -spc
+
+[1]	Looking at my own very simplistic client and yeah, I would have to
+	use a lower level API call to do that.  Ick.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000142.html">IPv6 and gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="000144.html">IPv6 and gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#143">[ date ]</a>
+              <a href="thread.html#143">[ thread ]</a>
+              <a href="subject.html#143">[ subject ]</a>
+              <a href="author.html#143">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

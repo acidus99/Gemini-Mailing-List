@@ -1,0 +1,241 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] Using a gitlab
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Using%20a%20gitlab&In-Reply-To=%3CCAFwUW92xn9Wh8DUxoOTR0vcopnjVuLRdkFTyVSH2NVUJ9xc5og%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006111.html">
+   <LINK REL="Next"  HREF="006116.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] Using a gitlab</H1>
+    <B>Mansfield</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Using%20a%20gitlab&In-Reply-To=%3CCAFwUW92xn9Wh8DUxoOTR0vcopnjVuLRdkFTyVSH2NVUJ9xc5og%40mail.gmail.com%3E"
+       TITLE="[spec] Using a gitlab">mansfield at ondollo.com
+       </A><BR>
+    <I>Mon Mar 15 03:55:00 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006111.html">[spec] Using a gitlab
+</A></li>
+        <LI>Next message (by thread): <A HREF="006116.html">[spec] Using a gitlab
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6112">[ date ]</a>
+              <a href="thread.html#6112">[ thread ]</a>
+              <a href="subject.html#6112">[ subject ]</a>
+              <a href="author.html#6112">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Mar 14, 2021 at 8:10 PM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+
+&gt;<i> It was thus said that the Great Mansfield once stated:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I *think* I implemented/tested/tried the IRI thing and I'm thinking that
+</I>&gt;<i> &gt; I'm not in the group-size-two that you referred to.
+</I>&gt;<i>
+</I>&gt;<i>   First off, I want to thank you if you have implemented IDNs (no matter
+</I>&gt;<i> how
+</I>&gt;<i> good or bad---just the fact that you did is wonderful).  Second, you are
+</I>&gt;<i> right, you are the third (if I recall correctly, not many people mentioned
+</I>&gt;<i> it) to do so.
+</I>&gt;<i>
+</I>
+You're welcome!
+
+I kinda wish we or I could be more organized around what experiments
+everyone is running so that we could swarm several implementations on any
+that others liked or disliked. IMO that could be an advantage of something
+like gitlab - label issues as 'experiments' and look for
+implementations/tests/urls/etc on the issues. Maybe I'll throw up some of
+my experiments as issues in gitlab...
+
+FWIW - I *really* like the &quot;implement your idea in code and then let's
+talk&quot; approach, since Gemini is soo stinking simple to get a foot in the
+door on.
+
+&gt;<i> The sentence I just wrote is *not* my point - I'm totally cool with the
+</I>&gt;<i> &gt; above (what I and you and others wrote/expressed) - my point is... I was
+</I>&gt;<i> &gt; thinking...
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; If I *thought* I tried out the IRI thing, but wanted to check, where
+</I>&gt;<i> would
+</I>&gt;<i> &gt; I go? What would I test? How would I 'certify'?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; If I wanted to be a part of the discussion in a
+</I>&gt;<i> &gt; trying-to-implement-this-new-experiment way, what should I do?
+</I>&gt;<i>
+</I>&gt;<i>   A great question, and fortunately, there is an answer, at least for
+</I>&gt;<i> clients:  try fetching the following IRI:
+</I>&gt;<i>
+</I>&gt;<i>         <A HREF="gemini://caf&#233;.mozz.us/files/">gemini://caf&#233;.mozz.us/files/</A> &lt;<A HREF="http://xn--caf-dma.mozz.us/files/">http://xn--caf-dma.mozz.us/files/</A>&gt;
+</I>&gt;<i> &#119995;&#119990;&#120003;&#119992;&#120014;.txt
+</I>&gt;<i>
+</I>
+Seemed to work fine. I ran my client from the CLI with that host/path as
+the destination and it seemed to work. Then I used the in-client method of
+editing/setting the destination and pasted that host/path and it returned
+the same result - not that *going* there would have been any different, but
+that I wanted to make sure that editing the location in the client
+supported what the CLI had supported.
+
+Thanks to mozz.us for providing that - it felt good to run a test that
+wasn't something I had contrived!
+
+
+&gt;<i> Not my site, but the size of the other person who bothered to experiment
+</I>&gt;<i> with this stuff.  And as for details, it would be nice to know:
+</I>&gt;<i>
+</I>&gt;<i>         operating system
+</I>&gt;<i>         implementation language
+</I>&gt;<i>         possible libraries in use
+</I>&gt;<i>
+</I>&gt;<i> and if it works, what you had to do in order to get it to work.
+</I>
+
+
+# OS
+Linux... I can try it on a windows machine later, but I'm guessing it might
+work the same depending on which windows cli I use. (Using the wrong cli in
+windows, it'll probably fail... but who knows until it's tried?)
+
+# Lang
+Golang
+
+# Libraries
+... net and net/url of course... and golang.org/x/net/idna ... and... that
+*might* be it? It's been a while since I wrote that code so my memory is
+fuzzy. I could go digging more if it mattered.
+
+# What I had to do
+...not much if I recall. It involves
+`idna.Lookup.ToASCII(dstURL.Hostname())` (after a check on the hostname not
+being an IP addr) and then use the resulting hostname in the Dial call. As
+for the path, I *think* all I did was ref EscapedPath kinda like this:
+<A HREF="https://play.golang.org/p/Uo9XKe4JQLZ">https://play.golang.org/p/Uo9XKe4JQLZ</A> (click 'run' to see the escaped path).
+
+Again, there could be more in the code that I'm not pulling out in the
+quick glance back over what I wrote a while ago.
+
+... you know... I'm starting to remember that there was some really
+annoying corner in the implementation... but my fuzzy memory says that it
+was with how I had organized my code - not with the key implementation
+details.
+
+
+
+&gt;<i> &gt; I'm guessing that maybe an email to the list or a comment on a gitlab
+</I>&gt;<i> issue
+</I>&gt;<i> &gt; to the effect of: &quot;I think this is what it means to test out the IRI
+</I>&gt;<i> thing.
+</I>&gt;<i> &gt; I think I did it, you can try out my implementation like this...&quot;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; That feels... good to me...
+</I>&gt;<i>
+</I>&gt;<i>   There is an issue with how I think it should work:
+</I>&gt;<i>
+</I>&gt;<i>         <A HREF="https://gitlab.com/gemini-specification/protocol/-/issues/1">https://gitlab.com/gemini-specification/protocol/-/issues/1</A>
+</I>&gt;<i>
+</I>
+Ahh... cool. The URL from above is in that ticket.
+
+Humm... so I'm not sure I'm following the discussion. Maybe some of it
+references the fact that I used the idna lib on the hostname instead of
+something in the golang std lib?
+
+Interesting points about the certs. I'll have to go check what happened in
+my server cert setup with the emoji subdomain I used in some testing...
+
+Also - for the list of should's and should not's that that issue
+provides... now I'm curious to find out if I'm fully compliant. I'm
+thinking that my server and client *are*, but... maybe there's some sharp
+corner I'm not great with. My thoughts are drawn back to wondering what
+test methods could be used to 'certify compliance' with the spec. Seems
+like that URL is a great start... maybe the only other test is &quot;that a
+server correctly respond when the domain and some part of the path contains
+unicode&quot;... is that really all this boils down to?? I feel like I'm missing
+something. Maybe I'll add some specific questions in that gitlab issue so
+that I can make sure I'm on the right page.
+
+
+&gt;<i> but I've been told that no, what I wrote is *wrong*, but as of yet, no one
+</I>&gt;<i> has given a concrete approach for clients to follow to get this to work.
+</I>&gt;<i> That's what pisses me off about this---I wrote what worked for me, but it's
+</I>&gt;<i> wrong [1], but no one has told me how to go about doing it right, and I'm
+</I>&gt;<i> very close to closing the ticket with prejudice [2], with the only way to
+</I>&gt;<i> get IRIs back on the table is to convince Solderpunk, the BDFL (I'm only
+</I>&gt;<i> the
+</I>&gt;<i> BDFLA, the Benevolent Dictator For Life's Assistant).  So the more concrete
+</I>&gt;<i> information I get for OR against it, the better.
+</I>&gt;<i>
+</I>&gt;<i>   -spc
+</I>&gt;<i>
+</I>&gt;<i> [1]     Mostly about resolving IDNs.
+</I>&gt;<i>
+</I>
+Well... specifically for resolving IDNs... my memory (again, fuzzy as it
+is) is that I wasn't able to Dial a tcp conn without punycoding the
+hostname. Again, the implementation detail for that is that it's a single
+call to a library in golang. (Now, some might want to point out that the
+'x' in the above URL for the idna library means 'experimental'... but..
+that moniker, IMO, doesn't hold across all the golang libs in 'x'... and
+the code is there to look at if any feel it's lacking.)
+
+As for setting up DNS using the emoji subdomain in my testing... my
+registrar converted it to punycode without consulting me ;-) ... and I took
+that to mean that that was the way it had to be done.
+
+
+[2]     An American legal term meaning---when a legal case is dismissed with
+&gt;<i>         prejudice, the case is closed, and there is NO means of appeal.
+</I>&gt;<i>         It's not used often, and when it does happen, it means the judge
+</I>&gt;<i> was
+</I>&gt;<i>         royally pissed off.
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210314/83aae93f/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210314/83aae93f/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006111.html">[spec] Using a gitlab
+</A></li>
+	<LI>Next message (by thread): <A HREF="006116.html">[spec] Using a gitlab
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6112">[ date ]</a>
+              <a href="thread.html#6112">[ thread ]</a>
+              <a href="subject.html#6112">[ subject ]</a>
+              <a href="author.html#6112">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

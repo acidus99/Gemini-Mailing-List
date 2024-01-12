@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> TOFU recommendations for Gemini clients
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20TOFU%20recommendations%20for%20Gemini%20clients&In-Reply-To=%3CC61W3H1XWNZW.20ID3FRCKEQ72%40homura%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002824.html">
+   <LINK REL="Next"  HREF="002772.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>TOFU recommendations for Gemini clients</H1>
+    <B>Drew DeVault</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20TOFU%20recommendations%20for%20Gemini%20clients&In-Reply-To=%3CC61W3H1XWNZW.20ID3FRCKEQ72%40homura%3E"
+       TITLE="TOFU recommendations for Gemini clients">sir at cmpwn.com
+       </A><BR>
+    <I>Thu Oct  1 22:58:24 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002824.html">TOFU recommendations for Gemini clients
+</A></li>
+        <LI>Next message (by thread): <A HREF="002772.html">[ANN] New gtk client, with colors
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2825">[ date ]</a>
+              <a href="thread.html#2825">[ thread ]</a>
+              <a href="subject.html#2825">[ subject ]</a>
+              <a href="author.html#2825">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu Oct 1, 2020 at 5:55 PM EDT,  wrote:
+&gt;<i> - I don't specify a file/storage format
+</I>
+Yeah, it's not necessary for us to standardize, but for what it's worth
+at least one other client has implemented my known_hosts format and I
+moved it to a more general location (~/.local/share/gemini), so we have
+a chance to establish a software agnostic trust store if we so desire.
+
+&gt;<i> - The cert fingerprint is generated from just the SPKI section of the
+</I>&gt;<i> cert, not the entire thing. See the post for rationale.
+</I>
+Aye, your rationale is good. Like I mentioned, the reason I hash the
+whole thing is to match the output of openssl x509 -sha512 -fingerprint,
+so that it's easier to independently verify the fingerprint.
+
+The ability for the server operator to replace the cert with a fresh one
+with the same PK and have the TOFU entry remain trusted is interesting,
+but seems fraught with some risk. In any case, I'm of the opinion that
+operators should never directly handle certificate maintenance in a TOFU
+system.
+
+&gt;<i> - The port is also stored (host vs hostname) so that different ports can
+</I>&gt;<i> use different certs
+</I>
+Good call, I'll think about this.
+
+&gt;<i> - I mention SHA-256, but that's just an implementation detail
+</I>
+I just went with SHA-256 because I don't expect these files to be
+hand-edited often and the hash, while longer and more cumbersome, is
+more likely to be useful for longer.
+
+&gt;<i> I also noticed that your flow doesn't seem to update the host data if
+</I>&gt;<i> the cert has expired, it just allows the request to continue. I assume
+</I>&gt;<i> that's an error? Or maybe I'm misreading.
+</I>
+The first step is to validate the certificate independently of the trust
+store. If it has expired, it would fail this step. Other things checked
+here include the valid hostnames, desired hashing algorithms, or
+anything else you find it useful to validate. Technically we don't even
+need to store the expiration.
+
+So yeah, the known hosts data does not get updated when the cert
+expires, but the expired cert would not be trusted anyway.
+
+&gt;<i> Would be happy to hear about what you think of my recommendations! I
+</I>&gt;<i> hope they're useful, I've been trying to spread them on Gemini since I
+</I>&gt;<i> wrote them.
+</I>
+Thanks for sharing! I'll add a link to my article.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002824.html">TOFU recommendations for Gemini clients
+</A></li>
+	<LI>Next message (by thread): <A HREF="002772.html">[ANN] New gtk client, with colors
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2825">[ date ]</a>
+              <a href="thread.html#2825">[ thread ]</a>
+              <a href="subject.html#2825">[ subject ]</a>
+              <a href="author.html#2825">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

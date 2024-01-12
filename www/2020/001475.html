@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3C20200609231403.GZ23998%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001439.html">
+   <LINK REL="Next"  HREF="001477.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3C20200609231403.GZ23998%40brevard.conman.org%3E"
+       TITLE="CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)">sean at conman.org
+       </A><BR>
+    <I>Wed Jun 10 00:14:04 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001439.html">[ANN] Gemini browser for iOS
+</A></li>
+        <LI>Next message (by thread): <A HREF="001477.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1475">[ date ]</a>
+              <a href="thread.html#1475">[ thread ]</a>
+              <a href="subject.html#1475">[ subject ]</a>
+              <a href="author.html#1475">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great solderpunk once stated:
+&gt;<i> 
+</I>&gt;<i> (following Sean's lead for now, although I need to bring up some points
+</I>&gt;<i> for discussion about this in the near future).
+</I>
+  So I have two CGI scripts set up.  Both are in a &quot;protected&quot; area of the
+server (on my development machine) that requires a client certificate.  One
+receives *just* the RFC-3875 defined variables:
+
+AUTH_TYPE=Certificate
+GEMINI_DOCUMENT_ROOT=/home/spc/projects/gemini/non-checkin/cgi-bin
+GEMINI_URL=<A HREF="gemini://lucy.roswell.area51/cgi-bin/beta/foobar?one=1&amp;two=2">gemini://lucy.roswell.area51/cgi-bin/beta/foobar?one=1&amp;two=2</A>
+GEMINI_URL_PATH=/cgi-bin/beta/foobar
+PATH_INFO=/foobar
+PATH_TRANSLATED=/home/spc/projects/gemini/non-checkin/cgi-bin/foobar
+QUERY_STRING=one=1&amp;two=2
+REMOTE_ADDR=::ffff:192.168.1.10
+REMOTE_HOST=::ffff:192.168.1.10
+REMOTE_USER=Sean Conner
+REQUEST_METHOD=
+SCRIPT_NAME=/home/spc/projects/gemini/non-checkin/cgi-bin/./beta
+SERVER_NAME=lucy.roswell.area51
+SERVER_PORT=1965
+SERVER_PROTOCOL=GEMINI
+SERVER_SOFTWARE=GLV-1.12556/1
+
+  The AUTH_TYPE is &quot;Certificate&quot;.  I choose that form because I'm following
+the form of HTTP (RFC-2617, updated by RFC-7616) which defines &quot;Basic&quot; and
+&quot;Digest&quot;.  I know of another Gemini server that sets this to &quot;CERTIFICATE&quot;.
+
+  The REMOTE_USER is taken from the Common Name of the certificate subject. 
+Right now, if a common name is not supplied, it won't be set (quirk of the
+Lua language---I should probably do something about that).  I suppose as a
+backup the certificate subject could be used, or perhaps the empty string
+(allowed by the RFC---I just checked).
+
+  The rest of the variables I've discussed elsewhere.
+
+  So here's what happens when I enable TLS variables to be set (it's an
+option for GLV-1.12556):
+
+AUTH_TYPE=Certificate
+GEMINI_DOCUMENT_ROOT=/home/spc/projects/gemini/non-checkin/cgi-bin
+GEMINI_URL=<A HREF="gemini://lucy.roswell.area51/cgi-bin/alpha/foobar?one=1&amp;two=2">gemini://lucy.roswell.area51/cgi-bin/alpha/foobar?one=1&amp;two=2</A>
+GEMINI_URL_PATH=/cgi-bin/alpha/foobar
+PATH_INFO=/foobar
+PATH_TRANSLATED=/home/spc/projects/gemini/non-checkin/cgi-bin/foobar
+QUERY_STRING=one=1&amp;two=2
+REMOTE_ADDR=::ffff:192.168.1.10
+REMOTE_HOST=::ffff:192.168.1.10
+REMOTE_USER=Sean Conner
+REQUEST_METHOD=
+SCRIPT_NAME=/home/spc/projects/gemini/non-checkin/cgi-bin/./alpha
+SERVER_NAME=lucy.roswell.area51
+SERVER_PORT=1965
+SERVER_PROTOCOL=GEMINI
+SERVER_SOFTWARE=GLV-1.12556/1
+TLS_CIPHER=ECDHE-RSA-CHACHA20-POLY1305
+TLS_CLIENT_HASH=SHA256:0eab5867fcb5b30046120e4c29562e31b88c51b167b091aee4b4e66221645a20
+TLS_CLIENT_ISSUER=/C=US/ST=FL/O=Conman Laboratories/OU=Security Division/CN=Conman Laboratories CA/emailAddress=<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">ca at conman.org</A>
+TLS_CLIENT_ISSUER_C=US
+TLS_CLIENT_ISSUER_CN=Conman Laboratories CA
+TLS_CLIENT_ISSUER_O=Conman Laboratories
+TLS_CLIENT_ISSUER_OU=Security Division
+TLS_CLIENT_ISSUER_ST=FL
+TLS_CLIENT_ISSUER_emailAddress=<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">ca at conman.org</A>
+TLS_CLIENT_NOT_AFTER=2020-06-18T23:54:56Z
+TLS_CLIENT_NOT_BEFORE=2019-06-19T23:54:56Z
+TLS_CLIENT_REMAIN=9
+TLS_CLIENT_SUBJECT=/C=US/ST=FL/L=Boca Raton/CN=Sean Conner/emailAddress=<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>
+TLS_CLIENT_SUBJECT_C=US
+TLS_CLIENT_SUBJECT_CN=Sean Conner
+TLS_CLIENT_SUBJECT_L=Boca Raton
+TLS_CLIENT_SUBJECT_ST=FL
+TLS_CLIENT_SUBJECT_emailAddress=<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>
+TLS_VERSION=TLSv1.2
+
+  I modeled this behavior from Apache.  Apache uses the prefix &quot;SSL_&quot; for
+these, I decided to change them to &quot;TLS_&quot;.  I included most of what Apache
+sends, but decided against the following fields:
+
+	SSL_CIPHER_ALGKEYSIZE		no way to get this via libtls
+	SSL_CIPHER_EXPORT			&quot;
+	SSL_CIPHER_USERKEYSIZE			&quot;
+	SSL_CLIENT_A_KEY			&quot;
+	SSL_CLIENT_A_SIG			&quot;
+	SSL_CLIENT_CERT			a copy of the client certificate
+	SSL_CLIENT_CERT_CHAIN_n		one (of n) certificates in the
+					client certificate chain
+	SSL_CLIENT_M_SERIAL		no way to get this via libtls
+	SSL_CLIENT_M_VERSION			&quot;
+	SSL_COMPRESS_METHOD			&quot;
+	SSL_SECURE_RENEG			&quot;
+	SSL_SERVER_A_KEY			&quot;
+	SSL_SERVER_A_SIG			&quot;
+	SSL_SERVER_CERT			a copy of the server certificate
+	SSL_SERVER_M_SERIAL		no way to get this via libtls
+	SSL_SERVER_M_VERSION			&quot;
+	SSL_SESSION_RESUMED			&quot;
+	SSL_TLS_SNI			covered by SERVER_NAME
+	SSL_VERSION_INTERFACE		didn't care
+	SSL_VERSION_LIBRARY		didn't care
+
+  I copied what I thought was most important, dropped what I didn't
+understand nor cared for, and that's that.  Certainly most of what I suspect
+Gemini will be used for can probably be covered with just AUTH_TYPE and
+REMOTE_USER, which is why I made the TLS_ variables optional.
+
+  This also applies to my SCGI implementation, as they both share the same
+code to generate the variables.  I will not be upset if the TLS_ variables
+are deemed &quot;off limits&quot; and are not to be set at all.  I just added them as
+a point of discussion.
+
+  -spc
+
+  
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001439.html">[ANN] Gemini browser for iOS
+</A></li>
+	<LI>Next message (by thread): <A HREF="001477.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1475">[ date ]</a>
+              <a href="thread.html#1475">[ thread ]</a>
+              <a href="subject.html#1475">[ subject ]</a>
+              <a href="author.html#1475">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

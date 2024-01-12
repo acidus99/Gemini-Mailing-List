@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C739591427.21203.1579383267196%40ichabod.co-bxl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000323.html">
+   <LINK REL="Next"  HREF="000387.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>Brian Evans</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C739591427.21203.1579383267196%40ichabod.co-bxl%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">b__m__e at mailfence.com
+       </A><BR>
+    <I>Sat Jan 18 21:34:27 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000323.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000387.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#380">[ date ]</a>
+              <a href="thread.html#380">[ thread ]</a>
+              <a href="subject.html#380">[ subject ]</a>
+              <a href="author.html#380">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Aaron Janse writes:
+&gt;<i> Hmmm. It does seem, though, that *allowing* ANSI colors would require
+</I>&gt;<i> non-terminal clients to strip ANSI colors, which would be a PITA,
+</I>&gt;<i> expecially considering that ANSI is a hot mess (I built an ANSI parser
+</I>&gt;<i> a while ago [1])
+</I>
+Currently Bombadillo has a few different modes. The normal mode removes 
+ansi escape codes. As I am parsing a document if I read an `\033` character I 
+just toggle an escape code boolean and then consume until I read a A-Za-z
+character (and consume that char as well). It works very quickly and handles
+removing them quite well. I do the same thing for the color mode for any
+escape codes that do not end in `m`. That said, it may not work as well for
+people not parsing by writing characters into a buffer char by char.
+
+I would also argue that it would _not_ require clients to strip them. There are
+a few options:
+
+1. Decide, rightly in my opinion, that if a content creator uses escape codes
+     they are taking the chance that the codes themselves will be displayed to
+     the eventual viewer depending on the client.
+2. Do a simple find and replace on the whole document for '\033' and replace
+    it with &quot;ESC&quot;. While this will still leave the codes displaying to the viewer
+    they will not actually render, thus you do not need to worry about line
+     movement, screen clears, etc.
+
+
+--&#160;
+Sent with <A HREF="https://mailfence.com">https://mailfence.com</A>
+Secure and private email
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000323.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000387.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#380">[ date ]</a>
+              <a href="thread.html#380">[ thread ]</a>
+              <a href="subject.html#380">[ subject ]</a>
+              <a href="author.html#380">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

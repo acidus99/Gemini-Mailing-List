@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A proposed scheme for parsing preformatted alt text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C15D1C9A9-4F92-4B4C-9C57-21B28E405C19%40ngalt.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002659.html">
+   <LINK REL="Next"  HREF="002663.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A proposed scheme for parsing preformatted alt text</H1>
+    <B>Nathan Galt</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C15D1C9A9-4F92-4B4C-9C57-21B28E405C19%40ngalt.com%3E"
+       TITLE="A proposed scheme for parsing preformatted alt text">mailinglists at ngalt.com
+       </A><BR>
+    <I>Fri Sep 11 03:29:53 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002659.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+        <LI>Next message (by thread): <A HREF="002663.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2662">[ date ]</a>
+              <a href="thread.html#2662">[ thread ]</a>
+              <a href="subject.html#2662">[ subject ]</a>
+              <a href="author.html#2662">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+&gt;<i> On Sep 10, 2020, at 5:16 PM, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">easeout at tilde.team</A> wrote:
+</I>&gt;<i> 
+</I>&gt;<i> On Thu, Sep 10, 2020 at 09:55:34AM -0600, Alex // nytpu wrote:
+</I>&gt;&gt;&gt;<i> I strongly recommend against this. The W3C has been trying to get HTML
+</I>&gt;&gt;&gt;<i> authors and browser makers to _only_ display, in tooltips, text in
+</I>&gt;&gt;&gt;<i> `title` attributes.  Previously, HTML authors would write `alt`
+</I>&gt;&gt;&gt;<i> attribute values intending them to be read by sighted HTML readers who
+</I>&gt;&gt;&gt;<i> can already see the image.
+</I>&gt;&gt;<i> I strongly agree. While I don't view the W3C's recommendations as the
+</I>&gt;&gt;<i> gold standard of things gemini should look to emulate (EME anyone?), I
+</I>&gt;&gt;<i> agree that if we make the alt text easily visible it will no longer be
+</I>&gt;&gt;<i> accessibility text and will turn into a miscellaneous-purpose field.
+</I>&gt;<i> 
+</I>&gt;<i> Great points. My main goal is to address the fact that the spec
+</I>&gt;<i> underdefines the alt text field. I want it to decide on one use such
+</I>&gt;<i> that clients could depend on it always being suitable for that use.
+</I>&gt;<i> 
+</I>&gt;<i> Thanks for pointing out that what we think of as &quot;alt text&quot; in HTML is
+</I>&gt;<i> not the same thing as the alternative representation used by screen
+</I>&gt;<i> readers. In that light, I don't want Gemini's preformat alt text to be
+</I>&gt;<i> machine-readable, nor do I want it to be an HTML alt text style tooltip
+</I>&gt;<i> or caption.
+</I>&gt;<i> 
+</I>&gt;<i> I think it should behave like the &quot;title&quot; attribute. I want Gemini to
+</I>&gt;<i> offer accessibility affordances where the nature of plain text does not
+</I>&gt;<i> already provide them, and this seems like the right use for that. I
+</I>&gt;<i> think it would also be suitable to change the name from &quot;alt text&quot; to
+</I>&gt;<i> something like &quot;accessibile description&#8221;.
+</I>
+I think you&#8217;ve got the terminology backwards. In HTML, `alt` is for people who can&#8217;t see the image (didn&#8217;t download it, eyes don&#8217;t work right, etc.). In that light, renaming it to &#8220;accessible description&#8221; changes nothing, and &#8220;it should behave like the &#8217;title&#8217; attribute&#8221; means, as far as I can tell, &#8220;it should be accessory information for people who can already see the image&#8221;, which is not even _trying_ to be helpful for people who can&#8217;t see the image.
+
+Let me show an example where the contents of `alt` and `title` differ wildly:
+
+&lt;img src='conned-eventually.jpeg' alt='Chio telling Link &#8220;Ya know, if you keep doing everything everyone asks of you without question, you&#8217;re gonna get conned eventually&#8230;&#8221;' title='Little does Chio know I&#8217;ve already met Purah.'&gt;
+
+The alt text describes the image (a screenshot of me playing The Legend of Zelda: Breath of the Wild).
+
+The title text is a joke, hidden behind a tooltip in most browsers, that should make anyone who&#8217;s played BotW snicker briefly. (Purah treats Link as an errand-boy for a good portion of the game.)
+
+&gt;<i> 
+</I>&gt;&gt;&gt;<i> (You might be thinking &#8220;well, what about that Markdown meme where
+</I>&gt;&gt;&gt;<i> people write &#8216;```javascript&#8217; to start off a JavaScript code block, with
+</I>&gt;&gt;&gt;<i> the idea that a syntax highlighter will read it and colorize the
+</I>&gt;&gt;&gt;<i> output?&#8221;
+</I>&gt;&gt;<i> The original point of suggesting that it be displayed for all users was
+</I>&gt;&gt;<i> to discourage turning text intended for humans into text intended for
+</I>&gt;&gt;<i> machines anyways, but I believe an alternate solution other than
+</I>&gt;&gt;<i> displaying it for everybody would still be preferable.
+</I>&gt;<i> 
+</I>&gt;<i> Yep, that is what I meant, to drop machine-readability in favor of human
+</I>&gt;<i> readability.
+</I>&gt;<i> 
+</I>&gt;&gt;<i> Rewriting that portion of the spec to emphasize that it is not to be
+</I>&gt;&gt;<i> parsed in any way other than as natural language?  Maybe say that a
+</I>&gt;&gt;<i> client *should be able to* completely replace the preformatted block
+</I>&gt;&gt;<i> with the contents of the alt text without the document losing
+</I>&gt;&gt;<i> significant meaning? That would work for ascii art and short code
+</I>&gt;&gt;<i> snippets, but it might not be doable for longer code blocks.
+</I>&gt;<i> 
+</I>&gt;<i> An accessible description for a long code block seems like a non-goal,
+</I>&gt;<i> though, because when code is text, I imagine that makes it accessible to
+</I>&gt;<i> a screen reader.
+</I>
+I have a strong prior that most screen readers won&#8217;t read code text aloud in ways that would make sense to a (blind) programmer who&#8217;s familiar with that sort of code. For example, I would expect that most screen readers won&#8217;t read parentheses and single/double quotation marks out loud, and those sorts of punctuation marks tend to be superlatively important in roughly all programming languages.
+
+And then there are blind non-programmers who might stumble across a bit of code, or blind programmers who don&#8217;t understand _that_ kind of code and would appreciate some short alternative text explaining what it does (this gives them a better idea of whether they should tough it out and listen to it all or just skip it).
+
+&gt;<i> When considering these details it is helping me to draw a clear line
+</I>&gt;<i> between an accessible content description and a caption. I think we want
+</I>&gt;<i> the former, not the latter.
+</I>
+For what it&#8217;s worth, I&#8217;m pro-alt-text. Tightly-bound captions might also be nice (I&#8217;d use them if they were in the spec), but they&#8217;re much, _much_ less important.
+
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002659.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+	<LI>Next message (by thread): <A HREF="002663.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2662">[ date ]</a>
+              <a href="thread.html#2662">[ thread ]</a>
+              <a href="subject.html#2662">[ subject ]</a>
+              <a href="author.html#2662">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

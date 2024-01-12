@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Real world data on TLS power consumption on mobile devices
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Real%20world%20data%20on%20TLS%20power%20consumption%20on%20mobile%20devices&In-Reply-To=%3C20200626133309.GC4156%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002002.html">
+   <LINK REL="Next"  HREF="001941.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Real world data on TLS power consumption on mobile devices</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Real%20world%20data%20on%20TLS%20power%20consumption%20on%20mobile%20devices&In-Reply-To=%3C20200626133309.GC4156%40SDF.ORG%3E"
+       TITLE="Real world data on TLS power consumption on mobile devices">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Fri Jun 26 14:33:09 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002002.html">SVG Bob
+</A></li>
+        <LI>Next message (by thread): <A HREF="001941.html">Real world data on TLS power consumption on mobile devices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1930">[ date ]</a>
+              <a href="thread.html#1930">[ thread ]</a>
+              <a href="subject.html#1930">[ subject ]</a>
+              <a href="author.html#1930">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>For those interested:
+
+<A HREF="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6806263/">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6806263/</A>
+
+A quick summary, focussing on stuff relevant for TLS 1.3 or TLS 1.2
+limited to TLS 1.3 ciphersuites: on tested Samsung and Xioami phones,
+ChaCha20-Poly1305 is both faster and consumes less battery than AES in
+GCM mode - and it's not a small difference, either.
+
+This will not necessarily generalise to PCs with modern Intel CPUs in
+them, which can have dedicated hardware instructions for AES.  But on
+phones, tablets, RaspberryPi's etc. it is very likely the case that
+prefering ChaCha20-Poly1305 over AES will make Gemini faster and
+greener.
+
+TLS allows both the server and client to express a preference for
+ciphersuites, and IIRC it's up to the server to decide whether its
+preferences or the client's have the final say.  It seems to me that
+servers running on VPSes, or otherwise in scenarios where they have
+reliable and abundant power, ought to defer to the client's preferences
+(at least by default), that mobile clients ought to explicitly prefer
+ChaCha20-Poly1305 over AES, and that non-mobile clients ought to allow
+users to configure this preference for themselves.  People using RPis,
+older PCs without hardware AES support, etc. can then configure a
+ChaCha20-Poly1305 preference and things will be faster for them.  Maybe
+not noticably faster to the naked eye, but faster.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002002.html">SVG Bob
+</A></li>
+	<LI>Next message (by thread): <A HREF="001941.html">Real world data on TLS power consumption on mobile devices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1930">[ date ]</a>
+              <a href="thread.html#1930">[ thread ]</a>
+              <a href="subject.html#1930">[ subject ]</a>
+              <a href="author.html#1930">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

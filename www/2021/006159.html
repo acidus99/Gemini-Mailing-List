@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] Signing Gemini capsules
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Signing%20Gemini%20capsules&In-Reply-To=%3C20210322112831.GA5254%40host%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005985.html">
+   <LINK REL="Next"  HREF="006290.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] Signing Gemini capsules</H1>
+    <B>nervuri</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Signing%20Gemini%20capsules&In-Reply-To=%3C20210322112831.GA5254%40host%3E"
+       TITLE="[tech] Signing Gemini capsules">nervuri at disroot.org
+       </A><BR>
+    <I>Mon Mar 22 11:28:31 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005985.html">[tech] Geminipg: using Gnupg to sign Gemini pages and directories
+</A></li>
+        <LI>Next message (by thread): <A HREF="006290.html">[tech] Signing Gemini capsules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6159">[ date ]</a>
+              <a href="thread.html#6159">[ thread ]</a>
+              <a href="subject.html#6159">[ subject ]</a>
+              <a href="author.html#6159">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Mar 07, 2021, Francesco Camuffo wrote:
+&gt;<i>Hi.
+</I>&gt;<i>
+</I>&gt;<i>I made a very basic proof-of-concept program [1] to check the signify
+</I>&gt;<i>signature of a resource.
+</I>&gt;<i>
+</I>&gt;<i>[1] <A HREF="https://git.sr.ht/~fmac/gemisign">https://git.sr.ht/~fmac/gemisign</A>
+</I>
+Hi!
+
+This made my day when you posted it.  I finally got around to trying it
+out (compiling gmni+BearSSL was a pain), tested it and found that it
+works well, once all the pieces are in place.  Thanks for taking the
+initial steps!  And sorry for replying so late.
+
+My recommendation is to merge key.pub, SHA256SUMS and SHA256SUMS.sig
+into a single file, to reduce the number of network requests.  I
+considered concatenating them within a plaintext file (using a separator
+like &quot;~~~&quot;), but then I discovered signify's -z option, which signs a
+gzip archive and embeds the signature in the gzip header.  GPG can do
+something similar - see `gpgtar`.
+
+Using an archive in this way has several benefits:
+
+* compression (which actually matters if you have a big SHA256SUMS file
+with long, repeating paths)
+* an elegant way to bundle as many files as we need; for instance, we
+could add `key-sources` later on
+* no separate signature file(s)
+
+I suggest `.well-known/signature-bundle` as the standard location for
+the signed archive.  It's important for this file *not* to have an
+extension, because the archive format might change later on, as software
+evolves.
+
+I wrote an implementation in POSIX Shell:
+
+<A HREF="https://tildegit.org/nervuri/NetSigil">https://tildegit.org/nervuri/NetSigil</A>
+
+I'm using it to sign <A HREF="gemini://rawtext.club/~nervuri/">gemini://rawtext.club/~nervuri/</A> and
+<A HREF="https://nervuri.net/.">https://nervuri.net/.</A>  Remember, none of this is strictly
+Gemini-specific.
+
+Verification is not yet implemented, but can be done manually - see the
+README.
+
+I intend to put all of this in a spec, after finishing the
+implementation.
+
+If you sign your capsules, please let me know.  I'd like to make a
+public list of signed capsules/websites/gopherholes and their keys.
+
+
+P.S.  I learned recently that there are established ways to publish PGP
+keys, both under .well-known and as DNS records, see:
+
+<A HREF="https://slxh.nl/blog/2016/pgp-and-dns/">https://slxh.nl/blog/2016/pgp-and-dns/</A>
+<A HREF="https://datatracker.ietf.org/doc/draft-koch-openpgp-webkey-service/?include_text=1">https://datatracker.ietf.org/doc/draft-koch-openpgp-webkey-service/?include_text=1</A>
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005985.html">[tech] Geminipg: using Gnupg to sign Gemini pages and directories
+</A></li>
+	<LI>Next message (by thread): <A HREF="006290.html">[tech] Signing Gemini capsules
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6159">[ date ]</a>
+              <a href="thread.html#6159">[ thread ]</a>
+              <a href="subject.html#6159">[ subject ]</a>
+              <a href="author.html#6159">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposal: Simple structured form specification
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%3A%20Simple%20structured%20form%20specification&In-Reply-To=%3Cbbf327ac-181d-855a-d26d-a318e66c62e8%40qwertqwefsday.eu%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004944.html">
+   <LINK REL="Next"  HREF="004951.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposal: Simple structured form specification</H1>
+    <B>Johann Galle</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%3A%20Simple%20structured%20form%20specification&In-Reply-To=%3Cbbf327ac-181d-855a-d26d-a318e66c62e8%40qwertqwefsday.eu%3E"
+       TITLE="Proposal: Simple structured form specification">johann at qwertqwefsday.eu
+       </A><BR>
+    <I>Wed Jan 27 18:52:38 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004944.html">Proposal: Simple structured form specification
+</A></li>
+        <LI>Next message (by thread): <A HREF="004951.html">Proposal: Simple structured form specification
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4946">[ date ]</a>
+              <a href="thread.html#4946">[ thread ]</a>
+              <a href="subject.html#4946">[ subject ]</a>
+              <a href="author.html#4946">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I think this should have a [TECH] tag? [1]
+
+I am quite firmly on the &quot;Gemini does not need forms&quot; side. At least as far as implementing additional syntax in clients. For some clients it might be a big leap to have to implement this, especially considering you can already build forms in Gemini, you just have to get a bit creative and it does not require any new syntax or behaviour on the client side. And thus no additional specification. But again: One should think twice if this really has to be implemented using Gemini and not another, more suited protocol.
+
+The basic idea is the following: Each form field is presented on a separate &quot;page&quot; and the server keeps track of where the client is in the form. Ideally the URL (URI/IRI?) contains all the data necessary, thus &quot;saving&quot; the data on the client so it might be continued at a later date. If the amount of data expected is larger than would fit in the URL, server side state with client certificates would be an alternative.
+
+Now to the different types of input fields. I assume the form's base is <A HREF="gemini://example.com/form/">gemini://example.com/form/</A> which might display some information about the form and the first input field.
+
+On 27.01.2021 18:37, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">me at edaha.org</A> wrote among&#160;other&#160;things:
+ &gt; # binary
+ &gt; Binary options are best known as checkboxes on the web. They're simple on/off toggles. How they are displayed is up to the client
+
+A check box can be simply implemented with two links for yes and no like this for example:
+```
+Does Gemini need forms?
+=&gt; 0/ No, it does not.
+=&gt; 1/ Yes, it does.
+```
+
+These two links would then direct the client to either &lt;<A HREF="gemini://example.com/form/0/">gemini://example.com/form/0/</A>&gt; or &lt;<A HREF="gemini://example.com/form/1/">gemini://example.com/form/1/</A>&gt; respectively. Now the server would have to understand that this still belongs to the form and it should serve the next input field page. In this example I just put each input in a path segment as that is the first thing I came up with. You could of course put this in the query, separate it with spaces, commas semicolons or something completely different.
+
+A nice side effect of doing it this way is that you could in theory build this from a static site server by creating respectively named directories and index.gmi files (or whatever your server happens to use).
+
+ &gt; # text
+ &gt; The bulk of data that we could ever ask for is just 'text'.
+
+We already have this (and passwords too!) with status codes 10 and 11. So when you go to either of the URLs in the example above, the server will have to respond with that status code. Upon receiving the data it might redirect the client so that the URL holds some representation of the data, say for example to &lt;<A HREF="gemini://example.com/0/42/">gemini://example.com/0/42/</A>&gt;.
+
+ &gt; Differentiating between &quot;tel&quot; &quot;num&quot; and &quot;text&quot; should be done server-side, as these are all still just text fields.
+
+I completely agree.
+
+ &gt; &quot;password&quot; is deliberately not supported -- this is why gemini has client certs.
+
+Odd choice considering Gemini already has support for this.
+
+ &gt; If an input should be multi-line, then the following could be used: [...]
+
+That is not something that could be implemented by using Gemini this way [2], but if you want to write big amounts of text, you should really use something else, e.g. file upload (ftp) or maybe email, irc, xmpp, nntp, etc.
+
+ &gt; # choice
+ &gt; Choice is ultimately optional, IMO. This provides closed-ended responses for a user. Again, the idea of &quot;radio&quot; vs. &quot;dropdown&quot; vs. anything else does not matter, as those are entirely client-side decisions. What's important is that the user is only able to select one response.
+ &gt;
+ &gt; &lt;= choice Which of these protocols are we using?
+ &gt; &lt;= choice gemini
+ &gt; &lt;= choice gopher
+ &gt; &lt;= choice HTTP
+
+This could be implemented just like a checkbox, just with more options. Coincidentally the syntax is very similar to the one proposed.
+```
+Which of these protocols are we using?
+=&gt; gemini/ gemini
+=&gt; gopher/ gopher
+=&gt; http/ HTTP
+```
+
+ &gt; # submit
+ &gt; Finally, submit. This one's easy:
+
+... because it is not necessary. The server will just show you the result or take the respective action after the last form field is filled. Maybe a final checkbox of &quot;Are you sure&quot; would be nice to let the user know that this will result in some action.
+
+ &gt; # Putting it all together
+ &gt;
+ &gt; The last part is how it's passed. As mentioned at the beginning, I think (were gemini to support this, which I don't think it should) that form inputs are sent /positional/, not named. This is a requirement to reduce the chance of hitting the url limit.
+
+And as I said above, you can pass these however you like, although I would guess using the path segment approach would be the easiest and best supported. If I recall correctly there were different opinions voiced about carrying on a query in a redirect. So who knows what some clients might do if the data is all stored in the query and a user decides to go to the next form field.
+
+ &gt; and that's it!
+
+... we do not need an additional specification for this. If you insist on implementing forms in Gemini, you already can - it just requires you to think a bit, and the solution might addmittedly be a bit clunky. But that's because Gemini is not meant for doing forms!
+
+I hope this was not too bad of a rant but actually helpful.
+
+Johann
+
+[1] <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/004142.html">https://lists.orbitalfox.eu/archives/gemini/2020/004142.html</A>
+
+[2] Maybe you could have the users type in some escaped line feeds, but the specification says: &quot;The requested resource accepts *a line* of textual user input.&quot; (&#167; 3.2.1, emphasis mine)
+---
+You can verify the digital signature on this email with the public key available through web key discovery. Try e.g. `gpg --locate-keys`...
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: OpenPGP_signature
+Type: application/pgp-signature
+Size: 840 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210127/570d7ce5/attachment-0001.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20210127/570d7ce5/attachment-0001.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004944.html">Proposal: Simple structured form specification
+</A></li>
+	<LI>Next message (by thread): <A HREF="004951.html">Proposal: Simple structured form specification
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4946">[ date ]</a>
+              <a href="thread.html#4946">[ thread ]</a>
+              <a href="subject.html#4946">[ subject ]</a>
+              <a href="author.html#4946">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

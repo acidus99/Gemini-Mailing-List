@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200115221117.GB21763%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000320.html">
+   <LINK REL="Next"  HREF="000324.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200115221117.GB21763%40SDF.ORG%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Wed Jan 15 22:11:17 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000320.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000324.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#322">[ date ]</a>
+              <a href="thread.html#322">[ thread ]</a>
+              <a href="subject.html#322">[ subject ]</a>
+              <a href="author.html#322">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Jan 15, 2020 at 12:47:27PM -0800, Aaron Janse wrote:
+
+&gt;<i> &gt; Yes, I definitely intend to include a recommendation that text/gemini
+</I>&gt;<i> &gt; content be hard wrapped
+</I>&gt;<i> 
+</I>&gt;<i> May I ask why?
+</I>
+Mostly because I want simple-as-possible clients to be viable, which
+means simply printing non-link lines to stdout should result in
+something usable.  Paragraphs of text formatted as a single line are
+tremendously unpleasant to read when displayed this way!  If this were
+the norm for text/gemini documents, I suspect nobody would use any
+client that didn't include (tedious to write!) code to wrap these
+lines at word breaks.
+
+&gt;<i> In fact, I think *discouraging* hard-wrapping might actually make life easier
+</I>&gt;<i> for client implementers. Hard-wrapping would require clients to un-wrap the
+</I>&gt;<i> newlines then re-wrap to the desired width.
+</I>
+It wouldn't *require* that, the lines could simply be displayed at their
+hard-wrapped width, which is why we're concerned with recommending a
+narrow enough width that this would work on devices with narrow
+displays.
+
+Basically, consider what happens with the bare minimum amount of code in
+either case:
+
+A) If an entire paragraph is one line and a client doesn't have code to
+break that big line up at word boundaries, leaving wrapping up to the
+terminal results in multiple lines (potentially uncomfortably long for
+reading) with randomly cut-up words at their beginnings and ends.
+
+B) If the paragraph is hard-wrapped at ~40 characters and a client doesn't
+have code to un-wrap and re-rewrap those lines, the result is lines of a
+comfortabe length for reading, which fit on a smartphone and don't have any
+randomly cut-up words at their beginnings and ends.
+
+Given these two choices, surely B) is preferable?
+
+Admittedly, this analysis is somewhat terminal-centric.  A lot of GUI
+toolkits probably have text displaying widgets which will handle
+breaking lines at word boundaries without the developer having to give
+it a second though.
+
+On the one hand, the vast majority of extant clients are
+terminal-centric and I think the majority of the early adopters (being
+gopher folk) lead terminal-centric lives, so a terminal-centric
+perspective is only natural.  On the other hand, Gemini isn't supposed
+to be only for a certain group of people, so I'm reluctant to lean on
+this too much...
+
+&gt;<i> Oh, well. I'm vocal about this because Gemini looks really exciting to me.
+</I>&gt;<i> As someone who plans to use it, I simply want it to be what I think is as
+</I>&gt;<i> easy to use as possible :-)
+</I>
+I appreciate you speaking up and I'm glad you're excited!
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000320.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000324.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#322">[ date ]</a>
+              <a href="thread.html#322">[ thread ]</a>
+              <a href="subject.html#322">[ subject ]</a>
+              <a href="author.html#322">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

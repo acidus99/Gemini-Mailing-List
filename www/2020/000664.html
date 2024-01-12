@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Announcing kwiecien.us
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Announcing%20kwiecien.us&In-Reply-To=%3Clz8shth9u8.fsf%40bs-mbpr348.d.ethz.ch%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000663.html">
+   <LINK REL="Next"  HREF="000673.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Announcing kwiecien.us</H1>
+    <B>plugd</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Announcing%20kwiecien.us&In-Reply-To=%3Clz8shth9u8.fsf%40bs-mbpr348.d.ethz.ch%3E"
+       TITLE="Announcing kwiecien.us">plugd at thelambdalab.xyz
+       </A><BR>
+    <I>Fri May 15 09:38:07 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000663.html">Announcing kwiecien.us
+</A></li>
+        <LI>Next message (by thread): <A HREF="000673.html">Announcing kwiecien.us
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#664">[ date ]</a>
+              <a href="thread.html#664">[ thread ]</a>
+              <a href="subject.html#664">[ subject ]</a>
+              <a href="author.html#664">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Hi Ben,
+
+Ben writes:
+&gt;<i> I'm having an issue with elpher where it asks me to approve the site's
+</I>&gt;<i> SSL cert because it says something like the issuer not being
+</I>&gt;<i> recognized... well that can't be right, so either I set up Jetforce a
+</I>&gt;<i> little bit wrong (specified the wrong files?), or this is some issue
+</I>&gt;<i> with elpher, which I noticed complains about the certs of most Gemini
+</I>&gt;<i> sites. My issuer is LetsEncrypt, which should be fine.
+</I>
+Elpher just relies on Emacs' default Network Security Manager behaviour,
+as described in the manual:
+<A HREF="https://www.gnu.org/software/emacs/manual/html_node/emacs/Network-Security.html.">https://www.gnu.org/software/emacs/manual/html_node/emacs/Network-Security.html.</A>
+I'm not sure why this is claiming your cert is invalid.  I'll look into
+it, but I suspect the issue will be upstream from elpher.
+
+That aside, elpher (or rather the NSM) does tend to raise warnings about every new gemini
+site you visit since it's common to use self-signed certificates.  While
+the spec-spec suggests a trust-on-first-use behaviour, this doesn't seem
+to be possible with the NSM. This exposes three security levels: &quot;low&quot;,
+which doesn't do any security checks, &quot;medium&quot;, which is the default
+level and is what you're experiencing, and &quot;high&quot;, which is even more stringent.
+
+Thus I've had to choose between no certificate validation at all and the
+current system.  Seeing as (a) the number of gemini sites has (until
+recently) been extremely small, (b) emacs remembers accepted
+self-signed/invalid certificates and doesn't ask again, and (c) at least
+one person has expressed a preference for more security rather than
+less, I've stuck with the &quot;medium&quot; setting.  However, I suspect I'm
+going to have to reconsider this stance the near future due to the
+amazing number of new gemini hosts appearing.
+
+Cheers,
+
+Tim
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 487 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200515/91dce597/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20200515/91dce597/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000663.html">Announcing kwiecien.us
+</A></li>
+	<LI>Next message (by thread): <A HREF="000673.html">Announcing kwiecien.us
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#664">[ date ]</a>
+              <a href="thread.html#664">[ thread ]</a>
+              <a href="subject.html#664">[ subject ]</a>
+              <a href="author.html#664">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

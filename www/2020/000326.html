@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200116151001.GA24028%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000324.html">
+   <LINK REL="Next"  HREF="000327.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200116151001.GA24028%40SDF.ORG%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Thu Jan 16 15:10:01 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000324.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000327.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#326">[ date ]</a>
+              <a href="thread.html#326">[ thread ]</a>
+              <a href="subject.html#326">[ subject ]</a>
+              <a href="author.html#326">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Jan 15, 2020 at 06:41:00PM -0800, Aaron Janse wrote:
+ 
+&gt;<i> I think that one-line-per-paragraph would be much better for mobile phones.
+</I>&gt;<i> I personally use a web browser proxy to read gemini pages when on mobile.
+</I>&gt;<i> Text wrapped at 80 columns looks horrible. Text wrapped at 40 columns looks
+</I>&gt;<i> okay, depending on my font size. But if text was one-line-per-paragraph,
+</I>&gt;<i> firefox would wrap it wonderfully with *zero* effort from the proxy author.
+</I>
+I am kind of reluctant to make any Gemini design decisions based on the
+assumption of a web browser as the user agent.  I understand that in
+these very early days this is by far the quickest and easiest way to get
+into Geminispace, and for smartphones it's probably the *only* viable
+way.  But I hope that as time moves forward the proxies will become a
+niche thing, serving as a &quot;gateway drug&quot; for real clients.  This is
+surely a valuable role, but for regular use I think they should be
+&quot;considered harmful&quot;.  They represent single (or few) points of failure,
+they involve trusting the proxy operator not to manipulate content
+(Gemini isn't sophisticated enough to permit proper TLS proxying, so the
+the web proxy is basically a MITM between client and server), proxy
+operators have more opportunities to log and track their users than
+individual Gemini servers do, and proxy users need to run vastly more
+complex than necessary software (i.e. web browsers, although at least
+Gemini proxies should typically be usable with nice alternative browsers
+like dillo).
+
+(aside: some of these issues go away with proxies designed to be run
+locally by the user - a nice project for anybody itching for one!)
+
+None of this is to say the web proxies or bad and that people shouldn't
+run them or use them - I'm very gratefully to the people who have set
+them up!  But I don't think of them as &quot;first class&quot; clients, and given
+a choice between pushing implementation effort onto native client
+authors or onto web proxy authors, I will make life easier for native
+client authors every time.
+
+Besides, getting a web proxy to provide beautiful wrapping if a
+text/gemini file is hard-wrapped at 40 chars involves nothing more than
+wrapping paragraphs in &lt;p&gt; and &lt;/p&gt; tags.  That's a significantly easier
+task than getting a terminal client to provide beautiful wrapping if a
+text/gemini file has lines thousands of characters long, which requires
+splitting the line into words, calculating and summing the lengths of
+words, etc, etc.  Given the choice between making web proxy authors do
+a little bit more work and makig native client authors to a moderate
+amount of more work, I'm definitely going to choose the former.
+
+&gt;<i> I can only imagine unlimited-column text catastrophically failing in two
+</I>&gt;<i> places:
+</I>&gt;<i> 
+</I>&gt;<i> 1. A very wide terminal
+</I>&gt;<i> 2. A very wide web browser
+</I>
+Neither of which are terribly uncommon, right, with full-screen windows
+on desktops or even laptops?  My &quot;daily driver&quot; laptop terminal is 113
+chars wide.  Although, even on a terminal &lt; 80 chars wide, I kind of
+consider words being split across lines as pretty severe failure.  I
+don't want to read that - it's even less pleasant than hard-wrapped 80
+char lines on a mobile.
+
+&gt;<i> Thanks, solderpunk, for being a thoughtful BDFL!
+</I>
+I'm glad you think I'm thoughtful!  Sorry if I seem to be dismissing the
+&quot;long lines&quot; approach out of hand, I promise you I'm giving it a lot of
+thought.  I'm already stressing out that I'm being unduly influenced by
+the fact that I use simple / old-fashioned editors and mostly write
+stuff that should be hard-wrapped (plain text email, gopher content,
+source code).  From my perspective, writing &quot;long line&quot; content is a
+less pleasant experience for authors, because my editors don't work that
+way out of the box.  But I realise that, actually, for the majority of
+people that's far *more* accessible.  Someone using something resembling
+Notepad is going to have a miserable time writing content hard-wrapped
+at 40 chars, while the &quot;long line&quot; format just happens, probably without
+them even realising it.
+
+Then again, making text/gemini easy to write with &quot;normal&quot; editors
+arguably isn't worth much if the next step is anyway &quot;now use sftp or a
+git push to get your content on the server&quot;.  Gemini is never going to
+be able to support easy WYSIWIG authoring experiences akin to WordPress,
+so perhaps it's pointless to consider the user experience for
+non-technical types.
+
+Argh!  Simplicity ain't simple.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000324.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000327.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#326">[ date ]</a>
+              <a href="thread.html#326">[ thread ]</a>
+              <a href="subject.html#326">[ subject ]</a>
+              <a href="author.html#326">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

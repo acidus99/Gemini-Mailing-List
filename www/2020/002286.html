@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Username/password authentication strategy
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Username/password%20authentication%20strategy&In-Reply-To=%3CCAPk6LxQAwvg36ZSa8RnheaH4NYnmMv6LhRELAvhqJbw21vL5MQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002282.html">
+   <LINK REL="Next"  HREF="002287.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Username/password authentication strategy</H1>
+    <B>Kevin Sangeelee</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Username/password%20authentication%20strategy&In-Reply-To=%3CCAPk6LxQAwvg36ZSa8RnheaH4NYnmMv6LhRELAvhqJbw21vL5MQ%40mail.gmail.com%3E"
+       TITLE="Username/password authentication strategy">kevin at susa.net
+       </A><BR>
+    <I>Mon Jul 20 15:50:01 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002282.html">Username/password authentication strategy
+</A></li>
+        <LI>Next message (by thread): <A HREF="002287.html">Username/password authentication strategy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2286">[ date ]</a>
+              <a href="thread.html#2286">[ thread ]</a>
+              <a href="subject.html#2286">[ subject ]</a>
+              <a href="author.html#2286">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I see this as the same issue that exists for clients - without a trusted
+CA, there's nothing to stop me masquerading as anyone else, other than the
+certificate (e.g. fingerprint) pinning, so I believe the process absolutely
+needs a (one-time) login prompt to pin the certificate - I can't see a way
+to avoid it.
+
+Your question made me think about what would be the minimum steps required
+to implement client TOFU with PIN or password verification, and the code
+below is my take on what I think has to happen. Note the code is only meant
+as a concise way to discuss the process.
+
+So, for example, a request to a private resource, such as: -
+
+<A HREF="gemini://susa.net/cgi-bin/private.sh?articleId=1234">gemini://susa.net/cgi-bin/private.sh?articleId=1234</A>
+
+Might be handled something like this: -
+
+$ cat private.sh
+#!/bin/bash
+
+# If we have no client certificate, request one.
+if [[ &quot;${TLS_CLIENT_HASH}&quot; == &quot;&quot; ]]; then
+
+    echo -ne &quot;60 CLIENT CERTIFICATE REQUIRED\r\n&quot;
+
+elif [[ $(grep &quot;${TLS_CLIENT_HASH}&quot; /tmp/${REMOTE_USER}_sigs) == &quot;&quot; ]]; then
+
+    # We've never seen this user's client hash, so challenge for a PIN
+    # (we could store this current URL for onward forwarding)
+    echo -ne &quot;30 /cgi-bin/login.sh\r\n&quot;
+
+else
+
+    echo -ne &quot;20 text/gemini\r\n&quot;
+    echo &quot;This is the prize inside the protected resource!&quot;
+fi
+
+I think a redirect to a login process is unavoidable, because any
+originating request might have its own query_string, yet we're going to
+need one for the password prompt response. So the login.sh would be our
+one-time verification to pin the certificate to a CN based user-id.
+
+$ cat login
+#!/bin/bash
+
+# If we have no client certificate, request one.
+if [[ &quot;${TLS_CLIENT_HASH}&quot; == &quot;&quot; ]]; then
+    echo -ne &quot;60 CLIENT CERTIFICATE REQUIRED\r\n&quot;
+    exit
+fi
+
+# If the certificate has no CN, then reject it
+if [[ &quot;${REMOTE_USER}&quot; == &quot;&quot; ]]; then
+    echo -ne &quot;20 text/gemini\r\n&quot;
+    echo &quot;Your CN can't be used as a user-id!&quot;
+    exit
+fi
+
+# We have a client certificate, is it already authorised?
+if [[ $(grep &quot;${TLS_CLIENT_HASH}&quot; /tmp/${REMOTE_USER}_sigs) != &quot;&quot; ]]; then
+    echo -ne &quot;20 text/gemini\r\n&quot;
+    echo &quot;You are already authorised!&quot;
+    exit
+fi
+
+# We have a certificate and a valid user-id (CN), so either prompt for
+# a PIN, or verify PIN if we've been given a QUERY_STRING.
+
+# Grep the remote user's line from the passwd file (format CN:PIN)
+PWD_ENTRY=$(grep &quot;^${REMOTE_USER}:&quot; login_passwd)
+
+# Strip the CN value and separator, leaving the PIN
+MY_PIN=&quot;${PWD_ENTRY#${REMOTE_USER}:}&quot;
+
+# Check for our PIN in the query string (which may be empty)
+if [[ &quot;${QUERY_STRING}&quot; == &quot;${MY_PIN}&quot; ]]; then
+    echo -ne &quot;20 text/gemini\r\n&quot;
+    echo &quot;Your PIN checks out, ${REMOTE_USER}!&quot;
+    echo &quot;${TLS_CLIENT_HASH}&quot; &gt;&gt;/tmp/${REMOTE_USER}_sigs
+    echo &quot;Your hash has been stored in '/tmp/${REMOTE_USER}_sigs'&quot;
+    exit
+fi
+
+echo -ne &quot;11 Please enter your PIN, ${REMOTE_USER}\r\n&quot;
+
+
+On Sun, 19 Jul 2020 at 20:26, Peter Vernigorov &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">pitr.vern at gmail.com</A>&gt; wrote:
+
+&gt;<i> I am trying to implement a simple authentication for my Gemini site,
+</I>&gt;<i> and was planning to use a client certificate CN field to pass
+</I>&gt;<i> username:password pair to server. However, upon reading closely about
+</I>&gt;<i> the TLS handshake -
+</I>&gt;<i> <A HREF="https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_handshake">https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_handshake</A> -
+</I>&gt;<i> it seems that the client (just like the server) certificate is sent
+</I>&gt;<i> before the ChangeCipherSpec record, i.e. insecure. That means to me
+</I>&gt;<i> that the CN field would be passed before the TLS session is started
+</I>&gt;<i> and therefore not suitable as an authentication medium. Is that
+</I>&gt;<i> correct?
+</I>&gt;<i>
+</I>&gt;<i> Another alternative to implement username/password type authentication
+</I>&gt;<i> in Gemini would be the sensitive input status code, but then I would
+</I>&gt;<i> have to store a list of certificate fingerprint and username pairs,
+</I>&gt;<i> greatly complicating the system.
+</I>&gt;<i>
+</I>&gt;<i> Given that Gemini protocol strives to be minimal/low-cost for both
+</I>&gt;<i> users and client/server devs, has anyone found a simple way to
+</I>&gt;<i> implement username/password type authentication systems? To be fair, I
+</I>&gt;<i> have attempted to use client short-/long-lived client certificates as
+</I>&gt;<i> per recommendation in Gemini protocol specification; however, if
+</I>&gt;<i> access to the same &quot;account&quot; from multiple devices and being able to
+</I>&gt;<i> survive certificate loss without permanently losing access is my
+</I>&gt;<i> account are requirements, this authentication method quickly becomes a
+</I>&gt;<i> mess. For example, think about how one would go about getting access
+</I>&gt;<i> to their astrobotany plant on a new device. This is why I ended up
+</I>&gt;<i> going back to username/password authentication, but having
+</I>&gt;<i> difficulties making sure that everything is secure. In need of
+</I>&gt;<i> help/suggestions/ideas, thanks.
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200720/8bb3276f/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200720/8bb3276f/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002282.html">Username/password authentication strategy
+</A></li>
+	<LI>Next message (by thread): <A HREF="002287.html">Username/password authentication strategy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2286">[ date ]</a>
+              <a href="thread.html#2286">[ thread ]</a>
+              <a href="subject.html#2286">[ subject ]</a>
+              <a href="author.html#2286">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

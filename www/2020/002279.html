@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Username/password authentication strategy
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Username/password%20authentication%20strategy&In-Reply-To=%3CCAG-mZ3htQ_Zv%3DK7TU6RyRJ0YbfA1yedehiTQFoJeS_7OvBSrLQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002290.html">
+   <LINK REL="Next"  HREF="002281.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Username/password authentication strategy</H1>
+    <B>Peter Vernigorov</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Username/password%20authentication%20strategy&In-Reply-To=%3CCAG-mZ3htQ_Zv%3DK7TU6RyRJ0YbfA1yedehiTQFoJeS_7OvBSrLQ%40mail.gmail.com%3E"
+       TITLE="Username/password authentication strategy">pitr.vern at gmail.com
+       </A><BR>
+    <I>Sun Jul 19 20:26:03 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002290.html">text/gemini support in MycorrhizaWiki
+</A></li>
+        <LI>Next message (by thread): <A HREF="002281.html">Username/password authentication strategy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2279">[ date ]</a>
+              <a href="thread.html#2279">[ thread ]</a>
+              <a href="subject.html#2279">[ subject ]</a>
+              <a href="author.html#2279">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I am trying to implement a simple authentication for my Gemini site,
+and was planning to use a client certificate CN field to pass
+username:password pair to server. However, upon reading closely about
+the TLS handshake -
+<A HREF="https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_handshake">https://en.wikipedia.org/wiki/Transport_Layer_Security#TLS_handshake</A> -
+it seems that the client (just like the server) certificate is sent
+before the ChangeCipherSpec record, i.e. insecure. That means to me
+that the CN field would be passed before the TLS session is started
+and therefore not suitable as an authentication medium. Is that
+correct?
+
+Another alternative to implement username/password type authentication
+in Gemini would be the sensitive input status code, but then I would
+have to store a list of certificate fingerprint and username pairs,
+greatly complicating the system.
+
+Given that Gemini protocol strives to be minimal/low-cost for both
+users and client/server devs, has anyone found a simple way to
+implement username/password type authentication systems? To be fair, I
+have attempted to use client short-/long-lived client certificates as
+per recommendation in Gemini protocol specification; however, if
+access to the same &quot;account&quot; from multiple devices and being able to
+survive certificate loss without permanently losing access is my
+account are requirements, this authentication method quickly becomes a
+mess. For example, think about how one would go about getting access
+to their astrobotany plant on a new device. This is why I ended up
+going back to username/password authentication, but having
+difficulties making sure that everything is secure. In need of
+help/suggestions/ideas, thanks.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002290.html">text/gemini support in MycorrhizaWiki
+</A></li>
+	<LI>Next message (by thread): <A HREF="002281.html">Username/password authentication strategy
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2279">[ date ]</a>
+              <a href="thread.html#2279">[ thread ]</a>
+              <a href="subject.html#2279">[ subject ]</a>
+              <a href="author.html#2279">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

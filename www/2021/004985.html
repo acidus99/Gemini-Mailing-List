@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] [users] Two new capsules and a server
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20%5Busers%5D%20Two%20new%20capsules%20and%20a%20server&In-Reply-To=%3C20210201145239.GA30280%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004984.html">
+   <LINK REL="Next"  HREF="004973.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] [users] Two new capsules and a server</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20%5Busers%5D%20Two%20new%20capsules%20and%20a%20server&In-Reply-To=%3C20210201145239.GA30280%40brevard.conman.org%3E"
+       TITLE="[ANN] [users] Two new capsules and a server">sean at conman.org
+       </A><BR>
+    <I>Mon Feb  1 14:52:39 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004984.html">[ANN] [users] Two new capsules and a server
+</A></li>
+        <LI>Next message (by thread): <A HREF="004973.html">Enviroments (was poetry)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4985">[ date ]</a>
+              <a href="thread.html#4985">[ thread ]</a>
+              <a href="subject.html#4985">[ subject ]</a>
+              <a href="author.html#4985">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Omar Polo once stated:
+&gt;<i> 
+</I>&gt;<i> Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; writes:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; [...]
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;   You don't split the query.  You pass it in, as is, from the request, in
+</I>&gt;<i> &gt; QUERY_STRING.  Play around with:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; 	<A HREF="gemini://gemini.conman.org/cgi">gemini://gemini.conman.org/cgi</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; It will show all the variables, command line arguments and a breakdown of
+</I>&gt;<i> &gt; the query string.
+</I>&gt;<i> 
+</I>&gt;<i> Thanks for providing that page.  I played a bit with it while fixing my
+</I>&gt;<i> CGI implementation and now I believe gmid behaves just like GLV-1.12556
+</I>&gt;<i> does (minus the argument list).  I have to do some changes in order to
+</I>&gt;<i> access the raw query string when I'm about to execute the CGI script.
+</I>&gt;<i> 
+</I>&gt;<i> One thing that your page doesn't show are the TLS-related environment
+</I>&gt;<i> variables.  I remember you wrote about them in a previous message on
+</I>&gt;<i> this list.
+</I>
+  Ah.  To see those, use a client certificate and go here:
+
+	<A HREF="gemini://gemini.conman.org/private/cgi-sample">gemini://gemini.conman.org/private/cgi-sample</A>
+
+&gt;<i> I built a similar page, hosted at
+</I>&gt;<i> 
+</I>&gt;<i> 	<A HREF="gemini://gemini.omarpolo.com/cgi/env">gemini://gemini.omarpolo.com/cgi/env</A>
+</I>
+  Cool.  But you only set AUTH_TYPE and REMOTE_USER if a client certificate
+is present, otherwise, they're not set.  Same for the TLS_* variables. 
+
+  Also, PWD, LANG and LC_COLLATE aren't required (they're not part of the
+CGI spec).  I included LANG to ensure proper charset usage of any program
+executed, LC_COLLATE just because and PATH (not PWD) in case I need to
+execute a Unix command from a CGI script.
+
+&gt;<i> Thanks
+</I>
+  You're welcome.
+
+  -spc
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004984.html">[ANN] [users] Two new capsules and a server
+</A></li>
+	<LI>Next message (by thread): <A HREF="004973.html">Enviroments (was poetry)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4985">[ date ]</a>
+              <a href="thread.html#4985">[ thread ]</a>
+              <a href="subject.html#4985">[ subject ]</a>
+              <a href="author.html#4985">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

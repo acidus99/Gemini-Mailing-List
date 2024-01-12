@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Some new tests in the Gemini Client Torture Test
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20new%20tests%20in%20the%20Gemini%20Client%20Torture%20Test&In-Reply-To=%3C20200620081902.GP11281%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001813.html">
+   <LINK REL="Next"  HREF="001816.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Some new tests in the Gemini Client Torture Test</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20new%20tests%20in%20the%20Gemini%20Client%20Torture%20Test&In-Reply-To=%3C20200620081902.GP11281%40brevard.conman.org%3E"
+       TITLE="Some new tests in the Gemini Client Torture Test">sean at conman.org
+       </A><BR>
+    <I>Sat Jun 20 09:19:03 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001813.html">Some new tests in the Gemini Client Torture Test
+</A></li>
+        <LI>Next message (by thread): <A HREF="001816.html">fingerprint art
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1814">[ date ]</a>
+              <a href="thread.html#1814">[ thread ]</a>
+              <a href="subject.html#1814">[ subject ]</a>
+              <a href="author.html#1814">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Luke Emmet once stated:
+&gt;<i> Hi Sean
+</I>&gt;<i> 
+</I>&gt;<i> Thanks for the new tests - I think they are all reasonable, even the 
+</I>&gt;<i> last one.
+</I>
+  Heh, I was a bit worried about that last one.
+
+&gt;<i> I just ran them on GemiNaut and I believe it is doing the right thing 
+</I>&gt;<i> for all of them, which is to wrap at the word, hyphen or soft-hypen. 
+</I>
+  There is a Unicode Line Breaking Algorithm:
+
+	<A HREF="https://www.unicode.org/reports/tr14/">https://www.unicode.org/reports/tr14/</A>
+
+  Warning:  it's long.  Longer than the Gemini specification, and it's in
+it's 13th revision.  This is *not* an easy problem.
+
+&gt;<i> But 
+</I>&gt;<i> I shouldn't claim much credit, I'm just using a system control to 
+</I>&gt;<i> display the text content, which does the hard work of rendering the 
+</I>&gt;<i> unicode into the display.
+</I>&gt;<i> 
+</I>&gt;<i> For tests 43, 46 and 49, it is unclear in the test what you expect 
+</I>&gt;<i> should happen. 
+</I>
+  I think &quot;not crash&quot; is a good starting point.  Past that, it's up to the
+client.  The way I've done it (in my gopher client) is to just simply wrap
+the text (being careful to not break between a glyph codepoint and a
+combining codepoint).  Given this:
+
+LoremipsumdolorsitametconsecteturadipiscingelitInlaciniasemperfringillaDonecvehiculafermentummaximusAliquamegetfelisquamCrasegetullamcorpernuncSuspendisseidlaoreetrisusUtaerosmiMaurisaloremposuereelementumjustosedpellentesquequamAeneansagittisquameupretiumporttitorInnecsemaenimvehiculafaucibusAeneanluctusnonloremacblanditIntegertinciduntlectusnecpulvinarcongueestenimpharetraliberoutgravidadolorneque
+
+And a &quot;screen width&quot; of say, 40 characters, you end up with:
+
+Loremipsumdolorsitametconsecteturadipisc
+ingelitInlaciniasemperfringillaDonecvehi
+culafermentummaximusAliquamegetfelisquam
+CrasegetullamcorpernuncSuspendisseidlaor
+eetrisusUtaerosmiMaurisaloremposuereelem
+entumjustosedpellentesquequamAeneansagit
+tisquameupretiumporttitorInnecsemaenimve
+hiculafaucibusAeneanluctusnonloremacblan
+ditIntegertinciduntlectusnecpulvinarcong
+ueestenimpharetraliberoutgravidadolorneq
+ue
+
+  Leaving it as one line and side-scrolling is another valid method. 
+There's not much you can do in the face of such input.
+
+&gt;<i> Do you just want the client to confirm it doesn't barf on 
+</I>&gt;<i> the content, but can display it somehow? 
+</I>
+  Pretty much.  I figure if the client doesn't crash, and does The Right
+Thing (even if for some tests quite arbitrary what The Right Thing is), then
+it's good to go.
+
+&gt;<i> A suggestion for a possible improvement - it would be helpful if there 
+</I>&gt;<i> was a &quot;back to tests index&quot; link on each page, that way you can choose a 
+</I>&gt;<i> few tests from the index, then go back to the index when you are done - 
+</I>&gt;<i> otherwise you might have to go back N times, which is not quite as nice.
+</I>
+  Sounds like a good idea.  I'll probably have them added in the next day or
+so.  Thank you for the suggestion.
+
+  -spc
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001813.html">Some new tests in the Gemini Client Torture Test
+</A></li>
+	<LI>Next message (by thread): <A HREF="001816.html">fingerprint art
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1814">[ date ]</a>
+              <a href="thread.html#1814">[ thread ]</a>
+              <a href="subject.html#1814">[ subject ]</a>
+              <a href="author.html#1814">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,206 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Caching and status codes
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3C6bf932f1c4ae5c1aa49dfc195abb0687%40tilde.team%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003186.html">
+   <LINK REL="Next"  HREF="003120.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Caching and status codes</H1>
+    <B>khuxkm at tilde.team</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3C6bf932f1c4ae5c1aa49dfc195abb0687%40tilde.team%3E"
+       TITLE="Caching and status codes">khuxkm at tilde.team
+       </A><BR>
+    <I>Sat Nov  7 19:35:02 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003186.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+        <LI>Next message (by thread): <A HREF="003120.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3114">[ date ]</a>
+              <a href="thread.html#3114">[ thread ]</a>
+              <a href="subject.html#3114">[ subject ]</a>
+              <a href="author.html#3114">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>November 7, 2020 11:43 AM, &quot;Ali Fardan&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">raiz at stellarbound.space</A>&gt; wrote:
+
+&gt;<i> On Sat, 07 Nov 2020 10:17:20 +0300
+</I>&gt;<i> &quot;Leo&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">list at gkbrk.com</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> I don't understand why a client caching responses is rude. Or rather,
+</I>&gt;&gt;<i> I don't understand who it is being rude to. When I configure my HTTP
+</I>&gt;&gt;<i> or Gemini browser to cache every response, is my browser now being
+</I>&gt;&gt;<i> rude to me? Is it being rude to the server?
+</I>&gt;<i> 
+</I>&gt;<i> The rude thing here would be having to serve large files over Gemini
+</I>&gt;<i> and expect them to be served often, the protocol operates under the
+</I>&gt;<i> assumption that caching does not exist, it's by convention, this
+</I>&gt;<i> simplifies the client a LOT and removes such uncertainty when writing
+</I>&gt;<i> dynamic content for Gemini. Consider reading 2.1.1 in
+</I>&gt;<i> <A HREF="gemini://gemini.circumlunar.space/docs/faq.gmi">gemini://gemini.circumlunar.space/docs/faq.gmi</A>
+</I>
+Alright, bet. 2.1.1 in the FAQ says:
+
+&gt;<i> Gemini aims to be simple, but not too simple. Gopher is simpler at
+</I>&gt;<i> a protocol level, but as a consequence the client is eternally
+</I>&gt;<i> uncertain: what character encoding is this text in? Is this text the
+</I>&gt;<i> intended content or an error message from the server? What kind of 
+</I>&gt;<i> file is this binary data? Because of this, a robust Gopher client is
+</I>&gt;<i> made less simple by needing to infer or guess missing information. 
+</I>&gt;<i> Early Gemini discussion included three clear goals with regard to
+</I>&gt;<i> simplicity:
+</I>&gt;<i>
+</I>&gt;<i> * It should be possible for somebody who had no part in designing
+</I>&gt;<i> the protocol to accurately hold the entire protocol spec in their
+</I>&gt;<i> head after reading a well-written description of it once or twice.
+</I>&gt;<i> * A basic but usable (not ultra-spartan) client should fit
+</I>&gt;<i> comfortably within 50 or so lines of code in a modern high-level
+</I>&gt;<i> language. Certainly not more than 100.
+</I>&gt;<i> * A client comfortable for daily use which implements every single
+</I>&gt;<i> protocol feature should be a feasible weekend programming project
+</I>&gt;<i> for a single developer.
+</I>
+Adding separate 2x status codes for &quot;feel free to cache this&quot; and 
+&quot;don't cache this&quot; would follow:
+
+* It's literally just 2 more numbers to remember, shouldn't be much 
+harder than remembering the status codes that exist today.
+* A basic but usable client can just ignore 21/22 and act like it
+got a 20 response code (that's the point of the 2-digit response
+code, AFAICT).
+* Implementing some form of caching wouldn't be too hard to add to
+a client that &quot;implements every single protocol feature&quot;.
+
+&gt;&gt;<i> How can something that causes less resource usage on the server be
+</I>&gt;&gt;<i> rude to the server, or something I configured or downloaded as a
+</I>&gt;&gt;<i> &quot;client that has caching&quot; be rude to me for using it?
+</I>&gt;<i> 
+</I>&gt;<i> Because the server operates under the assumption that content is not
+</I>&gt;<i> cached, if you're serving large files over Gemini you should look
+</I>&gt;<i> somewhere else, this is not bittorrent, and if your server is eating up
+</I>&gt;<i> a lot of resources, you're doing Gemini wrong, Gemini servers don't
+</I>&gt;<i> have to be complicated, that's your own problem. Consider using
+</I>&gt;<i> connection queue and serving connections one by instead of forking or
+</I>&gt;<i> multithreading because the protocol allows such simple design by
+</I>&gt;<i> closing the connection right after the transaction, it's not like in
+</I>&gt;<i> HTTP land where you have keep-alive.
+</I>
+Elitism much? Let me read you 2.1.3, from the very same FAQ you quoted:
+
+&gt;<i> The &quot;first class&quot; application of Gemini is human consumption of
+</I>&gt;<i> predominantly written material - to facilitate something like
+</I>&gt;<i> gopherspace, or like &quot;reasonable webspace&quot; (e.g. something which is
+</I>&gt;<i> comfortably usable in Lynx or Dillo). But, just like HTTP can be, and
+</I>&gt;<i> is, used for much, much more than serving HTML, Gemini should be able to
+</I>&gt;<i> be used for as many other purposes as possible without compromising the
+</I>&gt;<i> simplicity and privacy criteria above. This means taking into account
+</I>&gt;<i> possible applications built around non-text files and non-human clients.
+</I>
+I'm not sure how you read this section, but it seems to me like the intent
+is to be able to serve large files if you can.
+
+&gt;&gt;<i> Is not doing everything a server sends being rude to the server
+</I>&gt;&gt;<i> operator? If a server sends a 100000000x100000000 image, is my image
+</I>&gt;&gt;<i> viewer being rude for refusing to decode/display it?
+</I>&gt;<i> 
+</I>&gt;<i> No, its being sane, this does not apply here.
+</I>
+Let me rephrase the question: if a server tells you you can cache the 
+response, is your client being rude for refusing to cache it?
+
+&gt;<i> Does everyone here require a lecture on why their desired features
+</I>&gt;<i> aren't in the protocol yet? seems to be the common point of discussion
+</I>&gt;<i> here, as if the protocol is NOT ENOUGH, I don't know what brought your
+</I>&gt;<i> interest here, did you see it as a great way of avoiding the current
+</I>&gt;<i> scope creep of the modern web, or as a playground to satisfy your bad
+</I>&gt;<i> ideas?
+</I>
+Again, your elitism is showing. I feel like adding a way to signal 
+whether or not you can safely cache a response isn't really sacrificing 
+any of the Gemini ethos: simplicity, privacy, or generality.
+
+&gt;<i> If any feature does not add a great value at an acceptable cost to the
+</I>&gt;<i> simplicity of the protocol, consider it rejected before even proposing
+</I>&gt;<i> it, I don't want to have a different experience browsing Gemini space
+</I>&gt;<i> using netcat than using Kristall.
+</I>
+I fail to see how adding &quot;safe to cache&quot; and &quot;do not cache&quot; status codes 
+would make using netcat different from Kristall or any other client. Just 
+treat it as a 2x success status code, and move on.
+
+Just my two cents,
+Robert &quot;khuxkm&quot; Miles
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003186.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+	<LI>Next message (by thread): <A HREF="003120.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3114">[ date ]</a>
+              <a href="thread.html#3114">[ thread ]</a>
+              <a href="subject.html#3114">[ subject ]</a>
+              <a href="author.html#3114">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

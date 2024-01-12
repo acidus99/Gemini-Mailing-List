@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> IDN with Gemini?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C20201204135138.GA684%40sources.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003811.html">
+   <LINK REL="Next"  HREF="003792.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>IDN with Gemini?</H1>
+    <B>Stephane Bortzmeyer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C20201204135138.GA684%40sources.org%3E"
+       TITLE="IDN with Gemini?">stephane at sources.org
+       </A><BR>
+    <I>Fri Dec  4 13:51:38 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003811.html">[ANN] Garden Gnome Society!
+</A></li>
+        <LI>Next message (by thread): <A HREF="003792.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3788">[ date ]</a>
+              <a href="thread.html#3788">[ thread ]</a>
+              <a href="subject.html#3788">[ subject ]</a>
+              <a href="author.html#3788">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>The specification
+&lt;<A HREF="gemini://gemini.circumlunar.space/docs/specification.gmi">gemini://gemini.circumlunar.space/docs/specification.gmi</A>&gt; seems
+silent about IDN (Internationalized Domain Names, domains in Unicode,
+see RFC 5890). The spec mentions URI (not 3986) but not IRI
+(Internationalized Resource Identifiers, RFC 3987).
+
+Therefore, it is not clear what servers and clients should do (send an
+IRI, or accept IRI but convert it to URI or something else). A test
+with some clients seem to indicate it does not work (tested at
+&lt;<A HREF="gemini://g&#233;meaux.bortzmeyer.org/">gemini://g&#233;meaux.bortzmeyer.org/</A>&gt;):
+
+* Amfora claims the domain name does not exist (it does exist),
+&quot;Failed to connect to the server: dial tcp: lookup
+g&#233;meaux.bortzmeyer.org: no such host.&quot;
+
+* AV-98 does not protest and sends the IRI but the server I use
+(Gemserv) fails to match either using the UTF-8 form (U-label) or the
+Punycode one (A-label),
+
+- Bombadillo says &quot;Found &quot;&#233;&quot;, expected EOF&quot;
+
+What is the normal behaviour?
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003811.html">[ANN] Garden Gnome Society!
+</A></li>
+	<LI>Next message (by thread): <A HREF="003792.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3788">[ date ]</a>
+              <a href="thread.html#3788">[ thread ]</a>
+              <a href="subject.html#3788">[ subject ]</a>
+              <a href="author.html#3788">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

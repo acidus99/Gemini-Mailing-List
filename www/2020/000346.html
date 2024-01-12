@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200117160708.GA11117%40briz%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000345.html">
+   <LINK REL="Next"  HREF="000347.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>lel</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200117160708.GA11117%40briz%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">lel at envs.net
+       </A><BR>
+    <I>Fri Jan 17 16:07:08 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000345.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000347.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#346">[ date ]</a>
+              <a href="thread.html#346">[ thread ]</a>
+              <a href="subject.html#346">[ subject ]</a>
+              <a href="author.html#346">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Jan 17, 2020 at 02:27:15PM +0000, solderpunk wrote:
+&gt;<i> ...
+</I>&gt;<i> I guess the next thing to do is to start thinking about how
+</I>&gt;<i> difficult a &quot;good enough&quot; (not necessarily perfect) implementation of
+</I>&gt;<i> wrap_line_to_viewport is in most languages, and decide whether or not we
+</I>&gt;<i> think that burden is too high.
+</I>
+I don't think it's too high. I just wrote up an awful implementation in 
+the most naive way possible and it came out ~30 lines, with a good deal of
+that being the edge case of words longer than the viewport width (i 
+handled this by splitting these words with hyphens at the viewport width;
+i don't know if there are other edge-cases that need to be handled but i 
+can't think of any).
+
+I'm attaching it. You can execute it with:
+
+```
+python3 wrap.py [length] [text]
+```
+
+Or import it and call wrap with first parameter being the text and the
+second being the viewport width.
+
+I can't stress enough how &quot;not perfect&quot; this is (I wrote it up on my
+phone, of all things, in about 5 minutes, so very little thought was put
+into making it good) but at the very least it's doable. I know you mention
+that python can do this natively, but I didn't use any dynamic-typing, and
+all that's required for this sort of implementation is a method to split 
+by newline and space, so really something like this could be done pretty 
+universally.
+
+But it's still not good.
+
+~ lel
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: wrap.py
+Type: text/x-python
+Size: 1233 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200117/4becec65/attachment.py">https://lists.orbitalfox.eu/archives/gemini/attachments/20200117/4becec65/attachment.py</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000345.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000347.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#346">[ date ]</a>
+              <a href="thread.html#346">[ thread ]</a>
+              <a href="subject.html#346">[ subject ]</a>
+              <a href="author.html#346">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Search forms and server side search scripting?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Search%20forms%20and%20server%20side%20search%20scripting%3F&In-Reply-To=%3C8735xt23cv.fsf%40rwv.io%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005340.html">
+   <LINK REL="Next"  HREF="005342.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Search forms and server side search scripting?</H1>
+    <B>Remco</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Search%20forms%20and%20server%20side%20search%20scripting%3F&In-Reply-To=%3C8735xt23cv.fsf%40rwv.io%3E"
+       TITLE="Search forms and server side search scripting?">me at rwv.io
+       </A><BR>
+    <I>Thu Feb 18 08:21:20 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005340.html">Search forms and server side search scripting?
+</A></li>
+        <LI>Next message (by thread): <A HREF="005342.html">Search forms and server side search scripting?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5341">[ date ]</a>
+              <a href="thread.html#5341">[ thread ]</a>
+              <a href="subject.html#5341">[ subject ]</a>
+              <a href="author.html#5341">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>2021/02/18 09:07, Lars Nood&#233;n:
+
+&gt;<i> I've looked at the Gemini specification [1] and wonder where I can find
+</I>&gt;<i> information about receiving search or other input from the client.
+</I>&gt;<i> Perhaps I am missing something obvious, as I see that there are a
+</I>&gt;<i> growing number of interesting, searchable capsules [2] but have not yet
+</I>&gt;<i> seen how to do that.  My goal is to implement a local search function
+</I>&gt;<i> for a capsule being built.
+</I>&gt;<i>
+</I>&gt;<i> So I have two questions,
+</I>&gt;<i>
+</I>&gt;<i> 1) What markup should a gemini page contain to trigger an input dialog,
+</I>&gt;<i> and where may I see some sample code or pseudo code for the server-side?
+</I>&gt;<i>  If anyone has any sample- psuedo code to share, that would be
+</I>&gt;<i> wonderful.
+</I>
+Here's an example of a very basic CGI script written in Ruby:
+
+  <A HREF="gemini://rwv.io/src/search">gemini://rwv.io/src/search</A>
+
+It triggers a &quot;10&quot; response when there's no query set, otherwise it
+returns a &quot;20&quot; response with links to all the files matching the query.
+In this case it simple greps through the gemini directory.
+
+Note, it doesn't do query string decoding so, depending on the server,
+you might have to do some for &quot;special&quot; characters.
+
+&gt;<i> 2) Which servers are light yet can still handle referrals to scripts, or
+</I>&gt;<i> is that best handled by a separate package and let the server deal with
+</I>&gt;<i> static pages only?
+</I>
+Any light server supporting CGI should be fine.
+
+Cheers,
+Remco
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005340.html">Search forms and server side search scripting?
+</A></li>
+	<LI>Next message (by thread): <A HREF="005342.html">Search forms and server side search scripting?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5341">[ date ]</a>
+              <a href="thread.html#5341">[ thread ]</a>
+              <a href="subject.html#5341">[ subject ]</a>
+              <a href="author.html#5341">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

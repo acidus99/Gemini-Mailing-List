@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Germinal v0.2.0 update
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Germinal%20v0.2.0%20update&In-Reply-To=%3C20200615110114.GB20393%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001692.html">
+   <LINK REL="Next"  HREF="001656.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Germinal v0.2.0 update</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Germinal%20v0.2.0%20update&In-Reply-To=%3C20200615110114.GB20393%40SDF.ORG%3E"
+       TITLE="Germinal v0.2.0 update">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Mon Jun 15 12:01:14 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001692.html">Germinal v0.2.0 update
+</A></li>
+        <LI>Next message (by thread): <A HREF="001656.html">[ANN] Git front-end for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1694">[ date ]</a>
+              <a href="thread.html#1694">[ thread ]</a>
+              <a href="subject.html#1694">[ subject ]</a>
+              <a href="author.html#1694">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Jun 15, 2020 at 06:55:33AM -0400, Jason McBrayer wrote:
+&gt;<i> Sure. Originally, I took a very simplistic approach, just eating '../'
+</I>&gt;<i> whenever I saw it in a request. Unfortunately, it didn't handle a bare
+</I>&gt;<i> '..', which meant the parent directory of the document root was
+</I>&gt;<i> listable. Worse, you could construct a request like
+</I>&gt;<i> <A HREF="gemini://my.site/.../...//.../...//etc/passwd">gemini://my.site/.../...//.../...//etc/passwd</A> to get whatever you
+</I>&gt;<i> wanted, as long as it was locally world-readable.
+</I>&gt;<i> 
+</I>&gt;<i> The fix normalizes all pathnames before looking for files, and it checks
+</I>&gt;<i> that the resulting path is under the document root. I pulled in a
+</I>&gt;<i> library to help with this, which I originally wanted to avoid, but
+</I>&gt;<i> pathname handling in Common Lisp is pretty weird, and I felt the library
+</I>&gt;<i> (ppath) was worth it.
+</I>
+Thanks for sharing this!  A good cautionary tale for people quickly
+throwing together servers.
+
+For what it's worth, if Molly Brown detects even a single &quot;..&quot; in a
+request URL anywhere it immediately returns:
+
+&quot;50 Your directory traversal technique has been defeated!\r\n&quot;
+
+without even consulting the filesystem. :)  Just not worth the risk of
+trying to get it right, IMHO.  Even then, I *still* explicitly check
+the resultant filesystem path is under the document root, and also
+explicitly check that it is not equal to the server access log or the
+TLS cert or key files (which should never inside the document root,
+but better safe than sorry!).
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001692.html">Germinal v0.2.0 update
+</A></li>
+	<LI>Next message (by thread): <A HREF="001656.html">[ANN] Git front-end for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1694">[ date ]</a>
+              <a href="thread.html#1694">[ thread ]</a>
+              <a href="subject.html#1694">[ subject ]</a>
+              <a href="author.html#1694">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

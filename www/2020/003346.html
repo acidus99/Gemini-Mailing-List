@@ -1,0 +1,128 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> (proposal) on metadata in documents
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%28proposal%29%20on%20metadata%20in%20documents&In-Reply-To=%3C20201116014302.GF19536%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003344.html">
+   <LINK REL="Next"  HREF="003351.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>(proposal) on metadata in documents</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%28proposal%29%20on%20metadata%20in%20documents&In-Reply-To=%3C20201116014302.GF19536%40brevard.conman.org%3E"
+       TITLE="(proposal) on metadata in documents">sean at conman.org
+       </A><BR>
+    <I>Mon Nov 16 01:43:03 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003344.html">(proposal) on metadata in documents
+</A></li>
+        <LI>Next message (by thread): <A HREF="003351.html">(proposal) on metadata in documents
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3346">[ date ]</a>
+              <a href="thread.html#3346">[ thread ]</a>
+              <a href="subject.html#3346">[ subject ]</a>
+              <a href="author.html#3346">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">smlckz at tilde.pink</A> once stated:
+&gt;<i> On Sat, 14 Nov 2020, Sean Conner wrote:
+</I>&gt;<i> &gt; Okay.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;Created 2020-11-14T17:34:19-0500
+</I>&gt;<i> &gt;Modified 2020-11-14T17:50:03-0500
+</I>&gt;<i> &gt;Copyright 2020 by Sean Conner.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The timestamp was created with the following Unix command: &quot;date +%FT%T%z&quot;
+</I>&gt;<i> &gt;so that's pretty easy.
+</I>&gt;<i> 
+</I>&gt;<i> That's one way of doing that. Can we do better than that?
+</I>
+  What's wrong with that format?  It's an ISO standard, it's locale neutral,
+easy to parse, and it's easy for humans to read.  I don't think you really
+can do better than that.  Unless you really want to parse dates like
+
+	vuos, sk&#65533;b 16. b. 2020 02:27:32 CET
+
+&gt;<i> &gt;And you know, if you move the lines to the top of
+</I>&gt;<i> &gt;the document, put the Modified: header first, a client would only have to
+</I>&gt;<i> &gt;read the first 34 bytes of the document to see if it's modified, and if it
+</I>&gt;<i> &gt;hasn't since the client last read it, the client can close the connection.
+</I>&gt;<i> &gt;Caching solved!
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -spc (Add a Size header and you solve the size problem as well!)
+</I>&gt;<i> &gt;
+</I>&gt;<i> 
+</I>&gt;<i> We don't want or need anything like that. That is a breaking change to the 
+</I>&gt;<i> spec so breaks all existing clients.
+</I>
+  Like adding headers isn't a breaking change?  And I'm not adding the size
+to the MIME type, but to the other &quot;fields&quot;, something like:
+
+Created 2020-11-15T20:29:01-0500
+Modifie 2020-11-15T20:29:01-0500
+Copyright 2020 by Sean Conner
+Size 806
+Cache not-on-your-life
+User-Agent myGeminiClient-1.13
+MD5sum fd888c3218f34e71dc57221143d44ccb
+
+&gt;<i> Let me change my wordings a little bit.
+</I>&gt;<i> 
+</I>&gt;<i> &gt;&gt;The metadata should be placed at the end of the document so that the
+</I>&gt;<i> &gt;&gt;viewers can view the content first.
+</I>&gt;<i> I should have said ''must'' instead of ''should''.
+</I>
+  Kill joy.
+
+&gt;<i> &gt;&gt;The clients may use the information, but may not hide the metadata.
+</I>&gt;<i> ''must'' not hide.
+</I>&gt;<i> 
+</I>&gt;<i> mmmh..
+</I>
+  Mmmmmh indeed ...
+
+  -spc
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003344.html">(proposal) on metadata in documents
+</A></li>
+	<LI>Next message (by thread): <A HREF="003351.html">(proposal) on metadata in documents
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3346">[ date ]</a>
+              <a href="thread.html#3346">[ thread ]</a>
+              <a href="subject.html#3346">[ subject ]</a>
+              <a href="author.html#3346">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

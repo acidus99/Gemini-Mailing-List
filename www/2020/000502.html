@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Announcing Gemfeed, an Atom feed tool for Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Announcing%20Gemfeed%2C%20an%20Atom%20feed%20tool%20for%20Gemini&In-Reply-To=%3C20200317203919.GA697%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002470.html">
+   <LINK REL="Next"  HREF="000503.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Announcing Gemfeed, an Atom feed tool for Gemini</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Announcing%20Gemfeed%2C%20an%20Atom%20feed%20tool%20for%20Gemini&In-Reply-To=%3C20200317203919.GA697%40SDF.ORG%3E"
+       TITLE="[ANN] Announcing Gemfeed, an Atom feed tool for Gemini">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Tue Mar 17 20:39:19 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002470.html">New Gemini Server
+</A></li>
+        <LI>Next message (by thread): <A HREF="000503.html">[ANN] Announcing Gemfeed, an Atom feed tool for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#502">[ date ]</a>
+              <a href="thread.html#502">[ thread ]</a>
+              <a href="subject.html#502">[ subject ]</a>
+              <a href="author.html#502">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Greetings, Geminauts!
+
+I had been planning something like this for a while, but the recent
+announcement of the &quot;Send the nukes&quot; gemlog prompted me to get off my
+butt and actually churn it out.
+
+I am happy to announce that a tool named Gemfeed
+(<A HREF="https://tildegit.org/solderpunk/gemfeed">https://tildegit.org/solderpunk/gemfeed</A>) is now ready for preliminary
+testing.  Gemfeed's job is to create a single XML file containing an
+Atom feed for all the .gmi or .gemini files in a single directory,
+except the index.gmi/index.gemini file, if it exists.  It's designed
+to be a very easy solution for a simple gemlog which is just a bunch
+of .gmi files in a directory, especially when you are using the newly
+specced heading line syntax (where h1, h2 and h3 level headings are
+lines beginning with #, ## and ###).  You can either run it manually
+after each post, or just set a cronjob to run it regularly enough and
+then forget about it.  There are options to override the following
+behaviour, but by default it uses the first heading it finds in the
+index file as the feed's title, and uses the first heading it finds in
+every non-index file as the title of an entry in the feed.  Each
+entry's update time is set to the corresponding file's creation time
+(not modification time, so you can fix minor typos the day after
+without your feed changing).  Basically, if you are using headings in
+a sensible way, all you need to tell Gemfeed is the URL corresponding
+to the directory you're creating a feed for, and it will produce
+something sensible.
+
+Full instructions at
+<A HREF="https://tildegit.org/solderpunk/gemfeed/src/branch/master/README.md.">https://tildegit.org/solderpunk/gemfeed/src/branch/master/README.md.</A>
+
+If you have any kind of periodically updated Gemini content, please
+give this a try!  I now plan to immediately begin work on a public
+aggregator named CAPCOM (it will be both a tool you can use for your
+own aggregation, like moku-pona, and a high-profile public aggregator,
+like Bongusta), so the incentive for adopting Gemfeed is that you'll
+be able to get your content aggregated there from the earliest days.
+Stay tuned!
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002470.html">New Gemini Server
+</A></li>
+	<LI>Next message (by thread): <A HREF="000503.html">[ANN] Announcing Gemfeed, an Atom feed tool for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#502">[ date ]</a>
+              <a href="thread.html#502">[ thread ]</a>
+              <a href="subject.html#502">[ subject ]</a>
+              <a href="author.html#502">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] Questions about cache
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Questions%20about%20cache&In-Reply-To=%3C20201222232915.56pi2cy6f4heldaz%40GLaDOS%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004292.html">
+   <LINK REL="Next"  HREF="004300.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] Questions about cache</H1>
+    <B>Alex // nytpu</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Questions%20about%20cache&In-Reply-To=%3C20201222232915.56pi2cy6f4heldaz%40GLaDOS%3E"
+       TITLE="[tech] Questions about cache">alex at nytpu.com
+       </A><BR>
+    <I>Tue Dec 22 23:29:15 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004292.html">[tech] Questions about cache
+</A></li>
+        <LI>Next message (by thread): <A HREF="004300.html">[tech] Questions about cache
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4293">[ date ]</a>
+              <a href="thread.html#4293">[ thread ]</a>
+              <a href="subject.html#4293">[ subject ]</a>
+              <a href="author.html#4293">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> &gt; Gemini has no support for caching
+</I>
+This is referring to protocol-mandated caching, there's nothing saying a
+client can't cache at its discretion. It also implies that if your
+dynamic content doesn't work, then it's the client's fault, not yours
+nor the protocol's.
+
+
+&gt;<i> So I was a bit surprised when I was putting together some dynamic
+</I>&gt;<i> content for my capsule and found that my client (amfora) was caching
+</I>&gt;<i> things. I was able to get around it by using temporary redirects to
+</I>&gt;<i> add cache busting query strings.
+</I>
+Well behaved clients usually have some way to disable or get around the
+cache. For instance, Lagrange only caches forwards and backwards
+navigation, and any new links visited will not use the cache, even if
+you've already visited that page.
+
+Looking at the Amfora code, it seems like there's 3 limits to the
+cache[1]: number of pages, size in bytes, and number of seconds. This
+seems to be configurable[2],and it looks like it *should* (I may be
+misreading the code) hard reload the page when you refresh a tab[3]. Not
+that this is helpful for dynamic content, you can't expect your users to
+do an extra refresh every time, but helpful if you're viewing a dynamic
+page yourself.
+
+[1]: <A HREF="https://github.com/makeworld-the-better-one/amfora/blob/master/cache/page.go#L19-L3">https://github.com/makeworld-the-better-one/amfora/blob/master/cache/page.go#L19-L3</A>
+[2]: <A HREF="https://github.com/makeworld-the-better-one/amfora/blob/master/config/config.go#L199-L201">https://github.com/makeworld-the-better-one/amfora/blob/master/config/config.go#L199-L201</A>
+[3]: <A HREF="https://github.com/makeworld-the-better-one/amfora/blob/master/display/display.go#L591-L592">https://github.com/makeworld-the-better-one/amfora/blob/master/display/display.go#L591-L592</A>
+
+
+&gt;<i> &gt; ...I only added it for cache-busting on lynx (otherwise you would
+</I>&gt;<i> &gt; always see the same result as the first time you loaded the page).
+</I>
+This seems like lynx's fault. Caching a page permanently is not a good
+idea, even in webspace.
+
+
+&gt;<i> Is there some guarantee that a capsule writer has on what may _not_ be
+</I>&gt;<i> cached, or is it entirely up to the client's discretion? If the
+</I>&gt;<i> latter, is this something which could be clarified in the spec? My
+</I>&gt;<i> impression from this ML was that caching is frowned upon (except for
+</I>&gt;<i> perhaps navigating back and forth through your history), but this has
+</I>&gt;<i> not been my experience (at least with amfora).
+</I>
+There's no way to guarantee or request it, because pages assume they
+aren't cached. The consensus on caching should be that it should be only
+in special circumstances instead of the norm (for instance, caching
+forward/backward navigation only). I'd look to see if there's a way to
+disable caching on a per-site basis or at least temporarily disable it
+globally in Amfora, because having a cache that acts like that doesn't
+seem quite right. Absolute worst case, use a different client for
+dynamic content than you would use for static content.
+
+
+Just because I'm lazy I wouldn't go out of my way to implement cache
+busting, and instead just put a warning saying some clients may cache
+the page and cause it to not function properly. Especially when most
+clients don't cache, and the cache-busting would clog up
+forward/backward navigation on normal clients.
+
+~nytpu
+
+-- 
+Alex // nytpu
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">alex at nytpu.com</A>
+GPG Key: <A HREF="https://www.nytpu.com/files/pubkey.asc">https://www.nytpu.com/files/pubkey.asc</A>
+Key fingerprint: 43A5 890C EE85 EA1F 8C88 9492 ECCD C07B 337B 8F5B
+<A HREF="https://useplaintext.email/">https://useplaintext.email/</A>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 833 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201222/caf4c00c/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201222/caf4c00c/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004292.html">[tech] Questions about cache
+</A></li>
+	<LI>Next message (by thread): <A HREF="004300.html">[tech] Questions about cache
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4293">[ date ]</a>
+              <a href="thread.html#4293">[ thread ]</a>
+              <a href="subject.html#4293">[ subject ]</a>
+              <a href="author.html#4293">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Caching and status codes
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3C20201106055217.GA4163%40202x.moe%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003104.html">
+   <LINK REL="Next"  HREF="003078.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Caching and status codes</H1>
+    <B>bie</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3C20201106055217.GA4163%40202x.moe%3E"
+       TITLE="Caching and status codes">bie at 202x.moe
+       </A><BR>
+    <I>Fri Nov  6 05:52:17 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003104.html">[ANN] twins, a Gemini server written in Go
+</A></li>
+        <LI>Next message (by thread): <A HREF="003078.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3077">[ date ]</a>
+              <a href="thread.html#3077">[ thread ]</a>
+              <a href="subject.html#3077">[ subject ]</a>
+              <a href="author.html#3077">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello everyone!
+
+There's been some light discussion on the gemini irc channel about if
+and how clients should cache gemini responses, and I'd love to hear how
+people here think about the issue...
+
+Personally I feel like caching adds a ton of complexity, so the default
+behavior should be not to cache anything. There's no way to know if the
+response from a server is the product of a dynamic CGI script or a static
+file, and trying to guess at what's what will definitely introduce some
+weird behavior. Just to give some examples - on my personal site I have
+a script that returns a random jpeg, a guestbook and a simple gemlog,
+none of which should be cached!
+
+Now, I don't see the need for caching at all when it comes to
+gemini, but if it's something the gemini community wants or needs then
+I'd like to suggest a 2x status code that let's a client know that the
+response is unlikely to change and thus cacheable. This could even kind
+of match how the temporary/permanent redirect status codes are defined:
+
+20 - SUCCESS
+21 - &quot;PERMANENT&quot; SUCCESS (Feel free to cache this)
+
+This allows simple clients to keep doing what they're doing now (send a
+request, show the response) and allows more complex clients to play
+around with caching without breaking compatibility with what we already
+have.
+
+Another suggestion made on irc was to do the opposite and create a &quot;do
+not cache&quot; 2x status code, but I'm not really sold on that. Caching
+introduces a lot of complexity even without a separate status code (how
+should query strings be handled, 1x responses, redirects?) and these
+issues don't go away if you add a &quot;do not cache&quot; code.
+
+Any thoughts...?
+
+bie
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003104.html">[ANN] twins, a Gemini server written in Go
+</A></li>
+	<LI>Next message (by thread): <A HREF="003078.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3077">[ date ]</a>
+              <a href="thread.html#3077">[ thread ]</a>
+              <a href="subject.html#3077">[ subject ]</a>
+              <a href="author.html#3077">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Some reading on IRIs and IDNs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3C20201209221749.GA24194%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003933.html">
+   <LINK REL="Next"  HREF="003936.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Some reading on IRIs and IDNs</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3C20201209221749.GA24194%40brevard.conman.org%3E"
+       TITLE="Some reading on IRIs and IDNs">sean at conman.org
+       </A><BR>
+    <I>Wed Dec  9 22:17:49 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003933.html">Some reading on IRIs and IDNs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003936.html">Some reading on IRIs and IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3935">[ date ]</a>
+              <a href="thread.html#3935">[ thread ]</a>
+              <a href="subject.html#3935">[ subject ]</a>
+              <a href="author.html#3935">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Stephane Bortzmeyer once stated:
+&gt;<i> On Wed, Dec 09, 2020 at 12:26:51AM -0500,
+</I>&gt;<i>  Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote 
+</I>&gt;<i>  a message of 73 lines which said:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; It does have an RFC (RFC-3492) and said RFC does contain code for
+</I>&gt;<i> &gt; encoding and decoding punycode (but it's in C, and the API is
+</I>&gt;<i> &gt; ... not what I would define but it can be worked with).
+</I>&gt;<i> 
+</I>&gt;<i> There is an implemention of Punycode in every standard library,
+</I>&gt;<i> whatever your language.
+</I>&gt;<i> 
+</I>&gt;<i> &gt; so a domain name like &quot;&#32013;&#35910;.english.s&#229;d&#228;r.&#1605;&#1589;&#1585;&quot; is converted thusly:
+</I>&gt;<i> 
+</I>&gt;<i> In Python (but it is as simple in any other language):
+</I>&gt;<i> 
+</I>&gt;<i> &gt;&gt;&gt; print(codecs.encode(&quot;&#32013;&#35910;.English.s&#229;d&#228;r.&#1605;&#1589;&#1585;&quot;, encoding=&quot;idna&quot;))
+</I>&gt;<i> b'xn--99zt52a.English.xn--sdr-rlad.xn--wgbh1c'
+</I>&gt;<i> 
+</I>&gt;<i> (Note that the encodings.idna library of Python standard library is
+</I>&gt;<i> limited to IDN v1.)
+</I>&gt;<i> 
+</I>&gt;<i> So, almost nothing to do for the programmer. I don't agree with your
+</I>&gt;<i> assessment that IDN is simpler than IRI.
+</I>
+  I'm sorry, but the two languages I work in do *not* have an implementation
+of punycode in their standard library.  I *was* able to find code for C
+(from the RFC, which at least I know will work per the RFC) and could not
+find one for Lua.  There's a reason why I'm having to muck with this.  The
+API I have for C is *not* set up to handle domain names (breaking out the
+labels, prepending or removing the &quot;xn--&quot;, etc.).
+
+  It's wonderful that the language you use comes with punycode support in
+its standard library.  Not all languages have that.  I'm looking at the list
+of clients [1] and there's one client written in a language I haven't heard
+of before (Vala).  Other languages used are Nim, scheme and Tcl.  I would be
+surprised if Vala or Nim have a punycode implementation.
+
+  -spc (But hey, write your own client that does eveything you want and show
+	us all how easy it is)
+
+[1]	<A HREF="gemini://gemini.circumlunar.space/software/">gemini://gemini.circumlunar.space/software/</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003933.html">Some reading on IRIs and IDNs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003936.html">Some reading on IRIs and IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3935">[ date ]</a>
+              <a href="thread.html#3935">[ thread ]</a>
+              <a href="subject.html#3935">[ subject ]</a>
+              <a href="author.html#3935">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Postel's Law
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Postel%27s%20Law&In-Reply-To=%3CCAD2gp_SVxStz_WWsxoxfAJZPgkdSs55gVGA0cXWYTB87qxWoOQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003688.html">
+   <LINK REL="Next"  HREF="003710.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Postel's Law</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Postel%27s%20Law&In-Reply-To=%3CCAD2gp_SVxStz_WWsxoxfAJZPgkdSs55gVGA0cXWYTB87qxWoOQ%40mail.gmail.com%3E"
+       TITLE="Postel's Law">cowan at ccil.org
+       </A><BR>
+    <I>Mon Nov 30 15:07:30 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003688.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003710.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3681">[ date ]</a>
+              <a href="thread.html#3681">[ thread ]</a>
+              <a href="subject.html#3681">[ subject ]</a>
+              <a href="author.html#3681">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, Nov 30, 2020 at 3:28 AM Stephane Bortzmeyer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stephane at sources.org</A>&gt;
+wrote:
+
+Note that one of the reasons why the Web became so bloated is
+&gt;<i> precisely Postel's law (the robustness principle). Browsers and
+</I>&gt;<i> servers violate the spec, these violations soon became
+</I>&gt;<i> de-facto-mandatory-to-support and one after the other, the &quot;unofficial
+</I>&gt;<i> spec&quot; became much larger than the real one.
+</I>&gt;<i>
+</I>
+Not that I was there at the time, but I firmly believe that Postel's law
+has always meant &quot;Don't exploit obscure features of the protocol when
+sending; but do be prepared for them, as well as for outright errors, when
+receiving&quot;, and so has nothing to do with trying to make sense of received
+but invalid transmissions.  RFC 1122 (1989) section 1.1.2 agrees with this
+interpretation:
+
+         At every layer of the protocols, there is a general rule whose
+         application can lead to enormous benefits in robustness and
+         interoperability:
+
+                &quot;Be liberal in what you accept, and
+                 conservative in what you send&quot;
+
+         Software should be written to deal with every conceivable
+         error, no matter how unlikely; sooner or later a packet will
+         come in with that particular combination of errors and
+         attributes, and unless the software is prepared, chaos can
+         ensue.  In general, it is best to assume that the network is
+         filled with malevolent entities that will send in packets
+         designed to have the worst possible effect.  This assumption
+         will lead to suitable protective design, although the most
+         serious problems in the Internet have been caused by
+         unenvisaged mechanisms triggered by low-probability events;
+         mere human malice would never have taken so devious a course!
+
+         Adaptability to change must be designed into all levels of
+         Internet [...] software.  As a simple example, consider a
+         protocol specification that contains an enumeration of values
+         for a particular header field -- e.g., a type field, a port
+         number, or an error code; this enumeration must be assumed to
+         be incomplete.  Thus, if a protocol specification defines four
+         possible error codes, the software must not break when a fifth
+         code shows up.  An undefined code might be logged [...],
+         but it must not cause a failure.
+
+         The second part of the principle is almost as important:
+         software on other hosts may contain deficiencies that make it
+         unwise to exploit legal but obscure protocol features.  It is
+         unwise to stray far from the obvious and simple, lest untoward
+         effects result elsewhere.  A corollary of this is &quot;watch out
+         for misbehaving hosts&quot;; host software should be prepared, not
+         just to survive other misbehaving hosts, but also to cooperate
+         to limit the amount of disruption such hosts can cause to the
+         shared communication facility.
+
+I think that implementers have in effect misunderstood the phrase &quot;deal
+with every conceivable error&quot; as if it meant &quot;accept every conceivable
+error and try to act on it&quot;, but the context makes it clear (to me, at
+least) that what is meant is &quot;not crash on any conceivable error&quot;.
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+Almost all theorems are true, but almost all proofs have bugs.
+        --Paul Pedersen
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201130/b8d15260/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201130/b8d15260/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003688.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003710.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3681">[ date ]</a>
+              <a href="thread.html#3681">[ thread ]</a>
+              <a href="subject.html#3681">[ subject ]</a>
+              <a href="author.html#3681">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

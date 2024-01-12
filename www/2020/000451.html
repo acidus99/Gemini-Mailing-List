@@ -1,0 +1,281 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> An outsider's view of the `gemini://` protocol
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20outsider%27s%20view%20of%20the%20%60gemini%3A//%60%20protocol&In-Reply-To=%3C20200228223235.GA8734%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000447.html">
+   <LINK REL="Next"  HREF="000453.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>An outsider's view of the `gemini://` protocol</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20outsider%27s%20view%20of%20the%20%60gemini%3A//%60%20protocol&In-Reply-To=%3C20200228223235.GA8734%40SDF.ORG%3E"
+       TITLE="An outsider's view of the `gemini://` protocol">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Fri Feb 28 22:32:35 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000447.html">An outsider's view of the `gemini://` protocol
+</A></li>
+        <LI>Next message (by thread): <A HREF="000453.html">An outsider's view of the `gemini://` protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#451">[ date ]</a>
+              <a href="thread.html#451">[ thread ]</a>
+              <a href="subject.html#451">[ subject ]</a>
+              <a href="author.html#451">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Feb 28, 2020 at 01:16:30AM +0200, Ciprian Dorin Craciun wrote:
+&gt;<i> Hello all!
+</I>&gt;<i> 
+</I>&gt;<i> Today I've stumbled upon the `<A HREF="gemini://`">gemini://`</A> protocol specification
+</I>&gt;<i> (v0.10) and FAQ, and after reading them both, I thought that perhaps
+</I>&gt;<i> an &quot;outsiders&quot; point of view could be useful.
+</I>
+Howdy!
+
+Thanks very much for taking the time to provide this outside
+perspective.  I've done my best to take your comments in the
+constructive fashion you intended them.  I'm going to reply relatively
+briefly to some major points below - please don't take brevity as me
+being dismissive, it's more to do with my available time!
+ 
+&gt;<i> * caching -- given that most content is going to be static, caching
+</I>&gt;<i> should be quite useful;  however it doesn't seem to have been present
+</I>&gt;<i> as a concern neither in the spec, FAQ or the mailing list archive;
+</I>&gt;<i> I'm not advocating for the whole HTTP caching headers, but perhaps for
+</I>&gt;<i> a simple SHA of the body so that clients can just skip downloading it
+</I>&gt;<i> (although this would imply a more elaborate protocol, having a
+</I>&gt;<i> &quot;headers&quot; and separate &quot;body&quot; phase);
+</I>
+Not just a more elaborate protocol (although that does count, by itself,
+against caching, as implementation simplicity is a driving goal of the
+protocol), but a more extensible protocol.  I've fought since day one
+against anything that acts to divide the response header into parts,
+equivalent to the multiple header lines of HTTP.  Extensibility, for all
+its benefits, is the eventual death of simplicity.
+
+Caching is not a bad thing, but it pays off the most for large content.
+Leaving caching out actively encourages content producers to make their
+content as small as possible.  I like that.
+ 
+&gt;<i> * compression -- needless to say that `text/*` MIME types compress
+</I>&gt;<i> very well, thus saving both bandwidth and caching storage;  (granted
+</I>&gt;<i> one can use compression on the TLS side, although I think that one was
+</I>&gt;<i> dropped due to security issues?);
+</I>
+As above, compression is not a bad thing, but for small content the
+benefit is not proportionate to the implementation effort.  Gopherspace
+is an existence proof that worthwhile textual content can be served
+uncompressed and still be orders of magnitude smaller than the average
+website which *does* use compression.
+
+You're right about TLS compression having security problems.
+
+&gt;<i> * `Content-Length` -- I've seen this mentioned in the FAQ or the
+</I>&gt;<i> mailing lists;  I think the days of &quot;unreliable&quot; protocols has passed;
+</I>&gt;<i>  (i.e. we should better make sure that the intended document was
+</I>&gt;<i> properly delivered, in its entirety and unaltered;)
+</I>
+This is definitely the biggest existing pain point in Gemini so far, I
+think.  I might write about this in another email.  I still think for
+various reasons we can live without this, but I won't swear that if the
+right solution is proposed I won't consider it.
+
+Someone did mention earlier on the list that TLS has a way to explicitly
+signal a clean shut down of a connection, which would provide &quot;in its
+entirety&quot;.
+
+&gt;<i> * status codes -- although both Gemini and HTTP use numeric status
+</I>&gt;<i> codes, I do believe that these are an artifact of ancient times, and
+</I>&gt;<i> we could just replace them with proper symbols (perhaps hierarchical
+</I>&gt;<i> in nature like `redirect:temporary` or `failure:temporary:slow-down`;
+</I>
+This seems to me like extra bytes with very little benefit?  The status
+codes are supposed to be machine-readable, so what's wrong with numbers?
+
+&gt;<i> * keep-alive -- although in Gopher and Gemini the served documents
+</I>&gt;<i> seem to be self-contained, and usually connections will be idle while
+</I>&gt;<i> the user is pondering what to read, in case of crawlers having to
+</I>&gt;<i> re-establish each time a new connection (especially a TLS one) would
+</I>&gt;<i> eat a lot of resources and incur significant delays;  (not to mention
+</I>&gt;<i> that repeated TCP connection establishment to the same port or target
+</I>&gt;<i> IP might be misinterpreted as an attack by various security appliances
+</I>&gt;<i> or cloud providers;)
+</I>
+The overhead of setting up a new TLS connection each time is a shame.
+TLS 1.3 introduces new functionality to reuse previously negotiated
+content, which is currently not widely supported in a lot of libraries
+but I hope that this will become easier in the future and ease some of
+the pain on this point.
+ 
+&gt;<i> Now on the transport side, somewhat related to the previous point, I
+</I>&gt;<i> think TLS transient certificates are an overkill...  If one wants to
+</I>&gt;<i> implement &quot;sessions&quot;, one could introduce
+</I>&gt;<i> &quot;client-side-generated-cookies&quot; which are functionally equivalent to
+</I>&gt;<i> these transient certificates.  Instead of creating a transient
+</I>&gt;<i> certificate, the client generates a unique token and sends that to the
+</I>&gt;<i> server instead.  The server has no more control over the value of that
+</I>&gt;<i> cookie as it does for the transient certificate.
+</I>&gt;<i>
+</I>&gt;<i> Moreover the way sessions are signaled between the server and client,
+</I>&gt;<i> piggy-backed ontop of status codes, seems rather an afterthought than
+</I>&gt;<i> part of an orthogonal design.  Perhaps these sessions should &quot;moved&quot;
+</I>&gt;<i> to a higher level (i.e. after transport and before the actual
+</I>&gt;<i> transaction, just like in the case of OSI stack).
+</I> 
+This is all true, but once client certificate support was already in the
+protocol for reasons unrelated to sessions, since it was *possible* to
+implement sessions using client certificates instead of adding some new
+part to the protocol, I chose to do it.  This is part of the &quot;maximise
+power to weight&quot; principle that has guided Gemini's design.  Once you
+are paying the weight penalty for some part of the protocol, you should
+extract as much power from it you can by using it to solve any problem
+you can.  This will lead to somewhat clunky solutions to problems
+cobbled together from two or three exisitng parts, even when there is an
+obvious neater solution that could be achieved with one non-existing
+part, but I'm okay with that.
+ 
+&gt;<i> Also these transient certificates are sold as &quot;privacy enablers&quot; or
+</I>&gt;<i> &quot;tracking preventing&quot; which is far from the truth.  The server (based
+</I>&gt;<i> on IP, ASN or other information) can easily map various transient
+</I>&gt;<i> certificates as &quot;possibly&quot; belonging to the same person.  Thus just by
+</I>&gt;<i> allowing these one opens up the possibility of tracking (even if only
+</I>&gt;<i> for a given session).  Moreover, securely generating these transient
+</I>&gt;<i> certificates does require some CPU power.
+</I>
+But servers can do that with raw requests anyway, right?
+
+The CPU power point is well taken, believe me.  I have considered having
+the spec (or maybe this belongs in our Best Practices document)
+encourage implementers to support and to prefer the computationally
+lighter ciphers in TLS (e.g. the ChaCha stream cipher).
+ 
+&gt;<i> On a second thought, why TLS?  Why not something based on NaCL /
+</I>&gt;<i> `libsodium` constructs, or even the &quot;Noise Protocol&quot;
+</I>&gt;<i> (<A HREF="http://www.noiseprotocol.org/">http://www.noiseprotocol.org/</A>)?
+</I>
+Mostly because TLS library support is much more wide spread than
+anything else.
+
+&gt;<i> For example I've tried to build the
+</I>&gt;<i> Asuka Rust-based client and it pulled ~104 dependencies and took a few
+</I>&gt;<i> minutes to compile, this doesn't seem too lightweight...
+</I>
+A slight off-topic rant:  That's not Asuka's fault, it's not TLS's fault
+and it's not Gemini's fault, that's Rust's fault.  Every single Rust
+program I have ever tried to build has had over 100 dependencies.  Every
+single one has had at least one dependency with a minimum required
+version (of either the library, or Rust itself) which was released only
+yesterday.  The Rust toolchain and community seem to support and even
+actively encourage this unsustainable approach to development.  It
+strikes me (as an outsider!) as a total mess.
+ 
+&gt;<i> Why not just re-use PGP to sign / encrypt requests and replies?  With
+</I>&gt;<i> regard to PGP, given that Gopher communities tend to be quite small,
+</I>&gt;<i> and composed of mostly &quot;techie&quot; people, this goes hand-in-hand with
+</I>&gt;<i> the &quot;web-of-trust&quot;
+</I>
+I would prefer not to do anything like explicitly designing Gemini to
+cater to a small and tight-knit group of techies.  I know it's that now,
+and maybe that's all it will ever be, but I would like to give it a
+decent chance of being more.
+
+There is an `application/pgp-encrypted` MIME type that Gemini can serve
+content with, and people can write clients that to handle this, so
+Gemininaut cypherpunks can do this if they want to!
+
+&gt;<i> Now getting back to the `<A HREF="gemini://`">gemini://`</A> protocol, another odd thing I
+</I>&gt;<i> found is the &quot;query&quot; feature.  Gemini explicitly supports only `GET`
+</I>&gt;<i> requests, and the `text/gemini` format doesn't support forms, yet it
+</I>&gt;<i> still tries to implement a &quot;single input-box form&quot;...  Granted it's a
+</I>&gt;<i> nice hack, but it's not &quot;elegant&quot;...  (Again, like in the case of
+</I>&gt;<i> sessions, it seems more as an afterthought, even though this is the
+</I>&gt;<i> way Gopher does it...)
+</I>
+&gt;<i> Perhaps a simple &quot;form&quot; solution would be better?  Perhaps completely
+</I>&gt;<i> eliminating for the time these &quot;queries&quot;?  Or perhaps introducing a
+</I>&gt;<i> new form of URL's like for example:
+</I>&gt;<i> `gemini-query:?url=<A HREF="gemini://server/path&amp;prompt=Please+enter+something`">gemini://server/path&amp;prompt=Please+enter+something`</A>
+</I>&gt;<i> which can be served either in-line (as was possible in Gopher) and /
+</I>&gt;<i> or served as a redirect (thus eliminating another status code family).
+</I>
+I did, back during the long, drawn-out contemplation of whether to use
+one, two or three digit status codes, consider having the META content
+for query status be a string in some kind of small DSL for defining a
+form, but decided against it.  You can simulate the effect using a
+sequency of &quot;single input forms&quot; tied together with a client certificate
+session.  This is, IMHO, &quot;elegant&quot; in it's own way - a FORTHy kind of
+elegance where you build complicated things up by combining a small set
+of sharp primitives in creative ways.
+
+&gt;<i> Regarding the `text/gemini` format -- and taking into account various
+</I>&gt;<i> emails in the archive about reflowing, etc -- makes me wonder if it is
+</I>&gt;<i> actually needed.  Why can't CommonMark be adopted as the HTML
+</I>&gt;<i> equivalent, and a more up-to-date Gopher map variant as an alternative
+</I>&gt;<i> for menus?  There are already countless safe CommonMark parsers
+</I>&gt;<i> out-there (for example in Rust there is one implemented by Google) and
+</I>&gt;<i> the format is well understood and accepted by a large community
+</I>&gt;<i> (especially the static side generators community).
+</I>
+Sorry, I'm still too busy recovering from the trauma of our text/gemini
+discussion around Markdown to respond to this now. :)
+ 
+&gt;<i> All in all I find the `<A HREF="gemini://`">gemini://`</A> project quite interesting, and I'll
+</I>&gt;<i> keep an close eye on it.
+</I>
+Please do!  And please continue to share your thoughts with us here.  I
+hope it doesn't seem to much like I've not taken some of your points
+seriously enough and have just stubbornly stuck to previous decisions.
+I really do see challenging questions regarding our design decisions as
+valuable things, and tried to consider your questions seriously - and
+I'll continue to do so in coming days.
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000447.html">An outsider's view of the `gemini://` protocol
+</A></li>
+	<LI>Next message (by thread): <A HREF="000453.html">An outsider's view of the `gemini://` protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#451">[ date ]</a>
+              <a href="thread.html#451">[ thread ]</a>
+              <a href="subject.html#451">[ subject ]</a>
+              <a href="author.html#451">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

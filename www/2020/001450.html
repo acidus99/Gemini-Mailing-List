@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> implementing client certificate support
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20implementing%20client%20certificate%20support&In-Reply-To=%3C20200609183923.GB13153%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001442.html">
+   <LINK REL="Next"  HREF="001463.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>implementing client certificate support</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20implementing%20client%20certificate%20support&In-Reply-To=%3C20200609183923.GB13153%40SDF.ORG%3E"
+       TITLE="implementing client certificate support">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Tue Jun  9 19:39:23 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001442.html">implementing client certificate support
+</A></li>
+        <LI>Next message (by thread): <A HREF="001463.html">implementing client certificate support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1450">[ date ]</a>
+              <a href="thread.html#1450">[ thread ]</a>
+              <a href="subject.html#1450">[ subject ]</a>
+              <a href="author.html#1450">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Jun 09, 2020 at 12:01:28AM -0400, Michael Lazar wrote:
+ 
+&gt;<i> Any complexity that we can remove from the spec surrounding client certificates
+</I>&gt;<i> is a strong positive. I'm in favor of deprecating the 61 and 21 status codes.
+</I>
+I was thinking of dropping 21 and &quot;softening&quot; 61 to mean something like
+&quot;you need a certificate to access this resource, and the server is
+signalling that it's okay to use something temporary/disposable&quot; - i.e.
+to make it clear this is not an Astrobotany-style application where
+losing your key/cert pair means forever losing access to your account.
+Clients can handle this however they want - some clients will implement
+good support for transient certs which never hit the disk, and will brag
+about that, and users who really care will use them.
+
+In general, I was thinking of just having a bunch of 6x codes which all
+mean &quot;you need a cert to get in here&quot; but with different hints as to
+what is expected - something you can generate yourself on the spot and
+dispose of when you like, something you can generate yourself on the spot
+and should take care to keep hold of (astrobotany style), or something
+pre-approved by the admin (which might mean a CSR process, or just a
+fingerprint whitelisting).  No prescribed behaviour for any of them,
+clients can give users as many or as few options for dealing with them as
+the authors see fit, but at least this way they can convey enough
+information to the user for them to make an informed choice.
+
+&gt;<i> Drop &quot;64 FUTURE CERTIFICATE REJECTED&quot; and &quot;65 EXPIRED CERTIFICATE REJECTED&quot;
+</I>&gt;<i> while you're at it, they can be subsumed by &quot;63 CERTIFICATE NOT ACCEPTED&quot;.
+</I>
+I expect Sean to object to this...
+ 
+&gt;<i> Judging by the lack of client support so far, it's becoming clear that either:
+</I>&gt;<i> 
+</I>&gt;<i> 1. They're a pain to implement compared to the rest of the specification
+</I>
+This is true.  I may amend the spec the explicitly call them an advanced
+and optional feature.  People should not feel ashamed of writing a
+client that just opts out of the whole thing.  To some extent the
+existence of good clients which do this will act as a defence against
+people putting stuff behind certificates without very good reason.
+
+&gt;<i> It sticks out when compared to the rest of the spec, which mostly borrows from
+</I>&gt;<i> tried-and-true patterns already seen in gopher/WWW.
+</I>
+I like to think of at least the pre-approved cert workflow as
+tried-and-true from ssh.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001442.html">implementing client certificate support
+</A></li>
+	<LI>Next message (by thread): <A HREF="001463.html">implementing client certificate support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1450">[ date ]</a>
+              <a href="thread.html#1450">[ thread ]</a>
+              <a href="subject.html#1450">[ subject ]</a>
+              <a href="author.html#1450">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> TLS certificate sizes in Geminispace
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20TLS%20certificate%20sizes%20in%20Geminispace&In-Reply-To=%3Cc616a813-2b01-65f6-6273-7ee246ab5d28%40pwarren.id.au%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001965.html">
+   <LINK REL="Next"  HREF="001970.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>TLS certificate sizes in Geminispace</H1>
+    <B>Paul Warren</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20TLS%20certificate%20sizes%20in%20Geminispace&In-Reply-To=%3Cc616a813-2b01-65f6-6273-7ee246ab5d28%40pwarren.id.au%3E"
+       TITLE="TLS certificate sizes in Geminispace">pwarren at pwarren.id.au
+       </A><BR>
+    <I>Sat Jun 27 11:37:17 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001965.html">TLS certificate sizes in Geminispace
+</A></li>
+        <LI>Next message (by thread): <A HREF="001970.html">TLS certificate sizes in Geminispace
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1969">[ date ]</a>
+              <a href="thread.html#1969">[ thread ]</a>
+              <a href="subject.html#1969">[ subject ]</a>
+              <a href="author.html#1969">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>G'day!
+
+I've put an ed25519 based cert on <A HREF="gemini://gem.pwarren.id.au/">gemini://gem.pwarren.id.au/</A> which is
+being served out by the latest gemserv.
+
+I generated it on debian with openssl 1.1.1d via:
+
+$ openssl genpkey -algorithm ED25519 &gt; gemkey.pem
+
+$ openssl req -x509 -key gemkey.pem -subj &quot;/CN=gem.pwarren.id.au&quot;
+-reqexts SAN -extensions SAN -config &lt;(cat /etc/ssl/openssl.cnf &lt;(printf
+&quot;[SAN]\nsubjectAltName=DNS:gem.pwarren.id.au,DNS:gemini.pwarren.id.au,DNS:gemini.lan&quot;))
+-out gemnew.pem -days 3600
+
+I'm not sure if SANs are required really for gemini, I think with the
+TOFU idea it's only the hash that matters?
+
+The new cert is 489 bytes vs the 1830 for the old RSA keyed certificate
+(in PEM format), most of my content so far is &lt; 2000 bytes!
+
+Cheers
+--
+Paul
+
+
+On 27/6/20 6:58 pm, solderpunk wrote:
+&gt;<i> ----- Forwarded message from solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at SDF.ORG</A>&gt; -----
+</I>&gt;<i> 
+</I>&gt;<i> Date: Fri, 26 Jun 2020 15:57:59 +0000
+</I>&gt;<i> From: solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at SDF.ORG</A>&gt;
+</I>&gt;<i> To: Gemini application layer protocol &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gemini at lists.orbitalfox.eu</A>&gt;
+</I>&gt;<i> Subject: Re: TLS certificate sizes in Geminispace
+</I>&gt;<i> 
+</I>&gt;<i> On Fri, Jun 26, 2020 at 05:05:22PM +0200, Felix Quei&#223;ner wrote:
+</I>&gt;&gt;&gt;<i> This makes me think it's an error with the server, as opposed to the ED22519 key; I'd love to try another server with this type of certificate for testing.
+</I>&gt;&gt;<i> Using Kristall works and it's blazingly fast, seems to be a correct
+</I>&gt;&gt;<i> server configuration
+</I>&gt;&gt;<i>
+</I>&gt;<i> 
+</I>&gt;<i> Hmm, I think SDF's mail server must be having issues, I'm not seeing
+</I>&gt;<i> other posts to this thread, even my own replies, but I can see them at
+</I>&gt;<i> Sloum's Gemini mirror of the list.  I'll send this now in the hopes it
+</I>&gt;<i> gets through eventually...
+</I>&gt;<i> 
+</I>&gt;<i> I think perhaps it is, indeed, the case that older versions of OpenSSL
+</I>&gt;<i> will choke on this.  That *sucks*.  I know this is a big problem with
+</I>&gt;<i> the web, but the web, by virtue of being mostly a commercial enterprise,
+</I>&gt;<i> needs to support janky old clients because the people using them still
+</I>&gt;<i> have good money.  I figured that since there *are* no janky old Gemini
+</I>&gt;<i> clients, we would not be bitten by this kind of thing.
+</I>&gt;<i> 
+</I>&gt;<i> Okay, perhaps everybody jumping to ED22519 right now is not viable, but
+</I>&gt;<i> it should be a medium-term goal and, in the mean time, we can figure out
+</I>&gt;<i> what the smallest possible widely supported certificate is (without
+</I>&gt;<i> doing silly things like using tiny key sizes), and build tools / write
+</I>&gt;<i> docs help folks generate them.
+</I>&gt;<i> 
+</I>&gt;<i> Cheers,
+</I>&gt;<i> Solderpunk
+</I>&gt;<i> 
+</I>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 1003 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200627/d958682b/attachment-0001.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20200627/d958682b/attachment-0001.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001965.html">TLS certificate sizes in Geminispace
+</A></li>
+	<LI>Next message (by thread): <A HREF="001970.html">TLS certificate sizes in Geminispace
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1969">[ date ]</a>
+              <a href="thread.html#1969">[ thread ]</a>
+              <a href="subject.html#1969">[ subject ]</a>
+              <a href="author.html#1969">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

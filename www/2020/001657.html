@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Uploading Gemini content
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Uploading%20Gemini%20content&In-Reply-To=%3C20200614031119.GR11281%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001639.html">
+   <LINK REL="Next"  HREF="001612.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Uploading Gemini content</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Uploading%20Gemini%20content&In-Reply-To=%3C20200614031119.GR11281%40brevard.conman.org%3E"
+       TITLE="Uploading Gemini content">sean at conman.org
+       </A><BR>
+    <I>Sun Jun 14 04:11:19 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001639.html">Uploading Gemini content
+</A></li>
+        <LI>Next message (by thread): <A HREF="001612.html">sysadmin advice concerning backups
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1657">[ date ]</a>
+              <a href="thread.html#1657">[ thread ]</a>
+              <a href="subject.html#1657">[ subject ]</a>
+              <a href="author.html#1657">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+  To begin with, I'm going with the titan: scheme, to ensure that this isn't
+mixed up with the gemini: scheme itself.
+
+  This proposal is mostly based upon a new URL scheme, and I've spent the
+day diving deep into RFC-7595 (URI Scheme Guidelines June 2015, current
+standard).  First, the good news---gemini fits the spec for a &quot;Permanent
+Status&quot; with the IETF.  Next, these bits from the RFC:
+
+Section 1:
+
+	The URI syntax provides a federated and extensible naming system,
+	where each scheme's specification can further restrict the syntax
+	and define the semantics of identifiers using that scheme.
+
+Section 3.4:
+
+	Note: It is perfectly valid to say that &quot;no operation apart from GET
+	is defined for this URI.&quot;
+
+  Both are quite good for the current definition of the gemini: scheme. 
+
+  It's some other bits from section 3.4 that bodes somewhat well for the
+current proposal (with a new scheme) under consideration:
+
+	It is also valid to say that &quot;there's only one operation defined for
+	this URI, and it's not very GET-like.&quot; The important point is that
+	what is defined on this scheme is described ... The default
+	invocation, or dereferencing, of a URI SHOULD be &quot;safe&quot; in the sense
+	described by Section 3.4 of [W3CWebArch]; i.e., performing such an
+	invocation should not incur any additional obligations by doing so.
+
+[W3CWebArch]	<A HREF="https://www.w3.org/TR/webarch/#safe-interaction">https://www.w3.org/TR/webarch/#safe-interaction</A>
+
+  So doing a non-GET method based on a scheme is okay.  That's the one thing
+I was worried about, as I looked over all the currently registered schemes
+[1] appear to *only* specify a location, not an action and a location.  So
+the following are &quot;okay&quot; (ish) per the spec:
+
+	titan+put:
+	titan+post:
+	titan+del:
+
+  Further more, from RFC-6335 (Service Name and Port Number Procedures
+August 2011), section 5:
+
+	There may be more than one service name associated with a particular
+	transport protocol and port.  There are three ways that such port
+	number overloading can occur:
+
+	o  Overloading occurs when one service is an extension of another
+	   service, and an in-band mechanism exists for determining if the
+	   extension is present or not.
+
+  So I'm still &quot;okay&quot; (ish) with the new URL schemes.  
+
+  I rejected the following URL:
+
+	<A HREF="titan://put@example.com/path/to/new/item">titan://put@example.com/path/to/new/item</A>
+
+  While it's cute, and syntatically correct, semantically it's quite a
+stretch---it's not a &quot;user&quot;, it's a &quot;command&quot;, which doesn't semantically
+follow as a user nor a location.  It's too much of an abuse for my liking.
+
+  Semantically, I would probably treat these three new schemes differently. 
+The first, titan+post: (or titan-post: which is easier to type) would be:
+
+	titan+<A HREF="post://example.com/post-handler/endpoint?size=1234&amp;mime=text/plain">post://example.com/post-handler/endpoint?size=1234&amp;mime=text/plain</A>
+
+  The size and MIME types are part of the query string, as the data being
+uploaded is *NOT* a replacement of a resource on the server, must data for a
+service to consume, so semantically, it makes sense as a query string.
+
+	titan+<A HREF="put://example.com/path/to/new/resource;size=1234&amp;mime=text/plain">put://example.com/path/to/new/resource;size=1234&amp;mime=text/plain</A>
+
+  Here request is being replaced---there's no &quot;endpoint&quot; per se to receive
+the data, so query data doesn't make semantic sense.  The size and MIME type
+are inherent properties of the resource being uploaded, so by using the ';'
+as a sub-delimeter in the path, it semantically relates to the resource. 
+That semantic relationship doesn't exist with a query string.
+
+	tital+<A HREF="del://example.com/path/to/remove">del://example.com/path/to/remove</A>
+
+  Nothing more to say, other than the resource is removed.
+
+  Upon reflection, given the semantic meanings involved, I can cut the
+number of new schemes down to just one: &quot;titan:&quot;.  Here are the three
+examples again:
+
+	<A HREF="titan://example.com/post-handler/endpoint?size=1234&amp;mime=text/plain">titan://example.com/post-handler/endpoint?size=1234&amp;mime=text/plain</A>
+	<A HREF="titan://example.com/path/to/new/resource;size=1234&amp;mime=text/plain">titan://example.com/path/to/new/resource;size=1234&amp;mime=text/plain</A>
+	<A HREF="titan://example.com/path/to/remove;size=0">titan://example.com/path/to/remove;size=0</A>
+
+  The logic goes something like this [2]:
+
+	if the request has a query, it's an upload of data---accept data.
+	if the request has no query, and the path parameter (marked by ';')
+		doesn't exist---error.
+	if the request has no query, and the path parameter exists:
+		if size==0, delete the resource
+		if size&gt;0, accept data and make the resource available.
+
+  So that's my current thinking (other than having a way of Gemini to
+reverse the flow).
+
+  -spc
+
+[1]	<A HREF="https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml">https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml</A>
+
+[2]	Assuming proper authorization and data checks are made.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001639.html">Uploading Gemini content
+</A></li>
+	<LI>Next message (by thread): <A HREF="001612.html">sysadmin advice concerning backups
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1657">[ date ]</a>
+              <a href="thread.html#1657">[ thread ]</a>
+              <a href="subject.html#1657">[ subject ]</a>
+              <a href="author.html#1657">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

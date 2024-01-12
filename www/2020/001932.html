@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> TLS certificate sizes in Geminispace
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20TLS%20certificate%20sizes%20in%20Geminispace&In-Reply-To=%3C20200626135633.GD4156%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001961.html">
+   <LINK REL="Next"  HREF="001933.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>TLS certificate sizes in Geminispace</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20TLS%20certificate%20sizes%20in%20Geminispace&In-Reply-To=%3C20200626135633.GD4156%40SDF.ORG%3E"
+       TITLE="TLS certificate sizes in Geminispace">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Fri Jun 26 14:56:33 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001961.html">Real world data on TLS power consumption on mobile devices
+</A></li>
+        <LI>Next message (by thread): <A HREF="001933.html">TLS certificate sizes in Geminispace
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1932">[ date ]</a>
+              <a href="thread.html#1932">[ thread ]</a>
+              <a href="subject.html#1932">[ subject ]</a>
+              <a href="author.html#1932">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>There are several contributing factors to TLS overhead.  Some of it is
+network based, to do with actually downloading the certificate, and
+doing the handshake.  Some of it is computation based, to do with the
+key exchange calculations.  Which is the more important bottleneck will
+differe between applications.  In cases where network overhead is more
+important, getting down the size of the certificate may help.
+
+My AV-98 TOFU database has 103 certificates stored in it.  The mean size
+is 1247 bytes - about as large, IIRC, as the average text/gemini
+document.  95% of certificates range in size between 704 bytes and 1634
+bytes.
+
+However, the smallest certificate I have encountered belongs to
+cozylabs.eu.  It is 273 bytes, i.e. 20% of the average!  Or, about 1 KiB
+smaller than average.  That's 1KiB less network traffic for each
+request to that server compare to a typical server.
+
+cozylabs.eu achieves this feat with a single self-signed ED25519
+certificate.  For folks who want to ditch the CA system and embrace
+TOFU, this is clearly the way to do it.  I will migrate
+gemini.circumlunar.space to this style of certificate in the near
+future.
+
+Unfortunately making this kind of cert with the `openssl` tool is not
+as straightforward as other options.  The standard library for Go seems
+up to the task.  I will write a small and simple bulletproof program to
+generate these certs next week, and document it well.  It will be handy
+not only for server admins but people who want to generate their own
+client certs for use with clients like Alphonse.  Stay tund...
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001961.html">Real world data on TLS power consumption on mobile devices
+</A></li>
+	<LI>Next message (by thread): <A HREF="001933.html">TLS certificate sizes in Geminispace
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1932">[ date ]</a>
+              <a href="thread.html#1932">[ thread ]</a>
+              <a href="subject.html#1932">[ subject ]</a>
+              <a href="author.html#1932">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

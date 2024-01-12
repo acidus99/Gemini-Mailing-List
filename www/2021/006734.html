@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> a space case for transparent gemtext compression
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20a%20space%20case%20for%20transparent%20gemtext%20compression&In-Reply-To=%3CCAPx7jWc4Y8cbC%2BcNv_%2BXpFZFrY4wDt2kLCJifMix4%2Bz4xK3rkA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006753.html">
+   <LINK REL="Next"  HREF="006735.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>a space case for transparent gemtext compression</H1>
+    <B>Francis Siefken</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20a%20space%20case%20for%20transparent%20gemtext%20compression&In-Reply-To=%3CCAPx7jWc4Y8cbC%2BcNv_%2BXpFZFrY4wDt2kLCJifMix4%2Bz4xK3rkA%40mail.gmail.com%3E"
+       TITLE="a space case for transparent gemtext compression">fsiefken at gmail.com
+       </A><BR>
+    <I>Sat Jun 19 10:34:28 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006753.html">a space case for transparent gemtext compression
+</A></li>
+        <LI>Next message (by thread): <A HREF="006735.html">a space case for transparent gemtext compression
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6734">[ date ]</a>
+              <a href="thread.html#6734">[ thread ]</a>
+              <a href="subject.html#6734">[ subject ]</a>
+              <a href="author.html#6734">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Christian, on Sa 19 jun. 2021 09:15 Christian Seibold &lt;
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">krixano at mailbox.org</A>&gt; you wrote:
+
+&gt;<i> The last person who emailed on the mailing list was Johann Galle, not me.
+</I>
+I know, in my previous message replied specifically to your message vr 18
+june 14:24. Is there something wrong with that?
+
+&gt;<i> Please read my own response again.
+</I>[..]
+&gt;<i> If you're using zips, Lagrange doesn't take 4 user actions, it takes 1.
+</I>
+I understood what you meant yesterday. But in my test with Langrange 1.5.2
+and gmnisrv it took 4 steps. With the reference gpub (excellent choice) it
+takes 3 steps and it opens an addititional tab. With a gmi zip it says:
+&quot;xi.zip is a compressed archive. You can save it as a file to your
+Downloads folder: press Ctrl+S or select &quot;Save to Downloads&quot; from the
+menu.&quot; And then a whole lot more steps. I wish it would take zero steps and
+a client would for example automatically gunzip a gmi.gz and display it
+inline immediately by default.
+
+&gt;<i> Browsers should implement this, not the protocol. It's that's simple
+</I>
+Will it be? For example Asuka, Amfora, Ariane and Lagrange are nice
+browsers but if I read the discussion so far I am sure it will be
+implemented in the way I envision. Images and sounds are handled
+differently and take at least one or a few user actions. What I hope and
+wish for is that one day my Gemini capsule can serve index.gmi.zstd or
+index.gmi.ppmd transparently. I trust they can be automatically
+decompressed inline in the same tab by visiting browsers, either through
+the mime-type route, TLS compression or through a Gemini Content-Encoding
+and zstd or ppm server side compression.
+You mentioned the dogma browsers should implement this and not the
+protocol. I am curious as to what your reason for this is other then that
+gemini protocol is supposedly set in stone?
+Protocol support has been discussed on list before. On March 10, 2021
+Bradley D. Thornton had a similar remark &quot;neither of those two things
+(Accessibility or gzip compression) have anything to do with, nor have any
+place in discussions, for spec changes&quot; and argued:
+* &quot;Gemini is intended (expected, rather) to deliver mostly small files&quot;
+* &quot;at 1Gbps it's not really that big of a deal&quot;
+ and Solderpunk wrote 16th of January 2020:
+* &quot;compression is not a bad thing, but for small content the benefit is not
+proportionate to the implementation effort&quot;.
+
+But both arguments do not apply in low bandwidth situations (in a forest or
+in space), even with an 2000 byte mail like mine you get at least a 50%
+reduction which in some situations in space or remote places could
+theoretically mean life or death. IMAP has compression, HTTP has
+compression (for examplee Content-Encoding: zstd, rfc8478). How hard is it
+really, a few extra lines in the server?
+I'd think it's not much harder then getting mime-type handling consistently
+implemented in Gemini browsers (which in my original post means zero steps
+for compressed gemtext). TLS 1.3 has compression on board, it's a security
+risk in HTTP session hijacking and all HTTP browsers have turned it off.
+But this security risk doesn't apply to Gemini or with SMTP or IMAP. This
+would be another way to making this compressed gemtext vision work. Even in
+Vinton Cerf's interplanetary DTN bundling protocol compression plays a
+role, so why not in the space inspired Gemini protocol if it can be done
+easily? And if not, of course I appreciate the basic answer of keeping it
+simple. But how simple is the proposed alternative really? The Gempub
+doesn't load immediately and I suspect there will always be the extra
+download and open step. Of course I can send patches, fork browsers or roll
+my own gemini client and encourage people to additionally compress their
+individual gemtexts with PPMd and their capsule with Gempub.
+
+regards,
+Francis Siefken (NL)
+<A HREF="gemini://fsiefken.srht.site">gemini://fsiefken.srht.site</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210619/eaccb15d/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210619/eaccb15d/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006753.html">a space case for transparent gemtext compression
+</A></li>
+	<LI>Next message (by thread): <A HREF="006735.html">a space case for transparent gemtext compression
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6734">[ date ]</a>
+              <a href="thread.html#6734">[ thread ]</a>
+              <a href="subject.html#6734">[ subject ]</a>
+              <a href="author.html#6734">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

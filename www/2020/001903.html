@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> TLS 1.3 Early Data (0RTT)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20TLS%201.3%20Early%20Data%20%280RTT%29&In-Reply-To=%3C20200625154920.GD16671%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001886.html">
+   <LINK REL="Next"  HREF="001895.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>TLS 1.3 Early Data (0RTT)</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20TLS%201.3%20Early%20Data%20%280RTT%29&In-Reply-To=%3C20200625154920.GD16671%40SDF.ORG%3E"
+       TITLE="TLS 1.3 Early Data (0RTT)">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Thu Jun 25 16:49:20 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001886.html">TLS 1.3 Early Data (0RTT)
+</A></li>
+        <LI>Next message (by thread): <A HREF="001895.html">SVG Bob
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1903">[ date ]</a>
+              <a href="thread.html#1903">[ thread ]</a>
+              <a href="subject.html#1903">[ subject ]</a>
+              <a href="author.html#1903">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Jun 24, 2020 at 05:36:24PM -0700, Matt Brubeck wrote:
+ 
+&gt;<i> Has anyone implemented a Gemini client and/or server with support for
+</I>&gt;<i> 0-RTT data?
+</I>
+To the best of my knowledge, no.  I don't think anybody has written
+anything supporting session resumption, either.
+
+It's very true that the combination of TLS and
+one-request-per-connection is a bad combination for latency (although,
+for what it's worth, I still think the user experience is pretty
+acceptable even now, and much better than the web).  As for &quot;how bad&quot;
+this is, and whether or not it's a good motivation (as alluded to in
+other threads) for dropping TLS, it should be noted that, today, we are
+surely seeing almost the worst possible cases for this.  Nobody is using
+stuff like 0-RTT data, nobody is using session resumption, and most
+people are using Let's Encrypt certificate chains which are three certs
+long, and each one uses big RSA keys.  We can and should try to do
+better in this regard.
+
+&gt;<i> Any thoughts on which requests can safely use it?  (For
+</I>&gt;<i> example, would it be reasonable to allow early data for all requests
+</I>&gt;<i> that don't use a client certificate?)
+</I>
+In combination with the idea I've proposed previously that any request
+with non-reversible non-trivial consequences should require a client
+certificate, that would seem, at first glance, a pretty sensible
+response to the threat of replay attacks.
+
+Regarding TLS session resumption, there is the issue to consider of
+so-called &quot;prolongation attacks&quot;:
+
+<A HREF="https://svs.informatik.uni-hamburg.de/publications/2018/2018-12-06-Sy-ACSAC-Tracking_Users_across_the_Web_via_TLS_Session_Resumption.pdf">https://svs.informatik.uni-hamburg.de/publications/2018/2018-12-06-Sy-ACSAC-Tracking_Users_across_the_Web_via_TLS_Session_Resumption.pdf</A>
+
+whereby TLS session information which roundtrips from the server to
+client and back can be used (as can *any* information which roundtrips
+in this way) for tracking.  This could be mitigated easily with
+client-side policies on maximum session duration, but would be something
+for implementers to be wary of.
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001886.html">TLS 1.3 Early Data (0RTT)
+</A></li>
+	<LI>Next message (by thread): <A HREF="001895.html">SVG Bob
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1903">[ date ]</a>
+              <a href="thread.html#1903">[ thread ]</a>
+              <a href="subject.html#1903">[ subject ]</a>
+              <a href="author.html#1903">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] Certificate trust
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Certificate%20trust&In-Reply-To=%3C20210301091749.GA26074%40sources.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005818.html">
+   <LINK REL="Next"  HREF="005761.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] Certificate trust</H1>
+    <B>Stephane Bortzmeyer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Certificate%20trust&In-Reply-To=%3C20210301091749.GA26074%40sources.org%3E"
+       TITLE="[spec] Certificate trust">stephane at sources.org
+       </A><BR>
+    <I>Mon Mar  1 09:17:49 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005818.html">[spec] Certificate trust
+</A></li>
+        <LI>Next message (by thread): <A HREF="005761.html">[spec] &#9791;&#65039; &#8212; a symbolic protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5784">[ date ]</a>
+              <a href="thread.html#5784">[ thread ]</a>
+              <a href="subject.html#5784">[ subject ]</a>
+              <a href="author.html#5784">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Feb 28, 2021 at 08:27:26PM +0100,
+ C&#244;me Chilliet &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">come at chilliet.eu</A>&gt; wrote 
+ a message of 32 lines which said:
+
+&gt;<i> The certificate trust is one of the weak point of the current
+</I>&gt;<i> specification I think, and it would need to be clarified.
+</I>
+I agree with your statement. With the new issue tracking system that
+Sean configured, this is ticket #5
+&lt;<A HREF="https://gitlab.com/gemini-specification/protocol/-/issues/5">https://gitlab.com/gemini-specification/protocol/-/issues/5</A>&gt;.
+
+&gt;<i> Secondly, there is the good old CA system, nowadays mostly using
+</I>&gt;<i> letsencrypt. It seems badly supported in most clients which still
+</I>&gt;<i> use TOFU in this case and will complain at each renewal.
+</I>
+More precisely, each renewal, BY DEFAULT. But Let's Encrypt lets you
+request that we keep the public key, and then TOFU will still work iff
+it acts on the public key only.
+
+If you use the ACME client dehydrated, this is in the configuration file:
+
+PRIVATE_KEY_RENEW=&quot;no&quot;
+
+With the ACME client certbot, this is an option on the command-line:
+
+--reuse-key
+
+&gt;<i> A third possibility I think would be to use DANE and base validation
+</I>&gt;<i> on the DNS system, but I&#8217;ve not seen anyone advocating this, is
+</I>&gt;<i> there anything wrong with that idea?
+</I>
+This is certainly the best solution, technically
+speaking. Unfortunately, adding DANE support to your Gemini client
+typically requires some effort, the existing libraries are typically
+not sufficient. (Full disclosure: I did not even add DANE support to
+my own Gemini client, despites the fact I'm strongly pro-DANE.)
+
+Also, the Internet is very ossified by broken middleboxes (typically
+firewalls but not only them) and TLSA requests may be blocked (or,
+worse, any DNSSEC use, which DANE requires). This is something to keep
+in mind.
+
+&gt;<i> I&#8217;m failing to see how TOFU can provide any security, especially if
+</I>&gt;<i> there is no way to announce a renewal by sending both new and old
+</I>&gt;<i> cert or something, there is a MITM possibility at each renewal. The
+</I>&gt;<i> only TOFU example I&#8217;ve seen cited is openssh, which seems offtopic
+</I>&gt;<i> because you usually do not ssh into random machine on the internet
+</I>&gt;<i> by following links like you do with Gemini.
+</I>
+I fully agree. TOFU is great for SSH but Gemini is completely
+different.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005818.html">[spec] Certificate trust
+</A></li>
+	<LI>Next message (by thread): <A HREF="005761.html">[spec] &#9791;&#65039; &#8212; a symbolic protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5784">[ date ]</a>
+              <a href="thread.html#5784">[ thread ]</a>
+              <a href="subject.html#5784">[ subject ]</a>
+              <a href="author.html#5784">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

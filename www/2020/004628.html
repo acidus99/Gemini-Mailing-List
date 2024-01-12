@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] [spec] TLS statistics
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20%5Bspec%5D%20TLS%20statistics&In-Reply-To=%3C20201230235258.GZ3625%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004627.html">
+   <LINK REL="Next"  HREF="004632.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] [spec] TLS statistics</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20%5Bspec%5D%20TLS%20statistics&In-Reply-To=%3C20201230235258.GZ3625%40brevard.conman.org%3E"
+       TITLE="[tech] [spec] TLS statistics">sean at conman.org
+       </A><BR>
+    <I>Wed Dec 30 23:52:58 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004627.html">[tech] [spec] TLS statistics
+</A></li>
+        <LI>Next message (by thread): <A HREF="004632.html">[tech] [spec] TLS statistics
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4628">[ date ]</a>
+              <a href="thread.html#4628">[ thread ]</a>
+              <a href="subject.html#4628">[ subject ]</a>
+              <a href="author.html#4628">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great nervuri once stated:
+&gt;<i> 
+</I>&gt;<i> As far as I know, with TLSv1.2 client certs are sent in the clear,
+</I>&gt;<i> revealing login information to the ISP (and whoever else is looking). In
+</I>&gt;<i> this respect, when used with TLS 1.2, client certs are worse than cookies.
+</I>
+  I currently log client certificates (gasp!).  Yes, it's true, but I added
+such logging last year when the protocol was still in the intial stages of
+development and I wanted a way to debug client certificate issues.  I have
+an area that requires client certificates but it doesn't get a lot of
+traffic.  But, just bacause I'm feeling ornery about this, here are the
+details of the few client certs that have crossed my server over the past
+month (the subject):
+
+	/CN=elpherAyKLzp
+	/CN=default
+	/CN=My Cert
+	/C=CH/ST=Some-State/O=Internet Widgits Pty Ltd
+	/CN=testuser
+	/C=US/ST=FL/L=Boca Raton/CN=Sean Conner/emailAddress=<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>
+
+and except for that last one (what a stupid git, giving out his name and
+email address like that!), the issuer was also the same as the subject.
+
+  Yeah, way worse than cookies I'd say.
+
+&gt;<i> Also, 1.2 isn't compatible with encrypted SNI. So I hope it will be phased
+</I>&gt;<i> out soon, if possible. Let me know your thoughts.
+</I>
+  Sigh.
+
+  Given the current state of Gemini, *even if* the domain name were
+encrypted, there's still a near 80% chance of knowing which domain is being
+accessed, just because most servers only serve one domain.  And there is
+*no* login information in a server certificate.
+
+  -spc (You know, a pair of scissors to the network cable does wonders for
+	security ... )
+</PRE>
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004627.html">[tech] [spec] TLS statistics
+</A></li>
+	<LI>Next message (by thread): <A HREF="004632.html">[tech] [spec] TLS statistics
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4628">[ date ]</a>
+              <a href="thread.html#4628">[ thread ]</a>
+              <a href="subject.html#4628">[ subject ]</a>
+              <a href="author.html#4628">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

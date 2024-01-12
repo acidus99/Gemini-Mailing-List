@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> IPv6 and gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IPv6%20and%20gemini&In-Reply-To=%3C20190915081617.GB16029%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000144.html">
+   <LINK REL="Next"  HREF="000165.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>IPv6 and gemini</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IPv6%20and%20gemini&In-Reply-To=%3C20190915081617.GB16029%40SDF.ORG%3E"
+       TITLE="IPv6 and gemini">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Sun Sep 15 09:16:17 BST 2019</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000144.html">IPv6 and gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="000165.html">IPv6 and gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#163">[ date ]</a>
+              <a href="thread.html#163">[ thread ]</a>
+              <a href="subject.html#163">[ subject ]</a>
+              <a href="author.html#163">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> &gt;&gt; Obviously 4 is my favourite because it's less (no) work for me. :)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;   I like 4 as well.
+</I>&gt;<i> 
+</I>&gt;<i> Yay!
+</I>&gt;<i>
+</I>
+I would like to hope that it won't be *too* much longer before 4 just
+kind of happens because networking libraries will have gotten to the
+point where you have to actively go out of your way to write IPv4-only
+code.
+
+Sorry that the Zaibatsu is doing a bad job of leading by example on
+this front!  I was fully prepared to accept the blame for this, since
+the gegobi server was thrown togeher over a few evenings and I just
+didn't think about IPv6.  I thought I'd quickly patch it to support
+serving on both IP versions at once before making this post, but...
+
+...it turns out the quick and easy TCP server utilities in Python's
+socketserver module are (still, in 2019 for crying out loud)
+hard-coded to only work with IPv4.  So it's not a quick patch, but a
+slightly larger project. :(   Maybe I was a bit optimistic in my first
+paragraph.
+
+Since starting the Gemini project, this is the second time I've felt
+disappointed in Python's standard library, which is a rare thing.  At
+<A HREF="gemini://mozz.us/journal/2019-08-21.txt,">gemini://mozz.us/journal/2019-08-21.txt,</A> Michael writes about how the
+ssl module can't accept a self-signed client certificate.  Even worse
+than that, while it's possible to accept self-signed server
+certificates, you can't get direct access to the details of that
+certificate (like, say, the validity start and expiry dates).  With
+CA-validated certificates you can easily get this data.  If the cert
+is self-signed, you can only get an x509 encoded representation of the
+cert - and there's nothing in the standard library to decode it!  The
+ssl module really does seem to be designed to let people who don't
+understand TLS very thoroughly write HTTPS stuff without shooting
+themselves in the foot (the docs even talk explicitly about &quot;Web
+servers&quot; instead of just &quot;servers&quot;!).  And, of course, I understand
+why it's useful for a library with that kind of interface to exist.
+But I *do* expect to be able to &quot;go off-road&quot; when I really want to.
+This is going to make it a big pain to get a proper TOFU system in
+AV-98, grumble, grumble.  When I eventually get around to writing my
+own server, I'll definitely do it in something other than Python:
+probably Go.
+
+Any way, perhaps the most interesting thing to come out of this
+conversation is the matter of using URLs with IP addresses instead of
+hostnames as Gemini requests.  I'd guess a lot of existing servers
+don't handle this well.  And, as mentioned, in the case of
+hostname-based virtual servers, it's not entirely clear what handling
+this well even means.  I wonder if it's worth explicitly disallowing
+such requests?
+
+-Solderpunk
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000144.html">IPv6 and gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="000165.html">IPv6 and gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#163">[ date ]</a>
+              <a href="thread.html#163">[ thread ]</a>
+              <a href="subject.html#163">[ subject ]</a>
+              <a href="author.html#163">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

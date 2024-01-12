@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Gemini server logging formats and practices
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20server%20logging%20formats%20and%20practices&In-Reply-To=%3C20200513030630.GP7305%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000574.html">
+   <LINK REL="Next"  HREF="000576.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Gemini server logging formats and practices</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20server%20logging%20formats%20and%20practices&In-Reply-To=%3C20200513030630.GP7305%40brevard.conman.org%3E"
+       TITLE="Gemini server logging formats and practices">sean at conman.org
+       </A><BR>
+    <I>Wed May 13 04:06:30 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000574.html">Gemini server logging formats and practices
+</A></li>
+        <LI>Next message (by thread): <A HREF="000576.html">Gemini server logging formats and practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#575">[ date ]</a>
+              <a href="thread.html#575">[ thread ]</a>
+              <a href="subject.html#575">[ subject ]</a>
+              <a href="author.html#575">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Dave Huseby once stated:
+&gt;<i> On Tue, May 12, 2020, at 11:23 AM, solderpunk wrote:
+</I>&gt;<i> &gt; I am understanding of and sympathetic towards both admins who want to
+</I>&gt;<i> &gt; log IPs for debugging or abuse-detection purposes and towards those who
+</I>&gt;<i> &gt; don't want to so they can (rightfully) boast about their severs' respect
+</I>&gt;<i> &gt; for privacy.
+</I>&gt;<i> 
+</I>&gt;<i> Thanks. This is how the HTTP protocol conversation should have gone back
+</I>&gt;<i> in 1989.
+</I>
+  Back in 1989, the Internet as we know it was still five years away. 
+Commerical activity was against the rules and the only people who were on
+the Internet back then where largely academics (students, instructors,
+professors) at universities and a few researchers at some select companies
+(like IBM, Sun or Symbolics).  I would think that had you seriously
+presented this argument at the time, people might have looked at you
+strangely.  While people were still largely trustful of other users, the
+Morris Worm of Nov 1988 was still quite recent and if not for logging, it
+would have taken much longer to stop.
+
+&gt;<i> &gt; We could also define a half-way format, where a compact hash of the IP is
+</I>&gt;<i> &gt; logged, so that unique visitor statistics can be calcualted for those
+</I>&gt;<i> &gt; who want them, or e.g. malfunctioning bots can be spotted, but nothing.
+</I>&gt;<i> 
+</I>&gt;<i> I think it may help to consider that the IP address of a sender is
+</I>&gt;<i> personally identifiable information and is not the server operator's to
+</I>&gt;<i> collect without consent. 
+</I>
+  So a not-so-hypothetical situation here---if I were to put on my Gemini
+server &quot;I LOG ALL THE IPS!&quot;, honestly, how could I get your consent (or
+non-consent)?  I can't get it from you prior to your connection, because I
+don't know you will connect.  I can't get your concent afterwards because I
+already have your IP.  And would such a disclaimer have to be added to every
+page?  How can you know prior to requesting a Gemini page that the server
+will log your IP address?
+
+  I'm not under the delusion that security is possible on the Internet, nor
+privacy.  I've always operated under the assumption that anything I put on a
+public server, *even with access controls,* is public [1].
+
+  Yes, I'm a bit antagonistic towards such goals because I don't believe
+that one can have a truly anonymous exchange of data over *any* medium, but
+unfortunately, I don't have such a proof, other than---you need two
+endpoints who of of each other such that data can be exchanged, and how do
+you prove your identities (or repudate an identity, such as &quot;I am NOT a FBI
+agent&quot;)?  I think you can exchange data anonymously but you won't know who
+is actually on the other end, or you can know, but so will an observer.  I
+don't think you can get both.
+
+&gt;<i> Right now the only thing we can do is willfully
+</I>&gt;<i> blind our servers. Eventually though, if all goes according to plan,
+</I>&gt;<i> Gemini servers will be running on a mixnet of some kind 
+</I>
+  Really?  I don't recall seeing such a plan myself.  Solderpunk, are you
+holding out on me?
+
+&gt;<i> and they won't be
+</I>&gt;<i> able to track IP addresses because the source isn't mapped to anything in
+</I>&gt;<i> the real world. 
+</I>
+  I know a lot of people use TOR for anonimity, but I feel that it's still
+not 100% secure and that a state actor (like, oh, I don't know, China or the
+United States) can, with enough resources, do a correlation attack on both
+ingress and egress TOR points.  I mean, the authorities *say* they caught
+the Dread Pirate Roberts on one mistake he made a few years earlier, but I
+feel that the mistake was found *after* they knew who we really was, because
+the US threw enough resources (legal and otherwise) into finding him.
+
+&gt;<i> Accessing permissioned resources (i.e. 6X response codes) doesn't
+</I>&gt;<i> necessarily imply correlation of the user. Certainly the user can present
+</I>&gt;<i> the same cryptographic credentials on subsequent requests but a better
+</I>&gt;<i> design is to allow for pair-wise credentials that are ephemeral to each
+</I>&gt;<i> session and potentially ephemeral to each request. Currently TLS doesn&#8217;t
+</I>&gt;<i> allow for this mode of operation. Something like CurveCP with
+</I>&gt;<i> decentralized verifiable credentials is a superior solution for
+</I>&gt;<i> uncorrelatable confidentiality.
+</I>
+  So go ahead and implement it if you think it's possible.  
+
+&gt;<i> Anyway, back to logging. I don't think it is our place as server operators
+</I>&gt;<i> to collect IP addresses without consent since it isn't our data. 
+</I>
+  Technically, the IP address you use to access a server isn't yours either. 
+It's the providers.  They are just letting you use it.
+
+&gt;<i> It is an
+</I>&gt;<i> unfortunate legacy of the existing IP network layer that will hopefully be
+</I>&gt;<i> overcome soon. 
+</I>
+  TOR?  Content addressible stuff with names like 9a793f67-3df1-45e2-a3f5-4b3166800102? 
+Yeah, I'm not sold on that stuff.
+
+&gt;<i> I think the hashing of IP addresses for correlation is fine
+</I>&gt;<i> but I think it is fair to expect all server operators to notify their
+</I>&gt;<i> users that they are doing so.
+</I>
+  Again, how?
+
+  -spc
+
+[1]	A few days ago, I was informed of a bug in my server where you could
+	by-pass the certificate check with a malformed, but still accepted,
+	request.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000574.html">Gemini server logging formats and practices
+</A></li>
+	<LI>Next message (by thread): <A HREF="000576.html">Gemini server logging formats and practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#575">[ date ]</a>
+              <a href="thread.html#575">[ thread ]</a>
+              <a href="subject.html#575">[ subject ]</a>
+              <a href="author.html#575">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

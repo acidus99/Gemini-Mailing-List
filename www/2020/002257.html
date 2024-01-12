@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Reopening: Stream status code
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Reopening%3A%20Stream%20status%20code&In-Reply-To=%3C5F137221.70404%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002254.html">
+   <LINK REL="Next"  HREF="002258.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Reopening: Stream status code</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Reopening%3A%20Stream%20status%20code&In-Reply-To=%3C5F137221.70404%40marmaladefoo.com%3E"
+       TITLE="Reopening: Stream status code">luke at marmaladefoo.com
+       </A><BR>
+    <I>Sat Jul 18 23:05:21 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002254.html">Reopening: Stream status code
+</A></li>
+        <LI>Next message (by thread): <A HREF="002258.html">Reopening: Stream status code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2257">[ date ]</a>
+              <a href="thread.html#2257">[ thread ]</a>
+              <a href="subject.html#2257">[ subject ]</a>
+              <a href="author.html#2257">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+On 18-Jul-2020 22:09, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+&gt;<i> A stream status code has been mentioned on this list before, and I'd like to
+</I>&gt;<i> bring it up again. Streams have begun appearing on Gemini, notably on
+</I>&gt;<i> <A HREF="gemini://chat.mozz.us.">gemini://chat.mozz.us.</A> But at the same time, responsible clients have been
+</I>&gt;<i> adding timeouts for server responses. It is even part of the Egsam test, under
+</I>&gt;<i> section 1.1: <A HREF="gemini://egsam.pitr.ca/1.1.gmi.">gemini://egsam.pitr.ca/1.1.gmi.</A>
+</I>&gt;<i>
+</I>&gt;<i> The best solution that I see, as I believe that streams can be very useful and
+</I>&gt;<i> interesting, is to add a SUCCESS AS STREAM status code. I propose status code 21.
+</I>&gt;<i>
+</I>&gt;<i> Thoughts? I know Solderpunk has said that there won't be non-trivial changes to
+</I>&gt;<i> spec from now on, but I hope he will see this as an important exception.
+</I>Hi makeworld and everyone
+
+I would be against this - it would be a radical change from the existing 
+spec - section 1.1 says that the server closes the connection. At 
+present we have a simple model - client request-&gt; server response and 
+close. Would it be an optional status code that some clients accept and 
+others reject (in which case it would seem to violate that you can just 
+check the first digit of the status).
+
+It would require a considerable change to the connection logic to some 
+clients which wait for the content to be finished being delivered before 
+rendering.
+
+For my money if we are opening up these kinds of questions there would 
+be others that should be considered. I'm on for a wider discussion about 
+evolution of the spec, but not just for this matter on its own.
+
+Best wishes
+
+  - Luke
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002254.html">Reopening: Stream status code
+</A></li>
+	<LI>Next message (by thread): <A HREF="002258.html">Reopening: Stream status code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2257">[ date ]</a>
+              <a href="thread.html#2257">[ thread ]</a>
+              <a href="subject.html#2257">[ subject ]</a>
+              <a href="author.html#2257">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

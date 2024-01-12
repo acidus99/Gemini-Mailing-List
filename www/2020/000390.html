@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Color and other escape sequences in Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Color%20and%20other%20escape%20sequences%20in%20Gemini&In-Reply-To=%3C20200119001019.GK3354%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000367.html">
+   <LINK REL="Next"  HREF="000394.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Color and other escape sequences in Gemini</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Color%20and%20other%20escape%20sequences%20in%20Gemini&In-Reply-To=%3C20200119001019.GK3354%40brevard.conman.org%3E"
+       TITLE="Color and other escape sequences in Gemini">sean at conman.org
+       </A><BR>
+    <I>Sun Jan 19 00:10:19 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000367.html">File size issues
+</A></li>
+        <LI>Next message (by thread): <A HREF="000394.html">FW: Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#390">[ date ]</a>
+              <a href="thread.html#390">[ thread ]</a>
+              <a href="subject.html#390">[ subject ]</a>
+              <a href="author.html#390">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+  I'm seeing some people wanting to support some other formatting options
+like color, leading to the support of ECMA-48 [1].  I would rather NOT see
+this supported because of several issues.
+
+1). Complexity.  The spec is rather complex and wide ranging.  There are 130
+    escape codes (and I'm EXCLUDING those defined by ANSI, codes 0 through
+    31).  If you are filtering them, then five or six cases (depending if
+    you want to support one non-standard encoding used by xterm) need to be
+    considered (which is still four or five more than most would expect).
+
+2). Security.  Passing raw escape sequences can not only leave the termainal
+    into an unknown state, but there are a few seqences that are especially
+    alarming:
+
+	DCS	Device Control String
+	OSC	Operating System Command
+	APC	Application Program Command
+
+    which, if supported, are exactly what they say on the tin, and thus, you
+    *don't* want these to be processed *at all*.  Personally, I haven't come
+    across any terminal or program that supports these.
+
+    Also, ANSI.SYS, originally for MS-DOS but maybe it still exists for
+    Windows?  (I don't know, I don't use Windows) allows one to redefine any
+    key on the keyboard to send a new sequence.  &quot;DELTREE C:\*&quot; anyone?
+
+Below is the BNF (RFC-5234) for ECMA-48 control sequences:
+
+	CSI      = %d27 '['
+	         / %d155        ; ISO charset
+	         / %d194 %d155  ; UTF-8
+	OSC      = %d27 ']'
+	         / %d157        ; ISO
+	         / %d194 %d157  ; UTF-8
+	ST       = %d27 '\'
+	         / %d156        ; ISO
+	         / %d194 %156   ; UTF-8
+	string   = %d27 ( 'P' / 'X' / '^' / '_')
+	         / (%d144 / %d152 / %d158 / %d159)       ; ISO
+	         / %d194 (%d144 / %d152 / %d158 / %d159) ; UTF-8
+	iso      = %d160-255
+	
+	; the utf8 rule is any UTF-8 codepoint 160 or higher
+
+	sequence = CSI    *(%d48-63) *(%d32-47) %d64-126
+                 / OSC    *(%d8-13 / %32-126 / iso / utf8) (ST / %d7)
+                 / string *(%d8-13 / %32-126 / iso / utf8) ST
+		 / %d27 (%d64-126)
+	         / %d128-159         ; ISO
+		 / %d194 (%d128-159) ; UTF-8
+
+  If you are parsing an ISO charset (like ISO-8859-1) then remove the rules
+marked UTF-8; similarly, if you are parsing UTF-8, then remove the rules
+marked ISO.  
+
+  -spc
+
+[1]	The so called 'ANSI escape codes', which is funny because they're
+	not defined by ANSI, but ISO, so of course they're called ECMA.
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000367.html">File size issues
+</A></li>
+	<LI>Next message (by thread): <A HREF="000394.html">FW: Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#390">[ date ]</a>
+              <a href="thread.html#390">[ thread ]</a>
+              <a href="subject.html#390">[ subject ]</a>
+              <a href="author.html#390">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

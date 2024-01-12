@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> C program to resolve UTF-8 IDNs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20C%20program%20to%20resolve%20UTF-8%20IDNs&In-Reply-To=%3C810988c0-f212-2812-ad08-44dcc8527edf%40scotdoyle.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006139.html">
+   <LINK REL="Next"  HREF="006146.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>C program to resolve UTF-8 IDNs</H1>
+    <B>Scot</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20C%20program%20to%20resolve%20UTF-8%20IDNs&In-Reply-To=%3C810988c0-f212-2812-ad08-44dcc8527edf%40scotdoyle.com%3E"
+       TITLE="C program to resolve UTF-8 IDNs">gmi1 at scotdoyle.com
+       </A><BR>
+    <I>Thu Mar 18 01:19:40 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006139.html">[ANN] beepboop.systems
+</A></li>
+        <LI>Next message (by thread): <A HREF="006146.html">C program to resolve UTF-8 IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6145">[ date ]</a>
+              <a href="thread.html#6145">[ thread ]</a>
+              <a href="subject.html#6145">[ subject ]</a>
+              <a href="author.html#6145">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Sean,
+
+I think you were wondering whether it's possible to resolve UTF-8
+IDNs with a C or Lua program. This Linux C program [7] will do so
+via glibc's getaddrinfo(). For platforms without glibc such as the
+BSDs, ports of the libidn library [1] are available.
+
+Microsoft provides IdnToAscii() [2] for use with Windows 7 and it
+looks as if they support automatic conversion to punycode [3]
+in their implemenation of getaddrinfo() as of Windows 8.
+
+Slides 30 through 48 of this presentation [4] describe how Apple
+approaches network name internationalization. iOS 10 and
+macOS Sierra will try to query a given UTF-8 name via DNS. If
+the server doesn't have an entry for the UTF-8 name, it
+converts to punycode and tries again.
+
+Android 2.3 has the java.net.IDN package [5] for converting
+IDNs and Android 7.0 has android.icu.text.IDNA [6].
+
+Thoughts?
+Scot
+
+
+[1] <A HREF="https://www.gnu.org/software/libidn/">https://www.gnu.org/software/libidn/</A>
+[2] 
+<A HREF="https://docs.microsoft.com/en-us/windows/win32/api/winnls/nf-winnls-idntoascii">https://docs.microsoft.com/en-us/windows/win32/api/winnls/nf-winnls-idntoascii</A>
+[3] 
+<A HREF="https://docs.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfo">https://docs.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfo</A>
+[4] 
+<A HREF="https://devstreaming-cdn.apple.com/videos/wwdc/2016/714urluxe140lardrb7/714/714_networking_for_the_modern_internet.pdf?dl=1">https://devstreaming-cdn.apple.com/videos/wwdc/2016/714urluxe140lardrb7/714/714_networking_for_the_modern_internet.pdf?dl=1</A>
+[5] <A HREF="https://developer.android.com/reference/kotlin/java/net/IDN">https://developer.android.com/reference/kotlin/java/net/IDN</A>
+[6] <A HREF="https://developer.android.com/reference/android/icu/text/IDNA">https://developer.android.com/reference/android/icu/text/IDNA</A>
+
+
+[7] Public domain example C program to resolve UTF-8 IDNs
+
+#define _GNU_SOURCE
+#include &lt;locale.h&gt;
+#include &lt;netdb.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;sys/socket.h&gt;
+#include &lt;sys/types.h&gt;
+
+#define ADDR_LEN 1024
+
+void show_ip(char *name) {
+ &#160; struct addrinfo filter, *info;
+ &#160; char address[ADDR_LEN];
+ &#160; void *addr;
+ &#160; memset (&amp;filter, 0, sizeof(filter));
+ &#160; filter.ai_family = PF_UNSPEC;
+ &#160; filter.ai_socktype = SOCK_STREAM;
+ &#160; filter.ai_flags = AI_IDN;
+ &#160; if (getaddrinfo (name, NULL, &amp;filter, &amp;info) == 0) {
+ &#160;&#160;&#160; printf (&quot;\nHost: %s\n&quot;, name);
+ &#160;&#160;&#160; while (info) {
+ &#160;&#160;&#160;&#160;&#160; if (info-&gt;ai_family == AF_INET) {
+ &#160;&#160;&#160;&#160;&#160;&#160;&#160; addr = &amp;((struct sockaddr_in *) info-&gt;ai_addr)-&gt;sin_addr;
+ &#160;&#160;&#160;&#160;&#160;&#160;&#160; inet_ntop (AF_INET, addr, address, ADDR_LEN);
+ &#160;&#160;&#160;&#160;&#160;&#160;&#160; printf (&quot;&#160; IPv4 address: %s\n&quot;, address);
+ &#160;&#160;&#160;&#160;&#160; } else if (info-&gt;ai_family == AF_INET6) {
+ &#160;&#160;&#160;&#160;&#160;&#160;&#160; addr = &amp;((struct sockaddr_in6 *) info-&gt;ai_addr)-&gt;sin6_addr;
+ &#160;&#160;&#160;&#160;&#160;&#160;&#160; inet_ntop (AF_INET6, addr, address, ADDR_LEN);
+ &#160;&#160;&#160;&#160;&#160;&#160;&#160; printf (&quot;&#160; IPv6 address: %s\n&quot;, address);
+ &#160;&#160;&#160;&#160;&#160; }
+ &#160;&#160;&#160;&#160;&#160; info = info-&gt;ai_next;
+ &#160;&#160;&#160; }
+ &#160; } else
+ &#160;&#160;&#160; perror (&quot;getaddrinfo&quot;);
+ &#160; freeaddrinfo(info);
+}
+
+int main() {
+ &#160; setlocale(LC_ALL, &quot;&quot;);
+ &#160; show_ip(&quot;&#34552;.jp&quot;);
+ &#160; show_ip(&quot;xn--td2a.jp&quot;);
+ &#160; show_ip(&quot;g&#233;meaux.bortzmeyer.org&quot;);
+ &#160; show_ip(&quot;xn--gmeaux-bva.bortzmeyer.org&quot;);
+ &#160; show_ip(&quot;caf&#233;.mozz.us&quot;);
+ &#160; show_ip(&quot;xn--caf-dma.mozz.us&quot;);
+}
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006139.html">[ANN] beepboop.systems
+</A></li>
+	<LI>Next message (by thread): <A HREF="006146.html">C program to resolve UTF-8 IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6145">[ date ]</a>
+              <a href="thread.html#6145">[ thread ]</a>
+              <a href="subject.html#6145">[ subject ]</a>
+              <a href="author.html#6145">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

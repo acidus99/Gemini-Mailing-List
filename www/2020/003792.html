@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> IDN with Gemini?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3CCAD2gp_R04%2Bq%2BjF9YzyCn9igdzMpPnsTTTkOFigDRUj4%2B_WoNig%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003788.html">
+   <LINK REL="Next"  HREF="003794.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>IDN with Gemini?</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3CCAD2gp_R04%2Bq%2BjF9YzyCn9igdzMpPnsTTTkOFigDRUj4%2B_WoNig%40mail.gmail.com%3E"
+       TITLE="IDN with Gemini?">cowan at ccil.org
+       </A><BR>
+    <I>Fri Dec  4 14:46:40 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003788.html">IDN with Gemini?
+</A></li>
+        <LI>Next message (by thread): <A HREF="003794.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3792">[ date ]</a>
+              <a href="thread.html#3792">[ thread ]</a>
+              <a href="subject.html#3792">[ subject ]</a>
+              <a href="author.html#3792">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Dec 4, 2020 at 8:53 AM Stephane Bortzmeyer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stephane at sources.org</A>&gt;
+wrote:
+
+Therefore, it is not clear what servers and clients should do (send an
+&gt;<i> IRI, or accept IRI but convert it to URI or something else).
+</I>&gt;<i>
+</I>
+It seems clear from the behavior of web browsers that the Right Thing is to
+convert all IDNs to Punycode before putting them on the wire.  By the same
+token, all non-ASCII characters in other parts should be UTF-8 encoded and
+then %-encoded before transmission.  This applies both to IRIs entered by
+hand and IRIs appearing in links.
+
+
+&gt;<i> * Amfora claims the domain name does not exist (it does exist),
+</I>&gt;<i> &quot;Failed to connect to the server: dial tcp: lookup
+</I>&gt;<i> g&#233;meaux.bortzmeyer.org &lt;<A HREF="http://xn--gmeaux-bva.bortzmeyer.org">http://xn--gmeaux-bva.bortzmeyer.org</A>&gt;: no such
+</I>&gt;<i> host.&quot;
+</I>&gt;<i>
+</I>
+I'm pretty sure this is because no punycoding is being done in the DNS, and
+it's probably getting the UTF-8 encoding instead of &quot;
+xn--gmeaux-bva.bortzmeyer.org&quot;.  When I ask Lagrange to connect to the
+punycoded form explicitly, your server does not recognize it as &quot;self&quot; and
+replies with &quot;Proxy Request Refused&quot;.
+
+I can't account for the behavior of the other servers easily.
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+One art / There is / No less / No more
+To do / All things / With sparks / Galore   --Douglas Hofstadter
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201204/77b4431f/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201204/77b4431f/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003788.html">IDN with Gemini?
+</A></li>
+	<LI>Next message (by thread): <A HREF="003794.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3792">[ date ]</a>
+              <a href="thread.html#3792">[ thread ]</a>
+              <a href="subject.html#3792">[ subject ]</a>
+              <a href="author.html#3792">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

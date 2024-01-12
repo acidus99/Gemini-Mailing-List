@@ -1,0 +1,137 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> On certificates and validation
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20certificates%20and%20validation&In-Reply-To=%3CC7CDGIP2CKQQ.39HSXJN808TB8%40taiga%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003548.html">
+   <LINK REL="Next"  HREF="003550.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>On certificates and validation</H1>
+    <B>Drew DeVault</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20certificates%20and%20validation&In-Reply-To=%3CC7CDGIP2CKQQ.39HSXJN808TB8%40taiga%3E"
+       TITLE="On certificates and validation">sir at cmpwn.com
+       </A><BR>
+    <I>Wed Nov 25 13:17:23 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003548.html">On certificates and validation
+</A></li>
+        <LI>Next message (by thread): <A HREF="003550.html">On certificates and validation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3549">[ date ]</a>
+              <a href="thread.html#3549">[ thread ]</a>
+              <a href="subject.html#3549">[ subject ]</a>
+              <a href="author.html#3549">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed Nov 25, 2020 at 8:16 AM EST, Bj&#246;rn W&#228;rmedal wrote:
+&gt;<i> So basically at least one of Common Name and Subject Alternative Names
+</I>&gt;<i> should match the hostname provided? What if it doesn't, but it matches
+</I>&gt;<i> the IP?
+</I>
+Hm, I'm not sure. Check the spec? I have never put an IP address into a
+certificate.
+
+&gt;<i> I guess I could press this issue even more, really. There's a
+</I>&gt;<i> technical difficulty in parsing wildcards, for example, depending on
+</I>&gt;<i> the libs available. If I request some.subdomain.example.com and the
+</I>&gt;<i> certificate lists &quot;some.*.example.com&quot; the ssl._dnsname_match() method
+</I>&gt;<i> in python3 won't be able to match it despite it being a valid wildcard
+</I>&gt;<i> (afaik). I don't really know what the certificate specification says
+</I>&gt;<i> here, but with self-signed certs we can write pretty much anything.
+</I>
+Technically you can make up your own CA and sign whatever bullshit certs
+you want. So what? That doesn't change the interpretation of the
+specification.
+
+&gt;<i> My example of a Common Name that doesn't have a hostname would fail
+</I>&gt;<i> under your validation algorithm, but is it objectively *wrong*?
+</I>
+Yes.
+
+&gt;<i> Under a TOFU scheme I could also encounter a situation where a cert I
+</I>&gt;<i> have accepted has now expired, but the server still provides it. Is it
+</I>&gt;<i> *wrong* to still accept it?
+</I>
+Yes.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003548.html">On certificates and validation
+</A></li>
+	<LI>Next message (by thread): <A HREF="003550.html">On certificates and validation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3549">[ date ]</a>
+              <a href="thread.html#3549">[ thread ]</a>
+              <a href="subject.html#3549">[ subject ]</a>
+              <a href="author.html#3549">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposal to drop double slashes from URL syntax
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%20to%20drop%20double%20slashes%20from%20URL%20syntax&In-Reply-To=%3C20210209222229.GF30280%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005111.html">
+   <LINK REL="Next"  HREF="005125.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposal to drop double slashes from URL syntax</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%20to%20drop%20double%20slashes%20from%20URL%20syntax&In-Reply-To=%3C20210209222229.GF30280%40brevard.conman.org%3E"
+       TITLE="Proposal to drop double slashes from URL syntax">sean at conman.org
+       </A><BR>
+    <I>Tue Feb  9 22:22:29 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005111.html">Proposal to drop double slashes from URL syntax
+</A></li>
+        <LI>Next message (by thread): <A HREF="005125.html">Proposal to drop double slashes from URL syntax
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5113">[ date ]</a>
+              <a href="thread.html#5113">[ thread ]</a>
+              <a href="subject.html#5113">[ subject ]</a>
+              <a href="author.html#5113">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Daniel Nagy once stated:
+&gt;<i> Hello,
+</I>&gt;<i> 
+</I>&gt;<i> I want to propose to drop the double slashes from the gemini URL syntax.
+</I>&gt;<i> 
+</I>&gt;<i> The reason for this is that they dont serve any semantic value and while
+</I>&gt;<i> the project is still young, I think it could still be changed. So instead
+</I>&gt;<i> of
+</I>&gt;<i> 
+</I>&gt;<i>    <A HREF="gemini://example.com">gemini://example.com</A>
+</I>&gt;<i> 
+</I>&gt;<i> we would have:
+</I>&gt;<i> 
+</I>&gt;<i>    gemini:example.com
+</I>
+  All right.  Let's assume we do this.  Let's start with an existing link:
+
+	<A HREF="gemini://gemini.conman.org/test/torture/0001">gemini://gemini.conman.org/test/torture/0001</A>
+
+and work our way through the first few entries with the new style.  The
+first is a full link in the Gemini document:
+
+	gemini:gemini.conman.org/test/torture/0002
+
+That works.  Our client can get the second page.  The next is a schemeless
+link, wihch *is* valid in text/gemini documents (but not as the request). 
+This will now look like:
+
+	gemini.conman.org/test/torture/0003
+
+Here we hit our first potential snag---do we have a hostname or not?  In
+fact, here are the links from the next few tests using your proposal:
+
+	/test/torture/0005
+	007
+	/test/../test/torture/0009
+
+And to further mess with things, I could add a test 0051 with a relative
+link to:
+
+	gemini.conman.org
+
+Do I mean the top level page of my sever?  Or the page
+
+	/test/torture/gemini.conman.org
+
+Because remember, you can have relative links in text/gemini documents, and
+the hypothetical test 0051 has a path of
+
+	/test/torture/0051
+
+(and don't think I wouldn't do it).
+
+&gt;<i> In fact, Sir Tim Berners-Lee apologized[0] for introducing them in the
+</I>&gt;<i> http URL syntax. I see the following advantages and disadvantages:
+</I>
+  Not mentioned is the alternative he would have done.
+
+&gt;<i> Advantages:
+</I>&gt;<i>  - Less typing
+</I>&gt;<i>  - Less wasted screenspace
+</I>&gt;<i>  - Less transfered bytes and less stored bytes on disk and memory
+</I>
+  We're running over TLS.  There's already quite a bit of overhead, as I
+documented here:
+
+	<A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/001958.html">https://lists.orbitalfox.eu/archives/gemini/2020/001958.html</A>
+
+&gt;<i> Disadvantages:
+</I>
+  - Breaks relative linking in documents.  
+
+  -spc
+
+[0]: <A HREF="https://www.sitepoint.com/sir-tim-berners-lee-http-slashes/">https://www.sitepoint.com/sir-tim-berners-lee-http-slashes/</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005111.html">Proposal to drop double slashes from URL syntax
+</A></li>
+	<LI>Next message (by thread): <A HREF="005125.html">Proposal to drop double slashes from URL syntax
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5113">[ date ]</a>
+              <a href="thread.html#5113">[ thread ]</a>
+              <a href="subject.html#5113">[ subject ]</a>
+              <a href="author.html#5113">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

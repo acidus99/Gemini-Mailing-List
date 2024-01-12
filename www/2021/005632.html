@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] [tech] Companion Specification Proposal for Metadata
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20%5Btech%5D%20Companion%20Specification%20Proposal%20for%20Metadata&In-Reply-To=%3CCAD2gp_RDWt2gSXRh28PwKQH_b94NWuxG1BaSSUAgfessDAGeqw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005629.html">
+   <LINK REL="Next"  HREF="005636.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] [tech] Companion Specification Proposal for Metadata</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20%5Btech%5D%20Companion%20Specification%20Proposal%20for%20Metadata&In-Reply-To=%3CCAD2gp_RDWt2gSXRh28PwKQH_b94NWuxG1BaSSUAgfessDAGeqw%40mail.gmail.com%3E"
+       TITLE="[spec] [tech] Companion Specification Proposal for Metadata">cowan at ccil.org
+       </A><BR>
+    <I>Thu Feb 25 19:57:24 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005629.html">[spec] [tech] Companion Specification Proposal for Metadata
+</A></li>
+        <LI>Next message (by thread): <A HREF="005636.html">[spec] [tech] Companion Specification Proposal for Metadata
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5632">[ date ]</a>
+              <a href="thread.html#5632">[ thread ]</a>
+              <a href="subject.html#5632">[ subject ]</a>
+              <a href="author.html#5632">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Feb 25, 2021 at 2:32 PM Gary Johnson &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">lambdatronic at disroot.org</A>&gt;
+wrote:
+
+
+&gt;<i> Gemtext pages may be tagged with information that can be useful to
+</I>&gt;<i> automated clients (e.g., search engines, archiving bots, and maybe
+</I>&gt;<i> proxies) that is otherwise difficult or impossible to infer from
+</I>&gt;<i> performing a full text search of the Gemtext file's contexts.
+</I>&gt;<i>
+</I>&gt;<i> ## Against
+</I>&gt;<i>
+</I>&gt;<i> Metadata represents a slippery slope to uncontrolled extensibility. It
+</I>&gt;<i> might be abused for server-specified styling, requesting external
+</I>&gt;<i> resources (e.g., supporting client-side scripting or background images
+</I>&gt;<i> of kittens), or just generally making Gemtext pages hard to read in
+</I>&gt;<i> clients that don't hide inline metadata or make page concatenation
+</I>&gt;<i> difficult with the end-of-file metadata proposal that's been discussed
+</I>&gt;<i> at some length on the mailing list.
+</I>&gt;<i>
+</I>
+As has been shown, text lines are equally abusable.
+
+&gt;<i> 1. Metadata /within/ a Gemtext file carries a number of liabilities that
+</I>&gt;<i>    make some of our community members nervous (understandably so IMO).
+</I>&gt;<i>
+</I>
+To understand all is to forgive all.
+
+&gt;<i>
+</I>&gt;<i> 2. The subset of metadata that is meant to be read and understood by a
+</I>&gt;<i>    human reader using a typical Gemini client can already be expressed
+</I>&gt;<i>    in natural language without any community-approved tag
+</I>&gt;<i>    standardization.
+</I>&gt;<i>
+</I>
+Sometimes having both is unavoidable: books have both a title page and
+cataloging-in-publication data, which also includes the title and the
+publisher.  (Whether a title page is part of the book or just more metadata
+is OT here.)  But surely if both humans and bots can be informed by the
+same thing, that's better?  Don't Repeat Yourself, for when updating, one
+copy will be forgotten.
+
+1. $DOCUMENT_ROOT/.metadata.gmi
+&gt;<i>
+</I>2. $DOCUMENT_ROOT/.well-known/metadata.gmi
+&gt;<i>
+</I>
+Such proposals always fall down (for me, YMMV) on the issue of where the
+document root actually is.  Multi-homing makes it possible for every user
+of a shared site to have their own domain name, but not everyone wants
+that, and it creates issues:
+
+1) Apache has a global access control file, but it turns out that different
+parts of a website need different access controls, so the
+per-website-directory &quot;.htaccess&quot; file was invented to make this scalable.
+
+2) Robots.txt (on a website) also has to know about everything precisely
+because it is global: multiple users can have their own policies, but they
+have to then persuade a site admin (as opposed to a website admin) to get
+them added, which becomes bureaucratic over time.
+
+3) Originally the addresses of all hosts on the internet (!) were
+maintained in a hosts.txt file that every site had to keep an up-to-date
+copy of (!!), usually via FTP.  That broke and was replaced by the DNS we
+have today, with authority distributed into DNS zones (not quite the same
+as domains, but close enough for this conversation).
+
+The principle of subsidiarity: &lt;<A HREF="https://en.wikipedia.org/wiki/Subsidiarity">https://en.wikipedia.org/wiki/Subsidiarity</A>&gt;
+is a generalization of this.  We should avoid adding yet another
+centralized (even if per-host) solution.  Capsules are a honking good idea,
+but we should not conflate them with DNS host names.
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+Sir, I quite agree with you, but what are we two against so many?
+    --George Bernard Shaw,
+         to a man booing at the opening of _Arms and the Man_
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210225/6d84f140/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210225/6d84f140/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005629.html">[spec] [tech] Companion Specification Proposal for Metadata
+</A></li>
+	<LI>Next message (by thread): <A HREF="005636.html">[spec] [tech] Companion Specification Proposal for Metadata
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5632">[ date ]</a>
+              <a href="thread.html#5632">[ thread ]</a>
+              <a href="subject.html#5632">[ subject ]</a>
+              <a href="author.html#5632">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,205 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Thoughts on TOFU
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Thoughts%20on%20TOFU&In-Reply-To=%3CZ-lCPOETzWlwXWZly7mBB27iQIb1IFuDurIrsGOrVEWzVonLnFHXP7ZwzIMJRtACAfjIA8riLb3rSinbTe5UYC32_1frBSsV3qW3WPa8org%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001687.html">
+   <LINK REL="Next"  HREF="001800.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Thoughts on TOFU</H1>
+    <B>colecmac at protonmail.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Thoughts%20on%20TOFU&In-Reply-To=%3CZ-lCPOETzWlwXWZly7mBB27iQIb1IFuDurIrsGOrVEWzVonLnFHXP7ZwzIMJRtACAfjIA8riLb3rSinbTe5UYC32_1frBSsV3qW3WPa8org%3D%40protonmail.com%3E"
+       TITLE="Thoughts on TOFU">colecmac at protonmail.com
+       </A><BR>
+    <I>Mon Jun 15 19:53:49 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001687.html">Thoughts on TOFU
+</A></li>
+        <LI>Next message (by thread): <A HREF="001800.html">Thoughts on TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1712">[ date ]</a>
+              <a href="thread.html#1712">[ thread ]</a>
+              <a href="subject.html#1712">[ subject ]</a>
+              <a href="author.html#1712">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> I would love to! And I have loads of ideas on this front.
+</I>
+Happy to hear it! Let's do this :)
+
+&gt;<i> I do think that &quot;controlling how servers use certs&quot; is [a good idea]
+</I>
+This is probably the only way forward, but unfortunately it complicates things.
+It makes Gemini less simple, because people can't stick to what they
+know about certs, or just use the existing one they have for their domain.
+I guess we just have to try and get servers to support this and abstract it
+away.
+
+&gt;<i> -   Servers can sign their new cert with their previous private key.
+</I>&gt;<i>     Then TOFU clients which accepted the previous cert can validate the
+</I>&gt;<i>     changeover - and then immediately stop trusting the previous cert so
+</I>&gt;<i>     that anybody who stole the private key can't sign their own new cert.
+</I>&gt;<i>     Basically, when you accept a new cert you also grant it one-use-only,
+</I>&gt;<i>     very-limited-scope CA powers.
+</I>
+BLoCkcHaiN style, nice ;)
+This does mean that servers would have to serve up an ever growing certificate
+chain though? I think? Because otherwise how can a client verify that it was signed.
+
+I guess the servers only need to serve up two certs, the previous and current, but
+if I boot up my client after a year, then how does it know whether it just has missed
+some certs in between, or if there's an MITM attack?
+
+&gt;<i> -   Servers can generate their new self-signed cert N months in advance
+</I>&gt;<i>     and, for those N months, advertise the hash of the new cert at a
+</I>&gt;<i>     well-known endpoint, access to which is secured by the current cert.
+</I>&gt;<i>     TOFU clients can notice when an accepted cert is close to expiry and
+</I>&gt;<i>     pre-fetch the future fingerprint.
+</I>
+The problem is still like what if I miss a cert? Like if my client got cert 1 and
+the hash of cert 2, but by the time I come back online, that site is serving cert 3
+and I don't know whether that's one I should trust or not.
+
+&gt;<i> -   Servers can use DANE (RFC6698) to advertise their self-signed cert
+</I>&gt;<i>     over DNS, and TOFU clients can check this when receiving an unrecognised
+</I>&gt;<i>     cert. LOTS of details to discuss here re: DNS security.
+</I>
+DANE seems cool, I want to look into it more. But it will complicate things, and then
+there's DNSSEC, etc etc. I'm guessing it should be avoided for now.
+
+&gt;<i> -   We could built Perspectives/Convergence style &quot;notary&quot; servers that
+</I>&gt;<i>     TOFU clients clients can consult when receiving an unrecognised cert.
+</I>&gt;<i>     This was an idea that was developed before it's time, IMHO. Today there
+</I>&gt;<i>     is no reason that achieving broad network perspective requires trusted
+</I>&gt;<i>     third parties and an effective &quot;shadow infrastructure&quot; alongside CAs.
+</I>&gt;<i>     Just run your own certificate observatory on a dirt cheap VPS. Share it
+</I>&gt;<i>     with friends, who share theirs with you. Pubnixes can run then for
+</I>&gt;<i>     their users. Unlike some of the other ideas, this works just as nicely
+</I>&gt;<i>     with CA-signed certs (like those from Let's Encrypt) as self-signed
+</I>&gt;<i>     certs.
+</I>
+This seems cool, and I want to learn more. How is conflict resolution handled?
+Doesn't this need bootstrapping? It could be a good solution, but still will
+complicate the protocol a lot.
+
+
+I feel somewhat unsure about the problems I raised here btw, please correct me if
+I've made any mistakes.
+
+makeworld
+
+&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208; Original Message &#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;
+On Monday, June 15, 2020 3:32 AM, solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at SDF.ORG</A>&gt; wrote:
+
+&gt;<i> On Sun, Jun 14, 2020 at 11:09:05PM +0000, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; Solderpunk, I'd appreciate if we could work towards some general solution for this,
+</I>&gt;<i> &gt; and official recommendations for how to handle TOFU and cert renewal.
+</I>&gt;<i>
+</I>&gt;<i> I wouldlove to! And I have loads of ideas on this front. I've just
+</I>&gt;<i> never had the time to write anything substantial on them because there
+</I>&gt;<i> is always some more urgent matter popping up, like surprise auto-cookies
+</I>&gt;<i> or people wanting to add upload capabilities. If things ever settle
+</I>&gt;<i> down (tonight I will make official the spec changes I recently asked for
+</I>&gt;<i> feedback on and then freeze the thing again, perhaps that will help) we
+</I>&gt;<i> can tackle this.
+</I>&gt;<i>
+</I>&gt;<i> &gt; I'm not sure what to do about this. Both options seem bad, and both will cause
+</I>&gt;<i> &gt; breakage. It seems that there is no good way to do TOFU with certs, unless
+</I>&gt;<i> &gt; you want to try and control how servers use certs, like specifying that keypairs
+</I>&gt;<i> &gt; should not change or something.
+</I>&gt;<i>
+</I>&gt;<i> I don't think that keeping the same keypair forever is a good idea, but
+</I>&gt;<i> I do think that &quot;controlling how servers use certs&quot; is. Without CAs
+</I>&gt;<i> in the picture it's trivial to automate cert changes, which makes this
+</I>&gt;<i> easy. I also think that pushing Gemini servers to use the smallest
+</I>&gt;<i> certs they can (i.e. not RSA) is a good idea to reduce TLS overhead,
+</I>&gt;<i> which is another reason for people to take control of their own
+</I>&gt;<i> certificate generation.
+</I>&gt;<i>
+</I>&gt;<i> Quick sketches:
+</I>&gt;<i>
+</I>&gt;<i> -   Servers can sign their new cert with their previous private key.
+</I>&gt;<i>     Then TOFU clients which accepted the previous cert can validate the
+</I>&gt;<i>     changeover - and then immediately stop trusting the previous cert so
+</I>&gt;<i>     that anybody who stole the private key can't sign their own new cert.
+</I>&gt;<i>     Basically, when you accept a new cert you also grant it one-use-only,
+</I>&gt;<i>     very-limited-scope CA powers.
+</I>&gt;<i>
+</I>&gt;<i> -   Servers can generate their new self-signed cert N months in advance
+</I>&gt;<i>     and, for those N months, advertise the hash of the new cert at a
+</I>&gt;<i>     well-known endpoint, access to which is secured by the current cert.
+</I>&gt;<i>     TOFU clients can notice when an accepted cert is close to expiry and
+</I>&gt;<i>     pre-fetch the future fingerprint.
+</I>&gt;<i>
+</I>&gt;<i> -   Servers can use DANE (RFC6698) to advertise their self-signed cert
+</I>&gt;<i>     over DNS, and TOFU clients can check this when receiving an unrecognised
+</I>&gt;<i>     cert. LOTS of details to discuss here re: DNS security.
+</I>&gt;<i>
+</I>&gt;<i> -   We could built Perspectives/Convergence style &quot;notary&quot; servers that
+</I>&gt;<i>     TOFU clients clients can consult when receiving an unrecognised cert.
+</I>&gt;<i>     This was an idea that was developed before it's time, IMHO. Today there
+</I>&gt;<i>     is no reason that achieving broad network perspective requires trusted
+</I>&gt;<i>     third parties and an effective &quot;shadow infrastructure&quot; alongside CAs.
+</I>&gt;<i>     Just run your own certificate observatory on a dirt cheap VPS. Share it
+</I>&gt;<i>     with friends, who share theirs with you. Pubnixes can run then for
+</I>&gt;<i>     their users. Unlike some of the other ideas, this works just as nicely
+</I>&gt;<i>     with CA-signed certs (like those from Let's Encrypt) as self-signed
+</I>&gt;<i>     certs.
+</I>&gt;<i>
+</I>&gt;<i>     Cheers,
+</I>&gt;<i>     Solderpunk
+</I>&gt;<i>
+</I>
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001687.html">Thoughts on TOFU
+</A></li>
+	<LI>Next message (by thread): <A HREF="001800.html">Thoughts on TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1712">[ date ]</a>
+              <a href="thread.html#1712">[ thread ]</a>
+              <a href="subject.html#1712">[ subject ]</a>
+              <a href="author.html#1712">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

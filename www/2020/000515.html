@@ -1,0 +1,292 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> robots.txt for Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20robots.txt%20for%20Gemini&In-Reply-To=%3C20200324195404.GA7041%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000512.html">
+   <LINK REL="Next"  HREF="000514.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>robots.txt for Gemini</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20robots.txt%20for%20Gemini&In-Reply-To=%3C20200324195404.GA7041%40SDF.ORG%3E"
+       TITLE="robots.txt for Gemini">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Tue Mar 24 19:54:04 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000512.html">robots.txt for Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="000514.html">robots.txt for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#515">[ date ]</a>
+              <a href="thread.html#515">[ thread ]</a>
+              <a href="subject.html#515">[ subject ]</a>
+              <a href="author.html#515">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Mar 22, 2020 at 10:39:05PM +0000, Krixano wrote:
+&gt;<i> You can go to literally any website and append &quot;/robots.txt&quot; to see what they use. I've already seen a couple that use &quot;Allow&quot;.
+</I>
+Thanks for that. I've also verified that Python's stdlib function for
+parsing robots.txt recognises &quot;Allow&quot;, so it seems that this is not as
+obscure an option as some sources suggest.  I'd say we may as well
+explicitly support this for Gemini.
+
+Cheers,
+Solderpunk
+
+
+&gt;<i> 
+</I>&gt;<i> Christian Seibold
+</I>&gt;<i> 
+</I>&gt;<i> Sent with ProtonMail Secure Email.
+</I>&gt;<i> 
+</I>&gt;<i> ??????? Original Message ???????
+</I>&gt;<i> On Sunday, March 22, 2020 1:13 PM, solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at SDF.ORG</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Howdy all,
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; As the first and perhaps most important push toward getting some clear
+</I>&gt;<i> &gt; guidelines in place for well-behaved non-human Gemini clients (e.g.
+</I>&gt;<i> &gt; Gemini to web proxies, search engine spiders, feed aggregators, etc.),
+</I>&gt;<i> &gt; let's get to work on adapting robots.txt to Gemini.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; My current thinking is that this doesn't belong in the Gemini spec
+</I>&gt;<i> &gt; itself, much like robots.txt does not belong in the HTTP spec. That
+</I>&gt;<i> &gt; said, this feels like it warrants something more than just being put in
+</I>&gt;<i> &gt; the Best Practices doc. Maybe we need to start working on official
+</I>&gt;<i> &gt; &quot;side specs&quot;, too. Not sure what these should be called.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Anyway, I've refamiliarised myself with robots.txt. Turns out it is
+</I>&gt;<i> &gt; still only a de facto standard without an official RFC. My
+</I>&gt;<i> &gt; understanding is based on:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -   The <A HREF="https://www.robotstxt.org/">https://www.robotstxt.org/</A> website (which Wikipedia calls the
+</I>&gt;<i> &gt;     &quot;Official website&quot; at
+</I>&gt;<i> &gt;     <A HREF="https://en.wikipedia.org/wiki/Robots_exclusion_standard">https://en.wikipedia.org/wiki/Robots_exclusion_standard</A> - it's not
+</I>&gt;<i> &gt;     clear to me what &quot;official&quot; means for a de facto standard), and in
+</I>&gt;<i> &gt;     particular:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -   An old draft RFC from 1996 which that site hosts at
+</I>&gt;<i> &gt;     <A HREF="https://www.robotstxt.org/norobots-rfc.txt">https://www.robotstxt.org/norobots-rfc.txt</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -   A new draft RFC from 2019 which appears to have gotten further than
+</I>&gt;<i> &gt;     the first, considering it is hosted by the IETF at
+</I>&gt;<i> &gt;     <A HREF="https://tools.ietf.org/html/draft-rep-wg-topic-00">https://tools.ietf.org/html/draft-rep-wg-topic-00</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     While the 1996 draft is web-specific, I was pleasantly surprised to
+</I>&gt;<i> &gt;     see that the 2019 version is not. Section 2.3 says:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; &gt; As per RFC3986 [1], the URI of the robots.txt is:
+</I>&gt;<i> &gt; &gt; &quot;scheme:[//authority]/robots.txt&quot;
+</I>&gt;<i> &gt; &gt; For example, in the context of HTTP or FTP, the URI is:
+</I>&gt;<i> &gt; &gt; <A HREF="http://www.example.com/robots.txt">http://www.example.com/robots.txt</A>
+</I>&gt;<i> &gt; &gt; <A HREF="https://www.example.com/robots.txt">https://www.example.com/robots.txt</A>
+</I>&gt;<i> &gt; &gt; <A HREF="ftp://ftp.example.com/robots.txt">ftp://ftp.example.com/robots.txt</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; So, why not Gemini too?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Regarding the first practical question which was raised by Sean's recent
+</I>&gt;<i> &gt; post, it seems a no-brainer to me that Gemini should retain the
+</I>&gt;<i> &gt; convention of there being a single /robots.txt URL rather than having
+</I>&gt;<i> &gt; them per-directory or anything like that. Which it now seems was the
+</I>&gt;<i> &gt; intended behaviour of GUS all along, so I'm guessing nobody will find
+</I>&gt;<i> &gt; this controversial (but speak up if you do).
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; <A HREF="https://www.robotstxt.org/robotstxt.html">https://www.robotstxt.org/robotstxt.html</A> claims that excluding all files
+</I>&gt;<i> &gt; except one from robot access is &quot;currently a bit awkward, as there is no
+</I>&gt;<i> &gt; &quot;Allow&quot; field&quot;. However, both the old and new RFC drafts clearly
+</I>&gt;<i> &gt; mention one. I am not sure exactly what the ground truth is here, in
+</I>&gt;<i> &gt; terms of how often Allow is used in the wild or to what extent it is
+</I>&gt;<i> &gt; obeyed even by well-intentiond bots. I would be very happy in principle
+</I>&gt;<i> &gt; to just declare that Allow lines are valid for Gemini robot.txt files,
+</I>&gt;<i> &gt; but if it turns out that popular programming languages have standard
+</I>&gt;<i> &gt; library tools for parsing robot.txt which don't choke on <A HREF="gemini://">gemini://</A> URLs
+</I>&gt;<i> &gt; but don't recognise &quot;Allow&quot;, this could quickly lead to unintended
+</I>&gt;<i> &gt; consequences, so perhaps it is best to be conservative here.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; If anybody happens to be familiar with current practice on the web with
+</I>&gt;<i> &gt; regard to Allow, please chime in.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; There is the question of caching. Both RFC drafts for robots.txt make
+</I>&gt;<i> &gt; it clear that standard HTTP caching mechanisms apply to robots.txt, but
+</I>&gt;<i> &gt; Gemini doesn't have an equivalent and I'm not interested in adding one
+</I>&gt;<i> &gt; yet, especially not for the purposes of robots.txt. And yet, obviously,
+</I>&gt;<i> &gt; some caching needs to take place. A spider requesting /robots.txt
+</I>&gt;<i> &gt; again and again for every document at a host is generating a lot of
+</I>&gt;<i> &gt; needless traffic. The 1996 RFC recommends &quot;If no cache-control
+</I>&gt;<i> &gt; directives are present robots should default to an expiry of 7 days&quot;,
+</I>&gt;<i> &gt; while the 2019 one says &quot;Crawlers SHOULD NOT use the cached version for
+</I>&gt;<i> &gt; more than 24 hours, unless the robots.txt is unreachable&quot;. My gut tells
+</I>&gt;<i> &gt; me most Gemini robots.txt files will change very infrequently and 7 days
+</I>&gt;<i> &gt; is more appropriate than 24 hours, but I'm happy for us to discuss this.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The biggest question, in my mind, is what to do about user-agents, which
+</I>&gt;<i> &gt; Gemini lacks (by design, as they are a component of the browser
+</I>&gt;<i> &gt; fingerprinting problem, and because they encourage content developers to
+</I>&gt;<i> &gt; serve browser-specific content which is a bad thing IMHO). The 2019 RFC
+</I>&gt;<i> &gt; says &quot;The product token SHOULD be part of the identification string that
+</I>&gt;<i> &gt; the crawler sends to the service&quot; (where &quot;product token&quot; is bizarre and
+</I>&gt;<i> &gt; disappointingly commercial alternative terminology for &quot;user-agent&quot; in
+</I>&gt;<i> &gt; this document), so the fact that Gemini doesn't send one is not
+</I>&gt;<i> &gt; technically a violation.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; Of course, a robot doesn't need to send its user-agent in order to
+</I>&gt;<i> &gt; know its user-agent and interpet robots.txt accordingly. But it's
+</I>&gt;<i> &gt; much harder for Gemini server admins than their web counterparts to know
+</I>&gt;<i> &gt; exactly which bot is engaging in undesired behaviour and how to address
+</I>&gt;<i> &gt; it. Currently, the only thing that seems achievable in Gemini is to use
+</I>&gt;<i> &gt; the wildcard user-agent &quot;*&quot; to allow/disallow access by all bots to
+</I>&gt;<i> &gt; particular resources.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; But not all bots are equal. I'm willing to bet there are people using
+</I>&gt;<i> &gt; Gemini who are perfectly happy with e.g. the GUS search engine spider
+</I>&gt;<i> &gt; crawling their site to make it searchable via a service which is offered
+</I>&gt;<i> &gt; exclusively within Geminispace, but who are not happy with Gemini to web
+</I>&gt;<i> &gt; proxies accessing their content because they are concerned that
+</I>&gt;<i> &gt; poorly-written proxies will not disallow Google from crawling them so
+</I>&gt;<i> &gt; that Gemini content ends up being searchable within webspace. This is a
+</I>&gt;<i> &gt; perfectly reasonable stance to take and I think we should try to
+</I>&gt;<i> &gt; facilitate it.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; With no Gemini-specific changes to the de facto robots.txt spec, this
+</I>&gt;<i> &gt; would require admins to either manually maintain a whitelist of
+</I>&gt;<i> &gt; Gemini-only search engine spiders in their robots.txt or a blacklist
+</I>&gt;<i> &gt; of web proxies. This is easy today when you can count the number of
+</I>&gt;<i> &gt; either of things on one hand, but it does not scale well and is not a
+</I>&gt;<i> &gt; reasonable thing to expect admins to do in order to enforce a reasonable
+</I>&gt;<i> &gt; stance.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; (and, really, this isn't a Gemini-specific problem and I'm surprised
+</I>&gt;<i> &gt; that what I'm about to propose isn't a thing for the web)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I have mentioned previously on this list (quickly, in passing), the idea
+</I>&gt;<i> &gt; of &quot;meta user-agents&quot; (I didn't use that term when I first mentioned
+</I>&gt;<i> &gt; it). But since there is no way for Gemini server admins to learn the
+</I>&gt;<i> &gt; user-agent of arbitrary bots, we could define a small (I'm thinking ~5
+</I>&gt;<i> &gt; would suffice, surely 10 at most) number of pre-defined user-agents
+</I>&gt;<i> &gt; which all bots of a given kind MUST respect (in addition to optionally
+</I>&gt;<i> &gt; having their own individual user-agent). A very rough sketch of some
+</I>&gt;<i> &gt; possibilities, not meant to be exhaustive or even very good, just to
+</I>&gt;<i> &gt; give the flavour:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -   A user-agent of &quot;webproxy&quot; which must be respected by all web proxies.
+</I>&gt;<i> &gt;     Possibly this could have sub-types for proxies which do and don't
+</I>&gt;<i> &gt;     forbid web search engines?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -   A user-agent of &quot;search&quot; which must be respected by all search engine
+</I>&gt;<i> &gt;     spiders
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -   A user-agent of &quot;research&quot; for bots which crawl a site without making
+</I>&gt;<i> &gt;     specific results of their crawl publically available (I've thought of
+</I>&gt;<i> &gt;     writing something like this to study the growth of Geminispace and the
+</I>&gt;<i> &gt;     structure of links between documents)
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     Enumerating actual use cases is probably the wrong way to go about it,
+</I>&gt;<i> &gt;     rather we should think of broad classes of behaviour which differ with
+</I>&gt;<i> &gt;     regard to privacy implications - e.g. bots which don't make the results
+</I>&gt;<i> &gt;     of their crawling public, bots which make their results public over
+</I>&gt;<i> &gt;     Gemini only, bots which breach the Gemini-web barrier, etc.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     Do people think this is a good idea?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     Can anybody think of other things to consider in adapting robots.txt to
+</I>&gt;<i> &gt;     Gemini?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;     Cheers,
+</I>&gt;<i> &gt;     Solderpunk
+</I>&gt;<i> &gt;
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I>&gt;<i> 
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000512.html">robots.txt for Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="000514.html">robots.txt for Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#515">[ date ]</a>
+              <a href="thread.html#515">[ thread ]</a>
+              <a href="subject.html#515">[ subject ]</a>
+              <a href="author.html#515">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Call for AV-98 testing
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Call%20for%20AV-98%20testing&In-Reply-To=%3C20200523132839.GD12486%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001016.html">
+   <LINK REL="Next"  HREF="001244.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Call for AV-98 testing</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Call%20for%20AV-98%20testing&In-Reply-To=%3C20200523132839.GD12486%40SDF.ORG%3E"
+       TITLE="Call for AV-98 testing">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Sat May 23 14:28:39 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001016.html">[SPEC-CHANGE] Small housekeeping updates
+</A></li>
+        <LI>Next message (by thread): <A HREF="001244.html">Call for AV-98 testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#983">[ date ]</a>
+              <a href="thread.html#983">[ thread ]</a>
+              <a href="subject.html#983">[ subject ]</a>
+              <a href="author.html#983">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hey folks,
+
+I'm preparing to finally do a 1.0.0 release of AV-98 this weekend and
+would appreciate people helping me kick the tyres.  Once the release is
+made you'll be able to install it with pip, but for now you need to
+clone the repo:
+
+<A HREF="https://tildegit.org/solderpunk/AV-98/">https://tildegit.org/solderpunk/AV-98/</A>
+
+There's a setup.py in there if you want to install it yourself, but it
+has no essential third party dependencies and it's all in a single file
+so you can just run av98.py from right where you clone it, easy peasy.
+
+The release is mostly for the sake of easier installation, and for
+everyday use you won't notice much new if you are already used to how
+AV-98 works.  But there have been substantial changes to the TLS-side
+of things.
+
+Firstly, you can now toggle between two methods of TLS certificate
+validation (AV-98, until now, did no verification whatsoever, an
+embarrassing reminder of it's &quot;hacked together quickly in response to
+the surprise experience of an actual, live Gemini server&quot; legacy).
+
+With `set tls_mode tofu` (the default), you get the TOFU validation mode
+I initially envisioned for Gemini.  When you first visit a server, the
+received certificate is blindly trusted.  An SQLite database is
+maintained with the fingerprints of trusted certificates, a count of how
+many times they've been seen and the dates they were first and most
+recently seen.  If you ever subsequently see a different certificate for
+that host, you get a warning with details on how often the previous cert
+was seen and when it is/was due to expire, to inform your decision on
+whether or not to accept it.
+
+Note that it's not required, but the TOFU mode works beter if you have
+the `cryptography` module installed - certificates won't be blindly
+accepted if they are expired, or not yet valid, or don't have a common
+name or subject alternate name matching the expected hostname.  Python's
+standard `ssl` module doesn't let you check this for self-signed
+certificates (really!).
+
+In TOFU-mode there's a lot of creation of files and directories and this
+is largely what I'm hoping to discover bugs in by getting people to try
+this out.
+
+With `set tls_mode ca` (which you can stick in an RC file to make your
+permanent setting), AV-98 will do typical CA-based validation using your
+platform's default trusted certificates, and will refuse to accept
+self-signed certificates.
+
+For now I'm still wimping out on setting a hard requirement on TLS cert
+validation in the spec (which allows whatever the client likes - but
+clients really should be extremely upfront with users about what they
+are doing!).  But for my part I am pretty committed to experimenting
+with less centralised and less commercial alternatives to the CA system
+and I'll probably end up building a lot more options into AV-98's TOFU
+mode to reduce the risk associated with the initial acceptance.  I'm
+taking a lot of inspiration and ideas from DNS-based solutions like
+DANE, and from projects like Perspectives and Convergence.  I'm happy to
+discuss them with interested folks.
+
+Secondly, there is now a &quot;client certificate manager&quot; which is accessed
+via the `cert` command.  Use of client certificates in Gemini is
+currently under-specced and (perhaps as a partial consequence)
+under-used, and I want to correct this in the near future.  So I threw
+some stuff together in AV-98 to give us concrete ideas to discuss and
+test.  None of how this functions is &quot;canonical&quot; yet - I'm embracing the
+notion of AV-98 as an experimental client where we test stuff out.
+
+For now, the client certificate manager relies on the `openssl` command
+line tool being available to run with `system()`, because this is a
+whole world of pain less than doing it in Python.
+
+When it receives a 60, 61 or 62 status code, AV-98 will pop up a
+notification and give the use the option to generate a client
+certificate to use when re-requesting the resource, or to load a
+previously generated (non-transient!) certificate from the filesystem.
+When client certificates are *not* being used, the AV-98&gt; prompt now
+appears in a happy, friendly lime green colour.  As soon as a client
+certificate is loaded, the prompt becomes a scary deep red and displays
+as &quot;AV-98+cert&gt;&quot;.  If, while a client cert is loaded, you try to
+navigate away to a different domain, AV-98 will warn you and give you a
+Y/N dialogue to deactivate the cert before continuing, to avoid
+&quot;identity leak&quot;.  If you subsequently navigate back, during the same
+session (I mean AV-98 session here, i.e. you haven't exited and
+restarted the program), to a domain where you previously used a client
+cert, you'll be asked if you want to load it again.  You can use the
+`cert` command to explicitly end a client certificate session any time
+you like.
+
+It's all a bit clunky and explicit for now (although to some extent
+that's a good thing because people should be *aware* of how they use
+client certs), but it's definitely a huge improvement over previous
+options for occasionally keeping an eye on your astrobotany plant!
+
+I will make a separate more detailed post later about client
+certificates and the things we should think about with regard to them.
+
+That's about it!  Thanks to anybody who tests out, bug reports welcome
+via email or at <A HREF="https://tildegit.org/solderpunk/AV-98/issues.">https://tildegit.org/solderpunk/AV-98/issues.</A>
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001016.html">[SPEC-CHANGE] Small housekeeping updates
+</A></li>
+	<LI>Next message (by thread): <A HREF="001244.html">Call for AV-98 testing
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#983">[ date ]</a>
+              <a href="thread.html#983">[ thread ]</a>
+              <a href="subject.html#983">[ subject ]</a>
+              <a href="author.html#983">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

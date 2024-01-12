@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Announcing gmni, a line-mode gemini browser and curl-esque utility program
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Announcing%20gmni%2C%20a%20line-mode%20gemini%20browser%20and%20curl-esque%0A%20utility%20program&In-Reply-To=%3C20200921110137.hsnca4oj7f62dhev%40yasuna.kalasarn.se%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002748.html">
+   <LINK REL="Next"  HREF="002750.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Announcing gmni, a line-mode gemini browser and curl-esque utility program</H1>
+    <B>Magnus Wild</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Announcing%20gmni%2C%20a%20line-mode%20gemini%20browser%20and%20curl-esque%0A%20utility%20program&In-Reply-To=%3C20200921110137.hsnca4oj7f62dhev%40yasuna.kalasarn.se%3E"
+       TITLE="Announcing gmni, a line-mode gemini browser and curl-esque utility program">magnus at kalasarn.se
+       </A><BR>
+    <I>Mon Sep 21 12:01:37 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002748.html">Announcing gmni, a line-mode gemini browser and curl-esque utility program
+</A></li>
+        <LI>Next message (by thread): <A HREF="002750.html">Announcing gmni, a line-mode gemini browser and curl-esque utility program
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2749">[ date ]</a>
+              <a href="thread.html#2749">[ thread ]</a>
+              <a href="subject.html#2749">[ subject ]</a>
+              <a href="author.html#2749">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Sep 20, 2020 at 10:12:26PM -0400, Drew DeVault wrote:
+&gt;<i> Hiya! I felt that the Gemini space has a lot of cool browers, but was
+</I>&gt;<i> missing the basic works-everywhere client with few-to-no dependencies.
+</I>
+This is cool. I managed to build it on openbsd-current with a small
+modification;
+
+--- a/src/gmnlm.c
++++ b/src/gmnlm.c
+@@ -10,6 +10,7 @@
+ #include &lt;sys/ioctl.h&gt;
+ #include &lt;termios.h&gt;
+ #include &lt;unistd.h&gt;
++#include &lt;limits.h&gt;
+ #include &quot;gmni.h&quot;
+ #include &quot;url.h&quot;
+ #include &quot;util.h&quot;
+
+The error I got before this modification can be seen below.
+
+openbsd-build$ make
+CC      src/client.o
+CC      src/escape.o
+CC      src/gmni.o
+CC      src/url.o
+CCLD    gmni
+CC      src/gmnlm.o
+src/gmnlm.c:127:19: error: use of undeclared identifier 'PATH_MAX'
+        static char path[PATH_MAX+1];
+                         ^
+src/gmnlm.c:155:19: error: use of undeclared identifier 'PATH_MAX'
+        static char path[PATH_MAX+1];
+                         ^
+src/gmnlm.c:157:18: error: use of undeclared identifier 'PATH_MAX'
+        static char url[PATH_MAX+1+7];
+                        ^
+3 errors generated.
+*** Error 1 in /home/magnus/gmni/build (Makefile:25 'src/gmnlm.o': @cc -c -g  -std=c11  -D_XOPEN_SOURCE=700  -Wall  -Wextra  -Werror  -pedan...)
+
+The program is really small and seems very useful. Thanks a lot for spending time on this and sharing it!
+
+/Magnus
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002748.html">Announcing gmni, a line-mode gemini browser and curl-esque utility program
+</A></li>
+	<LI>Next message (by thread): <A HREF="002750.html">Announcing gmni, a line-mode gemini browser and curl-esque utility program
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2749">[ date ]</a>
+              <a href="thread.html#2749">[ thread ]</a>
+              <a href="subject.html#2749">[ subject ]</a>
+              <a href="author.html#2749">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

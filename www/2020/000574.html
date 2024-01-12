@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Gemini server logging formats and practices
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20server%20logging%20formats%20and%20practices&In-Reply-To=%3C74dd3821-810a-4f6f-982c-2180c5ea64ef%40www.fastmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000571.html">
+   <LINK REL="Next"  HREF="000575.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Gemini server logging formats and practices</H1>
+    <B>Dave Huseby</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20server%20logging%20formats%20and%20practices&In-Reply-To=%3C74dd3821-810a-4f6f-982c-2180c5ea64ef%40www.fastmail.com%3E"
+       TITLE="Gemini server logging formats and practices">dwh at vi.rs
+       </A><BR>
+    <I>Wed May 13 02:43:51 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000571.html">Gemini server logging formats and practices
+</A></li>
+        <LI>Next message (by thread): <A HREF="000575.html">Gemini server logging formats and practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#574">[ date ]</a>
+              <a href="thread.html#574">[ thread ]</a>
+              <a href="subject.html#574">[ subject ]</a>
+              <a href="author.html#574">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, May 12, 2020, at 11:23 AM, solderpunk wrote:
+&gt;<i> I am understanding of and sympathetic towards both admins who want to
+</I>&gt;<i> log IPs for debugging or abuse-detection purposes and towards those who
+</I>&gt;<i> don't want to so they can (rightfully) boast about their severs' respect
+</I>&gt;<i> for privacy.
+</I>
+Thanks. This is how the HTTP protocol conversation should have gone back in 1989.
+
+&gt;<i> We could also define a half-way format, where a compact hash of the IP is
+</I>&gt;<i> logged, so that unique visitor statistics can be calcualted for those
+</I>&gt;<i> who want them, or e.g. malfunctioning bots can be spotted, but nothing.
+</I>
+I think it may help to consider that the IP address of a sender is personally identifiable information and is not the server operator's to collect without consent. Right now the only thing we can do is willfully blind our servers. Eventually though, if all goes according to plan, Gemini servers will be running on a mixnet of some kind and they won't be able to track IP addresses because the source isn't mapped to anything in the real world. Users will appear to the server as first time users on every request. The only balance to be struck will be if the user offers a correlation identifier to the server for some reason, say to access some stored state they have on the server (e.g. their own plant in the cyber garden or whatever).
+
+Accessing permissioned resources (i.e. 6X response codes) doesn't necessarily imply correlation of the user. Certainly the user can present the same cryptographic credentials on subsequent requests but a better design is to allow for pair-wise credentials that are ephemeral to each session and potentially ephemeral to each request. Currently TLS doesn&#8217;t allow for this mode of operation. Something like CurveCP with decentralized verifiable credentials is a superior solution for uncorrelatable confidentiality. 
+
+Anyway, back to logging. I don't think it is our place as server operators to collect IP addresses without consent since it isn't our data. It is an unfortunate legacy of the existing IP network layer that will hopefully be overcome soon. I think the hashing of IP addresses for correlation is fine but I think it is fair to expect all server operators to notify their users that they are doing so.
+
+I may sound extreme but if we want to make the internet better, our thinking has to first shift. 
+
+Cheers!
+Dave
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000571.html">Gemini server logging formats and practices
+</A></li>
+	<LI>Next message (by thread): <A HREF="000575.html">Gemini server logging formats and practices
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#574">[ date ]</a>
+              <a href="thread.html#574">[ thread ]</a>
+              <a href="subject.html#574">[ subject ]</a>
+              <a href="author.html#574">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

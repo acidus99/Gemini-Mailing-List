@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> implementing client certificate support
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20implementing%20client%20certificate%20support&In-Reply-To=%3C20200607224414.pvpcbzjsx6gna3au%40gonzales.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001404.html">
+   <LINK REL="Next"  HREF="001415.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>implementing client certificate support</H1>
+    <B>mbays at sdf.org</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20implementing%20client%20certificate%20support&In-Reply-To=%3C20200607224414.pvpcbzjsx6gna3au%40gonzales.net%3E"
+       TITLE="implementing client certificate support">mbays at sdf.org
+       </A><BR>
+    <I>Sun Jun  7 23:44:14 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001404.html">implementing client certificate support
+</A></li>
+        <LI>Next message (by thread): <A HREF="001415.html">implementing client certificate support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1412">[ date ]</a>
+              <a href="thread.html#1412">[ thread ]</a>
+              <a href="subject.html#1412">[ subject ]</a>
+              <a href="author.html#1412">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>* Sunday, 2020-06-07 at 20:37 +0000 - solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at SDF.ORG</A>&gt;:
+
+&gt;<i>On Sun, Jun 07, 2020 at 08:54:39PM +0200, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">mbays at sdf.org</A> wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> ### Using identities
+</I>&gt;&gt;<i> * An identity can be set to be used on a given server at and below a given
+</I>&gt;&gt;<i> URI path. So you can have one identity in use for
+</I>&gt;&gt;<i> <A HREF="gemini://foo.bar/~quux/...,">gemini://foo.bar/~quux/...,</A> and another for <A HREF="gemini://foo.bar/~xuuq/...">gemini://foo.bar/~xuuq/...</A>
+</I>&gt;<i>
+</I>&gt;<i>How does a certificate come to be restricted to a given URL path and 
+</I>&gt;<i>subpaths?
+</I>
+If an identity starts being used as the result of a 6* response to 
+a request, then the identity is subsequently used for all requests to 
+that path and anything below. Same if the &quot;identify&quot; command is used on 
+an URI.
+
+This doesn't work entirely smoothly with astrobotony -- you might start 
+using our certificate at <A HREF="gemini://astrobotany.mozz.us/plant/,">gemini://astrobotany.mozz.us/plant/,</A> so it then 
+also takes effect for <A HREF="gemini://astrobotany.mozz.us/plant/water">gemini://astrobotany.mozz.us/plant/water</A> and so 
+on, but if you try e.g. <A HREF="gemini://astrobotany.mozz.us/settings">gemini://astrobotany.mozz.us/settings</A> you have 
+to select the identity again. You can manually &quot;identify 
+<A HREF="gemini://astrobotany.mozz.us">gemini://astrobotany.mozz.us</A>&quot;, but that isn't so smooth. Probably marks 
+should optionally have an identity associated -- that would help quite 
+a bit, but needs some forethought from the user.
+
+If this method of restricting an identity to subpaths of the path it's 
+first requested at became normal, maybe servers would tend to arrange 
+everything which requires a certificate below a single &quot;gate&quot; root.
+
+&gt;<i>I have been thinking that perhaps the &lt;META&gt; line for status coedes 6x 
+</I>&gt;<i>could be used for the server to specify precisely this information.
+</I>
+That could work.
+
+Cheers,
+Martin
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 195 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200608/a05b2f1c/attachment-0001.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20200608/a05b2f1c/attachment-0001.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001404.html">implementing client certificate support
+</A></li>
+	<LI>Next message (by thread): <A HREF="001415.html">implementing client certificate support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1412">[ date ]</a>
+              <a href="thread.html#1412">[ thread ]</a>
+              <a href="subject.html#1412">[ subject ]</a>
+              <a href="author.html#1412">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

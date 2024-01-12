@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] Managing un-moderated account creation and it's side-effects
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Managing%20un-moderated%20account%20creation%20and%20it%27s%20side-effects&In-Reply-To=%3CCAFwUW912fvb4J05HxdEB8P5M0htbGAWhrmDjhhKXDPy6i3c-eg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004773.html">
+   <LINK REL="Next"  HREF="004762.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] Managing un-moderated account creation and it's side-effects</H1>
+    <B>Mansfield Mansfield</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Managing%20un-moderated%20account%20creation%20and%20it%27s%20side-effects&In-Reply-To=%3CCAFwUW912fvb4J05HxdEB8P5M0htbGAWhrmDjhhKXDPy6i3c-eg%40mail.gmail.com%3E"
+       TITLE="[tech] Managing un-moderated account creation and it's side-effects">mansfield at ondollo.com
+       </A><BR>
+    <I>Thu Jan  7 04:38:32 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004773.html">[tech] A '.well-known/' path for contact information?
+</A></li>
+        <LI>Next message (by thread): <A HREF="004762.html">Re: [tech] Managing un-moderated account creation and it's side-effects
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4761">[ date ]</a>
+              <a href="thread.html#4761">[ thread ]</a>
+              <a href="subject.html#4761">[ subject ]</a>
+              <a href="author.html#4761">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello!
+
+I've been enjoying the gemini-space and I'm excited that this email signals
+my attempt to join more vocally. Hopefully my attempts to support Gemini
+end up being acceptable or at the least agreeable. :-)
+
+I've been working on a server and client for Gemini and I'm nearing the end
+of what I wanted to explore in my implementations... but I have a few
+questions that I'd love some help thinking through. I'd like to cover one
+of those questions in this email.
+
+One of my goals has been to have a client / server pairing that
+supports helping non-technical users go from downloading a client to
+posting content as quickly and painlessly as possible. In my mind this
+means allowing new accounts to be created *without* moderating their
+creation... which leaves me wondering how I might respond to side-effects
+like any unwelcome content (illegal, offensive, spam, etc.).
+
+I understand that walking down a path that allows un-moderated account
+creation is asking for trouble. I'm still interested in exploring
+the possibilities to see if a compromise might be found for
+my implementations.
+
+One of the options I'm considering is to restrict the number of posts a new
+account can make. Say, only &quot;one page&quot;? This wouldn't remove *all* negative
+side-effects, but seems to discourage some abuse and facilitate any
+clean-up since there'd only be one 'thing' to remove.
+
+Another option is to limit the *kind* of content that a new account can
+provide. Say, no links? This could curtail a type of side-effect
+(facilitating access to external content through my domain/server), but not
+entirely, since text/gemini *without* explicit links could just as easily
+be a link-in-plain-text that is copied and used somewhere else.
+
+A third option I'm considering is to limit the visibility of the content
+that a new account can provide. I've written an HTTP server that provides
+access to the Gemini content, so, maybe I disallow any content from
+accounts less than say, 1 month old? If a new account were showing promise
+as a positive contributor I could manually enable it sooner than a month...
+a sort of default-deny with a manual-allow. Content could of course still
+be viewed through a Gemini-specific client, just not through a web browser.
+
+The last option I've been mulling over is to just accept the side-effects,
+but that feels too much like an ends-justify-means approach which I find
+weak as a motivation... but... I *almost* prefer encouraging communication
+and creation enough to endure negative side-effects.
+
+I guess one way to sum up the sharp corner I'm trying to round-off is that
+I have two goals that seem to oppose each other: encourage creation of
+content *and* discourage creation of 'wrong' content. I'm very sensitive to
+this concept of 'wrong' content too... (I'm *very* uninterested in limits
+to agency, but there's the swinging fists and noses point in the middle of
+that)... but that's a different discussion.
+
+I have memories of some server implementations simply requiring manual
+account creation approvals, which, as mentioned, is what I'm hoping to
+avoid... I *know* this is a tough complication. As some additional
+information, all I have set up as required for account creation is to
+provide a certificate. I plan on using the subject-common-name and first
+few characters from the generated fingerprint as the account name... so...
+no email verification, and no way to know if some spammer is just creating
+a bunch of new accounts for similar purposes.
+
+There's more thought I've had, but I'll stop rambling there.
+
+Thanks for reading this far. :-D
+
+Thoughts?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210106/0b144906/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210106/0b144906/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004773.html">[tech] A '.well-known/' path for contact information?
+</A></li>
+	<LI>Next message (by thread): <A HREF="004762.html">Re: [tech] Managing un-moderated account creation and it's side-effects
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4761">[ date ]</a>
+              <a href="thread.html#4761">[ thread ]</a>
+              <a href="subject.html#4761">[ subject ]</a>
+              <a href="author.html#4761">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,344 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> An outsider's view of the `gemini://` protocol
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20outsider%27s%20view%20of%20the%20%60gemini%3A//%60%20protocol&In-Reply-To=%3CCA%2BTk8fxyiGDETSM-Fc5jO9UJvS6CfP%3DnSvebawpAGwHfmHn0Ug%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000446.html">
+   <LINK REL="Next"  HREF="000454.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>An outsider's view of the `gemini://` protocol</H1>
+    <B>Ciprian Dorin Craciun</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20outsider%27s%20view%20of%20the%20%60gemini%3A//%60%20protocol&In-Reply-To=%3CCA%2BTk8fxyiGDETSM-Fc5jO9UJvS6CfP%3DnSvebawpAGwHfmHn0Ug%40mail.gmail.com%3E"
+       TITLE="An outsider's view of the `gemini://` protocol">ciprian.craciun at gmail.com
+       </A><BR>
+    <I>Fri Feb 28 10:04:19 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000446.html">An outsider's view of the `gemini://` protocol
+</A></li>
+        <LI>Next message (by thread): <A HREF="000454.html">An outsider's view of the `gemini://` protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#449">[ date ]</a>
+              <a href="thread.html#449">[ thread ]</a>
+              <a href="subject.html#449">[ subject ]</a>
+              <a href="author.html#449">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, Feb 28, 2020 at 11:07 AM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+&gt;<i>   Why is a numeric status code so bad?  Yes, the rest of the protocol is
+</I>&gt;<i> English centric (MIME types; left-to-right, UTF-8).  It just seems that
+</I>&gt;<i> using words (regardless of language) is just complexity for its own sake.
+</I>
+
+Why did people use `/etc/hosts` files before DNS was invented?  Why do
+we have `/etc/services`?  Why do we have `O_READ`?  Why do we have
+`chmod +x`?
+
+Because numbers are hard to remember, and say nothing to a person that
+doesn't know the spec by heart.  (For example although I do a lot of
+HTTP related work with regard to routing and such, I always don't
+remember which of the 4-5 HTTP redirect codes says &quot;temporary redirect
+but keep the same method&quot; as &quot;opposed to temporary redirect but switch
+to `GET`&quot;.)
+
+
+
+
+&gt;<i> &gt; As minor issues:
+</I>&gt;<i> &gt; * why `CRLF`?  it's easier (both in terms of availability of functions
+</I>&gt;<i> &gt; and efficiency) to split lines by a single character `\n` than by a
+</I>&gt;<i> &gt; string;
+</I>&gt;<i>
+</I>&gt;<i>   That was discussed earlier on the list:
+</I>&gt;<i>
+</I>&gt;<i>         <A HREF="https://lists.orbitalfox.eu/archives/gemini/2019/000116.html">https://lists.orbitalfox.eu/archives/gemini/2019/000116.html</A>
+</I>
+
+OK, reading that email the answer seems to be &quot;because other protocols
+have it&quot;...  And even you admit that in your own code you also handle
+just `LF`.
+
+So then why bother?  Why not simplify the protocol?
+
+
+
+
+&gt;<i> &gt; &gt; &gt; On a second thought, why TLS?  Why not something based on NaCL /
+</I>&gt;<i> &gt; &gt; &gt; `libsodium` constructs, or even the &quot;Noise Protocol&quot;
+</I>&gt;<i> &gt; &gt; &gt; (<A HREF="http://www.noiseprotocol.org/">http://www.noiseprotocol.org/</A>)?
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;         1) Never, *NEVER* implement crypto yourself.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I was never proposing to implement crypto ourselves.  `libsodium` /
+</I>&gt;<i> &gt; NaCL provides very useful high-level constructs, tailored for specific
+</I>&gt;<i> &gt; use-cases (like for example message encryption and signing), that are
+</I>&gt;<i> &gt; proven to be safe, and exports them with a very simple API that can be
+</I>&gt;<i> &gt; easily understood and used.
+</I>&gt;<i>
+</I>&gt;<i>   TLS was choosen because the COMMUNICATIONS LINK is encrypted, not just the
+</I>&gt;<i> payload.  All Eve (the evesdropper) can see is what IP address you are
+</I>&gt;<i> connecting to, not what content you are reading, nor (depending upon the TLS
+</I>&gt;<i> version) what virtual server you might be talking to.
+</I>
+
+Although I do agree that encryption at the &quot;transport&quot; level to hide
+the entire traffic is a good idea, if you take into account that
+`<A HREF="gemini://`">gemini://`</A> requires one request and one reply per TCP connection
+(thus TLS connection), there is no actual &quot;communications link here&quot;.
+
+Basically you are using TLS to encrypt only one payload.  Moreover
+also because there is exactly one request / one reply one can just
+look at the traffic pattern and deduce what the user is doing just by
+analyzing the length of the stream (in both ways) and the time the
+server takes to respond (which says static or dynamically generated).
+(Granted TLS records are padded, however even so, having the size as
+multiple of some fixed value, still gives an insight into what was
+requested.)
+
+For example say lives in a country where certain books (perhaps about
+cryptography) are forbidden;  now imagine there is a library out there
+that serves these books through `<A HREF="gemini://`;">gemini://`;</A>  now imagine the country
+wants to see what books are read by its own citizens;  all it has to
+do is record each session and deduce a response size range, then crawl
+that library and see which books fit into that range.
+
+Therefore I would say (I'm no cryptographer) TLS doesn't help at all,
+einter does PGP, either `libsodium` / NaCL...
+
+
+
+
+Another related topic regarding TLS that just struck me:  given that
+`<A HREF="gemini://`">gemini://`</A> supports out-of-the-box virtual hosts, do you couple that
+with TLS SNI?
+
+If not basically TLS is just an &quot;obfuscation&quot; than actual end-to-end
+encryption.  Why I say that:  because the spec says one should use
+SSH-style &quot;do you trust this server&quot; questions and keep that
+certificate in mind.  But how about when the certificate expires, or
+is revoked?  (SSH server public keys never expire...)  How does the
+user know that the certificate was rightfully replaced or he is a
+victim of an MITM attack?
+
+
+
+
+&gt;<i> &gt; &gt; &gt; Why not just re-use PGP to sign / encrypt requests and replies?  With
+</I>&gt;<i> &gt; &gt; &gt; regard to PGP,
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;   There are issues with using PGP:
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;         <A HREF="https://latacora.micro.blog/2019/07/16/the-pgp-problem.html">https://latacora.micro.blog/2019/07/16/the-pgp-problem.html</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; There are issues with any technology, TLS included.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; However I would say it's easier to integrate GnuPG (even through
+</I>&gt;<i> &gt; subprocesses) in order to encrypt / decrypt payloads (especially given
+</I>&gt;<i> &gt; how low in count they are for Gemini's ecosystem) than implementing
+</I>&gt;<i> &gt; TLS.  Moreover it offers out-of-the-box the whole client side
+</I>&gt;<i> &gt; certificate management, which adding to a TLS-based client would be
+</I>&gt;<i> &gt; much more involved, more on this bellow...
+</I>&gt;<i>
+</I>&gt;<i>   As I have mentioned, that only protects the payload, not the
+</I>&gt;<i> communications channel.
+</I>
+
+But as said, you don't have an actual communications channel because
+you use TLS for a single request / reply payload pair...  :)
+
+
+
+
+&gt;<i> &gt; &gt;   The hardest problem with crypto is key management.  If anything, key
+</I>&gt;<i> &gt; &gt; management with PGP seems more problematic than with OpenSSL and the CA
+</I>&gt;<i> &gt; &gt; infrastructure (as bad as the CA infrastructure is).
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; One of the `<A HREF="gemini://`">gemini://`</A> specifications explicitly states that the
+</I>&gt;<i> &gt; server certificate authentication model is similar to SSH's first use
+</I>&gt;<i> &gt; accept and cache afterward.  However say you'll go with the actual CA
+</I>&gt;<i> &gt; model, now you need to juggle Let's Encrypt (each 3 months) (or add
+</I>&gt;<i> &gt; support for ACME in your server), then juggle PEM files, etc.
+</I>&gt;<i> &gt; Regardless, either way one will have to implement all this certificate
+</I>&gt;<i> &gt; management from scratch.
+</I>&gt;<i>
+</I>&gt;<i>   Or self-signed certificates.
+</I>&gt;<i>
+</I>&gt;<i>   Okay, we use NaCL.  Now what?  What's needed to secure the communication
+</I>&gt;<i> channel?  A key exchange.  Again, rule 1---never implement crypto.
+</I>
+
+Given that one has the public key of the server (more on that later),
+one could use the following on client / server sides:
+
+    <A HREF="https://libsodium.gitbook.io/doc/public-key_cryptography/sealed_boxes">https://libsodium.gitbook.io/doc/public-key_cryptography/sealed_boxes</A>
+
+```
+The crypto_box_seal() function encrypts a message m of length mlen for
+a recipient whose public key is pk. It puts the ciphertext whose
+length is crypto_box_SEALBYTES + mlen into c.
+
+The function creates a new key pair for each message, and attaches the
+public key to the ciphertext. The secret key is overwritten and is not
+accessible after this function returns.
+
+The crypto_box_seal_open() function decrypts the ciphertext c whose
+length is clen, using the key pair (pk, sk), and puts the decrypted
+message into m (clen - crypto_box_SEALBYTES bytes).
+```
+
+How does one get the public key of the server?  One could change the
+protocol so that the server speaks first and sends its own public key.
+
+
+My take on this:  given a set of clear requirements for the
+`<A HREF="gemini://`">gemini://`</A> protocol (which I've seen there are) one can come up with
+better solutions than TLS, ones that better fit the use-case.
+
+(Again, just to be clear, I'm not saying &quot;lets invent our own crypto&quot;,
+but instead &quot;let's look at other tested&quot; alternatives.  As a
+side-note, NaCL, on which `libsodium` is based, was created by `Daniel
+J. Bernstein`...)
+
+
+
+
+&gt;<i> &gt; &gt; &gt; Regarding an up-to-date Gopher map alternative, I think this is an
+</I>&gt;<i> &gt; &gt; &gt; important piece of the Gopher ecosystem that is missing from today's
+</I>&gt;<i> &gt; &gt; &gt; world:  a machine-parsable standard format of indexing documents.  I
+</I>&gt;<i> &gt; &gt; &gt; very fondly remember &quot;directory&quot; sites of yesteryear (like DMOZ or the
+</I>&gt;<i> &gt; &gt; &gt; countless other clones) that strives to categorize the internet not by
+</I>&gt;<i> &gt; &gt; &gt; &quot;machine learning&quot; but by human curation.
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;   Could you provide an example of what you mean by this?  I'm not sure why a
+</I>&gt;<i> &gt; &gt; map alternative is needed.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; One problem with today's web is that the actual &quot;web structure&quot; is
+</I>&gt;<i> &gt; embedded in unstructured documents as links.  What I liked about
+</I>&gt;<i> &gt; Gopher maps is that it gave a machine-readable, but still
+</I>&gt;<i> &gt; user-friendly, way to map and categorize the &quot;web contents&quot;.
+</I>&gt;<i>
+</I>&gt;<i>   One problem with that---incentives.  What's my incentive to make all this
+</I>&gt;<i> information more easily machine readable?  On the web, you do that, and what
+</I>&gt;<i> happens?  Google comes along, munches on all that sweet machine readable
+</I>&gt;<i> data and serves it up directly to users, meaning the user just has to go to
+</I>&gt;<i> Google for the information, not your server.  Given those incentives, I have
+</I>&gt;<i> no reason to make my data easily machine readable when it means less
+</I>&gt;<i> traffic.
+</I>
+
+The incentive is a clear one:  for the end-user.  Given that we can
+standardize on such an &quot;index&quot;, then we can create better
+&quot;user-agents&quot; that are more useful to our actual users.  (And I'm not
+even touching on the persons that have various disabilities that
+hamper their interaction with computers.)
+
+For example say I'm exposing a API documentation via `<A HREF="gemini://`.">gemini://`.</A>  How
+do I handle the &quot;all functions index page&quot;?  Do I create a large
+`text/gemini` file, or a large HTML file?  How does the user interact
+with that?  With search?  Wouldn't he be better served by a searchable
+interface which filters the options as he types, like `dmenu` / `rofi`
+/ `fzf` (or the countless other clones) do?  (Currently each
+programming language from Rust to Scheme tries to do something similar
+with JavaScript and the result is horrible...)
+
+Or, to take another approach, why do people use Google to search
+things?  Because our web pages are so poor when it comes to
+structuring information, that most often than not, when I want to find
+something on a site I just Google: `site:example.com the topic i'm
+interested in`.
+
+
+
+
+&gt;<i>   I recall the large push for RDF (Resource Description Framework) back
+</I>&gt;<i> around 2004 or so ... embed machine parsable relations and metadata and it
+</I>&gt;<i> would be oh so wonderful.  Some people even bothered to to all that work.
+</I>&gt;<i> And for what?  It was a pain to maintain, the tooling was poor, and Google
+</I>&gt;<i> would just suck it up and serve it to users directly, no reason for anyone
+</I>&gt;<i> to actually visit your site.
+</I>
+I'm not advocating for RDF (it was quite convoluted) or semantic web,
+or GraphQL, etc.  I'm just advocating something better than the Gopher
+map.
+
+
+
+
+&gt;<i>   As a user, that's great!  As a web site operator, not so much.
+</I>
+
+OK...  Now here is something I don't understand:  aren't you building
+Gemini sites for &quot;users&quot;?  You are building it for &quot;operators&quot;?
+
+Because if the operator is what you optimize for, then why not just
+SSH into the operator's server where he provides you with his
+&quot;favourite&quot; BBS clone.
+
+
+
+
+&gt;<i> &gt; &gt; &gt; * and perhaps add support for content-based addressing (as opposed to
+</I>&gt;<i> &gt; &gt; &gt; server-based addressing) (i.e. persistent URL's);
+</I>&gt;<i> &gt; &gt;
+</I>&gt;<i> &gt; &gt;   There already exist such protocols---I'm not sure what a new one based
+</I>&gt;<i> &gt; &gt; around Gemini would buy.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; I agree that `<A HREF="gemini://`">gemini://`</A> is first and foremost a &quot;transfer&quot; protocol.
+</I>&gt;<i> &gt; However one can include a document's identity as a first class citizen
+</I>&gt;<i> &gt; of the protocol.
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; For example say each document is identified by its SHA;  then when
+</I>&gt;<i> &gt; replying with a document also send that SHA in form of a permanent URL
+</I>&gt;<i> &gt; like say `gemini-object:?sha={SHA}&amp;location=<A HREF="gemini://first-server/...&amp;location=gemini://second-server/...`;">gemini://first-server/...&amp;location=gemini://second-server/...`;</A>
+</I>&gt;<i> &gt;  then a client (that perhaps has bookmarked that particular version of
+</I>&gt;<i> &gt; that document) could send that URL to a server (of his choosing via
+</I>&gt;<i> &gt; configuration, to the first one specified in `location`, etc.) and if
+</I>&gt;<i> &gt; that server has that document just reply with that, else use
+</I>&gt;<i> &gt; `location`, else return 404.
+</I>&gt;<i>
+</I>&gt;<i>   Hey, go ahead and implement that.  I'd like to see that ...
+</I>
+
+There is already FreeNet and IPFS that implement content-based
+addressing.  I just wanted something in between that is still
+&quot;location&quot; driven, but is &quot;content identity&quot; aware.
+
+Ciprian.
+</PRE>
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000446.html">An outsider's view of the `gemini://` protocol
+</A></li>
+	<LI>Next message (by thread): <A HREF="000454.html">An outsider's view of the `gemini://` protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#449">[ date ]</a>
+              <a href="thread.html#449">[ thread ]</a>
+              <a href="subject.html#449">[ subject ]</a>
+              <a href="author.html#449">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

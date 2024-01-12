@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Designing a simpler alternative to TLS
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Designing%20a%20simpler%20alternative%20to%20TLS&In-Reply-To=%3CC79633QYW8EG.4OZBP7FHHLTS%40nitro%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003467.html">
+   <LINK REL="Next"  HREF="003468.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Designing a simpler alternative to TLS</H1>
+    <B>Adnan Maolood</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Designing%20a%20simpler%20alternative%20to%20TLS&In-Reply-To=%3CC79633QYW8EG.4OZBP7FHHLTS%40nitro%3E"
+       TITLE="Designing a simpler alternative to TLS">me at adnano.co
+       </A><BR>
+    <I>Sat Nov 21 18:52:44 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003467.html">Designing a simpler alternative to TLS
+</A></li>
+        <LI>Next message (by thread): <A HREF="003468.html">Designing a simpler alternative to TLS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3476">[ date ]</a>
+              <a href="thread.html#3476">[ thread ]</a>
+              <a href="subject.html#3476">[ subject ]</a>
+              <a href="author.html#3476">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat Nov 21, 2020 at 3:30 AM EST, Sean Conner wrote:
+&gt;<i> First off, the specification does not give enough detail to actually
+</I>&gt;<i> implement the protocol. There's nothing about the wire format, and I had
+</I>&gt;<i> to
+</I>&gt;<i> check the implementation to see you are using BARE message Encoding [1],
+</I>&gt;<i> yet
+</I>&gt;<i> *another* encoding scheme like JSON, BSON, CBOR, MsgPack, CapnProto,
+</I>&gt;<i> Protobuf, etc. etc. [2]
+</I>
+The specification is still a very rough draft.
+
+&gt;<i> Second, TLS libraries come with the cryptographic primitives required,
+</I>&gt;<i> and
+</I>&gt;<i> yes, there is negotiation that happens, but that's because as
+</I>&gt;<i> cryptographic
+</I>&gt;<i> primitives are broken, new ones can be slotted in and used. Here, if
+</I>&gt;<i> (and
+</I>&gt;<i> it could happen) Ed25519 is &quot;broken&quot; then what? At least with several
+</I>&gt;<i> supported primitives, the protocol can still be used while the broken
+</I>&gt;<i> primitive is removed.
+</I>
+If Ed25519 is broken, then it would be considered insecure, and a new
+KeyShare message could be added in a backwards-compatible way.
+
+&gt;<i> Even so, anyone attempting to implement Ed25519 is a fool for the
+</I>&gt;<i> pitfalls
+</I>&gt;<i> are subtle and *will* be exploited; I'm guessing you are assuming the
+</I>&gt;<i> use of
+</I>&gt;<i> libsodium (or God help you, libnacl) with this protocol, right?
+</I>
+Yes, I assume that you would not implement the cryptography yourself.
+
+&gt;<i> I'm no crytographic expert, but I don't see how this protocol prevents
+</I>&gt;<i> MITM attacks; the details in the key share (section 2.2.1) don't go into
+</I>&gt;<i> enough detail for my liking. How do I know I'm talking to the server in
+</I>&gt;<i> question, and not being invisibly proxied by Eve or Mal?
+</I>
+MITM protection is covered in section 2.2.4. Essentially, the server
+signs the key share messages with its certificate private key, and the
+client verifies this signature.
+
+&gt;<i> And how does each
+</I>&gt;<i> side determine an insecure key share? What exactly goes over the wire?
+</I>
+A key share would be insecure if it is later &quot;broken&quot; as you said.
+
+I don't expect anyone to use this instead of TLS, it is mostly just for
+educational purposes and to gather ideas of what a simpler TLS could
+look like.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003467.html">Designing a simpler alternative to TLS
+</A></li>
+	<LI>Next message (by thread): <A HREF="003468.html">Designing a simpler alternative to TLS
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3476">[ date ]</a>
+              <a href="thread.html#3476">[ thread ]</a>
+              <a href="subject.html#3476">[ subject ]</a>
+              <a href="author.html#3476">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

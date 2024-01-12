@@ -1,0 +1,191 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Caching and status codes
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3C20201108050409.5db9ab3f%40home%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003117.html">
+   <LINK REL="Next"  HREF="003079.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Caching and status codes</H1>
+    <B>Ali Fardan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3C20201108050409.5db9ab3f%40home%3E"
+       TITLE="Caching and status codes">raiz at stellarbound.space
+       </A><BR>
+    <I>Sun Nov  8 02:04:09 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003117.html">Caching and status codes
+</A></li>
+        <LI>Next message (by thread): <A HREF="003079.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3124">[ date ]</a>
+              <a href="thread.html#3124">[ thread ]</a>
+              <a href="subject.html#3124">[ subject ]</a>
+              <a href="author.html#3124">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, 08 Nov 2020 00:41:10 +0300
+&quot;Leo&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">list at gkbrk.com</A>&gt; wrote:
+&gt;<i> This is the statement that bothered me because it seemed very weird to
+</I>&gt;<i> consider a client &quot;rude&quot; for not making requests. So I asked about it
+</I>&gt;<i> for clarification.
+</I>
+Because as of currently, there's no way to indicate if content is
+dynamic or static.
+
+&gt;<i> But here you are saying that the rude thing here is having to serve
+</I>&gt;<i> large files over gemini and expecting them to be served often. This
+</I>&gt;<i> would be the server being rude, and clients caching or not caching
+</I>&gt;<i> resources would not have an impact on how large a server's reponses
+</I>&gt;<i> are.
+</I>&gt;<i>
+</I>&gt;<i> If anything, it would result in less traffic and at least partially
+</I>&gt;<i> mitigate the issue. If your server is being _rude_ and sending large
+</I>&gt;<i> responses, my client is not gonna make it worse by requesting it every
+</I>&gt;<i> single time. Your server might have a lot of bandwidth, my client does
+</I>&gt;<i> not.
+</I>
+Gemini responses should typically be in the kilobytes range as they are
+plain text, unless you're serving MP3s or ISOs which are saved to the
+disk permanently, there's no point of having caching here.
+
+&gt;<i> The protocol operates under the assumption that caching does not exist
+</I>&gt;<i> in order to make clients and servers simpler. A client adding caching
+</I>&gt;<i> would NOT affect a server negatively. If you consider caching clients
+</I>&gt;<i> to be rude clients, too bad, you will never notice them because
+</I>&gt;<i> instead of making extra requests, they are making less. I suppose you
+</I>&gt;<i> can ask them to apologise for not making you spend money on
+</I>&gt;<i> compute/bandwidth etc.
+</I>
+Again, the protocol by convention should not go in the direction of
+bittorrent, plain text documents aren't large.
+
+&gt;<i> Again, you are talking about making servers more complicated. If my
+</I>&gt;<i> client does not cache and your server sends large responses, this is
+</I>&gt;<i> indeed a problem and you might have to make your server more complex
+</I>&gt;<i> to handle it. Caching clients would make simpler server code
+</I>&gt;<i> possible, as performance tricks would not be necessary. But even
+</I>&gt;<i> ignoring that, a client that caches responses would not make your
+</I>&gt;<i> server more complex.
+</I>
+They won't take burden off the server, instead, they add more, now the
+server have to tell the client which content to cache and which it
+should not.
+
+&gt;<i> So it is being sane when a server says &quot;display this monstrous image&quot;
+</I>&gt;<i> and the client refuses, but it is insane when the server says &quot;please
+</I>&gt;<i> download this resource that you downloaded 3 seconds ago&quot; and the
+</I>&gt;<i> client says &quot;I'll just use the response I have cached&quot;?
+</I>
+Resources are identified using URIs, that's all the client knows, how
+does it know that the resource haven't been altered since the last time
+it got accessed? the client could be showing an outdated document in
+the case of dynamic content.
+
+&gt;<i> The whole point of the discussion is that clients WILL cache
+</I>&gt;<i> resources. Gemini benefits a lot from having a wide range of
+</I>&gt;<i> different clients. You simply can't control everyone's use case to
+</I>&gt;<i> fit the way you think they should consume content.
+</I>
+Different use cases can be satisfied with different protocols.
+
+&gt;<i> Just like some browsers/proxies cache HTTP and Gopher responses, some
+</I>&gt;<i> people who are bandwidth constrained or simply not wasteful will
+</I>&gt;<i> choose to cache their Gemini responses too. The discussion throws out
+</I>&gt;<i> the idea of client HINTS that will say &quot;This might be a dynamic
+</I>&gt;<i> response, maybe don't cache it&quot;. Neither the server nor the client
+</I>&gt;<i> needs to take advantage of this, a client can always cache or never
+</I>&gt;<i> cache, and a server can expect everything to be cached or not cached.
+</I>&gt;<i> Just like before.
+</I>
+Again, there shouldn't be a point where caching is mandatory if plain
+text documents are being served.
+
+&gt;<i> Disagreeing with someone is one thing, but you don't have to attack
+</I>&gt;<i> them like this.
+</I>
+I'm sorry you feel offended.
+
+&gt;<i> Before you shame other people, please enlighten us
+</I>&gt;<i> with the tangible value that you have provided to the greater Gemini
+</I>&gt;<i> community.
+</I>
+Not proposing solutions to non-existent problems.
+
+&gt;<i> &gt; If any feature does not add a great value at an acceptable cost to
+</I>&gt;<i> &gt; the simplicity of the protocol, consider it rejected before even
+</I>&gt;<i> &gt; proposing it, I don't want to have a different experience browsing
+</I>&gt;<i> &gt; Gemini space using netcat than using Kristall.  
+</I>&gt;<i> 
+</I>&gt;<i> I agree with this completely.
+</I>
+Then there's nothing to discuss further.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003117.html">Caching and status codes
+</A></li>
+	<LI>Next message (by thread): <A HREF="003079.html">Caching and status codes
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3124">[ date ]</a>
+              <a href="thread.html#3124">[ thread ]</a>
+              <a href="subject.html#3124">[ subject ]</a>
+              <a href="author.html#3124">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

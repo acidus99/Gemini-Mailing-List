@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] Adapting the HTTP Common Logging Format for use by Gemini servers
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Adapting%20the%20HTTP%20Common%20Logging%20Format%20for%20use%20by%20Gemini%0A%20servers&In-Reply-To=%3C20201227201054.sjtagtfif3cxrkfl%40gux%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004498.html">
+   <LINK REL="Next"  HREF="004483.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] Adapting the HTTP Common Logging Format for use by Gemini servers</H1>
+    <B>Arav K.</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Adapting%20the%20HTTP%20Common%20Logging%20Format%20for%20use%20by%20Gemini%0A%20servers&In-Reply-To=%3C20201227201054.sjtagtfif3cxrkfl%40gux%3E"
+       TITLE="[spec] Adapting the HTTP Common Logging Format for use by Gemini servers">nothien at uber.space
+       </A><BR>
+    <I>Sun Dec 27 20:10:54 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004498.html">[spec] Adapting the HTTP Common Logging Format for use by Gemini servers
+</A></li>
+        <LI>Next message (by thread): <A HREF="004483.html">[spec] Adapting the HTTP Common Logging Format for use by Gemini servers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4479">[ date ]</a>
+              <a href="thread.html#4479">[ thread ]</a>
+              <a href="subject.html#4479">[ subject ]</a>
+              <a href="author.html#4479">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Dec 27, 2020 at 02:59:02PM -0500, John Cowan wrote:
+&gt;<i> On the literal approach, field 4 is ISO 8601 (RFC 3336) format, field 5 is
+</I>&gt;<i> the URL request line (no quotes needed), and field 6 is the Gemini status
+</I>&gt;<i> code unconverted.
+</I>
+We want to be careful about malicious clients sending a request like
+'\n&lt;garbage or fake log here&gt;'.  Although that may fail, it would still
+show up in the logs and mess them up.  Perhaps the logger should check
+if the request line is a proper URL, and if it is not it would encode it
+in some way (perhaps just URL-encoding it, because that function may
+already be available to the code).
+
+~aravk | ~nothien
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 833 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201227/e5f1c805/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201227/e5f1c805/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004498.html">[spec] Adapting the HTTP Common Logging Format for use by Gemini servers
+</A></li>
+	<LI>Next message (by thread): <A HREF="004483.html">[spec] Adapting the HTTP Common Logging Format for use by Gemini servers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4479">[ date ]</a>
+              <a href="thread.html#4479">[ thread ]</a>
+              <a href="subject.html#4479">[ subject ]</a>
+              <a href="author.html#4479">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] New Gemini Server: Space Age
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20New%20Gemini%20Server%3A%20Space%20Age&In-Reply-To=%3C87pn93gqqj.fsf%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002166.html">
+   <LINK REL="Next"  HREF="002187.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] New Gemini Server: Space Age</H1>
+    <B>Gary Johnson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20New%20Gemini%20Server%3A%20Space%20Age&In-Reply-To=%3C87pn93gqqj.fsf%40disroot.org%3E"
+       TITLE="[ANN] New Gemini Server: Space Age">lambdatronic at disroot.org
+       </A><BR>
+    <I>Fri Jul 10 19:38:28 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002166.html">[ANN] New Gemini Server: Space Age
+</A></li>
+        <LI>Next message (by thread): <A HREF="002187.html">[ANN] New Gemini Server: Space Age
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2186">[ date ]</a>
+              <a href="thread.html#2186">[ thread ]</a>
+              <a href="subject.html#2186">[ subject ]</a>
+              <a href="author.html#2186">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Hannu,
+
+  Thanks for the feedback. I also write Clojure+Clojurescript for a
+living doing full stack web development and scientific modelling in the
+environmental arena.
+
+To control RAM consumption by the JVM, you can set -D-Xmx in Space Age's
+toplevel deps.edn file. Outside of embedded environments (e.g.,
+Raspberry Pis), I suspect the default of a few hundred MBs of RAM
+shouldn't be too much of a burden for most laptops, desktops, or VMs,
+but with that flag, you can set the JVM's max memory to whatever you
+want. GraalVM could be an interesting build target though, so let me
+know if have any success compiling Space Age on it.
+
+I'll take a look at java.net.URI to see if it provides any benefit over
+my current approach. I suspect I'll still need to perform string
+trimming, selective lower-casing for some URI components, and default
+values for missing elements as I am doing currently, but if it shaves a
+few lines off the code base, that's certainly nothing to complain about.
+;)
+
+In other news, I just added a primitive CLJ script running facility to
+Space Age. Now all you have to do is drop an executable &lt;whatever&gt;.clj
+file into your ~/public_gemini folder (or the document root directory),
+and you're off to the races! Any query params from the request URL are
+available to the script in a global variable called (creatively)
+&quot;request-params&quot;. Anything you print to stdout in your script will be
+returned as the body of a text/gemini response to the client.
+
+I'm still thinking through just how much additional info I want to pass
+to these scripts and how/whether I should let them send non-success
+responses, but that's half the fun of it after all.
+
+(hack 'the :planet)
+  Gary
+
+
+Hannu Hartikainen &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">hannu.hartikainen+gemini at gmail.com</A>&gt; writes:
+
+&gt;<i> On Fri, Jul 10, 2020, 00:39 Gary Johnson &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">lambdatronic at disroot.org</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> Space Age is a Gemini server written in Clojure (<A HREF="https://clojure.org/">https://clojure.org/</A>).
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> It implements Gemini protocol specification v0.14.2 (July 2nd 2020), all
+</I>&gt;&gt;<i> except for client certificates (which I'm still working on).
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> The entire code base (including build files) clocks in at a cool 200
+</I>&gt;&gt;<i> lines with absolutely no dependency libraries.
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Great work!
+</I>&gt;<i>
+</I>&gt;<i> I write Clojure at $dayjob and consider it a great fit for full-stack web
+</I>&gt;<i> (and Gemini by extension). Besides a static Gemini site, I've written one
+</I>&gt;<i> CGI app in Rust (twinwiki) and one server/app in Python/Jetforce (
+</I>&gt;<i> ansi.hrtk.in). Both could have been in Clojure if there was a nice library.
+</I>&gt;<i>
+</I>&gt;<i> For my use RAM consumption is important, though, so I'd need to measure a
+</I>&gt;<i> bit with GraalVM or possibly a tiny JVM instance. Practically Rust will
+</I>&gt;<i> always be the better (best?) choice, but it's a bit heavy for prototyping.
+</I>&gt;<i>
+</I>&gt;<i> Briefly reading the code I was left wondering if java.net.URI wouldn't
+</I>&gt;<i> parse URIs out of the box. Probably it's just not ergonomic and/or has
+</I>&gt;<i> weird corner cases...
+</I>&gt;<i>
+</I>&gt;<i> Happy hacking!
+</I>&gt;<i>
+</I>&gt;<i> -Hannu
+</I>
+
+-- 
+GPG Key ID: 7BC158ED
+Use `gpg --search-keys lambdatronic' to find me
+Protect yourself from surveillance: <A HREF="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</A>
+=======================================================================
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+Please avoid sending me MS-Office attachments.
+See <A HREF="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002166.html">[ANN] New Gemini Server: Space Age
+</A></li>
+	<LI>Next message (by thread): <A HREF="002187.html">[ANN] New Gemini Server: Space Age
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2186">[ date ]</a>
+              <a href="thread.html#2186">[ thread ]</a>
+              <a href="subject.html#2186">[ subject ]</a>
+              <a href="author.html#2186">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

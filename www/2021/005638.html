@@ -1,0 +1,331 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC] Backwards-compatible metadata in Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3C874khzkgsk.fsf%40omarpolo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005627.html">
+   <LINK REL="Next"  HREF="005702.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC] Backwards-compatible metadata in Gemini</H1>
+    <B>Omar Polo</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3C874khzkgsk.fsf%40omarpolo.com%3E"
+       TITLE="[SPEC] Backwards-compatible metadata in Gemini">op at omarpolo.com
+       </A><BR>
+    <I>Thu Feb 25 20:56:27 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005627.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="005702.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5638">[ date ]</a>
+              <a href="thread.html#5638">[ thread ]</a>
+              <a href="subject.html#5638">[ subject ]</a>
+              <a href="author.html#5638">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+John Cowan &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>&gt; writes:
+
+&gt;<i> On Thu, Feb 25, 2021 at 4:17 AM Omar Polo &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">op at omarpolo.com</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i>  - we have TLS because it's fundamental to guarantee confidentiality
+</I>&gt;&gt;<i>    between servers and clients
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> I personally don't give a damn about this (after all, who's going to pass
+</I>&gt;<i> confidential information over Gemini?  See below.), but I accept that other
+</I>&gt;<i> people do.
+</I>
+&quot;confidentiality&quot; maybe was the wrong word.  The idea is that I don't
+want to let everyone in the same network see (and possibly hijack) the
+pages I visit.  (OK, there are tons of possible issues with this, given
+TOFU and how specific clients implements it etc, I don't want to get off
+topic though.)
+
+&gt;<i>  - we have status codes, because a page that says &quot;an error occurred&quot;
+</I>&gt;&gt;<i>    or &quot;certificate required&quot; cannot be interpreted correctly otherwise
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> They aren't actually part of the required protocol engine, except for 1x
+</I>&gt;<i> vs. 2x.  The META for the others is just human-readable content, and could
+</I>&gt;<i> be replaced by a 2x document, and some other mechanism could be found for
+</I>&gt;<i> the marginal case of 1x.  (Clients might exploit 6x to automatically retry
+</I>&gt;<i> with a (different) cert, but it's unclear that this is the Right Thing: the
+</I>&gt;<i> protocol document is, as usual, ambiguous, as it says &quot;should be retried&quot;
+</I>&gt;<i> but not who should retry it.)
+</I>
+I'm not sure I understand what you mean.  If my server fails to execute
+a CGI script, it should return a 20 reply with &quot;Error while executing
+the script&quot; instead of 42?  The meta is human-readable, but the codes
+3x, 4x, 5x and 6x carries a meaning, it's an extra information, heck,
+you can consider that a metadata in some large interpretation of the
+word.  (Maybe 3x can be dropped, and some codes inside 4x and 5x as well
+if we really want to be barebones, but again, I don't want to get
+off-topic.)
+
+&gt;&gt;<i>  - we have pre-formatted blocks to allow certain types of
+</I>&gt;&gt;<i>    explanations/presentations that otherwise would have been impossible
+</I>&gt;&gt;<i>    (how do we teach how to write text/gemini in text/gemini?)
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> It's still hard to explain ``` within ```: you can talk about it but you
+</I>&gt;<i> can't show an example.
+</I>
+Touch&#233;
+
+&gt;<i> Anyway, I don't care about any of these points, just that &quot;necessary&quot; is in
+</I>&gt;<i> the eye of the beholder.
+</I>&gt;<i>
+</I>&gt;<i>  - the one adding the line-type =: (or whatever): you have to parse the
+</I>&gt;&gt;<i>
+</I>&gt;<i>    whole document to extract the metadata
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> True, but that's true for any approach except metadata-at-the-top.  Note
+</I>&gt;<i> that ^^^ within ``` does not mark metadata, so you have to parse at least
+</I>&gt;<i> that much.
+</I>&gt;<i>
+</I>&gt;<i> and it allows for possibly unreadable text/gemini files[1]
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>
+[...]
+
+&gt;<i> you probably will have trouble here
+</I>
+FYI, Emacs handled that wall of text surprisingly well :)
+
+(just for curiosity, what languages are?  I couldn't recognize them)
+
+&gt;<i> Workers at the Tower of Babel:
+</I>&gt;<i> &quot;Bitte geben Sie mir einen kleineren Schraubenschl&#252;ssel.'
+</I>&gt;<i> 'Non ho idea di quello che stai chiedendo.&#8217;
+</I>
+Adesso ne ho una, o almeno mezza, sperando che la traduzione sia fedele :)
+
+(sorry I couldn't resist.  I don't see pretty often examples featuring
+Italian)
+
+&gt;<i> &#8216;&#1044;&#1072;&#1074;&#1072;&#1081;&#1090;&#1077; &#1095;&#1072;&#1096;&#1082;&#1091; &#1095;&#1072;&#1103; &#1080; &#1076;&#1086;&#1084;&#1086;&#1081;.&#8217;
+</I>&gt;<i> &#8216;Kei te korero koe i tito noa, ko ahau ngenge o te whare pourewa.'
+</I>&gt;<i>
+</I>&gt;<i> There.  A perfectly valid text/gemini or indeed text/plain document, and
+</I>&gt;<i> yet quite unintelligible, and it would be trivial to make it far worse.
+</I>&gt;<i> The question is, what is the _motive_ for writing and serving such rubbish?
+</I>&gt;<i> Web pages lie to search engines because money.  Web pages contain hidden
+</I>&gt;<i> text because money.  Web pages plant tracking pixels because money.  The
+</I>&gt;<i> love of money is the root of all Web evil. But where's the money in
+</I>&gt;<i> Gemini?  I mean, you could put textual ads in your pages and a link to a
+</I>&gt;<i> website, but why not just use the website?
+</I>
+The motive to serving rubbish can simply be some sloppery when
+generating automatic content.  If I know `=:'-style metadata can be put
+anywhere, I can write scripts that *for convenience* don't try to put
+everything at the top/bottom.  But I agree, this is probably a moot
+point.  The real issue I see lies in just adding an explicit syntax for
+key-pairs value.  I'm explaining it better below
+
+&gt;<i>    An user on a non-sophisticate client cannot (easily) understand
+</I>&gt;&gt;<i>    that.  It's just full of bloat.
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Again, you'd have to be a fool to write something like your example or mine
+</I>&gt;<i> except for hack value.  Reasonable people would either put metadata at the
+</I>&gt;<i> bottom of the document or the most important entries at the top and less
+</I>&gt;<i> important ones at the bottom; it's the possibility of doing that, along
+</I>&gt;<i> with allowing links-with-metadata, that make me want it to be able to go
+</I>&gt;<i> anywhere.  Gemini is like (anarchist) Anarres: everything is open to
+</I>&gt;<i> everyone's .  The Web has become like (capitalist) Urras: there is lots of
+</I>&gt;<i> glitz on top, but the important stuff is hidden in the cellars, where
+</I>&gt;<i> people are bleeding to death.
+</I>&gt;<i>
+</I>&gt;<i> Repeating myself:  metadata conventions should go in a metadata spec, *not*
+</I>&gt;<i> in the text/gemini spec, since neither clients nor servers are required to
+</I>&gt;<i> take any notice of them.
+</I>
+&gt;<i> [snip]
+</I>&gt;<i>
+</I>&gt;&gt;<i> One thing that I haven't though about when writing the mail, but only
+</I>&gt;&gt;<i> later when discussing the matter with thfr@, is that we're trying to
+</I>&gt;&gt;<i> hide stuff from users eyes.  Sure, if used correctly those two proposed
+</I>&gt;&gt;<i> syntaxes (=: and ^^^) can be easy to read, but lets be honest: clients
+</I>&gt;&gt;<i> won't show them as-is, in particular the more advanced ones.
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> I'm sorry, but I am unwilling to take this for granted.  Why hide them?
+</I>&gt;<i> (I'm already annoyed that Gmail hides signatures, and mine aren't always
+</I>&gt;<i> the same, so I don't use the standard &quot;-- &quot; line to announce them any more.)
+</I>&gt;<i>
+</I>&gt;<i> As things stands now, there are only two things that Gemini clients
+</I>&gt;&gt;<i> usually hide: the URL of a link-line and the alt-text of a pre-formatted
+</I>&gt;&gt;<i> block.
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> I actually think hiding the URL is bad UX.  People should be able to know
+</I>&gt;<i> *before* going to a page where it's coming from.  Showing the domain is not
+</I>&gt;<i> enough, because multi-hosting.  (This is an option in Lagrange now.)
+</I>&gt;<i>
+</I>&gt;&gt;<i> There's a understandable UX reason for that, but do we really
+</I>&gt;&gt;<i> need to add something else that we know will be hidden to end users?
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> &quot;Know&quot; is a very strong verb, especially for something that hasn't happened
+</I>&gt;<i> yet.  Metadata in HTML head elements was *required* to be hidden from day 1.
+</I>&gt;<i>[]
+</I>&gt;&gt;<i> Another thing that I forgot to explicitly say in my previous message is
+</I>&gt;&gt;<i> that we can use some sort of common notation, a convention, rather than
+</I>&gt;&gt;<i> adding new things to the specification.  See for instance the
+</I>&gt;&gt;<i> &quot;Subscribing to Gemini pages&quot; companion specification: a lightweight,
+</I>&gt;&gt;<i> convention-based way to provide atom-like feeds.  I found it pretty
+</I>&gt;&gt;<i> elegant, and has proven a) easy to implement b) easy for content writers
+</I>&gt;&gt;<i> to use c) easy for end-users to consume and d) avoid adding extra line
+</I>&gt;&gt;<i> types/file types/etc to the specification.
+</I>&gt;&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> That's what I want too.  =: does not have to be a text/gemini line type,
+</I>&gt;<i> just a convention explained elsewhere.
+</I>
+I feel like we're not talking about the same thing.  This thread has
+grown pretty large, so I apologies if I missed some parts of it.
+
+My understanding of the proposals is that they want to add some sort of
+extra notation (either as line-type or block, it doesn't matter) to
+express (potentially) arbitrary key-value pairs.  Given this, we know
+that non-dummy clients will hide them in the document, probably to show
+those information in a &quot;better&quot; way.  I mean, it wouldn't be bad if a
+client would be able to display a sidebar the authors of the document
+and creation/update dates.  But then we have given users ways to extend
+the format way beyond its purpose, so it gets way easier to add styling,
+formatting, and other stuff.
+
+But from what you write, it seems that you're aim at some sort of
+convention for metadata, and this is something I can actually agree on.
+To make it clear, since in another mail you mentioned two &quot;factions&quot;,
+I'm not against the idea of metadata in the first place, I simply don't
+like the existing proposals for the already mentioned issues.
+
+Even if I'm not 100% happy with what follows, if I were to add metadata,
+I'd advocate for something simpler, without a prefix that smell like
+&quot;unofficial line-type&quot;, and probably already in use like:
+
+Author: Omar Polo
+Published: 2020-02-24
+Edited: 2020-02-25
+Licence: ISC
+
+(even the FAQ document has a Last-Update line near the top, or something
+like that)
+
+With something like this I think we could achieve metadata in a way
+that:
+ - they're not hidden from the end-user eyes
+ - easy (and natural) to use by who write contents
+ - intuitive for the readers
+ - backward - and forward - compatible with the spec
+ - doesn't require a special treatment by already existing clients
+
+Something like this would also avoid various problems regarding the
+classification of valid keywords and the troubles regarding
+internationalisation.  In an Italian document I would happily write
+
+Autore: Omar Polo
+Pubblicato: 2020-02-24
+Aggiornato: 2020-02-25
+Licenza: ISC
+
+and all my readers would understand the meaning.  We could then have
+specific search-engines per-language, adapt tools to cope with this etc,
+all without modifying the spec and without providing a syntax that can
+be abused.
+
+Now, to the OT  (i'm lazy today and I don't want to write another mail)
+
+&gt;<i> OT: I'm actually designing something like GeminiScript, but not for Gemini
+</I>&gt;<i> clients.  I think the idea of no-install instant-download software with
+</I>&gt;<i> severe limitations on presentation and no access to the local system except
+</I>&gt;<i> very limited keyboard/screen/mouse is in fact a good one, but unlike
+</I>&gt;<i> Brendan Eich I have the luxury of more than two weeks to think about it.  I
+</I>&gt;<i> also want to make it as accessible to non-professionals as microcomputer
+</I>&gt;<i> Basic was.  It would run in its own native client, either CLI or TUI or GUI
+</I>&gt;<i> (there are some issues around the fact that CLIs linearize access).  Like
+</I>&gt;<i> most languages, it could probably be compiled to JavaScript.
+</I>&gt;<i>
+</I>
+I don't like the idea of instant-download software for various ethical
+and practical concerns, but I have a soft-spot for programming language
+design and compilers, so, if you don't mind, I'd be curious to read more
+about it :)
+
+
+
+P.S.: I find your way of quoting text strange.  Why the first line of
+every cited block isn't prefixed by &gt; when all the others are?  Is that
+some sort of arcane custom that youngster like me don't understand?
+
+&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+</I>&gt;<i> Your worships will perhaps be thinking that it is an easy thing
+</I>&gt;<i> to blow up a dog? [Or] to write a book?
+</I>&gt;<i>     --Don Quixote, Introduction
+</I>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005627.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="005702.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5638">[ date ]</a>
+              <a href="thread.html#5638">[ thread ]</a>
+              <a href="subject.html#5638">[ subject ]</a>
+              <a href="author.html#5638">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

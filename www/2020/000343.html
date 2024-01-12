@@ -1,0 +1,171 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200117133312.GA7402%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000342.html">
+   <LINK REL="Next"  HREF="000344.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200117133312.GA7402%40SDF.ORG%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Fri Jan 17 13:33:12 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000342.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000344.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#343">[ date ]</a>
+              <a href="thread.html#343">[ thread ]</a>
+              <a href="subject.html#343">[ subject ]</a>
+              <a href="author.html#343">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hmm, I've just realised something which might salvage this whole mess.
+It's possible even that what I'm about to describe is exactly what the
+&quot;long line&quot; folks have been talking about all along without my
+realising it.  Sorry for missing it if so, but I don't think it was
+ever made explicit!
+
+I have always conceptualised our choice as being between two
+alternatives:
+
+1. Hard-wrapped text which clients display verbatim, line-by-line,
+   exactly the way Gopher works.
+
+2. What I'll call &quot;full blown reflowing&quot;, the way HTML and LaTeX work.
+   This involves lines longer than the viewport being split up into
+   multiple shorter lines, but also consecutive non-blank lines
+   shorter than the viewport being joined into fewer, longer lines.
+   Basically, this model of reflow is &quot;paragraph based&quot;.  Consecutive
+   non-empty lines of text form clumps called paragraphs which are
+   formatted as a whole, whether this results in more or fewer total
+   lines compared to the &quot;source&quot;.
+
+There is another option that I hadn't thought about until now, which
+is to do only the first half of 2. above.  That is, lines longer than
+the viewport get broken up nicely at word boundaries into lines of
+length equal to or less than the viewport width - but that's it.
+Consecutive shorter lines are *not* joined together.  Blank lines in
+the &quot;source&quot; are rendered, one by one, into empty vertical space.
+The renderer has no explicit concept of a paragraph.
+
+This allows writing things we want to look like paragraphs as
+individual long lines (easy for most editors, plays nicely with
+version control) with the knowledge they'll be nicely wrapped to the
+viewport width, but it doesn't break things like
+one
+word
+per
+line
+for
+emphasis, because the lines won't be sucked up and joined together, and
+it also doesn't break lists for the same reason (more on lists below).
+
+I kind of like this.  Unlike the paragraph-oriented web/LaTeX model
+where ten consecutive newlines and two consecutive newlines are
+identical, this also allows us to put larger gaps between paragraphs
+to give the impression of pausing for thought.
+
+
+
+
+
+Neat, huh?
+
+This does rescue lists, right?  A list of short items:
+
+* Mercury
+* Gemini
+* Apollo
+* Shuttle
+
+does't get turned into a mess of:
+
+* Mercury * Gemini * Apollo Shuttle
+
+But multi-line list items get wrapped appropriately.  Dumb clients
+which don't recognise list items at all can do this in an ugly way, by
+applying exactly the same wrapping code they use for normal lines:
+
+* This is a multi-line list item where the beginning of lines after
+the first one are not offset from the left hand of the viewport to
+match the offset of the first one.
+
+Whereas smarter clients can recognise lines beginning with &quot;*&quot; as
+being list items and do slightly nicer formatting:
+
+* This is a multi-line list item which has been handled by a smarter
+  client which results in a nicer appearance - a strictly optional bit
+  of extra work for ambitious client authors.
+
+There doesn't seem to be any need to keep track of whether or not you
+are inside of a list or not?
+
+This syntax is strictly line-based, and recognising a special type of
+line involves only looking at the first few characters.  Recognising
+Gemini links is of course mandatory, but so long as every other
+special kind of line can be handled appropriately by just printing it
+(in the way that list items seemingly can be) then defining special
+line types for headings, etc. doesn't actually add any extra burden on
+simple clients.  It's basically a question of how many cases you want
+to handle in a switch statement...
+
+This seems pretty great, the only downside is that even bare minimal
+clients need to be able to wrap long lines to result in readability.
+I'm not quite as bothered by this as I was before I realised that
+Python has a standard library function which just does this (it's
+even pretty smart, e.g. if the final word of a line would make that
+line longer than the requested width, and the word has a hyphen in
+it, it'll break at the hyphen if that shortens the lin enough), but
+it's still not great.  I wonder how common that kind of function is
+across standard libraries?
+
+Surely it can't be this simple.  I look forward to somebody pointing
+out the inevitable overlooked fatal flaw...
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000342.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000344.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#343">[ date ]</a>
+              <a href="thread.html#343">[ thread ]</a>
+              <a href="subject.html#343">[ subject ]</a>
+              <a href="author.html#343">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> On certificates and validation
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20certificates%20and%20validation&In-Reply-To=%3CCAFTy05bA3fLjR5imUpn2X%3Dg0vKR01nK7UWryVZc%3D%2B28GtBjeJw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003586.html">
+   <LINK REL="Next"  HREF="003597.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>On certificates and validation</H1>
+    <B>Michael Lazar</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20certificates%20and%20validation&In-Reply-To=%3CCAFTy05bA3fLjR5imUpn2X%3Dg0vKR01nK7UWryVZc%3D%2B28GtBjeJw%40mail.gmail.com%3E"
+       TITLE="On certificates and validation">lazar.michael22 at gmail.com
+       </A><BR>
+    <I>Thu Nov 26 18:41:11 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003586.html">On certificates and validation
+</A></li>
+        <LI>Next message (by thread): <A HREF="003597.html">On certificates and validation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3596">[ date ]</a>
+              <a href="thread.html#3596">[ thread ]</a>
+              <a href="subject.html#3596">[ subject ]</a>
+              <a href="author.html#3596">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, Nov 26, 2020 at 6:02 AM Bj&#246;rn W&#228;rmedal &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">bjorn.warmedal at gmail.com</A>&gt;
+wrote:
+&gt;<i>
+</I>&gt;<i> &gt; Ssh doesn't expire its keys, and isn't worse for that.
+</I>&gt;<i>
+</I>&gt;<i> This is the analogue I was looking for. SSH doesn't care about Common
+</I>&gt;<i> Name or other cruft in the cert, either.
+</I>&gt;<i>
+</I>&gt;<i> I agree that some sort of sanity check is nice, but at the same time I
+</I>&gt;<i> have trouble finding a philosophical or practical reason for doing any
+</I>&gt;<i> sort of validation on first use, and any beyond &quot;same as last time&quot; on
+</I>&gt;<i> subsequent visits.
+</I>&gt;<i>
+</I>&gt;<i> Yes, Drew says I should. But are there any arguments supporting that
+</I>position?
+&gt;<i>
+</I>
+I fully agree that the expiration date is useless in TOFU schemes. I brought
+this up on the mailing list a while ago and I didn't see any rebuttals that
+really convinced me otherwise. The mailing list settled on recommending a
+long
+expiration times of several years, but that was just dodging the fundamental
+problem IMO. I think it will still take folks a while to come around to this
+conclusion. Thank you for giving me some hope :)
+
+I didn't make the logical jump at the time, but certificate hostnames are
+similarly useless in TOFU for the same reason. They don't verify anything
+since
+they can be trivially forged.
+
+On Thu, Nov 26, 2020 at 8:04 AM Drew DeVault &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sir at cmpwn.com</A>&gt; wrote:
+&gt;<i> These are configurable parameters. If they are configured incorrectly,
+</I>&gt;<i> then we should reject the certificate. Someone may have configured them
+</I>&gt;<i> with an expiration, for example, by design, knowing that their server
+</I>&gt;<i> would soon disappear, and that certificate reuse signals that something
+</I>&gt;<i> stinky is going on.
+</I>
+The expiration date does not protect against anything in this scenario. An
+attacker can trivially generate a new certificate to send to the client if
+they see the old one has expired.
+
+&gt;<i> Or the common name could be set because the admin
+</I>&gt;<i> has chosen to set up their own certificate authority, perhaps complete
+</I>&gt;<i> with signed client-side certificates, and the common name is used to
+</I>&gt;<i> strongly identify the server.
+</I>
+Now you're talking about CA verified certificates. There's nothing wrong
+with
+using self-signed CAs, but it's a completely different security model than
+TOFU and shouldn't be confused with it.
+
+- Michael
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201126/f8b64432/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201126/f8b64432/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003586.html">On certificates and validation
+</A></li>
+	<LI>Next message (by thread): <A HREF="003597.html">On certificates and validation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3596">[ date ]</a>
+              <a href="thread.html#3596">[ thread ]</a>
+              <a href="subject.html#3596">[ subject ]</a>
+              <a href="author.html#3596">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Re: New Android Client: Tv&#229;
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%3D%3FUTF-8%3FQ%3FRe%3D3A_New_Android_Client%3D3A_Tv%3DC3%3DA5%3F%3D&In-Reply-To=%3CCAPk6LxQhdO%3DTjjjzxRtgb3i87iU10g1jXYkymvVTBe0MtAB%3DoQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002493.html">
+   <LINK REL="Next"  HREF="002498.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Re: New Android Client: Tv&#229;</H1>
+    <B>Kevin Sangeelee</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%3D%3FUTF-8%3FQ%3FRe%3D3A_New_Android_Client%3D3A_Tv%3DC3%3DA5%3F%3D&In-Reply-To=%3CCAPk6LxQhdO%3DTjjjzxRtgb3i87iU10g1jXYkymvVTBe0MtAB%3DoQ%40mail.gmail.com%3E"
+       TITLE="Re: New Android Client: Tv&#229;">kevin at susa.net
+       </A><BR>
+    <I>Tue Aug 25 12:16:44 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002493.html">Re: New Android Client: Tv&#229; 
+</A></li>
+        <LI>Next message (by thread): <A HREF="002498.html">Re: New Android Client: Tv&#229;
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2497">[ date ]</a>
+              <a href="thread.html#2497">[ thread ]</a>
+              <a href="subject.html#2497">[ subject ]</a>
+              <a href="author.html#2497">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is looking really nice, aesthetics are great and it's really fast.
+
+Curiously, I noticed that it fails when fetching many CGI-generated URLs,
+all mine yield a blank screen, other sites have missing data.
+
+I did a little checking, and it seems that (at least some) servers don't
+properly signal their intention to close the TLS session when sending the
+output of CGI scripts.
+
+I wonder if your client picks up this error and abandons the response
+(which in fact was received correctly)? If so, perhaps it could instead
+flush any input buffers and keep the response.
+
+I have put a few notes below in case it's of use to you.
+
+Kevin
+
+---------------------------------------
+# Example URL that fails in Tv&#229;: <A HREF="gemini://gemini.susa.net/cgi-bin/twitter">gemini://gemini.susa.net/cgi-bin/twitter</A>
+# Response is received, but with an error.
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">kevin at kakapo</A>:~/gemini/content$ echo -ne &quot;<A HREF="gemini://">gemini://</A>
+gemini.susa.net/cgi-bin/twitter\r\n&quot;|gnutls-cli --no-ca-verification
+--port=1965 gemini.susa.net
+Processed 151 CA certificate(s).
+Resolving 'gemini.susa.net:1965'...
+Connecting to '78.46.186.193:1965'...
+- Certificate type: X.509
+- Got a certificate list of 1 certificates.
+- Certificate[0] info:
+ - subject `CN=*.susa.net', issuer `CN=*.susa.net', serial
+0x00af7f3177de559661, RSA key 4096 bits, signed using RSA-SHA256, activated
+`2020-07-10 21:47:06 UTC', expires `2030-07-08 21:47:06 UTC',
+pin-sha256=&quot;kUjkK2Oa2yhHsyFHokB3df7DqbTxgIwzah2bLzZFAjw=&quot;
+        Public Key ID:
+                sha1:c6b2cce3070eba096a2ddede1b65d8684bb04ff1
+
+sha256:9148e42b639adb2847b32147a2407775fec3a9b4f1808c336a1d9b2f3645023c
+        Public Key PIN:
+                pin-sha256:kUjkK2Oa2yhHsyFHokB3df7DqbTxgIwzah2bLzZFAjw=
+
+- Successfully sent 0 certificate(s) to server.
+- Description: (TLS1.2-X.509)-(ECDHE-X25519)-(RSA-SHA512)-(AES-256-GCM)
+- Session ID:
+10:69:F0:70:F3:B6:9B:B2:9E:DA:A3:7E:02:99:B4:86:BE:54:9E:94:FB:30:1F:66:C6:B8:61:20:88:21:F8:FF
+- Options: extended master secret, safe renegotiation,
+- Handshake was completed
+
+- Simple Client Mode:
+
+20 text/gemini
+#The Twitter Oracle spake thus, the words spoken were:
+
+```
+Fr u hoes WEAK is u serious&#8252;&#65039;
+```
+
+Just a tiny sample of what you're missing out on - refresh for more!***
+Fatal error: Error in the pull function.
+*** Server has terminated the connection abnormally.
+
+
+On Mon, 24 Aug 2020 at 14:42, &#214;ppen &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">tva at fastmail.se</A>&gt; wrote:
+
+&gt;<i> Hi all, I've been working on this in my spare time for the last week or
+</I>&gt;<i> two, still lots to do and it's buggy in places (especially tabs, and some
+</I>&gt;<i> pages aren't rendering (that _did_ work previously)) but it's shaping up
+</I>&gt;<i> nicely.
+</I>&gt;<i>
+</I>&gt;<i> Download, more info, links to source etc: <A HREF="https://www.oppenlab.net/pr/tva/">https://www.oppenlab.net/pr/tva/</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200825/02291cd1/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200825/02291cd1/attachment.htm</A>&gt;
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002493.html">Re: New Android Client: Tv&#229; 
+</A></li>
+	<LI>Next message (by thread): <A HREF="002498.html">Re: New Android Client: Tv&#229;
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2497">[ date ]</a>
+              <a href="thread.html#2497">[ thread ]</a>
+              <a href="subject.html#2497">[ subject ]</a>
+              <a href="author.html#2497">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

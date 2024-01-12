@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Optional/mandatory whitespace in &#167;5.5 Advanced line types
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Optional/mandatory%20%3D%3Fiso-8859-1%3FQ%3Fwhit%3F%3D%0A%20%3D%3Fiso-8859-1%3FQ%3Fespace_in_%3DA75%3D2E5%3F%3D%20Advanced%20line%20types&In-Reply-To=%3C20200913032046.GL1964344%40tilde.team%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002700.html">
+   <LINK REL="Next"  HREF="002703.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Optional/mandatory whitespace in &#167;5.5 Advanced line types</H1>
+    <B>easeout at tilde.team</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Optional/mandatory%20%3D%3Fiso-8859-1%3FQ%3Fwhit%3F%3D%0A%20%3D%3Fiso-8859-1%3FQ%3Fespace_in_%3DA75%3D2E5%3F%3D%20Advanced%20line%20types&In-Reply-To=%3C20200913032046.GL1964344%40tilde.team%3E"
+       TITLE="Optional/mandatory whitespace in &#167;5.5 Advanced line types">easeout at tilde.team
+       </A><BR>
+    <I>Sun Sep 13 04:20:46 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002700.html">Optional/mandatory whitespace in &#167;5.5  Advanced line types
+</A></li>
+        <LI>Next message (by thread): <A HREF="002703.html">Optional/mandatory whitespace in &#167;5.5  Advanced line types
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2701">[ date ]</a>
+              <a href="thread.html#2701">[ thread ]</a>
+              <a href="subject.html#2701">[ subject ]</a>
+              <a href="author.html#2701">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Sep 12, 2020 at 07:46:12PM -0700, Nathan Galt wrote:
+&gt;<i> I noticed that the spec has three different advanced line types and three different whitespace handling verbiages for each.
+</I>&gt;<i> 
+</I>&gt;<i> Heading lines: Start with 1&#8211;3 &#8220;#&#8221;, then optional whitespace.
+</I>&gt;<i> List items: Start with &#8220;* &#8220; (note the space!)
+</I>&gt;<i> Quote lines: Start with &#8220;&gt;&#8221; 
+</I>&gt;<i> 
+</I>&gt;<i> Shouldn&#8217;t these three have the same whitespace rules, with the same phrasing?
+</I>
+I'm inclined to agree.
+
+&gt;<i> Here&#8217;s my argument for &#8220;mandatory whitespace for all&#8221; ([\t ]+):
+</I>&gt;<i> 
+</I>&gt;<i> - It lets authors write &#8220;#3. I like eggs.&#8221; without accidentally getting that line parsed as if it were a heading (we don&#8217;t have backslash escapes like Markdown does)
+</I>&gt;<i> - It&#8217;s better for some emoticons that, um, might be out there that start with &gt; or *
+</I>&gt;<i> - &#8220;#Steak&#8221; looks like a hashtag, and I could see some fraction of authors writing &#8220;#blah&#8221; _meaning_ for it to be a tag
+</I>&gt;<i> - We shouldn&#8217;t be worried about backcompat at v0.14.2. I don&#8217;t have much gemini text, but I&#8217;m the sort who would reformat his own non-conformant documents to match something like this.
+</I>
+Let's also consider the other way these three cases could have the same
+whitespace rules, which is to make that whitespace always optional
+rather than always required.
+
+Pros of all-optional whitespace:
+- Parsing is one step simpler than requiring at least one whitespace
+  character.
+- Parsing is compatible with existing Gemtext. (I also think this is not
+  that big of a deal, but let's list it.)
+
+Cons:
+- At the beginning of an intended plain text line, some common forms of
+  expression like &quot;*Foo*&quot;, &quot;#Foo&quot;, and &quot;&gt;_&lt;&quot; would be interpreted as
+  list items, headings, or quotations.
+
+&#8230;and that's all I've got. Having thought through it, I think mandatory
+whitespace sounds like a better choice.
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002700.html">Optional/mandatory whitespace in &#167;5.5  Advanced line types
+</A></li>
+	<LI>Next message (by thread): <A HREF="002703.html">Optional/mandatory whitespace in &#167;5.5  Advanced line types
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2701">[ date ]</a>
+              <a href="thread.html#2701">[ thread ]</a>
+              <a href="subject.html#2701">[ subject ]</a>
+              <a href="author.html#2701">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

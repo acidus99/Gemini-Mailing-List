@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> implementing client certificate support
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20implementing%20client%20certificate%20support&In-Reply-To=%3C20200609074232.GA6468%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001441.html">
+   <LINK REL="Next"  HREF="001450.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>implementing client certificate support</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20implementing%20client%20certificate%20support&In-Reply-To=%3C20200609074232.GA6468%40SDF.ORG%3E"
+       TITLE="implementing client certificate support">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Tue Jun  9 08:42:32 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001441.html">implementing client certificate support
+</A></li>
+        <LI>Next message (by thread): <A HREF="001450.html">implementing client certificate support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1442">[ date ]</a>
+              <a href="thread.html#1442">[ thread ]</a>
+              <a href="subject.html#1442">[ subject ]</a>
+              <a href="author.html#1442">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Jun 09, 2020 at 12:40:07AM -0400, Sean Conner wrote:
+&gt;<i> It was thus said that the Great Michael Lazar once stated:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; Heck, drop client certificates from the gemini specification all together.
+</I>&gt;<i> &gt; Judging by the lack of client support so far, it's becoming clear that either:
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; 1. They're a pain to implement compared to the rest of the specification
+</I>&gt;<i> &gt; 2. There's not much interest in actually using them
+</I>&gt;<i> 
+</I>&gt;<i>   I personally would like to keep them, if only to protect sections of a
+</I>&gt;<i> Gemini site from general consumption.  The &quot;transient client certificate&quot;
+</I>&gt;<i> idea is certainly problematic and I wouldn't mind if that concept went away
+</I>&gt;<i> though.
+</I>
+I think it's probably a little too early in the game to interpet the
+lack of client support as a lack of interest in using them.  Many people
+might be holding off on implementing them in the expectation that the
+spec will change/simplify - which it surely will:  I'm pretty much sold
+on deprecating the transient client certificate status codes.  There's
+also an obvious chicken-and-egg problem here, where client authors have
+no incentive to add support until servers require it to access
+compelling content.
+
+I too would like to keep *some* client cert support, though.  I really
+like the idea of being able to self-host little productivity apps for
+myself which I can simply and reliably secure in an ssh-like fashion
+(add my self-signed cert fingerprint to the equivalent of an
+authorized_keys file).  And, yes, okay, that doesn't strictly require 6x
+status codes, the server could just immeditely cut the connection if it
+didn't get a cert it liked.  But it would be nice to be able to
+gracefully use those apps from within an everyday client.
+
+Mk's concern that &quot;it'd be good not to hardwire SSL too strongly into
+Gemini, in case the tooling around an alternative improves sufficiently
+in the future and we'd like to swap&quot; is a valid one, though, and one I
+have (very occasionally) worried about.  If nothing else this is a good
+argument to keep our use of client certificates simple and perhaps not
+to make use in apps of anything beyond the cert fingerprint (i.e. don't
+rely heavily on the notion of Distinguished Names for Subject and
+Issuer)...
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001441.html">implementing client certificate support
+</A></li>
+	<LI>Next message (by thread): <A HREF="001450.html">implementing client certificate support
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1442">[ date ]</a>
+              <a href="thread.html#1442">[ thread ]</a>
+              <a href="subject.html#1442">[ subject ]</a>
+              <a href="author.html#1442">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Scheme Section 2 quibble
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3CCAD2gp_Qf7jVzaOx%3DGT%2BAaZUViWcE4JViU1JXvBhVzZvCt8ix5g%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003388.html">
+   <LINK REL="Next"  HREF="003392.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Scheme Section 2 quibble</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3CCAD2gp_Qf7jVzaOx%3DGT%2BAaZUViWcE4JViU1JXvBhVzZvCt8ix5g%40mail.gmail.com%3E"
+       TITLE="Scheme Section 2 quibble">cowan at ccil.org
+       </A><BR>
+    <I>Tue Nov 17 23:23:31 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003388.html">Scheme Section 2 quibble
+</A></li>
+        <LI>Next message (by thread): <A HREF="003392.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3390">[ date ]</a>
+              <a href="thread.html#3390">[ thread ]</a>
+              <a href="subject.html#3390">[ subject ]</a>
+              <a href="author.html#3390">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Nov 17, 2020 at 6:07 PM Alex // nytpu &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">alex at nytpu.com</A>&gt; wrote:
+
+
+&gt;<i> Let's say I want to start hosting the git repo for my utility
+</I>&gt;<i> gemlog.sh[a] on gemini. I make a directory on my site, so the full url
+</I>&gt;<i> would be `<A HREF="gemini://nytpu.com/gemlog.sh/`">gemini://nytpu.com/gemlog.sh/`</A> &lt;<A HREF="http://nytpu.com/gemlog.sh/">http://nytpu.com/gemlog.sh/</A>&gt;.
+</I>&gt;<i> Now, say I put a link in my
+</I>&gt;<i> root index.gmi (`/`) linking to `gemlog.sh`[b]. This is a perfectly
+</I>&gt;<i> valid link to a directory on my server, but this would instead be
+</I>&gt;<i> interpreted as the url `<A HREF="gemini://gemlog.sh/`">gemini://gemlog.sh/`</A> &lt;<A HREF="http://gemlog.sh/">http://gemlog.sh/</A>&gt; if you
+</I>&gt;<i> use the faulty
+</I>&gt;<i> method of parsing. (`.sh` is a valid TLD[c] so it wouldn't work even if
+</I>&gt;<i> you have a whitelist of tlds).
+</I>&gt;<i>
+</I>
+In any case, nothing says a hostname has to be absolute.  If your hostname
+is &quot;client.example.com&quot; then you can refer to &quot;server.example.com&quot; as
+simply &quot;server&quot;.  The only way to tell if &quot;server&quot; is a meaningful host is
+to ask the DNS, and the answer can change.
+
+&gt;<i> 4) Follow the carefully and clearly defined specification[d] that is
+</I>&gt;<i> over 15 years old and is well-adopted by existing uri parsing libraries.
+</I>&gt;<i> Requires minimal, non-breaking spec changes, purely for clarity.
+</I>&gt;<i>
+</I>
+Requires a small breaking spec change to remove the sentence about
+defaulting to &quot;<A HREF="gemini://">gemini://</A>&quot; in 5.4.2 and preferably in 2 as well.  But 5.4.2
+is self-contradictory and has to be fixed.
+
+My proposal is to rewrite section 2 to say this:
+
+&lt;URL&gt; is an absolute URL according to RFC 3986, of maximum length 1024
+bytes.
+
+And to rewrite section 5.4.2 to say this:
+
+&lt;URL&gt; is a URI reference according to RFC 3986.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201117/8bc74bd0/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201117/8bc74bd0/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003388.html">Scheme Section 2 quibble
+</A></li>
+	<LI>Next message (by thread): <A HREF="003392.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3390">[ date ]</a>
+              <a href="thread.html#3390">[ thread ]</a>
+              <a href="subject.html#3390">[ subject ]</a>
+              <a href="author.html#3390">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

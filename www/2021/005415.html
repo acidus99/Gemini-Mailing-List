@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Encouraging%20HTTP%20Proxies%20to%20support%20Gemini%20hosts%0A%20self-blacklisting&In-Reply-To=%3CCAFwUW91Yx8-z5aHA5iG4Z63YTU5nwEu6AHzTO%3Du%2BRoFLjHucKQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005414.html">
+   <LINK REL="Next"  HREF="005423.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</H1>
+    <B>Mansfield</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Encouraging%20HTTP%20Proxies%20to%20support%20Gemini%20hosts%0A%20self-blacklisting&In-Reply-To=%3CCAFwUW91Yx8-z5aHA5iG4Z63YTU5nwEu6AHzTO%3Du%2BRoFLjHucKQ%40mail.gmail.com%3E"
+       TITLE="[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting">mansfield at ondollo.com
+       </A><BR>
+    <I>Sun Feb 21 21:37:18 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005414.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting
+</A></li>
+        <LI>Next message (by thread): <A HREF="005423.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5415">[ date ]</a>
+              <a href="thread.html#5415">[ thread ]</a>
+              <a href="subject.html#5415">[ subject ]</a>
+              <a href="author.html#5415">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Feb 21, 2021 at 1:48 PM Johann Galle &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">johann at qwertqwefsday.eu</A>&gt;
+wrote:
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> why is robots.txt not the obvious answer here? The companion
+</I>&gt;<i> specification[1] has a &quot;User-agent: webproxy&quot; for this specific case:
+</I>&gt;<i>
+</I>&gt;<i>  &gt; ### Web proxies
+</I>&gt;<i>  &gt; Gemini bots which fetch content in order to translate said content into
+</I>&gt;<i> HTML and publicly serve the result over HTTP(S) (in order to make
+</I>&gt;<i> Geminispace accessible from within a standard web browser) should respect
+</I>&gt;<i> robots.txt directives aimed at a User-agent of &quot;webproxy&quot;.
+</I>&gt;<i>
+</I>&gt;<i> So this should suffice:
+</I>&gt;<i>
+</I>&gt;<i> ```
+</I>&gt;<i> User-agent: webproxy
+</I>&gt;<i> Disallow: /
+</I>&gt;<i> ```
+</I>&gt;<i>
+</I>&gt;<i> Regards,
+</I>&gt;<i> Johann
+</I>&gt;<i>
+</I>
+I must admit, I'm woefully lacking skill or background with robots.txt. It
+seems like it could be a great answer.
+
+A few questions to help me educate myself:
+
+ 1. How often should that file be referenced by the proxy? It feels like an
+answer might be, to check that URL before every request, but that goes in
+the direction of some of the negative feedback about the favicon. One user
+action -&gt; one gemini request and more.
+ 2. Is 'webproxy' a standard reference to any proxy, or is that something
+left to us to decide?
+ 3. Are there globbing-like syntax rules for the Disallow field?
+ 4. I'm assuming there could be multiple rules that need to be mixed. Is
+there a standard algorithm for that process? E.g.:
+User-agent: webproxy
+Disallow: /a
+Allow: /a/b
+Disallow: /a/b/c
+
+Again - it seems like this could work out really well.
+
+Thanks for helping me learn a bit more!
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210221/efe2188f/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210221/efe2188f/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005414.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting
+</A></li>
+	<LI>Next message (by thread): <A HREF="005423.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5415">[ date ]</a>
+              <a href="thread.html#5415">[ thread ]</a>
+              <a href="subject.html#5415">[ subject ]</a>
+              <a href="author.html#5415">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

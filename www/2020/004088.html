@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Synchronizing bookmarks - Request for comments
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Synchronizing%20bookmarks%20-%20Request%20for%20comments&In-Reply-To=%3C48F18C46-520A-4E5B-AD3D-7DE743B68737%40dengine.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004087.html">
+   <LINK REL="Next"  HREF="004094.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Synchronizing bookmarks - Request for comments</H1>
+    <B>skyjake</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Synchronizing%20bookmarks%20-%20Request%20for%20comments&In-Reply-To=%3C48F18C46-520A-4E5B-AD3D-7DE743B68737%40dengine.net%3E"
+       TITLE="Synchronizing bookmarks - Request for comments">skyjake at dengine.net
+       </A><BR>
+    <I>Wed Dec 16 06:57:49 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004087.html">Synchronizing bookmarks - Request for comments
+</A></li>
+        <LI>Next message (by thread): <A HREF="004094.html">Synchronizing bookmarks - Request for comments
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4088">[ date ]</a>
+              <a href="thread.html#4088">[ thread ]</a>
+              <a href="subject.html#4088">[ subject ]</a>
+              <a href="author.html#4088">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 15. Dec 2020, at 23:08, C&#244;me Chilliet &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">come at chilliet.eu</A>&gt; wrote:
+
+&gt;<i> I&#8217;ve put together an idea of simple specification to allow clients to synchronize bookmarks and feeds across Gemini, as this is something that I&#8217;m currently missing in my daily Gemini use.
+</I>&gt;<i> 
+</I>&gt;<i> You can read it at <A HREF="gemini://gemlog.lanterne.chilliet.eu/2020-12-15%20link-sync-rev-1.en.gmi">gemini://gemlog.lanterne.chilliet.eu/2020-12-15%20link-sync-rev-1.en.gmi</A>
+</I>
+I think this is a valid use case, and it's something I have been thinking about myself just running Lagrange on a number of different computers. When you bring in a mix of different clients and desktop/mobile operating systems, sync is even more important.
+
+The lowest common denominator should be export to/import from a .gmi file. Such a file (that Adnan Maolood suggested, for example) is guaranteed to be at least viewable by all clients. It supports folders, has no line length limitations, and can support tags as well (e.g., an optional line/bullet/quote following a link).  The user can then manually manage the files via any means they see fit.
+
+However, the UX of doing that on an ongoing basis to sync your bookmarks/feeds isn't great. An automated mechanism is certainly more desirable.
+
+When it comes to basing sync on the Gemini protocol, it makes a certain amount of sense (clients know how to do Gemini requests) but it's not a perfect fit:
+
+* one add/del per request &#8212; what if you have a 100 bookmarks to sync?
+* request URL length limit
+* does not address tags, folders, manual ordering
+
+&gt;<i> * Would you consider implementing support for something like this?
+</I>
+Something like this, yes.
+
+The current proposal needs revising, though. I suggest creating a mechanism that allows using Gemini subscriptions as a core part of the sync. A client would view and/or subscribe to a bookmarks page served by the bookmark sync server. Client-side, the subscription would track all links instead of dated links, and ensure that all links on the bookmarks page have copies in the local set of bookmarks. (And somehow get rid of deleted bookmarks, too.)
+
+This way,  a public bookmarks feed could be served as a static file by any Gemini server.
+
+It's a good idea that a client cert is used to ensure privacy of the served bookmarks, unless they are meant to be public.
+
+The upload part is where it's gets tricky, and I don't think the Gemini protocol should be used for that. As a client author what I'd like to see is that I just export the bookmarks .gmi file as usual, and then send it to the server, perhaps via a TLS socket at a port specifically reserved for uploads &#8212; just open a socket, set a client cert, and write the .gmi file to the socket. The client cert would be required for user identification. It would be up to the server to merge the bookmarks and get rid of deleted ones on server-side.
+
+This does make things a bit more difficult for the server implementation, but keeping things easy for clients at least encourages wider support.
+
+&gt;<i> * Does your client have some kind of plugin system which would allow a third-party to add support?
+</I>
+Not currently. However, Lagrange's MIME hooks could be extended to allow manual activation, so you could run an external program on your &quot;about:bookmarks&quot; page to do the sync. It would need to edit the internal bookmarks.txt file, and Lagrange would then need to detect that the file has changed after the hook program finishes. I wouldn't prefer going down this route, though. It's better to have a mechanism that benefits all clients equally.
+
+So let's keep working on this! Automatic bookmark (and client cert?) sync would be great features for Gemini clients.
+
+--jaakko
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004087.html">Synchronizing bookmarks - Request for comments
+</A></li>
+	<LI>Next message (by thread): <A HREF="004094.html">Synchronizing bookmarks - Request for comments
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4088">[ date ]</a>
+              <a href="thread.html#4088">[ thread ]</a>
+              <a href="subject.html#4088">[ subject ]</a>
+              <a href="author.html#4088">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

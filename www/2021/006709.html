@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> a space case for transparent gemtext compression
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20a%20space%20case%20for%20transparent%20gemtext%20compression&In-Reply-To=%3CCAPx7jWfXcDJ9dw7XxKE%2B8wZngnLf6Og0nDu8-gSSgx3LOfHBmQ%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006702.html">
+   <LINK REL="Next"  HREF="006710.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>a space case for transparent gemtext compression</H1>
+    <B>Francis Siefken</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20a%20space%20case%20for%20transparent%20gemtext%20compression&In-Reply-To=%3CCAPx7jWfXcDJ9dw7XxKE%2B8wZngnLf6Og0nDu8-gSSgx3LOfHBmQ%40mail.gmail.com%3E"
+       TITLE="a space case for transparent gemtext compression">fsiefken at gmail.com
+       </A><BR>
+    <I>Thu Jun 17 13:24:45 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006702.html">Gemini Digest, Vol 23, Issue 25
+</A></li>
+        <LI>Next message (by thread): <A HREF="006710.html">a space case for transparent gemtext compression
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6709">[ date ]</a>
+              <a href="thread.html#6709">[ thread ]</a>
+              <a href="subject.html#6709">[ subject ]</a>
+              <a href="author.html#6709">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Att&#225;l gemininauts,
+
+Gemini appeals to me as someone who likes plain text and keeping things
+simple. It also evokes a huge nostalgia for the days of gopher, bbs and
+slow packet radio links.
+Suppose there were a few shielded and solar powered Raspberry Pico based
+Gemini servers in orbit with radio transmitter and receiver. The long
+distance bandwidth would be a scarce resource and timeouts can happen
+frequently. There's HTTP has compression, BBS has zmodem, there's the Squid
+proxy. Caching and compression have been discussed before. I want to focus
+on compression as it surprises me as the remarks seem to be to dismissive
+even though compression was a huge thing in the early days of popular data
+networks (fidonet, bbs, simtel).
+
+On March 10, 2021 Bradley D. Thornton remarks &quot;neither of those two things
+(Accessibility or gzip compression) have anything to do with, nor have any
+place in discussions, for spec changes&quot; and argues:
+* &quot;Gemini is intended (expected, rather) to deliver mostly small files&quot;
+* &quot;Would compression be nice? - you betcha! but at 1Gbps it's not really
+that big of a deal - at least for now&quot;
+ and Solderpunk remarked earlier on the 16th of January 2020:
+&quot;compression is not a bad thing, but for small content the benefit is not
+proportionate to the implementation effort&quot;.
+
+I'm not sure about that.
+I agree that Gemini is not about efficient transfer of files, there's
+bittorrent, IPFS and plain http for that. For me it's about transferring
+text as simple and effectively as possible. As Gemini is also about
+creativity and focus through limits, I want to to test the Gemini design in
+constrained bandwidth situations for example at sea or in space with 1200
+bps on a low power Raspberry Pico or perhaps even on the computer and radio
+of the Gemini capsule in 1965. Loading twelve Kbyte SF story wouldn't load
+instantaneous.
+Fortunately Unicode can be compressed substantially. So I wondered if
+compression could somehow be implemented easily without breaking the
+minimalist design philosophy. Of course one could use Mosh and SSH to start
+a terminal Gemini client on a host with higher bandwidth (or use lzo
+compression in OpenVPN), but it would be elegant if the decompression
+happens transparently in Gemini without using additional ssh or openvpn
+servers.
+It also would be a sport to get gemtext to the client as fast as
+technically possible, ideally below the threshold of noticing there has
+been a network transfer at all.
+
+One simplistic idea is to check if the gmi is binary, and assume it has
+been compressed with zstd and then automatically decompress it in the
+client. It'd be just one extra step in the gemini client.
+To assess thethe speed and data savings I compressed a short story by Gene
+Wolfe with zstandard and lpaq9, a page or so, representative of an average
+gemtext. The compression and decompression speeds are below 30ms here. I
+didn't precompress with a dictionary (for added significant size reduction)
+as that would mean detecting the language (from for example word
+frequency). Ideally the gmi would be compressed one time on the server to
+avoid compressing (and straining the solar powered pico on space) for each
+request.
+
+11390 xicygnus.gmi
+4098 xicygnus.gmi.0.lpaq9
+4855 xicygnus.gmi.13.zst
+5146 xicygnus.gmi.3.zst
+
+How would people solve such use cases elegantly and within the design
+philosophy?
+
+I tried to find out the data rates from the pictures of the Apollo moon
+missions, but only found this:
+&quot;For a typical Apollo launch, Cape Kennedy is connected directly to the
+Mission Control Center, Houston, by NASCOM's Apollo Launch Data System, a
+combination of data gathering and transmission systems designed to handle
+launch data exclusively. A high speed data (2400 bit per second) line
+connects the Cape to Goddard. At Goddard the transmission rate is increased
+to 40,800 per second rate from there to Houston.&quot;
+<A HREF="http://web.mit.edu/digitalapollo/Documents/Chapter8/apollomsfn.pdf">http://web.mit.edu/digitalapollo/Documents/Chapter8/apollomsfn.pdf</A>
+
+kind regards,
+Francis Siefken (NL)
+<A HREF="gemini://fsiefken.srht.site">gemini://fsiefken.srht.site</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210617/ab1b2245/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210617/ab1b2245/attachment.htm</A>&gt;
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006702.html">Gemini Digest, Vol 23, Issue 25
+</A></li>
+	<LI>Next message (by thread): <A HREF="006710.html">a space case for transparent gemtext compression
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6709">[ date ]</a>
+              <a href="thread.html#6709">[ thread ]</a>
+              <a href="subject.html#6709">[ subject ]</a>
+              <a href="author.html#6709">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

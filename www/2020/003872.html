@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> IDN with Gemini?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C045cd0f5-4569-4b2c-cb58-e3ab6211cd25%40scotdoyle.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003865.html">
+   <LINK REL="Next"  HREF="003874.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>IDN with Gemini?</H1>
+    <B>Scot</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C045cd0f5-4569-4b2c-cb58-e3ab6211cd25%40scotdoyle.com%3E"
+       TITLE="IDN with Gemini?">gmi1 at scotdoyle.com
+       </A><BR>
+    <I>Tue Dec  8 02:21:18 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003865.html">IDN with Gemini?
+</A></li>
+        <LI>Next message (by thread): <A HREF="003874.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3872">[ date ]</a>
+              <a href="thread.html#3872">[ thread ]</a>
+              <a href="subject.html#3872">[ subject ]</a>
+              <a href="author.html#3872">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 12/7/20 3:46 PM, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+&gt;<i> On Monday, December 7, 2020 4:00 PM, Scot&lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gmi1 at scotdoyle.com</A>&gt;  wrote:
+</I>&gt;<i>
+</I>&gt;&gt;<i> On 12/7/20 12:00 <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">PM,colecmac at protonmail.com</A>  wrote:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> What parsing would a client have to do?
+</I>&gt;&gt;&gt;<i>
+</I>&gt;&gt;&gt;<i> -   Extracting the domain, so it can be punycoded for DNS lookups
+</I>&gt;&gt;<i> Can we be sure gemini host resolution will always use the global DNS?
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Section 4 of RFC 6055 cautions against assuming that all name resolution
+</I>&gt;&gt;<i> is using the global DNS and therefore that querying with punycode
+</I>&gt;&gt;<i> domain names will succeed:
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i>  &#160; It is inappropriate for an application that calls a general-purpose
+</I>&gt;&gt;<i>    name resolution library to convert a name to an A-label unless the
+</I>&gt;&gt;<i>    application is absolutely certain that, in all environments where the
+</I>&gt;&gt;<i>    application might be used, only the global DNS that uses IDNA
+</I>&gt;&gt;<i>    A-labels actually will be used to resolve the name.
+</I>&gt;<i> ... Do you have an example of a system/network that fails on punycode?
+</I>&gt;<i>
+</I>Yes, an organization's internal network resolver or a user's local
+resolver could reply to utf8 queries but not punycode queries.
+
+For example, adding the line:
+
+ &#160; 10.99.99.1&#160; &#34552;&#34552;.jp
+
+to /etc/hosts on Ubuntu 20.04 with resolver systemd-resolved
+and running the test program [1] gives this output:
+
+ &#160; error querying 'xn--td2aa.jp': Unknown server error
+
+ &#160; name '&#34552;&#34552;.jp' has ip address 10.99.99.1
+
+
+[1]
+#include &lt;netdb.h&gt;
+#include &lt;stdio.h&gt;
+#include &lt;arpa/inet.h&gt;
+#include &lt;netinet/in.h&gt;
+#include &lt;sys/socket.h&gt;
+
+int show_ip(char *name) {
+ &#160; struct hostent *entry;
+ &#160; entry = gethostbyname(name);
+ &#160; if (entry) {
+ &#160;&#160;&#160; printf(&quot;name '%s' has ip address %s\n\n&quot;, entry-&gt;h_name,
+ &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; inet_ntoa(*((struct in_addr*)entry-&gt;h_addr)));
+ &#160; } else {
+ &#160;&#160;&#160; printf(&quot;error querying '%s': %s\n\n&quot;, name, hstrerror(h_errno));
+ &#160; }
+}
+
+int main() {
+ &#160; show_ip(&quot;xn--td2aa.jp&quot;);
+ &#160; show_ip(&quot;&#34552;&#34552;.jp&quot;);
+}
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003865.html">IDN with Gemini?
+</A></li>
+	<LI>Next message (by thread): <A HREF="003874.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3872">[ date ]</a>
+              <a href="thread.html#3872">[ thread ]</a>
+              <a href="subject.html#3872">[ subject ]</a>
+              <a href="author.html#3872">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

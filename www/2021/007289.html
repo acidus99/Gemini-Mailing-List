@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] comments on the proposed gemini spec revisions
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20comments%20on%20the%20proposed%20gemini%20spec%20revisions&In-Reply-To=%3C87h7dnk5qh.fsf%40omarpolo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007284.html">
+   <LINK REL="Next"  HREF="007286.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] comments on the proposed gemini spec revisions</H1>
+    <B>Omar Polo</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20comments%20on%20the%20proposed%20gemini%20spec%20revisions&In-Reply-To=%3C87h7dnk5qh.fsf%40omarpolo.com%3E"
+       TITLE="[spec] comments on the proposed gemini spec revisions">op at omarpolo.com
+       </A><BR>
+    <I>Mon Oct 11 15:13:00 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007284.html">[spec] comments on the proposed gemini spec revisions
+</A></li>
+        <LI>Next message (by thread): <A HREF="007286.html">[spec] comments on the proposed gemini spec revisions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7289">[ date ]</a>
+              <a href="thread.html#7289">[ thread ]</a>
+              <a href="subject.html#7289">[ subject ]</a>
+              <a href="author.html#7289">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Stephane Bortzmeyer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stephane at sources.org</A>&gt; writes:
+
+&gt;<i> On Mon, Oct 11, 2021 at 08:57:59AM +0200,
+</I>&gt;<i>  Omar Polo &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">op at omarpolo.com</A>&gt; wrote 
+</I>&gt;<i>  a message of 87 lines which said:
+</I>&gt;<i>
+</I>&gt;&gt;<i> 3. close_notify
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> Is it still a problem? :D
+</I>&gt;<i>
+</I>&gt;<i> Yes :-(
+</I>&gt;<i>
+</I>&gt;&gt;<i> (Sometimes I've left dangling questions like this hoping for Bortzmeyer
+</I>&gt;&gt;<i> to chime in and share some stats.  In the past it worked, hope he share
+</I>&gt;&gt;<i> some this time too ;-)
+</I>&gt;<i>
+</I>&gt;<i> &quot;50.4&#160;% of URLs do NOT send a proper TLS shutdown (application
+</I>&gt;<i> close). Even 36.8&#160;% of those who return status 20 are in that case.&quot;
+</I>
+It's worst than what I thought!  We know what software this servers are
+using?
+
+Thanks for chiming in and also for sharing the excerpt about
+close_notify :)
+
+&gt;<i> The future RFC on HTTP (completely rewritten and reorganised) has a
+</I>&gt;<i> nice explanation:
+</I>&gt;<i>
+</I>&gt;<i> 9.8.  TLS Connection Closure
+</I>&gt;<i>
+</I>&gt;<i>    TLS uses an exchange of closure alerts prior to (non-error)
+</I>&gt;<i>    connection closure to provide secure connection closure; see
+</I>&gt;<i>    Section 6.1 of [TLS13].  When a valid closure alert is received, an
+</I>&gt;<i>    implementation can be assured that no further data will be received
+</I>&gt;<i>    on that connection.
+</I>&gt;<i>
+</I>&gt;<i>    When an implementation knows that it has sent or received all the
+</I>&gt;<i>    message data that it cares about, typically by detecting HTTP message
+</I>&gt;<i>    boundaries, it might generate an &quot;incomplete close&quot; by sending a
+</I>&gt;<i>    closure alert and then closing the connection without waiting to
+</I>&gt;<i>    receive the corresponding closure alert from its peer.
+</I>&gt;<i>
+</I>&gt;<i>    An incomplete close does not call into question the security of the
+</I>&gt;<i>    data already received, but it could indicate that subsequent data
+</I>&gt;<i>    might have been truncated.  As TLS is not directly aware of HTTP
+</I>&gt;<i>    message framing, it is necessary to examine the HTTP data itself to
+</I>&gt;<i>    determine whether messages were complete.  Handling of incomplete
+</I>&gt;<i>    messages is defined in Section 8.
+</I>&gt;<i>
+</I>&gt;<i>    When encountering an incomplete close, a client SHOULD treat as
+</I>&gt;<i>    completed all requests for which it has received as much data as
+</I>&gt;<i>    specified in the Content-Length header or, when a Transfer-Encoding
+</I>&gt;<i>    of chunked is used, for which the terminal zero-length chunk has been
+</I>&gt;<i>    received.  A response that has neither chunked transfer coding nor
+</I>&gt;<i>    Content-Length is complete only if a valid closure alert has been
+</I>&gt;<i>    received.  Treating an incomplete message as complete could expose
+</I>&gt;<i>    implementations to attack.
+</I>&gt;<i>
+</I>&gt;<i>    A client detecting an incomplete close SHOULD recover gracefully.
+</I>&gt;<i>
+</I>&gt;<i>    Clients MUST send a closure alert before closing the connection.
+</I>&gt;<i>    Clients that do not expect to receive any more data MAY choose not to
+</I>&gt;<i>    wait for the server's closure alert and simply close the connection,
+</I>&gt;<i>    thus generating an incomplete close on the server side.
+</I>&gt;<i>
+</I>&gt;<i>    Servers SHOULD be prepared to receive an incomplete close from the
+</I>&gt;<i>    client, since the client can often determine when the end of server
+</I>&gt;<i>    data is.
+</I>&gt;<i>
+</I>&gt;<i>    Servers MUST attempt to initiate an exchange of closure alerts with
+</I>&gt;<i>    the client before closing the connection.  Servers MAY close the
+</I>&gt;<i>    connection after sending the closure alert, thus generating an
+</I>&gt;<i>    incomplete close on the client side.
+</I>&gt;<i>
+</I>&gt;<i> And also:
+</I>&gt;<i>
+</I>&gt;<i> 11.3.  Message Integrity
+</I>&gt;<i> ...
+</I>&gt;<i>    Care is needed however to ensure that connection closure
+</I>&gt;<i>    cannot be used to truncate messages (see Section 9.8).  User agents
+</I>&gt;<i>    might refuse to accept incomplete messages or treat them specially.
+</I>&gt;<i>    For example, a browser being used to view medical history or drug
+</I>&gt;<i>    interaction information needs to indicate to the user when such
+</I>&gt;<i>    information is detected by the protocol to be incomplete, expired, or
+</I>&gt;<i>    corrupted during transfer.  Such mechanisms might be selectively
+</I>&gt;<i>    enabled via user agent extensions or the presence of message
+</I>&gt;<i>    integrity metadata in a response.
+</I>&gt;<i>    
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007284.html">[spec] comments on the proposed gemini spec revisions
+</A></li>
+	<LI>Next message (by thread): <A HREF="007286.html">[spec] comments on the proposed gemini spec revisions
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7289">[ date ]</a>
+              <a href="thread.html#7289">[ thread ]</a>
+              <a href="subject.html#7289">[ subject ]</a>
+              <a href="author.html#7289">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

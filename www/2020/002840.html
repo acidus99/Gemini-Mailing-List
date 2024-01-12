@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Dioscuri, another application layer protocol
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Dioscuri%2C%20another%20application%20layer%20protocol&In-Reply-To=%3CCAD2gp_TpPGy09Qt_R9r50k6q-AYsQ7UinEKgsLzYFSDB2vkMBg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002821.html">
+   <LINK REL="Next"  HREF="002794.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Dioscuri, another application layer protocol</H1>
+    <B>John Cowan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Dioscuri%2C%20another%20application%20layer%20protocol&In-Reply-To=%3CCAD2gp_TpPGy09Qt_R9r50k6q-AYsQ7UinEKgsLzYFSDB2vkMBg%40mail.gmail.com%3E"
+       TITLE="Dioscuri, another application layer protocol">cowan at ccil.org
+       </A><BR>
+    <I>Fri Oct  9 03:17:31 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002821.html">Dioscuri, another application layer protocol
+</A></li>
+        <LI>Next message (by thread): <A HREF="002794.html">[ANN] gemini-php: A Gemini server written in PHP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2840">[ date ]</a>
+              <a href="thread.html#2840">[ thread ]</a>
+              <a href="subject.html#2840">[ subject ]</a>
+              <a href="author.html#2840">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Sep 30, 2020 at 12:14 PM Sandra Snan &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sandra.snan at idiomdrottning.org</A>&gt;
+wrote:
+
+
+&gt;<i> The good old days when we had separate apps for everything was paradise
+</I>&gt;<i> for me, and, well, still is because I can still happily live in that
+</I>&gt;<i> world in my li'l Debian bubble.
+</I>&gt;<i>
+</I>
+I live in that world too.  But there are only a few of them: ftp, ssh and
+friends, mail, etc.  I have no trouble learning them all.  But they are
+very inconsistent, much like Posix command-line tools.
+
+
+&gt;<i> As an example, email exploded once web-interfaces to email became
+</I>&gt;<i> available.
+</I>&gt;<i>
+</I>
+I'm not sure if you think that's good or bad.  See &lt;
+<A HREF="http://www.catb.org/jargon/html/S/September-that-never-ended.html">http://www.catb.org/jargon/html/S/September-that-never-ended.html</A>&gt;.
+
+
+&gt;<i> If Gemini and adjacent protocols turn into a general-purpose application
+</I>&gt;<i> platform, there need to be some sort of purpose or guiding light or
+</I>&gt;<i> boundaries or reason for starting a new pile instead of working on the
+</I>&gt;<i> already existing pile of junk.
+</I>&gt;<i>
+</I>
+Well, why work on Gemini instead of just using HTML and HTTP?  Simplicity
+Gemini and text/gemini are simple enough without being too simple.  I
+believe that Dioscuri is too.
+
+
+&gt;<i> Dioscuri doesn't have a client-side, server-served programming language.
+</I>&gt;<i>
+</I>
+There's no reason Gemini can't ship JavaScript, or Scheme for that matter.
+&quot;JavaScript: The Good Parts&quot; actually describes a very nice little language.
+
+Talk about complexity in the client! With SSH I can have an app on the
+&gt;<i> remote and call it from my client.
+</I>&gt;<i>
+</I>&gt;<i> ssh some-server-name 'ls|tail'
+</I>&gt;<i>
+</I>
+Yes, you can, but the server is at risk if it allows you to ssh and run
+arbitrary shell commands.  Posix systems are better defended than most, but
+the firewall is far from complete.
+
+*If* there were to be a new general-purpose application platform
+&gt;<i> along-side Gemini, client side should be &quot;dumb&quot; and the protocol (i.e.
+</I>&gt;<i> the interface between client and server) also needs to be simple and
+</I>&gt;<i> specific.
+</I>&gt;<i>
+</I>
+The trouble is that for decades now almost all the CPU power in the world
+has been client-side, most of it underused.  Downloadable smart clients
+keep the strain off the servers.  That fact will be with us for the
+foreseeable future (phones are somewhat weaker, but there are a lot more of
+them).
+
+
+&gt;<i> A handful of standard UI elements communicating with server back and
+</I>&gt;<i> forth in a straight-forward way according to one specific protocol.
+</I>&gt;<i>
+</I>
+That's how HTML/HTTP began, and we know where that led to.  I was striving
+for something different, *starting* from a smart client, downloadable or
+not, and a fairly dumb server, which is where the web is moving now (see
+&quot;single-page application&quot;).  In particular, this means that the client
+doesn't have to be a GUI or a TUI like lynx/w3m/etc.  It can be a CLI or a
+batch job or any number of other things.  &quot;Pages? What pages?  We don't
+need no steenking pages!&quot;
+
+Intercooler does look interesting: I'm going to explore it further.
+
+I once saw an application that had been converted from 3270 to a Windows
+desktop product. I had been asked to give it a quick tryout to see how the
+UI worked.  I went back to the programmers and told them that no Windows
+user would put up with this complete lack of control.  The back end needed
+to be event-driven.  Of course, the browser restored the 3270 model
+completely.
+
+PS I feel bad for shooting down Dioscuri so harshly, I hate being such a
+&gt;<i> parade-rainer. jcowan is one of my idols
+</I>
+
+No problem.  Idols often have feet of clay, after all.
+
+
+
+
+John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+Using RELAX NG compact syntax to develop schemas is one of the simple
+pleasures in life....          --Jeni Tennison
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201008/054f44b9/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201008/054f44b9/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002821.html">Dioscuri, another application layer protocol
+</A></li>
+	<LI>Next message (by thread): <A HREF="002794.html">[ANN] gemini-php: A Gemini server written in PHP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2840">[ date ]</a>
+              <a href="thread.html#2840">[ thread ]</a>
+              <a href="subject.html#2840">[ subject ]</a>
+              <a href="author.html#2840">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

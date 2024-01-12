@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A proposed scheme for parsing preformatted alt text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3CD48DB569-FEB5-4790-B905-7E91AA6A3FF1%40ngalt.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002682.html">
+   <LINK REL="Next"  HREF="002686.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A proposed scheme for parsing preformatted alt text</H1>
+    <B>Nathan Galt</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3CD48DB569-FEB5-4790-B905-7E91AA6A3FF1%40ngalt.com%3E"
+       TITLE="A proposed scheme for parsing preformatted alt text">mailinglists at ngalt.com
+       </A><BR>
+    <I>Fri Sep 11 21:22:47 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002682.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+        <LI>Next message (by thread): <A HREF="002686.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2684">[ date ]</a>
+              <a href="thread.html#2684">[ thread ]</a>
+              <a href="subject.html#2684">[ subject ]</a>
+              <a href="author.html#2684">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+&gt;<i> On Sep 11, 2020, at 12:57 PM, Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i> It was thus said that the Great Nathan Galt once stated:
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;&gt;<i> On Sep 11, 2020, at 12:44 AM, Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+</I>&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;<i> Okay, check out
+</I>&gt;&gt;&gt;<i> 
+</I>&gt;&gt;&gt;<i> 	<A HREF="gemini://gemini.conman.org/test/preformat-2.gemini">gemini://gemini.conman.org/test/preformat-2.gemini</A>
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> Much better.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> I don&#8217;t know if &#8220;image&#8221; before the ASCII-art images is, or would be,
+</I>&gt;&gt;<i> useful to anything.
+</I>&gt;<i> 
+</I>&gt;<i>  It would prevent a screen reader from reading &quot;circumflex circumflex next
+</I>&gt;<i> line slash backslash slash slash backslash nextline &#8230;&#8221;
+</I>
+Oh, huh. My assumption would be that screenreaders wouldn&#8217;t read anything in preformatted-text blocks if there were any alt text available.
+
+(Yes, my assumption is that 99.9999% of the time, the page will download faster than a screenreader can speak.)
+
+Back in HTML land, if an image has no alt attribute at all, the usual screenreader behavior is to read the filename out loud. Because this is time-wasting noise 99.999% of the time, web authors are repeatedly urged to add `alt=&#8220;&#8221;` (empty alt attributes) to images that blind people don&#8217;t need to care about (purely presentational ones, for example).
+
+At any rate, if I were blind, I&#8217;d want a &#8220;skip past the preformatted block I&#8217;m in&#8221; if my client were set to read out preformatted-text blocks. I have no idea how hard this would be to program in a GUI-based Gemini client, though, for any OS.
+
+&gt;&gt;<i> It seems a little weird to see &#8220; code Lua&#8221; instead of &#8220;lua&#8221;, and I don&#8217;t
+</I>&gt;&gt;<i> know how easy it would be to adjust syntax-coloring libraries to account
+</I>&gt;&gt;<i> for this, but this nitpick is largely immaterial.
+</I>&gt;<i> 
+</I>&gt;<i>  Do you really want a client to have to list all these languages?
+</I>
+Seems doable to me:
+
+&gt;<i> bat --list-languages | wc -l
+</I>     147
+
+&#8230;and &lt;<A HREF="https://github.com/sharkdp/bat">https://github.com/sharkdp/bat</A>&gt; is merely a supercharged cat(1) clone.
+
+&lt;<A HREF="https://pygments.org/">https://pygments.org/</A>&gt; boasts support for &#8220;over 500&#8221; languages/text formats.
+
+&gt;<i> At least with the prefix &quot;code&quot; the client can know it's source code, even
+</I>&gt;<i> if it doesn't what the language is.  And having the language can let a
+</I>&gt;<i> client syntax highlight for those languages it does know.  That was my
+</I>&gt;<i> reasoning.
+</I>
+Good choice.
+</PRE>
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002682.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+	<LI>Next message (by thread): <A HREF="002686.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2684">[ date ]</a>
+              <a href="thread.html#2684">[ thread ]</a>
+              <a href="subject.html#2684">[ subject ]</a>
+              <a href="author.html#2684">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

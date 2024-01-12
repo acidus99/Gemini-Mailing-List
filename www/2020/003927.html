@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Some reading on IRIs and IDNs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3C20201209083845.GC14045%40sources.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003924.html">
+   <LINK REL="Next"  HREF="003931.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Some reading on IRIs and IDNs</H1>
+    <B>Stephane Bortzmeyer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3C20201209083845.GC14045%40sources.org%3E"
+       TITLE="Some reading on IRIs and IDNs">stephane at sources.org
+       </A><BR>
+    <I>Wed Dec  9 08:38:45 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003924.html">Some reading on IRIs and IDNs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003931.html">Some reading on IRIs and IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3927">[ date ]</a>
+              <a href="thread.html#3927">[ thread ]</a>
+              <a href="subject.html#3927">[ subject ]</a>
+              <a href="author.html#3927">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Dec 09, 2020 at 12:26:51AM -0500,
+ Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote 
+ a message of 73 lines which said:
+
+&gt;<i> DNS *can* support UTF-8, but such support isn't wide, nor is it a
+</I>&gt;<i> standard.
+</I>
+Wrong. DNS 2181, which clarifies that &quot;any binary string whatever can
+be used as the label of any resource record&quot; is part of the Standards
+Track. The reasons why few people use UTF-8 in domain names are:
+
+* Ignorance and lack of care for internationalization,
+
+* Non-DNS reasons such as the fact that existing libraries and applications
+  may react badly to non-ASCII domain names,
+
+* As often, the problem of normalization. DNS has normalization of
+  names (the case-insensitivity rule) but it does not extend to
+  Unicode.
+
+&gt;<i> It does have an RFC (RFC-3492) and said RFC does contain code for
+</I>&gt;<i> encoding and decoding punycode (but it's in C, and the API is
+</I>&gt;<i> ... not what I would define but it can be worked with).
+</I>
+There is an implemention of Punycode in every standard library,
+whatever your language.
+
+&gt;<i> so a domain name like &quot;&#32013;&#35910;.english.s&#229;d&#228;r.&#1605;&#1589;&#1585;&quot; is converted thusly:
+</I>
+In Python (but it is as simple in any other language):
+
+&gt;&gt;&gt;<i> print(codecs.encode(&quot;&#32013;&#35910;.English.s&#229;d&#228;r.&#1605;&#1589;&#1585;&quot;, encoding=&quot;idna&quot;))
+</I>b'xn--99zt52a.English.xn--sdr-rlad.xn--wgbh1c'
+
+(Note that the encodings.idna library of Python standard library is
+limited to IDN v1.)
+
+So, almost nothing to do for the programmer. I don't agree with your
+assessment that IDN is simpler than IRI.
+
+&gt;<i> I'm not even sure what name should be in a certificate for an
+</I>&gt;<i> IDN---the full UTF-8 version, or the punycode version, or both?
+</I>&gt;<i> What's currently done in HTTP land about this? (answering this will
+</I>&gt;<i> at least point in a direction, even if we don't want to go that
+</I>&gt;<i> direction).
+</I>
+<A HREF="gemini://gemini.bortzmeyer.org/rfc-mirror/rfc8399.txt">gemini://gemini.bortzmeyer.org/rfc-mirror/rfc8399.txt</A>
+
+But it depends on the CA. It seems Let's Encrypt does not want to
+handle UTF-8 and requires Punycode.
+
+&gt;<i> [3]	The domain name &quot;gemini.conman.org&quot; has three labels, &quot;gemini&quot;,
+</I>&gt;<i> 	&quot;conman&quot; and &quot;org&quot;.  The term &quot;label&quot; is DNS lingo.
+</I>
+Let's be picky, there are four, there is also the root :-)
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003924.html">Some reading on IRIs and IDNs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003931.html">Some reading on IRIs and IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3927">[ date ]</a>
+              <a href="thread.html#3927">[ thread ]</a>
+              <a href="subject.html#3927">[ subject ]</a>
+              <a href="author.html#3927">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] &#9791;&#65039; &#8212; a symbolic protocol
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%3D%3Futf-8%3FB%3FW3NwZWNdIOKYv%2B%2B4jyDigJQgYSBzeW1ib2xpYyBwcm90b2NvbA%3D%3D%3F%3D&In-Reply-To=%3C7E3EF40A-545A-4C63-80EE-4A5E92706382%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005784.html">
+   <LINK REL="Next"  HREF="005813.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] &#9791;&#65039; &#8212; a symbolic protocol</H1>
+    <B>Petite Abeille</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%3D%3Futf-8%3FB%3FW3NwZWNdIOKYv%2B%2B4jyDigJQgYSBzeW1ib2xpYyBwcm90b2NvbA%3D%3D%3F%3D&In-Reply-To=%3C7E3EF40A-545A-4C63-80EE-4A5E92706382%40gmail.com%3E"
+       TITLE="[spec] &#9791;&#65039; &#8212; a symbolic protocol">petite.abeille at gmail.com
+       </A><BR>
+    <I>Sun Feb 28 22:19:34 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005784.html">[spec] Certificate trust
+</A></li>
+        <LI>Next message (by thread): <A HREF="005813.html">[ANN] HtmGem, Php program to view Gemini through HTTP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5761">[ date ]</a>
+              <a href="thread.html#5761">[ thread ]</a>
+              <a href="subject.html#5761">[ subject ]</a>
+              <a href="author.html#5761">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&#9791;&#65039;://&#9791;&#65039;
+
+The multiaddr bellow is the default location of a Mercury (&#9791;&#65039;) service:
+
+/dns4/&#9791;&#65039;.xyz/tcp/1961
+
+A multiaddr describes how to connect to a &#9791;&#65039; service &#8212; for example, &#10122; using DNS, &#10123; resolve hostname &#9791;&#65039;.xyz, and &#10124; connect over tcp &#10125; to  port 1961.
+
+To find a &#9791;&#65039; multiaddr, query the host &#9791;&#65039; DNS TXT record:
+
+# dig +short TXT &#9791;&#65039;._tcp.&#9791;&#65039;.xyz.
+multiaddr=/dns/&#9791;&#65039;.xyz/tcp/1958/tls/sni/&#9791;&#65039;.xyz
+
+By default, a &#9791;&#65039; service runs over TCP, at port 1961 &#8224;
+
+A &#9791;&#65039;:// request is one-line &#8212;4,096 bytes long at most, UTF-8 encoded&#8212; containing a fully qualified, normalized Internationalized Resource Identifier (IRI):
+
+&#9791;&#65039;://&#9791;&#65039;.xyz/
+
+An IRI is an UTF-8 version of an Uniform Resource Identifier (URI). 
+An URI can be either an Uniform Resource Locator (URL), or Uniform Resource Name (URN).
+
+An example of a &#9791;&#65039; request, followed by a text/&#9791;&#65039; response:
+
+# echo -e '&#9791;&#65039;://&#9791;&#65039;.xyz/\r\n' | nc 127.0.0.1 1961
+&#12873; text/&#9791;&#65039;;charset=utf-8;
+Hello &#9791;&#65039;!
+
+&#8734; &#9791;&#65039;://&#9791;&#65039;.xyz/license CC0-1.0 
+&lt;end of connection&gt; 
+
+A successful &#9791;&#65039; response is a one-line with status &#12873;&#8212;optionally followed by a content type, plus associated attributes, such as encoding:  
+
+&#12873; text/&#9791;&#65039;;charset=utf-8;
+
+The content type is optional &#8212; defaulting to text/&#9791;&#65039;, UTF-8 encoded.
+
+The content itself follow the  &#12873; status line &#8212; terminated by the service dropping the network connection.
+
+There are 3 status codes:
+
+&#12873; [20] SUCCESS &#8212; one-line, with optional content type, plus attributes, 4,096 bytes long at most, UTF-8 encoded
+&#12873; text/&#9791;&#65039;;charset=utf-8;
+
+&#12874; [30] REDIRECT &#8212; one-line IRI, fully qualified, and normalized, 4,096 bytes long at most, UTF-8 encoded
+&#12874; &#9791;&#65039;://&#9791;&#65039;.xyz/
+
+&#12875; [40] ERROR &#8212; one-line, 4,096 bytes long at most, UTF-8 encoded, with optional description 
+&#12875; &#9888;&#65038;
+
+A text/&#9791;&#65039; consists of two line types: text, and link. 
+
+A link is denoted as one-line, starting with the infinity symbol (&#8734;), followed by a space, followed by a fully qualified, and normalized, IRI &#8212; optionally followed by a space and description:
+
+&#8734; &#9791;&#65039;://&#9791;&#65039;.xyz/license CC0-1.0
+
+All other lines are regular text lines.
+
+A &#9791;&#65039; URL may anchor a text/&#9791;&#65039; line number:
+
+&#9791;&#65039;://&#9791;&#65039;.xyz/license#42
+
+A &#9791;&#65039; service may optionally respond to the urn:&#9791;&#65039;:capa directive &#8212; listing additional capabilities, specific to the service, as text/&#9791;&#65039; links:
+
+# echo -e 'urn:&#9791;&#65039;:capa' | nc 127.0.0.1 1961
+&#12873; text/&#9791;&#65039;;charset=utf-8;
+&#8734; urn:&#9791;&#65039;:capa
+&#8734; urn:&#9791;&#65039;:capa:connection:keep-alive
+&#8734; urn:&#9791;&#65039;:capa:transfer-encoding:chunked
+&#8734; urn:&#9791;&#65039;:capa:turn
+&lt;end of connection&gt; 
+
+Capabilities are optional, and not part of the &#9791;&#65039; protocol. They are documented separately.
+
+# while true; do { echo -e '&#12873;\r\n&#8734; urn:&#9791;&#65039;:capa'; } | nc -l 127.0.0.1 1958; done
+# echo -e 'urn:&#9791;&#65039;:capa\r\n' | nc 127.0.0.1 1958
+&#12873;
+&#8734; urn:&#9791;&#65039;:capa
+&lt;end of connection&gt; 
+
+That's all folks.
+
+&#177;0&#162;
+
+&#8224; NASA's Project Mercury was the first human spaceflight program of the United States, running from 1958 through 1963. The first crewed flight took place in 1961. Therefore the port number.
+
+
+
+
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210228/b49f927c/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210228/b49f927c/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005784.html">[spec] Certificate trust
+</A></li>
+	<LI>Next message (by thread): <A HREF="005813.html">[ANN] HtmGem, Php program to view Gemini through HTTP
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5761">[ date ]</a>
+              <a href="thread.html#5761">[ thread ]</a>
+              <a href="subject.html#5761">[ subject ]</a>
+              <a href="author.html#5761">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

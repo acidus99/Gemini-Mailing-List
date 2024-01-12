@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client certificate musings
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200524201743.GI23998%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001015.html">
+   <LINK REL="Next"  HREF="001103.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client certificate musings</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200524201743.GI23998%40brevard.conman.org%3E"
+       TITLE="Client certificate musings">sean at conman.org
+       </A><BR>
+    <I>Sun May 24 21:17:43 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001015.html">Client certificate musings
+</A></li>
+        <LI>Next message (by thread): <A HREF="001103.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1030">[ date ]</a>
+              <a href="thread.html#1030">[ thread ]</a>
+              <a href="subject.html#1030">[ subject ]</a>
+              <a href="author.html#1030">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great solderpunk once stated:
+&gt;<i> I'm, unsurprisingly, extremely out of touch with modern web development:
+</I>&gt;<i> are cookies still strictly tied to domains or have they evolved some
+</I>&gt;<i> kind of path-specificity?
+</I>
+  It's not path-specificity, but domain-specificity, but a cookie *can* be
+shared between sub-domains of a domain.
+
+	domain	cookies
+	===============
+	conman.org
+		alpha
+
+	www.conman.org
+		alpba
+		beta
+
+	sub.www.conman.org
+		alpha
+		beta
+		gamma
+
+  The 'alpha' cookie will be sent to the domain and each subdomain, the
+'beta' cookie will only be sent to the www subdomain, and 'gamma' will be
+only sent to sub.www sub-subdomain.  A cookie can only be set on a domain,
+not a TLD, but this requires some explaining.  If my site were under the UK,
+then:
+
+	conman.co.uk
+		alpha
+
+	www.conman.co.uk
+		alpha
+		beta
+
+	sub.www.conman.co.uk
+		alpha
+		beta
+		gamma
+
+  A cookie for 'co,uk' MUST be rejected by browsers, as 'co.uk' is
+considered a TLD (much like .org and .com).  Yes, this means that every
+browser has to be aware of the domain rules for every country (and they can
+change over time).  For the US, a domain is either a place name under a
+state (two letter code) or (and this changed several years back) any domain
+(other than the state ones) under the .us domain:
+
+	nyc.ny.us	-- VALID for cookies
+	acme.us		-- VALID for cookies
+	ny.us		-- INVALID for cookies
+
+  If you think this is insane, it is.  
+
+  -spc (Kind of wish I was making this up)
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001015.html">Client certificate musings
+</A></li>
+	<LI>Next message (by thread): <A HREF="001103.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1030">[ date ]</a>
+              <a href="thread.html#1030">[ thread ]</a>
+              <a href="subject.html#1030">[ subject ]</a>
+              <a href="author.html#1030">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

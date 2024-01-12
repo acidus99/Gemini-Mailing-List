@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Reopening: Stream status code
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Reopening%3A%20Stream%20status%20code&In-Reply-To=%3CCABuFWiKGLTK-dmL4Q27zZy5Ncpo3eEWabhWhyuNmz0cXJ%2B9Q1Q%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002361.html">
+   <LINK REL="Next"  HREF="002364.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Reopening: Stream status code</H1>
+    <B>Paul Boyd</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Reopening%3A%20Stream%20status%20code&In-Reply-To=%3CCABuFWiKGLTK-dmL4Q27zZy5Ncpo3eEWabhWhyuNmz0cXJ%2B9Q1Q%40mail.gmail.com%3E"
+       TITLE="Reopening: Stream status code">boyd.paul2 at gmail.com
+       </A><BR>
+    <I>Fri Jul 31 12:01:10 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002361.html">Reopening: Stream status code
+</A></li>
+        <LI>Next message (by thread): <A HREF="002364.html">Reopening: Stream status code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2362">[ date ]</a>
+              <a href="thread.html#2362">[ thread ]</a>
+              <a href="subject.html#2362">[ subject ]</a>
+              <a href="author.html#2362">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Please don't. That would complicate generated responses. The server would
+have to hold the response until the whole thing was rendered just to count
+the number of bytes. It's a lot simpler to write the data as it's ready,
+which also avoids (potentially large) temporary memory allocations.
+
+Paul
+
+On Fri, Jul 31, 2020, 6:34 AM Philip Linde &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">linde.philip at gmail.com</A>&gt; wrote:
+
+&gt;<i> On Fri, 31 Jul 2020 12:03:42 +0200
+</I>&gt;<i> Katarina Eriksson &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gmym at coopdot.com</A>&gt; wrote:
+</I>&gt;<i> &gt; Are you proposing adding content lenght to the MIME type? That has been
+</I>&gt;<i> &gt; rejected every time the topic has come up and has led to the discussion
+</I>&gt;<i> of
+</I>&gt;<i> &gt; alternative ways to communicate such meta data.
+</I>&gt;<i>
+</I>&gt;<i> No, I'm suggesting in general a protocol-level way of communicating in
+</I>&gt;<i> advance how many bytes will follow the header. I am not aware that MIME
+</I>&gt;<i> types can be used for that purpose.
+</I>&gt;<i>
+</I>&gt;<i> &gt; The point is to not have an extendable header.
+</I>&gt;<i>
+</I>&gt;<i> The header needn't be extensible to support this. It could be a
+</I>&gt;<i> required part of the header (my original thinking, hence admitting that
+</I>&gt;<i> this is quite a radical change) or it could be optional in the same way
+</I>&gt;<i> that the MIME type is optional (which would not be nearly as useful and
+</I>&gt;<i> probably would still break a fair amount of existing clients, but
+</I>&gt;<i> would at least not require a change on servers).
+</I>&gt;<i>
+</I>&gt;<i> The purpose would be to give clients some information that can serve as
+</I>&gt;<i> a basis for timeout heuristics, when to close connections to misbehaving
+</I>&gt;<i> servers and the means for a client to separate early close from
+</I>&gt;<i> intentional end-of-document.
+</I>&gt;<i>
+</I>&gt;<i> --
+</I>&gt;<i> Philip
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200731/3bd836d8/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200731/3bd836d8/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002361.html">Reopening: Stream status code
+</A></li>
+	<LI>Next message (by thread): <A HREF="002364.html">Reopening: Stream status code
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2362">[ date ]</a>
+              <a href="thread.html#2362">[ thread ]</a>
+              <a href="subject.html#2362">[ subject ]</a>
+              <a href="author.html#2362">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

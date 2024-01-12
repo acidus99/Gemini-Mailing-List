@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> The lang parameter to text/gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20The%20lang%20parameter%20to%20text/gemini&In-Reply-To=%3CbUz83kRQD3H3RP2l2VI_UHE_rURSdOLnq0P56z4LLBouOVN-ULwZyprY3vBnpVfWWS8QYMgaAyLrANB1N-Rsmx9ocoeYLCDs-2aSOiHrkRY%3D%40strega-nil.co%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001107.html">
+   <LINK REL="Next"  HREF="001110.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>The lang parameter to text/gemini</H1>
+    <B>Nicole Mazzuca</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20The%20lang%20parameter%20to%20text/gemini&In-Reply-To=%3CbUz83kRQD3H3RP2l2VI_UHE_rURSdOLnq0P56z4LLBouOVN-ULwZyprY3vBnpVfWWS8QYMgaAyLrANB1N-Rsmx9ocoeYLCDs-2aSOiHrkRY%3D%40strega-nil.co%3E"
+       TITLE="The lang parameter to text/gemini">nicole at strega-nil.co
+       </A><BR>
+    <I>Thu May 28 21:02:34 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001107.html">The lang parameter to text/gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="001110.html">The lang parameter to text/gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1109">[ date ]</a>
+              <a href="thread.html#1109">[ thread ]</a>
+              <a href="subject.html#1109">[ subject ]</a>
+              <a href="author.html#1109">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I would say, generally, that the base directionality of text is given by the script one is using, which is defined by the language tag. A language has a default script (for en-US, that's Latin), and if someone wants to change their script, it's very easy to do so via the script part of the lang tag, for example, yi-US (which is shorthand for yi-Hebr-US, and is RTL) vs yi-Latn-US (LTR).
+
+Nicole
+
+On Thu, May 28, 2020 at 11:43, solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at SDF.ORG</A>&gt; wrote:
+
+&gt;<i> Ahoy!
+</I>&gt;<i>
+</I>&gt;<i> Let's pick this issue up again, in its own thread this time.
+</I>&gt;<i>
+</I>&gt;<i> My original proposal was that we add a new parameter to the text/gemini
+</I>&gt;<i> media type to specify the human language a document is written in.
+</I>&gt;<i> Following the lead of RFC1766, the parameter would be called &quot;lang&quot; and
+</I>&gt;<i> take values based on ISO 639 language codes and ISO 3166 country codes.
+</I>&gt;<i>
+</I>&gt;<i> As far as I recall, nobody actually objected to this as something we
+</I>&gt;<i> should do in principle, instead we just got distracted by various edge
+</I>&gt;<i> cases. But I guess I may as well ask now: does anybody think this is a
+</I>&gt;<i> *bad* idea?
+</I>&gt;<i>
+</I>&gt;<i> The two concerete motivations for adding this were:
+</I>&gt;<i>
+</I>&gt;<i> 1. Screenreaders need to know this information to know which settings to
+</I>&gt;<i> use for their text-to-speech engine: the same letters correspond to
+</I>&gt;<i> different sounds in different languages.
+</I>&gt;<i>
+</I>&gt;<i> 2. Search engines may want to to offer their users the ability to ask
+</I>&gt;<i> for results only in a particular set of languages.
+</I>&gt;<i>
+</I>&gt;<i> Can anybody think of additional likey use cases besides these?
+</I>&gt;<i>
+</I>&gt;<i> Since these are the main motivations, that also means that &quot;normal
+</I>&gt;<i> clients&quot; (i.e. for use by sighted human users) have minimal use for this
+</I>&gt;<i> information and can more or less ignore it. So, in considering the edge
+</I>&gt;<i> cases that came up, we should be thinking about screenreaders and search
+</I>&gt;<i> engines, not the stuff that most people here are presumably using day to
+</I>&gt;<i> day.
+</I>&gt;<i>
+</I>&gt;<i> The first question was what to do if the parameter is not specified.
+</I>&gt;<i>
+</I>&gt;<i> I was, and am, opposed to putting a default language in the spec.
+</I>&gt;<i>
+</I>&gt;<i> In the case of a screenreader, it seems entirely sensible to me that the
+</I>&gt;<i> user of any such screenreader should be able to specify their own
+</I>&gt;<i> default based on their primary reading languages, and that the software
+</I>&gt;<i> should make it easy to change this when it is clear there is a problem.
+</I>&gt;<i> It's not really the Gemini spec's job to say anything about this.
+</I>&gt;<i>
+</I>&gt;<i> The case of search engines is trickier, since their resulting database
+</I>&gt;<i> does not have just one user but many. This was where autodetection
+</I>&gt;<i> first came up, which some people seemed to get carried away with. Fully
+</I>&gt;<i> generalised autodetection of language is computationally expensive and
+</I>&gt;<i> it gives answers with some uncertainty. A large search engine project
+</I>&gt;<i> *may* want to think about it - the idea of clients for humans users
+</I>&gt;<i> doing it as a routine response to a lack of a lang parameter is nuts.
+</I>&gt;<i>
+</I>&gt;<i> A simpler option for search engines might simply be to interpret a user
+</I>&gt;<i> request of &quot;only show me results in languages X&quot; as &quot;don't show results
+</I>&gt;<i> *known* to be in languages other than X&quot;. i.e documents for which the
+</I>&gt;<i> language is not known are always possible search results. This is
+</I>&gt;<i> imperfect, but, well, sometimes life is.
+</I>&gt;<i>
+</I>&gt;<i> In short, I am not sure that the lack of specified default behaviour is
+</I>&gt;<i> a good reason not to go ahead with this.
+</I>&gt;<i>
+</I>&gt;<i> The second question was what to do when a document contains text in
+</I>&gt;<i> multiple languages. This is a trickier question. I'd prefer not to
+</I>&gt;<i> define a new line type to handle it. We could at least allow the lang
+</I>&gt;<i> parameter to accept multiple values separated by some delimiter. It
+</I>&gt;<i> wouldn't be clear from that which parts were what, but it could at least
+</I>&gt;<i> act as a strong hint to screenreaders. Search engines could include
+</I>&gt;<i> such pages in results if any of the delcared languages matched one the
+</I>&gt;<i> user had requested. Actually, perhaps that's a perfectly adequate
+</I>&gt;<i> solution, in which case this is not trickier at all.
+</I>&gt;<i>
+</I>&gt;<i> There's also the question of directionality, which I think might require
+</I>&gt;<i> a separate parameter entirely. But let's focus on the language thing
+</I>&gt;<i> for now. How does the above sound to people?
+</I>&gt;<i>
+</I>&gt;<i> Cheers,
+</I>&gt;<i> Solderpunk
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200528/0330b10c/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200528/0330b10c/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001107.html">The lang parameter to text/gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="001110.html">The lang parameter to text/gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1109">[ date ]</a>
+              <a href="thread.html#1109">[ thread ]</a>
+              <a href="subject.html#1109">[ subject ]</a>
+              <a href="author.html#1109">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

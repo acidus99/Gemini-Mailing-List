@@ -1,0 +1,190 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Server software recommendations
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Server%20software%20recommendations&In-Reply-To=%3C20200514213854.GZ7305%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000650.html">
+   <LINK REL="Next"  HREF="000653.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Server software recommendations</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Server%20software%20recommendations&In-Reply-To=%3C20200514213854.GZ7305%40brevard.conman.org%3E"
+       TITLE="Server software recommendations">sean at conman.org
+       </A><BR>
+    <I>Thu May 14 22:38:54 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000650.html">Server software recommendations
+</A></li>
+        <LI>Next message (by thread): <A HREF="000653.html">Server software recommendations
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#643">[ date ]</a>
+              <a href="thread.html#643">[ thread ]</a>
+              <a href="subject.html#643">[ subject ]</a>
+              <a href="author.html#643">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great solderpunk once stated:
+&gt;<i> On Thu, May 14, 2020 at 12:35:45PM +0000, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">tiwesdaeg at tilde.pink</A> wrote:
+</I>&gt;<i>  
+</I>&gt;<i> &gt; I'm using molly-brown currently, because I like how it handles user
+</I>&gt;<i> &gt; public_gemini directories. Full cgi support would be nice.
+</I>&gt;<i> 
+</I>&gt;<i> I've been meaning to write a gemlog about this for ages, but never seem
+</I>&gt;<i> to have the time...
+</I>&gt;<i> 
+</I>&gt;<i> GCI support in Molly Brown scares the pants off me.  Go doesn't reliably
+</I>&gt;<i> support setuid() and this totally breaks all the standard pradigms of
+</I>&gt;<i> unix server design.  In particular, I can find no way for MB to spawn a
+</I>&gt;<i> CGI process which doesn't run as the same user as MB itself, and
+</I>&gt;<i> therefore necessarily has the ability to read the TLS private key files
+</I>&gt;<i> and write to the log file, which is obviously a massive security hole.
+</I>&gt;<i> Because the MB process never runs as root, it's not possible to chroot
+</I>&gt;<i> the CGI processes somewhere they couldn't see those files, either
+</I>
+  Does Go actually check the permissions of a file before calling exec() on
+it?  And refuse to run it if it's setuid?  That sounds strange to me.  Or do
+you mean something like?
+
+	child = fork()
+	if (child == 0) /* child process */
+	{
+	  setuid(CGIowner);
+	  exec(CGIprogram);
+	}
+
+  And because I feel compelled to state this:  setuid() only works for root.
+
+  And it is possible to chroot programs, but it's not generally done in
+these days of dynamically linked programs because you need to copy in all
+the shared objects into the chroot with the program.  Hmmm ... I wonder if
+you can't do a chroot with some LD_PRELOAD trickery ... might have to play
+around with that.
+
+&gt;<i> I'm frankly baffled that a language with Ken Thompson and Rob Pike as
+</I>&gt;<i> designers, created specifically to help Google engineers write server
+</I>&gt;<i> software, could turn out to be so terrible for...writing servers on
+</I>&gt;<i> unix.
+</I>
+  Rob Pike doesn't trust programmers.  Direct quote from him:
+
+	The key point here is our programmers are Googlers, they're not
+	researchers.  They're typically, fairly young, fresh out of school,
+	probably learned Java, maybe learned C or C++, probably learned
+	Python. They're not capable of understanding a brilliant language
+	but we want to use them to build good software. So, the language
+	that we give them has to be easy for them to understand and easy to
+	adopt.
+
+		<A HREF="http://channel9.msdn.com/Events/Lang-NEXT/Lang-NEXT-2014/From-Parallel-to-Concurrent">http://channel9.msdn.com/Events/Lang-NEXT/Lang-NEXT-2014/From-Parallel-to-Concurrent</A>
+
+&gt;<i> This was the reason that I pondered a few months back on this list some
+</I>&gt;<i> kind of FastCGI-esque system for a Gemini server to communicate with a
+</I>&gt;<i> process it didn't spawn itself over a domain socket or similar.  But
+</I>&gt;<i> maybe I should just give up on Go for servers (this exact same issue
+</I>&gt;<i> affects Shizaru, too.).
+</I>
+  FastCGI could be a way of doing it.  I might just look into that for
+GLV-1.12556 ...
+
+  -spc (There's always Rust ... )
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000650.html">Server software recommendations
+</A></li>
+	<LI>Next message (by thread): <A HREF="000653.html">Server software recommendations
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#643">[ date ]</a>
+              <a href="thread.html#643">[ thread ]</a>
+              <a href="subject.html#643">[ subject ]</a>
+              <a href="author.html#643">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

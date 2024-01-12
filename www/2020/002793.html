@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Dioscuri, another application layer protocol
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Dioscuri%2C%20another%20application%20layer%20protocol&In-Reply-To=%3C87o8lqu0dq.fsf%40pop-os.i-did-not-set--mail-host-address--so-tickle-me%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002792.html">
+   <LINK REL="Next"  HREF="002801.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Dioscuri, another application layer protocol</H1>
+    <B>Meff</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Dioscuri%2C%20another%20application%20layer%20protocol&In-Reply-To=%3C87o8lqu0dq.fsf%40pop-os.i-did-not-set--mail-host-address--so-tickle-me%3E"
+       TITLE="Dioscuri, another application layer protocol">meff at meff.me
+       </A><BR>
+    <I>Mon Sep 28 02:59:45 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002792.html">Dioscuri, another application layer protocol
+</A></li>
+        <LI>Next message (by thread): <A HREF="002801.html">Dioscuri, another application layer protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2793">[ date ]</a>
+              <a href="thread.html#2793">[ thread ]</a>
+              <a href="subject.html#2793">[ subject ]</a>
+              <a href="author.html#2793">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>John Cowan &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>&gt; writes:
+
+&gt;<i> A Dioscuri request starts out with the client sending a single line,
+</I>&gt;<i> &lt;URL&gt;&lt;SP&gt;&lt;MEDIA-TYPE&gt;&lt;CR&gt;&lt;LF&gt;.  This indicates that a body follows which
+</I>&gt;<i> should be interpreted according to the media type.  For example, &quot;<A HREF="gemini://">gemini://</A>
+</I>&gt;<i> example.org/foo text/gemini\r\n&quot; means that the Dioscuri server should do
+</I>&gt;<i> something with the following body, which is of type text/gemini.  Exactly
+</I>&gt;<i> what happens depends on the server and the URL.  For example, it might
+</I>&gt;<i> replace the contents of &quot;foo&quot; with the uploaded body.  Alternatively,
+</I>&gt;<i> &quot;<A HREF="gemini://example.org/do/this">gemini://example.org/do/this</A> text/javascript\r\n&quot; might cause the
+</I>&gt;<i> JavaScript in the uploaded body to be executed on the server.
+</I>
+Does Dioscuri have the same line-length limits as Gemini?
+
+&gt;<i>
+</I>&gt;<i> By mutual agreement between the client and the server, the server may
+</I>&gt;<i> return &quot;70 &lt;URL&gt;\r\n&quot; not  followed by a body.  This code means that the
+</I>&gt;<i> request has succeeded, but rather than the server sending a response body
+</I>&gt;<i> in the same TCP connection, the response body can be found at &lt;URL&gt;.
+</I>&gt;<i>
+</I>&gt;<i> A use case for this is that the client wishes to add a new file to a
+</I>&gt;<i> container (directory or whatever) in the server but leaves it up to the
+</I>&gt;<i> server to choose the new URL according to some algorithm (random,
+</I>&gt;<i> timestamp, etc.)  So a request of &quot;&lt;container-URL&gt; text/gemini\r\n&quot;
+</I>&gt;<i> followed by the body would in such a case respond &quot;60 &lt;object-URL&gt;\r\n&quot;,
+</I>&gt;<i> meaning that the new resource can be found at &lt;object-URL&gt;.
+</I>&gt;<i>
+</I>
+Do you mean &quot;70&quot; here instead of &quot;60&quot;?
+
+&gt;<i>
+</I>&gt;<i> Finally, an implementation note: the TCP library used to implement Dioscuri
+</I>&gt;<i> clients must be able to separately close the input and the output sides of
+</I>&gt;<i> the TCP connection to the server.  So in the application server discussed
+</I>&gt;<i> above, the client closes the output side of its socket when it has sent the
+</I>&gt;<i> body, and the server receives EOF when it attempts to read more body.
+</I>&gt;<i> However,  the input side on the client must remain open so that the
+</I>&gt;<i> server's response can be read.
+</I>
+Are there any limits on payload length from the client? Are there any
+plans for the client to indicate to the server the length of the
+payload? What happens if the server encounters a fault while reading in
+the entire client payload?
+
+Is there any guidance on timeouts? Should implementors assume that
+timeouts are quick and the server should hangup quickly if nothing is
+found on the client's send stream, or is this application dependent so
+that it's up to the server/endpoint to determine timeouts (e.g. for a
+streaming application)? My worry is that opening connections to the
+server and keeping the server send connection open can quickly exhaust
+the number of sockets/fds the server has available.
+
+- meff
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002792.html">Dioscuri, another application layer protocol
+</A></li>
+	<LI>Next message (by thread): <A HREF="002801.html">Dioscuri, another application layer protocol
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2793">[ date ]</a>
+              <a href="thread.html#2793">[ thread ]</a>
+              <a href="subject.html#2793">[ subject ]</a>
+              <a href="author.html#2793">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

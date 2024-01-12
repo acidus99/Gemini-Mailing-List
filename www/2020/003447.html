@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Scheme Section 2 quibble
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3CCAFTy05bwJE26ks7YYKoOtgr4dm2S%3DU_oS1DxwSmKAeuiP9Qeig%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003406.html">
+   <LINK REL="Next"  HREF="003372.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Scheme Section 2 quibble</H1>
+    <B>Michael Lazar</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3CCAFTy05bwJE26ks7YYKoOtgr4dm2S%3DU_oS1DxwSmKAeuiP9Qeig%40mail.gmail.com%3E"
+       TITLE="Scheme Section 2 quibble">lazar.michael22 at gmail.com
+       </A><BR>
+    <I>Thu Nov 19 19:37:34 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003406.html">Scheme Section 2 quibble
+</A></li>
+        <LI>Next message (by thread): <A HREF="003372.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3447">[ date ]</a>
+              <a href="thread.html#3447">[ thread ]</a>
+              <a href="subject.html#3447">[ subject ]</a>
+              <a href="author.html#3447">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Nov 18, 2020 at 4:10 PM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> It was thus said that the Great Remco once stated:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; If you want to point fingers:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; <A HREF="https://github.com/michael-lazar/gemini-diagnostics/blob/master/gemini-diagnostics#L440">https://github.com/michael-lazar/gemini-diagnostics/blob/master/gemini-diagnostics#L440</A>
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; That's what I based my implementation on and I suspect many others did
+</I>&gt;<i> &gt; so too.
+</I>&gt;<i>
+</I>&gt;<i>  The test isn't *wrong* per se, it's just testing at the wrong level. My
+</I>&gt;<i> server will return:
+</I>&gt;<i>
+</I>&gt;<i>     <A HREF="gemini://gemini.conman.org">gemini://gemini.conman.org</A>   -&gt; 20
+</I>&gt;<i>     <A HREF="gemini://gemini.conman.org/">gemini://gemini.conman.org/</A>   -&gt; 20
+</I>&gt;<i>
+</I>&gt;<i> but
+</I>&gt;<i>
+</I>&gt;<i>     <A HREF="gemini://gemini.conman.org/test">gemini://gemini.conman.org/test</A> -&gt; 31 <A HREF="gemini://gemini.conman.org/test/">gemini://gemini.conman.org/test/</A>
+</I>&gt;<i>
+</I>&gt;<i>   which is what that test is testing.
+</I>&gt;<i>
+</I>&gt;<i>   -spc
+</I>
+Yes that's probably what I meant to do. It was difficult to write many of the
+tests because they can't assume that any particular directory exists on the
+server. I didn't realize that the root URL was special in this regard.
+
+I think this is an interesting problem for the gemini protocol. In HTTP you
+typically only have one way to write out this request so it's never a problem:
+
+GET / HTTP/1.1
+
+Even though &quot;<A HREF="gemini://example.com">gemini://example.com</A>&quot; and &quot;<A HREF="gemini://example.com/">gemini://example.com/</A>&quot; are supposed to
+be identical per the URL definition, good luck getting gemini developers to
+read through 100+ pages of RFCs and implement this correctly.
+
+- Michael
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003406.html">Scheme Section 2 quibble
+</A></li>
+	<LI>Next message (by thread): <A HREF="003372.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3447">[ date ]</a>
+              <a href="thread.html#3447">[ thread ]</a>
+              <a href="subject.html#3447">[ subject ]</a>
+              <a href="author.html#3447">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

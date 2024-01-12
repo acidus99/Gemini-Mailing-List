@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] The updated speculative specification is now up
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20The%20updated%20speculative%20specification%20is%20now%20up&In-Reply-To=%3C20210406164947.GA3619%40host%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006284.html">
+   <LINK REL="Next"  HREF="006298.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] The updated speculative specification is now up</H1>
+    <B>nervuri</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20The%20updated%20speculative%20specification%20is%20now%20up&In-Reply-To=%3C20210406164947.GA3619%40host%3E"
+       TITLE="[spec] The updated speculative specification is now up">nervuri at disroot.org
+       </A><BR>
+    <I>Tue Apr  6 17:50:08 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006284.html">[spec] The updated speculative specification is now up
+</A></li>
+        <LI>Next message (by thread): <A HREF="006298.html">[spec] The updated speculative specification is now up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6285">[ date ]</a>
+              <a href="thread.html#6285">[ thread ]</a>
+              <a href="subject.html#6285">[ subject ]</a>
+              <a href="author.html#6285">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, 2021-04-05, Sean Conner wrote:
+&gt;<i>
+</I>&gt;<i>  The updated protocol (only) specification is now up and can be read at:
+</I>&gt;<i>
+</I>&gt;<i>	<A HREF="https://gitlab.com/gemini-specification/protocol/-/blob/master/specification.gmi">https://gitlab.com/gemini-specification/protocol/-/blob/master/specification.gmi</A>
+</I>
+Thank you.  A few thoughts:
+
+I recommend making each change in a separate commit, to make it easier
+to isolate and comment on.  In a huge diff like this [1] it's easy to
+miss small, but important changes.
+
+[1] <A HREF="https://gitlab.com/gemini-specification/protocol/-/commit/0235100151b57d9f5c3384acdacb4ad9986f7ae4?expanded=1&amp;view=inline">https://gitlab.com/gemini-specification/protocol/-/commit/0235100151b57d9f5c3384acdacb4ad9986f7ae4?expanded=1&amp;view=inline</A>
+
+&gt;<i> The use of an existing TLS library SHOULD be used, but because not all
+</I>&gt;<i> existing TLS libraries support TLS 1.3, then at this time (2021),
+</I>&gt;<i> implementations MUST support TLS version 1.2 or higher.
+</I>
+You probably meant to start with &quot;An existing TLS library SHOULD be
+used&quot;, but what does this actually mean?  Existing as of when?  If
+someone makes a new TLS library, it will also exist.  Also, many
+libraries are abandoned, so it will never be the case that &quot;all existing
+TLS libraries&quot; will support TLS 1.3, or even 1.2.
+
+I don't think the final Gemini specification should mention libraries at
+all.  They may be ok as a temporary justification for why TLS 1.2 is in
+the spec, but let's see if we can get more clarity on this: what exactly
+are we waiting for before TLS 1.3 becomes the minimum version?  Support
+in BearSSL (which may never be added)?  Support in X% of clients and Y%
+of servers?  Hard to say, isn't it?
+
+&gt;<i> TLS 1.2 will send the server name and the client certificate (if used)
+</I>&gt;<i> in the clear
+</I>
+TLS 1.3 also sends the server name (SNI) in the clear, unless ECH/ESNI
+is used.  The issue here is that TLS 1.2 is not compatible with
+ECH/ESNI.  But even with TLS 1.3, public keys need to be put in DNS in
+order for ECH/ESNI to work, so it will probably not be a mainstream
+feature (although it should be encouraged).
+
+&gt;<i> A client MAY warn a user of a TLS 1.2 connection is established, and
+</I>&gt;<i> SHOULD warn the user of a client certifiate will be transmitted via
+</I>&gt;<i> TLS 1.2.
+</I>
+It's &quot;if&quot; rather than &quot;of&quot;, right?
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006284.html">[spec] The updated speculative specification is now up
+</A></li>
+	<LI>Next message (by thread): <A HREF="006298.html">[spec] The updated speculative specification is now up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6285">[ date ]</a>
+              <a href="thread.html#6285">[ thread ]</a>
+              <a href="subject.html#6285">[ subject ]</a>
+              <a href="author.html#6285">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> IETF policy on encodings and languages
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IETF%20policy%20on%20encodings%20and%20languages&In-Reply-To=%3C20201228091230.nomtkdkolsdckksi%40gux%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004484.html">
+   <LINK REL="Next"  HREF="004597.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>IETF policy on encodings and languages</H1>
+    <B>Arav K.</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IETF%20policy%20on%20encodings%20and%20languages&In-Reply-To=%3C20201228091230.nomtkdkolsdckksi%40gux%3E"
+       TITLE="IETF policy on encodings and languages">nothien at uber.space
+       </A><BR>
+    <I>Mon Dec 28 09:12:30 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004484.html">IETF policy on encodings and languages
+</A></li>
+        <LI>Next message (by thread): <A HREF="004597.html">IETF policy on encodings and languages
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4512">[ date ]</a>
+              <a href="thread.html#4512">[ thread ]</a>
+              <a href="subject.html#4512">[ subject ]</a>
+              <a href="author.html#4512">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Dec 27, 2020 at 03:41:14PM -0500, John Cowan wrote:
+&gt;<i> And if you request <A HREF="gemini://example.com/la/non-exsistens.gmi">gemini://example.com/la/non-exsistens.gmi</A> and there
+</I>&gt;<i> is no support for Latin error messages, as there probably is not?
+</I>&gt;<i> Then what language should be used?  With the exception of 1x
+</I>&gt;<i> responses, human-readable &lt;META&gt; reflects error situations, where by
+</I>&gt;<i> definition the server doesn't know what the user can or cannot
+</I>&gt;<i> understand.
+</I>
+If the server has a Latin section, it is expected to have a complete
+Latin interface.  And the language that the user is expecting is
+generally encoded into the URL itself, as others have mentioned: the
+server knows that the /la/ section is requested, so it can use Latin
+error messages.
+
+&gt;<i> I have no idea why you would want to disallow that.  Changes to the
+</I>&gt;<i> query string *are* changes to the URL, so that a particular language
+</I>&gt;<i> could be equally well indicated using the domain, the path, or the
+</I>&gt;<i> query, depending on the server's conventions.
+</I>
+Because we don't want the query string to be used as it is in HTML, i.e.
+for arbitrary parameters.  Using ?lang=&lt;lang&gt; is setting an arguably
+dangerous precedent.
+ 
+&gt;<i> That's ideal, but it's a big burden on the client, which has to use
+</I>&gt;<i> something as general as Google Translate to convert the Russian error
+</I>&gt;<i> message being returned by the server to the Welsh expected by the
+</I>&gt;<i> user.
+</I>
+You're right, clients can't do translation.  But the idea is that if you
+came across a site that only had &lt;insert language you don't understand&gt;,
+and you really wanted to see it, you would translate it manually.
+Similarly, if you use the &lt;language&gt; interface / section of a site, it's
+your responsibility (not the server's) to translate it.  If the site
+offers a language interface / section that you do understand, use that.
+Otherwise, you'll have to translate.
+
+&gt;<i> Not really: again, we are talking about the language of error messages.
+</I>
+You're right, never mind.
+
+&gt;<i> Another point is that people often google for the meaning of error
+</I>&gt;<i> messages, and that's made easier if they always look the same, or at
+</I>&gt;<i> least some part of them always looks the same.
+</I>
+That's the whole point of the status code.  The user's client can also
+present a generic description of the status code (in the user's language
+of choice) in addition to the error message from the META line.  The
+user can reasonably expect that the error messages are in the language
+of the interface / section specified in the URL, e.g. requesting
+<A HREF="gemini://example.com/la/~foo">gemini://example.com/la/~foo</A> could return 51 &quot;non est usor&quot;.  If the
+user doesn't understand Latin and has still for some reason requested
+the Latin interface URL, they can still get a good idea of what's going
+on thanks to the code 51, which their client can/should explain as
+&quot;Permanent Failure - Not Found&quot;.
+
+~aravk | ~nothien
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 833 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201228/53b76d84/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201228/53b76d84/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004484.html">IETF policy on encodings and languages
+</A></li>
+	<LI>Next message (by thread): <A HREF="004597.html">IETF policy on encodings and languages
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4512">[ date ]</a>
+              <a href="thread.html#4512">[ thread ]</a>
+              <a href="subject.html#4512">[ subject ]</a>
+              <a href="author.html#4512">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

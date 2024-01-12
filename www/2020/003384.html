@@ -1,0 +1,290 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Scheme Section 2 quibble
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3C20201117221041.GO19536%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003381.html">
+   <LINK REL="Next"  HREF="003385.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Scheme Section 2 quibble</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3C20201117221041.GO19536%40brevard.conman.org%3E"
+       TITLE="Scheme Section 2 quibble">sean at conman.org
+       </A><BR>
+    <I>Tue Nov 17 22:10:41 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003381.html">Scheme Section 2 quibble
+</A></li>
+        <LI>Next message (by thread): <A HREF="003385.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3384">[ date ]</a>
+              <a href="thread.html#3384">[ thread ]</a>
+              <a href="subject.html#3384">[ subject ]</a>
+              <a href="author.html#3384">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Ali Fardan once stated:
+&gt;<i> On Tue, 17 Nov 2020 10:19:52 +0100
+</I>&gt;<i> Philip Linde &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">linde.philip at gmail.com</A>&gt; wrote:
+</I>&gt;<i> &gt; With respect to RFC3986, it's not a matter of opinion.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; It's very much not an implementation specific hack. It's defined in
+</I>&gt;<i> &gt; RFC 3986 as &quot;relative-ref&quot;, a &quot;network-path reference&quot; specifically.
+</I>&gt;<i> &gt; Non-URIs of the &quot;example.com/hello&quot; style on the other hand are an
+</I>&gt;<i> &gt; implementation specific hack, as you've noted, discouraged by RFC 3986
+</I>&gt;<i> &gt; and not specified in any of the syntaxes it defines. It's obviously
+</I>&gt;<i> &gt; unsuitable for links because it's ambiguous with relative-ref.
+</I>&gt;<i> 
+</I>&gt;<i> I don't know about that, section 3.2 states that authority should be
+</I>&gt;<i> preceded by a &quot;//&quot;, not that it is a part of the authority component,
+</I>&gt;<i> also, the ABNF representation has no &quot;//&quot; in it.
+</I>&gt;<i> 
+</I>&gt;<i> Suffix references (section 4.5) are only discouraged because of
+</I>&gt;<i> possible misinterpretation, however in the case of Gemini requests,
+</I>&gt;<i> people can write their code to handle them just like they write their
+</I>&gt;<i> code to handle &quot;//example.tld&quot;, it's not that hard and looks much much
+</I>&gt;<i> cleaner, the argument that it could be interpreted as path should also
+</I>&gt;<i> apply for &quot;//example.tld&quot; too, because it could be interpreted as a
+</I>                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+&gt;<i> path too, however if the author decided to handle such case, it'll be
+</I>  ^^^^^^^^^
+  Citation needed.
+
+  I'm sorry, this just isn't the case.  From the full ABNF in Appendix A:
+
+   URI           = scheme &quot;:&quot; hier-part [ &quot;?&quot; query ] [ &quot;#&quot; fragment ]
+
+   hier-part     = &quot;//&quot; authority path-abempty
+                 / path-absolute 
+                 / path-rootless 
+                 / path-empty
+
+   URI-reference = URI / relative-ref
+   
+   absolute-URI  = scheme &quot;:&quot; hier-part [ &quot;?&quot; query ]
+
+   relative-ref  = relative-part [ &quot;?&quot; query ] [ &quot;#&quot; fragment ]
+
+   relative-part = &quot;//&quot; authority path-abempty
+                 / path-absolute
+                 / path-noscheme
+                 / path-empty 
+
+[ NON-PATH RELATED RULES OMITTED FOR SPACE I REPEAT NON-PATH RELATED RULES OMITTED FOR SPACE ]
+
+   path          = path-abempty    ; begins with &quot;/&quot; or is empty
+                 / path-absolute   ; begins with &quot;/&quot; but not &quot;//&quot;
+                 / path-noscheme   ; begins with a non-colon segment
+                 / path-rootless   ; begins with a segment
+                 / path-empty      ; zero characters
+
+   path-abempty  = *( &quot;/&quot; segment )
+   path-absolute = &quot;/&quot; [ segment-nz *( &quot;/&quot; segment ) ]
+   path-noscheme = segment-nz-nc *( &quot;/&quot; segment )
+   path-rootless = segment-nz *( &quot;/&quot; segment )
+   path-empty    = 0&lt;pchar&gt;
+
+  The path parsing rules state a single slash.  Not '/'+, nor '/'*, but a
+single '/'.  The only place where more than a single slash is allowed PER
+THE @#%@#$@$ ABNF is just prior to the authority, which contains the
+hostname.  THE ONLY PLACE!  
+
+  I will also draw your attention to the URI-reference rule, which is there
+for some reason, which allows both a full URI, or a RELATIVE URI, which
+means that
+
+		//example.com/path/to/resource
+
+IS A VALID URI!  IT IS NOT A HACK!  What part of the ABNF do you not
+understand?
+
+&gt;<i> handled just fine, you can have your parser treat the text before the
+</I>&gt;<i> first occurrence of '/' as host subcomponent of authority component if
+</I>&gt;<i> scheme is not specified just like you have your parser treat the first
+</I>&gt;<i> occurrence of '/' after the &quot;//&quot; prefix as host subcomponent in the
+</I>&gt;<i> current way of handling schemeless requests in Gemini, the Gemini
+</I>&gt;<i> protocol requires passing full URL in requests, therefore, such should
+</I>&gt;<i> not be interpreted as path because Gemini requests don't allow path
+</I>&gt;<i> without stating host.
+</I>
+  No, the spec allows both the full URI, and a relative URI as long as it
+starts with '//' (it has the authority section).  The wording in the spec is
+bad and should be changed to clarify it, but that's the current
+specification.  
+
+  Again,
+
+		//example.com/path/to/resource
+
+IS NOT A HACK!
+
+&gt;<i> So yeah, I'm not changing my mind, &quot;//example.tld&quot; is a hack because
+</I>&gt;<i> that is not a valid URI and &quot;//&quot; is supposed to be only present when
+</I>&gt;<i> scheme is specified, however, &quot;example.tld&quot; is while discouraged,
+</I>&gt;<i> acceptable for this use case and the RFC even acknowledged it.
+</I>&gt;<i> 
+</I>&gt;<i> Let me quote to you why it is that RFC 3986 discourages its use:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Although this practice of using suffix references is common, it
+</I>&gt;<i> &gt; should be avoided whenever possible and should never be used in
+</I>&gt;<i> &gt; situations where long-term references are expected.
+</I>&gt;<i> 
+</I>&gt;<i> In the case of Gemini requests, they are not a 'long-term' reference,
+</I>&gt;<i> they're one-time requests, I don't see any downside to not doing it.
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Last I checked, if you connect to <A HREF="gemini://gemini.circumlunar.space">gemini://gemini.circumlunar.space</A>
+</I>&gt;<i> &gt; and request &quot;gemini.circumlunar.space/&quot; you get an error. You may
+</I>&gt;<i> &gt; however request &quot;//gemini.circumlunar.space/&quot; and get the appropriate
+</I>&gt;<i> &gt; 20 response. Should gemini.circumlunar.space be considered to be
+</I>&gt;<i> &gt; running a canonical implementation of Gemini?
+</I>&gt;<i> 
+</I>&gt;<i> You shouldn't look at any particular implementation as a reference for
+</I>&gt;<i> the spec, 
+</I>
+  I believe Philip used gemini.circumlunar.space because that's the server
+written by solderpunk, author of the specification.  
+
+&gt;<i> I'm assuming gemini.circumlunar.space is running molly-brown,
+</I>
+  Also written by solderpunk.  The bastard!  Writing a Gemini server that
+doesn't follow his specification!
+
+&gt;<i> do you know that molly-brown treats single '\n' as valid request
+</I>&gt;<i> terminators instead of explicit '\r\n'? (see:
+</I>&gt;<i> <A HREF="https://tildegit.org/solderpunk/molly-brown/src/branch/master/handler.go#L138">https://tildegit.org/solderpunk/molly-brown/src/branch/master/handler.go#L138</A>),
+</I>&gt;<i> do you know that if a transaction is finished, molly-brown waits for
+</I>&gt;<i> the client to close the connection instead of closing it from the
+</I>&gt;<i> server side, is that spec compliant?
+</I>&gt;<i> 
+</I>&gt;<i> The reason I think molly-brown accepted &quot;//example.tld&quot; in the first
+</I>&gt;<i> place is because the Go standard library URL parser implementation
+</I>&gt;<i> accepted this, I don't know if this was a bug or it is intended design,
+</I>
+  It's by design---see the ABNF above.  
+
+&gt;<i> but that's what it is, other URI parsers that are more strict with
+</I>&gt;<i> compliance to the RFC will refuse to parse a URI without scheme
+</I>&gt;<i> present, 
+</I>
+  If it does, it's broken by design.  Again, see the ABNF above.
+
+&gt;<i> here is an excerpt from the library's documentation that might
+</I>&gt;<i> give an idea of how they treat URLs:
+</I>&gt;<i> 
+</I>&gt;<i> &gt; A URL represents a parsed URL (technically, a URI reference).
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The general form represented is:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; [scheme:][//[userinfo@]host][/]path[?query][#fragment]
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; URLs that do not start with a slash after the scheme are
+</I>&gt;<i> &gt; interpreted as:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; scheme:opaque[?query][#fragment]
+</I>&gt;<i> 
+</I>&gt;<i> Notice that [scheme:] is enclosed in brackets implying that it is
+</I>&gt;<i> optional, while [//host] is optional too, the &quot;//&quot; is considered a part
+</I>&gt;<i> of the authority component by the Go URL parser implementation, this is
+</I>&gt;<i> why &quot;//example.tld&quot; is accepted while &quot;example.tld&quot; is not, try passing
+</I>&gt;<i> both strings to url.Parse() and see what you get.
+</I>
+  Yes, exactly.  Again, that's per the ABNF above.  Why do you not get this? 
+Here, have one more excerpt from RFC-3986, this time from section 3:
+
+   The following are two example URIs and their component parts:
+
+         <A HREF="foo://example.com:8042/over/there?name=ferret#nose">foo://example.com:8042/over/there?name=ferret#nose</A>
+         \_/   \______________/\_________/ \_________/ \__/
+          |           |            |            |        |
+       scheme     authority       path        query   fragment
+          |   _____________________|__
+         / \ /                        \
+         urn:example:animal:ferret:nose
+
+and the URL parsing library I have parses those as:
+
+['<A HREF="foo://example.com:8042/over/there?name=ferret#nose">foo://example.com:8042/over/there?name=ferret#nose</A>'] =
+{
+  fragment = &quot;nose&quot;,
+  query = &quot;name=ferret&quot;,
+  path = &quot;/over/there&quot;,
+  scheme = &quot;foo&quot;,
+  port = 8042.000000,
+  host = &quot;example.com&quot;,
+}
+
+['urn:example:animal:ferret:nose'] =
+{
+  path = &quot;example:animal:ferret:nose&quot;,
+  scheme = &quot;urn&quot;,
+}
+
+and because I like belaboring the inanimate equus pleonastically:
+
+[&quot;//example.com/path/to/resource&quot;] =
+{
+  host = &quot;example.com&quot;,
+  path = &quot;/path/to/resource&quot;,
+}
+
+[&quot;/example.com/path/to/resource&quot;] =
+{
+  path = &quot;/example.com/path/to/resource&quot;,
+}
+
+[&quot;example.com/path/to/resource&quot;] =
+{
+  path = &quot;example.com/path/to/resource&quot;,
+}
+
+  You should try those with the Go URL parser you use and see what YOU get.
+
+  -spc
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003381.html">Scheme Section 2 quibble
+</A></li>
+	<LI>Next message (by thread): <A HREF="003385.html">Scheme Section 2 quibble
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3384">[ date ]</a>
+              <a href="thread.html#3384">[ thread ]</a>
+              <a href="subject.html#3384">[ subject ]</a>
+              <a href="author.html#3384">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

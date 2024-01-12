@@ -1,0 +1,132 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Suggestions for a Gemini server
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Suggestions%20for%20a%20Gemini%20server&In-Reply-To=%3C87bl1br7eh.fsf%40omarpolo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="007717.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Suggestions for a Gemini server</H1>
+    <B>Omar Polo</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Suggestions%20for%20a%20Gemini%20server&In-Reply-To=%3C87bl1br7eh.fsf%40omarpolo.com%3E"
+       TITLE="Suggestions for a Gemini server">op at omarpolo.com
+       </A><BR>
+    <I>Mon Dec 20 08:28:59 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="007717.html">Suggestions for a Gemini server
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7718">[ date ]</a>
+              <a href="thread.html#7718">[ thread ]</a>
+              <a href="subject.html#7718">[ subject ]</a>
+              <a href="author.html#7718">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Jason Evans &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">jsevans at mailfence.com</A>&gt; writes:
+
+&gt;<i> Hi all,
+</I>&gt;<i>
+</I>&gt;<i> I've been running molly-brown for some time and I really like its
+</I>&gt;<i> flexibility when it comes to handling funky mime types. I've been hosting
+</I>&gt;<i> a gemini mirror to textfiles.com for a while and lot of these files
+</I>&gt;<i> have random
+</I>&gt;<i> file extensions but they are actually all plain text files. With molly, I
+</I>&gt;<i> can define mime types like this:
+</I>&gt;<i>
+</I>&gt;<i> [MimeOverrides]
+</I>&gt;<i> &quot;atom.xml$&quot; = &quot;application/atom+xml&quot;
+</I>&gt;<i> &quot;rss.xml$&quot; = &quot;application/rss+xml&quot;
+</I>&gt;<i> &quot;.$&quot; = &quot;text/plain&quot;
+</I>&gt;<i> &quot;.gmi$&quot; = &quot;text/gemini&quot;
+</I>&gt;<i> &quot;.tgz$&quot; = &quot;application/gzip&quot;
+</I>&gt;<i> &quot;.zip$&quot; = &quot;application/zip&quot;
+</I>&gt;<i> &quot;.tar.gz$&quot; = &quot;application/gzip&quot;
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> That way anything that isn't defined is automatically assumed to be
+</I>&gt;<i> &quot;text/plain&quot; which works great for me.
+</I>&gt;<i>
+</I>&gt;<i> I tried using gmnisrv and it has some wonderful features like certificate
+</I>&gt;<i> generation and the ability to create multiple capsules however, custom
+</I>&gt;<i> mime types must be managed manually which means that I would probably need
+</I>&gt;<i> to rename every file in the textfiles collection to .txt or .gmi which I
+</I>&gt;<i> really don't want to do.
+</I>&gt;<i>
+</I>&gt;<i> I'm looking for suggestions for a server that can give me all of these
+</I>&gt;<i> functions together in one place. Thanks!
+</I>
+shameless self-promotion :)
+
+I've never used molly brown nor gmnisrv, but my server gmid[0] has
+location blocks and settings customizable per-location block.  That
+means that you can either
+
+	server &quot;example.com&quot; {
+		cert &quot;...&quot;
+		key &quot;...&quot;
+		root &quot;...&quot;
+
+		# set the default mime to text/plain
+		default type &quot;text/plain&quot;
+	}
+
+or even
+
+	server &quot;example.com&quot; {
+		cert &quot;...&quot;
+		key &quot;...&quot;
+		root &quot;...&quot;
+
+		location &quot;/text-files/*&quot; {
+			default type &quot;text/plain&quot;
+		}
+	}
+
+to change the `default type' only for files that matches &quot;/text-file/*&quot;.
+It's also possible to define custom mime-types per extensions using the
+`map mime-type to-ext extension', see the manpage for usage and
+examples.
+
+Regarding the automatic renewal of certificates, there's nothing in the
+current last version (v1.7.5) but in -master there's an helper script in
+contrib/ to automatically renew the certificates (it's meant to be ran
+from a crontab or similar) and I'd like to tag the 1.8 with the new
+year.
+
+
+[0]: <A HREF="gemini://gmid.omarpolo.com">gemini://gmid.omarpolo.com</A>
+  or <A HREF="https://gmid.omarpolo.com">https://gmid.omarpolo.com</A>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="007717.html">Suggestions for a Gemini server
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#7718">[ date ]</a>
+              <a href="thread.html#7718">[ thread ]</a>
+              <a href="subject.html#7718">[ subject ]</a>
+              <a href="author.html#7718">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

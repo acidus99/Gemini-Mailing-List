@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> IDN with Gemini?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3CWs3Z7nDYW2kvGmorJxRyyF0gsAF5LPEdqudKBxY2QnwtvYq-MLAAQWIDcSjmSHSNeyIgYZacmwEBPM93gsdik0cfSSFlltYtbT2F_Ga3KVo%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003863.html">
+   <LINK REL="Next"  HREF="003872.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>IDN with Gemini?</H1>
+    <B>colecmac at protonmail.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3CWs3Z7nDYW2kvGmorJxRyyF0gsAF5LPEdqudKBxY2QnwtvYq-MLAAQWIDcSjmSHSNeyIgYZacmwEBPM93gsdik0cfSSFlltYtbT2F_Ga3KVo%3D%40protonmail.com%3E"
+       TITLE="IDN with Gemini?">colecmac at protonmail.com
+       </A><BR>
+    <I>Mon Dec  7 21:46:06 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003863.html">IDN with Gemini?
+</A></li>
+        <LI>Next message (by thread): <A HREF="003872.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3865">[ date ]</a>
+              <a href="thread.html#3865">[ thread ]</a>
+              <a href="subject.html#3865">[ subject ]</a>
+              <a href="author.html#3865">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Monday, December 7, 2020 4:00 PM, Scot &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gmi1 at scotdoyle.com</A>&gt; wrote:
+
+&gt;<i> On 12/7/20 12:00 PM, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+</I>&gt;<i>
+</I>&gt;<i> &gt; What parsing would a client have to do?
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; -   Extracting the domain, so it can be punycoded for DNS lookups
+</I>&gt;<i>
+</I>&gt;<i> Can we be sure gemini host resolution will always use the global DNS?
+</I>&gt;<i>
+</I>&gt;<i> Section 4 of RFC 6055 cautions against assuming that all name resolution
+</I>&gt;<i> is using the global DNS and therefore that querying with punycode
+</I>&gt;<i> domain names will succeed:
+</I>&gt;<i>
+</I>&gt;<i> &#160; It is inappropriate for an application that calls a general-purpose
+</I>&gt;<i>   name resolution library to convert a name to an A-label unless the
+</I>&gt;<i>   application is absolutely certain that, in all environments where the
+</I>&gt;<i>   application might be used, only the global DNS that uses IDNA
+</I>&gt;<i>   A-labels actually will be used to resolve the name.
+</I>
+That's interesting, thanks for sharing. However, it seems obvious to me
+that punycoding is a necessity, since the global DNS system won't work
+without it. I've worked with offline mesh network systems, but never
+had to handle Unicode domain names. However, all of our stack was software
+that was intended to work on the Internet, as well as any other network.
+Standard DNS servers, standard OS and stdlib DNS resolvers, etc. So
+punycoding would be the right way to do it in that network too.
+
+Despite what this RFC says, I don't see what situation would actually
+completely fail on punycoded domains. I guess the spec could mandate trying
+with punycode first, than Unicode, but that seems needless to me. Do you
+have an example of a system/network that fails on punycode?
+
+&gt;<i> Conversely, querying with utf8 domain names fails on Ubuntu 20.04
+</I>&gt;<i> using systemd-resolved [1].
+</I>
+Yep, that's what I meant when I called it a necessity.
+
+&gt;<i> Some languages/libraries such as Python convert utf8 requests to
+</I>&gt;<i> punycode silently before submitting the request to the resolver [2].
+</I>
+That's pretty handy, but it doesn't change my advice. The spec can state
+that all domains must by punycoded for DNS, and maybe your library
+will handle that or not. Even if an unware Pythonista manually punycodes
+the domain, nothing bad will happen when the library tries again.
+
+Cheers,
+makeworld
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003863.html">IDN with Gemini?
+</A></li>
+	<LI>Next message (by thread): <A HREF="003872.html">IDN with Gemini?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3865">[ date ]</a>
+              <a href="thread.html#3865">[ thread ]</a>
+              <a href="subject.html#3865">[ subject ]</a>
+              <a href="author.html#3865">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

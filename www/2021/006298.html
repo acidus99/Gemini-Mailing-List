@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] The updated speculative specification is now up
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20The%20updated%20speculative%20specification%20is%20now%20up&In-Reply-To=%3C20210408023541.GD685%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006285.html">
+   <LINK REL="Next"  HREF="006306.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] The updated speculative specification is now up</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20The%20updated%20speculative%20specification%20is%20now%20up&In-Reply-To=%3C20210408023541.GD685%40brevard.conman.org%3E"
+       TITLE="[spec] The updated speculative specification is now up">sean at conman.org
+       </A><BR>
+    <I>Thu Apr  8 03:35:41 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006285.html">[spec] The updated speculative specification is now up
+</A></li>
+        <LI>Next message (by thread): <A HREF="006306.html">[spec] The updated speculative specification is now up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6298">[ date ]</a>
+              <a href="thread.html#6298">[ thread ]</a>
+              <a href="subject.html#6298">[ subject ]</a>
+              <a href="author.html#6298">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great nervuri once stated:
+&gt;<i> On Mon, 2021-04-05, Sean Conner wrote:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt; The updated protocol (only) specification is now up and can be read at:
+</I>&gt;<i> &gt;
+</I>&gt;<i> &gt;	<A HREF="https://gitlab.com/gemini-specification/protocol/-/blob/master/specification.gmi">https://gitlab.com/gemini-specification/protocol/-/blob/master/specification.gmi</A>
+</I>&gt;<i> 
+</I>&gt;<i> Thank you.  A few thoughts:
+</I>&gt;<i> 
+</I>&gt;<i> I recommend making each change in a separate commit, to make it easier
+</I>&gt;<i> to isolate and comment on.  In a huge diff like this [1] it's easy to
+</I>&gt;<i> miss small, but important changes.
+</I>
+  Further changes should be less massive.  I know this change is large, but
+only because I felt it easier to just rewrite the document from scratch than
+try to adjust the existing one.
+
+&gt;<i> [1] 
+</I>&gt;<i> <A HREF="https://gitlab.com/gemini-specification/protocol/-/commit/0235100151b57d9f5c3384acdacb4ad9986f7ae4?expanded=1&amp;view=inline">https://gitlab.com/gemini-specification/protocol/-/commit/0235100151b57d9f5c3384acdacb4ad9986f7ae4?expanded=1&amp;view=inline</A>
+</I>&gt;<i> 
+</I>&gt;<i> &gt;The use of an existing TLS library SHOULD be used, but because not all
+</I>&gt;<i> &gt;existing TLS libraries support TLS 1.3, then at this time (2021),
+</I>&gt;<i> &gt;implementations MUST support TLS version 1.2 or higher.
+</I>&gt;<i> 
+</I>&gt;<i> You probably meant to start with &quot;An existing TLS library SHOULD be
+</I>&gt;<i> used&quot;, but what does this actually mean?  Existing as of when?  If
+</I>&gt;<i> someone makes a new TLS library, it will also exist.  Also, many
+</I>&gt;<i> libraries are abandoned, so it will never be the case that &quot;all existing
+</I>&gt;<i> TLS libraries&quot; will support TLS 1.3, or even 1.2.
+</I>
+  Okay, I reworked this paragraph:
+
+	At the time of writing (2021), not all existing TLS libraries
+	support TLS 1.3, but a majority (all?) do support TLS 1.2, thus TLS
+	1.2 is the minimum required version.  Implementations MUST support
+	TLS SNI (Server Name Indication), and servers MUST use the TLS
+	close_notify implementation to close the connection.  Clients SHOULD
+	NOT close a connection by default, but MAY in case the content
+	exceeds constraints set by the user.
+
+&gt;<i> I don't think the final Gemini specification should mention libraries at
+</I>&gt;<i> all.  They may be ok as a temporary justification for why TLS 1.2 is in
+</I>&gt;<i> the spec, but let's see if we can get more clarity on this: what exactly
+</I>&gt;<i> are we waiting for before TLS 1.3 becomes the minimum version?  Support
+</I>&gt;<i> in BearSSL (which may never be added)?  Support in X% of clients and Y%
+</I>&gt;<i> of servers?  Hard to say, isn't it?
+</I>
+  One reason was the use of LibreSSL, which (until relatively recently) only
+support TLS 1.2, and there were several large sites using LibreSSL
+(including mine, until I switched to using OpenSSL and libretls).  Also,
+stats [1] show that some 21% of Gemini sites still use TLS 1.2.  Personally,
+I think that once this falls below 5% (or greater than 95% of all sites
+support TLS 1.3) we can revisit this decision.
+
+&gt;<i> &gt;TLS 1.2 will send the server name and the client certificate (if used)
+</I>&gt;<i> &gt;in the clear
+</I>&gt;<i> 
+</I>&gt;<i> TLS 1.3 also sends the server name (SNI) in the clear, unless ECH/ESNI
+</I>&gt;<i> is used.  The issue here is that TLS 1.2 is not compatible with
+</I>&gt;<i> ECH/ESNI.  But even with TLS 1.3, public keys need to be put in DNS in
+</I>&gt;<i> order for ECH/ESNI to work, so it will probably not be a mainstream
+</I>&gt;<i> feature (although it should be encouraged).
+</I>
+  This, I did not know.  I'm not sure what to say about this.
+
+&gt;<i> &gt;A client MAY warn a user of a TLS 1.2 connection is established, and
+</I>&gt;<i> &gt;SHOULD warn the user of a client certifiate will be transmitted via
+</I>&gt;<i> &gt;TLS 1.2.
+</I>&gt;<i> 
+</I>&gt;<i> It's &quot;if&quot; rather than &quot;of&quot;, right?
+</I>
+  Yes, fixed.  Thanks.
+
+  -spc
+
+[1]	<A HREF="gemini://gemini.bortzmeyer.org/software/lupa/stats.gmi">gemini://gemini.bortzmeyer.org/software/lupa/stats.gmi</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006285.html">[spec] The updated speculative specification is now up
+</A></li>
+	<LI>Next message (by thread): <A HREF="006306.html">[spec] The updated speculative specification is now up
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6298">[ date ]</a>
+              <a href="thread.html#6298">[ thread ]</a>
+              <a href="subject.html#6298">[ subject ]</a>
+              <a href="author.html#6298">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

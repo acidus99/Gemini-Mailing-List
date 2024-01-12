@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> gemini+stream://
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bstream%3A//&In-Reply-To=%3C5ae8b513-53f7-53a7-c95a-0ee6230781ae%40lavabit.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002403.html">
+   <LINK REL="Next"  HREF="002406.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>gemini+stream://</H1>
+    <B>James Tomasino</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bstream%3A//&In-Reply-To=%3C5ae8b513-53f7-53a7-c95a-0ee6230781ae%40lavabit.com%3E"
+       TITLE="gemini+stream://">tomasino at lavabit.com
+       </A><BR>
+    <I>Sat Aug 15 00:39:20 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002403.html">Installing CAPCOM on FreeBSD 12.1 (need gusmobile)
+</A></li>
+        <LI>Next message (by thread): <A HREF="002406.html">gemini+stream://
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2404">[ date ]</a>
+              <a href="thread.html#2404">[ thread ]</a>
+              <a href="subject.html#2404">[ subject ]</a>
+              <a href="author.html#2404">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Several of us had a fruitful discussion about gemini streaming over in the IRC channel tonight. For those of you who don't IRC, the full logs of the channel are available from my weechat logs, updated nightly at 0000UTC:
+
+<A HREF="gemini://tilde.black:1965/users/fox/irc/log.txt">gemini://tilde.black:1965/users/fox/irc/log.txt</A>
+
+I strongly believe there's tangible value in having streaming support for the text/gemini mime-type. We have the lovely chatroom proof-of-concept out there already, and a few minutes of brainstorming came up with speech-to-text broadcast radio using Watson's speech-to-text engine. The cool ideas already floating around solderpunk's head in his gemlog about Gemini applications haven't been forgotten either. There's an untapped goldmine here.
+
+That being said, the protocol has a very simple flow defined currently wherein a client makes a request, the server responds, ends the connection, then the client processes it. Changing that fundamental behavior to support streaming is not an insignificant thing to ask of client authors, and some will have no desire to do so at all.
+
+We've talked in the past about possibly serving a different response code to signify to a client that this resource wants to stream, but that was countered with valid reasoning. Tonight I tried making the argument for a text/gemini+stream mime-type instead. Lukee challenged that, and ultimately I have to admit it leaves out one important aspect of serving streaming content: the user should be aware that the resource intends to stream.
+
+Whether we serve a mime-type, response code, or somehow talk solderpunk into content-length information, none of these will be available as information to the user before they select a link. The only way to make it clear to a user that a stream is intended for a link, then, is a protocol indicator.
+
+gemini+<A HREF="stream://">stream://</A>
+
+That's my recommendation for several reasons:
+
+1. We're not changing much in the default gemini protocol. What we are indicating is that the client should not wait for a connection close to begin processing/displaying content. We are also signaling to the user that this resource intends to stream. Everything else about the connection remains otherwise default gemini behavior. Giving it a new protocol name would suggest there's more differences here and possibly open a doorway for other scope creep.
+
+2. By keeping gemini in the protocol name still this tightly couples it with Gemini. This isn't something that is designed to go off and live on its own or be in any way confused as its own system. There was discussion about Titan when this idea came up. I personally still prefer gemini+<A HREF="write://">write://</A> for that extension for the same reasons as above, but as Alex is doing literally all the work on it himself, I defer to him.
+
+3. It's not <A HREF="gemini://">gemini://</A> and therefore it is inherently not a part of the gemini core requirements for clients. I think streaming is fascinating, but I don't want to suggest that it be a requirement to support it like we have for the text/gemini mime-type. It represents a different way of consuming data and presenting it that would turn a weekend project into a two weekend project. Having a supplemental protocol fits better.
+
+4. (sort of related to #3) Having &quot;something&quot; as a standard avoids the vagueness we have right now where people will try whatever makes sense to them in the moment. They'll get it working on their personal client and that's the extent of it. With something defined we all have a common target.
+
+5. It doesn't inherently limit itself to the text/gemini mime-type since the streaming behavior is indicated by the protocol itself. It could also stream plain text, for instance, or even an mp3. The individual mime would have to make sense in a streaming context, but the door is technically open.
+
+6. It is still a single client-initiated request happening in the foreground. We aren't creating background threads of who-know-what running services. We're getting an ongoing document in real-time, that's all.
+
+I believe this answers all the concerns we've had voiced before about streaming. It allows for an optional extension of gemini that explicitly allows for a persistent streaming connection without breaking anything natural or inherent in the core protocol. But please chime in and correct me if I've missed something important.
+
+This turned into quite the post! Yeesh
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002403.html">Installing CAPCOM on FreeBSD 12.1 (need gusmobile)
+</A></li>
+	<LI>Next message (by thread): <A HREF="002406.html">gemini+stream://
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2404">[ date ]</a>
+              <a href="thread.html#2404">[ thread ]</a>
+              <a href="subject.html#2404">[ subject ]</a>
+              <a href="author.html#2404">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

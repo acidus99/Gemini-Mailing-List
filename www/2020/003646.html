@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC-CHANGE] Mandatory scheme in request and link URLs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Mandatory%20scheme%20in%20request%20and%20link%20URLs&In-Reply-To=%3CC7FYSG7UY1V1.37JQFPTNE82MG%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003769.html">
+   <LINK REL="Next"  HREF="003652.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC-CHANGE] Mandatory scheme in request and link URLs</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Mandatory%20scheme%20in%20request%20and%20link%20URLs&In-Reply-To=%3CC7FYSG7UY1V1.37JQFPTNE82MG%40stilgar%3E"
+       TITLE="[SPEC-CHANGE] Mandatory scheme in request and link URLs">solderpunk at posteo.net
+       </A><BR>
+    <I>Sun Nov 29 18:38:21 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003769.html">CGI and client certificate, or do we need a CGI spec
+</A></li>
+        <LI>Next message (by thread): <A HREF="003652.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3646">[ date ]</a>
+              <a href="thread.html#3646">[ thread ]</a>
+              <a href="subject.html#3646">[ subject ]</a>
+              <a href="author.html#3646">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Greetings Geminauts!
+
+As per recent mailing list discovery, I've made a very small change to
+the specification.  Previously, Gemini requests and links in text/gemini
+documents could both omit the scheme, and servers/clients were expected
+to add an implicit scheme of &quot;gemini&quot;.  This has been changed and now
+schemes are mandatory in URLs in both these contexts.
+
+This is a trivial simplification of the spec, reflecting observations
+from multiple people that schemeless URLs are both very rarely used and
+very rarely understood (a leading &quot;//&quot; is required to disambiguate
+schemeless URLs from relative URLs, but nobody knows that because
+informal use of notation like <A HREF="gemini://">gemini://</A> and <A HREF="https://">https://</A> has caused us all
+to mistakenly believe the &quot;//&quot; is associated with the scheme when it is
+actually part of the authority).  The implicit scheme idea dates back to
+very early stages of Gemini when I was unduly concerned with minimising
+protocol overhead relative to Gopher.  As soon as mandatory TLS was
+added, saving the 7 bytes of &quot;gemini:&quot; became of no practical concern
+and getting rid of this idea just eliminates a confusing edge case.
+
+On a related note, the spec was also changed in various places so that
+it does not perpetuate the misunderstanding of URL structure by talking
+about &quot;a scheme of <A HREF="gemini://">gemini://</A>&quot;.
+
+Server authors MAY update their servers to return status 59 (&quot;bad
+request&quot;) upon receipt of a request with no scheme in the URL, but this
+should not be considered an urgent change, as leaving existing behaviour
+of assuming a scheme of gemini in place could be considered a valid
+application of Postel's law.
+
+Client authors MUST update their clients so that if a user manually
+enters a URL without a scheme, a scheme of gemini is included in the
+request (many clients likely do this anyway).  Clients MAY treat
+schemeless links in text/gemini documents as errors, but again assuming
+a scheme of gemini may be considered a valid application of Postel's
+law.
+
+Authors of Gemini content or software which generates Gemini content
+MUST add explicit schemes to any schemeless links.
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003769.html">CGI and client certificate, or do we need a CGI spec
+</A></li>
+	<LI>Next message (by thread): <A HREF="003652.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3646">[ date ]</a>
+              <a href="thread.html#3646">[ thread ]</a>
+              <a href="subject.html#3646">[ subject ]</a>
+              <a href="author.html#3646">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

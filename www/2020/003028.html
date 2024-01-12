@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposal about content-size and hash
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%20about%20content-size%20and%20hash&In-Reply-To=%3Cc826571ccee1b85ecadebb49e83ae371%40tilde.team%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003026.html">
+   <LINK REL="Next"  HREF="003029.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposal about content-size and hash</H1>
+    <B>khuxkm at tilde.team</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%20about%20content-size%20and%20hash&In-Reply-To=%3Cc826571ccee1b85ecadebb49e83ae371%40tilde.team%3E"
+       TITLE="Proposal about content-size and hash">khuxkm at tilde.team
+       </A><BR>
+    <I>Tue Nov  3 15:33:31 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003026.html">Proposal about content-size and hash
+</A></li>
+        <LI>Next message (by thread): <A HREF="003029.html">Proposal about content-size and hash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3028">[ date ]</a>
+              <a href="thread.html#3028">[ thread ]</a>
+              <a href="subject.html#3028">[ subject ]</a>
+              <a href="author.html#3028">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>November 3, 2020 10:22 AM, &quot;Ali Fardan&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">raiz at stellarbound.space</A>&gt; wrote:
+
+&gt;<i> On Tue, 03 Nov 2020 14:07:49 +0000
+</I>&gt;<i> <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">khuxkm at tilde.team</A> wrote:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> I don't really think this is a scenario where there are things that
+</I>&gt;&gt;<i> weren't &quot;intended&quot;; what was intended was to create a protocol,
+</I>&gt;&gt;<i> lighter than the Web and heavier than Gopher, for serving content
+</I>&gt;&gt;<i> securely (at least, from where I sit and what I see). Obviously, the
+</I>&gt;&gt;<i> protocol isn't perfect, so sometimes it needs things added that may
+</I>&gt;&gt;<i> not have been there at the beginning, but fit the intent of the
+</I>&gt;&gt;<i> protocol.
+</I>&gt;<i> 
+</I>&gt;<i> Let me reword... weren't considered from the beginning, here is an
+</I>&gt;<i> example: 5.4.2 from the spec goes into great detail even defining what
+</I>&gt;<i> whitespace is, while 5.5.2 and 5.5.3 aren't defined in the same style
+</I>&gt;<i> as 5.4.2 was defined, there's nothing wrong with that, the protocol
+</I>&gt;<i> evolved and these were added later, though they weren't considered at
+</I>&gt;<i> the very beginning, that's what I meant by weren't &quot;intended&quot;.
+</I>
+I think this is an apples to oranges comparison; 5.5.2 has to do with the text/gemini media type, which, while it is a part of the spec, isn't protocol based (i.e; I could serve text/gemini on a web server if I really wanted to)
+
+&gt;&gt;<i> The spec was created around August of 2019 (at least, the list was
+</I>&gt;&gt;<i> first posted to in mid-August). It's only a year old. If a breaking
+</I>&gt;&gt;<i> change *needs* to be made, it's not too late yet.
+</I>&gt;<i> 
+</I>&gt;<i> If a crucial change were to be made, of course, I'm all for it, but in
+</I>&gt;<i> my opinion, it seems that there is no need for any more features to be
+</I>&gt;<i> added, and the way I see it is moving towards stabilizing the spec
+</I>&gt;<i> without any breaking changes, that's just my opinion.
+</I>
+I agreed with you on that point though; this isn't needed, at least not yet. But if the breaking change needed to be made, like you said, it should be made. This attitude of &quot;oh, we don't need anything else&quot; might convince some people who otherwise would have had good suggestions to back away; after all, if we aren't adding new features, why bother giving your suggestion?
+
+&gt;&gt;<i> That's not really a good comparison. Obviously you wouldn't add
+</I>&gt;&gt;<i> revision control and/or a remote shell to Gemini; that has nothing to
+</I>&gt;&gt;<i> do with serving content. But if the X in &quot;gemini + X&quot; has to do with
+</I>&gt;&gt;<i> content (serving it, etc.), it's worth considering.
+</I>&gt;<i> 
+</I>&gt;<i> I may have went to the extreme with this, but take a look at web land,
+</I>&gt;<i> there's applications written to entirely run on the web, those include
+</I>&gt;<i> mail readers, video and music players (implemented in JS), document
+</I>&gt;<i> editors (Google docs and whatnot), and finally, control panels which
+</I>&gt;<i> serve the purpose of a remote shell, obviously, that's not SSH, but if
+</I>&gt;<i> more and more features get accepted to the protocol, how long until
+</I>&gt;<i> that becomes possible?
+</I>
+Just for the sake of it, I really want to try and make a remote shell in Gemini CGI, just to prove a point. You can do it already, with the protocol as-is; send the command as a query to a CGI endpoint
+
+&gt;<i> Applications can be implemented in Gemini currently, using CGI, these
+</I>&gt;<i> applications don't have to do with serving content, you could implement
+</I>&gt;<i> a calculator, a banner generator, and a git repository viewer, all
+</I>&gt;<i> using what is currently available, I have no argument against
+</I>&gt;<i> implementing such applications using CGI which currently allows
+</I>&gt;<i> extending the protocol without requiring more features to be added.
+</I>
+Okay, but with all due respect, what does that have to do with content size? CGI isn't going to help the fact that the protocol currently has no way to indicate &quot;this is how big the response will be&quot; or &quot;this is the hash of the file&quot;. Those questions, at least in my opinion, need to be answered at the protocol level, unless we're going to make a .well-known for Gemini.
+
+Just my two cents,
+Robert &quot;khuxkm&quot; Miles
+</PRE>
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003026.html">Proposal about content-size and hash
+</A></li>
+	<LI>Next message (by thread): <A HREF="003029.html">Proposal about content-size and hash
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3028">[ date ]</a>
+              <a href="thread.html#3028">[ thread ]</a>
+              <a href="subject.html#3028">[ subject ]</a>
+              <a href="author.html#3028">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

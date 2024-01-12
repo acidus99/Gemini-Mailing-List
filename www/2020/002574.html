@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A proposed scheme for parsing preformatted alt text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C20200907004747.GI15566%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002573.html">
+   <LINK REL="Next"  HREF="002585.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A proposed scheme for parsing preformatted alt text</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C20200907004747.GI15566%40brevard.conman.org%3E"
+       TITLE="A proposed scheme for parsing preformatted alt text">sean at conman.org
+       </A><BR>
+    <I>Mon Sep  7 01:47:47 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002573.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+        <LI>Next message (by thread): <A HREF="002585.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2574">[ date ]</a>
+              <a href="thread.html#2574">[ thread ]</a>
+              <a href="subject.html#2574">[ subject ]</a>
+              <a href="author.html#2574">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Luke Emmet once stated:
+&gt;<i> Hi All
+</I>&gt;<i> 
+</I>&gt;<i> We had an interesting discussion on the #Gemini IRC channel earlier 
+</I>&gt;<i> today about a generalised scheme for parsing the alt text on 
+</I>&gt;<i> preformatted regions, e.g.
+</I>&gt;<i> 
+</I>&gt;<i> ```this is the alt text, not normally displayed to the end user
+</I>&gt;<i> the preformatted content
+</I>&gt;<i> ```
+</I>&gt;<i> 
+</I>&gt;<i> It was a collective discussion, but I've written up some of the key 
+</I>&gt;<i> points in a post here:
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="gemini://gemini.marmaladefoo.com/blog/7-Sep-2020_Parsing_preformatted_alt_text.gmi">gemini://gemini.marmaladefoo.com/blog/7-Sep-2020_Parsing_preformatted_alt_text.gmi</A>
+</I>&gt;<i> 
+</I>&gt;<i> Essentially the key design considerations are as follows:
+</I>&gt;<i> 
+</I>&gt;<i> 1. By default the whole alt text can be used as a label (current behaviour)
+</I>&gt;<i> 2. Use CSS style syntax for the remainder, a familiar and low ritual syntax
+</I>
+  I read the article linked, and I think a better format would be:
+
+``` mumble mumble label text mumble; attribute1=value1; attribute2=value2
+
+  Skip the CSS rules since they aren't used in Gemini, but the attributes
+for MIME *are* used, and those use the format I've shown above.  If you can
+parse MIME types, you can reuse *that* code to parse attributes.
+
+```here is a table in CSV; content-type=text/csv; lang=en_US;
+
+  The format for tables is *horrible* (at least in my opinion).  The format
+I use to generate tables (ultimately in HTML) is the following:
+
+*header1	header2	header3	header4
+**footer1	footer2	footer3	footer4
+row-11	row-12	row-13	row-14
+row-21	row-22	row-23	row-24
+
+  Basically, it's a TAB-delimeted text, so there's no worry about escaping
+commas or dealing with quoted strings or any such nonsense.  I know, tabs
+are horrible, don't ever use them, etc. etc. but it's *way* easier to deal
+with tabs than just about any other character (short of the field separator
+control characters).
+
+  So your table example:
+
+```Here is a table; content-type=text/tsv; lang=en
+*+	1	2	3
+1	2	3	4
+2	3	4	5
+3	4	5	6
+```
+
+  (Yeah, way eaiser to type than '|' between each field)
+
+&gt;<i> 3. Don't prescribe the attributes, allow practice to suggest them
+</I>&gt;<i> 4. Be backwards compatible and friendly to screen readers etc.
+</I>&gt;<i> 
+</I>&gt;<i> two initial attributes seem to have obvious initial utility and could be 
+</I>&gt;<i> used to effectively label content in a practical way:
+</I>&gt;<i> 
+</I>&gt;<i> content-type
+</I>&gt;<i> lang
+</I>
+  Just my two zorkmids worth.  I don't really have a horse in this race, as
+I don't really care for the current gemini text format anyway, and this is
+adding complexity to a simple format, but that is solerpunk's call, not
+mine.
+
+  -spc
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002573.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+	<LI>Next message (by thread): <A HREF="002585.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2574">[ date ]</a>
+              <a href="thread.html#2574">[ thread ]</a>
+              <a href="subject.html#2574">[ subject ]</a>
+              <a href="author.html#2574">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC-CHANGE] Mandatory scheme in request and link URLs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Mandatory%20scheme%20in%20request%20and%20link%20URLs&In-Reply-To=%3C20201130100723.GE24194%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003676.html">
+   <LINK REL="Next"  HREF="003679.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC-CHANGE] Mandatory scheme in request and link URLs</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Mandatory%20scheme%20in%20request%20and%20link%20URLs&In-Reply-To=%3C20201130100723.GE24194%40brevard.conman.org%3E"
+       TITLE="[SPEC-CHANGE] Mandatory scheme in request and link URLs">sean at conman.org
+       </A><BR>
+    <I>Mon Nov 30 10:07:23 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003676.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003679.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3677">[ date ]</a>
+              <a href="thread.html#3677">[ thread ]</a>
+              <a href="subject.html#3677">[ subject ]</a>
+              <a href="author.html#3677">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Bj&#246;rn W&#228;rmedal once stated:
+&gt;<i> On the topic of explicit scheme in gemtext links I have one opinion
+</I>&gt;<i> and one question.
+</I>&gt;<i> 
+</I>&gt;<i> Opinion: when cross-hosting between the web and geminispace I think
+</I>&gt;<i> the publisher can reasonably be expected to run a search-replace. If I
+</I>&gt;<i> host on both <A HREF="https://tilde.team/~ew0k/">https://tilde.team/~ew0k/</A> and <A HREF="gemini://tilde.team/~ew0k/">gemini://tilde.team/~ew0k/</A>
+</I>&gt;<i> I can easily make sure to replace that particular line in links. I see
+</I>&gt;<i> that there may be an issue if I link to someone else who also
+</I>&gt;<i> cross-posts, though... I'm willing to admit that the scheme should NOT
+</I>&gt;<i> be required in gemtext links.
+</I>&gt;<i> 
+</I>&gt;<i> Question: How does this work with relative links in gemtext documents?
+</I>
+  Luke Emmet mentioned this, but I think it got lost.  In text/gemini, the
+following are all legal links:
+
+=&gt; <A HREF="gemini://example.net/path/foo.gemini">gemini://example.net/path/foo.gemini</A> Absolute URL - fully specified
+=&gt; //example.net/path/foo.gemini        relative URL - no scheme
+=&gt; /path/foo.gemini                     relative URL - no host
+=&gt; foo.gemini                           relative URL - no path
+=&gt; ../path/foo.gemini                   relative URL - relative
+
+  It is up to the client to resolve these, using rules specified in RFC-3986
+section 5.2.
+
+  What Solderpunk just changed was the request *TO* a Gemini server.  It
+used to be the following two forms were allowed when making a request to a
+Gemini server:
+
+<A HREF="gemini://example.net/path/foo.gemini">gemini://example.net/path/foo.gemini</A>
+//example.net/path/foo.gemini
+
+  This was confusing, and so the schemeless format is no longer allowed when
+making a request to a Gemini server.  The only form that is now allowed when
+making a request to a Gemini server is:
+
+<A HREF="gemini://example.net/path/foo.gemini">gemini://example.net/path/foo.gemini</A>
+
+  -spc
+
+  
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003676.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003679.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3677">[ date ]</a>
+              <a href="thread.html#3677">[ thread ]</a>
+              <a href="subject.html#3677">[ subject ]</a>
+              <a href="author.html#3677">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

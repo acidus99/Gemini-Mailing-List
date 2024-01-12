@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Unicode vs. the World
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3C87sg83uj9g.fsf%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004118.html">
+   <LINK REL="Next"  HREF="004126.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Unicode vs. the World</H1>
+    <B>Gary Johnson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3C87sg83uj9g.fsf%40disroot.org%3E"
+       TITLE="Unicode vs. the World">lambdatronic at disroot.org
+       </A><BR>
+    <I>Fri Dec 18 17:16:43 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004118.html">Unicode vs. the World
+</A></li>
+        <LI>Next message (by thread): <A HREF="004126.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4125">[ date ]</a>
+              <a href="thread.html#4125">[ thread ]</a>
+              <a href="subject.html#4125">[ subject ]</a>
+              <a href="author.html#4125">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Katarina Eriksson &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gmym at coopdot.com</A>&gt; writes:
+&gt;<i>
+</I>&gt;<i> Anyway, the request reaches the server. &quot;%20&quot; become space and &quot;%2b&quot; become
+</I>&gt;<i> plus. I see no reason why it would be hard to also convert
+</I>&gt;<i> &quot;%F0%9F%90%87&quot; into bytes, so I will assume it isn't and wait for server
+</I>&gt;<i> software programmers to tell me how wrong I am.
+</I>&gt;<i>
+</I>&gt;<i> So now we have a string of bytes that we can use to fetch the bunny file.
+</I>&gt;<i> Wait. What happened with the case where the bunny isn't %-encoded? Why
+</I>&gt;<i> can't servers just blindly accept non-ASCII bytes as is? Is it a library
+</I>&gt;<i> thing? Anyway, I really should test this in a bunch of languages but I'm
+</I>&gt;<i> writing this on my phone on my way to work, so instead I present you this
+</I>&gt;<i> pseudo code:
+</I>&gt;<i>
+</I>&gt;<i> *ELIDED TEXT HERE*
+</I>&gt;<i>
+</I>&gt;<i> If these 3 lines are all true for the server software, I see no reason to
+</I>&gt;<i> %-encode those non-ASCII bytes in the client or anywhere else. Surely I
+</I>&gt;<i> have missed something obvious somewhere. Can anyone help me?
+</I>
+The Space Age server uses java.net.URI to parse incoming URI strings
+into their component parts. It can accept URIs with unencoded UTF-8
+path, query, and fragment parts (except that spaces must be
+percent-encoded as %20). Unicode is not allowed in the hostname part.
+
+One more data point for you,
+  Gary
+
+-- 
+GPG Key ID: 7BC158ED
+Use `gpg --search-keys lambdatronic' to find me
+Protect yourself from surveillance: <A HREF="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</A>
+=======================================================================
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+Why is HTML email a security nightmare? See <A HREF="https://useplaintext.email/">https://useplaintext.email/</A>
+
+Please avoid sending me MS-Office attachments.
+See <A HREF="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</A>
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004118.html">Unicode vs. the World
+</A></li>
+	<LI>Next message (by thread): <A HREF="004126.html">Unicode vs. the World
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4125">[ date ]</a>
+              <a href="thread.html#4125">[ thread ]</a>
+              <a href="subject.html#4125">[ subject ]</a>
+              <a href="author.html#4125">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

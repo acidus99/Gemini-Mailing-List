@@ -1,0 +1,258 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Possibly silly text/gemini spec suggestion: Frames
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Possibly%20silly%20text/gemini%20spec%20suggestion%3A%20Frames&In-Reply-To=%3CFSe0LlbQ5scjnVmz-Sd96XvuKMUx4t2LB-lLY9GWGdcieIMaKnykEA6D113Ciqa0Fipj_EzSagwSf07GOC3_zauejLy2YdDLmDTGyF4kDA8%3D%40protonmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001137.html">
+   <LINK REL="Next"  HREF="001205.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Possibly silly text/gemini spec suggestion: Frames</H1>
+    <B>colecmac at protonmail.com</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Possibly%20silly%20text/gemini%20spec%20suggestion%3A%20Frames&In-Reply-To=%3CFSe0LlbQ5scjnVmz-Sd96XvuKMUx4t2LB-lLY9GWGdcieIMaKnykEA6D113Ciqa0Fipj_EzSagwSf07GOC3_zauejLy2YdDLmDTGyF4kDA8%3D%40protonmail.com%3E"
+       TITLE="Possibly silly text/gemini spec suggestion: Frames">colecmac at protonmail.com
+       </A><BR>
+    <I>Fri May 29 15:34:52 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001137.html">Possibly silly text/gemini spec suggestion: Frames
+</A></li>
+        <LI>Next message (by thread): <A HREF="001205.html">Possibly silly text/gemini spec suggestion: Frames
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1164">[ date ]</a>
+              <a href="thread.html#1164">[ thread ]</a>
+              <a href="subject.html#1164">[ subject ]</a>
+              <a href="author.html#1164">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Couldn't nice clients do this already, just using the heading and
+preformatted blocks? That keeps thing simple but still allow for this
+kind of functionality. I'm picturing something like what Wikipedia
+looks like on mobile.
+
+makeworld
+
+&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208; Original Message &#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;
+On Thursday, May 28, 2020 9:33 PM, InvisibleUp &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">invis at park-city.club</A>&gt; wrote:
+
+&gt;<i> I had an idea for a new line type for the text/gemini document type.I'm
+</I>&gt;<i> not sure how attached I am to it, or how well it would be received,but I
+</I>&gt;<i> figure it would at least be worth mentioning here.
+</I>&gt;<i>
+</I>&gt;<i> &quot;Frames&quot; are a way to create collapsible &quot;sections&quot; of a Gemini
+</I>&gt;<i> document. In graphical browsers I imagine these would be arranged
+</I>&gt;<i> horizontally, but they would be perfectly readable vertically as well.
+</I>&gt;<i>
+</I>&gt;<i> Proposed syntax:
+</I>&gt;<i> ||| denotes the start or end of a frame
+</I>&gt;<i> |&#160;&#160; (or any non-'|' characters after the first '|') denotes a new frame
+</I>&gt;<i> section
+</I>&gt;<i> --- denotes a vertical/same section division in a frame section
+</I>&gt;<i>
+</I>&gt;<i> A very good example of this would be a navigation bar. For example,
+</I>&gt;<i>
+</I>&gt;<i> Page Title
+</I>&gt;<i>
+</I>&gt;<i> ===========
+</I>&gt;<i>
+</I>&gt;<i> |||||||||||||||||
+</I>&gt;<i>
+</I>&gt;<i> =&gt; ../ Back
+</I>&gt;<i> =&gt; page1/ Page 1
+</I>&gt;<i> =&gt; page2/ Page 2
+</I>&gt;<i> =&gt; page3/ Page 3
+</I>&gt;<i>
+</I>&gt;<i> | | | | | | | | |
+</I>&gt;<i>
+</I>&gt;<i> Article Title
+</I>&gt;<i>
+</I>&gt;<i> --------------
+</I>&gt;<i>
+</I>&gt;<i> 2020-05-28
+</I>&gt;<i>
+</I>&gt;<i> -----------
+</I>&gt;<i>
+</I>&gt;<i> Article contents
+</I>&gt;<i> ...
+</I>&gt;<i>
+</I>&gt;<i> |||||||||||||||||
+</I>&gt;<i> Footer text
+</I>&gt;<i>
+</I>&gt;<i> This is perfectly readable on a dumb terminal display, but on a TUI/GUI
+</I>&gt;<i> browserit may look something like this:
+</I>&gt;<i>
+</I>&gt;<i> Page Title
+</I>&gt;<i>
+</I>&gt;<i> ===========
+</I>&gt;<i>
+</I>&gt;<i> -----------------------------
+</I>&gt;<i> &#160;&#160;&#160; =&gt; Back&#160;&#160; | ## Article Title
+</I>&gt;<i> =&gt; Page 1 | 2020-05-28
+</I>&gt;<i> =&gt; Page 2 |------------------
+</I>&gt;<i> =&gt; Page 3 | Article contents
+</I>&gt;<i> | ...
+</I>&gt;<i> &#160;&#160;&#160; -----------------------------
+</I>&gt;<i> &#160;&#160;&#160; Footer text
+</I>&gt;<i>
+</I>&gt;<i> With this example, it may be a better idea to place the links at the
+</I>&gt;<i> endof the document, resulting in a right sidebar. This keeps the
+</I>&gt;<i> navigation fromencroaching onto the document contents in a vertical
+</I>&gt;<i> view. Left sidebars should
+</I>&gt;<i> be short, sweet, and simple.
+</I>&gt;<i>
+</I>&gt;<i> The user should be able to collapse the navigation component, if they
+</I>&gt;<i> choose.They may also choose to display it vertically. Perhaps frame
+</I>&gt;<i> sections consistingsolely of links could also display the links in a
+</I>&gt;<i> line, at the client'sdiscretion.
+</I>&gt;<i>
+</I>&gt;<i> This could also be used inline in a standard document, for figures w/
+</I>&gt;<i> captiontext, poetry next to ASCII art w/ alt-text, etc.
+</I>&gt;<i>
+</I>&gt;<i> Note that you cannot nest a frame within another frame. This vastly
+</I>&gt;<i> simplifiesthe syntax and implementation, as well as discouraging future
+</I>&gt;<i> extensions.
+</I>&gt;<i>
+</I>&gt;<i> Another idea for layout:
+</I>&gt;<i>
+</I>&gt;<i> &#160;&#160;&#160; |||
+</I>&gt;<i> &#160;&#160;&#160; # Article Title
+</I>&gt;<i> &#160;&#160;&#160; 2020-05-28
+</I>&gt;<i> &#160;&#160;&#160; |
+</I>&gt;<i> &#160;&#160;&#160; =&gt; ../ All
+</I>&gt;<i> =&gt; next/ Next
+</I>&gt;<i> =&gt; prev/ Previous
+</I>&gt;<i> |||
+</I>&gt;<i> Article contents
+</I>&gt;<i> ...
+</I>&gt;<i>
+</I>&gt;<i> which could be displayed as
+</I>&gt;<i>
+</I>&gt;<i> Article Title | =&gt; All
+</I>&gt;<i>
+</I>&gt;<i> =======================
+</I>&gt;<i>
+</I>&gt;<i> 2020-05-28 &#160; &#160;&#160; | =&gt; Next
+</I>&gt;<i> | =&gt; Previous
+</I>&gt;<i> ------------------------------
+</I>&gt;<i> &#160;&#160;&#160; Article contents
+</I>&gt;<i> &#160;&#160;&#160; ...
+</I>&gt;<i>
+</I>&gt;<i> I kinda like it, but I can definitely see the arguments against it. Let
+</I>&gt;<i> me know what you think of this.
+</I>&gt;<i>
+</I>&gt;<i> -- InvisibleUp <A HREF="gemini://park-city.club/~invis">gemini://park-city.club/~invis</A>
+</I>&gt;<i>
+</I>&gt;<i> -- Email domain proudly hosted <A HREF="athttps://migadu.com">athttps://migadu.com</A>
+</I>
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001137.html">Possibly silly text/gemini spec suggestion: Frames
+</A></li>
+	<LI>Next message (by thread): <A HREF="001205.html">Possibly silly text/gemini spec suggestion: Frames
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1164">[ date ]</a>
+              <a href="thread.html#1164">[ thread ]</a>
+              <a href="subject.html#1164">[ subject ]</a>
+              <a href="author.html#1164">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

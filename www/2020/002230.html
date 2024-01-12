@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CGI
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI&In-Reply-To=%3CCABuFWiJhAObKW9hsVqvboC_0Mau3Z2f3ttEAHOPVWObZy3dDiA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002263.html">
+   <LINK REL="Next"  HREF="002235.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CGI</H1>
+    <B>Paul Boyd</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI&In-Reply-To=%3CCABuFWiJhAObKW9hsVqvboC_0Mau3Z2f3ttEAHOPVWObZy3dDiA%40mail.gmail.com%3E"
+       TITLE="CGI">boyd.paul2 at gmail.com
+       </A><BR>
+    <I>Fri Jul 17 13:21:35 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002263.html">Question About Link Format
+</A></li>
+        <LI>Next message (by thread): <A HREF="002235.html">CGI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2230">[ date ]</a>
+              <a href="thread.html#2230">[ thread ]</a>
+              <a href="subject.html#2230">[ subject ]</a>
+              <a href="author.html#2230">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello all,
+
+I was excited to learn about Gemini recently. I ported some web content of
+mine over (<A HREF="gemini://pboyd.io">gemini://pboyd.io</A>), and I've been enjoying looking through
+what's out there.
+
+The Gemini sites (err.. capsules?) remind me of the web in another era, so
+I thought it would be fun to re-create some &quot;classic&quot; CGI scripts. I
+started with a Guestbook (<A HREF="gemini://pboyd.io/guestbook/,">gemini://pboyd.io/guestbook/,</A> source: <A HREF="gemini://">gemini://</A>
+pboyd.io/guestbook/guestbook.pl). I got it working, but it felt like I was
+in the weeds from the very start.
+
+The first problem I hit is that I'm limited to one input at a time. I
+wanted a few inputs (name, location, comment). Of course, plenty of command
+line programs work fine with a single argument list, so, in theory, that
+should be enough. But flags or comma-separated input wasn't what I was
+going for. Successive input prompts didn't seem quite right either.
+
+I ended up with a &quot;form&quot; made out of links to input URLs. The data is
+collected in a temp file named with a random session ID, and there's a
+final &quot;submit&quot; link that updates the generated guestbook (in true retro CGI
+fashion it probably fails horribly when two people submit at once).
+
+This works, but like I said, kinda in the weeds. Is there a better way to
+get multiple inputs that I missed?
+
+The other problem I ran into is that dynamic responses were cached in my
+client. In my case, the user would submit the form and be presented with an
+error page. They'd fix the error and resubmit only to get the same error
+again because of the client cache.
+
+I worked around that by making sure each generated link is unique (by a
+counter). Conditional GET behavior is probably too complicated, but it
+would be nice if there were a &quot;Pragma: no-cache&quot; type flag on dynamic pages.
+
+Anyway, am I making this harder than it needs to be? Am I just trying to do
+something that shouldn't be done on Gemini?
+
+Cheers,
+Paul
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200717/c6a609a0/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200717/c6a609a0/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002263.html">Question About Link Format
+</A></li>
+	<LI>Next message (by thread): <A HREF="002235.html">CGI
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2230">[ date ]</a>
+              <a href="thread.html#2230">[ thread ]</a>
+              <a href="subject.html#2230">[ subject ]</a>
+              <a href="author.html#2230">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

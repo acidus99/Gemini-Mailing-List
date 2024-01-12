@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Status Codes Question (Forbidden/Internal Server Error)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Status%20Codes%20Question%20%28Forbidden/Internal%20Server%20Error%29&In-Reply-To=%3C20200716092446.GH19717%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002215.html">
+   <LINK REL="Next"  HREF="002217.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Status Codes Question (Forbidden/Internal Server Error)</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Status%20Codes%20Question%20%28Forbidden/Internal%20Server%20Error%29&In-Reply-To=%3C20200716092446.GH19717%40brevard.conman.org%3E"
+       TITLE="Status Codes Question (Forbidden/Internal Server Error)">sean at conman.org
+       </A><BR>
+    <I>Thu Jul 16 10:24:47 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002215.html">Status Codes Question (Forbidden/Internal Server Error)
+</A></li>
+        <LI>Next message (by thread): <A HREF="002217.html">The Transjovian Vault: moving my Wikipedia Proxy to a separate domain
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2216">[ date ]</a>
+              <a href="thread.html#2216">[ thread ]</a>
+              <a href="subject.html#2216">[ subject ]</a>
+              <a href="author.html#2216">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Caranatar once stated:
+&gt;<i> Hi folks, 
+</I>
+  Howdy.
+
+&gt;<i> I have a pretty simple question that I wasn't able to find anywhere on the
+</I>&gt;<i> mailing list or elsewhere:
+</I>&gt;<i> 
+</I>&gt;<i> Are there equivalents to the forbidden and internal server error status
+</I>&gt;<i> codes in HTTP? Alternatively, what extant status codes would y'all
+</I>&gt;<i> recommend using to indicate those errors?
+</I>
+  It's there, but probably under a different subject line.  There's this
+message I sent last year:
+
+	<A HREF="https://lists.orbitalfox.eu/archives/gemini/2019/000107.html">https://lists.orbitalfox.eu/archives/gemini/2019/000107.html</A>
+
+It's for running web-based CGI scripts under Gemini [1].  Here's the table I
+presented:
+
+        HTTP status     Gemini status
+        ---------       --------
+        200-299         20
+        301             31
+        300-399         30
+        403             60
+        404             51
+        405             59
+        400-499         50
+        500-599         40
+        000-999         50
+
+&gt;<i> It's mostly for debugging sake, but I found myself wanting a way to say
+</I>&gt;<i> &quot;oops! File permissions are screwed up!&quot; or &quot;oops! I wrote some bad code
+</I>&gt;<i> and there's an unexpected error somewhere&quot;. Right now I use 51 for
+</I>&gt;<i> permissions and 59 for a catch all error, but I feel like they're
+</I>&gt;<i> semantically different enough that it irks me to use them.
+</I>
+  What I do is use the most generic status code I can, and log (via syslog()
+but use whatever mechanism works for you) the actual error to prevent
+information from leaking out to a Gemini client.
+
+  -spc
+
+[1]	GLV-1.12556 [2] can run web-based SCGI/CGI scripts, and I had to set
+	up a mapping of status values.
+
+[2]	<A HREF="https://github.com/spc476/GLV-1.12556">https://github.com/spc476/GLV-1.12556</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002215.html">Status Codes Question (Forbidden/Internal Server Error)
+</A></li>
+	<LI>Next message (by thread): <A HREF="002217.html">The Transjovian Vault: moving my Wikipedia Proxy to a separate domain
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2216">[ date ]</a>
+              <a href="thread.html#2216">[ thread ]</a>
+              <a href="subject.html#2216">[ subject ]</a>
+              <a href="author.html#2216">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

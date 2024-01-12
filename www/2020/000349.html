@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C8517d9cd-e722-4301-aa7a-304412bdb18f%40www.fastmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000348.html">
+   <LINK REL="Next"  HREF="000353.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>Aaron Janse</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C8517d9cd-e722-4301-aa7a-304412bdb18f%40www.fastmail.com%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">aaron at ajanse.me
+       </A><BR>
+    <I>Fri Jan 17 17:59:18 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000348.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000353.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#349">[ date ]</a>
+              <a href="thread.html#349">[ thread ]</a>
+              <a href="subject.html#349">[ subject ]</a>
+              <a href="author.html#349">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Lines consisting of only and exactly three back ticks (```) are preformatted
+</I>&gt;<i> toggle lines.
+</I>
+Hmm, this might confuse some people who are used to markdown's allowance of
+specifying the language:
+
+```python
+print(&quot;Hello!&quot;)
+```
+
+Plus, if we *allow* people to specify the language, maybe some clients could
+implement syntax highlighting. Would that be too complex?
+
+If not, what would happen if people add text to the closing three ticks?
+
+&gt;<i> Lines longer than the client's viewport must not be wrapped, leading or
+</I>&gt;<i> trailing whitespace must not be removed, etc.  Handling of lines longer than
+</I>&gt;<i> the viewport is client-specific
+</I>
+These two sentences contradict each other, I think. Maybe state that clients
+MUST NOT remove trailing space, etc, but state that clients SHOULD allow
+readers to copy the text such that it can be pasted directly into a text editor
+then run (this would allow the 100-line python client to just print the lines;
+terminals should un-soft-wrap lines longer than the viewport when copied to the
+clipboard).
+
+&gt;<i> They should be presented to the user in a client-specific &quot;pleasing manner&quot;
+</I>&gt;<i> Variable width fonts may be used.
+</I>
+I *love* that this is part of the spec!
+
+&gt;<i> 6. UNORDERED LIST ITEMS
+</I>
+Are minus signs allowed for unordered list items? How about plus signs etc?
+I'm somewhat in favor of limiting bullets to astrisks and minuses.
+
+Can top-level bullets begin with a space? What about nested bullet points?
+
+&gt;<i> 7. ORDERED LIST ITEMS
+</I>
+I'd further specify what is/isn't allowed here. For example:
+- Some people may try `1)` instead of `1.`. I personally think that spec should
+  say that only the latter is allowed but clients may choose to *render*
+  ordered lists as the former
+- What about nested ordered bullet points. Wouldn't they start with whitespace?
+- Markdown allows lists to be auto-numbered. For example, the nested bullet
+  points would be re-numbered from 1 to 5 in markdown:
+  1. one
+  1. two
+  5. three
+  2. four
+  1. five
+- What about lettered lists (A-Z)? I think these would be cool to have but I
+  doubt they'd be worth the complexity. I'd be explicit in the spec
+- What about roman numerals? I don't think these should be allowed
+
+While we could leave some stuff un-specified and see how things play out, I
+think there could be some value in limiting authors for the sake of preventing
+a scenario where making a client is so complex that very few nice clients exist
+(as we see in the world of web browsers).
+
+&gt;<i> The lines of a text/gemini file come in 8 different types.
+</I>
+Hmm, I only saw 7 different types specified. I also recommend you specify that
+people may use greater-than-symbol quotes, which may be nested. I'd recommend
+that authors MUST NOT unnecessarily hard-wrap their quotes, suggesting that
+advanced clients MAY add a visual greater-than symbol to the beginning of each
+wrapped line.
+
+Example:
+
+&gt;<i> hello this is wider than the viewport
+</I>
+Displayed by advanced clients as:
+
+&gt;<i> hello this is
+</I>&gt;<i> wider that the
+</I>&gt;<i> viewport
+</I>
+---
+
+I asked a ton of questions, but I still like the direction we're going. I'd
+just like to bring up one more thing:
+
+What about Gemini proxies of comment thread sites, such as hacker news (*waves
+to Michael Lazar's awesome HN Gopher proxy*). I think we should take those
+into consideration.
+
+If we wanted to introduce new syntax (which is a bit crazy, but fun), we could
+use pipes like greater-than signs. We could use the exact same code for this
+that we would use for fancy-wrapping greater-than-sign quotes.
+
+For example, the source code would be:
+
+|<i> # John
+</I>|<i> this is a comment wider than the very narrow viewport
+</I>|<i>
+</I>|<i> | # Joe
+</I>|<i> | and this is a sub comment tthat is very very very long!
+</I>|<i> |
+</I>|<i> | | # You
+</I>|<i> | | and this is a sub sub comment!
+</I>|<i>
+</I>|<i> | # Bob
+</I>|<i> | and this is a sub comment
+</I>
+The output on a narrow viewport would be:
+
+|<i> # John
+</I>|<i> this is a comment wider
+</I>|<i> than the very narrow
+</I>|<i> viewport
+</I>|<i>
+</I>|<i> | # Joe
+</I>|<i> | and this is a sub
+</I>|<i> | comment that is very
+</I>|<i> | very very long!
+</I>|<i> |
+</I>|<i> | | # You
+</I>|<i> | | and this is a sub
+</I>|<i> | | sub comment!
+</I>|<i>
+</I>|<i> | # Bob
+</I>|<i> | and this is a sub
+</I>|<i> | comment
+</I>
+I know it's super crazy, but it sounds simple to implement. I was considering
+mentioning it in its own thread, but I think this is the most relevant time
+to bring it up.
+
+Cheers!
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000348.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000353.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#349">[ date ]</a>
+              <a href="thread.html#349">[ thread ]</a>
+              <a href="subject.html#349">[ subject ]</a>
+              <a href="author.html#349">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

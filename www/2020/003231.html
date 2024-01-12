@@ -1,0 +1,121 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Cache duration and response body size proposals
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cache%20duration%20and%20response%20body%20size%20proposals&In-Reply-To=%3Cc80ad8bd426b8b2338913977815bc261%40tilde.team%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003230.html">
+   <LINK REL="Next"  HREF="003237.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Cache duration and response body size proposals</H1>
+    <B>Robert &quot;khuxkm&quot; Miles</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Cache%20duration%20and%20response%20body%20size%20proposals&In-Reply-To=%3Cc80ad8bd426b8b2338913977815bc261%40tilde.team%3E"
+       TITLE="Cache duration and response body size proposals">khuxkm at tilde.team
+       </A><BR>
+    <I>Tue Nov 10 15:36:01 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003230.html">Cache duration and response body size proposals
+</A></li>
+        <LI>Next message (by thread): <A HREF="003237.html">Cache duration and response body size proposals
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3231">[ date ]</a>
+              <a href="thread.html#3231">[ thread ]</a>
+              <a href="subject.html#3231">[ subject ]</a>
+              <a href="author.html#3231">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>November 10, 2020 10:29 AM, &quot;Philip Linde&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">linde.philip at gmail.com</A>&gt; wrote:
+
+&gt;<i> On Tue, 10 Nov 2020 15:11:54 +0000
+</I>&gt;<i> &quot;Robert \&quot;khuxkm\&quot; Miles&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">khuxkm at tilde.team</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> I mean, yes, that's the point of close_notify, but what if the connection dies *after* the data is
+</I>&gt;&gt;<i> sent but *before* the close_notify can be sent? Then it turns into an unsolvable two-generals
+</I>&gt;&gt;<i> problem.
+</I>&gt;<i> 
+</I>&gt;<i> Then you don't know that you received the complete data. You can
+</I>&gt;<i> safely apply the same strategy as you would if you *did* know that you
+</I>&gt;<i> didn't receive the complete data. It's only a problem if you make it
+</I>&gt;<i> one.
+</I>&gt;<i> 
+</I>&gt;<i> --
+</I>&gt;<i> Philip
+</I>
+But then this goes back to the whole discussion we had about caching: sure, the overhead of a TLS connection is low, but it's not zero. If I know for a fact that the response I got has as many bytes as I was told I had, then even in the absence of a close_notify, I know for a fact I have the whole response and can be sure in that. (If I get a close_notify while not having as many bytes, I can just assume the server either lied or something else broke, and I can ask my user what to do.)
+
+Just my two cents,
+Robert &quot;khuxkm&quot; Miles
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003230.html">Cache duration and response body size proposals
+</A></li>
+	<LI>Next message (by thread): <A HREF="003237.html">Cache duration and response body size proposals
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3231">[ date ]</a>
+              <a href="thread.html#3231">[ thread ]</a>
+              <a href="subject.html#3231">[ subject ]</a>
+              <a href="author.html#3231">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

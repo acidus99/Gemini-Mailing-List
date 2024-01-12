@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A proposed scheme for parsing preformatted alt text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C5F565F9E.30701%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002574.html">
+   <LINK REL="Next"  HREF="002580.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A proposed scheme for parsing preformatted alt text</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C5F565F9E.30701%40marmaladefoo.com%3E"
+       TITLE="A proposed scheme for parsing preformatted alt text">luke at marmaladefoo.com
+       </A><BR>
+    <I>Mon Sep  7 17:28:14 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002574.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+        <LI>Next message (by thread): <A HREF="002580.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2585">[ date ]</a>
+              <a href="thread.html#2585">[ thread ]</a>
+              <a href="subject.html#2585">[ subject ]</a>
+              <a href="author.html#2585">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+On 07-Sep-2020 01:47, Sean Conner wrote:
+&gt;<i> I read the article linked, and I think a better format would be:
+</I>&gt;<i>
+</I>&gt;<i> ``` mumble mumble label text mumble; attribute1=value1; attribute2=value2
+</I>&gt;<i>
+</I>&gt;<i>    Skip the CSS rules since they aren't used in Gemini, but the attributes
+</I>&gt;<i> for MIME *are* used, and those use the format I've shown above.  If you can
+</I>&gt;<i> parse MIME types, you can reuse *that* code to parse attributes.
+</I>&gt;<i>
+</I>&gt;<i> ```here is a table in CSV; content-type=text/csv; lang=en_US;
+</I>
+That's a possibility. Either formats are simple enough to parse I think.
+
+&gt;<i> The format for tables is *horrible* (at least in my opinion).  The format
+</I>&gt;<i> I use to generate tables (ultimately in HTML) is the following:
+</I>&gt;<i>
+</I>&gt;<i> *header1	header2	header3	header4
+</I>&gt;<i> **footer1	footer2	footer3	footer4
+</I>&gt;<i> row-11	row-12	row-13	row-14
+</I>&gt;<i> row-21	row-22	row-23	row-24
+</I>
+Yes I think people have jumped on the specific example of table parsing 
+I gave. The example is a quote from Bouncepaw's original post, and was 
+to illustrate primarily how the parameters are used in the alt text, not 
+to propose a new format. Maybe that aspect wasn't clear enough.
+
+The particular format for a table I don't endorse - CSV or TSV is more 
+natural and the mime type is already defined.
+
+I'll clarify the example so its clear I'm not proposing a new format for 
+text based tables.
+
+&gt;<i>    So your table example:
+</I>&gt;<i>
+</I>&gt;<i> ```Here is a table; content-type=text/tsv; lang=en
+</I>&gt;<i> *+	1	2	3
+</I>&gt;<i> 1	2	3	4
+</I>&gt;<i> 2	3	4	5
+</I>&gt;<i> 3	4	5	6
+</I>&gt;<i> ```
+</I>&gt;<i>
+</I>&gt;<i>    (Yeah, way eaiser to type than '|' between each field)
+</I>
+Yes I agree, as you illustrate, using TSV or CSV is probably better.
+
+&gt;<i> Just my two zorkmids worth. I don't really have a horse in this race, as
+</I>&gt;<i> I don't really care for the current gemini text format anyway, and this is
+</I>&gt;<i> adding complexity to a simple format, but that is solerpunk's call, not
+</I>&gt;<i> mine.
+</I>
+I'm not proposing this needs to be institutionalised in the spec 
+(although that would be cool).
+
+Rather this is instead what I have in mind is more like a community 
+practice. For example people are sometimes using unicode superscript or 
+square bracket footnotes to indicate a citation marker for links.
+
+Best Wishes
+
+  - Luke
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002574.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+	<LI>Next message (by thread): <A HREF="002580.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2585">[ date ]</a>
+              <a href="thread.html#2585">[ thread ]</a>
+              <a href="subject.html#2585">[ subject ]</a>
+              <a href="author.html#2585">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

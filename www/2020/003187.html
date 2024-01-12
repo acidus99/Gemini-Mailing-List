@@ -1,0 +1,84 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20sizes%2C%20the%20explosion%20of%20responise%20codes%20%28was%20Re%3A%0A%20Caching%20and%20status%20codes%29&In-Reply-To=%3C87mtzqp20e.fsf%40cassilda.carcosa.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003178.html">
+   <LINK REL="Next"  HREF="003133.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)</H1>
+    <B>Jason McBrayer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20sizes%2C%20the%20explosion%20of%20responise%20codes%20%28was%20Re%3A%0A%20Caching%20and%20status%20codes%29&In-Reply-To=%3C87mtzqp20e.fsf%40cassilda.carcosa.net%3E"
+       TITLE="Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)">jmcbray at carcosa.net
+       </A><BR>
+    <I>Mon Nov  9 23:02:41 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003178.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+        <LI>Next message (by thread): <A HREF="003133.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3187">[ date ]</a>
+              <a href="thread.html#3187">[ thread ]</a>
+              <a href="subject.html#3187">[ subject ]</a>
+              <a href="author.html#3187">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>John Cowan &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>&gt; writes:
+
+&gt;<i> I don't understand your reasoning there. What does a server learn by
+</I>&gt;<i> sending a 21 YOU CAN CACHE or 22 YOU SHOULD NOT CACHE response back
+</I>&gt;<i> instead of a plain 20 response? (I'm not a security expert and I know
+</I>&gt;<i> there are loopholes I don't see.)
+</I>
+The server operator gets a decent guess at whether the user has visited
+the page before (within a reasonable caching window), because if you
+sent a 21 YOU CAN CACHE, and they made the request, that means they
+hadn't seen it recently. Combine this with query strings, IP addresses,
+and/or fragment identifiers, and you can identify individual users, even
+users who have refused to set a client certificate when you asked. It's
+a pretty minor information leak, since it can't be used for cross-site
+tracking. But give techbros an inch, and they'll take a mile.
+
+-- 
+Jason McBrayer      | &#8220;Strange is the night where black stars rise,
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">jmcbray at carcosa.net</A> | and strange moons circle through the skies,
+                    | but stranger still is lost Carcosa.&#8221;
+                    | &#8213; Robert W. Chambers,The King in Yellow
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003178.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+	<LI>Next message (by thread): <A HREF="003133.html">Caching and sizes, the explosion of responise codes (was Re: Caching and status codes)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3187">[ date ]</a>
+              <a href="thread.html#3187">[ thread ]</a>
+              <a href="subject.html#3187">[ subject ]</a>
+              <a href="author.html#3187">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

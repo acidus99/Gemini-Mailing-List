@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Removing expiry dates for TOFU
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Removing%20expiry%20dates%20for%20TOFU&In-Reply-To=%3CC3Z069NVF98Q.3VMDOCAM9Z8Q1%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002075.html">
+   <LINK REL="Next"  HREF="002077.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Removing expiry dates for TOFU</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Removing%20expiry%20dates%20for%20TOFU&In-Reply-To=%3CC3Z069NVF98Q.3VMDOCAM9Z8Q1%40stilgar%3E"
+       TITLE="Removing expiry dates for TOFU">solderpunk at posteo.net
+       </A><BR>
+    <I>Sun Jul  5 22:20:11 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002075.html">Removing expiry dates for TOFU
+</A></li>
+        <LI>Next message (by thread): <A HREF="002077.html">Removing expiry dates for TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2076">[ date ]</a>
+              <a href="thread.html#2076">[ thread ]</a>
+              <a href="subject.html#2076">[ subject ]</a>
+              <a href="author.html#2076">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun Jul 5, 2020 at 8:48 PM CEST,  wrote:
+&gt;<i> Looks like it was a bad idea after all haha. I wasn't sure about it,
+</I>&gt;<i> so thanks for showing some issues with it.
+</I>&gt;<i>
+</I>&gt;<i> Maybe this is a better solution, everyone using longer term certs? It
+</I>&gt;<i> still might not be enough though.
+</I>&gt;<i>
+</I>&gt;<i> My thinking behind my original post was that the fewer valid reasons for
+</I>&gt;<i> changing certs the better. If changing certs is very rare, then clients
+</I>&gt;<i> can be more informative to the user, and say with more surety that there
+</I>&gt;<i> is a MITM attack going on. How can we lessen the behaviour of just
+</I>&gt;<i> clicking through any TOFU pop-up?
+</I>
+Well, I think your overall thinking was very much in the right
+direction, you just took it too far. :)
+
+It's basically just a trade-off.  If certificates never, ever expire
+then TOFU is very simple and clients will never have to show scary
+messages under ordinary circumstances when everything is fine, but the
+risk of the private key being stolen or broken (keys which are long
+enough to be safe today will not be decades later) is very high, and if
+it happens, the consequences last forever.  If certificates expire every
+week, it's very hard to steal or crack a key before the corresponding
+cert expires, but TOFU is unworkable without some extra complication on
+top.  The best approach is somewhere in the middle.  The question is:
+where?
+
+On the web, certificate lifetimes are getting shorter and shorter - but
+CAs have a strong financial incentive to be risk averse here, because
+bad publicity around a single, long-lasting erroneously issued cert will
+damage their reputation and hence business, possibly quite hard.  But
+Gemini server admins using self-signed certs don't have that risk at
+all.  Also, on the web, TLS is often protecting credit card details, or
+access to email, or other things people have a strong incentive to
+actively try to steal.  A personal Gemini host serving a gemlog is not
+likely to be the target of serious efforts at compromise, so yet less
+reason to be super cautious about key rotation.  For low-risk
+applications, a five year certificate might be perfectly reasonable.
+
+One could argue that longer lived certs actually help TOFU work, within
+reason.  The longer a cert is in use, the more opportunity you have to
+observe that cert being served to you from multiple different networks
+(at home, at work, at the library, at the airport), which helps build
+up your trust in it: getting MITMed once on a single network might be a
+plausible risk.  Being consistently MITMed every time you visit a host,
+from multiple locations, for years and years, is almost impossible, so
+the longer you see the same cert, the more confident you can become that
+when you blindly accepted the cert the very first time you weren't being
+attacked.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002075.html">Removing expiry dates for TOFU
+</A></li>
+	<LI>Next message (by thread): <A HREF="002077.html">Removing expiry dates for TOFU
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2076">[ date ]</a>
+              <a href="thread.html#2076">[ thread ]</a>
+              <a href="subject.html#2076">[ subject ]</a>
+              <a href="author.html#2076">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

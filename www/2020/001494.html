@@ -1,0 +1,161 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> &quot;Wide load&quot; status code(s)?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%22Wide%20load%22%20status%20code%28s%29%3F&In-Reply-To=%3CE1jiyiu-0001sP-J2%40rmmprod07.runbox%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001487.html">
+   <LINK REL="Next"  HREF="001505.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>&quot;Wide load&quot; status code(s)?</H1>
+    <B>Tadeusz Sosnierz</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%22Wide%20load%22%20status%20code%28s%29%3F&In-Reply-To=%3CE1jiyiu-0001sP-J2%40rmmprod07.runbox%3E"
+       TITLE="&quot;Wide load&quot; status code(s)?">tadeusz at sosnierz.com
+       </A><BR>
+    <I>Wed Jun 10 12:16:48 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001487.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+        <LI>Next message (by thread): <A HREF="001505.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1494">[ date ]</a>
+              <a href="thread.html#1494">[ thread ]</a>
+              <a href="subject.html#1494">[ subject ]</a>
+              <a href="author.html#1494">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+2020-06-10 12:36 GMT+02:00 Natalie Pendragon&lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">natpen at natpen.net</A>&gt;:
+&gt;<i> What I feel less excited about is the specification of a hard-coded
+</I>&gt;<i> $THRESHOLD. It feels like a magic number that's not going to fit all
+</I>&gt;<i> situations well - adding three of them like you brought up at the end
+</I>&gt;<i> improves the situation, but nevertheless still feels like a magic
+</I>&gt;<i> number solution. And depending on how future-proof you want these
+</I>&gt;<i> $THRESHOLDs to be, no matter how good the magic numbers are today, as
+</I>&gt;<i> years pass and internet access/quality across the world changes, for
+</I>&gt;<i> better or worse, the magic numbers will become more and more out of
+</I>&gt;<i> date.
+</I>
+I feel the same way; sounds like no matter what you pick will become the
+&quot;64 kilobytes&quot; of tomorrow's jokes. And ultimately it doesn't allow the
+introduction of a meaningful progress indicator. Is 100MBs a lot? Is it a long wait?
+I don't know, is the upstream server fast? Is my wifi having a good day?
+
+The alternative is tricky to come up without making the response structure arbitrary
+and complex. Here's a take though: anything bigger than a megabyte or ten is realistically
+not going to be text, or anything text-like that can be displayed inline. I can think of images,
+videos, maybe PDFs or just a bunch of encrypted data in the form of whatever.
+I wonder if it'd make sense to have a status code that indicates
+&#8220;mimetype is basically meaningless, it's a big whatever,
+so I'll give you the content length instead&#8220;.
+
+Client could then choose to receive a few more bytes and check a magic byte for something
+it recognizes &#8211; or just prompt the client saying &#8220;that's not exactly something we can display anyway,
+(how) do you want it saved?&#8221;
+
+--
+tadzik
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001487.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+	<LI>Next message (by thread): <A HREF="001505.html">&quot;Wide load&quot; status code(s)?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1494">[ date ]</a>
+              <a href="thread.html#1494">[ thread ]</a>
+              <a href="subject.html#1494">[ subject ]</a>
+              <a href="author.html#1494">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

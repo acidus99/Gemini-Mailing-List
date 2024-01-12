@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] tanelorn.city: a public gemini host for writers
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20tanelorn.city%3A%20a%20public%20gemini%20host%20for%20writers&In-Reply-To=%3C20200612134152.6f35ae6de93195da91f725e4%40matthewgraybosch.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001591.html">
+   <LINK REL="Next"  HREF="001598.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] tanelorn.city: a public gemini host for writers</H1>
+    <B>Matthew Graybosch</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20tanelorn.city%3A%20a%20public%20gemini%20host%20for%20writers&In-Reply-To=%3C20200612134152.6f35ae6de93195da91f725e4%40matthewgraybosch.com%3E"
+       TITLE="[ANN] tanelorn.city: a public gemini host for writers">hello at matthewgraybosch.com
+       </A><BR>
+    <I>Fri Jun 12 18:41:52 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001591.html">[ANN] tanelorn.city: a public gemini host for writers
+</A></li>
+        <LI>Next message (by thread): <A HREF="001598.html">[ANN] tanelorn.city: a public gemini host for writers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1592">[ date ]</a>
+              <a href="thread.html#1592">[ thread ]</a>
+              <a href="subject.html#1592">[ subject ]</a>
+              <a href="author.html#1592">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Fri, 12 Jun 2020 16:43:25 +0000
+solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at SDF.ORG</A>&gt; wrote:
+
+&gt;<i> On Fri, Jun 12, 2020 at 06:39:22PM +0200, tastytea wrote:
+</I>&gt;<i>  
+</I>&gt;<i> &gt; If I interpret the output from `openssl s_client`&#185; correctly, the
+</I>&gt;<i> &gt; CN of the certificate is set to &#8220;Matthew Graybosch&#8221;, not a
+</I>&gt;<i> &gt; &#8220;tanelorn.city&#8221;, as it is custom for HTTPS. However, while the
+</I>&gt;<i> &gt; specification states in 4.2 that &#8220;Clients can validate TLS
+</I>&gt;<i> &gt; connections however they like&#8221;, it recommends a &#8220;lightweight &quot;TOFU&quot;
+</I>&gt;<i> &gt; certificate-pinning system&#8221; without mentioning hostname validation.
+</I>&gt;<i> 
+</I>&gt;<i> I guess various best practices for non-conventional certificate
+</I>&gt;<i> validation should be hashed out in, well, the best practices doc, or
+</I>&gt;<i> even a dedicated document.
+</I>&gt;<i> 
+</I>&gt;<i> For what it's worth, AV-98 expects either the Subject CN or one of the
+</I>&gt;<i> SubjectAlternativeNames to match the hostname in the URL it's trying
+</I>&gt;<i> to fetch and will complain otherwise.  I can visit tanelorn.city just
+</I>&gt;<i> fine, so I guess there's a valid SAN that perhaps Bombadillo isn't
+</I>&gt;<i> seeing?
+</I>
+I might have gone about creating my certs the wrong way, too.
+
+After RTFMing FreeBSD's openssl implementation I came up with the
+following shell script.
+
+```
+#!/bin/sh
+
+DOMAIN=${1}
+SSL_CERT_PATH=/usr/local/etc/ssl/${DOMAIN}
+
+if [ ! -d &quot;${SSL_CERT_PATH}&quot; ]; then
+        mkdir -p $SSL_CERT_PATH
+fi
+
+openssl req -x509 -nodes -days 365 -newkey rsa:4096 \
+	-keyout ${SSL_CERT_PATH}/ssl.key \
+	-out ${SSL_CERT_PATH}/ssl.crt
+openssl dhparam -out ${SSL_CERT_PATH}/dhparam.pem 4096
+```
+
+It looks like I'm getting prompted to create a CSR for each cert as
+well, and I might be putting in the wrong information.
+
+-- 
+Matthew Graybosch		<A HREF="gemini://starbreaker.org">gemini://starbreaker.org</A>
+#include &lt;disclaimer.h&gt;		<A HREF="gemini://demifiend.org">gemini://demifiend.org</A>
+<A HREF="https://matthewgraybosch.com">https://matthewgraybosch.com</A>	<A HREF="gemini://tanelorn.city">gemini://tanelorn.city</A>
+&quot;Out of order?! Even in the future nothing works.&quot;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001591.html">[ANN] tanelorn.city: a public gemini host for writers
+</A></li>
+	<LI>Next message (by thread): <A HREF="001598.html">[ANN] tanelorn.city: a public gemini host for writers
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1592">[ date ]</a>
+              <a href="thread.html#1592">[ thread ]</a>
+              <a href="subject.html#1592">[ subject ]</a>
+              <a href="author.html#1592">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

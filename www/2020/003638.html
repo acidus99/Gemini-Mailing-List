@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> CGI and client certificate, or do we need a CGI spec
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%20and%20client%20certificate%2C%20or%20do%20we%20need%20a%20CGI%20spec&In-Reply-To=%3C87k0u4xfp8.fsf%40rwv.io%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003637.html">
+   <LINK REL="Next"  HREF="003641.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>CGI and client certificate, or do we need a CGI spec</H1>
+    <B>Remco</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%20and%20client%20certificate%2C%20or%20do%20we%20need%20a%20CGI%20spec&In-Reply-To=%3C87k0u4xfp8.fsf%40rwv.io%3E"
+       TITLE="CGI and client certificate, or do we need a CGI spec">me at rwv.io
+       </A><BR>
+    <I>Sun Nov 29 16:58:43 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003637.html">[ANN] gebase: PoC Gemini server in shell
+</A></li>
+        <LI>Next message (by thread): <A HREF="003641.html">CGI and client certificate, or do we need a CGI spec
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3638">[ date ]</a>
+              <a href="thread.html#3638">[ thread ]</a>
+              <a href="subject.html#3638">[ subject ]</a>
+              <a href="author.html#3638">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I've been working on a gemini server and implemented CGI by skimming
+through the CGI/1.1 spec (RFC 3875) and looking through some gemini
+server implementations a couple of weeks ago, to figure out what
+environment variables to provide.
+
+=&gt; <A HREF="https://git.sr.ht/~rwv/dezhemini/tree/bf5b0ec4/dezhmnsrv.rkt#L253">https://git.sr.ht/~rwv/dezhemini/tree/bf5b0ec4/dezhmnsrv.rkt#L253</A>
+
+Currently I'm playing around with client certificates (having learned a
+lot more about libopenssl and racket ffi than I bargained for) and was
+wondering what environment variables I want to expose to bring that
+information into CGI scripts.  So I visited the list of gemini server
+software again, browsed some code and found 4 servers supporting both
+CGI and client certificates.
+
+Here's what the expose.
+
+# Jetforce
+
+=&gt; <A HREF="https://github.com/michael-lazar/jetforce/blob/d2d1f63f/jetforce/protocol.py#L180">https://github.com/michael-lazar/jetforce/blob/d2d1f63f/jetforce/protocol.py#L180</A>
+
+* AUTH_TYPE : &quot;CERTIFICATE&quot;.
+* REMOTE_USER : client certificate X509 subject common name
+* TLS_CLIENT_HASH : certificate fingerprint
+* TLS_CLIENT_NOT_BEFORE :  certificate start date
+* TLS_CLIENT_NOT_AFTER : certificate end date
+* TLS_CLIENT_SERIAL_NUMBER : certificate X509 serial number
+* TLS_CLIENT_AUTHORISED : &quot;true&quot; if certificate is validated by server CA store
+
+# GLV-1.12556
+
+=&gt; <A HREF="https://github.com/spc476/GLV-1.12556/blob/13d52b63/Lua/GLV-1/gateway.lua#L156">https://github.com/spc476/GLV-1.12556/blob/13d52b63/Lua/GLV-1/gateway.lua#L156</A>
+
+* AUTH_TYPE : &quot;Certificate&quot;
+* REMOTE_USER : client certificate X509 subject common name
+* TLS_CLIENT_HASH : certificate fingerprint
+* TLS_CLIENT_ISSUER : certificate X509 issuer
+* TLS_CLIENT_ISSUER_* : certificate X509 issuer sub fields
+* TLS_CLIENT_NOT_AFTER : certificate end date
+* TLS_CLIENT_NOT_BEFORE : certificate start date
+* TLS_CLIENT_REMAIN : certificate days left
+* TLS_CLIENT_SUBJECT : certificate X509 subject
+* TLS_CLIENT_SUBJECT_* : certificate X509 subject sub fields
+
+# Gemserv
+
+=&gt; <A HREF="https://git.sr.ht/~int80h/gemserv/tree/ebc22964/src/cgi.rs#L42">https://git.sr.ht/~int80h/gemserv/tree/ebc22964/src/cgi.rs#L42</A>
+
+* AUTH_TYPE : &quot;Certificate&quot;
+* REMOTE_USER : client certificate X509 subject common name
+* TLS_CLIENT_HASH : certificate fingerprint
+
+# The Unsinkable Molly Brown
+
+=&gt; <A HREF="https://tildegit.org/solderpunk/molly-brown/src/commit/48f9a206c03c0470e1c132b9667c6daa3583dada/dynamic.go#L151">https://tildegit.org/solderpunk/molly-brown/src/commit/48f9a206c03c0470e1c132b9667c6daa3583dada/dynamic.go#L151</A>
+
+* TLS_CLIENT_HASH : certificate fingerprint
+* TLS_CLIENT_ISSUER : certificate X509 issuer
+* TLS_CLIENT_ISSUER_CN : certificate X509 issuer common name
+* TLS_CLIENT_SUBJECT : certificate X509 subject
+* TLS_CLIENT_SUBJECT_CN : certificate X509 subject common name
+
+Looking at these it's obvious everybody is looking at everybody else to
+see how they implemented it and just pick whatever they like, so it
+seems I am on the right track.  ;-)  Personally I like this minimal
+approach of the latter two and will probably go with no more than:
+
+* REMOTE_USER : client certificate X509 subject common name
+* TLS_CLIENT_HASH : certificate fingerprint
+
+Because when writing a CGI scripts these are the only things I would
+really need: a way to communicate with the user about their certificate
+(REMOTE_USER) and a way to distinguish between offered certificates
+(TLS_CLIENT_HASH).  I won't need AUTH_TYPE because if I do get a
+TLS_CLIENT_HASH I'll know I can authenticate the user.
+
+But that brings me to the real question here.  Does gemini need a CGI
+spec?  Given status code 42 for CGI errors, it kinda committed to
+something CGI-ish without actually stating what that is.  The only
+server making the effort to implement CGI/1.1 is GLV but, IMHO, that
+isn't the kind of simplicity I am here for and it's a bit of a hack to
+be honest.
+
+GLV does manage to make CGI scripts more portable, whereas other servers
+don't really make the effort.  For instance, some don't provide
+PATH_INFO but do provide PATH_TRANSLATED and others provide neither.  I
+would like to share my CGI-scripts and have them run anywhere but to
+make sharing easier something like a spec would be nice.  What do you
+think?
+
+Anyway, back to libopenssl and racket ffi..
+
+Cheers,
+Remco
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003637.html">[ANN] gebase: PoC Gemini server in shell
+</A></li>
+	<LI>Next message (by thread): <A HREF="003641.html">CGI and client certificate, or do we need a CGI spec
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3638">[ date ]</a>
+              <a href="thread.html#3638">[ thread ]</a>
+              <a href="subject.html#3638">[ subject ]</a>
+              <a href="author.html#3638">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

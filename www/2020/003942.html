@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Some reading on IRIs and IDNs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3C20201210011634.GC24194%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003936.html">
+   <LINK REL="Next"  HREF="003943.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Some reading on IRIs and IDNs</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3C20201210011634.GC24194%40brevard.conman.org%3E"
+       TITLE="Some reading on IRIs and IDNs">sean at conman.org
+       </A><BR>
+    <I>Thu Dec 10 01:16:34 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003936.html">Some reading on IRIs and IDNs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003943.html">Some reading on IRIs and IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3942">[ date ]</a>
+              <a href="thread.html#3942">[ thread ]</a>
+              <a href="subject.html#3942">[ subject ]</a>
+              <a href="author.html#3942">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> once stated:
+&gt;<i> &gt; I'm sorry, but the two languages I work in donot have an implementation
+</I>&gt;<i> &gt; of punycode in their standard library.
+</I>&gt;<i> 
+</I>&gt;<i> Isn't this somewhat irrelevant in this case? 
+</I>
+  It was more a comment about this quote:
+
+&gt;<i> There is an implemention of Punycode in every standard library,
+</I>&gt;<i> whatever your language.
+</I>
+  There is *not* an implementation of punycode in every standard library,
+whatever your language.  In a lot of currently in-use languages?  Probably,
+but not *all*.  
+
+&gt;<i> It's unfortunate they don't
+</I>&gt;<i> have an implementation, but as it stands right now, most Gemini clients
+</I>&gt;<i> will not handle Unicode domain names at all. 
+</I>
+  And I'm not seeing anyone else trying to update clients to do this, even
+if in an exploratory nature.  What?  Are they just waiting for a decree?
+
+&gt;<i> Punycoding domains will
+</I>&gt;<i> solve that issue, and languages that don't have it in their stdlib
+</I>&gt;<i> can either use a third-party library, or if that's not possible then
+</I>&gt;<i> those languages will just ignore punycoding entirely. 
+</I>
+  Poking around the GNU libidn documentation, I found Appendix B [1]
+worrisome because the IDN rabbit hole just got deeper with U+2024 (ONE DOT
+LEADER) and U+2485 (DIGIT FIVE FULL STOP).  Should I worry about it?  I
+don't know.  This internationalization stuff is complex and makes me want to
+throw up hands in the air, scream a bit, and go back to the simplicity of
+ASCII.
+
+  In the end, I'll probably just do Unicode normalization, then punycode and
+call it a day.
+
+&gt;<i> Obviously that's
+</I>&gt;<i> not great for those languages, but it doesn't make sense to me to not
+</I>&gt;<i> have punycoding at all because of that.
+</I>&gt;<i> 
+</I>&gt;<i> At the end of the day, Gemini clients must be allowed to support Unicode
+</I>&gt;<i> domains. Perhaps the term &quot;SHOULD&quot; as defined by RFC2119 should be used
+</I>&gt;<i> in the spec in this case.
+</I>
+  So when are you going to update gemget and Amfora to support punycode? 
+I've heard it's easy to do.  Or are you waiting for a spec change first?
+
+  -spc (Seriously, I feel like I'm the only one *doing* anything here)
+
+[1]	<A HREF="https://www.gnu.org/software/libidn/manual/html_node/On-Label-Separators.html">https://www.gnu.org/software/libidn/manual/html_node/On-Label-Separators.html</A>
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003936.html">Some reading on IRIs and IDNs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003943.html">Some reading on IRIs and IDNs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3942">[ date ]</a>
+              <a href="thread.html#3942">[ thread ]</a>
+              <a href="subject.html#3942">[ subject ]</a>
+              <a href="author.html#3942">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

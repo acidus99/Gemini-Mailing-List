@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client certificate musings
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200523230429.GA38201%40allanon.local%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000987.html">
+   <LINK REL="Next"  HREF="001008.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client certificate musings</H1>
+    <B>Thomas Karpiniec</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200523230429.GA38201%40allanon.local%3E"
+       TITLE="Client certificate musings">tkarpiniec at icloud.com
+       </A><BR>
+    <I>Sun May 24 00:04:29 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000987.html">Client certificate musings
+</A></li>
+        <LI>Next message (by thread): <A HREF="001008.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1005">[ date ]</a>
+              <a href="thread.html#1005">[ thread ]</a>
+              <a href="subject.html#1005">[ subject ]</a>
+              <a href="author.html#1005">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi!
+
+On Sat, May 23, 2020 at 02:56:38PM +0000, solderpunk wrote:
+&gt;<i> Gemini specs a lot of use for client certificates - partially because
+</I>&gt;<i> they're a nice tool for the job, partially because the design goal of
+</I>&gt;<i> maximising power-to-weight ratio means once you accept the weight of
+</I>&gt;<i> using TLS you'd better implement everything you can using TLS rather
+</I>&gt;<i> than adding yet another pile of concepts.
+</I>
+This was the thing that stood out most on my first read-through of the
+spec! I particularly like the insistence &quot;Transient certificates MUST
+NOT be generated automatically&quot;. I wasn't here for the earlier
+discussion but I assume this is to fend off servers making sessions
+purely for tracking purposes by default.
+
+&gt;<i>   Right now, AV-98 fills the &quot;Subject&quot; of transient certs with
+</I>&gt;<i>   random unique values from Python's `uuid` module, because I seemed
+</I>&gt;<i>   to encounter errors sending totally empty certificates to
+</I>&gt;<i>   conman.org.
+</I>
+I've seen similar problems before with custom usage of X.509. It would
+be nice to use something smaller than UUID if possible just to keep
+cert size down - provided there is library support as you noted.
+
+&gt;<i> There is a third scenario, which the spec does not explicitly discuss at
+</I>&gt;<i> all, but which is actually the most widely used scenario in Geminispace
+</I>&gt;<i> so far, which is the main reason that I want to kick off a discussion
+</I>&gt;<i> about this and change the spec if required.  It's the idea of persistent
+</I>&gt;<i> identity (basically, a &quot;user account&quot;) at a server which is not under
+</I>&gt;<i> the client's control.
+</I>&gt;<i> ...
+</I>&gt;<i> We could change 62 to specify that the META should be a plain-language
+</I>&gt;<i> message to users, which could disambiguate the scenario.  Something
+</I>&gt;<i> else to consider here is that astrobotany uses the Common Name part of
+</I>&gt;<i> the certificate for the username.  I like this idea a lot, but
+</I>&gt;<i> different applications may want different or additional user
+</I>&gt;<i> information, and using META to convey this information could work well.
+</I>
+I'm not a big fan of using certificate fields for anything meaningful
+- it's a side channel (surrounded by lots of other fields that people
+might be tempted to use) - and it slightly increases the complexity of
+integration between the TLS library and the client/server code.
+
+When a server wants the client to use a non-disposable certificate
+there is an ambiguity. Is it just because they want the user to
+preserve their authentication for more than 24 hours for convenience?
+Or is it because the user will permanently lose access to their
+account if they ever lose that key?
+
+Much like a bitcoin wallet, the latter is technically a very tidy and
+secure solution but it absolutely sets up users to fail. People who
+are auto-generating this authentication in regular clients will lose
+their keys and be sad about it. By comparison, those who are setting
+up whitelisted keys out-of-band are likely more savvy and know what
+they're getting into.
+
+With this in mind, my current opinion is that there should be no way
+for a server to request a non-disposable certificate. Where
+authentication is required, it should be done in-band via a password
+or username/password 10 responses as you noted, which is then
+associated on the server with the transient certificate. It then
+becomes the responsibility of clients to ask the user &quot;how long do you
+want to stay authenticated to this website?&quot; If it times out, they can
+simply repeat their authentication.
+
+One argument against is that it encourages clients to choose very lax
+deletion policies to reduce friction. This may not be as big a concern
+as it is on the web, since users will presumably only have a session
+with a small fraction of the gemini sites they visit, so they are not
+picking up transient tracking sessions willy nilly that need to be
+flushed out.
+
+One final thought: do we need a way to encourage clients to have
+multiple certificates for the same server, depending on path? If I
+authenticate to a CGI application on a multi-user server I don't
+necessarily want my identity to be followed by everybody else's
+applications on that server.
+
+Cheers,
+
+Tom
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000987.html">Client certificate musings
+</A></li>
+	<LI>Next message (by thread): <A HREF="001008.html">Client certificate musings
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1005">[ date ]</a>
+              <a href="thread.html#1005">[ thread ]</a>
+              <a href="subject.html#1005">[ subject ]</a>
+              <a href="author.html#1005">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

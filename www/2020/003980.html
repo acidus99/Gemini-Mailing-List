@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Good practices regarding MIME type
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Good%20practices%20regarding%20MIME%20type&In-Reply-To=%3C578cd787bc570c1a5e08a24222a63219%40perso.pw%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003978.html">
+   <LINK REL="Next"  HREF="003981.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Good practices regarding MIME type</H1>
+    <B>Sol&#232;ne Rapenne</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Good%20practices%20regarding%20MIME%20type&In-Reply-To=%3C578cd787bc570c1a5e08a24222a63219%40perso.pw%3E"
+       TITLE="Good practices regarding MIME type">solene at perso.pw
+       </A><BR>
+    <I>Thu Dec 10 21:29:13 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003978.html">Good practices regarding MIME type
+</A></li>
+        <LI>Next message (by thread): <A HREF="003981.html">Good practices regarding MIME type
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3980">[ date ]</a>
+              <a href="thread.html#3980">[ thread ]</a>
+              <a href="subject.html#3980">[ subject ]</a>
+              <a href="author.html#3980">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Le 2020-12-10 22:26, Omar Polo a &#233;crit&#160;:
+&gt;<i> Sol&#232;ne Rapenne &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solene at perso.pw</A>&gt; writes:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> Hi,
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> I wrote a gemini server in C and I currently use an hardcoded list of
+</I>&gt;&gt;<i> file extensions &lt;-&gt; MIME type assocation.
+</I>&gt;&gt;<i> This isn't great because it relies on file extension which can be
+</I>&gt;&gt;<i> wrong, but a file without extension would
+</I>&gt;&gt;<i> use a default.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> I chose to set a default text/gemini in case the extension is unknown
+</I>&gt;&gt;<i> or if the file has no extension.
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> What are the good practices to determine a file MIME type?
+</I>&gt;&gt;<i> 
+</I>&gt;&gt;<i> regards
+</I>&gt;&gt;<i> Sol&#232;ne
+</I>&gt;<i> 
+</I>&gt;<i> I'm using the same approach in my server, but there are two 
+</I>&gt;<i> alternatives
+</I>&gt;<i> I know:
+</I>&gt;<i> 
+</I>&gt;<i>  - using /usr/share/misc/mime.types (still a list, but probably more
+</I>&gt;<i>    complete than a manual one).  Don't know if it's widespread, but
+</I>&gt;<i>    it's present in base on OpenBSD :)
+</I>&gt;<i>  - using libmagic: it's a library to detect the MIME type by reading 
+</I>&gt;<i> the
+</I>&gt;<i>    file.  it powers the file(1) command on some unices.  The drawback 
+</I>&gt;<i> is
+</I>&gt;<i>    that it needs to open and read the file, whereas guessing from the
+</I>&gt;<i>    extension doesn't.
+</I>
+I already did use that exact mime.types file, but I hardcoded it. I will
+take a look at file(1) code. I target OpenBSD first but I'll see if
+it can be ported easily.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003978.html">Good practices regarding MIME type
+</A></li>
+	<LI>Next message (by thread): <A HREF="003981.html">Good practices regarding MIME type
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3980">[ date ]</a>
+              <a href="thread.html#3980">[ thread ]</a>
+              <a href="subject.html#3980">[ subject ]</a>
+              <a href="author.html#3980">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,139 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Encouraging%20HTTP%20Proxies%20to%20support%20Gemini%20hosts%0A%20self-blacklisting&In-Reply-To=%3CCAFkF85ZhzSU1eONKmGL7wGV%3DDK_aGNJoE%3DpeFLgvdAVF2P4mOw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005406.html">
+   <LINK REL="Next"  HREF="005410.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</H1>
+    <B>Oliver Simmons</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Encouraging%20HTTP%20Proxies%20to%20support%20Gemini%20hosts%0A%20self-blacklisting&In-Reply-To=%3CCAFkF85ZhzSU1eONKmGL7wGV%3DDK_aGNJoE%3DpeFLgvdAVF2P4mOw%40mail.gmail.com%3E"
+       TITLE="[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting">oliversimmo at gmail.com
+       </A><BR>
+    <I>Sun Feb 21 19:31:16 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005406.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting
+</A></li>
+        <LI>Next message (by thread): <A HREF="005410.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5407">[ date ]</a>
+              <a href="thread.html#5407">[ thread ]</a>
+              <a href="subject.html#5407">[ subject ]</a>
+              <a href="author.html#5407">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm abstaining from commenting on the rest, but for the status code:
+
+On Sun, 21 Feb 2021 at 18:54, Mansfield &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">mansfield at ondollo.com</A>&gt; wrote:
+&gt;<i> ... or... the HTTP Proxy could just 404? 400? 204 Success and no content? 301 Moved permanently with a gemini URI? 403 Forbidden (not a *user* authz issue... but a *proxy* authz issue...)? 410 Gone? 451 Legal? (As an aside: there is a part of me that loves discussions/debates around what the right HTTP status code is for a given situation... there's another part of me that dies every time...)
+</I>
+404, 204 and 410 I think are definitely the wrong codes.
+A 3xx redirect would be bad as it may cause confusion for non-gemini
+folks and browsers.
+451 &amp; 403 would ~kinda make sense.
+
+I'm going to add to the list these two, which I think may somewhat fit
+when someone is trying to access gemini-only content via HTTP:
+
+406 Not Acceptable:
+&gt;<i> The requested resource is capable of generating only content not acceptable according to the Accept headers sent in the request.
+</I>
+405 Method Not Allowed:
+&gt;<i> A request method is not supported for the requested resource; for example, a GET request on a form that requires data to be presented via POST, or a PUT request on a read-only resource.
+</I>
+I'm not expert on HTTP though :p so I'm likely to be wrong.
+
+- Oliver Simmons (GoodClover)
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005406.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting
+</A></li>
+	<LI>Next message (by thread): <A HREF="005410.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5407">[ date ]</a>
+              <a href="thread.html#5407">[ thread ]</a>
+              <a href="subject.html#5407">[ subject ]</a>
+              <a href="author.html#5407">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

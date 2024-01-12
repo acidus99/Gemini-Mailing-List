@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> On certificates and validation
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20certificates%20and%20validation&In-Reply-To=%3CCAJScK0KNOv%3DE2B2Qo8sU%3DpHE8DFROoFs-7rgyGufR92%3DxNr-rA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003615.html">
+   <LINK REL="Next"  HREF="003547.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>On certificates and validation</H1>
+    <B>Bj&#246;rn W&#228;rmedal</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20certificates%20and%20validation&In-Reply-To=%3CCAJScK0KNOv%3DE2B2Qo8sU%3DpHE8DFROoFs-7rgyGufR92%3DxNr-rA%40mail.gmail.com%3E"
+       TITLE="On certificates and validation">bjorn.warmedal at gmail.com
+       </A><BR>
+    <I>Wed Nov 25 12:58:19 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003615.html">On the use of %20 instead of + in URIs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003547.html">On certificates and validation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3546">[ date ]</a>
+              <a href="thread.html#3546">[ thread ]</a>
+              <a href="subject.html#3546">[ subject ]</a>
+              <a href="author.html#3546">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm building a lib to simplify gemini client development in python,
+and my current headache is certification handling. There's a few
+things that come to mind, some more philosophical than technical in
+nature.
+
+* Should I support verification of CA-issued certificates, or
+self-signed only? Doing both at the same time leads to a &quot;try this, if
+fail then try this&quot; sort of situation which isn't very pretty. How
+common are CA-issued certificates in geminispace, and should they be
+handled differently than TOFU?
+* How does one even validate a self-signed cert? If ew0k.example.com
+serves a certificate with the Common Name &quot;ew0k's Awesome Site&quot; and no
+Subject Alternative Names, is that less valid than one that includes
+the hostname? Or the IP? Does expiration time matter at all for a
+self-signed cert?
+* When a browser has accepted one cert for example.com but is
+presented another on the next visit, it shows a warning to the user
+who will then decide whether to accept the new cert. What information
+allows a user to make an informed decision in this case? Does it
+matter that the last cert would still be valid for another 3 years? Or
+2 months?
+
+Any opinions or advice welcomed :)
+
+Cheers,
+ew0k
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003615.html">On the use of %20 instead of + in URIs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003547.html">On certificates and validation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3546">[ date ]</a>
+              <a href="thread.html#3546">[ thread ]</a>
+              <a href="subject.html#3546">[ subject ]</a>
+              <a href="author.html#3546">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

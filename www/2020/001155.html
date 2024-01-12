@@ -1,0 +1,202 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Trust model for addresses and certificates (DANE etc..)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Trust%20model%20for%20addresses%20and%20certificates%20%28DANE%20etc..%29&In-Reply-To=%3C20200529082946.GB302232%40thunix.net%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001572.html">
+   <LINK REL="Next"  HREF="001163.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Trust model for addresses and certificates (DANE etc..)</H1>
+    <B>southerntofu at thunix.net</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Trust%20model%20for%20addresses%20and%20certificates%20%28DANE%20etc..%29&In-Reply-To=%3C20200529082946.GB302232%40thunix.net%3E"
+       TITLE="Trust model for addresses and certificates (DANE etc..)">southerntofu at thunix.net
+       </A><BR>
+    <I>Fri May 29 09:29:46 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001572.html">The Problems of Transclusion (was Re: More silly text/gemini spec proposals)
+</A></li>
+        <LI>Next message (by thread): <A HREF="001163.html">Trust model for addresses and certificates (DANE etc..)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1155">[ date ]</a>
+              <a href="thread.html#1155">[ thread ]</a>
+              <a href="subject.html#1155">[ subject ]</a>
+              <a href="author.html#1155">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hey,
+
+I've been following Gemini from afar, that's a really cool project you've got! I'm curious about the threat model with gemini and how we can increase security in ways that are not user-hostile, and do not concentrate power in the hands of third parties.
+
+A TOFU approach to certificates (trust on first use, i.e. blind trust) can be easier to deal with, but strongly lacks any security guarantee. Especially, so far user agents of all sorts have been terrible at making a UX to inspect and verify server/peer certificates, so i think it's not so good.
+
+DANE is a RFC that describes how to distribute TLS public keys over the DNS (+ DNSSEC). It consists of TLSA records containing the server's public key, which can also be CNAME'd to, like in the example in the spec:
+
+      example.com.                IN MX 0 mx1.example.com.
+      example.com.                IN MX 0 mx2.example.com.
+      _25._tcp.mx1.example.com.   IN CNAME tlsa201._dane.example.com.
+      _25._tcp.mx2.example.com.   IN CNAME tlsa201._dane.example.com.
+      tlsa201._dane.example.com.  IN TLSA 2 0 1 e3b0c44298fc1c149a...
+
+Using DANE to distribute certificates reduces the attack surface, because the DNS is already a SPOF for a gemini server. I personally believe the gemini spec should strongly encourage admins to use DANE to distribute their server certificates.
+
+A different approach to this problem is the GNU Name System, which is a DNS-compatible, fully autonomous and secure naming system: <A HREF="https://datatracker.ietf.org/doc/draft-schanzen-gns/">https://datatracker.ietf.org/doc/draft-schanzen-gns/</A>
+
+GNS has much stronger security guarantees than DNSSEC, which is ideal for bootstrapping a secure connection to a remote server. It's also entirely decentralized and name seizures are made impossible by introducing cryptographic forms of zone delegation (instead of IP-based delegation as DNS does). I would recommend people investigate it, because interpersonal concerns set aside, GNS is in my view the best proposal for a secure, censorship-free naming system.
+
+There was a presentation at ICANN about GNS, which you can view here: <A HREF="https://git.gnunet.org/gnunet-videos-2019.git/plain/ICANN66/GNU_Name_System_-_2019_ICANN66__Martin_Schanzenbach.webm">https://git.gnunet.org/gnunet-videos-2019.git/plain/ICANN66/GNU_Name_System_-_2019_ICANN66__Martin_Schanzenbach.webm</A>
+
+I hope this message brings you food for thought. Long live the free internet, burn all prisons and borders!
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001572.html">The Problems of Transclusion (was Re: More silly text/gemini spec proposals)
+</A></li>
+	<LI>Next message (by thread): <A HREF="001163.html">Trust model for addresses and certificates (DANE etc..)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1155">[ date ]</a>
+              <a href="thread.html#1155">[ thread ]</a>
+              <a href="subject.html#1155">[ subject ]</a>
+              <a href="author.html#1155">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

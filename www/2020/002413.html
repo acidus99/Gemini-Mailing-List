@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> gemini+stream://
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bstream%3A//&In-Reply-To=%3C20200815172537.GA1328426%40tilde.team%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002417.html">
+   <LINK REL="Next"  HREF="002418.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>gemini+stream://</H1>
+    <B>easeout at tilde.team</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bstream%3A//&In-Reply-To=%3C20200815172537.GA1328426%40tilde.team%3E"
+       TITLE="gemini+stream://">easeout at tilde.team
+       </A><BR>
+    <I>Sat Aug 15 18:25:37 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002417.html">gemini+stream://
+</A></li>
+        <LI>Next message (by thread): <A HREF="002418.html">gemini+stream://
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2413">[ date ]</a>
+              <a href="thread.html#2413">[ thread ]</a>
+              <a href="subject.html#2413">[ subject ]</a>
+              <a href="author.html#2413">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sat, Aug 15, 2020 at 12:47:22PM +0200, cage wrote:
+&gt;<i> Honestly i  fail to understand  why a new  scheme is needed  here. The
+</I>&gt;<i> protocol already supports  stream as discussed in  a previous messages
+</I>&gt;<i> and i  do no  see a lott  of advantages for  using a  different scheme
+</I>&gt;<i> except (as you wrote) to signal to  the user that the content will not
+</I>&gt;<i> end.
+</I>&gt;<i> 
+</I>&gt;<i> Probably i am missing something, please help me to understand.
+</I>
+In our IRC discussion, we raised some user-facing guarantees of Gemini:
+
+- You know that when you open a link, you're just getting that one file,
+  not an implicit bundle of child requests
+
+- You know the connection will not remain open after you have begun to
+  see its content
+
+As users, these guarantees feel good to us. And we have confidence in
+these guarantees whenever we see a <A HREF="gemini://">gemini://</A> link. So we would like to
+keep that user confidence high. For that reason, we like the idea of
+leaving the <A HREF="gemini://">gemini://</A> scheme for content you download and then consume,
+and a separate scheme for content you consume while the connaection
+remains open.
+
+&gt;<i> &gt;  6. It is  still a single client-initiated request  happening in the
+</I>&gt;<i> &gt; foreground. We  aren't creating background threads  of who-know-what
+</I>&gt;<i> &gt; running services.  We're getting  an ongoing document  in real-time,
+</I>&gt;<i> &gt; that's all.
+</I>&gt;<i> 
+</I>&gt;<i> I do not think this is entirely  true if you want to update/keep alive
+</I>&gt;<i> the  UI  of  the  client  while   the  content  is  flowing  from  the
+</I>&gt;<i> server. Some kind of concurrent works enter in the equation, i think.
+</I>
+I think the &quot;foreground&quot; versus &quot;background&quot; concept was really more
+about what the user is made aware of. In that sense, a &quot;background&quot;
+operation would be one that happens without the user's knowledge. We
+like the idea that in Gemini, even if streamed, you don't stream
+anything you're not aware of. If a second process or thread did the
+work, but the user can see that happening, that's no problem.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002417.html">gemini+stream://
+</A></li>
+	<LI>Next message (by thread): <A HREF="002418.html">gemini+stream://
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2413">[ date ]</a>
+              <a href="thread.html#2413">[ thread ]</a>
+              <a href="subject.html#2413">[ subject ]</a>
+              <a href="author.html#2413">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

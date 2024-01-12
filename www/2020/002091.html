@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Minimal client
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Minimal%20client&In-Reply-To=%3Cdd671278-c451-7e8c-b9e2-1a0b68b7a6e4%40ratfactor.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002035.html">
+   <LINK REL="Next"  HREF="002092.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Minimal client</H1>
+    <B>Dave Gauer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Minimal%20client&In-Reply-To=%3Cdd671278-c451-7e8c-b9e2-1a0b68b7a6e4%40ratfactor.com%3E"
+       TITLE="Minimal client">dave at ratfactor.com
+       </A><BR>
+    <I>Mon Jul  6 15:09:17 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002035.html">Minimal client
+</A></li>
+        <LI>Next message (by thread): <A HREF="002092.html">Minimal client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2091">[ date ]</a>
+              <a href="thread.html#2091">[ thread ]</a>
+              <a href="subject.html#2091">[ subject ]</a>
+              <a href="author.html#2091">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On 7/1/20 6:06 PM, Phil Leblanc wrote:
+&gt;<i> Hi all,
+</I>&gt;<i> 
+</I>&gt;<i> I am looking for a solution to build a _small_, _statically linked_,
+</I>&gt;<i> minimal gemini client. My focus at the moment is to implement the
+</I>&gt;<i> basic communication layer (including TLS!): just enough to send a
+</I>&gt;<i> request to a gemini host and receive a response.
+</I>
+
+I have long been planning to do the same thing, but haven't even 
+started. The plan was to write it in Rust and use this:
+
+<A HREF="https://github.com/ctz/rustls">https://github.com/ctz/rustls</A>
+
+Copied from README.md:
+=================================================================
+## Current features
+
+* TLS1.2 and TLS1.3.
+* ECDSA, Ed25519 or RSA server authentication by clients.
+* ECDSA, Ed25519 or RSA server authentication by servers.
+* Forward secrecy using ECDHE; with curve25519, nistp256 or nistp384 curves.
+* AES128-GCM and AES256-GCM bulk encryption, with safe nonces.
+* ChaCha20-Poly1305 bulk encryption 
+([RFC7905](<A HREF="https://tools.ietf.org/html/rfc7905">https://tools.ietf.org/html/rfc7905</A>)).
+* ALPN support.
+* SNI support.
+* Tunable MTU to make TLS messages match size of underlying transport.
+* Optional use of vectored IO to minimise system calls.
+* TLS1.2 session resumption.
+* TLS1.2 resumption via tickets (RFC5077).
+* TLS1.3 resumption via tickets or session storage.
+* TLS1.3 0-RTT data for clients.
+* Client authentication by clients.
+* Client authentication by servers.
+* Extended master secret support (RFC7627).
+* Exporters (RFC5705).
+* OCSP stapling by servers.
+* SCT stapling by servers.
+* SCT verification by clients.
+=================================================================
+
+Statically linked, yes. But I have no idea if it would meet the _small_ 
+goal!
+
+-Dave
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002035.html">Minimal client
+</A></li>
+	<LI>Next message (by thread): <A HREF="002092.html">Minimal client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2091">[ date ]</a>
+              <a href="thread.html#2091">[ thread ]</a>
+              <a href="subject.html#2091">[ subject ]</a>
+              <a href="author.html#2091">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

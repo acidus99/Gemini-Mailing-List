@@ -1,0 +1,149 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Fafi, a Racket-based client
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Fafi%2C%20a%20Racket-based%20client&In-Reply-To=%3CCAF3jwTnN%3DBbeac%2BQr8NsVa0HM39MsgXdDBJ520R9nq24kK4rKg%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002429.html">
+   <LINK REL="Next"  HREF="002442.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Fafi, a Racket-based client</H1>
+    <B>Andre Garzia</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Fafi%2C%20a%20Racket-based%20client&In-Reply-To=%3CCAF3jwTnN%3DBbeac%2BQr8NsVa0HM39MsgXdDBJ520R9nq24kK4rKg%40mail.gmail.com%3E"
+       TITLE="[ANN] Fafi, a Racket-based client">andre at andregarzia.com
+       </A><BR>
+    <I>Sun Aug 16 18:24:22 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002429.html">[ANN] Fafi, a Racket-based client
+</A></li>
+        <LI>Next message (by thread): <A HREF="002442.html">[ANN] Fafi, a Racket-based client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2426">[ date ]</a>
+              <a href="thread.html#2426">[ thread ]</a>
+              <a href="subject.html#2426">[ subject ]</a>
+              <a href="author.html#2426">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Luke,
+
+Thanks a lot for the kind words. I am brand new to the ecosystem. I started
+writing Fafi just from reading the protocol specs, I had no exposure to
+other browsers and content. Now, I am getting to know more about apps and
+content and am liking it very much. It is an impressive coincidence that I
+checked out GemiNaut a bit before sending my first email to this list. I
+took a tour of Gemini Browsers and saw that your browser had REBOL code in
+it and that made me smile. I used to work with REBOL in the early 2000s and
+it is a language that is very dear to my heart. I think that a Gemini
+browser using Red should be a fantastic project, maybe I'll try that as
+well.
+
+As for Firefox OS, that is a little flame in my heart that will never be
+extinguished, I really liked it and still do. I think that a client is
+possible but you won't be able to support all the status codes and use
+cases as you won't be able to generate certificates (unless you write a
+pure JS TLS implementation). I'm not sure which version of OpenSSL KaiOS is
+linked against but you should be able to open a raw TCP secure socket to
+port 1965 and read and write from it using &quot;mozTCPSocket&quot;:
+
+  <A HREF="https://developer.mozilla.org/en-US/docs/Archive/B2G_OS/API/TPC_Socket_API">https://developer.mozilla.org/en-US/docs/Archive/B2G_OS/API/TPC_Socket_API</A>
+
+Another thing that put a smile on me was the surprise I got when I was
+researching to write the reply to you (it has been a while since I last
+touched FirefoxOS code). If I remember correctly in 2013 I took some time
+adding FirefoxOS samples to MDN  and the sample linked to that article is a
+Telnet client I wrote:
+
+  <A HREF="https://github.com/soapdog/firefoxos-sample-app-telnet-client">https://github.com/soapdog/firefoxos-sample-app-telnet-client</A>
+
+You should be able to pick that telnet client and just tweak it a little to
+test it against a Gemini server. Be aware that KaiOS has a different
+keyboard based navigation system and you'll need to check their dev docs:
+
+  <A HREF="https://developer.kaiostech.com/">https://developer.kaiostech.com/</A>
+
+I don't have any KaiOS device but I am intrigued by it. Some months ago I
+had a meeting with their DevRel to talk about the old days of FirefoxOS and
+how community was handled and encouraged, it was a fun meeting and I hope
+they are investing more in building a community now.
+
+Kind Regards
+A.
+
+
+&gt;<i> Welcome to the ecosystem!
+</I>&gt;<i>
+</I>&gt;<i> Its great to see another client. There are a couple of other clients
+</I>&gt;<i> that support tabs like Kristall and amfora (that I know of). Others take
+</I>&gt;<i> the approach of forking the browsing session with a new window (like my
+</I>&gt;<i> own, GemiNaut). Personally I like to be able to use the normal OS
+</I>&gt;<i> features to manage application windows, and each fork of the browsing
+</I>&gt;<i> session feels more to me like a separate thread through Geminispace to
+</I>&gt;<i> be independently minimised, maximised, etc. Some folk seem to prefer
+</I>&gt;<i> tabs though.
+</I>&gt;<i>
+</I>&gt;<i> On a slightly separate note, I saw from your profile you have a
+</I>&gt;<i> background in FirefoxOS. I know it had its ups and downs, but it does
+</I>&gt;<i> live on in KaiOS which is gaining a wide user base particularly outside
+</I>&gt;<i> Europe and North America. I have a a Nokia 2720 which I love as a flip
+</I>&gt;<i> phone, for its relative simplicity and for its battery life. There is a
+</I>&gt;<i> simple marketplace of apps.
+</I>&gt;<i>
+</I>&gt;<i> So a quick question - do you think it could be possible to write a
+</I>&gt;<i> gemini client for KaiOS? Personally, it would be great to be able to
+</I>&gt;<i> check a few pages when on the move. And more importantly, it would open
+</I>&gt;<i> gemini up to a wide and diverse range of potential new users who may
+</I>&gt;<i> have a lot to contribute.
+</I>&gt;<i>
+</I>&gt;<i> Best Wishes
+</I>&gt;<i>
+</I>&gt;<i>   - Luke
+</I>&gt;<i>
+</I>
+
+-- 
+<A HREF="https://www.andregarzia.com">https://www.andregarzia.com</A> &lt;<A HREF="http://www.andregarzia.com">http://www.andregarzia.com</A>&gt;
+Want to support me? Buy me a coffee at <A HREF="https://ko-fi.com/andregarzia">https://ko-fi.com/andregarzia</A>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200816/b8f35cbc/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200816/b8f35cbc/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002429.html">[ANN] Fafi, a Racket-based client
+</A></li>
+	<LI>Next message (by thread): <A HREF="002442.html">[ANN] Fafi, a Racket-based client
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2426">[ date ]</a>
+              <a href="thread.html#2426">[ thread ]</a>
+              <a href="subject.html#2426">[ subject ]</a>
+              <a href="author.html#2426">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,124 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] What to do of fragments when there is a redirection
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20What%20to%20do%20of%20fragments%20when%20there%20is%20a%20redirection&In-Reply-To=%3C87h7od1s4y.fsf%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004541.html">
+   <LINK REL="Next"  HREF="004254.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] What to do of fragments when there is a redirection</H1>
+    <B>Gary Johnson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20What%20to%20do%20of%20fragments%20when%20there%20is%20a%20redirection&In-Reply-To=%3C87h7od1s4y.fsf%40disroot.org%3E"
+       TITLE="[spec] What to do of fragments when there is a redirection">lambdatronic at disroot.org
+       </A><BR>
+    <I>Tue Dec 22 20:51:25 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004541.html">[spec] What to do of fragments when there is a redirection
+</A></li>
+        <LI>Next message (by thread): <A HREF="004254.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4282">[ date ]</a>
+              <a href="thread.html#4282">[ thread ]</a>
+              <a href="subject.html#4282">[ subject ]</a>
+              <a href="author.html#4282">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Stephane Bortzmeyer &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">stephane at sources.org</A>&gt; writes:
+
+&gt;<i> Gemini specfication apparently does not mention what to do of
+</I>&gt;<i> fragments when there is a redirection.
+</I>&gt;<i>
+</I>&gt;<i> If original URI is &lt;<A HREF="gemini://foobar.example/#baz">gemini://foobar.example/#baz</A>&gt; and there is a
+</I>&gt;<i> redirect to &lt;<A HREF="gemini://thing.example/doit">gemini://thing.example/doit</A>&gt;, should the Gemini client
+</I>&gt;<i> consider is has to go to &lt;<A HREF="gemini://thing.example/doit#baz">gemini://thing.example/doit#baz</A>&gt; or to
+</I>&gt;<i> &lt;<A HREF="gemini://thing.example/doit">gemini://thing.example/doit</A>&gt;?
+</I>
+This is a reasonable question. In HTTP, fragments are usually used to
+denote a particular named anchor on the same page. While I support
+parsing fragments from Gemini requests in my server and presenting them
+to CGI-like functions, I don't include fragments in redirects to other
+pages in the same way that I would leave off the query from one request
+when redirecting to another page. AFAIK, both the query and fragment are
+specific to a particular path on the server and don't transfer to
+others.
+
+Hopefully, Solderpunk can clarify this once and for all for us.
+
+Best,
+  Gary
+
+-- 
+GPG Key ID: 7BC158ED
+Use `gpg --search-keys lambdatronic' to find me
+Protect yourself from surveillance: <A HREF="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</A>
+=======================================================================
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+Why is HTML email a security nightmare? See <A HREF="https://useplaintext.email/">https://useplaintext.email/</A>
+
+Please avoid sending me MS-Office attachments.
+See <A HREF="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004541.html">[spec] What to do of fragments when there is a redirection
+</A></li>
+	<LI>Next message (by thread): <A HREF="004254.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4282">[ date ]</a>
+              <a href="thread.html#4282">[ thread ]</a>
+              <a href="subject.html#4282">[ subject ]</a>
+              <a href="author.html#4282">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

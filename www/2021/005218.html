@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Should Gemini clients alert users upon redirect?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Should%20Gemini%20clients%20alert%20users%20upon%20redirect%3F&In-Reply-To=%3C87h7mfocvs.fsf%40idiomdrottning.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005190.html">
+   <LINK REL="Next"  HREF="005221.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Should Gemini clients alert users upon redirect?</H1>
+    <B>Sandra Snan</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Should%20Gemini%20clients%20alert%20users%20upon%20redirect%3F&In-Reply-To=%3C87h7mfocvs.fsf%40idiomdrottning.org%3E"
+       TITLE="Should Gemini clients alert users upon redirect?">sandra.snan at idiomdrottning.org
+       </A><BR>
+    <I>Sat Feb 13 21:51:03 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005190.html">Should Gemini clients alert users upon redirect?
+</A></li>
+        <LI>Next message (by thread): <A HREF="005221.html">Should Gemini clients alert users upon redirect?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5218">[ date ]</a>
+              <a href="thread.html#5218">[ thread ]</a>
+              <a href="subject.html#5218">[ subject ]</a>
+              <a href="author.html#5218">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Sean wrote:
+&gt;<i> There's a semantic difference between a URL that ends with a '/' and one
+</I>&gt;<i> that doesn't.  The one that ends with a '/' is semantically a
+</I>&gt;<i> directory
+</I>
+Yes. That's why I removed the slashes and why I all along wanted the
+slashes gone.
+
+Sean wrote:
+&gt;<i> that doesn't.  The one that ends with a '/' is semantically a directory, and
+</I>&gt;<i> to have to add a file per directory to get all URLs to end with a '/' is, in
+</I>&gt;<i> my opinion, silly.  I can see what you are trying to do---skip the silly
+</I>&gt;<i> &quot;.gmi&quot; or &quot;.gemini&quot; extension as being part of the URL, but there should be
+</I>&gt;<i> better ways of doing that that populating a filesystem with a bunch of
+</I>&gt;<i> directories containing a single file
+</I>
+It seems like you've got what I want to do somewhat backwards.
+
+You seem to think that I want URLs that end with slashes, i.e. has
+directory semantics.
+That's what I don't want.
+That's why my internal links all along have been without slashes.
+That's why I finally fixed the long-standing 31 issue.
+
+And I needed to do programming to do so which is what I didn't wanna do
+in the first place. Ugh. You guys roped me in to doing actual work.
+
+The server-side technical implementation behind serving up, for example,
+&quot;The Dumbphone Experience&quot; text at
+<A HREF="gemini://idiomdrottning.org/dumbphone-experience">gemini://idiomdrottning.org/dumbphone-experience</A>
+
+should not matter for users.
+
+As far as they're concerned, that's a leaf node named
+dumbphone-experience placed in the capsule root.
+
+That's the semantics I want and that's the semantics I've got now. Jolly
+good.
+
+(On the server side, I could implement that in a couple of ways; I need
+the server to be able to distinguish the page from other files (for
+example I also host images, and plain text files) so on the server side,
+I need to set up a naming scheme like dumbphone-experience.gmi,
+dumbphone-experience.gemini, or dumbphone-experience/index.gmi and then
+use server rewriting to serve up the correct node.
+
+It's wholly irrelevant on the client side which of those three is in use
+(I'm not mixing the three models, I use one of them). They get a file
+named dumbphone-experience with the text/gemini MIME type which is what
+they wanted.
+
+Turns out that in order to get different languages for different
+pages&#8212;which was the first thing I wanted to do on this list back in
+August 2020&#8212;and this particular server, it's easier to use
+dumbphone-experience/index.gmi because then I can also put metadata in
+the same directory. Since I needed to reprogram the server anyway, I
+could've come up with some cockamamie convention to get per-file
+metadata, like dumbphone-experience.gemini and
+dumbphone-experience.metadata both in the same folder and then serve
+that as dumbphone-experience. Or have preambles that the server strips.
+I coulda done it in all tons of ways. Does not matter to clientside
+which way I did it.)
+
+Sean wrote:
+&gt;<i> Furthermore, if you follow this link, sans a trailing '/':
+</I>&gt;<i>
+</I>&gt;<i> 	<A HREF="gemini://gemini.conman.org/test/UCSD-Pascal-source.zip">gemini://gemini.conman.org/test/UCSD-Pascal-source.zip</A>
+</I>&gt;<i>
+</I>&gt;<i> you'll get a ZIP file.  But, add a trailing '/' to that:
+</I>&gt;<i>
+</I>&gt;<i> 	<A HREF="gemini://gemini.conman.org/test/UCSD-Pascal-source.zip/">gemini://gemini.conman.org/test/UCSD-Pascal-source.zip/</A>
+</I>&gt;<i>
+</I>&gt;<i> and see what you get (hint:  it's not a ZIP file)
+</I>&gt;<i>
+</I>&gt;<i>   -spc
+</I>
+You posted the same argument in the same kinda patronizing way last
+September:
+
+Sean wrote, but way earlier:
+&gt;<i> I'm curious as to what the argument against is, because the slash is
+</I>&gt;<i> semantically important.
+</I>&gt;<i>
+</I>&gt;<i> =&gt; <A HREF="gemini://gemini.conman.org/test/doc1">gemini://gemini.conman.org/test/doc1</A>  This is not a directory.
+</I>&gt;<i> =&gt; <A HREF="gemini://gemini.conman.org/test/doc1/">gemini://gemini.conman.org/test/doc1/</A> And this is not the document you think it is
+</I>
+Semantics is my jam.
+Do not try to bring the ruckus vs Idiomdrottning on this.
+
+Sean wrote:
+&gt;<i> And then there's the reason for the tailing slash that Solderpunk gives:
+</I>&gt;<i>
+</I>&gt;<i>       <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/002000.html">https://lists.orbitalfox.eu/archives/gemini/2020/002000.html</A>
+</I>
+Solderpunk is awesome.&#9829;&#9829;
+But he is wrong about this.
+
+Solderpunk writes:
+&gt;<i> It might *seem* dumb, but it's essential for relative URLs to work
+</I>&gt;<i> correctly.
+</I>
+They work correctly when there is a consistent view which tree nodes are
+leaf nodes.
+
+Solderpunk writes:
+&gt;<i> Links in text/gemini may be relative URLs, e.g. just
+</I>&gt;<i> &quot;other_page.gmi&quot;.  It's the client's job to turn that into an absolute
+</I>&gt;<i> URL, in accordance with the RFC rules for doing so.  If you are at
+</I>&gt;<i> &quot;<A HREF="gemini://example.com/foo">gemini://example.com/foo</A>&quot;, then that relative link turns into
+</I>&gt;<i> &quot;<A HREF="gemini://example.com/other_page.gmi">gemini://example.com/other_page.gmi</A>&quot;
+</I>
+Which is fine. It's just that foo is a leaf node. That's what I want.
+The semantics work, it's just one level up.
+
+True, relative links don't work when you have slashed and unslashed both
+working. Because they'll be at different &quot;levels&quot; in the tree. So before
+I add any relative links to my pages, I'll need to put in the 31s from
+slashed to unslashed (which is the direction they should've been going
+all along) so there's only one canonical URL for each page.
+
+Sandra
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005190.html">Should Gemini clients alert users upon redirect?
+</A></li>
+	<LI>Next message (by thread): <A HREF="005221.html">Should Gemini clients alert users upon redirect?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5218">[ date ]</a>
+              <a href="thread.html#5218">[ thread ]</a>
+              <a href="subject.html#5218">[ subject ]</a>
+              <a href="author.html#5218">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

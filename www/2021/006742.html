@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> a space case for transparent gemtext compression
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20a%20space%20case%20for%20transparent%20gemtext%20compression&In-Reply-To=%3C87v96af7pr.fsf%40omarpolo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006739.html">
+   <LINK REL="Next"  HREF="006743.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>a space case for transparent gemtext compression</H1>
+    <B>Omar Polo</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20a%20space%20case%20for%20transparent%20gemtext%20compression&In-Reply-To=%3C87v96af7pr.fsf%40omarpolo.com%3E"
+       TITLE="a space case for transparent gemtext compression">op at omarpolo.com
+       </A><BR>
+    <I>Sat Jun 19 11:51:28 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006739.html">a space case for transparent gemtext compression
+</A></li>
+        <LI>Next message (by thread): <A HREF="006743.html">a space case for transparent gemtext compression
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6742">[ date ]</a>
+              <a href="thread.html#6742">[ thread ]</a>
+              <a href="subject.html#6742">[ subject ]</a>
+              <a href="author.html#6742">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Christian Seibold &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">krixano at mailbox.org</A>&gt; writes:
+
+&gt;<i> Let me repeat this... adding compression to clients in the way that
+</I>&gt;<i> has been described in this thread does NOT break geminispace.
+</I>
+I'm not too too sure about this.  As I see it, using *any* file type
+other than text/gemini as default choice for the content will break the
+geminispace.
+
+Gemini browser have to implement text/gemini[0], not text/gemini+gzip,
+text/html or text/x-markdown, and if text/gemini+gz (or whatever) starts
+to gain a bit of popularity it *will* break the geminispace IMHO.
+
+&gt;<i> Gemini deliberately allows you to send whatever you want over. It's a
+</I>&gt;<i> file-transfer protocol. Using the mimetype is *exactly* what I
+</I>&gt;<i> proposed. Period. End of discussion.
+</I>
+and I totally agree with you here.  You can serve any type of content
+over Gemini, so what's all this fuss about?  You have a strange use case
+where you need compression?  Fine, you can do it.  Good for you.  But
+please don't waste our time by telling how much cool would be to change
+every browser just to read the usual 1-2K[1] pages.
+
+
+Cheers,
+
+Omar Polo
+
+P.S.: I don't want to sound too harsh, in fact I have a local patch for
+      gmid to allow the `entrypoint' config option inside `location'
+      blocks, so that for instance one can do something like
+
+	server &quot;xyz.com&quot; {
+		...
+		location &quot;*.gmi.gz&quot; {
+			entrypoint &quot;/my/gzip/script&quot;;
+		}
+	}
+
+      to automatically generate gzipped files (using an hypotetical CGI
+      script in /my/gzip/script) on the fly[2].
+
+
+[0]: OK, not quite really, gemget/curl-like applications only implement
+     the protocol, but I'm talking about more &quot;user-facing&quot; browsers.
+[1]: Stephane Bortzmeyer once shared with us the mean size of
+     text/gemini pages as computed by lupa IIRC.
+[2]: actually, this will allow to generate *any* file on the fly, that's
+     why I added it.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006739.html">a space case for transparent gemtext compression
+</A></li>
+	<LI>Next message (by thread): <A HREF="006743.html">a space case for transparent gemtext compression
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6742">[ date ]</a>
+              <a href="thread.html#6742">[ thread ]</a>
+              <a href="subject.html#6742">[ subject ]</a>
+              <a href="author.html#6742">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

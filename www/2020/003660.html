@@ -1,0 +1,120 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC-CHANGE] Mandatory scheme in request and link URLs
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Mandatory%20scheme%20in%20request%20and%20link%20URLs&In-Reply-To=%3C5FC42413.8030400%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003659.html">
+   <LINK REL="Next"  HREF="003661.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC-CHANGE] Mandatory scheme in request and link URLs</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Mandatory%20scheme%20in%20request%20and%20link%20URLs&In-Reply-To=%3C5FC42413.8030400%40marmaladefoo.com%3E"
+       TITLE="[SPEC-CHANGE] Mandatory scheme in request and link URLs">luke at marmaladefoo.com
+       </A><BR>
+    <I>Sun Nov 29 22:43:31 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003659.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+        <LI>Next message (by thread): <A HREF="003661.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3660">[ date ]</a>
+              <a href="thread.html#3660">[ thread ]</a>
+              <a href="subject.html#3660">[ subject ]</a>
+              <a href="author.html#3660">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+On 29-Nov-2020 22:22, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+&gt;<i>
+</I>&gt;<i> [...]  I take issue with two parts:
+</I>&gt;&gt;<i> Clients MAY treat schemeless links in text/gemini documents as errors
+</I>&gt;<i> and
+</I>&gt;<i>
+</I>&gt;&gt;<i> Authors of Gemini content or software which generates Gemini content
+</I>&gt;&gt;<i> MUST add explicit schemes to any schemeless links.
+</I>&gt;<i> I think both of these changes are not great, as I explained in my original
+</I>&gt;<i> email. It effectively disallows schemeless links in gemtext, which I'm
+</I>&gt;<i> not in favour of.
+</I>
+Ok - I'm following you now, and I think I agree about not needing this 
+restriction in gemtext itself.
+
+on the first point, schemeless links of the form
+
+//authority/path
+
+in the gemtext are quite valid and will be mapped to 
+<A HREF="gemini://authority/path">gemini://authority/path</A> in a gemini client and <A HREF="http://authority/path">http://authority/path</A> in  
+a web client
+
+schemeless links of the form
+
+server.foo/path
+
+are not schemeless links, but rather relative paths with respect to the 
+current URL.
+
+On the second point, gemtext generating software should allow for the 
+//authority/path form of links.
+
+  - Luke
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003659.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+	<LI>Next message (by thread): <A HREF="003661.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3660">[ date ]</a>
+              <a href="thread.html#3660">[ thread ]</a>
+              <a href="subject.html#3660">[ subject ]</a>
+              <a href="author.html#3660">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

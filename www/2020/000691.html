@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> DNS SRV Records
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20DNS%20SRV%20Records&In-Reply-To=%3C20200515213251.GE24022%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000685.html">
+   <LINK REL="Next"  HREF="000679.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>DNS SRV Records</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20DNS%20SRV%20Records&In-Reply-To=%3C20200515213251.GE24022%40brevard.conman.org%3E"
+       TITLE="DNS SRV Records">sean at conman.org
+       </A><BR>
+    <I>Fri May 15 22:32:51 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000685.html">DNS SRV Records
+</A></li>
+        <LI>Next message (by thread): <A HREF="000679.html">Announcing https://github.com/jackdoe/net-gemini - embeddable gemini go server
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#691">[ date ]</a>
+              <a href="thread.html#691">[ thread ]</a>
+              <a href="subject.html#691">[ subject ]</a>
+              <a href="author.html#691">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great solderpunk once stated:
+&gt;<i> On Fri, May 15, 2020 at 05:40:58PM +0000, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+</I>&gt;<i> &gt; Hello!
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt; DNS SRV records are pretty interesting, but in my opinion this would
+</I>&gt;<i> &gt; unnecessarily complicate the spec.
+</I>&gt;<i> 
+</I>&gt;<i> I don't think this would necessarily need to clutter up the main spec -
+</I>&gt;<i> this is a &quot;companion spec&quot; kind of thing, like robots.txt or other
+</I>&gt;<i> things like that.
+</I>
+  Kind of.  One issue is:  given the URL:
+
+	<A HREF="gemini://gemini.example.com/">gemini://gemini.example.com/</A>
+
+does that mean a client has to look up the SRV RR for 'gemini.example.com'
+before defaulting to port 1965?  Also, it's not like there can only be one
+SRV RR for a given service.  Hypothetically, a client could get this back:
+
+			         P    W  port  host
+-------------------------------------------------------------
+_gemini._tcp.example.net. IN SRV 10    1 1965 backupserver3.example.net.
+			  IN SRV 0     0 1965 server3.example.net.
+			  IN SRV 0  5000 1965 server1.example.net.
+			  IN SRV 10    2 1966 backupserver2.example.net.
+			  IN SRV 10    3 1967 backupserver1.example.net.
+			  IN SRV 5     0 1965 redundant1.example.net.
+			  IN SRV 0  1000 1965 server2.example.net.
+			  IN SRV 0  5000 5691 server3.example.net.
+			  IN SRV 5     0 1965 redundant2.example.net.
+			  IN SRV 5     0 2020 redundant3.example.net.
+
+
+		P = priority - lower values first 
+		W = weight - higher values first
+
+  A client would need to sort the list based upon priority (lower first),
+then by weight (higher first), then pick a server at random among those with
+the same priority and weight.  So according to this list, a client would
+have to first attempt to contact
+
+		pick one at random
+			server1.example.net:1965
+			server3.example.net:6591
+
+and last
+
+		backupserver3.example.net:1965
+
+It's all spelled out in RFC-2782 [1].
+
+  Is this a pathological case?  Yes.  Will most SRV records have one entry? 
+Probably, but that's a gut feeling, I don't have actual numbers to look at.
+And unlike looking up an A or AA RR with the &quot;standard&quot; POSIX function
+getaddrinfo(), there is not simple API that I am aware of for the SRV RR.
+Also, an SRV RR query might require a second A/AAAA RR lookup [2].
+
+  -spc (Just some things to keep in mind ... )
+
+[1]	Shameless plug---I wote a DNS library in C:
+
+		<A HREF="https://github.com/spc476/SPCDNS">https://github.com/spc476/SPCDNS</A>
+
+	Yeah, that's why I know this stuff.
+
+[2]	Depends upon the DNS server.  Some will return the answer along with
+	additional records to avoid further queries, some won't.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000685.html">DNS SRV Records
+</A></li>
+	<LI>Next message (by thread): <A HREF="000679.html">Announcing https://github.com/jackdoe/net-gemini - embeddable gemini go server
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#691">[ date ]</a>
+              <a href="thread.html#691">[ thread ]</a>
+              <a href="subject.html#691">[ subject ]</a>
+              <a href="author.html#691">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

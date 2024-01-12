@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Does a cert need a Common Name matching the domain?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Does%20a%20cert%20need%20a%20Common%20Name%20matching%20the%20domain%3F&In-Reply-To=%3C55c06980fadf39e1c3018077d00d360505a3f364.camel%40gnu.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002289.html">
+   <LINK REL="Next"  HREF="002300.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Does a cert need a Common Name matching the domain?</H1>
+    <B>Alex Schroeder</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Does%20a%20cert%20need%20a%20Common%20Name%20matching%20the%20domain%3F&In-Reply-To=%3C55c06980fadf39e1c3018077d00d360505a3f364.camel%40gnu.org%3E"
+       TITLE="Does a cert need a Common Name matching the domain?">alex at gnu.org
+       </A><BR>
+    <I>Tue Jul 21 07:09:25 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002289.html">Does a cert need a Common Name matching the domain?
+</A></li>
+        <LI>Next message (by thread): <A HREF="002300.html">Does a cert need a Common Name matching the domain?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2291">[ date ]</a>
+              <a href="thread.html#2291">[ thread ]</a>
+              <a href="subject.html#2291">[ subject ]</a>
+              <a href="author.html#2291">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Mon, 2020-07-20 at 23:11 -0400, Gary Johnson wrote:
+&gt;<i> I was under the impression that the Gemini spec already made it
+</I>&gt;<i> mandatory to make CNs match the requested domain name. That's why I
+</I>&gt;<i> implemented SNI in Space Age. Here's the relevant section of the
+</I>&gt;<i> spec:
+</I>&gt;<i> 
+</I>&gt;<i> From <A HREF="gemini://gemini.circumlunar.space/docs/specification.gmi:">gemini://gemini.circumlunar.space/docs/specification.gmi:</A>
+</I>&gt;<i> -----------------------------------------------------------------
+</I>&gt;<i> 4 TLS
+</I>&gt;<i> 
+</I>&gt;<i> Use of TLS for Gemini transactions is mandatory.
+</I>&gt;<i> 
+</I>&gt;<i> Use of the Server Name Indication (SNI) extension to TLS is also
+</I>&gt;<i> mandatory, to facilitate name-based virtual hosting.
+</I>&gt;<i> -----------------------------------------------------------------
+</I>&gt;<i> 
+</I>&gt;<i> If I'm misunderstanding something here, please clarify.
+</I>
+Hi Gary
+
+Thanks for your response.
+
+My thinking is this: SNI is how the client tells the server which host
+it wants to reach in case multiple hosts are hosted on the same IP.
+Thus, the spec says: in order to facilitate name-based virtual hosting,
+we want SNI to be part of the standard. That is, both users Alex and
+Gary could host their sites on a single server, and they could both use
+their own server certificates. The server would receive requests from
+clients for either Alex's site or Gary's site, know which certificate
+to send back to the client, and serve the appropriate content. This is
+the benefit of SNI.
+
+In my mind, this doesn't require hostname verification, though! Alex's
+certificate could have used the common name &quot;Alex Schroeder&quot; and Gary's
+certificate could have used the common name &quot;Gary Johnson&quot;. All the
+client sees is a certificate, which it trusts on first use (TOFU).
+Users might decide to look at the common name of the certificate, or
+not. There's not even the need to provide a common name &#8211; we could have
+generated our certificates using nothing but our email address, or our
+organization name.
+
+In short, I'm claiming all of these are valid certificates for a Gemini
+site at alexschroeder.ch, even if they are invalid certificates for a
+HTTPS site at alexschroeder.ch (maybe? I'm ignoring alt subject name):
+
+openssl x509 -in cert.pem -noout -sha256 -text | grep Subject
+        Subject: emailAddress = <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">alex at gnu.org</A>
+
+openssl x509 -in cert.pem -noout -sha256 -text | grep Subject
+        Subject: CN = Gemini Wiki
+
+openssl x509 -in /var/lib/dehydrated/certs/transjovian.org/cert.pem
+-noout -sha256 -text | grep Subject
+        Subject: CN = transjovian.org
+
+What do you think? Do you think SNI inherently mandates that the
+subject have a common name field that matches the domain? It would have
+to be implied in the X.509 spec somewhere, I guess?
+
+Cheers
+Alex
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002289.html">Does a cert need a Common Name matching the domain?
+</A></li>
+	<LI>Next message (by thread): <A HREF="002300.html">Does a cert need a Common Name matching the domain?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2291">[ date ]</a>
+              <a href="thread.html#2291">[ thread ]</a>
+              <a href="subject.html#2291">[ subject ]</a>
+              <a href="author.html#2291">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

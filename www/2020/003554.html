@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Assuming%20disallow-all%2C%20and%20some%20research%20on%20robots.txt%20in%0A%20Geminispace%20%28Was%3A%20Re%3A%20robots.txt%20for%20Gemini%20formalised%29&In-Reply-To=%3Cd820f6c0f12afa0a20bd207779097dca864b9882.camel%40ur.gs%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003551.html">
+   <LINK REL="Next"  HREF="003558.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)</H1>
+    <B>Nick Thomas</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Assuming%20disallow-all%2C%20and%20some%20research%20on%20robots.txt%20in%0A%20Geminispace%20%28Was%3A%20Re%3A%20robots.txt%20for%20Gemini%20formalised%29&In-Reply-To=%3Cd820f6c0f12afa0a20bd207779097dca864b9882.camel%40ur.gs%3E"
+       TITLE="Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)">gemini at ur.gs
+       </A><BR>
+    <I>Wed Nov 25 17:00:46 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003551.html">Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+</A></li>
+        <LI>Next message (by thread): <A HREF="003558.html">On Web-proxies (was Re: Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised))
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3554">[ date ]</a>
+              <a href="thread.html#3554">[ thread ]</a>
+              <a href="subject.html#3554">[ subject ]</a>
+              <a href="author.html#3554">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, 2020-11-25 at 10:10 -0500, John Cowan wrote:
+&gt;<i> On Wed, Nov 25, 2020 at 6:32 AM Nick Thomas &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gemini at ur.gs</A>&gt; wrote:
+</I>&gt;<i> &gt; If it's true for people with an explicit preference, it can also be
+</I>&gt;<i> &gt; true for people who haven't expressed a preference yet. Since
+</I>&gt;<i> &gt; Gemini
+</I>&gt;<i> &gt; has a higher standard for user privacy than the web, it can also
+</I>&gt;<i> &gt; have a
+</I>&gt;<i> &gt; higher standard for these preferences - one that does not rely on
+</I>&gt;<i> &gt; presumed consent - if we want it to.
+</I>&gt;<i> &gt; 
+</I>&gt;<i> 
+</I>&gt;<i> By this logic, nobody should be able to access a Gemini server at all
+</I>&gt;<i> unless the capsule author has expressed a preference for them to do
+</I>&gt;<i> so.
+</I>&gt;<i> But to publish is to expose your work to the public.
+</I>
+Browsing, indexing, research crawling, and archiving, are all distinct
+things with distinct impacts on capsule author privacy. This is why my
+opening email proposed that we retain presumed consent for browing via
+a proxy - it's a clear case of &quot;one of these things is not like the
+others&quot;, and the same is true for individual browsing.
+
+This section was mostly aimed at establishing that capsule authors
+should be thought of as gemini users, so it took some shortcuts on
+presumed consent verbiage, which might not have been helpful.
+
+For clarity: I think it's fine to presume consent for browsing (whether
+through a proxy or not), and not fine to presume consent for archiving.
+If adopted, this represents a significant enhancement to capsule author
+privacy compared to web norms.
+
+Presumed consent for indexing, I'm actually fairly marginal about. I do
+think it's more appropriate to forbid than permit it, but not very
+strongly.
+
+&gt;<i> &gt; &gt; Why isn't the site I'm looking for in the archive?*
+</I>&gt;<i> &gt; &gt; Some sites may not be included because the automated crawlers
+</I>&gt;<i> &gt; &gt; were
+</I>&gt;<i> &gt; &gt; unaware of their existence at the time of the crawl. It's also
+</I>&gt;<i> &gt; &gt; possible that some sites were not archived because they were
+</I>&gt;<i> &gt; &gt; password protected, blocked by robots.txt, or otherwise
+</I>&gt;<i> &gt; &gt; inaccessible
+</I>&gt;<i> &gt; &gt; to our automated systems. Site owners might have also requested
+</I>&gt;<i> &gt; &gt; that
+</I>&gt;<i> &gt; &gt; their sites be excluded from the Wayback Machine.
+</I>&gt;<i> 
+</I>&gt;<i> I interpret that to mean that some sites were not crawled during the
+</I>&gt;<i> period
+</I>&gt;<i> when the Archive was paying attention to robots.txt, and so their
+</I>&gt;<i> content
+</I>&gt;<i> as of that date is unavailable.  Note the past tense:  &quot;were [...]
+</I>&gt;<i> protected by robots.txt&quot; as opposed to &quot;are protected&quot;.
+</I>
+I don't see any space at all to read it like that, not least due to the
+references to &quot;password protected&quot; and &quot;otherwise inaccessible&quot; content
+in exactly the same tense.
+
+To me, it's crystal clear that the past tense is used here simply
+because the crawl happened in the past.
+
+I do have this blog post from April 2018, referencing archived blogs
+from December 2017, where robots.txt being respected is a plot point:
+
+<A HREF="https://blog.archive.org/2018/04/24/addressing-recent-claims-of-manipulated-blog-posts-in-the-wayback-machine/">https://blog.archive.org/2018/04/24/addressing-recent-claims-of-manipulated-blog-posts-in-the-wayback-machine/</A>
+
+The blog.archive.org rant about robots.txt not being suitable for
+archivers was April 2017. that's the one that mentions they may not
+respect robots.txt in-general in the future; I'd really very strongly
+expect a futher blog post to appear if they start taking steps in that
+direction.
+
+It would definitely be interesting if you had an experiment or
+reference demonstrating that archive.org ignores robots.txt in general,
+but this page simply isn't it.
+
+/Nick
+
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003551.html">Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised)
+</A></li>
+	<LI>Next message (by thread): <A HREF="003558.html">On Web-proxies (was Re: Assuming disallow-all, and some research on robots.txt in Geminispace (Was: Re: robots.txt for Gemini formalised))
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3554">[ date ]</a>
+              <a href="thread.html#3554">[ thread ]</a>
+              <a href="subject.html#3554">[ subject ]</a>
+              <a href="author.html#3554">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

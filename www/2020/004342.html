@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] IRIs, IDNs, and all that international jazz
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3C20201223230319.GC9267%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004318.html">
+   <LINK REL="Next"  HREF="004349.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] IRIs, IDNs, and all that international jazz</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3C20201223230319.GC9267%40brevard.conman.org%3E"
+       TITLE="[spec] IRIs, IDNs, and all that international jazz">sean at conman.org
+       </A><BR>
+    <I>Wed Dec 23 23:03:19 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004318.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+        <LI>Next message (by thread): <A HREF="004349.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4342">[ date ]</a>
+              <a href="thread.html#4342">[ thread ]</a>
+              <a href="subject.html#4342">[ subject ]</a>
+              <a href="author.html#4342">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great marc once stated:
+&gt;<i> 
+</I>&gt;<i> It is one thing to find full I8N support in a language such as python
+</I>&gt;<i> (slow batteries included), but what about minorities such tcl, lua, m4 or
+</I>&gt;<i> sed ?
+</I>
+  I have Lua covered.  I can't say for the others (other than, you really
+use m4?  You are a better man than I am, Gunga Din).
+
+&gt;<i> I think internationalisation concern belong in the very highest level of a
+</I>&gt;<i> stack. You expect me to say presentation or application-level, but
+</I>&gt;<i> remember the OSI model is wrong (For instance, things like HTTP or gemini
+</I>&gt;<i> are typically lumped into one application layer, when there many layers to
+</I>&gt;<i> them). The actual highest level is the naive computer uses who gets told
+</I>&gt;<i> to &quot;move the mouse over this and then click on this, like so...&quot;. At that
+</I>&gt;<i> level, it might make sense for a gemini browser to be fully localised, and
+</I>&gt;<i> render an url in the local language (maybe even left to right, or top to
+</I>&gt;<i> bottom).
+</I>
+  I have to deal with the telephony network at work.  It *is* the OSI seven
+layer burrito [1] and even *there* there are baked in assumptions relating
+to i18n [2].  Text is limited to ASCII.  Yup.  7-bit US-ASCII it all its
+glory.  Anything else requires some very nasty hacks.  Even better, there
+does exist a way to relate a name to a phone number, but it's restricted to
+just 15 bytes of US-ASCII.  So &quot;Rafaella Gabriela Sarsaparilla&quot; gets cut to
+&quot;Rafaella Gabrie&quot;.  Lovely, isn't it?
+
+&gt;<i> But even the layer just below that (the competent user level) this starts
+</I>&gt;<i> leaking. A gemini url starts with &quot;<A HREF="gemini://">gemini://</A>&quot; - that is ascii text, and
+</I>&gt;<i> even funnier, taken from latin. If a non-english user is confused by
+</I>&gt;<i> english (nay, latin, with no native speakers at all) words, then surely
+</I>&gt;<i> &quot;<A HREF="gemini://">gemini://</A>&quot; has to be rewritten as &quot;<A HREF="tweling://">tweling://</A>&quot; or &quot;<A HREF="zwilling://">zwilling://</A>&quot; or
+</I>&gt;<i> whatever farsi, japanese or mongolian use for &quot;twin&quot;. If not, then an full
+</I>&gt;<i> ascii text url should be manageable too... an url is primarily a computer
+</I>&gt;<i> address.
+</I>
+  Sushi comes from Japanese, gesundheit from German, sauna from Finnish,
+smorgasbord from Swedish, borscht from Russian and ketchup from China,
+what's your point?  All those are perfectly cromulent (from Simpsons) words. 
+Modern English sucks up words from all other languages.
+
+  Also, what's the Japanese equivalent of 'https'?  I'm curious.
+
+&gt;<i> Long ago I came across a version of (I think it was) Pascal
+</I>&gt;<i> had been localised into french with language keywords
+</I>&gt;<i> like &quot;begin&quot; and &quot;if&quot; replaced. 
+</I>
+  It wasn't H&#229;stad [3], was it?  If it was, I made that up to make a point
+about LISP.
+
+  But yes, there have been several such localizations in the past for
+various languages but they never caught on internationally for some reason. 
+One language I heard about, Cornerstone, used a novel method for
+identifiers---the visual representation was not part of the code but from a
+map---change a variable name in one place, and every place that variable
+appeared would change its name.  Pretty cool concept if you ask me.
+
+  -spc
+
+[1]	And a complete pain to work with.  Fortunately, it's becoming less
+	and less of an issue as things are transitioning to the Internet,
+	but the phone companies are fighting and screaming all the way.
+
+[2]	&#207;&#241;t&#232;r&#241;&#224;t&#236;&#242;&#241;&#225;l&#237;z&#226;t&#238;&#248;&#241;
+
+[3]	<A HREF="http://boston.conman.org/2008/01/04.1">http://boston.conman.org/2008/01/04.1</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004318.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+	<LI>Next message (by thread): <A HREF="004349.html">[spec] IRIs, IDNs, and all that international jazz
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4342">[ date ]</a>
+              <a href="thread.html#4342">[ thread ]</a>
+              <a href="subject.html#4342">[ subject ]</a>
+              <a href="author.html#4342">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

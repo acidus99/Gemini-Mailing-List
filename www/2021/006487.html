@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Station, a centralised social network on Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Station%2C%20a%20centralised%20social%20network%20on%20Gemini&In-Reply-To=%3C20210504094934.GA3362%40sources.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006486.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Station, a centralised social network on Gemini</H1>
+    <B>Stephane Bortzmeyer</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Station%2C%20a%20centralised%20social%20network%20on%20Gemini&In-Reply-To=%3C20210504094934.GA3362%40sources.org%3E"
+       TITLE="Station, a centralised social network on Gemini">stephane at sources.org
+       </A><BR>
+    <I>Tue May  4 10:49:34 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006486.html">[ANN] g2ra.py, a gemini to RSS/Atom gateway
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6487">[ date ]</a>
+              <a href="thread.html#6487">[ thread ]</a>
+              <a href="subject.html#6487">[ subject ]</a>
+              <a href="author.html#6487">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Interesting experience, a social network based on Gemini:
+
+<A HREF="gemini://station.martinrue.com/">gemini://station.martinrue.com/</A>
+
+(My personal feed is &lt;<A HREF="gemini://station.martinrue.com/bortzmeyer">gemini://station.martinrue.com/bortzmeyer</A>&gt; if
+you're interested.)
+
+This is quite experimental at this time, the source code is not even
+released yet
+&lt;<A HREF="gemini://station.martinrue.com/rdelaage/281c0c04664143b0956d2573165ace23">gemini://station.martinrue.com/rdelaage/281c0c04664143b0956d2573165ace23</A>&gt;. And,
+at the current time, it is centralized
+&lt;<A HREF="gemini://station.martinrue.com/adele/5c225167813e4e2badb3a156e4f9a686">gemini://station.martinrue.com/adele/5c225167813e4e2badb3a156e4f9a686</A>&gt;.
+
+If you want to use Lagrange to connect, a few tips:
+
+First, you need a client certificate. You can do it from Lagrange (the
+Identity menu, a small person on the left of the address bar, then
+&quot;New identity&quot;) or from outside. Here is an example to get a
+certificate with elliptic curves (because we can) with OpenSSL:
+
+openssl ecparam -out key-user.pem -name prime256v1 -genkey 
+openssl req -new -subj /CN=Me -sha256 -nodes -key key-user.pem -out cert-user.crt
+openssl x509 -days 1000 -in cert-user.crt -out cert-user.pem -req -signkey key-user.pem 
+cat cert-user.pem key-user.pem &gt; import-with-lagrange.pem
+lagrange import-with-lagrange.pem
+
+Then you can use the Identity menu to import your certificate.
+
+Next, when you navigate to Station, be sure to first visit the home
+page &lt;<A HREF="gemini://station.martinrue.com/">gemini://station.martinrue.com/</A>&gt; (otherwise, the certificate
+will be used by Lagrange only for URLs under the prefix you
+visit). Then, using the Identity menu, &quot;Show identities&quot;, right click
+on the one you created or imported and ask for this identity to be
+used on that page.
+
+After that, you can create your Station account at
+&lt;<A HREF="gemini://station.martinrue.com/join">gemini://station.martinrue.com/join</A>&gt; and after that create entries in
+the log, reply, etc.
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006486.html">[ANN] g2ra.py, a gemini to RSS/Atom gateway
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6487">[ date ]</a>
+              <a href="thread.html#6487">[ thread ]</a>
+              <a href="subject.html#6487">[ subject ]</a>
+              <a href="author.html#6487">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

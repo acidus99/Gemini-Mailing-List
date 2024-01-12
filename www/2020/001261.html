@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Three month spec freeze
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20month%20spec%20freeze&In-Reply-To=%3C20200602205113.GE11961%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001259.html">
+   <LINK REL="Next"  HREF="001262.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Three month spec freeze</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20month%20spec%20freeze&In-Reply-To=%3C20200602205113.GE11961%40SDF.ORG%3E"
+       TITLE="Three month spec freeze">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Tue Jun  2 21:51:13 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001259.html">Three month spec freeze
+</A></li>
+        <LI>Next message (by thread): <A HREF="001262.html">Three month spec freeze
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1261">[ date ]</a>
+              <a href="thread.html#1261">[ thread ]</a>
+              <a href="subject.html#1261">[ subject ]</a>
+              <a href="author.html#1261">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, Jun 02, 2020 at 10:14:59PM +0200, Felix Quei&#223;ner wrote:
+
+&gt;<i> I strongly recommend supporting utf-8 only.
+</I>
+Noted, but...
+
+&gt;<i> I don't want to support more than one in my
+</I>&gt;<i> code
+</I>
+You don't have to!  Support UTF-8 and you are spec compliant.
+
+&gt;<i> most libraries don't support more than UTF-8, UTF-16, UTF-32 and
+</I>&gt;<i> ASCII.
+</I>
+Oh, now that can't be true.  Loads of content produced on Windows
+computers is saved in some silly legacy ISO-whatever encoding that
+Microsoft refuses to drop.  Any library used by working programmers
+in the &quot;real world&quot; of commercial software needs to be able to deal
+with that, at least.
+ 
+&gt;<i> Encoding is hell
+</I>
+It's really not that bad at all in a situation, like Gemini (and
+unlike Gopher!), where you get told precisely what the encoding is.
+AV-98 does this:
+
+---
+if mime.startswith(&quot;text/&quot;):
+    encoding = mime_options.get(&quot;charset&quot;, &quot;UTF-8&quot;)
+    try:
+        body = body.decode(encoding)                                                                 
+    except UnicodeError:
+        print(&quot;Could not decode response body using %s encoding declared in header!&quot; % encoding)
+        return
+---
+
+Hardly a nightmare!
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001259.html">Three month spec freeze
+</A></li>
+	<LI>Next message (by thread): <A HREF="001262.html">Three month spec freeze
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1261">[ date ]</a>
+              <a href="thread.html#1261">[ thread ]</a>
+              <a href="subject.html#1261">[ subject ]</a>
+              <a href="author.html#1261">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

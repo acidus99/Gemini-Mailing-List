@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Text reflow woes (or: I want bullets back!)y
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200116182746.GA11266%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000327.html">
+   <LINK REL="Next"  HREF="000329.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Text reflow woes (or: I want bullets back!)y</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3C20200116182746.GA11266%40brevard.conman.org%3E"
+       TITLE="Text reflow woes (or: I want bullets back!)y">sean at conman.org
+       </A><BR>
+    <I>Thu Jan 16 18:27:46 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000327.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+        <LI>Next message (by thread): <A HREF="000329.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#328">[ date ]</a>
+              <a href="thread.html#328">[ thread ]</a>
+              <a href="subject.html#328">[ subject ]</a>
+              <a href="author.html#328">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Aaron Janse once stated:
+&gt;<i> On Thu, Jan 16, 2020, at 7:10 AM, solderpunk wrote:
+</I>&gt;<i> &gt; But I realise that, actually, for the majority of people that's far
+</I>&gt;<i> &gt; *more* accessible.  Someone using something resembling Notepad is going
+</I>&gt;<i> &gt; to have a miserable time writing content hard-wrapped at 40 chars, while
+</I>&gt;<i> &gt; the &quot;long line&quot; format just happens, probably without them even realising
+</I>&gt;<i> &gt; it.
+</I>&gt;<i> 
+</I>&gt;<i> I do admit that you've nearly convinced me that 40 chars is easiest for
+</I>&gt;<i> readers, even though I'm not sure if it's best if we consider authors, too.
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Then again, making text/gemini easy to write with &quot;normal&quot; editors
+</I>&gt;<i> &gt; arguably isn't worth much if the next step is anyway &quot;now use sftp or a
+</I>&gt;<i> &gt; git push to get your content on the server&quot;.
+</I>&gt;<i> 
+</I>&gt;<i> In my experience, though, hard-wrapping text doesn't work well with git
+</I>&gt;<i> anyway. And I don't know of any text editors that re-hard-wrap automatically
+</I>&gt;<i> when the beginning of a paragraph is edited.
+</I>&gt;<i> 
+</I>&gt;<i> Maybe gemini files could be authored in either wrapped or unwrapped format,
+</I>&gt;<i> then the server could hard-wrap intelligently before sending it to the
+</I>&gt;<i> reader? Would that be bad practice?
+</I>
+  First question---how to tell the server the width?  Well, one solution:
+
+	<A HREF="gemini://gemini.conman.org/test/wrap;80">gemini://gemini.conman.org/test/wrap;80</A>
+	<A HREF="gemini://gemini.conman.org/test/wrap;40">gemini://gemini.conman.org/test/wrap;40</A>
+	<A HREF="gemini://gemini.conman.org/test/wrap;32">gemini://gemini.conman.org/test/wrap;32</A>
+	<A HREF="gemini://gemini.conman.org/test/wrap;132">gemini://gemini.conman.org/test/wrap;132</A>
+
+  Just replace the number at the end with your preferred width.  If not
+given:
+
+	<A HREF="gemini://gemini.conman.org/test/wrap">gemini://gemini.conman.org/test/wrap</A>
+
+it will currently default to 77.
+
+  I just happen to have the code to handle reflowing text at arbitrary
+widths, but the code to do so has to take into account a few edge cases that
+might not be readily apparent (what if there is no breakpoint within the
+mandated width?).
+
+  -spc (Also note---I added that to my Gemini site last September)
+</PRE>
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000327.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+	<LI>Next message (by thread): <A HREF="000329.html">Text reflow woes (or: I want bullets back!)y
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#328">[ date ]</a>
+              <a href="thread.html#328">[ thread ]</a>
+              <a href="subject.html#328">[ subject ]</a>
+              <a href="author.html#328">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

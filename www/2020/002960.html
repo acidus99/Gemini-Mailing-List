@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Using netcat with gemini (was Re: A question regarding the spec)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Using%20netcat%20with%20gemini%20%28was%20Re%3A%20A%20question%20regarding%20the%20spec%29&In-Reply-To=%3C87mu06nomi.fsf%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002956.html">
+   <LINK REL="Next"  HREF="002961.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Using netcat with gemini (was Re: A question regarding the spec)</H1>
+    <B>Gary Johnson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Using%20netcat%20with%20gemini%20%28was%20Re%3A%20A%20question%20regarding%20the%20spec%29&In-Reply-To=%3C87mu06nomi.fsf%40disroot.org%3E"
+       TITLE="Using netcat with gemini (was Re: A question regarding the spec)">lambdatronic at disroot.org
+       </A><BR>
+    <I>Wed Oct 28 19:20:53 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002956.html">Using netcat with gemini (was Re: A question regarding the spec)
+</A></li>
+        <LI>Next message (by thread): <A HREF="002961.html">Using netcat with gemini (was Re: A question regarding the spec)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2960">[ date ]</a>
+              <a href="thread.html#2960">[ thread ]</a>
+              <a href="subject.html#2960">[ subject ]</a>
+              <a href="author.html#2960">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Netcat (ncat) does support SSL connections with the --ssl flag.
+
+Here's my little &quot;gemget&quot; Guile script I wrote that lets me poke around
+Geminispace from the command line whenever I'm not inside a proper
+Gemini client. It's also useful for scripting in situations where you
+might use wget with HTTP(S).
+
+-----------------------------------------------------------------------------
+#!/usr/bin/env guile
+!#
+
+(let ((args (command-line)))
+  (if (not (= 2 (length args)))
+      (display &quot;Usage: gemget &lt;GEMINI_URL&gt;\n&quot;)
+      (let ((url (cadr args)))
+        (if (not (string-prefix? &quot;<A HREF="gemini://">gemini://</A>&quot; url))
+            (display &quot;GEMINI_URL should begin with <A HREF="gemini://\n">gemini://\n</A>&quot;)
+            (let ((server (caddr (string-split url #\/))))
+              (system (simple-format #f &quot;echo ~S | ncat --ssl ~S 1965&quot; url server)))))))
+-----------------------------------------------------------------------------
+
+Just save this in a file called gemget somewhere on your PATH and you
+can use it like this:
+
+-----------------------------------------------------------------------------
+<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gjohnson at euclid</A> ~ $ gemget <A HREF="gemini://gemini.circumlunar.space/">gemini://gemini.circumlunar.space/</A>
+20 text/gemini
+# Project Gemini
+
+## Overview
+
+Gemini is a new internet protocol which:
+
+* Is heavier than gopher
+* Is lighter than the web
+* Will not replace either
+* Strives for maximum power to weight ratio
+* Takes user privacy very seriously
+
+## Resources
+
+=&gt; docs/	Gemini documentation
+=&gt; software/	Gemini software
+=&gt; servers/	Known Gemini servers
+=&gt; <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">https://lists.orbitalfox.eu/listinfo/gemini</A>	Gemini mailing list
+=&gt; <A HREF="gemini://gemini.conman.org/test/torture/">gemini://gemini.conman.org/test/torture/</A>	Gemini client torture test
+
+## Web proxies
+
+=&gt; <A HREF="https://portal.mozz.us/?url=gemini%3A%2F%2Fgemini.circumlunar.space%2F&amp;fmt=fixed">https://portal.mozz.us/?url=gemini%3A%2F%2Fgemini.circumlunar.space%2F&amp;fmt=fixed</A>	Gemini-to-web proxy service
+=&gt; <A HREF="https://proxy.vulpes.one/gemini/gemini.circumlunar.space">https://proxy.vulpes.one/gemini/gemini.circumlunar.space</A>	Another Gemini-to-web proxy service
+
+## Search engines
+
+=&gt; <A HREF="gemini://gus.guru/">gemini://gus.guru/</A>	Gemini Universal Search engine
+=&gt; <A HREF="gemini://houston.coder.town">gemini://houston.coder.town</A>	Houston search engine
+
+## Geminispace aggregators
+
+=&gt; capcom/	CAPCOM
+=&gt; <A HREF="gemini://rawtext.club:1965/~sloum/spacewalk.gmi">gemini://rawtext.club:1965/~sloum/spacewalk.gmi</A>	Spacewalk
+
+## Gemini mirrors of web resources
+
+=&gt; <A HREF="gemini://gempaper.strangled.net/mirrorlist/">gemini://gempaper.strangled.net/mirrorlist/</A>	A list of mirrored services
+
+## Free Gemini hosting
+
+=&gt; users/	Users with Gemini content on this server
+-----------------------------------------------------------------------------
+
+Have fun and happy hacking!
+  Gary
+
+-- 
+GPG Key ID: 7BC158ED
+Use `gpg --search-keys lambdatronic' to find me
+Protect yourself from surveillance: <A HREF="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</A>
+=======================================================================
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+Please avoid sending me MS-Office attachments.
+See <A HREF="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002956.html">Using netcat with gemini (was Re: A question regarding the spec)
+</A></li>
+	<LI>Next message (by thread): <A HREF="002961.html">Using netcat with gemini (was Re: A question regarding the spec)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2960">[ date ]</a>
+              <a href="thread.html#2960">[ thread ]</a>
+              <a href="subject.html#2960">[ subject ]</a>
+              <a href="author.html#2960">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

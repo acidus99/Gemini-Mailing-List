@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Gemini file downloading client - a thought experiment
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20file%20downloading%20client%20-%20a%20thought%20experiment&In-Reply-To=%3CCAObwWNiMO-u182iKj1eHznwYYGQNGi-VZi_Nwpt8hWif0DVW5Q%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003042.html">
+   <LINK REL="Next"  HREF="003041.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Gemini file downloading client - a thought experiment</H1>
+    <B>Katarina Eriksson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20file%20downloading%20client%20-%20a%20thought%20experiment&In-Reply-To=%3CCAObwWNiMO-u182iKj1eHznwYYGQNGi-VZi_Nwpt8hWif0DVW5Q%40mail.gmail.com%3E"
+       TITLE="Gemini file downloading client - a thought experiment">gmym at coopdot.com
+       </A><BR>
+    <I>Tue Nov  3 21:35:14 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003042.html">Torture test 0026
+</A></li>
+        <LI>Next message (by thread): <A HREF="003041.html">Gemini file downloading client - a thought experiment
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3039">[ date ]</a>
+              <a href="thread.html#3039">[ thread ]</a>
+              <a href="subject.html#3039">[ subject ]</a>
+              <a href="author.html#3039">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is in response to the thread on content length. I propose making a
+supporting specification separate from the Gemini specification.
+
+Feel free to extend the experiment with more problems and scenarios or
+point out if I made the wrong conclusion.
+
+Problem A: clients don't have enough information to show a progress bar
+
+Scenario 1: download a tiny file
+
+The user clicks the download button and the download is completed within a
+second. No need to show progress.
+
+Scenario 2: download a medium sized file
+
+The user clicks the download button and the download starts. The client
+shows the number of bytes downloaded, download speed and elapsed time. A
+button labeled &quot;show progress&quot; appears after 5 seconds or so. The download
+completes before the user is tempted to click that button.
+
+Scenario 3: download a big file
+
+Like scenario 2 except the user gets impatient enough to click the &quot;show
+progress&quot; button. The client makes a separate request to a standardized
+endpoint to get the needed information. If the server supports this
+standard, the information is sent and the client can show the progress bar
+to the user.
+
+Problem B: we can't tell if the download succeed
+
+Scenario 4: the TLS session terminated cleanly but we don't have full
+confidence the download succeed
+
+Verify the file using the information we have (from scenario 3) or present
+the user with the option to fetch a hash from the standardized endpoint.
+
+--
+Katarina
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201103/ac41f38e/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201103/ac41f38e/attachment.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003042.html">Torture test 0026
+</A></li>
+	<LI>Next message (by thread): <A HREF="003041.html">Gemini file downloading client - a thought experiment
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3039">[ date ]</a>
+              <a href="thread.html#3039">[ thread ]</a>
+              <a href="subject.html#3039">[ subject ]</a>
+              <a href="author.html#3039">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

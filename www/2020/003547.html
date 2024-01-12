@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> On certificates and validation
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20certificates%20and%20validation&In-Reply-To=%3CC7CD2DP18NIT.2OAI6N8UP237F%40taiga%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003546.html">
+   <LINK REL="Next"  HREF="003548.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>On certificates and validation</H1>
+    <B>Drew DeVault</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20On%20certificates%20and%20validation&In-Reply-To=%3CC7CD2DP18NIT.2OAI6N8UP237F%40taiga%3E"
+       TITLE="On certificates and validation">sir at cmpwn.com
+       </A><BR>
+    <I>Wed Nov 25 12:58:55 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003546.html">On certificates and validation
+</A></li>
+        <LI>Next message (by thread): <A HREF="003548.html">On certificates and validation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3547">[ date ]</a>
+              <a href="thread.html#3547">[ thread ]</a>
+              <a href="subject.html#3547">[ subject ]</a>
+              <a href="author.html#3547">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed Nov 25, 2020 at 7:58 AM EST, Bj&#246;rn W&#228;rmedal wrote:
+&gt;<i> I'm building a lib to simplify gemini client development in python,
+</I>&gt;<i> and my current headache is certification handling. There's a few
+</I>&gt;<i> things that come to mind, some more philosophical than technical in
+</I>&gt;<i> nature.
+</I>&gt;<i>
+</I>&gt;<i> * Should I support verification of CA-issued certificates, or
+</I>&gt;<i> self-signed only? Doing both at the same time leads to a &quot;try this, if
+</I>&gt;<i> fail then try this&quot; sort of situation which isn't very pretty. How
+</I>&gt;<i> common are CA-issued certificates in geminispace, and should they be
+</I>&gt;<i> handled differently than TOFU?
+</I>
+I strongly recommend not checking for CA-signed certificates, and only
+supporting TOFU.
+
+&gt;<i> * How does one even validate a self-signed cert? If ew0k.example.com
+</I>&gt;<i> serves a certificate with the Common Name &quot;ew0k's Awesome Site&quot; and no
+</I>&gt;<i> Subject Alternative Names, is that less valid than one that includes
+</I>&gt;<i> the hostname? Or the IP? Does expiration time matter at all for a
+</I>&gt;<i> self-signed cert?
+</I>
+Yes, test the common name and/or alternative names, and the expiration
+time.
+
+&gt;<i> * When a browser has accepted one cert for example.com but is
+</I>&gt;<i> presented another on the next visit, it shows a warning to the user
+</I>&gt;<i> who will then decide whether to accept the new cert. What information
+</I>&gt;<i> allows a user to make an informed decision in this case? Does it
+</I>&gt;<i> matter that the last cert would still be valid for another 3 years? Or
+</I>&gt;<i> 2 months?
+</I>
+The SHA-256 of the certificate is helpful in this, because they use it
+to verify the certificate's authenticity out of band (e.g. email the
+operator, call a friend on a different ISP, etc).
+
+You may find this article I wrote on TOFU helpful:
+
+<A HREF="gemini://drewdevault.com/2020/09/21/Gemini-TOFU.gmi">gemini://drewdevault.com/2020/09/21/Gemini-TOFU.gmi</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003546.html">On certificates and validation
+</A></li>
+	<LI>Next message (by thread): <A HREF="003548.html">On certificates and validation
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3547">[ date ]</a>
+              <a href="thread.html#3547">[ thread ]</a>
+              <a href="subject.html#3547">[ subject ]</a>
+              <a href="author.html#3547">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

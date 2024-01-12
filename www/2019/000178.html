@@ -1,0 +1,204 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> TLS, TOFU and the Gemini security model
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20TLS%2C%20TOFU%20and%20the%20Gemini%20security%20model&In-Reply-To=%3C20190923181900.GA5995%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000175.html">
+   <LINK REL="Next"  HREF="000179.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>TLS, TOFU and the Gemini security model</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20TLS%2C%20TOFU%20and%20the%20Gemini%20security%20model&In-Reply-To=%3C20190923181900.GA5995%40SDF.ORG%3E"
+       TITLE="TLS, TOFU and the Gemini security model">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Mon Sep 23 19:19:00 BST 2019</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000175.html">Clarification of current spec
+</A></li>
+        <LI>Next message (by thread): <A HREF="000179.html">TLS, TOFU and the Gemini security model
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#178">[ date ]</a>
+              <a href="thread.html#178">[ thread ]</a>
+              <a href="subject.html#178">[ subject ]</a>
+              <a href="author.html#178">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Currently, the &quot;speculative specification&quot; has the following to say
+about how Gemini clients should validate TLS certificates when
+connecting to servers:
+
+&gt;<i> Clients can validate TLS connections however they like (including not
+</I>&gt;<i> at all) but the strongly RECOMMENDED approach is to implement a
+</I>&gt;<i> lightweight &quot;TOFU&quot; certificate-pinning system which treats self-signed
+</I>&gt;<i> certificates as first- class citizens.
+</I>
+Well, there's a *little* more detail than that, but not much.
+
+To the best of my knowledge, all extant clients take the &quot;not at all&quot;
+route.  I'm looking to change this for the case of AV-98 and so wanted
+to start thinking a little more clearly about what the different
+possibilities are for making TLS as secure as possible without relying
+on certificate authorities.
+
+Before even starting to talk about this, it makes sense to at least
+vaguely specify a threat model.  I don't think it's realistic to aim at
+Gemini being resilient against targetted attacks from state-level
+actors, and given the likely total lack of commercial content on Gemini
+in the forseeable future I think cybercriminals are not yet a realistic
+concern.  To my mind the most important things to consider are:
+
+ * ISPs logging all Gemini traffic
+ * ISPs altering Gemini traffic (e.g. to insert adverts)
+ * ISPs terminating connections when blacklisted keywords are seen, to
+   facilitate government-mandated censorship
+
+All of these things do happen right now or have happened previously in
+the context of the web, so they're not ridiculous to consider.  None of
+these things are targetted, in the sense that they are most probably
+done to *all* traffic on a given set of ports using automated systems,
+without any special case-by-case consideration.  This means that
+effective countermeasures don't necessarily need to be things that
+couldn't be defeated by a smart person with a little effort, they just
+need to be not so trivially defeated that the attack can be easily and
+reliably automated.
+
+Right now, all use of TLS for Gemini *can* be easily and reliably
+automated because there's nothing to prevent MITM attacks.
+
+At the very least, it seems sensible for a client to insist that a
+certificate's &quot;Not Before&quot; and &quot;Not After&quot; validity dates agree with the
+current date, and that the hostname the client is trying to connect to
+is consistent with either the certificate's Common Name or Subject
+Alternative Names.  This only prevents extremely stupid MITM attacks
+which try to use a generic bogus certificate to attack all connections,
+but it's relatively straightforward to do and raises the bar slightly,
+so why not recommend it?
+
+Onto more serious attempts at preventing MITM: I've always thought that
+a TOFU style approach would work well for this, but before digging into
+this more I'll quickly metion something else I read about today which
+could be a great tool for Gemini - I don't discuss it before TOFU here
+because I think it's better than TOFU, I do it because I think it can be
+described quickly and easily and doesn't raise as many implementation
+questions.
+
+DNS-Based Authentication of Named Entities (DANE, see
+<A HREF="https://en.wikipedia.org/wiki/DNS-based_Authentication_of_Named_Entities">https://en.wikipedia.org/wiki/DNS-based_Authentication_of_Named_Entities</A>)
+basically involves using DNS records to let domain owners declare
+certain things about which certificates should be considered valid for
+their hostnames, and one thing a DANE record can declare is that
+&quot;exactly this verbatim certificate should be used and none other&quot;.  This
+means that a successful MITM attack also requires a successful attack on
+the user's DNS system - which of course is not impossible, but it raises
+the bar substantially.  I think DANE could be part of a good
+security-in-depth design.
+
+Anyway, onto the TOFU.
+
+The basic TOFU model involves blindly trusting a certificate the first
+time you encounter it, but *remembering* that certificate (or rather,
+just its fingerprint, basically a hash digest) and warning the user if a
+different certficiate is encountered in the future.  In principle this
+approach means that a MITM attack can only be pulled off the first time
+a user connects to a particular host.  Which, now that I think about it,
+actually offers much better defence against targetted attacks than the
+automated dragnet stuff that is supposed to be part of Gemini's threat
+model - a TOFU client which only ever accesses Geminispace from the same
+home internet connection through the same ISP is vulnerable to bulk MITM
+attacks.  Hrmh.
+
+The TOFU model sounds simple enough but questions appear once you start
+actually trying to code it.  The first one I had was whether or not
+certificates should be &quot;remembered&quot; against IP addresses or hostnames.
+This question is pertinent because Gemini's use of URLs instead of
+selectors as requests enables name-based virtual hosting, so it's
+possible for one IP address to map to multiple hostnames.
+
+It turns out that most TLS implementations (including even the Python
+standard library's ssl module, which I've started to take a dim view of)
+support a TLS extension called Server Name Indication (SNI) where the
+client sends the hostname of the server it think it's connecting to as
+part of the TLS handshake.  This allows virtual hosting servers to serve
+up distinct certificates for distinct hostnames.  This is a good thing
+because it allows shared hosting where each user can take responsibility
+for their own certificates.  I am thinking of amending the Gemini spec
+to say that clients SHOULD use SNI.
+
+The end result of this is that TOFU clients should store certificate
+fingerprints against hostnames, not IP addresses.  So, there's that
+question solved and I'll code this up for AV-98 soon.
+
+The next question is what to do about certificate expiration.  The first
+time a client connects to a host after that host's previously seen
+certificate has expired, the client EXPECTS to see something new.  If it
+simply blindly trusts the first new thing which comes along, this
+basically means that a client is periodically vulnerable to MITMs at
+certain times - times which are publically announced far in advance!  A
+very simple way to partially mitigate this problem might be to recommend
+that Gemini certificates be relatively long lived - although this is a
+trade-off because it means the damage from a compromised certificate
+lasts longer.  A much better solution is some sort of scheme where
+servers sign their new certificates using the key associated with their
+old certificate, authenticating the continuity - this is really
+beautiful, but it would require server admins to use a specialised
+certificate genreating tool, which feels unlikely to take off.
+
+There are various more complicated schemes people have proposed to make
+TLS work without CAs, like the idea of &quot;public notary&quot; servers.  I'm
+very interested in exploring these possibilities for Gemini.  Probably
+any such system would be a recommendation only for especially
+security-conscious clients, with vanilla TOFU being the more common
+baseline.
+
+Thoughts very welcome!
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000175.html">Clarification of current spec
+</A></li>
+	<LI>Next message (by thread): <A HREF="000179.html">TLS, TOFU and the Gemini security model
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#178">[ date ]</a>
+              <a href="thread.html#178">[ thread ]</a>
+              <a href="subject.html#178">[ subject ]</a>
+              <a href="author.html#178">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

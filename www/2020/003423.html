@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Again on feeds in Gemini format
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Again%20on%20feeds%20in%20Gemini%20format&In-Reply-To=%3CC77CTKZB05Z0.2W444SW8X2PG2%40stilgar%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003416.html">
+   <LINK REL="Next"  HREF="003425.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Again on feeds in Gemini format</H1>
+    <B>Solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Again%20on%20feeds%20in%20Gemini%20format&In-Reply-To=%3CC77CTKZB05Z0.2W444SW8X2PG2%40stilgar%3E"
+       TITLE="Again on feeds in Gemini format">solderpunk at posteo.net
+       </A><BR>
+    <I>Thu Nov 19 15:44:06 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003416.html">Again on feeds in Gemini format
+</A></li>
+        <LI>Next message (by thread): <A HREF="003425.html">Again on feeds in Gemini format
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3423">[ date ]</a>
+              <a href="thread.html#3423">[ thread ]</a>
+              <a href="subject.html#3423">[ subject ]</a>
+              <a href="author.html#3423">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi Geminauts,
+
+On Thu Nov 19, 2020 at 1:19 PM CET, Luke Emmet wrote:
+
+&gt;<i> I see no harm in using Atom as a machine readable format, but from my
+</I>&gt;<i> point of view the main downside is expecting end users to author it, or
+</I>&gt;<i> have the skills to run some command line application to generate it.
+</I>&gt;<i> Probably fine for early adopters, but not so good for &quot;normal&quot; users.
+</I>
+I quite agree with this perspective.  The biggest drawback to using Atom
+as the standard way to subscribe to serial content on Gemini is not the
+difficulty of parsing, but that it requires the authors of such content
+to generate the feed file.  I thought this could be addressed with good
+tooling, such as my gemfeed program, but real world experience in
+helping people use it, and using it myself, has proven this is not
+actually straightforward.  The sticking point is the need for
+timestamps.  File system timestamps are too easily accidentally changed
+to be really useful for this.  Of course the problem is trivially solved
+by some kind of static site generator which keeps its own database of
+creation/update times and generates the feed, but IMHO it absolutely
+should be necessary to use such a system just to make your content
+subscribable.  If somebody wants to use such a tool, more power to them,
+but ideally one should be able to manage a capsule entirely by hand with
+nothing more than a standard text editor if that's what one wants to do,
+and still participate in Geminispace as a first class citizen.  Atom
+feeds don't fit well with this ideal.
+
+Systems like Spacewalk or Moku Pona (recently updated to support
+Gemini!) *do* fit with this ideal.  The content author does not need to
+do anything special at all, and users can subscribe to anything at all.
+These are extremely desirable properties.  The downside is that these
+change-detection systems are fragile (and will erroneously declare a
+site to have been updated if all the author did is change a typo or add
+some ASCII art above their post list), and provide no meta-data - you
+can't see post titles in Spacewalk the way you can in CAPCOM.
+
+I have been thinking for some time now about how to get the best of both
+these worlds, and have had Fediverse/email discussions with a few
+people about this subject.  Recently I settled on a design and had been
+meaning to make some kind of post about it.  Reading this thread, I
+realise now I've independently reinvented exactly the same scheme that
+Luke Emmet has already implemented!
+
+I would be strongly in favour of some kind of &quot;sidekick standard&quot; (like
+robots.txt) defining a process by which *any* text/gemini document can
+be interpreted as a feed and subscribed to.  The details would look
+roughly like this:
+
+* The text of the first heading line (e.g. # My gemlog) to appear in the
+  document is equivalent to the &lt;feed&gt;&lt;title&gt; element of an Atom feed.
+  All other heading lines are ignored.
+* All other lines which are not link lines are ignored.
+* All link lines with labels where the first whitespace-separated
+  component of the label is a recognised datestamp are treated as
+  equivalent to an Atom &lt;entry&gt; element, where:
+    - The link's URL provides &lt;entry&gt;&lt;link&gt;
+    - The datestamp provides &lt;entry&gt;&lt;updated&gt;
+    - The content of the label after the datestamp provides
+      &lt;entry&gt;&lt;title&gt;
+* All other link lines are ignored
+
+Ignoring link lines without a datestamp allows for the presence of
+&quot;Home&quot; or &quot;Next page in LEO&quot; (I only learned about LEO yesterday - love
+it!) links in a subscribable page without having them turn up as entries
+in the feed.
+
+All this requires to become a fairly complete spec is a specification of
+acceptable datestamp formats.  It seems like Luke Emmet's implementation
+of this is flexible in this regard.  I would argue strongly in favour of
+supporting only a single format, namely the ISO 8601 format (in which
+today is 2020-11-19).  The advantages of this format are:
+
+* There's a complete formal spec for it already available, written and
+  maintained by somebody else
+* It's linguistically neutral (e.g. does not use English-specific
+  abbreviations like &quot;Jun&quot; or &quot;Mon&quot;)
+* It's very easily recognised via a simple regex
+* Lexicographic sorting is equivalent to chronological sorting.
+
+If all feeds use this format, then an aggregator which subscribes to
+multiple feeds (and I realise that Luke's tool is *not* one of these,
+so the fact that it is flexible on dates should not be perceived as a
+failing) can fetch all its feeds and sort the entries it finds from most
+recent to oldest without even having to actually parse the datestamps at
+all - they can just be treated as dumb strings.  This substantially
+simplifies aggregator design compared to a standard which allows
+multiple date formats, or which mandates any other date format.
+
+I am aware this approach does not provide as much information as an Atom
+feed does (e.g. it cannot convey per-entry authorship), but it should be
+adequate for a majority of real-world cases.  Certainly it would be
+adequate for something like the CAPCOM and Spacewalk aggregators
+currently in popular use.
+
+I don't want to be perceived as forcing this design upon the community,
+but I have given it quite some thought and I really think it's hard to
+significantly improve upon.  It would allow for aggregators with all the
+best parts of CAPCOM (high resistance to false alarm updates, providing
+feed and entry titles in aggregated output) with implementation burdens
+much closer to Spacewalk, for both aggregator authors and content
+authors.  That's a very Gemini kind of solution. :)  A quick browse of
+CAPCOM and Spacewalk suggest the majority of gemlogs are already 100%
+compatible with this method of subscription (including all those at
+gemlog.blue).  Many which aren't could be very quickly and easily made
+so (e.g. by changing 2020/11/19 to 2020-11-19), without any nasty side
+effects like changing URLs.
+
+So, if somebody can see serious shortcomings with this approach or needs
+clarification of some small details, I'm very happy to discuss it, but
+otherwise it would be nice to avoid this becoming yet another endless
+bikeshedding expedition, and I'd be happy to bless this approach or one
+very similar as &quot;official&quot; quite quickly.  CAPCOM is rapidly approaching
+100 feeds, and I would love to see the community move toward norms of
+people either running their own private aggregators to read only what
+they like, and/or people setting up curated public aggregators specific
+to particular special interests, rather than encouraging everybody to
+read everything that anybody ever says.  Making subscription
+substantially easier could help push us in that direction.
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003416.html">Again on feeds in Gemini format
+</A></li>
+	<LI>Next message (by thread): <A HREF="003425.html">Again on feeds in Gemini format
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3423">[ date ]</a>
+              <a href="thread.html#3423">[ thread ]</a>
+              <a href="subject.html#3423">[ subject ]</a>
+              <a href="author.html#3423">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

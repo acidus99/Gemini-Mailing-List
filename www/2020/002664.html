@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A proposed scheme for parsing preformatted alt text
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C0FDC124F-8F0E-4B80-99CF-D79CB095CF48%40ngalt.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002661.html">
+   <LINK REL="Next"  HREF="002671.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A proposed scheme for parsing preformatted alt text</H1>
+    <B>Nathan Galt</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C0FDC124F-8F0E-4B80-99CF-D79CB095CF48%40ngalt.com%3E"
+       TITLE="A proposed scheme for parsing preformatted alt text">mailinglists at ngalt.com
+       </A><BR>
+    <I>Fri Sep 11 03:59:33 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002661.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+        <LI>Next message (by thread): <A HREF="002671.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2664">[ date ]</a>
+              <a href="thread.html#2664">[ thread ]</a>
+              <a href="subject.html#2664">[ subject ]</a>
+              <a href="author.html#2664">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+&gt;<i> On Sep 10, 2020, at 5:30 PM, Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+</I>&gt;<i> 
+</I>&gt;<i>  I added the following non-standard document:
+</I>&gt;<i> 
+</I>&gt;<i> 	<A HREF="gemini://gemini.conman.org/test/preformat.gemini">gemini://gemini.conman.org/test/preformat.gemini</A>
+</I>&gt;<i> 
+</I>&gt;<i> that contains &quot;machine readable text&quot; at the opening preformatted marker,
+</I>&gt;<i> and a &quot;human readable text&quot; on the ending preformatted marker, just to give
+</I>&gt;<i> an indication of what it might look like and what might be done with it. 
+</I>&gt;<i> Enough talk, *someone* has to do an implementation to scare the bejeezus out
+</I>&gt;<i> of everyone (not that it's particularly scary in what I did).
+</I>&gt;<i> 
+</I>&gt;<i>  -spc (HTML people.  Seriously, HTML.  You want your format, you have it
+</I>&gt;<i> 	already ... )
+</I>
+I like sets of concrete examples. Thanks for whipping this up.
+
+What I dislike about this style of &#8220;&#8216;machine-readable&#8217; text up top&#8221; (for some definition of &#8220;machine-readable&#8221;) is that the alt-text function has been entirely obliterated, at least in these examples.
+
+For the two code bits at the top of the page, the alt text should be the contents of the captions at the bottom of each.
+
+For the three &#8220;images&#8221;, the alt-text should be something like:
+
+- a dragon
+- Merry Christmas
+- a Christmas tree with a rabbit sitting near its base
+
+It seems we have a &#8220;pick two&#8221; problem. We have (at least!) three different annotation types that we&#8217;d like to adorn preformatted blocks with:
+
+- machine-readable hints for how to parse a block (say, for syntax highlighting)
+- alternative representations for people who can&#8217;t see (/understand?) the contents of the block
+- captions of the block for people who can see it fine
+
+And&#8230;we have two potential slots to fill. Constraints:
+
+- preexisting Markdown parsers expect their what-language-is-this hint right after the first ```
+- alt text probably ought to come first, just in case the user is on an oversaturated 2 KB/s modem connection&#8230;or something. Plus, the Gemini spec already says that This Is the Way&#8482;.
+
+Personally, I think block captions (title-text equivalents) are the least important and should be the first to be shoved out the airlock. While HTML is better for their addition, people limped along OK before &lt;aside&gt; and &lt;figure&gt;+&lt;figcaption&gt; were added to HTML5.
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002661.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+	<LI>Next message (by thread): <A HREF="002671.html">A proposed scheme for parsing preformatted alt text
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2664">[ date ]</a>
+              <a href="thread.html#2664">[ thread ]</a>
+              <a href="subject.html#2664">[ subject ]</a>
+              <a href="author.html#2664">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

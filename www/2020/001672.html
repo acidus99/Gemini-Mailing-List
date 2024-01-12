@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> gemini+submit:// (was Re: Uploading Gemini content)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bsubmit%3A//%20%28was%20Re%3A%20Uploading%20Gemini%20content%29&In-Reply-To=%3C20200614150547.GF363%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001644.html">
+   <LINK REL="Next"  HREF="001674.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>gemini+submit:// (was Re: Uploading Gemini content)</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bsubmit%3A//%20%28was%20Re%3A%20Uploading%20Gemini%20content%29&In-Reply-To=%3C20200614150547.GF363%40SDF.ORG%3E"
+       TITLE="gemini+submit:// (was Re: Uploading Gemini content)">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Sun Jun 14 16:05:47 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001644.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+        <LI>Next message (by thread): <A HREF="001674.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1672">[ date ]</a>
+              <a href="thread.html#1672">[ thread ]</a>
+              <a href="subject.html#1672">[ subject ]</a>
+              <a href="author.html#1672">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, Jun 14, 2020 at 02:33:52AM +0200, Petite Abeille wrote:
+&gt;<i> 
+</I>&gt;<i> Unfortunately, the 1024 bytes limit doesn't get  us very far. The diff itself is ~14K. ~5K compressed. Too big for one request.
+</I>&gt;<i> 
+</I>&gt;<i> Fossil delta format [2] is much more compact than diff -u, but still weights ~4K, 2K compressed. And this is not accounting for data: encoding overhead.
+</I>&gt;<i> 
+</I>&gt;<i> So, hmmm, 1024 bytes is quite a limiting factor if one must use only one request.
+</I>
+Well, look - 1024 bytes as a maximum URL length is a value I more or
+less plucked out of the air without deep consideration, simply because
+the elements passed around by a protocol *should* have a well-defined
+maximum length so people can allocate appropriately sized memory
+buffers, etc.  I certainly *wasn't* thinking about using queries to
+upload content, I was thinking of &quot;ordinary URLs&quot; and so 1024 bytes
+seemed hugely generous.
+
+I believe most web browsers have a larger maximum URL length.  I did
+look into this briefly for some reason - IIRC, Internet Explorer has/had
+the smallest limit, and it was either 2048 or 4096 bytes.
+
+According to GUS, currently more than half of the text/gemini content
+out there is less than 1.2 KiB in size.  If URLs were allowed to be 2048
+bytes long, all that content could be uploaded as a query.
+
+I do not have hard numbers on this (Alex may be able to provide them),
+but I would *imagine* that most edits to wikis, when expressed as diffs,
+would also be much less than 1 KiB.
+
+Can we solve a lot of these issues by bumping up our maximum URL length
+and, perhaps, defining a new 1x status code meaning &quot;I'm asking you for
+some input and in this context it's quite reasonable that you might want
+to submit something on the long side&quot;, which clients could optionally
+respond to by launching a text editor instead of just reading a single
+line of input?  Clients which chose to support this code would become
+the preferred clients of wiki enthusiasts or people who don't want to or
+don't know how to use scp etc.
+
+Heck, wiki nerds could write their own clients which can launch an
+editor pointed at a local copy of the resource being viewed, then
+calculate a diff in some format and submit *that* as a query, and the
+wiki software the server runs could apply the diff.  The special wiki
+editing clients could even do your suggested chunked transfer thing for
+very large diffs, if the wiki servers all implemented a standard API for
+such a thing.
+
+It should also be very easy to write an app targetted at &quot;non-technical&quot;
+authors which lets them submit chunks of writing up to 2 KiB or so, with
+an &quot;append&quot; link at the submission confirmation page to submit a follow
+up chunk.  It wouldn't necessarily be the smoothest experience in the
+world, but if most content could be written in a single request and 99%
+with one or two &quot;append&quot; requests, I think it would be usable enough.
+Heck, this is the &quot;slow internet&quot;, right?  A little bit of inconvenience
+as part of a careful and deliberate process should not scare us away.
+
+In general, solving perceived problems with the limitations that Gemini
+imposes by combining the &quot;primitives&quot; which are already there in
+creative new ways, even if they are very slightly clunky, makes me far,
+far happier than adding in additional more advanced features to remove
+those limitations.  If we discover really useful and generally
+applicable constructions that can be built in this way, we can give them
+names, standardise them, and clients can choose to impelement them in
+ways which hide the clunkiness from the user.  It would be wonderful,
+though, if they were still usable in a clunky way by a knowledgable
+users in clients which didn't support them explicitly.
+
+In short, think like FORTH. :)
+
+&gt;<i> A bit clunky, but workable :D
+</I>
+Maybe we should adopt this as an official motto? :p
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001644.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+	<LI>Next message (by thread): <A HREF="001674.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1672">[ date ]</a>
+              <a href="thread.html#1672">[ thread ]</a>
+              <a href="subject.html#1672">[ subject ]</a>
+              <a href="author.html#1672">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

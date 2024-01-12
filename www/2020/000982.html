@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC-CHANGE] Small housekeeping updates
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Small%20housekeeping%20updates&In-Reply-To=%3C20200523102651.GB12486%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000981.html">
+   <LINK REL="Next"  HREF="000986.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC-CHANGE] Small housekeeping updates</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Small%20housekeeping%20updates&In-Reply-To=%3C20200523102651.GB12486%40SDF.ORG%3E"
+       TITLE="[SPEC-CHANGE] Small housekeeping updates">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Sat May 23 11:26:51 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000981.html">Updates to Gemini best practices
+</A></li>
+        <LI>Next message (by thread): <A HREF="000986.html">[SPEC-CHANGE] Small housekeeping updates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#982">[ date ]</a>
+              <a href="thread.html#982">[ thread ]</a>
+              <a href="subject.html#982">[ subject ]</a>
+              <a href="author.html#982">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Ahoy!
+
+I pushed some small changes to the Gemini specification this morning,
+which you can see at:
+
+* <A HREF="gemini://gemini.circumlunar.space/docs/spec-spec.txt">gemini://gemini.circumlunar.space/docs/spec-spec.txt</A>
+* <A HREF="gopher://gemini.circumlunar.space/0/docs/spec-spec.txt">gopher://gemini.circumlunar.space/0/docs/spec-spec.txt</A>
+* <A HREF="https://gemini.circumlunar.space/docs/spec-spec.txt">https://gemini.circumlunar.space/docs/spec-spec.txt</A>
+
+These are fairly small, house-keeping style changes being made in
+advance of the formal &quot;unfreezing&quot; of the spec come June.  Most
+server/client implementations should need only minor changes if any to
+keep up with these, but authors, please do check/test rather than
+assuming!
+
+SUMMARY OF CHANGES:
+
+Response headers now must use only a single space character to separate
+the &lt;META&gt; content from the status code, instead of a mix of one-or-more
+spaces and tabs (see section 1.3.1).  This means the maximum size of a
+valid response header is now 1029 bytes (including the CRLF), whereas
+before it was unbounded.
+
+It is now specified that content with a text/* media type may be
+transferred via Gemini using bare LF line separators as well as the
+canonical CRLF (see section 1.3.3).
+
+Use of the Server Name Indication (SNI) extension to TLS is now
+mandatory (see section 1.4)
+
+IMPLICATIONS FOR SERVER AUTHORS:
+
+If your server is using a tab character to separate status codes from
+&lt;META&gt; content, you MUST switch to using a space.
+
+IMPLICATIONS FOR CLIENT AUTHORS:
+
+Client authors of a Postelian inclination probably don't need to change
+anything in response to the change of response headers.  If you really
+want to you MAY refuse to parse headers using non-compliant whitespace,
+but this will probably just require adding ugly code for little
+benefit.
+
+Check that your client can handle text/gemini content with
+CRLF-separated lines without visibly displaying the CR.  If you are
+using built-in line splitting tools from your programming languages
+standard library, chances are very good you are already fine in this
+regard.
+
+If your client is not using SNI, you MUST start using it.
+
+IMPLICATIONS FOR CONTENT AUTHORS:
+
+If you author your Gemini content on a pre-OS X Apple computer, '70s or
+'80s vintage 8-bit microcomputer or MIT LISP machine, you should take
+care to convert your line endings to CR or CRLF before uploading it to
+your server of choice, or write your own server which does the
+conversion before you.  Please let the list know more about your amazing
+life decisions!
+
+Cheers,
+Solderpunk
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000981.html">Updates to Gemini best practices
+</A></li>
+	<LI>Next message (by thread): <A HREF="000986.html">[SPEC-CHANGE] Small housekeeping updates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#982">[ date ]</a>
+              <a href="thread.html#982">[ thread ]</a>
+              <a href="subject.html#982">[ subject ]</a>
+              <a href="author.html#982">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

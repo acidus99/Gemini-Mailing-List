@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] Proposed reversed Gemini for uploads to servers - Feedback wanted
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Proposed%20reversed%20Gemini%20for%20uploads%20to%20servers%20-%0A%20Feedback%20wanted&In-Reply-To=%3C87v9cjme5c.fsf%40posteo.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004625.html">
+   <LINK REL="Next"  HREF="004626.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] Proposed reversed Gemini for uploads to servers - Feedback wanted</H1>
+    <B>benthor</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20Proposed%20reversed%20Gemini%20for%20uploads%20to%20servers%20-%0A%20Feedback%20wanted&In-Reply-To=%3C87v9cjme5c.fsf%40posteo.de%3E"
+       TITLE="[tech] Proposed reversed Gemini for uploads to servers - Feedback wanted">benthor at posteo.de
+       </A><BR>
+    <I>Wed Dec 30 16:50:39 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004625.html">[tech] Proposed reversed Gemini for uploads to servers - Feedback wanted
+</A></li>
+        <LI>Next message (by thread): <A HREF="004626.html">[tech] Proposed reversed Gemini for uploads to servers - Feedback wanted
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4611">[ date ]</a>
+              <a href="thread.html#4611">[ thread ]</a>
+              <a href="subject.html#4611">[ subject ]</a>
+              <a href="author.html#4611">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Sean Conner writes:
+&gt;<i>   There's also the titan: protocol:
+</I>&gt;<i>
+</I>&gt;<i> 	<A HREF="https://communitywiki.org/wiki/Titan">https://communitywiki.org/wiki/Titan</A>
+</I>&gt;<i>
+</I>&gt;<i> also an upload method for Gemini, and also originally an idea of 
+</I>&gt;<i> mine (but
+</I>&gt;<i> developed almost exclusively by Alex Schroeder).
+</I>
+Very interesting. If I understand 
+<A HREF="gemini://communitywiki.org/page/Titan">gemini://communitywiki.org/page/Titan</A> correctly, the following 
+should have worked:
+
+     echo -en 
+     &quot;<A HREF="titan://communitywiki.org/raw/Test;token=hello;mime=text/plain;size=12\r\nHello">titan://communitywiki.org/raw/Test;token=hello;mime=text/plain;size=12\r\nHello</A> 
+     World\n&quot; | socat - ssl:communitywiki.org:1965,verify=0
+
+However, <A HREF="gemini://communitywiki.org/page/Test">gemini://communitywiki.org/page/Test</A> remained empty. Even 
+after creating the page via the http interface, I couldn't update 
+it. In general, I am not sure whether the token requirement 
+couldn't be dropped in favor of exclusively client 
+certificate-based authentication.
+
+&gt;<i> There is also Dioscuri:
+</I>&gt;<i>
+</I>&gt;<i> 	<A HREF="gemini://rawtext.club/~sloum/geminilist/002792.gmi">gemini://rawtext.club/~sloum/geminilist/002792.gmi</A>
+</I>&gt;<i>
+</I>&gt;<i>   I have nothing to do with this one.  So there's quite a bit of 
+</I>&gt;<i>   interest
+</I>&gt;<i> and work in this.
+</I>
+Oh, I like this approach! Unfortunately the Gemini version of that 
+page is a bit taxing to read due to issues with newline 
+conversion. Here is the HTML version for anyone who is interested:
+
+      <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/002792.html">https://lists.orbitalfox.eu/archives/gemini/2020/002792.html</A>
+
+Does anyone know whether at least a toy implementation of this 
+already exists? The ML thread seems to have derailed pretty 
+quickly unfortunately...
+
+
+&gt;<i>   I'd like to at least read the spec, but I'm still stuck at TLS 
+</I>&gt;<i>   1.2 until I
+</I>&gt;<i> check out the newer LibreSSL library.  But at the very least, 
+</I>&gt;<i> check out the
+</I>&gt;<i> others methods as well.
+</I>
+Could you check again if you can access the site? It's now using a 
+taditional ECDSA certificate instead of the previous newfangled 
+ED25519 cert.
+
+      <A HREF="gemini://inimeg.space">gemini://inimeg.space</A>
+
+benthor
+
+</PRE>
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004625.html">[tech] Proposed reversed Gemini for uploads to servers - Feedback wanted
+</A></li>
+	<LI>Next message (by thread): <A HREF="004626.html">[tech] Proposed reversed Gemini for uploads to servers - Feedback wanted
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4611">[ date ]</a>
+              <a href="thread.html#4611">[ thread ]</a>
+              <a href="subject.html#4611">[ subject ]</a>
+              <a href="author.html#4611">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

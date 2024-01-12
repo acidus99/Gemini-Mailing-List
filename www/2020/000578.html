@@ -1,0 +1,369 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Gemini server logging formats and practices
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20server%20logging%20formats%20and%20practices&In-Reply-To=%3C20200513215820.GR7305%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000648.html">
+   <LINK REL="Next"  HREF="000564.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Gemini server logging formats and practices</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20server%20logging%20formats%20and%20practices&In-Reply-To=%3C20200513215820.GR7305%40brevard.conman.org%3E"
+       TITLE="Gemini server logging formats and practices">sean at conman.org
+       </A><BR>
+    <I>Wed May 13 22:58:20 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000648.html">Alternative transports,  philosophy [was: Gemini server logging formats and practices]
+</A></li>
+        <LI>Next message (by thread): <A HREF="000564.html">Basic git clone over gemini:// working
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#578">[ date ]</a>
+              <a href="thread.html#578">[ thread ]</a>
+              <a href="subject.html#578">[ subject ]</a>
+              <a href="author.html#578">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Dave Huseby once stated:
+&gt;<i> I love your enthusiasm Sean. I'm going to reply in kind and call out when
+</I>&gt;<i> I'm trolling you. Just remember that I appreciate your position and thank
+</I>&gt;<i> you for sharing your perspective. I'm sincere as Fred Rogers when I say
+</I>&gt;<i> that. Now...let the trolling begin! Let's see who can flame each other
+</I>&gt;<i> better. ; )
+</I>&gt;<i> 
+</I>&gt;<i> On Tue, May 12, 2020, at 8:06 PM, Sean Conner wrote:
+</I>&gt;<i> &gt;   Back in 1989, the Internet as we know it was still five years away. 
+</I>&gt;<i> &gt; Commerical activity was against the rules and the only people who were on
+</I>&gt;<i> &gt; the Internet back then where largely academics (students, instructors,
+</I>&gt;<i> &gt; professors) at universities and a few researchers at some select companies
+</I>&gt;<i> &gt; (like IBM, Sun or Symbolics).  I would think that had you seriously
+</I>&gt;<i> &gt; presented this argument at the time, people might have looked at you
+</I>&gt;<i> &gt; strangely.  While people were still largely trustful of other users, the
+</I>&gt;<i> &gt; Morris Worm of Nov 1988 was still quite recent and if not for logging, it
+</I>&gt;<i> &gt; would have taken much longer to stop.
+</I>&gt;<i> 
+</I>&gt;<i> You're not wrong. I was. It was 1991, not 1989: 
+</I>&gt;<i> 
+</I>&gt;<i> =&gt; <A HREF="http://ksi.cpsc.ucalgary.ca/archives/WWW-TALK/www-talk-1991.messages/1.html">http://ksi.cpsc.ucalgary.ca/archives/WWW-TALK/www-talk-1991.messages/1.html</A>
+</I>&gt;<i> 
+</I>&gt;<i> Dismissive troll: The rest of what you said above is irrelevant, missing
+</I>&gt;<i> the point, and distracting.
+</I>&gt;<i>  
+</I>&gt;<i> &gt;   So a not-so-hypothetical situation here---if I were to put on my Gemini
+</I>&gt;<i> &gt; server &quot;I LOG ALL THE IPS!&quot;, honestly, how could I get your consent (or
+</I>&gt;<i> &gt; non-consent)?  I can't get it from you prior to your connection, because I
+</I>&gt;<i> &gt; don't know you will connect.  I can't get your concent afterwards because I
+</I>&gt;<i> &gt; already have your IP.  And would such a disclaimer have to be added to every
+</I>&gt;<i> &gt; page?  How can you know prior to requesting a Gemini page that the server
+</I>&gt;<i> &gt; will log your IP address?
+</I>&gt;<i> 
+</I>&gt;<i> You're not wrong. IP is what we have. You seemed to have completely missed
+</I>&gt;<i> that I'm making philosophical arguments.
+</I>
+  I come across people who make grand statements like yours.  Such as
+Stanislav:
+
+	The Loper OS Project aims to remake computing. I am aware that
+	others have tried and failed. Laughing? The job is not nearly as
+	difficult as it sounds.  Much of the complexity found in modern
+	systems software is accidental, rather than inherent. A large
+	portion of my thinking has gone into figuring out what parts of an
+	operating system are non-axiomatic - vestiges from a computational
+	Stone Age which could safely be swept away.
+
+		<A HREF="http://www.loper-os.org/?p=4#selection-33.0-41.338">http://www.loper-os.org/?p=4#selection-33.0-41.338</A>
+
+(written in 2007; he's still writing at his blog today, but no Loper OS). 
+There was Fran&#231;ois-Ren&#233; Rideau Dang-Vu B&#226;n with his TUNES operating system:
+
+	TUNES is a project to replace existing Operating Systems, Languages,
+	and User Interfaces by a completely rethought Computing System,
+	based on a correctness-proof-secure higher-order reflective
+	self-extensible fine-grained distributed persistent fault-tolerant
+	version-aware decentralized (no-kernel) object system.
+
+		<A HREF="http://tunes.org/papers/WhyNewOS/WhyNewOS.html">http://tunes.org/papers/WhyNewOS/WhyNewOS.html</A>
+
+(I recall when it was first announced in 1992---I thought it was silly back
+then; again, TUNES is no longer).  Then there's Richard Kulisz:
+
+	PlanNine has modularity, composability, distribution and half of
+	uniformity. You can also include reliability.
+
+	Unix has only modularity and many people seem to act like it's the
+	&quot;best OS of all time.&quot;
+
+	ErosOs satisfies Reliability, TransparentPersistence and most of
+	security.  It doesn't seem to give very practical security.
+
+	BlueAbyss aims to satisfy all of the principles to the utmost,
+	except for Correctness Proofs, which I see as a costly fad that adds
+	little value.
+
+		<A HREF="https://wiki.c2.com/?OperatingSystemsDesignPrinciples">https://wiki.c2.com/?OperatingSystemsDesignPrinciples</A>
+
+(again, grand plans and not much to show for it years later).  And finally
+to round out these examples, I present Curtis Yarvin and Urbit---and I still
+can't decide if it's an elaborate troll or an earnest endevour, but Urbit
+was introduced with this:
+
+	This spec defines one function, Nock.
+
+	2 Structures
+
+	A noun is an atom or a cell.  An atom is any unsigned integer.
+	A cell is an ordered pair of any two nouns.
+
+	3 Pseudocode
+
+	Brackets enclose cells.  [a b c] is [a [b c]].
+
+	*a is Nock(a).  Reductions match top-down.
+
+	4 Reductions
+
+	?[a b]           =&gt; 0
+	?a               =&gt; 1
+
+	^[a b]           =&gt; ^[a b]
+	^a               =&gt; (a + 1)
+
+	=[a a]           =&gt; 0
+	=[a b]           =&gt; 1
+	=a               =&gt; =a
+
+	/[1 a]           =&gt; a
+	/[2 a b]         =&gt; a
+	/[3 a b]         =&gt; b
+	/[(a + a) b]     =&gt; /[2 /[a b]]
+	/[(a + a + 1) b] =&gt; /[3 /[a b]]
+	/a               =&gt; /a
+
+	*[a 0 b]         =&gt; /[b a]
+	*[a 1 b]         =&gt; b
+	*[a 2 b c d]     =&gt; *[a 3 [0 1] 3 [1 c d] [1 0] 3 [1 2 3] [1 0] 5 5 b]
+	*[a 3 b]         =&gt; **[a b]
+	*[a 4 b]         =&gt; ?*[a b]
+	*[a 5 b]         =&gt; ^*[a b]
+	*[a 6 b]         =&gt; =*[a b]
+	*[a [b c] d]     =&gt; [*[a b c] *[a d]]
+	*a               =&gt; *a
+
+		<A HREF="https://www.unqualified-reservations.org/2010/01/maxwells-equations-of-software/">https://www.unqualified-reservations.org/2010/01/maxwells-equations-of-software/</A>
+
+And further elaborates:
+
+	Urbit is a static functional namespace: a programming environment
+	specified as a single stateless, frozen function. The Urbit function
+	is Maxwellian: formally defined by a small system of axioms. Urbit,
+	while a cool toy, is designed for practical computing.
+
+		<A HREF="https://moronlab.blogspot.com/2010/01/urbit-functional-programming-from.html">https://moronlab.blogspot.com/2010/01/urbit-functional-programming-from.html</A>
+
+(and it seems to have become A Thing at <A HREF="https://urbit.org/,">https://urbit.org/,</A> although Curtis
+is no longer associated with the project).
+
+  I present these examples (and there are more I have saved) as a means of
+explanation---I come across these grand sweeping statements that we're doing
+this all wrong and we must, MUST! change how it all works because the
+current way is (to be charitable) not optimum!  And in all these cases, it's
+all words, no implementation (except for Urbit, but even they cheat by not
+using Nock but &quot;optimizing&quot; it with native code).
+
+  Your message came across exactly like that to me---IP is bad, we must use
+this other technology now!
+
+  And I will admit that my reply might have been a bit incendiary.
+
+&gt;<i> Time for you to catch up with the rest of us Sean. It's only a matter of
+</I>&gt;<i> time now. People--including me--are already working on a mixnet that
+</I>&gt;<i> leverages this. Once we unlock that achievement, Gemini will be able to
+</I>&gt;<i> stop relying on IP entirely.
+</I>
+  I'll patiently await the results.  &lt;troll&gt;Hopefully it won't take as long
+as TUNES, Loper OS, Blue Abyss, or Urbit.&lt;/troll&gt;
+
+&gt;<i> Concern troll: I'm worried about you. Hopefully post-mixnet you'll have a
+</I>&gt;<i> better attitude about the state of the world. Stress kills y'know ; )
+</I>
+  I know.  Thanks.
+
+&gt;<i> You're not wrong. I made a mistake implying the Gemini had *anything* to
+</I>&gt;<i> do with my efforts fix the Internet status quo. i gave three, one-hour
+</I>&gt;<i> presentations last week at the Internet Identity Workshop and decided I
+</I>&gt;<i> was going to walk the walk and *not* publish my papers on the web. 
+</I>
+  Good for you.  At least now I know you are serious enough to work on this.
+
+&gt;<i> My support for pseudonimity is a philosophical line in the sand. The only
+</I>&gt;<i> way for users to maintain leverage against surveillance capitalism to do
+</I>&gt;<i> all they can to maintain pseudonimity and privacy. My contributions to the
+</I>&gt;<i> Gemini community are mostly philosophical. There's no reason we have to do
+</I>&gt;<i> things the same way just because that's how it's always been done. 
+</I>
+  True enough, but the issue I have is people questioning the design and
+declaring it should have been done another way, *without doing any work*. 
+Not even a proof-of-concept.
+
+  When solderpunk first designed the protocol, I had a problem with the then
+defined status codes.  I ignored that aspect when writing the first server,
+opting instead to reuse HTTP codes.  That lead to a long discussion and
+finally the design we have.  But the crutial point is that *there was code!*
+
+&gt;<i> &gt; &gt; Anyway, back to logging. I don't think it is our place as server operators
+</I>&gt;<i> &gt; &gt; to collect IP addresses without consent since it isn't our data. 
+</I>&gt;<i> &gt; 
+</I>&gt;<i> &gt;   Technically, the IP address you use to access a server isn't yours either. 
+</I>&gt;<i> &gt; It's the providers.  They are just letting you use it.
+</I>&gt;<i> 
+</I>&gt;<i> You're not wrong.
+</I>&gt;<i> 
+</I>&gt;<i> Troll: Again, you're answering a philosophical argument with a technical
+</I>&gt;<i> one. I'm starting to think you're uncomfortable discussing philosophy and
+</I>&gt;<i> always run to the comfort of black and white, right angles and straight
+</I>&gt;<i> jackets....I mean straight walls. ; )
+</I>
+  My best friend has a degree in Philosophy, so I'm not unconfortable with
+it.  But there comes a time when Reality comes knocking at the door ...
+
+&gt;<i> When I send you a packet, my computer fills in the source IP address. That
+</I>&gt;<i> source IP address is personally identifiable information the vast majority
+</I>&gt;<i> of the time. It's the same as me filling in my address on an envelope. I
+</I>&gt;<i> may rent, and not own, the house--and therefore the address--that I live
+</I>&gt;<i> in but legally, my address is considered personally identifiable
+</I>&gt;<i> information (PII) and protected under the GDPR and CCPA. I'm suggesting
+</I>&gt;<i> that to gain a consistent and coherent philosophy about user sovereignty
+</I>&gt;<i> to make the internet better with truly decentralized systems, we should
+</I>&gt;<i> all start thinking of IP addresses as PII and build/configure systems
+</I>&gt;<i> accordingly.
+</I>
+  And that's easy to say.  It's another thing to implement it.
+
+&gt;<i> Thanks for your reply Sean. 
+</I>
+  You're welcome.
+
+&gt;<i> It was fun replying to you. I understand what
+</I>&gt;<i> you're saying and you're not wrong with all of your technical details. But
+</I>&gt;<i> I was speaking in philosophical terms as guiding principles for making
+</I>&gt;<i> decisions going forward. I reject the current status quo. I only look back
+</I>&gt;<i> to remind myself of what went wrong but all of my energy is focused ahead
+</I>&gt;<i> of me. I think Aaron's quote is apropos here:
+</I>&gt;<i> 
+</I>&gt;<i> &quot;What is the most important thing you could be working on in the world
+</I>&gt;<i> right now? ... And if you're not working on that, why aren't you?&quot;
+</I>
+  Was that Aaron Swartz?
+
+&gt;<i> Troll: maybe you should work on learning Rust and meditating ; )
+</I>
+  Rusty meditation?  What are you on about? 8-P
+
+  -spc
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000648.html">Alternative transports,  philosophy [was: Gemini server logging formats and practices]
+</A></li>
+	<LI>Next message (by thread): <A HREF="000564.html">Basic git clone over gemini:// working
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#578">[ date ]</a>
+              <a href="thread.html#578">[ thread ]</a>
+              <a href="subject.html#578">[ subject ]</a>
+              <a href="author.html#578">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

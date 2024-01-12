@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> fingerprint art
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20fingerprint%20art&In-Reply-To=%3C20200620115900.GB15711%40localhost%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001814.html">
+   <LINK REL="Next"  HREF="001819.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>fingerprint art</H1>
+    <B>mbays at sdf.org</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20fingerprint%20art&In-Reply-To=%3C20200620115900.GB15711%40localhost%3E"
+       TITLE="fingerprint art">mbays at sdf.org
+       </A><BR>
+    <I>Sat Jun 20 12:59:00 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001814.html">Some new tests in the Gemini Client Torture Test
+</A></li>
+        <LI>Next message (by thread): <A HREF="001819.html">fingerprint art
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1816">[ date ]</a>
+              <a href="thread.html#1816">[ thread ]</a>
+              <a href="subject.html#1816">[ subject ]</a>
+              <a href="author.html#1816">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'd like to suggest that, to supplement TOFU, we copy OpenSSH's trick of 
+displaying a fingerprint as ASCII art. I just implemented this in my 
+client diohsc; here's an example:
+
+```
+&gt;<i> g gemini.circumlunar.space
+</I>&gt;&gt;&gt;<i> <A HREF="gemini://gemini.circumlunar.space">gemini://gemini.circumlunar.space</A>
+</I>Certificate chain: DST Root CA X3 &gt;&gt;&gt; Let's Encrypt Authority X3 &gt;&gt;&gt; gemini.circumlunar.space
+    +-----[X509]------+           +-----[X509]------+
+    |   ..     .      |           |  ... .          |
+    |o .  .   . .     |           |   . o .         |
+    |+o  . o   o      |           |    o o          |
+    |+E   = . =       |           |   . . o         |
+    | .  + + ^ .      |           |  . . o ^        |
+    |   . + * o       |    &gt;&gt;&gt;    |   + + E         |
+    |    . o .        |           |  . @ .          |
+    |       .         |           |.o + *           |
+    |                 |           |B+..o            |
+    +----[SHA256]-----+           +----[SHA256]-----+
+Let's Encrypt Authority X     gemini.circumlunar.space
+    Expires 2021-03-17            Expires 2020-08-01
+25847d668eb4f04fdd40b12b6b0740c567da7d024308eb6c2c96fe41d9de218d
+&gt;&gt;&gt;<i> 2bba43d5886f92f4e3f1d0fc1d66d647c2b890965e8088f09d0345649bb5bd25
+</I>No previous certificate seen for this host -- trusting provided certificate!
+[press a key]
+```
+
+The idea is that these pictures are much easier for humans to recognise 
+than long hex strings. So even if you don't have the fingerprint you're 
+expecting saved to disk, you might be familiar enough with its picture 
+that you can recognise if it's changed.
+
+This is using the &quot;drunken bishop&quot; algorithm used by OpenSSH; it's 
+pretty straightforward, and described nicely here:
+<A HREF="http://www.dirk-loss.de/sshvis/drunken_bishop.pdf">http://www.dirk-loss.de/sshvis/drunken_bishop.pdf</A>
+(I'm using this nice haskell implementation:
+<A HREF="https://hackage.haskell.org/package/drunken-bishop">https://hackage.haskell.org/package/drunken-bishop</A> )
+
+I think it might be nice if we had a cross-client convention to use 
+these fingerprint pictures.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 195 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200620/8004b10c/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20200620/8004b10c/attachment.sig</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001814.html">Some new tests in the Gemini Client Torture Test
+</A></li>
+	<LI>Next message (by thread): <A HREF="001819.html">fingerprint art
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1816">[ date ]</a>
+              <a href="thread.html#1816">[ thread ]</a>
+              <a href="subject.html#1816">[ subject ]</a>
+              <a href="author.html#1816">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [SPEC] Backwards-compatible metadata in Gemini
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3CCAFkF85bUF9aEjQ%3D0MsCoRk%3D4mJJH-%2Bp3Lh3ZCyH3MD11M7nH3g%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005409.html">
+   <LINK REL="Next"  HREF="005426.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[SPEC] Backwards-compatible metadata in Gemini</H1>
+    <B>Oliver Simmons</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3CCAFkF85bUF9aEjQ%3D0MsCoRk%3D4mJJH-%2Bp3Lh3ZCyH3MD11M7nH3g%40mail.gmail.com%3E"
+       TITLE="[SPEC] Backwards-compatible metadata in Gemini">oliversimmo at gmail.com
+       </A><BR>
+    <I>Mon Feb 22 00:46:22 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005409.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+        <LI>Next message (by thread): <A HREF="005426.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5420">[ date ]</a>
+              <a href="thread.html#5420">[ thread ]</a>
+              <a href="subject.html#5420">[ subject ]</a>
+              <a href="author.html#5420">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Sun, 21 Feb 2021 at 20:21, easrng &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">easrng at gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> Many of us strongly believe in the one pageload generates one request philosophy, including me, but metadata is also nice to have. While you could put metadata in other files, that would result in multiple requests being made. Instead, I am proposing a new file format, text/gemini-metadata+json, to be used in data URIs in Gemtext. It would be json (simply because it is popular and has wide support) with specified keys. Possible things to include in the metadata could be a favicon (be it emoji or otherwise), a theme color or color scheme to be used by the client as it wishes, etc.
+</I>&gt;<i> It would be used like this:
+</I>&gt;<i>
+</I>&gt;<i> ```
+</I>&gt;<i> # My super cool gemsite
+</I>&gt;<i> Welcome!
+</I>&gt;<i>
+</I>&gt;<i> =&gt; data:text/gemini-metadata+json;charset=utf-8,{&quot;favicon&quot;:&quot;%E2%80%8D&quot;} Page metadata
+</I>&gt;<i> ```
+</I>&gt;<i>
+</I>&gt;<i> A Gemini client implementing this would add a check for links starting with data:text/gemini-metadata+json to it's rendering code and when it encounters one, decode it and take note of the metadata. Clients not implenenting it will just see a link to the data, degrading (imo) quite gracefully. I can't decide if the link should be hidden or not in browsers with support though. If the link is hidden then the client should make sure to expose the metadata elsewhere in the interface.
+</I>&gt;<i> Please give all the feedback!
+</I>&gt;<i>
+</I>
+Whilst it does fallback gracefully, I think the method of putting it
+in a link is a bit &quot;hack-y&quot; and using the data: URI may pave the way
+for other things abusing it.
+Also for people that don't have nice link parsing it would look a mess.
+
+I think something like this would be nicer:
+```
+# Boop, a website :)
+Free hugs for all!
+
+^^^
+favicon: &#129303;
+author: Bob McBobface
+last-edited: 22nd Feb 2021
+```
+
+That is:
+```
+&lt;PAGE&gt;
+^^^
+&lt;METADATA&gt;
+```
+
+For the metadata format I think a simple key:value list would work
+fine, nothing overcomplicated.
+To someone without support for it it should just look like a human
+list of metadata.
+
+This way it would work with gemtext's current line-by-line method, and
+parsing should be simple.
+The delimiter would work similar to the opening ``` toggle and there
+would be no closing one, enforcing placing it at the end of the file.
+The delimiter needs to be 3 chars long (as per current spec), and
+something people wouldn't want to use in their document elsewhere, I
+think ^^^ would work good for this.
+
+I think this is given, but the metadata would be entirely optional.
+
+- Oliver Simmons (GoodClover)
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005409.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+	<LI>Next message (by thread): <A HREF="005426.html">[SPEC] Backwards-compatible metadata in Gemini
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5420">[ date ]</a>
+              <a href="thread.html#5420">[ thread ]</a>
+              <a href="subject.html#5420">[ subject ]</a>
+              <a href="author.html#5420">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

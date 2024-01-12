@@ -1,0 +1,150 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Client certificates
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificates&In-Reply-To=%3CCA%2BTk8fwFw4tyT1-v5A8S1M53x_A%2BKqfDzWM7YhBaEb95N9qKrA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000525.html">
+   <LINK REL="Next"  HREF="000527.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Client certificates</H1>
+    <B>Ciprian Dorin Craciun</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificates&In-Reply-To=%3CCA%2BTk8fwFw4tyT1-v5A8S1M53x_A%2BKqfDzWM7YhBaEb95N9qKrA%40mail.gmail.com%3E"
+       TITLE="Client certificates">ciprian.craciun at gmail.com
+       </A><BR>
+    <I>Mon Apr 20 14:02:00 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000525.html">Client certificates
+</A></li>
+        <LI>Next message (by thread): <A HREF="000527.html">Client certificates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#526">[ date ]</a>
+              <a href="thread.html#526">[ thread ]</a>
+              <a href="subject.html#526">[ subject ]</a>
+              <a href="author.html#526">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>[Disclaimer:  I'm not directly involved in Gemini development or
+ecosystem, but I follow closely these developments.]
+
+
+On Mon, Apr 20, 2020 at 12:23 AM Julien Blanchard &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">julien at typed-hole.org</A>&gt; wrote:
+&gt;<i> When trying to implement client certificate support in my client I
+</I>&gt;<i> wondered whether or not we would want to be able to use different
+</I>&gt;<i> certificates for different gemini places?
+</I>
+I would definitively want to have different &quot;personas&quot; for different
+sites.  In fact even for the same site I would like to have different
+ones, for example:  one for administrative purposes, and one for
+normal (but authenticated) access.
+
+
+
+&gt;<i> I figured why not so started I my implementation by searching for a
+</I>&gt;<i> certificate that matches the host domain name like
+</I>&gt;<i> astrobotany.mozz.us.key and astrobotany.mozz.us.crt.
+</I>&gt;<i> Does it make sense? Where should one put its certificates if such a
+</I>&gt;<i> place exists in a filesystem?
+</I>
+
+Automatically choosing a client certificate and presenting it to the
+server, I believe is a bad idea from a privacy perspective.  I would
+implement something like this:  when connecting to a domain for which
+one could use a client certificate, ask the user the first time if he
+wants to:
+* always use the same certificate for that particular domain;
+* wants to use a particular certificate (assuming there are multiple),
+but prefers to confirm it for each new &quot;tab&quot; (or browsing context);
+(i.e. sort of &quot;last-used&quot; but &quot;confirm&quot;;)
+* never use any certificate;
+
+Ciprian.
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000525.html">Client certificates
+</A></li>
+	<LI>Next message (by thread): <A HREF="000527.html">Client certificates
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#526">[ date ]</a>
+              <a href="thread.html#526">[ thread ]</a>
+              <a href="subject.html#526">[ subject ]</a>
+              <a href="author.html#526">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

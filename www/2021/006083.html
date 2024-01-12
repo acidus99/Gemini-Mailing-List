@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] Regarding the proposal to remove status code 11
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Regarding%20the%20proposal%20to%20remove%20status%20code%2011&In-Reply-To=%3C8db3b447-e4d6-94ba-39fb-d9204c7d8270%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006113.html">
+   <LINK REL="Next"  HREF="006086.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] Regarding the proposal to remove status code 11</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Regarding%20the%20proposal%20to%20remove%20status%20code%2011&In-Reply-To=%3C8db3b447-e4d6-94ba-39fb-d9204c7d8270%40marmaladefoo.com%3E"
+       TITLE="[spec] Regarding the proposal to remove status code 11">luke at marmaladefoo.com
+       </A><BR>
+    <I>Sun Mar 14 09:32:16 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006113.html">[spec] Using a gitlab (Was: Regarding the proposal to remove status code 11
+</A></li>
+        <LI>Next message (by thread): <A HREF="006086.html">[spec] Regarding the proposal to remove status code 11
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6083">[ date ]</a>
+              <a href="thread.html#6083">[ thread ]</a>
+              <a href="subject.html#6083">[ subject ]</a>
+              <a href="author.html#6083">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+On 13-Mar-2021 20:03, PJ vM wrote:
+&gt;<i> Over at Gitlab, people are discussing [1] a potential deprecation of
+</I>&gt;<i> status code 11 (sensitive input). A few points.
+</I>&gt;<i> 
+</I>&gt;<i> Firstly, for certain (possibly many) use cases password authentication
+</I>&gt;<i> (combined with shorter- or longer-lived &quot;session&quot; client certificates)
+</I>&gt;<i> is the right choice over only using client certificates. Some examples I
+</I>&gt;<i> could quickly think of:
+</I>&gt;<i> 
+</I>&gt;<i> * a Gemini interface to a service for which the user already has login
+</I>&gt;<i> credentials (and other cases where one needs to confirm the user is the
+</I>&gt;<i> same as an identity previously established by other means than a
+</I>&gt;<i> certificate)
+</I>&gt;<i> * any use case for which client certs are simply not portable enough
+</I>&gt;<i> * the equivalent of &quot;changing one's password&quot; seems (not certain about
+</I>&gt;<i> this) quite tedious to do in a world with only client certs, for use
+</I>&gt;<i> cases where the users are pseudonymous
+</I>&gt;<i> 
+</I>&gt;<i> It seems clear to me that login credentials and certs are sufficiently
+</I>&gt;<i> different in practical aspects that certs cannot replace password
+</I>&gt;<i> authentication for all use cases.
+</I>&gt;<i> 
+</I>&gt;<i> So, and this is really my key point: whether one likes it or not, I
+</I>&gt;<i> think password authentication will keep being used as long as there is a
+</I>&gt;<i> way to give input to the server.
+</I>Gemini is really a read-only medium as its method is GET only - there is 
+no idempotent method to send data. Servers that attempt to put transient 
+state with side effects (changing a password among other things) by 
+putting these into the URI is poor design IMO.
+
+URIs are designed to be shared, bookmarked - they are a publicly 
+persistable reference of server state (see Fielding et al). They are a 
+massive success on the internet as such.
+
+A URI query should be thought of as a query parameterisation - a way to 
+address server state, rather than as a way to send state to the server. 
+To send state properly you need an idempotent mechanism, which Gemini 
+doesnt have. The web does, as incidentally did early gopher before it 
+adopted URIs. This seems to be a conscious design choice of Gemini.
+
+My view is that status 11 is a kind of security theatre - it gives a 
+false sense of security, when in fact it is logically equivalent to 
+status 10 - and in fact the spec allows valid clients to only interpret 
+the first digit, so a client may actually not know. We should not be 
+encouraging its use or authors or users to form a view it is 
+&quot;protecting&quot; them in any significant sense.
+
+
+&gt;<i> Secondly, let's look at why exactly it is considered a bad idea to put
+</I>&gt;<i> sensitive information in a URL. The reasons given by RFC 3986 &#167;7.5
+</I>&gt;<i> (quoted at the Gitlab issue) are:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> URIs are frequently displayed by browsers, stored in clear text
+</I>&gt;&gt;<i> bookmarks, and logged by user agent history and intermediary
+</I>&gt;&gt;<i> applications (proxies) &gt; The last problem can be avoided by not using relay-type proxies (by
+</I>&gt;<i> which I mean proxies where the TLS connection is with the proxy rather
+</I>&gt;<i> than with the destination). Note that all the other problems can be
+</I>&gt;<i> addressed by client software IF it's possible to distinguish between
+</I>&gt;<i> sensitive and non-sensitive input. When the server sends 11, the client
+</I>&gt;<i> can hide the input the user is typing, and throw away the query after
+</I>&gt;<i> sending the request, before displaying the URL in the URL bar or saving
+</I>&gt;<i> it in the browsing history.
+</I>
+No, its not possible for either clients nor servers to know which URIs 
+are &quot;sensitive&quot;
+
+Q: here is a URI - should a client, proxy or server be prevented from 
+recording or sharing it:
+
+<A HREF="gemini://example.com/foo?bar">gemini://example.com/foo?bar</A>
+
+Ans: there is *no* way to know. It depends on the semantics of the 
+application and foo and bar.
+
+&gt;<i> So actually, if we reason from the assumption that password
+</I>&gt;<i> authentication will happen anyway (as I've argued above), removing
+</I>&gt;<i> status code 11 has rather negative consequences, as it removes the
+</I>&gt;<i> ability to distinguish between sensitive and non-sensitive input.
+</I>
+Status 10 and 11 are currently logically indistinguishable and status 11 
+is misleading.
+
+If we keep status 11, the FAQ could warn off its use and I think clients 
+should warn users to say something like &quot;The server requested to mask 
+the input, however be aware that the parameter will be simply appended 
+in the clear to the subsequent URI, and this does not offer a genuine 
+security feature.&quot;
+
+&gt;<i> My conclusion is that removing status code 11 would be unwise, and
+</I>&gt;<i> instead it would be better to include a recommendation in the best
+</I>&gt;<i> practices document to throw away the query part after sending a request
+</I>&gt;<i> that results from user input on a 11 page. Maybe there should also be a
+</I>&gt;<i> recommendation to store client certs in a password-encrypted vault, as
+</I>&gt;<i> of course storing long-lived certs unencrypted is about as much of a
+</I>&gt;<i> problem as storing sensitive queries in the browsing history.
+</I>&gt;<i> 
+</I>&gt;<i> Thirdly and lastly, about Gitlab. I strongly dislike the fact that
+</I>&gt;<i> discussions which can have quite an impact on all Gemini users are
+</I>&gt;<i> happening in Gitlab issues; to stay up-to-date on all these requires
+</I>&gt;<i> regularly going through multiple webpages, and to comment requires a
+</I>&gt;<i> Gitlab account! I think this is a mistake.
+</I>
+I don't think its a big deal - if the BDFN finds it a useful and 
+practical way to gather issues with the spec, I'm happy to contribute 
+wherever the conversation may happen.
+
+&gt;<i> [1] <A HREF="https://gitlab.com/gemini-specification/protocol/-/issues/17">https://gitlab.com/gemini-specification/protocol/-/issues/17</A>
+</I>
+  - Luke
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006113.html">[spec] Using a gitlab (Was: Regarding the proposal to remove status code 11
+</A></li>
+	<LI>Next message (by thread): <A HREF="006086.html">[spec] Regarding the proposal to remove status code 11
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6083">[ date ]</a>
+              <a href="thread.html#6083">[ thread ]</a>
+              <a href="subject.html#6083">[ subject ]</a>
+              <a href="author.html#6083">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

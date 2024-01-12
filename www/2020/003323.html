@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Why not use the markdown way to deal with long lines?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Why%20not%20use%20the%20markdown%20way%20to%20deal%20with%20long%20lines%3F&In-Reply-To=%3C20201114164400.GA7249%40commie.my.domain%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003321.html">
+   <LINK REL="Next"  HREF="003326.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Why not use the markdown way to deal with long lines?</H1>
+    <B>lel</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Why%20not%20use%20the%20markdown%20way%20to%20deal%20with%20long%20lines%3F&In-Reply-To=%3C20201114164400.GA7249%40commie.my.domain%3E"
+       TITLE="Why not use the markdown way to deal with long lines?">lel at envs.net
+       </A><BR>
+    <I>Sat Nov 14 16:44:00 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003321.html">Why not use the markdown way to deal with long lines?
+</A></li>
+        <LI>Next message (by thread): <A HREF="003326.html">Why not use the markdown way to deal with long lines?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3323">[ date ]</a>
+              <a href="thread.html#3323">[ thread ]</a>
+              <a href="subject.html#3323">[ subject ]</a>
+              <a href="author.html#3323">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>A solution to this problem for those who think this is an issue:
+
+Just write a server that pulls single linebreaks back into one
+line in source files before sending them to clients. Then you can
+use vim more effectively or whatever without imposing change on a
+spec already followed by oodles of clients and servers and
+thousands upon thousands of pages of content.
+
+Our options back when softwrap was decided were:
+
+1) hardwrapping at some crazy small number of characters that
+would only look good on a phone
+2) optionally doing error-prone text reflowing that so it might
+look good on something other than a phone
+3) what actually happened
+
+Each of these is still less complex than this markdown suggestion
+and was done at a time when there was basically no content on the
+protocol and even still didn't require anything to be rewritten,
+because hard-wrapped content is still viewablw with softwrap.
+
+What is being suggested would require substantial rewrites for 
+literally every single thing ever created related to gemini, and
+even if we accepted that, would require some means for new
+clients to know the difference between the new spec and the old
+one, either giving us a new mime type or some kind of version
+header, and now we're in solderpunk's nightmare scenario.
+
+So no, I don't think this will happen, but you could always write
+a server that autoconverts your markdown-y content into gemtext!
+
+best,
+lel
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003321.html">Why not use the markdown way to deal with long lines?
+</A></li>
+	<LI>Next message (by thread): <A HREF="003326.html">Why not use the markdown way to deal with long lines?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3323">[ date ]</a>
+              <a href="thread.html#3323">[ thread ]</a>
+              <a href="subject.html#3323">[ subject ]</a>
+              <a href="author.html#3323">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

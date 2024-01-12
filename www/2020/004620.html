@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [tech] [spec] TLS statistics
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20%5Bspec%5D%20TLS%20statistics&In-Reply-To=%3Ccbd574117b113284ed8e456dd96d4bc2%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004615.html">
+   <LINK REL="Next"  HREF="004623.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[tech] [spec] TLS statistics</H1>
+    <B>nervuri</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20%5Bspec%5D%20TLS%20statistics&In-Reply-To=%3Ccbd574117b113284ed8e456dd96d4bc2%40disroot.org%3E"
+       TITLE="[tech] [spec] TLS statistics">nervuri at disroot.org
+       </A><BR>
+    <I>Wed Dec 30 22:15:11 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004615.html">[tech] [spec] TLS statistics
+</A></li>
+        <LI>Next message (by thread): <A HREF="004623.html">[tech] [spec] TLS statistics
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4620">[ date ]</a>
+              <a href="thread.html#4620">[ thread ]</a>
+              <a href="subject.html#4620">[ subject ]</a>
+              <a href="author.html#4620">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>December 30, 2020 7:19 PM, Stephen wrote:
+  &gt; 66 is more Let's Encrypt certs than I would have guessed.
+
+What's strange to me is that 31 of those fail validation. It might be interesting to see why.
+
+By the way, Lupa lists 68 Let's Encrypt certs:
+
+<A HREF="gemini://gemini.bortzmeyer.org/software/lupa/stats.gmi">gemini://gemini.bortzmeyer.org/software/lupa/stats.gmi</A>
+
+Also, Lupa knows about 528 hosts, more than GUS's 442. I wish it listed them.
+
+  &gt; For better or worse, they seem a bit out of place in gemini. When I was setting up my server, I was almost going to use my Let's Encrypt cert, but I'm glad I didn't. The Let's Encrypt method is antithetical to the TOFU model of certs. Using a trusted CA is irrelevant and regularly updating your certs (often a month in advance of expiry) is not good with TOFU.
+
+There is value in a third party attesting that a specific cert belongs to a specific domain. I would like a Gemini browser to do TOFU for self-signed certs and normal validation for CA-signed certs - and let me know when I'm dealing with the latter. There is more to say on this, I might elaborate at some point.
+
+  December 30, 2020 7:44 PM, colecmac wrote:
+  &gt; Do you have any idea what server software is allowing this? Maybe you can
+look at the capsules, as some will say what software they use. That way
+someone can file a bug or submit a patch/PR.
+
+This kind of thing will always be an issue. The barrier to entry is low, so we can expect problematic server implementations to keep popping up.
+
+I did check out *.lanterne.chilliet.eu and it looks like it's using a self-made server written in PHP. I'll submit an issue one of these days, if someone doesn't do it before me.
+
+<A HREF="gemini://gemlog.lanterne.chilliet.eu/softwares.en.gmi">gemini://gemlog.lanterne.chilliet.eu/softwares.en.gmi</A>
+<A HREF="https://framagit.org/MCMic/gemini-server">https://framagit.org/MCMic/gemini-server</A>
+
+As for the others... here are the hosts:
+
+```
+cat data/tls/tls-versions | grep tls1_1
+
+cadence.moe | -tls1_2 -tls1_1 -tls1
+code.lanterne.chilliet.eu | -tls1_2 -tls1_1 -tls1
+consensus.circumlunar.space | -tls1_2 -tls1_1 -tls1
+cyberpunksin.space | -tls1_3 -tls1_2 -tls1_1 -tls1
+dioskouroi.xyz | -tls1_2 -tls1_1 -tls1
+ftrv.se | -tls1_3 -tls1_2 -tls1_1 -tls1
+gem.johanbove.info | -tls1_3 -tls1_2 -tls1_1 -tls1
+gemini-textboard.fgaz.me | -tls1_3 -tls1_2 -tls1_1 -tls1
+gemini.cycrad.io | -tls1_3 -tls1_2 -tls1_1 -tls1
+gemini.sirodoht.com | -tls1_3 -tls1_2 -tls1_1 -tls1
+gemini.slashdev.space | -tls1_2 -tls1_1 -tls1
+gemini.thebackupbox.net | -tls1_3 -tls1_2 -tls1_1 -tls1
+gemini.thegonz.net | -tls1_3 -tls1_2 -tls1_1 -tls1
+gemini.ucant.org | -tls1_2 -tls1_1 -tls1
+gemini.uxq.ch | -tls1_3 -tls1_2 -tls1_1 -tls1
+gemini.uxw.ch | -tls1_3 -tls1_2 -tls1_1 -tls1
+gemlog.lanterne.chilliet.eu | -tls1_2 -tls1_1 -tls1
+gsthnz.com | -tls1_3 -tls1_2 -tls1_1 -tls1
+hacktivis.me | -tls1_3 -tls1_2 -tls1_1 -tls1
+happycreature.org | -tls1_3 -tls1_2 -tls1_1 -tls1
+heavysquare.com | -tls1_3 -tls1_2 -tls1_1 -tls1
+houston.coder.town | -tls1_3 -tls1_2 -tls1_1 -tls1
+iim.gay | -tls1_3 -tls1_2 -tls1_1 -tls1
+jfh.me | -tls1_2 -tls1_1 -tls1
+kamalatta.ddnss.de | -tls1_2 -tls1_1 -tls1
+kwiecien.us | -tls1_3 -tls1_2 -tls1_1 -tls1
+lord.re | -tls1_3 -tls1_2 -tls1_1 -tls1
+nixo.xyz | -tls1_3 -tls1_2 -tls1_1 -tls1
+ols.wtf | -tls1_3 -tls1_2 -tls1_1 -tls1
+posixcafe.org | -tls1_2 -tls1_1 -tls1
+rainbow-100.com | -tls1_3 -tls1_2 -tls1_1 -tls1
+rocketnine.space | -tls1_3 -tls1_2 -tls1_1 -tls1
+rwv.io | -tls1_3 -tls1_2 -tls1_1 -tls1
+saintnet.tech | -tls1_3 -tls1_2 -tls1_1 -tls1
+sanctum.geek.nz | -tls1_2 -tls1_1 -tls1
+sdf.org | -tls1_3 -tls1_2 -tls1_1 -tls1
+stanner.bayern | -tls1_3 -tls1_2 -tls1_1 -tls1
+thebackupbox.net | -tls1_3 -tls1_2 -tls1_1 -tls1
+tictactoe.lanterne.chilliet.eu | -tls1_2 -tls1_1 -tls1
+trfs.me | -tls1_3 -tls1_2 -tls1_1
+tweek.zyxxyz.eu | -tls1_3 -tls1_2 -tls1_1 -tls1
+twins.rocketnine.space | -tls1_3 -tls1_2 -tls1_1 -tls1
+typed-hole.org | -tls1_2 -tls1_1 -tls1
+vignette.kalasarn.se | -tls1_3 -tls1_2 -tls1_1 -tls1
+```
+</PRE>
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004615.html">[tech] [spec] TLS statistics
+</A></li>
+	<LI>Next message (by thread): <A HREF="004623.html">[tech] [spec] TLS statistics
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4620">[ date ]</a>
+              <a href="thread.html#4620">[ thread ]</a>
+              <a href="subject.html#4620">[ subject ]</a>
+              <a href="author.html#4620">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [users] Public Gemini hosting?
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Busers%5D%20Public%20Gemini%20hosting%3F&In-Reply-To=%3C20210409164441.GA6516%40host%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="006313.html">
+   <LINK REL="Next"  HREF="006296.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[users] Public Gemini hosting?</H1>
+    <B>nervuri</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Busers%5D%20Public%20Gemini%20hosting%3F&In-Reply-To=%3C20210409164441.GA6516%40host%3E"
+       TITLE="[users] Public Gemini hosting?">nervuri at disroot.org
+       </A><BR>
+    <I>Thu Apr 15 14:32:55 BST 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="006313.html">[users] Public Gemini hosting?
+</A></li>
+        <LI>Next message (by thread): <A HREF="006296.html">[users] Public Gemini hosting?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6363">[ date ]</a>
+              <a href="thread.html#6363">[ thread ]</a>
+              <a href="subject.html#6363">[ subject ]</a>
+              <a href="author.html#6363">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Thu, 2021-04-08, Mansfield wrote:
+&gt;<i>I'm curious... is there *any* server that is running where the code
+</I>&gt;<i>being run can be verified? I could see someone saying, &quot;I'm running the
+</I>&gt;<i>open source version of FOO as the server&quot;, but they could have tweaked
+</I>&gt;<i>it to be FOO' or something... thoughts?
+</I>
+Look into remote attestation - TPM-based cryptographic assurance that
+remote code is what it's supposed to be.  It's a DRM-type scheme,
+relying on a secret key being stored in hardware, so it's not ultimately
+trustworthy, but it does raise the bar.  Signal makes use of the Intel
+SGX variant [1], although it has its share of problems [2].
+
+&gt;<i>SGX allows applications to provision a &#8220;secure enclave&#8221; that is
+</I>&gt;<i>isolated from the host operating system and kernel, similar to
+</I>&gt;<i>technologies like ARM&#8217;s TrustZone. SGX enclaves also support remote
+</I>&gt;<i>attestation. Remote attestation provides a cryptographic guarantee of
+</I>&gt;<i>the code that is running in a remote enclave over a network.
+</I>
+&gt;<i>An SGX enclave on the server would enable a service to perform
+</I>&gt;<i>computations on encrypted client data without learning the content of
+</I>&gt;<i>the data or the result of the computation.
+</I>
+[1] <A HREF="https://signal.org/blog/secure-value-recovery/#deus-sgx-machina">https://signal.org/blog/secure-value-recovery/#deus-sgx-machina</A>
+[2] <A HREF="https://medium.com/@maniacbolts/signal-increases-their-reliance-on-sgx-f46378f336d3">https://medium.com/@maniacbolts/signal-increases-their-reliance-on-sgx-f46378f336d3</A>
+
+
+As for your application, I agree with Jason McBrayer: good idea, but I
+would not use or recommend it unless it is libre software.
+</PRE>
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="006313.html">[users] Public Gemini hosting?
+</A></li>
+	<LI>Next message (by thread): <A HREF="006296.html">[users] Public Gemini hosting?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#6363">[ date ]</a>
+              <a href="thread.html#6363">[ thread ]</a>
+              <a href="subject.html#6363">[ subject ]</a>
+              <a href="author.html#6363">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

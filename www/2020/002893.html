@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Spec proposal
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Spec%20proposal&In-Reply-To=%3C20201022220133.GE30302%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002891.html">
+   <LINK REL="Next"  HREF="002894.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Spec proposal</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Spec%20proposal&In-Reply-To=%3C20201022220133.GE30302%40brevard.conman.org%3E"
+       TITLE="Spec proposal">sean at conman.org
+       </A><BR>
+    <I>Thu Oct 22 23:01:34 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002891.html">Spec proposal
+</A></li>
+        <LI>Next message (by thread): <A HREF="002894.html">Spec proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2893">[ date ]</a>
+              <a href="thread.html#2893">[ thread ]</a>
+              <a href="subject.html#2893">[ subject ]</a>
+              <a href="author.html#2893">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Ali Fardan once stated:
+&gt;<i> Greetings follows, I just found out about gemini recently and I got
+</I>&gt;<i> interested in the project and wanted to be involved, In the process of
+</I>&gt;<i> setting up my gempod (that's how you call them?), I wanted to be able
+</I>&gt;<i> to have an HTML/HTTP mirror for my gempod and I haven't found a gemtext
+</I>&gt;<i> to HTML converter 
+</I>
+  Given how easy it is, I'm surprised there aren't more.  But by searching
+the mailing list, I did fine reference to two Gemini-text-to-HTML
+converters:
+
+	<A HREF="https://github.com/LukeEmmet/GemiNaut/blob/master/GemiNaut/GmiConverters/GmiToHtml.r3">https://github.com/LukeEmmet/GemiNaut/blob/master/GemiNaut/GmiConverters/GmiToHtml.r3</A>
+	(written in Rebol, a blast from the past)
+
+	<A HREF="https://git.sr.ht/~sotirisp/qute-gemini">https://git.sr.ht/~sotirisp/qute-gemini</A>
+	(Gemini text to Markdown to HTML in python3)
+
+&gt;<i> so I decided to write my own, and in the middle of
+</I>&gt;<i> the process I thought if I'm going write a full parser for gemtext,
+</I>&gt;<i> I might as well make the code reusable and package it as a library, so
+</I>&gt;<i> the project shifted from a gemtext to HTML tool to a gemtext processing
+</I>&gt;<i> library, and here I am.
+</I>
+  Hello.
+
+&gt;<i> As of now, my implementation is complete, It is almost usable for
+</I>&gt;<i> anyone willing to test it, I wrote manpages for all functions currently
+</I>&gt;<i> implemented, but not for the data types yet, I'm going to work on that,
+</I>&gt;<i> and as part of my project, I want to write a manpage for the text/gemini
+</I>&gt;<i> format (gemtext(5)) and I want it to be precise and spec compliant,
+</I>&gt;<i> if you don't mind, I'll go ahead and write the manpage as a proposal to
+</I>&gt;<i> standardize some of the unclear cases of the spec, if the rest of the
+</I>&gt;<i> community agrees, maybe get the spec updated too?
+</I>&gt;<i> 
+</I>&gt;<i> Attached is a tarball of my current implementation (WIP)
+</I>
+  And here are some comments from trying it out.  I wrote a simple Gemini
+text file (with very long lines) and ran your test program over it.  In the
+output you have some garbage data on the very first line:
+
+00000000: 88 DB CB 23 20 4C 6F 72 65 6D 20 69 70 73 75 6D ...# Lorem ipsum
+00000010: 20 64 6F 6C 6F 72 20 73 69 74 20 61 6D 65 74 2C  dolor sit amet,
+
+  Thoughts:  sounds like you have some unitialized memory.  Aside from the
+garbage bytes, the output did not match the input as the pre-formatted block
+input did not have the ``` guards.  And the last blank line was not included
+in the output either.
+
+  I also ran it under valgrind [1] and found a leak in the happy path:
+
+[spc]lucy:/tmp/libgemtext&gt;valgrind --show-reachable=yes --leak-check=full ./test &lt;/tmp/text.gemini &gt;/tmp/t.gmi
+==26859== Memcheck, a memory error detector.
+==26859== Copyright (C) 2002-2005, and GNU GPL'd, by Julian Seward et al.
+==26859== Using LibVEX rev 1575, a library for dynamic binary translation.
+==26859== Copyright (C) 2004-2005, and GNU GPL'd, by OpenWorks LLP.
+==26859== Using valgrind-3.1.1, a dynamic binary instrumentation framework.
+==26859== Copyright (C) 2000-2005, and GNU GPL'd, by Julian Seward et al.
+==26859== For more details, rerun with: -v
+==26859== 
+==26859== Conditional jump or move depends on uninitialised value(s)
+==26859==    at 0x804A2C1: strlcat (strlcat.c:38)
+==26859==    by 0x8049C7E: _line_append (encode.c:198)
+==26859==    by 0x8049EF5: gemtext_encode (encode.c:263)
+==26859==    by 0x804A182: gemtext_encode_fd (encode.c:339)
+==26859==    by 0x804A1FB: gemtext_encode_file (encode.c:359)
+==26859==    by 0x804867A: main (test.c:15)
+==26859== 
+==26859== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 12 from 1)
+==26859== malloc/free: in use at exit: 7,200 bytes in 1 blocks.
+==26859== malloc/free: 86 allocs, 85 frees, 84,247 bytes allocated.
+==26859== For counts of detected errors, rerun with: -v
+==26859== searching for pointers to 1 not-freed blocks.
+==26859== checked 55,588 bytes.
+==26859== 
+==26859== 
+==26859== 7,200 bytes in 1 blocks are possibly lost in loss record 1 of 1
+==26859==    at 0x400579F: realloc (vg_replace_malloc.c:306)
+==26859==    by 0x8049C56: _line_append (encode.c:194)
+==26859==    by 0x8049D5D: gemtext_encode (encode.c:224)
+==26859==    by 0x804A182: gemtext_encode_fd (encode.c:339)
+==26859==    by 0x804A1FB: gemtext_encode_file (encode.c:359)
+==26859==    by 0x804867A: main (test.c:15)
+==26859== 
+==26859== LEAK SUMMARY:
+==26859==    definitely lost: 0 bytes in 0 blocks.
+==26859==      possibly lost: 7,200 bytes in 1 blocks.
+==26859==    still reachable: 0 bytes in 0 blocks.
+==26859==         suppressed: 0 bytes in 0 blocks.
+
+  You will also want to check the non-happy paths for memory leaks.  In my
+experience, memory leaks are more likely in the non-happy path because
+programmers rarely think through the non-happy path, and it's annoying to
+write code to properly handle the non-happy paths in C.
+
+  But I think it's wonderful that there was only one leak, and possibly an
+easy one to fix.  The library itself appears easy to use (if you know C). 
+Good job.
+
+  -spc
+
+[1]	If you are doing C, and have access to valgrind (it's almost always
+	installed on every Linux system, or available to be installed), use
+	it.  It is a fantastic tool to find memory leaks and issues with
+	unitialized memory.  Yes, it's annoying having to track all the
+	issues down, but I feel it's worth it.
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002891.html">Spec proposal
+</A></li>
+	<LI>Next message (by thread): <A HREF="002894.html">Spec proposal
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2893">[ date ]</a>
+              <a href="thread.html#2893">[ thread ]</a>
+              <a href="subject.html#2893">[ subject ]</a>
+              <a href="author.html#2893">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

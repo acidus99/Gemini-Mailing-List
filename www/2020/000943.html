@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Proposed minor spec changes, for comment.
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C20200521204731.GA4116%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000862.html">
+   <LINK REL="Next"  HREF="000944.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Proposed minor spec changes, for comment.</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C20200521204731.GA4116%40SDF.ORG%3E"
+       TITLE="Proposed minor spec changes, for comment.">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Thu May 21 21:47:31 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="000862.html">Proposed minor spec changes, for comment.
+</A></li>
+        <LI>Next message (by thread): <A HREF="000944.html">Proposed minor spec changes, for comment.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#943">[ date ]</a>
+              <a href="thread.html#943">[ thread ]</a>
+              <a href="subject.html#943">[ subject ]</a>
+              <a href="author.html#943">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Tue, May 19, 2020 at 07:46:25AM +0000, solderpunk wrote:
+ 
+&gt;<i> So now the question is which do we prefer, forcing servers to
+</I>&gt;<i> canonicalise (canonise?) everything, with client behaviour then being
+</I>&gt;<i> strictly limited, or letting servers just send whatever the author uses
+</I>&gt;<i> and forcing clients to accept any of CRLF, CR or LF?
+</I>&gt;<i> 
+</I>&gt;<i> In general I have preferred pushing burden to server authors over client
+</I>&gt;<i> authors for Gemini...but I expect the client burden is pretty small here
+</I>&gt;<i> as most languages will have some kind of functionality for breaking
+</I>&gt;<i> strings into lines which already handles this...
+</I>
+Some quick experimentation with Python revealed that str.splitlines()
+is, indeed, smart enough to handle CRLF, CR and LF as linebreaks.
+Encouraged by this, I made a single Gemini page that mixes all three
+styles in a single document:
+
+<A HREF="gemini://gemini.circumlunar.space/users/solderpunk/linebreaks.gmi">gemini://gemini.circumlunar.space/users/solderpunk/linebreaks.gmi</A>
+
+I visited it with a selection of clients, but the results weren't
+encouraging.
+
+It rendered just fine in AV-98, because apparently Python is awesome at
+this.
+
+Curiously, McCross, also in Python, could handle CR fine, split CRLF
+into lines but displayed some stray characters at the end of lines, and
+did not split LF lines at all.  Perhaps this is because it's a GUI
+client and is relying on Tkinter to redner text?
+
+Bombadillo and Castor (an old build of Castor I had lying around,
+admittedly) both handled CR and CRLF fine, but did not split LF lines at
+all.  The same was true of my tiny demo Lua and Go clients.
+
+So, speccing any line ending as permissble, like HTML does, would
+seemingly immediately render most clients out-of-spec.
+
+Specifying CR or CRLF but not LF would require the minimum amount of
+rework, but it would be hard to justify this by anything other than
+laziness.  We either go strict, and require CRLF only, or we go
+permissive, and allow anything, but we can't really pick and mix for the
+sake of convenience.
+
+We basically need to choose between forcing server authors to normalise
+all endings to CRLF or forcing client authors to recgonise LF (even
+though it'll probably never be seen in the wild).
+
+Neither really thrill me, but, well, here we are.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="000862.html">Proposed minor spec changes, for comment.
+</A></li>
+	<LI>Next message (by thread): <A HREF="000944.html">Proposed minor spec changes, for comment.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#943">[ date ]</a>
+              <a href="thread.html#943">[ thread ]</a>
+              <a href="subject.html#943">[ subject ]</a>
+              <a href="author.html#943">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

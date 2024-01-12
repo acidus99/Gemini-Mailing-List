@@ -1,0 +1,343 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [spec] The Tragedy of &amp;
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20The%20Tragedy%20of%20%26&In-Reply-To=%3C87h7n29g4w.fsf%40disroot.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="004938.html">
+   <LINK REL="Next"  HREF="004958.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[spec] The Tragedy of &amp;</H1>
+    <B>Gary Johnson</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20The%20Tragedy%20of%20%26&In-Reply-To=%3C87h7n29g4w.fsf%40disroot.org%3E"
+       TITLE="[spec] The Tragedy of &amp;">lambdatronic at disroot.org
+       </A><BR>
+    <I>Wed Jan 27 22:19:59 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="004938.html">Proposal: Simple structured form specification
+</A></li>
+        <LI>Next message (by thread): <A HREF="004958.html">[spec] The Tragedy of &amp;
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4947">[ date ]</a>
+              <a href="thread.html#4947">[ thread ]</a>
+              <a href="subject.html#4947">[ subject ]</a>
+              <a href="author.html#4947">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Jason McBrayer wrote:
+
+&gt;<i> Having more complex forms is a temptation to implement applications on
+</I>&gt;<i> Gemini, rather than using pairings of protocol+client that are more
+</I>&gt;<i> appropriate (e.g. using NNTP for a message board).
+</I>
+Charlie Stanton &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">charlie at shtanton.com</A>&gt; wrote:
+
+&gt;<i> I agree with this completely. I think Gemini should be a protocol for
+</I>&gt;<i> viewing content only. I missed all the discussion around inimeg, titan
+</I>&gt;<i> etc. at the time but I feel similarly about those.
+</I>&gt;<i>
+</I>&gt;<i> I think a different protocol for filling out forms makes a lot more
+</I>&gt;<i> sense, and we can work on having gemini clients and form clients play
+</I>&gt;<i> nicely together so the user experience doesn't suffer from using a
+</I>&gt;<i> different program to fill out a form.
+</I>&gt;<i>
+</I>&gt;<i> Adding forms would take us wayyyyy too close to the web in my opinion.
+</I>
+And now me...
+
+tl;dr: Gemini can already emulate forms. We just need a spec language
+       clarification in Section 3.2.1 1x (INPUT) from Solderpunk and for
+       client authors to update their software accordingly. I illustrate
+       both points (and provide code) below.
+
+
+# Section 1: Motivation
+
+
+I appreciate the generally conservative nature of the Gemini community
+when it comes to extending the Gemini and Gemtext specifications. As a
+server author, this certainly keeps my life easier.
+
+However, I'd like to go on record here to say that interactive capsules
+are not something that worries me. There are already quite a few of them
+out there in Geminispace (hello Astrobotany!), and I'd like to continue
+to see this medium grow and thrive in our little corner of the internet.
+
+I don't think form-like data submission should be seen as an evil. It
+allows us to implement a wide variety of CGI-style applications that do
+all their computing on the server side (often through some script
+extension mechanism). This keeps our servers and clients simple,
+empowers content authors to build cool things, and still keeps us nicely
+insulated from &quot;The Javascript Trap&quot; since our Gemini clients never
+download and run any client-side code.
+
+=&gt; <A HREF="https://www.gnu.org/philosophy/javascript-trap.html">https://www.gnu.org/philosophy/javascript-trap.html</A> The Javascript Trap
+
+
+# Section 2: The Problem
+
+
+Over the months that I have followed this mailing list, I've seen
+broadly two categories of proposals around extending Gemini's simple
+input methods:
+
+1. Ways to submit multiple pieces of information to a server at once.
+
+2. Ways to upload files to a server.
+
+Both proposals are pretty self-explanatory since they extend the
+possible functionality of interactive Gemini capsules without breaking
+any of our privacy or security guarantees. However, option 1 puts an
+additional burden on client authors, and option 2 puts an additional
+burden on both client and server authors.
+
+Some members of our community have suggested that these features aren't
+worth the extra effort. Others have argued in favor of one or both of
+them, and a brave few have gone off and created their own sister
+protocols to try and implement Gemini-like systems that also support
+some variant of these two data upload options (e.g., Titan, Dioscuri,
+Inimeg).
+
+&gt;<i>From a personal standpoint (and I can only speak for myself here
+</I>obviously), I wouldn't mind one or more form types being added to
+Gemtext (option 1 above) as it would reduce the total number of
+round-trip network requests between client and server to submit multiple
+pieces of information (and I have quite a slow satellite internet
+connection, so this matters to me).
+
+
+# Section 3: A Solution
+
+
+However, even without (a very unlikely) form enhancement to Solderpunk's
+Gemtext spec, I'd like to remind folks that we actually do (or at least
+we should) already have the ability to emulate forms in our Gemini
+capsules.
+
+
+## Section 3.1: Form Templates
+
+
+Assuming we are currently browsing a page at
+<A HREF="gemini://awesome.capsule.net/form,">gemini://awesome.capsule.net/form,</A> this dynamic Gemtext page could
+include forms as follows:
+
+```Gemtext form template
+# Welcome to my Gemini Form!
+
+To fill in any field below, simply click it. Everything's a link in Gemini, so you can't really mess up!
+
+=&gt; form?$SESSION&amp;name Name: $NAME
+
+=&gt; form?$SESSION&amp;password Password: $PASSWORD
+
+=&gt; form?$SESSION&amp;smog SMOG is great: $SMOG
+
+=&gt; form?$SESSION&amp;plant Best Astrobotany Plant: $PLANT
+
+=&gt; form?$SESSION&amp;submit Submit Answers
+```
+
+Here, my Gemtext is a template string, which I process in a context in
+which $SESSION, $NAME, $PASSWORD, $SMOG, and $PLANT are defined (or
+default to empty strings). When the page first loads, we create a new
+$SESSION value in our CGI script and insert it into the links to
+preserve state across requests until we restart the server or the user
+refreshes the page.
+
+(Obviously, a more robust state management mechanism could be achieved
+with client certs and a DB, but I just mean to show a very simple
+example here.)
+
+
+## Section 3.2: Server-side Responses
+
+
+Here would be the server-side responses for each of those links:
+
+* NAME: 10 Enter your name\r\n
+* PASSWORD: 11 Enter password\r\n
+* SMOG: 10 Choose one of [Yes|No]\r\n
+* PLANT: 10 Choose one of [Ficus|Baobob|Pachypodium|Moss]\r\n
+
+For the boolean choice (SMOG) and the multiple choice (PLANT) inputs,
+you could, of course, perform input validation and re-prompt if
+necessary. You could also simply include one link per choice in your
+form template instead of using a 10 INPUT response.
+
+
+## Section 3.3: (DESIRED) Client-side Requests
+
+
+The intention of this example is that the clients would produce requests
+of this form after each input prompt:
+
+=&gt; <A HREF="gemini://awesome.capsule.net/form?$SESSION&amp;name&amp;Gary%20Johnson">gemini://awesome.capsule.net/form?$SESSION&amp;name&amp;Gary%20Johnson</A>
+=&gt; <A HREF="gemini://awesome.capsule.net/form?$SESSION&amp;password&amp;secret">gemini://awesome.capsule.net/form?$SESSION&amp;password&amp;secret</A>
+=&gt; <A HREF="gemini://awesome.capsule.net/form?$SESSION&amp;smog&amp;yes">gemini://awesome.capsule.net/form?$SESSION&amp;smog&amp;yes</A>
+=&gt; <A HREF="gemini://awesome.capsule.net/form?$SESSION&amp;plant&amp;Ficus">gemini://awesome.capsule.net/form?$SESSION&amp;plant&amp;Ficus</A>
+
+where $SESSION is whatever value was generated by the CGI script on the
+first page load.
+
+
+## Section 3.4: Server-side State Management and Form Submission
+
+
+With this information in the query params, it would be easy to store a
+lookup table in the CGI script that mapped session -&gt; field -&gt; value,
+and these values can then be easily inserted into the original Gemtext
+template form above (see Section 3.1) in response to these requests.
+
+The form?$SESSION&amp;submit link can then trigger the server to validate
+that all of the required form fields have been filled in correctly and
+perform whatever next step operation you want.
+
+
+## Section 3.5: File &quot;Uploads&quot;
+
+
+In addition, as I mentioned several months ago on this list, you could
+perform file &quot;uploads&quot; by having one of the input links prompt for a URL
+to a file. Then the server could download that file and store it in your
+session (or account if you're using client certs and a DB).
+
+
+# Section 4: What's Stopping This from Working?
+
+
+While this example creates more back-and-forth requests than a proper
+client-side form would generate, I hope it demonstrates that Gemini and
+Gemtext in their current incarnations are already sufficiently complete
+to build interactive CGI applications with them today.
+
+The only problem I'm running into here is that the various Gemini
+clients I've tested (elpher, bombadillo, kristall) don't actually append
+a user's input as an additional parameter to an existing query string if
+one is present. Instead, bombadillo and kristall just overwrite the
+existing query string and only return ?$NEW_INPUT. Elpher, on the other
+hand, just creates invalid URLs by simply appending ?$NEW_INPUT to
+whatever is already in the URL (e.g.,
+<A HREF="gemini://awesome.capsule.net/form?$SESSION&amp;smog?yes.">gemini://awesome.capsule.net/form?$SESSION&amp;smog?yes.</A> Neither of these
+behaviors do what I'd want or expect here.
+
+
+## Section 4.1: Check the Spec!
+
+
+I think the culprit then is probably Gemini Protocol Specification
+section 3.2.1 1x (INPUT):
+
+```Gemini specification section 3.2.1 1x (INPUT)
+Status codes beginning with 1 are INPUT status codes, meaning:
+
+The requested resource accepts a line of textual user input. The &lt;META&gt;
+line is a prompt which should be displayed to the user. The same
+resource should then be requested again with the user's input included
+as a query component. Queries are included in requests as per the usual
+generic URL definition in RFC3986, i.e. separated from the path by a ?.
+Reserved characters used in the user's input must be &quot;percent-encoded&quot;
+as per RFC3986, and space characters should also be percent-encoded.
+```
+
+
+## Section 4.2: Append Don't Replace!
+
+
+As far as I can tell, the fix here is for Solderpunk to update the text
+in section 3.2.1 to indicate that if a query string is already part of
+the request leading to an INPUT response, then the user's input should
+be appended (using &amp;) to the existing query string rather than replacing
+it wholesale (using ?).
+
+Otherwise, we really have no way to input more than one query param
+(with &amp;) other than asking the user to type it directly into the INPUT
+prompt (e.g., cat&amp;dog&amp;pig). I'm hoping this isn't the spec's intention
+here and that we just have a case of ambiguous wording that has led some
+client authors to create divergent (or broken) implementations.
+
+
+# Section 5: Conclusion and a Call to Action
+
+
+Okay, that was a LONG message, but I hope I've communicated my points
+clearly. Thanks to all who read this far, and thanks to everyone for
+making Gemini such an active and engaging community!
+
+I've attached a short (47 line) CGI script (for Space Age) that
+implements the dynamic form example described in this email. If clients
+would append user input params (with &amp;) to existing query strings rather
+than replace them, it should work perfectly. Until then, it will just
+have to feel a bit sad and dejected.
+
+Whose client is going to make it work first! I wait eagerly with bated
+breath to find out.
+
+Happy hacking!
+  Gary
+
+-------------- next part --------------
+An embedded and charset-unspecified text was scrubbed...
+Name: form.clj
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210127/4d28aea6/attachment.ksh">https://lists.orbitalfox.eu/archives/gemini/attachments/20210127/4d28aea6/attachment.ksh</A>&gt;
+-------------- next part --------------
+
+-- 
+GPG Key ID: 7BC158ED
+Use `gpg --search-keys lambdatronic' to find me
+Protect yourself from surveillance: <A HREF="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</A>
+=======================================================================
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+Why is HTML email a security nightmare? See <A HREF="https://useplaintext.email/">https://useplaintext.email/</A>
+
+Please avoid sending me MS-Office attachments.
+See <A HREF="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</A>
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="004938.html">Proposal: Simple structured form specification
+</A></li>
+	<LI>Next message (by thread): <A HREF="004958.html">[spec] The Tragedy of &amp;
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#4947">[ date ]</a>
+              <a href="thread.html#4947">[ thread ]</a>
+              <a href="subject.html#4947">[ subject ]</a>
+              <a href="author.html#4947">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

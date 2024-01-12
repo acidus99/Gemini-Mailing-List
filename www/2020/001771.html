@@ -1,0 +1,165 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> A vision for Gemini applications
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20vision%20for%20Gemini%20applications&In-Reply-To=%3C20200618134508.GA2565%40SDF.ORG%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001767.html">
+   <LINK REL="Next"  HREF="001750.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>A vision for Gemini applications</H1>
+    <B>solderpunk</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20vision%20for%20Gemini%20applications&In-Reply-To=%3C20200618134508.GA2565%40SDF.ORG%3E"
+       TITLE="A vision for Gemini applications">solderpunk at SDF.ORG
+       </A><BR>
+    <I>Thu Jun 18 14:45:08 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001767.html">A vision for Gemini applications
+</A></li>
+        <LI>Next message (by thread): <A HREF="001750.html">[ANN] Acme client is finally fixed.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1771">[ date ]</a>
+              <a href="thread.html#1771">[ thread ]</a>
+              <a href="subject.html#1771">[ subject ]</a>
+              <a href="author.html#1771">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>On Wed, Jun 17, 2020 at 02:34:53PM -0700, Koushik Roy wrote:
+ 
+&gt;<i> Do you visualize separate clients per application, an application-optimized
+</I>&gt;<i> client, or both? Just curious about the destination of this vision.
+</I>
+General purpose, application-optimised clients.  Application specific
+clients would be nothing to get excited about.  To quote my post:
+
+&gt;<i> Yes, you can build tiny little remote command line apps which use HTTP
+</I>&gt;<i> to talk to an API somewhere, but every one of them is its own separate
+</I>&gt;<i> app, wedded to its own specific API and not useful for anything else.
+</I>&gt;<i> The Gemini-based solution sketched above lets you use *one* client
+</I>&gt;<i> program for *all* apps, which is clearly far superior, and does so
+</I>&gt;<i> without any risk of the apps being able to interact with one another.
+</I>
+I have an in-development proof-of-concept implementation of this here:
+
+<A HREF="https://tildegit.org/solderpunk/alphonse">https://tildegit.org/solderpunk/alphonse</A>
+
+It is basically AV-98 with half the code ripped out (and more ripping to
+be done!).  It requires a URL, TLS cert and TLS key as compulsory
+command line options.  The cert is used unconditionally for all
+requests, and it will refuse to visit any URL which is not at the same
+domain and the same path or lower as the provided starting URL.  The
+&quot;go&quot; command, all bookmarking stuff, &quot;tour&quot; command and any other
+interface elements that allow the user to specify somewhere to go have
+been removed.  You just use the internal links of the apps you point it
+at upon startup and can't go anywhere else.
+
+I have aliased `astrobotany` in my shell to fire up Alphonse, pointed at
+astrobotany.mozz.us/app and feeding in my existing cert/key, and it's
+now how I water my plant.  As intended, it basically gives the remote
+Gemini app the appearance of a local command line application.  Now I
+can use any Gemini client I like for my day to day reading of gemlogs,
+without it needing to support client certificates or, if it does support
+them, without me having told it where to find my astrobotany certs, and
+thus my little space plant is now totally invulnerable to CSRF attacks.
+
+This is not only a safer way to use astrobotany, it is much more
+convenient than opening a general purpose client, opening my bookmarks,
+choosing astrobotany, selecting my cert from a list that is brought up
+when it sees the 6x status code, and then playing.  I just open a new
+terminal, type `astro`, hit tab, hit enter and then I'm in,
+authenticated, ready to go.  I can't imagine wanting to go back to the
+old way.  If more applications built around long-lived certificates
+appear in Geminispace, I will add new aliases for the ones that
+interest me.  It's a really great approach, IMHO.
+
+It is not foolproof - it cannot protect against application-internal
+CSRF attacks, e.g. some kind of multi-user application where one user
+can post text/gemini content which is rendered by another user of the
+same application.  But for single-user applications or applications
+where different users cannot interact with one another via means of
+unfiltered text/gemini, this is great.  App developers do not need to
+bother with tedious nonce code, and users can click on any link they
+like in their everyday client knowing the apps they use via their
+app-specific client are totally safe.
+
+Cheers,
+Solderpunk
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001767.html">A vision for Gemini applications
+</A></li>
+	<LI>Next message (by thread): <A HREF="001750.html">[ANN] Acme client is finally fixed.
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1771">[ date ]</a>
+              <a href="thread.html#1771">[ thread ]</a>
+              <a href="subject.html#1771">[ subject ]</a>
+              <a href="author.html#1771">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

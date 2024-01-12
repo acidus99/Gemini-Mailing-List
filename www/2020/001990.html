@@ -1,0 +1,167 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [ANN] Web based gemlog authoring
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Web%20based%20gemlog%20authoring&In-Reply-To=%3C20200627214033.GO19717%40brevard.conman.org%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001977.html">
+   <LINK REL="Next"  HREF="001993.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[ANN] Web based gemlog authoring</H1>
+    <B>Sean Conner</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20Web%20based%20gemlog%20authoring&In-Reply-To=%3C20200627214033.GO19717%40brevard.conman.org%3E"
+       TITLE="[ANN] Web based gemlog authoring">sean at conman.org
+       </A><BR>
+    <I>Sat Jun 27 22:40:33 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001977.html">[ANN] Web based gemlog authoring
+</A></li>
+        <LI>Next message (by thread): <A HREF="001993.html">SRV records
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1990">[ date ]</a>
+              <a href="thread.html#1990">[ thread ]</a>
+              <a href="subject.html#1990">[ subject ]</a>
+              <a href="author.html#1990">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>It was thus said that the Great Brian Evans once stated:
+&gt;<i> I believe that avoiding the web entirely, with regard to gemini, is probably the best call. 
+</I>&gt;<i> But that that leaves out a TON of people that lack the technical knowhow to ssh, rsync, git, etc.
+</I>&gt;<i> 
+</I>&gt;<i> As such, I have built a website that allows users to create accounts on my gemini server
+</I>&gt;<i> and post content from simple web based forms. The site uses no js, no cookies, no session or
+</I>&gt;<i> local storage, and no external stylesheet(s).
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="https://gemlog.blue">https://gemlog.blue</A>
+</I>&gt;<i> <A HREF="gemini://gemlog.blue">gemini://gemlog.blue</A>
+</I>
+  I saw on your Gemini post that you are trying to get editing and deleting
+posts working.  A very silly, and out there suggestion---why not client
+certificates?  Apache does support them, and there are HTTP methods that are
+quite well suited to the task at hand (POST, PUT, DELETE).  You could set up
+a method similar to Astrobotany to sign CSRs
+
+	<A HREF="gemini://astrobotany.mozz.us/register">gemini://astrobotany.mozz.us/register</A>
+
+  Just an idea ...
+
+  -spc
+
+P.S. Here's the Apache config I created a few weeks ago when I started
+looking into this:
+
+&lt;VirtualHost 192.168.1.10:443&gt;
+        ServerName      wiki.roswell.area51
+        ServerAdmin     <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">spc at conman.org</A>
+        DocumentRoot    /home/spc/web/wiki/htdocs
+        ScriptAlias     /.cgi/ /home/spc/web/wiki/cgi-bin/
+        AddHandler      cgi-script .cgi
+
+        SSLEngine               on
+        SSLCipherSuite          ALL
+        SSLCACertificateFile    /home/spc/JAIL/etc/ssl/cert.pem
+        SSLCertificateFile      /home/spc/web/wiki/cert.pem
+        SSLCertificateKeyFile   /home/spc/web/wiki/key.pem
+        SSLProtocol             +TLSv1.2
+
+        &lt;Directory /home/spc/web/wiki/cgi-bin&gt;
+                Options                 All
+                AllowOverride           None
+                Require                 valid-user
+                Require                 ssl-verify-client
+                SSLOptions              +StdEnvVars
+                SSLVerifyClient         require
+                SSLVerifyDepth          5
+        &lt;/Directory&gt;
+
+        &lt;Directory /home/spc/web/wiki/htdocs&gt;
+                Options         All -ExecCGI
+                AllowOverride   None
+                Require         all granted
+                Script          PUT    /.cgi/put.cgi
+                Script          DELETE /.cgi/delete.cgi
+        &lt;/Directory&gt;
+&lt;/VirtualHost&gt;
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001977.html">[ANN] Web based gemlog authoring
+</A></li>
+	<LI>Next message (by thread): <A HREF="001993.html">SRV records
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1990">[ date ]</a>
+              <a href="thread.html#1990">[ thread ]</a>
+              <a href="subject.html#1990">[ subject ]</a>
+              <a href="author.html#1990">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

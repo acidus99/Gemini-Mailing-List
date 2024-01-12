@@ -1,0 +1,180 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Again on feeds in Gemini format
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Again%20on%20feeds%20in%20Gemini%20format&In-Reply-To=%3C87y2ixoe6w.fsf%40omarpolo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="003410.html">
+   <LINK REL="Next"  HREF="003415.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Again on feeds in Gemini format</H1>
+    <B>Omar Polo</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Again%20on%20feeds%20in%20Gemini%20format&In-Reply-To=%3C87y2ixoe6w.fsf%40omarpolo.com%3E"
+       TITLE="Again on feeds in Gemini format">op at omarpolo.com
+       </A><BR>
+    <I>Thu Nov 19 10:04:23 GMT 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="003410.html">Again on feeds in Gemini format
+</A></li>
+        <LI>Next message (by thread): <A HREF="003415.html">Again on feeds in Gemini format
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3414">[ date ]</a>
+              <a href="thread.html#3414">[ thread ]</a>
+              <a href="subject.html#3414">[ subject ]</a>
+              <a href="author.html#3414">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+Emilis &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">emilis at emilis.net</A>&gt; writes:
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> I am developing a generator and a parser for the
+</I>&gt;<i> frequently-discussed-but-never-agreed-on feeds in Gemini format.
+</I>&gt;<i>
+</I>&gt;<i> I would like to share my code, see your similar code and later discuss
+</I>&gt;<i> (over IRC?) what format could work best for our use cases.
+</I>&gt;<i>
+</I>&gt;<i> My code:
+</I>&gt;<i>
+</I>&gt;<i> Gemlog generator: <A HREF="gemini://tilde.team/~emilis/Makefile">gemini://tilde.team/~emilis/Makefile</A>
+</I>&gt;<i> Aggregator: <A HREF="https://tildegit.org/emilis/gmi-feed-aggregator">https://tildegit.org/emilis/gmi-feed-aggregator</A>
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> The motivation (taken from this post:
+</I>&gt;<i> <A HREF="gemini://tilde.team/~emilis/2020/11/19-on-feeds-in-gemini-format.gmi">gemini://tilde.team/~emilis/2020/11/19-on-feeds-in-gemini-format.gmi</A>
+</I>&gt;<i> ):
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> I looked through the discussions on Gemini list, read the posts by
+</I>&gt;<i> ~ew0k and Drew DeVault.
+</I>&gt;<i>
+</I>&gt;<i> I wholeheartedly disagree with the opinion that Atom/RSS (or JSON
+</I>&gt;<i> feeds) should be enough for everybody.
+</I>&gt;<i>
+</I>&gt;<i> The point is - some of us are not thinking about running feed
+</I>&gt;<i> generators, parsers and aggregators on developer laptops,
+</I>&gt;<i> workstations, modern servers we own, etc..
+</I>&gt;<i>
+</I>&gt;<i> We are thinking about running these programs on computers where we
+</I>&gt;<i> have limited permissions, OpenWRT routers, experimental SBCs, old
+</I>&gt;<i> netbooks and rooted phones that cannot be updated to any recent
+</I>&gt;<i> distros, etc..
+</I>&gt;<i>
+</I>&gt;<i> In these situations even Python (widespread as it is) may not be
+</I>&gt;<i> available, may be too resource-hungry or may not have the option to be
+</I>&gt;<i> updated or extended with libraries.
+</I>&gt;<i>
+</I>&gt;<i> What we need is the ability to process feeds with a bare minimum of
+</I>&gt;<i> tools (e.g. a POSIX shell, BusyBox, etc.). Parsing XML and JSON is not
+</I>&gt;<i> feasible in these situations.
+</I>
+With all the due respect, this is a bullshit.  Leaving aside that gemini
+requires TLS by the spec, even if you don&#8217;t have root privileges on a
+machine, there is a C compiler on it (how you&#8217;re gonna build a shell
+without one?), and with that you can build a parser.  (I once wrote a
+parser with a friend: a couple of hours of fun pair programming and we
+had a JSON parser that was able to parse json objects over a socket,
+without blocking etc, and was like ~200-300 lines of c code? &#8212; ok, it
+wasn&#8217;t 100% complete and spec compliant, but you get the idea).
+
+anyway&#8230;
+
+&gt;<i> Therefore we want a plain Gemini feed format. Seeing how easy it is to
+</I>&gt;<i> generate and parse Gemini files with just plain shell script, makes us
+</I>&gt;<i> want it badly. We also have hopes it would have more uses than just
+</I>&gt;<i> gemlogging.
+</I>
+I really like the idea!  A plain (but structured) text/gemini file would
+be better IMHO.  It fits the goal of the protocol well: it&#8217;s simple,
+effective, usable &#8220;as it is&#8221; without special client support, easy to
+generate (and consume) by humans etc&#8230;
+
+&gt;<i> ## What should we do about it
+</I>&gt;<i>
+</I>&gt;<i> I think we should start by just building the tools for ourselves and
+</I>&gt;<i> sharing them (probably on the Gemini list). After we have a few
+</I>&gt;<i> implementations, we can discuss on the formal spec between the developers.
+</I>
+I&#8217;ve just adapted my static site generator to generate a gemini feed.
+The commit for it was just &#8220;3 files changed, 26 insertions, 5
+deletions&#8221;, as git says.  It&#8217;s hosted here
+
+=&gt; <A HREF="gemini://gemini.omarpolo.com/rss.gmi">gemini://gemini.omarpolo.com/rss.gmi</A>
+
+&gt;<i> The main criteria should probably be the amount of effort and
+</I>&gt;<i> knowledge needed to implement a parser.
+</I>&gt;<i>
+</I>&gt;<i> What I found in the discussions is that this may be the lowest common
+</I>&gt;<i> denominator at the moment:
+</I>&gt;<i>
+</I>&gt;<i> ```
+</I>&gt;<i> =&gt; URL ISO-TIMESTAMP TITLE-MAYBE-WITH-AUTHOR
+</I>&gt;<i> ```
+</I>&gt;<i>
+</I>&gt;<i> We can start from this and agree that our parsers will rely on just
+</I>&gt;<i> these lines and ignore the rest for the moment. It could be done by
+</I>&gt;<i> this command:
+</I>
+ignoring anything besides the links can be a good idea.  For instance,
+in my feed I&#8217;ve included a title and a quote before the list of feeds:
+this can improve the human consumption, but can also let advance clients
+to improve the UI: for instance, they could (optionally) extract the
+title of the page (the first &#8216;#&#8217; title) and use it as a prefix for the
+titles, or improve the search, or &#8230;
+
+&gt;<i> ```
+</I>&gt;<i> grep -E '^=&gt;\s*<A HREF="gemini://[^">gemini://[^</A> ]+
+</I>&gt;<i> [0-9]{4}-[0-9]{2}-[0-9]{2}(T[0-9]{2}:[0-9]{2}:[0-9]{2}(Z|\+[0-9]{1,2}:[0-9]{2}))?\s+.*$'
+</I>&gt;<i> ```
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Looking forward to seeing your implementations. Please share them!
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="003410.html">Again on feeds in Gemini format
+</A></li>
+	<LI>Next message (by thread): <A HREF="003415.html">Again on feeds in Gemini format
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#3414">[ date ]</a>
+              <a href="thread.html#3414">[ thread ]</a>
+              <a href="subject.html#3414">[ subject ]</a>
+              <a href="author.html#3414">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

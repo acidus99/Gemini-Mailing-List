@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> TLS certificate sizes in Geminispace
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20TLS%20certificate%20sizes%20in%20Geminispace&In-Reply-To=%3CAE937A5C-2864-489B-943D-9B856DC7865E%40gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="002146.html">
+   <LINK REL="Next"  HREF="002149.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>TLS certificate sizes in Geminispace</H1>
+    <B>Petite Abeille</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20TLS%20certificate%20sizes%20in%20Geminispace&In-Reply-To=%3CAE937A5C-2864-489B-943D-9B856DC7865E%40gmail.com%3E"
+       TITLE="TLS certificate sizes in Geminispace">petite.abeille at gmail.com
+       </A><BR>
+    <I>Thu Jul  9 18:09:58 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="002146.html">TLS certificate sizes in Geminispace
+</A></li>
+        <LI>Next message (by thread): <A HREF="002149.html">TLS certificate sizes in Geminispace
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2148">[ date ]</a>
+              <a href="thread.html#2148">[ thread ]</a>
+              <a href="subject.html#2148">[ subject ]</a>
+              <a href="author.html#2148">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+
+&gt;<i> On Jul 9, 2020, at 18:50, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+</I>&gt;<i> 
+</I>&gt;&gt;<i> What is the consensus on those self-signed ED25519 certificates? Good? Bad? Ugly?
+</I>&gt;<i> 
+</I>&gt;<i> I prefer using EC keys, which are still quite small (256 bits), but are more widely
+</I>&gt;<i> supported. The OpenSSL command is a bit annoying, but I made a gemlog post about it
+</I>&gt;<i> to make it easier.
+</I>&gt;<i> 
+</I>&gt;<i> <A HREF="gemini://makeworld.gq/gemlog/2020-07-06-openssl.gmi">gemini://makeworld.gq/gemlog/2020-07-06-openssl.gmi</A>
+</I>
+Cool. Thanks for sharing.
+
+&gt;<i> The *key* part of it is:
+</I>&gt;<i> -newkey ec -pkeyopt ec_paramgen_curve:prime256v1
+</I>
+Ok, so:
+
+$ openssl req -new -newkey ec -pkeyopt ec_paramgen_curve:prime256v1 -nodes -keyout key.pem -x509 -days 36500 -subj / -outform der | wc -c
+347
+
+347 bytes vs 282 bytes for the ED25519 variant. Not bad at all, size wise.
+
+Is it something you are using at makeworld.gq?
+
+$ echo | openssl s_client -connect makeworld.gq:1965 2&gt;/dev/null | openssl x509 -outform der | wc -c
+1160
+
+At first glance I guess not:
+
+Issuer: C = US, O = Let's Encrypt, CN = Let's Encrypt Authority X3
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200709/32d361af/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200709/32d361af/attachment-0001.htm</A>&gt;
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="002146.html">TLS certificate sizes in Geminispace
+</A></li>
+	<LI>Next message (by thread): <A HREF="002149.html">TLS certificate sizes in Geminispace
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#2148">[ date ]</a>
+              <a href="thread.html#2148">[ thread ]</a>
+              <a href="subject.html#2148">[ subject ]</a>
+              <a href="author.html#2148">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

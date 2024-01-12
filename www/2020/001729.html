@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> gemini+submit:// (was Re: Uploading Gemini content)
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bsubmit%3A//%20%28was%20Re%3A%20Uploading%20Gemini%20content%29&In-Reply-To=%3C5EE87C49.9010004%40marmaladefoo.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="001726.html">
+   <LINK REL="Next"  HREF="001621.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>gemini+submit:// (was Re: Uploading Gemini content)</H1>
+    <B>Luke Emmet</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20gemini%2Bsubmit%3A//%20%28was%20Re%3A%20Uploading%20Gemini%20content%29&In-Reply-To=%3C5EE87C49.9010004%40marmaladefoo.com%3E"
+       TITLE="gemini+submit:// (was Re: Uploading Gemini content)">luke at marmaladefoo.com
+       </A><BR>
+    <I>Tue Jun 16 09:01:13 BST 2020</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="001726.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+        <LI>Next message (by thread): <A HREF="001621.html">Uploading Gemini content
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1729">[ date ]</a>
+              <a href="thread.html#1729">[ thread ]</a>
+              <a href="subject.html#1729">[ subject ]</a>
+              <a href="author.html#1729">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>
+On 16-Jun-2020 02:37, Sean Conner wrote:
+&gt;<i> It was thus said that the Great Pete D. once stated:
+</I>&gt;&gt;<i> And so now, seeing all this wiki talk, I'm excited again by the idea of a
+</I>&gt;&gt;<i> wiki protocol, but at the same time, I feel like it really should be a
+</I>&gt;&gt;<i> different project. It's not what gemini is.
+</I>&gt;&gt;<i>
+</I>&gt;<i>    Sadly, that *is* HTTP.  HTTP/1.0 added the methods PUT and DELETE which
+</I>&gt;<i> make adding/updating/removing resources from a webserver possible with just
+</I>&gt;<i> a web client.  The methods map to:
+</I>&gt;<i>
+</I>&gt;<i> 	GET	Retrieve a resource, should be no side-effects on the server
+</I>&gt;<i> 	POST	Submit data to an existing resource
+</I>&gt;<i> 	PUT	Add a new resource (a file for example) to the server
+</I>&gt;<i> 	DELETE	Remove a resource (a file for example file) from the server
+</I>&gt;<i>
+</I>&gt;<i>    The major difference between POST and PUT is that with POST, the resource
+</I>&gt;<i> receiving the data isn't modified (it's a fixed endpoint) whereas with PUT,
+</I>&gt;<i> the resource given is created or modified by the data.
+</I>
+Yes at the moment we have implemented GET, but not POST. It turned out 
+the other verbs (PUT, DELETE) are not really essential as they can 
+usually be implemented via POST, certainly for user facing applications. 
+So I don't think there is a need to get side tracked by those.
+
+As far as I understand it GET is supposed to be for persistent resources 
+that are more or less idempotent. It shouldn't really be used as a 
+vehicle to update a system, as the URLs are shareable and linkable 
+(hence the potential SPAM problem of having a million pre-configured 
+links to post comments whenever a search engine crawls your page).
+
+Unfortunately we don't have any equivalent to POST. I do think this is a 
+weakness and would be pleased to understand what the alternative in-band 
+method is. SSH and SFTP is I know being recommended for some, but a) 
+that is an out of band channel and wont be accessible to the majority of 
+end users and b) limits the content to being file-system based.
+
+We should not re-implement the web I agree, but there are a few things 
+we should learn from that history and specify a constrained POST scheme 
+that is not extendible.
+
+&gt;<i>    Of the complaints I've read online about Gemini, the question of &quot;why not
+</I>&gt;<i> use HTTP&quot; comes up, and in a sense, I can see the reason for the
+</I>&gt;<i> question---HTTP does *not* inherenetly imply spying and tracking but that
+</I>&gt;<i> there are external forces that force that in the HTTP world.
+</I>&gt;<i>
+</I>&gt;<i>    I still like the idea, but the trick is to tame (or limit) the damage that
+</I>&gt;<i> can be done.
+</I>
+I think we just need to lock it down and keep it really simple, but good 
+enough. Something like this:
+
+<A HREF="scheme://domain/fixed-end-point?params">scheme://domain/fixed-end-point?params</A>
+&lt;here come the bytes...&gt;
+close connection
+
+params should include path/content length/mime but not the content
+
+We just need to bolt it down. There should be no _hidden_ state that the 
+server can request (like cookies).
+
+Seeing as gemini just does GET, we can have a single simple POST scheme 
+that does nothing else
+
+<A HREF="gemini://">gemini://</A> (a perfect simple GET, not really extendible)
+<A HREF="postscheme://">postscheme://</A> (a perfect simple POST, not really extendible)
+
+Maybe in future PUT/DELETE but I dont think they're needed as a suitably 
+configured end point can receive parameters to enact this. The web got 
+by without it for almost all of its life, and is only used by some REST 
+end points.
+
+Best Wishes
+
+  - Luke
+
+
+
+</PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="001726.html">gemini+submit:// (was Re: Uploading Gemini content)
+</A></li>
+	<LI>Next message (by thread): <A HREF="001621.html">Uploading Gemini content
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1729">[ date ]</a>
+              <a href="thread.html#1729">[ thread ]</a>
+              <a href="subject.html#1729">[ subject ]</a>
+              <a href="author.html#1729">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>

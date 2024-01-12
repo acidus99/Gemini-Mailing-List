@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Clients] Gemini and accessibility regarding preformatted code blocks
+   </TITLE>
+   <LINK REL="Index" HREF="index.html" >
+   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BClients%5D%20Gemini%20and%20accessibility%20regarding%20preformatted%20code%0A%20blocks&In-Reply-To=%3CCAG-mZ3iK9HbuqAVMdgBWcMOgaAFLx2hGqtFxZG-wcDPOYgNePw%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="005647.html">
+   <LINK REL="Next"  HREF="005812.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Clients] Gemini and accessibility regarding preformatted code blocks</H1>
+    <B>Peter Vernigorov</B> 
+    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BClients%5D%20Gemini%20and%20accessibility%20regarding%20preformatted%20code%0A%20blocks&In-Reply-To=%3CCAG-mZ3iK9HbuqAVMdgBWcMOgaAFLx2hGqtFxZG-wcDPOYgNePw%40mail.gmail.com%3E"
+       TITLE="[Clients] Gemini and accessibility regarding preformatted code blocks">pitr.vern at gmail.com
+       </A><BR>
+    <I>Mon Mar  1 11:36:25 GMT 2021</I>
+    <P><UL>
+        <LI>Previous message (by thread): <A HREF="005647.html">[Clients] Gemini and accessibility regarding preformatted code blocks
+</A></li>
+        <LI>Next message (by thread): <A HREF="005812.html">[Clients] Gemini and accessibility regarding preformatted code blocks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5804">[ date ]</a>
+              <a href="thread.html#5804">[ thread ]</a>
+              <a href="subject.html#5804">[ subject ]</a>
+              <a href="author.html#5804">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Latest version of Elaho (1.3, in App Store now) handles preformatted
+text better and wraps it with accessibility metadata, using the alt
+text if present as title. I tested it with VoiceOver and it seems to
+do the right thing. Sometimes it seems to also read the contents of
+preformatted text if it looks like words, but not always. In any case,
+please let me know if this works better.
+
+On Thu, Feb 25, 2021 at 10:21 PM Devin Prater &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">r.d.t.prater at gmail.com</A>&gt; wrote:
+&gt;<i>
+</I>&gt;<i> On Feb 25, 2021, at 2:38 PM, Sol&#232;ne Rapenne &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solene at perso.pw</A>&gt; wrote:
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Is the reader reading line by line? So depending on the alternative text the user could decide
+</I>&gt;<i> to explore the content or skip it?
+</I>&gt;<i>
+</I>&gt;<i> The screen readers read line by line, basically. But browsers would have to put the code blocks in a container that can be skipped, like a frame so that screen readers can know that this is something that can be skipped. That&#8217;s for browsers that use some kind of web engine to show the content. For text browsers, this can&#8217;t really be controlled, some screen readers can&#8217;t easily skip it. That&#8217;s why I think these browsers should &#8220;fold&#8221; in Emacs terminology, or hide the blocks on request. Okay, I&#8217;ll give more concrete examples.
+</I>&gt;<i>
+</I>&gt;<i> On iOS, the VoiceOver screen reader shows everything in its own element. The Elaho browser, then, could get away with simply putting the preformatted blocks without Alt-text, or Alt-text that isn&#8217;t a language ID, in its own element so that can be skipped by moving to the next element (item) with VoiceOver. This is the same with Android with the TalkBack screen reader, and on the Mac, using VoiceOver.
+</I>&gt;<i> =&gt; <A HREF="https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/supporting_voiceover_in_your_app">https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/supporting_voiceover_in_your_app</A> VoiceOver (Apple developer)
+</I>&gt;<i> =&gt; <A HREF="https://developer.android.com/guide/topics/ui/accessibility">https://developer.android.com/guide/topics/ui/accessibility</A> TalkBack (Android developer)
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Windows and Linux graphical screen readers, however, read web pages like a document. So, there isn&#8217;t an easy way to skip past plain text, like Ascii art and such. Even if the blocks are marked up in the GemText, it is up to clients to show them. So, if a client just dumps the GemText into paragraphs, and puts the Ascii art in with it, then it is hard to skip. One can quickly arrow line by line until understandable words are spoken, but this is slow and frustrating. Windows and Linux GUI screen readers do have commands to &#8220;skip to end of container,&#8221; which are used to skip block quotes, frames, things like that. But the browser has to display them to the screen reader as such, the screen reader doesn&#8217;t just guess this.
+</I>&gt;<i> =&gt; <A HREF="https://github.com/nvaccess/nvda">https://github.com/nvaccess/nvda</A> NVDA screen reader for Windows (Github)
+</I>&gt;<i> =&gt; <A HREF="https://gitlab.gnome.org/GNOME/orca">https://gitlab.gnome.org/GNOME/orca</A> Orca screen reader (Gitlab)
+</I>&gt;<i>
+</I>&gt;<i> Console screen readers are the most dumb of them all. They read directly from top left of the screen to bottom right, whereas GUI screen readers start at keyboard focus, or at top left of a document or web page that doesn&#8217;t put keyboard focus anywhere else. Console screen readers do have keys to read by line, word or character, but not much else. It all is dependent on the program being read.
+</I>&gt;<i> =&gt; <A HREF="http://www.linux-speakup.org">http://www.linux-speakup.org</A> Speak screen reader
+</I>&gt;<i> =&gt; <A HREF="https://github.com/chrys87/fenrir">https://github.com/chrys87/fenrir</A> Fenrir screen reader
+</I>&gt;<i> =&gt; <A HREF="https://brltty.app">https://brltty.app</A> BRLTTY braille display driver
+</I>&gt;<i>
+</I>&gt;<i> Hope that helps a little more.
+</I></PRE>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message (by thread): <A HREF="005647.html">[Clients] Gemini and accessibility regarding preformatted code blocks
+</A></li>
+	<LI>Next message (by thread): <A HREF="005812.html">[Clients] Gemini and accessibility regarding preformatted code blocks
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#5804">[ date ]</a>
+              <a href="thread.html#5804">[ thread ]</a>
+              <a href="subject.html#5804">[ subject ]</a>
+              <a href="author.html#5804">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
+mailing list</a><br>
+</body></html>
