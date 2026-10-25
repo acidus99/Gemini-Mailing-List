@@ -1,2 +1,10 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Preserve email/MIME bytes, including signed content and original line endings.
+/mbox/*.mbox -text
+/sources/mbox/*.mbox -text
+/sources/mbox/*.mbx -text
+
+# Generated XML can contain original folded-header line endings.
+/mbox/*.xml -text
