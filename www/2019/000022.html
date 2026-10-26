@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>File size issues</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000021.html">
+<link rel="next" href="000024.html">
+</head>
+<body>
+<h1>File size issues</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Fri Aug 16 14:44:27 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000021.html">File size issues</a></li>
+<li>Next message (by thread): <a href="000024.html">File size issues</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#22">[ date ]</a> <a href="thread.html#22">[ thread ]</a> <a href="subject.html#22">[ subject ]</a> <a href="author.html#22">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>&gt;<i> We are, of course, re-inventing the Content-Length header here, which is
+</i>&gt;<i> an extremely useful header so that clients can do things like have a
+</i>&gt;<i> progress bar for downloads. If we support every useful feature, of
+</i>&gt;<i> course, we end up with basically HTTP 0.9.
+</i>
+Right, and that&#x27;s what I&#x27;d like to avoid even taking one step toward
+to doing, because unless we resist it hard from day one, I worry we&#x27;ll
+inevitably fall down a slippery slope to recreating HTTP.
+
+In some sense, Gemini as-is chooses Content-Type as the &quot;one true
+header&quot;.  To some extent that needs justification, because there are
+certainly other HTTP headers which don&#x27;t do any evil and are genuinely
+helpful.  I guess Content-Type was elevated because in my experience
+with Gopher, it was the missing piece of information which caused the
+most pain.  The lack of in-band content type signalling in Gopher
+requires things like a custom URL scheme to encode that information,
+which is a bit gross.
+ 
+&gt;<i> IMO you probably don&#x27;t want to serve the timestamps or file sizes for
+</i>&gt;<i> every single file/resource in one response, for a number of reasons both
+</i>&gt;<i> privacy-related and performance-related.
+</i>
+Yeah, putting every hosted resource in one response makes no sense -
+that response could easily be larger than the one resource we were
+interested in checking the timestamp or file size of.  The sensible
+thing is to include the particular path you care about as a query.  If
+that is absent, a sensible default might be to list the N most recently
+updated resources, or the N most popularly requested?  But, really, I&#x27;m
+not sure who would be making that kind of request or why.
+ 
+&gt;<i> The one downside I see to that is that once we start seeing more complex
+</i>&gt;<i> clients written, especially graphical clients, we will start seeing
+</i>&gt;<i> progress bars, download managers, etc., and there will always be a need
+</i>&gt;<i> to make a second request to get the metadata, which is relatively
+</i>&gt;<i> expensive.
+</i>
+While they are not prohibited, using Gemini to transfer large binary
+files (of the kind for which progress bars and download managers are
+useful) is not a very smart idea.  There&#x27;s no way to use compression to
+speed things up, and there is no way to resume an interrupted download
+with anything like a Range: header.  It&#x27;s just not the right tool for
+the job.  Thankfully, it&#x27;s very easy for a Gemini document to link to
+things hosted on other protocols, like https or even bittorrent, or one
+of these newfangled P2P things the kids are using like IPFS, which are
+more appropriate for that task.  I would say it makes sense to
+recommend not using Gemini for files larger than, I dunno, 10MB?
+
+The second request is definitely expensive, but the idea is not that
+every client does this before every &quot;real&quot; request.  This &quot;pseudo HEAD&quot;
+is mostly a support mechanism for clients with unreliable and/or slow
+connections or with very limited disc space and/or memory.  I expect 95%
+of clients to work exactly the way Gopher clients do, by just ignoring
+all of this and generally being none the worse for it.
+
+Well, maybe 95% is a bit strong.  Moku pona style aggregators might be
+able to make good use of this, too.
+
+Very slick clients could just request a resource directly, keep track of
+how much response they&#x27;ve pulled down so far (or how many seconds
+they&#x27;ve been reading for) and once some threshold is passed (1MB?  5
+seconds?) make another request in a separate thread for the metadata and
+then begin displaying a progress bar or ETA prompt or something to
+reassure the user that things really are happening.
+
+&gt;<i> My experience *so far* is that server implementation is easier. But that
+</i>&gt;<i> is likely to change, I guess.
+</i>
+I guess for a sufficiently simple server which only deals in 20, 40 and
+50 that&#x27;s true.
+ 
+&gt;<i> This is definitely re-inventing HTTP headers with a different format.
+</i>
+It is - while the well-known endpoint for metadata is basically
+reinventing a HTTP method with a different format.
+
+Maybe we don&#x27;t need to worry about this?  There&#x27;s no shame in not being
+able to match every single useful capability that HTTP has.  It should
+have been clear from the outset we wouldn&#x27;t be able to do that.
+
+-Solderpunk
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000021.html">File size issues</a></li>
+<li>Next message (by thread): <a href="000024.html">File size issues</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#22">[ date ]</a> <a href="thread.html#22">[ thread ]</a> <a href="subject.html#22">[ subject ]</a> <a href="author.html#22">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Should Gemini clients alert users upon redirect?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005313.html">
+<link rel="next" href="005667.html">
+</head>
+<body>
+<h1>Should Gemini clients alert users upon redirect?</h1>
+<b>Michael Lazar</b> lazar.michael22 at gmail.com<br>
+<i>Wed Feb 17 20:56:01 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005313.html">Should Gemini clients alert users upon redirect?</a></li>
+<li>Next message (by thread): <a href="005667.html">Should Gemini clients alert users upon redirect?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5330">[ date ]</a> <a href="thread.html#5330">[ thread ]</a> <a href="subject.html#5330">[ subject ]</a> <a href="author.html#5330">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Wed, Feb 17, 2021 at 4:18 AM Stephane Bortzmeyer
+&lt;stephane at sources.org&gt; wrote:
+&gt;<i>
+</i>&gt;<i> On Tue, Feb 16, 2021 at 10:52:47PM -0500,
+</i>&gt;<i> Michael Lazar &lt;lazar.michael22 at gmail.com&gt; wrote
+</i>&gt;<i> a message of 33 lines which said:
+</i>&gt;<i>
+</i>&gt;<i> &gt; <a href="gemini://example.com">gemini://example.com</a> and <a href="gemini://example.com/">gemini://example.com/</a> are canonically the
+</i>&gt;<i> &gt; same resource and should always return the same response.
+</i>&gt;<i>
+</i>&gt;<i> Are you sure?
+</i>&gt;<i>
+</i>&gt;<i> RFC 3986, section 6.2.3 says &quot;In general, a URI that uses the generic
+</i>&gt;<i> syntax for authority with an empty path should be normalized to a path
+</i>&gt;<i> of &quot;/&quot;.&quot; Note the &quot;in general&quot;. The rest of section 6.2.3 explains
+</i>&gt;<i> that is is scheme-specific.
+</i>&gt;<i>
+</i>&gt;<i> &lt;<a href="gemini://gemini.circumlunar.space/docs/specification.gmi">gemini://gemini.circumlunar.space/docs/specification.gmi</a>&gt; seems
+</i>&gt;<i> silent about &quot;gemini:&quot; rules. 1.2 says &quot;The path, query and fragment
+</i>&gt;<i> components are allowed and have no special meanings beyond those
+</i>&gt;<i> defined by the generic syntax.&quot;
+</i>&gt;<i>
+</i>&gt;<i> (The Lupa crawler currently normalizes &lt;<a href="gemini://example.com">gemini://example.com</a>&gt; to
+</i>&gt;<i> &lt;<a href="gemini://example.com/">gemini://example.com/</a>&gt; but I wonder if I&#x27;m right.)
+</i>
+That&#x27;s an interesting point. Assuming the gemini spec is undefined
+simply because this edge case was not considered at the time (that I
+am 99.9% sure of). Can you make an argument for why this
+normalization *should not* be adopted by gemini://?
+
+The biggest advantage that I see is that we can use existing URL
+normalization tools and libraries which, like it or not, are heavily
+biased towards working with the http:// URL scheme.
+
+Also, those URLs being the same means that I can always depend on
+using &quot;/&quot; as the relative link for my root URL. If I had to worry
+about them being semantically different, I would also want to be able
+to use an empty string &quot;&quot; as a relative URL (which is valid as far as
+I can tell, see path-empty in section 4.2 the RFC). But looking at the
+text/gemini specification for link lines:
+
+=&gt;[&lt;whitespace&gt;]&lt;URL&gt;[&lt;whitespace&gt;&lt;USER-FRIENDLY LINK NAME&gt;]
+
+A blank, relative &lt;URL&gt; will collapse into
+
+=&gt;[&lt;whitespace&gt;&lt;USER-FRIENDLY LINK NAME&gt;]
+
+which collides with the alternate form of
+
+=&gt;[&lt;whitespace&gt;]&lt;URL&gt;
+
+- Michael
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005313.html">Should Gemini clients alert users upon redirect?</a></li>
+<li>Next message (by thread): <a href="005667.html">Should Gemini clients alert users upon redirect?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5330">[ date ]</a> <a href="thread.html#5330">[ thread ]</a> <a href="subject.html#5330">[ subject ]</a> <a href="author.html#5330">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

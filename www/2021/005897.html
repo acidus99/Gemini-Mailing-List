@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Greek characters in query string</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005898.html">
+<link rel="next" href="005903.html">
+</head>
+<body>
+<h1>Greek characters in query string</h1>
+<b>Omar Polo</b> op at omarpolo.com<br>
+<i>Thu Mar  4 07:50:06 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005898.html">Greek characters in query string</a></li>
+<li>Next message (by thread): <a href="005903.html">Greek characters in query string</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5897">[ date ]</a> <a href="thread.html#5897">[ thread ]</a> <a href="subject.html#5897">[ subject ]</a> <a href="author.html#5897">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+Rev. Fr. Robert Bower &lt;frrobert at frrobert.com&gt; writes:
+
+&gt;<i> I have a cgi script in which the query string has both English characters and Greek characters.
+</i>&gt;<i>
+</i>&gt;<i> For example, the user may enter in the input box Matt1/???
+</i>&gt;<i>
+</i>&gt;<i> When the url with the query string is sent to the server (I am using Molly Brown the server and amfora as a client) it is changed the Greek characters using url encoding.
+</i>&gt;<i>
+</i>&gt;<i> I am wondering how to I decode the url to get back the Greek characters.  I am using bash for my scripts.
+</i>&gt;<i>
+</i>&gt;<i> Thank you.
+</i>
+One way to decode using plain sh scripts is to substitute each % with \x
+and pass the string to printf, but I don&#x27;t know how solid it can be in
+the real world
+
+	$ QUERY_STRING=&#x27;caf%C3%A8&#x27;
+	$ printf &#x27;%b\n&#x27; $(printf &quot;%s\n&quot; &quot;$QUERY_STRING&quot; | sed &#x27;s/%/\\x/g&#x27;)
+	caf?
+
+Or you can shell out to python, ruby, perl, etc... that have libraries
+to do the decoding.
+
+Cheers,
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005898.html">Greek characters in query string</a></li>
+<li>Next message (by thread): <a href="005903.html">Greek characters in query string</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5897">[ date ]</a> <a href="thread.html#5897">[ thread ]</a> <a href="subject.html#5897">[ subject ]</a> <a href="author.html#5897">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

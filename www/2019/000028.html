@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text reflow woes (or: I want bullets back!)y</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000025.html">
+<link rel="next" href="000029.html">
+</head>
+<body>
+<h1>Text reflow woes (or: I want bullets back!)y</h1>
+<b>Jason McBrayer</b> jmcbray at carcosa.net<br>
+<i>Sat Aug 17 20:14:03 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000025.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000029.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#28">[ date ]</a> <a href="thread.html#28">[ thread ]</a> <a href="subject.html#28">[ subject ]</a> <a href="author.html#28">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+Brian Evans writes:
+
+&gt;<i> I think think many clients will opt to implement markdown parsers
+</i>&gt;<i> (heck, some may even try html parsing), but I think it would be a bad
+</i>&gt;<i> call to include it in the spec for gemini. Now that it has been
+</i>&gt;<i> brought up, I may add markdown parsing to the client I am working on
+</i>&gt;<i> (I am still in planning stages figuring out how I want it to work and
+</i>&gt;<i> the necessary structs and execution flows).
+</i>
+I am of two minds on this. On the one hand, I am generally of the &quot;pave
+the cowpaths&quot; school, where your RFCs ratify actual practice and pick
+out best practices. On the other, I would not like to see Gemini usage
+split early on between Markdown-implementing sites/clients and
+non-Markdown-implementing.
+
+Personally, what I would most like to see in a client is a large subset
+of Markdown (no embedded HTML, probably no inline images). But all of
+the CommonMark text properties, levels of headings, etc. In general, I
+would like for reasonable typography to be what you think of when you
+think of a Gemini page. I understand that this makes things
+significantly harder for client implementors.
+
+That&#x27;s one reason why I&#x27;ve suggested ratfactor&#x27;s Text Junior format (can
+someone invite ratfactor? I don&#x27;t have any means of contacting them) as
+a standard format for Gemini. It is basically a large subset of
+Markdown, but fully line-oriented and stripped of parsing ambiguities. A
+simple client can either just cat(1) it, can fmt(1) everything that&#x27;s
+not wrapped in a ``` ``` block, or can apply full formatting. Everything
+I have served on my Gemini site is legal Text Junior.
+
+It is perhaps unfortunate that despite there being Markdown parser
+libraries for every common language, practically all of them are focused
+on generating HTML rather than generating (e.g.) a parse tree that you
+could use in your own layout engine. If all of those libraries had
+better support for other representations, I&#x27;d honestly argue that we
+just use MarkDown (CommonMark), because it already occupies the
+text-formatting analogue of the niche that Gemini is aiming for in the
+protocol world, IMO.
+
+--
++----------------------------------------------------------------------+
+| Jason F. McBrayer                                jmcbray at carcosa.net |
+| The scalloped tatters of the King in Yellow must hide Yhtill forever.|
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000025.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000029.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#28">[ date ]</a> <a href="thread.html#28">[ thread ]</a> <a href="subject.html#28">[ subject ]</a> <a href="author.html#28">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

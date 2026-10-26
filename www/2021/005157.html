@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A proxy for Web pages in Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005151.html">
+<link rel="next" href="005172.html">
+</head>
+<body>
+<h1>A proxy for Web pages in Gemini</h1>
+<b>Andreas R.</b> avr at softwarelibre.nl<br>
+<i>Thu Feb 11 07:18:44 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005151.html">A proxy for Web pages in Gemini</a></li>
+<li>Next message (by thread): <a href="005172.html">A proxy for Web pages in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5157">[ date ]</a> <a href="thread.html#5157">[ thread ]</a> <a href="subject.html#5157">[ subject ]</a> <a href="author.html#5157">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Wed, Feb 10, 2021 at 10:46:34PM +0000, Nader K. Rad wrote:
+&gt;<i> Hello everyone,
+</i>&gt;<i> I&#x27;m new here, and I&#x27;ve set up my Gemini capsule only a couple of days ago. I was writing a new article today when I had to reference a Web page, and I started thinking: What if there&#x27;s a Web proxy for Gemini?
+</i>&gt;<i> 
+</i>&gt;<i> I&#x27;ve seen Gemini proxies for Web, but not the other way around. Instead of external links, writers can add a link via the proxy, and the readers can stay in Gemini and read the referenced article.
+</i>&gt;<i> 
+</i>&gt;<i> For example, if the proxy is at <a href="gemini://example.proxy">gemini://example.proxy</a>, and the writer wants to link to <a href="https://example.com">https://example.com</a>, they can add a link to <a href="gemini://example.proxy?https://example.com">gemini://example.proxy?https://example.com</a>. When the proxy receives such a request, it can pass the link to Mozilla&#x27;s readability script to clean it up, and then pipe the output through another script to convert it to gemtext. A link to the original Web page can be added to the top, in case the readability script couldn&#x27;t do its job well enough. The output will be served to the user, and it will be cached for future requests (for one month, for example). 
+</i>&gt;<i> 
+</i>&gt;<i> Any ideas?
+</i>
+I have set up 
+<a href="gemini://webgate.geminet.org/web.sh">gemini://webgate.geminet.org/web.sh</a>
+for that occasion.
+
+It&#x27;s a simple cgi-script that uses gemget and duckling proxy.
+
+I still need to patch duckling proxy to rewrite all the hrefs in the html document, so you can follow them without
+leaving gemini, but for now, for a single referenced page on the web, it might already be useful.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005151.html">A proxy for Web pages in Gemini</a></li>
+<li>Next message (by thread): <a href="005172.html">A proxy for Web pages in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5157">[ date ]</a> <a href="thread.html#5157">[ thread ]</a> <a href="subject.html#5157">[ subject ]</a> <a href="author.html#5157">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Color and escape codes in text/gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000271.html">
+<link rel="next" href="000274.html">
+</head>
+<body>
+<h1>Color and escape codes in text/gemini</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Thu Dec 12 00:30:40 GMT 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000271.html">Color and escape codes in text/gemini</a></li>
+<li>Next message (by thread): <a href="000274.html">Color and escape codes in text/gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#273">[ date ]</a> <a href="thread.html#273">[ thread ]</a> <a href="subject.html#273">[ subject ]</a> <a href="author.html#273">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Baschdel once stated:
+&gt;<i> In my last post on this list I called escape codes spaghetti without much
+</i>&gt;<i> of an explaination.
+</i>&gt;<i> 
+</i>&gt;<i> Tl;dr:
+</i>&gt;<i> -Do we want color in text/gemini?
+</i>&gt;<i> -If yes how should it be standardized?
+</i>
+  Oh goody!  We still haven&#x27;t figured out our last question about Gemini:
+To reflow or not to reflow, that is the question.  
+
+&gt;<i> I really like that there are creative people out there looking for ways to
+</i>&gt;<i> push systems like gemini outside of what they are supposed to be able to
+</i>&gt;<i> do.
+</i>
+&gt;<i> And I don&#x27;t want to decide (at least not now) if the escape code thingy is
+</i>&gt;<i> a &quot;bug&quot; or a feataure in most clients. The first question we have ask here
+</i>&gt;<i> is if we want color support at all: I know, that gemini should remain
+</i>&gt;<i> simple and support for colors takes away a good part of this simplicity.
+</i>&gt;<i> But there are a lot of usecases for color support. (Code highlighting,
+</i>&gt;<i> pretty ascii art, footnotes, ...) For me these are two pretty strong
+</i>&gt;<i> arguments against each other.
+</i>&gt;<i> 
+</i>&gt;<i> So in case we want color support: Assuming the escape code thingy is a
+</i>&gt;<i> feataure: We should standardize which escape codes are allowed and how
+</i>&gt;<i> clients should handle them. Assuming it is a &quot;bug&quot;: Some people (me
+</i>&gt;<i> included after thinking about it) like to see color being used in gemini
+</i>&gt;<i> so we have to find another way to put colors in while the text/gemini
+</i>&gt;<i> format should remain easy to parse and human readable. (Correct me if I&#x27;m
+</i>&gt;<i> wrong but that is how I interpret the text/gemini format: Markup that is
+</i>&gt;<i> easy to parse but still human readable if you open it in something like a
+</i>&gt;<i> text editor)
+</i>
+  Ah, the so called ANSI escape codes, which aren&#x27;t at all defined by ANSI
+but ISO, and are technically known as ECMA-48.  First off, the control codes
+that *are* defined by ASCII, codes 0 to 31 [1].  There are only seven
+control codes that releate to text (we&#x27;re excluding the unit separators,
+which are rarely, if ever, used):
+
+	07	BEL	audible alarm
+	08	BS	move left one space
+	09	HT	horizontal tab
+	0A	LF	move down one line
+	0B	VT	vertical tab
+	0C	FF	form feed
+	0D	CR	carriage return
+
+  Of these, HT, LF and CR are the most used---the rest not so much in text
+files.  Now technically, what we consider the backspace is actually the
+action of two control characters, BS (move left one space) and DEL (ignore
+this character---if things worked this way, an easy way to get, say, an
+umlaut is &#x27;a BS &quot;&#x27; or an n with a tilde over it by &#x27;n BS ~&#x27;), and there are
+fights over how to end a line (CR, LF, or both?  Technically, Microsoft got
+this right with both).
+
+  Then there&#x27;s ECMA-48, which is what is under discussion here.  It&#x27;s a vast
+standard, but they all fall under a few patterns (using a slightly modified
+RFC-5234 format---&quot;a&quot; - &quot;z&quot; means the range of characters between &quot;a&quot; and
+&quot;z&quot;):
+
+	Pattern group 1 (largely, a few exceptions in here as shown below):
+
+		group1 = %d27 ( &quot;`&quot; - &quot;~&quot;)
+
+	Pattern group 2 (largely, a few exceptions in here shown below):
+
+		group2 = %d27 ( &quot;@&quot; - &quot;_&quot;)
+	               / %d128-175 ; [3]
+
+	Pattern group 3 (these are what is popularly known as ANSI codes,
+	and a subset of group 2):
+
+		group3 = (%d27 &quot;[&quot; / %d155) *(&quot;0&quot; - &quot;?&quot;) *1(&quot; &quot; - &quot;/&quot;) (&quot;@&quot; - &quot;~&quot;)
+
+	and finally pattern group 4 (and are a subset of group 1):
+
+		cmd     = %d144 / %d152 / %d157 / %d158 / %d159
+		        / %d27 ( &quot;P&quot; / &quot;X&quot; / &quot;]&quot; / &quot;^&quot; / &quot;_&quot;)
+		group4  = cmd *(%d8-13 / &quot; &quot; - &quot;~&quot;) (%d156 / %27 &quot;\&quot;)
+
+  Group 4 is the most problematic, security wise, as they define actual
+messages.  &#x27;ESC]&#x27; is defined as &quot;OPERATING SYSTEM COMMAND&quot; and &#x27;ESC_&#x27; is
+&quot;APPLICATION PROGRAM COMMAND&quot;.  Not many terminal emulators support group 4,
+but they are defined.
+
+  And there are several commands under group 3 that are problematic.
+Microsoft defined &#x27;ESC[...p&#x27; (which is in the private use area of
+ECMA-48) to redefine the keys on the keyboard (so beware of the text file
+that does &#x27;ESC[13;&quot;deltree c:\&quot;p&#x27;).
+
+And there are code that do more than just define colors, they can define
+fonts, move the cursor, define locked regions on the screen, set or clear
+tab stops, insert lines or characters on the screen, delete lines or
+characters on the screen, and even define print parameters.  But oddly, no
+defined sequence to query the size of the screen (fancy that!).
+
+  Now, not all terminial emulators support all of ECMA-48, but it&#x27;s a large
+standard (and there is plenty of room for terminal emulators to extend
+support with private codes).  
+
+&gt;<i> If I had to standardize it I&#x27;d use custom escape sequences, similar to
+</i>&gt;<i> those already in use but optimized to be no longer than necessary that
+</i>&gt;<i> ALWAYS end in a &#x27;;&#x27;. 
+</i>
+  Hard to enforce, and the ending in &#x27;;&#x27; is problematic with respect to the
+current standard.  For instance, to set the foreground color blinking and
+the background color:
+
+	ESC[31;42;5m
+
+&gt;<i> This is not really text editor friendly, but avoids
+</i>&gt;<i> having to escape the escape caracter (I&#x27;m looking at you XML), makes it
+</i>&gt;<i> easy to parse/strip the escape sequences and if you don&#x27;t you at least get
+</i>&gt;<i> very short spaghetti.
+</i>
+  So how would you define the control sequences?
+
+  One thing I noticed with <a href="gemini://konpeito.media/">gemini://konpeito.media/</a> is that the default page
+was very hard for me to read, but that&#x27;s because the page made one
+assumption that isn&#x27;t universally true---that the default background color
+is black.  I don&#x27;t use a black background on my terminals.
+
+&gt;<i> In any case I&#x27;m for filtering out unwanted escape codes.
+</i>
+  That&#x27;s what I do, only I filter out all escape codes, since I don&#x27;t want
+the screen to mess up and my program get confused as to what is where.
+
+  -spc
+
+[1]	32, or space, is special in that it can be treated as a control code
+	(part of the unit separator group starting with 28), or the
+	graphical portion (even though it has no graphical representation). 
+	And 127 is technically not part of any control group, as it
+	technically means &quot;ignore me entirely&quot; [2].
+
+[2]	It comes from paper tape, which originally were 7 bits long, and the
+	hole represents a 1.  If there was an error, to fix it, all 7 bits
+	were punched out (representing 127) and and reading side was known
+	to ignore that character entirely.
+
+[3]	If you are using the UTF-8 encoding scheme, these characters will be
+	encoded as UTF-8 codepoints, so 155 is encoded as the byte sequence
+	194,155, as if things weren&#x27;t bad enough.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000271.html">Color and escape codes in text/gemini</a></li>
+<li>Next message (by thread): <a href="000274.html">Color and escape codes in text/gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#273">[ date ]</a> <a href="thread.html#273">[ thread ]</a> <a href="subject.html#273">[ subject ]</a> <a href="author.html#273">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

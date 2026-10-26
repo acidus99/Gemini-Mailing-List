@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposal to drop double slashes from URL syntax</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005086.html">
+<link rel="next" href="005107.html">
+</head>
+<body>
+<h1>Proposal to drop double slashes from URL syntax</h1>
+<b>Daniel Nagy</b> danielnagy at posteo.de<br>
+<i>Tue Feb  9 19:57:48 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005086.html">Proposal to drop double slashes from URL syntax</a></li>
+<li>Next message (by thread): <a href="005107.html">Proposal to drop double slashes from URL syntax</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5105">[ date ]</a> <a href="thread.html#5105">[ thread ]</a> <a href="subject.html#5105">[ subject ]</a> <a href="author.html#5105">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>My initial mail should have made that clearer. I was not talking 
+about removing
+the double-slashes of every link you can find in a Gemtext 
+document. I was only
+talking about gemini URI scheme links. http links ( and all other 
+urls ) should
+stay exactly the same as they are.
+
+Also, to my understanding removing them does not violate the 
+standard. For
+example, `tel:+1-816-555-1212` and `magnet:?xt=urn:sha1:...` are 
+valid URIs. A
+Gemini browser might choose to recognize those `tel:` and 
+`magnet:` links and a
+open a locally installed VoiP client or Torrent client 
+respectively. My initial
+assumption was that some of the simpler parsers might not 
+recognize this format.
+If they adhere to the URI standard it should be fine.
+
+There is some confusion regarding the terms URI and URL. The W3C 
+tries to clear
+that up[0]. It used to be that they ment different things in what 
+they call the
+&quot;classical view&quot; but this difference isn&#x27;t as dominant anymore in 
+the
+&quot;contemporary view&quot;. In my understanding, a scheme, which would be 
+`gemini:`,
+can define upon its own what it expects after the colon. You can 
+find more
+registered schemes here[1], some of which require a double-slash, 
+some don&#x27;t.
+
+Even though the difference seems small, in the amount of links out 
+there I think
+this small difference can add up.
+
+Best,
+Daniel
+
+[0]: <a href="https://www.w3.org/TR/uri-clarification/#uri-partitioning">https://www.w3.org/TR/uri-clarification/#uri-partitioning</a>
+[1]: 
+<a href="https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml">https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml</a>
+
+PJ vM &lt;pjvm742 at disroot.org&gt; writes:
+
+&gt;<i>&gt; I want to propose to drop the double slashes from the gemini 
+</i>&gt;<i>&gt; URL
+</i>&gt;<i>&gt; syntax.
+</i>&gt;<i>
+</i>&gt;<i> No.
+</i>&gt;<i>
+</i>&gt;<i> One of the reasons Gemini uses URLs is because the URL syntax is 
+</i>&gt;<i> a
+</i>&gt;<i> *standard*. Gemtext allows linking to things that are accessible 
+</i>&gt;<i> through
+</i>&gt;<i> any other protocol for which there exists a URL scheme. In order 
+</i>&gt;<i> for a
+</i>&gt;<i> different-protocol link to be handled by a client for that 
+</i>&gt;<i> protocol, it
+</i>&gt;<i> is important that the link is a valid, standard URL. And it does 
+</i>&gt;<i> not
+</i>&gt;<i> make sense to use nonstandard fake URLs for gemini links and 
+</i>&gt;<i> real URLs
+</i>&gt;<i> for other protocols.
+</i></pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005086.html">Proposal to drop double slashes from URL syntax</a></li>
+<li>Next message (by thread): <a href="005107.html">Proposal to drop double slashes from URL syntax</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5105">[ date ]</a> <a href="thread.html#5105">[ thread ]</a> <a href="subject.html#5105">[ subject ]</a> <a href="author.html#5105">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

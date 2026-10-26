@@ -1,81 +1,65 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Client certificate musings
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200523230429.GA38201%40allanon.local%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="000987.html">
-   <LINK REL="Next"  HREF="001008.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Client certificate musings</H1>
-    <B>Thomas Karpiniec</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200523230429.GA38201%40allanon.local%3E"
-       TITLE="Client certificate musings">tkarpiniec at icloud.com
-       </A><BR>
-    <I>Sun May 24 00:04:29 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="000987.html">Client certificate musings
-</A></li>
-        <LI>Next message (by thread): <A HREF="001008.html">Client certificate musings
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1005">[ date ]</a>
-              <a href="thread.html#1005">[ thread ]</a>
-              <a href="subject.html#1005">[ subject ]</a>
-              <a href="author.html#1005">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client certificate musings</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000987.html">
+<link rel="next" href="001008.html">
+</head>
+<body>
+<h1>Client certificate musings</h1>
+<b>Thomas Karpiniec</b> tkarpiniec at icloud.com<br>
+<i>Sun May 24 00:04:29 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000987.html">Client certificate musings</a></li>
+<li>Next message (by thread): <a href="001008.html">Client certificate musings</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1005">[ date ]</a> <a href="thread.html#1005">[ thread ]</a> <a href="subject.html#1005">[ subject ]</a> <a href="author.html#1005">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Hi!
+<pre>Hi!
 
 On Sat, May 23, 2020 at 02:56:38PM +0000, solderpunk wrote:
 &gt;<i> Gemini specs a lot of use for client certificates - partially because
-</I>&gt;<i> they're a nice tool for the job, partially because the design goal of
-</I>&gt;<i> maximising power-to-weight ratio means once you accept the weight of
-</I>&gt;<i> using TLS you'd better implement everything you can using TLS rather
-</I>&gt;<i> than adding yet another pile of concepts.
-</I>
+</i>&gt;<i> they&#x27;re a nice tool for the job, partially because the design goal of
+</i>&gt;<i> maximising power-to-weight ratio means once you accept the weight of
+</i>&gt;<i> using TLS you&#x27;d better implement everything you can using TLS rather
+</i>&gt;<i> than adding yet another pile of concepts.
+</i>
 This was the thing that stood out most on my first read-through of the
 spec! I particularly like the insistence &quot;Transient certificates MUST
-NOT be generated automatically&quot;. I wasn't here for the earlier
+NOT be generated automatically&quot;. I wasn&#x27;t here for the earlier
 discussion but I assume this is to fend off servers making sessions
 purely for tracking purposes by default.
 
 &gt;<i>   Right now, AV-98 fills the &quot;Subject&quot; of transient certs with
-</I>&gt;<i>   random unique values from Python's `uuid` module, because I seemed
-</I>&gt;<i>   to encounter errors sending totally empty certificates to
-</I>&gt;<i>   conman.org.
-</I>
-I've seen similar problems before with custom usage of X.509. It would
+</i>&gt;<i>   random unique values from Python&#x27;s `uuid` module, because I seemed
+</i>&gt;<i>   to encounter errors sending totally empty certificates to
+</i>&gt;<i>   conman.org.
+</i>
+I&#x27;ve seen similar problems before with custom usage of X.509. It would
 be nice to use something smaller than UUID if possible just to keep
 cert size down - provided there is library support as you noted.
 
 &gt;<i> There is a third scenario, which the spec does not explicitly discuss at
-</I>&gt;<i> all, but which is actually the most widely used scenario in Geminispace
-</I>&gt;<i> so far, which is the main reason that I want to kick off a discussion
-</I>&gt;<i> about this and change the spec if required.  It's the idea of persistent
-</I>&gt;<i> identity (basically, a &quot;user account&quot;) at a server which is not under
-</I>&gt;<i> the client's control.
-</I>&gt;<i> ...
-</I>&gt;<i> We could change 62 to specify that the META should be a plain-language
-</I>&gt;<i> message to users, which could disambiguate the scenario.  Something
-</I>&gt;<i> else to consider here is that astrobotany uses the Common Name part of
-</I>&gt;<i> the certificate for the username.  I like this idea a lot, but
-</I>&gt;<i> different applications may want different or additional user
-</I>&gt;<i> information, and using META to convey this information could work well.
-</I>
-I'm not a big fan of using certificate fields for anything meaningful
-- it's a side channel (surrounded by lots of other fields that people
+</i>&gt;<i> all, but which is actually the most widely used scenario in Geminispace
+</i>&gt;<i> so far, which is the main reason that I want to kick off a discussion
+</i>&gt;<i> about this and change the spec if required.  It&#x27;s the idea of persistent
+</i>&gt;<i> identity (basically, a &quot;user account&quot;) at a server which is not under
+</i>&gt;<i> the client&#x27;s control.
+</i>&gt;<i> ...
+</i>&gt;<i> We could change 62 to specify that the META should be a plain-language
+</i>&gt;<i> message to users, which could disambiguate the scenario.  Something
+</i>&gt;<i> else to consider here is that astrobotany uses the Common Name part of
+</i>&gt;<i> the certificate for the username.  I like this idea a lot, but
+</i>&gt;<i> different applications may want different or additional user
+</i>&gt;<i> information, and using META to convey this information could work well.
+</i>
+I&#x27;m not a big fan of using certificate fields for anything meaningful
+- it&#x27;s a side channel (surrounded by lots of other fields that people
 might be tempted to use) - and it slightly increases the complexity of
 integration between the TLS library and the client/server code.
 
@@ -90,7 +74,7 @@ secure solution but it absolutely sets up users to fail. People who
 are auto-generating this authentication in regular clients will lose
 their keys and be sad about it. By comparison, those who are setting
 up whitelisted keys out-of-band are likely more savvy and know what
-they're getting into.
+they&#x27;re getting into.
 
 With this in mind, my current opinion is that there should be no way
 for a server to request a non-disposable certificate. Where
@@ -110,119 +94,22 @@ flushed out.
 
 One final thought: do we need a way to encourage clients to have
 multiple certificates for the same server, depending on path? If I
-authenticate to a CGI application on a multi-user server I don't
-necessarily want my identity to be followed by everybody else's
+authenticate to a CGI application on a multi-user server I don&#x27;t
+necessarily want my identity to be followed by everybody else&#x27;s
 applications on that server.
 
 Cheers,
 
 Tom
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="000987.html">Client certificate musings
-</A></li>
-	<LI>Next message (by thread): <A HREF="001008.html">Client certificate musings
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1005">[ date ]</a>
-              <a href="thread.html#1005">[ thread ]</a>
-              <a href="subject.html#1005">[ subject ]</a>
-              <a href="author.html#1005">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="000987.html">Client certificate musings</a></li>
+<li>Next message (by thread): <a href="001008.html">Client certificate musings</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1005">[ date ]</a> <a href="thread.html#1005">[ thread ]</a> <a href="subject.html#1005">[ subject ]</a> <a href="author.html#1005">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

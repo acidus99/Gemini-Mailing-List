@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[users] [announce] geminispace.info - alternative search provider</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005719.html">
+<link rel="next" href="004961.html">
+</head>
+<body>
+<h1>[users] [announce] geminispace.info - alternative search provider</h1>
+<b>Natalie Pendragon</b> natpen at natpen.net<br>
+<i>Sat Feb 27 13:48:44 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005719.html">[users] [announce] geminispace.info - alternative search provider</a></li>
+<li>Next message (by thread): <a href="004961.html">[ANN] Mansfield client and server</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5717">[ date ]</a> <a href="thread.html#5717">[ thread ]</a> <a href="subject.html#5717">[ subject ]</a> <a href="author.html#5717">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>I can&#x27;t believe GUS has been around for over a year at this point.
+There was one fairly substantial refactor about 4-5 months in, but the
+architecture is still *mostly* the same as it was on day one. I think
+that&#x27;s kind of cool, because that means GUS has mostly survived a bit
+over an order of magnitude of Geminispace growth - the first GUS crawl
+indexed 26 domains! I&#x27;m not sure if you were looking for the story of
+GUS, or an explanation of &quot;why not Elasticsearch,&quot; but I&#x27;ll tell the
+story anyway in case it&#x27;s interesting to anyone :)
+
+GUS has two parts (similar to how Stephane broke down the problem in
+another response): there&#x27;s the crawler and there&#x27;s the searcher. In
+the beginning, the crawler wrote directly to a TF-IDF index as it
+crawled. Then, the searcher, when run later, was simply a reader and
+searcher of that same index.
+
+On Sat, Feb 27, 2021 at 10:21:18AM +0100, C?me Chilliet wrote:
+&gt;<i> I was kind of expecting to see a solution based on an existing
+</i>&gt;<i> search engine to emerge, such as elastic search, by implementing
+</i>&gt;<i> only the gemini specific parts, but I looked into quite a few
+</i>&gt;<i> project and all were terribly complicated?
+</i>
+It&#x27;s interesting to note that, although I chose to build slightly
+closer to the metal than, say, Elasticsearch, it&#x27;s still basically the
+same tech. Elasticsearch wraps niceties around Lucene, which is a
+library for doing TF-IDF development. I chose to use a different
+TF-IDF library directly in GUS - I thought for fun, I would try one
+that was native to Python, to keep the project as self-contained as
+possible. I found Whoosh [1], and while it&#x27;s had a few sharp edges,
+it&#x27;s mostly been great to work with.
+
+[1] <a href="https://whoosh.readthedocs.io/">https://whoosh.readthedocs.io/</a>
+
+Onto the big refactor I mentioned happened 4-5 months in. TF-IDF
+indexes I would best describe as &quot;fragile.&quot; You have to be careful
+about interrupting any writes, you don&#x27;t get easy transactions or
+rollbacks like you do with most relational databases. This became
+increasingly frustrating to have to deal with as part of the crawl,
+which (again, as Stephane) is a difficult beast to manage in the real
+world. Capsules get creative :) So I added one extra piece to GUS&#x27;
+architecture - a SQLite database. The crawl writes to the SQLite
+database, then the TF-IDF index is built afterwards, from what&#x27;s in
+the database.
+
+I think GUS is about due for another rearchitecture of the crawler. A
+lot of the recent hacking on GUS is being done by a few folks like
+Rene with geminispace.info, so I would also be curious what their
+ideas are, but I think there could be a lot of promise taking a
+similar approach to what mozz did for his Gemini archiver [2].
+
+[2] <a href="https://github.com/michael-lazar/mozz-archiver/">https://github.com/michael-lazar/mozz-archiver/</a>
+
+I also think the WARC output format is cool. It makes me think of a
+world in which maybe we could even get rid of the need for crawling -
+just provide tooling that folks can use to package their own capsule
+into a WARC, then they submit it. It would be a more efficient use of
+network bandwidth than crawling is, and it would also naturally be
+opt-in, which after lots of reflection, I think would be a nice
+property for a place like Gemini.
+
+Well that&#x27;s the story of GUS. Let me know if you have any questions or
+want me to expound on any of this. I will close by saying I am very
+excited and thankful to see new folks like Rene and Remco get so
+involved with this project, and I am really looking forward to the
+future of search in Gemini.
+
+Warm regards,
+Natalie
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005719.html">[users] [announce] geminispace.info - alternative search provider</a></li>
+<li>Next message (by thread): <a href="004961.html">[ANN] Mansfield client and server</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5717">[ date ]</a> <a href="thread.html#5717">[ thread ]</a> <a href="subject.html#5717">[ subject ]</a> <a href="author.html#5717">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

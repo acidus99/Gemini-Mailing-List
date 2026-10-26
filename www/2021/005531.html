@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005496.html">
+<link rel="next" href="005551.html">
+</head>
+<body>
+<h1>[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</h1>
+<b>Bradley D. Thornton</b> Bradley at NorthTech.US<br>
+<i>Tue Feb 23 19:19:31 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005496.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li>Next message (by thread): <a href="005551.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5531">[ date ]</a> <a href="thread.html#5531">[ thread ]</a> <a href="subject.html#5531">[ subject ]</a> <a href="author.html#5531">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+
+On 2/22/2021 6:21 PM, Jason McBrayer wrote:
+&gt;<i> 
+</i>&gt;<i> Dave Cottlehuber writes:
+</i>&gt;<i>&gt; 403 Forbidden is ideal for this, or one of the 50x error codes. In
+</i>&gt;<i>&gt; practice most systems will retry a 50x request but not a 403.
+</i>&gt;<i> 
+</i>&gt;<i> I feel that by analogy, status code 418 might be appropriate.
+</i>&gt;<i> 
+</i>
+Oh Jason you beat me to the punch lolz.
+
+Yes I was just this very minute playing with ASCII-art generators for a
+kewl teapot response page delivered with status code 20.
+
+I figured I might need this after checking a few  webproxies. some
+respect robots.txt, some don&#x27;t. I understand that some of those authors
+may not view their proxy as a bot, but middleware it is. It may not have
+ever occured to them to accommodate that part of the spec.
+
+to further complicate things where my philosophy is concerned, and this
+was pointed out yesterday or so with the explanation as to what exactly
+a &quot;webproxy&quot; is, due to the necessarily vague verbiage in the spec.
+
+What if, Someone uses something like what Bitreich has with their SSH
+kiosk, to enable people to burrow Gopherholes? I&#x27;ve actually thought of
+deploying a service like this for Gemini...
+
+But if I authored such a thing, I myself would have to say that yes, I&#x27;m
+going to have to consider my product a webproxy and not violate a
+Disallow rule for webproxy user agents.
+
+And certainly, my specific intent here is not to stymie that sort of
+vehicle. My beef, is I don&#x27;t want any of the unique content that I
+publish in Gopher space or Gemini space leaking to HTTP space. I just
+loathe the thought of that - What purpose does Gopher or Gemini have
+where the client side is concerned if it&#x27;s just going to be published in
+HTML.
+
+In fact, I rarely, and I mean rarely ever publish anything in HTTP space
+that exists in either Gopher or Gemini space. I maintained a package
+repo containing well over ten thousand slackware packages back in the
+Slackware 9 and 10 days, and none of those packages were obtainable via
+HTTP - only gopher.
+
+To me (no point in debating me on this as it&#x27;s simply how I feel about
+it), having &quot;Unique&quot; content in a particular aspect of a network breeds
+relevance for the usage of that space. With Gemini, I see much more
+potential than simple phlogs in Gemini capsules here in the future.
+
+But enough of why I feel that it&#x27;s important enough for me to be kinda a
+dik about it with respect to the way I brought it up the other day. I
+try to be a lot nicer than that most of the time lolz.
+
+Now I&#x27;m just thinking of my own properties in the following, so it may
+or may not be applicable or attractive to others now or in the future -
+or NOT. Either way is kewl :)
+
+So short of /dev/null routing tables, I think a CIDR based event handler
+for Vger might be worth a go, because as it has been pointed out, it&#x27;s
+an actual user that will receive the page for all of those URLs. Instead
+of baking this into the the daemon of Vger, perhaps it would be more
+elegant to forward the packets to another Gemini service with something
+like go-mmproxy and simply serve a single page with that HTTP 418
+graphic for any and all requests?
+
+I&#x27;ll still have to manually hunt down the offending webproxy bots that
+refuse to comply with the published spec:
+
+<a href="gemini://gemini.circumlunar.space/docs/companion/robots.gmi">gemini://gemini.circumlunar.space/docs/companion/robots.gmi</a>
+
+But that&#x27;s not so difficult, since most are eager to advertise as a
+public service (and most with good intentions, to be certain).
+
+I&#x27;m long past being angry about it. Now it just feels like a fun little
+tinkering project to play around with. This problem is not unique to
+Gemini space - the bat bot phenomenon has plagued the HTTP space for
+decades, but as the spec points out, it&#x27;s different with Gemini, because
+there&#x27;s no user agent to assist in the identification process.
+
+Although I think serving a .gmi with an HTTP 418 graphic is quite
+hilarious, there&#x27;s an undercurrent that is sinister on another,
+non-technical level.
+
+I have wanted to believe that I can incorporate copyright law into the
+things that I personally wish to share with the world by using things
+like the GPL v2 (and in some instances the AGPL) or with a CC-BY-SA. But
+this matter has me questioning if that&#x27;s going to afford others (and
+myself) the protections I choose for my works.
+
+Do I need to do something like &quot;Copyright 2021 all rights reserved?&quot; or
+will simply racheting things up a little bit to a CC-BY-ND legally
+protect my intellectual property from being converted into HTML?
+
+And what about the other user agents? Search engines like Gus and
+Houston? Will they think that maybe they shouldn&#x27;t crawl and index
+servers that state that webproxies aren&#x27;t welcome - I certainly don&#x27;t
+wish for that to happen, those are not simply valuable services to the
+community, but in the coming years they&#x27;re going to be vital.
+
+And what about the archiver agetns? are they going to store their
+results in space that includes HTTP servers?
+
+It&#x27;s potentially a whole can &quot;O&quot; worms.
+
+My position is quite simple. I don&#x27;t want ANYONE to be able to read,
+surf or access content on Vger from a web browser via HTTP protocol.
+This of course, excludes plugins like Geminize, because the user is
+actually using native Gemini protocol to access Gemini space.
+
+Very simple concept to me. It makes Gopher more valuable. it makes
+Gemini more valuable (provided the content is worth visiting via the
+native protocols).
+
+And I really don&#x27;t want people to have to adhere to a &quot;No Derivitive&quot;
+clause in a creative commons license. I want them to be able to take my
+toys and edit them and share them with others in a form that suits the
+greater good (Yes, even if  that means they put that shit on a web
+server - they just have to retrieve it via Gemini or Gopher client).
+
+I really don&#x27;t know the answers to all of the questions that may raise,
+and maybe that&#x27;s where the discussion should go, coz I don&#x27;t see any
+roadblocks adressing this technically, or in a neighborly fashion. It&#x27;s
+the people who choose an immoral approach that may beg of licensing and
+copyright discussions.
+
+But in the end... Hey man, what do I know? I&#x27;m just a teapot :)
+
+Kindest regards,
+
+
+
+
+-- 
+Bradley D. Thornton
+Manager Network Services
+<a href="http://NorthTech.US">http://NorthTech.US</a>
+TEL: +1.310.421.8268
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005496.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li>Next message (by thread): <a href="005551.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5531">[ date ]</a> <a href="thread.html#5531">[ thread ]</a> <a href="subject.html#5531">[ subject ]</a> <a href="author.html#5531">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

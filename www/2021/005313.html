@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Should Gemini clients alert users upon redirect?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005308.html">
+<link rel="next" href="005330.html">
+</head>
+<body>
+<h1>Should Gemini clients alert users upon redirect?</h1>
+<b>Stephane Bortzmeyer</b> stephane at sources.org<br>
+<i>Wed Feb 17 09:16:47 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005308.html">Should Gemini clients alert users upon redirect?</a></li>
+<li>Next message (by thread): <a href="005330.html">Should Gemini clients alert users upon redirect?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5313">[ date ]</a> <a href="thread.html#5313">[ thread ]</a> <a href="subject.html#5313">[ subject ]</a> <a href="author.html#5313">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Tue, Feb 16, 2021 at 10:52:47PM -0500,
+ Michael Lazar &lt;lazar.michael22 at gmail.com&gt; wrote 
+ a message of 33 lines which said:
+
+&gt;<i> <a href="gemini://example.com">gemini://example.com</a> and <a href="gemini://example.com/">gemini://example.com/</a> are canonically the
+</i>&gt;<i> same resource and should always return the same response.
+</i>
+Are you sure?
+
+RFC 3986, section 6.2.3 says &quot;In general, a URI that uses the generic
+syntax for authority with an empty path should be normalized to a path
+of &quot;/&quot;.&quot; Note the &quot;in general&quot;. The rest of section 6.2.3 explains
+that is is scheme-specific.
+
+&lt;<a href="gemini://gemini.circumlunar.space/docs/specification.gmi">gemini://gemini.circumlunar.space/docs/specification.gmi</a>&gt; seems
+silent about &quot;gemini:&quot; rules. 1.2 says &quot;The path, query and fragment
+components are allowed and have no special meanings beyond those
+defined by the generic syntax.&quot;
+
+(The Lupa crawler currently normalizes &lt;<a href="gemini://example.com">gemini://example.com</a>&gt; to
+&lt;<a href="gemini://example.com/">gemini://example.com/</a>&gt; but I wonder if I&#x27;m right.)
+
+
+
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005308.html">Should Gemini clients alert users upon redirect?</a></li>
+<li>Next message (by thread): <a href="005330.html">Should Gemini clients alert users upon redirect?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5313">[ date ]</a> <a href="thread.html#5313">[ thread ]</a> <a href="subject.html#5313">[ subject ]</a> <a href="author.html#5313">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

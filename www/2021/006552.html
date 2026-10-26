@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] Client history behavior with redirects</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006550.html">
+<link rel="next" href="006593.html">
+</head>
+<body>
+<h1>[tech] Client history behavior with redirects</h1>
+<b>Oliver Simmons</b> oliversimmo at gmail.com<br>
+<i>Thu May 20 17:16:39 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006550.html">[tech] Client history behavior with redirects</a></li>
+<li>Next message (by thread): <a href="006593.html">[tech] Client history behavior with redirects</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6552">[ date ]</a> <a href="thread.html#6552">[ thread ]</a> <a href="subject.html#6552">[ subject ]</a> <a href="author.html#6552">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Mon, 17 May 2021 at 17:50, Michael Lazar &lt;lazar.michael22@gmail.com&gt; wrote:
+&gt;<i>
+</i>&gt;<i> Hi all,
+</i>&gt;<i>
+</i>&gt;<i> I have a question on a common design pattern in gemini. Say we have
+</i>&gt;<i> a guestbook, message board, etc. that accepts user comments via an
+</i>&gt;<i> input query. A normal session with a client might look like this:
+</i>&gt;<i>
+</i>&gt;<i> ```
+</i>&gt;<i> C: /
+</i>&gt;<i> S: 20 text/gemini (display the home page)
+</i>&gt;<i>
+</i>&gt;<i> C: /guestbook
+</i>&gt;<i> S: 20 text/gemini (display the guestbook page)
+</i>&gt;<i>
+</i>&gt;<i> C: /guestbook/input
+</i>&gt;<i> S: 10 enter your message
+</i>&gt;<i>
+</i>&gt;<i> C: /guestbook/input?hello%20world
+</i>&gt;<i> S: 30 /guestbook (submit the user&#x27;s message and redirect)
+</i>&gt;<i>
+</i>&gt;<i> C: /guestbook
+</i>&gt;<i> S: 20 text/gemini (display the guestbook page)
+</i>&gt;<i> ```
+</i>&gt;<i>
+</i>&gt;<i> Now, what should happen at this point when the user clicks the
+</i>&gt;<i> &quot;back&quot; button in their client?
+</i>&gt;<i>
+</i>&gt;<i> ⚞snip⚟
+</i>
+The way I would like it is:
+```
+C: /
+S: 20 text/gemini (display the home page)
+Stored in history
+
+C: /guestbook
+S: 20 text/gemini (display the guestbook page)
+Stored in history
+
+C: /guestbook/input
+S: 10 enter your message
+Not stored due to it being an input (resp. code 1x)
+
+C: /guestbook/input?hello%20world
+S: 30 /guestbook (submit the user&#x27;s message and redirect)
+Redirect not stored, the page redirected to should be stored (resp. code 3x)
+
+C: /guestbook
+S: 20 text/gemini (display the guestbook page)
+Stored in history. It&#x27;s a duplicate of the previous page in history
+though, so it should probably be removed.
+```
+
+That is, response codes 1x and 3x aren&#x27;t stored in history, and
+duplicates of the same URI (including query!) in history are merged
+into one.
+It&#x27;s not the query that makes it not store, it&#x27;d be the response code.
+So if /guestbook/input?hello%20world gave a 20 response code instead
+it would be stored, as that&#x27;s likely a unique page e.g. search results
+or generated content.
+
+This shouldn&#x27;t be required behaviour, it&#x27;d be a &quot;best practice&quot;
+recommendation instead.
+Different browsers have different preferences and in an ideal world
+this would be configurable by settings.
+
+-Oliver Simmons
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006550.html">[tech] Client history behavior with redirects</a></li>
+<li>Next message (by thread): <a href="006593.html">[tech] Client history behavior with redirects</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6552">[ date ]</a> <a href="thread.html#6552">[ thread ]</a> <a href="subject.html#6552">[ subject ]</a> <a href="author.html#6552">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

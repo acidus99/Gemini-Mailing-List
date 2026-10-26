@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposal: Simple structured form specification</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004934.html">
+<link rel="next" href="004944.html">
+</head>
+<body>
+<h1>Proposal: Simple structured form specification</h1>
+<b>Russtopia</b> rmagee at gmail.com<br>
+<i>Wed Jan 27 03:55:41 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004934.html">Proposal: Simple structured form specification</a></li>
+<li>Next message (by thread): <a href="004944.html">Proposal: Simple structured form specification</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4935">[ date ]</a> <a href="thread.html#4935">[ thread ]</a> <a href="subject.html#4935">[ subject ]</a> <a href="author.html#4935">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Tue, 26 Jan 2021 at 15:16, easrng &lt;easrng at gmail.com&gt; wrote:
+
+&gt;<i> I agree that Gemini should have forms, but that format doesn&#x27;t look
+</i>&gt;<i> great to me.
+</i>
+
+Sure, I&#x27;m not attached too much to my syntax, it was a hack-ish one I&#x27;d
+come up with for another project of mine.
+
+&gt;<i> What if forms were implemented as their own pages, not a
+</i>&gt;<i> new link line type? I&#x27;m thinking something like this:
+</i>&gt;<i>
+</i>&gt;<i> # Gemini Form Proposal
+</i>&gt;<i> ## Basic Format
+</i>&gt;<i> Form fields are on their own line. Any line starting with `[in` is
+</i>&gt;<i> considered a form element. This allows clients to continue to
+</i>&gt;<i> determine line types by the first 3 characters. After the `[in`, a
+</i>&gt;<i> dash is required.
+</i>&gt;<i> After the dash, the input type is listed. If a client cannot handle an
+</i>&gt;<i> input type, it SHOULD fall back to text. The rest of the line, up to
+</i>&gt;<i> the first ] is used as options for the input. Next, there is a ]
+</i>&gt;<i> character, then an optional text label.
+</i>&gt;<i> ## Escape sequences
+</i>&gt;<i> In order to allow for ] characters, newlines, and literal backslashes
+</i>&gt;<i> in input options, preface them with a backslash.
+</i>&gt;<i> ## Input types
+</i>&gt;<i> Other types could be added, like number, email, phone, color, or even
+</i>&gt;<i> file, but I feel this is an acceptable minimum set of types.
+</i>&gt;<i>
+</i>
+I do feel like there should be some explicit allowance for one-of
+types and boolean types, to give a client app hints as to what &#x27;widgets&#x27;
+to best use to present the valid values to the user  (eg., drop-downs or
+choose a-b-c-d for a text-based client, and checkboxes). IMHO.
+
+&gt;<i> ### text
+</i>&gt;<i> A text input is a single line text input. Its format is as follows.
+</i>&gt;<i> (Things in parentheses are optional)
+</i>&gt;<i> ```
+</i>&gt;<i> [in-text &lt;name&gt;( &lt;initial value&gt;)]
+</i>&gt;<i> ```
+</i>&gt;<i> For example,
+</i>&gt;<i> ```
+</i>&gt;<i> [in-text userFullName Alex Fierro] What is your name?
+</i>&gt;<i> ```
+</i>&gt;<i> ### password
+</i>&gt;<i> A password input is a single line text input that MUST hide the value
+</i>&gt;<i> typed into it. For security reasons, there is now way to prefill a
+</i>&gt;<i> password input. Its format is as follows.
+</i>&gt;<i> ```
+</i>&gt;<i> [in-password &lt;name&gt;]
+</i>&gt;<i> ```
+</i>&gt;<i> For example,
+</i>&gt;<i> ```
+</i>&gt;<i> [in-password newPassword] What is your name?
+</i>&gt;<i> ```
+</i>&gt;<i> ### multiline
+</i>&gt;<i> A multiline input is a text input that accepts any number of lines.
+</i>&gt;<i> Its format is as follows. (Things in parentheses are optional)
+</i>&gt;<i> ```
+</i>&gt;<i> [in-multiline &lt;name&gt; ( &lt;initial value&gt;)]
+</i>&gt;<i> ```
+</i>&gt;<i> For example,
+</i>&gt;<i> ```
+</i>&gt;<i> [in-multiline bio I am a demigod who enjoys art and the colors pink
+</i>&gt;<i> and green.\nI usually use she/her pronouns, but sometimes I use
+</i>&gt;<i> he/him.] Tell me about yourself
+</i>&gt;<i> ```
+</i>&gt;<i> ### submit
+</i>&gt;<i> A submit input is a button that submits a form to a URL. It&#x27;s label
+</i>&gt;<i> SHOULD be used as the text on the button. Its format is as follows.
+</i>&gt;<i> ```
+</i>&gt;<i> [in-submit /url/to/submit/to]
+</i>&gt;<i> ```
+</i>&gt;<i> For example,
+</i>&gt;<i> ```
+</i>&gt;<i> [in-submit /cgi-bin/profile.py] Update Profile
+</i>&gt;<i> ```
+</i>&gt;<i> ## Submitting
+</i>&gt;<i> When an `[in-submit]` is (clicked|tapped|activated with the
+</i>&gt;<i> keyboard|etc) all named inputs on the page (submit buttons are not
+</i>&gt;<i> named) will be added to the URL of the submit button as query
+</i>&gt;<i> parameters, and the resulting URL will be loaded.
+</i>&gt;<i>
+</i>&gt;<i>
+</i>&gt;<i> - easrng
+</i>&gt;<i>
+</i>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210126/2d272f1c/attachment-0001.htm">https://mailing-list-archive.gemi.dev/www/attachments/20210126/2d272f1c/attachment-0001.htm</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004934.html">Proposal: Simple structured form specification</a></li>
+<li>Next message (by thread): <a href="004944.html">Proposal: Simple structured form specification</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4935">[ date ]</a> <a href="thread.html#4935">[ thread ]</a> <a href="subject.html#4935">[ subject ]</a> <a href="author.html#4935">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

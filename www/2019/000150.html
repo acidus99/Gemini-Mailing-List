@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>URLs in request lines</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000149.html">
+<link rel="next" href="000153.html">
+</head>
+<body>
+<h1>URLs in request lines</h1>
+<b>plugd</b> plugd at thelambdalab.xyz<br>
+<i>Fri Sep 13 22:01:45 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000149.html">URLs in request lines</a></li>
+<li>Next message (by thread): <a href="000153.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#150">[ date ]</a> <a href="thread.html#150">[ thread ]</a> <a href="subject.html#150">[ subject ]</a> <a href="author.html#150">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Sean Conner writes:
+&gt;<i> It was thus said that the Great plugd once stated:
+</i>&gt;<i>&gt; Hi all,
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; This question occurred to me when debugging some 5x error responses from
+</i>&gt;<i>&gt; servers: how strictly are servers expected to be when responding to
+</i>&gt;<i>&gt; requests?  In particular, if a client is given a URL such as
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; <a href="gemini://example.com">gemini://example.com</a>
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; (i.e. with an empty file name) is it expected to translate it into
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; <a href="gemini://example.com/">gemini://example.com/</a>  ?
+</i>&gt;<i>
+</i>&gt;<i>   Yes.  In RFC-3986, if you follow the BNF, you&#x27;ll find this bit:
+</i>
+[snip]
+
+Great, thank you for the explanation.  (I should have RTFM, sorry!)
+
+&gt;<i>
+</i>&gt;<i> we have the &#x27;scheme&#x27; portion, then the two &#x27;//&#x27; which means we&#x27;re following
+</i>&gt;<i> the first rule in &#x27;hier-part&#x27;.  &#x27;authority&#x27; is the host part (which I didn&#x27;t
+</i>&gt;<i> include) followed by a &#x27;path-abempty&#x27;, of which there can be 0 or more of,
+</i>&gt;<i> so that&#x27;s a perfectly cromulent URL.  It&#x27;s the responsibility of the
+</i>&gt;<i> *server* to handle the situation, not the client.
+</i>
+Converting to this canonical form actually makes several things easier
+on the client side too.
+
+&gt;<i>   A related problem is a relative URL like:
+</i>&gt;<i>
+</i>&gt;<i> 	/test/torture/../../test/./torture/../../../../test/./././torture/./0022
+</i>&gt;<i>
+</i>&gt;<i>   That collapses down to:
+</i>&gt;<i>
+</i>&gt;<i> 	/test/torture/0022
+</i>&gt;<i>
+</i>&gt;<i> but in this case, I think it would be the responsibiliy of the *client* to
+</i>&gt;<i> collapse the first into the second (and then add the scheme, host, etc.).  I
+</i>&gt;<i> know my own server does the collapsing, but I think I may change that.
+</i>
+Fair enough.  The URL library elpher uses doesn&#x27;t automatically do this,
+but it seems simple enough to do (famous last words)..
+
+Thanks for the help,
+
+plugd
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000149.html">URLs in request lines</a></li>
+<li>Next message (by thread): <a href="000153.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#150">[ date ]</a> <a href="thread.html#150">[ thread ]</a> <a href="subject.html#150">[ subject ]</a> <a href="author.html#150">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

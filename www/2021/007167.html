@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A simple/toy client in C</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007166.html">
+<link rel="next" href="007168.html">
+</head>
+<body>
+<h1>A simple/toy client in C</h1>
+<b>Omar Polo</b> op at omarpolo.com<br>
+<i>Tue Sep 21 16:51:15 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007166.html">A simple/toy client in C</a></li>
+<li>Next message (by thread): <a href="007168.html">A simple/toy client in C</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7167">[ date ]</a> <a href="thread.html#7167">[ thread ]</a> <a href="subject.html#7167">[ subject ]</a> <a href="author.html#7167">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+stack@tilde.club writes:
+
+&gt;<i> I&#x27;ve been trying to put together a very simple C toy client - just
+</i>&gt;<i> enought to connect to a Gemini server and get a page (no UI).  My goal
+</i>&gt;<i> is to figure out how a client connects, wrap a Common Lisp CFFI and
+</i>&gt;<i> make a Common Lisp client (which is why C is a requirement).
+</i>
+My common lisp knowledge is pretty limited, but there&#x27;s a reason you
+can&#x27;t use cl+ssl?  AFAIK it should works.  I know there are at least one
+server (which I forgot the name, sorry) and a client (tinmop) which are
+written entirely in common lisp.
+
+&gt;<i> I am using BearSSL (for its minimalism). I started with the sample
+</i>&gt;<i> provided, modified for the Gemini request.  I keep getting stuck with
+</i>&gt;<i> error 62 (probably because I don&#x27;t understand how to deal with TLS).
+</i>&gt;<i> I attempted to generate the CA boilerplate code, but there are some
+</i>&gt;<i> ominous hints that the code is HTTPS-specific.
+</i>&gt;<i>
+</i>&gt;<i> Could someone point me in the right direction (Ideally, to a repo with
+</i>&gt;<i> a C example :) I am not married to BearSSL - it just seemed an OK
+</i>&gt;<i> starting point.
+</i>
+I&#x27;ve never used anything else beside libtls, so I can&#x27;t comment (or
+compare it to) other libraries, but I&#x27;m quite fond of it.  It&#x27;s really
+well-documented (well, it&#x27;s from OpenBSD after all :P) and really nice
+to use.
+
+As part of the regress suite of gmid (a gemini server) I&#x27;ve wrote a
+really simple gemini client which should fits your criteria:
+
+<a href="https://git.omarpolo.com/gmid/tree/regress/gg.c">https://git.omarpolo.com/gmid/tree/regress/gg.c</a>
+
+It&#x27;s mean to be compiled as part of gmid, but it&#x27;s really easy to
+extract (just define GEMINI_URL_LEN and replace strlcat/strlcpy or add
+libbsd as deps)
+
+Cheers!
+
+&gt;<i> Many thanks.
+</i></pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007166.html">A simple/toy client in C</a></li>
+<li>Next message (by thread): <a href="007168.html">A simple/toy client in C</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7167">[ date ]</a> <a href="thread.html#7167">[ thread ]</a> <a href="subject.html#7167">[ subject ]</a> <a href="author.html#7167">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

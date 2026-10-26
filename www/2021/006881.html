@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Malicious Links</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006879.html">
+<link rel="next" href="006882.html">
+</head>
+<body>
+<h1>Malicious Links</h1>
+<b>Alice</b> lia at loveisanalogue.info<br>
+<i>Sat Jul 10 11:27:34 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006879.html">Malicious Links</a></li>
+<li>Next message (by thread): <a href="006882.html">Malicious Links</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6881">[ date ]</a> <a href="thread.html#6881">[ thread ]</a> <a href="subject.html#6881">[ subject ]</a> <a href="author.html#6881">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+
+On 9 July 2021 23:25:47 BST, nothien@uber.space wrote:
+
+&gt;<i>The reason that HTTP/HTML does not suffer from this problem is twofold.
+</i>&gt;<i>Firstly, HTML is interactive, and so whenever such an action is
+</i>&gt;<i>performed, the user can be interactively requested to confirm their
+</i>&gt;<i>intention.  Secondly, when the action is performed directly (e.g. by
+</i>&gt;<i>using HTTP POST to the relevant URL), the attacker doesn&#x27;t have access
+</i>&gt;<i>to the necessary cookies to authorize the action. 
+</i>
+HTTP does suffer from the same problem - because cookies are sent automatically. To prevent this HTTP requests typically use a &quot;CSRF&quot; token - an extra, random piece of text that is included in forms every time they are generated, and which the server tests against.
+
+Gemini could easily use the same approach: the page that generates the &quot;delete your account&quot; link can add a random string in the query string. The server can then tests for the presence of that query string.
+
+Because it&#x27;s generated randomly every time the page is generated, attackers can&#x27;t guess it. The CSRF token should have a limited life time.
+
+:)
+Alice
+-- 
+Sent from my Android device with K-9 Mail. Please excuse my brevity.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006879.html">Malicious Links</a></li>
+<li>Next message (by thread): <a href="006882.html">Malicious Links</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6881">[ date ]</a> <a href="thread.html#6881">[ thread ]</a> <a href="subject.html#6881">[ subject ]</a> <a href="author.html#6881">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

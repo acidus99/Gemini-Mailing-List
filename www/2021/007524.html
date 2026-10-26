@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rethinking the link line</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007523.html">
+<link rel="next" href="007526.html">
+</head>
+<body>
+<h1>Rethinking the link line</h1>
+<b>Michael Lazar</b> lazar.michael22 at gmail.com<br>
+<i>Wed Nov  3 19:59:20 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007523.html">Rethinking the link line</a></li>
+<li>Next message (by thread): <a href="007526.html">Rethinking the link line</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7524">[ date ]</a> <a href="thread.html#7524">[ thread ]</a> <a href="subject.html#7524">[ subject ]</a> <a href="author.html#7524">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Greetings,
+
+It sounds like what you are asking for is akin to the HTTP
+Content-Disposition response header [0]. I don&#x27;t think it&#x27;s a crazy
+idea... I mean gemini already has content-type, charset, and lang, and
+content-disposition snuggles right in there with those.
+
+I will suggest that making this part of the response meta, instead of
+an additional gemtext link type, feels like a more complete solution,
+for the same reason that mime-type is declared in the response.
+Someone might visit a gemini URL directly, or the response from the
+server might be dynamically generated.
+
+Gemini doesn&#x27;t have response headers, and suggesting additional
+response parameters will go nowhere on this list (although you could
+add them anyway and they probably won&#x27;t break most clients).
+
+20 image/png; content-disposition=attachment
+
+However, I think you could get away with simply responding with a
+content type of &quot;application/octet-stream&quot; for these files. No sane
+gemini client is going to attempt to display that inline, and once
+it&#x27;s saved to the filesystem then it&#x27;s up to the filename extension to
+indicate what the mimetype is.
+
+<a href="gemini://myserver.com/mysong.mp3">gemini://myserver.com/mysong.mp3</a>
+20 application/octet-stream
+
+Best,
+Michael
+
+[0] <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Disposition</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007523.html">Rethinking the link line</a></li>
+<li>Next message (by thread): <a href="007526.html">Rethinking the link line</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7524">[ date ]</a> <a href="thread.html#7524">[ thread ]</a> <a href="subject.html#7524">[ subject ]</a> <a href="author.html#7524">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

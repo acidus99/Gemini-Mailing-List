@@ -1,61 +1,45 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Three possible uses for IRIs
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3CCAD2gp_Ti%3DyKG7VOBi2M5Y-OE1QX%3Dug0LWMEsBzGOVLe6R4MMkA%40mail.gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="003908.html">
-   <LINK REL="Next"  HREF="003912.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Three possible uses for IRIs</H1>
-    <B>John Cowan</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3CCAD2gp_Ti%3DyKG7VOBi2M5Y-OE1QX%3Dug0LWMEsBzGOVLe6R4MMkA%40mail.gmail.com%3E"
-       TITLE="Three possible uses for IRIs">cowan at ccil.org
-       </A><BR>
-    <I>Tue Dec  8 20:30:10 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="003908.html">Three possible uses for IRIs
-</A></li>
-        <LI>Next message (by thread): <A HREF="003912.html">Three possible uses for IRIs
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3910">[ date ]</a>
-              <a href="thread.html#3910">[ thread ]</a>
-              <a href="subject.html#3910">[ subject ]</a>
-              <a href="author.html#3910">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three possible uses for IRIs</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="003908.html">
+<link rel="next" href="003912.html">
+</head>
+<body>
+<h1>Three possible uses for IRIs</h1>
+<b>John Cowan</b> cowan at ccil.org<br>
+<i>Tue Dec  8 20:30:10 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="003908.html">Three possible uses for IRIs</a></li>
+<li>Next message (by thread): <a href="003912.html">Three possible uses for IRIs</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3910">[ date ]</a> <a href="thread.html#3910">[ thread ]</a> <a href="subject.html#3910">[ subject ]</a> <a href="author.html#3910">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Tue, Dec 8, 2020 at 2:09 PM &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A>&gt; wrote:
+<pre>On Tue, Dec 8, 2020 at 2:09 PM &lt;colecmac at protonmail.com&gt; wrote:
 
 
 &gt;<i> I think some people really were calling for a breaking change to the
-</I>&gt;<i> protocol.
-</I>&gt;<i> But I'm glad you're not, and I hope we can move on and stop talking about
-</I>&gt;<i> it.
-</I>&gt;<i> What you propose here is allowing IRIs in link lines only?
-</I>
+</i>&gt;<i> protocol.
+</i>&gt;<i> But I&#x27;m glad you&#x27;re not, and I hope we can move on and stop talking about
+</i>&gt;<i> it.
+</i>&gt;<i> What you propose here is allowing IRIs in link lines only?
+</i>
 
 Yes.
 
 &gt;<i> Or do you mean allowing
-</I>&gt;<i> only IRIs for relative references?
-</I>&gt;<i>
-</I>
+</i>&gt;<i> only IRIs for relative references?
+</i>&gt;<i>
+</i>
 No.
 
-&gt;<i> I'm unsure whether that would require an IRI parser or not,
-</I>
+&gt;<i> I&#x27;m unsure whether that would require an IRI parser or not,
+</i>
 
 It will not, because conversion can be done before parsing, other than the
 trivial parsing required to find the hostname and punycode it.  Once that
@@ -72,34 +56,34 @@ conversion become three:
 or %nn%nn%nn, or %nn%nn%nn%nn sequences, where nn is two hex digits.
 
 It turns out that all of this is spelled out in more detail at &lt;
-<A HREF="https://tools.ietf.org/html/rfc3987#section-3.1">https://tools.ietf.org/html/rfc3987#section-3.1</A>&gt;.  That section says not to
+<a href="https://tools.ietf.org/html/rfc3987#section-3.1">https://tools.ietf.org/html/rfc3987#section-3.1</a>&gt;.  That section says not to
 normalize unless you have the IRI in non-digital or non-UTF* format, but
 since the world is not full of editors that normalize, I think Gemini
 clients need to do it themselves.   That said, most keyboard drivers (even
 for hard cases like Vietnamese, which has way too many vowels to dedicate a
 key to each) now deliver normalized text to applications.
 
-It's good to know that some existing URI libraries support IRIs, but that
+It&#x27;s good to know that some existing URI libraries support IRIs, but that
 section should be convincing evidence that you can change an IRI to a URI
 without parsing it (always excepting the domain name, which is trivial to
 find).
 
 But this is still a somewhat-breaking change, as once authors start using
 &gt;<i> these, other non-Go clients will likely begin to fail. And the correction
-</I>&gt;<i> that Go does is not even complete, because it will not work on query
-</I>&gt;<i> strings.
-</I>&gt;<i> And even if it did, it would not work in the Gemini way that doesn't allow
-</I>&gt;<i> pluses, etc etc.
-</I>&gt;<i>
-</I>
+</i>&gt;<i> that Go does is not even complete, because it will not work on query
+</i>&gt;<i> strings.
+</i>&gt;<i> And even if it did, it would not work in the Gemini way that doesn&#x27;t allow
+</i>&gt;<i> pluses, etc etc.
+</i>&gt;<i>
+</i>
 The above transformation will work, however.  Sometimes DIY is the Right
 Thing.
 
-&gt;<i> We're almost there with this one, but I still think it's a mistake, and
-</I>&gt;<i> it'll
-</I>&gt;<i> make Gemini more complex. :/
-</I>&gt;<i>
-</I>
+&gt;<i> We&#x27;re almost there with this one, but I still think it&#x27;s a mistake, and
+</i>&gt;<i> it&#x27;ll
+</i>&gt;<i> make Gemini more complex. :/
+</i>&gt;<i>
+</i>
 It will.  But in the end, if Gemini succeeds even modestly there will be
 more authors than programmers.
 
@@ -109,44 +93,23 @@ which is &quot;no mark&quot;) as in Chinese.  And the same number in upper case.
 
 
 
-John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
-It's like if you meet an really old, really rich guy covered in liver
+John Cowan          <a href="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</a>        cowan at ccil.org
+It&#x27;s like if you meet an really old, really rich guy covered in liver
 spots and breathing with an oxygen tank, and you say, &quot;I want to be
-rich, too, so I'm going to start walking with a cane and I'm going to
-act crotchety and I'm going to get liver disease. --Wil Shipley
+rich, too, so I&#x27;m going to start walking with a cane and I&#x27;m going to
+act crotchety and I&#x27;m going to get liver disease. --Wil Shipley
 -------------- next part --------------
 An HTML attachment was scrubbed...
-URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201208/6720d39c/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201208/6720d39c/attachment.htm</A>&gt;
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20201208/6720d39c/attachment.htm">https://mailing-list-archive.gemi.dev/www/attachments/20201208/6720d39c/attachment.htm</a>&gt;
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="003908.html">Three possible uses for IRIs
-</A></li>
-	<LI>Next message (by thread): <A HREF="003912.html">Three possible uses for IRIs
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3910">[ date ]</a>
-              <a href="thread.html#3910">[ thread ]</a>
-              <a href="subject.html#3910">[ subject ]</a>
-              <a href="author.html#3910">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="003908.html">Three possible uses for IRIs</a></li>
+<li>Next message (by thread): <a href="003912.html">Three possible uses for IRIs</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3910">[ date ]</a> <a href="thread.html#3910">[ thread ]</a> <a href="subject.html#3910">[ subject ]</a> <a href="author.html#3910">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

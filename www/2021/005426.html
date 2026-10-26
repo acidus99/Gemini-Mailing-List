@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SPEC] Backwards-compatible metadata in Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005420.html">
+<link rel="next" href="005428.html">
+</head>
+<body>
+<h1>[SPEC] Backwards-compatible metadata in Gemini</h1>
+<b>Louis Brauer</b> louis at brauer.family<br>
+<i>Mon Feb 22 10:00:58 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005420.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li>Next message (by thread): <a href="005428.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5426">[ date ]</a> <a href="thread.html#5426">[ thread ]</a> <a href="subject.html#5426">[ subject ]</a> <a href="author.html#5426">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Am Mo, 22. Feb 2021, um 01:46, schrieb Oliver Simmons:
+&gt;<i> I think something like this would be nicer:
+</i>&gt;<i> ```
+</i>&gt;<i> # Boop, a website :)
+</i>&gt;<i> Free hugs for all!
+</i>&gt;<i> 
+</i>&gt;<i> ^^^
+</i>&gt;<i> favicon: ?
+</i>&gt;<i> author: Bob McBobface
+</i>&gt;<i> last-edited: 22nd Feb 2021
+</i>&gt;<i> ```
+</i>&gt;<i> 
+</i>&gt;<i> That is:
+</i>&gt;<i> ```
+</i>&gt;<i> &lt;PAGE&gt;
+</i>&gt;<i> ^^^
+</i>&gt;<i> &lt;METADATA&gt;
+</i>&gt;<i> ```
+</i>&gt;<i> 
+</i>&gt;<i> For the metadata format I think a simple key:value list would work
+</i>&gt;<i> fine, nothing overcomplicated.
+</i>&gt;<i> To someone without support for it it should just look like a human
+</i>&gt;<i> list of metadata.
+</i>
+Giving my two cents, I agree with Oliver here. I don&#x27;t think page metadata deserves it&#x27;s own mime/type and shouldn&#x27;t be JSON encoded in a data link. Goes against the human-friendly philosophy of Gemtext.
+
+Oliver&#x27;s proposal seems to be quite right because it makes everything optional, very easy to parse and can also be displayed without any special rendering support by the client. This way it&#x27;s purely conventional and would still work for clients with and without support.
+
+Regarding color schemes etc. Is it part of the plan that Gemtext pages will control the browser color scheme? Gemtext is a text-based markup, there should be no style information. The user should control the theme of their client/browser, not the page that is currently displayed.
+
+Lagrange is a great example how rendering of Gemtext can be very beautiful without CSS-like styling whatsoever.
+
+Louis
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005420.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li>Next message (by thread): <a href="005428.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5426">[ date ]</a> <a href="thread.html#5426">[ thread ]</a> <a href="subject.html#5426">[ subject ]</a> <a href="author.html#5426">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

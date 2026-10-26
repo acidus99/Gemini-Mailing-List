@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] [tech] Companion Specification Proposal for Metadata</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005625.html">
+<link rel="next" href="005632.html">
+</head>
+<body>
+<h1>[spec] [tech] Companion Specification Proposal for Metadata</h1>
+<b>Gary Johnson</b> lambdatronic at disroot.org<br>
+<i>Thu Feb 25 19:31:32 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005625.html">[tech] Announcing cl-gemini-client 1.0.0</a></li>
+<li>Next message (by thread): <a href="005632.html">[spec] [tech] Companion Specification Proposal for Metadata</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5629">[ date ]</a> <a href="thread.html#5629">[ thread ]</a> <a href="subject.html#5629">[ subject ]</a> <a href="author.html#5629">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Howdy Geminauts,
+
+# Rationale
+
+  It seems that the conversation about why and how to include metadata
+in Gemtext files has been raging on for quite a long time now with no
+real conclusion in sight. Also, lacking a final spec-altering decision
+by our BDFL (currently MIA, likely riding a refurbished bike through a
+forest with a ham radio right now), not much is likely to actually
+change in Geminispace.
+
+Thus far, I&#x27;ve read passionate arguments on both sides of the metadata
+debate, both for and against adding it to Gemtext. To me these have been
+the most compelling (YMMV):
+
+## For
+
+Gemtext pages may be tagged with information that can be useful to
+automated clients (e.g., search engines, archiving bots, and maybe
+proxies) that is otherwise difficult or impossible to infer from
+performing a full text search of the Gemtext file&#x27;s contexts.
+
+## Against
+
+Metadata represents a slippery slope to uncontrolled extensibility. It
+might be abused for server-specified styling, requesting external
+resources (e.g., supporting client-side scripting or background images
+of kittens), or just generally making Gemtext pages hard to read in
+clients that don&#x27;t hide inline metadata or make page concatenation
+difficult with the end-of-file metadata proposal that&#x27;s been discussed
+at some length on the mailing list.
+
+It could also be used to reopen the fetid can of worms that was last
+year&#x27;s discussion of extending mime-type attributes in the status 20
+response metadata, particularly around the topics of caching (now a
+client-side best practices procedure), file size (computable by the
+client during download), file integrity (already signaled by
+tls_close_notify), and file authenticity (managed out-of-band by
+including md5sum, sha256sum, sig, or asc files for download next to
+links that warrant manual verification).
+
+More to the point, most if not all non-presentation/protocol-altering
+metadata attributes about a Gemtext page may already be encoded in the
+author&#x27;s natural language with no changes to Gemtext at all. This
+enables content authors to express such information not only in their
+language of choice but also in the most culturally appropriate manner
+for their readers (consider the different interpretations of the date
+02/03/04 depending on where you live).
+
+Consider the following example blog post that does just this:
+
+```An example blog post expressing &quot;metadata&quot; attributes in English
+# People for the Ethical Treatment of Autonomous Agents
+
+Author: lambdatronic
+Date Written: 2021-02-25 (a.k.a. February 25, 2021)
+
+## Why Bots Matter
+
+Have you ever used (poor, uncared-for) GUS? Or Houston?
+
+Have you ever really considered their feelings? They slave away all day
+trying to sort and categorize every capsule in Geminispace just to save
+you time and energy when navigating across our little (but rapidly
+growing) constellation of text-powered space outposts?
+
+They do their best with full-text search, with categorization by
+toplevel headers, and with their own best estimates of the publishing
+time of these capsules based on their own indexing times, but oh what a
+Sisyphean task they toil at on our behalf.
+
+If only they had a little metadata to ease their burden.
+
+CAPCOM and Spacewalk get a little assistance from Atom and the Gemini
+subscription companion spec. Proxies can be pointed in the right
+direction by the robots.txt companion spec. Why can&#x27;t our poor, poor
+search engines get a little relief?
+
+Put yourself in their shoes and try to find compassion in your heart for
+your friendly neighborhood bot. Every autonomous agent matters. Programs
+have feelings too. Leave no bot behind.
+
+Copyright: CC-BY-SA
+Tags: irony education advocacy bots
+```
+
+# Proposal
+
+Considering that:
+
+1. Metadata /within/ a Gemtext file carries a number of liabilities that
+   make some of our community members nervous (understandably so IMO).
+
+2. The subset of metadata that is meant to be read and understood by a
+   human reader using a typical Gemini client can already be expressed
+   in natural language without any community-approved tag
+   standardization.
+
+3. The main value to attaching standardized metadata tags to Gemtext
+   pages is likely to simply aid automated bots supporting search
+   engines and archiving.
+
+4. Geminispace is filled with files in more formats than just Gemtext,
+   many (all?) of which could benefit from similar bot-assisting
+   metadata.
+
+5. Both aggregators and proxies already have companion specifications
+   that have been (somewhat) adopted by the community and seem to fare
+   better in our community than direct changes to the Gemini protocol or
+   Gemtext specifications.
+
+We propose a companion specification for metadata, in which all the
+metadata about the static files and/or dynamic endpoints (of any format)
+in a capsule be included in a separate file accessible at a well-known
+location that a bot could check as it crawls through Geminispace.
+
+As placeholders, let&#x27;s put forward these candidates for discussion:
+
+1. $DOCUMENT_ROOT/.metadata.gmi
+2. $DOCUMENT_ROOT/.well-known/metadata.gmi
+
+In the Gemini spirit of reducing network requests (only one request
+needed per capsule here) and storing our information in a human-readable
+format (good old ubiquitous text/gemini), here&#x27;s my initial stab at a
+dead simple format for these metadata files:
+
+```Example metadata.gmi syntax
+# This is a Header-Level Comment
+
+I can write anything I want in this file, and it will be treated as
+comments unless it is of line type link (=&gt;) or bulleted list (*). I
+don&#x27;t have to write these comments, and if I left them out, I&#x27;d make
+this easier to read, but sometimes I can&#x27;t stop blabbing in my metadata
+files.
+
+## Another Header-Level Comment About My Toplevel Pages
+
+=&gt; / Lambdatronic&#x27;s Gemini Capsule
+=&gt; /index.gmi Lambdatronic&#x27;s Gemini Capsule
+
+* author: lambdatronic
+* last-modified: 2021-02-25
+* copyright: cc-by-sa
+* tags: lambdatronic gemini
+
+## Now I&#x27;ll Comment About Some Stuff
+
+=&gt; /stuff Some Stuff I Like
+=&gt; /stuff/this.gmi Astronomy Stuff
+=&gt; /stuff/that.gmi Bike Stuff
+
+* author: lambdatronic
+* last-modified: 2020-12-13
+* copyright: cc-by-nd
+
+=&gt; /stuff/this.gmi Astronomy Stuff
+
+* tags: nature stars telescopes
+
+=&gt; /stuff/that.gmi Bike Stuff
+
+* tags: &quot;fat tires&quot; &quot;electric bikes&quot;
+
+## Now I&#x27;ll Comment About Some Things
+
+=&gt; /things/some-gemtext.gmi I Wrote Something
+=&gt; /things/some-plain-text.txt Sometimes I Write in Plain Text
+=&gt; /things/obligatory-cat-picture.png Meow (and also) Meow
+=&gt; /things/my-best-1990s-mixtape.ogg Too Much Green Day
+
+* author: lambdatronic
+* last-modified: 2020-01-20
+* copyright: cc-by-sa
+
+=&gt; /things/obligatory-cat-picture.png Meow (and also) Meow
+
+* tags: cats funny &quot;so fuzzy&quot;
+
+=&gt; /things/my-best-1990s-mixtape.ogg Too Much Green Day
+
+* tags: &quot;green day&quot; &quot;punk rock&quot; punk &quot;90s music&quot;
+```
+
+Okay, so that&#x27;s pretty much it. Essentially the metadata.gmi syntax is
+based around two existing Gemini line types:
+
+1. Links
+
+   You should include a /relative/ link line to each path on your
+   capsule for which you want to provide metadata. This is meant to be
+   an entirely opt-in process, so any paths that you leave out will
+   simply have no metadata associated with them, leaving bots to rely on
+   whatever methods they so choose to tag and index your pages.
+
+   You may include any number of link lines one after the other in the
+   file, and you may (if you think it provides some value that outweighs
+   the possible loss of readability) include any other line type between
+   any two link lines without changing the parsing semantics EXCEPT for
+   a bulleted list line type (*).
+
+2. Bulleted Lists
+
+   Any bulleted list in a metadata.gmi file will be interpreted as a
+   metadata attribute specifier for all link lines preceding it up to
+   the most recent prior bulleted list line or the top of the file,
+   whichever is encountered first.
+
+   If the same link element appears more than once within the file and
+   is therefore followed by more than one bulleted list of metadata
+   attributes, all encountered metadata attributes should be merged into
+   a single list per link element. If the same attribute is specified
+   more than once for the same link element (whether in the same
+   bulleted list or in separate bulleted lists within the file), the
+   attribute whose value appears later in the file should overwrite the
+   earlier specified value.
+
+   Each bulleted list line should use the following format to indicate
+   a single pair of attribute and value:
+
+   *[WHITESPACE]&lt;ATTRIBUTE&gt;[WHITESPACE]:[WHITESPACE]&lt;VALUE&gt;
+
+   Here, [WHITESPACE] is optional and &lt;ATTRIBUTE&gt;, :, and &lt;VALUE&gt; are
+   required line elements.
+
+NOTE: All other line types should be ignored by metadata parsers and
+      treated as comments by the file&#x27;s author.
+
+In order to parse a metadata.gmi file, a program would start reading it
+in line by line as with any Gemtext file. All lines that are not of type
+link (=&gt;) or bulleted list (*) should be ignored.
+
+1. When a link line is encountered, it should be stored in the program&#x27;s
+   memory as a currently active link. If more links are read in before a
+   bulleted list is reached, each of these links should be stored in
+   memory as active links. Multiple links may be active at the same
+   time.
+
+2. When a bulleted list line is encountered, it should be parsed
+   according to the attribute=value specification described in point 2
+   (Bulleted Lists) above. If the line&#x27;s contents do not match this
+   specification, it should be ignored and treated as another comment
+   line. Depending on the program&#x27;s design, it may be valuable to report
+   this line as a syntax error.
+
+3. For each bulleted list line that parses correctly, assign the
+   attribute=value pair to all currently active links in memory. In the
+   event of an attribute conflict, overwrite the old attribute=value
+   pair associated with the active link in conflict with the
+   attribute=value pair being read. In the event that no links are
+   currently active in memory, simply continue on to the next line.
+
+4. If/when the next link line is encountered, mark all links in memory
+   as inactive, store the currently read link line in memory as an
+   active link, and resume program execution from step 1 above.
+
+And that&#x27;s all there is to it. When your program reaches the end of the
+metadata.gmi file, it should have a data structure containing all of its
+links and associating each of them with a table of attribute=value
+pairs. The program can then do whatever it wants with this information.
+
+
+# Conclusion
+
+Here, we&#x27;ve proposed a (currently very informal) companion specification
+for an /optional/ toplevel metadata.gmi file per capsule.
+
+This approach has the following advantages over specifying metadata
+attributes within Gemtext files:
+
+1. No need to extend the Gemtext spec with more line types.
+
+2. No potential for impacting the readability of existing Gemtext files
+   for non-metadata-aware clients.
+
+3. No potential for presentation/behavior abuse within existing Gemtext
+   files since nothing is being added to them.
+
+4. Less bandwidth needed per request to a Gemtext page since
+   non-metadata-aware clients won&#x27;t have to download per-page metadata
+   that they don&#x27;t use.
+
+5. Less bandwidth needed to download metadata when you want it since
+   paths that share the same value for metadata attributes can specify
+   the shared attributes once in metadata.gmi rather than once per page.
+
+6. Less requests needed for metadata-scraping bots since they can simply
+   request the toplevel /.metadata.gmi path rather than having to
+   request and parse every Gemtext file for optional metadata.
+
+7. Can be used to attach metadata to non-Gemtext files as well as to
+   responses from dynamic endpoints (e.g., CGI scripts).
+
+8. Could be used by Stephane Bortzmeyer to easily figure out how many
+   Gemini capsules actually want to publish metadata about themselves.
+   ;D
+
+So that&#x27;s my proposal. Let&#x27;s talk about it constructively and see if it
+can be improved upon. I&#x27;m sure you brilliant folks can think of
+something that hasn&#x27;t yet crossed my mind.
+
+Failing that, we can always just nuke the whole topic either by group
+consensus or just by not taking this to the next step of actually
+writing up a formal companion spec and implementing it in some clients.
+
+Thanks again for everyone&#x27;s hard work and creativity in making Gemini
+the really interesting, vibrant, quirky, and passionate community that
+it is. I look forward to reading your responses.
+
+Happy hacking,
+  Gary
+
+-- 
+GPG Key ID: 7BC158ED
+Use `gpg --search-keys lambdatronic&#x27; to find me
+Protect yourself from surveillance: <a href="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</a>
+=======================================================================
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+Why is HTML email a security nightmare? See <a href="https://useplaintext.email/">https://useplaintext.email/</a>
+
+Please avoid sending me MS-Office attachments.
+See <a href="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005625.html">[tech] Announcing cl-gemini-client 1.0.0</a></li>
+<li>Next message (by thread): <a href="005632.html">[spec] [tech] Companion Specification Proposal for Metadata</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5629">[ date ]</a> <a href="thread.html#5629">[ thread ]</a> <a href="subject.html#5629">[ subject ]</a> <a href="author.html#5629">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

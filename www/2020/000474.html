@@ -1,55 +1,39 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Regarding `gemini://` over NaCL (replacing TLS)
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Regarding%20%60gemini%3A//%60%20over%20NaCL%20%28replacing%20TLS%29&In-Reply-To=%3C20200302223051.GJ5475%40brevard.conman.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="000469.html">
-   <LINK REL="Next"  HREF="000495.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Regarding `gemini://` over NaCL (replacing TLS)</H1>
-    <B>Sean Conner</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Regarding%20%60gemini%3A//%60%20over%20NaCL%20%28replacing%20TLS%29&In-Reply-To=%3C20200302223051.GJ5475%40brevard.conman.org%3E"
-       TITLE="Regarding `gemini://` over NaCL (replacing TLS)">sean at conman.org
-       </A><BR>
-    <I>Mon Mar  2 22:30:51 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="000469.html">Regarding `gemini://` over NaCL (replacing TLS)
-</A></li>
-        <LI>Next message (by thread): <A HREF="000495.html">Regarding `gemini://` over NaCL (replacing TLS)
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#474">[ date ]</a>
-              <a href="thread.html#474">[ thread ]</a>
-              <a href="subject.html#474">[ subject ]</a>
-              <a href="author.html#474">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Regarding `gemini://` over NaCL (replacing TLS)</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000469.html">
+<link rel="next" href="000495.html">
+</head>
+<body>
+<h1>Regarding `gemini://` over NaCL (replacing TLS)</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Mon Mar  2 22:30:51 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000469.html">Regarding `gemini://` over NaCL (replacing TLS)</a></li>
+<li>Next message (by thread): <a href="000495.html">Regarding `gemini://` over NaCL (replacing TLS)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#474">[ date ]</a> <a href="thread.html#474">[ thread ]</a> <a href="subject.html#474">[ subject ]</a> <a href="author.html#474">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>
-  I think I'm going to bow out of the encryption talk.  It's clear to me
-that I feel TLS is good enougn, and Ciprian doesn't (or would rather have
-alternatives).  I'm not the creator of the Gemini protocol, so I don't have
+<pre>
+  I think I&#x27;m going to bow out of the encryption talk.  It&#x27;s clear to me
+that I feel TLS is good enougn, and Ciprian doesn&#x27;t (or would rather have
+alternatives).  I&#x27;m not the creator of the Gemini protocol, so I don&#x27;t have
 the authority to make drastic changes to the protocol.
 
-  I've heard the admonintion to not roll your own crypto, and I believe that
+  I&#x27;ve heard the admonintion to not roll your own crypto, and I believe that
 it extends to protocols as well.  And as bad and complex as TLS might be,
-it's a standard, there are real cryptographers trying to break it, and there
+it&#x27;s a standard, there are real cryptographers trying to break it, and there
 are multiple implementations of it available: OpenSSL and LibreSSL are two,
 but off the top of my head, there are also bearSSL, PolarSSL, boringSSL. and
 GNUTLS.  And in a sense, that makes it easier to use, since these
-implementations *exit*.  This new protocol Ciprian is designing hasn't been
-vetted, and I'm unaware of anyone on this list that is expert enough in
+implementations *exit*.  This new protocol Ciprian is designing hasn&#x27;t been
+vetted, and I&#x27;m unaware of anyone on this list that is expert enough in
 crypto to fully examine it.
 
   And Ciprian wants to design a new secure protocol ... 
@@ -57,69 +41,51 @@ crypto to fully examine it.
   Anyway, a few comments about this message.
 
 It was thus said that the Great Ciprian Dorin Craciun once stated:
-&gt;<i> On Mon, Mar 2, 2020 at 2:18 AM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
-</I>&gt;<i> &gt; 1) I assume the 32-bit length is sent bigendian (if I understand the
-</I>&gt;<i> &gt; argument to struct.pack() and struct.unpack() correctly---I'm not a Python
-</I>&gt;<i> &gt; programmer).  Why big endian?  99% of all computers on the Internet today is
-</I>&gt;<i> &gt; little endian (x86) so it seems to me that sending it little endian would be
-</I>&gt;<i> &gt; better.  [1][2]
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt; [1]     Okay, I happen to agree with the big endian choice, but that's
-</I>&gt;<i> &gt;         because I'm biased---binary based Internet protocols are all big
-</I>&gt;<i> &gt;         endian, and I have a soft spot for the Motorola CPUs of past.  I've
-</I>&gt;<i> &gt;         never been a fan of little endian personally.
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt; [2]     I'm also asking to reflect back to you the same argument you
-</I>&gt;<i> &gt;         presented with using CRLF.  Your big endian choice seems to be
-</I>&gt;<i> &gt;         &quot;because that's how all Internet protocols do it&quot;.
-</I>&gt;<i> 
-</I>&gt;<i> There are a couple of reasons I like big endian for protocols:
-</I>&gt;<i> 
-</I>&gt;<i> * it is logical;  for example although all integers are stored in
-</I>&gt;<i> little endian on x86, when we write numbers in code we use &quot;big
-</I>&gt;<i> endian&quot;;
-</I>
-  We use the Arabic numerals these days.  It's interesting to note that the
+&gt;<i> On Mon, Mar 2, 2020 at 2:18 AM Sean Conner &lt;sean at conman.org&gt; wrote:
+</i>&gt;<i> &gt; 1) I assume the 32-bit length is sent bigendian (if I understand the
+</i>&gt;<i> &gt; argument to struct.pack() and struct.unpack() correctly---I&#x27;m not a Python
+</i>&gt;<i> &gt; programmer).  Why big endian?  99% of all computers on the Internet today is
+</i>&gt;<i> &gt; little endian (x86) so it seems to me that sending it little endian would be
+</i>&gt;<i> &gt; better.  [1][2]
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; [1]     Okay, I happen to agree with the big endian choice, but that&#x27;s
+</i>&gt;<i> &gt;         because I&#x27;m biased---binary based Internet protocols are all big
+</i>&gt;<i> &gt;         endian, and I have a soft spot for the Motorola CPUs of past.  I&#x27;ve
+</i>&gt;<i> &gt;         never been a fan of little endian personally.
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; [2]     I&#x27;m also asking to reflect back to you the same argument you
+</i>&gt;<i> &gt;         presented with using CRLF.  Your big endian choice seems to be
+</i>&gt;<i> &gt;         &quot;because that&#x27;s how all Internet protocols do it&quot;.
+</i>&gt;<i> 
+</i>&gt;<i> There are a couple of reasons I like big endian for protocols:
+</i>&gt;<i> 
+</i>&gt;<i> * it is logical;  for example although all integers are stored in
+</i>&gt;<i> little endian on x86, when we write numbers in code we use &quot;big
+</i>&gt;<i> endian&quot;;
+</i>
+  We use the Arabic numerals these days.  It&#x27;s interesting to note that the
 value three hundred and twenty-one is written in the order of 321 in Arabic
 (much like in Western countries) but Arabic itself is written right-to-left,
-so one could say they write their numbers in little endian format.  You're
+so one could say they write their numbers in little endian format.  You&#x27;re
 just expressing a western bias---logic has nothing to do with it 8-P
 
 &gt;<i> * (and most importantly) when dumping a protocol capture there are no
-</I>&gt;<i> &quot;surprises&quot;, I read the number left to right, and if I just take the
-</I>&gt;<i> bytes in hex and concatenate them I can get the constant, i.e. `[01 02
-</I>&gt;<i> 03 04]` is just `0x01020304`;
-</I>
-  And it'd be backwards for Arabic programmers.
+</i>&gt;<i> &quot;surprises&quot;, I read the number left to right, and if I just take the
+</i>&gt;<i> bytes in hex and concatenate them I can get the constant, i.e. `[01 02
+</i>&gt;<i> 03 04]` is just `0x01020304`;
+</i>
+  And it&#x27;d be backwards for Arabic programmers.
 
   -spc
-</PRE>
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="000469.html">Regarding `gemini://` over NaCL (replacing TLS)
-</A></li>
-	<LI>Next message (by thread): <A HREF="000495.html">Regarding `gemini://` over NaCL (replacing TLS)
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#474">[ date ]</a>
-              <a href="thread.html#474">[ thread ]</a>
-              <a href="subject.html#474">[ subject ]</a>
-              <a href="author.html#474">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="000469.html">Regarding `gemini://` over NaCL (replacing TLS)</a></li>
+<li>Next message (by thread): <a href="000495.html">Regarding `gemini://` over NaCL (replacing TLS)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#474">[ date ]</a> <a href="thread.html#474">[ thread ]</a> <a href="subject.html#474">[ subject ]</a> <a href="author.html#474">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>File size issues</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000020.html">
+<link rel="next" href="000022.html">
+</head>
+<body>
+<h1>File size issues</h1>
+<b>Jason McBrayer</b> jmcbray at carcosa.net<br>
+<i>Fri Aug 16 14:09:42 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000020.html">File size issues</a></li>
+<li>Next message (by thread): <a href="000022.html">File size issues</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#21">[ date ]</a> <a href="thread.html#21">[ thread ]</a> <a href="subject.html#21">[ subject ]</a> <a href="author.html#21">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+solderpunk writes:
+
+&gt;<i> This also, of course, sets a precendent of &quot;whenever we decide a little
+</i>&gt;<i> bit of extra metadata would be handy in the header, just append it after
+</i>&gt;<i> a tab&quot;, which over time could bloat our header until it&#x27;s basically just
+</i>&gt;<i> a HTTP header in disguise with tabs instead of newlines.
+</i>
+We are, of course, re-inventing the Content-Length header here, which is
+an extremely useful header so that clients can do things like have a
+progress bar for downloads. If we support every useful feature, of
+course, we end up with basically HTTP 0.9.
+
+&gt;<i> Sean writes:
+</i>&gt;<i>&gt;   One way would be to query a well-known endpoint (these exist in the HTTP
+</i>&gt;<i>&gt; world---robots.txt is one such file) that contains tiemstamps for various
+</i>&gt;<i>&gt; resources.  Slap a MIME type of text/gemini-timestamp and call it done:
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; <a href="gemini://example.com/">gemini://example.com/</a>	2019-08-15T13:53:00-05:00
+</i>&gt;<i>&gt; <a href="gemini://example.com/feed">gemini://example.com/feed</a>	2019-07-29T00:00:00-05:00
+</i>&gt;<i>&gt; <a href="gemini://example.com/other">gemini://example.com/other</a>	2019-08-01T00:00:00-05:00
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt;   That&#x27;s one way.
+</i>
+IMO you probably don&#x27;t want to serve the timestamps or file sizes for
+every single file/resource in one response, for a number of reasons both
+privacy-related and performance-related.
+
+&gt;<i> I actually quite like this idea.  No need to make it timestamp-specific
+</i>&gt;<i> either.  We could have a well-known endpoint for general file metadata,
+</i>&gt;<i> which listed modification time, file size, checksum, MIME type, etc.  It
+</i>&gt;<i> could accept queries for a specific path, and *that* could be the way to
+</i>&gt;<i> do an equivalent of a HEAD request.
+</i>
+Yeah, it makes sense to bundle the metadata into one response, but only
+serve for one path per request.
+
+&gt;<i> This would let clients for specific scenarios do the extra work
+</i>&gt;<i> themselves to work around their problems, e.g. clients with very low
+</i>&gt;<i> memory or storage space could request the metadata for all files before
+</i>&gt;<i> attempting to access them and warn the user if the file size exceeds a
+</i>&gt;<i> threshold; clients on unreliable connections could request the metadata
+</i>&gt;<i> before downloading and then warn the user if file size and/checksum did
+</i>&gt;<i> not agree.  Most &quot;normal&quot; clients could do neither and just operate as
+</i>&gt;<i> they already do.
+</i>
+The one downside I see to that is that once we start seeing more complex
+clients written, especially graphical clients, we will start seeing
+progress bars, download managers, etc., and there will always be a need
+to make a second request to get the metadata, which is relatively
+expensive.
+
+&gt;<i> I think it&#x27;s kind of neat to keep solutions to edge problems outside of
+</i>&gt;<i> the protocol itself and push them into things like well-known endpoints
+</i>&gt;<i> like the above where they can easily be ignored when they are not
+</i>&gt;<i> needed/wanted.  The downside is that server developers have to do the
+</i>&gt;<i> work to add support for these things - but it&#x27;s expected, I think, that
+</i>&gt;<i> servers are harder to write than clients.
+</i>
+My experience *so far* is that server implementation is easier. But that
+is likely to change, I guess.
+
+&gt;<i>&gt;   As I mentioned in a private email to solderpunk earlier, one could always
+</i>&gt;<i>&gt; take advantage of the sub-delimeters in the path portion.  I had at one
+</i>&gt;<i>&gt; point mentioned using those to specify the prompt (otherwise the server
+</i>&gt;<i>&gt; would return a status of 10):
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; 	<a href="gemini://example.com/search;Search%20for">gemini://example.com/search;Search%20for</a>
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; This could be formalized:
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; 	<a href="gemini://example.com/search;prompt=Search%20for">gemini://example.com/search;prompt=Search%20for</a>
+</i>&gt;<i>&gt; 	<a href="gemini://example.com/blogfeed;timestamp=2019-08-15T00:00:00Z">gemini://example.com/blogfeed;timestamp=2019-08-15T00:00:00Z</a>
+</i>&gt;<i>&gt; 	<a href="gemini://example.com/wildexample;prompt=Search%20for;timestamp=2019-08-15:00:00:00Z?query=foo&amp;usename=bar">gemini://example.com/wildexample;prompt=Search%20for;timestamp=2019-08-15:00:00:00Z?query=foo&amp;usename=bar</a>
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt;   So, you have &quot;prompt&quot; and &quot;timestamp&quot;.  Others could be propsed.  If the
+</i>&gt;<i>&gt; &quot;timestamp&quot; thing above is accepted, then you might want to have a new
+</i>&gt;<i>&gt; status code meaning &quot;no change&quot; or &quot;okay, but there&#x27;s no content&quot;.
+</i>
+This is definitely re-inventing HTTP headers with a different format.
+
+--
++----------------------------------------------------------------------+
+| Jason F. McBrayer                                jmcbray at carcosa.net |
+| The scalloped tatters of the King in Yellow must hide Yhtill forever.|
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000020.html">File size issues</a></li>
+<li>Next message (by thread): <a href="000022.html">File size issues</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#21">[ date ]</a> <a href="thread.html#21">[ thread ]</a> <a href="subject.html#21">[ subject ]</a> <a href="author.html#21">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

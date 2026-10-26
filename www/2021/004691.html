@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] Ambiguity with regards to quote lines</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004690.html">
+<link rel="next" href="004693.html">
+</head>
+<body>
+<h1>[spec] Ambiguity with regards to quote lines</h1>
+<b>colecmac at protonmail.com</b> colecmac at protonmail.com<br>
+<i>Sun Jan  3 19:00:15 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004690.html">[spec] Ambiguity with regards to quote lines</a></li>
+<li>Next message (by thread): <a href="004693.html">[spec] Ambiguity with regards to quote lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4691">[ date ]</a> <a href="thread.html#4691">[ thread ]</a> <a href="subject.html#4691">[ subject ]</a> <a href="author.html#4691">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>What Amfora does tries to stay in line with the gemtext idea that each line stands
+on its own. So quote lines are wrapped, and &quot;&gt; &quot; is put in front of each one. But
+if there is another quote line below, that&#x27;s considered a separate quote line, and
+is processed separately from the others, it&#x27;s not made to be part of the previous
+quote somehow.
+
+So this gemtext:
+
+&gt;<i> very long quote line very long quote line very long quote line very long quote line very long quote line
+</i>&gt;<i> another quote
+</i>
+might be rendered like this:
+
+&gt;<i> very long quote line very long quote line very long quote line
+</i>&gt;<i> very long quote line very long quote line
+</i>&gt;<i> another quote
+</i>
+
+&gt;<i> What isn&#x27;t clear is whether subsequent quote lines ought to be
+</i>&gt;<i> considered as part of the same quote block, ie, say my client surrounds
+</i>&gt;<i> quotations with &quot; marks. Should these marks surround each line, or
+</i>&gt;<i> surround an entire block of subsequent quote lines?
+</i>
+Despite what I said above, I think it makes sense for other clients to consider
+quote lines to be part of the same block. Amfora can get away with ignoring this,
+but in a GUI client that maybe puts quotes in a box or something? It would look
+pretty ugly to separate them, I think.
+
+
+makeworld
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004690.html">[spec] Ambiguity with regards to quote lines</a></li>
+<li>Next message (by thread): <a href="004693.html">[spec] Ambiguity with regards to quote lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4691">[ date ]</a> <a href="thread.html#4691">[ thread ]</a> <a href="subject.html#4691">[ subject ]</a> <a href="author.html#4691">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

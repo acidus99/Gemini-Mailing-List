@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Not always online capsules</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007180.html">
+<link rel="next" href="007184.html">
+</head>
+<body>
+<h1>Not always online capsules</h1>
+<b>Carsten Strotmann</b> carsten at strotmann.de<br>
+<i>Wed Sep 22 11:32:34 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007180.html">Not always online capsules</a></li>
+<li>Next message (by thread): <a href="007184.html">Not always online capsules</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7183">[ date ]</a> <a href="thread.html#7183">[ thread ]</a> <a href="subject.html#7183">[ subject ]</a> <a href="author.html#7183">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi,
+
+On 22 Sep 2021, at 11:36, Alice wrote:
+
+&gt;<i>&gt;
+</i>&gt;<i>&gt; There are registrar that disallow txt records?  Lot of other services
+</i>&gt;<i>&gt; (gitlab pages comes to mind for example) requires user to set TXT
+</i>&gt;<i>&gt; records.
+</i>&gt;<i>
+</i>&gt;<i> Also SPF and dkim require TXT records - and these are needed for anyone who wants email at their own domain.
+</i>&gt;<i>
+</i>&gt;<i> My registrar hides TXT records under an &quot;Advanced&quot; tab, but it&#x27;s available.
+</i>&gt;<i>
+</i>
+when using TXT records (which might not be the best choice for this function), they should be stored at a well-known subdomain.
+
+The DNS currently has the problem that too many applications try to store information in TXT records on the base domain name, that creates all kinds of operational issues for the DNS service and for the applications.
+
+For example take a look at &quot;dig microsoft.com txt&quot; or &quot;dig twitter.com txt&quot;. Storing more TXT records at that place will make the situation worse.
+
+A well-know subdomain for Gemini parameter information could be something like
+
+_gemini_parameter.domain.tld.   TXT  &quot;online-start=090000&quot; &quot;online-end=220000&quot; &quot;language=en&quot;
+
+Another (maybe technically better) alternative could be the new SVCB &quot;Service binding and parameter specification via the DNS&quot; record: &lt;<a href="https://datatracker.ietf.org/doc/draft-ietf-dnsop-svcb-https">https://datatracker.ietf.org/doc/draft-ietf-dnsop-svcb-https</a>&gt;
+
+Greetings
+
+Carsten
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007180.html">Not always online capsules</a></li>
+<li>Next message (by thread): <a href="007184.html">Not always online capsules</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7183">[ date ]</a> <a href="thread.html#7183">[ thread ]</a> <a href="subject.html#7183">[ subject ]</a> <a href="author.html#7183">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

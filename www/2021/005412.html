@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005410.html">
+<link rel="next" href="005456.html">
+</head>
+<body>
+<h1>[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Sun Feb 21 20:26:34 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005410.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li>Next message (by thread): <a href="005456.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5412">[ date ]</a> <a href="thread.html#5412">[ thread ]</a> <a href="subject.html#5412">[ subject ]</a> <a href="author.html#5412">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Mansfield once stated:
+&gt;<i> 
+</i>&gt;<i> Maybe the proxy could instead return a page that says... &quot;The owner of this
+</i>&gt;<i> content has requested that it only be accessible through the gemini
+</i>&gt;<i> protocol and we respect that. Please use a Gemini client to access content
+</i>&gt;<i> at <a href="gemini://ondollo.com">gemini://ondollo.com</a>. Here are some recommended clients: &lt;list of one or
+</i>&gt;<i> more clients&gt;&quot;
+</i>
+  After reading up on HTTP response codes, I think the most appropriate one
+is 409 Conflict.  The HTTP spec (RFC-2616, section 10.4.10, with added
+commentary from me):
+
+	The request could not be completed due to a conflict with the
+	current state of the resource. 
+
+The owner of the Gemini server does not want data proxied to HTTP.
+
+	This code is only allowed in situations where it is expected that
+	the user might be able to resolve the conflict and resubmit the
+	request.
+
+To resolve the situation, use an actual Gemini client.
+
+	The response body SHOULD include enough information for the user to
+	recognize the source of the conflict.  Ideally, the response entity
+	would include enough information for the user or user agent to fix
+	the problem; however, that might not be possible and is not
+	required.
+
+Which can be included in the body of the 409 response (most, if not all, web
+servers allow custom error pages to be sent).
+
+  Short of that, then 407 Proxy Authentication Required is the next best
+one, kind of.  The semantics are perfect, but it would seem to apply
+(RFC-2616, section 10.4.8):
+
+	This code is similar to 401 (Unauthorized), but indicates that the
+	client must first authenticate itself with the proxy. The proxy MUST
+	return a Proxy-Authenticate header field (section 14.33) containing
+	a challenge applicable to the proxy for the requested resource. The
+	client MAY repeat the request with a suitable Proxy-Authorization
+	header field (section 14.34). HTTP access authentication is
+	explained in &quot;HTTP Authentication: Basic and Digest Access
+	Authentication&quot;
+
+&gt;<i> # An Alternative
+</i>&gt;<i> 
+</i>&gt;<i> An additional thought I had... the above feels like it might be too process
+</i>&gt;<i> heavy (but... it&#x27;s also super simple...). What if proxy server
+</i>&gt;<i> implementations were encouraged to check gemini://&lt;gemhost&gt;/noproxy.txt
+</i>&gt;<i> before a request? (Every request? Feels too much like the favicon. The
+</i>&gt;<i> first request? What if the creating-user changes their mind?) If my proxy
+</i>&gt;<i> checks that URL and gets a 20 status back, then it refuses to proxy the
+</i>&gt;<i> connection. If it gets a 51 back, then it continues with proxying the
+</i>&gt;<i> request.
+</i>
+  If only there was a file that automated agents already use ... like
+robots.txt, where one could do something like ...
+
+	User-agent: proxy
+	Disallow: /
+
+But alas, not-so-benevolent dictator wanna-be Drew DeVault said thou shalt
+not do that:
+
+	<a href="https://mailing-list-archive.gemi.dev/www/2020/003506.html">https://mailing-list-archive.gemi.dev/www/2020/003506.html</a>
+
+  -spc (I don&#x27;t agree with Drew, and think robots.txt is find, and already
+	in place in most cases ... )
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005410.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li>Next message (by thread): <a href="005456.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5412">[ date ]</a> <a href="thread.html#5412">[ thread ]</a> <a href="subject.html#5412">[ subject ]</a> <a href="author.html#5412">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

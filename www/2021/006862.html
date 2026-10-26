@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[USER] Weird Title Rendering on Various Clients</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006917.html">
+<link rel="next" href="006863.html">
+</head>
+<body>
+<h1>[USER] Weird Title Rendering on Various Clients</h1>
+<b>mbays</b> mbays at sdf.org<br>
+<i>Wed Jul  7 18:34:28 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006917.html">[USER] Weird Title Rendering on Various Clients</a></li>
+<li>Next message (by thread): <a href="006863.html">[USER] Weird Title Rendering on Various Clients</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6862">[ date ]</a> <a href="thread.html#6862">[ thread ]</a> <a href="subject.html#6862">[ subject ]</a> <a href="author.html#6862">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>* Tuesday, 2021-07-06 at 08:56 +0300 - skyjake &lt;skyjake@dengine.net&gt;:
+
+&gt;<i> I checked how Lagrange handles the Byte Order Mark (BOM), and sure enough it breaks the first line&#x27;s type detection.
+</i>
+If we follow section 6 of RFC 3629, it looks like the right thing to do is to interpret this character as a nonbreaking space, even if it is the first character of the utf8-encoded gemtext. So then the first line should be interpreted as a text line.
+
+Another thing to clarify in the next version of the spec.
+
+&quot;&quot;&quot;
+A protocol SHOULD forbid use of U+FEFF as a signature for those textual protocol elements that the protocol mandates to be always UTF-8, the signature function being totally useless in those cases.
+
+A protocol SHOULD also forbid use of U+FEFF as a signature for those textual protocol elements for which the protocol provides character encoding identification mechanisms, when it is expected that implementations of the protocol will be in a position to always use the mechanisms properly.  This will be the case when the protocol elements are maintained tightly under the control of the implementation from the time of their creation to the time of their (properly labeled) transmission.
+
+[...]
+
+When a protocol forbids use of U+FEFF as a signature for a certain protocol element, then any initial U+FEFF in that protocol element MUST be interpreted as a &quot;ZERO WIDTH NO-BREAK SPACE&quot;.
+&quot;&quot;&quot;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006917.html">[USER] Weird Title Rendering on Various Clients</a></li>
+<li>Next message (by thread): <a href="006863.html">[USER] Weird Title Rendering on Various Clients</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6862">[ date ]</a> <a href="thread.html#6862">[ thread ]</a> <a href="subject.html#6862">[ subject ]</a> <a href="author.html#6862">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

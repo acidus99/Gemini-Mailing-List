@@ -1,89 +1,73 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> What is required to be IRI compliant?
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20What%20is%20required%20to%20be%20IRI%20compliant%3F&In-Reply-To=%3C20201228125912.6c6fee79%40kongroo.lan%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="004524.html">
-   <LINK REL="Next"  HREF="004528.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>What is required to be IRI compliant?</H1>
-    <B>Solene Rapenne</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20What%20is%20required%20to%20be%20IRI%20compliant%3F&In-Reply-To=%3C20201228125912.6c6fee79%40kongroo.lan%3E"
-       TITLE="What is required to be IRI compliant?">solene at perso.pw
-       </A><BR>
-    <I>Mon Dec 28 11:59:12 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="004524.html">What is required to be IRI compliant?
-</A></li>
-        <LI>Next message (by thread): <A HREF="004528.html">What is required to be IRI compliant?
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4527">[ date ]</a>
-              <a href="thread.html#4527">[ thread ]</a>
-              <a href="subject.html#4527">[ subject ]</a>
-              <a href="author.html#4527">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What is required to be IRI compliant?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004524.html">
+<link rel="next" href="004528.html">
+</head>
+<body>
+<h1>What is required to be IRI compliant?</h1>
+<b>Solene Rapenne</b> solene at perso.pw<br>
+<i>Mon Dec 28 11:59:12 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="004524.html">What is required to be IRI compliant?</a></li>
+<li>Next message (by thread): <a href="004528.html">What is required to be IRI compliant?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4527">[ date ]</a> <a href="thread.html#4527">[ thread ]</a> <a href="subject.html#4527">[ subject ]</a> <a href="author.html#4527">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Mon, 28 Dec 2020 12:41:15 +0100
-&quot;Solderpunk&quot; &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at posteo.net</A>&gt;:
+<pre>On Mon, 28 Dec 2020 12:41:15 +0100
+&quot;Solderpunk&quot; &lt;solderpunk at posteo.net&gt;:
 
 &gt;<i> On Mon Dec 28, 2020 at 12:15 PM CET, Solene Rapenne wrote:
-</I>&gt;<i> 
-</I>&gt;<i> &gt; Requests such as the following are working well:
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt; - <A HREF="gemini://ho&#223;t/&#233;">gemini://ho&#223;t/&#233;</A> &#232;.gmi
-</I>&gt;<i> &gt; - <A HREF="gemini://&#9972;//&#10084;&#65039;.gmi">gemini://&#9972;//&#10084;&#65039;.gmi</A>
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt; Honestly, I am very surprised it works  
-</I>&gt;<i> 
-</I>&gt;<i> Me too!  Are you using a third party library to parse URIs/IRIs, or did
-</I>&gt;<i> you implement it yourself?  People have acted like there is no easy
-</I>&gt;<i> availability of reliable libraries for this kind of thing in C.  If that
-</I>&gt;<i> is false, it would be very good to know.
-</I>&gt;<i> 
-</I>&gt;<i> To be fair, for a server, in addition to being able to parse the request
-</I>&gt;<i> IRI, there is also possibly the need to normalise it, e.g. the
-</I>&gt;<i> server's idea of its domain name might involve two separate characters
-</I>&gt;<i> (a basic vowel plus an accent symbol, say) while the request's version
-</I>&gt;<i> uses a single combined character (or the other way around).  We might
-</I>&gt;<i> spec that one form is required, but robustness would require checking.
-</I>&gt;<i> It might be that *this* is the really hard requirement, rather than
-</I>&gt;<i> simply parsing.
-</I>&gt;<i> 
-</I>&gt;<i> (servers seem to get off lighter than clients, as they don't e.g. need
-</I>&gt;<i> to do DNS lookups or resolve relative URLs - which, by the way, seems to
-</I>&gt;<i> be the correct terminology, not &quot;absolutise&quot; as I've confused people
-</I>&gt;<i> with earlier)
-</I>&gt;<i> 
-</I>&gt;<i> Cheers,
-</I>&gt;<i> Solderpunk
-</I>&gt;<i> 
-</I>&gt;<i> is something people have acteThe impression I've received from other people here is that
-</I>&gt;<i> parsing an IRI in C is prohibitively difficult., in my code
-</I>&gt;<i> &gt; everything are simple char arrays (in C), but it does.
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt; Are there other specifics handling required for being
-</I>&gt;<i> &gt; IRI compliant? I'm not sure I understood exactly what
-</I>&gt;<i> &gt; it means.  
-</I>&gt;<i> 
-</I>
-the code doesn't check anything, it only serves what is requested [1].
+</i>&gt;<i> 
+</i>&gt;<i> &gt; Requests such as the following are working well:
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; - <a href="gemini://ho?t/?">gemini://ho?t/?</a> ?.gmi
+</i>&gt;<i> &gt; - gemini://?//??.gmi
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; Honestly, I am very surprised it works  
+</i>&gt;<i> 
+</i>&gt;<i> Me too!  Are you using a third party library to parse URIs/IRIs, or did
+</i>&gt;<i> you implement it yourself?  People have acted like there is no easy
+</i>&gt;<i> availability of reliable libraries for this kind of thing in C.  If that
+</i>&gt;<i> is false, it would be very good to know.
+</i>&gt;<i> 
+</i>&gt;<i> To be fair, for a server, in addition to being able to parse the request
+</i>&gt;<i> IRI, there is also possibly the need to normalise it, e.g. the
+</i>&gt;<i> server&#x27;s idea of its domain name might involve two separate characters
+</i>&gt;<i> (a basic vowel plus an accent symbol, say) while the request&#x27;s version
+</i>&gt;<i> uses a single combined character (or the other way around).  We might
+</i>&gt;<i> spec that one form is required, but robustness would require checking.
+</i>&gt;<i> It might be that *this* is the really hard requirement, rather than
+</i>&gt;<i> simply parsing.
+</i>&gt;<i> 
+</i>&gt;<i> (servers seem to get off lighter than clients, as they don&#x27;t e.g. need
+</i>&gt;<i> to do DNS lookups or resolve relative URLs - which, by the way, seems to
+</i>&gt;<i> be the correct terminology, not &quot;absolutise&quot; as I&#x27;ve confused people
+</i>&gt;<i> with earlier)
+</i>&gt;<i> 
+</i>&gt;<i> Cheers,
+</i>&gt;<i> Solderpunk
+</i>&gt;<i> 
+</i>&gt;<i> is something people have acteThe impression I&#x27;ve received from other people here is that
+</i>&gt;<i> parsing an IRI in C is prohibitively difficult., in my code
+</i>&gt;<i> &gt; everything are simple char arrays (in C), but it does.
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; Are there other specifics handling required for being
+</i>&gt;<i> &gt; IRI compliant? I&#x27;m not sure I understood exactly what
+</i>&gt;<i> &gt; it means.  
+</i>&gt;<i> 
+</i>
+the code doesn&#x27;t check anything, it only serves what is requested [1].
 
-I don't understand what you mean by normalizing the request.
-For the hostname, I see no reason to write &quot;&#233;crire.hostname&quot; as
-&quot;e'crire.hostname&quot; if it what you mean.
+I don&#x27;t understand what you mean by normalizing the request.
+For the hostname, I see no reason to write &quot;?crire.hostname&quot; as
+&quot;e&#x27;crire.hostname&quot; if it what you mean.
 
 What I see as an issue would be people using puny code if we go
 using IRI. That would mean the server will have to check the puny
@@ -98,23 +82,23 @@ A library will certainly be required for that.
  * look for the first / after the hostname
  * in order to split hostname and uri
  */
-pos = strchr(request, '/');
+pos = strchr(request, &#x27;/&#x27;);
 
 if (pos != NULL) {
 	/* if there is a / found */
 	/* separate hostname and uri */
 	estrlcpy(file, pos, strlen(pos)+1);
 	/* just keep hostname in request */
-	pos[0] = '\0';
+	pos[0] = &#x27;\0&#x27;;
 
 	/*
 	 * use a default file if no file are requested this
-	 * can happen in two cases <A HREF="gemini://hostname/">gemini://hostname/</A>
-	 * <A HREF="gemini://hostname/directory/">gemini://hostname/directory/</A>
+	 * can happen in two cases <a href="gemini://hostname/">gemini://hostname/</a>
+	 * <a href="gemini://hostname/directory/">gemini://hostname/directory/</a>
 	 */
 	if (strlen(file) == 0)
 		estrlcpy(file, &quot;/index.gmi&quot;, 11);
-	if (file[strlen(file) - 1] == '/')
+	if (file[strlen(file) - 1] == &#x27;/&#x27;)
 		estrlcat(file, &quot;index.gmi&quot;, sizeof(file));
 } else {
 	/*
@@ -124,50 +108,15 @@ if (pos != NULL) {
 }
 estrlcpy(hostname, request, sizeof(hostname));
 ```
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="004524.html">What is required to be IRI compliant?
-</A></li>
-	<LI>Next message (by thread): <A HREF="004528.html">What is required to be IRI compliant?
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4527">[ date ]</a>
-              <a href="thread.html#4527">[ thread ]</a>
-              <a href="subject.html#4527">[ subject ]</a>
-              <a href="author.html#4527">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="004524.html">What is required to be IRI compliant?</a></li>
+<li>Next message (by thread): <a href="004528.html">What is required to be IRI compliant?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4527">[ date ]</a> <a href="thread.html#4527">[ thread ]</a> <a href="subject.html#4527">[ subject ]</a> <a href="author.html#4527">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

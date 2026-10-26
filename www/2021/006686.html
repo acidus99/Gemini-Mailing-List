@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>In Body URI references</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006685.html">
+<link rel="next" href="006687.html">
+</head>
+<body>
+<h1>In Body URI references</h1>
+<b>Jonathan McHugh</b> indieterminacy at libre.brussels<br>
+<i>Sun Jun 13 15:30:15 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006685.html">In Body URI references</a></li>
+<li>Next message (by thread): <a href="006687.html">In Body URI references</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6686">[ date ]</a> <a href="thread.html#6686">[ thread ]</a> <a href="subject.html#6686">[ subject ]</a> <a href="author.html#6686">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi Stephane,
+
+Thanks for your interest.
+
+Stephane Bortzmeyer &lt;stephane@sources.org&gt; writes:
+
+&gt;<i> On Sun, Jun 13, 2021 at 03:17:35PM +0200,
+</i>&gt;<i>  Jonathan McHugh &lt;indieterminacy@libre.brussels&gt; wrote 
+</i>&gt;<i>&gt; Is there a style like Bit.ly for url shortening? Which still
+</i>&gt;<i>&gt; respects Gemini design principles?
+</i>&gt;<i>
+</i>&gt;<i> I don&#x27;t think any URI redirector could respect Gemini design
+</i>&gt;<i> principles. For instance, these redirectors are a privacy issue.
+</i>&gt;<i>
+</i>
+I have no desire to redirect users.
+
+Im thinking in terms of inline reference to unclutter a large paragraph
+while still collecting the urls below a section or as a footer.
+
+&gt;<i>&gt; Would it be interesting for there to be a (de)centralised site, which
+</i>&gt;<i>&gt; provides?:
+</i>&gt;<i>&gt; * A dictionary of url links
+</i>&gt;<i>&gt; * Appropriate hashes that can be used for publishing or client
+</i>&gt;<i>&gt; (re)interpretations.
+</i>&gt;<i>
+</i>&gt;<i> WHat is exactly the problem you are trying to solve? I can imagine
+</i>&gt;<i> some uses for such a site but I&#x27;m not sure which you had in mind.
+</i>
+I would prefer to work to a standard equivalent to wikipedia
+content. IMHO. Its a good expectation for managing content, irrespective
+of site or service.
+
+As an example, the HTTP wikipedia page for Gemini Protocol starts with this
+paragraph
+=&gt; <a href="https://en.wikipedia.org/wiki/Gemini_(protocol)">https://en.wikipedia.org/wiki/Gemini_(protocol)</a>
+```
+The Gemini protocol is an application layer protocol for distributed hypertext information systems that provides access to simple, primarily textual documents in Gemini space. This is done with contemporary technologies such as TLS, thereby improving privacy and user agency relative to the Web. Servers run by default on port 1965. The protocol is being designed collaboratively and is not currently being standardized as an internet standard. 
+```
+Pasting this echews 6 uri links:
+=&gt; <a href="https://en.wikipedia.org/wiki/Application_layer">https://en.wikipedia.org/wiki/Application_layer</a>
+=&gt; <a href="https://en.wikipedia.org/wiki/Hypertext">https://en.wikipedia.org/wiki/Hypertext</a>
+=&gt; <a href="https://en.wikipedia.org/wiki/Gemini_space">https://en.wikipedia.org/wiki/Gemini_space</a>
+=&gt; <a href="https://en.wikipedia.org/wiki/Transport_Layer_Security">https://en.wikipedia.org/wiki/Transport_Layer_Security</a>
+=&gt; <a href="https://en.wikipedia.org/wiki/Internet_standard">https://en.wikipedia.org/wiki/Internet_standard</a>
+
+Naturally these are all unternal links, which could be referenced if
+needed. I expect serving ALL references as a footer bibliopgraphy is
+equitable.
+
+I do not know whether clients or users have policies for &#x27;folding away&#x27;
+cross references for obvious/queryable suggestions.
+
+The next paragraph contains 2 internal navigation links and 2 internal citations:
+```
+The design is inspired by the Gopher protocol, but mandates the use of Transport Layer Security with trust on first use (TOFU)[1] and privacy-related features. It is not intended to replace Gopher or HTTP, but to co-exist with them.[2]
+```
+=&gt; <a href="https://en.wikipedia.org/wiki/Internet_protocol_suite">https://en.wikipedia.org/wiki/Internet_protocol_suite</a>
+=&gt; <a href="https://en.wikipedia.org/wiki/Trust_on_first_use">https://en.wikipedia.org/wiki/Trust_on_first_use</a>
+=&gt; <a href="https://en.wikipedia.org/wiki/Gemini_(protocol)#cite_note-1">https://en.wikipedia.org/wiki/Gemini_(protocol)#cite_note-1</a>
+=&gt; <a href="https://en.wikipedia.org/wiki/Gemini_(protocol)#cite_note-faq-2">https://en.wikipedia.org/wiki/Gemini_(protocol)#cite_note-faq-2</a>
+
+The use of [:digit:] doesnt seem to be stable for content
+(intentionally) containing square brackets, such as in lua
+```
+x = foo[1]
+```
+
+The proxy Gopherpedia eschews internal links and citations for the
+content it generates.
+
+I have come across this repo for proxying wiki content with Gemini but I
+havent come across a working service yet
+=&gt; <a href="https://github.com/pitr/wp">https://github.com/pitr/wp</a>
+
+I dont know whether there are are successful CMS approaches for cleanly
+managing links.
+
+
+I have been reminising about the social bookmarking site Delicious. Id
+be happy if by aggregate or by project I was capable of having more
+solid references across documents and references.
+
+I have been intrigued by the potential of Emacs&#x27; Hyperbole as a
+mechanism for interpreting content and interfacing with it. Given that
+it cooperate with (the Gemini client) Emacs&#x27; Elpher I would like to
+think there could be utility
+=&gt; <a href="https://www.gnu.org/software/hyperbole/DEMO.html#Social-Media-Hashtags-and-Usernames">https://www.gnu.org/software/hyperbole/DEMO.html#Social-Media-Hashtags-and-Usernames</a>
+
+Approaches include
+```
+   [facebook|instagram|twitter][#@]&lt;hashtag-or-username&gt;
+   [fb|in|tw][#@]&lt;hashtag-or-username&gt;
+   gh#rswgnu/hyperbole/5ae3550 (if include user, must include project)
+   github#hyperbole/5ae3550    (project can be given with user default)
+   gh#5ae3550                  (user and project defaults are used)
+   git#/hyperbole            (displays the top directory of the hyperbole repository)
+   git#/hyperbole/55a1f0     (displays hyperbole git commit diff)
+   git#=hactypes.el          (displays a git-versioned file regardless of directory)
+   git#=master:kotl/kview.el (displays file in subdirectory from master branch)
+   gt#55a1f0                 (when within a git repo, displays its commit diff)
+```                   
+As well as this
+```
+   A document id is used just like a reference citation in traditional publications but it
+   actually links to the document that it references and the card catalog
+   (index) entry for the document.  One can easily pass around doc ids to point
+   people to appropriate documents.  For example, a mail message in response to
+   a question might say, &quot;See [Emacs-001] for examples of what Emacs can do.&quot;
+```
+
+Here is a Hyperbole mailing list thread, concerning my generation of
+navigation links to anchored queries (based upon searching my
+filesystem)
+=&gt; <a href="https://lists.gnu.org/archive/html/hyperbole-users/2021-05/msg00050.html">https://lists.gnu.org/archive/html/hyperbole-users/2021-05/msg00050.html</a>
+
+I would like to have content served to me in Elpher, with actionable
+links that permit me to visit links with little fuss. If I can consume
+(or create) content like wikipedia with the links but with minimal URI noise, it
+would make me happy.
+
+--
+Jonathan McHugh
+indieterminacy@libre.brussels
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006685.html">In Body URI references</a></li>
+<li>Next message (by thread): <a href="006687.html">In Body URI references</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6686">[ date ]</a> <a href="thread.html#6686">[ thread ]</a> <a href="subject.html#6686">[ subject ]</a> <a href="author.html#6686">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

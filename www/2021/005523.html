@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SPEC] Experimenting with a status code of 12</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005356.html">
+<link rel="next" href="005566.html">
+</head>
+<body>
+<h1>[SPEC] Experimenting with a status code of 12</h1>
+<b>Katarina Eriksson</b> gmym at coopdot.com<br>
+<i>Tue Feb 23 17:16:59 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005356.html">[SPEC] Experimenting with a status code of 12</a></li>
+<li>Next message (by thread): <a href="005566.html">[SPEC] Experimenting with a status code of 12</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5523">[ date ]</a> <a href="thread.html#5523">[ thread ]</a> <a href="subject.html#5523">[ subject ]</a> <a href="author.html#5523">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Mansfield &lt;mansfield at ondollo.com&gt; wrote:
+
+&gt;<i> I&#x27;ve been experimenting with a non-standard status code and I wanted to
+</i>&gt;<i> share some details. I am running this experiment to find a way for users to
+</i>&gt;<i> manage content using only a Gemini client and server. No ssh, rsync, vim,
+</i>&gt;<i> emacs, nano, or anything else.
+</i>&gt;<i>
+</i>
+A gemini client could implement an existing protocol, like rsync or sftp,
+to achieve the goal of not requiring any additional software to manage a
+capsule.
+
+The simplest conceptual adjustment is that there&#x27;s no character limit on
+&gt;<i> the input a client might provide in request/response input cycle involving
+</i>&gt;<i> a status code of 12. Status codes 10 and 11 have specified limits around 1k
+</i>&gt;<i> bytes (I&#x27;m fudging the details there). Status codes 10 and 11 also have the
+</i>&gt;<i> specified behavior of putting the user input into the URL as the value of
+</i>&gt;<i> the query component. So... the simple part is that there&#x27;s no limit to the
+</i>&gt;<i> number of bytes sent from a client to a server in a request/response input
+</i>&gt;<i> cycle involving a status code of 12.
+</i>&gt;<i>
+</i>
+So you are using status code 12 to signal the client to use a different
+kind of request. What happens when a client interpretes that as a status
+code 10? (As it should if it doesn&#x27;t understand 12.)
+
+To escape the 1k limits of the URL in responses to 10 and 11, my
+&gt;<i> exploration of status code 12 places the user input in the body. This meant
+</i>&gt;<i> I had to change my server from only understanding how to process the single
+</i>&gt;<i> request line of standard requests to processing the request line *and* the
+</i>&gt;<i> body when it sees a response to a 12. So I needed to tell the difference
+</i>&gt;<i> between requests with a body and ones without.
+</i>&gt;<i>
+</i>
+Introducing a new kind of request into gemini would be a mistake, I think.
+We have seen proposals for side protocols on this list to fill this space
+but they didn&#x27;t get popular.
+
+Since I then needed to be able to tell the difference between requests that
+&gt;<i> didn&#x27;t have a body and those that should, I modified the server to provide
+</i>&gt;<i> unique links to the client. These unique links use a UUIDv4 that is tracked
+</i>&gt;<i> on the server and expire after a day.
+</i>&gt;<i>
+</i>
+Such links could also start with something like &quot;gemini+edit://&quot; so that
+only clients supporting this feature can access it.
+
+[1] - After creating an account you&#x27;ll get a status code of 20 in response,
+&gt;<i> with unique links as described above - if you use those links you&#x27;ll get a
+</i>&gt;<i> status code of 12 containing the current value of the resource as the body
+</i>&gt;<i> of the response and letting you manage your content as this email describes
+</i>&gt;<i> (assuming your client supports sending requests with a body).
+</i>&gt;<i>
+</i>
+Ah, so the client only get status code 12 if it has an account. I missed
+that the first time I read through your e-mail. I also missed that it
+supports editing of existing text.
+
+Ah... and another point... how does the server know when to stop reading
+&gt;<i> the body of a request that pairs up with a 12? Well... there&#x27;s a deadline
+</i>&gt;<i> on the connection. You&#x27;ll want to get all your data across before then. We
+</i>&gt;<i> don&#x27;t really like that that&#x27;s all we have... we&#x27;ve thought about
+</i>&gt;<i> implementing something more, but other options currently feel just as
+</i>&gt;<i> arbitrary... some max byte size?
+</i>&gt;<i>
+</i>
+TLS close_notify from the client maybe?
+
+I think the simplicity of only having &quot;&lt;URL&gt;CRLF&quot; requests outweighs any
+benefits we get from this approach.
+
+-- 
+Katarina
+
+&gt;<i>
+</i>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210223/a538a9f9/attachment-0001.htm">https://mailing-list-archive.gemi.dev/www/attachments/20210223/a538a9f9/attachment-0001.htm</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005356.html">[SPEC] Experimenting with a status code of 12</a></li>
+<li>Next message (by thread): <a href="005566.html">[SPEC] Experimenting with a status code of 12</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5523">[ date ]</a> <a href="thread.html#5523">[ thread ]</a> <a href="subject.html#5523">[ subject ]</a> <a href="author.html#5523">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

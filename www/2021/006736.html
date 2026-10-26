@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>a space case for transparent gemtext compression</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006731.html">
+<link rel="next" href="006739.html">
+</head>
+<body>
+<h1>a space case for transparent gemtext compression</h1>
+<b>cage</b> cage-dev at twistfold.it<br>
+<i>Sat Jun 19 10:55:59 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006731.html">a space case for transparent gemtext compression</a></li>
+<li>Next message (by thread): <a href="006739.html">a space case for transparent gemtext compression</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6736">[ date ]</a> <a href="thread.html#6736">[ thread ]</a> <a href="subject.html#6736">[ subject ]</a> <a href="author.html#6736">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Sat, Jun 19, 2021 at 03:42:26AM -0500, Christian Seibold wrote:
+&gt;<i> &gt; This is how bloated software starts.
+</i>&gt;<i>
+</i>&gt;<i> Who says what is bloated? How much features do we have to add for something to be bloated? Was adding TLS bloat? TLS added a bunch of complexity to the protocol. What about gemtext? Is gemtext bloat?
+</i>
+There are reasons why TLS is in gemini and compression not, please reread the FAQ.
+
+&gt;<i> This isn&#x27;t  black and  white.
+</i>
+I agree it is not.
+
+&gt;<i> Bloat  is a  ratio of  various things,
+</i>&gt;<i> including  complexity added,  size  added,  and performance  effects
+</i>&gt;<i> vs. how  much the feature adds  to the program and  its usefulness -
+</i>&gt;<i> it&#x27;s &quot;power to weight ratio&quot;
+</i>
+I agree.
+
+&gt;<i>
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; &gt;  Some gemini  browser maintainers are  probably going to  argue that
+</i>&gt;<i> &gt; &gt; it&#x27;s not  the purpose  of a  browser to support  opening zips,  as a
+</i>&gt;<i> &gt; &gt; similar argument has  been used for Gemini  Subscription Feeds, Atom
+</i>&gt;<i> &gt; &gt; Feeds, audio/video  files, and  other such things.  I would  have to
+</i>&gt;<i> &gt; &gt; completely disagree. The point of a browser is to browse documents -
+</i>&gt;<i> &gt; &gt; that&#x27;s the scope of gemini browsers.  I do recognize that there are,
+</i>&gt;<i> &gt; &gt; however, two different approaches to this. Have the &quot;gemini browser&quot;
+</i>&gt;<i> &gt; &gt; be a full document browser for  the gemini protocol, or have it just
+</i>&gt;<i> &gt; &gt; deal with the gemini protocol and  pass the documents off to another
+</i>&gt;<i> &gt; &gt; program. The problem, of course,  is many applications don&#x27;t support
+</i>&gt;<i> &gt; &gt; gemini links, which is definitely why I prefer the 1st approach,
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; So are you  arguing that gemini client should include  a postscript or
+</i>&gt;<i> &gt; PDF interpreter?  Supports HTML?  JavaScript?  There are libraries for
+</i>&gt;<i> &gt; those in the most common languages.
+</i>&gt;<i>
+</i>&gt;<i> Nope, I never suggested such a thing. HTML isn&#x27;t used in geminispace.
+</i>
+It is,  because as you  correctly said,  the protocol with  mime types
+allow for any type of document.
+
+&gt;<i>Neither is javascript. Additionally, again, you have to look at the pros and cons of things. Javascript adds significant performance and security problems. Compression **doesn&#x27;t**.
+</i>
+So are you OK, with PDF and postscript that you left out?
+
+&gt;<i> Stop trying to compare compression to Javascript and HTML, especially when compression is very basic and doesn&#x27;t add barely any LOC or performance decreases.
+</i>
+You you know that compression &quot;barely&quot; add a few effort for every possible programming scenario?
+
+&gt;<i> Let&#x27;s look at an lz4 library:
+</i>&gt;<i> <a href="https://github.com/lz4/lz4">https://github.com/lz4/lz4</a>
+</i>&gt;<i>
+</i>&gt;<i> It&#x27;s 49000 MB/s on a Core i7-9700K CPU @ 4.9GHz.
+</i>&gt;<i> And it&#x27;s 5699 LOC.
+</i>&gt;<i>
+</i>&gt;<i> Btw, this is the approach that Solderpunk used to determine what should go into the protocol. It&#x27;s right on the front page of the gemini capsule:
+</i>&gt;<i> &quot;Strives for maximum power to weight ratio&quot;
+</i>
+Yes, please reread the FAQ. Compression is not in the standard for reasons.
+
+&gt;<i> Imo, compression fits perfectly with this. Some people will disagree, and that&#x27;s fine. That&#x27;s not gonna change my opinion on this matter though. All I ask is that you stop using personal attacks, because it doesn&#x27;t help your argument.
+</i>
+You tell me that i am presumptuous and accuse me for personal attacks?
+
+&gt;<i>
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; &gt; which  seems more  like  the approach  Lagrange  takes (Skyjake  can
+</i>&gt;<i> &gt; &gt;  correct me if I&#x27;m wrong).
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; Please this  is not the place  to discuss a single  implementation for
+</i>&gt;<i> &gt; gemini standard.
+</i>&gt;<i>
+</i>&gt;<i> Yes it is. The OP was asking for a specific feature, and I suggested a client that had that feature that they can use. I NEVER suggested every single client should implement compression, and I actually said the opposite:
+</i>&gt;<i> &quot;Which means you need to either support things yourself, or have the ability to pass them off to another application that *can* support them properly.&quot;
+</i>
+I quote another your message:
+
+&quot;Please read  my own  response again. If  you&#x27;re using  zips, Lagrange
+doesn&#x27;t take 4 user actions, it  takes 1. If other browsers don&#x27;t have
+this functionality,  then tell  them. Browsers should  implement this,
+not the protocol. It&#x27;s that&#x27;s simple.&quot;
+
+And a  few lines  above: &quot;...why  I prefer the  1st approach&quot;  [a full
+gemini document browser].
+
+&gt;<i> Passing things off to other applications is just as valid of a way to deal with this, and it&#x27;s what AV-98 and various other clients do.
+</i>
+But  you prefer  a full  gemini browser,  right? And  clients *should*
+implement a form of decompression one way or another, right?
+
+&gt;<i> &gt;
+</i>&gt;<i> &gt; The fact is  that or you are proposing a  standard extension, and just
+</i>&gt;<i> &gt; let me  write that i am  tired that about  60% of the traffic  in this
+</i>&gt;<i> &gt; mailing list is  about proposing extension to the  protocol that still
+</i>&gt;<i> &gt; needs works  to be finalized, instead  of proposing fix (there  is the
+</i>&gt;<i> &gt; gitlab  repo for  that).  If  you  do not  like gemini  propose a  new
+</i>&gt;<i> &gt; protocol and  i likely be  the first  to works on  that if i  think is
+</i>&gt;<i> &gt; good.  Or if  this is not extension  (and i disagree it is  not, to be
+</i>&gt;<i> &gt; clear) it is a discussion  about a single implementation which produce
+</i>&gt;<i> &gt; noise in this ml.
+</i>&gt;<i>
+</i>&gt;<i> I in no way proposed an extension to the protocol. In fact, I proposed the exact opposite, that this should stay *out* of the protocol, and be in client applications for people who want to support this:
+</i>&gt;<i> &quot;I do want to note that the gemini protocol doesn&#x27;t care about what&#x27;s send   over it. This is why mimetypes were added to the protocol. You can send any binary data over gemini. This is why compression doesn&#x27;t need to be in the main protocol - because you can send over the compressed stuff just as any other binary file can.&quot;
+</i>&gt;<i>
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; Moreover  i  think  that  promoting a  &quot;fat&quot;  client  promotes  client
+</i>&gt;<i> &gt; mono culture as  well. Complicated clients need  more resources (people
+</i>&gt;<i> &gt; or money) and lead to monopolistic behaviour (even in good faith).
+</i>&gt;<i>
+</i>&gt;<i> People are smart enough to decide for themselves what client they want to use. I&#x27;m allowed to promote a client. I think it&#x27;s very presumptuous to think I&#x27;m somehow &quot;propagandizing&quot; people into supporting Lagrange. It&#x27;s ridiculous. People are smart enough to decide for themselves what client they want to use.
+</i>
+i  like lagrange  a  lot, this  is neither  about  lagrange nor  about
+compression, this is about pushing for complex client that could break
+the geminispace.
+
+&gt;<i> &gt;
+</i>&gt;<i> &gt; To be  clear. No if  lagrange implements X  this does not  means every
+</i>&gt;<i> &gt; other  client should  follows  the  same path.  In  my  opinion if  an
+</i>&gt;<i> &gt; implementation  follows  the  path  you are  proposing  (bloating  the
+</i>&gt;<i> &gt; software) this,  in my opinion,  is a  reason to not  implements those
+</i>&gt;<i> &gt; (anti)features.
+</i>&gt;<i>
+</i>&gt;<i> I didn&#x27;t suggest any such thing, as I&#x27;ve already said above.
+</i>
+And i can requote your other message as above.
+
+Please reread the Bortzmeyer reply, he is wiser than me and so is able
+to explain where the problem is better than me.
+
+Also i encourage  *everyone* that cares for gemini  (including you) to
+helps to finalize the standard,  not advocating for re-implementing web
+browser with an unfit protocol.
+
+Bye!
+C.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006731.html">a space case for transparent gemtext compression</a></li>
+<li>Next message (by thread): <a href="006739.html">a space case for transparent gemtext compression</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6736">[ date ]</a> <a href="thread.html#6736">[ thread ]</a> <a href="subject.html#6736">[ subject ]</a> <a href="author.html#6736">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

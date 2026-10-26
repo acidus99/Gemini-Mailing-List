@@ -1,51 +1,35 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Proposal about content-size and hash
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%20about%20content-size%20and%20hash&In-Reply-To=%3CC6PBVE9Q0280.2IIFY1GUSJY2S%40gux%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="002966.html">
-   <LINK REL="Next"  HREF="002974.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Proposal about content-size and hash</H1>
-    <B>Arav K.</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposal%20about%20content-size%20and%20hash&In-Reply-To=%3CC6PBVE9Q0280.2IIFY1GUSJY2S%40gux%3E"
-       TITLE="Proposal about content-size and hash">nothien at uber.space
-       </A><BR>
-    <I>Thu Oct 29 11:11:28 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="002966.html">[ANN] New Personal Server: thesudorm.com
-</A></li>
-        <LI>Next message (by thread): <A HREF="002974.html">Proposal about content-size and hash
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2970">[ date ]</a>
-              <a href="thread.html#2970">[ thread ]</a>
-              <a href="subject.html#2970">[ subject ]</a>
-              <a href="author.html#2970">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposal about content-size and hash</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="002966.html">
+<link rel="next" href="002974.html">
+</head>
+<body>
+<h1>Proposal about content-size and hash</h1>
+<b>Arav K.</b> nothien at uber.space<br>
+<i>Thu Oct 29 11:11:28 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="002966.html">[ANN] New Personal Server: thesudorm.com</a></li>
+<li>Next message (by thread): <a href="002974.html">Proposal about content-size and hash</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2970">[ date ]</a> <a href="thread.html#2970">[ thread ]</a> <a href="subject.html#2970">[ subject ]</a> <a href="author.html#2970">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Hi, Gemini peoples!
+<pre>Hi, Gemini peoples!
 
 I have two main proposals for getting information like content-size
 (which, as has been discussed previously, would be very useful for even
 slightly big responses).
 
 1. Define specific additional MIME type parameters.  For example, one
-   could return '20 application/gzip; content-size=42069420' as the
+   could return &#x27;20 application/gzip; content-size=42069420&#x27; as the
    response line.  This could also be used for giving the client a hash
-   of the data (parameter name e.g. 'content-hash-sha256'), useful for
+   of the data (parameter name e.g. &#x27;content-hash-sha256&#x27;), useful for
    verification and for checking against local caches of the same page.
 
    To just check the MIME type (now possibly with size and hash), as
@@ -71,12 +55,12 @@ slightly big responses).
 2. Define an additional endpoint for retrieving meta info.
 
    On ~chat, bjorn.warmedal layed out the possibility of using the
-   '/.content' URL to return a content hash.  This would function like a
+   &#x27;/.content&#x27; URL to return a content hash.  This would function like a
    normal URL, one which accepts as input the URL of the page to
    retrieve content information about.
 
-   I propose that the response from a '/.content?/&lt;path&gt;' request
-   returns the MIME type of the URL '/&lt;path&gt;', optionally including
+   I propose that the response from a &#x27;/.content?/&lt;path&gt;&#x27; request
+   returns the MIME type of the URL &#x27;/&lt;path&gt;&#x27;, optionally including
    content-size and content-hash-* parameters (this works because there
    are no size restrictions for the content, unlike the META line).  Its
    MIME type can be bikeshed if this proposal is agreed upon.  The
@@ -84,7 +68,7 @@ slightly big responses).
    anything).
 
    Unfortunately, extension becomes possible simply by using a different
-   MIME type.  I don't know how to prevent this.
+   MIME type.  I don&#x27;t know how to prevent this.
 
 I think that proposal #1 is definitely doable, but I understand that #2
 can be more problematic for some.  I suppose #2 would be beneficial if
@@ -92,38 +76,15 @@ we determine that content-hash is really necessary, but further
 extensibility is unwanted and should be prevented somehow.
 
 ~aravk | ~nothien
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="002966.html">[ANN] New Personal Server: thesudorm.com
-</A></li>
-	<LI>Next message (by thread): <A HREF="002974.html">Proposal about content-size and hash
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2970">[ date ]</a>
-              <a href="thread.html#2970">[ thread ]</a>
-              <a href="subject.html#2970">[ subject ]</a>
-              <a href="author.html#2970">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="002966.html">[ANN] New Personal Server: thesudorm.com</a></li>
+<li>Next message (by thread): <a href="002974.html">Proposal about content-size and hash</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2970">[ date ]</a> <a href="thread.html#2970">[ thread ]</a> <a href="subject.html#2970">[ subject ]</a> <a href="author.html#2970">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

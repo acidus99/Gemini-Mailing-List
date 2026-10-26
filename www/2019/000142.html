@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IPv6 and gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000141.html">
+<link rel="next" href="000143.html">
+</head>
+<body>
+<h1>IPv6 and gemini</h1>
+<b>plugd</b> plugd at thelambdalab.xyz<br>
+<i>Fri Sep 13 08:38:04 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000141.html">[ANN] GLV-1.12556 Gemini Server now released</a></li>
+<li>Next message (by thread): <a href="000143.html">IPv6 and gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#142">[ date ]</a> <a href="thread.html#142">[ thread ]</a> <a href="subject.html#142">[ subject ]</a> <a href="author.html#142">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi all,
+
+I&#x27;ve been having intermittent connection issues with some of the gemini
+servers.  While this is of course to be expected at this point, it
+seemed odd that, for instance, <a href="gemini://zaibatsu.circumlunar.space">gemini://zaibatsu.circumlunar.space</a>
+seemed to be offline more often than not.  I finally got around to
+looking at this more carefully, and noticed that using gnutls-cli to
+open a connection to the IPv4 address always succeeds, whereas
+connections to the IPv6 address that the resolver returns do not.
+Since the network that I&#x27;m using supports IPv6 and falls back to IPv4
+when necessary, this was causing a problem.
+
+Furthermore, because of the requirement that clients transmit the full
+URL to the server, it&#x27;s not trivial to get around this by just directing
+the client to the IPv4 address: the server probably won&#x27;t recognise the
+URL and will respond with an error code.
+
+There seem to be four options:
+
+1. Have clients only look at IPv4 addresses (i.e. ignore AAAA DNS
+records).
+ - Pro: would immediately solve the problem in this case.
+ - Con: gemini gets stuck in the past.
+
+2. Have clients do a reverse-DNS lookup when the gemini URL contains
+an IP and use this to construct a URL to supply to the gemini server.
+ - Pro: would allow clients to connect using URLs with literal IP
+   addresses in them.
+ - Cons:
+    a) connecting via the hostname still wouldn&#x27;t work.
+    b) if a single server is hosting several gemini sites the result
+       of the connection would be non-deterministic.
+    
+3. Have servers recognise IP URLs.
+ - Pros and cons same as for 2.
+
+4. Have servers ensure that if they have an AAAA record they also listen
+for IPv6 gemini connections.
+  - Pros: future-proof, no client-side changes necessary.
+  - Con: some additional work necessary on the server side.
+
+Obviously 4 is my favourite because it&#x27;s less (no) work for me. :)
+
+plugd
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000141.html">[ANN] GLV-1.12556 Gemini Server now released</a></li>
+<li>Next message (by thread): <a href="000143.html">IPv6 and gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#142">[ date ]</a> <a href="thread.html#142">[ thread ]</a> <a href="subject.html#142">[ subject ]</a> <a href="author.html#142">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

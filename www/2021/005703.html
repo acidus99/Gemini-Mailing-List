@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Clients] Gemini and accessibility regarding preformatted code blocks</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005663.html">
+<link rel="next" href="005685.html">
+</head>
+<body>
+<h1>[Clients] Gemini and accessibility regarding preformatted code blocks</h1>
+<b>Devin Prater</b> r.d.t.prater at gmail.com<br>
+<i>Fri Feb 26 14:29:31 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005663.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li>Next message (by thread): <a href="005685.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5703">[ date ]</a> <a href="thread.html#5703">[ thread ]</a> <a href="subject.html#5703">[ subject ]</a> <a href="author.html#5703">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Regarding changes to voices based on content type, screen readers don?t switch voices for poetry or anything, unless something like SSML is used. Even then, the screen reader must support sending the SSML directly to the speech synthesizer, and the speech synthesizer must support SSML. Otherwise, everything is plain text, with no variation on speech or anything besides normal clause pauses and such.
+=&gt; <a href="https://www.w3.org/TR/speech-synthesis11/">https://www.w3.org/TR/speech-synthesis11/</a> &lt;<a href="https://www.w3.org/TR/speech-synthesis11/">https://www.w3.org/TR/speech-synthesis11/</a>&gt; SSML
+
+
+
+Devin Prater
+r.d.t.prater at gmail.com
+
+
+
+&gt;<i> On Feb 25, 2021, at 11:31 PM, Sean Conner &lt;sean at conman.org&gt; wrote:
+</i>&gt;<i> 
+</i>&gt;<i> It was thus said that the Great John Cowan once stated:
+</i>&gt;<i>&gt; On Thu, Feb 25, 2021 at 5:25 PM Sean Conner &lt;sean at conman.org&gt; wrote:
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt;&gt;        tag       = &#x27;@art&#x27; / &#x27;@code&#x27; / &#x27;@data&#x27; / &#x27;@poem&#x27;
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; We now know what the benefit of @art is.  What are the advantages of the
+</i>&gt;<i>&gt; other three over no tag?
+</i>&gt;<i> 
+</i>&gt;<i>  A client could style each type differently, even if just a subtle change
+</i>&gt;<i> in background color.  Or even different monospaced fonts depending upon
+</i>&gt;<i> usage.  
+</i>&gt;<i> 
+</i>&gt;<i>&gt;&gt; ``` @code
+</i>&gt;<i>&gt;&gt; x = 5
+</i>&gt;<i>&gt;&gt; ```
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; Shouldn&#x27;t this be read as if it were &quot;ex equals five&quot;?
+</i>&gt;<i> 
+</i>&gt;<i>  I didn&#x27;t want to get too wild with the examples, but yes, that sounds fine
+</i>&gt;<i> to me.  
+</i>&gt;<i> 
+</i>&gt;<i>&gt; ``` @art Obligatory Cat picture
+</i>&gt;<i>&gt;&gt; cat
+</i>&gt;<i>&gt;&gt; ```
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; Right.
+</i>&gt;<i> 
+</i>&gt;<i>  Didn&#x27;t want to bother trying to draw an ASCII cat.
+</i>&gt;<i> 
+</i>&gt;<i>&gt;&gt; ``` @data Price list
+</i>&gt;<i>&gt;&gt; widget  3.45
+</i>&gt;<i>&gt;&gt; gadget  5.99
+</i>&gt;<i>&gt;&gt; fob     1.99
+</i>&gt;<i>&gt;&gt; ```
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; Shouldn&#x27;t this be read as &quot;widget one ninety-nine (pause) gadget five
+</i>&gt;<i>&gt; ninety-nine (pause) fob one ninety-nine&quot;?  
+</i>&gt;<i> 
+</i>&gt;<i>  It could even be &quot;Row one widget one ninety-nine (pause) row two gadget
+</i>&gt;<i> five ninety-nine (pause) row three fob one ninety-nine&quot; but I can see the
+</i>&gt;<i> repeated &quot;row x&quot; could get tiresome.  
+</i>&gt;<i> 
+</i>&gt;<i>&gt; How might a visual browser
+</i>&gt;<i>&gt; render it differently?
+</i>&gt;<i> 
+</i>&gt;<i>  How about alternating light and dark background for each row?  I mean, it
+</i>&gt;<i> doesn&#x27;t have to be a jarring contrast like black background/white
+</i>&gt;<i> background, but black background/dark grey background, just to help visually
+</i>&gt;<i> separate the records.
+</i>&gt;<i> 
+</i>&gt;<i>&gt;&gt; ``` @poem
+</i>&gt;<i>&gt;&gt; There once was a person from Nantucket ...
+</i>&gt;<i>&gt;&gt; ```
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; How might a visual browser render this differently?
+</i>&gt;<i> 
+</i>&gt;<i>  No idea on this one, but a screen reader, in theory, could switch voices
+</i>&gt;<i> for reading poetry.  
+</i>&gt;<i> 
+</i>&gt;<i>  I don&#x27;t expect this to be standardized any time soon in the spec, as the
+</i>&gt;<i> spec for text/gemini is line oriented and less with parsing the data in each
+</i>&gt;<i> line.  But I can certainly see this as something clients slowly converge on,
+</i>&gt;<i> much like gopher clients supporting selector types not specified in
+</i>&gt;<i> RFC-1436.
+</i>&gt;<i> 
+</i>&gt;<i>  And the spec does say, &quot;MAY be interpreted ... &quot;
+</i>&gt;<i> 
+</i>&gt;<i>  -spc
+</i>&gt;<i> 
+</i>
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210226/0bc5644f/attachment-0001.htm">https://mailing-list-archive.gemi.dev/www/attachments/20210226/0bc5644f/attachment-0001.htm</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005663.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li>Next message (by thread): <a href="005685.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5703">[ date ]</a> <a href="thread.html#5703">[ thread ]</a> <a href="subject.html#5703">[ subject ]</a> <a href="author.html#5703">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

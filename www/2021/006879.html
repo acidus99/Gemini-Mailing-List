@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Malicious Links</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006878.html">
+<link rel="next" href="006881.html">
+</head>
+<body>
+<h1>Malicious Links</h1>
+<b>Jonathan McHugh</b> indieterminacy at libre.brussels<br>
+<i>Fri Jul  9 23:50:40 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006878.html">Malicious Links</a></li>
+<li>Next message (by thread): <a href="006881.html">Malicious Links</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6879">[ date ]</a> <a href="thread.html#6879">[ thread ]</a> <a href="subject.html#6879">[ subject ]</a> <a href="author.html#6879">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Interesting concern.
+
+What if a delete process required visiting (sequentially) two links?:
+* Visiting example.com/delete
+* Visiting example.com/delete/confirm
+
+Would that permit users to realise somethings awry prior to making a fateful error?
+
+====================
+Jonathan McHugh
+indieterminacy@libre.brussels
+
+July 10, 2021 12:26 AM, nothien@uber.space wrote:
+
+&gt;<i> In Gemini, the restriction that information can only be sent to a server
+</i>&gt;<i> by performing a request is considered a feature. However, this can
+</i>&gt;<i> backfire by removing the need for user interaction, even when it is
+</i>&gt;<i> absolutely necessary. Below, I provide an example to show why this
+</i>&gt;<i> feature, combined with the existence of malicious links, can prevent (or
+</i>&gt;<i> at least hinder) the sole use of TLS certificates in account-based sites
+</i>&gt;<i> on Gemini.
+</i>&gt;<i> 
+</i>&gt;<i> Consider a website, <a href="gemini://example.org">gemini://example.org</a>, where users can set up
+</i>&gt;<i> accounts. It uses TLS certificates for authentication and provides
+</i>&gt;<i> important settings through the Gemini interface. For example, one can
+</i>&gt;<i> delete their account by visiting a certain URL: perhaps
+</i>&gt;<i> <a href="gemini://example.org/account/delete">gemini://example.org/account/delete</a>. Although this makes sense, you may
+</i>&gt;<i> already begin to understand the problem at hand.
+</i>&gt;<i> 
+</i>&gt;<i> Malicious Gemini pages (or parts thereof) can contain links to such
+</i>&gt;<i> locations. Depending upon the user&#x27;s Gemini client configuration, it
+</i>&gt;<i> may not show them the URL they are going to (e.g. Amfora, I think), and
+</i>&gt;<i> they may accidentally delete their account at <a href="gemini://example.org">gemini://example.org</a> (or
+</i>&gt;<i> perform any other action involuntarily) this way.
+</i>&gt;<i> 
+</i>&gt;<i> Note that simple workarounds such as responding by asking the user to
+</i>&gt;<i> type &#x27;YES&#x27; can be avoided trivially, by adding the &#x27;YES&#x27; to the query
+</i>&gt;<i> string in the URL of the malicious link.
+</i>&gt;<i> 
+</i>&gt;<i> One possible workaround is to require the user to provide their password
+</i>&gt;<i> (through a response 11) for every such action. Presumably, the attacker
+</i>&gt;<i> doesn&#x27;t know the user&#x27;s password, and so cannot craft a URL which would
+</i>&gt;<i> delete the user&#x27;s account without interaction from them. Sites would
+</i>&gt;<i> have to re-state the action being performed within the prompt attached
+</i>&gt;<i> to the response 11, and give context (so the prompt may look something
+</i>&gt;<i> like &quot;Are you sure you want to delete the account at
+</i>&gt;<i> <a href="gemini://example.org?">gemini://example.org?</a> Type in your password to continue.&quot;). However,
+</i>&gt;<i> if the user is performing many actions which require password
+</i>&gt;<i> verification, this is going to get irritating. In addition, it forces
+</i>&gt;<i> sites into using and storing passwords, even when they use TLS
+</i>&gt;<i> certificates.
+</i>&gt;<i> 
+</i>&gt;<i> Another workaround is to require the user to provide a randomly
+</i>&gt;<i> generated string. For example, upon visiting
+</i>&gt;<i> <a href="gemini://example.org/account/delete">gemini://example.org/account/delete</a>, the user is requested to type in
+</i>&gt;<i> some words that were generated at that moment (&quot;correct horse battery
+</i>&gt;<i> staple&quot;) to authorize the action. This removes the need for a password
+</i>&gt;<i> in addition to the TLS certificate, but forces sites to keep track of
+</i>&gt;<i> the random words for each user whenever they request such an action
+</i>&gt;<i> (this functionality will likely have to be implemented by hand, and
+</i>&gt;<i> there are complications like timeouts to consider). This prevents
+</i>&gt;<i> attackers from crafting the necessary URL, but once again performing
+</i>&gt;<i> account-related actions through Gemini would become irritating.
+</i>&gt;<i> 
+</i>&gt;<i> It would also be possible to avoid this issue by using a special URL
+</i>&gt;<i> format when sensitive input needs to be included. Sites requiring
+</i>&gt;<i> authorization (even just a &#x27;YES&#x27; string) could use the sensitive input
+</i>&gt;<i> response, and clients would not allow the sensitive input string to be
+</i>&gt;<i> automatically provided (instead, the user would be required to type it
+</i>&gt;<i> by hand). This provides a minimal level of necessary user interaction.
+</i>&gt;<i> Although it still suffers from the repetition problem of the above
+</i>&gt;<i> workarounds, it seems to reduce the amount of work necessary, and
+</i>&gt;<i> better share it between server, client, and user. However, it would
+</i>&gt;<i> necessitate a breaking change in protocol (or, perhaps, a new status
+</i>&gt;<i> code and convention for &#x27;sensitive query strings&#x27;).
+</i>&gt;<i> 
+</i>&gt;<i> The reason that HTTP/HTML does not suffer from this problem is twofold.
+</i>&gt;<i> Firstly, HTML is interactive, and so whenever such an action is
+</i>&gt;<i> performed, the user can be interactively requested to confirm their
+</i>&gt;<i> intention. Secondly, when the action is performed directly (e.g. by
+</i>&gt;<i> using HTTP POST to the relevant URL), the attacker doesn&#x27;t have access
+</i>&gt;<i> to the necessary cookies to authorize the action. TLS certificates are
+</i>&gt;<i> problematic in comparison because they apply for all interactions with
+</i>&gt;<i> the site, and so automatically authorize any interaction; cookies for a
+</i>&gt;<i> certain site are only available to the HTML/CSS/JS of that site, and so
+</i>&gt;<i> the site can interactively verify the user&#x27;s intention before
+</i>&gt;<i> authorizing the action. The access control with cookies also avoids the
+</i>&gt;<i> repetition problem, and allows users to authorize once to perform
+</i>&gt;<i> multiple actions.
+</i>&gt;<i> 
+</i>&gt;<i> With any of the above workarounds, account management on sites through
+</i>&gt;<i> Gemini becomes difficult, both for hosters/admins and for users. In
+</i>&gt;<i> fact, this extends to just about any account-based interaction with any
+</i>&gt;<i> site; for example, sites where comments can be uploaded are affected,
+</i>&gt;<i> because a malicious link can cause an unpleasant comment to be
+</i>&gt;<i> involuntarily submitted.
+</i>&gt;<i> 
+</i>&gt;<i> What does the Gemini community think? How big of a problem is this?
+</i>&gt;<i> Are there any other feasible workarounds? Which major (and minor) sites
+</i>&gt;<i> are affected? Does this call for some sort of change in protocol?
+</i>&gt;<i> 
+</i>&gt;<i> ~nothien
+</i>&gt;<i> 
+</i>&gt;<i> P.S: I&#x27;m not sure what ML category this fits into. [spec], maybe?
+</i>&gt;<i> [tech]? No clue.
+</i></pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006878.html">Malicious Links</a></li>
+<li>Next message (by thread): <a href="006881.html">Malicious Links</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6879">[ date ]</a> <a href="thread.html#6879">[ thread ]</a> <a href="subject.html#6879">[ subject ]</a> <a href="author.html#6879">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

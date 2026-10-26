@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CGI suport for Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000084.html">
+<link rel="next" href="000120.html">
+</head>
+<body>
+<h1>CGI suport for Gemini</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Thu Sep  5 19:55:41 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000084.html">Alive</a></li>
+<li>Next message (by thread): <a href="000120.html">CGI suport for Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#107">[ date ]</a> <a href="thread.html#107">[ thread ]</a> <a href="subject.html#107">[ subject ]</a> <a href="author.html#107">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+  I see that mozz.us has added CGI support for Gemini, which makes two
+servers [1] (as far as I can see), so I think it&#x27;s time to go into a bit of
+details about how I adapted RFC-3875 for Gemini.  I should note that I don&#x27;t
+expect Gemini servers to support this---I only did it because I could.
+
+  First, a bit about the specification. This is just a light overview of the
+CGI specification and readers are encouraged to read RFC-3875 for the full
+details.  It&#x27;s a way to generate content for a server using an external
+process and was originally meant for the web.  The spec itself is fairly
+agnostic to HTTP though, which means it&#x27;s pretty easy to adapt to Gemini.
+
+  The output from a script contains a header portion, followed by a blank
+line, followed by the body.  The headers defined by RFC-3875 are:
+
+	Content-Type:	mandatory, contains MIME type
+	Location:	optional, contains absolute URL to new location
+	Status:		optional, contains status code and text phrase
+
+  Other headers can be included but it&#x27;s up to the CGI handler to deal with
+those (section 6.3.4 and 6.3.5).  Unlike email or HTTP hheaders, any headers
+output from a CGI script MUST be one-per-line, which simplifies processing. 
+If the Status: header isn&#x27;t present, it defaults to &#x27;200 OK&#x27; (but more on
+this with respect to Gemini below).
+
+  The input to a CGI program comes from environment variables.  The
+following headers are defined:
+
+	AUTH_TYPE		authentication type, see below for discussion
+	CONTENT_LENGTH		length of incoming body
+	CONETNT_TYPE		media-type of incoming body
+	GATEWAY_INTERFACE	MUST be &quot;CGI/1.1&quot;
+	PATH_INFO		see below for discussion
+	PATH_TRANSLATED		see below for discussion
+	QUERY_STRING		MUST exist; if no query given, defaults to &quot;&quot;
+	REMOTE_ADDR		MUST exist
+	REMOTE_HOST		SHOULD exist; MAY be REMOTE_ADDR
+	REMOTE_IDENT		MAY exist, see RFC-1413 for info
+	REMOTE_USER		see below for discussion
+	REQUEST_METHOD		MUST exist
+	SCRIPT_NAME		MUST exist, path to script
+	SERVER_NAME		MUST exist
+	SERVER_PORT		MUST exist
+	SERVER_PROTOCOL		MUST exist
+	SERVER_SOFTWARE		MUST exist
+
+  There may also exist protocol specific headers (for the web, these would
+be &quot;HTTP_...&quot; and for Gemini they should be &quot;GEMINI_...&quot;) but these are
+implementation defined; there are none defined in the RFC.  Other
+environment variables may also exist, depending upon the operating system or
+configuration and again are beyond the scope of the RFC.
+
+  Per section 4.4, if the query string does NOT contain an unencoded &#x27;=&#x27;
+character, then the query should be broken up into words, splitting on an
+unencoded &#x27;+&#x27; character and passed to the CGI program as command line
+parameters; otherwise, if there is an unencoded &#x27;=&#x27; character, treat the
+query string a a list of name/value pairs, and DO NOT pass the query string
+as command line parameters. [2]
+
+  Now for the Gemini-specific parts.  Some of this only applies to my server
+implemeation and is marked as such; other bits should probably apply to
+other implementations to ensure a consistent approach to CGI programs under
+Gemini.
+
+  My server receives a request and parses it.  The path portion is then
+checked against a redirection list (temporary, permanent, gone [4]), then
+against a handler list [3].  Only after passing through that processing is
+the file system checked.  As the processing proceeds down the filesystem, if
+a file is marked as executable (the server is Unix), then the server assumes
+it&#x27;s a CGI program.  The following environment variables are set:
+
+	GATEWAY_INTERFACE	&quot;CGI/1.1&quot;
+	QUERY_STRING		the raw query string per the request, or &quot;&quot;
+	REMOTE_ADDR		IP address of client
+	REMOTE_HOST		IP address of client
+	REQUEST_METHOD		&quot;&quot; (see discussion)
+	SCRIPT_NAME		URL path to script
+	SERVER_NAME		host of server
+	SERVER_PORT		port of server
+	SERVER_PROTOCOL		&quot;GEMINI&quot;
+	SERVER_SOFTWARE		&quot;GLV-1.12556/1&quot;
+	REMOTE_IDENT		not set
+	CONTENT_TYPE		not set
+	CONTENT_LENGTH		not set
+
+  I don&#x27;t support RFC-1413, so I don&#x27;t bother setting REMOTE_IDENT.  There&#x27;s
+no body, so I don&#x27;t bother setting CONTENT_TYPE or CONTENT_LENGTH.  And
+after some thought, I decided to go with &quot;&quot; for REQUEST_METHOD.  Gemini
+doesn&#x27;t have the concept of requests with respect to HTTP.  I mean, I suppoe
+&quot;GET&quot; *could* apply, but I didn&#x27;t want to give the impression that Gemini
+would offer other methods, so to signal intent, I went with an empty string,
+given that REQUEST_METHOD is mandatory.  I only set PATH_INFO and
+PATH_TRANSLATED in certain circumstances---when the path continues on past
+the CGI program in the request.  For example:
+
+	/test/cgi		PATH_INFO/PATH_TRANSLATED NOT set
+	/test/cgi/foo/bar	PATH_INFO/PATH_TRANSLATED set
+
+  Given the second exxample, they would be set as:
+
+	PATH_INFO	&quot;/foo/bar&quot;
+	PATH_TRANSLATED	&quot;/home/spc/projects/gemini/root/foo/bar&quot;
+
+(see RFC-3875 for more details).
+
+  Since I also run my own website using Apache, you can configure the CGI
+script to get Apache style environment variables, and if enabled, the
+following will be set:
+
+	DOCUMENT_ROOT		top level directory of Gemini content
+	CONTEXT_DOCUMENT_ROOT	same as DOCUMENT_ROOT
+	CONTEXT_PREFIX		&quot;&quot;
+	SCRIPT_FILENAME		actual path to script on filesystem
+
+  And because of that, I added support to run web-based CGI scripts and if
+configured (http mode), the following environment variables are also
+included (or changed):
+
+	REQUEST_METHOD		&quot;GET&quot;
+	SERVER_PROTOCOL		&quot;HTTP/1.0&quot;
+	HTTP_ACCEPT		&quot;*/*&quot;
+	HTTP_CONNECTION		&quot;close&quot;
+	HTTP_HOST		SERVER_NAME
+	HTTP_REFERER		&quot;&quot;
+	HTTP_USER_AGENT		&quot;&quot;
+
+  I hardcoded the last two in case web-based CGI scripts rely upon those
+variables being set.  I&#x27;ll get to how I handle the output below [7].
+
+  I set AUTH_INFO and REMOTE_USER only if a client certificate is provided
+AND the configuration enables TLS environment variables to be set (this is
+specific to my server):
+
+	AUTH_TYPE	&quot;Certificate&quot;
+	REMOTE_USER	The comman name subfield from the client certificate
+			subject field.
+
+  If TLS environment variables are enabled, then I also add the following
+environment variables:
+
+	TLS_CIPHER
+	TLS_VERSION
+	TLS_CLIENT_HASH
+	TLS_CLIENT_ISSUER
+	TLS_CLIENT_ISSUER_*	(each subfield of the client issuer)
+	TLS_CLIENT_SUBJECT
+	TLS_CLIENT_SUBJECT_*	(each subfield of the client subject)
+	TLS_CLIENT_NOT_BEFORE
+	TLS_CLIENT_NOT_AFTER
+	TLS_CLIENT_REMAIN	TLS_CLIENT_NOT_AFTER - TLS_CLIENT_NOT_BEFORE
+
+  Also, if Apache style environment variables are configured, instead of the
+above TLS_* environment variables, the following Apache environment
+variables are set:
+
+	SSL_CHIPER
+	SSL_PROTOCOL
+	SSL_CLIENT_I_DN
+	SSL_CLIENT_I_DN_*	(each subfield of the client issuer)
+	SSL_CLIENT_S_DN
+	SSL_CLIENT_S_DN_*	(each subfield of the client subject)
+	SSL_CLIENT_V_START
+	SSL_CLIENT_V_END
+	SSL_CLIENT_V_REMAIN	SSL_CLIENT_V_END - SSL_CLIENT_V_START
+
+  Once the variables are set, the program is executed, the output collected
+and the response is generated.  The CGI module will automatically detect
+three digit status codes and translate appropriately (in order, first match
+used):
+
+	HTTP status	Gemini status
+	---------	--------
+	200-299		20
+	301		31
+	300-399		30
+	403		60
+	404		51
+	405		59
+	400-499		50
+	500-599		40
+	000-999		50
+
+  If a Gemini reponse of 20 is seen, then the Content-Type is used; if a
+Gemini response of 30-39 is seen, then Location: is used, otherwise the text
+portion of the status resply is used; any body for a status other than 20 is
+accepted but ignored (I specifically ignored 410---I don&#x27;t have any scripts
+that return this status, and I can&#x27;t see this status being returned by a CGI
+script, but it can be easily added).
+
+  A lot of this was done by also running multiple tests under Apache with a
+CGI script to see what is and isn&#x27;t set per environment variables.  And I&#x27;m
+not saying that all Gemini CGI modules need to support, say, the Apache
+environment variables or the HTTP specific variables.  Again, a lot of this
+was done just because I could and to also push the limits of what could be
+run with my CGI module.
+
+  Anyway, that&#x27;s it for this.  I think it&#x27;s enough.
+
+  -spc
+
+[1]	The other being <a href="gemini://gemini.conman.org/">gemini://gemini.conman.org/</a>
+
+[2]	This requirement pushed me over the edge into doing a rewrite of my
+	URL parsing code [6].
+
+[3]	On second thought, I think I should reverse that ordering.
+
+[4]	Handlers are references to non-files.  Examples on my server are the
+	Hi-Lo guessing game, The King James Bible, the Quote of the Day and
+	technically, the gRFC and torture test [5].
+
+[5]	These are technically files, but there is some additional processing
+	going on.  For the gRFC, they are parsed for date, current status
+	and title.  For the torture test, they contain response code and
+	MIME types.
+
+[6]	<a href="https://github.com/spc476/LPeg-Parsers/blob/e6e321995c512b9076dba452569521cb4cb90cdf/url.lua">https://github.com/spc476/LPeg-Parsers/blob/e6e321995c512b9076dba452569521cb4cb90cdf/url.lua</a>
+
+[7]	Now that I think about it, I should probably set:
+
+		CONTENT_TYPE	text/plain
+		CONTENT_LENGTH	0
+
+	just to be safe.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000084.html">Alive</a></li>
+<li>Next message (by thread): <a href="000120.html">CGI suport for Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#107">[ date ]</a> <a href="thread.html#107">[ thread ]</a> <a href="subject.html#107">[ subject ]</a> <a href="author.html#107">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

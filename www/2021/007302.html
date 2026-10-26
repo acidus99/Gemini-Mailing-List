@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] comments on the proposed gemini spec revisions</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007300.html">
+<link rel="next" href="007290.html">
+</head>
+<body>
+<h1>[spec] comments on the proposed gemini spec revisions</h1>
+<b>Chris McGowan</b> cmcgowan9990 at gmail.com<br>
+<i>Thu Oct 14 00:53:02 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007300.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li>Next message (by thread): <a href="007290.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7302">[ date ]</a> <a href="thread.html#7302">[ thread ]</a> <a href="subject.html#7302">[ subject ]</a> <a href="author.html#7302">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>&gt;<i>Using RegEx this way is in effect doing the starts-with method I
+</i>&gt;<i>mentioned in my other email.
+</i>
+Sort of, its actually technically less efficient since a startsWith method should simply loop over the string. Regex is admittedly a bit overkill for this but being a Perl developer and the problem statement being parsing, it was the first thing I reached for.
+
+You can actually accomplish this slightly more efficiently in Perl using the index (and in the case of headers, rindex) functions. 
+
+Of course, gemini parsing is so light that the difference in execution speed/ memory use between either version is negligible in almost all cases.
+
+&gt;<i>Since this is &quot;Perl but with C tactics&quot; code: does Perl have a switch statement?
+</i>
+Yes and no. It does have a switch statement but its use is heavily discouraged as it was a (failed) experiment and will likely be removed in the near future. If you want a switch like construct in Perl, the general idiom is:
+
+```
+for ( $var )
+{
+  if ( /a/ )
+  {
+     # do a stuff
+  }
+  elsif ( /b/ )
+  {
+    # do b stuff
+  }
+  else
+  {
+     # do default stuff
+  }
+}
+```
+
+Of course there&#x27;s several CPAN modules which also implement a switch statement, so you&#x27;re free to use any of them if that&#x27;s not to your liking.
+
+FWIW, the equivalent C version would not be shorter for using switch statements as switches in C can only work on integers and chars (which are also technically integers). You would have to either have nested ifs or nested switches, neither of which is pretty.
+
+&gt;<i>&gt; In summary, I hardly think it&#x27;s impossible or even difficult to
+</i>&gt;<i>&gt; unambiguously parse gemtext without having a mandatory space.
+</i>&gt;<i>
+</i>&gt;<i>I never claimed that it wasn&#x27;t, just that it&#x27;s easier to program.
+</i>
+Ah I thought you meant that the first three characters were somehow not enough to unambiguously parse the line without the mandatory space. Apologies for the misunderstanding. 
+
+Given that argument, I would say I&#x27;m not sure that it&#x27;s worth adding a requirement which burdens the user (admittedly very minorly) just as a very small benefit to the programmer parsing it. 
+
+If you&#x27;re going to lay additional requirements on the user, the benefits of simplifying the parsing has to be fairly substantial (at least IMO). In this case we&#x27;re talking about reducing a ~20 line function to a ~10 line function. Pretty small potatoes. 
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007300.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li>Next message (by thread): <a href="007290.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7302">[ date ]</a> <a href="thread.html#7302">[ thread ]</a> <a href="subject.html#7302">[ subject ]</a> <a href="author.html#7302">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,58 +1,42 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Query Strings
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Query%20Strings&In-Reply-To=%3C20200524212858.GK23998%40brevard.conman.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="001026.html">
-   <LINK REL="Next"  HREF="001040.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Query Strings</H1>
-    <B>Sean Conner</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Query%20Strings&In-Reply-To=%3C20200524212858.GK23998%40brevard.conman.org%3E"
-       TITLE="Query Strings">sean at conman.org
-       </A><BR>
-    <I>Sun May 24 22:28:58 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="001026.html">Query Strings
-</A></li>
-        <LI>Next message (by thread): <A HREF="001040.html">Query Strings
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1034">[ date ]</a>
-              <a href="thread.html#1034">[ thread ]</a>
-              <a href="subject.html#1034">[ subject ]</a>
-              <a href="author.html#1034">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Query Strings</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="001026.html">
+<link rel="next" href="001040.html">
+</head>
+<body>
+<h1>Query Strings</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Sun May 24 22:28:58 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="001026.html">Query Strings</a></li>
+<li>Next message (by thread): <a href="001040.html">Query Strings</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1034">[ date ]</a> <a href="thread.html#1034">[ thread ]</a> <a href="subject.html#1034">[ subject ]</a> <a href="author.html#1034">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>It was thus said that the Great Brian Evans once stated:
+<pre>It was thus said that the Great Brian Evans once stated:
 &gt;<i> Greetings,
-</I>&gt;<i> I got a bug report recently for Bombadillo about how I have been handling
-</I>&gt;<i> query strings. 
-</I>
+</i>&gt;<i> I got a bug report recently for Bombadillo about how I have been handling
+</i>&gt;<i> query strings. 
+</i>
   [ snip ]
 
 &gt;<i> I think it would be good to clearly state what is expected of clients and
-</I>&gt;<i> servers regarding the escaping of querystring values for gemini.
-</I>
+</i>&gt;<i> servers regarding the escaping of querystring values for gemini.
+</i>
   There are three standards conflating here.  They are:
 
 	[CGI]	  RFC-3875
 	[URI]	  RFC-3986
-	[WEBFORM] <A HREF="https://www.w3.org/TR/html401/interact/forms.html">https://www.w3.org/TR/html401/interact/forms.html</A>
+	[WEBFORM] <a href="https://www.w3.org/TR/html401/interact/forms.html">https://www.w3.org/TR/html401/interact/forms.html</a>
 
-  I'm going to try to do a summary here (if anyone is interested in the gory
+  I&#x27;m going to try to do a summary here (if anyone is interested in the gory
 details, check the docs listed above).  To encode a URL (per [URI]), the
 following characters can be used AS IS:
 
@@ -66,164 +50,59 @@ and the following characters MUST always be encoded [1]:
 appears (more on that below).
 
   Encoding a character means converting it to its hex value and preceeding
-it with a '%':
+it with a &#x27;%&#x27;:
 
 	##%	-&gt; %23%23%25
 
   Each section of a URL (scheme, authority [2], path, query, fragment)
 allows certain characters that would otherwise be encoded to NOT be encoded. 
-I'll concentrate on the query portion since that's the part under question. 
+I&#x27;ll concentrate on the query portion since that&#x27;s the part under question. 
 The query portion allows the following characters to appear non-encoded:
 
 	ALPHA DIGIT - . _ ~ / ? : @
 
-  The '=' and '&amp;' are used as sub-delimeters (to separate name and value,
-and to separate namevalue pairs).  If a '=' or '&amp;' appear in a name or the
+  The &#x27;=&#x27; and &#x27;&amp;&#x27; are used as sub-delimeters (to separate name and value,
+and to separate namevalue pairs).  If a &#x27;=&#x27; or &#x27;&amp;&#x27; appear in a name or the
 value, they have to be encoded.
 
-  The '+' sign is listed as a sub-delimeter in [URI], but otherwise says
+  The &#x27;+&#x27; sign is listed as a sub-delimeter in [URI], but otherwise says
 nothing about it.  [CGI] and [WEBFORM] define it differently.  [CGI] allows
-it, but *only* if '=' and '&amp;' aren't used (section 4.4):
+it, but *only* if &#x27;=&#x27; and &#x27;&amp;&#x27; aren&#x27;t used (section 4.4):
 
-	...?one+two+three		'+' ALLOWED
-	...?one+two=3&amp;three=3		'+' DISALLOWED
+	...?one+two+three		&#x27;+&#x27; ALLOWED
+	...?one+two=3&amp;three=3		&#x27;+&#x27; DISALLOWED
 
-  And in this case, the '+' is to be treated as a space.  In any other case,
+  And in this case, the &#x27;+&#x27; is to be treated as a space.  In any other case,
 the space needs to be encoded:
 
 	...?query=what%20is%20this%20madness&amp;lang=en	DEFINED
 	...?query=what+is+this+madness&amp;lang=en		UNDEFINED
 
-  [WEBFORM] defines the '+' to be a space, but only when the data is being
+  [WEBFORM] defines the &#x27;+&#x27; to be a space, but only when the data is being
 sent as part of a POST, and the content type is
-&quot;application/x-www-form-urlencoded&quot;.  This doesn't apply at all to Gemini.
+&quot;application/x-www-form-urlencoded&quot;.  This doesn&#x27;t apply at all to Gemini.
 
   Now, it could be that there are webservers (or CGI scripts) that convert
-'+' to spaces reguardless.  I'm just saying ...
+&#x27;+&#x27; to spaces reguardless.  I&#x27;m just saying ...
 
   Hopefully, this clears it all up (said as he wipes the mud off his face).
 
-  -spc (Don't hesitate to ask any questions ... )
+  -spc (Don&#x27;t hesitate to ask any questions ... )
 
-[1]	You'd be hard pressed to see these listed in [URI] since they aren't
-	listed!  RFC-1738 lists those characters explicitly, so that's four
+[1]	You&#x27;d be hard pressed to see these listed in [URI] since they aren&#x27;t
+	listed!  RFC-1738 lists those characters explicitly, so that&#x27;s four
 	references.  Sorry.
 
 [2]	[URI] calls the host portion &quot;authority&quot;.
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="001026.html">Query Strings
-</A></li>
-	<LI>Next message (by thread): <A HREF="001040.html">Query Strings
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1034">[ date ]</a>
-              <a href="thread.html#1034">[ thread ]</a>
-              <a href="subject.html#1034">[ subject ]</a>
-              <a href="author.html#1034">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="001026.html">Query Strings</a></li>
+<li>Next message (by thread): <a href="001040.html">Query Strings</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1034">[ date ]</a> <a href="thread.html#1034">[ thread ]</a> <a href="subject.html#1034">[ subject ]</a> <a href="author.html#1034">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

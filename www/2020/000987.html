@@ -1,50 +1,34 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Client certificate musings
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200523145638.GG12486%40SDF.ORG%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="001244.html">
-   <LINK REL="Next"  HREF="001005.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Client certificate musings</H1>
-    <B>solderpunk</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200523145638.GG12486%40SDF.ORG%3E"
-       TITLE="Client certificate musings">solderpunk at SDF.ORG
-       </A><BR>
-    <I>Sat May 23 15:56:38 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="001244.html">Call for AV-98 testing
-</A></li>
-        <LI>Next message (by thread): <A HREF="001005.html">Client certificate musings
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#987">[ date ]</a>
-              <a href="thread.html#987">[ thread ]</a>
-              <a href="subject.html#987">[ subject ]</a>
-              <a href="author.html#987">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client certificate musings</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="001244.html">
+<link rel="next" href="001005.html">
+</head>
+<body>
+<h1>Client certificate musings</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Sat May 23 15:56:38 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="001244.html">Call for AV-98 testing</a></li>
+<li>Next message (by thread): <a href="001005.html">Client certificate musings</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#987">[ date ]</a> <a href="thread.html#987">[ thread ]</a> <a href="subject.html#987">[ subject ]</a> <a href="author.html#987">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Howdy,
+<pre>Howdy,
 
-It's time to start thinking hard about client certificates.
+It&#x27;s time to start thinking hard about client certificates.
 
 A super quick introduction for the unaware: everyone is (hopefully!)
 familiar with the idea that when you make a TLS connection to a server,
 the server provides a certificate (basically a public key plus some
 metadata, signed - directly or via a chain - by a trusted third party).
-This is supposed to convince you that you've connected to who you think
+This is supposed to convince you that you&#x27;ve connected to who you think
 you have.  What some may not know is that TLS allows clients to send a
 certificate to the server as well.  This never (or almost never) happens
 on the web, where clients typically authenticate using a username and
@@ -53,12 +37,12 @@ password inside a cookie-powered session.
 I first learned about client certificates in the murky, distant past
 when the &quot;semantic web&quot; was a hot topic, in the context of the
 decentralised &quot;Friend Of a Friend&quot; social network idea.  You can read
-about FOAF+SSL at <A HREF="https://www.w3.org/wiki/Foaf+ssl.">https://www.w3.org/wiki/Foaf+ssl.</A>
+about FOAF+SSL at <a href="https://www.w3.org/wiki/Foaf+ssl">https://www.w3.org/wiki/Foaf+ssl</a>.
 
 Gemini specs a lot of use for client certificates - partially because
-they're a nice tool for the job, partially because the design goal of
+they&#x27;re a nice tool for the job, partially because the design goal of
 maximising power-to-weight ratio means once you accept the weight of
-using TLS you'd better implement everything you can using TLS rather
+using TLS you&#x27;d better implement everything you can using TLS rather
 than adding yet another pile of concepts.
 
 The current rough spec fairly clearly outlines two usage scenarios for
@@ -67,21 +51,21 @@ client certificates.
 One is where you want to restrict access to some Gemini resource to a
 limited set of clients, e.g. you want to be able to check a webcam at
 your home via Gemini from your office while at work, or via your phone,
-but you don't want to open up access to the whole world.  So, you
+but you don&#x27;t want to open up access to the whole world.  So, you
 generate a self-signed certificate on your office computer or your
 phone, and manually add its fingerprint to a whitelist on your home
 server, and nobody else is allowed in.  This is entirely analogous to
 the way many of you are probably familiar with of logging into a server
 over ssh using a private key.  It works the same way and has the same
-pros/cons (e.g. can't be brute forced, is limited to devices with the
+pros/cons (e.g. can&#x27;t be brute forced, is limited to devices with the
 right keys installed).
 
 This is pretty explicitly supported in Gemini via status code 62 to
 request such a certificate and 63 to reject one not on the whitelist.
-It is actually implemented at <A HREF="gemini://gemini.conman.org/,">gemini://gemini.conman.org/,</A> if you want
+It is actually implemented at <a href="gemini://gemini.conman.org/">gemini://gemini.conman.org/</a>, if you want
 to play around with this.
 
-I'm not sure there's much more to consider for this scenario.  Because
+I&#x27;m not sure there&#x27;s much more to consider for this scenario.  Because
 in a whitelisting scenario the server and client are typically both
 under some degree of control by the same person, people can handle
 expiry/renewal however they want and the spec should stay silent on
@@ -97,7 +81,7 @@ a long series of status code 10 responses to basically &quot;fill out a
 form&quot;, e.g. in signing a guest book there could be separate prompts for
 a name, email address or URL, plus guest book comment.  You could
 actually build fairly extensive command-line applications using this
-paradigm (they'd suck in a graphical browser that kept popping up input
+paradigm (they&#x27;d suck in a graphical browser that kept popping up input
 windows, but in something like AV-98 the experience would be a lot
 smoother).
 
@@ -120,7 +104,7 @@ do.  21 allows servers to signal the termination of a session and
 clients should immediately and permanently delete the corresponding
 keypair upon receiving it.
 
-Until very recently, I don't think any of this was implemented anywhere.
+Until very recently, I don&#x27;t think any of this was implemented anywhere.
 AV-98 now recognises these codes and reacts appropriately.  I tested it
 with a purpose-built dummy server which does nothing but send these
 codes.  I am hoping we can soon start to explore this mechanism more,
@@ -135,22 +119,22 @@ but there are some things to discuss:
   tied to any permanent notion of identity, it follows that they should
   not have any meaningful metadata associated with them, and therefore
   we should spec something to ensure this.  Right now, AV-98 fills the
-  &quot;Subject&quot; of transient certs with random unique values from Python's
+  &quot;Subject&quot; of transient certs with random unique values from Python&#x27;s
   `uuid` module, because I seemed to encounter errors sending totally
-  empty certificates to conman.org.  I don't know if the X509 spec
-  allows empty certs, and even if it does I don't know whether all
+  empty certificates to conman.org.  I don&#x27;t know if the X509 spec
+  allows empty certs, and even if it does I don&#x27;t know whether all
   popular TLS libraries accept them without choking.
 * We should specify a fixed validity time for the certificate, again
-  because if we don't different clients will do different things and
+  because if we don&#x27;t different clients will do different things and
   certs will become weakly fingerprintable.  AV-98 uses 24 hours, which
   seems reasonable to me.
 
 There is a third scenario, which the spec does not explicitly discuss at
 all, but which is actually the most widely used scenario in Geminispace
 so far, which is the main reason that I want to kick off a discussion
-about this and change the spec if required.  It's the idea of persistent
+about this and change the spec if required.  It&#x27;s the idea of persistent
 identity (basically, a &quot;user account&quot;) at a server which is not under
-the client's control.  The persistent part differentiates this scenario
+the client&#x27;s control.  The persistent part differentiates this scenario
 from the clearly defined transient certificates, and the lack of
 combined control differentiates it from the previously discussed
 ssh-style whitelist scenario.  This is exactly the scenario which holds
@@ -158,7 +142,7 @@ with the astrobotany.mozz.us application.
 
 Astrobotany currently requires users to generate a CSR for their
 certificate, which is submitted to mozz.us over HTTPS, which signs
-whatever it sees.  This is cumbersome for the user, and doesn't actually
+whatever it sees.  This is cumbersome for the user, and doesn&#x27;t actually
 achieve anything because the signing is done unconditionally.  Everybody
 involved agrees this should be done differently.  The reason it turned
 out like it has is because of the extreme lack of detail in the cert on
@@ -181,9 +165,9 @@ the smallest possible change to the spec which permits a much more
 streamlined version of the way astrobotany currently works.  AV-98 is
 ready right now to work with applications using this paradigm.
 
-But, I don't know if it makes more sense to introduce new 6x codes to
+But, I don&#x27;t know if it makes more sense to introduce new 6x codes to
 explicitly separate this scenario from the whitelisted cert scenario.
-If we don't do this, clients may waste time prompting their users to
+If we don&#x27;t do this, clients may waste time prompting their users to
 generate a cert to send to a server which is never going to accept it,
 which may confused users.
 
@@ -198,17 +182,17 @@ There is also the open question of how to handle renewal of this kind of
 certificate, which people might have need of for years and years.
 Applications which a user authenticates to this way could request the
 user to provide an email address (which could be validated in the usual
-webbish way of sending a <A HREF="gemini://">gemini://</A> URL with a unique token in it).
+webbish way of sending a gemini:// URL with a unique token in it).
 Then, once the initial sign-up cert is due to expire soon, the app could
 email the user a URL with a unique token in it which they should access
-using a new cert, whereupon the new cert's fingerprint should be tied to
-the account.  But I'm wary of blindly copying ideas from the web.  This
-approach doesn't allow a long term account without associating an email
+using a new cert, whereupon the new cert&#x27;s fingerprint should be tied to
+the account.  But I&#x27;m wary of blindly copying ideas from the web.  This
+approach doesn&#x27;t allow a long term account without associating an email
 address, and that sucks from a privacy perspective.
 
 A similar workflow could happen inside the app if somebody &quot;signs in&quot;
 close to the expiry date of their cert, which would not require an email
-address.  But this doesn't work if you happen not to log in for several
+address.  But this doesn&#x27;t work if you happen not to log in for several
 months on either side of the expiry date.
 
 Users could sign their new certificate with their old certificate to
@@ -221,19 +205,19 @@ realistically, *all* Gemini applications are likely to be very
 low-stakes for the foreseeable future - users could also just &quot;sign up&quot;
 with very long-lived certificates.  The CA/Browser Forum disallows certs
 that live longer than two years currently, and will apparently soon drop
-the limit to one year, but there's no reason we need to listen to them,
+the limit to one year, but there&#x27;s no reason we need to listen to them,
 especially not in the context of client certificates.
 
 There are probably plenty of relevant things I have not mentioned yet.
 Feel free to mention them!
 
 For anybody thinking &quot;Holy heck, this sounds complicated, why are we
-putting this in Gemini?&quot; and/or &quot;I sure don't want to write all the code
-to do this in my client&quot;:  Client certificates weren't dreamed up for
+putting this in Gemini?&quot; and/or &quot;I sure don&#x27;t want to write all the code
+to do this in my client&quot;:  Client certificates weren&#x27;t dreamed up for
 Gemini, they are a pre-existing part of TLS.  Even if the Gemini spec
-didn't say a word about them, people could build applications using them
+didn&#x27;t say a word about them, people could build applications using them
 for authentication without violating the Gemini spec in anyway.  Because
-they're very handy things, their eventual use in conjunction with Gemini
+they&#x27;re very handy things, their eventual use in conjunction with Gemini
 is likely inevitable.  Thus, my thinking is that we might as well
 standardise on how to use them with Gemini to provide for easier
 interoperability and streamlined user experiences.  Also, they are
@@ -241,130 +225,22 @@ totally unnecessary for public content like gemlogs, and a client which
 does not implement them at all (which is currently the vast majority of
 clients) is likely to remain extremely usable for the majority of people
 and the majority of purposes.  In fact, to some extent the existence of
-popular clients which *don't* handle client certificates would provide a
+popular clients which *don&#x27;t* handle client certificates would provide a
 useful protective measure against people hiding content behind certs
 (which, I realise, also facilitate nasty things like &quot;pay walls&quot;)
 without a good reason.
 
 Cheers,
 Solderpunk
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="001244.html">Call for AV-98 testing
-</A></li>
-	<LI>Next message (by thread): <A HREF="001005.html">Client certificate musings
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#987">[ date ]</a>
-              <a href="thread.html#987">[ thread ]</a>
-              <a href="subject.html#987">[ subject ]</a>
-              <a href="author.html#987">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="001244.html">Call for AV-98 testing</a></li>
+<li>Next message (by thread): <a href="001005.html">Client certificate musings</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#987">[ date ]</a> <a href="thread.html#987">[ thread ]</a> <a href="subject.html#987">[ subject ]</a> <a href="author.html#987">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

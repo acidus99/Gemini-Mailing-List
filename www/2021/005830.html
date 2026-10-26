@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[announce] Delegation of responsibility for spec finalisation</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005828.html">
+<link rel="next" href="005833.html">
+</head>
+<body>
+<h1>[announce] Delegation of responsibility for spec finalisation</h1>
+<b>Alex // nytpu</b> alex at nytpu.com<br>
+<i>Mon Mar  1 22:26:46 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005828.html">[announce] Delegation of responsibility for spec finalisation</a></li>
+<li>Next message (by thread): <a href="005833.html">[announce] Delegation of responsibility for spec finalisation</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5830">[ date ]</a> <a href="thread.html#5830">[ thread ]</a> <a href="subject.html#5830">[ subject ]</a> <a href="author.html#5830">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On 2021-03-01 03:18PM, Scot wrote:
+&gt;<i> 1. Not requiring client applications to send TLS close_notify, since
+</i>&gt;<i> they indicate end-of-data via the request &lt;CR&gt;&lt;LF&gt; ?
+</i>
+See this quote from the TLS 1.3 spec:
+&gt;<i> Each party MUST send a &quot;close_notify&quot; alert before closing its write
+</i>&gt;<i> side of the connection, unless it has already sent some error alert.
+</i>&gt;<i> This does not have any effect on its read side of the connection.
+</i><a href="https://tools.ietf.org/html/rfc8446#section-6.1">https://tools.ietf.org/html/rfc8446#section-6.1</a> - TLS 1.3
+
+The effect of this is that clients MUST send close_notify after writing
+their a request in order to properly comply with TLS 1.3.  I would
+operate under the assumption that a server would not send a response
+until a close_notify is received (or the request would be allowed to
+time out).  Obviously a robust server would work without a close_notify,
+but you should still operate within the spec because I&#x27;m wouldn&#x27;t be
+surprised if at least one or two TLS implementations require it.
+
+There&#x27;s even stronger wording for TLS 1.2 which requires a close_notify
+after writing is completed and for /both/ the sending and receiving
+parties to send a close_notify after the transaction is completed, so
+the client would have to send a close_notify after the both request and
+the response, not just the request.
+See: <a href="https://tools.ietf.org/html/rfc5246#section-7.2.1">https://tools.ietf.org/html/rfc5246#section-7.2.1</a>
+
+
+On 2021-03-01 03:18PM, Scot wrote:
+&gt;<i> 2. Only requiring server applications to send TLS close_notify if all
+</i>&gt;<i> data has been sent? If the TCP or TLS connection is interrupted by the
+</i>&gt;<i> client or by an intermediary before the server application has
+</i>&gt;<i> transmitted all of its data, there doesn&#x27;t seem to be a benefit to
+</i>&gt;<i> sending a close_notify to the client and it could also cause various
+</i>&gt;<i> delays which prohibit the server application from moving on to other
+</i>&gt;<i> work. For example, an unending streaming response would be closed by
+</i>&gt;<i> the client, in which case there is no need for a close_notify from the
+</i>&gt;<i> server.
+</i>
+The whole point of close_notify is to indicate that the write has
+successfully been completed.  I may be misunderstanding your question,
+but if the connection is interrupted then a close_notify should not be
+sent, as that would erroneously report that the transaction was
+successfully completed.  For streaming data I assume that it would be
+properly terminated by the client closing the connection since the data
+is never completely sent (it&#x27;s unending).
+
+
+I&#x27;m no TLS expert, I&#x27;m just reporting what I found after skimming the
+TLS RFCs, feel free to correct me if I&#x27;m wrong here.
+
+~nytpu
+
+-- 
+Alex // nytpu
+alex at nytpu.com
+GPG Key: <a href="https://www.nytpu.com/files/pubkey.asc">https://www.nytpu.com/files/pubkey.asc</a>
+Key fingerprint: 43A5 890C EE85 EA1F 8C88 9492 ECCD C07B 337B 8F5B
+<a href="https://useplaintext.email/">https://useplaintext.email/</a>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 833 bytes
+Desc: not available
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210301/7c782861/attachment.sig">https://mailing-list-archive.gemi.dev/www/attachments/20210301/7c782861/attachment.sig</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005828.html">[announce] Delegation of responsibility for spec finalisation</a></li>
+<li>Next message (by thread): <a href="005833.html">[announce] Delegation of responsibility for spec finalisation</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5830">[ date ]</a> <a href="thread.html#5830">[ thread ]</a> <a href="subject.html#5830">[ subject ]</a> <a href="author.html#5830">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

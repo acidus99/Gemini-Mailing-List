@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questions on INPUT behavior</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000064.html">
+<link rel="next" href="000083.html">
+</head>
+<body>
+<h1>Questions on INPUT behavior</h1>
+<b>Michael Lazar</b> lazar.michael22 at gmail.com<br>
+<i>Sun Aug 25 03:47:59 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000064.html">ANN: lobste.rs in Gemini-space</a></li>
+<li>Next message (by thread): <a href="000083.html">Questions on INPUT behavior</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#82">[ date ]</a> <a href="thread.html#82">[ thread ]</a> <a href="subject.html#82">[ subject ]</a> <a href="author.html#82">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi all. I&#x27;m looking into implementing a few endpoints on my server that accept
+user input, and I ended up with a few ambiguities about the gemini specification
+that I would like to discuss:
+
+```
+The requested resource accepts a line of textual user input.
+The &lt;META&gt; line is a prompt which should be displayed to the
+user.  The same resource should then be requested again with
+the user&#x27;s input included as a query component.  Queries are
+included in requests as per the usual generic URL definition
+in RFC3986, i.e. separated from the path by a ?.  There is no
+response body.
+```
+
+Here are my questions:
+
+1. Should the query component be formatted as a &quot;key=value&quot; parameter?
+   Or should it be added directly as the entire query component?
+
+   A. &quot;<a href="gemini://hostname.com/input?q=AbrahamLincoln">gemini://hostname.com/input?q=AbrahamLincoln</a>&quot;
+   vs.
+   B. &quot;<a href="gemini://hostname.com/input?AbrahamLincoln">gemini://hostname.com/input?AbrahamLincoln</a>&quot;
+
+2. Should the query component allow percent-sign escaping?
+   If so, which characters should be escaped?
+
+   A. &quot;<a href="gemini://hostname.com/input?Hello%20world">gemini://hostname.com/input?Hello%20world</a>&quot;
+   vs.
+   B. &quot;<a href="gemini://hostname.com/input?Hello">gemini://hostname.com/input?Hello</a> world&quot;
+
+3. Should a server be allowed to link to a URL with the user input pre-filled?
+   E.g. Should this link, if placed in a text/gemini file, mean the same thing
+   as the user manually typing in &quot;Hello World&quot;?
+
+   A. &quot;=&gt;/input?Hello%20world&quot;
+
+   This also brings up a point that the above link would be impossible to
+   define in a text/gemini file if percent-escaped spaces were not allowed.
+
+4. If my server has an endpoint that does not request user input, can I
+   re-purpose the query section for my own needs?
+
+   A. &quot;<a href="gemini://hostname.com/items?page=2&amp;limit=20">gemini://hostname.com/items?page=2&amp;limit=20</a>&quot;
+
+5. In the above example, what happens if a request to that URL returns a status
+   code of 10? Should the client strip the existing query components from the
+   URL, or append a new key=value pair to the end?
+
+6. What widget should the client use to display the input prompt? A single line
+   input, or a multi-line text box? Should newline characters even be allowed?
+
+7. Should there be a maximum input length? Currently it is implicitly defined
+   as 1024 bytes minus the length of the URL.
+
+Personally, I have mixed feelings about gemini enabling user input in the first
+place. I know that gopher supports it using the &quot;7&quot; item type, but I have only
+seen a couple of compelling use cases for this in the wild. On the other hand,
+it opens up a Pandora&#x27;s box of complexity by allowing creative developers to
+port over many features from HTTP.
+
+I can already envision XSS style attacks. For example, say a gemini page
+requests user input that will be rendered in a public text/gemini page like a
+guestbook. The bad-actor submits a message that contains something like:
+
+    &quot;\n=&gt;<a href="http://malicious.url\thttp://innocent.url">http://malicious.url\thttp://innocent.url</a>&quot;.
+
+Servers will need to be diligent in sanitizing their inputs, which kind of sucks
+for what should be a simple protocol.
+
+- mozz
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000064.html">ANN: lobste.rs in Gemini-space</a></li>
+<li>Next message (by thread): <a href="000083.html">Questions on INPUT behavior</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#82">[ date ]</a> <a href="thread.html#82">[ thread ]</a> <a href="subject.html#82">[ subject ]</a> <a href="author.html#82">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

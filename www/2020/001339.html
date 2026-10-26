@@ -1,43 +1,27 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Ambiguity in spec regarding line endings
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Ambiguity%20in%20spec%20regarding%20line%20endings&In-Reply-To=%3C20200604160844.rohbntqqlvssgytj%40zeta.rak.ac%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="001353.html">
-   <LINK REL="Next"  HREF="001340.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Ambiguity in spec regarding line endings</H1>
-    <B>Ryan Kavanagh</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Ambiguity%20in%20spec%20regarding%20line%20endings&In-Reply-To=%3C20200604160844.rohbntqqlvssgytj%40zeta.rak.ac%3E"
-       TITLE="Ambiguity in spec regarding line endings">rak at rak.ac
-       </A><BR>
-    <I>Thu Jun  4 17:08:44 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="001353.html">Lightweight Unicode Author Client Hinting - LUACH proposal
-</A></li>
-        <LI>Next message (by thread): <A HREF="001340.html">Ambiguity in spec regarding line endings
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1339">[ date ]</a>
-              <a href="thread.html#1339">[ thread ]</a>
-              <a href="subject.html#1339">[ subject ]</a>
-              <a href="author.html#1339">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ambiguity in spec regarding line endings</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="001353.html">
+<link rel="next" href="001340.html">
+</head>
+<body>
+<h1>Ambiguity in spec regarding line endings</h1>
+<b>Ryan Kavanagh</b> rak at rak.ac<br>
+<i>Thu Jun  4 17:08:44 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="001353.html">Lightweight Unicode Author Client Hinting - LUACH proposal</a></li>
+<li>Next message (by thread): <a href="001340.html">Ambiguity in spec regarding line endings</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1339">[ date ]</a> <a href="thread.html#1339">[ thread ]</a> <a href="subject.html#1339">[ subject ]</a> <a href="author.html#1339">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>I'm reading the current version of the spec, and have come across the
-following ambiguous paragraph in &#167;3.3:
+<pre>I&#x27;m reading the current version of the spec, and have come across the
+following ambiguous paragraph in ?3.3:
 
     When in canonical form, media subtypes of the &quot;text&quot; type use CRLF
     as the text line break.  Gemini relaxes this requirement and allows
@@ -60,26 +44,26 @@ How should Gemini clients behave when both CRLF and LF appear in the
 same text/gemini transmission? Are both to be equivalently treated as
 line breaks?
 
-I've looked through the archives to see what has been said in the past
+I&#x27;ve looked through the archives to see what has been said in the past
 about line breaks, and the two following messages appear most relevant:
 
 On Sat, Sep 07, 2019 at 04:30:14PM -0400, Jason McBrayer wrote:
 &gt;<i> IMO, it makes sense to require CRLF in the plain text parts of the
-</I>&gt;<i> protocol (after requests, after the status line of a response), but I
-</I>&gt;<i> don't think that the text/gemini file format needs to have CR/LF; IMO
-</I>&gt;<i> clients should be prepared to accept either LF or CR/LF just as they
-</I>&gt;<i> would with text/plain. And maybe if we're serious about supporting old
-</I>&gt;<i> devices, clients should be prepared for bare CR, too (Classic MacOS).
-</I>&gt;<i> But it's a pain in the arse to authors to have to save text documents
-</I>&gt;<i> with non-native line endings, and I don't feel like servers need to be
-</I>&gt;<i> in the business of reformatting the content they serve.
-</I>
+</i>&gt;<i> protocol (after requests, after the status line of a response), but I
+</i>&gt;<i> don&#x27;t think that the text/gemini file format needs to have CR/LF; IMO
+</i>&gt;<i> clients should be prepared to accept either LF or CR/LF just as they
+</i>&gt;<i> would with text/plain. And maybe if we&#x27;re serious about supporting old
+</i>&gt;<i> devices, clients should be prepared for bare CR, too (Classic MacOS).
+</i>&gt;<i> But it&#x27;s a pain in the arse to authors to have to save text documents
+</i>&gt;<i> with non-native line endings, and I don&#x27;t feel like servers need to be
+</i>&gt;<i> in the business of reformatting the content they serve.
+</i>
 On Sun, Sep 08, 2019 at 02:42:08PM +0000, solderpunk wrote:
 &gt;<i> I will admit that the current liberal use of CRLF throughout the
-</I>&gt;<i> Gemini spec is the result of me blindly copying from Gopher and other
-</I>&gt;<i> RFCs (as Sean mentioned, it's ubiquitous).
-</I>
-Here's [0,1] some of the history of requiring CRLF in network protocols
+</i>&gt;<i> Gemini spec is the result of me blindly copying from Gopher and other
+</i>&gt;<i> RFCs (as Sean mentioned, it&#x27;s ubiquitous).
+</i>
+Here&#x27;s [0,1] some of the history of requiring CRLF in network protocols
 and in requiring CRLF for text/ subtypes [2] during transmission.
 
 TL;DR: every system has a different native line ending sequence (LF vs
@@ -93,7 +77,7 @@ the business of reformatting text/* content that they serve, and they do
 so to ensure interoperability between systems with different line ending
 conventions.
 
-I think there's a conceptual point to be made here: text/gemini files
+I think there&#x27;s a conceptual point to be made here: text/gemini files
 are not binary data, but rather, *text files*. This means that their
 transmission should not attempt to provide byte-for-byte identical
 copies of the local data, but should instead follow well-defined and
@@ -105,7 +89,7 @@ The FTP protocol makes a similar conceptual distinction. It allows for
 text transmission (ASCII and EBCDIC types), where end-of-lines are
 defined to be CLRF (ASCII type) and NL (EBCDIC type). It also allows for
 a stream / binary transfer mode for transmitting text (and other data)
-without any conversion. Quoting from the RFC [4, &#167;3.4]:
+without any conversion. Quoting from the RFC [4, ?3.4]:
 
     For the purpose of standardized transfer, the sending host will
     translate its internal end of line or end of record denotation into
@@ -116,8 +100,8 @@ without any conversion. Quoting from the RFC [4, &#167;3.4]:
     transferring non-record structured text files might wish to use a
     binary representation and stream mode for the transfer.
 
-However, in keeping with Postel's law, I suggest allowing clients to
-accept LF as a line ending, as is done by RFC 7230 &#167;3.5 [3]:
+However, in keeping with Postel&#x27;s law, I suggest allowing clients to
+accept LF as a line ending, as is done by RFC 7230 ?3.5 [3]:
 
      Although the line terminator for the start-line and header fields
      is the sequence CRLF, a recipient MAY recognize a single LF as a
@@ -129,7 +113,7 @@ To eliminate ambiguity and to make the gemini protocol consistent with
 every other text transmission protocol I know of, I propose amending the
 ambiguous paragraph in the spec as follows:
 
-    As specified in RFC 2046 &#167;4.1.1, the canonical form of any MIME
+    As specified in RFC 2046 ?4.1.1, the canonical form of any MIME
     &quot;text&quot; subtype MUST always represent a line break as a CRLF
     sequence. For robustness, a recipient MAY recognize a single LF as
     a line terminator and ignore any preceding CR in text media.
@@ -137,110 +121,32 @@ ambiguous paragraph in the spec as follows:
 Best,
 Ryan
 
-[0] <A HREF="https://www.rfc-editor.org/old/EOLstory.txt">https://www.rfc-editor.org/old/EOLstory.txt</A>
-[1] <A HREF="https://tools.ietf.org/html/rfc318">https://tools.ietf.org/html/rfc318</A>
+[0] <a href="https://www.rfc-editor.org/old/EOLstory.txt">https://www.rfc-editor.org/old/EOLstory.txt</a>
+[1] <a href="https://tools.ietf.org/html/rfc318">https://tools.ietf.org/html/rfc318</a>
     [ page 8, &quot;End of Line Convention&quot; ]
-[2] <A HREF="https://tools.ietf.org/html/rfc2046#section-4.1.1">https://tools.ietf.org/html/rfc2046#section-4.1.1</A>
-[3] <A HREF="https://tools.ietf.org/html/rfc7230#section-3.5">https://tools.ietf.org/html/rfc7230#section-3.5</A>
-[4] <A HREF="https://tools.ietf.org/html/rfc959">https://tools.ietf.org/html/rfc959</A>
+[2] <a href="https://tools.ietf.org/html/rfc2046#section-4.1.1">https://tools.ietf.org/html/rfc2046#section-4.1.1</a>
+[3] <a href="https://tools.ietf.org/html/rfc7230#section-3.5">https://tools.ietf.org/html/rfc7230#section-3.5</a>
+[4] <a href="https://tools.ietf.org/html/rfc959">https://tools.ietf.org/html/rfc959</a>
 
 -- 
-|<i>)|/  Ryan Kavanagh      | GPG: 4E46 9519 ED67 7734 268F
-</I>|<i>\|\  <A HREF="https://rak.ac">https://rak.ac</A>     |      BD95 8F7B F8FC 4A11 C97A
-</I>-------------- next part --------------
+|)|/  Ryan Kavanagh      | GPG: 4E46 9519 ED67 7734 268F
+|\|\  <a href="https://rak.ac">https://rak.ac</a>     |      BD95 8F7B F8FC 4A11 C97A
+-------------- next part --------------
 A non-text attachment was scrubbed...
 Name: signature.asc
 Type: application/pgp-signature
 Size: 1873 bytes
 Desc: not available
-URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200604/fbf5d0ed/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20200604/fbf5d0ed/attachment.sig</A>&gt;
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20200604/fbf5d0ed/attachment.sig">https://mailing-list-archive.gemi.dev/www/attachments/20200604/fbf5d0ed/attachment.sig</a>&gt;
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="001353.html">Lightweight Unicode Author Client Hinting - LUACH proposal
-</A></li>
-	<LI>Next message (by thread): <A HREF="001340.html">Ambiguity in spec regarding line endings
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1339">[ date ]</a>
-              <a href="thread.html#1339">[ thread ]</a>
-              <a href="subject.html#1339">[ subject ]</a>
-              <a href="author.html#1339">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="001353.html">Lightweight Unicode Author Client Hinting - LUACH proposal</a></li>
+<li>Next message (by thread): <a href="001340.html">Ambiguity in spec regarding line endings</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1339">[ date ]</a> <a href="thread.html#1339">[ thread ]</a> <a href="subject.html#1339">[ subject ]</a> <a href="author.html#1339">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

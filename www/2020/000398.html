@@ -1,52 +1,36 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> FW: Text reflow woes (or: I want bullets back!)y
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20FW%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3CCAFTy05YRbZGO2q0fE4wA3vF4M9dQV7g2H4CrScDKnnrcOHxuAg%40mail.gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="000397.html">
-   <LINK REL="Next"  HREF="000400.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>FW: Text reflow woes (or: I want bullets back!)y</H1>
-    <B>Michael Lazar</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20FW%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3CCAFTy05YRbZGO2q0fE4wA3vF4M9dQV7g2H4CrScDKnnrcOHxuAg%40mail.gmail.com%3E"
-       TITLE="FW: Text reflow woes (or: I want bullets back!)y">lazar.michael22 at gmail.com
-       </A><BR>
-    <I>Mon Jan 20 02:01:17 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="000397.html">FW: Text reflow woes (or: I want bullets back!)y
-</A></li>
-        <LI>Next message (by thread): <A HREF="000400.html">FW: Text reflow woes (or: I want bullets back!)y
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#398">[ date ]</a>
-              <a href="thread.html#398">[ thread ]</a>
-              <a href="subject.html#398">[ subject ]</a>
-              <a href="author.html#398">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FW: Text reflow woes (or: I want bullets back!)y</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000397.html">
+<link rel="next" href="000400.html">
+</head>
+<body>
+<h1>FW: Text reflow woes (or: I want bullets back!)y</h1>
+<b>Michael Lazar</b> lazar.michael22 at gmail.com<br>
+<i>Mon Jan 20 02:01:17 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000397.html">FW: Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000400.html">FW: Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#398">[ date ]</a> <a href="thread.html#398">[ thread ]</a> <a href="subject.html#398">[ subject ]</a> <a href="author.html#398">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>I think there have been a lot of good suggestions coming from all sides. Here's
+<pre>I think there have been a lot of good suggestions coming from all sides. Here&#x27;s
 my take on a compromised format that tries to take everything into account while
 also inserting a few of my own opinions:
 
-Parser pseudo-code (actually, it's valid python):
+Parser pseudo-code (actually, it&#x27;s valid python):
 
 ```
 preformat_mode = False
 preformat_buffer = []
 for line in document:
-    if line.startswith('```'):
+    if line.startswith(&#x27;```&#x27;):
         if not preformat_mode:
             # Start preformat block
             preformat_mode = True
@@ -58,15 +42,15 @@ for line in document:
     elif preformat_mode:
         # Inside of preformat block
         preformat_buffer.append(line)
-    elif line.startswith('###'):
+    elif line.startswith(&#x27;###&#x27;):
         display_header_level_3(line)
-    elif line.startswith('##'):
+    elif line.startswith(&#x27;##&#x27;):
         display_header_level_2(line)
-    elif line.startswith('#'):
+    elif line.startswith(&#x27;#&#x27;):
         display_header_level_1(line)
-    elif line.startswith('=&gt;'):
+    elif line.startswith(&#x27;=&gt;&#x27;):
         display_link(line)
-    elif line.startswith('---'):
+    elif line.startswith(&#x27;---&#x27;):
         display_horizontal_rule()
     else:
         display_paragraph(line)
@@ -90,7 +74,7 @@ representation of what most client parsers would end up looking like.
 
 ## Headers
 
-I'm of the opinion that there should only be a fixed number of header levels.
+I&#x27;m of the opinion that there should only be a fixed number of header levels.
 It keeps the matching logic flat and straightforward. Three levels is few
 enough that most clients should be able to come up with distinct styles to
 display them. Fixed header lines are trivial to parse and provide a lot of
@@ -114,7 +98,7 @@ For authors, they still have a few choices for lists:
 2. Write the list in plain mode without special formatting
 
 I accept that neither of these options is *ideal* for all use cases, but I
-think they are *good enough* for most use cases. Don't forget that unicode
+think they are *good enough* for most use cases. Don&#x27;t forget that unicode
 bullets can already be added directly in gemini documents if the author
 wishes to do so.
 
@@ -148,11 +132,11 @@ Footer
 The following gemini sites already use some form of horizontal separator on
 their front pages (the precise syntax varies):
 
-- <A HREF="gemini://vger.cloud/">gemini://vger.cloud/</A>
-- <A HREF="gemini://gemini.conman.org/">gemini://gemini.conman.org/</A>
-- <A HREF="gemini://zaibatsu.circumlunar.space/">gemini://zaibatsu.circumlunar.space/</A>
-- <A HREF="gemini://carcosa.net/">gemini://carcosa.net/</A>
-- <A HREF="gemini://yam655.com/">gemini://yam655.com/</A>
+- <a href="gemini://vger.cloud/">gemini://vger.cloud/</a>
+- <a href="gemini://gemini.conman.org/">gemini://gemini.conman.org/</a>
+- <a href="gemini://zaibatsu.circumlunar.space/">gemini://zaibatsu.circumlunar.space/</a>
+- <a href="gemini://carcosa.net/">gemini://carcosa.net/</a>
+- <a href="gemini://yam655.com/">gemini://yam655.com/</a>
 
 I think that since horizontal rules are easy to parse and they add utility for
 structuring pages, they should be included in the spec.
@@ -160,7 +144,7 @@ structuring pages, they should be included in the spec.
 ### Other Random Opinions
 
 - Leading and trailing whitespace should be stripped from all of lines outside
-  of the preformat block. If you're allowing a non-monospace font for these
+  of the preformat block. If you&#x27;re allowing a non-monospace font for these
   elements, then leading whitespace can look inconsistent and trailing
   whitespace serves no real purpose. By leading whitespace, I mean that
 
@@ -172,46 +156,20 @@ structuring pages, they should be included in the spec.
 
 I think I would be satisfied enough with the above document to at least try it
 out by converting all of my existing gemini content. I also think I would be
-fine keeping everything fixed-width and hard wrapping. I *don't* think I would
+fine keeping everything fixed-width and hard wrapping. I *don&#x27;t* think I would
 want to implement nested lists or quote blocks, or anything significantly more
 complicated than what is outlined above.
 
 - mozz
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="000397.html">FW: Text reflow woes (or: I want bullets back!)y
-</A></li>
-	<LI>Next message (by thread): <A HREF="000400.html">FW: Text reflow woes (or: I want bullets back!)y
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#398">[ date ]</a>
-              <a href="thread.html#398">[ thread ]</a>
-              <a href="subject.html#398">[ subject ]</a>
-              <a href="author.html#398">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="000397.html">FW: Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000400.html">FW: Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#398">[ date ]</a> <a href="thread.html#398">[ thread ]</a> <a href="subject.html#398">[ subject ]</a> <a href="author.html#398">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

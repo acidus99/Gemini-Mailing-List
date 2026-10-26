@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[users] [announce] geminispace.info - alternative search provider</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005709.html">
+<link rel="next" href="005715.html">
+</head>
+<body>
+<h1>[users] [announce] geminispace.info - alternative search provider</h1>
+<b>René Wagner</b> rwagner at rw-net.de<br>
+<i>Fri Feb 26 17:17:06 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005709.html">[users] [announce] geminispace.info - alternative search provider</a></li>
+<li>Next message (by thread): <a href="005715.html">[users] [announce] geminispace.info - alternative search provider</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5711">[ date ]</a> <a href="thread.html#5711">[ thread ]</a> <a href="subject.html#5711">[ subject ]</a> <a href="author.html#5711">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi,
+
+i didn&#x27;t realize that Stephane wrote to the mailing list and 
+answered him directly to his personal mail. So here we go again. ;)
+
+
+It will work again - once the currently running indexing is done.
+Unfortunately this is a shortcoming of the current GUS implementation.
+
+Crawling and updating the search index are separate steps and the later one
+locks the search index database.
+Unfortunately, as geminispace grows, this becomes more of a pain than earlier 
+cause indexing takes more time.
+
+It seems that a mirror of a webpage with a huge archive popped up a few
+days ago. I had to stop the crawl as it was still fetching this archive, i
+probably need to exclude this mirror until we were able to improve the
+performance of crawling/indexing.
+Unfortunately i&#x27;m not that familiar with Python, so it may take some time.
+
+Especially the data gathering parts (crawling/indexing) are currently bottlenecks. 
+They are strictly sequential and single-threaded &quot;one page at a time&quot;
+which will prolong these processes increasingly. 
+But there are some more issues which arise as geminispace keeps growing,
+GUS was not designed to index large capsulses which mirrors of webpages.
+
+If you are interested in helping out with Python coding feel free to join,
+every help is welcome:
+<a href="https://src.clttr.info/rwa/geminispace.info/issues">https://src.clttr.info/rwa/geminispace.info/issues</a>
+
+I&#x27;m not sure if its feasible to improve GUS in a sustainable way or if we need
+to start over and come up with a new design that honors the growth of geminispace 
+(and is likely much more complex than GUS currently is).
+
+regards
+Ren?
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005709.html">[users] [announce] geminispace.info - alternative search provider</a></li>
+<li>Next message (by thread): <a href="005715.html">[users] [announce] geminispace.info - alternative search provider</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5711">[ date ]</a> <a href="thread.html#5711">[ thread ]</a> <a href="subject.html#5711">[ subject ]</a> <a href="author.html#5711">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

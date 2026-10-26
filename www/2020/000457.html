@@ -1,42 +1,26 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Regarding `gemini://` over NaCL (replacing TLS)
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Regarding%20%60gemini%3A//%60%20over%20NaCL%20%28replacing%20TLS%29&In-Reply-To=%3CCA%2BTk8fwYfs29M1Z72qRLm20r_WCQgL98FFi-LesUzpjzMk%3DeNg%40mail.gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="000494.html">
-   <LINK REL="Next"  HREF="000458.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Regarding `gemini://` over NaCL (replacing TLS)</H1>
-    <B>Ciprian Dorin Craciun</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Regarding%20%60gemini%3A//%60%20over%20NaCL%20%28replacing%20TLS%29&In-Reply-To=%3CCA%2BTk8fwYfs29M1Z72qRLm20r_WCQgL98FFi-LesUzpjzMk%3DeNg%40mail.gmail.com%3E"
-       TITLE="Regarding `gemini://` over NaCL (replacing TLS)">ciprian.craciun at gmail.com
-       </A><BR>
-    <I>Sun Mar  1 01:31:47 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="000494.html">Is it too late to consider adding a subset of Markdown to the render spec?
-</A></li>
-        <LI>Next message (by thread): <A HREF="000458.html">Regarding `gemini://` over NaCL (replacing TLS)
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#457">[ date ]</a>
-              <a href="thread.html#457">[ thread ]</a>
-              <a href="subject.html#457">[ subject ]</a>
-              <a href="author.html#457">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Regarding `gemini://` over NaCL (replacing TLS)</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000494.html">
+<link rel="next" href="000458.html">
+</head>
+<body>
+<h1>Regarding `gemini://` over NaCL (replacing TLS)</h1>
+<b>Ciprian Dorin Craciun</b> ciprian.craciun at gmail.com<br>
+<i>Sun Mar  1 01:31:47 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000494.html">Is it too late to consider adding a subset of Markdown to the render spec?</a></li>
+<li>Next message (by thread): <a href="000458.html">Regarding `gemini://` over NaCL (replacing TLS)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#457">[ date ]</a> <a href="thread.html#457">[ thread ]</a> <a href="subject.html#457">[ subject ]</a> <a href="author.html#457">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>So I've taken Sean Conner advice and implemented a proof-of-concept
+<pre>So I&#x27;ve taken Sean Conner advice and implemented a proof-of-concept
 client and server (only the protocol, transport and crypto part, not
 the actual file serving) in Python by replacing TLS with NaCL /
 `libsodium`.
@@ -45,13 +29,13 @@ the actual file serving) in Python by replacing TLS with NaCL /
 
 The code is available on GitHub:
 
-    <A HREF="https://github.com/cipriancraciun/gemini-experiments/blob/e4bbeae01a8e7d2e393ab93317890f5c7f511b09/nacl/sources">https://github.com/cipriancraciun/gemini-experiments/blob/e4bbeae01a8e7d2e393ab93317890f5c7f511b09/nacl/sources</A>
+    <a href="https://github.com/cipriancraciun/gemini-experiments/blob/e4bbeae01a8e7d2e393ab93317890f5c7f511b09/nacl/sources">https://github.com/cipriancraciun/gemini-experiments/blob/e4bbeae01a8e7d2e393ab93317890f5c7f511b09/nacl/sources</a>
 
 The sources are structured as such:
 
 * `protocol_v1.py` builds upon `transport.py`, and actually implements
-the `<A HREF="gemini://`">gemini://`</A> protocol;  no surprises here, the `protocol_client`
-function (that takes the server's address, an optional public key
+the `<a href="gemini://`">gemini://`</a> protocol;  no surprises here, the `protocol_client`
+function (that takes the server&#x27;s address, an optional public key
 (used for NaCL signatures), and a selector) interacts with the server
 and returns the body;  similarly the `protocol_server` function takes
 a listening socket and a handler function (that given a selector
@@ -88,17 +72,17 @@ length prefixed) packets, so from now on &quot;send&quot; and &quot;receive&quot
 such frames;
 
 * the bulk of NaCL implementation happens inside `transport_prepare`
-(<A HREF="https://github.com/cipriancraciun/gemini-experiments/blob/e4bbeae01a8e7d2e393ab93317890f5c7f511b09/nacl/sources/transport.py#L40-L94">https://github.com/cipriancraciun/gemini-experiments/blob/e4bbeae01a8e7d2e393ab93317890f5c7f511b09/nacl/sources/transport.py#L40-L94</A>)
+(<a href="https://github.com/cipriancraciun/gemini-experiments/blob/e4bbeae01a8e7d2e393ab93317890f5c7f511b09/nacl/sources/transport.py#L40-L94">https://github.com/cipriancraciun/gemini-experiments/blob/e4bbeae01a8e7d2e393ab93317890f5c7f511b09/nacl/sources/transport.py#L40-L94</a>)
 which does as follows;
 
 * both the client and server use this function, thus from now on the
 transport protocol is identical, thus symmetrical;
 
 * by using `crypto_kx_keypair`
-(<A HREF="https://libsodium.gitbook.io/doc/key_exchange">https://libsodium.gitbook.io/doc/key_exchange</A>) the local peer creates
+(<a href="https://libsodium.gitbook.io/doc/key_exchange">https://libsodium.gitbook.io/doc/key_exchange</a>) the local peer creates
 an ephemeral session public / private key pair, which it exchanges
 with its remote peer;  (this is the only piece of information that
-doesn't travel encrypted, and thus available to an attacker;)
+doesn&#x27;t travel encrypted, and thus available to an attacker;)
 
 * the by using `crypto_kx_client_session_keys` (from the same link as
 above) the local peer creates two symmetric secret keys, one for
@@ -117,26 +101,26 @@ is OK, the only requirement is not to reuse them;)
 
 * from here on, all exchanged messages are encrypted by using
 `crypto_secretbox`
-(<A HREF="https://libsodium.gitbook.io/doc/secret-key_cryptography/secretbox">https://libsodium.gitbook.io/doc/secret-key_cryptography/secretbox</A>)
+(<a href="https://libsodium.gitbook.io/doc/secret-key_cryptography/secretbox">https://libsodium.gitbook.io/doc/secret-key_cryptography/secretbox</a>)
 which provides both encryption and authentication against tampering;
 (and coupled with the unique incremental nonces, it also assures that
-the messages haven't been replayed, reordered, or dropped;)
+the messages haven&#x27;t been replayed, reordered, or dropped;)
 
 * by using `crypto_sign_keypair`
-(<A HREF="https://libsodium.gitbook.io/doc/public-key_cryptography/public-key_signatures">https://libsodium.gitbook.io/doc/public-key_cryptography/public-key_signatures</A>)
+(<a href="https://libsodium.gitbook.io/doc/public-key_cryptography/public-key_signatures">https://libsodium.gitbook.io/doc/public-key_cryptography/public-key_signatures</a>)
 the local peer creates a signature public / private key pair used for
 authentication;  (both the client and server can use a stored public
 key, or generated on the fly if `None` is used);
 
 * by using `crypto_sign_detached` (the same link), the local peer
-signs with its own signature private key the remote peer's session
+signs with its own signature private key the remote peer&#x27;s session
 public key;  the local peer then exchanges with the remote peer its
 own signature public key and the computed signature;  (this proves
 that the local peer has control over the signature secret key, and
 also that this is not a replay attack as it signs something under the
 control of the remote peer;)
 
-* then, after receiving the remote peer's signature public key and the
+* then, after receiving the remote peer&#x27;s signature public key and the
 detached signature it verifies it accordingly;
 
 * at this moment the session is considered open, and the peers have
@@ -146,9 +130,9 @@ authenticated themselves to one-another;
 
 A few notes about this encryption scheme:
 
-* I am not a cryptographer or security expert, however I think I've
+* I am not a cryptographer or security expert, however I think I&#x27;ve
 followed the best practices, especially those described in
-(<A HREF="https://libsodium.gitbook.io/doc/secret-key_cryptography/encrypted-messages">https://libsodium.gitbook.io/doc/secret-key_cryptography/encrypted-messages</A>);
+(<a href="https://libsodium.gitbook.io/doc/secret-key_cryptography/encrypted-messages">https://libsodium.gitbook.io/doc/secret-key_cryptography/encrypted-messages</a>);
  (I bet an experimented cryptographer can take a look at this and say
 if there are any issues, and how to fix those;)
 
@@ -182,11 +166,11 @@ bytes for the `secretbox` authentication, and the 4 bytes for the
 framing;)
 
 * this schema is compliant with TCP FastOpen
-(<A HREF="https://en.wikipedia.org/wiki/TCP_Fast_Open">https://en.wikipedia.org/wiki/TCP_Fast_Open</A>), i.e. the session public
+(<a href="https://en.wikipedia.org/wiki/TCP_Fast_Open">https://en.wikipedia.org/wiki/TCP_Fast_Open</a>), i.e. the session public
 key exchange can be done at the same time as the TCP
 three-way-handshake happens;
 
-* given the 4 bytes framing, the selector, headers and body can't be
+* given the 4 bytes framing, the selector, headers and body can&#x27;t be
 larger than 4 GiB;  this is not a limitation, as we can implement for
 the body an 8 bytes length prefixed framing;
 
@@ -199,14 +183,14 @@ frames instead of parsing for `CRLF`;
 * at the moment TLS-SNI like functionality can be easily implemented
 by asking the client to send with its signature public key also the
 &quot;virtual host&quot; it wants to communicate with, thus based on that the
-server can respond with that proper public key (this doesn't affect
+server can respond with that proper public key (this doesn&#x27;t affect
 the packet exchanges);  as opposed to TLS-SNI feature, this proposal
 does not expose to an attacker the identity of the server public key
 (i.e. the virtual host);  (granted there is a proposed extension to
 TLS-SNI that encrypts that information;)
 
 * the protocol should definitively require a version format (both for
-the transport but also for the `<A HREF="gemini://`">gemini://`</A> semantic) that should be
+the transport but also for the `<a href="gemini://`">gemini://`</a> semantic) that should be
 sent first by the client, and based on that the server should choose
 the proper implementation if supported;  (however such a feature has
 to be carefully implemented as not to be used by attackers to
@@ -214,40 +198,19 @@ downgrade a certain client into a vulnerable version;)
 
 
 
-I hope I haven't made too many mistakes, and I hope this is useful as
+I hope I haven&#x27;t made too many mistakes, and I hope this is useful as
 a proof-of-concept that one could replace TLS for such simpler
 protocols,
 Ciprian.
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="000494.html">Is it too late to consider adding a subset of Markdown to the render spec?
-</A></li>
-	<LI>Next message (by thread): <A HREF="000458.html">Regarding `gemini://` over NaCL (replacing TLS)
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#457">[ date ]</a>
-              <a href="thread.html#457">[ thread ]</a>
-              <a href="subject.html#457">[ subject ]</a>
-              <a href="author.html#457">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="000494.html">Is it too late to consider adding a subset of Markdown to the render spec?</a></li>
+<li>Next message (by thread): <a href="000458.html">Regarding `gemini://` over NaCL (replacing TLS)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#457">[ date ]</a> <a href="thread.html#457">[ thread ]</a> <a href="subject.html#457">[ subject ]</a> <a href="author.html#457">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

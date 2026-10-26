@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] Possible Tables Syntax</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004654.html">
+<link rel="next" href="004664.html">
+</head>
+<body>
+<h1>[spec] Possible Tables Syntax</h1>
+<b>John Cowan</b> cowan at ccil.org<br>
+<i>Sun Jan  3 00:16:09 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004654.html">[spec] Possible Tables Syntax</a></li>
+<li>Next message (by thread): <a href="004664.html">[spec] Possible Tables Syntax</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4659">[ date ]</a> <a href="thread.html#4659">[ thread ]</a> <a href="subject.html#4659">[ subject ]</a> <a href="author.html#4659">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>&quot;User&quot; editors usually don&#x27;t generate HT when the user presses the TAB key.
+
+On Sat, Jan 2, 2021 at 4:35 PM &lt;nothien at uber.space&gt; wrote:
+
+&gt;<i> There is a new discussion about table formats under the [users]
+</i>&gt;<i> category, but I&#x27;ve thought of one possibility that roughly matches the
+</i>&gt;<i> look of tables but keeps each cell on its own line, and I wanted to see
+</i>&gt;<i> what others think of it in a more [spec]-relevant area.  Essentially,
+</i>&gt;<i> indentation (tabs) is used to represent which column a cell is in.
+</i>&gt;<i> Wrapping cell text is possible, so I hesitate to put it in a
+</i>&gt;<i> preformatted block, but it&#x27;s the best way to show that it&#x27;s an
+</i>&gt;<i> unfamiliar format.
+</i>&gt;<i>
+</i>&gt;<i> &gt; +--------------------------------+-------+
+</i>&gt;<i> &gt; | Food                           | Price |
+</i>&gt;<i> &gt; +--------------------------------+-------+
+</i>&gt;<i> &gt; | Eggs                           | $2    |
+</i>&gt;<i> &gt; | Eggs and spam                  | $4    |
+</i>&gt;<i> &gt; | Eggs, spam, eggs and spam      | $8    |
+</i>&gt;<i> &gt; | Spam spam baked beans and spam | $8    |
+</i>&gt;<i> &gt; | Just spam                      | $2    |
+</i>&gt;<i> &gt; +--------------------------------+-------+
+</i>&gt;<i>
+</i>&gt;<i> ```table
+</i>&gt;<i> Food
+</i>&gt;<i>         Price
+</i>&gt;<i> Eggs
+</i>&gt;<i>         $2
+</i>&gt;<i> Eggs and spam
+</i>&gt;<i>         $4
+</i>&gt;<i> Eggs, spam, eggs and spam
+</i>&gt;<i>         $8
+</i>&gt;<i> Spam spam baked beans and spam
+</i>&gt;<i>         $8
+</i>&gt;<i> Just spam
+</i>&gt;<i>         $2
+</i>&gt;<i> ```
+</i>&gt;<i>
+</i>&gt;<i> It needs to be tried out a lot more to see how flexible it really is,
+</i>&gt;<i> but it looks promising to me.  It looks quite structured visually, and
+</i>&gt;<i> should be very easy to parse programmatically as well.  Of course, it
+</i>&gt;<i> would be more difficult to visualize with more columns and longer cell
+</i>&gt;<i> texts, but it&#x27;s (much) better than nothing.
+</i>&gt;<i>
+</i>&gt;<i> Each cell is on a different block, and the general expectation is that
+</i>&gt;<i> the indentation level increases by one horizontal tab for every next
+</i>&gt;<i> column, then resetting to no indentation for the next row.  We could
+</i>&gt;<i> probably give specific interpretation to other possible things that
+</i>&gt;<i> happen (e.g. &#x27;jumps&#x27; in indentation level which are not resetting to
+</i>&gt;<i> rows), or we could outright ban them, but I would prefer the former (as
+</i>&gt;<i> then there is no room for extension).
+</i>&gt;<i>
+</i>&gt;<i> I know that we&#x27;re looking to finalize the spec, and that this will
+</i>&gt;<i> probably not make it in (even if it gets accepted).  Tables are quite
+</i>&gt;<i> uncommon, after all, so I don&#x27;t there would be a big enough push to
+</i>&gt;<i> warrant making it official.  But I argue that tables are a very
+</i>&gt;<i> difficult thing to format to satisfy both humans and computers, so at
+</i>&gt;<i> the minimum we would add this (or any agreed-upon table format) to the
+</i>&gt;<i> best practices document.  The best-case scenario to me is that it gets
+</i>&gt;<i> added to the gemtext spec as an optional type to parse, similar to how
+</i>&gt;<i> one would parse other preformatted blocks (but with more state to keep
+</i>&gt;<i> track of).
+</i>&gt;<i>
+</i>&gt;<i> What do you think?
+</i>&gt;<i>
+</i>&gt;<i> ~aravk | ~nothien
+</i>&gt;<i>
+</i>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210102/80f9e9d3/attachment-0001.htm">https://mailing-list-archive.gemi.dev/www/attachments/20210102/80f9e9d3/attachment-0001.htm</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004654.html">[spec] Possible Tables Syntax</a></li>
+<li>Next message (by thread): <a href="004664.html">[spec] Possible Tables Syntax</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4659">[ date ]</a> <a href="thread.html#4659">[ thread ]</a> <a href="subject.html#4659">[ subject ]</a> <a href="author.html#4659">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

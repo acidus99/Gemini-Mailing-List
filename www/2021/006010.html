@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enhancing TOFU</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006007.html">
+<link rel="next" href="005964.html">
+</head>
+<body>
+<h1>Enhancing TOFU</h1>
+<b>Thomas Frohwein</b> tfrohwein at fastmail.com<br>
+<i>Mon Mar  8 18:42:32 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006007.html">Enhancing TOFU</a></li>
+<li>Next message (by thread): <a href="005964.html">[tech] coopting keybase for fun &amp; profit</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6010">[ date ]</a> <a href="thread.html#6010">[ thread ]</a> <a href="subject.html#6010">[ subject ]</a> <a href="author.html#6010">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>I have written up how clients and servers can support out-of-band pubkey
+verification to add a higher level of trust where needed. My opinion is
+that for 99% of connections made by most clients, TOFU provides sufficient
+security. For those situations where TOFU is judged by the user to be
+insufficiently secure, clients can (sic) offer a variety of different
+ways to support easy out-of-band verification.
+
+I call this approach &quot;Trust, but Verify (where appropriate).&quot;
+
+In a nutshell, 3 security levels would be offered and displayed by a
+client following this, the first 2 of which are already part of TOFU:
+
+- red: untrusted, mostly if certificate mismatch is encountered
+- yellow: trusted, likely the large majority of all connections,
+          here the host cert matches the known host of the same name
+- green: verified - cert matches known host, plus the client has
+         matched the cert with an out-of-band digest of the cert,
+         confirming the identity of the server. This would be useful
+         for connections involving sensitive information.
+
+The details should be left to the client, with some technically simple
+examples provided (entering/pasting pubkey hash, random art like
+&#x27;ssh-keygen -lv&#x27;). A variety of technically more complicated ways to
+confirm the pubkey like TLSA, DANE, TXT records could fall into this
+approach, too, but I think it could be left up to the client and servers
+what ways to offer to support the verification.
+
+The full write-up is hosted here:
+
+<a href="gemini://thfr.info/gemini/modified-trust-verify.gmi">gemini://thfr.info/gemini/modified-trust-verify.gmi</a>
+
+thfr
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006007.html">Enhancing TOFU</a></li>
+<li>Next message (by thread): <a href="005964.html">[tech] coopting keybase for fun &amp; profit</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6010">[ date ]</a> <a href="thread.html#6010">[ thread ]</a> <a href="subject.html#6010">[ subject ]</a> <a href="author.html#6010">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

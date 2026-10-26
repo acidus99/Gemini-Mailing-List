@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] When may clients begin processing responses?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007626.html">
+<link rel="next" href="007630.html">
+</head>
+<body>
+<h1>[spec] When may clients begin processing responses?</h1>
+<b>Omar Polo</b> op at omarpolo.com<br>
+<i>Tue Nov 23 07:57:43 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007626.html">[spec] When may clients begin processing responses?</a></li>
+<li>Next message (by thread): <a href="007630.html">[spec] When may clients begin processing responses?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7627">[ date ]</a> <a href="thread.html#7627">[ thread ]</a> <a href="subject.html#7627">[ subject ]</a> <a href="author.html#7627">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Scot &lt;gmi1@scotdoyle.com&gt; writes:
+
+&gt;<i> Hi all,
+</i>&gt;<i>
+</i>&gt;<i> The transaction sequence in section 1.1 seems to read chronologically, 
+</i>&gt;<i> which would mean clients are not permitted to handle any of the 
+</i>&gt;<i> response until the server closes the connection.
+</i>
+I don&#x27;t know how every gemini client handle this, but IMHO the clearest
+way to do so is just streamingly parsing the output as soon as it
+arrives.  If you don&#x27;t get a close_notify at the end you can just as
+well delete the page and render an error if you want.
+
+(also, you won&#x27;t be able to handle streaming pages if you wait for the
+server to close the connection)
+
+&gt;<i> Would it make sense to clarify this in the spec, maybe by changing 
+</i>&gt;<i> the last line of section 1.1 or by adding a note to section 3.4?
+</i>
+No.  The transaction sequence shows the steps, it&#x27;s not written anywhere
+that some of those steps can&#x27;t happen in parallel.
+
+&gt;<i> Scot
+</i>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007626.html">[spec] When may clients begin processing responses?</a></li>
+<li>Next message (by thread): <a href="007630.html">[spec] When may clients begin processing responses?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7627">[ date ]</a> <a href="thread.html#7627">[ thread ]</a> <a href="subject.html#7627">[ subject ]</a> <a href="author.html#7627">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

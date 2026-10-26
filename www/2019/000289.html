@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text reflow woes (or: I want bullets back!)y</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000288.html">
+<link rel="next" href="000290.html">
+</head>
+<body>
+<h1>Text reflow woes (or: I want bullets back!)y</h1>
+<b>Aaron Janse</b> aaron at ajanse.me<br>
+<i>Mon Dec 16 02:35:19 GMT 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000288.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000290.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#289">[ date ]</a> <a href="thread.html#289">[ thread ]</a> <a href="subject.html#289">[ subject ]</a> <a href="author.html#289">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Sun, Dec 15, 2019, at 5:53 PM, Brian Evans wrote:
+&gt;<i> I believe, once again, we are wading into territory where wrapping
+</i>&gt;<i> and reflowing are being conflated. 
+</i>
+Wow. I absolutely did make this mistake. Thank you for clarifying.
+
+The speculative spec states:
+&gt;<i> In order to facilitate a comfortable user experience with simple
+</i>&gt;<i> clients which do not implement reflowing, authors SHOULD limit the
+</i>&gt;<i> width of lines to 78 characters, excluding CRLF pairs.
+</i>
+I got so caught up in the false dichotomy of either reflowing or 80-column
+text that I never questioned why source code is hard-wrapped in the first
+place. 
+
+&gt;<i> At present, wrapping is the default that is happening for the vast majority
+</i>&gt;<i> of clients
+</i>
+I agree. The spec&#x27;s justification for suggesting that source code is
+hard-wrapped is the idea that it makes life easier for simple client.
+
+And yet:
+1. It&#x27;s much easier for simple clients to wrap than to reflow
+2. Afaik, most simple clients won&#x27;t even need to worry about wrapping because
+   it will already be handled by their output medium (e.g. terminal, browser).
+
+&gt;<i>From a while ago:
+</i>&gt;<i> Text reflow IS A MUST. We live in a world of wildly varying screen sizes
+</i>&gt;<i> these days. The trend is clearly headed towards polarization: huge 22&#x27;+
+</i>&gt;<i> desktop screens in one corner, small less than 7&#x27; smartphone screens in the
+</i>&gt;<i> other. Nothing in the middle. There&#x27;s no way you&#x27;re going to get decent
+</i>&gt;<i> presentation of non reflown text on both kinds of displays. No matter how
+</i>&gt;<i> many kludgy rules you instate on default width, max before forced wrap, etc.
+</i>
+All of this is completely possible without reflow. All we need to do is to
+state in the spec that text MUST NOT be hard-wrapped at 80 columns unless it&#x27;s
+supposed to be displayed that way.
+
+tl;dr If the spec is changed to discourage hard-wrapping source code, there&#x27;
+would be no need for reflow in order to have text fit the width of a client&#x27;s
+screen. This would make life much easier for both authors and readers using
+the gemini protocol.
+
+Pardon my ignorance if the above is what everyone else was already thinking.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000288.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000290.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#289">[ date ]</a> <a href="thread.html#289">[ thread ]</a> <a href="subject.html#289">[ subject ]</a> <a href="author.html#289">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

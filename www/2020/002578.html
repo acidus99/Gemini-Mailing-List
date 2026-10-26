@@ -1,42 +1,26 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Feed format for gemini (alternative to rss feed)
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Feed%20format%20for%20gemini%20%28alternative%20to%20rss%20feed%29&In-Reply-To=%3CN_nBid1Hb0eLC-pftynUo2ocRTEZOejGrJ4jtYYSePKqhbMUu7X9Z7qZcJuGZY7FAkDK2oaWfBwVcsfcGpN7Nm2daxt-czorL2LODDJs1_w%3D%40protonmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="002577.html">
-   <LINK REL="Next"  HREF="002587.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Feed format for gemini (alternative to rss feed)</H1>
-    <B>James Henderson</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Feed%20format%20for%20gemini%20%28alternative%20to%20rss%20feed%29&In-Reply-To=%3CN_nBid1Hb0eLC-pftynUo2ocRTEZOejGrJ4jtYYSePKqhbMUu7X9Z7qZcJuGZY7FAkDK2oaWfBwVcsfcGpN7Nm2daxt-czorL2LODDJs1_w%3D%40protonmail.com%3E"
-       TITLE="Feed format for gemini (alternative to rss feed)">henderson.j at protonmail.com
-       </A><BR>
-    <I>Mon Sep  7 08:49:51 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="002577.html">Feed format for gemini (alternative to rss feed)
-</A></li>
-        <LI>Next message (by thread): <A HREF="002587.html">Feed format for gemini (alternative to rss feed)
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2578">[ date ]</a>
-              <a href="thread.html#2578">[ thread ]</a>
-              <a href="subject.html#2578">[ subject ]</a>
-              <a href="author.html#2578">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Feed format for gemini (alternative to rss feed)</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="002577.html">
+<link rel="next" href="002587.html">
+</head>
+<body>
+<h1>Feed format for gemini (alternative to rss feed)</h1>
+<b>James Henderson</b> henderson.j at protonmail.com<br>
+<i>Mon Sep  7 08:49:51 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="002577.html">Feed format for gemini (alternative to rss feed)</a></li>
+<li>Next message (by thread): <a href="002587.html">Feed format for gemini (alternative to rss feed)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2578">[ date ]</a> <a href="thread.html#2578">[ thread ]</a> <a href="subject.html#2578">[ subject ]</a> <a href="author.html#2578">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>The reason I went for non csv in this is that people might want to use commas in the description or title.
+<pre>The reason I went for non csv in this is that people might want to use commas in the description or title.
 
 This can be solved by enclosing strings in quotations but then if people want to include quotations in their strings they need to be escaped.
 
@@ -44,69 +28,54 @@ The idea behind using ::: is that its rare enough to never really show up and th
 
 Basically its just more simple and clean, in my mind anyway.
 
-On Mon, Sep 7, 2020 at 08:36, cblte &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cblte at envs.net</A>&gt; wrote:
+On Mon, Sep 7, 2020 at 08:36, cblte &lt;cblte at envs.net&gt; wrote:
 
 &gt;<i> Am 06.09.20 um 23:15 schrieb James Henderson:
-</I>&gt;&gt;<i> Hello everyone,
-</I>&gt;&gt;<i>
-</I>&gt;&gt;<i> As content starts growing on gemini there may be cause for an rss
-</I>&gt;&gt;<i> style feed for the platform.
-</I>&gt;&gt;<i>
-</I>&gt;&gt;<i> rss is fine but it&#8217;s fairly verbose and Allows for things like
-</I>&gt;&gt;<i> embedding images and the like which don&#8217;t seem to fit well with gemini.
-</I>&gt;&gt;<i>
-</I>&gt;&gt;<i> My proposal is a simpler format where each line in a file is an item
-</I>&gt;&gt;<i> in a feed with fields separated by three colons and the line ending \r\n.
-</I>&gt;&gt;<i> The four fields would be date, link, title, text description e.g.
-</I>&gt;&gt;<i>
-</I>&gt;&gt;<i> yyyy/mm/dd ::: link_to_article ::: title ::: text describing the
-</I>&gt;&gt;<i> content \r\n
-</I>&gt;&gt;<i>
-</I>&gt;&gt;<i> A format like this is easily parsed and displayed in a client. If the
-</I>&gt;&gt;<i> gemini protocol defines a mime type for it in the standard it would be
-</I>&gt;&gt;<i> easily recognised.
-</I>&gt;&gt;<i>
-</I>&gt;&gt;<i> I am just throwing the idea out there, what do people think?
-</I>&gt;&gt;<i>
-</I>&gt;<i> Good Morning,
-</I>&gt;<i>
-</I>&gt;<i> I like your idea of simplicity, but what about a simple csv file?
-</I>&gt;<i>
-</I>&gt;<i> A simple comma-seperated-file, working now for years in a a lot of
-</I>&gt;<i> situations and proven to bo in exchanging lots of data. Nothing new has
-</I>&gt;<i> to bb implemented. Libraries for writing csv files are existing for
-</I>&gt;<i> almost if not for every programming out there.
-</I>&gt;<i>
-</I>&gt;<i> Why implementing something new?
-</I>&gt;<i>
-</I>&gt;<i> --Carsten
-</I>-------------- next part --------------
+</i>&gt;<i>&gt; Hello everyone,
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; As content starts growing on gemini there may be cause for an rss
+</i>&gt;<i>&gt; style feed for the platform.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; rss is fine but it?s fairly verbose and Allows for things like
+</i>&gt;<i>&gt; embedding images and the like which don?t seem to fit well with gemini.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; My proposal is a simpler format where each line in a file is an item
+</i>&gt;<i>&gt; in a feed with fields separated by three colons and the line ending \r\n.
+</i>&gt;<i>&gt; The four fields would be date, link, title, text description e.g.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; yyyy/mm/dd ::: link_to_article ::: title ::: text describing the
+</i>&gt;<i>&gt; content \r\n
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; A format like this is easily parsed and displayed in a client. If the
+</i>&gt;<i>&gt; gemini protocol defines a mime type for it in the standard it would be
+</i>&gt;<i>&gt; easily recognised.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; I am just throwing the idea out there, what do people think?
+</i>&gt;<i>&gt;
+</i>&gt;<i> Good Morning,
+</i>&gt;<i>
+</i>&gt;<i> I like your idea of simplicity, but what about a simple csv file?
+</i>&gt;<i>
+</i>&gt;<i> A simple comma-seperated-file, working now for years in a a lot of
+</i>&gt;<i> situations and proven to bo in exchanging lots of data. Nothing new has
+</i>&gt;<i> to bb implemented. Libraries for writing csv files are existing for
+</i>&gt;<i> almost if not for every programming out there.
+</i>&gt;<i>
+</i>&gt;<i> Why implementing something new?
+</i>&gt;<i>
+</i>&gt;<i> --Carsten
+</i>-------------- next part --------------
 An HTML attachment was scrubbed...
-URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200907/36654913/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200907/36654913/attachment.htm</A>&gt;
-</PRE>
-
-
-
-
-
-
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20200907/36654913/attachment.htm">https://mailing-list-archive.gemi.dev/www/attachments/20200907/36654913/attachment.htm</a>&gt;
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="002577.html">Feed format for gemini (alternative to rss feed)
-</A></li>
-	<LI>Next message (by thread): <A HREF="002587.html">Feed format for gemini (alternative to rss feed)
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2578">[ date ]</a>
-              <a href="thread.html#2578">[ thread ]</a>
-              <a href="subject.html#2578">[ subject ]</a>
-              <a href="author.html#2578">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="002577.html">Feed format for gemini (alternative to rss feed)</a></li>
+<li>Next message (by thread): <a href="002587.html">Feed format for gemini (alternative to rss feed)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2578">[ date ]</a> <a href="thread.html#2578">[ thread ]</a> <a href="subject.html#2578">[ subject ]</a> <a href="author.html#2578">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

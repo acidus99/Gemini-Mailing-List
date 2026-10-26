@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] [spec] TLS statistics</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004640.html">
+<link rel="next" href="004643.html">
+</head>
+<body>
+<h1>[tech] [spec] TLS statistics</h1>
+<b>nervuri</b> nervuri at disroot.org<br>
+<i>Fri Jan  1 17:44:10 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004640.html">[tech] [spec] TLS statistics</a></li>
+<li>Next message (by thread): <a href="004643.html">[tech] [spec] TLS statistics</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4641">[ date ]</a> <a href="thread.html#4641">[ thread ]</a> <a href="subject.html#4641">[ subject ]</a> <a href="author.html#4641">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>December 31, 2020 9:45 PM, Sean Conner wrote:
+&gt;<i> Okay, point taken.
+</i>
+Because of this privacy issue, I think browsers should only send client certificates over TLS 1.3 (and newer).  This could be part of the spec.
+
+We could also make a coordinated effort to help Gemini software support TLS 1.3 - reach out, send patches, see what&#x27;s holding developers back.  Currently LibreSSL, GnuTLS and wolfSSL all support TLS 1.3, so most (if not all) browsers/servers/proxies/crawlers could probably make the upgrade.  Once enough software supports 1.3 and enough servers have switched, the minimum TLS version can be changed in the spec.
+
+&gt;<i> Yes, that&#x27;s a bit of work, but it was less than 5 minutes, and I&#x27;m not even a state actor here.  Is that enough of a bar for you?
+</i>
+SNI-based surveillance is automatable, making it trivial for third parties to hoard this data at nearly no cost.  Even a tiny bit of non-automated work, like what you just did, will deter many (mostly commercial) actors involved in mass surveillance, for whom scalability is what makes it worthwhile.  When it comes to targeted surveillance done by state actors, ESNI won&#x27;t help much (if at all), but this threat model doesn&#x27;t apply to most people.  Let&#x27;s not fall for the perfect solution fallacy.
+
+Looks like ESNI is being superseded by Encrypted Client Hello (ECH):
+
+<a href="https://tools.ietf.org/html/draft-ietf-tls-esni-08">https://tools.ietf.org/html/draft-ietf-tls-esni-08</a>
+<a href="https://blog.cloudflare.com/encrypted-client-hello/">https://blog.cloudflare.com/encrypted-client-hello/</a>
+
+Nice.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004640.html">[tech] [spec] TLS statistics</a></li>
+<li>Next message (by thread): <a href="004643.html">[tech] [spec] TLS statistics</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4641">[ date ]</a> <a href="thread.html#4641">[ thread ]</a> <a href="subject.html#4641">[ subject ]</a> <a href="author.html#4641">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

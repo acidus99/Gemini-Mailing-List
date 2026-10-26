@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fwd: elpher now supports gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000167.html">
+<link rel="next" href="000141.html">
+</head>
+<body>
+<h1>Fwd: elpher now supports gemini</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Fri Sep 13 22:01:48 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000167.html">Fwd: elpher now supports gemini</a></li>
+<li>Next message (by thread): <a href="000141.html">[ANN] GLV-1.12556 Gemini Server now released</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#151">[ date ]</a> <a href="thread.html#151">[ thread ]</a> <a href="subject.html#151">[ subject ]</a> <a href="author.html#151">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Bradley D. Thornton once stated:
+&gt;<i> 
+</i>&gt;<i> 2.) I experienced problems with gemini.conman.org loading beyond 1%.
+</i>
+  What type of problem?  I&#x27;ve been making a lot of changes to the server
+code recently and there might be issues that aren&#x27;t client releated but
+server releated.  
+
+&gt;<i> 3.) zaibatsu.circumlunar.space comes up, but it takes a while. Like I
+</i>&gt;<i> said above, in Asuka, all sites come up rather quickly, although I can
+</i>&gt;<i> tell the difference in the resources being served. In Elpher it can take
+</i>&gt;<i> several seconds, however.
+</i>
+  Of the servers, I get:
+
+<a href="gemini://gemini.conman.org/">gemini://gemini.conman.org/</a>		comes up quick [1]
+<a href="gemini://zaibatsu.circumlunar.space/">gemini://zaibatsu.circumlunar.space/</a>	comes up quick
+<a href="gemini://carcosa.net/">gemini://carcosa.net/</a>			comes up quick
+<a href="gemini://heavysquare.com/">gemini://heavysquare.com/</a>		comes up quick
+<a href="gemini://mozz.us/">gemini://mozz.us/</a>			comes up quick
+<a href="gemini://dgold.eu/">gemini://dgold.eu/</a>			error: cannot connect to dgold.eu
+<a href="gemini://typed-hole.org/">gemini://typed-hole.org/</a>		comes up quick
+<a href="gemini://gopher.black/">gemini://gopher.black/</a>			(gone---mentioned in another email)
+<a href="gemini://tilde.black/">gemini://tilde.black/</a>			comes up quick
+<a href="gemini://consensus.circumlunar.space/">gemini://consensus.circumlunar.space/</a>	error: cannot connect to consensus.circumlunar.space
+<a href="gemini://tilde.pink/">gemini://tilde.pink/</a>			comes up quick
+<a href="gemini://165.22.178.247/">gemini://165.22.178.247/</a>		comes up quick (but returns status 51)
+<a href="gemini://vger.cloud/">gemini://vger.cloud/</a>			comes up quick
+
+  And of certificates:
+
+<a href="gemini://gemini.conman.org/">gemini://gemini.conman.org/</a>		unknown CA [2]
+<a href="gemini://zaibatsu.circumlunar.space/">gemini://zaibatsu.circumlunar.space/</a>	self-signed
+<a href="gemini://carcosa.net/">gemini://carcosa.net/</a>			self-signed
+<a href="gemini://heavysquare.com/">gemini://heavysquare.com/</a>		unknown CA
+<a href="gemini://mozz.us/">gemini://mozz.us/</a>			valid
+<a href="gemini://dgold.eu/">gemini://dgold.eu/</a>			N/A (can&#x27;t connect)
+<a href="gemini://typed-hole.org/">gemini://typed-hole.org/</a>		self-signed
+<a href="gemini://gopher.black/">gemini://gopher.black/</a>			N/A (gone)
+<a href="gemini://tilde.black/">gemini://tilde.black/</a>			valid
+<a href="gemini://consensus.circumlunar.space/">gemini://consensus.circumlunar.space/</a>	N/A (can&#x27;t connect)
+<a href="gemini://tilde.pink/">gemini://tilde.pink/</a>			self-signed
+<a href="gemini://165.22.178.247/">gemini://165.22.178.247/</a>		self-signed
+<a href="gemini://vger.cloud/">gemini://vger.cloud/</a>			valid
+
+
+
+&gt;<i> A feature of Elpher that I find really kewl is that it doesn&#x27;t presume
+</i>&gt;<i> it&#x27;s okay to just plough ahead when it perceives there&#x27;s something funky
+</i>&gt;<i> with the cert, as illustrated in this image (I&#x27;m unable to select this
+</i>&gt;<i> text in Elpher to paste it, if there&#x27;s a way, please enlighten me):
+</i>&gt;<i> <a href="https://bit.ly/2kKJCrv">https://bit.ly/2kKJCrv</a>
+</i>&gt;<i> 
+</i>&gt;<i> That originally came up for <a href="gemini://conman.org">gemini://conman.org</a> (certificate/host
+</i>&gt;<i> mismatch), because that&#x27;s NOT the hostname the cert was issued for.
+</i>
+  Yup.  I don&#x27;t know how to create a certificate for multiple hostnames.
+
+&gt;<i> Again, Asuka and the other clients don&#x27;t complain, but prolly should ;)
+</i>
+  Probably, but if you aren&#x27;t doing certificate validation (to get around
+the whole &quot;self-signed&quot; thing, perhaps it&#x27;s a moot point?)
+
+  -spc
+
+[1]	It better for me.  I wrote the server.
+
+[2]	I have my own private CA I signed the certificate with.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000167.html">Fwd: elpher now supports gemini</a></li>
+<li>Next message (by thread): <a href="000141.html">[ANN] GLV-1.12556 Gemini Server now released</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#151">[ date ]</a> <a href="thread.html#151">[ thread ]</a> <a href="subject.html#151">[ subject ]</a> <a href="author.html#151">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,103 +1,61 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Scheme Section 2 quibble
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3C1e2c09e7-0e0d-3f46-6760-2e84fadce0fd%40masterq32.de%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="003374.html">
-   <LINK REL="Next"  HREF="003377.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Scheme Section 2 quibble</H1>
-    <B>Felix Quei&#223;ner</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Scheme%20Section%202%20quibble&In-Reply-To=%3C1e2c09e7-0e0d-3f46-6760-2e84fadce0fd%40masterq32.de%3E"
-       TITLE="Scheme Section 2 quibble">felix at masterq32.de
-       </A><BR>
-    <I>Tue Nov 17 08:41:07 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="003374.html">Scheme Section 2 quibble
-</A></li>
-        <LI>Next message (by thread): <A HREF="003377.html">Scheme Section 2 quibble
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3376">[ date ]</a>
-              <a href="thread.html#3376">[ thread ]</a>
-              <a href="subject.html#3376">[ subject ]</a>
-              <a href="author.html#3376">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scheme Section 2 quibble</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="003374.html">
+<link rel="next" href="003377.html">
+</head>
+<body>
+<h1>Scheme Section 2 quibble</h1>
+<b>Felix Queißner</b> felix at masterq32.de<br>
+<i>Tue Nov 17 08:41:07 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="003374.html">Scheme Section 2 quibble</a></li>
+<li>Next message (by thread): <a href="003377.html">Scheme Section 2 quibble</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3376">[ date ]</a> <a href="thread.html#3376">[ thread ]</a> <a href="subject.html#3376">[ subject ]</a> <a href="author.html#3376">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Heya!
+<pre>Heya!
 
-&gt;<i>   It *is* allowed though---it's a schemeless URI and in a given context, it
-</I>&gt;<i> can be inferred.  Check out RFC-3986 section 5.2.2 (Transforming
-</I>&gt;<i> Rreferences, aka, resolving a URL with a base URL) and section 5.3
-</I>&gt;<i> (Component Recomposision) where ':' is appended to the scheme, and '//' is
-</I>&gt;<i> prefixed to the authority (host) section.
-</I>&gt;<i> 
-</I>&gt;<i>   So, given a URL like this:
-</I>&gt;<i> 
-</I>&gt;<i> 	//example.net/path/to/resource
-</I>&gt;<i> 
-</I>&gt;<i> in a resource, if the resource was served up via HTTP, then the scheme is
-</I>&gt;<i> 'http:'; if HTTPS, then 'https:' and if gemini, 'gemini:'.  
-</I>
-I'm using this on gemini sites that are also hosted in web space. This
-allows cross-server linking without changing protocol, it's very convenient.
+&gt;<i>   It *is* allowed though---it&#x27;s a schemeless URI and in a given context, it
+</i>&gt;<i> can be inferred.  Check out RFC-3986 section 5.2.2 (Transforming
+</i>&gt;<i> Rreferences, aka, resolving a URL with a base URL) and section 5.3
+</i>&gt;<i> (Component Recomposision) where &#x27;:&#x27; is appended to the scheme, and &#x27;//&#x27; is
+</i>&gt;<i> prefixed to the authority (host) section.
+</i>&gt;<i> 
+</i>&gt;<i>   So, given a URL like this:
+</i>&gt;<i> 
+</i>&gt;<i> 	//example.net/path/to/resource
+</i>&gt;<i> 
+</i>&gt;<i> in a resource, if the resource was served up via HTTP, then the scheme is
+</i>&gt;<i> &#x27;http:&#x27;; if HTTPS, then &#x27;https:&#x27; and if gemini, &#x27;gemini:&#x27;.  
+</i>
+I&#x27;m using this on gemini sites that are also hosted in web space. This
+allows cross-server linking without changing protocol, it&#x27;s very convenient.
 
 &gt;<i>   A URL like this:
-</I>&gt;<i>
-</I>&gt;<i> 	example.net/path/to/resource
-</I>&gt;<i>
-</I>&gt;<i> is, again, per RFC-3986 parsing rules, to be interpreted as a path, not an
-</I>&gt;<i> authority section then path.  Need I create an example to show this?
-</I>I can.
+</i>&gt;<i>
+</i>&gt;<i> 	example.net/path/to/resource
+</i>&gt;<i>
+</i>&gt;<i> is, again, per RFC-3986 parsing rules, to be interpreted as a path, not an
+</i>&gt;<i> authority section then path.  Need I create an example to show this?
+</i>I can.
 
 Exactly.
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="003374.html">Scheme Section 2 quibble
-</A></li>
-	<LI>Next message (by thread): <A HREF="003377.html">Scheme Section 2 quibble
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3376">[ date ]</a>
-              <a href="thread.html#3376">[ thread ]</a>
-              <a href="subject.html#3376">[ subject ]</a>
-              <a href="author.html#3376">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="003374.html">Scheme Section 2 quibble</a></li>
+<li>Next message (by thread): <a href="003377.html">Scheme Section 2 quibble</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3376">[ date ]</a> <a href="thread.html#3376">[ thread ]</a> <a href="subject.html#3376">[ subject ]</a> <a href="author.html#3376">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

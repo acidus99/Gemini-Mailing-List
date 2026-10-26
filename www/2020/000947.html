@@ -1,66 +1,50 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Proposed minor spec changes, for comment.
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C5EC6EEE3.9030909%40gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="000946.html">
-   <LINK REL="Next"  HREF="000949.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Proposed minor spec changes, for comment.</H1>
-    <B>Luke Emmet</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C5EC6EEE3.9030909%40gmail.com%3E"
-       TITLE="Proposed minor spec changes, for comment.">luke.emmet at gmail.com
-       </A><BR>
-    <I>Thu May 21 22:13:07 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="000946.html">Proposed minor spec changes, for comment.
-</A></li>
-        <LI>Next message (by thread): <A HREF="000949.html">Proposed minor spec changes, for comment.
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#947">[ date ]</a>
-              <a href="thread.html#947">[ thread ]</a>
-              <a href="subject.html#947">[ subject ]</a>
-              <a href="author.html#947">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposed minor spec changes, for comment.</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000946.html">
+<link rel="next" href="000949.html">
+</head>
+<body>
+<h1>Proposed minor spec changes, for comment.</h1>
+<b>Luke Emmet</b> luke.emmet at gmail.com<br>
+<i>Thu May 21 22:13:07 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000946.html">Proposed minor spec changes, for comment.</a></li>
+<li>Next message (by thread): <a href="000949.html">Proposed minor spec changes, for comment.</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#947">[ date ]</a> <a href="thread.html#947">[ thread ]</a> <a href="subject.html#947">[ subject ]</a> <a href="author.html#947">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>
+<pre>
 On 21-May-2020 21:47, solderpunk wrote:
 &gt;<i> On Tue, May 19, 2020 at 07:46:25AM +0000, solderpunk wrote:
-</I>&gt;&gt;<i> So now the question is which do we prefer, forcing servers to
-</I>&gt;&gt;<i> canonicalise (canonise?) everything, with client behaviour then being
-</I>&gt;&gt;<i> strictly limited, or letting servers just send whatever the author uses
-</I>&gt;&gt;<i> and forcing clients to accept any of CRLF, CR or LF?
-</I>&gt;&gt;<i>
-</I>&gt;&gt;<i> In general I have preferred pushing burden to server authors over client
-</I>&gt;&gt;<i> authors for Gemini...but I expect the client burden is pretty small here
-</I>&gt;&gt;<i> as most languages will have some kind of functionality for breaking
-</I>&gt;&gt;<i> strings into lines which already handles this...
-</I>&gt;<i> Some quick experimentation with Python revealed that str.splitlines()
-</I>&gt;<i> is, indeed, smart enough to handle CRLF, CR and LF as linebreaks.
-</I>&gt;<i> Encouraged by this, I made a single Gemini page that mixes all three
-</I>&gt;<i> styles in a single document:
-</I>&gt;<i>
-</I>&gt;<i> <A HREF="gemini://gemini.circumlunar.space/users/solderpunk/linebreaks.gmi">gemini://gemini.circumlunar.space/users/solderpunk/linebreaks.gmi</A>
-</I>&gt;<i>
-</I>&gt;<i> I visited it with a selection of clients, but the results weren't
-</I>&gt;<i> encouraging.
-</I>&gt;<i>
-</I>&gt;<i> It rendered just fine in AV-98, because apparently Python is awesome at
-</I>&gt;<i> this.
-</I>As a client author, I think we have to expect a mix of line endings, but 
+</i>&gt;<i>&gt; So now the question is which do we prefer, forcing servers to
+</i>&gt;<i>&gt; canonicalise (canonise?) everything, with client behaviour then being
+</i>&gt;<i>&gt; strictly limited, or letting servers just send whatever the author uses
+</i>&gt;<i>&gt; and forcing clients to accept any of CRLF, CR or LF?
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; In general I have preferred pushing burden to server authors over client
+</i>&gt;<i>&gt; authors for Gemini...but I expect the client burden is pretty small here
+</i>&gt;<i>&gt; as most languages will have some kind of functionality for breaking
+</i>&gt;<i>&gt; strings into lines which already handles this...
+</i>&gt;<i> Some quick experimentation with Python revealed that str.splitlines()
+</i>&gt;<i> is, indeed, smart enough to handle CRLF, CR and LF as linebreaks.
+</i>&gt;<i> Encouraged by this, I made a single Gemini page that mixes all three
+</i>&gt;<i> styles in a single document:
+</i>&gt;<i>
+</i>&gt;<i> <a href="gemini://gemini.circumlunar.space/users/solderpunk/linebreaks.gmi">gemini://gemini.circumlunar.space/users/solderpunk/linebreaks.gmi</a>
+</i>&gt;<i>
+</i>&gt;<i> I visited it with a selection of clients, but the results weren&#x27;t
+</i>&gt;<i> encouraging.
+</i>&gt;<i>
+</i>&gt;<i> It rendered just fine in AV-98, because apparently Python is awesome at
+</i>&gt;<i> this.
+</i>As a client author, I think we have to expect a mix of line endings, but 
 perhaps not commonly in the same document. But even this will happen at 
 some stage when you have multiple authors contributing to the same file. 
 Most text editors will handle this without complaint. I think it is not 
@@ -88,99 +72,15 @@ Best Wishes
    - Luke
 
 
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="000946.html">Proposed minor spec changes, for comment.
-</A></li>
-	<LI>Next message (by thread): <A HREF="000949.html">Proposed minor spec changes, for comment.
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#947">[ date ]</a>
-              <a href="thread.html#947">[ thread ]</a>
-              <a href="subject.html#947">[ subject ]</a>
-              <a href="author.html#947">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="000946.html">Proposed minor spec changes, for comment.</a></li>
+<li>Next message (by thread): <a href="000949.html">Proposed minor spec changes, for comment.</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#947">[ date ]</a> <a href="thread.html#947">[ thread ]</a> <a href="subject.html#947">[ subject ]</a> <a href="author.html#947">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

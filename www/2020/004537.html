@@ -1,69 +1,53 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [spec] Limit valid encodings of text/gemini to UTF-8
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Limit%20valid%20encodings%20of%20text/gemini%20to%20UTF-8&In-Reply-To=%3C20201228141627.7bebd030c7ffde63118338c6%40gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="004549.html">
-   <LINK REL="Next"  HREF="004538.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[spec] Limit valid encodings of text/gemini to UTF-8</H1>
-    <B>Philip Linde</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Limit%20valid%20encodings%20of%20text/gemini%20to%20UTF-8&In-Reply-To=%3C20201228141627.7bebd030c7ffde63118338c6%40gmail.com%3E"
-       TITLE="[spec] Limit valid encodings of text/gemini to UTF-8">linde.philip at gmail.com
-       </A><BR>
-    <I>Mon Dec 28 13:16:27 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="004549.html">[user] [ot] flame warriors: a full taxonomy
-</A></li>
-        <LI>Next message (by thread): <A HREF="004538.html">[spec] Limit valid encodings of text/gemini to UTF-8
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4537">[ date ]</a>
-              <a href="thread.html#4537">[ thread ]</a>
-              <a href="subject.html#4537">[ subject ]</a>
-              <a href="author.html#4537">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] Limit valid encodings of text/gemini to UTF-8</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004549.html">
+<link rel="next" href="004538.html">
+</head>
+<body>
+<h1>[spec] Limit valid encodings of text/gemini to UTF-8</h1>
+<b>Philip Linde</b> linde.philip at gmail.com<br>
+<i>Mon Dec 28 13:16:27 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="004549.html">[user] [ot] flame warriors: a full taxonomy</a></li>
+<li>Next message (by thread): <a href="004538.html">[spec] Limit valid encodings of text/gemini to UTF-8</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4537">[ date ]</a> <a href="thread.html#4537">[ thread ]</a> <a href="subject.html#4537">[ subject ]</a> <a href="author.html#4537">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>This is not fully expressed in the specification, but practically, &quot;all&quot;
+<pre>This is not fully expressed in the specification, but practically, &quot;all&quot;
 text/gemini documents are either UTF-8 or US-ASCII encoded. Stephane
 Bortzmeyer compiled the following list from his crawler:
 
 &gt;<i> Only for text/gemini:
-</I>&gt;<i> 
-</I>&gt;<i> * Unspecified: 5997
-</I>&gt;<i> * utf-8: 4619
-</I>&gt;<i> * tcvn-5712: 2
-</I>&gt;<i> * cp437: 2
-</I>&gt;<i> * utf-16be: 1
-</I>&gt;<i> * utf-16: 1
-</I>&gt;<i> * windows-1252: 1
-</I>&gt;<i> * utf-32le: 1
-</I>&gt;<i> * utf-32be: 1
-</I>&gt;<i> * utf-16le: 1
-</I>&gt;<i> * ebcdicatde: 1
-</I>&gt;<i> 
-</I>&gt;<i> But wait, all the exotic charsets are at &lt;<A HREF="gemini://egsam.pitr.ca/">gemini://egsam.pitr.ca/</A>&gt;
-</I>&gt;<i> which is a test site for various funny stuff. So, it is safe to say
-</I>&gt;<i> that not one &quot;real&quot; gemtext resource uses something else than UTF-8.
-</I>
+</i>&gt;<i> 
+</i>&gt;<i> * Unspecified: 5997
+</i>&gt;<i> * utf-8: 4619
+</i>&gt;<i> * tcvn-5712: 2
+</i>&gt;<i> * cp437: 2
+</i>&gt;<i> * utf-16be: 1
+</i>&gt;<i> * utf-16: 1
+</i>&gt;<i> * windows-1252: 1
+</i>&gt;<i> * utf-32le: 1
+</i>&gt;<i> * utf-32be: 1
+</i>&gt;<i> * utf-16le: 1
+</i>&gt;<i> * ebcdicatde: 1
+</i>&gt;<i> 
+</i>&gt;<i> But wait, all the exotic charsets are at &lt;<a href="gemini://egsam.pitr.ca/">gemini://egsam.pitr.ca/</a>&gt;
+</i>&gt;<i> which is a test site for various funny stuff. So, it is safe to say
+</i>&gt;<i> that not one &quot;real&quot; gemtext resource uses something else than UTF-8.
+</i>
 While it is the case that impact is minimal, I suggest that the
 specification reflects the much simpler situation these statistics
 indicate rather than keep itself open to the general problem of
 representing text/gemini in encodings that might not even have the meta
-information characters encoded in the same way, and&#8212;if IRIs are
-introduced&#8212;creates the problem of how IRIs should be represented in
+information characters encoded in the same way, and?if IRIs are
+introduced?creates the problem of how IRIs should be represented in
 e.g. ISO-8859-1.
 
 I understand the need for other document types to take other character
@@ -73,7 +57,7 @@ and I see no reason that it should extend to support arbitrary
 encodings when limiting to UTF-8 creates a much simpler situation for
 implementers and is already the unspoken standard.
 
-There are display systems and platforms that fundamentally can't
+There are display systems and platforms that fundamentally can&#x27;t
 display UTF-8 directly. For example, in the PC text modes I am limited
 to IBM437. The problem of transcoding text/gemini should then lie with
 the client authors for those platforms, not with every other client
@@ -89,53 +73,16 @@ Name: not available
 Type: application/pgp-signature
 Size: 488 bytes
 Desc: not available
-URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201228/f3768982/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201228/f3768982/attachment.sig</A>&gt;
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20201228/f3768982/attachment.sig">https://mailing-list-archive.gemi.dev/www/attachments/20201228/f3768982/attachment.sig</a>&gt;
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="004549.html">[user] [ot] flame warriors: a full taxonomy
-</A></li>
-	<LI>Next message (by thread): <A HREF="004538.html">[spec] Limit valid encodings of text/gemini to UTF-8
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4537">[ date ]</a>
-              <a href="thread.html#4537">[ thread ]</a>
-              <a href="subject.html#4537">[ subject ]</a>
-              <a href="author.html#4537">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="004549.html">[user] [ot] flame warriors: a full taxonomy</a></li>
+<li>Next message (by thread): <a href="004538.html">[spec] Limit valid encodings of text/gemini to UTF-8</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4537">[ date ]</a> <a href="thread.html#4537">[ thread ]</a> <a href="subject.html#4537">[ subject ]</a> <a href="author.html#4537">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

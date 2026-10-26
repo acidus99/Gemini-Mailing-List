@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Clients] Gemini and accessibility regarding preformatted code blocks</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005635.html">
+<link rel="next" href="005641.html">
+</head>
+<body>
+<h1>[Clients] Gemini and accessibility regarding preformatted code blocks</h1>
+<b>Devin Prater</b> r.d.t.prater at gmail.com<br>
+<i>Thu Feb 25 21:20:54 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005635.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li>Next message (by thread): <a href="005641.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5639">[ date ]</a> <a href="thread.html#5639">[ thread ]</a> <a href="subject.html#5639">[ subject ]</a> <a href="author.html#5639">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Feb 25, 2021, at 2:38 PM, Sol?ne Rapenne &lt;solene at perso.pw&gt; wrote:
+&gt;<i> 
+</i>&gt;<i> Is the reader reading line by line? So depending on the alternative text the user could decide
+</i>&gt;<i> to explore the content or skip it?
+</i>The screen readers read line by line, basically. But browsers would have to put the code blocks in a container that can be skipped, like a frame so that screen readers can know that this is something that can be skipped. That?s for browsers that use some kind of web engine to show the content. For text browsers, this can?t really be controlled, some screen readers can?t easily skip it. That?s why I think these browsers should ?fold? in Emacs terminology, or hide the blocks on request. Okay, I?ll give more concrete examples.
+
+On iOS, the VoiceOver screen reader shows everything in its own element. The Elaho browser, then, could get away with simply putting the preformatted blocks without Alt-text, or Alt-text that isn?t a language ID, in its own element so that can be skipped by moving to the next element (item) with VoiceOver. This is the same with Android with the TalkBack screen reader, and on the Mac, using VoiceOver.
+=&gt; <a href="https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/supporting_voiceover_in_your_app">https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/supporting_voiceover_in_your_app</a> &lt;<a href="https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/supporting_voiceover_in_your_app">https://developer.apple.com/documentation/uikit/accessibility_for_ios_and_tvos/supporting_voiceover_in_your_app</a>&gt; VoiceOver (Apple developer)
+=&gt; <a href="https://developer.android.com/guide/topics/ui/accessibility">https://developer.android.com/guide/topics/ui/accessibility</a> &lt;<a href="https://developer.android.com/guide/topics/ui/accessibility">https://developer.android.com/guide/topics/ui/accessibility</a>&gt; TalkBack (Android developer)
+
+
+Windows and Linux graphical screen readers, however, read web pages like a document. So, there isn?t an easy way to skip past plain text, like Ascii art and such. Even if the blocks are marked up in the GemText, it is up to clients to show them. So, if a client just dumps the GemText into paragraphs, and puts the Ascii art in with it, then it is hard to skip. One can quickly arrow line by line until understandable words are spoken, but this is slow and frustrating. Windows and Linux GUI screen readers do have commands to ?skip to end of container,? which are used to skip block quotes, frames, things like that. But the browser has to display them to the screen reader as such, the screen reader doesn?t just guess this.
+=&gt; <a href="https://github.com/nvaccess/nvda">https://github.com/nvaccess/nvda</a> &lt;<a href="https://github.com/nvaccess/nvda">https://github.com/nvaccess/nvda</a>&gt; NVDA screen reader for Windows (Github)
+=&gt; <a href="https://gitlab.gnome.org/GNOME/orca">https://gitlab.gnome.org/GNOME/orca</a> &lt;<a href="https://gitlab.gnome.org/GNOME/orca">https://gitlab.gnome.org/GNOME/orca</a>&gt; Orca screen reader (Gitlab)
+
+Console screen readers are the most dumb of them all. They read directly from top left of the screen to bottom right, whereas GUI screen readers start at keyboard focus, or at top left of a document or web page that doesn?t put keyboard focus anywhere else. Console screen readers do have keys to read by line, word or character, but not much else. It all is dependent on the program being read.
+=&gt; <a href="http://www.linux-speakup.org">http://www.linux-speakup.org</a> &lt;<a href="http://www.linux-speakup.org/">http://www.linux-speakup.org/</a>&gt; Speak screen reader
+=&gt; <a href="https://github.com/chrys87/fenrir">https://github.com/chrys87/fenrir</a> &lt;<a href="https://github.com/chrys87/fenrir">https://github.com/chrys87/fenrir</a>&gt; Fenrir screen reader
+=&gt; <a href="https://brltty.app">https://brltty.app</a> &lt;<a href="https://brltty.app/">https://brltty.app/</a>&gt; BRLTTY braille display driver
+
+Hope that helps a little more.
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210225/adc45c81/attachment.htm">https://mailing-list-archive.gemi.dev/www/attachments/20210225/adc45c81/attachment.htm</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005635.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li>Next message (by thread): <a href="005641.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5639">[ date ]</a> <a href="thread.html#5639">[ thread ]</a> <a href="subject.html#5639">[ subject ]</a> <a href="author.html#5639">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

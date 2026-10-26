@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] [spec] On extending gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005397.html">
+<link rel="next" href="005392.html">
+</head>
+<body>
+<h1>[tech] [spec] On extending gemini</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Sun Feb 21 06:49:48 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005397.html">[tech] [spec] On extending gemini</a></li>
+<li>Next message (by thread): <a href="005392.html">[tech] [spec] On extending gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5383">[ date ]</a> <a href="thread.html#5383">[ thread ]</a> <a href="subject.html#5383">[ subject ]</a> <a href="author.html#5383">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Michael Lazar once stated:
+&gt;<i> I feel like I should say something as the author of the controversial
+</i>&gt;<i> gemini favicon RFC [0].
+</i>
+  I&#x27;ve been pondering a response to this all day, and I wasn&#x27;t sure even if
+I should respond.  Thanks for breaking the ground here.
+
+&gt;<i> This comment was posted earlier today by ddevault on the Amfora issue
+</i>&gt;<i> tracker [1].
+</i>&gt;<i> 
+</i>&gt;<i> &gt; Every gemini page shall complete in a single gemini request. Please
+</i>&gt;<i> &gt; do not send extra requests to my server, opt-in or not. Gemini is
+</i>&gt;<i> &gt; not the web and adding flashy features and new standards is
+</i>&gt;<i> &gt; decidedly un-gemini.
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; I might update my server software to automatically blackhole any IP
+</i>&gt;<i> &gt; address which tries to request a favicon file.
+</i>&gt;<i> 
+</i>&gt;<i> And continuing in the following comment (after makeworld expressed
+</i>&gt;<i> some reservations).
+</i>&gt;<i> 
+</i>&gt;<i> &gt; This is the only means we have of self regulation. I&#x27;ll ask nicely
+</i>&gt;<i> &gt; first but ultimately I&#x27;ll do what I have to in order to preserve
+</i>&gt;<i> &gt; Gemini&#x27;s simplicity and utility as a small internet protocol.
+</i>&gt;<i> &gt; Do not. Extend. Gemini.
+</i>&gt;<i> &gt; Period.
+</i>&gt;<i> 
+</i>&gt;<i> This is disgraceful, shameless intimidation.
+</i>
+  But it fits with his character.  When I asked for the IP address of his
+web proxy to block it (because of his refusal to support robots.txt), he 
+resorted to name calling:
+  
+        <a href="https://mailing-list-archive.gemi.dev/www/2020/003509.html">https://mailing-list-archive.gemi.dev/www/2020/003509.html</a>
+
+(Note for non-US readers:  The term &quot;dick&quot; is a slang term for &quot;penis&quot; and
+is used as a slur against other males.  It is *also* true that &quot;Dick&quot; is a
+legitimate name (a short form for &quot;Richard&quot;), but as I&#x27;m not named
+&quot;Richard&quot;, nor is Drew, it was obviously a slur against me.)
+
+  It does come across as Drew saying &quot;blocking is for me, not for thee.&quot;)
+
+&gt;<i> Note the deliberate timing of when this issue was raised.
+</i>&gt;<i> <a href="gemini://srht.site">gemini://srht.site</a> was announced just a few hours earlier and the
+</i>&gt;<i> obvious expectation is that ddevault will soon host a significant
+</i>&gt;<i> portion of gemini capsules in the wild. He now has the power he
+</i>&gt;<i> needs to make demands of other gemini developers.
+</i>&gt;<i> 
+</i>&gt;<i> The threat isn?t to blackhole all requests to /favicon.txt, which
+</i>&gt;<i> might have been considered reasonable. No, the thread is to blackhole
+</i>&gt;<i> the IP address of every amfora user, cutting them off from a large
+</i>&gt;<i> swath of gemini and thereby crippling the client. Destroying the
+</i>&gt;<i> hundreds of hours that makeworld has no doubt spent building up his
+</i>&gt;<i> software and community. Unless he submits, unwavering, to ddevault?s
+</i>&gt;<i> ultimatum to &quot;fix&quot; his software.
+</i>&gt;<i>   
+</i>&gt;<i> And it worked.
+</i>&gt;<i> 
+</i>&gt;<i> Think carefully about the consequences of using <a href="gemini://srht.site">gemini://srht.site</a>.
+</i>&gt;<i> 
+</i>&gt;<i> Now, switching gears to rant about gemini more broadly. For context,
+</i>&gt;<i> I was one of the earliest adopters of gemini, although I don?t have
+</i>&gt;<i> any ties to its inception and the group of people who brainstormed
+</i>&gt;<i> ideas for the initial spec. I was a spectator who stumbled upon it
+</i>&gt;<i> while I was browsing through bongusta! one day [2].
+</i>
+  I am not fond of Drew (and it&#x27;s for more than his just calling me a bad
+name), but I&#x27;m trying square his actions against mine from 2019.  For
+context, I was *the* first adopter of Gemini, writing my own server even
+before Solderpunk could write one (for the record: he wrote the second
+Gemini server).  I *broke* the spec with my implementation, not at all
+agreeing with Solderpunk about some pretty fundamental issues with the
+protocol, because at *that* time, the protocol:
+
+	used single digit resonse codes
+	no support for client certificates
+	a link line of [text|url]
+	no virtual hosting
+	a request format ala gopher (including TABs!)
+	no rediection
+	no indication of pages are actually gone vs not found
+	no MIME parameters
+
+  I like to think I wasn&#x27;t quite the dictator that Drew comes across as (in
+both his Amfora ticket, or this message to the list:
+
+	<a href="https://mailing-list-archive.gemi.dev/www/2020/003506.html">https://mailing-list-archive.gemi.dev/www/2020/003506.html</a>
+
+Who put *him* in charge of Gemini?)  I had (well, still have) strong
+opinions on Gemini, but I did present my arguments for certain features, and
+against others.  And it wasn&#x27;t uncommon in the early days of sweeping
+changes and mass updates to clients *and* servers.
+
+  As a consequence, I find this seeming charge of &quot;don&#x27;t change the spec
+EVER!&quot; troublesome.  That once Solderpunk (where *IS* he, by the way?) makes
+the few changes that are requested, that&#x27;s it.  It&#x27;s done.  No more
+experimentation.  Ever.  It feels as if Gemini is ossifying even before it&#x27;s
+set in stone.  It&#x27;s a weird feeling.
+
+&gt;<i> It?s the magic of the smolnet. It?s fleeting; you can?t capture it in
+</i>&gt;<i> a bottle and you can?t freeze it in time by locking down the spec.
+</i>&gt;<i> Enjoy it while it lasts. I came up with the favicon emoji RFC because
+</i>&gt;<i> I thought it was a fun idea. I ported botany to gemini because I
+</i>&gt;<i> thought it was a fun idea. Don?t stifle your own ideas out of fear of
+</i>&gt;<i> what will happen to gemini://. Gemini will evolve whether you want it to
+</i>&gt;<i> or not.
+</i>
+  I thought the favicon emoji was a fun idea.  I still do.  I even support
+it on my server.  Astrobotany is a *wonderful* use of client certificates
+(and something I was hoping would happen when I was pushing for their use). 
+And I agree, Gemini will evolve over time.  Inline images?  Okay, data: URLs
+[3]!  Or wait, I know!  A MIME type of multiple/related!
+
+  -spc (Muahahahahahahahahahaha!)
+
+&gt;<i> [0] <a href="gemini://mozz.us/files/rfc_gemini_favicon.gmi">gemini://mozz.us/files/rfc_gemini_favicon.gmi</a>
+</i>&gt;<i> [1] <a href="https://github.com/makeworld-the-better-one/amfora/issues/199">https://github.com/makeworld-the-better-one/amfora/issues/199</a>
+</i>&gt;<i> [2] <a href="gopher://i-logout.cz:70/1/bongusta">gopher://i-logout.cz:70/1/bongusta</a>
+</i>
+[3]	I&#x27;m the joker responsible for that.  Gemini Client Torture Test #21.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005397.html">[tech] [spec] On extending gemini</a></li>
+<li>Next message (by thread): <a href="005392.html">[tech] [spec] On extending gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5383">[ date ]</a> <a href="thread.html#5383">[ thread ]</a> <a href="subject.html#5383">[ subject ]</a> <a href="author.html#5383">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

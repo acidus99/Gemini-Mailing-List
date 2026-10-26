@@ -1,47 +1,31 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Seeking for help with C Gemini client
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Seeking%20for%20help%20with%20C%20Gemini%20client&In-Reply-To=%3C20200819212601.1c618ea45391e2f0f3a9b848%40yandex.ru%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="002448.html">
-   <LINK REL="Next"  HREF="002447.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Seeking for help with C Gemini client</H1>
-    <B>-</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Seeking%20for%20help%20with%20C%20Gemini%20client&In-Reply-To=%3C20200819212601.1c618ea45391e2f0f3a9b848%40yandex.ru%3E"
-       TITLE="Seeking for help with C Gemini client">anridellal at yandex.ru
-       </A><BR>
-    <I>Wed Aug 19 19:26:01 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="002448.html">Seeking for help with C Gemini client
-</A></li>
-        <LI>Next message (by thread): <A HREF="002447.html">Seeking for help with C Gemini client
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2453">[ date ]</a>
-              <a href="thread.html#2453">[ thread ]</a>
-              <a href="subject.html#2453">[ subject ]</a>
-              <a href="author.html#2453">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seeking for help with C Gemini client</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="002448.html">
+<link rel="next" href="002447.html">
+</head>
+<body>
+<h1>Seeking for help with C Gemini client</h1>
+<b>-</b> anridellal at yandex.ru<br>
+<i>Wed Aug 19 19:26:01 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="002448.html">Seeking for help with C Gemini client</a></li>
+<li>Next message (by thread): <a href="002447.html">Seeking for help with C Gemini client</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2453">[ date ]</a> <a href="thread.html#2453">[ thread ]</a> <a href="subject.html#2453">[ subject ]</a> <a href="author.html#2453">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Thank you.
-I managed to make it work with LibreSSL's libtls:
+<pre>Thank you.
+I managed to make it work with LibreSSL&#x27;s libtls:
 
-<A HREF="https://man.openbsd.org/tls_init.3">https://man.openbsd.org/tls_init.3</A>
+<a href="https://man.openbsd.org/tls_init.3">https://man.openbsd.org/tls_init.3</a>
 
-Sharing the code in case someone wants to take a look at an implementation (the code is far from perfection, but I'll fix it later):
+Sharing the code in case someone wants to take a look at an implementation (the code is far from perfection, but I&#x27;ll fix it later):
 
 #include &lt;arpa/inet.h&gt;
 #include &lt;locale.h&gt;
@@ -90,7 +74,7 @@ int main() {
 	const char *hostname = &quot;gemini.circumlunar.space&quot;;
 
 	char *url = malloc(sizeof(char)*1024);
-	strcpy(url, &quot;<A HREF="gemini://gemini.circumlunar.space/">gemini://gemini.circumlunar.space/</A>&quot;);
+	strcpy(url, &quot;<a href="gemini://gemini.circumlunar.space/">gemini://gemini.circumlunar.space/</a>&quot;);
 	char rec_buf[1029];
 	int writebytes = sprintf(url, &quot;%s\r\n&quot;, url);
 	tls_connect(client, hostname, GEMINI_PORT);
@@ -128,145 +112,129 @@ int main() {
 }
 
 On Wed, 19 Aug 2020 15:55:00 +0100
-Kevin Sangeelee &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">kevin at susa.net</A>&gt; wrote:
+Kevin Sangeelee &lt;kevin at susa.net&gt; wrote:
 
 &gt;<i> This is something I had been tinkering with, before getting distracted
-</I>&gt;<i> onto something else(!). I found two examples of simple echo servers,
-</I>&gt;<i> one for GnuTLS and one OpenSSL. The code is here
-</I>&gt;<i> 
-</I>&gt;<i>     <A HREF="gemini://gemini.susa.net/c/">gemini://gemini.susa.net/c/</A>
-</I>&gt;<i> 
-</I>&gt;<i> Both certainly compiled (I have binaries on disk), but I can't recall
-</I>&gt;<i> any more detail than that, so just sharing this as a pointer to the
-</I>&gt;<i> original poster.
-</I>&gt;<i> 
-</I>&gt;<i> Kevin
-</I>&gt;<i> 
-</I>&gt;<i> On Wed, 19 Aug 2020 at 12:36, Paul Warren &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">pwarren at pwarren.id.au</A>&gt; wrote:
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt; G'day!
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt; Gemini, while simple, isn't quite that simple. All protocol commands and
-</I>&gt;<i> &gt; responses are over TLS connections, so doing a send/recv on a raw
-</I>&gt;<i> &gt; network socket will not work!
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt; I'm not 100% sure on the best or simplest way to get a TLS stack going
-</I>&gt;<i> &gt; in C, I've done some bits with OpenSSL, but it was not simple!
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt; Cheers
-</I>&gt;<i> &gt; --
-</I>&gt;<i> &gt; Paul
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt; On 19/8/20 11:57 pm, - wrote:
-</I>&gt;<i> &gt; &gt; Hello,
-</I>&gt;<i> &gt; &gt;
-</I>&gt;<i> &gt; &gt; I've started writing a client for Gemini protocol, but since I've never been writing networking programs, I find myself at the dead end at the moment. Please could someone help me? When I send a request and get a response, the only thing I have in response is &quot;<A HREF="gemini://">gemini://</A>&quot; and nothing else. The code is given below:
-</I>&gt;<i> &gt; &gt;
-</I>&gt;<i> &gt; &gt; #include &lt;arpa/inet.h&gt;
-</I>&gt;<i> &gt; &gt; #include &lt;locale.h&gt;
-</I>&gt;<i> &gt; &gt; #include &lt;netdb.h&gt;
-</I>&gt;<i> &gt; &gt; #include &lt;netinet/in.h&gt;
-</I>&gt;<i> &gt; &gt; #include &lt;stdio.h&gt;
-</I>&gt;<i> &gt; &gt; #include &lt;stdlib.h&gt;
-</I>&gt;<i> &gt; &gt; #include &lt;string.h&gt;
-</I>&gt;<i> &gt; &gt; #include &lt;sys/types.h&gt;
-</I>&gt;<i> &gt; &gt; #include &lt;sys/socket.h&gt;
-</I>&gt;<i> &gt; &gt; #include &lt;unistd.h&gt;
-</I>&gt;<i> &gt; &gt;
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_INPUT 10
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_SENSITIVE_INPUT 11
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_SUCCESS 20
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_REDIRECT_TEMP 30
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_REDIRECT_PERM 31
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_TEMP_FAILURE 40
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_SERVER_UNAVAILABLE 41
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_CGI_ERROR 42
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_PROXY_ERROR 43
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_SLOW_DOWN 44
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_PERM_FAILURE 50
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_NOT_FOUND 51
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_GONE 52
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_PROXY_REQUEST_REFUSED 53
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_BAD_REQUEST 59
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_CLIENT_CERT_REQUIRED 60
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_CERT_NO_AUTH 61
-</I>&gt;<i> &gt; &gt; #define STATUS_CODE_CERT_NOT_VALID 62
-</I>&gt;<i> &gt; &gt;
-</I>&gt;<i> &gt; &gt; #define GEMINI_PORT 1965
-</I>&gt;<i> &gt; &gt;
-</I>&gt;<i> &gt; &gt; int main() {
-</I>&gt;<i> &gt; &gt;       char *locale;
-</I>&gt;<i> &gt; &gt;       locale = setlocale(LC_ALL, &quot;&quot;);
-</I>&gt;<i> &gt; &gt;
-</I>&gt;<i> &gt; &gt;       int sockfd = socket(AF_INET, SOCK_STREAM, 0);
-</I>&gt;<i> &gt; &gt;       if (sockfd &lt; 0) {
-</I>&gt;<i> &gt; &gt;               perror(&quot;socket&quot;);
-</I>&gt;<i> &gt; &gt;               exit(1);
-</I>&gt;<i> &gt; &gt;       }
-</I>&gt;<i> &gt; &gt;       char *url = malloc(sizeof(char)*1024);
-</I>&gt;<i> &gt; &gt;       strcpy(url, &quot;<A HREF="gemini://gemini.circumlunar.space/\r\n">gemini://gemini.circumlunar.space/\r\n</A>&quot;);
-</I>&gt;<i> &gt; &gt;       char rec_buf[1029] = {0};
-</I>&gt;<i> &gt; &gt;       struct hostent *host_entry;
-</I>&gt;<i> &gt; &gt;       host_entry = gethostbyname(url);
-</I>&gt;<i> &gt; &gt;       struct sockaddr_in addr;
-</I>&gt;<i> &gt; &gt;       addr.sin_family = AF_INET;
-</I>&gt;<i> &gt; &gt;       addr.sin_port = htons(GEMINI_PORT);
-</I>&gt;<i> &gt; &gt;       addr.sin_addr.s_addr = htonl(INADDR_ANY);
-</I>&gt;<i> &gt; &gt;       int opt = 1;
-</I>&gt;<i> &gt; &gt;       if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &amp;opt, sizeof(opt)) &lt; 0) {
-</I>&gt;<i> &gt; &gt;               perror(&quot;setsockopt&quot;);
-</I>&gt;<i> &gt; &gt;               exit(1);
-</I>&gt;<i> &gt; &gt;       }
-</I>&gt;<i> &gt; &gt;       if (bind(sockfd, (struct sockaddr *)&amp;addr, sizeof(addr)) &lt; 0) {
-</I>&gt;<i> &gt; &gt;               perror(&quot;bind&quot;);
-</I>&gt;<i> &gt; &gt;               exit(2);
-</I>&gt;<i> &gt; &gt;       }
-</I>&gt;<i> &gt; &gt;       if (connect(sockfd, (struct sockaddr *)&amp;addr, sizeof(addr)) &lt; 0) {
-</I>&gt;<i> &gt; &gt;               perror(&quot;connect&quot;);
-</I>&gt;<i> &gt; &gt;               exit(3);
-</I>&gt;<i> &gt; &gt;       }
-</I>&gt;<i> &gt; &gt;       send(sockfd, url, sizeof(url), 0);
-</I>&gt;<i> &gt; &gt;       recv(sockfd, rec_buf, sizeof(rec_buf), 0);
-</I>&gt;<i> &gt; &gt;       printf(&quot;%s\n&quot;, rec_buf);
-</I>&gt;<i> &gt; &gt;       close(sockfd);
-</I>&gt;<i> &gt; &gt;       shutdown(sockfd, SHUT_RDWR);
-</I>&gt;<i> &gt; &gt;       free(url);
-</I>&gt;<i> &gt; &gt;       return 0;
-</I>&gt;<i> &gt; &gt; }
-</I>&gt;<i> &gt; &gt;
-</I>&gt;<i> &gt; &gt;
-</I>&gt;<i> &gt;
-</I>
+</i>&gt;<i> onto something else(!). I found two examples of simple echo servers,
+</i>&gt;<i> one for GnuTLS and one OpenSSL. The code is here
+</i>&gt;<i> 
+</i>&gt;<i>     <a href="gemini://gemini.susa.net/c/">gemini://gemini.susa.net/c/</a>
+</i>&gt;<i> 
+</i>&gt;<i> Both certainly compiled (I have binaries on disk), but I can&#x27;t recall
+</i>&gt;<i> any more detail than that, so just sharing this as a pointer to the
+</i>&gt;<i> original poster.
+</i>&gt;<i> 
+</i>&gt;<i> Kevin
+</i>&gt;<i> 
+</i>&gt;<i> On Wed, 19 Aug 2020 at 12:36, Paul Warren &lt;pwarren at pwarren.id.au&gt; wrote:
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; G&#x27;day!
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; Gemini, while simple, isn&#x27;t quite that simple. All protocol commands and
+</i>&gt;<i> &gt; responses are over TLS connections, so doing a send/recv on a raw
+</i>&gt;<i> &gt; network socket will not work!
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; I&#x27;m not 100% sure on the best or simplest way to get a TLS stack going
+</i>&gt;<i> &gt; in C, I&#x27;ve done some bits with OpenSSL, but it was not simple!
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; Cheers
+</i>&gt;<i> &gt; --
+</i>&gt;<i> &gt; Paul
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; On 19/8/20 11:57 pm, - wrote:
+</i>&gt;<i> &gt; &gt; Hello,
+</i>&gt;<i> &gt; &gt;
+</i>&gt;<i> &gt; &gt; I&#x27;ve started writing a client for Gemini protocol, but since I&#x27;ve never been writing networking programs, I find myself at the dead end at the moment. Please could someone help me? When I send a request and get a response, the only thing I have in response is &quot;gemini://&quot; and nothing else. The code is given below:
+</i>&gt;<i> &gt; &gt;
+</i>&gt;<i> &gt; &gt; #include &lt;arpa/inet.h&gt;
+</i>&gt;<i> &gt; &gt; #include &lt;locale.h&gt;
+</i>&gt;<i> &gt; &gt; #include &lt;netdb.h&gt;
+</i>&gt;<i> &gt; &gt; #include &lt;netinet/in.h&gt;
+</i>&gt;<i> &gt; &gt; #include &lt;stdio.h&gt;
+</i>&gt;<i> &gt; &gt; #include &lt;stdlib.h&gt;
+</i>&gt;<i> &gt; &gt; #include &lt;string.h&gt;
+</i>&gt;<i> &gt; &gt; #include &lt;sys/types.h&gt;
+</i>&gt;<i> &gt; &gt; #include &lt;sys/socket.h&gt;
+</i>&gt;<i> &gt; &gt; #include &lt;unistd.h&gt;
+</i>&gt;<i> &gt; &gt;
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_INPUT 10
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_SENSITIVE_INPUT 11
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_SUCCESS 20
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_REDIRECT_TEMP 30
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_REDIRECT_PERM 31
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_TEMP_FAILURE 40
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_SERVER_UNAVAILABLE 41
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_CGI_ERROR 42
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_PROXY_ERROR 43
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_SLOW_DOWN 44
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_PERM_FAILURE 50
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_NOT_FOUND 51
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_GONE 52
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_PROXY_REQUEST_REFUSED 53
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_BAD_REQUEST 59
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_CLIENT_CERT_REQUIRED 60
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_CERT_NO_AUTH 61
+</i>&gt;<i> &gt; &gt; #define STATUS_CODE_CERT_NOT_VALID 62
+</i>&gt;<i> &gt; &gt;
+</i>&gt;<i> &gt; &gt; #define GEMINI_PORT 1965
+</i>&gt;<i> &gt; &gt;
+</i>&gt;<i> &gt; &gt; int main() {
+</i>&gt;<i> &gt; &gt;       char *locale;
+</i>&gt;<i> &gt; &gt;       locale = setlocale(LC_ALL, &quot;&quot;);
+</i>&gt;<i> &gt; &gt;
+</i>&gt;<i> &gt; &gt;       int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+</i>&gt;<i> &gt; &gt;       if (sockfd &lt; 0) {
+</i>&gt;<i> &gt; &gt;               perror(&quot;socket&quot;);
+</i>&gt;<i> &gt; &gt;               exit(1);
+</i>&gt;<i> &gt; &gt;       }
+</i>&gt;<i> &gt; &gt;       char *url = malloc(sizeof(char)*1024);
+</i>&gt;<i> &gt; &gt;       strcpy(url, &quot;<a href="gemini://gemini.circumlunar.space/\r\n">gemini://gemini.circumlunar.space/\r\n</a>&quot;);
+</i>&gt;<i> &gt; &gt;       char rec_buf[1029] = {0};
+</i>&gt;<i> &gt; &gt;       struct hostent *host_entry;
+</i>&gt;<i> &gt; &gt;       host_entry = gethostbyname(url);
+</i>&gt;<i> &gt; &gt;       struct sockaddr_in addr;
+</i>&gt;<i> &gt; &gt;       addr.sin_family = AF_INET;
+</i>&gt;<i> &gt; &gt;       addr.sin_port = htons(GEMINI_PORT);
+</i>&gt;<i> &gt; &gt;       addr.sin_addr.s_addr = htonl(INADDR_ANY);
+</i>&gt;<i> &gt; &gt;       int opt = 1;
+</i>&gt;<i> &gt; &gt;       if (setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &amp;opt, sizeof(opt)) &lt; 0) {
+</i>&gt;<i> &gt; &gt;               perror(&quot;setsockopt&quot;);
+</i>&gt;<i> &gt; &gt;               exit(1);
+</i>&gt;<i> &gt; &gt;       }
+</i>&gt;<i> &gt; &gt;       if (bind(sockfd, (struct sockaddr *)&amp;addr, sizeof(addr)) &lt; 0) {
+</i>&gt;<i> &gt; &gt;               perror(&quot;bind&quot;);
+</i>&gt;<i> &gt; &gt;               exit(2);
+</i>&gt;<i> &gt; &gt;       }
+</i>&gt;<i> &gt; &gt;       if (connect(sockfd, (struct sockaddr *)&amp;addr, sizeof(addr)) &lt; 0) {
+</i>&gt;<i> &gt; &gt;               perror(&quot;connect&quot;);
+</i>&gt;<i> &gt; &gt;               exit(3);
+</i>&gt;<i> &gt; &gt;       }
+</i>&gt;<i> &gt; &gt;       send(sockfd, url, sizeof(url), 0);
+</i>&gt;<i> &gt; &gt;       recv(sockfd, rec_buf, sizeof(rec_buf), 0);
+</i>&gt;<i> &gt; &gt;       printf(&quot;%s\n&quot;, rec_buf);
+</i>&gt;<i> &gt; &gt;       close(sockfd);
+</i>&gt;<i> &gt; &gt;       shutdown(sockfd, SHUT_RDWR);
+</i>&gt;<i> &gt; &gt;       free(url);
+</i>&gt;<i> &gt; &gt;       return 0;
+</i>&gt;<i> &gt; &gt; }
+</i>&gt;<i> &gt; &gt;
+</i>&gt;<i> &gt; &gt;
+</i>&gt;<i> &gt;
+</i>
 
 -- 
-- &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">anridellal at yandex.ru</A>&gt;
-</PRE>
-
-
-
-
-
-
-
+- &lt;anridellal at yandex.ru&gt;
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="002448.html">Seeking for help with C Gemini client
-</A></li>
-	<LI>Next message (by thread): <A HREF="002447.html">Seeking for help with C Gemini client
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2453">[ date ]</a>
-              <a href="thread.html#2453">[ thread ]</a>
-              <a href="subject.html#2453">[ subject ]</a>
-              <a href="author.html#2453">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="002448.html">Seeking for help with C Gemini client</a></li>
+<li>Next message (by thread): <a href="002447.html">Seeking for help with C Gemini client</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2453">[ date ]</a> <a href="thread.html#2453">[ thread ]</a> <a href="subject.html#2453">[ subject ]</a> <a href="author.html#2453">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

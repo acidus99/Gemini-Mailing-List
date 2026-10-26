@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] comments on the proposed gemini spec revisions</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007298.html">
+<link rel="next" href="007306.html">
+</head>
+<body>
+<h1>[spec] comments on the proposed gemini spec revisions</h1>
+<b>Robert &quot;khuxkm&quot; Miles</b> khuxkm at tilde.team<br>
+<i>Tue Oct 12 21:27:00 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007298.html">[spec] [whitespace]</a></li>
+<li>Next message (by thread): <a href="007306.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7294">[ date ]</a> <a href="thread.html#7294">[ thread ]</a> <a href="subject.html#7294">[ subject ]</a> <a href="author.html#7294">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>October 11, 2021 10:44 AM, &quot;Alan Bunbury&quot; &lt;gemini@bunburya.eu&gt; wrote:
+
+&gt;<i> In truth I&#x27;m not sure in what circumstances a &quot;---&quot; text line would be intended as something other
+</i>&gt;<i> than a separator, but I&#x27;m sure other authors are more imaginative than I am. To take another
+</i>&gt;<i> example, I have regularly encountered situations where a single * in a markdown document is
+</i>&gt;<i> incorrectly interpreted as marking the beginning of italicised text, so the rest of the document is
+</i>&gt;<i> italicised inappropriately. I&#x27;d like for that not to become commonplace in Geminispace.
+</i>
+I fail to see how replacing a line that has only `---` on it with a graphical separator is anything like the runaway italics thing you mentioned. Still, I can kind of see where you&#x27;re going with that.
+
+&gt;<i> Separately, on the whitespace issue, I do think it would be helpful to clarify in the spec whether
+</i>&gt;<i> whitespace is mandatory, particularly for headers. For example, should the line &quot;#### Hello&quot; be
+</i>&gt;<i> interpreted as (i) a level 3 header whose text is &quot;# Hello&quot;, or (ii) a text line whose text is
+</i>&gt;<i> &quot;#### Hello&quot;? AFAIK that is ambiguous unless there is a clear stance on mandatory whitespace in the
+</i>&gt;<i> spec.
+</i>
+That is not ambiguous, with or without mandatory whitespace. As Plain Text pointed out, the max amount of characters used to determine the linetype is the first 3, per 5.3 in the gemtext spec (awkwardly numbered because it was originally part of the protocol spec):
+
+&gt;<i> It is possible to unambiguously determine a line&#x27;s type purely by inspecting its first three characters.
+</i>
+Therefore, any (good) client will see that the first 3 characters of the line are &quot;###&quot; and correctly call it what it is: a level 3 header with the text &quot;# Hello&quot;. I fail to see how that would be ambiguous (I guess the spec doesn&#x27;t do *that* good of a job explaining it, but I would think you could catch on by the fact that the section on header lines only gives examples of #, ##, and ###).
+
+Just my two cents,
+Robert &quot;khuxkm&quot; Miles
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007298.html">[spec] [whitespace]</a></li>
+<li>Next message (by thread): <a href="007306.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7294">[ date ]</a> <a href="thread.html#7294">[ thread ]</a> <a href="subject.html#7294">[ subject ]</a> <a href="author.html#7294">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

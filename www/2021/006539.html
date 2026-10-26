@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] Integrity checks for Gemini pages</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006535.html">
+<link rel="next" href="006548.html">
+</head>
+<body>
+<h1>[tech] Integrity checks for Gemini pages</h1>
+<b>Almaember</b> almaember at disroot.org<br>
+<i>Wed May 19 13:40:43 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006535.html">[tech] Integrity checks for Gemini pages</a></li>
+<li>Next message (by thread): <a href="006548.html">[tech] Integrity checks for Gemini pages</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6539">[ date ]</a> <a href="thread.html#6539">[ thread ]</a> <a href="subject.html#6539">[ subject ]</a> <a href="author.html#6539">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On 19/05/2021 13:13, ew.gemini wrote:
+&gt;<i>
+</i>&gt;<i> Almaember &lt;almaember@disroot.org&gt; writes:
+</i>&gt;<i>
+</i>&gt;<i>&gt; On 19/05/2021 09:40, ew.gemini wrote:
+</i>&gt;<i>&gt;&gt; Hello almaember,
+</i>&gt;<i>&gt;&gt; Almaember &lt;almaember@disroot.org&gt; writes:
+</i>&gt;<i>&gt;&gt;
+</i>&gt;<i>&gt;&gt;&gt; Hello, everybody!
+</i>&gt;<i>&gt;&gt;&gt;
+</i>&gt;<i>&gt;&gt;&gt; I know that there is no way in Gemini right now to check the integrity
+</i>&gt;<i>&gt;&gt;&gt; of pages. However, it would be nice for this to possible.
+</i>&gt;<i>&gt;&gt; Integrity in the sense of &quot;the file remained unchanged in
+</i>&gt;<i>&gt;&gt; transit&quot;? TLS should take care of that. In the sense &quot;the file
+</i>&gt;<i>&gt;&gt; is the one that the original author intented it to be&quot;?
+</i>&gt;<i>&gt;&gt; There are at least two attempts to deal with this:
+</i>&gt;<i>&gt;&gt; If you dare to check my capsule at
+</i>&gt;<i>&gt;&gt; =&gt; <a href="gemini://ew.srht.site/">gemini://ew.srht.site/</a>
+</i>&gt;<i>&gt;&gt; There are two links to openbsd-signify and NetSigil.
+</i>&gt;<i>&gt;&gt; When I publish a post, my Makefile takes care to create
+</i>&gt;<i>&gt;&gt; corresponding sha256 checksums. They are concatenated into one
+</i>&gt;<i>&gt;&gt; file, which is then signed using my gpg key. That&#x27;s one option.
+</i>&gt;<i>&gt;&gt; The same information is packaged differently to
+</i>&gt;<i>&gt;&gt; .well-known/signature-bundle. This file is created using
+</i>&gt;<i>&gt;&gt; openbds-signify.
+</i>&gt;<i>&gt;&gt; There are a few threads on the mailing list, too ...
+</i>&gt;<i>&gt;&gt; <a href="https://mailing-list-archive.gemi.dev/www/2021/005550.html">https://mailing-list-archive.gemi.dev/www/2021/005550.html</a>
+</i>&gt;<i>&gt;&gt; <a href="https://mailing-list-archive.gemi.dev/www/2021/005374.html">https://mailing-list-archive.gemi.dev/www/2021/005374.html</a>
+</i>&gt;<i>&gt;&gt; <a href="https://mailing-list-archive.gemi.dev/www/2021/005331.html">https://mailing-list-archive.gemi.dev/www/2021/005331.html</a>
+</i>&gt;<i>&gt;&gt; Also see my first post about experimenting with this:
+</i>&gt;<i>&gt;&gt; =&gt; <a href="gemini://ew.srht.site/en/2020/20201217-towards-a-proper-flightlog-4.gmi">gemini://ew.srht.site/en/2020/20201217-towards-a-proper-flightlog-4.gmi</a>
+</i>&gt;<i>&gt;&gt;
+</i>&gt;<i>&gt;&gt; There are two parts to this, as I see it.
+</i>&gt;<i>&gt;&gt; 1.
+</i>&gt;<i>&gt;&gt; Create the checksums/signature in some agreed upon format.
+</i>&gt;<i>&gt;&gt; Everyone editing a capsule has to do this. While a bit tedious,
+</i>&gt;<i>&gt;&gt; it still can be done manually on the shell (unix type
+</i>&gt;<i>&gt;&gt; environment assumed).
+</i>&gt;<i>&gt;&gt; 2.
+</i>&gt;<i>&gt;&gt; Upon user request browsers have to check these agreed upon
+</i>&gt;<i>&gt;&gt; locations, download the signed file, possibly download the
+</i>&gt;<i>&gt;&gt; public key, cache these things properly and then do the
+</i>&gt;<i>&gt;&gt; verification. I am not aware that any gemini browsers have
+</i>&gt;<i>&gt;&gt; picked this up. But of course, I would be pleased to be proven
+</i>&gt;<i>&gt;&gt; wrong :)
+</i>&gt;<i>&gt;&gt;
+</i>&gt;<i>&gt;&gt;&gt; snip&lt;
+</i>&gt;<i>&gt;&gt; Hope this helps,
+</i>&gt;<i>&gt;&gt; ~ew
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; That would be a good (and better than my proposed) way to do it.
+</i>&gt;<i>&gt; It would be good to be able to automatically (with minimal user
+</i>&gt;<i>&gt; involvement) check the digital signatures of files.
+</i>&gt;<i>
+</i>&gt;<i> If you like some technical inspiration, you can check out the
+</i>&gt;<i> Makefile, that is publishing my capsule at
+</i>&gt;<i> <a href="https://git.sr.ht/~ew/ew.srht.site/tree/master/item/Makefile">https://git.sr.ht/~ew/ew.srht.site/tree/master/item/Makefile</a>
+</i>&gt;<i>
+</i>&gt;<i>
+</i>&gt;<i> Btw you did reply only to me, not the list --- just in case.
+</i>&gt;<i>
+</i>&gt;<i>
+</i>&gt;<i> Cheers,
+</i>&gt;<i> ~ew
+</i>
+That&#x27;s interesting. And I wanted to send it too the list, I clicked on the wrong button though. I will CC this one to the list, since it has the whole conversation as a quote.
+
+Cheers,
+~almaember
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006535.html">[tech] Integrity checks for Gemini pages</a></li>
+<li>Next message (by thread): <a href="006548.html">[tech] Integrity checks for Gemini pages</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6539">[ date ]</a> <a href="thread.html#6539">[ thread ]</a> <a href="subject.html#6539">[ subject ]</a> <a href="author.html#6539">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

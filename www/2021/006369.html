@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] IPv6 addresses in URLs</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006368.html">
+<link rel="next" href="006371.html">
+</head>
+<body>
+<h1>[tech] IPv6 addresses in URLs</h1>
+<b>nervuri</b> nervuri at disroot.org<br>
+<i>Thu Apr 15 21:51:33 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006368.html">[tech] IPv6 addresses in URLs</a></li>
+<li>Next message (by thread): <a href="006371.html">[tech] IPv6 addresses in URLs</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6369">[ date ]</a> <a href="thread.html#6369">[ thread ]</a> <a href="subject.html#6369">[ subject ]</a> <a href="author.html#6369">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Thu, 2021-04-15, Alex // nytpu wrote:
+&gt;<i>The problem is that Gemini mandates Server Name Indication (SNI).  It lets you
+</i>&gt;<i>host multiple (sub)domains at one IP address.
+</i>
+Indeed, this might require clarification in the spec.  There&#x27;s no reason
+to demand SNI if a raw IP address is used - as almaember points out, RFC
+6066 even forbids IP addresses in SNI.  If a server has multiple IP
+addresses, it can serve different certificates on each of them without
+having to use SNI.
+
+Also, there&#x27;s no reason for Gemini to require paying the DNS tax.
+People should be able to host capsules without dealing with DNS.
+
+&gt;<i>the HostName field can be 0 characters.  TLS 1.3 (and Gemini over TLS
+</i>&gt;<i>1.2) mandates that the SNI extension /exists/ in the ClientHello, but
+</i>&gt;<i>the hostname field itself can be empty, indicating to use some
+</i>&gt;<i>&quot;default&quot; at the operators discresion.  If anyone has a gitlab account,
+</i>&gt;<i>this might be a good thing to open an issue to clarify.
+</i>
+Yes, if TLS 1.3 mandates it, then the answer is to send an empty SNI
+field.  But does it?  Here&#x27;s what it says at the start of
+<a href="https://tools.ietf.org/html/rfc8446#section-9.2">https://tools.ietf.org/html/rfc8446#section-9.2</a> :
+
+&gt;<i>In the absence of an application profile standard specifying otherwise,
+</i>&gt;<i>a TLS-compliant application MUST implement the following TLS extensions
+</i>
+What does &quot;application profile standard&quot; mean?  Can the Gemini
+&quot;application profile standard&quot; say that SNI is not required in this
+case?  Or would this create problems with TLS libraries?
+
+For what it&#x27;s worth, the OpenSSL s_client manpage says:
+
+&gt;<i>Even though SNI should normally be a DNS name and not an IP
+</i>&gt;<i>address, if -servername is provided then that name will be
+</i>&gt;<i>sent, regardless of whether it is a DNS name or not.
+</i>
+No SNI vs empty SNI - we could test to see if servers have a problem
+with either.
+
+I&#x27;ll open the issue on GitLab.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006368.html">[tech] IPv6 addresses in URLs</a></li>
+<li>Next message (by thread): <a href="006371.html">[tech] IPv6 addresses in URLs</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6369">[ date ]</a> <a href="thread.html#6369">[ thread ]</a> <a href="subject.html#6369">[ subject ]</a> <a href="author.html#6369">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

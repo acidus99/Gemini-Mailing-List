@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>a space case for transparent gemtext compression</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006759.html">
+<link rel="next" href="006765.html">
+</head>
+<body>
+<h1>a space case for transparent gemtext compression</h1>
+<b>The Gnuserland</b> gnuserland at mailbox.org<br>
+<i>Sun Jun 20 04:00:42 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006759.html">a space case for transparent gemtext compression</a></li>
+<li>Next message (by thread): <a href="006765.html">a space case for transparent gemtext compression</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6764">[ date ]</a> <a href="thread.html#6764">[ thread ]</a> <a href="subject.html#6764">[ subject ]</a> <a href="author.html#6764">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>I am the least expert here...
+
+But as author/user if the encryption is transparent for me, in the terms that I always upload a GMI file anyway, I don&#x27;t see any real objection against but just more work for the implementers.
+
+However the GMI is the lighter file we can think of, I really have hard time thinking any human made GMI file bigger than few kilobytes...
+
+Thinking that a compressed capsule will save my life while modern HTTP, despite CDN, minification, etc... Will be always way more, and incomparable, bigger that any average GMI page, just makes believing that we are over-thinking about that topic!
+
+Thanks... 😉
+
+On June 19, 2021 12:22:49 PM EDT, Francis Siefken &lt;fsiefken@gmail.com&gt; wrote:
+&gt;<i>Hi Gnuserland, you wrote today:
+</i>&gt;<i>
+</i>&gt;<i>
+</i>&gt;<i>&gt; As Author I have to decide if to use or not use compression,
+</i>&gt;<i>HTML/HTTP
+</i>&gt;<i>&gt; doesn&#x27;t use compression so far I know.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; The HTTP protocol supports compression; for example
+</i>&gt;<i>&quot;Content-Encoding:
+</i>&gt;<i>zstd&quot;
+</i>&gt;<i>=&gt; <a href="https://datatracker.ietf.org/doc/html/rfc8478#section-3">https://datatracker.ietf.org/doc/html/rfc8478#section-3</a>
+</i>&gt;<i>If both the client and server support gzip or zstd compression a
+</i>&gt;<i>compressed
+</i>&gt;<i>stream is established. Yes this causes a developer overhead, that&#x27;s why
+</i>&gt;<i>I
+</i>&gt;<i>was happy to read compression is in TLS 1.2 and dismayed that it was
+</i>&gt;<i>removed in TLS 1.3. While it&#x27;s not removed in HTTP it warns against
+</i>&gt;<i>it&#x27;s
+</i>&gt;<i>use in certain situations, which do or do not apply in Gemini context:
+</i>&gt;<i>
+</i>&gt;<i>=&gt; <a href="https://datatracker.ietf.org/doc/html/rfc2616">https://datatracker.ietf.org/doc/html/rfc2616</a> HTTP/1.1 section on
+</i>&gt;<i>compression
+</i>&gt;<i>=&gt; <a href="https://datatracker.ietf.org/doc/html/rfc7540#section-10.6">https://datatracker.ietf.org/doc/html/rfc7540#section-10.6</a> HTTP/2
+</i>&gt;<i>compression section
+</i>&gt;<i>=&gt;
+</i>&gt;<i><a href="https://datatracker.ietf.org/doc/html/draft-ietf-quic-http-34#page-47">https://datatracker.ietf.org/doc/html/draft-ietf-quic-http-34#page-47</a>
+</i>&gt;<i>HTTP/3 compression section
+</i>&gt;<i>
+</i>&gt;<i>It doesn&#x27;t have to be difficult to mandate or implement an easy
+</i>&gt;<i>solution.
+</i>&gt;<i>
+</i>&gt;<i>Suppose I am in a life or death situation and I am on a 300 bps link I
+</i>&gt;<i>want
+</i>&gt;<i>the 2 kilobyte of life-saving information to be there as soon as
+</i>&gt;<i>possible.
+</i>&gt;<i>Or you have the daily top 12 HN threads mirrored as a Gemtext file
+</i>&gt;<i>(~100
+</i>&gt;<i>Kilobyte each) and want to read those on a 300 bps link.
+</i>&gt;<i>Compression speeds up the process. With zstd compression and dictionary
+</i>&gt;<i>compression <a href="https://facebook.github.io/zstd/#small-data">https://facebook.github.io/zstd/#small-data</a> it can be there
+</i>&gt;<i>quicker and on low end hardware.
+</i>&gt;<i>I think it would be elegant not to rely on having two seperate files
+</i>&gt;<i>for
+</i>&gt;<i>this on the server, one index.gmi and one index.gmi.zstd - the Gemini
+</i>&gt;<i>specification could allow index.gmi to be a binary and let the browser
+</i>&gt;<i>check this after retrieval. If it&#x27;s a zstd binary automatically extract
+</i>&gt;<i>and
+</i>&gt;<i>display it.
+</i>&gt;<i>Ofcourse keeping this poor man&#x27;s content sniffing method as simple and
+</i>&gt;<i>secure as possible.
+</i>&gt;<i>=&gt; <a href="https://en.wikipedia.org/wiki/Content_sniffing">https://en.wikipedia.org/wiki/Content_sniffing</a> Wikipedia on Content
+</i>&gt;<i>sniffing
+</i>&gt;<i>
+</i>&gt;<i>As mentioned by others in this thread a index.gmi.zstd could also be
+</i>&gt;<i>extracted through the existing application/zstd mime-type automatically
+</i>&gt;<i>and
+</i>&gt;<i>display the resulting gmi inline - but as the protocol doesn&#x27;t enforce
+</i>&gt;<i>this
+</i>&gt;<i>each client can implement it differently.
+</i>&gt;<i>To me it seems like a minimal change to the Gemini protocol to allow
+</i>&gt;<i>gmi
+</i>&gt;<i>text to be served in zstd format and to state that the client must
+</i>&gt;<i>decompress and display it inline instead of merely offering to download
+</i>&gt;<i>it.
+</i>&gt;<i>
+</i>&gt;<i>Saluton,
+</i>&gt;<i>Francis Siefken (NL)
+</i>
+-- 
+Sent from my Android device with K-9 Mail. Please excuse my brevity.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006759.html">a space case for transparent gemtext compression</a></li>
+<li>Next message (by thread): <a href="006765.html">a space case for transparent gemtext compression</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6764">[ date ]</a> <a href="thread.html#6764">[ thread ]</a> <a href="subject.html#6764">[ subject ]</a> <a href="author.html#6764">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

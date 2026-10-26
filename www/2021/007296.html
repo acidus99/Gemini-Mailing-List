@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] comments on the proposed gemini spec revisions</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007287.html">
+<link rel="next" href="007297.html">
+</head>
+<body>
+<h1>[spec] comments on the proposed gemini spec revisions</h1>
+<b>Oliver Simmons</b> oliversimmo at gmail.com<br>
+<i>Wed Oct 13 20:02:51 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007287.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li>Next message (by thread): <a href="007297.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7296">[ date ]</a> <a href="thread.html#7296">[ thread ]</a> <a href="subject.html#7296">[ subject ]</a> <a href="author.html#7296">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Mon, 11 Oct 2021 at 15:07, Chris McGowan &lt;cmcgowan9990@gmail.com&gt; wrote:
+&gt;<i> Doesn&#x27;t the spec say that line type indicators are only three characters maximum?
+</i>&gt;<i> It also implies that line type indicators should be the first thing on the line and that nothing should come before them (i.e. no whitespace before the indicator).
+</i>
+Yes and yup, we&#x27;re talking about the space after the indicator.
+
+&gt;<i> That should mean that simply taking a three character substring of the line should be enough to determine whether it has a line type indicator and, if so, which type. That should be relatively easy and quick to parse as there&#x27;s only about 5-6 different cases to handle.
+</i>
+Unfortunately, no. For example, take this line: `# Foo bar I&#x27;m a level-1 title`
+A 3-char substring of that would yield &quot;# F&quot;, which isn&#x27;t useful.
+It would work if the spec required (MUST) you to add whitespace
+padding the indicator to three characters, but that&#x27;s not how it is.
+
+To determine the line-type you have to do a starts-with check or split
+on the space like me and Omar are saying.
+
+-Oliver Simmons (GoodClover)
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007287.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li>Next message (by thread): <a href="007297.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7296">[ date ]</a> <a href="thread.html#7296">[ thread ]</a> <a href="subject.html#7296">[ subject ]</a> <a href="author.html#7296">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

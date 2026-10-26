@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text reflow woes (or: I want bullets back!)y</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000027.html">
+<link rel="next" href="000110.html">
+</head>
+<body>
+<h1>Text reflow woes (or: I want bullets back!)y</h1>
+<b>Brian Evans</b> b__m__e at mailfence.com<br>
+<i>Thu Sep  5 22:17:31 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000027.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000110.html">SPOOFED: Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#109">[ date ]</a> <a href="thread.html#109">[ thread ]</a> <a href="subject.html#109">[ subject ]</a> <a href="author.html#109">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>spc writes:
+&gt;<i>  Or how about:  lines that start with &#x27;=&gt;&#x27; are links and are handled
+</i>&gt;<i> differently, lines starting with a &#x27; &#x27; are fixed (but should be
+</i>&gt;<i> less than N characters in length), and starting with any other character
+</i>&gt;<i> should be reflowed until a blank line, a line staring with &#x27;=&gt;&#x27; or
+</i>&gt;<i> whitespace.
+</i>
+I agree with that proposal wholeheartedly. It creates one additional simple
+parse case for fixed lines (that will not be truncated to N characters if they
+go beyond). But I do not think that additional parse to implement adds
+any major work or complexity to clients.
+
+I am of the opinions that link lines _should_ wrap. My reason for this
+is that many people may want to do url only links:
+
+=&gt; <a href="gemini://this.is.a/url/to/some/place_or_other?it-has-a-data-component-that-exceeds-the-limit-of-characters">gemini://this.is.a/url/to/some/place_or_other?it-has-a-data-component-that-exceeds-the-limit-of-characters</a>
+
+It is reasonable to want to see the whole link before following it.
+
+So, I am in favor of:
+
+1. Regular text and links both wrap to n (tbd) characters
+2. A leading space creates a non-wrapping line that will
+   be truncated at n (tbd) characters if it exceeds that
+   number of chars. Clients can optionally add an ellipses.
+
+One thing to consider with wrapping or truncating links is that many
+terminal based clients will implement links with numbers. Given that
+those numbers will be based by the number of links on a page, it will
+be difficult for content authors to predict what the behavior of longer
+lines will be (where something might wrap or get cut) in order to make
+room for interface elements such as:
+=&gt; A link
+13 =&gt; A link
+[13] A link
+(13) A link
+( 13) =&gt; A link
+Any of those are reasonable and possible ways a client can represent
+a link on the screen. Because how clients do this will vary, things can
+get unpredictable. As such, what happens at what boundary should, I
+believe, be a part of the spec. So that people can know what to expect.
+They should also expect differing clients to render things mildly differently
+and not rely on very long lines to always appear identically.
+
+As a side note: I agree that accessibility is a solid concern.
+
+--?
+Sent with <a href="https://mailfence.com">https://mailfence.com</a>
+Secure and private email
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000027.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000110.html">SPOOFED: Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#109">[ date ]</a> <a href="thread.html#109">[ thread ]</a> <a href="subject.html#109">[ subject ]</a> <a href="author.html#109">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

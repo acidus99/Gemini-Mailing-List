@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>a space case for transparent gemtext compression</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006725.html">
+<link rel="next" href="006727.html">
+</head>
+<body>
+<h1>a space case for transparent gemtext compression</h1>
+<b>Christian Seibold</b> krixano at mailbox.org<br>
+<i>Fri Jun 18 14:22:32 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006725.html">a space case for transparent gemtext compression</a></li>
+<li>Next message (by thread): <a href="006727.html">a space case for transparent gemtext compression</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6726">[ date ]</a> <a href="thread.html#6726">[ thread ]</a> <a href="subject.html#6726">[ subject ]</a> <a href="author.html#6726">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>I think people would probably want either a different compression, or to just compress one file instead of a whole bunch of files. So we&#x27;d probably need to come up with a different format for compression of just single files. And this is actually *easier* to support than supporting zips, etc, because those are more like compressed directories that you can navigate within.
+
+Anyways, for people wondering about the gempub project, it&#x27;s the equivalent of both epubs, but with gemtest, and also has the goal of being used for gemini capsule archives. The spec for gempubs is here, if anyone wants to contribute. You can perhaps suggest this to other browsers to support: <a href="https://codeberg.org/oppenlab/gempub">https://codeberg.org/oppenlab/gempub</a>
+
+I do want to note that the gemini protocol doesn&#x27;t care about what&#x27;s send  over it. This is why mimetypes were added to the protocol. You can send any binary data over gemini. This is why compression doesn&#x27;t need to be in the main protocol - because you can send over the compressed stuff just as any other binary file can. It&#x27;s the job of the gemini browser to handle the compressed data by reading the mimetype and dealing with that mimetype in some way. And if it&#x27;s too complicated, then tell your browser maintainer and they can fix it if they want. If they don&#x27;t want to, then I would consider looking into other gemini browsers that do support what you want.
+
+Finally, the other consideration is whether supporting this within clients adds too much complexity. Personally, I do not think so, as there are tons of very simple libraries you can use for supporting compression. Golang even has these in its standard library.
+
+Some gemini browser maintainers are probably going to argue that it&#x27;s not the purpose of a browser to support opening zips, as a similar argument has been used for Gemini Subscription Feeds, Atom Feeds, audio/video files, and other such things. I would have to completely disagree. The point of a browser is to browse documents - that&#x27;s the scope of gemini browsers.
+
+I do recognize that there are, however, two different approaches to this. Have the &quot;gemini browser&quot; be a full document browser for the gemini protocol, or have it just deal with the gemini protocol and pass the documents off to another program. The problem, of course, is many applications don&#x27;t support gemini links, which is definitely why I prefer the 1st approach, which seems more like the approach Lagrange takes (Skyjake can correct me if I&#x27;m wrong). The point is, the point of a browser is to browse geminispace. Which means you need to either support things yourself, or have the ability to pass them off to another application that *can* support them properly.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006725.html">a space case for transparent gemtext compression</a></li>
+<li>Next message (by thread): <a href="006727.html">a space case for transparent gemtext compression</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6726">[ date ]</a> <a href="thread.html#6726">[ thread ]</a> <a href="subject.html#6726">[ subject ]</a> <a href="author.html#6726">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005551.html">
+<link rel="next" href="005415.html">
+</head>
+<body>
+<h1>[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</h1>
+<b>Johann Galle</b> johann at qwertqwefsday.eu<br>
+<i>Sun Feb 21 20:48:13 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005551.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li>Next message (by thread): <a href="005415.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5414">[ date ]</a> <a href="thread.html#5414">[ thread ]</a> <a href="subject.html#5414">[ subject ]</a> <a href="author.html#5414">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi,
+
+why is robots.txt not the obvious answer here? The companion specification[1] has a &quot;User-agent: webproxy&quot; for this specific case:
+
+ &gt;<i> ### Web proxies
+</i> &gt;<i> Gemini bots which fetch content in order to translate said content into HTML and publicly serve the result over HTTP(S) (in order to make Geminispace accessible from within a standard web browser) should respect robots.txt directives aimed at a User-agent of &quot;webproxy&quot;.
+</i>
+So this should suffice:
+
+```
+User-agent: webproxy
+Disallow: /
+```
+
+Regards,
+Johann
+
+-- 
+You can verify the digital signature on this email with the public key
+available through web key discovery. Try e.g. `gpg --locate-keys`...
+or go to
+&lt;<a href="https://qwertqwefsday.eu/.well-known/openpgpkey/hu/spd3xecxhotzgyu1p3eqdqdp31ba6rif">https://qwertqwefsday.eu/.well-known/openpgpkey/hu/spd3xecxhotzgyu1p3eqdqdp31ba6rif</a>&gt;.
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: OpenPGP_0xA4EFCC5A6174FB0F.asc
+Type: application/pgp-keys
+Size: 3131 bytes
+Desc: not available
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210221/1221b622/attachment-0001.bin">https://mailing-list-archive.gemi.dev/www/attachments/20210221/1221b622/attachment-0001.bin</a>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: OpenPGP_signature
+Type: application/pgp-signature
+Size: 840 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210221/1221b622/attachment-0001.sig">https://mailing-list-archive.gemi.dev/www/attachments/20210221/1221b622/attachment-0001.sig</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005551.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li>Next message (by thread): <a href="005415.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5414">[ date ]</a> <a href="thread.html#5414">[ thread ]</a> <a href="subject.html#5414">[ subject ]</a> <a href="author.html#5414">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

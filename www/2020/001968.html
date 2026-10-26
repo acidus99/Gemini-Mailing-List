@@ -1,63 +1,47 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Illusory latency due to trailing slash redirects
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Illusory%20latency%20due%20to%20trailing%20slash%20redirects&In-Reply-To=%3C20200627114239.0d9233f5d45a4d1f41187930%40gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="001964.html">
-   <LINK REL="Next"  HREF="001979.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Illusory latency due to trailing slash redirects</H1>
-    <B>Philip Linde</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Illusory%20latency%20due%20to%20trailing%20slash%20redirects&In-Reply-To=%3C20200627114239.0d9233f5d45a4d1f41187930%40gmail.com%3E"
-       TITLE="Illusory latency due to trailing slash redirects">linde.philip at gmail.com
-       </A><BR>
-    <I>Sat Jun 27 10:42:39 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="001964.html">Illusory latency due to trailing slash redirects
-</A></li>
-        <LI>Next message (by thread): <A HREF="001979.html">Illusory latency due to trailing slash redirects
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1968">[ date ]</a>
-              <a href="thread.html#1968">[ thread ]</a>
-              <a href="subject.html#1968">[ subject ]</a>
-              <a href="author.html#1968">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Illusory latency due to trailing slash redirects</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="001964.html">
+<link rel="next" href="001979.html">
+</head>
+<body>
+<h1>Illusory latency due to trailing slash redirects</h1>
+<b>Philip Linde</b> linde.philip at gmail.com<br>
+<i>Sat Jun 27 10:42:39 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="001964.html">Illusory latency due to trailing slash redirects</a></li>
+<li>Next message (by thread): <a href="001979.html">Illusory latency due to trailing slash redirects</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1968">[ date ]</a> <a href="thread.html#1968">[ thread ]</a> <a href="subject.html#1968">[ subject ]</a> <a href="author.html#1968">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>&gt;<i> I'm pretty sure it should be safe for clients to automatically append
-</I>&gt;<i> trailing slashes to URLs without paths.
-</I>
+<pre>&gt;<i> I&#x27;m pretty sure it should be safe for clients to automatically append
+</i>&gt;<i> trailing slashes to URLs without paths.
+</i>
 Indeed it should be, per rfc3986:
 
 &gt;<i> In general, a URI that uses the generic syntax for authority with
-</I>&gt;<i> an empty path should be normalized to a path of &quot;/&quot;.
-</I>
+</i>&gt;<i> an empty path should be normalized to a path of &quot;/&quot;.
+</i>
 An authority in this context is //[&lt;user&gt;[:&lt;password&gt;]@]&lt;host&gt;[:&lt;port&gt;],
-so &quot;<A HREF="gemini://example.horse">gemini://example.horse</A>&quot; and &quot;<A HREF="gemini://example.horse/">gemini://example.horse/</A>&quot; are
+so &quot;<a href="gemini://example.horse">gemini://example.horse</a>&quot; and &quot;<a href="gemini://example.horse/">gemini://example.horse/</a>&quot; are
 equivalent in a strictly compliant rfc3986 implementation.
 
 A server that serves different content on //server and //server/ can be
 a huge pain in the neck. When I wrote my dillo plugin I noticed that it
 seems to apply this normalization in reverse before the URL is handed
-to the plugin. So &quot;<A HREF="gemini://example.horse/">gemini://example.horse/</A>&quot; could only be seen on the
-plugin end as &quot;<A HREF="gemini://example.horse">gemini://example.horse</A>&quot;, which also makes redirects to
-&quot;<A HREF="gemini://example.horse/">gemini://example.horse/</A>&quot; loop back to &quot;<A HREF="gemini://example.horse/">gemini://example.horse/</A>&quot;.
+to the plugin. So &quot;<a href="gemini://example.horse/">gemini://example.horse/</a>&quot; could only be seen on the
+plugin end as &quot;<a href="gemini://example.horse">gemini://example.horse</a>&quot;, which also makes redirects to
+&quot;<a href="gemini://example.horse/">gemini://example.horse/</a>&quot; loop back to &quot;<a href="gemini://example.horse/">gemini://example.horse/</a>&quot;.
 Redirect hell ensued!
 
 That Dillo does this might be strange, but absolutely fine from a
-standards perspective. It's the server that's not compliant.
+standards perspective. It&#x27;s the server that&#x27;s not compliant.
 
 -- 
 Philip
@@ -67,73 +51,16 @@ Name: not available
 Type: application/pgp-signature
 Size: 488 bytes
 Desc: not available
-URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200627/627e8733/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20200627/627e8733/attachment.sig</A>&gt;
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20200627/627e8733/attachment.sig">https://mailing-list-archive.gemi.dev/www/attachments/20200627/627e8733/attachment.sig</a>&gt;
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="001964.html">Illusory latency due to trailing slash redirects
-</A></li>
-	<LI>Next message (by thread): <A HREF="001979.html">Illusory latency due to trailing slash redirects
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1968">[ date ]</a>
-              <a href="thread.html#1968">[ thread ]</a>
-              <a href="subject.html#1968">[ subject ]</a>
-              <a href="author.html#1968">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="001964.html">Illusory latency due to trailing slash redirects</a></li>
+<li>Next message (by thread): <a href="001979.html">Illusory latency due to trailing slash redirects</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1968">[ date ]</a> <a href="thread.html#1968">[ thread ]</a> <a href="subject.html#1968">[ subject ]</a> <a href="author.html#1968">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

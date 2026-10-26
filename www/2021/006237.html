@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How do you buffer a Gemini connection?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006236.html">
+<link rel="next" href="006238.html">
+</head>
+<body>
+<h1>How do you buffer a Gemini connection?</h1>
+<b>almaember</b> almaember at disroot.org<br>
+<i>Mon Mar 29 07:22:05 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006236.html">How do you buffer a Gemini connection?</a></li>
+<li>Next message (by thread): <a href="006238.html">How do you buffer a Gemini connection?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6237">[ date ]</a> <a href="thread.html#6237">[ thread ]</a> <a href="subject.html#6237">[ subject ]</a> <a href="author.html#6237">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Mon, 29 Mar 2021 07:17:31 +0300
+Ecmel Berk Canlıer &lt;me@ecmelberk.com&gt; wrote:
+ 
+&gt;<i> This is what I do on Moonlander. Not by line, as binary data can be
+</i>&gt;<i> sent over Gemini, but in 1029 byte chunks (exactly the max length of
+</i>&gt;<i> one Gemini header. Saves me code in trying to split that too)
+</i>
+That makes sense, it will even save me from having to mess with
+malloc and realloc.
+
+&gt;<i> I send each chunk into a separate &quot;renderer&quot; for the given file type, 
+</i>&gt;<i> which in text&#x27;s case decodes it into the given encoding (default
+</i>&gt;<i> UTF-8) and sends it over to the text/gemini parser which then does
+</i>&gt;<i> the line splitting and parsing there. (And in other cases it will
+</i>&gt;<i> just save the bytes directly to a file)
+</i>One question, what do you do if a single line is split into multiple
+chunks?
+
+I will try checking your source for it, but I don&#x27;t really understand
+or know Rust so I&#x27;m not sure I will understand it.
+
+
+~almaember
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006236.html">How do you buffer a Gemini connection?</a></li>
+<li>Next message (by thread): <a href="006238.html">How do you buffer a Gemini connection?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6237">[ date ]</a> <a href="thread.html#6237">[ thread ]</a> <a href="subject.html#6237">[ subject ]</a> <a href="author.html#6237">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

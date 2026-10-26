@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini Digest, Vol 23, Issue 40</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006791.html">
+<link rel="next" href="006787.html">
+</head>
+<body>
+<h1>Gemini Digest, Vol 23, Issue 40</h1>
+<b>Rohan Kumar</b> seirdy at seirdy.one<br>
+<i>Thu Jun 24 17:27:46 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006791.html">Gemini Digest, Vol 23, Issue 40</a></li>
+<li>Next message (by thread): <a href="006787.html">Gemini Digest, Vol 23, Issue 40</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6792">[ date ]</a> <a href="thread.html#6792">[ thread ]</a> <a href="subject.html#6792">[ subject ]</a> <a href="author.html#6792">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Thu, Jun 24, 2021 at 12:02:32PM +0200, Omar Polo wrote:
+&gt;<i> What could be done is use a HTTP header to inform the web browser that
+</i>&gt;<i> that site is available also over Gemini.  This way, the effort wouldn&#x27;t
+</i>&gt;<i> be on a bunch of people running a directory, but rather on the server
+</i>&gt;<i> administrator.  Something like a `Gemini-location: &lt;url&gt;&#x27;.  From my
+</i>&gt;<i> understanding it&#x27;s something that the tor project is doing:
+</i>&gt;<i>
+</i>&gt;<i> 	% curl --head <a href="https://www.torproject.org">https://www.torproject.org</a> | grep -i location
+</i>&gt;<i> 	Onion-Location: <a href="http://2gzyxa5ihm7nsggfxnu52rck2vv4rvmdlkiu3zzui5du4xyclen53wid.onion/index.html">http://2gzyxa5ihm7nsggfxnu52rck2vv4rvmdlkiu3zzui5du4xyclen53wid.onion/index.html</a>
+</i>
+Something that could work is an Alt-Svc header:
+
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Alt-Svc">https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Alt-Svc</a>
+
+These were sometimes used to advertise Onion sites before the Onion-Location header spec was released and supported by the Tor Browser.
+
+This is unlikely to give any major benefit for Gemini though, esp. if gemini:// isn&#x27;t IANA-registered; browsers don&#x27;t know what Gemini is and will ignore it. Perhaps a browser addon could sniff out an Alt-Svc header advertising a Gemini capsule?
+
+I&#x27;m generally against adding HTTP headers if they don&#x27;t make a significant difference, especially if they&#x27;re ignored by all the existing user agents. If information needs to reach a user and is ignored by the user agent, it should be included in the response body rather than the header.
+
+-- 
+/Seirdy (seirdy.one)
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006791.html">Gemini Digest, Vol 23, Issue 40</a></li>
+<li>Next message (by thread): <a href="006787.html">Gemini Digest, Vol 23, Issue 40</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6792">[ date ]</a> <a href="thread.html#6792">[ thread ]</a> <a href="subject.html#6792">[ subject ]</a> <a href="author.html#6792">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,96 +1,62 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Minimum requirements for client certificates
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Minimum%20requirements%20for%20client%20certificates&In-Reply-To=%3CCAPk6LxSj8Wx%3DEzkETop_uTesT850YOvKhUs6xuANKSwvUXhVFw%40mail.gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="002539.html">
-   <LINK REL="Next"  HREF="002543.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Minimum requirements for client certificates</H1>
-    <B>Kevin Sangeelee</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Minimum%20requirements%20for%20client%20certificates&In-Reply-To=%3CCAPk6LxSj8Wx%3DEzkETop_uTesT850YOvKhUs6xuANKSwvUXhVFw%40mail.gmail.com%3E"
-       TITLE="Minimum requirements for client certificates">kevin at susa.net
-       </A><BR>
-    <I>Tue Sep  1 00:05:44 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="002539.html">Minimum requirements for client certificates
-</A></li>
-        <LI>Next message (by thread): <A HREF="002543.html">Minimum requirements for client certificates
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2541">[ date ]</a>
-              <a href="thread.html#2541">[ thread ]</a>
-              <a href="subject.html#2541">[ subject ]</a>
-              <a href="author.html#2541">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Minimum requirements for client certificates</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="002539.html">
+<link rel="next" href="002543.html">
+</head>
+<body>
+<h1>Minimum requirements for client certificates</h1>
+<b>Kevin Sangeelee</b> kevin at susa.net<br>
+<i>Tue Sep  1 00:05:44 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="002539.html">Minimum requirements for client certificates</a></li>
+<li>Next message (by thread): <a href="002543.html">Minimum requirements for client certificates</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2541">[ date ]</a> <a href="thread.html#2541">[ thread ]</a> <a href="subject.html#2541">[ subject ]</a> <a href="author.html#2541">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>I think that, if a server requires a subject and no subject is given, then
+<pre>I think that, if a server requires a subject and no subject is given, then
 it is sensible to say that the certificate is not authorised, in much the
 same way that failing to provide a username would render a traditional
-login unauthorised. I don't see that as misleading, and it would seem an
+login unauthorised. I don&#x27;t see that as misleading, and it would seem an
 application specific matter to get appropriate credentials from the user.
 
 Kevin
 
-On Mon, 31 Aug 2020 at 17:52, Solderpunk &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at posteo.net</A>&gt; wrote:
+On Mon, 31 Aug 2020 at 17:52, Solderpunk &lt;solderpunk at posteo.net&gt; wrote:
 
 &gt;<i> I think it goes without saying that at the absolute minimum a Gemini
-</I>&gt;<i> client certificate ought to be a valid x509 certificate.  I did look
-</I>&gt;<i> into this at some stage and IIRC the Issuer needs to be non-empty but
-</I>&gt;<i> the Subject does not.  If that is indeed the case, then I'm not sure we
-</I>&gt;<i> should mandate anything further.  As makeworld said, such certificates
-</I>&gt;<i> might not be suitable for particular applications which make use of the
-</I>&gt;<i> Subject.  I guess the appropriate server response there would be 61?  62
-</I>&gt;<i> doesn't seem to apply since the certificate is technically valid.  But
-</I>&gt;<i> this does make the &quot;CERTIFICATE NOT AUTHORISED&quot; name for 61 misleading.
-</I>&gt;<i> Perhaps it ought to be &quot;CERTIFICATE NOT ACCEPTED&quot;?
-</I>&gt;<i>
-</I>&gt;<i> Cheers,
-</I>&gt;<i> Solderpunk
-</I>&gt;<i>
-</I>&gt;<i>
-</I>-------------- next part --------------
+</i>&gt;<i> client certificate ought to be a valid x509 certificate.  I did look
+</i>&gt;<i> into this at some stage and IIRC the Issuer needs to be non-empty but
+</i>&gt;<i> the Subject does not.  If that is indeed the case, then I&#x27;m not sure we
+</i>&gt;<i> should mandate anything further.  As makeworld said, such certificates
+</i>&gt;<i> might not be suitable for particular applications which make use of the
+</i>&gt;<i> Subject.  I guess the appropriate server response there would be 61?  62
+</i>&gt;<i> doesn&#x27;t seem to apply since the certificate is technically valid.  But
+</i>&gt;<i> this does make the &quot;CERTIFICATE NOT AUTHORISED&quot; name for 61 misleading.
+</i>&gt;<i> Perhaps it ought to be &quot;CERTIFICATE NOT ACCEPTED&quot;?
+</i>&gt;<i>
+</i>&gt;<i> Cheers,
+</i>&gt;<i> Solderpunk
+</i>&gt;<i>
+</i>&gt;<i>
+</i>-------------- next part --------------
 An HTML attachment was scrubbed...
-URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200901/8f9cd668/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200901/8f9cd668/attachment.htm</A>&gt;
-</PRE>
-
-
-
-
-
-
-
-
-
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20200901/8f9cd668/attachment.htm">https://mailing-list-archive.gemi.dev/www/attachments/20200901/8f9cd668/attachment.htm</a>&gt;
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="002539.html">Minimum requirements for client certificates
-</A></li>
-	<LI>Next message (by thread): <A HREF="002543.html">Minimum requirements for client certificates
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2541">[ date ]</a>
-              <a href="thread.html#2541">[ thread ]</a>
-              <a href="subject.html#2541">[ subject ]</a>
-              <a href="author.html#2541">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="002539.html">Minimum requirements for client certificates</a></li>
+<li>Next message (by thread): <a href="002543.html">Minimum requirements for client certificates</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2541">[ date ]</a> <a href="thread.html#2541">[ thread ]</a> <a href="subject.html#2541">[ subject ]</a> <a href="author.html#2541">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

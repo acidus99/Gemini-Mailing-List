@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>a space case for transparent gemtext compression</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006732.html">
+<link rel="next" href="006754.html">
+</head>
+<body>
+<h1>a space case for transparent gemtext compression</h1>
+<b>PJ vM</b> pjvm742 at disroot.org<br>
+<i>Sat Jun 19 12:13:20 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006732.html">a space case for transparent gemtext compression</a></li>
+<li>Next message (by thread): <a href="006754.html">a space case for transparent gemtext compression</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6746">[ date ]</a> <a href="thread.html#6746">[ thread ]</a> <a href="subject.html#6746">[ subject ]</a> <a href="author.html#6746">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>A bit of a recap and my thoughts:
+
+* Compression is not going to be in the protocol; this is a bad idea for
+multiple reasons, already pointed out.
+* Authors can of course offer a compressed version of a gemtext document
+alongside the uncompressed version. It remains to be seen how many
+people would make use of the compressed version (depends, one might
+suppose, on people&#x27;s internet speeds and how long the document in
+question is).
+* Client software could in theory recognise a compressed gemtext file,
+decompress it and display it as normal, giving the user the same
+experience as with a normal gemtext file. Probably not many clients will
+have this functionality, but who knows.
+* Part of the goal with Gemini&#x27;s simplicity is to avoid implementation
+monoculture, so it is reasonablye to say for many users not using the
+most featureful client. However, given the great variety in Gemini
+users, I think a monoculture will be avoided anyway, and a feature like
+automatic handling of compressed gemtext will never become mandatory. I
+don&#x27;t think proposing a feature that clients may implement is a threat
+to Geminispace.
+
+Some people should reflect on what they said in this discussion and how
+they said it: what parts of it were helpful and what parts weren&#x27;t.
+Maybe they can avoid a similar mess in the future. Moving on...
+
+On 19/06/2021 10:59, Stephane Bortzmeyer wrote:
+&gt;<i> * how the end user of a browser without compression support will know
+</i>&gt;<i> in advance if the file is compressed or not? From the file extension?
+</i>&gt;<i> It is not always present.
+</i>
+I expect authors would indicate this in the link text. So:
+
+=&gt; article.gmi my article
+=&gt; article.gmi.gz my article (compressed version)
+
+&gt;<i> * today, every browser can read every Gemini file. Your proposal
+</i>&gt;<i> seems to imply that some users will now see only a part of the
+</i>&gt;<i> Geminispace, the uncompressed one. This is the same problem we have
+</i>&gt;<i> when trying to use the Web with lynx or dillo: we can see only a part
+</i>&gt;<i> of it.
+</i>
+First of all, people are already serving PDFs &amp;c via Gemini, which is
+also something that Gemini is intended for. So already, not the entire
+Geminispace is visible from within the Gemini client.
+
+Secondly, I&#x27;d expect that authors offer a compressed version only in
+addition to the uncompressed version, not as a replacement. I don&#x27;t see
+this feature becoming nearly popular enough for authors to start doing
+the latter.
+
+-- 
+pjvm
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006732.html">a space case for transparent gemtext compression</a></li>
+<li>Next message (by thread): <a href="006754.html">a space case for transparent gemtext compression</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6746">[ date ]</a> <a href="thread.html#6746">[ thread ]</a> <a href="subject.html#6746">[ subject ]</a> <a href="author.html#6746">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

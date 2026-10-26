@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] Possible Tables Syntax</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004662.html">
+<link rel="next" href="004674.html">
+</head>
+<body>
+<h1>[spec] Possible Tables Syntax</h1>
+<b>nothien at uber.space</b> nothien at uber.space<br>
+<i>Sun Jan  3 09:02:28 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004662.html">[spec] Possible Tables Syntax</a></li>
+<li>Next message (by thread): <a href="004674.html">[spec] Possible Tables Syntax</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4663">[ date ]</a> <a href="thread.html#4663">[ thread ]</a> <a href="subject.html#4663">[ subject ]</a> <a href="author.html#4663">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Philip Linde &lt;linde.philip at gmail.com&gt; wrote:
+&gt;<i> I think that using preformatted blocks as an extension vector for
+</i>&gt;<i> table data is a bad idea. Preformatted then no longer always means
+</i>&gt;<i> preformatted.
+</i>
+Yes, I agree, the container format (```table```) is bad.  I was more
+interested in the actual format - but we can definitely change the
+containing layout.  Do you have any suggestions?
+
+&gt;<i> I also have qualms about the suggested format itself because there are
+</i>&gt;<i> already formats for describing tabular data with a lot of tooling
+</i>&gt;<i> support. If the goal is machine readability, choose a format which is
+</i>&gt;<i> already supported by numerous software.
+</i>
+The issue is that none of the other table formats I&#x27;ve seen are both
+human readable and easily machine parsable.  This one is.
+
+&gt;<i> In particular I think it&#x27;s a bad idea to introduce something like this
+</i>&gt;<i> as an optional recommended best practice. Either go all in, or what
+</i>&gt;<i> looks like a table in one client will look nothing like a table in
+</i>&gt;<i> another.
+</i>
+There are two issues with going &#x27;all in&#x27; (which I understand as making
+it a proper part of the gemtext part of the spec): firstly, that clients
+will treat it as a must-have, which it isn&#x27;t (it&#x27;s pretty readable
+without any fancy rendering), and secondly that the spec is almost
+finalized right now, and I don&#x27;t see it making it in (because of how
+rarely it comes up).  I did mention this as a best case scenario, but
+your last point is why I&#x27;ve introduced this idea at all - to prevent the
+aggregation of multiple different supported table formats.
+
+&gt;<i> My suggested solution: if you really need an in-line human readable
+</i>&gt;<i> table, lay it out in a preformatted block such that it makes sense to
+</i>&gt;<i> a user with a client that interprets and displays preformatted blocks
+</i>&gt;<i> as preformatted blocks. If you need the same data to be available
+</i>&gt;<i> machine readable, link to a corresponding CSV/TSV/*SV below.
+</i>
+Well, with my format, you can have both.  Of course, even slighly large
+tables can and should be kept in CSV or similar, but this works well for
+small tables which may be modified often.  The issue with a fully laid
+out table in a preformatted block is 1) that it&#x27;s getting into
+presentation (different users will create different looking tables,
+adding style as they see fit, but that&#x27;s against the general gemtext
+philosophy), and 2) that it&#x27;s difficult to modify cells without having
+to adjust the entire table.  My format is affected by neither, because
+all the table control is done via whitespace (and one can&#x27;t style HTs
+and LFs), and because cells are on individual lines which are much
+easier to move around or to add to.
+
+~aravk | ~nothien
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004662.html">[spec] Possible Tables Syntax</a></li>
+<li>Next message (by thread): <a href="004674.html">[spec] Possible Tables Syntax</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4663">[ date ]</a> <a href="thread.html#4663">[ thread ]</a> <a href="subject.html#4663">[ subject ]</a> <a href="author.html#4663">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

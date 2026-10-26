@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[users] Any live gmnigit capsules?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007667.html">
+<link rel="next" href="007670.html">
+</head>
+<body>
+<h1>[users] Any live gmnigit capsules?</h1>
+<b>Byron Torres</b> b at torresjrjr.com<br>
+<i>Thu Dec  9 11:02:33 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007667.html">[users] Any live gmnigit capsules?</a></li>
+<li>Next message (by thread): <a href="007670.html">[users] Any live gmnigit capsules?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7669">[ date ]</a> <a href="thread.html#7669">[ thread ]</a> <a href="subject.html#7669">[ subject ]</a> <a href="author.html#7669">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+9 Dec 2021 08:51:43 Omar Polo &lt;op@omarpolo.com&gt;:
+
+&gt;<i> &quot;Byron Torres&quot; &lt;b@torresjrjr.com&gt; writes:
+</i>&gt;<i>
+</i>&gt;<i>&gt; Does anyone know of a live [gmnigit] instance? I&#x27;d like to see one for
+</i>&gt;<i>&gt; myself.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; I&#x27;ve been looking for a Gemini version of [stagit], and I came across
+</i>&gt;<i>&gt; gmnigit from the [archives]. The author&#x27;s entire website and capsule,
+</i>&gt;<i>&gt; including the supposed gmnigit [demo], is down.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; =&gt; <a href="https://git.sr.ht/~kornellapacz/gmnigit">https://git.sr.ht/~kornellapacz/gmnigit</a> gmnigit
+</i>&gt;<i>&gt; =&gt; <a href="https://codemadness.org/stagit.html">https://codemadness.org/stagit.html</a> stagit
+</i>&gt;<i>&gt; =&gt; <a href="https://mailing-list-archive.gemi.dev/www/2021/006404.html">https://mailing-list-archive.gemi.dev/www/2021/006404.html</a> archives
+</i>&gt;<i>&gt; =&gt; <a href="gemini://lapacz-kornel.dev/git/gmnigit/">gemini://lapacz-kornel.dev/git/gmnigit/</a> demo
+</i>&gt;<i>
+</i>&gt;<i> Hello,
+</i>&gt;<i>
+</i>&gt;<i> I&#x27;m using gmnigit at:
+</i>&gt;<i>
+</i>&gt;<i>     <a href="gemini://git.omarpolo.com">gemini://git.omarpolo.com</a>
+</i>&gt;<i>
+</i>&gt;<i> and gitolite to manage the repositories.  My setup is like this: in
+</i>&gt;<i> gitolite.conf I have a rule like:
+</i>&gt;<i>
+</i>&gt;<i> repo @gemini
+</i>&gt;<i>     option hook.post-receive = gmnigit
+</i>&gt;<i>
+</i>&gt;<i> and then a bunch of repositories using that rule
+</i>&gt;<i>
+</i>&gt;<i> @gemini = a68-mode
+</i>&gt;<i> @gemini = acmetag
+</i>&gt;<i> @gemini = blog
+</i>&gt;<i> @gemini = dots
+</i>&gt;<i> # ...
+</i>&gt;<i>
+</i>&gt;<i> In gitolite-admin/local/hooks/repo-specific/gmnigit I have
+</i>&gt;<i>
+</i>&gt;<i> #!/bin/sh
+</i>&gt;<i>
+</i>&gt;<i> while read -r _ _ ref; do
+</i>&gt;<i>     if [ &quot;$ref&quot; != &quot;refs/heads/master&quot; -a \
+</i>&gt;<i>          &quot;$ref&quot; != &quot;refs/heads/main&quot; ]; then
+</i>&gt;<i>         continue
+</i>&gt;<i>     fi
+</i>&gt;<i>
+</i>&gt;<i>     name=&quot;$(basename $PWD)&quot;
+</i>&gt;<i>     gmnigit -repo . \
+</i>&gt;<i>         -refs \
+</i>&gt;<i>         -name &quot;${name%%.git}&quot; \
+</i>&gt;<i>         -dist ~/public/&quot;${name%%.git}&quot; \
+</i>&gt;<i>         -url &quot;<a href="https://git.omarpolo.com/${name}">https://git.omarpolo.com/${name}</a>&quot;
+</i>&gt;<i>     if [ $? -ne 0 ]; then
+</i>&gt;<i>         echo &quot;gmnigit failed for $PWD (ref=$ref)&quot;
+</i>&gt;<i>         exit 1
+</i>&gt;<i>     fi
+</i>&gt;<i> done
+</i>&gt;<i>
+</i>&gt;<i> that generates the repositories.
+</i>&gt;<i>
+</i>&gt;<i> My only annoyance with gmnigit is its speed: it could save some time by
+</i>&gt;<i> limiting the number of commits exported, like the last 500 or so, but it
+</i>&gt;<i> currently exports all of them and that could take a while for medium
+</i>&gt;<i> repositories.
+</i>&gt;<i>
+</i>&gt;<i> Overall thought, I&#x27;m happy about it, it&#x27;s been working fine for various
+</i>&gt;<i> months already.
+</i>&gt;<i>
+</i>&gt;<i> Cheers,
+</i>&gt;<i>
+</i>&gt;<i> Omar Polo
+</i>
+Thank you for the in-depth review,
+and for sharing your script.
+
+Perhaps gmnigit doesn&#x27;t use cache. idk.
+
+I wish stagit et al. supported a &quot;projects&quot;
+meta-index page natively, though I suppose
+taking advantage of their composability might
+be enough to make my own.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007667.html">[users] Any live gmnigit capsules?</a></li>
+<li>Next message (by thread): <a href="007670.html">[users] Any live gmnigit capsules?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7669">[ date ]</a> <a href="thread.html#7669">[ thread ]</a> <a href="subject.html#7669">[ subject ]</a> <a href="author.html#7669">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

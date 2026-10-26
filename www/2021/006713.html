@@ -1,130 +1,83 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> a space case for transparent gemtext compression
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20a%20space%20case%20for%20transparent%20gemtext%20compression&In-Reply-To=%3CYMt9kKHpXx4q65Bu%40SDF.ORG%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="006711.html">
-   <LINK REL="Next"  HREF="006716.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>a space case for transparent gemtext compression</H1>
-    <B>Jonathan Lane</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20a%20space%20case%20for%20transparent%20gemtext%20compression&In-Reply-To=%3CYMt9kKHpXx4q65Bu%40SDF.ORG%3E"
-       TITLE="a space case for transparent gemtext compression">tidux at sdf.org
-       </A><BR>
-    <I>Thu Jun 17 17:51:28 BST 2021</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="006711.html">a space case for transparent gemtext compression
-</A></li>
-        <LI>Next message (by thread): <A HREF="006716.html">a space case for transparent gemtext compression
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#6713">[ date ]</a>
-              <a href="thread.html#6713">[ thread ]</a>
-              <a href="subject.html#6713">[ subject ]</a>
-              <a href="author.html#6713">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>a space case for transparent gemtext compression</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006711.html">
+<link rel="next" href="006716.html">
+</head>
+<body>
+<h1>a space case for transparent gemtext compression</h1>
+<b>Jonathan Lane</b> tidux at sdf.org<br>
+<i>Thu Jun 17 17:51:28 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006711.html">a space case for transparent gemtext compression</a></li>
+<li>Next message (by thread): <a href="006716.html">a space case for transparent gemtext compression</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6713">[ date ]</a> <a href="thread.html#6713">[ thread ]</a> <a href="subject.html#6713">[ subject ]</a> <a href="author.html#6713">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Thu, Jun 17, 2021 at 04:34:54PM +0200, ew.gemini wrote:
+<pre>On Thu, Jun 17, 2021 at 04:34:54PM +0200, ew.gemini wrote:
 &gt;<i> Well, imho you do not neccessarily need any changes to the
-</I>&gt;<i> protocol or the gemtext specs.
-</I>&gt;<i> 
-</I>&gt;<i> Noone stops you from:
-</I>&gt;<i> 
-</I>&gt;<i> * writing an article (arbitrary size, consider it big for the
-</I>&gt;<i>   argument)
-</I>&gt;<i>   =&gt; filename.gmi
-</I>&gt;<i> * compressing this file with xz, say
-</I>&gt;<i>   =&gt; filename.gmi.xz
-</I>&gt;<i> * adding an abstract which describes the article
-</I>&gt;<i>   =&gt; filename-abstract.gmi
-</I>&gt;<i> * adding a link to the abstract
-</I>&gt;<i>   =&gt; filename.gmi.xz  read more [compressed]
-</I>&gt;<i> * the abstract is added to your feed and/or index.gmi
-</I>&gt;<i> 
-</I>&gt;<i> The the user will decide whether to follow the link.
-</I>&gt;<i> The client software might be able to uncompress the downloaded
-</I>&gt;<i> file and display it similar to LaGrange displaying image as if
-</I>&gt;<i> they were &quot;inline&quot;.
-</I>&gt;<i> 
-</I>&gt;<i> 
-</I>&gt;<i> Please bear in mind that the gemini protocol does not even
-</I>&gt;<i> announce the length of the content to follow.
-</I>&gt;<i> 
-</I>&gt;<i> 
-</I>&gt;<i> I would go the same route for extented text where I want to
-</I>&gt;<i> control the presentation. Use \LaTeX, produce a .pdf file, offer
-</I>&gt;<i> a download link in an plain/text abstract file, which is
-</I>&gt;<i> indexed. No need for &quot;complex machinery&quot;.
-</I>&gt;<i> 
-</I>&gt;<i> Cheers,
-</I>&gt;<i> ~ew
-</I>&gt;<i> 
-</I>
-This is basically how I'd go, although I'd lean towards gzip over xz for
-being much kinder to low-memory systems.  Anything that can't be done on
-a 68030 or an 80386SX doesn't belong in any of the core Gemini
+</i>&gt;<i> protocol or the gemtext specs.
+</i>&gt;<i> 
+</i>&gt;<i> Noone stops you from:
+</i>&gt;<i> 
+</i>&gt;<i> * writing an article (arbitrary size, consider it big for the
+</i>&gt;<i>   argument)
+</i>&gt;<i>   =&gt; filename.gmi
+</i>&gt;<i> * compressing this file with xz, say
+</i>&gt;<i>   =&gt; filename.gmi.xz
+</i>&gt;<i> * adding an abstract which describes the article
+</i>&gt;<i>   =&gt; filename-abstract.gmi
+</i>&gt;<i> * adding a link to the abstract
+</i>&gt;<i>   =&gt; filename.gmi.xz  read more [compressed]
+</i>&gt;<i> * the abstract is added to your feed and/or index.gmi
+</i>&gt;<i> 
+</i>&gt;<i> The the user will decide whether to follow the link.
+</i>&gt;<i> The client software might be able to uncompress the downloaded
+</i>&gt;<i> file and display it similar to LaGrange displaying image as if
+</i>&gt;<i> they were &quot;inline&quot;.
+</i>&gt;<i> 
+</i>&gt;<i> 
+</i>&gt;<i> Please bear in mind that the gemini protocol does not even
+</i>&gt;<i> announce the length of the content to follow.
+</i>&gt;<i> 
+</i>&gt;<i> 
+</i>&gt;<i> I would go the same route for extented text where I want to
+</i>&gt;<i> control the presentation. Use \LaTeX, produce a .pdf file, offer
+</i>&gt;<i> a download link in an plain/text abstract file, which is
+</i>&gt;<i> indexed. No need for &quot;complex machinery&quot;.
+</i>&gt;<i> 
+</i>&gt;<i> Cheers,
+</i>&gt;<i> ~ew
+</i>&gt;<i> 
+</i>
+This is basically how I&#x27;d go, although I&#x27;d lean towards gzip over xz for
+being much kinder to low-memory systems.  Anything that can&#x27;t be done on
+a 68030 or an 80386SX doesn&#x27;t belong in any of the core Gemini
 standards, or even de-facto standards like how to serve compressed
 gemtext. 
 
 See this StackOverflow posting for more details on the justification.
 
-<A HREF="https://stackoverflow.com/questions/6493270/why-is-tar-gz-still-much-more-common-than-tar-xz">https://stackoverflow.com/questions/6493270/why-is-tar-gz-still-much-more-common-than-tar-xz</A>
+<a href="https://stackoverflow.com/questions/6493270/why-is-tar-gz-still-much-more-common-than-tar-xz">https://stackoverflow.com/questions/6493270/why-is-tar-gz-still-much-more-common-than-tar-xz</a>
 
 -- 
-<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">tidux at sdf.org</A>
-SDF Public Access UNIX System - <A HREF="http://sdf.org">http://sdf.org</A>
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+tidux@sdf.org
+SDF Public Access UNIX System - <a href="http://sdf.org">http://sdf.org</a>
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="006711.html">a space case for transparent gemtext compression
-</A></li>
-	<LI>Next message (by thread): <A HREF="006716.html">a space case for transparent gemtext compression
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#6713">[ date ]</a>
-              <a href="thread.html#6713">[ thread ]</a>
-              <a href="subject.html#6713">[ subject ]</a>
-              <a href="author.html#6713">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="006711.html">a space case for transparent gemtext compression</a></li>
+<li>Next message (by thread): <a href="006716.html">a space case for transparent gemtext compression</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6713">[ date ]</a> <a href="thread.html#6713">[ thread ]</a> <a href="subject.html#6713">[ subject ]</a> <a href="author.html#6713">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,59 +1,43 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [ANN] New Gemini Server: Space Age
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20New%20Gemini%20Server%3A%20Space%20Age&In-Reply-To=%3C20200710200523.GW19717%40brevard.conman.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="002188.html">
-   <LINK REL="Next"  HREF="002190.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[ANN] New Gemini Server: Space Age</H1>
-    <B>Sean Conner</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20New%20Gemini%20Server%3A%20Space%20Age&In-Reply-To=%3C20200710200523.GW19717%40brevard.conman.org%3E"
-       TITLE="[ANN] New Gemini Server: Space Age">sean at conman.org
-       </A><BR>
-    <I>Fri Jul 10 21:05:23 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="002188.html">[ANN] New Gemini Server: Space Age
-</A></li>
-        <LI>Next message (by thread): <A HREF="002190.html">[ANN] New Gemini Server: Space Age
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2189">[ date ]</a>
-              <a href="thread.html#2189">[ thread ]</a>
-              <a href="subject.html#2189">[ subject ]</a>
-              <a href="author.html#2189">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[ANN] New Gemini Server: Space Age</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="002188.html">
+<link rel="next" href="002190.html">
+</head>
+<body>
+<h1>[ANN] New Gemini Server: Space Age</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Fri Jul 10 21:05:23 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="002188.html">[ANN] New Gemini Server: Space Age</a></li>
+<li>Next message (by thread): <a href="002190.html">[ANN] New Gemini Server: Space Age</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2189">[ date ]</a> <a href="thread.html#2189">[ thread ]</a> <a href="subject.html#2189">[ subject ]</a> <a href="author.html#2189">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>It was thus said that the Great Gary Johnson once stated:
-&gt;<i> Yes, these are CGI scripts in practice. I'm just trying not to shell out
-</I>&gt;<i> to subprocesses in the interest of server responsiveness. I'm currently
-</I>&gt;<i> just thinking through how to provide as simple and intuitive an
-</I>&gt;<i> interface as possible for the script writer. Probably it will amount to
-</I>&gt;<i> some kind of handler function API that takes a request map and returns a
-</I>&gt;<i> response map in the classic tradition of all ring-based Clojure web
-</I>&gt;<i> apps.
-</I>&gt;<i>
-</I>&gt;<i> Scripts are currently run within their own auto-generated temporary
-</I>&gt;<i> namespaces, which prevents them from accidentally polluting the server's
-</I>&gt;<i> namespaces with def* forms. Any I/O to stdout is captured in a string
-</I>&gt;<i> and currently returned as the body of a &quot;20 text/gemini; charset=utf-8&quot;
-</I>&gt;<i> response. This is fine as a starting point, but I think I want to create
-</I>&gt;<i> something that feels more functional and less state-oriented pretty
-</I>&gt;<i> soon.
-</I>&gt;<i> 
-</I>  GLV-1.12556 [1] uses handlers to generate content.  The builtin handlers
+<pre>It was thus said that the Great Gary Johnson once stated:
+&gt;<i> Yes, these are CGI scripts in practice. I&#x27;m just trying not to shell out
+</i>&gt;<i> to subprocesses in the interest of server responsiveness. I&#x27;m currently
+</i>&gt;<i> just thinking through how to provide as simple and intuitive an
+</i>&gt;<i> interface as possible for the script writer. Probably it will amount to
+</i>&gt;<i> some kind of handler function API that takes a request map and returns a
+</i>&gt;<i> response map in the classic tradition of all ring-based Clojure web
+</i>&gt;<i> apps.
+</i>&gt;<i>
+</i>&gt;<i> Scripts are currently run within their own auto-generated temporary
+</i>&gt;<i> namespaces, which prevents them from accidentally polluting the server&#x27;s
+</i>&gt;<i> namespaces with def* forms. Any I/O to stdout is captured in a string
+</i>&gt;<i> and currently returned as the body of a &quot;20 text/gemini; charset=utf-8&quot;
+</i>&gt;<i> response. This is fine as a starting point, but I think I want to create
+</i>&gt;<i> something that feels more functional and less state-oriented pretty
+</i>&gt;<i> soon.
+</i>&gt;<i> 
+</i>  GLV-1.12556 [1] uses handlers to generate content.  The builtin handlers
 include ones to serve up a file (yup--just one file), a filesystem (handles
 serving up data from a directory) and user directories [2].  The API I use
 is simple.  The optional functions are:
@@ -61,8 +45,8 @@ is simple.  The optional functions are:
 	okay,err = init(conf)
 
   This function does any intialization for the handler.  It is given the
-configuration parameters from the configuration file and returns 'true' if
-success, or 'false' and an error message if it fails.  Typically, if I have
+configuration parameters from the configuration file and returns &#x27;true&#x27; if
+success, or &#x27;false&#x27; and an error message if it fails.  Typically, if I have
 this function, it verifies the configuration passed in to make sure it will
 handle requests.  This configuratio block can also be used for state
 information for the handler if need be.
@@ -70,16 +54,16 @@ information for the handler if need be.
 	okay,err = fini(conf)
 
   This function is called when the server is being shut down, and is
-intended to do any cleanup (that isn't not already handled by the garbage
+intended to do any cleanup (that isn&#x27;t not already handled by the garbage
 collector) or saving any persistent data [3].
 
   The mandatory function is:
 
 	status,mime,data = handler(conf,auth,location,match)
 
-  This handles a request.  It's given the configuration block, the client
-certificate (if any [4]), the parsed URL and the 'match' array, which I
-don't know how to explain other than an example, in this case, the
+  This handles a request.  It&#x27;s given the configuration block, the client
+certificate (if any [4]), the parsed URL and the &#x27;match&#x27; array, which I
+don&#x27;t know how to explain other than an example, in this case, the
 filesystem handler (from my development system configuration file):
 
 	{
@@ -92,8 +76,8 @@ filesystem handler (from my development system configuration file):
   The path component is a Lua pattern (a type of regex) to determine which
 handler to call for a given request, and it has two parts, the first (which
 is captured in ()) determines the &quot;base&quot; path of the request, and the second
-is the part the handler is reponsible for.  It's these two captures that are
-passed in the 'match' section.
+is the part the handler is reponsible for.  It&#x27;s these two captures that are
+passed in the &#x27;match&#x27; section.
 
   This function returns a status code, meta information (named mime here)
 and a body (which for errors, has to be &quot;&quot;) as a string.  Handlers do not
@@ -101,14 +85,14 @@ have direct access to the socket.  And a given handler can be instantiated
 multiple times, each with its own configuration block.
 
   As handlers in GLV-1.12556 are also Lua modules, that means they get their
-own &quot;global&quot; namespace.  It works and I've had no issue with this structure. 
-It also means it's easier for me to write a handler than it is a CGI (or
+own &quot;global&quot; namespace.  It works and I&#x27;ve had no issue with this structure. 
+It also means it&#x27;s easier for me to write a handler than it is a CGI (or
 SCGI) script, although it does mean I have to add a configuration block and
 restart the server when adding a new handler.
 
   -spc
 
-[1]	<A HREF="https://github.com/spc476/GLV-1.12556">https://github.com/spc476/GLV-1.12556</A>
+[1]	<a href="https://github.com/spc476/GLV-1.12556">https://github.com/spc476/GLV-1.12556</a>
 
 [2]	I run more custom handlers than I do builtin ones.
 
@@ -116,58 +100,18 @@ restart the server when adding a new handler.
 	in order to pick up from where it left off.
 
 [4]	Authorization has already been done by the time the request is
-	handled so the handler doesn't need to do it, but some handlers
+	handled so the handler doesn&#x27;t need to do it, but some handlers
 	(like the filesystem handler, which deals with CGI/SCGi) can do some
 	additional processing.
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="002188.html">[ANN] New Gemini Server: Space Age
-</A></li>
-	<LI>Next message (by thread): <A HREF="002190.html">[ANN] New Gemini Server: Space Age
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2189">[ date ]</a>
-              <a href="thread.html#2189">[ thread ]</a>
-              <a href="subject.html#2189">[ subject ]</a>
-              <a href="author.html#2189">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="002188.html">[ANN] New Gemini Server: Space Age</a></li>
+<li>Next message (by thread): <a href="002190.html">[ANN] New Gemini Server: Space Age</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2189">[ date ]</a> <a href="thread.html#2189">[ thread ]</a> <a href="subject.html#2189">[ subject ]</a> <a href="author.html#2189">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

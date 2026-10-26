@@ -1,60 +1,44 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Text reflow woes (or: I want bullets back!)y
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3Cdcea439b-15c4-4360-86a0-7cd786db0703%40www.fastmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="000371.html">
-   <LINK REL="Next"  HREF="000377.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Text reflow woes (or: I want bullets back!)y</H1>
-    <B>Aaron Janse</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Text%20reflow%20woes%20%28or%3A%20I%20want%20bullets%20back%21%29y&In-Reply-To=%3Cdcea439b-15c4-4360-86a0-7cd786db0703%40www.fastmail.com%3E"
-       TITLE="Text reflow woes (or: I want bullets back!)y">aaron at ajanse.me
-       </A><BR>
-    <I>Sat Jan 18 19:20:10 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="000371.html">Text reflow woes (or: I want bullets back!)y
-</A></li>
-        <LI>Next message (by thread): <A HREF="000377.html">Text reflow woes (or: I want bullets back!)y
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#375">[ date ]</a>
-              <a href="thread.html#375">[ thread ]</a>
-              <a href="subject.html#375">[ subject ]</a>
-              <a href="author.html#375">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text reflow woes (or: I want bullets back!)y</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000371.html">
+<link rel="next" href="000377.html">
+</head>
+<body>
+<h1>Text reflow woes (or: I want bullets back!)y</h1>
+<b>Aaron Janse</b> aaron at ajanse.me<br>
+<i>Sat Jan 18 19:20:10 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000371.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000377.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#375">[ date ]</a> <a href="thread.html#375">[ thread ]</a> <a href="subject.html#375">[ subject ]</a> <a href="author.html#375">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>I think we made an oversight: syntax nested within quotes.
+<pre>I think we made an oversight: syntax nested within quotes.
 
 For example:
 
 ```gemini
 &gt;<i> &gt; It looks like things are moving along, I wonder if we forgot anything
-</I>&gt;<i> &gt; that would make us need to read more than three chars to specify the
-</I>&gt;<i> &gt; line type?
-</I>&gt;<i> 
-</I>&gt;<i> Here's a site to demo gemini's syntax:
-</I>&gt;<i> =&gt; <A HREF="gemini://example.com">gemini://example.com</A> Gemini Syntax Demo
-</I>&gt;<i> 
-</I>&gt;<i> In the future, we can add the following features:
-</I>&gt;<i> * foo
-</I>&gt;<i> * bar
-</I>
+</i>&gt;<i> &gt; that would make us need to read more than three chars to specify the
+</i>&gt;<i> &gt; line type?
+</i>&gt;<i> 
+</i>&gt;<i> Here&#x27;s a site to demo gemini&#x27;s syntax:
+</i>&gt;<i> =&gt; <a href="gemini://example.com">gemini://example.com</a> Gemini Syntax Demo
+</i>&gt;<i> 
+</i>&gt;<i> In the future, we can add the following features:
+</i>&gt;<i> * foo
+</i>&gt;<i> * bar
+</i>
 Client:
- *doesn't know to make quoted link clickable*
- *doesn't know to fancy-render the quoted list*
+ *doesn&#x27;t know to make quoted link clickable*
+ *doesn&#x27;t know to fancy-render the quoted list*
 ```
 
 ---
@@ -68,14 +52,14 @@ I definitely love:
 * Repeated list markers (*/+) to indicate depth
 * Stateless line-by-line parsing
 
-Changes I think we should make to the spec spec, based on what I've read
+Changes I think we should make to the spec spec, based on what I&#x27;ve read
 here and my own opinion:
 
 * Preformatted text toggle lines only need to *start* with three
   backticks. Specify the significance of text after the backticks.
   
   Some ideas:
-    * It's permitted in order to please markdown users. Ignore it
+    * It&#x27;s permitted in order to please markdown users. Ignore it
     * Display it to the user (could be position in file, language, etc)
     * Use it for syntax highlighting
 
@@ -88,7 +72,7 @@ here and my own opinion:
 
 * Specify that ordered lists MUST use plus sign markers
 
-* Specify Tomasino's nested list system
+* Specify Tomasino&#x27;s nested list system
 
 * Explicitly specify markdown syntax that is not allowed. Random idea,
   but maybe we could even advise clients to shame this syntax the same
@@ -108,41 +92,27 @@ here and my own opinion:
 Are we really limited to a max depth of three? Even if we allow unlimited
 depth of headers and lists, clients would only need to read the first two
 chars of a line to determine its type (unless we add horizontal rules,
-in which case we'd need to read three characters).
+in which case we&#x27;d need to read three characters).
 
 &gt;<i> Hmm.  I would want to think a bit before I lay down a hard statement on
-</I>&gt;<i> this because I don't want to impose too much of my own ideology on
-</I>&gt;<i> Gemini, as it's supposed to be a general-purpose tool....but I am not
-</I>&gt;<i> excited by verbatim dragging of mainstream web 2.0 cultural concepts
-</I>&gt;<i> like comment threads into Gemini.
-</I>
+</i>&gt;<i> this because I don&#x27;t want to impose too much of my own ideology on
+</i>&gt;<i> Gemini, as it&#x27;s supposed to be a general-purpose tool....but I am not
+</i>&gt;<i> excited by verbatim dragging of mainstream web 2.0 cultural concepts
+</i>&gt;<i> like comment threads into Gemini.
+</i>
 Well, worst case scenario, if someone really badly wants comment threads,
 maybe they could use nested quote blocks (assuming we figure that out).
 
 Cheers!
-</PRE>
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="000371.html">Text reflow woes (or: I want bullets back!)y
-</A></li>
-	<LI>Next message (by thread): <A HREF="000377.html">Text reflow woes (or: I want bullets back!)y
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#375">[ date ]</a>
-              <a href="thread.html#375">[ thread ]</a>
-              <a href="subject.html#375">[ subject ]</a>
-              <a href="author.html#375">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="000371.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000377.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#375">[ date ]</a> <a href="thread.html#375">[ thread ]</a> <a href="subject.html#375">[ subject ]</a> <a href="author.html#375">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

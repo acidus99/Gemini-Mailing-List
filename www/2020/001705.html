@@ -1,49 +1,33 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [SPEC-CHANGE] Simplified client certs, URI scheme, alt text
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Simplified%20client%20certs%2C%20URI%20scheme%2C%20alt%20text&In-Reply-To=%3C20200615161317.GF20393%40SDF.ORG%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="001745.html">
-   <LINK REL="Next"  HREF="001713.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[SPEC-CHANGE] Simplified client certs, URI scheme, alt text</H1>
-    <B>solderpunk</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Simplified%20client%20certs%2C%20URI%20scheme%2C%20alt%20text&In-Reply-To=%3C20200615161317.GF20393%40SDF.ORG%3E"
-       TITLE="[SPEC-CHANGE] Simplified client certs, URI scheme, alt text">solderpunk at SDF.ORG
-       </A><BR>
-    <I>Mon Jun 15 17:13:17 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="001745.html">CSRF in Gemini
-</A></li>
-        <LI>Next message (by thread): <A HREF="001713.html">[SPEC-CHANGE] Simplified client certs, URI scheme, alt text
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1705">[ date ]</a>
-              <a href="thread.html#1705">[ thread ]</a>
-              <a href="subject.html#1705">[ subject ]</a>
-              <a href="author.html#1705">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SPEC-CHANGE] Simplified client certs, URI scheme, alt text</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="001745.html">
+<link rel="next" href="001713.html">
+</head>
+<body>
+<h1>[SPEC-CHANGE] Simplified client certs, URI scheme, alt text</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Mon Jun 15 17:13:17 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="001745.html">CSRF in Gemini</a></li>
+<li>Next message (by thread): <a href="001713.html">[SPEC-CHANGE] Simplified client certs, URI scheme, alt text</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1705">[ date ]</a> <a href="thread.html#1705">[ thread ]</a> <a href="subject.html#1705">[ subject ]</a> <a href="author.html#1705">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Ahoy, Geminauts!
+<pre>Ahoy, Geminauts!
 
 I have just made the proposed spec changes that I asked for comment on
 over the just past weekend official.
 
 SUMMARY OF CHANGES:
  
-* A <A HREF="gemini://">gemini://</A> URI scheme is formally defined for the first time,
+* A gemini:// URI scheme is formally defined for the first time,
   explicitly disallowing the use of the userinfo subcomponent of the
   authority component.
 * The client certificate system has been substantially simplified, with
@@ -60,14 +44,14 @@ SUMMARY OF CHANGES:
 IMPLICATIONS FOR SERVER AUTHORS:
    
 Servers SHOULD return status 59 (BAD REQUEST) if they receive a request
-for a <A HREF="gemini://">gemini://</A> URL containing a userinfo subcomponent.  If you really
+for a gemini:// URL containing a userinfo subcomponent.  If you really
 want to be hyper-Postelian, you MAY instead strip out the userinfo so
 that, for example, it does not end up in logs, is not passed to CGI
 apps, etc.
     
 IMPLICATIONS FOR CLIENT AUTHORS:
      
-Clients should either refuse to follow <A HREF="gemini://">gemini://</A> links with userinfo
+Clients should either refuse to follow gemini:// links with userinfo
 subcomponents, or should strip out the userinfo before following the
 link.
 
@@ -82,7 +66,7 @@ display.  Strictly optional in all cases.
       
 IMPLICATIONS FOR CONTENT AUTHORS:
 
-If you have authored content which includes <A HREF="gemini://">gemini://</A> links with
+If you have authored content which includes gemini:// links with
 userinfo subcomponents, you MUST remove the userinfo.
 
 You may wish to add alt text to preformatted content which is not
@@ -91,97 +75,15 @@ meaningfully screen readable or search engine indexable.
 Cheers,
 Solderpunk
 
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="001745.html">CSRF in Gemini
-</A></li>
-	<LI>Next message (by thread): <A HREF="001713.html">[SPEC-CHANGE] Simplified client certs, URI scheme, alt text
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1705">[ date ]</a>
-              <a href="thread.html#1705">[ thread ]</a>
-              <a href="subject.html#1705">[ subject ]</a>
-              <a href="author.html#1705">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="001745.html">CSRF in Gemini</a></li>
+<li>Next message (by thread): <a href="001713.html">[SPEC-CHANGE] Simplified client certs, URI scheme, alt text</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1705">[ date ]</a> <a href="thread.html#1705">[ thread ]</a> <a href="subject.html#1705">[ subject ]</a> <a href="author.html#1705">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

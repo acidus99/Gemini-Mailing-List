@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] IPv6 addresses in URLs</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006372.html">
+<link rel="next" href="006383.html">
+</head>
+<body>
+<h1>[tech] IPv6 addresses in URLs</h1>
+<b>nervuri</b> nervuri at disroot.org<br>
+<i>Fri Apr 16 13:23:17 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006372.html">[tech] IPv6 addresses in URLs</a></li>
+<li>Next message (by thread): <a href="006383.html">[tech] IPv6 addresses in URLs</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6377">[ date ]</a> <a href="thread.html#6377">[ thread ]</a> <a href="subject.html#6377">[ subject ]</a> <a href="author.html#6377">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre><a href="https://gitlab.com/gemini-specification/protocol/-/issues/33">https://gitlab.com/gemini-specification/protocol/-/issues/33</a>
+
+See makeworld&#x27;s comments.  It looks like &quot;no SNI&quot; is the right answer
+for IP addresses.
+
+
+On Fri, 2021-04-16, Stephane Bortzmeyer wrote:
+&gt;<i>&gt; <a href="gemini://2a02:7b40:592f:a446::1/">gemini://2a02:7b40:592f:a446::1/</a>
+</i>&gt;<i>&gt; <a href="gemini://[2a02:7b40:592f:a446::1]:1965/">gemini://[2a02:7b40:592f:a446::1]:1965/</a>
+</i>&gt;<i>
+</i>&gt;<i> No. The first one is not a legal URL.
+</i>
+Thanks, I stand corrected.  Indeed, Agunua points out that the first URL
+is invalid, but connects to the second one.
+
+The clients I tested which didn&#x27;t accept the second URL are:
+- Lagrange
+- gmni
+- bombadillo
+- Mozz web proxy - <a href="https://portal.mozz.us/gemini/%5B2a02:7b40:592f:a446::1%5D:1965/">https://portal.mozz.us/gemini/%5B2a02:7b40:592f:a446::1%5D:1965/</a>
+- <a href="gemini://celehner.com/proxy/">gemini://celehner.com/proxy/</a> - <a href="https://celehner.com/gemini://[2a02:7b40:592f:a446::1]:1965/">https://celehner.com/gemini://[2a02:7b40:592f:a446::1]:1965/</a>
+- <a href="https://gemini.susa.net:1993/proxy.html">https://gemini.susa.net:1993/proxy.html</a>
+
+However, most clients accept the host without the scheme and behavior is
+sometimes inconsistent.  For instance, in Amfora:
+- &quot;89.47.164.70&quot; works
+- &quot;[2a02:7b40:592f:a446::1]&quot; works if it is supplied from the
+ command line, but not from within the program.
+- &quot;2a02:7b40:592f:a446::1&quot; - same as the above
+
+Agunua and Kristall adhere to the RFC, so they connect to the first two,
+but not the third.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006372.html">[tech] IPv6 addresses in URLs</a></li>
+<li>Next message (by thread): <a href="006383.html">[tech] IPv6 addresses in URLs</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6377">[ date ]</a> <a href="thread.html#6377">[ thread ]</a> <a href="subject.html#6377">[ subject ]</a> <a href="author.html#6377">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

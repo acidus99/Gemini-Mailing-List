@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clarification of current spec</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000174.html">
+<link rel="next" href="000178.html">
+</head>
+<body>
+<h1>Clarification of current spec</h1>
+<b>plugd</b> plugd at thelambdalab.xyz<br>
+<i>Thu Sep 19 10:14:30 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000174.html">Clarification of current spec</a></li>
+<li>Next message (by thread): <a href="000178.html">TLS, TOFU and the Gemini security model</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#175">[ date ]</a> <a href="thread.html#175">[ thread ]</a> <a href="subject.html#175">[ subject ]</a> <a href="author.html#175">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi Brian,
+
+Brian Evans writes:
+&gt;<i> I have finally gotten around to implementing a client.
+</i>
+Awesome!
+
+&gt;<i> While building all of this out I have been using existing servers for testing. It seems that there is a good
+</i>&gt;<i> amount of variation, particularly concerning tabs and spaces. 
+</i>&gt;<i>
+</i>&gt;<i> I am wanting clarity on whether this is correct:
+</i>&gt;<i> &lt;two digit status number&gt;&lt;space&gt;&lt;meta&gt;
+</i>
+Yes, as Sean says the spec is silent on this:
+
+--snip--
+Gemini response headers look like this:
+
+&lt;STATUS&gt; &lt;META&gt;&lt;CR&gt;&lt;LF&gt;
+--snip--
+
+&gt;<i>From reading some old phlog posts it seems it used to be
+</i>&lt;STATUS&gt;&lt;TAB&gt;&lt;META&gt;&lt;CR&gt;&lt;LF&gt;, and it&#x27;s not clear whether the &quot; &quot; in the
+current version is meant to be literal or just some collection of
+whitespace.
+
+For this reason in Elpher I&#x27;ve just programmed defensively and accept
+any combination of spaces and tabs.  This also follows my personal
+parsing philosophy of being relaxed about what I accept but strict about
+what I send.
+
+plugd
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000174.html">Clarification of current spec</a></li>
+<li>Next message (by thread): <a href="000178.html">TLS, TOFU and the Gemini security model</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#175">[ date ]</a> <a href="thread.html#175">[ thread ]</a> <a href="subject.html#175">[ subject ]</a> <a href="author.html#175">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] tls user_canceled issue with Java server + Go client</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006387.html">
+<link rel="next" href="006381.html">
+</head>
+<body>
+<h1>[tech] tls user_canceled issue with Java server + Go client</h1>
+<b>Bill Havanki</b> desu at deszaras.xyz<br>
+<i>Sat May  1 03:03:58 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006387.html">[tech] tls user_canceled issue with Java server + Go client</a></li>
+<li>Next message (by thread): <a href="006381.html">[ANN] New version of Agunua with the recursive downloader</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6483">[ date ]</a> <a href="thread.html#6483">[ thread ]</a> <a href="subject.html#6483">[ subject ]</a> <a href="author.html#6483">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>My thanks to Gary as well. I found that my own Java server implementation had the same problem.
+
+My server gets the socket’s input and output streams in a try-with-resources block, so they are closed when the block exits. Unfortunately, when either of those streams are closed, Java closes the socket as well!
+
+So, I fixed the user_canceled problem by making a thin wrapper object around the socket output stream. When that stream wrapper is closed, it calls shutdownOutput on the socket before closing the original stream (which then closes the socket). Works nicely.
+
+<a href="https://github.com/bhavanki/doppio/blob/a4f8802d6e0dbeb066fa71f8c79b66d8616b3cf1/src/main/java/com/havanki/doppio/RequestHandler.java#L555">https://github.com/bhavanki/doppio/blob/a4f8802d6e0dbeb066fa71f8c79b66d8616b3cf1/src/main/java/com/havanki/doppio/RequestHandler.java#L555</a>
+
+Bill
+
+&gt;<i> On Apr 18, 2021, at 10:41 AM, Alan &lt;gemini@bunburya.eu&gt; wrote:
+</i>&gt;<i>
+</i>&gt;<i> Hi Gary,
+</i>&gt;<i>
+</i>&gt;<i> That solved it, thanks! A simple fix but you&#x27;re right, I couldn&#x27;t find
+</i>&gt;<i> anything about it. Good to know there is a solution.
+</i>&gt;<i>
+</i>&gt;<i> Thanks,
+</i>&gt;<i>
+</i>&gt;<i> Alan
+</i>&gt;<i>
+</i>&gt;<i> On 18/04/2021 01:04, Gary Johnson wrote:
+</i>&gt;<i>
+</i>&gt;<i>&gt; Alan&lt;gemini@bunburya.eu&gt; writes:
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt;&gt; When using the Amfora browser, I was unable to view &quot;20&quot; responses,
+</i>&gt;<i>&gt;&gt; getting instead the following error: &quot;/Issuing creating page: remote
+</i>&gt;<i>&gt;&gt; error: tls: user//canceled/&quot;. Unusually, every other response is
+</i>&gt;<i>&gt;&gt; displayed fine.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; Hi Alan,
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; I&#x27;m the author of Space-Age, a Gemini server written in Clojure.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; =&gt;<a href="https://gitlab.com/lambdatronic/space-age/">https://gitlab.com/lambdatronic/space-age/</a>
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; The tls_user_canceled issue you are running into is coming from the Java
+</i>&gt;<i>&gt; side. It also mystified me last year when I was writing my server since
+</i>&gt;<i>&gt; I was constantly getting that error in elpher (the Emacs Gemini client)
+</i>&gt;<i>&gt; whenever I tried to browse pages from my capsule.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; You have to force your SSLSocket to send the tls_close_notify alert to
+</i>&gt;<i>&gt; the client before closing the socket. This is exceptionally poorly
+</i>&gt;<i>&gt; documented in the JSSE Reference Guide, but I eventually figured out the
+</i>&gt;<i>&gt; solution through trial and error.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; All you need to do is to make sure you call socket.shutdownOutput()
+</i>&gt;<i>&gt; immediately before calling socket.close().
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; Here&#x27;s my function for writing a Gemini response back to the client for reference:
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; ```
+</i>&gt;<i>&gt; (defn- write-socket! [^SSLSocket socket {:keys [status meta body]}]
+</i>&gt;<i>&gt; (doto (io/writer socket)
+</i>&gt;<i>&gt; (.write (str status &quot; &quot; meta &quot;\r\n&quot;))
+</i>&gt;<i>&gt; (.flush))
+</i>&gt;<i>&gt; (when body
+</i>&gt;<i>&gt; (with-open [in-stream (io/input-stream (if (string? body)
+</i>&gt;<i>&gt; (.getBytes ^String body)
+</i>&gt;<i>&gt; body))]
+</i>&gt;<i>&gt; (let [out-stream (io/output-stream socket)]
+</i>&gt;<i>&gt; (.transferTo in-stream out-stream)
+</i>&gt;<i>&gt; (.flush out-stream))))
+</i>&gt;<i>&gt; (.shutdownOutput socket))
+</i>&gt;<i>&gt; ```
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; This is called from another function that then calls socket.close() to
+</i>&gt;<i>&gt; terminate the connection.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; Here is my full Gemini server implementation for further reference:
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; =&gt;<a href="https://gitlab.com/lambdatronic/space-age/-/blob/master/src/space_age/server.clj">https://gitlab.com/lambdatronic/space-age/-/blob/master/src/space_age/server.clj</a>
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; Happy hacking!
+</i>&gt;<i>&gt; Gary
+</i></pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006387.html">[tech] tls user_canceled issue with Java server + Go client</a></li>
+<li>Next message (by thread): <a href="006381.html">[ANN] New version of Agunua with the recursive downloader</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6483">[ date ]</a> <a href="thread.html#6483">[ thread ]</a> <a href="subject.html#6483">[ subject ]</a> <a href="author.html#6483">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

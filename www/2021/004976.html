@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] The Tragedy of &amp;</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004966.html">
+<link rel="next" href="004978.html">
+</head>
+<body>
+<h1>[spec] The Tragedy of &amp;</h1>
+<b>Gary Johnson</b> lambdatronic at disroot.org<br>
+<i>Sun Jan 31 18:07:51 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004966.html">[spec] The Tragedy of &amp;</a></li>
+<li>Next message (by thread): <a href="004978.html">[spec] The Tragedy of &amp;</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4976">[ date ]</a> <a href="thread.html#4976">[ thread ]</a> <a href="subject.html#4976">[ subject ]</a> <a href="author.html#4976">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Sean Conner &lt;sean at conman.org&gt; writes:
+
+&gt;<i> Not if the CGI interface is properly written.  All I had to do was write
+</i>&gt;<i> this CGI script and drop it into my tests directory [1]:
+</i>&gt;<i>
+</i>&gt;<i> 	<a href="gemini://gemini.conman.org/test/pathseg.cgi">gemini://gemini.conman.org/test/pathseg.cgi</a>
+</i>&gt;<i>
+</i>&gt;<i> It uses only three of the RFC-3875 defined variables, QUERY_STRING,
+</i>&gt;<i> SCRIPT_NAME and PATH_INFO to do all the work.  The script will ask for three
+</i>&gt;<i> fields and then present a final page with all three fields.  But the script
+</i>&gt;<i> will only work if all three variables are defined per RFC-3975 (PATH_INFO is
+</i>&gt;<i> the tricky one).
+</i>&gt;<i>
+</i>&gt;<i>   Yes, it&#x27;s a bit ugly and yes, it&#x27;s a second class citizen and yes, it
+</i>&gt;<i> requires a proper CGI module to work, but it can be done without the
+</i>&gt;<i> configuration you think it does.  The script just simply appends each input
+</i>&gt;<i> field as the path, so if you enter
+</i>&gt;<i>
+</i>&gt;<i> 	and a one
+</i>&gt;<i> 	and a two
+</i>&gt;<i> 	skidoosh
+</i>&gt;<i>
+</i>&gt;<i> as the values, the final URL will be:
+</i>&gt;<i>
+</i>&gt;<i> 	<a href="gemini://gemini.conman.org/test/pathseg.cgi/and%20a%20one/and%20a%20two/skidoosh">gemini://gemini.conman.org/test/pathseg.cgi/and%20a%20one/and%20a%20two/skidoosh</a>
+</i>&gt;<i>
+</i>&gt;<i>   Yes, I could have done a bit more processing, naming each segment:
+</i>&gt;<i>
+</i>&gt;<i> 	/test/pathseg.cgi/name=and%20a%20one/age=and%20a%20two/action=skidoosh
+</i>&gt;<i>
+</i>&gt;<i> but I was lazy and wanted to just do a proof-of-concept here.
+</i>
+Thanks for sharing some code, Sean. I, of course, realize that one could
+write a CGI script to pick apart the PATH_INFO for user inputs. This
+issue I raised in my message was that this doesn&#x27;t make any sense in the
+context of a CGI script which is looked up using the path on the remote
+filesystem.
+
+In your example, your script is located at /test/pathseg.cgi. However,
+lacking side information, I see no indicator (outside of the --
+admittedly optional -- cgi extension on your file name) of which path
+segments should be considered part of the CGI filename lookup and which
+parts are meant to be user input data in your example link:
+
+/test/pathseg.cgi/name=and%20a%20one/age=and%20a%20two/action=skidoosh
+
+This feels like a massive hack to me and an abuse of path segments TBH.
+
+If I were to embrace this approach, I can see that I would have to
+reprogram my server to do some additional path preprocessing magic. I
+could either:
+
+1. Check every sequence of path segments starting from the document root
+   to see if any of them correspond to an executable file or have the
+   blessed CGI file extension for my server.
+
+2. (To use Chris Babcock&#x27;s suggestion), check every sequence of path
+   segments starting from the document root to see if any of them
+   correspond to a directory containing an index.cgi file.
+
+3. Include an input parameter to my server (on the command line or in a
+   config file) that specifies a particular mapping between path
+   segments and CGI scripts on my filesystem. That is, I would be
+   defining a routing table at server start time. This approach has the
+   unfortunate side effect of preventing users on a pubnix from
+   installing CGI scripts in their ~/public_gemini capsules without
+   getting the server administrator to update the global routing table
+   on their behalf. Alternatively, it would require each ~/public_gemini
+   capsule to include a routing table config file within it if it wanted
+   to support CGI scripts, and these would have to be read and parsed by
+   the server both at server start time and/or on a periodic interval or
+   event-based basis in order to support new user scripts as they are
+   added without having to restart the server.
+
+Once one of these 3 approaches enables the server to successfully detect
+that a particular path corresponds to a CGI script that is not actually
+located where that path is pointing, then the server would need to
+execute that script with PATH_INFO bound to the entire path. Every
+installed CGI script would then be responsible for manually removing
+SCRIPT_NAME from PATH_INFO and splitting it up to get the user inputs,
+which puts an additional burden on CGI developers.
+
+
+So I&#x27;ve now heard from multiple folks that we should all just get on
+with these path segment hacks and accept that as the best we can do in
+Gemini.
+
+While I can see that it&#x27;s technically possible (though arguable ugly) to
+do so, I suppose my question is:
+
+&quot;What exactly does Gemini lose by allowing chained query parameters?
+(with &amp;)&quot;
+
+I can&#x27;t for the life of me see any downside. It should literally be one
+line of code changed in your favorite Gemini client. Just append inputs
+to the query string if one already exists rather than replacing the
+query string outright.
+
+I believe John Cowan is right that &quot;include&quot; is too vague a word in
+Solderpunk&#x27;s current specification for the 10 INPUT field. Both
+appending and replacing are forms of inclusion, so any Gemini client
+author who chooses to append shouldn&#x27;t be in violation of the spec as it
+is currently worded.
+
+And changing that one line in your client could save every CGI script
+writer in Geminispace a lot of additional work (as clearly demonstrated
+by the examples shared by Katarina, Chris, and Sean).
+
+Seems like a very positive return on investment for a small change.
+
+What am I missing here, folks?
+
+Any chance of weighing in here, Solderpunk?
+
+
+With best intentions,
+  Gary
+
+-- 
+GPG Key ID: 7BC158ED
+Use `gpg --search-keys lambdatronic&#x27; to find me
+Protect yourself from surveillance: <a href="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</a>
+=======================================================================
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+Why is HTML email a security nightmare? See <a href="https://useplaintext.email/">https://useplaintext.email/</a>
+
+Please avoid sending me MS-Office attachments.
+See <a href="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004966.html">[spec] The Tragedy of &amp;</a></li>
+<li>Next message (by thread): <a href="004978.html">[spec] The Tragedy of &amp;</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4976">[ date ]</a> <a href="thread.html#4976">[ thread ]</a> <a href="subject.html#4976">[ subject ]</a> <a href="author.html#4976">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

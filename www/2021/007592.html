@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[ANN] Specification update</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007567.html">
+<link rel="next" href="007562.html">
+</head>
+<body>
+<h1>[ANN] Specification update</h1>
+<b>Jason McBrayer</b> jmcbray at carcosa.net<br>
+<i>Thu Nov 11 19:29:16 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007567.html">[ANN] Specification update</a></li>
+<li>Next message (by thread): <a href="007562.html">[ANN] Specification update</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7592">[ date ]</a> <a href="thread.html#7592">[ thread ]</a> <a href="subject.html#7592">[ subject ]</a> <a href="author.html#7592">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+Jason McBrayer &lt;jmcbray@carcosa.net&gt; writes:
+&gt;<i> Thanks. Clearly, using cl+ssl in the default ways doesn&#x27;t close the
+</i>&gt;<i> connection properly; hopefully it won&#x27;t be too difficult to make it
+</i>&gt;<i> happen. 
+</i>
+I&#x27;m pleased to note that this was an upstream bug, in CL+SSL, which has
+been fixed. Anyone who installed Germinal the default way (Roswell and
+quicklisp) should run (ql:update-all-dists) and (ql:quickload :cl+ssl)
+to upgrade their CL+SSL and restart Germinal.
+
+I added a line of code to explicitly close TLS streams, but I don&#x27;t
+believe it was actually needed; CL+SSL should be doing the right thing
+when streams are implicitly closed.
+
+-- 
+Jason McBrayer      | “Strange is the night where black stars rise,
+jmcbray@carcosa.net | and strange moons circle through the skies,
+                    | but stranger still is lost Carcosa.”
+                    | ― Robert W. Chambers,The King in Yellow
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007567.html">[ANN] Specification update</a></li>
+<li>Next message (by thread): <a href="007562.html">[ANN] Specification update</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7592">[ date ]</a> <a href="thread.html#7592">[ thread ]</a> <a href="subject.html#7592">[ subject ]</a> <a href="author.html#7592">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

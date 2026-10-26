@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[users] Simple Gemini server for testing in the current directory?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004862.html">
+<link rel="next" href="004870.html">
+</head>
+<body>
+<h1>[users] Simple Gemini server for testing in the current directory?</h1>
+<b>Gary Johnson</b> lambdatronic at disroot.org<br>
+<i>Wed Jan 20 20:13:54 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004862.html">[users] Simple Gemini server for testing in the current directory?</a></li>
+<li>Next message (by thread): <a href="004870.html">[users] Simple Gemini server for testing in the current directory?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4868">[ date ]</a> <a href="thread.html#4868">[ thread ]</a> <a href="subject.html#4868">[ subject ]</a> <a href="author.html#4868">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>mailinglists at ngalt.com writes:
+
+&gt;<i> One thing that I like about HTTP is that there are oodles of ways to spin up a simple server for testing on localhost. Things like `python3 -m http.server` and `caddy run` are what I&#x27;m thinking of. Since this is Gemini and not bare-bones HTTP, It&#x27;d have to handle key generation.
+</i>&gt;<i>
+</i>&gt;<i> Is there a server like that yet for Gemini that runs on macOS? 
+</i>
+If you are a Lispnik, feel free to check out Space Age (The Clojurian&#x27;s
+Gemini Server):
+
+  <a href="https://gitlab.com/lambdatronic/space-age">https://gitlab.com/lambdatronic/space-age</a>
+
+Since Clojure compiles to Java bytecode, it&#x27;s fully cross-platform. You
+just need to install a recent JDK and the Clojure command line tool. Key
+generation is handled with a single command, which is documented in the
+project&#x27;s README.
+
+You can then launch Space Age with the following command:
+
+$ clojure -M:run-server .
+
+That will serve up the current directory and anything within it on port
+1965. To serve up a different directory, just replace &quot;.&quot; with the
+directory path.
+
+Uniquely among Gemini servers, Space Age provides a form of server-side
+application programming modeled after Clojure&#x27;s de facto web programming
+standard, Ring, but further simplified for Geminispace.
+
+Essentially, dynamic routes can be programmed as simple functions that
+take a request map and return a response map. All you have to do is add
+a *.clj file anywhere under your document root (or under a user&#x27;s
+/home/username/public_gemini directory), make it executable, and define
+a main function within it that will be called whenever that page is
+requested by a Gemini client.
+
+So rather than messing with environment variables and printing to
+stdout, you can just write pure functions that take and receive data.
+Fun times for functional programmers of all ages!
+
+(happy :hacking)
+  Gary
+
+-- 
+GPG Key ID: 7BC158ED
+Use `gpg --search-keys lambdatronic&#x27; to find me
+Protect yourself from surveillance: <a href="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</a>
+=======================================================================
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+Why is HTML email a security nightmare? See <a href="https://useplaintext.email/">https://useplaintext.email/</a>
+
+Please avoid sending me MS-Office attachments.
+See <a href="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004862.html">[users] Simple Gemini server for testing in the current directory?</a></li>
+<li>Next message (by thread): <a href="004870.html">[users] Simple Gemini server for testing in the current directory?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4868">[ date ]</a> <a href="thread.html#4868">[ thread ]</a> <a href="subject.html#4868">[ subject ]</a> <a href="author.html#4868">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

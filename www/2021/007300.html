@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] comments on the proposed gemini spec revisions</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007297.html">
+<link rel="next" href="007302.html">
+</head>
+<body>
+<h1>[spec] comments on the proposed gemini spec revisions</h1>
+<b>Oliver Simmons</b> oliversimmo at gmail.com<br>
+<i>Wed Oct 13 22:53:13 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007297.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li>Next message (by thread): <a href="007302.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7300">[ date ]</a> <a href="thread.html#7300">[ thread ]</a> <a href="subject.html#7300">[ subject ]</a> <a href="author.html#7300">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Wed, 13 Oct 2021 at 21:38, Chris McGowan &lt;cmcgowan9990@gmail.com&gt; wrote:
+&gt;<i>
+</i>&gt;<i> &gt; Unfortunately, no. For example, take this line: `# Foo bar I&#x27;m a level-1 title`
+</i>&gt;<i> &gt; A 3-char substring of that would yield &quot;# F&quot;, which isn&#x27;t useful.
+</i>&gt;<i>
+</i>&gt;<i> In what way isn&#x27;t it useful? It tells you literally everything you need
+</i>&gt;<i> to know.
+</i>
+&gt;<i> my $first3 = substr $line, 0, 3;
+</i>
+*This* is what I assumed you mean by
+&gt;<i> … simply taking a three character substring of the line should be enough …
+</i>Seems there was a misunderstanding or something, apologies.
+I&#x27;ll respond to the rest of the email with the assumption there wasn&#x27;t
+a misunderstanding.
+
+&gt;<i> # slightly magical regex, /g will return an array of matches,
+</i>&gt;<i> # assigning back to a scalar gives us a count of matches
+</i>&gt;<i> if ( my $level = $first3 =~ m/(#)+/g )
+</i>&gt;<i> {
+</i>&gt;<i>    return &quot;Level $level header&quot;;
+</i>&gt;<i> [...]
+</i>&gt;<i> ```
+</i>
+Using RegEx this way is in effect doing the starts-with method I
+mentioned in my other email.
+
+&gt;<i> In fact, the substring isn&#x27;t even necessary in this code
+</i>
+&quot;In what way isn&#x27;t it useful?&quot;, here&#x27;s the answer.
+It&#x27;s useful as a method for limiting counts of &#x27;#&#x27;, but that could
+also be done with a `max(count, 3)` or you might not even be doing
+counts.
+
+&gt;<i> but that&#x27;s largely true for languages which have decent regex support.
+</i>
+A `.StartsWith(foo)` method works too.
+For doing the counting &#x27;#&#x27; part this way, you&#x27;d do something along the lines of:
+```C# code
+if (line.StartWith(&#x27;#&#x27;)) {
+    int count = line.SubString(0,3).Count(c =&gt; c == &#x27;#&#x27;).Length;
+OR
+    int count = Math.Max(line.Count(c =&gt; c == &#x27;#&#x27;).Length, 3);
+```
+(Note: this code isn&#x27;t tested, and there are faster ways to count
+chars than Count, it&#x27;s used here for clarity)
+
+&gt;<i> If you weren&#x27;t using one of those (i.e. C) or are for some reason
+</i>&gt;<i> allergic to regexes you could simply index the string to determine the
+</i>&gt;<i> line type (note: this would likely improve speed, but probably only a
+</i>&gt;<i> imperceptibly small amount and likely wouldn&#x27;t be worth it.)
+</i>&gt;<i>
+</i>&gt;<i> Just to really drive home the point that this isn&#x27;t a difficult task,
+</i>&gt;<i> here&#x27;s the version I wouldn&#x27;t write unless I was using C (still in Perl
+</i>&gt;<i> though):
+</i>&gt;<i>
+</i>&gt;<i> ```
+</i>&gt;<i> # Note: split here is because perl doesn&#x27;t allow direct subscripting of
+</i>&gt;<i> # strings. In languages that do allow that, this other array is
+</i>&gt;<i> # unnecessary and you could use $line directly.
+</i>&gt;<i> my @first3 = split( &quot;&quot;, substr( $line, 0, 3));
+</i>&gt;<i> if ( $first3[0] eq &#x27;#&#x27; )
+</i>&gt;<i> {
+</i>&gt;<i>    if ( $first3[1] eq &#x27;#&#x27; )
+</i>&gt;<i>    {
+</i>&gt;<i>      if ( $first3[2] eq &#x27;#&#x27; )
+</i>&gt;<i>      {
+</i>&gt;<i>        return &quot;Level 3 header&quot;;
+</i>&gt;<i>      }
+</i>&gt;<i>      return &quot;Level 2 header&quot;;
+</i>&gt;<i>    }
+</i>&gt;<i>    return &quot;Level 1 header&quot;;
+</i>&gt;<i> }
+</i>
+Certainly an interesting method for header lines.
+Since this is &quot;Perl but with C tactics&quot; code: does Perl have a switch statement?
+
+&gt;<i> In summary, I hardly think it&#x27;s impossible or even difficult to
+</i>&gt;<i> unambiguously parse gemtext without having a mandatory space.
+</i>
+I never claimed that it wasn&#x27;t, just that it&#x27;s easier to program.
+
+
+Here&#x27;s a simple parser using the split-on-first-space method:
+```C# code
+// Max split of three is used so this can be re-used later when doing
+link-lines, no need to do more than that anyways
+string[] splitLine = line.Split(&quot; &quot;, 3)
+switch (splitLine[0].SubString(0,3)) {
+    case &quot;#&quot;:
+    case &quot;##&quot;:
+    case &quot;###&quot;:
+        Console.PrintLine(&quot;Header level of {0} with text {1}&quot;,
+splitLine[0].Length, line[3..]);
+        // Rather than counting the header length, you could also just
+use the other `case` statements.
+        break;
+    case &quot;=&gt;&quot;:
+        Console.PrintLine(&quot;Link line with link {0}, title {1}&quot;,
+splitLine[1], splitLine[2]);
+        break;
+    [… and so on …]
+    default:
+        Console.PrintLine(&quot;Normal or preformatted line&quot;);
+        break;
+}
+```
+
+Thanks for your code examples,
+-Oliver Simmons (GoodClover)
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007297.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li>Next message (by thread): <a href="007302.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7300">[ date ]</a> <a href="thread.html#7300">[ thread ]</a> <a href="subject.html#7300">[ subject ]</a> <a href="author.html#7300">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

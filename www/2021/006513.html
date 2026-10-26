@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>dezhemini (aka dʒɛmɪni) security announcement</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006512.html">
+<link rel="next" href="006514.html">
+</head>
+<body>
+<h1>dezhemini (aka dʒɛmɪni) security announcement</h1>
+<b>Remco</b> me at rwv.io<br>
+<i>Sat May 15 14:18:52 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006512.html">dezhemini (aka dʒɛmɪni) security announcement</a></li>
+<li>Next message (by thread): <a href="006514.html">dezhemini (aka dʒɛmɪni) security announcement</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6513">[ date ]</a> <a href="thread.html#6513">[ thread ]</a> <a href="subject.html#6513">[ subject ]</a> <a href="author.html#6513">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>2021/05/15 13:09, Almaember:
+
+&gt;<i> A question to everybody reading the list, how badly would it break the
+</i>&gt;<i> spec to simply block any request whose URLs contain &quot;..&quot; as a
+</i>&gt;<i> standalone path-element?
+</i>
+Simply blocking &quot;..&quot; won&#x27;t catch all problems.  Of instance, dezhemini
+actually blocks all request containing &quot;..&quot; in the URL and returns a 59
+(bad request).  This particular case is a problem in the Racket standard
+library used to parse URLs.  This library splits a path in parts (string
+and symbols) with &#x27;up (a symbol) for &quot;..&quot;  but not when the dots are
+escaped with %, it would yield &quot;..&quot;.  Dezhemini only blocked on &#x27;up,
+auch..
+
+Also, blocking &quot;..&quot; will break my lang=morse site!  ;-)
+
+  ..///.-../---/...-/.///--././--/../-./..
+
+Cheers,
+Remco
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006512.html">dezhemini (aka dʒɛmɪni) security announcement</a></li>
+<li>Next message (by thread): <a href="006514.html">dezhemini (aka dʒɛmɪni) security announcement</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6513">[ date ]</a> <a href="thread.html#6513">[ thread ]</a> <a href="subject.html#6513">[ subject ]</a> <a href="author.html#6513">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

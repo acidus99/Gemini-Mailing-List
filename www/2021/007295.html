@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] comments on the proposed gemini spec revisions</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007288.html">
+<link rel="next" href="007299.html">
+</head>
+<body>
+<h1>[spec] comments on the proposed gemini spec revisions</h1>
+<b>Oliver Simmons</b> oliversimmo at gmail.com<br>
+<i>Wed Oct 13 19:54:53 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007288.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li>Next message (by thread): <a href="007299.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7295">[ date ]</a> <a href="thread.html#7295">[ thread ]</a> <a href="subject.html#7295">[ subject ]</a> <a href="author.html#7295">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Mon, 11 Oct 2021 at 15:12, Omar Polo &lt;op@omarpolo.com&gt; wrote:
+&gt;<i> I&#x27;ve seen this argument in the gitlab issue too […]
+</i>
+I haven&#x27;t checked the issue yet, will do after sending this.
+
+&gt;<i> In what language(s) splitting a string is faster than
+</i>&gt;<i> checking for a prefix?  Splitting requires the allocation of multiple
+</i>&gt;<i> objects, while the prefix only requires a scan of the first few bytes.
+</i>
+I said simpler, not faster. What you said is true in some cases, but
+not everyone is striving for optimisation speed-wise.
+
+It&#x27;ll depend on the language used, but splitting allows you to use a
+simple equality switch statement, which isn&#x27;t possible by checking
+with a prefix.
+The way I understand your message, I would have to use an else-if
+list, which is hardly ideal.
+
+e.g. in C#:
+```
+// If it&#x27;s &lt;3 chars then just treat it as a text line (the default).
+switch ((line.Length &lt; 3) ? &quot;&quot; : line.Substring(0, 3).Split(&quot; &quot;, 2)[0])
+{
+    case &quot;=&gt;&quot;: …
+    case &quot;* &quot;: …
+    … and so on …
+    default: …
+}
+```
+vs
+```
+if (line.StartsWith(&quot;=&gt; &quot;) {
+    …
+} else if (line.StartsWith(&quot;* &quot;) {
+    …
+} … and so on …
+else { … }
+```
+
+At the least, it should be required for link (as you said) and list
+lines (&quot;* &quot;). I&#x27;ve seen where people have tried to use *emphasis* at
+the start of a line and got a bullet point by mistake.
+
+&gt;<i> &gt; I see no downside to enforcing it in the spec (a SHOULD or MUST).
+</i>&gt;<i>
+</i>&gt;<i> My argument is kind the opposite: if there isn&#x27;t a (strong) reason for
+</i>&gt;<i> requiring something, then that something MUST be optional.  Whitespaces
+</i>&gt;<i> are required in the link line to separate unambiguously the link from
+</i>&gt;<i> the label, the other whitespaces in the &quot;special&quot; lines don&#x27;t serve this
+</i>&gt;<i> purpose so they need to be completely optional.
+</i>
+At the very least it should be recommended by the spec IMO.
+
+-Oliver Simmons (GoodClover)
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007288.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li>Next message (by thread): <a href="007299.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7295">[ date ]</a> <a href="thread.html#7295">[ thread ]</a> <a href="subject.html#7295">[ subject ]</a> <a href="author.html#7295">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

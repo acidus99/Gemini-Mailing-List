@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>May user-friendly link names be empty?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007565.html">
+<link rel="next" href="007573.html">
+</head>
+<body>
+<h1>May user-friendly link names be empty?</h1>
+<b>Alex // nytpu</b> alex at nytpu.com<br>
+<i>Mon Nov  8 20:01:38 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007565.html">May user-friendly link names be empty?</a></li>
+<li>Next message (by thread): <a href="007573.html">May user-friendly link names be empty?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7566">[ date ]</a> <a href="thread.html#7566">[ thread ]</a> <a href="subject.html#7566">[ subject ]</a> <a href="author.html#7566">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On 2021-11-08 08:07PM, codesoap@mailbox.org wrote:
+&gt;<i> Hi all,
+</i>&gt;<i> &gt; =&gt;[&lt;whitespace&gt;]&lt;URL&gt;[&lt;whitespace&gt;&lt;USER-FRIENDLY LINK NAME&gt;]
+</i>&gt;<i> From this description I don&#x27;t know whether &lt;USER-FRIENDLY LINK NAME&gt;
+</i>&gt;<i> MAY be empty. Which of these regular expressions would be correct to
+</i>&gt;<i> parse a link line?
+</i>
+The user friendly link name is optional, however if it is present
+then the whitespace after the url is mandatory as well.  In other words,
+the URL is mandatory, and you either have no link name and no space
+after the URL or a link name and mandatory space(s) after the URL.
+
+So you have the following possibilities for link lines:
+=&gt;url         &lt;- no link name, no space between =&gt; and url
+=&gt; url        &lt;- no link name, one or more spaces separating
+=&gt;url name    &lt;- link name present, no space between =&gt; and url
+=&gt; url   name &lt;- link name present, one or more spaces separating
+
+
+&gt;<i> a) ^=&gt;[ \t]*([^ \t]+)(?:$|[ \t]+([^ \t].*)$)
+</i>&gt;<i> b) ^=&gt;[ \t]*([^ \t]+)(?:$|[ \t]+([^ \t]?.*?)$)
+</i>I believe the latter (option b) would be correct.  I would remove the
+final &quot;[^ \t]?&quot; and simplify it down to this:
+    ^=&gt;[ \t]*([^ \t]+)(?:$|[ \t]+(.*)$)
+
+You don&#x27;t really need regex though, just skip past the =&gt;[whitespace],
+then the url is splitting on the first space and the remainder is
+everything else.
+
+~nytpu
+
+-- 
+Alex // nytpu
+alex@nytpu.com
+gpg --locate-external-key alex@nytpu.com
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007565.html">May user-friendly link names be empty?</a></li>
+<li>Next message (by thread): <a href="007573.html">May user-friendly link names be empty?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7566">[ date ]</a> <a href="thread.html#7566">[ thread ]</a> <a href="subject.html#7566">[ subject ]</a> <a href="author.html#7566">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

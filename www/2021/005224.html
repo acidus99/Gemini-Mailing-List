@@ -1,148 +1,58 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Source Code Control (git)
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Source%20Code%20Control%20%28git%29&In-Reply-To=%3CMTSaG_O--3-2%40nnix.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="005220.html">
-   <LINK REL="Next"  HREF="005236.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Source Code Control (git)</H1>
-    <B>David Emerson</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Source%20Code%20Control%20%28git%29&In-Reply-To=%3CMTSaG_O--3-2%40nnix.com%3E"
-       TITLE="Source Code Control (git)">d at nnix.com
-       </A><BR>
-    <I>Sat Feb 13 22:53:12 GMT 2021</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="005220.html">Source Code Control (git)
-</A></li>
-        <LI>Next message (by thread): <A HREF="005236.html">Source Code Control (git)
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#5224">[ date ]</a>
-              <a href="thread.html#5224">[ thread ]</a>
-              <a href="subject.html#5224">[ subject ]</a>
-              <a href="author.html#5224">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Source Code Control (git)</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005220.html">
+<link rel="next" href="005236.html">
+</head>
+<body>
+<h1>Source Code Control (git)</h1>
+<b>David Emerson</b> d at nnix.com<br>
+<i>Sat Feb 13 22:53:12 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005220.html">Source Code Control (git)</a></li>
+<li>Next message (by thread): <a href="005236.html">Source Code Control (git)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5224">[ date ]</a> <a href="thread.html#5224">[ thread ]</a> <a href="subject.html#5224">[ subject ]</a> <a href="author.html#5224">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Indeed, we just had a helpful thread on this, and here's what I implemented a moment ago on my capsule - it's simple:
+<pre>Indeed, we just had a helpful thread on this, and here&#x27;s what I implemented a moment ago on my capsule - it&#x27;s simple:
 
 - Gemini server (agate, in my case) running in Docker
 - Static mount in the container at run-time to /var/capsule on my host, which is actually a cloned git repo folder.
 - Cronjob on the host to pull the main branch every five minutes or whatever to keep the /var/capsule directory up to date.
 
 You can use post receive hooks too, that would be basically the same.
-&gt;&gt;<i> Link to the container definition for the Agage docker:&#160;<A HREF="https://github.com/davidemerson/nnix.com-gemini">https://github.com/davidemerson/nnix.com-gemini</A>
-</I>
+&gt;<i>&gt; Link to the container definition for the Agage docker:?<a href="https://github.com/davidemerson/nnix.com-gemini">https://github.com/davidemerson/nnix.com-gemini</a>
+</i>
 Regards,
 David
-Feb 13, 2021, 17:05 by <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">louis at brauer.family</A>:
+Feb 13, 2021, 17:05 by louis at brauer.family:
 
 &gt;<i> Am Sa, 13. Feb 2021, um 22:34, schrieb sailboatanon:
-</I>&gt;<i>
-</I>&gt;&gt;<i> Hello, everyone.&#160; I am new to this community and I intend to run my capsule in a kubernetes cluster on my existing rpi4 infra.&#160; As part of the CI/CD process for my production launch, I  need a mechanism (like git) for source code control.
-</I>&gt;&gt;<i>
-</I>&gt;&gt;<i> Before I recreate the wheel, does such a thing exist already?
-</I>&gt;&gt;<i> -sba
-</I>&gt;&gt;<i>
-</I>&gt;<i>
-</I>&gt;<i> Why not use git?
-</I>&gt;<i>
-</I>
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</i>&gt;<i>
+</i>&gt;<i>&gt; Hello, everyone.? I am new to this community and I intend to run my capsule in a kubernetes cluster on my existing rpi4 infra.? As part of the CI/CD process for my production launch, I  need a mechanism (like git) for source code control.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; Before I recreate the wheel, does such a thing exist already?
+</i>&gt;<i>&gt; -sba
+</i>&gt;<i>&gt;
+</i>&gt;<i>
+</i>&gt;<i> Why not use git?
+</i>&gt;<i>
+</i>
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="005220.html">Source Code Control (git)
-</A></li>
-	<LI>Next message (by thread): <A HREF="005236.html">Source Code Control (git)
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#5224">[ date ]</a>
-              <a href="thread.html#5224">[ thread ]</a>
-              <a href="subject.html#5224">[ subject ]</a>
-              <a href="author.html#5224">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="005220.html">Source Code Control (git)</a></li>
+<li>Next message (by thread): <a href="005236.html">Source Code Control (git)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5224">[ date ]</a> <a href="thread.html#5224">[ thread ]</a> <a href="subject.html#5224">[ subject ]</a> <a href="author.html#5224">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

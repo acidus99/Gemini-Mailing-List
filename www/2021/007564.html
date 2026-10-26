@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007553.html">
+<link rel="next" href="007570.html">
+</head>
+<body>
+<h1>Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks</h1>
+<b>mbays</b> mbays at sdf.org<br>
+<i>Mon Nov  8 17:47:12 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007553.html">Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks</a></li>
+<li>Next message (by thread): <a href="007570.html">Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7564">[ date ]</a> <a href="thread.html#7564">[ thread ]</a> <a href="subject.html#7564">[ subject ]</a> <a href="author.html#7564">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>* Sunday, 2021-11-07 at 13:06 -0800 - Rohan Kumar &lt;seirdy@seirdy.one&gt;:
+
+&gt;<i> There are many good reasons people to use TLS 1.3 that are quite
+</i>&gt;<i> relevant to Gemini:
+</i>&gt;<i>
+</i>&gt;<i> - TLS 1.3 can eliminate one or two round-trips.
+</i>&gt;<i> - TLS 1.3 supports Encrypted Client Hello.
+</i>&gt;<i> - TLS 1.3 supports record padding.
+</i>
+Another one I think is particularly important for Gemini:
+TLS 1.2 sends client certificates in the clear, while with 1.3 they are encrypted.
+
+Even if the spec doesn&#x27;t end up mandating 1.3, it might be worth requiring it for servers which make use of client certificates.
+
+Another big advantage of requiring 1.3 is that it would let us use ed25519 certificates (server and client). (I think in theory we could already do this, by choosing a certificate to send depending on which algorithms the remote party says they support, but that adds complexity and I don&#x27;t know of any implementation which does this.)
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007553.html">Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks</a></li>
+<li>Next message (by thread): <a href="007570.html">Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7564">[ date ]</a> <a href="thread.html#7564">[ thread ]</a> <a href="subject.html#7564">[ subject ]</a> <a href="author.html#7564">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questions on INPUT behavior</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000092.html">
+<link rel="next" href="000096.html">
+</head>
+<body>
+<h1>Questions on INPUT behavior</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Wed Aug 28 18:16:27 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000092.html">Questions on INPUT behavior</a></li>
+<li>Next message (by thread): <a href="000096.html">Questions on INPUT behavior</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#94">[ date ]</a> <a href="thread.html#94">[ thread ]</a> <a href="subject.html#94">[ subject ]</a> <a href="author.html#94">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Michael Lazar once stated:
+&gt;<i> On Wed, Aug 28, 2019 at 11:59 AM Sean Conner &lt;sean at conman.org&gt; wrote:
+</i>&gt;<i> &gt;   Wait a second ... I thought gopher URLs don&#x27;t support the query type.
+</i>&gt;<i> &gt; It&#x27;s not mentioned at all in RFC-4266 (and there are no updates as far as I
+</i>&gt;<i> &gt; can see).
+</i>&gt;<i> 
+</i>&gt;<i> &gt;From RFC-4266:
+</i>&gt;<i> 
+</i>&gt;<i>    &lt;selector&gt; is the Gopher selector string.  In the Gopher protocol,
+</i>&gt;<i>    Gopher selector strings are a sequence of octets that may contain any
+</i>&gt;<i>    octets except 09 hexadecimal (US-ASCII HT or tab), 0A hexadecimal
+</i>&gt;<i>    (US-ASCII character LF), and 0D (US-ASCII character CR).
+</i>&gt;<i> 
+</i>&gt;<i> Aside for those 3 reserved octets, you can stick anything you want in the
+</i>&gt;<i> selector part of the URL. Query string don&#x27;t have any special meaning to
+</i>&gt;<i> gopher, they&#x27;re just additional bytes in the selector that get sent to the
+</i>&gt;<i> server.
+</i>
+  I did try your site with my gopher client and it worked fine.  I&#x27;m just
+not used to seeing query strings with gopher URLs.
+
+&gt;<i> &gt;  Add on to the path component?  I did a very short version of that for my
+</i>&gt;<i> &gt; guessing game:
+</i>&gt;<i> 
+</i>&gt;<i> This would lead to a bunch of different paths that point to the same resource:
+</i>&gt;<i> 
+</i>&gt;<i>     /search/tag_37/tag_5/image_1/
+</i>&gt;<i>     /search/tag_5/tag_37/image_1/
+</i>&gt;<i>     /search/image_1/tag_5/tag_37/
+</i>&gt;<i>     ...
+</i>
+  Unless you maintain then in some canonical ordering (say, tags in sort
+order, then images in sort order, etc.).  Might be more problem than it&#x27;s
+worth, but it is a solution.
+
+  The path of a URL has nothing to do with a filesystem---it&#x27;s just a
+convention.  The link <a href="gemini://gemini.conman.org/qotd">gemini://gemini.conman.org/qotd</a> is not a file, nor a
+directory.  Nor is <a href="gemini://gemini.conman.org/bible/">gemini://gemini.conman.org/bible/</a> a directory (or a file
+for that matter).  
+
+&gt;<i> Of course, I could write my server to be able to understand and parse these
+</i>&gt;<i> path components. But it throws the whole &quot;path as a hierarchy&quot; paradigm out
+</i>&gt;<i> the window. I can only assume that this issue is why query param key-value
+</i>&gt;<i> pairs were invented in the first place.
+</i>
+  The path is an abstract reference to a resource.  It&#x27;s only hierarchial in
+your mind.  There is no spoon.
+
+  -spc
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000092.html">Questions on INPUT behavior</a></li>
+<li>Next message (by thread): <a href="000096.html">Questions on INPUT behavior</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#94">[ date ]</a> <a href="thread.html#94">[ thread ]</a> <a href="subject.html#94">[ subject ]</a> <a href="author.html#94">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

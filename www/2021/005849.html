@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] gemini capabilities</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005847.html">
+<link rel="next" href="005851.html">
+</head>
+<body>
+<h1>[spec] gemini capabilities</h1>
+<b>Petite Abeille</b> petite.abeille at gmail.com<br>
+<i>Tue Mar  2 10:44:25 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005847.html">[spec] avoiding the transport layer security trap</a></li>
+<li>Next message (by thread): <a href="005851.html">[spec] ☿️ gemini — a minimalist gemini protocol</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5849">[ date ]</a> <a href="thread.html#5849">[ thread ]</a> <a href="subject.html#5849">[ subject ]</a> <a href="author.html#5849">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It has been made abundantly clear that Gemini is meant to be a frozen, immutable protocol ? without any possible extensions whatsoever. 
+
+The forever protocol.
+
+So be it.
+
+Nevertheless, here is the outline of a small extension mechanism for Gemini: CAPA, short for capabilities.
+
+CAPA manifest itself as a directive, expressed as an URN:
+
+urn:gemini:capa
+
+The CAPA directive itself returns a list of capabilities supported by a given service, if any, or an error code otherwise:
+
+C: urn:gemini:capa
+S: 20 text/gemini
+=&gt; urn:gemini:capa
+=&gt; urn:gemini:capa:connection:keep-alive
+=&gt; urn:gemini:capa:transfer-encoding:chunked
+=&gt; urn:gemini:capa:turn
+&lt;end of connection&gt;
+
+In this case, the service understand CAPA itself, plus a handful of other capabilities, such as persistent connection, and chunked transfer encoding.
+
+A client enable a give capability by sending the relevant directive to the service:
+
+C: urn:gemini:capa:connection:keep-alive
+S: 10 Continue
+
+To which the conformant service replies with an informational status code ?10 Continue? acknowledging the new capability.
+
+In this example ?with the keep-alive capability enabled? the network connection is persistent and not dropped to indicate end-of-transmission after each request.
+
+Additionally, keep-alive enables the chunked transfer encoding ?  as now the Gemini service needs a different mechanism to indicate end-of-transmission to the client.
+
+Wrapping all this together:
+
+C: urn:gemini:capa:connection:keep-alive
+S: 10 Continue
+C: <a href="gemini://host.xyz:/life-is-a-long-quiet-river.gmi">gemini://host.xyz:/life-is-a-long-quiet-river.gmi</a>
+S: 20 text/gemini;charset=utf-8;connection:keep-alive;transfer-encoding=chunked;
+4\r\n
+Wiki\r\n (data)
+
+6\r\n
+pedia \r\n (data)
+
+E\r\n
+in \r\n
+\r\n
+chunks.\r\n 
+
+0\r\n 
+\r\n 
+&lt;service maintain connection, awaiting next request&gt;
+
+That&#x27;s all folks.
+
+?0?
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005847.html">[spec] avoiding the transport layer security trap</a></li>
+<li>Next message (by thread): <a href="005851.html">[spec] ☿️ gemini — a minimalist gemini protocol</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5849">[ date ]</a> <a href="thread.html#5849">[ thread ]</a> <a href="subject.html#5849">[ subject ]</a> <a href="author.html#5849">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

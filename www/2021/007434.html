@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] Undefined status codes</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007474.html">
+<link rel="next" href="007435.html">
+</head>
+<body>
+<h1>[spec] Undefined status codes</h1>
+<b>nervuri</b> nervuri at disroot.org<br>
+<i>Tue Oct 26 10:20:09 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007474.html">A proposal to freeze the Gemini specification</a></li>
+<li>Next message (by thread): <a href="007435.html">[spec] Undefined status codes</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7434">[ date ]</a> <a href="thread.html#7434">[ thread ]</a> <a href="subject.html#7434">[ subject ]</a> <a href="author.html#7434">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>I am writing a REST API for Gemini and need to have more than one status
+code coupled with a response body (to parallel the 409 response in
+Convergence&#x27;s Notary protocol [1]).  Only 2x status codes allow for
+response bodies, and the only defined 2x status code is 20.  No problem,
+I thought.  The second digit is optional, so gemini clients and
+libraries should accept any 2x status code and treat unknown ones as 20.
+Right?  Well, not in practice.  The clients I tested treat the request
+as failed if the status code begins with 2 but is anything other then
+20.
+
+Let&#x27;s clarify what the behavior of clients ought to be.  I think this
+makes the most sense:
+
+* if the response contains an undefined status code that begins with
+ 1-6, the client must handle it as though the second digit were 0;
+* if the response contains a status code that begins with anything other
+ than 1-6, the client must consider it invalid (of course).
+
+I also opened an issue on Gitlab for this, see [2].
+
+[1] <a href="https://github.com/moxie0/Convergence/wiki/Notary-Protocol#409">https://github.com/moxie0/Convergence/wiki/Notary-Protocol#409</a>
+[2] <a href="https://gitlab.com/gemini-specification/protocol/-/issues/43">https://gitlab.com/gemini-specification/protocol/-/issues/43</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007474.html">A proposal to freeze the Gemini specification</a></li>
+<li>Next message (by thread): <a href="007435.html">[spec] Undefined status codes</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7434">[ date ]</a> <a href="thread.html#7434">[ thread ]</a> <a href="subject.html#7434">[ subject ]</a> <a href="author.html#7434">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text reflow woes (or: I want bullets back!)y</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000106.html">
+<link rel="next" href="000111.html">
+</head>
+<body>
+<h1>Text reflow woes (or: I want bullets back!)y</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Thu Sep  5 20:04:11 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000106.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000111.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#108">[ date ]</a> <a href="thread.html#108">[ thread ]</a> <a href="subject.html#108">[ subject ]</a> <a href="author.html#108">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>&gt;<i> 
+</i>&gt;<i> I agree that there&#x27;s a certain amount of
+</i>&gt;<i> excitement associated the unexplored
+</i>&gt;<i> possibilities associated with a new format.
+</i>&gt;<i> Not only would a convention of wrapping
+</i>&gt;<i> Gemini content at 45 chars effectively remove
+</i>&gt;<i> the need to add enough markdup to the spec to
+</i>&gt;<i> facilitate near reflow, it could, like you
+</i>&gt;<i> say, give the medium a distinctie look and
+</i>&gt;<i> feel and encourage interesting new
+</i>&gt;<i> developments like multi-column layouts.
+</i>&gt;<i> 
+</i>&gt;<i> My biggest concern at this point is that link
+</i>&gt;<i> labels could easily exceed 45 chars and then
+</i>&gt;<i> clients need to come up with a nice way to
+</i>&gt;<i> wrap them...
+</i>
+  The link format:
+
+=&gt; link-URL link-text
+
+  You could state that the link-text should be 45 characters or less, and if
+not given, then the link-URL should be truncated at 42 characters, with
+&quot;...&quot; added on the end for display (if less than 42 characters, then no need
+for the &quot;...&quot; at the end).
+
+  In Lua, this would be:
+
+	if #linkurl &gt; 42 then
+	  linktext = linkurl:sub(1,42) .. &quot;...&quot;
+	end
+
+  In a string-hostile language like C:
+
+	char buffer[46];
+
+	if (strlen(linkurl) &gt; 42)
+	  snprintf(buffer,sizeof(buffer),&quot;*.*s...&quot;,42,42,linkurl);
+
+  So I don&#x27;t think it&#x27;s a hard thing to do.
+
+&gt;<i> &gt; Perhaps the largest downside of using a fixed width format is that you lose
+</i>&gt;<i> &gt; accessibility. People with reduced vision might want/need to use a larger font
+</i>&gt;<i> &gt; than average. With re-flowed text this is easy because the text will wrap to
+</i>&gt;<i> &gt; fit their screen. Also, I&#x27;ve heard that screen readers work poorly with hard
+</i>&gt;<i> &gt; line wraps, although I can&#x27;t find a citation for that.
+</i>&gt;<i> 
+</i>&gt;<i> This is a bit of a concern.  I noticed that
+</i>&gt;<i> dgold recently removed all ASCII art from
+</i>&gt;<i> their phlog for accessibility reasons - see
+</i>&gt;<i> <a href="gopher://ascraeus.org/0/phlog/030.txt">gopher://ascraeus.org/0/phlog/030.txt</a>.
+</i>
+  Or how about:  lines that start with &#x27;=&gt;&#x27; are links and are handled
+differently, lines starting with a &#x27; &#x27; are fixed (but should be
+less than N characters in length), and starting with any other character
+should be reflowed until a blank line, a line staring with &#x27;=&gt;&#x27; or
+whitespace.
+
+  So this wouldn&#x27;t be reflowed.
+But this would
+reflow because it doesn&#x27;t start with a whitespace
+=&gt; example:foo link text is handled differently.
+
+  -spc (Just some thoughts ... )
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000106.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000111.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#108">[ date ]</a> <a href="thread.html#108">[ thread ]</a> <a href="subject.html#108">[ subject ]</a> <a href="author.html#108">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

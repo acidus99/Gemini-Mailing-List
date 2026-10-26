@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] When may clients begin processing responses?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007630.html">
+<link rel="next" href="007629.html">
+</head>
+<body>
+<h1>[spec] When may clients begin processing responses?</h1>
+<b>Omar Polo</b> op at omarpolo.com<br>
+<i>Tue Nov 23 21:59:26 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007630.html">[spec] When may clients begin processing responses?</a></li>
+<li>Next message (by thread): <a href="007629.html">[spec] When may clients begin processing responses?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7632">[ date ]</a> <a href="thread.html#7632">[ thread ]</a> <a href="subject.html#7632">[ subject ]</a> <a href="author.html#7632">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Scot &lt;gmi1@scotdoyle.com&gt; writes:
+
+&gt;<i> On Tue, 23 Nov 2021 08:57:43 +0100
+</i>&gt;<i> Omar Polo &lt;op@omarpolo.com&gt; wrote:
+</i>&gt;<i>
+</i>&gt;<i>&gt; Scot &lt;gmi1@scotdoyle.com&gt; writes:
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; &gt; Hi all,
+</i>&gt;<i>&gt; &gt;
+</i>&gt;<i>&gt; &gt; The transaction sequence in section 1.1 seems to read chronologically, 
+</i>&gt;<i>&gt; &gt; which would mean clients are not permitted to handle any of the 
+</i>&gt;<i>&gt; &gt; response until the server closes the connection.
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; I don&#x27;t know how every gemini client handle this, but IMHO the clearest
+</i>&gt;<i>&gt; way to do so is just streamingly parsing the output as soon as it
+</i>&gt;<i>&gt; arrives.  If you don&#x27;t get a close_notify at the end you can just as
+</i>&gt;<i>&gt; well delete the page and render an error if you want.
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; (also, you won&#x27;t be able to handle streaming pages if you wait for the
+</i>&gt;<i>&gt; server to close the connection)
+</i>&gt;<i>&gt; 
+</i>&gt;<i>
+</i>&gt;<i> Agreed. A nice side effect (imo) of specifying that clients are
+</i>&gt;<i> permitted to start handling requests right away is that the
+</i>&gt;<i> streaming use case is included.
+</i>
+Exactly! :D
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007630.html">[spec] When may clients begin processing responses?</a></li>
+<li>Next message (by thread): <a href="007629.html">[spec] When may clients begin processing responses?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7632">[ date ]</a> <a href="thread.html#7632">[ thread ]</a> <a href="subject.html#7632">[ subject ]</a> <a href="author.html#7632">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

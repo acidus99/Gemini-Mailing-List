@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>URLs in request lines</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000164.html">
+<link rel="next" href="000168.html">
+</head>
+<body>
+<h1>URLs in request lines</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Sun Sep 15 09:57:09 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000164.html">URLs in request lines</a></li>
+<li>Next message (by thread): <a href="000168.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#166">[ date ]</a> <a href="thread.html#166">[ thread ]</a> <a href="subject.html#166">[ subject ]</a> <a href="author.html#166">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great solderpunk once stated:
+&gt;<i> &gt;   The TL;DR of this would be:  the following two URLs SHOULD be the same and
+</i>&gt;<i> &gt; serve up the same page:
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt;         <a href="gemini://example.com">gemini://example.com</a>
+</i>&gt;<i> &gt;         <a href="gemini://example.com/">gemini://example.com/</a> 
+</i>&gt;<i> 
+</i>&gt;<i> I&#x27;ll admit to having not yet done the RFC reading ad thinking required
+</i>&gt;<i> to know whether the above is in fact already mandated by RFC-3986, but
+</i>&gt;<i> the behaviour above is what I *strongly* think should be correct for
+</i>&gt;<i> Gemini, and if it&#x27;s not RFC-mandated then we should make it so in our
+</i>&gt;<i> own spec.
+</i>&gt;<i> 
+</i>&gt;<i> &gt;   Again, per RFC-3986, they are (unless some document describing Gemini URLs
+</i>&gt;<i> &gt; states otherwise).  I naturally assumed they would be as they are for HTTP.
+</i>&gt;<i> &gt; That&#x27;s perhaps an unwarrented assumption, but I would have to think the two
+</i>&gt;<i> &gt; *are* the same, because of the nature of URLs.
+</i>&gt;<i> 
+</i>&gt;<i> Certainly, I want Gemini URLs to be as &quot;generic&quot; as possible, and I
+</i>&gt;<i> definitely reject the idea of a Gopher-style approach of having our own
+</i>&gt;<i> URL standard which deviates from the rest of the world.  Being able to
+</i>&gt;<i> do away with that was (a small) part of the motivation for putting
+</i>&gt;<i> content type in the Gemini response header.
+</i>&gt;<i> 
+</i>&gt;<i> Are HTTP URLs perfectly generic or do they have some scheme-dependent
+</i>&gt;<i> details in there?
+</i>
+  It&#x27;s general.  RFC-3986 states:
+
+	In general, a URI that uses the generic syntax for authority with an
+	empty path should be normalized to a path of &quot;/&quot;.  Likewise, an
+	explicit &quot;:port&quot;, for which the port is empty or the default for the
+	scheme, is equivalent to one where the port and its &quot;:&quot; delimiter
+	are elided and thus should be removed by scheme-based normalization. 
+
+  So treating the two Gemini URLs listed above as semantically identical is
+fine by the RFC.
+
+&gt;<i> So far I have basically treated Gemini URLs as following whatever rules
+</i>&gt;<i> HTTP URLs do.  This is because the URL (un)parsing tools in the Python
+</i>&gt;<i> standard library don&#x27;t work nicely on schemes they don&#x27;t recognise (like
+</i>&gt;<i> gemini://), 
+</i>
+  That&#x27;s probably because there are a ton of URL schemes [1] that don&#x27;t
+follow the generic URL format so it&#x27;s best to only merge URL formats that
+are recognized.
+
+&gt;<i> &gt; With that out of the way, I do handle the lack of a trailing slash with
+</i>&gt;<i> &gt; the request &lt;<a href="gemini://gemini.conman.org">gemini://gemini.conman.org</a>&gt; in GLV-1.12556 by sending out a
+</i>&gt;<i> &gt; redirect.  I think mine is the only server that actually does something
+</i>&gt;<i> &gt; different than serve up the top level page [1]. I also do that for any
+</i>&gt;<i> &gt; requests that map to a directory that don&#x27;t end in a slash [2].
+</i>&gt;<i> 
+</i>&gt;<i> Something I&#x27;ve written (Gegobi, probably?) sends a redirect to add a
+</i>&gt;<i> missing trailing slash for requests that map to directories.  This was
+</i>&gt;<i> necessary for relative URL absolutisation to function correctly.  I
+</i>&gt;<i> remember thinking at the time it was kind of annoying to have to do
+</i>&gt;<i> this, but I guess it&#x27;s the price we have to pay for all of the nice
+</i>&gt;<i> stuff that using URLs provides.
+</i>
+  True.  And the Apache webserver also does a redirect in such cases.  So
+it&#x27;s a known problem with a known solution.
+
+  -spc
+
+[1]	<a href="https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml">https://www.iana.org/assignments/uri-schemes/uri-schemes.xhtml</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000164.html">URLs in request lines</a></li>
+<li>Next message (by thread): <a href="000168.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#166">[ date ]</a> <a href="thread.html#166">[ thread ]</a> <a href="subject.html#166">[ subject ]</a> <a href="author.html#166">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

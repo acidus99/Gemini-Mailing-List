@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Clients] Gemini and accessibility regarding preformatted code blocks</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005656.html">
+<link rel="next" href="005703.html">
+</head>
+<body>
+<h1>[Clients] Gemini and accessibility regarding preformatted code blocks</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Fri Feb 26 05:31:20 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005656.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li>Next message (by thread): <a href="005703.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5663">[ date ]</a> <a href="thread.html#5663">[ thread ]</a> <a href="subject.html#5663">[ subject ]</a> <a href="author.html#5663">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great John Cowan once stated:
+&gt;<i> On Thu, Feb 25, 2021 at 5:25 PM Sean Conner &lt;sean at conman.org&gt; wrote:
+</i>&gt;<i> 
+</i>&gt;<i> &gt;         tag       = &#x27;@art&#x27; / &#x27;@code&#x27; / &#x27;@data&#x27; / &#x27;@poem&#x27;
+</i>&gt;<i> 
+</i>&gt;<i> We now know what the benefit of @art is.  What are the advantages of the
+</i>&gt;<i> other three over no tag?
+</i>
+  A client could style each type differently, even if just a subtle change
+in background color.  Or even different monospaced fonts depending upon
+usage.  
+
+&gt;<i> &gt; ``` @code
+</i>&gt;<i> &gt; x = 5
+</i>&gt;<i> &gt; ```
+</i>&gt;<i> 
+</i>&gt;<i> Shouldn&#x27;t this be read as if it were &quot;ex equals five&quot;?
+</i>
+  I didn&#x27;t want to get too wild with the examples, but yes, that sounds fine
+to me.  
+
+&gt;<i> ``` @art Obligatory Cat picture
+</i>&gt;<i> &gt; cat
+</i>&gt;<i> &gt; ```
+</i>&gt;<i> 
+</i>&gt;<i> Right.
+</i>
+  Didn&#x27;t want to bother trying to draw an ASCII cat.
+
+&gt;<i> &gt; ``` @data Price list
+</i>&gt;<i> &gt; widget  3.45
+</i>&gt;<i> &gt; gadget  5.99
+</i>&gt;<i> &gt; fob     1.99
+</i>&gt;<i> &gt; ```
+</i>&gt;<i> 
+</i>&gt;<i> Shouldn&#x27;t this be read as &quot;widget one ninety-nine (pause) gadget five
+</i>&gt;<i> ninety-nine (pause) fob one ninety-nine&quot;?  
+</i>
+  It could even be &quot;Row one widget one ninety-nine (pause) row two gadget
+five ninety-nine (pause) row three fob one ninety-nine&quot; but I can see the
+repeated &quot;row x&quot; could get tiresome.  
+
+&gt;<i> How might a visual browser
+</i>&gt;<i> render it differently?
+</i>  
+  How about alternating light and dark background for each row?  I mean, it
+doesn&#x27;t have to be a jarring contrast like black background/white
+background, but black background/dark grey background, just to help visually
+separate the records.
+
+&gt;<i> &gt; ``` @poem
+</i>&gt;<i> &gt; There once was a person from Nantucket ...
+</i>&gt;<i> &gt; ```
+</i>&gt;<i> 
+</i>&gt;<i> How might a visual browser render this differently?
+</i>
+  No idea on this one, but a screen reader, in theory, could switch voices
+for reading poetry.  
+
+  I don&#x27;t expect this to be standardized any time soon in the spec, as the
+spec for text/gemini is line oriented and less with parsing the data in each
+line.  But I can certainly see this as something clients slowly converge on,
+much like gopher clients supporting selector types not specified in
+RFC-1436.
+
+  And the spec does say, &quot;MAY be interpreted ... &quot;
+
+  -spc
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005656.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li>Next message (by thread): <a href="005703.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5663">[ date ]</a> <a href="thread.html#5663">[ thread ]</a> <a href="subject.html#5663">[ subject ]</a> <a href="author.html#5663">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

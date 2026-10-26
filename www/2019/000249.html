@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On text reflow. It&#x27;s not about bullets!</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000248.html">
+<link rel="next" href="000250.html">
+</head>
+<body>
+<h1>On text reflow. It&#x27;s not about bullets!</h1>
+<b>David Requena</b> drequena at andram.net<br>
+<i>Thu Nov 28 14:12:38 GMT 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000248.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li>Next message (by thread): <a href="000250.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#249">[ date ]</a> <a href="thread.html#249">[ thread ]</a> <a href="subject.html#249">[ subject ]</a> <a href="author.html#249">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi Solderpunk,
+
+  Thanks for taking the time for exposing things in full.
+  
+  I did due diligence before posting here. I read all materials at
+<a href="gopher://zaibatsu.circumlunar.space:70/1/~solderpunk/gemini">gopher://zaibatsu.circumlunar.space:70/1/~solderpunk/gemini</a> as well as
+enkiv2&#x27;s and John Olmo&#x27;s pieces.  Also nearly all of this list&#x27;s
+archived emails.
+
+  That is to say, I believe I have a good grasp on the philosophy
+behind Gemini and the principles that have guided it&#x27;s evolution.  Let
+me spell it clearly: To those principles I violently agree!
+  
+  I&#x27;ll be cherry-picking topics below were actual disagreement exists.
+
+On Tue, Nov 26, 2019 at 19:06:30 +0000, solderpunk wrote:
+
+&gt;<i> But I am concerned, and consistently have been all throughout
+</i>&gt;<i> Gemini&#x27;s development, about making sure we don&#x27;t provide a toehold
+</i>&gt;<i> for extensibility to creep in.
+</i>
+  Sorry to say, that ship already sailed the moment =&gt; was
+specified. The most you can do is to make some hard requirements in
+the specification.
+
+  In all honesty, it sailed even before that, when mime types were
+adopted. What&#x27;s to prevent some Gemini server to serve text/html with
+external js indeed? What&#x27;s to prevent certain clients from rendering
+such content as a web browser does?
+
+I&#x27;m not trying to open a new discussion here. We all know this is just
+an matter of balance.
+
+
+&gt;<i> I am firmly of the belief that open-endedness and extensibility are
+</i>&gt;<i> nothing but poison for a project which wants to remain small and
+</i>&gt;<i> simple and to strongly enforce certain ideals.
+</i>
+  Agreed, but... A standard that falls short of its intended purpose
+in life is just calling for the very same kind of de-facto
+standardization you so well describe for http.
+
+
+&gt;<i> Thus, my big concern about using == as a start-of-line marker to
+</i>&gt;<i> indicate verbatim text (and let me be very clear that I recognise
+</i>&gt;<i> and appreciate the beauty of using this common notation for equality
+</i>&gt;<i> to mean &quot;present exactly this&quot;!)
+</i>
+  == possesses a certain beauty and elegance about it, doesn&#x27;t it? :-)
+At any rate which actual marker is adopted is of no consequence. Let&#x27;s
+call it the &#x27;verbatim marker&#x27; from here on.
+
+
+&gt;<i> [...] is that it might soe the seed of the idea that the text/gemini
+</i>&gt;<i> syntax is one where features are defined by two character markers
+</i>&gt;<i> where the first character is =.  If =&gt; is special and == is special
+</i>&gt;<i> then if we ever decide to add explicit representation of bullets
+</i>&gt;<i> everybody will have to agree it is obvious and consistent that this
+</i>&gt;<i> be done with =* and by this point the war is lost.  =$ and =# and =?
+</i>&gt;<i> are all fair game.  Someday somebody will propose that [...]
+</i>
+  I get it, really. Let me try to convey why I state this does not apply
+to the verbatim marker: it is an unavoidable requirement.
+
+  In fact there&#x27;s two unavoidable requirements at stake here.
+
+  1 - There must exist an option for the client for reflowing text. I
+      won&#x27;t elaborate much here. There&#x27;s simply no way verbatim
+      formatted text will look good simultaneously on big desktop
+      screens and small smartphone displays. Doing that according to
+      an RFC backed set of precise rules is nothing but &#x27;the right
+      thing&#x27; (TM).   
+
+  2 - In the presence of 1, some way to specify verbatim formatted
+      text lines MUST exist for the Gemini author.
+      
+  Number 1 will always be an option for the client, be it in the spec
+or not. So better handle it in an unambiguous way to avoid a myriad
+of, client chosen, different ways.
+
+  The capitalized MUST in 2 reflects the fact that it&#x27;s a fundamental,
+intrinsic, requirement for any text content distribution
+platform.  There&#x27;re sure many more use cases. I mentioned Python source
+and mathematical formulas.
+
+  It might be an inconvenience having C source code garbled, but it
+will compile anyway, and can be automatically reformatted.  That is
+not the case with Python code, with its syntactically relevant use of
+white space.
+
+  Take a Python snippet, reflow it, and you just lost its semantics.
+It won&#x27;t run.  It cannot be automatically reformatted. Depending on
+code complexity, even manual reformatting might be impossible.  Simply
+put, information has been irremediably lost at this point.
+  
+  Now take a simple polynomial expression.  Exact same situation
+arises when the reader cannot discern which numerator goes with which
+denominator.
+
+  In short, I object this is just a desirable feature of the
+text/gemini format, as you state elsewhere in your reply.
+
+  Admittedly this could be subsumed in a more general markup facility
+if the markup du jour was to be adopted, with all its nice to have
+text styling and structuring features. Fact remains verbatim
+formatted text must be available regardless.
+
+  If not specified, someone will implement this sooner than latter, in
+a not controlled way. It might get generally liked, hence adopted.
+Back at square one then.
+
+  Or someone will start experimenting on how to abuse with =&gt; markers
+in order to somehow achieve this kind of thing.  Coincidentally, the
+spec is not yet finalized and this has already begun with some
+result. Check
+<a href="https://mailing-list-archive.gemi.dev/www/2019/000019.html">https://mailing-list-archive.gemi.dev/www/2019/000019.html</a> in this
+very same list.
+
+  What&#x27;s to be expected once the spec is set on stone?
+
+
+&gt;<i> This is precisely the reason that when the question came up as to
+</i>&gt;<i> how we should best implement something like Gopher&#x27;s item type 7 in
+</i>&gt;<i> a system without item types, I rejected the notion (even though it
+</i>&gt;<i> seems to make perfect sense) that we use =? instead of =&gt; for search
+</i>&gt;<i> points (I *think* this was julienxx&#x27;s idea?).
+</i>
+  That, I believe, would have been just a case of bad tool for the job
+that was very appropriately handled IMHO.
+
+
+&gt;<i> [...] and I admit that Gemini is slightly more naturally immune to
+</i>&gt;<i> this than HTML is - Gemini clients are by design very simple, which
+</i>&gt;<i> means many people will write them, which means there is less likely
+</i>&gt;<i> to evolve a situation where a small number of highly influential
+</i>&gt;<i> clients [...]
+</i>
+  Also worth of consideration: general user population will likely be
+composed of disgruntled former web users in one hand and former gopher
+users on the other. I don&#x27;t expect any of these groups to be
+interested in such an outcome. Both had the web option available
+before gemini; both opted out.
+
+
+&gt;<i> This principle of not inviting future extension has informed a
+</i>&gt;<i> number of decisions about the Gemini protocol.
+</i>
+  As stated above, I fully agree with this approach. Anyway, sometimes
+you must handle the smaller evil in order to avoid the big one.
+
+
+&gt;<i> [on the use of syntactic white space]
+</i>
+  I don&#x27;t think I need to expand on how an atrociously bad choice
+white space would be. This very same email would be rendered in a
+mixture of formatted and reflowed paragraphs :-)
+
+
+&gt;<i> frustrating that is.  I do certainly agree with both of your
+</i>&gt;<i> premises, that some solution to widely varying screen sizes and some
+</i>&gt;<i> way to embed unreflowd text, are very highly desirable.
+</i>
+  I beg to disagree on the &quot;desirable&quot; bit, you know :-P
+
+  I personally would settle with any solution not involving stealth
+white space markers. Client driven text reflow cannot be ruled out, so
+verbatim formatted text must be in the spec in some form or another.
+
+&gt;<i>&gt; If you happen to have endured my prose all the way down here, many
+</i>&gt;<i>&gt; thanks for your attention. You&#x27;re a remarkably forgiving reader.
+</i>&gt;<i> Don&#x27;t worry, I have been working hard for months to scare anybody
+</i>&gt;<i> without a very high tolerance for verbosity far away from anything
+</i>&gt;<i> to do with Gemini. :)
+</i>
+Well, I&#x27;d say both of us seem to lean a bit on the loquacious side...
+
+Best regards,
+Andram
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000248.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li>Next message (by thread): <a href="000250.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#249">[ date ]</a> <a href="thread.html#249">[ thread ]</a> <a href="subject.html#249">[ subject ]</a> <a href="author.html#249">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

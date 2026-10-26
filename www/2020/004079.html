@@ -1,68 +1,52 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Unicode vs. the World
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3C3fb66b2e-7d62-0447-c4c1-3ba14588183d%40disroot.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="004074.html">
-   <LINK REL="Next"  HREF="004080.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Unicode vs. the World</H1>
-    <B>PJ vM</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unicode%20vs.%20the%20World&In-Reply-To=%3C3fb66b2e-7d62-0447-c4c1-3ba14588183d%40disroot.org%3E"
-       TITLE="Unicode vs. the World">pjvm742 at disroot.org
-       </A><BR>
-    <I>Tue Dec 15 19:11:12 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="004074.html">Unicode vs. the World
-</A></li>
-        <LI>Next message (by thread): <A HREF="004080.html">Unicode vs. the World
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4079">[ date ]</a>
-              <a href="thread.html#4079">[ thread ]</a>
-              <a href="subject.html#4079">[ subject ]</a>
-              <a href="author.html#4079">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unicode vs. the World</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004074.html">
+<link rel="next" href="004080.html">
+</head>
+<body>
+<h1>Unicode vs. the World</h1>
+<b>PJ vM</b> pjvm742 at disroot.org<br>
+<i>Tue Dec 15 19:11:12 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="004074.html">Unicode vs. the World</a></li>
+<li>Next message (by thread): <a href="004080.html">Unicode vs. the World</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4079">[ date ]</a> <a href="thread.html#4079">[ thread ]</a> <a href="subject.html#4079">[ subject ]</a> <a href="author.html#4079">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On 12/15/20 4:41 PM, C&#244;me Chilliet wrote:
+<pre>On 12/15/20 4:41 PM, C?me Chilliet wrote:
 &gt;<i> So, if you see a &quot;%&quot;, it is percent encoding. If you want to link to 
-</I>&gt;<i> a path containing a percent, you have to percent encode the percent, 
-</I>&gt;<i> resulting in %25.
-</I>&gt;<i> 
-</I>&gt;<i> As a result, percent encoding twice does not break the link, as you 
-</I>&gt;<i> only percent encode what is not percent encoded already.
-</I>
+</i>&gt;<i> a path containing a percent, you have to percent encode the percent, 
+</i>&gt;<i> resulting in %25.
+</i>&gt;<i> 
+</i>&gt;<i> As a result, percent encoding twice does not break the link, as you 
+</i>&gt;<i> only percent encode what is not percent encoded already.
+</i>
 So that would define a special percent-encoding for clients, where
-they'd encode everything except percent signs, right? So in this link:
-=&gt;<A HREF="gemini://example.com/&#128048;&#129365;&#128007;&#128048;-why-space-is-%20-in-urls.gmi">gemini://example.com/&#128048;&#129365;&#128007;&#128048;-why-space-is-%20-in-urls.gmi</A>
+they&#x27;d encode everything except percent signs, right? So in this link:
+=&gt;<a href="gemini://example.com/????-why-space-is-%20-in-urls.gmi">gemini://example.com/????-why-space-is-%20-in-urls.gmi</a>
 , a client would have to percent-encode the emojis, but leave the &quot;%20&quot;
-bit alone? This seems very confusing; it's also not one-to-one (encoding
+bit alone? This seems very confusing; it&#x27;s also not one-to-one (encoding
 then decoding &quot;%20&quot; gives &quot; &quot; back)... And if you just skip
 percent-encoding when the only &quot;encodable&quot; characters in the path are
-percent signs, that's confusing too. That rule also doesn't work on
-=&gt;<A HREF="gemini://example.com/%XY.gmi">gemini://example.com/%XY.gmi</A>
+percent signs, that&#x27;s confusing too. That rule also doesn&#x27;t work on
+=&gt;<a href="gemini://example.com/%XY.gmi">gemini://example.com/%XY.gmi</a>
 
 Also, if an author wants to link to &quot;why-space-is-%20-in-urls.gmi&quot; at
 example.com, the only option would be to write
-=&gt;<A HREF="gemini://example.com/why-space-is-%2520-in-urls.gmi">gemini://example.com/why-space-is-%2520-in-urls.gmi</A>
+=&gt;<a href="gemini://example.com/why-space-is-%2520-in-urls.gmi">gemini://example.com/why-space-is-%2520-in-urls.gmi</a>
 This introduces a pitfall for authors: they never have to think about
 percent-encoding, *except* when there are percent signs in the path.
 
 How is this better than agreeing that link paths in gemtext are always
 completely percent-encoded? In that case, clients can percent-decode the
-path and display that. Authors could use a tool that 'fully' (as in, it
+path and display that. Authors could use a tool that &#x27;fully&#x27; (as in, it
 also turns every &quot;%&quot; into &quot;%25&quot;) percent-encodes a link for them.
 
 Counterintuitively, in this way I think mandating completely
@@ -77,48 +61,26 @@ and disallowed (I think). On the other hand, allowing anything
 whatsoever in the domain name and nothing in the path would be strange
 and a bit inconsistent.
 
-Assuming we don't do IRI paths in gemtext link lines, I don't really
+Assuming we don&#x27;t do IRI paths in gemtext link lines, I don&#x27;t really
 have an clear opinion regarding IDNs, the choice is between:
 * all clients need to convert to punycode when following a link, authors
-can easily link to IDNs without a tool (though they're already using a
+can easily link to IDNs without a tool (though they&#x27;re already using a
 tool for unicode paths), somewhat inconsistent/strange
 * fancy clients will convert from punycode when displaying a link,
 authors need a tool to be able to easily make links to IDNs (though
-they're already using a tool for unicode paths)
+they&#x27;re already using a tool for unicode paths)
 
 --
 pjvm
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="004074.html">Unicode vs. the World
-</A></li>
-	<LI>Next message (by thread): <A HREF="004080.html">Unicode vs. the World
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4079">[ date ]</a>
-              <a href="thread.html#4079">[ thread ]</a>
-              <a href="subject.html#4079">[ subject ]</a>
-              <a href="author.html#4079">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="004074.html">Unicode vs. the World</a></li>
+<li>Next message (by thread): <a href="004080.html">Unicode vs. the World</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4079">[ date ]</a> <a href="thread.html#4079">[ thread ]</a> <a href="subject.html#4079">[ subject ]</a> <a href="author.html#4079">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

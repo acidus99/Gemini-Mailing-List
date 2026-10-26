@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text format proposal (was Re: Text reflow woes (or: I want bullets back!)y)</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000115.html">
+<link rel="next" href="000125.html">
+</head>
+<body>
+<h1>Text format proposal (was Re: Text reflow woes (or: I want bullets back!)y)</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Fri Sep  6 15:46:03 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000115.html">Text format proposal (was Re: Text reflow woes (or: I want bullets back!)y)</a></li>
+<li>Next message (by thread): <a href="000125.html">Text format proposal (was Re: Text reflow woes (or: I want bullets back!)y)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#116">[ date ]</a> <a href="thread.html#116">[ thread ]</a> <a href="subject.html#116">[ subject ]</a> <a href="author.html#116">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great James Tomasino once stated:
+&gt;<i> From: Sean Conner &lt;sean at conman.org&gt;
+</i>&gt;<i> &gt; The two characters LF and CR MUST appear in that order in a Gemini index
+</i>&gt;<i> &gt; file.  It is unspecified (at this time) what should happen if a single LF or
+</i>&gt;<i> &gt; CR is encountered.  Both characters together constitute the &quot;end of line
+</i>&gt;<i> &gt; marker&quot;.
+</i>&gt;<i> 
+</i>&gt;<i> Was there an earlier discussion on this point? That looks lifted from the
+</i>&gt;<i> gopher RFC, but is there a reason why it&#x27;s applying to Gemini? It seems
+</i>&gt;<i> quite specific and arbitrary to require both these days. Did someone have
+</i>&gt;<i> a good justification already?
+</i>
+  Well, the use of CRLF is mentioned several times in the Gemini spec:
+
+=&gt; <a href="gopher://zaibatsu.circumlunar.space/0/~solderpunk/gemini/spec-spec.txt">gopher://zaibatsu.circumlunar.space/0/~solderpunk/gemini/spec-spec.txt</a>
+
+(specifically sections 1.2, 1.3.1 and 1.3.5.2).  It doesn&#x27;t have the
+language MUST, SHOULD, etc, though.  Also, CRLF is an Internet standard for
+transfering text (you&#x27;ll see it in many other specifications, like SMTP and
+HTTP), so that&#x27;s why I added that language.
+
+  I have code (used in both my gopher and gemini clients) that can deal with
+either a CRLF (Internet standard; Windows text files) or LF (Linux, Mac
+OS-X), but I think it might be easier on clients to just look for both (my
+code will not deal with just a CR or an LFCR for instance, not that I&#x27;ve
+ever come across any text with that format in a long time [1]).
+
+  -spc (Didn&#x27;t expect CRLF to be a point of contention ... )
+
+[1]	I know Classic Mac (pre OS-X) and some older 8-bit computers used CR
+	only.
+
+
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000115.html">Text format proposal (was Re: Text reflow woes (or: I want bullets back!)y)</a></li>
+<li>Next message (by thread): <a href="000125.html">Text format proposal (was Re: Text reflow woes (or: I want bullets back!)y)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#116">[ date ]</a> <a href="thread.html#116">[ thread ]</a> <a href="subject.html#116">[ subject ]</a> <a href="author.html#116">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

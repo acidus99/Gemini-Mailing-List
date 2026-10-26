@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] comments on the proposed gemini spec revisions</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007296.html">
+<link rel="next" href="007300.html">
+</head>
+<body>
+<h1>[spec] comments on the proposed gemini spec revisions</h1>
+<b>Chris McGowan</b> cmcgowan9990 at gmail.com<br>
+<i>Wed Oct 13 21:38:32 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007296.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li>Next message (by thread): <a href="007300.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7297">[ date ]</a> <a href="thread.html#7297">[ thread ]</a> <a href="subject.html#7297">[ subject ]</a> <a href="author.html#7297">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>&gt;<i> Unfortunately, no. For example, take this line: `# Foo bar I&#x27;m a level-1 title`
+</i>&gt;<i> A 3-char substring of that would yield &quot;# F&quot;, which isn&#x27;t useful.
+</i>
+In what way isn&#x27;t it useful? It tells you literally everything you need to know. An example (in Perl):
+
+```
+my $first3 = substr $line, 0, 3;
+# slightly magical regex, /g will return an array of matches,
+# assigning back to a scalar gives us a count of matches
+if ( my $level = $first3 =~ m/(#)+/g )
+{
+  return &quot;Level $level header&quot;;
+}
+elsif ( $first3 =~ m/=&gt;/ )
+{
+  return &quot;Link&quot;
+}
+elsif( $first3 =~ m/```/ )
+{
+  return &quot;preformatted&quot;;
+}
+elsif( $first3 =~ m/\*/ )
+{
+  return &quot;list item&quot;;
+}
+elsif ( $first3 =~ m/&gt;/ )
+{
+  return &#x27;Blockquote&#x27;;
+}
+else
+{
+  return &quot;Text&quot;;
+}
+```
+
+That&#x27;s a simplified, very naive gemtext parser I wrote in my email client in about 3 minutes. It took longer to remember all of the list types than it did to write the code for them. In fact, the substring isn&#x27;t even necessary in this code as I could anchor the regex at the start of the line like so:
+
+```
+if ( $line =~ m/^\*/ )
+{
+  return &quot;list item&quot;;
+}
+```
+
+but that&#x27;s largely true for languages which have decent regex support. If you weren&#x27;t using one of those (i.e. C) or are for some reason allergic to regexes you could simply index the string to determine the line type (note: this would likely improve speed, but probably only a imperceptibly small amount and likely wouldn&#x27;t be worth it.)
+
+Just to really drive home the point that this isn&#x27;t a difficult task, here&#x27;s the version I wouldn&#x27;t write unless I was using C (still in Perl though):
+
+```
+# Note: split here is because perl doesn&#x27;t allow direct subscripting of
+# strings. In languages that do allow that, this other array is
+# unnecessary and you could use $line directly.
+my @first3 = split( &quot;&quot;, substr( $line, 0, 3));
+if ( $first3[0] eq &#x27;#&#x27; )
+{
+  if ( $first3[1] eq &#x27;#&#x27; )
+  {
+    if ( $first3[2] eq &#x27;#&#x27; )
+    {
+      return &quot;Level 3 header&quot;;
+    }
+    return &quot;Level 2 header&quot;;
+  }
+  return &quot;Level 1 header&quot;;
+}
+elsif ( $first3[0] eq &#x27;=&#x27; &amp;&amp; $first3[1] eq &#x27;&gt;&#x27; )
+{
+  return &quot;link&quot;;
+}
+elsif ( $first3[0] eq &#x27;*&#x27; )
+{
+  return &#x27;List Item&#x27;;
+}
+elsif ($first3[0] eq &#x27;&gt;&#x27; )
+{
+  return &quot;Blockquote&quot;;
+}
+elsif( $first3[0] eq &#x27;`&#x27; &amp;&amp; $first3[1] eq &#x27;`&#x27; &amp;&amp; $first3[2] eq &#x27;`&#x27; )
+{
+  return &quot;preformatted&quot;;
+}
+else
+{
+  return &quot;Text&quot;;
+}
+```
+
+It&#x27;s a bit more annoying to write, sure but it&#x27;s still really simple. That&#x27;s ~33 lines of code (mostly because of the Allman style braces, honestly.) It only took me 5 minutes to write.
+
+In summary, I hardly think it&#x27;s impossible or even difficult to unambiguously parse gemtext without having a mandatory space.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007296.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li>Next message (by thread): <a href="007300.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7297">[ date ]</a> <a href="thread.html#7297">[ thread ]</a> <a href="subject.html#7297">[ subject ]</a> <a href="author.html#7297">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

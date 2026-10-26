@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CGI programs and the gemini protocol</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006149.html">
+<link rel="next" href="006151.html">
+</head>
+<body>
+<h1>CGI programs and the gemini protocol</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Fri Mar 19 23:14:39 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006149.html">CGI programs and the gemini protocol</a></li>
+<li>Next message (by thread): <a href="006151.html">CGI programs and the gemini protocol</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6150">[ date ]</a> <a href="thread.html#6150">[ thread ]</a> <a href="subject.html#6150">[ subject ]</a> <a href="author.html#6150">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Frank Jüdes once stated:
+&gt;<i> Hi fellow Geminauts,
+</i>&gt;<i> 
+</i>&gt;<i> i am fairly new to the gemini protocol, but already like the simplicity 
+</i>&gt;<i> of everything, compared to the complexity of &quot;modern&quot; websites.
+</i>&gt;<i> 
+</i>&gt;<i> Currently i am using the Jetforce server and several clients (Kristal, 
+</i>&gt;<i> Lagrange, Geminaut) and trying to wrap my head around the /input/ 
+</i>&gt;<i> status-code:
+</i>&gt;<i> 
+</i>&gt;<i>  * Upon first invocation my cgi-script figures out that the
+</i>&gt;<i>    /QUERY_STRING/ is empty and responds with /10 Please enter some data/
+</i>&gt;<i>  * The client is prompting for some data and re-requesting the URL with
+</i>&gt;<i>    the data attached: [URL]?Some Data
+</i>&gt;<i>  * My CGI program detects that there is some data in the URL and
+</i>&gt;<i>    responds with /10 Please enter some more data/
+</i>&gt;<i>  * Upon which the client asks me to enter some more data and
+</i>&gt;<i>    re-requests the URL, but only with the /some more data/ attached to
+</i>&gt;<i>    the URL
+</i>&gt;<i>    The data that was already attached to the URL will be replaced with
+</i>&gt;<i>    the new data.
+</i>&gt;<i> 
+</i>&gt;<i> Is that the intended functionality?
+</i>&gt;<i> 
+</i>&gt;<i> It is only possible to use one parameter?
+</i>
+  It&#x27;s underspecified, and it&#x27;s a current issue:
+
+	<a href="https://gitlab.com/gemini-specification/protocol/-/issues/19">https://gitlab.com/gemini-specification/protocol/-/issues/19</a>
+
+&gt;<i> That definitely would make parsing the URL somewhat easier, but would 
+</i>&gt;<i> require some creativity in the CGI if more than one parameter is needed.
+</i>
+  Yes, and it depends upon the quality of implementation of the CGI spec.
+
+&gt;<i> Can somebody please explain this to me in a nutshell? Thank you very 
+</i>&gt;<i> much in advance for your help.
+</i>
+  Unfortunately, it&#x27;s an open issue.  I&#x27;m [1] leaning towards appending the
+new output (option #2 on the issue) but the spec needs to be updated first.
+
+  -spc
+
+[1]	Disclaimer:  speaking with my BDFLA [2] hat here.
+
+[2]	Benevelent Dictator For Life&#x27;s Assistant.
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006149.html">CGI programs and the gemini protocol</a></li>
+<li>Next message (by thread): <a href="006151.html">CGI programs and the gemini protocol</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6150">[ date ]</a> <a href="thread.html#6150">[ thread ]</a> <a href="subject.html#6150">[ subject ]</a> <a href="author.html#6150">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

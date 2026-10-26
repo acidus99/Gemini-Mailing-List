@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini input validation errors</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004954.html">
+<link rel="next" href="004957.html">
+</head>
+<body>
+<h1>Gemini input validation errors</h1>
+<b>Michael Lazar</b> lazar.michael22 at gmail.com<br>
+<i>Fri Jan 29 03:17:18 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004954.html">Gemini Digest, Vol 18, Issue 58</a></li>
+<li>Next message (by thread): <a href="004957.html">Gemini input validation errors</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4955">[ date ]</a> <a href="thread.html#4955">[ thread ]</a> <a href="subject.html#4955">[ subject ]</a> <a href="author.html#4955">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi all,
+
+Piggybacking on the recent threads about forms in gemini, how should
+we be handling errors with input validation? I&#x27;ve run into this
+problem a few times already with astrobotany and I haven&#x27;t found a
+great solution for it yet.
+
+REQUEST  : <a href="gemini://example.com/page/input">gemini://example.com/page/input</a>
+RESPONSE : 10 Enter a choice [yes/no]
+REQUEST  : <a href="gemini://example.com/page/input?potato">gemini://example.com/page/input?potato</a>
+RESPONSE : ???
+
+---
+
+Option 1.
+
+Return a proper error response code.
+
+REQUEST  : <a href="gemini://example.com/page/input?potato">gemini://example.com/page/input?potato</a>
+RESPONSE : 59 Invalid choice (potato)
+
+Pros
+- Feels like the semantically correct thing to do.
+
+Cons
+- Many gemini clients don&#x27;t display the human readable meta along
+  the error codes (For consistency, I guess?). This results in a
+  terribly confusing user experience.
+
+---
+
+Option 2.
+
+Return a new input prompt with the error message included.
+
+REQUEST  : <a href="gemini://example.com/page/input?potato">gemini://example.com/page/input?potato</a>
+RESPONSE : 10 Invalid choice (potato). Enter a choice [yes/no]
+
+Pros
+- Convenient for the user.
+- The UI is reasonably clean.
+
+Cons
+- It can get ugly really quickly with longer error messages being
+  concatenated on the same line as the original prompt.
+
+---
+
+Option 3.
+
+Return a successful response with the error as plain text.
+
+REQUEST  : <a href="gemini://example.com/page/input?potato">gemini://example.com/page/input?potato</a>
+RESPONSE : 20 text/gemini
+           Invalid option (potato).
+
+Pros
+- Will always display the error message to the user.
+
+Cons
+- No semantic indication that there was an error.
+- Can screw up browser history.
+
+---
+
+I know it&#x27;s blasphemy but a new error code could be really nice here.
+Something like
+
+54 INVALID INPUT
+Indicates that the query string contained a value that was not
+accepted by the server. The &lt;meta&gt; should be a human-readable
+error message that will be shown to the user. Sophisticated clients
+can display the error message along with re-prompting the user with
+the same input from the previous request.
+
+Any thoughts or other ideas?
+
+- Michael
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004954.html">Gemini Digest, Vol 18, Issue 58</a></li>
+<li>Next message (by thread): <a href="004957.html">Gemini input validation errors</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4955">[ date ]</a> <a href="thread.html#4955">[ thread ]</a> <a href="subject.html#4955">[ subject ]</a> <a href="author.html#4955">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

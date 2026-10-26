@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text reflow woes (or: I want bullets back!)</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000014.html">
+<link rel="next" href="000018.html">
+</head>
+<body>
+<h1>Text reflow woes (or: I want bullets back!)</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Thu Aug 15 20:59:24 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000014.html">Text reflow woes (or: I want bullets back!)</a></li>
+<li>Next message (by thread): <a href="000018.html">Text reflow woes (or: I want bullets back!)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#17">[ date ]</a> <a href="thread.html#17">[ thread ]</a> <a href="subject.html#17">[ subject ]</a> <a href="author.html#17">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>&gt;<i> there&#x27;s a way to mark lines that 
+</i>&gt;<i> shouldn&#x27;t be flowed at all.                                              
+</i>
+I assume this refers to the following part from early in RFC3676 4.1?
+
+&gt;<i> If the line ends in a space, the line is flowed.  Otherwise it is
+</i>&gt;<i> fixed.
+</i>
+Using a trailing space is kind of a neat solution, in the sense that is
+has very low visual impact.  But the particular implementation above
+strikes me as &quot;backward&quot;.  I want the majority of my lines to be flowed.
+The exceptions, which would be things like bullet points, or a centred
+title line, would likely account for fewer than 10% of the lines in the
+whole document.  Since they are in the minority, *they* are the lines
+which should require extra effort (manually adding an extra space).  The
+majority wrapped lines should require no effort to prepare (and
+certainly shouldn&#x27;t require me to fight against my editor&#x27;s wrapping).
+
+Adopting RFC3676 wholesale would bring in a lot of extra stuff that I
+don&#x27;t think we have an immediate need for (like quoting related stuff).
+But I&#x27;m very happy to use it as inspiration.
+
+Maybe a rule where lines ending in a space are immune to flowing could
+work?
+
+-Solderpunk
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000014.html">Text reflow woes (or: I want bullets back!)</a></li>
+<li>Next message (by thread): <a href="000018.html">Text reflow woes (or: I want bullets back!)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#17">[ date ]</a> <a href="thread.html#17">[ thread ]</a> <a href="subject.html#17">[ subject ]</a> <a href="author.html#17">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

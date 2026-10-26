@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[users] [ANN] telescope -- yet another browser</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006828.html">
+<link rel="next" href="006830.html">
+</head>
+<body>
+<h1>[users] [ANN] telescope -- yet another browser</h1>
+<b>Omar Polo</b> op at omarpolo.com<br>
+<i>Thu Jul  1 19:37:26 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006828.html">[users] [ANN] telescope -- yet another browser</a></li>
+<li>Next message (by thread): <a href="006830.html">[users] [ANN] telescope -- yet another browser</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6829">[ date ]</a> <a href="thread.html#6829">[ thread ]</a> <a href="subject.html#6829">[ subject ]</a> <a href="author.html#6829">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+Jonathan McHugh &lt;indieterminacy@libre.brussels&gt; writes:
+
+&gt;<i> Hi Omar,
+</i>&gt;<i>
+</i>&gt;<i> Would you please mind elaborating on this bullet point please?
+</i>&gt;<i> ```
+</i>&gt;<i> * splitted in three different process, each one is pledged (this only
+</i>&gt;<i>   on OpenBSD ofc; will add seccomp/landlock in the future, probably)
+</i>&gt;<i> ```
+</i>&gt;<i>
+</i>&gt;<i> I feels like something I could just nod along to (without really/properly understanding) but I suspect it is probably an interesting design concept.
+</i>
+Probably I should have use the &quot;privsep&quot; term, but it felt a slightly
+exaggeration.
+
+Telescope forks as soon as it can into three processes, each one does
+only one thing (conceptually) and they talk via IPC (using imsg from
+OpenBSD&#x27; libutil in particular).  Furthermore, on OpenBSD, each process
+is sandboxed with pledge(2) [0].  It&#x27;s on my todo-list to do the same
+with seccomp on linux, but later, probably around the 1.0.  Seccomp is
+very low-level and in general annoying to work with.
+
+This way, for e.g. the `client&#x27; process (the only one with the network
+access) can&#x27;t be tricked into reading your ssh keys, because the kernel
+would kill it as soon as it tries to open(2).
+
+Modern web browsers also do something similar to this, at least to my
+understanding.  (see firefox project electrolysis and fission)
+
+This is usually considered a security technique and while that&#x27;s true,
+I find that it also encourages cleaner code that&#x27;s simpler to reason
+about, when writing C at least.
+
+I wrote more about pledge/seccomp/capsicum here[1]: while the details
+regarding the implementation of gmid have changed a bit, the overall
+description of the different sandboxes is still relevant :)
+
+Cheers,
+
+Omar Polo
+
+[0]: <a href="gemini://gemini.omarpolo.com/cgi/man/pledge">gemini://gemini.omarpolo.com/cgi/man/pledge</a> or
+     <a href="https://man.openbsd.org/pledge">https://man.openbsd.org/pledge</a>
+
+[1]: <a href="gemini://gemini.omarpolo.com/post/gmid-sandbox.gmi">gemini://gemini.omarpolo.com/post/gmid-sandbox.gmi</a>
+
+
+P.S.: Thanks for noticing the wrong url.  I fixed it in the gemini
+      version of the page when the patch for telescope 0.3 was
+      committed, but forgot to update it in http-land!
+
+P.P.S: regarding tinmop: it&#x27;s a very peculiar program -- in a good way.
+       It&#x27;s both a pleroma AND gemini client!  It&#x27;s a complete client:
+       it has subscriptions support, a really cool history completion
+       UI, built-in help, IRI support (I haven&#x27;t tested this one though)
+       and so on.  And did I mention that it&#x27;s also a pleroma client? :D
+
+       I&#x27;m a little bit biased though, because both cage and I are
+       usually on #gemini-it on libera.chat and talk frequently.  He
+       (and the others there) have influenced telescope and I think I
+       can say that I did the same with tinmop.
+
+&gt;<i> Kind regards,
+</i>&gt;<i>
+</i>&gt;<i> ====================
+</i>&gt;<i> Jonathan McHugh
+</i>&gt;<i> indieterminacy@libre.brussels
+</i>&gt;<i>
+</i>&gt;<i> July 1, 2021 6:52 PM, &quot;Omar Polo&quot; &lt;op@omarpolo.com&gt; wrote:
+</i>&gt;<i>
+</i>&gt;<i>&gt; Hello everyone,
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; During the last 3/4 months I&#x27;ve been working on a yet another Gemini
+</i>&gt;<i>&gt; ncurses client: telescope
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; =&gt; <a href="gemini://telescope.omarpolo.com">gemini://telescope.omarpolo.com</a>
+</i>&gt;<i>&gt; =&gt; <a href="https://telescope.omarpolo.com">https://telescope.omarpolo.com</a>
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; It&#x27;s obviously a project only for fun, in a very-WIP stage and with lots
+</i>&gt;<i>&gt; of missing pieces, but it&#x27;s improving and I&#x27;ve reached the point where I
+</i>&gt;<i>&gt; think I can present it to a wider audience.
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; The main difference between telescope and others (I&#x27;ve only tried tinmop
+</i>&gt;<i>&gt; and amfora as TUI clients) is the Emacs (and w3m) inspired interface:
+</i>&gt;<i>&gt; instead of scrolling a page and typing a number to open a link, you have
+</i>&gt;<i>&gt; a cursor you can move freely around the page.
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; The default keybindings are heavily inspired from Emacs, but I tried at
+</i>&gt;<i>&gt; least to include some keys familiar to vi(1) users, so hjkl, gg, G, gT
+</i>&gt;<i>&gt; etc. work. All the keybindings are customizable anyway.
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; The current list of features is honestly quite short:
+</i>&gt;<i>&gt; * color and keybindings are customizable
+</i>&gt;<i>&gt; * history
+</i>&gt;<i>&gt; * rudimentary bookmark management
+</i>&gt;<i>&gt; * tabs (on startup reloads the last set of tabs)
+</i>&gt;<i>&gt; * streaming pages
+</i>&gt;<i>&gt; * rich set of commands to move around the page
+</i>&gt;<i>&gt; * splitted in three different process, each one is pledged (this only
+</i>&gt;<i>&gt; on OpenBSD ofc; will add seccomp/landlock in the future, probably)
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; while the TODO list is ever-growing!
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; I know there are various annoyances still (I just fixed the resize
+</i>&gt;<i>&gt; &quot;jump&quot; in the main branch for instance), but as I was saying, it has
+</i>&gt;<i>&gt; now reached a point where I think it&#x27;s starting to become &quot;usable&quot;. I&#x27;d
+</i>&gt;<i>&gt; love to receive feedbacks (and even more patches! :P)
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; Telescope 0.3 is available on guix, thanks to cage who did the work.
+</i>&gt;<i>&gt; Precompiled binaries for linux amd64 and aarch64 are available from the
+</i>&gt;<i>&gt; site, but it&#x27;s very easy to compile from source since it only depends on
+</i>&gt;<i>&gt; libevent, libncursesw, libtls and yacc/bison. It&#x27;s known to compile and
+</i>&gt;<i>&gt; run on FreeBSD too.
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; Cheers,
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; Omar Polo
+</i>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006828.html">[users] [ANN] telescope -- yet another browser</a></li>
+<li>Next message (by thread): <a href="006830.html">[users] [ANN] telescope -- yet another browser</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6829">[ date ]</a> <a href="thread.html#6829">[ thread ]</a> <a href="subject.html#6829">[ subject ]</a> <a href="author.html#6829">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

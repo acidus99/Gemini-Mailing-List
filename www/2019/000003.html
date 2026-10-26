@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text reflow woes (or: I want bullets back!)</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000013.html">
+<link rel="next" href="000014.html">
+</head>
+<body>
+<h1>Text reflow woes (or: I want bullets back!)</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Thu Aug 15 09:18:59 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000013.html">Let&#x27;s get this list started</a></li>
+<li>Next message (by thread): <a href="000014.html">Text reflow woes (or: I want bullets back!)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3">[ date ]</a> <a href="thread.html#3">[ thread ]</a> <a href="subject.html#3">[ subject ]</a> <a href="author.html#3">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>I was surprised and excited today to spot a (beta) web-to-Gemini
+portal at <a href="https://portal.mozz.us/">https://portal.mozz.us/</a>.  By default it points at the
+Zaibatsu, and my first thoughs upon seeing it rendered was &quot;Oh, what a
+shame, it messes up the bullet point list at the top of the page&quot;.
+
+But, no, nothing is messed up here, this is precisely what I specced
+in 0.9.1 with the text reflowing!
+
+I&#x27;m kind of sad about this.  I was resolved to destroying the
+possibility of ASCII art in Gemini pages as an unfortunate &quot;breaking
+eggs to make an omlette&quot; kind of thing.  I agree with the many people
+who have expressed frustration at Gopher content looking wonky if
+viewed on anything other than an 70 or 80 character wide terminal.
+But obviously I didn&#x27;t think the consequences of the way I specced
+things through very carefully, because I wouldn&#x27;t have been anywhere
+near as happy about destroying the possibility of bulleted lists.
+Those are a really useful and legitimate thing for text-based content
+to have.
+
+So, how do we fix this?
+
+Of course there has been plenty of talk in the past about using some
+fullblown lightweight markup language for Gemini, something like
+Markdown for example, or ratfactor&#x27;s &quot;Text Junior&quot; (ooh, I should
+invite ratfactor to this list).  I was a proponent of this in the
+beginning but I moved away from it quickly after it became clear that
+(i) people have strong opinions on lightweight markup languages and
+no choice was going to be popular with everybody, and (ii) lots of
+popular lightweight markup languages either lack a clear and
+unambiguous specification, or they have one and it&#x27;s a difficult thing
+to write a parser for.  In the end I put in the very minimal
+definition of reflowability that I did because it had an existing RFC
+reference and didn&#x27;t seem *too* onerous to implement (and, anyway,
+is optional).
+
+But now it seems we need something more than just that.  We could just
+add one more sentence saying that lines beginning with optional
+whitespace, a * and then at least one whitespace character should not
+be flowed, just like lines beginning with =&gt; should not be flowed.
+But that&#x27;s likely the first step down a slippery slope to inventing
+our own ad-hoc non-standard markup language.  Which perhaps we *ought*
+to do, but if so we ought to actually explicitly decide on it and
+commit to doing it properly in one go instead of designing it
+piecemeal.
+
+The alternative would seem to be to backtrack on reflowing and say
+&quot;reflowing would be very nice, but it&#x27;s not worth the cost of having
+to carefully specify how to handle all the edge cases necessary to
+preserve other very nice things like bullets, so tough cookies&quot;.  I
+don&#x27;t think that would be a popular choice, but it&#x27;s still on the
+table at this point, IMHO.
+
+-Solderpunk
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000013.html">Let&#x27;s get this list started</a></li>
+<li>Next message (by thread): <a href="000014.html">Text reflow woes (or: I want bullets back!)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3">[ date ]</a> <a href="thread.html#3">[ thread ]</a> <a href="subject.html#3">[ subject ]</a> <a href="author.html#3">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

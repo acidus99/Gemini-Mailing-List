@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] [spec] On extending gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005459.html">
+<link rel="next" href="005490.html">
+</head>
+<body>
+<h1>[tech] [spec] On extending gemini</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Tue Feb 23 00:16:26 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005459.html">[tech] [spec] On extending gemini</a></li>
+<li>Next message (by thread): <a href="005490.html">[tech] [spec] On extending gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5489">[ date ]</a> <a href="thread.html#5489">[ thread ]</a> <a href="subject.html#5489">[ subject ]</a> <a href="author.html#5489">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Drew DeVault once stated:
+&gt;<i> This
+</i>&gt;<i> historical revisionism about how Gemini is a platform for Gophers to
+</i>&gt;<i> feed their creativity into expanding upon Gopher&#x27;s limitations is
+</i>&gt;<i> ridiculous.  
+</i>
+  Michael is correct---you are not.  Gemini *is* an expansion of gopher, not
+a reimagining of the web.  Citing primary sources here (Solderpunk himself):
+
+<a href="gopher://zaibatsu.circumlunar.space/0/~solderpunk/phlog/pondering-whats-inbetween-gopher-and-the-web.txt">gopher://zaibatsu.circumlunar.space/0/~solderpunk/phlog/pondering-whats-inbetween-gopher-and-the-web.txt</a>
+
+	It&#x27;s no secret, of course, that I love gopher.  Some of my reasons
+	are outlined in previous writings[2].  And it&#x27;s neither a secret
+	that I hate the web, or at least it&#x27;s modern incarnation.  Both of
+	these things can be, and are, true while I still believe that Gopher
+	is not perfect and has shortcomings, and there are things about the
+	web experience to miss when one surfs on port 70.  So lately I&#x27;ve
+	been thinking about &quot;the space inbetween&quot;, about hypothetical dream
+	protocols which are more than gopher but less than HTTP.
+
+	...
+
+	As a first contribution to this line of thinking, I have come up
+	with a protocol which basically consists of three small changes to
+	gopher which address what I *think* I currently believe are its
+	three greatest shortcomings.
+
+	The first change is that TLS encryption of all connections is
+	mandatory.  No two port cleartext/cyphertext distinction like HTTP
+	and HTTPS, no upgrade from cleartext using STARTTLS, just secure
+	connections from the get go and that&#x27;s it. ...
+
+	The second change is that the standard non-directory item type is
+	not a plaintext file, but a text file in some very lightweight,
+	human-readable markup language which supports inline linking to
+	other resources.  ...
+
+	The third and final change is the introduction of an item-type which
+	means &quot;interpret this selector and interact with it in some way
+	determined by its schema&quot;.  The &#x27;h&#x27; item-type already plays this
+	role for many more advanced clients, if you put a &quot;URL:&quot; in front of
+	the selector, but this is IMHO an ugly hack which really spoils the
+	clean semantics of the gopher protocol.  And item-type of &#x27;h&#x27; is
+	supposed to and *should* mean &quot;this is a HTML file&quot;, and item-types
+	shouldn&#x27;t do double duty as it defeats the point of them.
+
+<a href="gopher://zaibatsu.circumlunar.space/0/~solderpunk/phlog/why-gopher-needs-crypto.txt">gopher://zaibatsu.circumlunar.space/0/~solderpunk/phlog/why-gopher-needs-crypto.txt</a>
+
+	I&#x27;m talking about the fact that my hypothetical new protocol
+	operated strictly over TLS connections - plaintext straight up
+	wasn&#x27;t an option.  I am of the opinion that the widespread lack of
+	encryption in gopherspace today is the protocol&#x27;s biggest
+	shortcoming, and I actually suspect that this point alone
+	discourages some folks who would otherwise be on board from adopting
+	it.  But others, including Bongusta overlord Logout, do not see the
+	need, so here&#x27;s my attempt at a justification.
+
+	...
+
+	The web is surely a dumpster fire, but let&#x27;s not pretend gopher is
+	perfect and cannot be improved.  Those of us fleeing the web have
+	just fallen back here because it&#x27;s about the only off-the-shelf
+	vaguely web-like thing that there is to fall back to.  Some of us
+	may be truly comfy here, and that&#x27;s absolutely fine.  Increasingly I
+	think I&#x27;d like to use gopher as a temporary base of operations to
+	build something even better.
+
+<a href="gopher://zaibatsu.circumlunar.space/0/~solderpunk/phlog/more-on-gopher-and-crypto.txt">gopher://zaibatsu.circumlunar.space/0/~solderpunk/phlog/more-on-gopher-and-crypto.txt</a>
+
+	My recent post[1] about &quot;why gopher needs crypto&quot; received a very
+	well-considered response[2] over at The Boston Diaries.  The author
+	(do I call you &quot;the conman&quot;?) rightly points out that the true
+	challenge is not in actually conducting a gopher request/response
+	transaction over a TLS connection, which in relatively trivial and
+	has been done before.  Rather, the core difficulty lies in the
+	absence of any way to represent in a type-1 response that a
+	particular gopher resource is accessible via TLS.
+
+	...
+
+	The conman suggests that creating a new protocol is to risk that we
+	&quot;start falling into HTTP territory&quot;.  This is of course a very real
+	risk, but I also very strongly believe that it is perfectly
+	avoidable if we are sufficiently determined from day one to avoid
+	it.  To this end, I hope to think and write (and read, if anybody
+	wants to join in!) more in the future not just about the
+	shortcomings of gopher but very explicitly about what is right and
+	what is wrong about HTTP and HTML.  It&#x27;s vitally important to
+	identify precisely what features of the web stack facilitated the
+	current state of affairs if we want to avoid the same thing
+	happening again.
+
+<a href="gopher://zaibatsu.circumlunar.space/0/~solderpunk/phlog/the-soul-of-gopher.txt">gopher://zaibatsu.circumlunar.space/0/~solderpunk/phlog/the-soul-of-gopher.txt</a>
+
+	What is the &quot;true spirit of gopher&quot;?  Its &quot;heart and soul&quot;, the
+	deep, conceptual commitment which distinguishes it from other
+	protocols, in particular from the web?
+
+	...
+
+	Now that we&#x27;ve uncovered the true spirit of gopher, the natural
+	question, for those participating in the on-going discussions about
+	new gopher-inspired protocols, is whether or not this idea is one
+	that the gopher community really cherishes and which should be
+	preserved in the Ultimate New Protocol of Truth and Glory.
+
+	...
+
+	... There&#x27;s plenty of evidence out there that a lot of Gopher
+	enthusiasts don&#x27;t actually *want* a protocol that divides sharply
+	between navigation and content.  They just want to be able to serve
+	plain-text with hyperlinks anywhere they like, via a bare bones
+	protocol that doesn&#x27;t support tracking and other unpleasantries. 
+	Something like &quot;HTML with only the &lt;a href&gt; tag, over HTTP/0.1&quot;.  I
+	think that&#x27;s all *I* want.
+
+<a href="gopher://zaibatsu.circumlunar.space/0/~solderpunk/phlog/protocol-pondering-intensifies-ii.txt">gopher://zaibatsu.circumlunar.space/0/~solderpunk/phlog/protocol-pondering-intensifies-ii.txt</a>
+
+	In the previous post in this series[1] I compared request formats
+	for gopher and HTTP and thought a bit about what a good anonymous
+	document system actually needs.  I ended up deciding that the answer
+	was nothing more than gopher already provides.  In this post I&#x27;ll
+	continue that discussion, focussing instead on the response format.
+
+	...
+
+	This protocol is not as simple as gopher, but I would argue its
+	power to weight ratio is substantially greater.  ...
+
+<a href="gopher://zaibatsu.circumlunar.space/0/~solderpunk/phlog/protocol-pondering-intensifies-iii.txt">gopher://zaibatsu.circumlunar.space/0/~solderpunk/phlog/protocol-pondering-intensifies-iii.txt</a>
+
+
+	A standard gopher menu line looks like this:
+
+	...
+
+	An obvious update which could be made here is to take advantage of
+	the fact that between now and gopher was first invented, URLs have
+	been invented!  We don&#x27;t need to specify the selector (path), host
+	and port separately, we have a standard way to build that into one
+	string, and every modern programming language has libraries for
+	parsing/buiding them. ...
+
+<a href="gopher://zaibatsu.circumlunar.space/0/~solderpunk/gemini/cold-blanketry.txt">gopher://zaibatsu.circumlunar.space/0/~solderpunk/gemini/cold-blanketry.txt</a>
+
+	The Gemini project has attracted more attention in a short time
+	frame than I expected, and on the whole the project is moving very
+	fast!  It&#x27;s quickly becoming apparent that not everybody is going to
+	agree with everybody else about what the best path forward for the
+	project is.  If things keep moving this fast, it&#x27;s going to be very
+	hard to keep building and maintaining consensus among the entire
+	community.
+
+	I understand that this seems kind of sad and kind of scary, but I
+	think (and surely hope!) that it will be okay.
+
+	The worst case scenario as I see it is that the Gemini project
+	quickly descends into internal arguments, nobody can agree on
+	anything and the whole thing fizzles out in a week.  If that
+	happens, we&#x27;ve all still got gopher, which isn&#x27;t going anywhere. ...
+
+  If you have a rebuttle, fine, but &quot;citation needed.&quot;
+
+&gt;<i> The purpose of Gemini has always been crystal clear. 
+</i>
+  Yes, a new gopher.  Ahd simplicity of implementation for both client and
+server.
+
+&gt;<i> The
+</i>&gt;<i> spec has received only minor clarifications and has always come with the
+</i>&gt;<i> following promises:
+</i>
+  No.  The spec has received *major* changes and clarifications since it was
+first written.  I&#x27;ve mentioned in other messages the differences from then
+and now.  But saying it has only ever had &quot;minor clarifications&quot; is history
+revisionism.
+
+  -spc
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005459.html">[tech] [spec] On extending gemini</a></li>
+<li>Next message (by thread): <a href="005490.html">[tech] [spec] On extending gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5489">[ date ]</a> <a href="thread.html#5489">[ thread ]</a> <a href="subject.html#5489">[ subject ]</a> <a href="author.html#5489">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,42 +1,26 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [tech] /.well-known/capability ehlo
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20/.well-known/capability%20ehlo&In-Reply-To=%3C15815838-98FE-4438-878B-6BE3EE982D0C%40gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="004154.html">
-   <LINK REL="Next"  HREF="004156.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[tech] /.well-known/capability ehlo</H1>
-    <B>Petite Abeille</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20/.well-known/capability%20ehlo&In-Reply-To=%3C15815838-98FE-4438-878B-6BE3EE982D0C%40gmail.com%3E"
-       TITLE="[tech] /.well-known/capability ehlo">petite.abeille at gmail.com
-       </A><BR>
-    <I>Sun Dec 20 00:39:42 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="004154.html">[tech] Mail client as Gemini browser?
-</A></li>
-        <LI>Next message (by thread): <A HREF="004156.html">[tech] /.well-known/capability ehlo
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4155">[ date ]</a>
-              <a href="thread.html#4155">[ thread ]</a>
-              <a href="subject.html#4155">[ subject ]</a>
-              <a href="author.html#4155">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] /.well-known/capability ehlo</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004154.html">
+<link rel="next" href="004156.html">
+</head>
+<body>
+<h1>[tech] /.well-known/capability ehlo</h1>
+<b>Petite Abeille</b> petite.abeille at gmail.com<br>
+<i>Sun Dec 20 00:39:42 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="004154.html">[tech] Mail client as Gemini browser?</a></li>
+<li>Next message (by thread): <a href="004156.html">[tech] /.well-known/capability ehlo</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4155">[ date ]</a> <a href="thread.html#4155">[ thread ]</a> <a href="subject.html#4155">[ subject ]</a> <a href="author.html#4155">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Older protocols such as SMTP, POP3, IMAP, and NNTP have developed extension mechanism overtime:
+<pre>Older protocols such as SMTP, POP3, IMAP, and NNTP have developed extension mechanism overtime:
 
 SMTP has EHLO.
 POP3 has CAPA.
@@ -58,7 +42,7 @@ In Gemini, a consenting client-server pair would use a similar mechanism to disc
 
 Upon receiving a request at /.well-known/capability, a compatible server would respond with a text listing its capabilities, as keywords, one per line:
 
-C: <A HREF="gemini://mozz.us/.well-known/capability">gemini://mozz.us/.well-known/capability</A>
+C: <a href="gemini://mozz.us/.well-known/capability">gemini://mozz.us/.well-known/capability</a>
 S: text
 IRI
 
@@ -68,9 +52,9 @@ Another capability could be EHLO.
 
 EHLO tells the client it can extend the initial Gemini request with further keywords, after the URI:
 
-C: <A HREF="gemini://mozz.us/bunny.gmi">gemini://mozz.us/bunny.gmi</A> IRI
+C: <a href="gemini://mozz.us/bunny.gmi">gemini://mozz.us/bunny.gmi</a> IRI
 S: text/gemini
-=&gt; <A HREF="gemini://&#128007;.hole/&#128048;%20%26%20&#129365;.gmi">gemini://&#128007;.hole/&#128048;%20%26%20&#129365;.gmi</A> &#128048; &amp; &#129365;: Down The Rabbit Hole, a journey.
+=&gt; gemini://?.hole/?%20%26%20?.gmi ? &amp; ?: Down The Rabbit Hole, a journey.
 
 Another server extension could be CHUNK, telling the client to expect chunked transfer encoding.
 
@@ -80,21 +64,21 @@ Another server extension could be PERSIST, informing the client the connection c
 
 Putting this together:
 
-C: <A HREF="gemini://mozz.us/.well-known/capability">gemini://mozz.us/.well-known/capability</A>
+C: <a href="gemini://mozz.us/.well-known/capability">gemini://mozz.us/.well-known/capability</a>
 S: text
 EHLO
 IRI
 PERSISTENT
 SIZE
 &lt;server drops connection&gt;
-C: <A HREF="gemini://mozz.us/&#128111;&#8205;&#9792;&#65039;.gmi">gemini://mozz.us/&#128111;&#8205;&#9792;&#65039;.gmi</A> IRI PERSIST SIZE
+C: <a href="gemini://mozz.us/????.gmi">gemini://mozz.us/????.gmi</a> IRI PERSIST SIZE
 S: text/gemini; size=90
-=&gt; <A HREF="gemini://&#128007;.hole/&#128048;%20%26%20&#129365;.gmi">gemini://&#128007;.hole/&#128048;%20%26%20&#129365;.gmi</A> &#128048; &amp; &#129365;: Down The Rabbit Hole, a journey.
+=&gt; gemini://?.hole/?%20%26%20?.gmi ? &amp; ?: Down The Rabbit Hole, a journey.
 &lt;server maintains connection, awaiting a further request&gt;
 
 In other words -after checking the server capabilities- the client request a persistent connection, with  content size, and IRIs.
 
-That's all folks.
+That&#x27;s all folks.
 
 Thoughts? Opinions? Likes? Dislikes? Something?
 
@@ -103,55 +87,15 @@ Thoughts? Opinions? Likes? Dislikes? Something?
 
 
 
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="004154.html">[tech] Mail client as Gemini browser?
-</A></li>
-	<LI>Next message (by thread): <A HREF="004156.html">[tech] /.well-known/capability ehlo
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4155">[ date ]</a>
-              <a href="thread.html#4155">[ thread ]</a>
-              <a href="subject.html#4155">[ subject ]</a>
-              <a href="author.html#4155">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="004154.html">[tech] Mail client as Gemini browser?</a></li>
+<li>Next message (by thread): <a href="004156.html">[tech] /.well-known/capability ehlo</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4155">[ date ]</a> <a href="thread.html#4155">[ thread ]</a> <a href="subject.html#4155">[ subject ]</a> <a href="author.html#4155">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

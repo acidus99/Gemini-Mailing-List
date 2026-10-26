@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IPv6 and gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000143.html">
+<link rel="next" href="000163.html">
+</head>
+<body>
+<h1>IPv6 and gemini</h1>
+<b>plugd</b> plugd at thelambdalab.xyz<br>
+<i>Fri Sep 13 10:05:18 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000143.html">IPv6 and gemini</a></li>
+<li>Next message (by thread): <a href="000163.html">IPv6 and gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#144">[ date ]</a> <a href="thread.html#144">[ thread ]</a> <a href="subject.html#144">[ subject ]</a> <a href="author.html#144">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+Sean Conner writes:
+
+&gt;<i>&gt; 4. Have servers ensure that if they have an AAAA record they also listen
+</i>&gt;<i>&gt; for IPv6 gemini connections.
+</i>&gt;<i>&gt;   - Pros: future-proof, no client-side changes necessary.
+</i>&gt;<i>&gt;   - Con: some additional work necessary on the server side.
+</i>&gt;<i>
+</i>&gt;<i>   It depends.  On GLV-1.12556, all that takes is to use an address of &quot;::&quot;
+</i>&gt;<i> to listen on all IPv4 and IPv6 interfaces, and that should work with any
+</i>&gt;<i> modern IP stack.
+</i>
+I didn&#x27;t want to presume. :-)
+
+&gt;<i>   There is also a fifth option:
+</i>&gt;<i>
+</i>&gt;<i> 	5. Have clients attempt to connect to both addresses and use the one
+</i>&gt;<i> 	that connects first.
+</i>&gt;<i> 	- Pro: should always work
+</i>&gt;<i> 	- Con: complicates the client
+</i>
+Ideally this should already have been happening, but determining whether
+a server is not listening is difficult, isn&#x27;t it?  At some point you
+have to simply define a timeout.  Which means that, unless you want
+false negatives you have to wait a while (say a few seconds at least)
+before declaring the connection a failure.  This is okay if it happens
+once, but it&#x27;d be awful if this were happening for every single
+selector.  Which means that clients would also have to implement some
+local caching mechanism ...
+
+&gt;<i>
+</i>&gt;<i>&gt; Obviously 4 is my favourite because it&#x27;s less (no) work for me. :)
+</i>&gt;<i>
+</i>&gt;<i>   I like 4 as well.
+</i>
+Yay!
+
+plugd
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000143.html">IPv6 and gemini</a></li>
+<li>Next message (by thread): <a href="000163.html">IPv6 and gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#144">[ date ]</a> <a href="thread.html#144">[ thread ]</a> <a href="subject.html#144">[ subject ]</a> <a href="author.html#144">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

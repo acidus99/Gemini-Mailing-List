@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supporting multi-line input without changing the specification</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005487.html">
+<link rel="next" href="005495.html">
+</head>
+<body>
+<h1>Supporting multi-line input without changing the specification</h1>
+<b>Katarina Eriksson</b> gmym at coopdot.com<br>
+<i>Tue Feb 23 00:40:36 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005487.html">[users][tech][ANN] rawnix.org gemini hosting and ESP8266 Gemini Server</a></li>
+<li>Next message (by thread): <a href="005495.html">Supporting multi-line input without changing the specification</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5491">[ date ]</a> <a href="thread.html#5491">[ thread ]</a> <a href="subject.html#5491">[ subject ]</a> <a href="author.html#5491">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Since we&#x27;re still getting proposals, I&#x27;m writing something I read somewhere
+gemini related. I do not claim I invented this myself. (Except the codes at
+the bottom.)
+
+# Objective
+
+Provide a way for users to send bigger chunks of text to the server.
+
+# User experience
+
+Support for regular status 10 input, CGI and client certificates assumed.
+
+## Clients with multi-line support
+
+The reader klicks a link. A text box, with a label from the meta part,
+appears. The reader writes and sends the message.
+
+## Clients without multi-line support
+
+The reader klicks a link. An input field, with a label from the meta
+part, appears.
+The reader writes the first line, end the line with a marker character to
+signal a wish to continue and sends the request. The server responds with a
+new input until it doesn?t receive that marker character.
+
+It should be easier to exit the loop than to continue.
+
+## Servers
+
+The writer puts a script (or a symlink to a script) in a reasonable
+location and link to it in gemtext. The script handles the incoming texts.
+
+# Behind the scenes
+
+The server needs to indicate to the client that it expects a multi-line
+text. One way is to send a new 1x status, like 12, but that is a spec
+change. Other ways are to use a specific file name extension or a keyword
+in the meta field.
+
+I must admit I prefer the new status code over the others. Other options?
+
+The client needs to indicate to the server that it wants to continue the
+text in another request. I have chosen &amp; since it doesn&#x27;t need to be
+escaped and doesn&#x27;t have a specific meaning yet in gemini.
+
+## Example
+
+S: &quot;10 New guest book entry (multi)\r\n&quot;
+C: &quot;<a href="gemini://guestbook.example/new.multi?Neat%20that%20you%20can%20post%20">gemini://guestbook.example/new.multi?Neat%20that%20you%20can%20post%20</a>
+multi-line%20texts.&amp;n\r\n&quot;
+S: &quot;10 (more)\r\n&quot;
+C: &quot;<a href="gemini://guestbook.example/new.multi?I%20wonder%20if%20clients%20will%20">gemini://guestbook.example/new.multi?I%20wonder%20if%20clients%20will%20</a>
+adopt%20it.\r\n&quot;
+
+## Codes
+
+I have written a script to experiment with user experience. These are the
+codes I came up with:
+
+* Input lines ending with &quot;&amp;n&quot; indicates that the next request is a new
+line.
+* Input lines ending with just &quot;&amp;&quot; indicates that the line continues
+immediately in the next request. (Can be in the middle of a word.)
+* Input lines ending with &quot;&amp;p&quot; saves a round-trip when you want to insert a
+blank line.
+* Everything else indicates that it is the final line.
+
+These codes are made to be typed by a human. A client translating a text
+box could just put &quot;%0a&quot; to break a line and end the input with a &quot;&amp;&quot; when
+it reaches the maximum request length to continue in the next request.
+
+-- 
+Katarina
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210223/ed698236/attachment.htm">https://mailing-list-archive.gemi.dev/www/attachments/20210223/ed698236/attachment.htm</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005487.html">[users][tech][ANN] rawnix.org gemini hosting and ESP8266 Gemini Server</a></li>
+<li>Next message (by thread): <a href="005495.html">Supporting multi-line input without changing the specification</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5491">[ date ]</a> <a href="thread.html#5491">[ thread ]</a> <a href="subject.html#5491">[ subject ]</a> <a href="author.html#5491">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

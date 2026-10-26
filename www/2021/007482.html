@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007481.html">
+<link rel="next" href="007483.html">
+</head>
+<body>
+<h1>ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Mon Nov  1 05:27:12 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007481.html">ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</a></li>
+<li>Next message (by thread): <a href="007483.html">ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7482">[ date ]</a> <a href="thread.html#7482">[ thread ]</a> <a href="subject.html#7482">[ subject ]</a> <a href="author.html#7482">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Charles Iliya Krempeaux once stated:
+&gt;<i> Hello everyone,
+</i>
+  Hello.
+
+&gt;<i> For me I prefer to separate out the TLS part from the server part. So, this
+</i>&gt;<i> implementation isn&#x27;t an attempt to get rid of encryption, but instead a way
+</i>&gt;<i> of dividing up the technology to make it easier to work with.
+</i>&gt;<i> 
+</i>&gt;<i> I was originally doing this in a Gemini Protocol Go implementation, and
+</i>&gt;<i> calling the TLS-free version &quot;naked Gemini&quot;. But when I started reading the
+</i>&gt;<i> mailing list archive, and some of the gemlogs — still working through them
+</i>&gt;<i> — and noticed Mercury was the same thing, I created Go package hg.
+</i>
+  The Mercury protocol:
+
+	<a href="https://portal.mozz.us/gemini/gemini.circumlunar.space/users/solderpunk/gemlog/the-mercury-protocol.gmi">https://portal.mozz.us/gemini/gemini.circumlunar.space/users/solderpunk/gemlog/the-mercury-protocol.gmi</a>
+
+was (at the time solderpunk proposed it) a thought experiement and is
+actually bit less than the current Gemini-TLS---it&#x27;s more akin to the
+original protocol he propsed with single digit status codes [1] and a very
+simple native text format.  The critical part of the Mercury &quot;spec&quot;:
+
+	3. ... then a lot of distinctions made by the remaining codes (e.g. 
+	temporary vs permanent redirects or failures) become far less
+	important, so we can get rid of more codes and end up below 10,
+	allowing them to be single digits.
+
+	4. The &#x27;charset&#x27; parameter from the text/gemini MIME type is removed
+	and UTF-8 encoding is obligatory.  The &#x27;lang&#x27; parameter currently
+	under discussion for Gemini is not added.
+
+	5. The text/gemini syntax is stripped back to just two line types:
+	links, and plain text.  Plain text lines are still wrapped by the
+	client, as they currently are in Gemini.
+
+  As for the requirement for TLS for Gemini, solderpunk explained his ideas
+in this post:
+
+	<a href="gopher://zaibatsu.circumlunar.space/0/~solderpunk/phlog/why-gopher-needs-crypto.txt">gopher://zaibatsu.circumlunar.space/0/~solderpunk/phlog/why-gopher-needs-crypto.txt</a>
+
+  In fact, a lot of the early history of Gemini is documented here:
+
+	<a href="gopher://zaibatsu.circumlunar.space:70/1/~solderpunk/gemini">gopher://zaibatsu.circumlunar.space:70/1/~solderpunk/gemini</a>
+
+  -spc
+
+[1]	<a href="gopher://zaibatsu.circumlunar.space/0/~solderpunk/gemini/status-codes.txt">gopher://zaibatsu.circumlunar.space/0/~solderpunk/gemini/status-codes.txt</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007481.html">ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</a></li>
+<li>Next message (by thread): <a href="007483.html">ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7482">[ date ]</a> <a href="thread.html#7482">[ thread ]</a> <a href="subject.html#7482">[ subject ]</a> <a href="author.html#7482">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] When may clients begin processing responses?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007624.html">
+<link rel="next" href="007627.html">
+</head>
+<body>
+<h1>[spec] When may clients begin processing responses?</h1>
+<b>lincoln auster</b> lincolnauster at gmail.com<br>
+<i>Tue Nov 23 05:38:01 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007624.html">[spec] When may clients begin processing responses?</a></li>
+<li>Next message (by thread): <a href="007627.html">[spec] When may clients begin processing responses?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7626">[ date ]</a> <a href="thread.html#7626">[ thread ]</a> <a href="subject.html#7626">[ subject ]</a> <a href="author.html#7626">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi,
+
+&gt;<i> The transaction sequence in section 1.1 seems to read chronologically,
+</i>&gt;<i> which would mean clients are not permitted to handle any of the
+</i>&gt;<i> response until the server closes the connection.
+</i>
+I hadn&#x27;t noticed that in my reading: it does look like incremental
+processing/rendering might be strictly disallowed with response body
+handling only allowed to occur after the close_notify.
+
+&gt;<i> Would it make sense to clarify this in the spec, maybe by changing
+</i>&gt;<i> the last line of section 1.1 or by adding a note to section 3.4?
+</i>
+What&#x27;s the current informal stance on clients just doing this given the
+ambiguity in the spec? It seems a bit odd to me that the spec would
+forbid this class of client optimizations: reading the whole of a
+response into memory for processing feels like it could be a fairly
+wasteful operation[0].
+
+Anyway, I&#x27;m just seconding Scot&#x27;s question and asking for some broader
+clarification!
+
+--
+lincoln auster
+     they/them
+
+0: I also think it would lead to a more complex implementation in
+   functional(-ish) languages where we can map a rendering subroutine
+   over a TLS stream regardless of the completion of that stream, but
+   don&#x27;t quote me on that :).
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007624.html">[spec] When may clients begin processing responses?</a></li>
+<li>Next message (by thread): <a href="007627.html">[spec] When may clients begin processing responses?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7626">[ date ]</a> <a href="thread.html#7626">[ thread ]</a> <a href="subject.html#7626">[ subject ]</a> <a href="author.html#7626">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

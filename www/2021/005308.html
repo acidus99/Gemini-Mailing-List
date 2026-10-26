@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Should Gemini clients alert users upon redirect?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005307.html">
+<link rel="next" href="005313.html">
+</head>
+<body>
+<h1>Should Gemini clients alert users upon redirect?</h1>
+<b>Michael Lazar</b> lazar.michael22 at gmail.com<br>
+<i>Wed Feb 17 03:52:47 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005307.html">Should Gemini clients alert users upon redirect?</a></li>
+<li>Next message (by thread): <a href="005313.html">Should Gemini clients alert users upon redirect?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5308">[ date ]</a> <a href="thread.html#5308">[ thread ]</a> <a href="subject.html#5308">[ subject ]</a> <a href="author.html#5308">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Tue, Feb 16, 2021 at 8:53 PM Sean Conner &lt;sean at conman.org&gt; wrote:
+&gt;<i>   Of the two clients I use (generally portal.mozz.us but sometimes the
+</i>&gt;<i> simple one I wrote), this link causes them to fail:
+</i>&gt;<i>
+</i>&gt;<i>         <a href="gemini://idiomdrottning.org/">gemini://idiomdrottning.org/</a>
+</i>&gt;<i>
+</i>&gt;<i>   Namely because both these clients get a redirection to:
+</i>&gt;<i>
+</i>&gt;<i>         <a href="gemini://idiomdrottning.org">gemini://idiomdrottning.org</a>
+</i>&gt;<i>
+</i>&gt;<i> but both clients will always send:
+</i>&gt;<i>
+</i>&gt;<i>         gmeini://idiomdrottning.org/
+</i>&gt;<i>
+</i>&gt;<i> (well, I can speak for my own client which does that, I suspect that&#x27;s
+</i>&gt;<i> what&#x27;s happening for portal.mozz.us).  There&#x27;s language in RFC-3986 about
+</i>&gt;<i> this particular case (section 6.2.3).
+</i>&gt;<i>
+</i>&gt;<i>   -spc
+</i>
+I just pushed an update to the portal.mozz.us proxy to fix this.
+Actually the code was already in place, but my web framework was doing
+an automatic redirect on the missing slash to try to be helpful :/ The
+following URL should now work without re-adding a trailing slash.
+
+<a href="https://portal.mozz.us/gemini/idiomdrottning.org">https://portal.mozz.us/gemini/idiomdrottning.org</a>
+
+Your point is well taken though. <a href="gemini://example.com">gemini://example.com</a> and
+<a href="gemini://example.com/">gemini://example.com/</a> are canonically the same resource and should
+always return the same response. It took me a while to understand this
+but I now see the light.
+
+- Michael
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005307.html">Should Gemini clients alert users upon redirect?</a></li>
+<li>Next message (by thread): <a href="005313.html">Should Gemini clients alert users upon redirect?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5308">[ date ]</a> <a href="thread.html#5308">[ thread ]</a> <a href="subject.html#5308">[ subject ]</a> <a href="author.html#5308">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

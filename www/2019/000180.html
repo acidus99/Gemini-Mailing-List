@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TLS, TOFU and the Gemini security model</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000181.html">
+<link rel="next" href="000183.html">
+</head>
+<body>
+<h1>TLS, TOFU and the Gemini security model</h1>
+<b>Michael Lazar</b> lazar.michael22 at gmail.com<br>
+<i>Tue Sep 24 15:19:45 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000181.html">TLS, TOFU and the Gemini security model</a></li>
+<li>Next message (by thread): <a href="000183.html">TLS, TOFU and the Gemini security model</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#180">[ date ]</a> <a href="thread.html#180">[ thread ]</a> <a href="subject.html#180">[ subject ]</a> <a href="author.html#180">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>I want to push back on the idea of TOFU certificates a little bit. Mainly, I
+feel like I&#x27;m missing some important context that led to this decision of
+rolling your own security model.
+
+&gt;<i> Simplicity:
+</i>&gt;<i>
+</i>&gt;<i> * It should be possible for somebody who had no part in designing the
+</i>&gt;<i>   protocol to accurately hold the entire protocol spec in their head
+</i>&gt;<i>   after reading a well-written description of it once or twice.
+</i>&gt;<i> * A basic but usable (not ultra-spartan) client should fit comfortably
+</i>&gt;<i>   within 50 or so lines of code in a modern high-level language.
+</i>&gt;<i>   Certainly not more than 100.
+</i>&gt;<i> * A client comfortable for daily use which implements every single
+</i>&gt;<i>   protocol feature should be a feasible weekend programming project
+</i>&gt;<i>   for a single developer.
+</i>
+Why not just use PKI/TLS and be done with it? It seems like this would be the
+most obvious and easiest to implement solution for both clients and servers.
+Setting up Let&#x27;s Encrypt is about as difficult as setting up a self-signed
+certificate (correctly). I would wager that most servers running gemini will
+already be running HTTPS anyway, so it won&#x27;t even require any extra effort.
+Your operating system already has the trusted root CAs installed. OpenSSL
+already knows how to hook everything together. It&#x27;s one line in python to use
+PKI/TLS as a gemini client:
+
+&gt;<i> context = ssl.create_default_context()
+</i>
+You could argue that PKI is overkill for gemini, and to an extent I agree with
+this on a philosophical level. It just happens to be that the way operating
+systems and SSL libraries have evolved, you effectively get PKI for &quot;free&quot; from
+the perspective a software developer. The same way that I don&#x27;t need/want to
+know how the TCP handshake works at the kernel level, I would rather let the
+operating system handle my trust model for me.
+
+- Michael
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000181.html">TLS, TOFU and the Gemini security model</a></li>
+<li>Next message (by thread): <a href="000183.html">TLS, TOFU and the Gemini security model</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#180">[ date ]</a> <a href="thread.html#180">[ thread ]</a> <a href="subject.html#180">[ subject ]</a> <a href="author.html#180">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>URLs in request lines</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000153.html">
+<link rel="next" href="000156.html">
+</head>
+<body>
+<h1>URLs in request lines</h1>
+<b>plugd</b> plugd at thelambdalab.xyz<br>
+<i>Sat Sep 14 09:02:16 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000153.html">URLs in request lines</a></li>
+<li>Next message (by thread): <a href="000156.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#155">[ date ]</a> <a href="thread.html#155">[ thread ]</a> <a href="subject.html#155">[ subject ]</a> <a href="author.html#155">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi again Sean,
+
+Sean Conner writes:
+&gt;<i> we have the &#x27;scheme&#x27; portion, then the two &#x27;//&#x27; which means we&#x27;re following
+</i>&gt;<i> the first rule in &#x27;hier-part&#x27;.  &#x27;authority&#x27; is the host part (which I didn&#x27;t
+</i>&gt;<i> include) followed by a &#x27;path-abempty&#x27;, of which there can be 0 or more of,
+</i>&gt;<i> so that&#x27;s a perfectly cromulent URL.  It&#x27;s the responsibility of the
+</i>&gt;<i> *server* to handle the situation, not the client.
+</i>
+I just read over this again and realised I&#x27;d been too hasty in my
+earlier response.  You point out that according to the URI RFC an empty
+path is a valid URL, and while this is good to know, does the following
+necessarily follow?
+
+&gt;<i>   Semantically speaking, these:
+</i>&gt;<i>
+</i>&gt;<i> 	<a href="gemini://example.com">gemini://example.com</a>
+</i>&gt;<i> 	<a href="gemini://example.com/">gemini://example.com/</a>
+</i>&gt;<i>
+</i>&gt;<i> are the same.
+</i>
+For gopher, <a href="gopher://example.com/1">gopher://example.com/1</a> and <a href="gopher://example.com/1/">gopher://example.com/1/</a> are not
+semantically the same. (Although they are often - but not always -
+treated as such.)  Section 6.2.3 on scheme-based normalization notes
+that <a href="http://example.com">http://example.com</a> and <a href="http://example.com/">http://example.com/</a> are semantically
+equivalent, and goes on to suggest that URIs of other schemes _should_
+follow this example.  So I suppose we now say that gemini does?
+
+plugd
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000153.html">URLs in request lines</a></li>
+<li>Next message (by thread): <a href="000156.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#155">[ date ]</a> <a href="thread.html#155">[ thread ]</a> <a href="subject.html#155">[ subject ]</a> <a href="author.html#155">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questions on INPUT behavior</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000091.html">
+<link rel="next" href="000094.html">
+</head>
+<body>
+<h1>Questions on INPUT behavior</h1>
+<b>Michael Lazar</b> lazar.michael22 at gmail.com<br>
+<i>Wed Aug 28 17:35:34 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000091.html">Questions on INPUT behavior</a></li>
+<li>Next message (by thread): <a href="000094.html">Questions on INPUT behavior</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#92">[ date ]</a> <a href="thread.html#92">[ thread ]</a> <a href="subject.html#92">[ subject ]</a> <a href="author.html#92">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Wed, Aug 28, 2019 at 11:59 AM Sean Conner &lt;sean at conman.org&gt; wrote:
+&gt;<i>   Wait a second ... I thought gopher URLs don&#x27;t support the query type.
+</i>&gt;<i> It&#x27;s not mentioned at all in RFC-4266 (and there are no updates as far as I
+</i>&gt;<i> can see).
+</i>
+&gt;<i>From RFC-4266:
+</i>
+   &lt;selector&gt; is the Gopher selector string.  In the Gopher protocol,
+   Gopher selector strings are a sequence of octets that may contain any
+   octets except 09 hexadecimal (US-ASCII HT or tab), 0A hexadecimal
+   (US-ASCII character LF), and 0D (US-ASCII character CR).
+
+Aside for those 3 reserved octets, you can stick anything you want in the
+selector part of the URL. Query string don&#x27;t have any special meaning to
+gopher, they&#x27;re just additional bytes in the selector that get sent to the
+server.
+
+&gt;<i>&gt; And then if you submit a search to that path, it will append the &quot;q=&quot; param to
+</i>&gt;<i>&gt; the existing filters:
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt;     <a href="gopher://mozz.us:7003/1/search?tag=37&amp;tag=5&amp;image=1&amp;q=irish">gopher://mozz.us:7003/1/search?tag=37&amp;tag=5&amp;image=1&amp;q=irish</a>
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; I&#x27;m trying to think of how I could re-implement this type of application in
+</i>&gt;<i>&gt; gemini. And I can&#x27;t really come up with a good solution if we assume that user
+</i>&gt;<i>&gt; input clears the current query params.
+</i>&gt;<i>
+</i>&gt;<i>  Add on to the path component?  I did a very short version of that for my
+</i>&gt;<i> guessing game:
+</i>
+This would lead to a bunch of different paths that point to the same resource:
+
+    /search/tag_37/tag_5/image_1/
+    /search/tag_5/tag_37/image_1/
+    /search/image_1/tag_5/tag_37/
+    ...
+
+Of course, I could write my server to be able to understand and parse these
+path components. But it throws the whole &quot;path as a hierarchy&quot; paradigm out
+the window. I can only assume that this issue is why query param key-value
+pairs were invented in the first place.
+
+- mozz
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000091.html">Questions on INPUT behavior</a></li>
+<li>Next message (by thread): <a href="000094.html">Questions on INPUT behavior</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#92">[ date ]</a> <a href="thread.html#92">[ thread ]</a> <a href="subject.html#92">[ subject ]</a> <a href="author.html#92">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

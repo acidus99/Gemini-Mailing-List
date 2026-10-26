@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposal to drop double slashes from URL syntax</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005087.html">
+<link rel="next" href="005111.html">
+</head>
+<body>
+<h1>Proposal to drop double slashes from URL syntax</h1>
+<b>Nico</b> nico at itwont.work<br>
+<i>Tue Feb  9 16:30:12 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005087.html">Proposal to drop double slashes from URL syntax</a></li>
+<li>Next message (by thread): <a href="005111.html">Proposal to drop double slashes from URL syntax</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5088">[ date ]</a> <a href="thread.html#5088">[ thread ]</a> <a href="subject.html#5088">[ subject ]</a> <a href="author.html#5088">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On 09/02/2021 16:12, Daniel Nagy wrote:
+&gt;<i> Hello,
+</i>&gt;<i> 
+</i>&gt;<i> I want to propose to drop the double slashes from the gemini URL syntax.
+</i>&gt;<i> 
+</i>&gt;<i> The reason for this is that they dont serve any semantic value and while 
+</i>&gt;<i> the
+</i>&gt;<i> project is still young, I think it could still be changed. So instead of
+</i>&gt;<i> 
+</i>&gt;<i>  ?? <a href="gemini://example.com">gemini://example.com</a>
+</i>&gt;<i> 
+</i>&gt;<i> we would have:
+</i>&gt;<i> 
+</i>&gt;<i>  ?? gemini:example.com
+</i>&gt;<i> 
+</i>&gt;<i> In fact, Sir Tim Berners-Lee apologized[0] for introducing them in the 
+</i>&gt;<i> http URL
+</i>&gt;<i> syntax. I see the following advantages and disadvantages:
+</i>&gt;<i> 
+</i>&gt;<i> Advantages:
+</i>&gt;<i>  ?- Less typing
+</i>&gt;<i>  ?- Less wasted screenspace
+</i>&gt;<i>  ?- Less transfered bytes and less stored bytes on disk and memory
+</i>&gt;<i> 
+</i>&gt;<i> Disadvantages:
+</i>&gt;<i>  ?- Newcomers might see familiarities with http in the double ?slashed 
+</i>&gt;<i> syntax and
+</i>&gt;<i>  ?? recognize, that the following token is a hostname, which will ?? be 
+</i>&gt;<i> contacted.
+</i>&gt;<i>  ?? There is a chance that, without the slashes, newcomers might ?? expect
+</i>&gt;<i>  ?? something else than a hostname after the color, although I    
+</i>&gt;<i> personally think
+</i>&gt;<i>  ?? that chance is low.
+</i>&gt;<i>  ?- Implementations would need to adapt to this and some URL ?parsers in 
+</i>&gt;<i> their
+</i>&gt;<i>  ?? respective languages might not support the parsing of such ?? syntax.
+</i>&gt;<i>  ?- Automatic URL detectors, like for example a terminal emulators 
+</i>&gt;<i>  ?where you can
+</i>&gt;<i>  ?? click on a URL and it openes, might have trouble detecting ?? this 
+</i>&gt;<i> URL form and
+</i>&gt;<i>  ?? therefore not recognize links. Those terminal emulators would    
+</i>&gt;<i> need adaption.
+</i>&gt;<i> 
+</i>&gt;<i> Of course, the double slashed syntax could still be supported, but the more
+</i>&gt;<i> compact format could be encouraged. Any feedback or suggestions would 
+</i>&gt;<i> greatly be
+</i>&gt;<i> welcomed.
+</i>&gt;<i> 
+</i>&gt;<i> Regards,
+</i>&gt;<i> Daniel
+</i>&gt;<i> 
+</i>&gt;<i> [0]: <a href="https://www.sitepoint.com/sir-tim-berners-lee-http-slashes/">https://www.sitepoint.com/sir-tim-berners-lee-http-slashes/</a>
+</i>I don&#x27;t really feel like the benefits of this are worth the drawbacks 
+that we would be breaking the URL standard, breaking existing 
+URL-handling libraries, just breaking things for the sake of, what, 
+saving two bytes? I don&#x27;t think it&#x27;s worth it. If you want to save 
+screen space, just don&#x27;t display the gemini://, if you are in a gemini 
+client it is safe to assume you are speaking gemini (many web browsers 
+don&#x27;t display the &quot;https://&quot; for similar reasons)
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005087.html">Proposal to drop double slashes from URL syntax</a></li>
+<li>Next message (by thread): <a href="005111.html">Proposal to drop double slashes from URL syntax</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5088">[ date ]</a> <a href="thread.html#5088">[ thread ]</a> <a href="subject.html#5088">[ subject ]</a> <a href="author.html#5088">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

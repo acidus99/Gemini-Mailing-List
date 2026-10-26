@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007482.html">
+<link rel="next" href="007492.html">
+</head>
+<body>
+<h1>ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</h1>
+<b>Charles Iliya Krempeaux</b> cikrempeaux at gmail.com<br>
+<i>Mon Nov  1 07:01:19 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007482.html">ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</a></li>
+<li>Next message (by thread): <a href="007492.html">ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7483">[ date ]</a> <a href="thread.html#7483">[ thread ]</a> <a href="subject.html#7483">[ subject ]</a> <a href="author.html#7483">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>A number of things to reply to. I wasn&#x27;t sure whether to reply to
+everything in one giant e-mail, or to reply in separate e-mails (that could
+turn into their own separate threads). I think I&#x27;ll create a small number
+of separate replies to make it easier for others to follow.
+
+Regarding:
+gopher://
+zaibatsu.circumlunar.space/0/~solderpunk/phlog/why-gopher-needs-crypto.txt
+
+I think the main topics of this is:
+
+№1: being able to detect (or prevent) content modification, and
+
+№2: being able to protect one&#x27;s privacy and make spying very difficult (if
+not impossible).
+
+(Please correct me if I missed anything.)
+
+Let&#x27;s get technical about this —
+
+I haven&#x27;t read the Gopher spec in a long time, so don&#x27;t recall whether
+there is something technical that would prevent it, but —
+
+One could try to use content-addressing to try to detect content
+modification.
+
+For example, there could be a convention created (and Gopher clients
+modified) such that the path in the gopher URL would contain a digest (from
+a cryptographic hash function) of the content. For example:
+
+gopher://
+example.com/content/base64/sha3-512/ld7McvClCuTZ1TeOGyJSWHz8cZd+QyksjxuEZIJIUJ8bwYvG8LDQuGBqZD7/YdYRroTm+9SiaDFlcGvW/UizNA==
+
+Notice that there are three main parts to this:
+
+• base64
+• sha3-512
+•
+ld7McvClCuTZ1TeOGyJSWHz8cZd+QyksjxuEZIJIUJ8bwYvG8LDQuGBqZD7/YdYRroTm+9SiaDFlcGvW/UizNA==
+
+The gibberish is base64 encoding of the digest of a sha3-512 hash function.
+
+(One could use base64url if they didn&#x27;t want the gibberish to have the &quot;/&quot;
+symbol.)
+
+Someone would need to modify Gopher clients to recognize that type of
+gopher URL, and then, once the data is downloaded, verify that its digest
+matches the digest in the URL.
+
+⁂
+
+And encryption (such as TLS, mentioned in the document) could help prevent
+the spying to help protect privacy
+
+(Although there are other options than just TLS.)
+
+⁂
+
+But, if you are using your ISP&#x27;s DNS servers, they can still see what
+Internet domain names you are resolving. Which breaks some of your privacy.
+
+(Personally, I would prefer to move away from the Internet domain name
+system, for various reasons.)
+
+⁂
+
+As a side note — if you are interested in privacy, you should look into
+what information mobile phone providers, and credit card companies (and
+their partners) are collecting, and &quot;sharing&quot;.
+
+
+
+--
+Charles Iliya Krempeaux, B.Sc.
+cikrempeaux@gmail.com
+
+
+
+On Sun, Oct 31, 2021 at 10:27 PM Sean Conner &lt;sean@conman.org&gt; wrote:
+
+&gt;<i> It was thus said that the Great Charles Iliya Krempeaux once stated:
+</i>&gt;<i> &gt; Hello everyone,
+</i>&gt;<i>
+</i>&gt;<i>   Hello.
+</i>&gt;<i>
+</i>&gt;<i> &gt; For me I prefer to separate out the TLS part from the server part. So,
+</i>&gt;<i> this
+</i>&gt;<i> &gt; implementation isn&#x27;t an attempt to get rid of encryption, but instead a
+</i>&gt;<i> way
+</i>&gt;<i> &gt; of dividing up the technology to make it easier to work with.
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; I was originally doing this in a Gemini Protocol Go implementation, and
+</i>&gt;<i> &gt; calling the TLS-free version &quot;naked Gemini&quot;. But when I started reading
+</i>&gt;<i> the
+</i>&gt;<i> &gt; mailing list archive, and some of the gemlogs — still working through
+</i>&gt;<i> them
+</i>&gt;<i> &gt; — and noticed Mercury was the same thing, I created Go package hg.
+</i>&gt;<i>
+</i>&gt;<i>   The Mercury protocol:
+</i>&gt;<i>
+</i>&gt;<i>
+</i>&gt;<i> <a href="https://portal.mozz.us/gemini/gemini.circumlunar.space/users/solderpunk/gemlog/the-mercury-protocol.gmi">https://portal.mozz.us/gemini/gemini.circumlunar.space/users/solderpunk/gemlog/the-mercury-protocol.gmi</a>
+</i>&gt;<i>
+</i>&gt;<i> was (at the time solderpunk proposed it) a thought experiement and is
+</i>&gt;<i> actually bit less than the current Gemini-TLS---it&#x27;s more akin to the
+</i>&gt;<i> original protocol he propsed with single digit status codes [1] and a very
+</i>&gt;<i> simple native text format.  The critical part of the Mercury &quot;spec&quot;:
+</i>&gt;<i>
+</i>&gt;<i>         3. ... then a lot of distinctions made by the remaining codes
+</i>&gt;<i> (e.g.
+</i>&gt;<i>         temporary vs permanent redirects or failures) become far less
+</i>&gt;<i>         important, so we can get rid of more codes and end up below 10,
+</i>&gt;<i>         allowing them to be single digits.
+</i>&gt;<i>
+</i>&gt;<i>         4. The &#x27;charset&#x27; parameter from the text/gemini MIME type is
+</i>&gt;<i> removed
+</i>&gt;<i>         and UTF-8 encoding is obligatory.  The &#x27;lang&#x27; parameter currently
+</i>&gt;<i>         under discussion for Gemini is not added.
+</i>&gt;<i>
+</i>&gt;<i>         5. The text/gemini syntax is stripped back to just two line types:
+</i>&gt;<i>         links, and plain text.  Plain text lines are still wrapped by the
+</i>&gt;<i>         client, as they currently are in Gemini.
+</i>&gt;<i>
+</i>&gt;<i>   As for the requirement for TLS for Gemini, solderpunk explained his ideas
+</i>&gt;<i> in this post:
+</i>&gt;<i>
+</i>&gt;<i>         gopher://
+</i>&gt;<i> zaibatsu.circumlunar.space/0/~solderpunk/phlog/why-gopher-needs-crypto.txt
+</i>&gt;<i>
+</i>&gt;<i>   In fact, a lot of the early history of Gemini is documented here:
+</i>&gt;<i>
+</i>&gt;<i>         <a href="gopher://zaibatsu.circumlunar.space:70/1/~solderpunk/gemini">gopher://zaibatsu.circumlunar.space:70/1/~solderpunk/gemini</a>
+</i>&gt;<i>
+</i>&gt;<i>   -spc
+</i>&gt;<i>
+</i>&gt;<i> [1]     gopher://
+</i>&gt;<i> zaibatsu.circumlunar.space/0/~solderpunk/gemini/status-codes.txt
+</i>&gt;<i>
+</i></pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007482.html">ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</a></li>
+<li>Next message (by thread): <a href="007492.html">ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7483">[ date ]</a> <a href="thread.html#7483">[ thread ]</a> <a href="subject.html#7483">[ subject ]</a> <a href="author.html#7483">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

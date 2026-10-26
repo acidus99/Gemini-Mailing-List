@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Malicious Links</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006929.html">
+<link rel="next" href="006954.html">
+</head>
+<body>
+<h1>Malicious Links</h1>
+<b>nervuri</b> nervuri at disroot.org<br>
+<i>Mon Jul 19 12:59:49 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006929.html">Malicious Links</a></li>
+<li>Next message (by thread): <a href="006954.html">Malicious Links</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6942">[ date ]</a> <a href="thread.html#6942">[ thread ]</a> <a href="subject.html#6942">[ subject ]</a> <a href="author.html#6942">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Fri, 2021-07-16, Oliver Simmons wrote:
+&gt;<i> How about the following?
+</i>&gt;<i>
+</i>&gt;<i> &quot;A client MUST NOT make a request to a URI in the scope of a client
+</i>&gt;<i> certificate outside the current scope, unless the user explicitly
+</i>&gt;<i> allows the request. The client SHOULD present the full target URI to
+</i>&gt;<i> the user.&quot;
+</i>
+Yes, I think I prefer the &quot;MUST NOT ... unless ...&quot; structure, but after
+putting this rule in code form [1], I came away wanting a more verbose
+and precise formulation.  It may seem overkill, but I think it&#x27;s worth
+it for the sake of clarity:
+
+ Since each client certificate is bound to a scope, we define cross-scope
+ requests as requests made by interactive clients starting at URI 1 and
+ going to URI 2, where the following conditions are true:
+
+ * URI 2 is in scope of an active client certificate;
+ * URI 1 is not in that same scope;
+ * the user did not explicitly input URI 2.
+
+ Such requests can occur when following a link on a page or following
+ one or more redirects.
+
+ An interactive client MUST NOT use a client certificate when making a
+ cross-scope request, unless the user explicitly allows it after being
+ shown the full target URI and an indication of what client certificate
+ would be used to connect to it.
+
+ This is to protect against Cross-Scope Request Forgery (CSRF), a type
+ of attack in which the user is tricked into executing unwanted actions
+ in a Gemini application in which they’re currently authenticated - for
+ example by following a redirect from
+ `<a href="gemini://malicious.org/kittens.png`">gemini://malicious.org/kittens.png`</a> to
+ `<a href="gemini://gemini.forum/account/delete`">gemini://gemini.forum/account/delete`</a>.
+
+I would add this to the end of section 4.3.
+
+I&#x27;ll leave it at this.  When they find the time, Sean or Solderpunk can
+decide whether to add this and what wording to go with.
+
+[1] <a href="https://gitlab.com/gemini-specification/protocol/-/issues/37#note_629384688">https://gitlab.com/gemini-specification/protocol/-/issues/37#note_629384688</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006929.html">Malicious Links</a></li>
+<li>Next message (by thread): <a href="006954.html">Malicious Links</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6942">[ date ]</a> <a href="thread.html#6942">[ thread ]</a> <a href="subject.html#6942">[ subject ]</a> <a href="author.html#6942">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini privacy</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006020.html">
+<link rel="next" href="006029.html">
+</head>
+<body>
+<h1>Gemini privacy</h1>
+<b>Phil Leblanc</b> philanc at gmail.com<br>
+<i>Tue Mar  9 17:36:52 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006020.html">Gemini privacy</a></li>
+<li>Next message (by thread): <a href="006029.html">Gemini privacy</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6028">[ date ]</a> <a href="thread.html#6028">[ thread ]</a> <a href="subject.html#6028">[ subject ]</a> <a href="author.html#6028">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Tue, Mar 9, 2021 at 7:58 AM Stephane Bortzmeyer &lt;stephane at sources.org&gt; wrote:
+&gt;<i>
+</i>&gt;<i> On Mon, Mar 08, 2021 at 11:35:19PM +0100,
+</i>&gt;<i>  nothien at uber.space &lt;nothien at uber.space&gt; wrote
+</i>&gt;<i> &gt; Firstly, most Gemini documents are (intentionally) pretty tiny,
+</i>&gt;<i> &gt; fitting within maybe 1 or 2 KB.
+</i>&gt;<i>
+</i>&gt;<i> Fact-checking
+</i>&gt;<i> &lt;<a href="gemini://gemini.bortzmeyer.org/software/lupa/stats.gmi">gemini://gemini.bortzmeyer.org/software/lupa/stats.gmi</a>&gt;:
+</i>&gt;<i>
+</i>&gt;<i> 50% of the Gemtext resources are 1,099 bytes or less
+</i>
+Your stats.gmi page is a great resource for this issue (among others).
+Very cool!  Thanks for making it available.
+&gt;<i>
+</i>&gt;<i> &gt; Length-analysis prevention is not Gemini&#x27;s job, it&#x27;s the job of TLS.
+</i>&gt;<i>
+</i>&gt;<i> TLS cannot do it alone, and this is why it is opt-in. Padding without
+</i>&gt;<i> knowledge of the application is dangerous.
+</i>&gt;<i>
+</i>
+Given your current stats, the record padding value I suggested
+previously (4,096) would be enough to almost eliminate the risk for
+more than 80% of pages and significantly reduce the risk for more than
+90% of pages. --  and we can agree that the one 903,321 bytes document
+_will_ probably  be catched whatever the record padding :-)
+
+&gt;<i> &gt; In conclusion, it&#x27;s not Gemini&#x27;s responsibility to handle these kinds of
+</i>&gt;<i> &gt; attacks.
+</i>&gt;<i>
+</i>&gt;<i> I disagree.
+</i>
+I agree with you disagreeing! :-)  but I think Nothien means it is not
+the responsibility of the Gemini _protocol_ to handle these attacks.
+It should rather be the responsibility of Gemini capsule owners to
+configure reasonable record padding for the typical documents they
+publish.
+
+So I think record padding belongs more to a best practices document
+than to the spec.
+
+Just writing this, I am wondering... with TLS 1.3, can the _client_
+request record padding for the server response? I will check. If it
+can, at least a client could take the initiative and protect itself
+even if the server does no padding,
+
+Cheers
+
+Phil
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006020.html">Gemini privacy</a></li>
+<li>Next message (by thread): <a href="006029.html">Gemini privacy</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6028">[ date ]</a> <a href="thread.html#6028">[ thread ]</a> <a href="subject.html#6028">[ subject ]</a> <a href="author.html#6028">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

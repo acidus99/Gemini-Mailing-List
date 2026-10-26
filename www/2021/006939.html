@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logging format for Gemini servers</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006938.html">
+<link rel="next" href="006940.html">
+</head>
+<body>
+<h1>Logging format for Gemini servers</h1>
+<b>Stephane Bortzmeyer</b> stephane at sources.org<br>
+<i>Mon Jul 19 07:44:39 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006938.html">Logging format for Gemini servers (addition)</a></li>
+<li>Next message (by thread): <a href="006940.html">Deurbanising the Web</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6939">[ date ]</a> <a href="thread.html#6939">[ thread ]</a> <a href="subject.html#6939">[ subject ]</a> <a href="author.html#6939">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Mon, Jul 19, 2021 at 03:22:49AM +0500,
+ Anna “CyberTailor” &lt;cyber@sysrq.in&gt; wrote 
+ a message of 91 lines which said:
+
+&gt;<i> Almost every HTTP server uses NCSA Common Log Format (or its
+</i>&gt;<i> superset - Combined Log Format). This is very cool, because
+</i>&gt;<i> developers of misc utilities (like fail2ban or monitoring tools)
+</i>&gt;<i> don&#x27;t need to bother writing log parsers for each server.
+</i>
+Yes, this is cool but it doesn&#x27;t mean this format is perfect. The
+biggest problem is that it logs the source IP address but not the
+source port. Because of the importance of IP address sharing today in
+the IPv4 world (RFC 6269
+&lt;<a href="gemini://gemini.bortzmeyer.org/rfc-mirror/rfc6269.txt">gemini://gemini.bortzmeyer.org/rfc-mirror/rfc6269.txt</a>&gt;), logging just
+the source IP address is a bad idea (RFC 6302
+&lt;<a href="gemini://gemini.bortzmeyer.org/rfc-mirror/rfc6302.txt">gemini://gemini.bortzmeyer.org/rfc-mirror/rfc6302.txt</a>&gt; recommends,
+*if* you log the source IP address, to log also the source port).
+
+Also, of course, there is the privacy issue. IMHO, Gemini servers
+should offer an option to log only the first N bits of the source IP
+address.
+
+&gt;<i>  |         | |     .---- datetime string [%d/%b/%Y:%H:%M:%S %z]
+</i>
+RFC 3339 &lt;<a href="gemini://gemini.bortzmeyer.org/rfc-mirror/rfc3339.txt">gemini://gemini.bortzmeyer.org/rfc-mirror/rfc3339.txt</a>&gt;
+format would have been a better idea.
+
+&gt;<i> Thankfully, Gemini doesn&#x27;t require client identification as there&#x27;re no
+</i>&gt;<i> compatibility issues between different Gemini clients. But that makes
+</i>&gt;<i> learning anything about robots very hard for capsule operators :(
+</i>
+Indeed, this is a serious operational problem. There have been some
+attempts to list all &quot;good&quot; robots somewhere but it was not a success.
+
+&gt;<i> I appreciate Stéphane Bortzmeyer for including additional info in
+</i>&gt;<i> robots.txt requests:
+</i>&gt;<i> 
+</i>&gt;<i> &gt; <a href="gemini://example.space/robots.txt?robot=true&amp;uri=gemini://gemini.bortzmeyer.org/software/lupa/">gemini://example.space/robots.txt?robot=true&amp;uri=gemini://gemini.bortzmeyer.org/software/lupa/</a>
+</i>
+Note that it breaks some Gemini servers
+&lt;<a href="https://framagit.org/bortzmeyer/lupa/-/issues/9">https://framagit.org/bortzmeyer/lupa/-/issues/9</a>&gt;.
+
+&gt;<i> Downsides:
+</i>&gt;<i> * identd probably won&#x27;t work behind ISP&#x27;s NAT
+</i>&gt;<i> * requires writing asynchronous or threaded server code to avoid
+</i>&gt;<i>   blocking main thread (although separating logger and listener
+</i>&gt;<i>   processes is a good idea as it&#x27;s more secure)
+</i>
+Indeed. It seems to me there are serious limitations.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006938.html">Logging format for Gemini servers (addition)</a></li>
+<li>Next message (by thread): <a href="006940.html">Deurbanising the Web</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6939">[ date ]</a> <a href="thread.html#6939">[ thread ]</a> <a href="subject.html#6939">[ subject ]</a> <a href="author.html#6939">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

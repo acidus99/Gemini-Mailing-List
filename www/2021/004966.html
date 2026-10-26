@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] The Tragedy of &amp;</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004965.html">
+<link rel="next" href="004976.html">
+</head>
+<body>
+<h1>[spec] The Tragedy of &amp;</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Sat Jan 30 23:59:47 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004965.html">[spec] The Tragedy of &amp;</a></li>
+<li>Next message (by thread): <a href="004976.html">[spec] The Tragedy of &amp;</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4966">[ date ]</a> <a href="thread.html#4966">[ thread ]</a> <a href="subject.html#4966">[ subject ]</a> <a href="author.html#4966">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Gary Johnson once stated:
+&gt;<i> 
+</i>&gt;<i> The issue I&#x27;m raising is that there appears to be no way to pass more
+</i>&gt;<i> than one piece of information at a time in our query strings. This has a
+</i>&gt;<i> very significant impact on any writers of CGI scripts, which is how many
+</i>&gt;<i> Gemini servers allow users to add dynamic pages to their capsules.
+</i>&gt;<i> 
+</i>&gt;<i> But why, you ask?
+</i>&gt;<i> 
+</i>&gt;<i> Because each CGI script is available at a particular file path and
+</i>&gt;<i> therefore additional path segments can&#x27;t be used to pass information to
+</i>&gt;<i> them. They have to get their inputs from the query string.
+</i>
+  [ snip ]
+
+&gt;<i> It means essentially that CGI scripts are currently second-class
+</i>&gt;<i> citizens, and the only people who can write dynamic capsules are server
+</i>&gt;<i> authors (or people willing to hack on server code). This is because
+</i>&gt;<i> encoding information using path segments requires injecting custom
+</i>&gt;<i> routing table code into the server&#x27;s request handler.
+</i>
+  Not if the CGI interface is properly written.  All I had to do was write
+this CGI script and drop it into my tests directory [1]:
+
+	<a href="gemini://gemini.conman.org/test/pathseg.cgi">gemini://gemini.conman.org/test/pathseg.cgi</a>
+
+It uses only three of the RFC-3875 defined variables, QUERY_STRING,
+SCRIPT_NAME and PATH_INFO to do all the work.  The script will ask for three
+fields and then present a final page with all three fields.  But the script
+will only work if all three variables are defined per RFC-3975 (PATH_INFO is
+the tricky one).
+
+  Yes, it&#x27;s a bit ugly and yes, it&#x27;s a second class citizen and yes, it
+requires a proper CGI module to work, but it can be done without the
+configuration you think it does.  The script just simply appends each input
+field as the path, so if you enter
+
+	and a one
+	and a two
+	skidoosh
+
+as the values, the final URL will be:
+
+	<a href="gemini://gemini.conman.org/test/pathseg.cgi/and%20a%20one/and%20a%20two/skidoosh">gemini://gemini.conman.org/test/pathseg.cgi/and%20a%20one/and%20a%20two/skidoosh</a>
+
+  Yes, I could have done a bit more processing, naming each segment:
+
+	/test/pathseg.cgi/name=and%20a%20one/age=and%20a%20two/action=skidoosh
+
+but I was lazy and wanted to just do a proof-of-concept here.
+	
+&gt;<i> If you can write a CGI script that can correctly associate INPUT
+</i>&gt;<i> responses with their intended variables, please share it. I suspect it
+</i>&gt;<i> would be quite educational.
+</i>
+  I have added it [3].
+
+  -spc
+
+[1]	I gave the script a .cgi extension just to drive the point
+	home---for my server, GLV-1.12556 [2], the extension of a CGI script
+	doesn&#x27;t matter at all.
+
+[2]	<a href="https://github.com/spc476/GLV-1.12556">https://github.com/spc476/GLV-1.12556</a>
+
+[3]	Here you go.  It&#x27;s in Lua, but it&#x27;s easy going except for the first
+	bit which is a bit of broilerplate I needed for encoding and
+	decoding various strings.  The main logic is marked though, so you
+	can skip the first section.
+
+#!/usr/bin/env lua
+
+-- ************************************************************************
+-- Decoding and Encoding crap, not much to see here, citizen!  Move along!
+-- ************************************************************************
+
+local lpeg    = require &quot;lpeg&quot;
+local xdigit  = lpeg.locale().xdigit
+local char    = lpeg.P&quot;%&quot; * lpeg.C(xdigit * xdigit)
+              / function(c)
+                  return string.char(tonumber(c,16))
+                end
+              + lpeg.P&quot;+&quot; / &quot; &quot;
+              + lpeg.P(1)
+local decode_query = lpeg.Cs(char^1)
+
+local function tohex(c)
+  return string.format(&quot;%%%02X&quot;,string.byte(c))
+end
+
+local unsafe     = lpeg.P&quot; &quot;  / &quot;%%20&quot;
+                 + lpeg.P&quot;#&quot;  / &quot;%%23&quot;
+                 + lpeg.P&quot;%&quot;  / &quot;%%25&quot;
+                 + lpeg.P&quot;&lt;&quot;  / &quot;%%3C&quot;
+                 + lpeg.P&quot;&gt;&quot;  / &quot;%%3E&quot;
+                 + lpeg.P&quot;[&quot;  / &quot;%%5B&quot;
+                 + lpeg.P&quot;\\&quot; / &quot;%%5C&quot;
+                 + lpeg.P&quot;]&quot;  / &quot;%%5D&quot;
+                 + lpeg.P&quot;^&quot;  / &quot;%%5E&quot;
+                 + lpeg.P&quot;{&quot;  / &quot;%%7B&quot;
+                 + lpeg.P&quot;|&quot;  / &quot;%%7C&quot;
+                 + lpeg.P&quot;}&quot;  / &quot;%%7D&quot;
+                 + lpeg.P&#x27;&quot;&#x27;  / &quot;%%22&quot;
+                 + lpeg.R(&quot;\0\31&quot;,&quot;\127\255&quot;) / tohex
+local char_path  = lpeg.P&quot;?&quot;  / &quot;%%3F&quot;
+                 + unsafe
+                 + lpeg.P(1)
+local esc_path   = lpeg.Cs(char_path^0)
+
+-- ************************************************************************
+-- The main script starts here
+-- ************************************************************************
+
+local query       = os.getenv(&quot;QUERY_STRING&quot;)
+local script_name = os.getenv(&quot;SCRIPT_NAME&quot;)
+local pathinfo    = os.getenv(&quot;PATH_INFO&quot;)
+
+if not pathinfo and query == &quot;&quot; then
+  io.stdout:write(&quot;Status: 10\n&quot;)
+  io.stdout:write(&quot;Content-Type: Input field\n&quot;)
+  io.stdout:write(&quot;\n&quot;)
+  os.exit(0,true)
+end
+
+if not pathinfo then
+  query = decode_query:match(query)
+  query = esc_path:match(query)
+  io.stdout:write(&quot;Status: 30\n&quot;)
+  io.stdout:write(string.format(&quot;Location: %s/%s\n&quot;,script_name,query))
+  io.stdout:write(&quot;\n&quot;)
+  os.exit(0,true)
+end
+
+if pathinfo:match(&quot;^/[^/]*/[^/]*/[^/]*&quot;) then
+  local f1,f2,f3 = pathinfo:match(&quot;^/([^/]*)/([^/]*)/([^/]*)&quot;)
+  f1 = decode_query:match(f1)
+  f2 = decode_query:match(f2)
+  f3 = decode_query:match(f3)
+  
+  io.stdout:write(&quot;Status: 20\n&quot;)
+  io.stdout:write(&quot;Content-Type: text/gemini\n&quot;)
+  io.stdout:write(&quot;\n&quot;)
+  io.stdout:write(&quot;The three fields you input:\n&quot;)
+  io.stdout:write(&quot;\n&quot;)
+  io.stdout:write(string.format(&quot;* %s\n&quot;,f1))
+  io.stdout:write(string.format(&quot;* %s\n&quot;,f2))
+  io.stdout:write(string.format(&quot;* %s\n&quot;,f3))
+  io.stdout:write(&quot;\n&quot;)
+  io.stdout:write(string.format(&quot;=&gt; %s Try again\n&quot;,script_name))
+  os.exit(0,true)
+end
+
+if query == &quot;&quot; then
+  io.stdout:write(&quot;Status: 10\n&quot;)
+  io.stdout:write(&quot;Content-Type: Input next field\n&quot;)
+  io.stdout:write(&quot;\n&quot;)
+  os.exit(0,true)
+else
+  query    = decode_query:match(query)
+  query    = esc_path:match(query)
+  pathinfo = esc_path:match(pathinfo)
+  io.stdout:write(&quot;Status: 30\n&quot;)
+  io.stdout:write(string.format(&quot;Location: %s%s/%s\n&quot;,script_name,pathinfo,query))
+  io.stdout:write(&quot;\n&quot;)
+  os.exit(0,true)
+end
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004965.html">[spec] The Tragedy of &amp;</a></li>
+<li>Next message (by thread): <a href="004976.html">[spec] The Tragedy of &amp;</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4966">[ date ]</a> <a href="thread.html#4966">[ thread ]</a> <a href="subject.html#4966">[ subject ]</a> <a href="author.html#4966">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Is streaming a normative protocol expectation? (was Re: Documents with mixed languages)</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007679.html">
+<link rel="next" href="007684.html">
+</head>
+<body>
+<h1>Is streaming a normative protocol expectation? (was Re: Documents with mixed languages)</h1>
+<b>Luke Emmet</b> luke at marmaladefoo.com<br>
+<i>Mon Dec 13 17:13:06 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007679.html">Documents with mixed languages</a></li>
+<li>Next message (by thread): <a href="007684.html">Is streaming a normative protocol expectation? (was Re: Documents with mixed languages)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7680">[ date ]</a> <a href="thread.html#7680">[ thread ]</a> <a href="subject.html#7680">[ subject ]</a> <a href="author.html#7680">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hello
+
+(we are straying off the thread a bit so I&#x27;ve tweaked the subject)
+
+On 13-Dec-2021 11:21, Krixano wrote:
+
+&gt;<i> Now, about what the spec states. If you read the spec too literally and linearly, then I can kinda see how people might think the spec says requests must be handled after close_notify, from:
+</i>&gt;<i>&gt; C: Opens connection
+</i>&gt;<i>&gt; S: Accepts connection
+</i>&gt;<i>&gt; C/S: Complete TLS handshake (see section 4)
+</i>&gt;<i>&gt; C: Validates server certificate (see 4.2)
+</i>&gt;<i>&gt; C: Sends request (one CRLF terminated line) (see section 2)
+</i>&gt;<i>&gt; S: Sends response header (one CRLF terminated line), closes connection
+</i>&gt;<i>   under non-success conditions (see 3.1 and 3.2)
+</i>&gt;<i>&gt; S: Sends response body (text or binary data) (see 3.3)
+</i>&gt;<i>&gt; S: Closes connection (including TLS close_notify, see section 4)
+</i>&gt;<i>&gt; C: Handles response (see 3.4)
+</i>&gt;<i>
+</i>&gt;<i> I firmly believe that this is an undesired overly-linear interpretation, and that perhaps Solderpunk might want to consider changing this if necessary, and if his views on streaming haven&#x27;t changed. Remember, the spec isn&#x27;t actually final yet.
+</i>
+Yes there would be an ambiguity in the spec if streaming clients are expected or normative. Personally I think it is intentional that the spec aims to keep the complexity of implementation low, as that is in keeping with the rest of Gemini&#x27;s design approach. Implementing a streaming client is more complex, and there are more cases that would need to be specified to resolve protocol ambiguity. For example how does a client tell the difference between a poorly behaved server that is just dripping a few bytes out second by second and one that is a streaming service? I can&#x27;t see how it can, particularly given that there are no content-length headers in Gemini.
+
+The Gemini FAQ also hints towards this simplicity and says Gemini is not suited to large downloads
+
+  &quot;2.6 Does Gemini have any shortcomings of it&#x27;s own?
+ Naturally!
+ Gemini has no support for caching, compression, or resumption of
+ interrupted downloads. As such, it&#x27;s not very well suited to distributing
+ large files, for values of &quot;large&quot; which depend upon the speed and reliability
+  of your network connection.&quot;
+
+At present the spec says the client waits for the content then handles the response.
+
+So this is what the spec says at present, it doesn&#x27;t say that clients may expect that server streams are indefinite in length.
+
+We have previously discussed this and there was some useful thoughts written up by James Tomasino
+
+<a href="https://mailing-list-archive.gemi.dev/www/2020/002404.html">https://mailing-list-archive.gemi.dev/www/2020/002404.html</a>
+
+My view is that if you want to stream content, there are better protocols available (e.g. HTTP and others).
+
+Best wishes
+
+ - Luke
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007679.html">Documents with mixed languages</a></li>
+<li>Next message (by thread): <a href="007684.html">Is streaming a normative protocol expectation? (was Re: Documents with mixed languages)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7680">[ date ]</a> <a href="thread.html#7680">[ thread ]</a> <a href="subject.html#7680">[ subject ]</a> <a href="author.html#7680">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

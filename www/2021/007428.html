@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A proposal to freeze the Gemini specification</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007427.html">
+<link rel="next" href="007431.html">
+</head>
+<body>
+<h1>A proposal to freeze the Gemini specification</h1>
+<b>Robert &quot;khuxkm&quot; Miles</b> khuxkm at tilde.team<br>
+<i>Tue Oct 26 07:44:23 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007427.html">A proposal to freeze the Gemini specification</a></li>
+<li>Next message (by thread): <a href="007431.html">A proposal to freeze the Gemini specification</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7428">[ date ]</a> <a href="thread.html#7428">[ thread ]</a> <a href="subject.html#7428">[ subject ]</a> <a href="author.html#7428">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>October 25, 2021 9:48 PM, &quot;Rohan Kumar&quot; &lt;seirdy@seirdy.one&gt; wrote:
+
+&gt;<i> A TLDR: the ecosystem can evolve without changing/breaking the existing 
+</i>&gt;<i> spec. Let&#x27;s freeze the spec soon!
+</i>
+That is indeed what Solderpunk aims to do (AFAICT), just fixing up the last few corner cases before declaring the spec done and finished.
+
+&gt;<i> Speaking of TLS: ome [sic] people from the netsec crowd have bristled at
+</i>&gt;<i> Gemini&#x27;s TOFU model, but I don&#x27;t think fixing that should require
+</i>&gt;<i> changes in the spec either. Adding e.g. a DHT of some sort doesn&#x27;t have
+</i>&gt;<i> to change how the Gemini protocol works; it can simply be a thing users
+</i>&gt;<i> use to verify certs &quot;out of band&quot; the first time they visit a capsule.
+</i>&gt;<i> Stuff like Tor hidden services are also a good fit for Gemini (I think
+</i>&gt;<i> the part of the Gemini Space accessible over Tor is called &quot;Deep Space&quot;)
+</i>&gt;<i> and can mitigate the issues inherent to TOFU without changing the spec.
+</i>
+I&#x27;m of the opinion that TOFU is perfectly fine in this scenario. The only thing I think would be good as an addition to Gemini is a way to deprecate a certificate. As it stands, if your capsule gets compromised there is no way to stop clients from recognizing the compromised certificate as valid. That being said, as you mentioned, that&#x27;s more of a thing that can be decided out-of-band and doesn&#x27;t really require the Gemini spec to change.
+
+&gt;<i> Adding features is typically misguided: it&#x27;s better to *complement*
+</i>&gt;<i> Gemini with other protocols suited for other purposes than to *extend*
+</i>&gt;<i> it. One such protocol is the spartan:// client-to-server protocol.
+</i>&gt;<i> Gemini can concentrate on supporting server-to-many-client situations
+</i>&gt;<i> while Spartan can concentrate on client-to-server communication.
+</i>&gt;<i>
+</i>&gt;<i> (This is not necessarily an endorsement of Spartan; I do have some
+</i>&gt;<i> issues with it, but that&#x27;s off-topic).
+</i>
+I feel like that&#x27;s a mischaracterization of Spartan. In the past, I&#x27;ve described Spartan as &quot;gemini - tls + uploads&quot;, because that&#x27;s basically what it is (barring some things like the =: line type for input links, and the one-character status codes). It&#x27;s more its own protocol that happens to take design cues from Gemini (Sean, if I&#x27;m completely missing the point here, please do tell me, but this is the impression I&#x27;ve gotten so far). Perhaps you meant Titan?
+
+Just my two cents,
+Robert &quot;khuxkm&quot; Miles
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007427.html">A proposal to freeze the Gemini specification</a></li>
+<li>Next message (by thread): <a href="007431.html">A proposal to freeze the Gemini specification</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7428">[ date ]</a> <a href="thread.html#7428">[ thread ]</a> <a href="subject.html#7428">[ subject ]</a> <a href="author.html#7428">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,56 +1,40 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [SPEC] Backwards-compatible metadata in Gemini
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3CCAFkF85YDRYgoL7fxumu%3DOdoPysbuNiRySxBmNu5pTWYi3DADjQ%40mail.gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="005579.html">
-   <LINK REL="Next"  HREF="005584.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[SPEC] Backwards-compatible metadata in Gemini</H1>
-    <B>Oliver Simmons</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3CCAFkF85YDRYgoL7fxumu%3DOdoPysbuNiRySxBmNu5pTWYi3DADjQ%40mail.gmail.com%3E"
-       TITLE="[SPEC] Backwards-compatible metadata in Gemini">oliversimmo at gmail.com
-       </A><BR>
-    <I>Wed Feb 24 19:18:54 GMT 2021</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="005579.html">[SPEC] Backwards-compatible metadata in Gemini
-</A></li>
-        <LI>Next message (by thread): <A HREF="005584.html">[SPEC] Backwards-compatible metadata in Gemini
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#5581">[ date ]</a>
-              <a href="thread.html#5581">[ thread ]</a>
-              <a href="subject.html#5581">[ subject ]</a>
-              <a href="author.html#5581">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SPEC] Backwards-compatible metadata in Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005579.html">
+<link rel="next" href="005584.html">
+</head>
+<body>
+<h1>[SPEC] Backwards-compatible metadata in Gemini</h1>
+<b>Oliver Simmons</b> oliversimmo at gmail.com<br>
+<i>Wed Feb 24 19:18:54 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005579.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li>Next message (by thread): <a href="005584.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5581">[ date ]</a> <a href="thread.html#5581">[ thread ]</a> <a href="subject.html#5581">[ subject ]</a> <a href="author.html#5581">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Wed, 24 Feb 2021 at 19:07, John Cowan &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>&gt; wrote:
+<pre>On Wed, 24 Feb 2021 at 19:07, John Cowan &lt;cowan at ccil.org&gt; wrote:
 &gt;<i>
-</I>&gt;<i> Part of the problem there is without a signal like &quot;=: &quot; that isn't likely to be ordinary content, it's easy to get confused.  Consider this:
-</I>&gt;<i>
-</I>&gt;<i> =====CUT HERE=====
-</I>[...]
+</i>&gt;<i> Part of the problem there is without a signal like &quot;=: &quot; that isn&#x27;t likely to be ordinary content, it&#x27;s easy to get confused.  Consider this:
+</i>&gt;<i>
+</i>&gt;<i> =====CUT HERE=====
+</i>[...]
 &gt;<i> =====CUT HERE=====
-</I>&gt;<i>
-</I>&gt;<i> It's obvious to a human that the last four lines are metadata and the rest is content.  But a metadata processor's job is much simplified if the last four lines are:
-</I>&gt;<i>
-</I>[...]
+</i>&gt;<i>
+</i>&gt;<i> It&#x27;s obvious to a human that the last four lines are metadata and the rest is content.  But a metadata processor&#x27;s job is much simplified if the last four lines are:
+</i>&gt;<i>
+</i>[...]
 &gt;<i>
-</I>&gt;<i> That makes it clear that &quot;Longaville&quot;, for example, is not a key.  This is Lars's proposal.  To it I add the convention that a link name beginning with =: contains metadata applicable to the linked resource.  And that's it.  I don't see that this is particularly more extensible than the &quot;unmarked key-value pairs at the end&quot; convention.  As for readability, if we can get used to seeing &quot;=&gt; &quot; as a link, we can get used to &quot;=: &quot; as metadata.
-</I>&gt;<i>
-</I>
+</i>&gt;<i> That makes it clear that &quot;Longaville&quot;, for example, is not a key.  This is Lars&#x27;s proposal.  To it I add the convention that a link name beginning with =: contains metadata applicable to the linked resource.  And that&#x27;s it.  I don&#x27;t see that this is particularly more extensible than the &quot;unmarked key-value pairs at the end&quot; convention.  As for readability, if we can get used to seeing &quot;=&gt; &quot; as a link, we can get used to &quot;=: &quot; as metadata.
+</i>&gt;<i>
+</i>
 It appears you missed an important part of the key/value form: the toggle line.
 
 A toggle line would be used (I suggested ^^^, but there may be a
@@ -72,73 +56,16 @@ another-key: another-value
 
 Here was my original email where I explained how I thought it would
 work very roughly:
-=&gt; <A HREF="https://lists.orbitalfox.eu/archives/gemini/2021/005420.html">https://lists.orbitalfox.eu/archives/gemini/2021/005420.html</A>
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+=&gt; <a href="https://mailing-list-archive.gemi.dev/www/2021/005420.html">https://mailing-list-archive.gemi.dev/www/2021/005420.html</a>
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="005579.html">[SPEC] Backwards-compatible metadata in Gemini
-</A></li>
-	<LI>Next message (by thread): <A HREF="005584.html">[SPEC] Backwards-compatible metadata in Gemini
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#5581">[ date ]</a>
-              <a href="thread.html#5581">[ thread ]</a>
-              <a href="subject.html#5581">[ subject ]</a>
-              <a href="author.html#5581">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="005579.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li>Next message (by thread): <a href="005584.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5581">[ date ]</a> <a href="thread.html#5581">[ thread ]</a> <a href="subject.html#5581">[ subject ]</a> <a href="author.html#5581">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

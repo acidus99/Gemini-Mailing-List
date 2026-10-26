@@ -1,42 +1,26 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Adding close_notify to the spec ?
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Adding%20close_notify%20to%20the%20spec%20%3F&In-Reply-To=%3C51e34fb4-1718-046f-f172-295c8edd292d%40scotdoyle.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="003270.html">
-   <LINK REL="Next"  HREF="003136.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Adding close_notify to the spec ?</H1>
-    <B>Scot</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Adding%20close_notify%20to%20the%20spec%20%3F&In-Reply-To=%3C51e34fb4-1718-046f-f172-295c8edd292d%40scotdoyle.com%3E"
-       TITLE="Adding close_notify to the spec ?">gmi1 at scotdoyle.com
-       </A><BR>
-    <I>Sun Nov  8 01:20:21 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="003270.html">examples with Sympy
-</A></li>
-        <LI>Next message (by thread): <A HREF="003136.html">Adding close_notify to the spec ?
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3122">[ date ]</a>
-              <a href="thread.html#3122">[ thread ]</a>
-              <a href="subject.html#3122">[ subject ]</a>
-              <a href="author.html#3122">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Adding close_notify to the spec ?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="003270.html">
+<link rel="next" href="003136.html">
+</head>
+<body>
+<h1>Adding close_notify to the spec ?</h1>
+<b>Scot</b> gmi1 at scotdoyle.com<br>
+<i>Sun Nov  8 01:20:21 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="003270.html">examples with Sympy</a></li>
+<li>Next message (by thread): <a href="003136.html">Adding close_notify to the spec ?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3122">[ date ]</a> <a href="thread.html#3122">[ thread ]</a> <a href="subject.html#3122">[ subject ]</a> <a href="author.html#3122">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Does anyone have any concerns about amending the spec to state that a TLS
+<pre>Does anyone have any concerns about amending the spec to state that a TLS
 close_notify message should be sent before closing the TCP connection?
 While TLS guarantees the integrity of the data from the server, it does
 not guarantee completeness until a close_notify is received by the client.
@@ -54,11 +38,11 @@ the TLS 1.2 and 1.3 specs, and is widely available for server authors to
 use. The OpenSSL C library provides the SSL_shutdown function which sends
 close_notify. The LibreSSL C library has had the same function since its
 first release. The libtls library included with LibreSSL provides this
-functionality in the tls_close function. I've verified the effectiveness of
-Python's SSLSocket.unwrap method. Ruby seems to handle this with
+functionality in the tls_close function. I&#x27;ve verified the effectiveness of
+Python&#x27;s SSLSocket.unwrap method. Ruby seems to handle this with
 SSLObject.sysclose and Go with the Close method in crypto/tls/conn.go.
 
-Every TLS 1.2 or 1.3 client I've seen will automatically handle TLS
+Every TLS 1.2 or 1.3 client I&#x27;ve seen will automatically handle TLS
 close_notify messages. Non-blocking clients will make a poll/select/etc
 call and wait for data from the server. When the close_notify message is
 received by the TLS library used by the client software, it will indicate
@@ -71,7 +55,7 @@ error message or status code indicating that a close_notify was received.
 In any case, the connection with the server is automatically closed
 (completely in TLS 1.2, and at a minimum from further reads in TLS 1.3).
 
-So, why can't we just use a read/receive of 0 bytes to always know that a
+So, why can&#x27;t we just use a read/receive of 0 bytes to always know that a
 close_notify was received? Because if the TCP connection is closed before a
 close_notify, the read/receive call will also return 0 bytes. Some clients
 do not have a way to distinguish between TCP disconnect and close_notify.
@@ -81,7 +65,7 @@ using OpenSSL/LibreSSL can use the SSL_read and SSL_get_error functions to
 obtain the SSL_ERROR_ZERO_RETURN value. Those written in C and using libtls
 can use the tls_read and tls_get_error functions. Python clients can use
 the demonstrated method [6]. And while there is no assured way to do this
-in Ruby or Go currently, patching Ruby's SSLSocket.sysread or Go's
+in Ruby or Go currently, patching Ruby&#x27;s SSLSocket.sysread or Go&#x27;s
 crypto/tls/conn.go readRecord to use the information already available in
 those source files might be possible.
 
@@ -92,25 +76,25 @@ the close_notify message, with the included Python script [6].
 message before disconnecting.
 
 
-[1] <A HREF="https://tools.ietf.org/html/rfc8446">https://tools.ietf.org/html/rfc8446</A>
-[2] <A HREF="https://lists.orbitalfox.eu/archives/gemini/2019/000037.html">https://lists.orbitalfox.eu/archives/gemini/2019/000037.html</A>
-[3] <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/002150.html">https://lists.orbitalfox.eu/archives/gemini/2020/002150.html</A>
-[4] <A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/002243.html">https://lists.orbitalfox.eu/archives/gemini/2020/002243.html</A>
-[5] <A HREF="gemini://gus.guru/known-hosts">gemini://gus.guru/known-hosts</A>
+[1] <a href="https://tools.ietf.org/html/rfc8446">https://tools.ietf.org/html/rfc8446</a>
+[2] <a href="https://mailing-list-archive.gemi.dev/www/2019/000037.html">https://mailing-list-archive.gemi.dev/www/2019/000037.html</a>
+[3] <a href="https://mailing-list-archive.gemi.dev/www/2020/002150.html">https://mailing-list-archive.gemi.dev/www/2020/002150.html</a>
+[4] <a href="https://mailing-list-archive.gemi.dev/www/2020/002243.html">https://mailing-list-archive.gemi.dev/www/2020/002243.html</a>
+[5] <a href="gemini://gus.guru/known-hosts">gemini://gus.guru/known-hosts</a>
 [6] I dedicate this script to the public domain.
- &#160;&#160;&#160; To query a different server, modify the second line.
+ ??? To query a different server, modify the second line.
 
 
 import socket, ssl, time
-server, port, path = 'gemini.circumlunar.space', 1965, '/'
+server, port, path = &#x27;gemini.circumlunar.space&#x27;, 1965, &#x27;/&#x27;
 start, out, cn = time.time(), [], False
-def log(m): out.append('\n--- %f %s' % (time.time()-start, m))
+def log(m): out.append(&#x27;\n--- %f %s&#x27; % (time.time()-start, m))
 def callback(connection, direction, v, c, m, data):
- &#160; p = [str(i)[str(i).find('.')+1:] for i in [direction, v, c, m]]
- &#160; log(''.join([i.ljust(j, ' ').lower()
- &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; for i, j in zip(p, [6, 8, 19, 20])]))
- &#160; if m == ssl._TLSAlertType.CLOSE_NOTIFY and direction == 'read':
- &#160;&#160;&#160; global cn; cn = True
+ ? p = [str(i)[str(i).find(&#x27;.&#x27;)+1:] for i in [direction, v, c, m]]
+ ? log(&#x27;&#x27;.join([i.ljust(j, &#x27; &#x27;).lower()
+ ????????????? for i, j in zip(p, [6, 8, 19, 20])]))
+ ? if m == ssl._TLSAlertType.CLOSE_NOTIFY and direction == &#x27;read&#x27;:
+ ??? global cn; cn = True
 context = ssl.SSLContext(ssl.PROTOCOL_TLS)
 context.verify_mode = ssl.CERT_NONE
 context.check_hostname = False
@@ -119,89 +103,34 @@ sock = socket.socket(socket.AF_INET)
 sock.settimeout(5)
 connection = context.wrap_socket(sock, server_hostname=server)
 connection.connect((server, port))
-log('SENDING GEMINI REQUEST TO SERVER')
-connection.send(b'<A HREF="gemini://">gemini://</A>'+server.encode()+path.encode()+b'\r\n')
-log('RECEIVING GEMINI RESPONSE FROM SERVER')
+log(&#x27;SENDING GEMINI REQUEST TO SERVER&#x27;)
+connection.send(b&#x27;gemini://&#x27;+server.encode()+path.encode()+b&#x27;\r\n&#x27;)
+log(&#x27;RECEIVING GEMINI RESPONSE FROM SERVER&#x27;)
 sameline = False
 while True:
- &#160; try:
- &#160;&#160;&#160; data = connection.recv().decode()
- &#160;&#160;&#160; if len(data) &lt; 1:
- &#160;&#160;&#160;&#160;&#160; if cn: log('COMPLETE RESPONSE RECEIVED')
- &#160;&#160;&#160;&#160;&#160; if not cn: log('COMPLETE RESPONSE MAY NOT HAVE BEEN RECEIVED')
- &#160;&#160;&#160;&#160;&#160; break
- &#160;&#160;&#160; if not sameline:
- &#160;&#160;&#160;&#160;&#160; data = '\n' + data
- &#160;&#160;&#160; out.append(data.rstrip().replace('\n', '\n'+' '*4))
- &#160;&#160;&#160; sameline, data = (data[-1] != '\n'), ''
- &#160; except Exception as e:
- &#160;&#160;&#160; log(str(e).upper())
+ ? try:
+ ??? data = connection.recv().decode()
+ ??? if len(data) &lt; 1:
+ ????? if cn: log(&#x27;COMPLETE RESPONSE RECEIVED&#x27;)
+ ????? if not cn: log(&#x27;COMPLETE RESPONSE MAY NOT HAVE BEEN RECEIVED&#x27;)
+ ????? break
+ ??? if not sameline:
+ ????? data = &#x27;\n&#x27; + data
+ ??? out.append(data.rstrip().replace(&#x27;\n&#x27;, &#x27;\n&#x27;+&#x27; &#x27;*4))
+ ??? sameline, data = (data[-1] != &#x27;\n&#x27;), &#x27;&#x27;
+ ? except Exception as e:
+ ??? log(str(e).upper())
 connection.close()
-print((''.join(out))[1:])
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+print((&#x27;&#x27;.join(out))[1:])
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="003270.html">examples with Sympy
-</A></li>
-	<LI>Next message (by thread): <A HREF="003136.html">Adding close_notify to the spec ?
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3122">[ date ]</a>
-              <a href="thread.html#3122">[ thread ]</a>
-              <a href="subject.html#3122">[ subject ]</a>
-              <a href="author.html#3122">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="003270.html">examples with Sympy</a></li>
+<li>Next message (by thread): <a href="003136.html">Adding close_notify to the spec ?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3122">[ date ]</a> <a href="thread.html#3122">[ thread ]</a> <a href="subject.html#3122">[ subject ]</a> <a href="author.html#3122">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

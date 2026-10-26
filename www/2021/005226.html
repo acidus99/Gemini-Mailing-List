@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Storing capsule pages?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005204.html">
+<link rel="next" href="005267.html">
+</head>
+<body>
+<h1>Storing capsule pages?</h1>
+<b>Kévin</b> lists at gph.dk<br>
+<i>Sun Feb 14 02:30:11 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005204.html">Storing capsule pages?</a></li>
+<li>Next message (by thread): <a href="005267.html">Storing capsule pages?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5226">[ date ]</a> <a href="thread.html#5226">[ thread ]</a> <a href="subject.html#5226">[ subject ]</a> <a href="author.html#5226">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>12 f?vr. 2021, 23:46 de d at nnix.com:
+
+&gt;<i> Those who have regularly updated pages, though: how do you update them? I&#x27;ve been thinking I&#x27;ll just use GitHub to store the capsule root, and reference that from the gemini server, but is there a smarter way?
+</i>&gt;<i>
+</i>I went full hog, not going to lie here,?OH.MG is comprised of four servers and three DreamObjects buckets for data storage, three of the servers are self-hosted on-site in Paris, France and the fourth (for now) is a DreamCompute Instance that pushes updates to the DreamObjects buckets.
+
+I have the production VM at DreamHost, the buckets for Gemini, WWW (+Assets), and Gopher (also at DreamHost), and then the individual servers within my network.
+
+My on-site servers have the DreamObjects buckets mounted as drives (/var/www/html, /var/gopher, and wherever I put my Gemini root), for the moment the cache time is about 5 minutes but I might increase that as you get a lag on the first call if the file hasn&#x27;t been accessed in a while.
+
+And the prod VM is pretty basic, I use kiln to generate the site contents, then a deploy script that syncs the buckets, and sets the upload to the mirror hosts.
+
+I ramble on a bit here : <a href="gemini://oh.mg/project/">gemini://oh.mg/project/</a> &lt;<a href="https://oh.mg/project/">https://oh.mg/project/</a>&gt; or <a href="https://oh.mg/project/">https://oh.mg/project/</a> &lt;<a href="https://oh.mg/project/">https://oh.mg/project/</a>&gt;
+
+I basically went OTT to see if I could actually make it work and mainly cos I&#x27;ve been burnt a couple of times by self-hosted VMs dying and taking the content with them (and no backups, because YOLO apparently).
+-K?vin
+
+--
+Envoi s?curis? avec Tutanota. Obtenez votre propre adresse email chiffr?e :
+<a href="https://tutanota.com">https://tutanota.com</a>
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005204.html">Storing capsule pages?</a></li>
+<li>Next message (by thread): <a href="005267.html">Storing capsule pages?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5226">[ date ]</a> <a href="thread.html#5226">[ thread ]</a> <a href="subject.html#5226">[ subject ]</a> <a href="author.html#5226">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

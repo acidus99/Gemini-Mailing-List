@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[HELP] A weird issue when downloading files</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000193.html">
+<link rel="next" href="000195.html">
+</head>
+<body>
+<h1>[HELP] A weird issue when downloading files</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Tue Oct  1 23:04:56 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000193.html">[HELP] A weird issue when downloading files</a></li>
+<li>Next message (by thread): <a href="000195.html">[HELP] A weird issue when downloading files</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#194">[ date ]</a> <a href="thread.html#194">[ thread ]</a> <a href="subject.html#194">[ subject ]</a> <a href="author.html#194">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Julien Blanchard once stated:
+&gt;<i> Hello Geminauts,
+</i>&gt;<i> 
+</i>&gt;<i> I have a weird issue that came up when coding stuff on Asuka (my client)
+</i>&gt;<i> and maybe you can help. I?m adding support for opening whatever mime type
+</i>&gt;<i> a Gemini server is serving me.
+</i>&gt;<i> 
+</i>&gt;<i> The logic I implemented so far is:
+</i>&gt;<i> - serve text/* in the client as usual
+</i>&gt;<i> - serve the other mime types by downloading content to a temporary file
+</i>&gt;<i>   and opening it with xdg-open, open...
+</i>&gt;<i> 
+</i>&gt;<i> In order to download the served content I first check the header as
+</i>&gt;<i> string, get its size as bytes, re-fetch the whole ?page? as bytes, reverse
+</i>&gt;<i> the bytes array, truncate it with the header length and finally reverse it
+</i>&gt;<i> again before writing it to a file.
+</i>
+  I&#x27;m not understanding what you are doing here.
+
+  Here&#x27;s how I would do this---read bytes until you have seen the CRLF [1].
+That&#x27;s the response from the server.  I then would parse that line of data
+to get the response and MIME type.  Then all I need to do is continue
+reading data from the server and write that data toa file.  Then launch the
+external program.
+
+&gt;<i> My issue is I have to add an offset of 5 bytes to the truncation for the
+</i>&gt;<i> files to be readable and I have no idea why. I tested this offset on
+</i>&gt;<i> several servers that are serving images, tarballs...  and it looks
+</i>&gt;<i> consistent.
+</i>&gt;<i> 
+</i>&gt;<i> Does it ring a bell by any chance? Or maybe I?m doing all of this
+</i>&gt;<i> completely wrong.
+</i>
+  Not really.  And whatever you are doing it seems overly complicated ... oh
+wait ... you aren&#x27;t using Python 3 by any chance, are you?
+
+  -spc (just a stab in the dark ... )
+
+[1]	ASCII character 13 and ASCII character 10
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000193.html">[HELP] A weird issue when downloading files</a></li>
+<li>Next message (by thread): <a href="000195.html">[HELP] A weird issue when downloading files</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#194">[ date ]</a> <a href="thread.html#194">[ thread ]</a> <a href="subject.html#194">[ subject ]</a> <a href="author.html#194">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

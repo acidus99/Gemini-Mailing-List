@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>File size issues</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000024.html">
+<link rel="next" href="000045.html">
+</head>
+<body>
+<h1>File size issues</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Sun Aug 18 12:36:41 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000024.html">File size issues</a></li>
+<li>Next message (by thread): <a href="000045.html">File size issues</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#37">[ date ]</a> <a href="thread.html#37">[ thread ]</a> <a href="subject.html#37">[ subject ]</a> <a href="author.html#37">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>&gt;<i> Does TLS not have a native way to handle this? I did a quick search and found
+</i>&gt;<i> that either the client/server may send a close_notify message before
+</i>&gt;<i> terminating a TLS connection.
+</i>&gt;<i> 
+</i>&gt;<i>     <a href="https://tools.ietf.org/html/rfc5246#section-7.2.1">https://tools.ietf.org/html/rfc5246#section-7.2.1</a>
+</i>
+Ah, this is a great detail to have noticed!  I&#x27;ll need to look into how
+hard it typically is for clients to check that they&#x27;ve received this.
+If it&#x27;s straightforward, it&#x27;s probably a good idea to amend the spec to
+say that servers MUST send this close_notify message.  That would then
+act as an analogue of Gopher&#x27;s lone dot.
+
+&gt;<i> I agree with this sentiment. Knowing the file size would be nice to have, but I
+</i>&gt;<i> haven&#x27;t seen any use cases that are compelling enough to justify increasing the
+</i>&gt;<i> complexity to the protocol for. Even in HTTP land, Content-Length is an optional
+</i>&gt;<i> response header and there are several scenarios where it doesn&#x27;t make sense to
+</i>&gt;<i> include it at all.
+</i>
+Yeah, I think we can leave this for now.  It was a hypothetical concern
+that somebody had.  Not necessarily a bad one, but until it&#x27;s observed
+actually creating significant trouble for actual users on actual clients
+I think we can just table this issue.  If it does come up as a practical
+concern, we can resume discussion of some of the ideas here.
+
+-Solderpunk
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000024.html">File size issues</a></li>
+<li>Next message (by thread): <a href="000045.html">File size issues</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#37">[ date ]</a> <a href="thread.html#37">[ thread ]</a> <a href="subject.html#37">[ subject ]</a> <a href="author.html#37">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SPEC] Backwards-compatible metadata in Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005422.html">
+<link rel="next" href="005420.html">
+</head>
+<body>
+<h1>[SPEC] Backwards-compatible metadata in Gemini</h1>
+<b>easrng</b> easrng at gmail.com<br>
+<i>Sun Feb 21 20:21:02 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005422.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li>Next message (by thread): <a href="005420.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5409">[ date ]</a> <a href="thread.html#5409">[ thread ]</a> <a href="subject.html#5409">[ subject ]</a> <a href="author.html#5409">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Many of us strongly believe in the one pageload generates one request
+philosophy, including me, but metadata is also nice to have. While you
+could put metadata in other files, that would result in multiple requests
+being made. Instead, I am proposing a new file format,
+text/gemini-metadata+json, to be used in data URIs in Gemtext. It would be
+json (simply because it is popular and has wide support) with specified
+keys. Possible things to include in the metadata could be a favicon (be it
+emoji or otherwise), a theme color or color scheme to be used by the client
+as it wishes, etc.
+It would be used like this:
+
+```
+# My super cool gemsite
+Welcome!
+
+=&gt; data:text/gemini-metadata+json;charset=utf-8,{&quot;favicon&quot;:&quot;?%E2%80%8D?&quot;}
+Page metadata
+```
+
+A Gemini client implementing this would add a check for links starting with
+data:text/gemini-metadata+json to it&#x27;s rendering code and when it
+encounters one, decode it and take note of the metadata. Clients not
+implenenting it will just see a link to the data, degrading (imo) quite
+gracefully. I can&#x27;t decide if the link should be hidden or not in browsers
+with support though. If the link is hidden then the client should make sure
+to expose the metadata elsewhere in the interface.
+Please give all the feedback!
+
+-- easrng
+(Did I tag this right?)
+
+
+-- 
+? &lt;<a href="https://www.google.com/teapot">https://www.google.com/teapot</a>&gt;
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210221/e9da64b2/attachment.htm">https://mailing-list-archive.gemi.dev/www/attachments/20210221/e9da64b2/attachment.htm</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005422.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li>Next message (by thread): <a href="005420.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5409">[ date ]</a> <a href="thread.html#5409">[ thread ]</a> <a href="subject.html#5409">[ subject ]</a> <a href="author.html#5409">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

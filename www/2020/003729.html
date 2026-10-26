@@ -1,110 +1,75 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [ANN] GemIF - Simple Interactive Fiction engine for Gemini
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20GemIF%20-%20Simple%20Interactive%20Fiction%20engine%20for%20Gemini&In-Reply-To=%3C5FC75A98.4000602%40marmaladefoo.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="003725.html">
-   <LINK REL="Next"  HREF="003736.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[ANN] GemIF - Simple Interactive Fiction engine for Gemini</H1>
-    <B>Luke Emmet</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20GemIF%20-%20Simple%20Interactive%20Fiction%20engine%20for%20Gemini&In-Reply-To=%3C5FC75A98.4000602%40marmaladefoo.com%3E"
-       TITLE="[ANN] GemIF - Simple Interactive Fiction engine for Gemini">luke at marmaladefoo.com
-       </A><BR>
-    <I>Wed Dec  2 09:12:56 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="003725.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
-</A></li>
-        <LI>Next message (by thread): <A HREF="003736.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3729">[ date ]</a>
-              <a href="thread.html#3729">[ thread ]</a>
-              <a href="subject.html#3729">[ subject ]</a>
-              <a href="author.html#3729">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[ANN] GemIF - Simple Interactive Fiction engine for Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="003725.html">
+<link rel="next" href="003736.html">
+</head>
+<body>
+<h1>[ANN] GemIF - Simple Interactive Fiction engine for Gemini</h1>
+<b>Luke Emmet</b> luke at marmaladefoo.com<br>
+<i>Wed Dec  2 09:12:56 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="003725.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini</a></li>
+<li>Next message (by thread): <a href="003736.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3729">[ date ]</a> <a href="thread.html#3729">[ thread ]</a> <a href="subject.html#3729">[ subject ]</a> <a href="author.html#3729">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>
+<pre>
 
 On 02-Dec-2020 01:37, Norm MacLennan wrote:
-&gt;<i> I've gone on about this for long enough, here's some links:
-</I>&gt;<i>
-</I>&gt;<i> * Demo site: <A HREF="gemini://gemif.fedi.farm">gemini://gemif.fedi.farm</A>
-</I>&gt;<i> * Source: <A HREF="https://git.sr.ht/~nromdotcom/GemIF">https://git.sr.ht/~nromdotcom/GemIF</A>
-</I>&gt;<i>
-</I>&gt;<i> Lemme know what you think or if there's anything you'd like to see here.
-</I>&gt;<i> The code is pretty rough due to (a) me still being a Go novice and (b)
-</I>&gt;<i> kinda rushing through to get a proof of concept together, but if you're
-</I>&gt;<i> willing to dive into the code I wouldn't turn away any collaborators.
-</I>
+&gt;<i> I&#x27;ve gone on about this for long enough, here&#x27;s some links:
+</i>&gt;<i>
+</i>&gt;<i> * Demo site: <a href="gemini://gemif.fedi.farm">gemini://gemif.fedi.farm</a>
+</i>&gt;<i> * Source: <a href="https://git.sr.ht/~nromdotcom/GemIF">https://git.sr.ht/~nromdotcom/GemIF</a>
+</i>&gt;<i>
+</i>&gt;<i> Lemme know what you think or if there&#x27;s anything you&#x27;d like to see here.
+</i>&gt;<i> The code is pretty rough due to (a) me still being a Go novice and (b)
+</i>&gt;<i> kinda rushing through to get a proof of concept together, but if you&#x27;re
+</i>&gt;<i> willing to dive into the code I wouldn&#x27;t turn away any collaborators.
+</i>
 Hi Norm
 
 Its great to see a gemini interactive fiction engine. I had a walk 
 around the demo instance to get a feel for it.
 
-Its a great start, but I'm afraid it breaks the forward and back 
+Its a great start, but I&#x27;m afraid it breaks the forward and back 
 navigation in my client, and might affect other clients too. This is 
 because each rendered page has the same URL.
 
 I would suggest some sort of simple modification should fix it, for 
 example a simple step number, like this maybe
 
-<A HREF="gemini://server/path/sessionguid/step">gemini://server/path/sessionguid/step</A>
+<a href="gemini://server/path/sessionguid/step">gemini://server/path/sessionguid/step</a>
 
 e.g.
 
-<A HREF="gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/1">gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/1</A>
-<A HREF="gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/2">gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/2</A>
-<A HREF="gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/3">gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/3</A>
+<a href="gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/1">gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/1</a>
+<a href="gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/2">gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/2</a>
+<a href="gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/3">gemini://gemif.fedi.farm/game/cb3e4821-c316-4124-a2f7-fa82a7110ed5/3</a>
 etc
 
-Or some other marker - it doesn't have to be an incrementing index. This 
-would then work in a wider range of clients and they'd be able to back 
+Or some other marker - it doesn&#x27;t have to be an incrementing index. This 
+would then work in a wider range of clients and they&#x27;d be able to back 
 and forward through their session.
 
 Regards
 
   - Luke
-</PRE>
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="003725.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
-</A></li>
-	<LI>Next message (by thread): <A HREF="003736.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3729">[ date ]</a>
-              <a href="thread.html#3729">[ thread ]</a>
-              <a href="subject.html#3729">[ subject ]</a>
-              <a href="author.html#3729">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="003725.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini</a></li>
+<li>Next message (by thread): <a href="003736.html">[ANN] GemIF - Simple Interactive Fiction engine for Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3729">[ date ]</a> <a href="thread.html#3729">[ thread ]</a> <a href="subject.html#3729">[ subject ]</a> <a href="author.html#3729">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

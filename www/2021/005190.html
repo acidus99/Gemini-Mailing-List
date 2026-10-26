@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Should Gemini clients alert users upon redirect?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005184.html">
+<link rel="next" href="005218.html">
+</head>
+<body>
+<h1>Should Gemini clients alert users upon redirect?</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Sat Feb 13 00:09:30 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005184.html">Should Gemini clients alert users upon redirect?</a></li>
+<li>Next message (by thread): <a href="005218.html">Should Gemini clients alert users upon redirect?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5190">[ date ]</a> <a href="thread.html#5190">[ thread ]</a> <a href="subject.html#5190">[ subject ]</a> <a href="author.html#5190">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Sandra Snan once stated:
+&gt;<i> Revisiting this issue, I want to clarify what my position was and is.
+</i>&gt;<i> 
+</i>&gt;<i> Bogan&#x27;s case is that you don&#x27;t want to be doing a bunch of 301s&amp;31s from
+</i>&gt;<i> unslashed to slashed all day every day.
+</i>&gt;<i> 
+</i>&gt;<i> I agree with that, and my site was definitely borked (both on HTTPS and
+</i>&gt;<i> Gemini) for being set up to do just that.
+</i>&gt;<i> 
+</i>&gt;<i> Bogan&#x27;s solution is that you add slashes to links.
+</i>&gt;<i> 
+</i>&gt;<i> I am not onboard with that solution but have now found another solution.
+</i>&gt;<i> Instead of 301/31, the unslashed versions will now serve the text
+</i>&gt;<i> directly.
+</i>&gt;<i> 
+</i>&gt;<i> This is what I intended all along, I just could not figure out how to do
+</i>&gt;<i> it properly because I am secretly really bad at computers^W being
+</i>&gt;<i> motivated to hack on server stuff.
+</i>&gt;<i> 
+</i>&gt;<i> In the future I might add 301/31 from slashed to unslashed, since that&#x27;s
+</i>&gt;<i> the canonical version. That&#x27;s a project for another day though.
+</i>&gt;<i> 
+</i>&gt;<i> Thanks to everyone for their patience with how messed up my capsule has
+</i>&gt;<i> been.
+</i>
+  There&#x27;s a semantic difference between a URL that ends with a &#x27;/&#x27; and one
+that doesn&#x27;t.  The one that ends with a &#x27;/&#x27; is semantically a directory, and
+to have to add a file per directory to get all URLs to end with a &#x27;/&#x27; is, in
+my opinion, silly.  I can see what you are trying to do---skip the silly
+&quot;.gmi&quot; or &quot;.gemini&quot; extension as being part of the URL, but there should be
+better ways of doing that that populating a filesystem with a bunch of
+directories containing a single file (I may do a proof-of-concept with
+extensionless files---no, wait!  I alreay have that---the individual tests
+under the Gemini Client Torture Test!)
+
+  Furthermore, if you follow this link, sans a trailing &#x27;/&#x27;:
+
+	<a href="gemini://gemini.conman.org/test/UCSD-Pascal-source.zip">gemini://gemini.conman.org/test/UCSD-Pascal-source.zip</a>
+
+you&#x27;ll get a ZIP file.  But, add a trailing &#x27;/&#x27; to that:
+
+	<a href="gemini://gemini.conman.org/test/UCSD-Pascal-source.zip/">gemini://gemini.conman.org/test/UCSD-Pascal-source.zip/</a>
+
+and see what you get (hint:  it&#x27;s not a ZIP file)
+
+  -spc
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005184.html">Should Gemini clients alert users upon redirect?</a></li>
+<li>Next message (by thread): <a href="005218.html">Should Gemini clients alert users upon redirect?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5190">[ date ]</a> <a href="thread.html#5190">[ thread ]</a> <a href="subject.html#5190">[ subject ]</a> <a href="author.html#5190">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] Using a gitlab</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006105.html">
+<link rel="next" href="006110.html">
+</head>
+<body>
+<h1>[spec] Using a gitlab</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Sun Mar 14 22:46:03 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006105.html">[spec] Using a gitlab</a></li>
+<li>Next message (by thread): <a href="006110.html">[spec] Using a gitlab</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6108">[ date ]</a> <a href="thread.html#6108">[ thread ]</a> <a href="subject.html#6108">[ subject ]</a> <a href="author.html#6108">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Liam once stated:
+&gt;<i> I did find the GitLab move strange. IMO it&#x27;s not very &quot;mission coherent&quot; to 
+</i>&gt;<i> develop a lightweight alternative to the web on a site that shows a blank 
+</i>&gt;<i> white page without JavaScript enabled.
+</i>
+  First off, as Stéphane has pointed out, people (and it was many people, by
+the way) were complaining about all the talk on the mailing list.  The
+mailing list was created *to talk about the Gemini protocol* and to hash the
+details out.  Perhaps that wasn&#x27;t stated strongly enough on the sign up
+page, but I do have to wonder what other people expectd out the list.
+Personally, I never found the volumn overwhelming, but then again, I&#x27;ve been
+on lists that have had 100+ messages per day, sustained (and a person high
+of 500 messages in a single day).
+
+  Second, about that &quot;lightweight alternative to the web&quot; bit ... having
+been involved with Gemini since before the mailing list, it was clear to me
+that Gemini was never about a &quot;lightweight alternative to the web&quot; but an
+improved gopher.  I think thinking of Gemini in terms of the web leads to
+all these proposed extensions (size, caching, uploads, etc.).  I think it&#x27;s
+a failure to set expectations, but that&#x27;s me.
+
+  Third, a bit more about that &quot;lightweight alternative to the web&quot; bit ...
+here&#x27;s a TL;DR summary of the protocol:
+
+	The client connects to TCP port 1965 using TLS 1.2 or higher.  The
+	client then sends a URI and a CR, LF pair to make a request.  The
+	server then replies with a status line consisting of two digits, a
+	space, some additional information depending upon the status, a CR,
+	LF pair, and then in the case of success, the conent.  The server
+	then closes the connection.
+
+  Simple right?
+
+TLS---people bitched about that.  Drop support for 1.2.  Drop TLS and use
+this alternative scheme I just read about.  Drop TLS entirely.  Make TLS
+optional!
+
+TLS certificates---people bitched about that.  Let&#x27;s Encypt certificates? 
+TOFU?  How to TOFU?  What to save for TOFU?  Don&#x27;t use Let&#x27;s Encrypt.  Don&#x27;t
+bother with validating server certificates.
+
+URI---people bitched about that.  ASCII only?  Use IRIs!  That&#x27;s too hard! 
+Is not!  Is too!  S&#x27;not!  S&#x27;too!  What about fragemnts?  What about them? 
+Hey!  data: is a URI!  No, ban those!  No, they&#x27;re valid URIs!  They&#x27;ll
+allow inlined images!  So?  That&#x27;s bad!
+
+The CR, LF pair---people bitched about that.  Why both? Why not just LF?  It
+saves a byte!  It&#x27;s too hard to deal with!  Saving a byte?  What, with the
+overhead of TCP (40 bytes per packet)?  And TLS (several additional
+packets).
+
+The status line---people bitched about that!  There are too few status
+codes!  There are too many status codes!  Let&#x27;s use single digit status
+codes!  Let&#x27;s use tripple digit status codes!  Let&#x27;s use double digit status
+codes!  We need redirection!  We don&#x27;t need redirection!  Yes we do!  And
+Gone.  Really?  We need senstive input.  No we don&#x27;t, it&#x27;s security theater.
+
+The MIME type for status 20---people bitched about that!  Not about the MIME
+bit directly, but about the parameters!  It allows extensions!  Strictly
+limit the parameters!  That will complicate clients because there are a lot
+of MIME types, with a lot of different parameters!  But extentions!  
+
+  And this is *JUST* for the protocol.  Please check the mailing list
+archives from 2019 onward---the bikeshedding that went on about text/gemini
+makes the above look trivial in nature.  Simple?  Ha ha ha ha ha ha ha ha!
+
+&gt;<i> The suggestion of SourceHut sounds like a good compromise if it&#x27;s true that 
+</i>&gt;<i> one can participate without an account.
+</i>
+  I&#x27;m the one responsible for setting up the gitlab issue tracker for
+Gemini.  It was suggested I set one up using gitlab (and no, I won&#x27;t say who
+made the suggestion).  I knew that github was off the table for this crowd,
+so I bit the bullet, created a gitlab account and went to town.  I was not
+familiar with the other alternatives at the time, and people were *massively
+bitching* about the volume on the mailing list.
+
+  I completely disagree with participation without an account.  I&#x27;m sorry,
+but my experience with Gemini has shown that it&#x27;s all too easy to bitch
+about it than to do anything about it.  That IRI thing?  As far as I know,
+only *two* people (and I&#x27;m one of them) actually bothered implementing IRI
+support, just to see how difficult it was.  TWO!  There are way more than
+TWO people who demand IRIs, and about an equal number who decry IRIs, and
+out of this lot, only TWO people bothered to try, and right now, between
+those two peple, 50% are ready to dump the idea into the dumpster fire out
+back (for the record, I&#x27;m that 50%), because the two camps are mostly
+talking about theory.  Anyway, to get back onto the point---if you want to
+bitch about Gemini, I think it&#x27;s fair to have some skin, however minimal, in
+the game.  If setting up an account is too much, tough!
+
+  I AM aware that there may be some technical difficulties in using gitlab
+and there are some who would participate that are otherwise unable to do so. 
+For them, yes, the mailing list is still good---I do follow both (and yes,
+that means I hit *each and every* issue page on gitlab nearly everyday, even
+if I don&#x27;t reply).  
+
+&gt;<i> I&#x27;ve only been a watcher of the spec process so far, but if contributing 
+</i>&gt;<i> involved making a GitLab account and keeping up with changes there then 
+</i>&gt;<i> that&#x27;s not a barrier I&#x27;d cross. But I haven&#x27;t been contributing so that 
+</i>&gt;<i> opinion weighs very little.
+</i>
+  You don&#x27;t need an account to follow the gitlab issues.  You just can&#x27;t
+comment on them without an account.
+
+  -spc
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006105.html">[spec] Using a gitlab</a></li>
+<li>Next message (by thread): <a href="006110.html">[spec] Using a gitlab</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6108">[ date ]</a> <a href="thread.html#6108">[ thread ]</a> <a href="subject.html#6108">[ subject ]</a> <a href="author.html#6108">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

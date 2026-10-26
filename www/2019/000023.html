@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text reflow woes (or: I want bullets back!)y</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000018.html">
+<link rel="next" href="000025.html">
+</head>
+<body>
+<h1>Text reflow woes (or: I want bullets back!)y</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Fri Aug 16 17:14:50 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000018.html">Text reflow woes (or: I want bullets back!)</a></li>
+<li>Next message (by thread): <a href="000025.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#23">[ date ]</a> <a href="thread.html#23">[ thread ]</a> <a href="subject.html#23">[ subject ]</a> <a href="author.html#23">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>&gt;<i>   Well, Markdown has two RFCs (RFC-7763 and 7764), so one could always use
+</i>&gt;<i> that to serve up documents---they allow linking after all.  Then again,
+</i>&gt;<i> expect to see requests for changes all the time as people use the
+</i>&gt;<i> protocol/text format and bump up against the limitations.  I don&#x27;t know what
+</i>&gt;<i> to tell you here---I&#x27;m neutral on this aspect.
+</i>
+I&#x27;ve actually always expected that serving Markdown over Gemini could
+become quite popular.  Some people are no doubt going to see Gemini
+first and foremost as &quot;the web, stripped down&quot; (as opposed to others who
+will see it as &quot;gopher, souped up&quot;), and in that sense Markdown is
+perhaps a natural partner since it seems to be the leading contender, in
+terms of mindshare, for &quot;HTML, stripped down&quot;.  I think if Gemini ever
+&quot;gets big&quot; in any meaningful sense (which, to be clear, I don&#x27;t think
+likely), that usage will probably be what drives it.  A nice graphical
+client which rendered section headers in heavier fonts and did bold and
+italics would offer a very nice experience, IMHO.
+
+This naturally raises the question &quot;why not just spec text/markdown as
+the default response type?&quot;.  I actually quite like Markdown so the
+notion doesn&#x27;t offend me, but I do think it raises the bar a little too
+high for client implementation effort.  Markdown is very common and
+there&#x27;s no shortages of libraries for dealing with it, but the vast
+majority of them have the goal of converting it to HTML, which is no
+good for us.  Of course one can just dump Markdown to the screen and not
+worry about line wrapping or section formatting or anything - Markdown
+is *designed* to look nice and readable as is.  But Markdown also allows
+links to occur anywhere in the text, and providing a nice textual
+interface to that kind of hypertext isn&#x27;t straightforward.  It can be
+done, of course, as things like lynx show.  But handling the
+one-link-per-line structure of Gopher or text/gemini is trivial, as so
+many Gopher clients show.  With text/gemini, you can, provably, write a
+usable Gemini client in &lt; 100 LOC.  With Markdown, I don&#x27;t think this
+would be possible (but anybody feel free to prove me wrong!).  I also
+happen to think that the one-link-per-line restriction encourages very
+clean and usable designs.
+
+It&#x27;s possible that in the future Geminispace will be split into two
+&quot;camps&quot;, a mainstream one using Markdown and graphical clients and the
+retrogrouch crowd using text/gemini and terminal clients.  Maybe *that*
+is how to solve the problem or reflowing text in text/gemini - we don&#x27;t,
+text/gemini is just plain text and if it really bothers you, well,
+that&#x27;s the proof of which camp you&#x27;re in, so start writing a client
+that renders Markdown!
+
+Really just thinking out loud here...
+
+-Solderpunk
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000018.html">Text reflow woes (or: I want bullets back!)</a></li>
+<li>Next message (by thread): <a href="000025.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#23">[ date ]</a> <a href="thread.html#23">[ thread ]</a> <a href="subject.html#23">[ subject ]</a> <a href="author.html#23">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini over tor</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000079.html">
+<link rel="next" href="000081.html">
+</head>
+<body>
+<h1>Gemini over tor</h1>
+<b>James Tomasino</b> tomasino at lavabit.com<br>
+<i>Fri Aug 23 22:50:53 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000079.html">Default index files</a></li>
+<li>Next message (by thread): <a href="000081.html">Gemini over tor</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#80">[ date ]</a> <a href="thread.html#80">[ thread ]</a> <a href="subject.html#80">[ subject ]</a> <a href="author.html#80">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>I set up Gemini on <a href="https://tilde.black">https://tilde.black</a> for all users tonight. We&#x27;re
+running Jetforce there (and I wrote a openbsd rcctl wrapper if anyone
+needs one). One of the first questions I got from the community was
+whether it would work over tor. I had no idea so I added a hidden
+service and tried it:
+
+HiddenServicePort 1965 127.0.0.1:1965
+
+The results can be seen here:
+
+<a href="https://ttm.sh/gP.png">https://ttm.sh/gP.png</a>
+
+Tor doesn&#x27;t work, but a direct connection does. I admit to not groking
+TLS, but I suspect it&#x27;s related to this. Tor uses its own certs to
+verify the connection, but Gemini will want to use its own. I have no
+idea if the protocols are compatible. If it&#x27;s possible, I&#x27;d like to
+implement it on ~black, but I defer to the smarter people on this list.
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000079.html">Default index files</a></li>
+<li>Next message (by thread): <a href="000081.html">Gemini over tor</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#80">[ date ]</a> <a href="thread.html#80">[ thread ]</a> <a href="subject.html#80">[ subject ]</a> <a href="author.html#80">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

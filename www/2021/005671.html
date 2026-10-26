@@ -1,50 +1,34 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Metadata Without A Proposal
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Metadata%20Without%20A%20Proposal&In-Reply-To=%3C2Y52GN42TX9V3.3IPOSNAQ07KG3%40nothien.uber.space%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="005733.html">
-   <LINK REL="Next"  HREF="005672.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Metadata Without A Proposal</H1>
-    <B>nothien at uber.space</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Metadata%20Without%20A%20Proposal&In-Reply-To=%3C2Y52GN42TX9V3.3IPOSNAQ07KG3%40nothien.uber.space%3E"
-       TITLE="Metadata Without A Proposal">nothien at uber.space
-       </A><BR>
-    <I>Fri Feb 26 10:51:08 GMT 2021</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="005733.html">[Clients] Gemini and accessibility regarding preformatted code blocks
-</A></li>
-        <LI>Next message (by thread): <A HREF="005672.html">Metadata Without A Proposal
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#5671">[ date ]</a>
-              <a href="thread.html#5671">[ thread ]</a>
-              <a href="subject.html#5671">[ subject ]</a>
-              <a href="author.html#5671">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metadata Without A Proposal</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005733.html">
+<link rel="next" href="005672.html">
+</head>
+<body>
+<h1>Metadata Without A Proposal</h1>
+<b>nothien at uber.space</b> nothien at uber.space<br>
+<i>Fri Feb 26 10:51:08 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005733.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li>Next message (by thread): <a href="005672.html">Metadata Without A Proposal</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5671">[ date ]</a> <a href="thread.html#5671">[ thread ]</a> <a href="subject.html#5671">[ subject ]</a> <a href="author.html#5671">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Hi!
+<pre>Hi!
 
-I've lost track of the currently raging metadata thread entirely, and so
-I've started this as a new post.
+I&#x27;ve lost track of the currently raging metadata thread entirely, and so
+I&#x27;ve started this as a new post.
 
-Thus far, I think there's general consensus on the following needs for
+Thus far, I think there&#x27;s general consensus on the following needs for
 any metadata proposal:
 
-1. Must degrade gracefully for clients that don't understand metadata.
+1. Must degrade gracefully for clients that don&#x27;t understand metadata.
 
 2. Must not be English-specific.
   
@@ -53,7 +37,7 @@ any metadata proposal:
    of English upon non-English users is unwanted.
   
    This rules out some of the current proposals which are oriented around
-   'tags', e.g. 'author' or 'license'.  Theoretically, you could have a
+   &#x27;tags&#x27;, e.g. &#x27;author&#x27; or &#x27;license&#x27;.  Theoretically, you could have a
    list of tags for different languages, but that would grow into a
    horrifically long list, and is generally unsustainable.
   
@@ -80,11 +64,11 @@ any metadata proposal:
 6. Must be accessible.
   
    Some proposals discussed the usage of emojis, and others have opted
-   for creating new unofficial line types.  These don't degrade
+   for creating new unofficial line types.  These don&#x27;t degrade
    gracefully for things like screen readers, until they adopt the
-   metadata proposal.  That's not great.
+   metadata proposal.  That&#x27;s not great.
 
-I think that we don't need a &quot;metadata proposal&quot; to solve any of these
+I think that we don&#x27;t need a &quot;metadata proposal&quot; to solve any of these
 problems.  We already have everything we need in pre-existing formats
 and specifications.  Only three metadata fields are really necessary:
 date, author, and license.  New fields, if completely necessary, need to
@@ -96,12 +80,12 @@ Dating content is mostly relevant to search engines, so that old (or
 new) results can be filtered out.  My proposal with dates is to use what
 we already have - the gmisub companion spec.  If any content (e.g. an
 article) has an associated date, the index page should in gmisub format
-list the content page with the date.  If content pages don't have any
-associated date, simply don't list a date in the index.  Search engines
+list the content page with the date.  If content pages don&#x27;t have any
+associated date, simply don&#x27;t list a date in the index.  Search engines
 and crawlers can still choose to include date information based on when
 they last crawled the page.
 
-=&gt; <A HREF="gemini://gemini.circumlunar.space/docs/companion/">gemini://gemini.circumlunar.space/docs/companion/</A>
+=&gt; <a href="gemini://gemini.circumlunar.space/docs/companion/">gemini://gemini.circumlunar.space/docs/companion/</a>
 
 One question this raises is what index page to use.  I think that the
 engine should search through parent directories until it finds one which
@@ -135,16 +119,16 @@ also allow for an optional author field.
 ```
 
 We can tweak the format around a bit so that currently existing titles
-which start with parenthesized text aren't misinterpreted.  In addition,
-one shouldn't have to repeat the author field for every line; we can
+which start with parenthesized text aren&#x27;t misinterpreted.  In addition,
+one shouldn&#x27;t have to repeat the author field for every line; we can
 have some system like only requiring the author field when it is
 different from the immediately previous author.  I prefer the first
-option, but I haven't explored when the license owner would differ from
+option, but I haven&#x27;t explored when the license owner would differ from
 the author (which I think is the case for e.g. news companies).
 
 ## Other Fields
 
-Clearly, other fields aren't supported by this.  If you want to place
+Clearly, other fields aren&#x27;t supported by this.  If you want to place
 additional metadata in your content, then I suggest writing it in
 natural language.  If it is absolutely necessary to have it
 machine-parsable (so that it can be specially understood by e.g. search
@@ -155,9 +139,9 @@ results.  Expect resistance.
 ## Metadata for Storage
 
 Author and license metadata is stored within the page itself, and so
-that's not a problem.  Personally, I store date information in the file
+that&#x27;s not a problem.  Personally, I store date information in the file
 name of the document (e.g. 2021-02-26-proposal.gmi), but I understand
-that this doesn't work for everyone: in that case, see below.
+that this doesn&#x27;t work for everyone: in that case, see below.
 
 There are legitimate uses for additional metadata when storing gemtext,
 such as for capsule-local tagging.  These fields should be stored using
@@ -168,87 +152,20 @@ organize content by tag).
 
 ## Conclusion
 
-I don't think we need a 'metadata proposal' to achieve the goals we're
+I don&#x27;t think we need a &#x27;metadata proposal&#x27; to achieve the goals we&#x27;re
 looking for.  The format conventions are already mostly in place; we
 just need to formalize them.
 
 ~aravk | ~nothien
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="005733.html">[Clients] Gemini and accessibility regarding preformatted code blocks
-</A></li>
-	<LI>Next message (by thread): <A HREF="005672.html">Metadata Without A Proposal
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#5671">[ date ]</a>
-              <a href="thread.html#5671">[ thread ]</a>
-              <a href="subject.html#5671">[ subject ]</a>
-              <a href="author.html#5671">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="005733.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li>Next message (by thread): <a href="005672.html">Metadata Without A Proposal</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5671">[ date ]</a> <a href="thread.html#5671">[ thread ]</a> <a href="subject.html#5671">[ subject ]</a> <a href="author.html#5671">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

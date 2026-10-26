@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text reflow woes (or: I want bullets back!)y</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000042.html">
+<link rel="next" href="000056.html">
+</head>
+<body>
+<h1>Text reflow woes (or: I want bullets back!)y</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Sun Aug 18 22:32:53 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000042.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000056.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#43">[ date ]</a> <a href="thread.html#43">[ thread ]</a> <a href="subject.html#43">[ subject ]</a> <a href="author.html#43">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great solderpunk once stated:
+&gt;<i> Here&#x27;s a question which is going to sound aggressive or confrontational
+</i>&gt;<i> but is actually just me trying to help all of us (myself included)
+</i>&gt;<i> clarify our thinking and start moving in the direction of a deicision:
+</i>&gt;<i> 
+</i>&gt;<i> *ahem*
+</i>&gt;<i> 
+</i>&gt;<i> Given that, thanks to the inclusion of MIME types in the response
+</i>&gt;<i> header, Gemini is already perfectly capable of serving of Markdown, and
+</i>&gt;<i> given that Markdown is powerful enough to completely replicate all of
+</i>&gt;<i> the semantics currently in the text/gemini spec (i.e. it can link to
+</i>&gt;<i> other places via URL with a user-friendly label attached), what do we
+</i>&gt;<i> actually stand to gain by speccing text/gemini up as something which is,
+</i>&gt;<i> roughly, just Markdown with perhaps a few features removed and its
+</i>&gt;<i> native linking syntax replaced by our own line-based =&gt; alternative?
+</i>&gt;<i> Isn&#x27;t this line of thought just leading us in the direction of
+</i>&gt;<i> substantial duplication of effort and having two redundant ways to do
+</i>&gt;<i> more or less the same thing?  Isn&#x27;t that, generally speaking, a pretty
+</i>&gt;<i> bad way to design things?
+</i>
+  I thought that one of the overriding concepts for Gemini was the ease if
+implementation---that one should be able to write a client in 100 lines of
+&lt;insert language here&gt;.
+
+  Now it has certainly grown a bit.  Given that a gemini index file can have
+relative links:
+
+	=&gt; subinfo/document.txt	Some Text
+
+means that clients now have to merge the base URL with the relative URL to
+derive the new full URL complicates the client a bit, but we do get a lot of
+functionality for giving up on ease of implementation (or the reliance upon
+some libraries).
+
+&gt;<i> If the answer to &quot;what do we actually stand to gain?&quot; is &quot;Hmm, not much,
+</i>&gt;<i> actually&quot; then it seems sensible to me that we should back away from
+</i>&gt;<i> this direction.
+</i>&gt;<i> 
+</i>&gt;<i> If the answer is &quot;We gain X, Y and Z&quot;, then the syntax, then we can do
+</i>&gt;<i> our best to design syntax which maximises X, Y and Z.
+</i>&gt;<i> 
+</i>&gt;<i> Either answer clarifies things for us.
+</i>
+  The issue I have with Markdown is that there is no one standard for it. 
+Mark Gruber created it in 2004 as a way for *him* to create HTML documents
+without having to write HTML (or use a clumsy HTML editor) and he had no
+desire to add to it (because it works for him).  Since then, multiple
+versions have been created to address shortcomings people came across as
+they tried using Markdown for their own use, and as of right now, defined in
+RFC-7763 and RFC-7764, are the various flavors of Markdown:
+
+	Original	<a href="http://daringfireball.net/projects/markdown/">http://daringfireball.net/projects/markdown/</a>
+	MultiMarkdown	<a href="http://fletcher.github.io/MultiMarkdown-4/syntax">http://fletcher.github.io/MultiMarkdown-4/syntax</a>
+	Github		<a href="https://help.github.com/articles/github-flavored-markdown/">https://help.github.com/articles/github-flavored-markdown/</a>
+	Pandoc		<a href="http://johnmacfarlane.net/pandoc/README.html#pandocs-markdown">http://johnmacfarlane.net/pandoc/README.html#pandocs-markdown</a>
+	Fountain	<a href="http://fountain.io/syntax">http://fountain.io/syntax</a>
+	CommonMark	<a href="http://spec.commonmark.org/">http://spec.commonmark.org/</a>
+	kramdown-rfc2629 <a href="https://github.com/cabo/kramdown-rfc2629">https://github.com/cabo/kramdown-rfc2629</a>
+	rfc7328		<a href="https://github.com/miekg/pandoc2rfc">https://github.com/miekg/pandoc2rfc</a>
+	Extra		<a href="https://michelf.ca/projects/php-markdown/extra/">https://michelf.ca/projects/php-markdown/extra/</a>
+
+  It&#x27;s almost like &quot;pick your poison&quot; here.
+
+  -spc 
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000042.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000056.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#43">[ date ]</a> <a href="thread.html#43">[ thread ]</a> <a href="subject.html#43">[ subject ]</a> <a href="author.html#43">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Discussion][Workflow] What do you use to write and upload to your capsules?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007006.html">
+<link rel="next" href="007009.html">
+</head>
+<body>
+<h1>[Discussion][Workflow] What do you use to write and upload to your capsules?</h1>
+<b>Rohan Kumar</b> seirdy at seirdy.one<br>
+<i>Sun Aug 15 07:21:27 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007006.html">[Discussion][Workflow] What do you use to write and upload to your capsules?</a></li>
+<li>Next message (by thread): <a href="007009.html">[Discussion][Workflow] What do you use to write and upload to your capsules?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7008">[ date ]</a> <a href="thread.html#7008">[ thread ]</a> <a href="subject.html#7008">[ subject ]</a> <a href="author.html#7008">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Workflow for seirdy.one:
+
+TLDR version: write in Neovim, git commit, git push. After a minute the site is updated.
+
+Long version:
+
+I write my content in Neovim. I use markdown for WWW content and Gemtext for Gemini content. I typically draft in Gemtext and convert to Markdown, then edit the Markdown a bit for stuff like inline links and inline metadata (semantic tags like &lt;time&gt; and microformats mostly).
+
+I do this all in a git repository. When I push commits, Sourcehut CI builds both my Gemini and Web content using Hugo. Hugo&#x27;s custom output formats made it really easy to support both. `make build` builds the pages and generates zopfli-gzip and brotli compressed files in advance; `make deploy` deploys assets to my Web and Gemini servers via rsync + ssh. It builds a separate version of my Web site for my Tor hidden service. I haven&#x27;t gotten around to launching a Gemini capsule into Deep Space (Gemini on Tor) yet, but I really should.
+
+Using a static site generator/templating engine is really neat because it makes it easy to have multiple versions of your content in multiple places, each version having different values substituted in the pages.  My hidden service has different urls than my Web content, and my Gemini content uses gemini:// links instead of https://. In the source code, I use relative paths; the SSG expands URLs by default.
+
+Hugo&#x27;s GitInfo fills in timestamps based on commit dates. So all I have to do is commit and push; my sites are then updated momentarily.
+
+There&#x27;s no vendor-lock-in. I build the binaries that I use in CI myself, except for rsync and make. I rsync them over from my server. So all I need for CI is an environment that can run &quot;make build &amp;&amp; make deploy&quot;.  If my VPS provider does something bad, I can switch to a different VPS easily; if Sourcehut disappears, any other CI system will work. I get the Netlify-like experience of &quot;just `git push` and deployment automatically happens&quot; without having to depend on a service like Netlify.
+
+-- 
+/Seirdy (seirdy.one)
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007006.html">[Discussion][Workflow] What do you use to write and upload to your capsules?</a></li>
+<li>Next message (by thread): <a href="007009.html">[Discussion][Workflow] What do you use to write and upload to your capsules?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7008">[ date ]</a> <a href="thread.html#7008">[ thread ]</a> <a href="subject.html#7008">[ subject ]</a> <a href="author.html#7008">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Decentralized content creation and linking</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006905.html">
+<link rel="next" href="006918.html">
+</head>
+<body>
+<h1>Decentralized content creation and linking</h1>
+<b>gemproj at suckless.anonaddy.com</b> gemproj at suckless.anonaddy.com<br>
+<i>Mon Jul 12 20:58:49 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006905.html">Decentralized content creation and linking</a></li>
+<li>Next message (by thread): <a href="006918.html">Decentralized content creation and linking</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6906">[ date ]</a> <a href="thread.html#6906">[ thread ]</a> <a href="subject.html#6906">[ subject ]</a> <a href="author.html#6906">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>&gt;<i>For Gemini, we could do something more basic. Gemini capsules could
+</i>&gt;<i>expose an endpoint; this can be parsed from a page in a manner similar
+</i>&gt;<i>to the gmnisub approach, by matching a string on a page. Perhaps a
+</i>&gt;<i>Gemini hyperlink to an input form with the text &quot;Submit a backlink&quot;?
+</i>&gt;<i>Making this multilingual could take a while.
+</i>
+&gt;<i>The &quot;manual&quot; approach would be having a user navigate to &quot;Submit a
+</i>&gt;<i>backlink&quot; somewhere on a gempost to share a backlink via input form; a
+</i>&gt;<i>backend can check out the source page and look for a backlink. If one is
+</i>&gt;<i>found, the Gemlog &quot;builder&quot; can add these backlinks to a &quot;Mentions&quot;
+</i>&gt;<i>section. An automatic approach could have a Gemlog &quot;builder&quot;
+</i>&gt;<i>automatically check each linked page for a &quot;Submit a backlink&quot; URL (or
+</i>&gt;<i>any of its translations) and auto-submit backlinks.
+</i>
+I think I get the gist. It&#x27;s more of an opt-in approach than what I
+suggested.
+The biggest problem with this is, imho, that you exclude all the static
+site generators. They can&#x27;t participate. And that&#x27;s a problem, because you
+can easily get a simple gemlog without any scripting backend, but you can&#x27;t
+get a proper scripting backend without a server. Ideally I&#x27;d love to
+include the static generators to at least be able to comment.
+
+At the same time I think your solution works better. Is easier to
+implement. And if you can just put up something like: &lt;domain&gt;/&lt;path to the
+log entry&gt;/backlink?&lt;link to the comment&gt; it&#x27;ll be almost automatic to
+comment on existing posts. Then you should review the backlinks you get
+before you put them there, but it&#x27;s simple, effective, just needs people to
+hop on board :)
+
+~m
+
+
+
+On Mon, Jul 12, 2021 at 8:32 PM Rohan Kumar &#x27;seirdy at seirdy.one&#x27;
+&lt;gemproj+seirdy=seirdy.one@suckless.anonaddy.com&gt; wrote:
+
+&gt;<i> This email was sent to gemproj@suckless.anonaddy.com from
+</i>&gt;<i> seirdy@seirdy.one and has been forwarded by AnonAddy.
+</i>&gt;<i> To deactivate this alias copy and paste the url below into your web
+</i>&gt;<i> browser.
+</i>&gt;<i>
+</i>&gt;<i>
+</i>&gt;<i> <a href="https://app.anonaddy.com/deactivate/84c97fb7-dd72-4688-b653-188215324c2a?signature=e4cd6fabb5144657ed72ac3c56cde019ecccfe366af0b08968536f9080c11eba">https://app.anonaddy.com/deactivate/84c97fb7-dd72-4688-b653-188215324c2a?signature=e4cd6fabb5144657ed72ac3c56cde019ecccfe366af0b08968536f9080c11eba</a>
+</i>&gt;<i>
+</i>&gt;<i> -----
+</i>&gt;<i>
+</i>&gt;<i>
+</i>&gt;<i> On Mon, Jul 12, 2021 at 03:54:36PM +0000, gemproj@suckless.anonaddy.com
+</i>&gt;<i> wrote:
+</i>&gt;<i> &gt;For instance you write a log entry with &lt;topic&gt;, post it on antenna
+</i>&gt;<i> &gt;(<a href="gemini://warmedal.se/~antenna/">gemini://warmedal.se/~antenna/</a>) and when someone posts another log entry
+</i>&gt;<i> &gt;with a title Re: &lt;topic&gt; your server collects it, parses the first text
+</i>&gt;<i> &gt;segment it finds until EOF or headline and puts it under your original
+</i>&gt;<i> log.
+</i>&gt;<i> &gt;Or just adds a link to this response post.
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;Additional features can be that you have a comment INPUT that takes a url
+</i>&gt;<i> &gt;to the response, or scanning multiple aggregators.
+</i>&gt;<i>
+</i>&gt;<i> I think something resembling the Web&#x27;s Webmentions would be a good
+</i>&gt;<i> start. With Webmentions, you write a comment on Webpage A on your own
+</i>&gt;<i> website, Webpage B that has a backlink to Webpage A. You then send a
+</i>&gt;<i> Webmention either automatically or manually; doing so manually is quite
+</i>&gt;<i> trivial:
+</i>&gt;<i>
+</i>&gt;<i> curl -d source=&quot;webpage B URL&quot; dest=&quot;webpage A URL&quot; &quot;link to website A&#x27;s
+</i>&gt;<i> webmention endpoint&quot;
+</i>&gt;<i>
+</i>&gt;<i> Where the link to Webpage A&#x27;s Webmention endpoint is in a &lt;link&gt; tag of
+</i>&gt;<i> the &lt;head&gt;. A daemon receives the Webmention, downloads Webpage B, and
+</i>&gt;<i> checks it for the backlink to Webpage A. If one exists, it accepts the
+</i>&gt;<i> Webmention.
+</i>&gt;<i>
+</i>&gt;<i> I have this setup for my static Web site <a href="https://seirdy.one/">https://seirdy.one/</a>; Hugo pulls
+</i>&gt;<i> in Webmentions from my self-hosted endpoint for each page. Some people
+</i>&gt;<i> also have an input form on their pages for submitting backlinks as
+</i>&gt;<i> Webmentions.
+</i>&gt;<i>
+</i>&gt;<i> For Gemini, we could do something more basic. Gemini capsules could
+</i>&gt;<i> expose an endpoint; this can be parsed from a page in a manner similar
+</i>&gt;<i> to the gmnisub approach, by matching a string on a page. Perhaps a
+</i>&gt;<i> Gemini hyperlink to an input form with the text &quot;Submit a backlink&quot;?
+</i>&gt;<i> Making this multilingual could take a while.
+</i>&gt;<i>
+</i>&gt;<i> The &quot;manual&quot; approach would be having a user navigate to &quot;Submit a
+</i>&gt;<i> backlink&quot; somewhere on a gempost to share a backlink via input form; a
+</i>&gt;<i> backend can check out the source page and look for a backlink. If one is
+</i>&gt;<i> found, the Gemlog &quot;builder&quot; can add these backlinks to a &quot;Mentions&quot;
+</i>&gt;<i> section. An automatic approach could have a Gemlog &quot;builder&quot;
+</i>&gt;<i> automatically check each linked page for a &quot;Submit a backlink&quot; URL (or
+</i>&gt;<i> any of its translations) and auto-submit backlinks.
+</i>&gt;<i>
+</i>&gt;<i> --
+</i>&gt;<i> /Seirdy
+</i>&gt;<i>
+</i>&gt;<i>
+</i>&gt;<i>
+</i>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006905.html">Decentralized content creation and linking</a></li>
+<li>Next message (by thread): <a href="006918.html">Decentralized content creation and linking</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6906">[ date ]</a> <a href="thread.html#6906">[ thread ]</a> <a href="subject.html#6906">[ subject ]</a> <a href="author.html#6906">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

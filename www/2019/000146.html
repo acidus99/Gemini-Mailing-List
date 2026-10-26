@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fwd: elpher now supports gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000145.html">
+<link rel="next" href="000147.html">
+</head>
+<body>
+<h1>Fwd: elpher now supports gemini</h1>
+<b>plugd</b> plugd at thelambdalab.xyz<br>
+<i>Fri Sep 13 17:42:50 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000145.html">Fwd: elpher now supports gemini</a></li>
+<li>Next message (by thread): <a href="000147.html">Fwd: elpher now supports gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#146">[ date ]</a> <a href="thread.html#146">[ thread ]</a> <a href="subject.html#146">[ subject ]</a> <a href="author.html#146">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi Bradley,
+
+Wow - I didn&#x27;t expect such a detailed usage report!  Thank you very
+much, this is incredibly useful.
+
+I will go through all of your comments in detail later.  But at the
+moment I want to rush out a quick reply to point out that some of the
+&quot;Gemini server reports PERMINANT FAILURE&quot; errors might have been due to
+a bug in the URL processing code.  I was mishandling the (important!)
+edge case where the filename portion is empty, resulting in broken URLs
+being sent to servers. This should now be fixed.
+
+I agree that the the failed connection errors need cleaning up a bit.
+
+I&#x27;m not sure what&#x27;s causing zaibatsu to load slowly for you.  In my case
+at the moment it&#x27;s due to the IPv6 issues that I mentioned earlier.  (It
+turns out that Emacs _does_ eventually fall back to the IPv4 address,
+but only after a whole _minute_ or so of waiting.)  Is it possible that
+your experience is just due to elpher not rendering anything until the
+entire document is available?  (I would prefer not to have to do this,
+but I&#x27;m not smart enough to figure out how to do this without breaking a
+lot of the things I like about the current factoring of the code.)
+
+Regarding the cert verification stuff: I&#x27;d love to take credit for this
+but it is in fact just Emacs&#x27; defualt GnuTLS behaviour.  At some point I
+hope to change this to reflect solderpunk&#x27;s TOFU suggestion, as I expect
+it&#x27;d get annoying when there are upwards of 100 or 1000 gemini servers
+with different self-signed certificates.
+
+Hopefully your server (which I don&#x27;t think I&#x27;d stumbled on before)
+should be accessible now following the URL parsing fixes.  I&#x27;ve also
+added the URL of the current page to the header in the latest release,
+so hopefully this also reduces confusion somewhat.
+
+
+&gt;<i> As far as the IPv4/IPv6 issue, I don&#x27;t really think most of those
+</i>&gt;<i> options should really be left to the author of the client software to
+</i>&gt;<i> tackle, and think server support for binding &quot;::&quot; to the NIC to be the
+</i>&gt;<i> best solution. Alternately, perhaps temporarily dropping the AAAA RR
+</i>&gt;<i> temporarily, until the Gemini server supports IPv6 bindings, if there
+</i>&gt;<i> aren&#x27;t other services listening on the host.
+</i>
+I&#x27;m starting to think that this is more of an emacs networking issue.
+While the problem does manifest with, for instance, AV-96, it&#x27;s not
+nearly as severe - there&#x27;s &quot;only&quot; a 10-20s delay in the connection,
+compared with a whole minute in emacs.  If only there were a way of
+altering the default timeout used by emacs...
+
+&gt;<i> I may have missed a few things here and there, but this is all really
+</i>&gt;<i> just the result of playing around with Elpher, which, if I&#x27;m not really
+</i>&gt;<i> careful, might get me to start saying nice things about Emacs ;)
+</i>
+Be careful, it&#x27;s a slippery slope... :-P
+
+&gt;<i> I hope that helps :)
+</i>
+It absolutely does!!
+
+plugd
+
+p.s. with the current release I have no problems with the following
+servers:
+
+* <a href="gemini://vger.cloud/">gemini://vger.cloud/</a>
+* <a href="gemini://tilde.black/">gemini://tilde.black/</a>
+* <a href="gemini://tilde.pink/">gemini://tilde.pink/</a>
+* <a href="gemini://carcosa.net/">gemini://carcosa.net/</a>
+* <a href="gemini://heavysquare.com/">gemini://heavysquare.com/</a>
+* <a href="gemini://mozz.us/">gemini://mozz.us/</a>
+* <a href="gemini://typed-hole.org/">gemini://typed-hole.org/</a>
+* <a href="gemini://zaibatsu.circumlunar.space/">gemini://zaibatsu.circumlunar.space/</a>
+
+The following I can&#x27;t connect to at all (i.e. no server response):
+* <a href="gemini://gopher.black/">gemini://gopher.black/</a>
+* <a href="gemini://consensus.circumlunar.space/">gemini://consensus.circumlunar.space/</a>
+* <a href="gemini://dgold.eu/">gemini://dgold.eu/</a>
+
+I cross-checked with AV-98 and got the same results.
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000145.html">Fwd: elpher now supports gemini</a></li>
+<li>Next message (by thread): <a href="000147.html">Fwd: elpher now supports gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#146">[ date ]</a> <a href="thread.html#146">[ thread ]</a> <a href="subject.html#146">[ subject ]</a> <a href="author.html#146">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

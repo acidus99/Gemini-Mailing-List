@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] Integrity checks for Gemini pages</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006539.html">
+<link rel="next" href="006551.html">
+</head>
+<body>
+<h1>[tech] Integrity checks for Gemini pages</h1>
+<b>nervuri</b> nervuri at disroot.org<br>
+<i>Thu May 20 14:35:06 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006539.html">[tech] Integrity checks for Gemini pages</a></li>
+<li>Next message (by thread): <a href="006551.html">[tech] Integrity checks for Gemini pages</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6548">[ date ]</a> <a href="thread.html#6548">[ thread ]</a> <a href="subject.html#6548">[ subject ]</a> <a href="author.html#6548">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Wed, 2021-05-19, ew.gemini wrote:
+&gt;<i> Integrity in the sense of &quot;the file remained unchanged in
+</i>&gt;<i> transit&quot;? TLS should take care of that.
+</i>
+Not necessarily.  The connection can be dropped before the transfer
+completes, or bits in the file can be flipped for various reasons.
+I think there is a place for simple, automated integrity checks - not
+just in Gemini, but also on the Web (like SRI [1], but applicable to all
+links).
+
+For Gemini, I once suggested using the URI fragment for this, as in
+&quot;song.mp3#hash:sha256=...&quot;, which has the advantage of not requiring
+additional network requests.  Adding hashes to all links on your capsule
+would not be worth the tedium, but you could use it to protect only a
+few larger files.  It could work on links to third-party sites/capsules
+as well.  On mismatch, clients would warn that the file either was
+changed or wasn&#x27;t transferred correctly.
+
+Another approach is to use a well-known file, such as
+.well-known/SHA256SUMS - like NetSigil [2], but without the signature,
+reducing it to just this bit of code:
+
+```
+# Remove old SHA256SUMS file
+rm -f .well-known/SHA256SUMS
+# Generate new SHA256SUMS file
+hashes=$(find -type f -printf &#x27;%P\n&#x27; | sort | xargs sha256sum)
+echo &quot;$hashes&quot; &gt; .well-known/SHA256SUMS
+```
+
+Doing it this way would require clients to make an extra network request
+every once in a while - and most of these requests would fail.  Unusual
+requests contribute to client fingerprinting, so this would not be good
+for implicit use.  It should only be done on explicit request by the
+user.
+
+Signatures are a more complete solution, but they&#x27;re also more complex -
+harder for capsule admins to set up and for clients to support.
+
+We could, as tidux suggests, use magnet (or IPFS) links for large files
+instead, as those protocols have integrity checking built-in.  However,
+this must be weighed against the added friction, both for server admins
+who must install and configure additional software and for visitors who
+don&#x27;t have a BitTorrent or IPFS client installed.
+
+[1] <a href="https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity">https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity</a>
+[2] <a href="https://tildegit.org/nervuri/NetSigil">https://tildegit.org/nervuri/NetSigil</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006539.html">[tech] Integrity checks for Gemini pages</a></li>
+<li>Next message (by thread): <a href="006551.html">[tech] Integrity checks for Gemini pages</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6548">[ date ]</a> <a href="thread.html#6548">[ thread ]</a> <a href="subject.html#6548">[ subject ]</a> <a href="author.html#6548">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

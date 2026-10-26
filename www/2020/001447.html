@@ -1,144 +1,64 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> =?UTF-8?Q?Re:_[SPEC-CHANGE]_lang_parameter, _minor_line_type_changes, _cla?= rifications...
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%3D%3FUTF-8%3FQ%3FRe%3A_%5BSPEC-CHANGE%5D_lang_parameter%2C%20_minor_line_type_changes%2C%0A%20_cla%3F%3D%20%3D%3FUTF-8%3FQ%3Frifications...%3F%3D&In-Reply-To=%3C0f2feefc-4b18-4aec-a23f-a842d9104504%40www.fastmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="001445.html">
-   <LINK REL="Next"  HREF="001449.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>=?UTF-8?Q?Re:_[SPEC-CHANGE]_lang_parameter, _minor_line_type_changes, _cla?= rifications...</H1>
-    <B>Case Duckworth</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%3D%3FUTF-8%3FQ%3FRe%3A_%5BSPEC-CHANGE%5D_lang_parameter%2C%20_minor_line_type_changes%2C%0A%20_cla%3F%3D%20%3D%3FUTF-8%3FQ%3Frifications...%3F%3D&In-Reply-To=%3C0f2feefc-4b18-4aec-a23f-a842d9104504%40www.fastmail.com%3E"
-       TITLE="=?UTF-8?Q?Re:_[SPEC-CHANGE]_lang_parameter, _minor_line_type_changes, _cla?= rifications...">acdw at acdw.net
-       </A><BR>
-    <I>Tue Jun  9 13:34:55 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="001445.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
-</A></li>
-        <LI>Next message (by thread): <A HREF="001449.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1447">[ date ]</a>
-              <a href="thread.html#1447">[ thread ]</a>
-              <a href="subject.html#1447">[ subject ]</a>
-              <a href="author.html#1447">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>=?UTF-8?Q?Re:_[SPEC-CHANGE]_lang_parameter, _minor_line_type_changes, _cla?= rifications...</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="001445.html">
+<link rel="next" href="001449.html">
+</head>
+<body>
+<h1>=?UTF-8?Q?Re:_[SPEC-CHANGE]_lang_parameter, _minor_line_type_changes, _cla?= rifications...</h1>
+<b>Case Duckworth</b> acdw at acdw.net<br>
+<i>Tue Jun  9 13:34:55 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="001445.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...</a></li>
+<li>Next message (by thread): <a href="001449.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1447">[ date ]</a> <a href="thread.html#1447">[ thread ]</a> <a href="subject.html#1447">[ subject ]</a> <a href="author.html#1447">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Mon, Jun 8, 2020, at 8:24 AM, Frank LENORMAND wrote:
+<pre>On Mon, Jun 8, 2020, at 8:24 AM, Frank LENORMAND wrote:
 
 &gt;<i> How are clients supposed to render words that are censored with asterisks?
-</I>&gt;<i> 
-</I>&gt;<i> Consider:
-</I>&gt;<i> 
-</I>&gt;<i> *ssh*le
-</I>&gt;<i> 
-</I>&gt;<i> The spec was modified to make sure clients understand the above isn't a
-</I>&gt;<i> bullet item. Therefore writers are indirectly allowed by the standard to
-</I>&gt;<i> influence the rendering, otherwise there would have been no conflict to
-</I>&gt;<i> address in the first place.
-</I>&gt;<i> 
-</I>&gt;<i> So clients will render the above as &quot;sshle&quot;, which isn't the writer's
-</I>&gt;<i> intent. Only a matter of time until you see writers start escaping asterisks
-</I>&gt;<i> in texts:
-</I>&gt;<i> 
-</I>&gt;<i> \*ssh\*le
-</I>&gt;<i> 
-</I>&gt;<i> And now, because you've put the responsibility of dealing with a concept
-</I>&gt;<i> that the standard implies is allowed, some clients will render the above
-</I>&gt;<i> either verbatim, or have a concept of escaping, the latter being against
-</I>&gt;<i> the philosophy of Gemini, from what I gather.
-</I>&gt;<i> 
-</I>&gt;<i> You can't pretend clients will fill-in the gaps by themselves if the
-</I>&gt;<i> specification isn't pedantic about it.
-</I>
-AFAICT most clients do nothing with in-text formatting, and in fact if the document type is text/gemini they *should* not. text/gemini *only* specifies the 6 line-types for possibilities of special rendering, which means that your example of '*ssh*le' will render exactly as '*ssh*le' -- no escaping needed. If the mimetype is text/markdown, clients *could* render it differently, but text/markdown has its own escaping rules that a client would follow.
+</i>&gt;<i> 
+</i>&gt;<i> Consider:
+</i>&gt;<i> 
+</i>&gt;<i> *ssh*le
+</i>&gt;<i> 
+</i>&gt;<i> The spec was modified to make sure clients understand the above isn&#x27;t a
+</i>&gt;<i> bullet item. Therefore writers are indirectly allowed by the standard to
+</i>&gt;<i> influence the rendering, otherwise there would have been no conflict to
+</i>&gt;<i> address in the first place.
+</i>&gt;<i> 
+</i>&gt;<i> So clients will render the above as &quot;sshle&quot;, which isn&#x27;t the writer&#x27;s
+</i>&gt;<i> intent. Only a matter of time until you see writers start escaping asterisks
+</i>&gt;<i> in texts:
+</i>&gt;<i> 
+</i>&gt;<i> \*ssh\*le
+</i>&gt;<i> 
+</i>&gt;<i> And now, because you&#x27;ve put the responsibility of dealing with a concept
+</i>&gt;<i> that the standard implies is allowed, some clients will render the above
+</i>&gt;<i> either verbatim, or have a concept of escaping, the latter being against
+</i>&gt;<i> the philosophy of Gemini, from what I gather.
+</i>&gt;<i> 
+</i>&gt;<i> You can&#x27;t pretend clients will fill-in the gaps by themselves if the
+</i>&gt;<i> specification isn&#x27;t pedantic about it.
+</i>
+AFAICT most clients do nothing with in-text formatting, and in fact if the document type is text/gemini they *should* not. text/gemini *only* specifies the 6 line-types for possibilities of special rendering, which means that your example of &#x27;*ssh*le&#x27; will render exactly as &#x27;*ssh*le&#x27; -- no escaping needed. If the mimetype is text/markdown, clients *could* render it differently, but text/markdown has its own escaping rules that a client would follow.
 
 -- Case (acdw)
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="001445.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
-</A></li>
-	<LI>Next message (by thread): <A HREF="001449.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1447">[ date ]</a>
-              <a href="thread.html#1447">[ thread ]</a>
-              <a href="subject.html#1447">[ subject ]</a>
-              <a href="author.html#1447">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="001445.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...</a></li>
+<li>Next message (by thread): <a href="001449.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1447">[ date ]</a> <a href="thread.html#1447">[ thread ]</a> <a href="subject.html#1447">[ subject ]</a> <a href="author.html#1447">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,54 +1,38 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> authority's userinfo?
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20authority%27s%20userinfo%3F&In-Reply-To=%3C20200610202811.GL10136%40SDF.ORG%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="001500.html">
-   <LINK REL="Next"  HREF="001538.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>authority's userinfo?</H1>
-    <B>solderpunk</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20authority%27s%20userinfo%3F&In-Reply-To=%3C20200610202811.GL10136%40SDF.ORG%3E"
-       TITLE="authority's userinfo?">solderpunk at SDF.ORG
-       </A><BR>
-    <I>Wed Jun 10 21:28:11 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="001500.html">authority's userinfo?
-</A></li>
-        <LI>Next message (by thread): <A HREF="001538.html">authority's userinfo?
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1514">[ date ]</a>
-              <a href="thread.html#1514">[ thread ]</a>
-              <a href="subject.html#1514">[ subject ]</a>
-              <a href="author.html#1514">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>authority&#x27;s userinfo?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="001500.html">
+<link rel="next" href="001538.html">
+</head>
+<body>
+<h1>authority&#x27;s userinfo?</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Wed Jun 10 21:28:11 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="001500.html">authority&#x27;s userinfo?</a></li>
+<li>Next message (by thread): <a href="001538.html">authority&#x27;s userinfo?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1514">[ date ]</a> <a href="thread.html#1514">[ thread ]</a> <a href="subject.html#1514">[ subject ]</a> <a href="author.html#1514">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Wed, Jun 10, 2020 at 01:15:33PM +0200, Felix Quei&#223;ner wrote:
+<pre>On Wed, Jun 10, 2020 at 01:15:33PM +0200, Felix Quei?ner wrote:
 &gt;<i> 
-</I>&gt;<i> If your server handles user@ in a different way than without authority,
-</I>&gt;<i> i think that's totally in-spec, but authentication is probably not.
-</I>&gt;<i> 
-</I>&gt;<i> One possible usage for authority could be home-dirs instead of an
-</I>&gt;<i> official site:
-</I>&gt;<i> 
-</I>&gt;<i> Instead of using
-</I>&gt;<i> =&gt; <A HREF="gemini://random-projects.net/~felix/">gemini://random-projects.net/~felix/</A>
-</I>&gt;<i> one could also access the directory via
-</I>&gt;<i> =&gt; <A HREF="gemini://felix@random-projects.net/">gemini://felix@random-projects.net/</A>
-</I>
+</i>&gt;<i> If your server handles user@ in a different way than without authority,
+</i>&gt;<i> i think that&#x27;s totally in-spec, but authentication is probably not.
+</i>&gt;<i> 
+</i>&gt;<i> One possible usage for authority could be home-dirs instead of an
+</i>&gt;<i> official site:
+</i>&gt;<i> 
+</i>&gt;<i> Instead of using
+</i>&gt;<i> =&gt; <a href="gemini://random-projects.net/~felix/">gemini://random-projects.net/~felix/</a>
+</i>&gt;<i> one could also access the directory via
+</i>&gt;<i> =&gt; <a href="gemini://felix">gemini://felix</a> at random-projects.net/
+</i>
 Hmm.  But RFC3985 says &quot;The userinfo subcomponent may consist of a user
 name and, optionally, scheme-specific information about how to gain
 authorization to access the resource&quot;.  I think using even just a
@@ -58,98 +42,29 @@ against the spirit of the spec.
 There are practical difficulties, too.  If servers used the username to
 select a user directory, instead of the traditional tilde URL, then for
 people to be able to meaningfully copy and paste links from their
-client's UI, said UI would need to render the userinfo component.
-That's going to be very dangerous if some other servers are using it for
+client&#x27;s UI, said UI would need to render the userinfo component.
+That&#x27;s going to be very dangerous if some other servers are using it for
 actual authentication.
 
 Putting credentials into URLs in general seems like playing with fire to
 me.  Client certificates are much safer in this regard, and more useful.
 The documentation for an app can say &quot;To change your profile details, go
-to <A HREF="gemini://fancyapp.com/edit/profile">gemini://fancyapp.com/edit/profile</A>&quot; and if I'm &quot;logged in&quot; via an
+to <a href="gemini://fancyapp.com/edit/profile">gemini://fancyapp.com/edit/profile</a>&quot; and if I&#x27;m &quot;logged in&quot; via an
 active cert I can follow that link and it will work.  Or I can paste the
 URL at which I get an error to the developer to help them debug, and
-they don't have to know my identity.  Etc.
+they don&#x27;t have to know my identity.  Etc.
 
 Cheers,
 Solderpunk
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="001500.html">authority's userinfo?
-</A></li>
-	<LI>Next message (by thread): <A HREF="001538.html">authority's userinfo?
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1514">[ date ]</a>
-              <a href="thread.html#1514">[ thread ]</a>
-              <a href="subject.html#1514">[ subject ]</a>
-              <a href="author.html#1514">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="001500.html">authority&#x27;s userinfo?</a></li>
+<li>Next message (by thread): <a href="001538.html">authority&#x27;s userinfo?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1514">[ date ]</a> <a href="thread.html#1514">[ thread ]</a> <a href="subject.html#1514">[ subject ]</a> <a href="author.html#1514">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,49 +1,33 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Dioscuri, another application layer protocol
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Dioscuri%2C%20another%20application%20layer%20protocol&In-Reply-To=%3CCAD2gp_R79Os_ur%2Bfz0fb%2BRvo6tTk1BWwTLZQ8br%3Djasu1aoBRA%40mail.gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="002791.html">
-   <LINK REL="Next"  HREF="002793.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Dioscuri, another application layer protocol</H1>
-    <B>John Cowan</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Dioscuri%2C%20another%20application%20layer%20protocol&In-Reply-To=%3CCAD2gp_R79Os_ur%2Bfz0fb%2BRvo6tTk1BWwTLZQ8br%3Djasu1aoBRA%40mail.gmail.com%3E"
-       TITLE="Dioscuri, another application layer protocol">cowan at ccil.org
-       </A><BR>
-    <I>Mon Sep 28 01:22:34 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="002791.html">Ditch URL. Uniform Resource Names ftw!
-</A></li>
-        <LI>Next message (by thread): <A HREF="002793.html">Dioscuri, another application layer protocol
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2792">[ date ]</a>
-              <a href="thread.html#2792">[ thread ]</a>
-              <a href="subject.html#2792">[ subject ]</a>
-              <a href="author.html#2792">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dioscuri, another application layer protocol</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="002791.html">
+<link rel="next" href="002793.html">
+</head>
+<body>
+<h1>Dioscuri, another application layer protocol</h1>
+<b>John Cowan</b> cowan at ccil.org<br>
+<i>Mon Sep 28 01:22:34 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="002791.html">Ditch URL. Uniform Resource Names ftw!</a></li>
+<li>Next message (by thread): <a href="002793.html">Dioscuri, another application layer protocol</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2792">[ date ]</a> <a href="thread.html#2792">[ thread ]</a> <a href="subject.html#2792">[ subject ]</a> <a href="author.html#2792">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Dioscuri is a protocol intended to supplement Gemini for doing things like
+<pre>Dioscuri is a protocol intended to supplement Gemini for doing things like
 uploading files, performing remote actions, and running an application
-server.  It is the POST to Gemini's GET.  Dioscuri servers will run on a
+server.  It is the POST to Gemini&#x27;s GET.  Dioscuri servers will run on a
 different port altogether, so that they do not interfere with Gemini
 servers.  Dioscuri, unlike Gemini, absolutely *requires* the use of client
 certificates.
 
-Great thanks to the members of <A HREF="irc://tilde.chat/gemini,">irc://tilde.chat/gemini,</A> especially lukee
+Great thanks to the members of irc://tilde.chat/gemini, especially lukee
 and aravk.
 
 The name &quot;Dioscuri&quot; is the Latinized spelling of the Greek name for the
@@ -56,12 +40,12 @@ their way.
 
 A Dioscuri request starts out with the client sending a single line,
 &lt;URL&gt;&lt;SP&gt;&lt;MEDIA-TYPE&gt;&lt;CR&gt;&lt;LF&gt;.  This indicates that a body follows which
-should be interpreted according to the media type.  For example, &quot;<A HREF="gemini://">gemini://</A>
+should be interpreted according to the media type.  For example, &quot;gemini://
 example.org/foo text/gemini\r\n&quot; means that the Dioscuri server should do
 something with the following body, which is of type text/gemini.  Exactly
 what happens depends on the server and the URL.  For example, it might
 replace the contents of &quot;foo&quot; with the uploaded body.  Alternatively,
-&quot;<A HREF="gemini://example.org/do/this">gemini://example.org/do/this</A> text/javascript\r\n&quot; might cause the
+&quot;<a href="gemini://example.org/do/this">gemini://example.org/do/this</a> text/javascript\r\n&quot; might cause the
 JavaScript in the uploaded body to be executed on the server.
 
 As a special case, a client can send a Dioscuri header without a media type
@@ -113,72 +97,28 @@ the TCP connection to the server.  So in the application server discussed
 above, the client closes the output side of its socket when it has sent the
 body, and the server receives EOF when it attempts to read more body.
 However,  the input side on the client must remain open so that the
-server's response can be read.
+server&#x27;s response can be read.
 
 Comments?
 
 
 
-John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+John Cowan          <a href="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</a>        cowan at ccil.org
 And it was said that ever after, if any man looked in that Stone,
 unless he had a great strength of will to turn it to other purpose,
 he saw only two aged hands withering in flame.   --&quot;The Pyre of Denethor&quot;
 -------------- next part --------------
 An HTML attachment was scrubbed...
-URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200927/1020e3cd/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200927/1020e3cd/attachment.htm</A>&gt;
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20200927/1020e3cd/attachment.htm">https://mailing-list-archive.gemi.dev/www/attachments/20200927/1020e3cd/attachment.htm</a>&gt;
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="002791.html">Ditch URL. Uniform Resource Names ftw!
-</A></li>
-	<LI>Next message (by thread): <A HREF="002793.html">Dioscuri, another application layer protocol
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2792">[ date ]</a>
-              <a href="thread.html#2792">[ thread ]</a>
-              <a href="subject.html#2792">[ subject ]</a>
-              <a href="author.html#2792">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="002791.html">Ditch URL. Uniform Resource Names ftw!</a></li>
+<li>Next message (by thread): <a href="002793.html">Dioscuri, another application layer protocol</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2792">[ date ]</a> <a href="thread.html#2792">[ thread ]</a> <a href="subject.html#2792">[ subject ]</a> <a href="author.html#2792">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

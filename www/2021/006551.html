@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] Integrity checks for Gemini pages</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006548.html">
+<link rel="next" href="006557.html">
+</head>
+<body>
+<h1>[tech] Integrity checks for Gemini pages</h1>
+<b>nothien at uber.space</b> nothien at uber.space<br>
+<i>Thu May 20 17:15:36 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006548.html">[tech] Integrity checks for Gemini pages</a></li>
+<li>Next message (by thread): <a href="006557.html">[tech] Integrity checks for Gemini pages</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6551">[ date ]</a> <a href="thread.html#6551">[ thread ]</a> <a href="subject.html#6551">[ subject ]</a> <a href="author.html#6551">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>nervuri &lt;nervuri@disroot.org&gt; wrote:
+&gt;<i> On Wed, 2021-05-19, ew.gemini wrote:
+</i>&gt;<i> &gt;Integrity in the sense of &quot;the file remained unchanged in
+</i>&gt;<i> &gt;transit&quot;? TLS should take care of that.
+</i>&gt;<i> 
+</i>&gt;<i> Not necessarily.  The connection can be dropped before the transfer
+</i>&gt;<i> completes, or bits in the file can be flipped for various reasons.
+</i>&gt;<i> I think there is a place for simple, automated integrity checks - not
+</i>&gt;<i> just in Gemini, but also on the Web (like SRI [1], but applicable to all
+</i>&gt;<i> links).
+</i>
+Sorry, but that&#x27;s just wrong.  TLS already provides the mandatory
+close_notify signal (and there have been discussions about it before on
+this ML) for indicating that the complete text has been transferred.
+And every single authenticated encryption method provided with TLS
+ensures that the communicated data is the same at both ends - bit flips
+and the like are detected and such malformed packets are dropped
+appropriately.  One of the mechanisms for this verification is Poly1305
+- check it out if you&#x27;re interested in how and why these work.
+
+&gt;<i> We could, as tidux suggests, use magnet (or IPFS) links for large
+</i>&gt;<i> files instead, as those protocols have integrity checking built-in.
+</i>&gt;<i> However, this must be weighed against the added friction, both for
+</i>&gt;<i> server admins who must install and configure additional software and
+</i>&gt;<i> for visitors who don&#x27;t have a BitTorrent or IPFS client installed.
+</i>
+This is the correct solution.  Note that even protocols like HTTP(S) are
+fine (as they - in their effort to support everything - support large
+file transfers), so there would be little to no friction.
+
+~aravk | ~nothien
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006548.html">[tech] Integrity checks for Gemini pages</a></li>
+<li>Next message (by thread): <a href="006557.html">[tech] Integrity checks for Gemini pages</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6551">[ date ]</a> <a href="thread.html#6551">[ thread ]</a> <a href="subject.html#6551">[ subject ]</a> <a href="author.html#6551">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

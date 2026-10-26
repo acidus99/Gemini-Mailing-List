@@ -1,142 +1,63 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> CSRF in Gemini
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CSRF%20in%20Gemini&In-Reply-To=%3C20200616112912.3f28c5b0%40phi%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="001736.html">
-   <LINK REL="Next"  HREF="001725.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>CSRF in Gemini</H1>
-    <B>Francesco Gazzetta</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CSRF%20in%20Gemini&In-Reply-To=%3C20200616112912.3f28c5b0%40phi%3E"
-       TITLE="CSRF in Gemini">fgaz at fgaz.me
-       </A><BR>
-    <I>Tue Jun 16 10:29:12 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="001736.html">CSRF in Gemini
-</A></li>
-        <LI>Next message (by thread): <A HREF="001725.html">CSRF in Gemini
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1735">[ date ]</a>
-              <a href="thread.html#1735">[ thread ]</a>
-              <a href="subject.html#1735">[ subject ]</a>
-              <a href="author.html#1735">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSRF in Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="001736.html">
+<link rel="next" href="001725.html">
+</head>
+<body>
+<h1>CSRF in Gemini</h1>
+<b>Francesco Gazzetta</b> fgaz at fgaz.me<br>
+<i>Tue Jun 16 10:29:12 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="001736.html">CSRF in Gemini</a></li>
+<li>Next message (by thread): <a href="001725.html">CSRF in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1735">[ date ]</a> <a href="thread.html#1735">[ thread ]</a> <a href="subject.html#1735">[ subject ]</a> <a href="author.html#1735">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Mon, 15 Jun 2020 17:05:33 +0200
-Felix Quei&#223;ner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">felix at masterq32.de</A>&gt; wrote:
+<pre>On Mon, 15 Jun 2020 17:05:33 +0200
+Felix Quei?ner &lt;felix at masterq32.de&gt; wrote:
 
 &gt;<i> I think one solution would be to force clients to remove queries from
-</I>&gt;<i> all URLs. It's not a really elegant solution and makes CGI stuff
-</I>&gt;<i> harder to implement, but will prevent a lot of URL-fuckery.
-</I>
+</i>&gt;<i> all URLs. It&#x27;s not a really elegant solution and makes CGI stuff
+</i>&gt;<i> harder to implement, but will prevent a lot of URL-fuckery.
+</i>
 That coul be a good and clean solution, if we get microbotany, gus, etc
 to move the stuff they put in the query to a path fragment. Too bad
-this means that it's no longer possible to use cgi for that stuff.
+this means that it&#x27;s no longer possible to use cgi for that stuff.
 
 &gt;<i> While writing this, i got the following idea (which seams reasonable
-</I>&gt;<i> to me): Specify that a response to INPUT MUST be passed with a
-</I>&gt;<i> query-parameter &quot;?input=&#8230;&quot; where &quot;&#8230;&quot; is the data from the user. The
-</I>&gt;<i> data is fully urlencoded with all forbidden characters(space,?,=,&#8230;)
-</I>&gt;<i> replaced with their percent-encoding.
-</I>&gt;<i> 
-</I>&gt;<i> Also specify that clients SHOULD remove the &quot;input&quot;-parameter between
-</I>&gt;<i> redirects and in documents using the gemini-scheme.
-</I>
-Less clean, but preserves cgi functionality and it's stateless! I like
+</i>&gt;<i> to me): Specify that a response to INPUT MUST be passed with a
+</i>&gt;<i> query-parameter &quot;?input=?&quot; where &quot;?&quot; is the data from the user. The
+</i>&gt;<i> data is fully urlencoded with all forbidden characters(space,?,=,?)
+</i>&gt;<i> replaced with their percent-encoding.
+</i>&gt;<i> 
+</i>&gt;<i> Also specify that clients SHOULD remove the &quot;input&quot;-parameter between
+</i>&gt;<i> redirects and in documents using the gemini-scheme.
+</i>
+Less clean, but preserves cgi functionality and it&#x27;s stateless! I like
 this
 
 &gt;<i> This allows us to prevent passing accidential or malicious data via
-</I>&gt;<i> redirects, but doesn't help against a spam-bot that targets a site
-</I>&gt;<i> directly. It also makes client implementation a bit harder.
-</I>
+</i>&gt;<i> redirects, but doesn&#x27;t help against a spam-bot that targets a site
+</i>&gt;<i> directly. It also makes client implementation a bit harder.
+</i>
 Eh, the spam problem is a problem on its own anyway, and I probably
 should have made a different example in my article.
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="001736.html">CSRF in Gemini
-</A></li>
-	<LI>Next message (by thread): <A HREF="001725.html">CSRF in Gemini
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1735">[ date ]</a>
-              <a href="thread.html#1735">[ thread ]</a>
-              <a href="subject.html#1735">[ subject ]</a>
-              <a href="author.html#1735">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="001736.html">CSRF in Gemini</a></li>
+<li>Next message (by thread): <a href="001725.html">CSRF in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1735">[ date ]</a> <a href="thread.html#1735">[ thread ]</a> <a href="subject.html#1735">[ subject ]</a> <a href="author.html#1735">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

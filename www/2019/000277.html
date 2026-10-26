@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Color and escape codes in text/gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000274.html">
+<link rel="next" href="000278.html">
+</head>
+<body>
+<h1>Color and escape codes in text/gemini</h1>
+<b>Michael Lazar</b> lazar.michael22 at gmail.com<br>
+<i>Fri Dec 13 05:02:20 GMT 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000274.html">Color and escape codes in text/gemini</a></li>
+<li>Next message (by thread): <a href="000278.html">Color and escape codes in text/gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#277">[ date ]</a> <a href="thread.html#277">[ thread ]</a> <a href="subject.html#277">[ subject ]</a> <a href="author.html#277">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Thu, Dec 12, 2019 at 10:18 AM Jason McBrayer &lt;jmcbray at carcosa.net&gt; wrote:
+
+&gt;<i> 1. That all Gemini clients are running on a terminal (emulator) that
+</i>&gt;<i>    interprets ANSI escape codes (or the client provides enough terminal
+</i>&gt;<i>    emulation to interpret these escape codes).
+</i>&gt;<i>
+</i>&gt;<i> 2. That ANSI escape codes sent by Gemini pages will only interact with
+</i>&gt;<i>    your terminal in a safe way.
+</i>&gt;<i>
+</i>&gt;<i> 3. That it is desirable for untrusted content from the Internet to be
+</i>&gt;<i>    able to control your terminal.
+</i>&gt;<i>
+</i>&gt;<i> I, honestly, don&#x27;t think any of these are true.
+</i>
+I agree, and adding to this:
+
+4. That gemini terminal clients write text directly to stdout.
+
+Libraries like curses maintain their own internal screen buffer and don&#x27;t allow
+passing through raw escape codes. Doing so would likely break any TUI display
+anyway, since escape codes could also change the cursor position.
+
+My opinion is that ANSI escape codes should be neither endorsed nor prohibited
+in the Gemini protocol. Even prohibiting them would add additional complexity,
+because then servers would need to worry about what&#x27;s a valid gemini document
+and what isn&#x27;t. Treat it as a fun little easter egg and leave it at that.
+
+- mozz
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000274.html">Color and escape codes in text/gemini</a></li>
+<li>Next message (by thread): <a href="000278.html">Color and escape codes in text/gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#277">[ date ]</a> <a href="thread.html#277">[ thread ]</a> <a href="subject.html#277">[ subject ]</a> <a href="author.html#277">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

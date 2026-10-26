@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JetForce vs. Molly Brown Server: CGI-variable SCRIPT_NAME is not present</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006341.html">
+<link rel="next" href="006362.html">
+</head>
+<body>
+<h1>JetForce vs. Molly Brown Server: CGI-variable SCRIPT_NAME is not present</h1>
+<b>Frank Jüdes</b> Frank.Juedes at linux4specialists.com<br>
+<i>Tue Apr 13 17:36:37 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006341.html">JetForce vs. Molly Brown Server: CGI-variable SCRIPT_NAME is not present</a></li>
+<li>Next message (by thread): <a href="006362.html">JetForce vs. Molly Brown Server: CGI-variable SCRIPT_NAME is not present</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6345">[ date ]</a> <a href="thread.html#6345">[ thread ]</a> <a href="subject.html#6345">[ subject ]</a> <a href="author.html#6345">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi Matthew,
+
+nice job! some parts really do look similar to my perl-code - same problem generates similar programs…
+
+I am able to read python-code, but have very little experience with the language. That &quot;whitespace has a meaning&quot; thing from the first version really kept me away…
+
+My GGI-package goes a little further with automatic redirection:
+
+ * if the variable QUERY_STRING is not empty, it will print a temporary
+   re-direct with the content of tge query-string attached to the URL
+   into the PATH-component (PATH_INFO) and exit.
+ * This will change the url from for example:
+   <a href="gemini://server.domain/cgi-bin/man?grep">gemini://server.domain/cgi-bin/man?grep</a> to
+   <a href="gemini://server.domain/cgi-bin/man/grep">gemini://server.domain/cgi-bin/man/grep</a>, so that the next input can
+   be requested from the client without overwriting the first value
+ * All this happens transparent for the application without the
+   developer to re-implement that re-direct in each program.
+
+My gemini-capsule is not yet officially on-line, but you can find the GGI-package at <a href="gemini://h2903872.stratoserver.net/">gemini://h2903872.stratoserver.net/</a>
+
+
+On 2021-04-13 10:59, Matthew Ernisse wrote:
+&gt;<i> On Mon, Apr 12, 2021 at 10:59:57PM -0400, Frank Jüdes said:
+</i>&gt;<i>&gt; i am not sure if the author of the Molly-Brown server is reading this list,
+</i>&gt;<i>&gt; i tried to sign up on tildegit.org, but they won&#x27;t accept my e-mail address
+</i>&gt;<i>&gt; there. I have created a perl-package to make the development of CGI programs
+</i>&gt;<i>&gt; for the gemini-space somewhat easier for perl-programmers, especially the
+</i>&gt;<i>&gt; handling of multiple parameters can be handled fully transparent for the
+</i>&gt;<i>&gt; application.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; But that mechanism is based on the SCRIPT_NAME cgi-variable!
+</i>&gt;<i> In the hopes that you may find this useful, I have a light wrapper I use
+</i>&gt;<i> to write CGIs for Molly Brown in Python.  It has served me fairly well with
+</i>&gt;<i> fairly complex CGIs.
+</i>&gt;<i>
+</i>&gt;<i> Module:
+</i>&gt;<i> <a href="gemini://going-flying.com/git/cgi/gemini.git/tree/master/cgi-bin/gmicgi/__init__.py">gemini://going-flying.com/git/cgi/gemini.git/tree/master/cgi-bin/gmicgi/__init__.py</a>
+</i>&gt;<i>
+</i>&gt;<i> Some demo code:
+</i>&gt;<i> <a href="gemini://going-flying.com/git/cgi/gemini.git/tree/master/cgi-bin/test">gemini://going-flying.com/git/cgi/gemini.git/tree/master/cgi-bin/test</a>
+</i>&gt;<i>
+</i>&gt;<i> All the CGIs I have at the moment:
+</i>&gt;<i> <a href="gemini://going-flying.com/git/cgi/gemini.git/tree/master/cgi-bin/">gemini://going-flying.com/git/cgi/gemini.git/tree/master/cgi-bin/</a>
+</i>&gt;<i>
+</i>&gt;<i> --Matt
+</i>&gt;<i>
+</i>&gt;<i> ---
+</i>&gt;<i> Matthew Ernisse
+</i>&gt;<i> matt@going-flying.com
+</i>&gt;<i> <a href="gemini://going-flying.com/">gemini://going-flying.com/</a>
+</i>&gt;<i>
+</i>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006341.html">JetForce vs. Molly Brown Server: CGI-variable SCRIPT_NAME is not present</a></li>
+<li>Next message (by thread): <a href="006362.html">JetForce vs. Molly Brown Server: CGI-variable SCRIPT_NAME is not present</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6345">[ date ]</a> <a href="thread.html#6345">[ thread ]</a> <a href="subject.html#6345">[ subject ]</a> <a href="author.html#6345">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

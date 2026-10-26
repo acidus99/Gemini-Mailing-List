@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text reflow woes (or: I want bullets back!)y</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000304.html">
+<link rel="next" href="000308.html">
+</head>
+<body>
+<h1>Text reflow woes (or: I want bullets back!)y</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Mon Jan 13 22:55:04 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000304.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000308.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#307">[ date ]</a> <a href="thread.html#307">[ thread ]</a> <a href="subject.html#307">[ subject ]</a> <a href="author.html#307">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great solderpunk once stated:
+&gt;<i> 
+</i>&gt;<i> I remain as commited as ever to the idea that any text/gemini markup
+</i>&gt;<i> should have the property that simple clients can just dump it right to
+</i>&gt;<i> stdout verbatim and that should be very usable.  As I argued
+</i>&gt;<i> previously, this rules out any kind of syntax where &lt;pre&gt; lines are
+</i>&gt;<i> indicated by some per-line prefix, as that prefix would break
+</i>&gt;<i> copy-and-pastability for simple clients dumping things to stdout.
+</i>&gt;<i> This is one more reason not to use the &quot;leading whitespace&quot; system
+</i>&gt;<i> proposed by Sean[2] (whose detailed spec remains a very nice and
+</i>&gt;<i> useful precise definition of lots of fuzzy concepts being slung around
+</i>&gt;<i> here).
+</i>
+  Thanks.  I understand the concern about copy-n-pasting (I see issues all
+the time on Reddit when people don&#x27;t understand to prepend each line with
+four spaces when posting source code).
+
+&gt;<i> So, given this, I am pretty much settled on using an easily
+</i>&gt;<i> recognisable line to toggle this mode on or off, say:
+</i>&gt;<i> 
+</i>&gt;<i> ```
+</i>
+  I have questions.  Oh, do I have questions.
+
+
+```
+This text is on the left.
+		This text is mostly centered.
+				This text is on the right.
+```
+
+But now ...
+
+````
+Note that there are four ticks.
+  What&#x27;s the expected result?
+    Literal text?
+      Or reflowed text?
+```
+
+```
+This is similar to the above,
+  but the block ends with four ticks,
+    not the expecte three.
+````
+
+``` What about trailing text?
+  Is that allowd?
+    What is the expected result?
+```
+
+```
+```
+
+(You should be able to handle the above as well).
+
+&gt;<i> I have experimented with supporting this syntax, and allowing
+</i>&gt;<i> reflowing of text not enclosed by ``` lines to an arbitrary
+</i>&gt;<i> user-specified width in AV-98 (not pushed to tildegit yet, but expect
+</i>&gt;<i> it soon).  It really is not too difficult to do, so I don&#x27;t think
+</i>&gt;<i> complexity of implementation is a good argument against this.
+</i>
+  One thing to watch out for are lines that exceed the wrapping length with
+no space (or dash if you are ambitious) characters to break on.
+
+&gt;<i> Does anybody know of a programming language where lines consisting only
+</i>&gt;<i> of three consecutive single quotes happen to occur frequently?
+</i>
+  I want to say Python.  I don&#x27;t program in Python, but I know I have seen
+that syntax in some lanuage.
+
+  -spc
+
+&gt;<i> [2] <a href="gemini://gemini.conman.org/gRFC/0004">gemini://gemini.conman.org/gRFC/0004</a>
+</i></pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000304.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000308.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#307">[ date ]</a> <a href="thread.html#307">[ thread ]</a> <a href="subject.html#307">[ subject ]</a> <a href="author.html#307">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

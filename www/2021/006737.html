@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>a space case for transparent gemtext compression</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006766.html">
+<link rel="next" href="006744.html">
+</head>
+<body>
+<h1>a space case for transparent gemtext compression</h1>
+<b>Christian Seibold</b> krixano at mailbox.org<br>
+<i>Sat Jun 19 11:05:54 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006766.html">a space case for transparent gemtext compression</a></li>
+<li>Next message (by thread): <a href="006744.html">a space case for transparent gemtext compression</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6737">[ date ]</a> <a href="thread.html#6737">[ thread ]</a> <a href="subject.html#6737">[ subject ]</a> <a href="author.html#6737">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>&gt;<i> If I understand correctly your proposal, you suggest to change,
+</i>&gt;<i> neither the protocol nor the gemtext format, but to push browser
+</i>&gt;<i> authors to recognize text/gemini+gzip and act accordingly.
+</i>
+Ok, so, as you have probably read before :D , there&#x27;s a divide on whether compression should even be put into the protocol or not. There&#x27;s even a divide on whether it should be put into any clients - of course nobody can control every client and force them to do what they want it to do. So, realistically, I don&#x27;t think we can get everyone to agree on a decision about compression being put into the protocol, especially when the protocol is almost finalized.
+
+However, users are allowed to suggest things for browsers, and browser developers are allowed to reject suggestions. So, as we cannot get it in the protocol, then some client developers might decide to implement it in their clients, and it&#x27;s totally possible to do this. This is really the next best step that we could take, assuming we won&#x27;t reach a consensus on putting it into the protocol.
+
+However, if what was said before was correct about TLS 1.3 having compression, all of this might be completely unnecessary when we switch to TLS 1.3.
+
+
+&gt;<i> * how the end user of a browser without compression support will know
+</i>&gt;<i> in advance if the file is compressed or not? From the file extension?
+</i>&gt;<i> It is not always present.
+</i>
+This is a good point about client design. I think clients should tell the user the mimetype of files that are unrecognized by the client. I would also personally like that they allow the user to open the file in another program, kinda like AV-98&#x27;s hooks, basically.
+
+&gt;<i> * today, every browser can read every Gemini file. Your proposal
+</i>&gt;<i> seems to imply that some users will now see only a part of the
+</i>&gt;<i> Geminispace, the uncompressed one. This is the same problem we have
+</i>&gt;<i> when trying to use the Web with lynx or dillo: we can see only a part
+</i>&gt;<i> of it.
+</i>
+I mean, right. But what else can we do if we cannot reach a consensus on putting compression in the protocol? Solderpunk could just make the decision anyways, but that&#x27;s dependent on him. The next best thing is for clients that want to provide this functionality to do so, and for clients that don&#x27;t - they might or might not allow you to open it in a different program.
+
+We also kinda already have this problem with various filetypes. There&#x27;s just too many filetypes to support them all in clients, so sending them off to be handled by another program can help resolve this.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006766.html">a space case for transparent gemtext compression</a></li>
+<li>Next message (by thread): <a href="006744.html">a space case for transparent gemtext compression</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6737">[ date ]</a> <a href="thread.html#6737">[ thread ]</a> <a href="subject.html#6737">[ subject ]</a> <a href="author.html#6737">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

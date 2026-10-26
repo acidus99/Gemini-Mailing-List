@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] Geminipg: using Gnupg to sign Gemini pages and directories</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005585.html">
+<link rel="next" href="005985.html">
+</head>
+<body>
+<h1>[tech] Geminipg: using Gnupg to sign Gemini pages and directories</h1>
+<b>nervuri</b> nervuri at disroot.org<br>
+<i>Sat Feb 27 14:10:17 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005585.html">[tech] Geminipg: using Gnupg to sign Gemini pages and directories</a></li>
+<li>Next message (by thread): <a href="005985.html">[tech] Geminipg: using Gnupg to sign Gemini pages and directories</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5718">[ date ]</a> <a href="thread.html#5718">[ thread ]</a> <a href="subject.html#5718">[ subject ]</a> <a href="author.html#5718">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Thu, Feb 25, 2021, Christophe HENRY wrote:
+&gt;<i>Nice to meet you :-)
+</i>
+Likewise.
+
+&gt;<i>&gt; Why not use a single SHA256SUMS file for all files on the capsule?  We
+</i>&gt;<i>
+</i>&gt;<i>Depending on the number of pages, it would become a huge file to
+</i>&gt;<i>locally update if one file happens to be modified.
+</i>
+It would be about 1 MB per 10,000 files and it would be updated
+selectively by the script.  I think that&#x27;s generally good enough.
+&quot;Premature optimization is the root of all evil.&quot; :)
+
+&gt;<i>Indeed, if it was only for me, I would sign the files inline
+</i>&gt;<i>(--clear-sign). Or even would add dedicated headers? But, wait, it&#x27;s
+</i>&gt;<i>been discussed ;-)
+</i>
+Inline signatures would work well in some cases.  They are ugly, but
+they&#x27;re otherwise the perfect solution: no extra network requests, clear
+indication of which file is signed...
+
+&gt;<i>&gt; I also want to explore the idea of a signed &quot;key-sources&quot; file
+</i>&gt;<i>&gt; containing links to the public key from multiple sources, for
+</i>&gt;<i>&gt; cross-checking in case the key changes.  Not sure how this would work
+</i>&gt;<i>&gt; exactly, I need to give it more thought.
+</i>&gt;<i>
+</i>&gt;<i>Yes, I totally agree. The good news is that it&#x27;s already part of the
+</i>&gt;<i>Gnupg ecosystem.
+</i>
+You mean keyservers?  They weren&#x27;t doing so well, last I checked:
+<a href="https://gist.github.com/rjhansen/67ab921ffb4084c865b3618d6955275f">https://gist.github.com/rjhansen/67ab921ffb4084c865b3618d6955275f</a>
+
+But it looks like keys.openpgp.org has remedied those issues:
+<a href="https://keys.openpgp.org/about/news#2019-06-12-launch">https://keys.openpgp.org/about/news#2019-06-12-launch</a>
+
+Still, it&#x27;s only a single source.  Are there any other such modern
+keyservers?
+
+&gt;<i>&gt; Instead of GPG, I recommend OpenBSD&#x27;s signify [1], which gives us nice
+</i>&gt;<i>&gt; and short Ed25519 keys and signatures.  It&#x27;s also available on
+</i>&gt;<i>&gt; GNU/Linux (in Debian, `apt install signify-openbsd`).
+</i>&gt;<i>&gt; (?)
+</i>&gt;<i>
+</i>&gt;<i>This way, we would lose the web of trust. Wouldn&#x27;t we?
+</i>
+We would lose the PGP version of it, although there&#x27;s nothing stopping
+you from signing someone else&#x27;s signify key, to show that you trust it
+(and send that person your signature, to publish on his/her site).  This
+gives us an ad-hoc web of trust.
+
+I never had the chance to use the PGP web of trust.  It sounds good in
+theory, but in practice the UI seriously hinders its adoption.  It might
+work within projects like Debian, but if I want to verify a file on the
+net made by someone I don&#x27;t know (and whose PGP-friends I don&#x27;t know),
+the only way for me to check if I have the right key is to get it from
+multiple sources and/or network perspectives.  This is what I&#x27;ve always
+done, the web of trust never entered the picture.
+
+&gt;<i>&gt; I don&#x27;t think multiple signatures are worth the added complexity.  But
+</i>&gt;<i>&gt; I&#x27;m curious if you have arguments to the contrary.
+</i>&gt;<i>
+</i>&gt;<i>It&#x27;s a major piece of my thoughts. It&#x27;s why I would like to keep
+</i>&gt;<i>signatures on one file (or even in a header?). Say one famous person
+</i>&gt;<i>publishes something great and signed it. On his capsule, there would be
+</i>&gt;<i>&quot;page.gmi&quot; and &quot;page.gmi.sig&quot;. If I want to keep this by my side or
+</i>&gt;<i>want to reuse the page, I can also re-publish the two files.
+</i>
+Ah, ok.  In this case, I would explain in a separate page: &quot;this is the
+author&#x27;s text and this is his signature&quot; (links to both).  Again, an
+ad-hoc solution for a rare use case, no technical burden.  This would be
+my preference, at least.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005585.html">[tech] Geminipg: using Gnupg to sign Gemini pages and directories</a></li>
+<li>Next message (by thread): <a href="005985.html">[tech] Geminipg: using Gnupg to sign Gemini pages and directories</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5718">[ date ]</a> <a href="thread.html#5718">[ thread ]</a> <a href="subject.html#5718">[ subject ]</a> <a href="author.html#5718">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

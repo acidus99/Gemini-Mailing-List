@@ -1,216 +1,68 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Announcing kwiecien.us
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Announcing%20kwiecien.us&In-Reply-To=%3CCAMPYpA4Fax0pCpMdkwyYvkOo%3DX19Cc%3DQTxdSg%3DyGnMF4Hwnesg%40mail.gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="000664.html">
-   <LINK REL="Next"  HREF="000675.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Announcing kwiecien.us</H1>
-    <B>Travis Briggs</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Announcing%20kwiecien.us&In-Reply-To=%3CCAMPYpA4Fax0pCpMdkwyYvkOo%3DX19Cc%3DQTxdSg%3DyGnMF4Hwnesg%40mail.gmail.com%3E"
-       TITLE="Announcing kwiecien.us">audiodude at gmail.com
-       </A><BR>
-    <I>Fri May 15 18:35:24 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="000664.html">Announcing kwiecien.us
-</A></li>
-        <LI>Next message (by thread): <A HREF="000675.html">Announcing kwiecien.us
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#673">[ date ]</a>
-              <a href="thread.html#673">[ thread ]</a>
-              <a href="subject.html#673">[ subject ]</a>
-              <a href="author.html#673">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Announcing kwiecien.us</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000664.html">
+<link rel="next" href="000675.html">
+</head>
+<body>
+<h1>Announcing kwiecien.us</h1>
+<b>Travis Briggs</b> audiodude at gmail.com<br>
+<i>Fri May 15 18:35:24 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000664.html">Announcing kwiecien.us</a></li>
+<li>Next message (by thread): <a href="000675.html">Announcing kwiecien.us</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#673">[ date ]</a> <a href="thread.html#673">[ thread ]</a> <a href="subject.html#673">[ subject ]</a> <a href="author.html#673">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Thu, May 14, 2020 at 11:44 PM Ben &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">benulo at systemli.org</A>&gt; wrote:
+<pre>On Thu, May 14, 2020 at 11:44 PM Ben &lt;benulo at systemli.org&gt; wrote:
 
-&gt;<i> I'm having an issue with elpher where it asks me to approve the site's
-</I>&gt;<i> SSL cert because it says something like the issuer not being
-</I>&gt;<i> recognized... well that can't be right, so either I set up Jetforce a
-</I>&gt;<i> little bit wrong (specified the wrong files?), or this is some issue
-</I>&gt;<i> with elpher, which I noticed complains about the certs of most Gemini
-</I>&gt;<i> sites. My issuer is LetsEncrypt, which should be fine.
-</I>&gt;<i>
-</I>&gt;<i>
-</I>Isn't that just because, by default, Jetforce generates it's own
+&gt;<i> I&#x27;m having an issue with elpher where it asks me to approve the site&#x27;s
+</i>&gt;<i> SSL cert because it says something like the issuer not being
+</i>&gt;<i> recognized... well that can&#x27;t be right, so either I set up Jetforce a
+</i>&gt;<i> little bit wrong (specified the wrong files?), or this is some issue
+</i>&gt;<i> with elpher, which I noticed complains about the certs of most Gemini
+</i>&gt;<i> sites. My issuer is LetsEncrypt, which should be fine.
+</i>&gt;<i>
+</i>&gt;<i>
+</i>Isn&#x27;t that just because, by default, Jetforce generates it&#x27;s own
 certificates and they are self-signed? When browsing with elpher I get this
 warning all the time, it seems everyone is using self signed certificates.
 
-For <A HREF="gemini://gem.bestalbumsintheuniverse.com">gemini://gem.bestalbumsintheuniverse.com</A> I am also using Jetforce and
-accessing with elpher, but I don't get the warnings because I used Let's
-Encrypt to generate CA certificates. If you've used Let's Encrypt and
+For <a href="gemini://gem.bestalbumsintheuniverse.com">gemini://gem.bestalbumsintheuniverse.com</a> I am also using Jetforce and
+accessing with elpher, but I don&#x27;t get the warnings because I used Let&#x27;s
+Encrypt to generate CA certificates. If you&#x27;ve used Let&#x27;s Encrypt and
 certbot before, the process is the same as if you were setting up an https
 site, except that instead of passing the certs in an nginx or Apache
 config, you pass the cert paths to the Jetforce startup command. For
-example, here is the startup command I'm using for Jetforce:
+example, here is the startup command I&#x27;m using for Jetforce:
 
  python3 jetforce.py --host &quot;&quot; --hostname gem.bestalbumsintheuniverse.com
 --tls-certfile fullchain.pem --tls-keyfile privkey.pem
 
 This is of course after I copied the fullchain.pem and privkey.pem files
 from the  /etc/letsencrypt/live/gem.bestalbumsintheuniverse.com/ directory
-and chown'd them to the user that runs the jetforce server.
+and chown&#x27;d them to the user that runs the jetforce server.
 
 Hope this helps!
 -Travis
 -------------- next part --------------
 An HTML attachment was scrubbed...
-URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200515/c81921ed/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200515/c81921ed/attachment.htm</A>&gt;
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20200515/c81921ed/attachment.htm">https://mailing-list-archive.gemi.dev/www/attachments/20200515/c81921ed/attachment.htm</a>&gt;
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="000664.html">Announcing kwiecien.us
-</A></li>
-	<LI>Next message (by thread): <A HREF="000675.html">Announcing kwiecien.us
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#673">[ date ]</a>
-              <a href="thread.html#673">[ thread ]</a>
-              <a href="subject.html#673">[ subject ]</a>
-              <a href="author.html#673">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="000664.html">Announcing kwiecien.us</a></li>
+<li>Next message (by thread): <a href="000675.html">Announcing kwiecien.us</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#673">[ date ]</a> <a href="thread.html#673">[ thread ]</a> <a href="subject.html#673">[ subject ]</a> <a href="author.html#673">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

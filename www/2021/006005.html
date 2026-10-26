@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enhancing TOFU</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006004.html">
+<link rel="next" href="006007.html">
+</head>
+<body>
+<h1>Enhancing TOFU</h1>
+<b>Björn Wärmedal</b> bjorn.warmedal at gmail.com<br>
+<i>Mon Mar  8 12:38:24 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006004.html">Enhancing TOFU</a></li>
+<li>Next message (by thread): <a href="006007.html">Enhancing TOFU</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6005">[ date ]</a> <a href="thread.html#6005">[ thread ]</a> <a href="subject.html#6005">[ subject ]</a> <a href="author.html#6005">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Mon, 8 Mar 2021 at 13:28, Stephane Bortzmeyer &lt;stephane at sources.org&gt; wrote:
+&gt;<i> Gemini already has one way to announce this intention. To quote the
+</i>&gt;<i> spec, &quot;If the certificate is not the one previously received, BUT THE
+</i>&gt;<i> PREVIOUS CERTIFICATE&#x27;S EXPIRY DATE HAS NOT PASSED, the user is shown a
+</i>&gt;<i> warning&quot;. So, to announce your intention to change the certificate,
+</i>&gt;<i> just say so in the expiration date (notAfter field).
+</i>
+In other words broadcast to potential attackers when the best time to
+do a MitMA is :)
+
+If clients silently accept new certificates this gets even worse,
+because it opens a window where the attack can happen without anyone
+knowing.
+
+A certificate that&#x27;s valid for 90 days, ending 9 days from now, can
+silently be replace by another certificate with the same
+not-valid-before and not-valid-after, allowing the attacker 9 days of
+unnoticed operation.
+
+I think we&#x27;ve pretty much laid out all the pros and cons of TOFU as a
+validation scheme. I personally believe there is very little benefit
+to trying to make it more secure, compared to the added complexity.
+
+We need to clarify the spec around what TOFU means for clients and
+servers, and that includes removing advice like &quot;check
+not-valid-before, hostname, and not-valid-after&quot; and that certificates
+should be rotated.
+
+Or we need to decide to not use TOFU. I&#x27;m not going to reiterate the
+alternatives I see, but suffice to say that I think this is an issue
+of &quot;decide which set of pros and cons to accept&quot;.
+
+Cheers,
+ew0k
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006004.html">Enhancing TOFU</a></li>
+<li>Next message (by thread): <a href="006007.html">Enhancing TOFU</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6005">[ date ]</a> <a href="thread.html#6005">[ thread ]</a> <a href="subject.html#6005">[ subject ]</a> <a href="author.html#6005">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

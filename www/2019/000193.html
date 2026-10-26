@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[HELP] A weird issue when downloading files</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000192.html">
+<link rel="next" href="000194.html">
+</head>
+<body>
+<h1>[HELP] A weird issue when downloading files</h1>
+<b>Julien Blanchard</b> julien at typed-hole.org<br>
+<i>Tue Oct  1 21:55:45 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000192.html">TLS, TOFU and the Gemini security model</a></li>
+<li>Next message (by thread): <a href="000194.html">[HELP] A weird issue when downloading files</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#193">[ date ]</a> <a href="thread.html#193">[ thread ]</a> <a href="subject.html#193">[ subject ]</a> <a href="author.html#193">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hello Geminauts,
+
+I have a weird issue that came up when coding stuff on Asuka (my client) and maybe you can help. I?m adding support for opening whatever mime type a Gemini server is serving me.
+
+The logic I implemented so far is:
+- serve text/* in the client as usual
+- serve the other mime types by downloading content to a temporary file and opening it with xdg-open, open...
+
+In order to download the served content I first check the header as string, get its size as bytes, re-fetch the whole ?page? as bytes, reverse the bytes array, truncate it with the header length and finally reverse it again before writing it to a file.
+
+My issue is I have to add an offset of 5 bytes to the truncation for the files to be readable and I have no idea why. I tested this offset on several servers that are serving images, tarballs...  and it looks consistent.
+
+Does it ring a bell by any chance? Or maybe I?m doing all of this completely wrong.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000192.html">TLS, TOFU and the Gemini security model</a></li>
+<li>Next message (by thread): <a href="000194.html">[HELP] A weird issue when downloading files</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#193">[ date ]</a> <a href="thread.html#193">[ thread ]</a> <a href="subject.html#193">[ subject ]</a> <a href="author.html#193">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

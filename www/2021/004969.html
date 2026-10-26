@@ -1,68 +1,52 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [spec] The Tragedy of &amp;
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20The%20Tragedy%20of%20%26&In-Reply-To=%3CCAD2gp_TMUodCtsxwjfmHGxakqfS%2B5bwDF%3Doo7kHEV0jXG%3DXcFg%40mail.gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="004978.html">
-   <LINK REL="Next"  HREF="004971.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[spec] The Tragedy of &amp;</H1>
-    <B>John Cowan</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20The%20Tragedy%20of%20%26&In-Reply-To=%3CCAD2gp_TMUodCtsxwjfmHGxakqfS%2B5bwDF%3Doo7kHEV0jXG%3DXcFg%40mail.gmail.com%3E"
-       TITLE="[spec] The Tragedy of &amp;">cowan at ccil.org
-       </A><BR>
-    <I>Sun Jan 31 03:09:55 GMT 2021</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="004978.html">[spec] The Tragedy of &amp;
-</A></li>
-        <LI>Next message (by thread): <A HREF="004971.html">[spec] The Tragedy of &amp;
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4969">[ date ]</a>
-              <a href="thread.html#4969">[ thread ]</a>
-              <a href="subject.html#4969">[ subject ]</a>
-              <a href="author.html#4969">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] The Tragedy of &amp;</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004978.html">
+<link rel="next" href="004971.html">
+</head>
+<body>
+<h1>[spec] The Tragedy of &amp;</h1>
+<b>John Cowan</b> cowan at ccil.org<br>
+<i>Sun Jan 31 03:09:55 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004978.html">[spec] The Tragedy of &amp;</a></li>
+<li>Next message (by thread): <a href="004971.html">[spec] The Tragedy of &amp;</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4969">[ date ]</a> <a href="thread.html#4969">[ thread ]</a> <a href="subject.html#4969">[ subject ]</a> <a href="author.html#4969">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Wed, Jan 27, 2021 at 5:20 PM Gary Johnson &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">lambdatronic at disroot.org</A>&gt;
+<pre>On Wed, Jan 27, 2021 at 5:20 PM Gary Johnson &lt;lambdatronic at disroot.org&gt;
 wrote:
 
 
-&gt;<i> I don't think form-like data submission should be seen as an evil. It
-</I>&gt;<i> allows us to implement a wide variety of CGI-style applications that do
-</I>&gt;<i> all their computing on the server side (often through some script
-</I>&gt;<i> extension mechanism).
-</I>&gt;<i>
-</I>
+&gt;<i> I don&#x27;t think form-like data submission should be seen as an evil. It
+</i>&gt;<i> allows us to implement a wide variety of CGI-style applications that do
+</i>&gt;<i> all their computing on the server side (often through some script
+</i>&gt;<i> extension mechanism).
+</i>&gt;<i>
+</i>
 +1
 
 which $SESSION, $NAME, $PASSWORD, $SMOG, and $PLANT are defined (or default
 &gt;<i> to empty strings). When the page first loads, we create a new
-</I>&gt;<i> $SESSION value in our CGI script and insert it into the links to
-</I>&gt;<i> preserve state across requests until we restart the server or the user
-</I>&gt;<i> refreshes the page.
-</I>&gt;<i>
-</I>
+</i>&gt;<i> $SESSION value in our CGI script and insert it into the links to
+</i>&gt;<i> preserve state across requests until we restart the server or the user
+</i>&gt;<i> refreshes the page.
+</i>&gt;<i>
+</i>
 I think this is exactly the Right Thing.
 
 
 &gt;<i> (Obviously, a more robust state management mechanism could be achieved
-</I>&gt;<i> with client certs and a DB, but I just mean to show a very simple
-</I>&gt;<i> example here.)
-</I>&gt;<i>
-</I>
+</i>&gt;<i> with client certs and a DB, but I just mean to show a very simple
+</i>&gt;<i> example here.)
+</i>&gt;<i>
+</i>
 A TLS session is not the same as an application session.  I may, for
 example, have two tabs (or whatever) open in my Gemini browser that refer
 to the same access-controlled capsule, and which therefore must be accessed
@@ -74,44 +58,44 @@ protocol.
 
 While this example creates more back-and-forth requests than a proper
 &gt;<i>
-</I>client-side form would generate, I hope it demonstrates that Gemini and
+</i>client-side form would generate, I hope it demonstrates that Gemini and
 &gt;<i> Gemtext in their current incarnations are already sufficiently complete
-</I>&gt;<i> to build interactive CGI applications with them today.
-</I>&gt;<i>
-</I>
+</i>&gt;<i> to build interactive CGI applications with them today.
+</i>&gt;<i>
+</i>
 The biggest problem is most likely the cost of setting up and tearing down
 all the TLS connections, but there is no help for that.
 
 &gt;<i> The requested resource accepts a line of textual user input. The &lt;META&gt;
-</I>&gt;<i> line is a prompt which should be displayed to the user. The same
-</I>&gt;<i> resource should then be requested again with the user's input included
-</I>&gt;<i> as a query component.
-</I>
+</i>&gt;<i> line is a prompt which should be displayed to the user. The same
+</i>&gt;<i> resource should then be requested again with the user&#x27;s input included
+</i>&gt;<i> as a query component.
+</i>
 
 &quot;Included&quot; is a vague word, and should be fixed whether we do appending or
 not.
 
 &gt;<i> As far as I can tell, the fix here is for Solderpunk to update the text
-</I>&gt;<i> in section 3.2.1 to indicate that if a query string is already part of
-</I>&gt;<i> the request leading to an INPUT response, then the user's input should
-</I>&gt;<i> be appended (using &amp;) to the existing query string rather than replacing
-</I>&gt;<i> it wholesale (using ?).
-</I>&gt;<i>
-</I>
+</i>&gt;<i> in section 3.2.1 to indicate that if a query string is already part of
+</i>&gt;<i> the request leading to an INPUT response, then the user&#x27;s input should
+</i>&gt;<i> be appended (using &amp;) to the existing query string rather than replacing
+</i>&gt;<i> it wholesale (using ?).
+</i>&gt;<i>
+</i>
 I suggest that if there is no query part, we append ? followed by the
-user's input, whereas if there is, we just append the user's input.  That
+user&#x27;s input, whereas if there is, we just append the user&#x27;s input.  That
 lets a simple form work like this:
 
 1) Suppose Fluffy (a server) wants me to send my name and email address.
 Fluffy sends this bare-bones text/gemini document, which we will say comes
-from <A HREF="gemini://fluffy.example/form1,">gemini://fluffy.example/form1,</A> to my client Aarfy.
+from <a href="gemini://fluffy.example/form1">gemini://fluffy.example/form1</a>, to my client Aarfy.
 
 =&gt; Name: ?name=
 =&gt; Email: ?email=
 
-2) Let's say I choose the first link.  Fluffy sends Arfy 10 Enter your name.
+2) Let&#x27;s say I choose the first link.  Fluffy sends Arfy 10 Enter your name.
 I type John Cowan into Aarfy, which sends the URL
-<A HREF="gemini://fluffy.example/form1?session=ABC&amp;name=John%20Cowan.">gemini://fluffy.example/form1?session=ABC&amp;name=John%20Cowan.</A>  Fluffy sends
+<a href="gemini://fluffy.example/form1?session=ABC&amp;name=John%20Cowan">gemini://fluffy.example/form1?session=ABC&amp;name=John%20Cowan</a>.  Fluffy sends
 this new document to Aarfy:
 
 =&gt; Name [John Cowan]: ?session=ABC&amp;name=
@@ -119,14 +103,14 @@ this new document to Aarfy:
 
 3) If I choose the first link, I can change my name.  If I choose the
 second link, Fluffy will send Arfy 10 Enter your email.  I type
-<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A> into Aarfy, which sends the URL
-<A HREF="gemini://fluffy.example/form1?session=ABC&amp;name=John%20Cowan&amp;email=">gemini://fluffy.example/form1?session=ABC&amp;name=John%20Cowan&amp;email=</A>
-<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org.</A>  Fluffy sends this third document to Aarfy:
+cowan at ccil.org into Aarfy, which sends the URL
+<a href="gemini://fluffy.example/form1?session=ABC&amp;name=John%20Cowan&amp;email=">gemini://fluffy.example/form1?session=ABC&amp;name=John%20Cowan&amp;email=</a>
+cowan at ccil.org.  Fluffy sends this third document to Aarfy:
 
-=&gt; Name [John Cowan]: ?session=ABC&amp;email=<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>&amp;name=
-=&gt; Email: [<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>] ?session=ABC&amp;name=John%20Cowan&amp;email=
-=&gt; Submit: [<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>] ?session=ABC&amp;name=John%20Cowan&amp;email=
-<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>&amp;submit
+=&gt; Name [John Cowan]: ?session=ABC&amp;email=cowan at ccil.org&amp;name=
+=&gt; Email: [cowan at ccil.org] ?session=ABC&amp;name=John%20Cowan&amp;email=
+=&gt; Submit: [cowan at ccil.org] ?session=ABC&amp;name=John%20Cowan&amp;email=
+cowan at ccil.org&amp;submit
 
 4) If I choose the first or second link again, I can change my name or
 email address.  But if I choose the third link, which Fluffy does *not*
@@ -146,46 +130,23 @@ As before, this is a matter of design, not protocol.
 
 
 
-John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+John Cowan          <a href="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</a>        cowan at ccil.org
 There is no real going back.  Though I may come to the Shire, it will
 not seem the same; for I shall not be the same.  I am wounded with
 knife, sting, and tooth, and a long burden.  Where shall I find rest?
                 --Frodo
 -------------- next part --------------
 An HTML attachment was scrubbed...
-URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20210130/c841e6c8/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20210130/c841e6c8/attachment.htm</A>&gt;
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210130/c841e6c8/attachment.htm">https://mailing-list-archive.gemi.dev/www/attachments/20210130/c841e6c8/attachment.htm</a>&gt;
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="004978.html">[spec] The Tragedy of &amp;
-</A></li>
-	<LI>Next message (by thread): <A HREF="004971.html">[spec] The Tragedy of &amp;
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4969">[ date ]</a>
-              <a href="thread.html#4969">[ thread ]</a>
-              <a href="subject.html#4969">[ subject ]</a>
-              <a href="author.html#4969">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="004978.html">[spec] The Tragedy of &amp;</a></li>
+<li>Next message (by thread): <a href="004971.html">[spec] The Tragedy of &amp;</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4969">[ date ]</a> <a href="thread.html#4969">[ thread ]</a> <a href="subject.html#4969">[ subject ]</a> <a href="author.html#4969">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

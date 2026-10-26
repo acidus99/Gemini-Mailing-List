@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Greek characters in query string</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005896.html">
+<link rel="next" href="005897.html">
+</head>
+<body>
+<h1>Greek characters in query string</h1>
+<b>Omar Polo</b> op at omarpolo.com<br>
+<i>Thu Mar  4 07:56:45 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005896.html">Greek characters in query string</a></li>
+<li>Next message (by thread): <a href="005897.html">Greek characters in query string</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5898">[ date ]</a> <a href="thread.html#5898">[ thread ]</a> <a href="subject.html#5898">[ subject ]</a> <a href="author.html#5898">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+Stephane Bortzmeyer &lt;stephane at sources.org&gt; writes:
+
+&gt;<i> On Wed, Mar 03, 2021 at 09:57:07PM -0500,
+</i>&gt;<i>  Rev. Fr. Robert Bower &lt;frrobert at frrobert.com&gt; wrote 
+</i>&gt;<i>  a message of 38 lines which said:
+</i>&gt;<i>
+</i>&gt;<i>&gt; When the url with the query string is sent to the server (I am using
+</i>&gt;<i>&gt; Molly Brown the server and amfora as a client) it is changed the
+</i>&gt;<i>&gt; Greek characters using url encoding.
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; I am wondering how to I decode the url to get back the Greek
+</i>&gt;<i>&gt; characters.  I am using bash for my scripts.
+</i>&gt;<i>
+</i>&gt;<i> The server (MollyBrown) should do it for you :-( but if it doesn&#x27;t, in
+</i>&gt;<i> bash, you have several solutions:
+</i>
+AFAIK that&#x27;s not correct.  gmid was doing exactly that, and after
+talking to Sean that raised some doubts about my CGI implementation (for
+this and other details), I re-checked the RFC3875[0] and it effectively
+requires QUERY_STRING to be url-encoded:
+
+&gt;<i> 4.1.7.  QUERY_STRING
+</i>&gt;<i>
+</i>&gt;<i> The QUERY_STRING variable contains a URL-encoded search or parameter
+</i>&gt;<i> string;
+</i>
+[0]: <a href="gemini://tanso.net/rfc/rfc3875.txt">gemini://tanso.net/rfc/rfc3875.txt</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005896.html">Greek characters in query string</a></li>
+<li>Next message (by thread): <a href="005897.html">Greek characters in query string</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5898">[ date ]</a> <a href="thread.html#5898">[ thread ]</a> <a href="subject.html#5898">[ subject ]</a> <a href="author.html#5898">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

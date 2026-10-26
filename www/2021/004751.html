@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] Gemini Acentred Messaging System</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004750.html">
+<link rel="next" href="004752.html">
+</head>
+<body>
+<h1>[tech] Gemini Acentred Messaging System</h1>
+<b>Alex // nytpu</b> alex at nytpu.com<br>
+<i>Wed Jan  6 20:47:27 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004750.html">[tech] Gemini Acentred Messaging System</a></li>
+<li>Next message (by thread): <a href="004752.html">[tech] Gemini Acentred Messaging System</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4751">[ date ]</a> <a href="thread.html#4751">[ thread ]</a> <a href="subject.html#4751">[ subject ]</a> <a href="author.html#4751">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>I really like this idea! Mixing the ease of writing, simplicity, and
+asynchronicity of gemlog replies with the ease of reading on a
+centralized page instead of searching out all the relevant posts on an
+aggregator.
+
+I link to GUS&#x27; backlinks on my own gemlog, but by the time GUS
+updates (last updated: 2020-12-06) my posts are usually over a month
+old, making the backlinks practically useless to anyone following the
+conversation as it unfolds. Another way to have these sorts of
+conversation are in order, saving people from having to make posts
+listing the full conversation like:
+<a href="gemini://republic.circumlunar.space/users/flexibeast/gemlog/2021-01-06.gmi">gemini://republic.circumlunar.space/users/flexibeast/gemlog/2021-01-06.gmi</a>
+
+
+Some feedback:
+&gt;<i> I originally intended to annouce this with a working capsule directly,
+</i>&gt;<i> but I?m having a hard time finding time to implement a board, and I
+</i>&gt;<i> wanted to do something completely based on text/gemini files for data
+</i>&gt;<i> to avoid using a database and it?s harder than anticipated.
+</i>I see no reason why your board server couldn&#x27;t use a database (or a
+non-gemtext file format) in the backend.  It would probably make it a
+lot easier when querying and parsing since you can use a custom
+structure that suits your internal data format, then just render to
+gemtext once you&#x27;re done.
+
+&gt;<i> The board should present a threaded view of messages
+</i>I have mixed feelings on threaded forums in general, but if you think
+it&#x27;s best it it&#x27;s not the end of the world.  However, it would
+/significantly/ simplify implementations if you just chronologically
+grouped messages by post tag.  You&#x27;d no longer have to query every
+single tagged post and find the first link, instead just querying the
+gemini feed page, saving lots of server time and bandwidth for both the
+board hoster&#x27;s server and the post author&#x27;s server.
+
+However, this non-threaded approach creates a problem.  This is the only
+situation I&#x27;ve come across so far that is actually limited by the gemini
+feed&#x27;s no timestamp limitation.  Since conversations can happen in the
+span of a day, it would make it hard to group them.  This would be the
+main reason I could think of for keeping the threaded design currently
+proposed.
+
+
+I dunno, it&#x27;s something to ponder on. I do love the idea though, and
+will be trying out your implementation when it&#x27;s done.
+
+~nytpu
+
+-- 
+Alex // nytpu
+alex at nytpu.com
+GPG Key: <a href="https://www.nytpu.com/files/pubkey.asc">https://www.nytpu.com/files/pubkey.asc</a>
+Key fingerprint: 43A5 890C EE85 EA1F 8C88 9492 ECCD C07B 337B 8F5B
+<a href="https://useplaintext.email/">https://useplaintext.email/</a>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 833 bytes
+Desc: not available
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210106/3216f154/attachment.sig">https://mailing-list-archive.gemi.dev/www/attachments/20210106/3216f154/attachment.sig</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004750.html">[tech] Gemini Acentred Messaging System</a></li>
+<li>Next message (by thread): <a href="004752.html">[tech] Gemini Acentred Messaging System</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4751">[ date ]</a> <a href="thread.html#4751">[ thread ]</a> <a href="subject.html#4751">[ subject ]</a> <a href="author.html#4751">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

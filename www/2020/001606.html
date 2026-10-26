@@ -1,130 +1,81 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Thoughts on TOFU
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Thoughts%20on%20TOFU&In-Reply-To=%3C20200612225019.GG11281%40brevard.conman.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="001604.html">
-   <LINK REL="Next"  HREF="001613.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Thoughts on TOFU</H1>
-    <B>Sean Conner</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Thoughts%20on%20TOFU&In-Reply-To=%3C20200612225019.GG11281%40brevard.conman.org%3E"
-       TITLE="Thoughts on TOFU">sean at conman.org
-       </A><BR>
-    <I>Fri Jun 12 23:50:19 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="001604.html">Thoughts on TOFU
-</A></li>
-        <LI>Next message (by thread): <A HREF="001613.html">Thoughts on TOFU
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1606">[ date ]</a>
-              <a href="thread.html#1606">[ thread ]</a>
-              <a href="subject.html#1606">[ subject ]</a>
-              <a href="author.html#1606">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thoughts on TOFU</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="001604.html">
+<link rel="next" href="001613.html">
+</head>
+<body>
+<h1>Thoughts on TOFU</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Fri Jun 12 23:50:19 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="001604.html">Thoughts on TOFU</a></li>
+<li>Next message (by thread): <a href="001613.html">Thoughts on TOFU</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1606">[ date ]</a> <a href="thread.html#1606">[ thread ]</a> <a href="subject.html#1606">[ subject ]</a> <a href="author.html#1606">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>It was thus said that the Great Felix Quei&#223;ner once stated:
+<pre>It was thus said that the Great Felix Quei?ner once stated:
 &gt;<i> Hey List!
-</I>&gt;<i> 
-</I>&gt;<i> While planning out the implementation of TOFU for Kristall, i noticed
-</I>&gt;<i> something weird:
-</I>&gt;<i> 
-</I>&gt;<i> Quoting the spec:
-</I>&gt;<i> ----------------------------------------------------------------------
-</I>&gt;<i> TOFU stands for &quot;Trust On First Use&quot; and is public-key security model
-</I>&gt;<i> similar to that used by OpenSSH.  The first time a Gemini client
-</I>&gt;<i> connects to a server, it accepts whatever certificate it is presented.
-</I>&gt;<i> That certificate's fingerprint and expiry date are saved in a persistent
-</I>&gt;<i> database (like the .known_hosts file for SSH), associated with the
-</I>&gt;<i> server's hostname.  On all subsequent connections to that hostname, the
-</I>&gt;<i> received certificate's fingerprint is computed and compared to the one
-</I>&gt;<i> in the database.  If the certificate is not the one previously received,
-</I>&gt;<i> but the previous certificate's expiry date has not passed, the user is
-</I>&gt;<i> shown a warning, analogous to the one web browser users are shown when
-</I>&gt;<i> receiving a certificate without a signature chain leading to a trusted CA.
-</I>&gt;<i> ----------------------------------------------------------------------
-</I>&gt;<i> 
-</I>&gt;<i> This means that trust in a server is lost as soon as a certificate is
-</I>&gt;<i> expired and a subsequent renewal of the certificate with the same
-</I>&gt;<i> private key is the same as visiting the host for the first time. But
-</I>&gt;<i> when i refresh my server certificate before it expires (which is
-</I>&gt;<i> recommended), we will have the situation that the client will not trust
-</I>&gt;<i> the server anymore (same situation as when an attacker is doing a MITM
-</I>&gt;<i> attack) which i think is not a good situation.
-</I>&gt;<i> 
-</I>&gt;<i> My proposal for both server certificates is the following:
-</I>&gt;<i> An endpoint stores the public key of the servers certificate as well as
-</I>&gt;<i> the host name. As long as this host continues to use the same identity
-</I>&gt;<i> (pub+privkey), it will be trusted. Certificates that aren't refreshed
-</I>&gt;<i> will error to the client, having another pubkey presented will error
-</I>&gt;<i> &quot;harder&quot; (as in: this is a possible MITM attack)
-</I>&gt;<i> 
-</I>&gt;<i> The same behaviour could be used for client certificates as well,
-</I>&gt;<i> allowing the renewal of client certificates with the same private key
-</I>&gt;<i> (which would solve the &quot;how do i have persistent identities&quot;)
-</I>&gt;<i> 
-</I>&gt;<i> What do you guys think?
-</I>
-  I think that's reasonable, as the client certificate for gemini.conman.org
+</i>&gt;<i> 
+</i>&gt;<i> While planning out the implementation of TOFU for Kristall, i noticed
+</i>&gt;<i> something weird:
+</i>&gt;<i> 
+</i>&gt;<i> Quoting the spec:
+</i>&gt;<i> ----------------------------------------------------------------------
+</i>&gt;<i> TOFU stands for &quot;Trust On First Use&quot; and is public-key security model
+</i>&gt;<i> similar to that used by OpenSSH.  The first time a Gemini client
+</i>&gt;<i> connects to a server, it accepts whatever certificate it is presented.
+</i>&gt;<i> That certificate&#x27;s fingerprint and expiry date are saved in a persistent
+</i>&gt;<i> database (like the .known_hosts file for SSH), associated with the
+</i>&gt;<i> server&#x27;s hostname.  On all subsequent connections to that hostname, the
+</i>&gt;<i> received certificate&#x27;s fingerprint is computed and compared to the one
+</i>&gt;<i> in the database.  If the certificate is not the one previously received,
+</i>&gt;<i> but the previous certificate&#x27;s expiry date has not passed, the user is
+</i>&gt;<i> shown a warning, analogous to the one web browser users are shown when
+</i>&gt;<i> receiving a certificate without a signature chain leading to a trusted CA.
+</i>&gt;<i> ----------------------------------------------------------------------
+</i>&gt;<i> 
+</i>&gt;<i> This means that trust in a server is lost as soon as a certificate is
+</i>&gt;<i> expired and a subsequent renewal of the certificate with the same
+</i>&gt;<i> private key is the same as visiting the host for the first time. But
+</i>&gt;<i> when i refresh my server certificate before it expires (which is
+</i>&gt;<i> recommended), we will have the situation that the client will not trust
+</i>&gt;<i> the server anymore (same situation as when an attacker is doing a MITM
+</i>&gt;<i> attack) which i think is not a good situation.
+</i>&gt;<i> 
+</i>&gt;<i> My proposal for both server certificates is the following:
+</i>&gt;<i> An endpoint stores the public key of the servers certificate as well as
+</i>&gt;<i> the host name. As long as this host continues to use the same identity
+</i>&gt;<i> (pub+privkey), it will be trusted. Certificates that aren&#x27;t refreshed
+</i>&gt;<i> will error to the client, having another pubkey presented will error
+</i>&gt;<i> &quot;harder&quot; (as in: this is a possible MITM attack)
+</i>&gt;<i> 
+</i>&gt;<i> The same behaviour could be used for client certificates as well,
+</i>&gt;<i> allowing the renewal of client certificates with the same private key
+</i>&gt;<i> (which would solve the &quot;how do i have persistent identities&quot;)
+</i>&gt;<i> 
+</i>&gt;<i> What do you guys think?
+</i>
+  I think that&#x27;s reasonable, as the client certificate for gemini.conman.org
 is set to expire in a few days (I run my own CA as an experiment).  
 
   -spc
 
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="001604.html">Thoughts on TOFU
-</A></li>
-	<LI>Next message (by thread): <A HREF="001613.html">Thoughts on TOFU
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1606">[ date ]</a>
-              <a href="thread.html#1606">[ thread ]</a>
-              <a href="subject.html#1606">[ subject ]</a>
-              <a href="author.html#1606">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="001604.html">Thoughts on TOFU</a></li>
+<li>Next message (by thread): <a href="001613.html">Thoughts on TOFU</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1606">[ date ]</a> <a href="thread.html#1606">[ thread ]</a> <a href="subject.html#1606">[ subject ]</a> <a href="author.html#1606">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

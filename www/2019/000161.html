@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>URLs in request lines</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000160.html">
+<link rel="next" href="000171.html">
+</head>
+<body>
+<h1>URLs in request lines</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Sun Sep 15 07:06:17 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000160.html">URLs in request lines</a></li>
+<li>Next message (by thread): <a href="000171.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#161">[ date ]</a> <a href="thread.html#161">[ thread ]</a> <a href="subject.html#161">[ subject ]</a> <a href="author.html#161">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Bradley D. Thornton once stated:
+&gt;<i> On 9/14/2019 3:36 PM, Sean Conner wrote:
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt;   The TL;DR of this would be:  the following two URLs SHOULD be the same and
+</i>&gt;<i> &gt; serve up the same page:
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt;         <a href="gemini://example.com">gemini://example.com</a>
+</i>&gt;<i> &gt;         <a href="gemini://example.com/">gemini://example.com/</a> 
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt;   What&#x27;s below is my thought process leading up to that.
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt;   Technically speaking, these two URLs are NOT the same:
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt; 	<a href="http://example.com/foo">http://example.com/foo</a>
+</i>&gt;<i> &gt; 	<a href="http://example.com/foo/">http://example.com/foo/</a>
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt; and a webserver could technically serve up different content for the two
+</i>&gt;<i> &gt; requests.
+</i>&gt;<i> 
+</i>&gt;<i> And that does happen sometimes in the real world, and confuses people.
+</i>&gt;<i> To me, the trailing slash forces the implication that you&#x27;re looking for
+</i>&gt;<i> an index file in that particular directory, whatever kind is specified
+</i>&gt;<i> by httpd, rather than a file named foo.
+</i>&gt;<i> 
+</i>&gt;<i> After all, there could exist, both a directory *AND* a file named &#x27;foo&#x27;.
+</i>
+  That would be a good trick.  I don&#x27;t know of any filesystem that will
+allow you to have a file *and* a directory with the same name in the same
+location.  
+
+
+  I had to do that with a custom non-filesystem handler.
+
+&gt;<i> &gt; But RFC-3986, section 6.2.3 states that the following are the
+</i>&gt;<i> &gt; same for http:
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt; 	<a href="http://example.com">http://example.com</a>
+</i>&gt;<i> &gt; 	<a href="http://example.com/">http://example.com/</a>
+</i>&gt;<i> &gt;
+</i>&gt;<i> 
+</i>&gt;<i> And IMO, they should be treated as such, but are sometimes not. I&#x27;ve
+</i>&gt;<i> received 404&#x27;s on occsion when omitting the trailing slash, and just got
+</i>&gt;<i> into the habit of (most often) putting it there when I type in an URL.
+</i>
+  That sounds like a webserver that hasn&#x27;t been set up to automatically
+redirect when it sees a resource that is an actual directory but the request
+doesn&#x27;t include a trailing slash.
+
+&gt;<i> &gt;   The question you are asking is---are the these two examples the same for
+</i>&gt;<i> &gt; Gemini?
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt; 	<a href="gemini://example.com">gemini://example.com</a>
+</i>&gt;<i> &gt; 	<a href="gemini://example.com/">gemini://example.com/</a>
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt;   Again, per RFC-3986, they are (unless some document describing Gemini URLs
+</i>&gt;<i> &gt; states otherwise).  I naturally assumed they would be as they are for HTTP.
+</i>&gt;<i> &gt; That&#x27;s perhaps an unwarrented assumption, but I would have to think the two
+</i>&gt;<i> &gt; *are* the same, because of the nature of URLs.
+</i>&gt;<i> 
+</i>&gt;<i> What about:
+</i>&gt;<i>      <a href="gemini://example.com/foo">gemini://example.com/foo</a>
+</i>&gt;<i>      <a href="gemini://example.com/foo/">gemini://example.com/foo/</a>
+</i>
+  What about it?
+
+	<a href="gemini://gemini.conman.org/foo">gemini://gemini.conman.org/foo</a>
+	<a href="gemini://gemini.conman.org/foo/">gemini://gemini.conman.org/foo/</a>
+
+&gt;<i> In the first example, couldn&#x27;t that refer to either a request for either
+</i>&gt;<i> an index.gmi in foo/ or a file in / called foo?
+</i>
+  Try it.  [1]
+
+&gt;<i> I&#x27;m not proposing anything. I&#x27;m just asking.
+</i>
+  And I&#x27;m answering 8-P
+
+  But seriously, I don&#x27;t think this should be done, even if it can be done.
+
+&gt;<i> I&#x27;ve been invited over to another farm tonight to do some Drinkin&#x27;
+</i>&gt;<i> Lincoln, and I know they&#x27;ve got good sippin&#x27; whiskey there lolz.
+</i>&gt;<i> 
+</i>&gt;<i> I&#x27;ve finished fiddling with the main gophermap on <a href="gopher://Vger.Cloud">gopher://Vger.Cloud</a>
+</i>&gt;<i> and one client is giving me errors about:
+</i>&gt;<i> 
+</i>&gt;<i> &lt;snip&gt;
+</i>&gt;<i> sh: 1: Syntax error: &quot;(&quot; unexpected
+</i>&gt;<i> &lt;/snip&gt;
+</i>
+  It&#x27;s the server.  My own gopher client is failing to show the output. 
+Doing it manually reveals the issue:
+
+[spc]lucy:~/source/gopher&gt;nc vger.cloud 70
+
+sh: 1: Syntax error: &quot;(&quot; unexpected
+iWelcome to Vger!       TITLE   null.host       1
+i               null.host       1
+
+  I only mention in case it wasn&#x27;t clear if the error was in the client or
+server.
+
+  -spc 
+
+[1]	I had to write a custom handler to do that.  I don&#x27;t have a file
+	named &#x27;foo&#x27; or a directory named &#x27;foo&#x27;.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000160.html">URLs in request lines</a></li>
+<li>Next message (by thread): <a href="000171.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#161">[ date ]</a> <a href="thread.html#161">[ thread ]</a> <a href="subject.html#161">[ subject ]</a> <a href="author.html#161">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

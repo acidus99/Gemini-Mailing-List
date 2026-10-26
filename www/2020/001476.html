@@ -1,150 +1,71 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> implementing client certificate support
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20implementing%20client%20certificate%20support&In-Reply-To=%3CCAG-mZ3g1t4i%2BU60kQ9120%3Dk2SH4cwC89rwgZb-NEgrfNWSp2ug%40mail.gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="001473.html">
-   <LINK REL="Next"  HREF="001480.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>implementing client certificate support</H1>
-    <B>Peter Vernigorov</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20implementing%20client%20certificate%20support&In-Reply-To=%3CCAG-mZ3g1t4i%2BU60kQ9120%3Dk2SH4cwC89rwgZb-NEgrfNWSp2ug%40mail.gmail.com%3E"
-       TITLE="implementing client certificate support">pitr.vern at gmail.com
-       </A><BR>
-    <I>Wed Jun 10 01:16:07 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="001473.html">implementing client certificate support
-</A></li>
-        <LI>Next message (by thread): <A HREF="001480.html">implementing client certificate support
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1476">[ date ]</a>
-              <a href="thread.html#1476">[ thread ]</a>
-              <a href="subject.html#1476">[ subject ]</a>
-              <a href="author.html#1476">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>implementing client certificate support</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="001473.html">
+<link rel="next" href="001480.html">
+</head>
+<body>
+<h1>implementing client certificate support</h1>
+<b>Peter Vernigorov</b> pitr.vern at gmail.com<br>
+<i>Wed Jun 10 01:16:07 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="001473.html">implementing client certificate support</a></li>
+<li>Next message (by thread): <a href="001480.html">implementing client certificate support</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1476">[ date ]</a> <a href="thread.html#1476">[ thread ]</a> <a href="subject.html#1476">[ subject ]</a> <a href="author.html#1476">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Wouldn&#8217;t the rest of that server&#8217;s content be also in the same language and
+<pre>Wouldn?t the rest of that server?s content be also in the same language and
 therefore not accessible to the user?
 
-On Tue, Jun 9, 2020 at 23:13 Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+On Tue, Jun 9, 2020 at 23:13 Sean Conner &lt;sean at conman.org&gt; wrote:
 
 &gt;<i> It was thus said that the Great Tadeusz Sosnierz once stated:
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt; 2020-06-09 22:59 GMT+02:00 Sean Conner&lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt;:
-</I>&gt;<i> &gt; &gt; Just saying &quot;bad certificate&quot; isn't actionable enough for the user. Why
-</I>&gt;<i> &gt; &gt; is it bad? Has it expired? Rejected? What? I NEED TO KNOW!
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt; Isn't that something that could go in the &quot;meta&quot; part of the response, or
-</I>&gt;<i> &gt; the content itself?
-</I>&gt;<i>
-</I>&gt;<i>   It could, but what does it mean when I get back &quot;n&#237; ghlactar le
-</I>&gt;<i> deimhni&#250;&quot;,
-</I>&gt;<i> &quot;di&#250;lta&#237;odh deimhni&#250; sa todhcha&#237;&quot;, or &quot;di&#250;lta&#237;odh deimhni&#250; caite&quot;?  Not
-</I>&gt;<i> everyone speaks English and a numeric response is unambiguous.
-</I>&gt;<i>
-</I>&gt;<i> &gt; The specificness of 6x codes is something I find quite puzzling,
-</I>&gt;<i> &gt; especially considering how carefully select the other codes are.
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt; Especially 64. When does that even come into play?
-</I>&gt;<i>
-</I>&gt;<i>   Time skew between the client and server on a freshly minted
-</I>&gt;<i> certificate.
-</I>&gt;<i>
-</I>&gt;<i> &gt; (Oh, and hi everyone; I'm new here, so excuse my perhaps silly questions
-</I>&gt;<i> :))
-</I>&gt;<i>
-</I>&gt;<i>   Hello, and no, your questions aren't silly.
-</I>&gt;<i>
-</I>&gt;<i>   -spc
-</I>&gt;<i>
-</I>-------------- next part --------------
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; 2020-06-09 22:59 GMT+02:00 Sean Conner&lt;sean at conman.org&gt;:
+</i>&gt;<i> &gt; &gt; Just saying &quot;bad certificate&quot; isn&#x27;t actionable enough for the user. Why
+</i>&gt;<i> &gt; &gt; is it bad? Has it expired? Rejected? What? I NEED TO KNOW!
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; Isn&#x27;t that something that could go in the &quot;meta&quot; part of the response, or
+</i>&gt;<i> &gt; the content itself?
+</i>&gt;<i>
+</i>&gt;<i>   It could, but what does it mean when I get back &quot;n? ghlactar le
+</i>&gt;<i> deimhni?&quot;,
+</i>&gt;<i> &quot;di?lta?odh deimhni? sa todhcha?&quot;, or &quot;di?lta?odh deimhni? caite&quot;?  Not
+</i>&gt;<i> everyone speaks English and a numeric response is unambiguous.
+</i>&gt;<i>
+</i>&gt;<i> &gt; The specificness of 6x codes is something I find quite puzzling,
+</i>&gt;<i> &gt; especially considering how carefully select the other codes are.
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; Especially 64. When does that even come into play?
+</i>&gt;<i>
+</i>&gt;<i>   Time skew between the client and server on a freshly minted
+</i>&gt;<i> certificate.
+</i>&gt;<i>
+</i>&gt;<i> &gt; (Oh, and hi everyone; I&#x27;m new here, so excuse my perhaps silly questions
+</i>&gt;<i> :))
+</i>&gt;<i>
+</i>&gt;<i>   Hello, and no, your questions aren&#x27;t silly.
+</i>&gt;<i>
+</i>&gt;<i>   -spc
+</i>&gt;<i>
+</i>-------------- next part --------------
 An HTML attachment was scrubbed...
-URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200610/cee6f610/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200610/cee6f610/attachment.htm</A>&gt;
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20200610/cee6f610/attachment.htm">https://mailing-list-archive.gemi.dev/www/attachments/20200610/cee6f610/attachment.htm</a>&gt;
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="001473.html">implementing client certificate support
-</A></li>
-	<LI>Next message (by thread): <A HREF="001480.html">implementing client certificate support
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1476">[ date ]</a>
-              <a href="thread.html#1476">[ thread ]</a>
-              <a href="subject.html#1476">[ subject ]</a>
-              <a href="author.html#1476">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="001473.html">implementing client certificate support</a></li>
+<li>Next message (by thread): <a href="001480.html">implementing client certificate support</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1476">[ date ]</a> <a href="thread.html#1476">[ thread ]</a> <a href="subject.html#1476">[ subject ]</a> <a href="author.html#1476">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

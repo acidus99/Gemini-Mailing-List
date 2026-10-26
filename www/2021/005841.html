@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[announce] Delegation of responsibility for spec finalisation</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005837.html">
+<link rel="next" href="005839.html">
+</head>
+<body>
+<h1>[announce] Delegation of responsibility for spec finalisation</h1>
+<b>Juan J. Martinez</b> jjm at usebox.net<br>
+<i>Tue Mar  2 08:09:03 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005837.html">[announce] Delegation of responsibility for spec finalisation</a></li>
+<li>Next message (by thread): <a href="005839.html">[announce] Delegation of responsibility for spec finalisation</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5841">[ date ]</a> <a href="thread.html#5841">[ thread ]</a> <a href="subject.html#5841">[ subject ]</a> <a href="author.html#5841">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+
+On 02/03/2021 00:23, Scot wrote:
+&gt;<i>[...]
+</i>&gt;<i> 
+</i>&gt;<i> After writing C and Python client and server implementations
+</i>&gt;<i> last fall, and examing packet traces, my conclusion was that
+</i>&gt;<i> this does not work with most TLS libraries. Mostly, they will
+</i>&gt;<i> close the connection in both directions if they receive a
+</i>&gt;<i> close_notify. Some of this is documented here [1]. This in
+</i>&gt;<i> turn causes problems for programming languages which
+</i>&gt;<i> expect a given library to behave in a certain way. For example,
+</i>&gt;<i> Python still does not allow sending a close_notify from the
+</i>&gt;<i> client after the request has been delivered and before
+</i>&gt;<i> receiving the response [2].
+</i>&gt;<i> 
+</i>&gt;<i> So, in my opinion, the simplest thing would be to utilize the
+</i>&gt;<i> &lt;CR&gt;&lt;LF&gt; of the Gemini request to indicate that the client
+</i>&gt;<i> is finished sending its request.
+</i>&gt;<i> 
+</i>&gt;<i> Three benefits of this approach would be:
+</i>&gt;<i> 
+</i>&gt;<i> 1. All Gemini clients will keep working right now without changes
+</i>&gt;<i> 
+</i>&gt;<i> 2. Because the &lt;CR&gt;&lt;LF&gt; can be explicitely sent by a client
+</i>&gt;<i> application and explicetely examined by the server application,
+</i>&gt;<i> without broken TLS libraries intervening, it is easy to correctly
+</i>&gt;<i> implement
+</i>&gt;<i> 
+</i>&gt;<i> 3. Gemini client authors will not experience intense frustration
+</i>&gt;<i> at the sad state of TLS library support for half-open close_notify
+</i>&gt;<i> (this is the voice of experience speaking...)
+</i>
+I&#x27;m not in any way a TLS expert, but I think you&#x27;re right: TLS 1.2 uses 
+a duplex-close policy (while TLS 1.3 uses a half-close policy, so that 
+should work better).
+
+IMHO the spec should probably refer to the RFC when available and 
+perhaps make a recommendation, but getting into specific details on how 
+the TLS implementation must behave is hairy and probably not practical.
+
+As long as the spec is clear, real world can differ and still work, and 
+that&#x27;s OK.
+
+Regards,
+
+Juan
+
+-- 
+Website: usebox.net/jjm/
+Twitter: @reidrac
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005837.html">[announce] Delegation of responsibility for spec finalisation</a></li>
+<li>Next message (by thread): <a href="005839.html">[announce] Delegation of responsibility for spec finalisation</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5841">[ date ]</a> <a href="thread.html#5841">[ thread ]</a> <a href="subject.html#5841">[ subject ]</a> <a href="author.html#5841">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

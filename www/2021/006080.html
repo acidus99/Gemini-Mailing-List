@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] Regarding the proposal to remove status code 11</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006078.html">
+<link rel="next" href="006081.html">
+</head>
+<body>
+<h1>[spec] Regarding the proposal to remove status code 11</h1>
+<b>PJ vM</b> pjvm742 at disroot.org<br>
+<i>Sat Mar 13 20:03:30 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006078.html">[users] new capsule: hyperborea.org</a></li>
+<li>Next message (by thread): <a href="006081.html">[spec] Regarding the proposal to remove status code 11</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6080">[ date ]</a> <a href="thread.html#6080">[ thread ]</a> <a href="subject.html#6080">[ subject ]</a> <a href="author.html#6080">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Over at Gitlab, people are discussing [1] a potential deprecation of
+status code 11 (sensitive input). A few points.
+
+Firstly, for certain (possibly many) use cases password authentication
+(combined with shorter- or longer-lived &quot;session&quot; client certificates)
+is the right choice over only using client certificates. Some examples I
+could quickly think of:
+
+* a Gemini interface to a service for which the user already has login
+credentials (and other cases where one needs to confirm the user is the
+same as an identity previously established by other means than a
+certificate)
+* any use case for which client certs are simply not portable enough
+* the equivalent of &quot;changing one&#x27;s password&quot; seems (not certain about
+this) quite tedious to do in a world with only client certs, for use
+cases where the users are pseudonymous
+
+It seems clear to me that login credentials and certs are sufficiently
+different in practical aspects that certs cannot replace password
+authentication for all use cases.
+
+So, and this is really my key point: whether one likes it or not, I
+think password authentication will keep being used as long as there is a
+way to give input to the server.
+
+Secondly, let&#x27;s look at why exactly it is considered a bad idea to put
+sensitive information in a URL. The reasons given by RFC 3986 §7.5
+(quoted at the Gitlab issue) are:
+
+&gt;<i> URIs are frequently displayed by browsers, stored in clear text
+</i>&gt;<i> bookmarks, and logged by user agent history and intermediary
+</i>&gt;<i> applications (proxies)
+</i>The last problem can be avoided by not using relay-type proxies (by
+which I mean proxies where the TLS connection is with the proxy rather
+than with the destination). Note that all the other problems can be
+addressed by client software IF it&#x27;s possible to distinguish between
+sensitive and non-sensitive input. When the server sends 11, the client
+can hide the input the user is typing, and throw away the query after
+sending the request, before displaying the URL in the URL bar or saving
+it in the browsing history.
+
+So actually, if we reason from the assumption that password
+authentication will happen anyway (as I&#x27;ve argued above), removing
+status code 11 has rather negative consequences, as it removes the
+ability to distinguish between sensitive and non-sensitive input.
+
+My conclusion is that removing status code 11 would be unwise, and
+instead it would be better to include a recommendation in the best
+practices document to throw away the query part after sending a request
+that results from user input on a 11 page. Maybe there should also be a
+recommendation to store client certs in a password-encrypted vault, as
+of course storing long-lived certs unencrypted is about as much of a
+problem as storing sensitive queries in the browsing history.
+
+Thirdly and lastly, about Gitlab. I strongly dislike the fact that
+discussions which can have quite an impact on all Gemini users are
+happening in Gitlab issues; to stay up-to-date on all these requires
+regularly going through multiple webpages, and to comment requires a
+Gitlab account! I think this is a mistake.
+
+Please excuse the length of this email.
+
+[1] <a href="https://gitlab.com/gemini-specification/protocol/-/issues/17">https://gitlab.com/gemini-specification/protocol/-/issues/17</a>
+
+-- 
+pjvm
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006078.html">[users] new capsule: hyperborea.org</a></li>
+<li>Next message (by thread): <a href="006081.html">[spec] Regarding the proposal to remove status code 11</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6080">[ date ]</a> <a href="thread.html#6080">[ thread ]</a> <a href="subject.html#6080">[ subject ]</a> <a href="author.html#6080">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

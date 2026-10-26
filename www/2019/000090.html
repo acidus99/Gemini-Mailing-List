@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questions on INPUT behavior</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000089.html">
+<link rel="next" href="000091.html">
+</head>
+<body>
+<h1>Questions on INPUT behavior</h1>
+<b>Michael Lazar</b> lazar.michael22 at gmail.com<br>
+<i>Wed Aug 28 16:24:51 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000089.html">Questions on INPUT behavior</a></li>
+<li>Next message (by thread): <a href="000091.html">Questions on INPUT behavior</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#90">[ date ]</a> <a href="thread.html#90">[ thread ]</a> <a href="subject.html#90">[ subject ]</a> <a href="author.html#90">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Jason McBrayer wrote:
+&gt;<i> solderpunk writes:
+</i>&gt;<i> &gt;&gt; &gt; 5. In the above example, what happens if a request to that URL
+</i>&gt;<i> &gt;&gt; &gt; returns a status code of 10? Should the client strip the existing
+</i>&gt;<i> &gt;&gt; &gt; query components from the URL, or append a new key=value pair to
+</i>&gt;<i> &gt;&gt; &gt; the end?
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; Hmm. If a client requests the URL above, it should include the query
+</i>&gt;<i> &gt; string in the request. So why would the server respond with a status
+</i>&gt;<i> &gt; 10 in that case? I mean, it&#x27;s currently not prohibited in the spec for
+</i>&gt;<i> &gt; a server to do that, so this is a fair question. I&#x27;m not sure whether
+</i>&gt;<i> &gt; we *should* forbid it or spec some sensible client response. Did you
+</i>&gt;<i> &gt; have a use case in mind or are you just keeping an eye out for edge
+</i>&gt;<i> &gt; cases?
+</i>&gt;<i>
+</i>&gt;<i> I can imagine a client asking successive questions in response to
+</i>&gt;<i> answers. But I&#x27;m not sure what the client should do. We might want to
+</i>&gt;<i> specify that Gemini URLs should not contain query parts except in
+</i>&gt;<i> requests initiated by 1x responses. Or that the query part should never
+</i>&gt;<i> be significant in a published URL; that it should be a pre-filled
+</i>&gt;<i> suggestion that can be modified by the client.
+</i>
+Here&#x27;s the example that I was thinking about when I wrote this question. I have
+a gopher site that acts as a search engine for drink recipes [1]. Users can
+filter their search results based on predefined tags, or they can search by
+keyword using a gopher menu &quot;7&quot; query.
+
+After adding some search filters, your path might look like this*:
+
+    <a href="gopher://mozz.us:7003/1/search?tag=37&amp;tag=5&amp;image=1">gopher://mozz.us:7003/1/search?tag=37&amp;tag=5&amp;image=1</a>
+
+And then if you submit a search to that path, it will append the &quot;q=&quot; param to
+the existing filters:
+
+    <a href="gopher://mozz.us:7003/1/search?tag=37&amp;tag=5&amp;image=1&amp;q=irish">gopher://mozz.us:7003/1/search?tag=37&amp;tag=5&amp;image=1&amp;q=irish</a>
+
+I&#x27;m trying to think of how I could re-implement this type of application in
+gemini. And I can&#x27;t really come up with a good solution if we assume that user
+input clears the current query params.
+
+This is admittedly a fringe case and I haven&#x27;t seen anybody else do this type
+of advanced search filtering in gopher. But it&#x27;s fairly common to use query
+params like this in HTTP when designing REST-like endpoints. For example, I
+might have a link at the top of my search results that sets
+&quot;?limit=20&quot; to control
+how many items are returned. I would want the user to be able to submit a new
+search string while preserving their previous choice for the limit.
+
+*side note: Many gopher clients can&#x27;t load this URL directly because they
+incorrectly treat everything after the &quot;?&quot; as a search query, or they strip it
+off completely (I&#x27;m looking at you, lynx!) [2].
+
+[1] <a href="gopher://mozz.us:7003/1/search">gopher://mozz.us:7003/1/search</a>
+[2] <a href="https://www.w3.org/Addressing/URL/4_1_Gopher+.html">https://www.w3.org/Addressing/URL/4_1_Gopher+.html</a>
+
+- mozz
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000089.html">Questions on INPUT behavior</a></li>
+<li>Next message (by thread): <a href="000091.html">Questions on INPUT behavior</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#90">[ date ]</a> <a href="thread.html#90">[ thread ]</a> <a href="subject.html#90">[ subject ]</a> <a href="author.html#90">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

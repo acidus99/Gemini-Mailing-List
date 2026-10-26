@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] What to do of fragments when there is a redirection</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004742.html">
+<link rel="next" href="004745.html">
+</head>
+<body>
+<h1>[spec] What to do of fragments when there is a redirection</h1>
+<b>Gary Johnson</b> lambdatronic at disroot.org<br>
+<i>Tue Jan  5 18:53:26 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004742.html">[spec] Proposed changes</a></li>
+<li>Next message (by thread): <a href="004745.html">[spec] What to do of fragments when there is a redirection</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4743">[ date ]</a> <a href="thread.html#4743">[ thread ]</a> <a href="subject.html#4743">[ subject ]</a> <a href="author.html#4743">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Solderpunk &lt;solderpunk at posteo.net&gt; writes:
+
+&gt;<i> Should redirect URLs be allowed to contain queries?
+</i>&gt;<i>
+</i>&gt;<i> If an original URL has a query in it but the client gets back a redirect
+</i>&gt;<i> URL without a query, should the original query be appended?
+</i>
+That&#x27;s a fair question. One of the recommendations you made for server
+authors was that we should redirect any URLs that don&#x27;t end with a / to
+their equivalent paths with / appended.
+
+Thus a URL like    <a href="gemini://mycapsule.org/foo?somequery">gemini://mycapsule.org/foo?somequery</a>
+should redirect to <a href="gemini://mycapsule.org/foo/?somequery">gemini://mycapsule.org/foo/?somequery</a>
+in order for the client to be able to correctly resolve any relative
+URLs in links within the returned gemtext document (assuming this URL
+responds with gemtext).
+
+This is what I currently do in Space Age. If we were to mandate dropping
+the query string, I suspect we would end up with some very broken
+dynamic pages in Geminispace.
+
+YMMV,
+  Gary
+
+-- 
+GPG Key ID: 7BC158ED
+Use `gpg --search-keys lambdatronic&#x27; to find me
+Protect yourself from surveillance: <a href="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</a>
+=======================================================================
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+Why is HTML email a security nightmare? See <a href="https://useplaintext.email/">https://useplaintext.email/</a>
+
+Please avoid sending me MS-Office attachments.
+See <a href="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004742.html">[spec] Proposed changes</a></li>
+<li>Next message (by thread): <a href="004745.html">[spec] What to do of fragments when there is a redirection</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4743">[ date ]</a> <a href="thread.html#4743">[ thread ]</a> <a href="subject.html#4743">[ subject ]</a> <a href="author.html#4743">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

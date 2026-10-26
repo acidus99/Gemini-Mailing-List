@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enhancing TOFU</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006386.html">
+<link rel="next" href="005957.html">
+</head>
+<body>
+<h1>Enhancing TOFU</h1>
+<b>nothien at uber.space</b> nothien at uber.space<br>
+<i>Fri Mar  5 12:33:49 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006386.html">[ANN] Release 1.1 of MastoGem</a></li>
+<li>Next message (by thread): <a href="005957.html">Enhancing TOFU</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5954">[ date ]</a> <a href="thread.html#5954">[ thread ]</a> <a href="subject.html#5954">[ subject ]</a> <a href="author.html#5954">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi!
+
+I think that people find TOFU controversial because it removes the
+ability for clients to verify the authenticity of servers they&#x27;ve never
+connected to before and it prevents servers from ever being able to
+change certificates.  I think that both of these issues are solvable
+while keeping with the spirit of Gemini.
+
+xq (on IRC) proposed the concept of &#x27;distributed trust&#x27; lists, which are
+simply lists associating domains with public keys (i.e. their hashes).
+Gemini servers and clients can then distribute and verify trust lists,
+and can even merge trust lists from different sources together.  This
+neatly solves the first problem, by allowing clients to check their
+trust lists to determine the public key of a server and so to
+authenticate them even in the first connection.
+
+Here&#x27;s xq&#x27;s post about their idea:
+=&gt; <a href="gemini://random-projects.net/blog/2021-03-03-distributed-trust.gemini">gemini://random-projects.net/blog/2021-03-03-distributed-trust.gemini</a>
+
+I propose an extension to this, which allows servers to announce their
+intention (in a verifiable way) to change certificates in the near
+future.  Essentially, servers now provide (over Gemini) a &#x27;/.pubkey&#x27; URL
+where they serve the hash of the public key they will use in the near
+future (which may be the same as the public key they use right now).
+Clients can periodically request &#x27;/.pubkey&#x27; to check if the server
+intends to change their pubkey soon.  In later connections, the server
+will either use the current pubkey or the previously-announced future
+pubkey - if clients see the latter being used, they know that the server
+has transitioned to using this future pubkey and so can drop the
+previous pubkey.  This provides a safe method for verifying server
+certificates, even when they are rotated.
+
+There are a few more details, which you can read about on my blog post:
+=&gt; <a href="gemini://gemini.ctrl-c.club/~aravk/blog/2021-03-04-distributed-trust.gmi">gemini://gemini.ctrl-c.club/~aravk/blog/2021-03-04-distributed-trust.gmi</a>
+
+The exact format used and various smaller details can be tweaked as we
+see fit, but I&#x27;m looking for thoughts on the general concept.  I know
+that there are some voices for permanently using a single certificate,
+but I personally prefer rotating certs and I think that the perma-cert
+people don&#x27;t lose out at all in this.
+
+Any (constructive) feedback is appreciated.
+
+~aravk | ~nothien
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006386.html">[ANN] Release 1.1 of MastoGem</a></li>
+<li>Next message (by thread): <a href="005957.html">Enhancing TOFU</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5954">[ date ]</a> <a href="thread.html#5954">[ thread ]</a> <a href="subject.html#5954">[ subject ]</a> <a href="author.html#5954">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

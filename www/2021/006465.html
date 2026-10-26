@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] Pre-generated trust stores for various Gemini clients</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006468.html">
+<link rel="next" href="006467.html">
+</head>
+<body>
+<h1>[tech] Pre-generated trust stores for various Gemini clients</h1>
+<b>nervuri</b> nervuri at disroot.org<br>
+<i>Wed Apr 28 18:47:29 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006468.html">[users] Re: The geminauts (Was: Gempub 1.0.0 ; A new eBook format based on Gemini Protocol&#x27;s Gemtext</a></li>
+<li>Next message (by thread): <a href="006467.html">[tech] Pre-generated trust stores for various Gemini clients</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6465">[ date ]</a> <a href="thread.html#6465">[ thread ]</a> <a href="subject.html#6465">[ subject ]</a> <a href="author.html#6465">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Geminispace is (currently) small enough that we can afford to download
+all known capsules&#x27; TLS certificates and use them to generate trust
+stores for Gemini clients.  If verified via multiple network perspectives,
+using a pre-generated trust store is a major improvement over blindly
+trusting-on-first-use.
+
+I wrote a set of shell scripts to do this:
+<a href="https://tildegit.org/nervuri/trust-store-generators">https://tildegit.org/nervuri/trust-store-generators</a>
+
+This is their output (which I will update every few days):
+<a href="https://tildegit.org/nervuri/trust-stores">https://tildegit.org/nervuri/trust-stores</a>
+
+The details are in the README files, so I won&#x27;t repeat myself too much.
+The idea is:
+
+1. download the list of hosts from <a href="gemini://geminispace.info/known-hosts">gemini://geminispace.info/known-hosts</a>
+2. download those hosts&#x27; TLS certificates
+  (and double-check each one via Tor, whenever possible);
+3. generate trust stores for various Gemini clients
+  (to start with: Agunua, Amfora and Lagrange).
+
+Contributions are welcome.  Requests to add specific clients are also
+welcome (I don&#x27;t know which ones are the most popular).  Existing
+scripts (ex: [1]) can be used as templates to add trust stores for more
+clients.
+
+[1] <a href="https://tildegit.org/nervuri/trust-store-generators/src/branch/master/lagrange/generate-trust-store.sh">https://tildegit.org/nervuri/trust-store-generators/src/branch/master/lagrange/generate-trust-store.sh</a>
+
+For each client there are instructions on how to use the generated trust
+store and merge it with your own (ex: [2]).  Merging at the moment is
+quite simplistic; a mismatch-aware merging method is something I&#x27;d like
+to develop later on.
+
+[2] <a href="https://tildegit.org/nervuri/trust-stores/src/branch/master/agunua/INSTRUCTIONS.md">https://tildegit.org/nervuri/trust-stores/src/branch/master/agunua/INSTRUCTIONS.md</a>
+
+Of course, you don&#x27;t need to trust that I am publishing the correct
+certificates and trust stores.  The scripts should be easy to understand
+(if not, tell me - I consider this to be very important), so run them
+yourselves and check if my results are replicated from your own network
+perspectives.  If your results don&#x27;t coincide with what I&#x27;ve published,
+please let me know.  And if you decide to run a public repo, tell me
+about it.  We could set up automatic comparisons of published data to
+notify us of inconsistencies.
+
+What I hope to see eventually is client developers bundling
+pre-generated trust stores with their clients.  This will go a long way
+towards addressing TOFU&#x27;s first-connection problem.
+
+Probably the big issue with this idea is that client developers may not
+want to bundle, for instance, Let&#x27;s Encrypt cert fingerprints, as they
+change every 2-3 months.  They may only want to include long-lived (and
+long-expired) certificates.  So, to allow for this, all generator
+scripts accept certificate expiry boundaries as arguments (see the
+README).
+
+As a side-effect, this project will give us a history of certificates in
+Geminispace.  And aside from the certificates themselves, we have tables
+containing details about each certificate, in markdown [3] and CSV [4]
+formats.
+
+[3] <a href="https://tildegit.org/nervuri/trust-stores/src/branch/master/cert-details.md">https://tildegit.org/nervuri/trust-stores/src/branch/master/cert-details.md</a>
+[4] <a href="https://tildegit.org/nervuri/trust-stores/raw/branch/master/cert-details.csv">https://tildegit.org/nervuri/trust-stores/raw/branch/master/cert-details.csv</a>
+
+This project delivers on xq&#x27;s idea of a distributed trust system [5],
+because the &quot;certs&quot; directory (containing PEM-encoded certs with
+filenames corresponding to the host:port [6]), can be freely shared and
+re-created.  The main difference from xq&#x27;s proposal is that no changes
+to Gemini clients are required.  We don&#x27;t require the involvement of
+client developers at all; anyone can write scripts to generate trust
+stores for any client.
+
+Of course, client developers are the ones best suited to write these
+scripts, so I encourage them especially to contribute and, ideally, to
+bundle trust stores with their clients (or have a secure, built-in
+method of downloading a verified Geminispace trust store).
+
+[5] <a href="gemini://random-projects.net/blog/2021-03-03-distributed-trust.gemini">gemini://random-projects.net/blog/2021-03-03-distributed-trust.gemini</a>
+[6] <a href="https://tildegit.org/nervuri/trust-stores/src/branch/master/certs">https://tildegit.org/nervuri/trust-stores/src/branch/master/certs</a>
+
+P.S.  The &quot;certs&quot; directory is currently at 3.4 MB for 839 certificates.
+It compresses to 560 KB.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006468.html">[users] Re: The geminauts (Was: Gempub 1.0.0 ; A new eBook format based on Gemini Protocol&#x27;s Gemtext</a></li>
+<li>Next message (by thread): <a href="006467.html">[tech] Pre-generated trust stores for various Gemini clients</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6465">[ date ]</a> <a href="thread.html#6465">[ thread ]</a> <a href="subject.html#6465">[ subject ]</a> <a href="author.html#6465">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

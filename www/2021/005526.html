@@ -1,50 +1,34 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [SPEC] Backwards-compatible metadata in Gemini
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3Ccb43ccc4-b6c8-c043-cca9-bbc8116b3507%40disroot.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="005522.html">
-   <LINK REL="Next"  HREF="005553.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[SPEC] Backwards-compatible metadata in Gemini</H1>
-    <B>Baschdel</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3Ccb43ccc4-b6c8-c043-cca9-bbc8116b3507%40disroot.org%3E"
-       TITLE="[SPEC] Backwards-compatible metadata in Gemini">baschdel at disroot.org
-       </A><BR>
-    <I>Tue Feb 23 17:37:19 GMT 2021</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="005522.html">[SPEC] Backwards-compatible metadata in Gemini
-</A></li>
-        <LI>Next message (by thread): <A HREF="005553.html">[SPEC] Backwards-compatible metadata in Gemini
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#5526">[ date ]</a>
-              <a href="thread.html#5526">[ thread ]</a>
-              <a href="subject.html#5526">[ subject ]</a>
-              <a href="author.html#5526">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SPEC] Backwards-compatible metadata in Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005522.html">
+<link rel="next" href="005553.html">
+</head>
+<body>
+<h1>[SPEC] Backwards-compatible metadata in Gemini</h1>
+<b>Baschdel</b> baschdel at disroot.org<br>
+<i>Tue Feb 23 17:37:19 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005522.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li>Next message (by thread): <a href="005553.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5526">[ date ]</a> <a href="thread.html#5526">[ thread ]</a> <a href="subject.html#5526">[ subject ]</a> <a href="author.html#5526">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>I put some example metadata below my last E-Mail but after catching up 
+<pre>I put some example metadata below my last E-Mail but after catching up 
 with the rest of the discussion since writing it, and thinking a bit 
-about it, I've come to the conclusion that I should add a littlebit of 
+about it, I&#x27;ve come to the conclusion that I should add a littlebit of 
 explanation.
 
 First and foremost: I consider this st its current stage a (thought) 
 experiment and MAYBE a future convention for gemtext.
 
-Something I really shouldn't have to write, but to clarify:
+Something I really shouldn&#x27;t have to write, but to clarify:
 With great power comes great responsibility!
 Adding metadata adds great power and whoever is implementing a metadata 
 based feature should ask themselves if what they are doing is the right 
@@ -52,100 +36,65 @@ thing to encourage (this applies to all things you are implementing).
 
 
 &gt;<i> 
-</I>&gt;<i> ^^^
-</I>&gt;<i> version: 1 &gt; date-written: 21-02-23 11:09 +0100
-</I>I added that one first and of course I messed it up.
+</i>&gt;<i> ^^^
+</i>&gt;<i> version: 1 &gt; date-written: 21-02-23 11:09 +0100
+</i>I added that one first and of course I messed it up.
 It should be:
 date written: 2021-02-23 11:09 +0100
-I choose this format because it's easy to parse for humans and computer 
+I choose this format because it&#x27;s easy to parse for humans and computer 
 alike for dates. The key consists of two keywords: date and written a 
 client that cares about metadata but wants to keep it simple can simply 
 search for the first thing starting with date. (Maybe just having date 
 is enough)
 &gt;<i> author: Baschdel
-</I>&gt;<i> =&gt; mailto:<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">baschdel at disroot.org</A> author contact E-Mail
-</I>I'm using link lines for uris here because then they will still work if 
+</i>&gt;<i> =&gt; mailto:baschdel at disroot.org author contact E-Mail
+</i>I&#x27;m using link lines for uris here because then they will still work if 
 the client ignores the metadata, the contact keyword tells the client 
 that this link is contact information.
-the E-Mail is just a label for humans (I don't know if adding the label 
+the E-Mail is just a label for humans (I don&#x27;t know if adding the label 
 without any special delimiter is a good thing or not, it will definitely 
 make it less easy to extend this)
-&gt;<i> =&gt; mailto:<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">gemini at lists.orbitalfox.eu</A>?subject=&#8230; reply contact
-</I>Same as above without a label for humans, a client could show a reply 
+&gt;<i> =&gt; mailto:gemini at lists.orbitalfox.eu?subject=? reply contact
+</i>Same as above without a label for humans, a client could show a reply 
 button at the bottom of the page
 &gt;<i> style: E-Mail message
-</I>Can of Worms! nasty ones!
+</i>Can of Worms! nasty ones!
 Thinking about it, it would be a good thing to add styling hints (for 
 example that this is a fee page or  search results page) but this would 
 encourage writing gemtext, that is overloading linetypes left and right 
-because some people don't realize, that styling and meaning are two 
+because some people don&#x27;t realize, that styling and meaning are two 
 different things.
-&gt;<i> =&gt; <A HREF="https://lists.orbitalfox.eu/archives/gemini/2021/005420.html">https://lists.orbitalfox.eu/archives/gemini/2021/005420.html</A> answerto &gt; =&gt; <A HREF="https://lists.orbitalfox.eu/archives/gemini/2021/005522.html">https://lists.orbitalfox.eu/archives/gemini/2021/005522.html</A> mirror
-</I>Two tagged links, one linking to the message this one is an answer to 
+&gt;<i> =&gt; <a href="https://mailing-list-archive.gemi.dev/www/2021/005420.html">https://mailing-list-archive.gemi.dev/www/2021/005420.html</a> answerto &gt; =&gt; <a href="https://mailing-list-archive.gemi.dev/www/2021/005522.html">https://mailing-list-archive.gemi.dev/www/2021/005522.html</a> mirror
+</i>Two tagged links, one linking to the message this one is an answer to 
 another one linking to a mirror of this page (following this system an 
 alternative link to an answer would be tagged with &quot;answerto mirror&quot;)
 
-To prevent content authors and/or server from going wild I'd suggest, 
+To prevent content authors and/or server from going wild I&#x27;d suggest, 
 that clients always show the metadata section like it would render the 
 page above.
 
-One thing I don't really like with this one is, that we use English 
+One thing I don&#x27;t really like with this one is, that we use English 
 keywords here and that for human readable text that is intended to be 
 attached to a file, that could be in any language and is not very 
 accessible to non-English speakers.
 
 A possible solution to that could be in unicode and (you guessed it, 
-didn't you?) emoji (yay!), at least those little pictures are 
+didn&#x27;t you?) emoji (yay!), at least those little pictures are 
 standardized and independent of the language(s) you speak. (Just make 
 sure the emoji makes sense for what it is used)
 
 Greetings
 - Baschdel (I should really spin up my own gemlog)
 
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="005522.html">[SPEC] Backwards-compatible metadata in Gemini
-</A></li>
-	<LI>Next message (by thread): <A HREF="005553.html">[SPEC] Backwards-compatible metadata in Gemini
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#5526">[ date ]</a>
-              <a href="thread.html#5526">[ thread ]</a>
-              <a href="subject.html#5526">[ subject ]</a>
-              <a href="author.html#5526">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="005522.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li>Next message (by thread): <a href="005553.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5526">[ date ]</a> <a href="thread.html#5526">[ thread ]</a> <a href="subject.html#5526">[ subject ]</a> <a href="author.html#5526">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

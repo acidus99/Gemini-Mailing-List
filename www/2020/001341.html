@@ -1,246 +1,152 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Ambiguity in spec regarding line endings
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Ambiguity%20in%20spec%20regarding%20line%20endings&In-Reply-To=%3C20200604162326.GB25314%40tilde.team%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="001340.html">
-   <LINK REL="Next"  HREF="001345.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Ambiguity in spec regarding line endings</H1>
-    <B>prisonpotato at tilde.team</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Ambiguity%20in%20spec%20regarding%20line%20endings&In-Reply-To=%3C20200604162326.GB25314%40tilde.team%3E"
-       TITLE="Ambiguity in spec regarding line endings">prisonpotato at tilde.team
-       </A><BR>
-    <I>Thu Jun  4 17:23:26 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="001340.html">Ambiguity in spec regarding line endings
-</A></li>
-        <LI>Next message (by thread): <A HREF="001345.html">Ambiguity in spec regarding line endings
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1341">[ date ]</a>
-              <a href="thread.html#1341">[ thread ]</a>
-              <a href="subject.html#1341">[ subject ]</a>
-              <a href="author.html#1341">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ambiguity in spec regarding line endings</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="001340.html">
+<link rel="next" href="001345.html">
+</head>
+<body>
+<h1>Ambiguity in spec regarding line endings</h1>
+<b>prisonpotato at tilde.team</b> prisonpotato at tilde.team<br>
+<i>Thu Jun  4 17:23:26 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="001340.html">Ambiguity in spec regarding line endings</a></li>
+<li>Next message (by thread): <a href="001345.html">Ambiguity in spec regarding line endings</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1341">[ date ]</a> <a href="thread.html#1341">[ thread ]</a> <a href="subject.html#1341">[ subject ]</a> <a href="author.html#1341">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>I disagree with this idea, as it adds a signifigant burden to both
+<pre>I disagree with this idea, as it adds a signifigant burden to both
 server implementations and client implementations running on unix
 systems.
 
 On Thu, Jun 04, 2020 at 12:08:44PM -0400, Ryan Kavanagh wrote:
-&gt;<i> I'm reading the current version of the spec, and have come across the
-</I>&gt;<i> following ambiguous paragraph in &#167;3.3:
-</I>&gt;<i> 
-</I>&gt;<i>     When in canonical form, media subtypes of the &quot;text&quot; type use CRLF
-</I>&gt;<i>     as the text line break.  Gemini relaxes this requirement and allows
-</I>&gt;<i>     the transport of text media with plain LF alone (but NOT a plain CR
-</I>&gt;<i>     alone) representing a line break when it is done consistently for an
-</I>&gt;<i>     entire response body.  Gemini clients MUST accept CRLF and bare LF
-</I>&gt;<i>     as being representative of a line break in text media received via
-</I>&gt;<i>     HTTP.
-</I>&gt;<i> 
-</I>&gt;<i> How do the second and third sentences interact? In particular, how does
-</I>&gt;<i> 
-</I>&gt;<i>     [...] when it is done consistently for an entire response body.
-</I>&gt;<i> 
-</I>&gt;<i> interact with
-</I>&gt;<i> 
-</I>&gt;<i>     Gemini clients MUST accept CRLF and bare LF as being representative
-</I>&gt;<i>     of a line break in text media received via HTTP.
-</I>&gt;<i> 
-</I>&gt;<i> How should Gemini clients behave when both CRLF and LF appear in the
-</I>&gt;<i> same text/gemini transmission? Are both to be equivalently treated as
-</I>&gt;<i> line breaks?
-</I>&gt;<i> 
-</I>&gt;<i> I've looked through the archives to see what has been said in the past
-</I>&gt;<i> about line breaks, and the two following messages appear most relevant:
-</I>&gt;<i> 
-</I>&gt;<i> On Sat, Sep 07, 2019 at 04:30:14PM -0400, Jason McBrayer wrote:
-</I>&gt;<i> &gt; IMO, it makes sense to require CRLF in the plain text parts of the
-</I>&gt;<i> &gt; protocol (after requests, after the status line of a response), but I
-</I>&gt;<i> &gt; don't think that the text/gemini file format needs to have CR/LF; IMO
-</I>&gt;<i> &gt; clients should be prepared to accept either LF or CR/LF just as they
-</I>&gt;<i> &gt; would with text/plain. And maybe if we're serious about supporting old
-</I>&gt;<i> &gt; devices, clients should be prepared for bare CR, too (Classic MacOS).
-</I>&gt;<i> &gt; But it's a pain in the arse to authors to have to save text documents
-</I>&gt;<i> &gt; with non-native line endings, and I don't feel like servers need to be
-</I>&gt;<i> &gt; in the business of reformatting the content they serve.
-</I>&gt;<i> 
-</I>&gt;<i> On Sun, Sep 08, 2019 at 02:42:08PM +0000, solderpunk wrote:
-</I>&gt;<i> &gt; I will admit that the current liberal use of CRLF throughout the
-</I>&gt;<i> &gt; Gemini spec is the result of me blindly copying from Gopher and other
-</I>&gt;<i> &gt; RFCs (as Sean mentioned, it's ubiquitous).
-</I>&gt;<i> 
-</I>&gt;<i> Here's [0,1] some of the history of requiring CRLF in network protocols
-</I>&gt;<i> and in requiring CRLF for text/ subtypes [2] during transmission.
-</I>&gt;<i> 
-</I>&gt;<i> TL;DR: every system has a different native line ending sequence (LF vs
-</I>&gt;<i> CR vs CRLF). To ensure all can communicate with each other (and to
-</I>&gt;<i> simplify parsing of communications), transmissions are required to
-</I>&gt;<i> represent all line endings in text formats by CRLF. Line endings used in
-</I>&gt;<i> the local storage of text files have *nothing to do* with the line
-</I>&gt;<i> endings used in transmission, and clients are expected to convert from
-</I>&gt;<i> CRLF to whatever local format is preferred. So indeed, servers are in
-</I>&gt;<i> the business of reformatting text/* content that they serve, and they do
-</I>&gt;<i> so to ensure interoperability between systems with different line ending
-</I>&gt;<i> conventions.
-</I>&gt;<i> 
-</I>&gt;<i> I think there's a conceptual point to be made here: text/gemini files
-</I>&gt;<i> are not binary data, but rather, *text files*. This means that their
-</I>&gt;<i> transmission should not attempt to provide byte-for-byte identical
-</I>&gt;<i> copies of the local data, but should instead follow well-defined and
-</I>&gt;<i> agreed-upon representations. If your goal is to transmit a byte-for-byte
-</I>&gt;<i> identical copy of your file, there are other mime types you can use to
-</I>&gt;<i> accomplish this (e.g., application/octet-stream).
-</I>&gt;<i> 
-</I>&gt;<i> The FTP protocol makes a similar conceptual distinction. It allows for
-</I>&gt;<i> text transmission (ASCII and EBCDIC types), where end-of-lines are
-</I>&gt;<i> defined to be CLRF (ASCII type) and NL (EBCDIC type). It also allows for
-</I>&gt;<i> a stream / binary transfer mode for transmitting text (and other data)
-</I>&gt;<i> without any conversion. Quoting from the RFC [4, &#167;3.4]:
-</I>&gt;<i> 
-</I>&gt;<i>     For the purpose of standardized transfer, the sending host will
-</I>&gt;<i>     translate its internal end of line or end of record denotation into
-</I>&gt;<i>     the representation prescribed by the transfer mode and file
-</I>&gt;<i>     structure, and the receiving host will perform the inverse
-</I>&gt;<i>     translation to its internal denotation.  [...]  Since these
-</I>&gt;<i>     transformations imply extra work for some systems, identical systems
-</I>&gt;<i>     transferring non-record structured text files might wish to use a
-</I>&gt;<i>     binary representation and stream mode for the transfer.
-</I>&gt;<i> 
-</I>&gt;<i> However, in keeping with Postel's law, I suggest allowing clients to
-</I>&gt;<i> accept LF as a line ending, as is done by RFC 7230 &#167;3.5 [3]:
-</I>&gt;<i> 
-</I>&gt;<i>      Although the line terminator for the start-line and header fields
-</I>&gt;<i>      is the sequence CRLF, a recipient MAY recognize a single LF as a
-</I>&gt;<i>      line terminator and ignore any preceding CR.
-</I>&gt;<i> 
-</I>&gt;<i> Conclusion:
-</I>&gt;<i> 
-</I>&gt;<i> To eliminate ambiguity and to make the gemini protocol consistent with
-</I>&gt;<i> every other text transmission protocol I know of, I propose amending the
-</I>&gt;<i> ambiguous paragraph in the spec as follows:
-</I>&gt;<i> 
-</I>&gt;<i>     As specified in RFC 2046 &#167;4.1.1, the canonical form of any MIME
-</I>&gt;<i>     &quot;text&quot; subtype MUST always represent a line break as a CRLF
-</I>&gt;<i>     sequence. For robustness, a recipient MAY recognize a single LF as
-</I>&gt;<i>     a line terminator and ignore any preceding CR in text media.
-</I>&gt;<i> 
-</I>&gt;<i> Best,
-</I>&gt;<i> Ryan
-</I>&gt;<i> 
-</I>&gt;<i> [0] <A HREF="https://www.rfc-editor.org/old/EOLstory.txt">https://www.rfc-editor.org/old/EOLstory.txt</A>
-</I>&gt;<i> [1] <A HREF="https://tools.ietf.org/html/rfc318">https://tools.ietf.org/html/rfc318</A>
-</I>&gt;<i>     [ page 8, &quot;End of Line Convention&quot; ]
-</I>&gt;<i> [2] <A HREF="https://tools.ietf.org/html/rfc2046#section-4.1.1">https://tools.ietf.org/html/rfc2046#section-4.1.1</A>
-</I>&gt;<i> [3] <A HREF="https://tools.ietf.org/html/rfc7230#section-3.5">https://tools.ietf.org/html/rfc7230#section-3.5</A>
-</I>&gt;<i> [4] <A HREF="https://tools.ietf.org/html/rfc959">https://tools.ietf.org/html/rfc959</A>
-</I>&gt;<i> 
-</I>&gt;<i> -- 
-</I>&gt;<i> |)|/  Ryan Kavanagh      | GPG: 4E46 9519 ED67 7734 268F
-</I>&gt;<i> |\|\  <A HREF="https://rak.ac">https://rak.ac</A>     |      BD95 8F7B F8FC 4A11 C97A
-</I>
-
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+&gt;<i> I&#x27;m reading the current version of the spec, and have come across the
+</i>&gt;<i> following ambiguous paragraph in ?3.3:
+</i>&gt;<i> 
+</i>&gt;<i>     When in canonical form, media subtypes of the &quot;text&quot; type use CRLF
+</i>&gt;<i>     as the text line break.  Gemini relaxes this requirement and allows
+</i>&gt;<i>     the transport of text media with plain LF alone (but NOT a plain CR
+</i>&gt;<i>     alone) representing a line break when it is done consistently for an
+</i>&gt;<i>     entire response body.  Gemini clients MUST accept CRLF and bare LF
+</i>&gt;<i>     as being representative of a line break in text media received via
+</i>&gt;<i>     HTTP.
+</i>&gt;<i> 
+</i>&gt;<i> How do the second and third sentences interact? In particular, how does
+</i>&gt;<i> 
+</i>&gt;<i>     [...] when it is done consistently for an entire response body.
+</i>&gt;<i> 
+</i>&gt;<i> interact with
+</i>&gt;<i> 
+</i>&gt;<i>     Gemini clients MUST accept CRLF and bare LF as being representative
+</i>&gt;<i>     of a line break in text media received via HTTP.
+</i>&gt;<i> 
+</i>&gt;<i> How should Gemini clients behave when both CRLF and LF appear in the
+</i>&gt;<i> same text/gemini transmission? Are both to be equivalently treated as
+</i>&gt;<i> line breaks?
+</i>&gt;<i> 
+</i>&gt;<i> I&#x27;ve looked through the archives to see what has been said in the past
+</i>&gt;<i> about line breaks, and the two following messages appear most relevant:
+</i>&gt;<i> 
+</i>&gt;<i> On Sat, Sep 07, 2019 at 04:30:14PM -0400, Jason McBrayer wrote:
+</i>&gt;<i> &gt; IMO, it makes sense to require CRLF in the plain text parts of the
+</i>&gt;<i> &gt; protocol (after requests, after the status line of a response), but I
+</i>&gt;<i> &gt; don&#x27;t think that the text/gemini file format needs to have CR/LF; IMO
+</i>&gt;<i> &gt; clients should be prepared to accept either LF or CR/LF just as they
+</i>&gt;<i> &gt; would with text/plain. And maybe if we&#x27;re serious about supporting old
+</i>&gt;<i> &gt; devices, clients should be prepared for bare CR, too (Classic MacOS).
+</i>&gt;<i> &gt; But it&#x27;s a pain in the arse to authors to have to save text documents
+</i>&gt;<i> &gt; with non-native line endings, and I don&#x27;t feel like servers need to be
+</i>&gt;<i> &gt; in the business of reformatting the content they serve.
+</i>&gt;<i> 
+</i>&gt;<i> On Sun, Sep 08, 2019 at 02:42:08PM +0000, solderpunk wrote:
+</i>&gt;<i> &gt; I will admit that the current liberal use of CRLF throughout the
+</i>&gt;<i> &gt; Gemini spec is the result of me blindly copying from Gopher and other
+</i>&gt;<i> &gt; RFCs (as Sean mentioned, it&#x27;s ubiquitous).
+</i>&gt;<i> 
+</i>&gt;<i> Here&#x27;s [0,1] some of the history of requiring CRLF in network protocols
+</i>&gt;<i> and in requiring CRLF for text/ subtypes [2] during transmission.
+</i>&gt;<i> 
+</i>&gt;<i> TL;DR: every system has a different native line ending sequence (LF vs
+</i>&gt;<i> CR vs CRLF). To ensure all can communicate with each other (and to
+</i>&gt;<i> simplify parsing of communications), transmissions are required to
+</i>&gt;<i> represent all line endings in text formats by CRLF. Line endings used in
+</i>&gt;<i> the local storage of text files have *nothing to do* with the line
+</i>&gt;<i> endings used in transmission, and clients are expected to convert from
+</i>&gt;<i> CRLF to whatever local format is preferred. So indeed, servers are in
+</i>&gt;<i> the business of reformatting text/* content that they serve, and they do
+</i>&gt;<i> so to ensure interoperability between systems with different line ending
+</i>&gt;<i> conventions.
+</i>&gt;<i> 
+</i>&gt;<i> I think there&#x27;s a conceptual point to be made here: text/gemini files
+</i>&gt;<i> are not binary data, but rather, *text files*. This means that their
+</i>&gt;<i> transmission should not attempt to provide byte-for-byte identical
+</i>&gt;<i> copies of the local data, but should instead follow well-defined and
+</i>&gt;<i> agreed-upon representations. If your goal is to transmit a byte-for-byte
+</i>&gt;<i> identical copy of your file, there are other mime types you can use to
+</i>&gt;<i> accomplish this (e.g., application/octet-stream).
+</i>&gt;<i> 
+</i>&gt;<i> The FTP protocol makes a similar conceptual distinction. It allows for
+</i>&gt;<i> text transmission (ASCII and EBCDIC types), where end-of-lines are
+</i>&gt;<i> defined to be CLRF (ASCII type) and NL (EBCDIC type). It also allows for
+</i>&gt;<i> a stream / binary transfer mode for transmitting text (and other data)
+</i>&gt;<i> without any conversion. Quoting from the RFC [4, ?3.4]:
+</i>&gt;<i> 
+</i>&gt;<i>     For the purpose of standardized transfer, the sending host will
+</i>&gt;<i>     translate its internal end of line or end of record denotation into
+</i>&gt;<i>     the representation prescribed by the transfer mode and file
+</i>&gt;<i>     structure, and the receiving host will perform the inverse
+</i>&gt;<i>     translation to its internal denotation.  [...]  Since these
+</i>&gt;<i>     transformations imply extra work for some systems, identical systems
+</i>&gt;<i>     transferring non-record structured text files might wish to use a
+</i>&gt;<i>     binary representation and stream mode for the transfer.
+</i>&gt;<i> 
+</i>&gt;<i> However, in keeping with Postel&#x27;s law, I suggest allowing clients to
+</i>&gt;<i> accept LF as a line ending, as is done by RFC 7230 ?3.5 [3]:
+</i>&gt;<i> 
+</i>&gt;<i>      Although the line terminator for the start-line and header fields
+</i>&gt;<i>      is the sequence CRLF, a recipient MAY recognize a single LF as a
+</i>&gt;<i>      line terminator and ignore any preceding CR.
+</i>&gt;<i> 
+</i>&gt;<i> Conclusion:
+</i>&gt;<i> 
+</i>&gt;<i> To eliminate ambiguity and to make the gemini protocol consistent with
+</i>&gt;<i> every other text transmission protocol I know of, I propose amending the
+</i>&gt;<i> ambiguous paragraph in the spec as follows:
+</i>&gt;<i> 
+</i>&gt;<i>     As specified in RFC 2046 ?4.1.1, the canonical form of any MIME
+</i>&gt;<i>     &quot;text&quot; subtype MUST always represent a line break as a CRLF
+</i>&gt;<i>     sequence. For robustness, a recipient MAY recognize a single LF as
+</i>&gt;<i>     a line terminator and ignore any preceding CR in text media.
+</i>&gt;<i> 
+</i>&gt;<i> Best,
+</i>&gt;<i> Ryan
+</i>&gt;<i> 
+</i>&gt;<i> [0] <a href="https://www.rfc-editor.org/old/EOLstory.txt">https://www.rfc-editor.org/old/EOLstory.txt</a>
+</i>&gt;<i> [1] <a href="https://tools.ietf.org/html/rfc318">https://tools.ietf.org/html/rfc318</a>
+</i>&gt;<i>     [ page 8, &quot;End of Line Convention&quot; ]
+</i>&gt;<i> [2] <a href="https://tools.ietf.org/html/rfc2046#section-4.1.1">https://tools.ietf.org/html/rfc2046#section-4.1.1</a>
+</i>&gt;<i> [3] <a href="https://tools.ietf.org/html/rfc7230#section-3.5">https://tools.ietf.org/html/rfc7230#section-3.5</a>
+</i>&gt;<i> [4] <a href="https://tools.ietf.org/html/rfc959">https://tools.ietf.org/html/rfc959</a>
+</i>&gt;<i> 
+</i>&gt;<i> -- 
+</i>&gt;<i> |)|/  Ryan Kavanagh      | GPG: 4E46 9519 ED67 7734 268F
+</i>&gt;<i> |\|\  <a href="https://rak.ac">https://rak.ac</a>     |      BD95 8F7B F8FC 4A11 C97A
+</i>
+
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="001340.html">Ambiguity in spec regarding line endings
-</A></li>
-	<LI>Next message (by thread): <A HREF="001345.html">Ambiguity in spec regarding line endings
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1341">[ date ]</a>
-              <a href="thread.html#1341">[ thread ]</a>
-              <a href="subject.html#1341">[ subject ]</a>
-              <a href="author.html#1341">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="001340.html">Ambiguity in spec regarding line endings</a></li>
+<li>Next message (by thread): <a href="001345.html">Ambiguity in spec regarding line endings</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1341">[ date ]</a> <a href="thread.html#1341">[ thread ]</a> <a href="subject.html#1341">[ subject ]</a> <a href="author.html#1341">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

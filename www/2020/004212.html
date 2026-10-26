@@ -1,54 +1,38 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Supporting TLS client certificate in PHP?
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Supporting%20TLS%20client%20certificate%20in%20PHP%3F&In-Reply-To=%3C877dpb30qv.fsf%40rwv.io%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="004210.html">
-   <LINK REL="Next"  HREF="004046.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Supporting TLS client certificate in PHP?</H1>
-    <B>Remco</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Supporting%20TLS%20client%20certificate%20in%20PHP%3F&In-Reply-To=%3C877dpb30qv.fsf%40rwv.io%3E"
-       TITLE="Supporting TLS client certificate in PHP?">me at rwv.io
-       </A><BR>
-    <I>Mon Dec 21 10:35:36 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="004210.html">Supporting TLS client certificate in PHP?
-</A></li>
-        <LI>Next message (by thread): <A HREF="004046.html">[ANN] SmolNetSharp - C# library for building Gemini/Gopher clients
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4212">[ date ]</a>
-              <a href="thread.html#4212">[ thread ]</a>
-              <a href="subject.html#4212">[ subject ]</a>
-              <a href="author.html#4212">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supporting TLS client certificate in PHP?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004210.html">
+<link rel="next" href="004046.html">
+</head>
+<body>
+<h1>Supporting TLS client certificate in PHP?</h1>
+<b>Remco</b> me at rwv.io<br>
+<i>Mon Dec 21 10:35:36 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="004210.html">Supporting TLS client certificate in PHP?</a></li>
+<li>Next message (by thread): <a href="004046.html">[ANN] SmolNetSharp - C# library for building Gemini/Gopher clients</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4212">[ date ]</a> <a href="thread.html#4212">[ thread ]</a> <a href="subject.html#4212">[ subject ]</a> <a href="author.html#4212">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>2020/12/21 10:42, C&#244;me Chilliet:
+<pre>2020/12/21 10:42, C?me Chilliet:
 
 &gt;<i> Current PHP cannot do that. Not sure what would be the best API for
-</I>&gt;<i> this feature if it was added. Most likely a new context option for ssl
-</I>&gt;<i> which says the client cert is optional. I guess to be complete it
-</I>&gt;<i> would allow disabling client cert validation all together, or only
-</I>&gt;<i> when client cert is absent.
-</I>&gt;<i>
-</I>&gt;<i> An other solution is to allow PHP code to set its own callback, but it
-</I>&gt;<i> seems to be dangerous and hard to use.
-</I>
+</i>&gt;<i> this feature if it was added. Most likely a new context option for ssl
+</i>&gt;<i> which says the client cert is optional. I guess to be complete it
+</i>&gt;<i> would allow disabling client cert validation all together, or only
+</i>&gt;<i> when client cert is absent.
+</i>&gt;<i>
+</i>&gt;<i> An other solution is to allow PHP code to set its own callback, but it
+</i>&gt;<i> seems to be dangerous and hard to use.
+</i>
 I feel your pain, client certs seem to be not very widely used so a lot
-for platforms don't support them out of the box.  For d&#658;&#603;m&#618;ni, I
+for platforms don&#x27;t support them out of the box.  For d??m?ni, I
 have/had a similar problem with racket, its standard ssl implementation
 does not handle client certificates at all, so I ended up breaking it
 open and allowing SSL_CTX_set_verify to be set with SSL_VERIFY_PEER.
@@ -61,33 +45,23 @@ apparently not very popular in racket) so I kinda got used to that..
 
 For details see:
 
-  <A HREF="https://git.sr.ht/~rwv/dezhemini/tree/client-cert/item/openssl-extra.rkt">https://git.sr.ht/~rwv/dezhemini/tree/client-cert/item/openssl-extra.rkt</A>
+  <a href="https://git.sr.ht/~rwv/dezhemini/tree/client-cert/item/openssl-extra.rkt">https://git.sr.ht/~rwv/dezhemini/tree/client-cert/item/openssl-extra.rkt</a>
 
 and search for verify-callback in:
 
-  <A HREF="https://git.sr.ht/~rwv/dezhemini/tree/client-cert/item/dezhmnsrv.rkt">https://git.sr.ht/~rwv/dezhemini/tree/client-cert/item/dezhmnsrv.rkt</A>
+  <a href="https://git.sr.ht/~rwv/dezhemini/tree/client-cert/item/dezhmnsrv.rkt">https://git.sr.ht/~rwv/dezhemini/tree/client-cert/item/dezhmnsrv.rkt</a>
 
 Cheers,
 R.
-</PRE>
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="004210.html">Supporting TLS client certificate in PHP?
-</A></li>
-	<LI>Next message (by thread): <A HREF="004046.html">[ANN] SmolNetSharp - C# library for building Gemini/Gopher clients
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4212">[ date ]</a>
-              <a href="thread.html#4212">[ thread ]</a>
-              <a href="subject.html#4212">[ subject ]</a>
-              <a href="author.html#4212">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="004210.html">Supporting TLS client certificate in PHP?</a></li>
+<li>Next message (by thread): <a href="004046.html">[ANN] SmolNetSharp - C# library for building Gemini/Gopher clients</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4212">[ date ]</a> <a href="thread.html#4212">[ thread ]</a> <a href="subject.html#4212">[ subject ]</a> <a href="author.html#4212">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

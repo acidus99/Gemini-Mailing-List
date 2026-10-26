@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] Clarify purpose of alt-text</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005750.html">
+<link rel="next" href="005766.html">
+</head>
+<body>
+<h1>[spec] Clarify purpose of alt-text</h1>
+<b>Adnan Maolood</b> me at adnano.co<br>
+<i>Sun Feb 28 21:28:38 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005750.html">[spec] Clarify purpose of alt-text</a></li>
+<li>Next message (by thread): <a href="005766.html">[spec] Clarify purpose of alt-text</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5758">[ date ]</a> <a href="thread.html#5758">[ thread ]</a> <a href="subject.html#5758">[ subject ]</a> <a href="author.html#5758">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Replying here as I never received the original email.
+
+On Sun Feb 28, 2021 at 19:54 GMT, Bradley D. Thornton wrote:
+&gt;<i> My original suggestion was for a &#x27;convention&#x27; that the authors of
+</i>&gt;<i> clients could find consensus with that will enable the non-sighted
+</i>&gt;<i> reader to configure that client so as not to render content in between
+</i>&gt;<i> the preformatted text area of a .gmi file.
+</i>&gt;<i> 
+</i>&gt;<i> That remains my concern. The rest may be worthwhile, or not, but in
+</i>&gt;<i> either case they involve no changes to the spec.
+</i>&gt;<i> 
+</i>&gt;<i> Whether:
+</i>&gt;<i> 
+</i>&gt;<i> ```:
+</i>&gt;<i> 
+</i>&gt;<i> ```
+</i>&gt;<i> 
+</i>&gt;<i> or:
+</i>&gt;<i> 
+</i>&gt;<i> ```@
+</i>&gt;<i> 
+</i>&gt;<i> ```
+</i>&gt;<i> 
+</i>&gt;<i> or:
+</i>&gt;<i> 
+</i>&gt;<i> preformat = &quot;```&quot; [ [WSP] tag ] [ [WSP] alt-text] end-of-line
+</i>&gt;<i> tag       = &#x27;@art&#x27; / &#x27;@code&#x27; / &#x27;@data&#x27; / &#x27;@poem&#x27;
+</i>&gt;<i> 
+</i>&gt;<i> None of these involve any mention (and again, nor should they) of a
+</i>&gt;<i> change in the spec.
+</i>&gt;<i> 
+</i>&gt;<i> This entire discussion evolves around what *some* clients *may*
+</i>&gt;<i> incorporate (by convention) in the form of a configurable option of
+</i>&gt;<i> their software so that a block of preformatted text can be opted out
+</i>&gt;<i> from being rendered in the Gemini browser.
+</i>
+I think the following conventions can be adopted instead:
+
+1. Authors of Gemini text are STRONGLY encouraged to add alt text to
+ASCII art and other inacessible preformatted text to prevent it from
+being read aloud by screen readers. For example:
+
+```ASCII art of a smiley face 
+:)
+```
+
+2. Code, poems, and other accessible text SHOULD NOT use alt text and
+instead prefer to place any descriptive text above or below the
+preformatted text. For example:
+
+Here is a code snippet demonstrating how to use print:
+```
+print(&quot;Hello, world!&quot;)
+```
+
+3. Clients should allow the user to skip displaying preformatted text.
+Preformatted text with a non-empty alt text should be considered
+inaccessible and should not be displayed. Clients can also assume that
+any preformatted text without alt-text is safe to display, but might
+want to allow the user to skip those as well on a case-by-case basis.
+
+This should be easy for gemtext authors and client authors alike.
+
+&gt;<i> &gt; Are there really any content types besides ASCII art that clients would
+</i>&gt;<i> &gt; need to decide whether to show or not?
+</i>&gt;<i> 
+</i>&gt;<i> Yes. And they are myriad. Consider log dumps, interminable parts lists
+</i>&gt;<i> or inventory sheets, perhaps even Microsoft EULAs (because as we all
+</i>&gt;<i> know, if you&#x27;re a living breathing organism, you&#x27;re already
+</i>&gt;<i> non-compliant with their licenses).
+</i>
+I think that in this case the alt-text would probably be better off on
+its own line. Alternative text is meant to provide an alternative
+representation for imagery and ASCII art, not for textual content. Users
+could still choose to skip the preformatted text if they desire. For
+example:
+
+Server log:
+```
+GET /
+GET /about.gmi
+(more entries...)
+```
+
+The client could allow the user to skip displaying the preformatted
+text. However, since there is no alt text the preformatted text should
+be considered accessible, unlike ASCII art.
+
+I believe that this is the simplest and most elegant approach.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005750.html">[spec] Clarify purpose of alt-text</a></li>
+<li>Next message (by thread): <a href="005766.html">[spec] Clarify purpose of alt-text</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5758">[ date ]</a> <a href="thread.html#5758">[ thread ]</a> <a href="subject.html#5758">[ subject ]</a> <a href="author.html#5758">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

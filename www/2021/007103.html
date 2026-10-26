@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] trailing &#x27;?&#x27; for input (was: entry field in gemtext)</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007102.html">
+<link rel="next" href="007112.html">
+</head>
+<body>
+<h1>[tech] trailing &#x27;?&#x27; for input (was: entry field in gemtext)</h1>
+<b>Michael Lazar</b> lazar.michael22 at gmail.com<br>
+<i>Sun Sep 12 17:20:54 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007102.html">[tech] trailing &#x27;?&#x27; for input (was: entry field in gemtext)</a></li>
+<li>Next message (by thread): <a href="007112.html">[tech] trailing &#x27;?&#x27; for input (was: entry field in gemtext)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7103">[ date ]</a> <a href="thread.html#7103">[ thread ]</a> <a href="subject.html#7103">[ subject ]</a> <a href="author.html#7103">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Sun, Sep 12, 2021 at 11:33 AM mbays &lt;mbays@sdf.org&gt; wrote:
+&gt;<i>
+</i>&gt;<i> * Sunday, 2021-09-12 at 14:53 +0000 - nervuri &lt;nervuri@disroot.org&gt;:
+</i>&gt;<i>
+</i>&gt;<i> &gt;On Fri, 2021-09-10, mbays wrote:
+</i>&gt;<i> &gt;&gt;=&gt; /link? Enter your input
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;So in order for a CGI script to do what you suggest:
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;&gt;* Doesn&#x27;t break clients who ignore the convention, as long as the
+</i>&gt;<i> &gt;&gt;server returns 10 to a request with empty query.
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;it would have to return 10 in response to both &quot;/link&quot; and &quot;/link?&quot;,
+</i>&gt;<i> &gt;which is not something we can expect everyone to do.
+</i>&gt;<i>
+</i>&gt;<i> Yes. So the problem is that people might create links using this
+</i>&gt;<i> convention without first checking that the target does return 10 on
+</i>&gt;<i> empty query, breaking compatibility with clients not following the
+</i>&gt;<i> convention.
+</i>&gt;<i>
+</i>&gt;<i> I think I agree that this is enough of a problem to make the convention
+</i>&gt;<i> a Bad Idea. Shame!
+</i>&gt;<i>
+</i>&gt;<i> It could still make sense as part of the gemini spec itself, but I&#x27;m not
+</i>&gt;<i> going to suggest that.
+</i>
+Let&#x27;s generalize this a bit more:
+
+If a gemini URL contains a query string, the client can show an edit
+textbox with the existing query string as the pre-filled or suggested
+value. The user can then edit the text, or submit it as-is (the
+latter would preserve the existing behavior).
+
+For example:
+
+    <a href="gemini://example.com/input?default%20text">gemini://example.com/input?default%20text</a>
+
+The client would show an input textbox prefilled with &quot;default text&quot;.
+
+Of course, this still doesn&#x27;t solve the case where you want to show an
+blank textbox to the user, but you could add a special case like:
+
+If the query string contains a single question mark,
+e.g. &quot;<a href="gemini://example.com/input??">gemini://example.com/input??</a>&quot;, the client can set the suggested
+text to an empty string &quot;&quot;.
+
+I don&#x27;t like this part as much though, so maybe just keep the first
+part.
+
+Pros:
+
+- Doesn&#x27;t abuse URL semantics.
+- Fully backwards compatible.
+- More secure, as the user will see the query string before they
+  click on it (prevents malicious URLs). Clients could even take
+  this a step further and outline the textbox in yellow or red if
+  the URL is for a cross-domain.
+
+&gt;<i> Multiple text boxes might give the false impression of a form.
+</i>
+I think as long as each textbox has a dedicated &quot;submit&quot; button this
+won&#x27;t be so bad. Based on the original email it sounds like some
+clients are already doing this anyway.
+
+- Michael
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007102.html">[tech] trailing &#x27;?&#x27; for input (was: entry field in gemtext)</a></li>
+<li>Next message (by thread): <a href="007112.html">[tech] trailing &#x27;?&#x27; for input (was: entry field in gemtext)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7103">[ date ]</a> <a href="thread.html#7103">[ thread ]</a> <a href="subject.html#7103">[ subject ]</a> <a href="author.html#7103">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

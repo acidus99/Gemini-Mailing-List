@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On text reflow. It&#x27;s not about bullets!</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000246.html">
+<link rel="next" href="000248.html">
+</head>
+<body>
+<h1>On text reflow. It&#x27;s not about bullets!</h1>
+<b>David Requena</b> drequena at andram.net<br>
+<i>Tue Nov 26 00:13:31 GMT 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000246.html">A library and server written in Go</a></li>
+<li>Next message (by thread): <a href="000248.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#247">[ date ]</a> <a href="thread.html#247">[ thread ]</a> <a href="subject.html#247">[ subject ]</a> <a href="author.html#247">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi all,
+
+   Just joined the list to add my 2 cents to the reflowing discussion. With
+all
+due respect, I think that long thread didn&#x27;t touch on a couple fundamental
+aspects I believe worth considering.
+
+1. Text reflow IS A MUST.
+       We live in a world of wildly varying screen sizes these days. The
+trend
+    is clearly headed towards polarization: huge 22&#x27;+ desktop screens in one
+    corner, small less than 7&#x27; smartphone screens in the other. Nothing in
+the
+    middle. There&#x27;s no way you&#x27;re going to get decent presentation of non
+    reflown text on both kinds of displays. No matter how many kludgy rules
+you
+    instate on default width, max before forced wrap, etc.
+
+2. Author&#x27;s having selected lines not reflown IS A MUST.
+       This has nothing to do with formatted lists, tables, fancy styling or
+    ASCII art. Fact is that Gemini is a publishing platform and by not
+allowing
+    this, you&#x27;d be precluding certain kinds of content from being
+distributed
+    over it. Those include text snippets whose semantics intrinsically
+depend
+    on formatting (spacing and horizontal alignment), such as:
+
+     - The simplest of mathematical formulas involving fractions
+     - Source code snippets in some computer languages. Hey pythonists, I
+see
+       several of you hanging around here!
+   
+   You literally cannot convey that kind of thing in the presence of text
+   reflowing.
+
+   If we can agree on 1 and 2, then we could as well man up, select a proper
+   line marker and be done with it.
+   Is the spec golden goal to end with exactly on special line marker?
+   Or is it ending with exactly what is needed, no more, no less?
+
+   How about (in non standarese):
+
+   Each line in a text/gemini document can, at the option of the client, be
+reflown and/or be presented in any font the client deems appropriate except
+for lines beginning with =&gt; or ==. These line markers mean:
+
+  =&gt;    (arrow) line is a link in the format bla bla bla...
+  ==    (equal, of all things!) line is preformatted text which MUST NOT be
+           transformed by reflow nor proportional font rendering.
+
+   That&#x27;s it! Let&#x27;s talk about text styling in some other occasion.
+
+   Finally, I firmly believe trying to accomplish this with a space is a bad
+idea: That conspicuous space *IS* markup. Some magical text sequence,
+sitting
+at the right place, triggering special presentation of text following it.
+Pitifully ashamed of itself markup, markup to the core nonetheless.
+
+   Trying to hide the need of an actual line marker behind some half-baked
+one-space convention seems particularly unsuitable to me. Besides... What&#x27;d
+be
+the point? Having our poor author repeatedly misinterpreting which line is
+each kind in his own document?
+
+   It doesn&#x27;t even work all the time. Using a space opens a whole new can of
+worms. For one: Have you noticed I&#x27;ve been opening every paragraph with 3
+spaces? This is quite common, at least it is in my country.
+
+   In my view the issue arises from trying to abuse the meaning of the space
+character. A space is, well, some white space. It separates things, it is
+invisible, and you can only perceive it because of an absence between said
+things. Overloading such an entity to mean something totally unrelated,
+depending on the happenstance of being inserted at the beginning of a line
+or, God forbid!, at the end, is simply calling for trouble in the long run.
+
+If you happen to have endured my prose all the way down here, many thanks
+for
+your attention. You&#x27;re a remarkably forgiving reader.
+
+Best regards,
+Andram
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000246.html">A library and server written in Go</a></li>
+<li>Next message (by thread): <a href="000248.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#247">[ date ]</a> <a href="thread.html#247">[ thread ]</a> <a href="subject.html#247">[ subject ]</a> <a href="author.html#247">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

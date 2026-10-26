@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Should Gemini clients alert users upon redirect?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005319.html">
+<link rel="next" href="005669.html">
+</head>
+<body>
+<h1>Should Gemini clients alert users upon redirect?</h1>
+<b>Bradley D. Thornton</b> Bradley at NorthTech.US<br>
+<i>Fri Feb 19 14:28:40 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005319.html">Should Gemini clients alert users upon redirect?</a></li>
+<li>Next message (by thread): <a href="005669.html">Should Gemini clients alert users upon redirect?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5355">[ date ]</a> <a href="thread.html#5355">[ thread ]</a> <a href="subject.html#5355">[ subject ]</a> <a href="author.html#5355">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
+
+
+
+On 2/12/2021 4:09 PM, Sean Conner wrote:
+&gt;<i> It was thus said that the Great Sandra Snan once stated:
+</i>&gt;<i>&gt; Revisiting this issue, I want to clarify what my position was and
+</i>&gt;<i>&gt; is.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; Bogan&#x27;s case is that you don&#x27;t want to be doing a bunch of
+</i>&gt;<i>&gt; 301s&amp;31s from unslashed to slashed all day every day.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; I agree with that, and my site was definitely borked (both on
+</i>&gt;<i>&gt; HTTPS and Gemini) for being set up to do just that.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; Bogan&#x27;s solution is that you add slashes to links.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; I am not onboard with that solution but have now found another
+</i>&gt;<i>&gt; solution. Instead of 301/31, the unslashed versions will now
+</i>&gt;<i>&gt; serve the text directly.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; This is what I intended all along, I just could not figure out
+</i>&gt;<i>&gt; how to do it properly because I am secretly really bad at
+</i>&gt;<i>&gt; computers^W being motivated to hack on server stuff.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; In the future I might add 301/31 from slashed to unslashed, since
+</i>&gt;<i>&gt; that&#x27;s the canonical version. That&#x27;s a project for another day
+</i>&gt;<i>&gt; though.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; Thanks to everyone for their patience with how messed up my
+</i>&gt;<i>&gt; capsule has been.
+</i>&gt;<i>
+</i>&gt;<i> There&#x27;s a semantic difference between a URL that ends with a &#x27;/&#x27;
+</i>&gt;<i> and one that doesn&#x27;t.  The one that ends with a &#x27;/&#x27; is semantically
+</i>&gt;<i> a directory, and to have to add a file per directory to get all
+</i>&gt;<i> URLs to end with a &#x27;/&#x27; is, in my opinion, silly.  I can see what
+</i>&gt;<i> you are trying to do---skip the silly &quot;.gmi&quot; or &quot;.gemini&quot; extension
+</i>&gt;<i> as being part of the URL, but there should be better ways of doing
+</i>&gt;<i> that that populating a filesystem with a bunch of directories
+</i>&gt;<i> containing a single file (I may do a proof-of-concept with
+</i>&gt;<i> extensionless files---no, wait!  I alreay have that---the
+</i>&gt;<i> individual tests under the Gemini Client Torture Test!)
+</i>&gt;<i>
+</i>&gt;<i> Furthermore, if you follow this link, sans a trailing &#x27;/&#x27;:
+</i>&gt;<i>
+</i>&gt;<i> <a href="gemini://gemini.conman.org/test/UCSD-Pascal-source.zip">gemini://gemini.conman.org/test/UCSD-Pascal-source.zip</a>
+</i>&gt;<i>
+</i>&gt;<i> you&#x27;ll get a ZIP file.  But, add a trailing &#x27;/&#x27; to that:
+</i>&gt;<i>
+</i>&gt;<i> <a href="gemini://gemini.conman.org/test/UCSD-Pascal-source.zip/">gemini://gemini.conman.org/test/UCSD-Pascal-source.zip/</a>
+</i>&gt;<i>
+</i>&gt;<i> and see what you get (hint:  it&#x27;s not a ZIP file)
+</i>&gt;<i>
+</i>
+
+Apologies for not trimming, I just left all of that intact above. Hey
+Sean, we&#x27;ve been down this road well over a year ago, 14 September
+2019 here on the list. Very early on in Gemini development.
+
+You are correct, by why are we revisiting this again? Perhaps just a
+link to the Subject thread: *URLs in request lines*, would suffice?
+
+I&#x27;ll make it simple ;) Here it is, from a post of mine, citing you, in
+the middle of the thread back when we had less than a dozen servers in
+Gemini space :)
+
+<a href="https://mailing-list-archive.gemi.dev/www/2019/000160.html">https://mailing-list-archive.gemi.dev/www/2019/000160.html</a>
+
+I hope that helps!
+
+Kindest regards,
+
+
+- -- 
+Bradley D. Thornton
+Manager Network Services
+<a href="http://NorthTech.US">http://NorthTech.US</a>
+<a href="gemini://Vger.Cloud">gemini://Vger.Cloud</a>
+TEL: +1.310.421.8268
+-----BEGIN PGP SIGNATURE-----
+Comment: Find this cert at hkps://keys.openpgp.org
+Comment: Using GnuPG with Thunderbird - <a href="https://www.enigmail.net/">https://www.enigmail.net/</a>
+
+iQEzBAEBCAAdFiEENWT7St9Eg6sLyiLAuIw5wQytyEkFAmAvywkACgkQuIw5wQyt
+yElh7gf/YFN114gnrZXY16fGZ35gZBnYeSdAOWf9vYlo2FKTYvdVORRx2I/4Tyhh
+KbP6uaFTZ5lJMJ40HLtNDX0+UqKwFqm+d2i2/sRl6mRJWOmDDDDgccM4VPMaqGD/
+n5BxhTnuKev8MJTNioT1GA/JclWMszTj12TufvHN7OJNDUQqjZDekJgjXccrlbaN
+c+2ZGg1EgPKLPBX2TIgSOGlJkh7scNyXPehX+g2Tg7mXOZEgJ3a4D03enYWqj4vD
+uAlAu3CPlSsgxKK+tSBH83anuOvk/IVEhu4DHj9ZLvlH7awdE2EpJ++64YKCSqDT
+UMyoz9IXBlWFkjOy6dTGpAQyzJ3Ncw==
+=pbG/
+-----END PGP SIGNATURE-----
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005319.html">Should Gemini clients alert users upon redirect?</a></li>
+<li>Next message (by thread): <a href="005669.html">Should Gemini clients alert users upon redirect?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5355">[ date ]</a> <a href="thread.html#5355">[ thread ]</a> <a href="subject.html#5355">[ subject ]</a> <a href="author.html#5355">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

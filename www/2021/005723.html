@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wikipedia: Citing sources</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005603.html">
+<link rel="next" href="005593.html">
+</head>
+<body>
+<h1>Wikipedia: Citing sources</h1>
+<b>Oliver Simmons</b> oliversimmo at gmail.com<br>
+<i>Sat Feb 27 19:42:51 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005603.html">Wikipedia: Citing sources</a></li>
+<li>Next message (by thread): <a href="005593.html">Links within a capsule</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5723">[ date ]</a> <a href="thread.html#5723">[ thread ]</a> <a href="subject.html#5723">[ subject ]</a> <a href="author.html#5723">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Wed, 24 Feb 2021 at 20:01, &lt;text at sdfeu.org&gt; wrote:
+&gt;<i>
+</i>&gt;<i> In its visual editor Wikipedia helps the editing person to cite sources
+</i>&gt;<i> by establishing title, author, date by retrieving and parsing a given URL:
+</i>&gt;<i>
+</i>&gt;<i> &gt; You can add a citation by selecting from the drop-down &quot;cite&quot; menu
+</i>&gt;<i> &gt; at the top of the editing box.
+</i>&gt;<i> _ <a href="https://en.wikipedia.org/wiki/Wikipedia:Citing_sources">https://en.wikipedia.org/wiki/Wikipedia:Citing_sources</a>
+</i>&gt;<i>
+</i>&gt;<i> Does anybody know where to start coding support for citing gemini://
+</i>&gt;<i> resources via this drop-down from within Wikipedia&#x27;s visual editor?
+</i>
+Citing sources would be exactly the same, just a different protocol in the URL.
+
+e.g.:
+```
+Would become
+{{cite web
+ |title=Project Gemini FAQ
+ |url=<a href="gemini://gemini.circumlunar.space/docs/faq.gmi">gemini://gemini.circumlunar.space/docs/faq.gmi</a>
+ |access-date=27 Feb 2021
+ |url-status=live
+ |archiveurl=
+ |archivedate=
+ |df=dmy-all
+}}&lt;/ref&gt;
+```
+
+The archive links don&#x27;t *have* to be from archive.org, that&#x27;s just
+what&#x27;s typically used.
+AFAIK we don&#x27;t have any archives like that yet, so for now that would
+have to be left missing (which is perfectly fine - it&#x27;s an optional
+field).
+The only Gemini Space archives I know of are data dumps.
+
+Having a dedicated template for gemini space probably would be best though :)
+{{Template:cite gemini space}} or something
+
+
+&gt;<i> According to Wikipedia citations for pages typically include:
+</i>&gt;<i>
+</i>&gt;<i> * URL of the specific page
+</i>[...]
+&gt;<i> * the date the page was accessed
+</i>&gt;<i>   (required if the publication date is unknown)
+</i>
+AFAIK this is mostly added by hand, except the URL and maybe title.
+Syntax for this stuff is still not decided on so I&#x27;d wait until then
+to add it anyways.
+
+
+- Oliver Simmons
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005603.html">Wikipedia: Citing sources</a></li>
+<li>Next message (by thread): <a href="005593.html">Links within a capsule</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5723">[ date ]</a> <a href="thread.html#5723">[ thread ]</a> <a href="subject.html#5723">[ subject ]</a> <a href="author.html#5723">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

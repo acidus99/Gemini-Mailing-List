@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005435.html">
+<link rel="next" href="005407.html">
+</head>
+<body>
+<h1>[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</h1>
+<b>Mansfield</b> mansfield at ondollo.com<br>
+<i>Sun Feb 21 18:53:36 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005435.html">(proposal) on metadata in documents</a></li>
+<li>Next message (by thread): <a href="005407.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5406">[ date ]</a> <a href="thread.html#5406">[ thread ]</a> <a href="subject.html#5406">[ subject ]</a> <a href="author.html#5406">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre># Overview
+
+I like the idea of supporting the creating-users freedom to choose to have
+their content only accessible through the gemini protocol. (Of course this
+support only goes so far - once content is available, it&#x27;s available.
+Stopping someone from taking what you&#x27;ve made available and doing what they
+will with it... short of a legal license and litigation... ugh.)
+
+So... I have an HTTP Proxy and, while I provide a robots.txt, I&#x27;d like to
+explore going a step further. I&#x27;d like to provide a URL path prefix like:
+/internal/blacklist
+
+The process I&#x27;m thinking of is explained in more detail below, but the
+result would be that the HTTP Proxy refuses to forward requests to
+self-blacklisted Gemini hosts.
+
+
+# An Example
+
+Before the process, going to <a href="https://gem.ondollo.com/external/ondollo.com">https://gem.ondollo.com/external/ondollo.com</a>
+would return the gemini/text content available at <a href="gemini://ondollo.com">gemini://ondollo.com</a> to
+the requesting web browser.
+
+After the process, going to <a href="https://gem.ondollo.com/external/ondollo.com">https://gem.ondollo.com/external/ondollo.com</a>
+would *not* return the gemini/text content available at <a href="gemini://ondollo.com">gemini://ondollo.com</a>
+
+Maybe the proxy could instead return a page that says... &quot;The owner of this
+content has requested that it only be accessible through the gemini
+protocol and we respect that. Please use a Gemini client to access content
+at <a href="gemini://ondollo.com">gemini://ondollo.com</a>. Here are some recommended clients: &lt;list of one or
+more clients&gt;&quot;
+
+... or... the HTTP Proxy could just 404? 400? 204 Success and no content?
+301 Moved permanently with a gemini URI? 403 Forbidden (not a *user* authz
+issue... but a *proxy* authz issue...)? 410 Gone? 451 Legal? (As an aside:
+there is a part of me that loves discussions/debates around what the right
+HTTP status code is for a given situation... there&#x27;s another part of me
+that dies every time...)
+
+I think I&#x27;ll go for a 200 HTTP status and content that explains what
+happened and encourages the user to access the content through gemini.
+
+
+# A Possible Request Response Sequence
+
+Here&#x27;s a sequence I&#x27;m thinking of (given a creating-user and their gemini
+server at gemhost, and a consuming-user and their web browser... and the
+proxy at proxyhost... and &#x27;somepath&#x27; - a sufficiently unique and random URL
+path):
+
+ 1. The creating-user makes a new document on their server available at
+&lt;gemhost&gt;/&lt;somepath&gt; with the content &lt;proxyhost&gt;
+ 2. The creating-user makes an HTTP GET request to
+&lt;proxyhost&gt;/internal/blacklist/&lt;gemhost&gt;/&lt;somepath&gt;
+ 3. The proxy makes a Gemini request to &lt;gemhost&gt;/&lt;somepath&gt; and gets the
+content that matches themself - their own proxyhost value
+ 4. The proxyhost adds the gemhost to their blacklist
+ 5. The proxyhost refuses to proxy requests to the gemhost
+
+Thoughts? How would you tweak to get the desired outcome?
+
+
+# An Alternative
+
+An additional thought I had... the above feels like it might be too process
+heavy (but... it&#x27;s also super simple...). What if proxy server
+implementations were encouraged to check gemini://&lt;gemhost&gt;/noproxy.txt
+before a request? (Every request? Feels too much like the favicon. The
+first request? What if the creating-user changes their mind?) If my proxy
+checks that URL and gets a 20 status back, then it refuses to proxy the
+connection. If it gets a 51 back, then it continues with proxying the
+request.
+
+So... who does the work? Proxy implementers would be encouraged to make
+modifications with either approach... but the first approach has no work by
+gemini server implementers, just creating-users. The second approach could
+have some work by gemini server implementors... but little by
+content-users... maybe they toggle a setting in the server to respond with
+a 20 to /noproxy.txt requests?
+
+Thoughts?
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210221/3685d0f6/attachment.htm">https://mailing-list-archive.gemi.dev/www/attachments/20210221/3685d0f6/attachment.htm</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005435.html">(proposal) on metadata in documents</a></li>
+<li>Next message (by thread): <a href="005407.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5406">[ date ]</a> <a href="thread.html#5406">[ thread ]</a> <a href="subject.html#5406">[ subject ]</a> <a href="author.html#5406">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

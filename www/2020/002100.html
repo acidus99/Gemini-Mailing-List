@@ -1,83 +1,67 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Removing expiry dates for TOFU
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Removing%20expiry%20dates%20for%20TOFU&In-Reply-To=%3CC40ABV74L8W6.2R14KJAURINIG%40stilgar%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="002099.html">
-   <LINK REL="Next"  HREF="002103.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Removing expiry dates for TOFU</H1>
-    <B>Solderpunk</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Removing%20expiry%20dates%20for%20TOFU&In-Reply-To=%3CC40ABV74L8W6.2R14KJAURINIG%40stilgar%3E"
-       TITLE="Removing expiry dates for TOFU">solderpunk at posteo.net
-       </A><BR>
-    <I>Tue Jul  7 10:30:20 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="002099.html">Removing expiry dates for TOFU
-</A></li>
-        <LI>Next message (by thread): <A HREF="002103.html">Removing expiry dates for TOFU
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2100">[ date ]</a>
-              <a href="thread.html#2100">[ thread ]</a>
-              <a href="subject.html#2100">[ subject ]</a>
-              <a href="author.html#2100">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Removing expiry dates for TOFU</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="002099.html">
+<link rel="next" href="002103.html">
+</head>
+<body>
+<h1>Removing expiry dates for TOFU</h1>
+<b>Solderpunk</b> solderpunk at posteo.net<br>
+<i>Tue Jul  7 10:30:20 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="002099.html">Removing expiry dates for TOFU</a></li>
+<li>Next message (by thread): <a href="002103.html">Removing expiry dates for TOFU</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2100">[ date ]</a> <a href="thread.html#2100">[ thread ]</a> <a href="subject.html#2100">[ subject ]</a> <a href="author.html#2100">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Tue Jul 7, 2020 at 6:26 AM CEST, Thomas Karpiniec wrote:
+<pre>On Tue Jul 7, 2020 at 6:26 AM CEST, Thomas Karpiniec wrote:
 
 &gt;<i> Could I gently push back on the idea that getting an LE certificate is a
-</I>&gt;<i> high barrier to entry? Configuring certbot is relatively easy and a
-</I>&gt;<i> known quantity. Cleaning up after my private key is lost or exposed is
-</I>&gt;<i> an open ended problem with no easy solutions. I know there is a
-</I>&gt;<i> diversity of opinions/priorities but my vote would be to lean on the
-</I>&gt;<i> regular CA infrastructure so that we don't have to tussle with all of
-</I>&gt;<i> the scenarios currently being discussed.
-</I>
+</i>&gt;<i> high barrier to entry? Configuring certbot is relatively easy and a
+</i>&gt;<i> known quantity. Cleaning up after my private key is lost or exposed is
+</i>&gt;<i> an open ended problem with no easy solutions. I know there is a
+</i>&gt;<i> diversity of opinions/priorities but my vote would be to lean on the
+</i>&gt;<i> regular CA infrastructure so that we don&#x27;t have to tussle with all of
+</i>&gt;<i> the scenarios currently being discussed.
+</i>
 This opinion has been expressed in the past - in fact, by Michael Lazar
 if I remember rightly?  The extent to which Geminispace at large has
 been interested in trying to breakaway from the &quot;centralised oligarchy
-of CAs&quot; has changed.  I'd love to have detail stats on the actual
+of CAs&quot; has changed.  I&#x27;d love to have detail stats on the actual
 proportion of servers using self-signed vs CA-signd certs over time!
 There seems to be more enthusiasm behind TOFU at the moment than
 at other times in the relatively recent past.
 
-The spec is deliberately, for now, quite open ended on this.  I didn't
+The spec is deliberately, for now, quite open ended on this.  I didn&#x27;t
 want to force people to implement TOFU, which has proven less trivial
-than I first imagined.  But I also didn't want server operators who do
+than I first imagined.  But I also didn&#x27;t want server operators who do
 choose to experiment with it to become second class citizens of
 Geminispace, with most clients throwing up scary warnings every time.
 
 &gt;<i> If nothing else, clients could attempt to verify the provided cert/chain
-</I>&gt;<i> against the system's trusted root CAs. If this takes precedence over
-</I>&gt;<i> TOFU it offers an escape hatch for anybody who wanted to try the
-</I>&gt;<i> self-signed thing and then it didn't work out. Nothing I've suggested
-</I>
+</i>&gt;<i> against the system&#x27;s trusted root CAs. If this takes precedence over
+</i>&gt;<i> TOFU it offers an escape hatch for anybody who wanted to try the
+</i>&gt;<i> self-signed thing and then it didn&#x27;t work out. Nothing I&#x27;ve suggested
+</i>
 In generally agree with you here.  This allows folks without
 philosophical/political axes to grind to just setup certbot and know it
-will work smoothly (which it doesn't with pure TOFU clients, which will
-trigger warnings regularly)  The only reason AV-98 doesn't do this, and
+will work smoothly (which it doesn&#x27;t with pure TOFU clients, which will
+trigger warnings regularly)  The only reason AV-98 doesn&#x27;t do this, and
 forces you to manually switch between the two modes, is that the
-standard Python ssl module doesn't allow it (at least not gracefully,
+standard Python ssl module doesn&#x27;t allow it (at least not gracefully,
 without making a new connection after one fails).
 
-&gt;<i> This thread feels like it's trying to hack certificate validation into
-</I>&gt;<i> doing something for which it really wasn't intended, operating without a
-</I>&gt;<i> CA. Getting this right is likely to be more complicated than any aspect
-</I>&gt;<i> of the Gemini protocol itself.
-</I>
+&gt;<i> This thread feels like it&#x27;s trying to hack certificate validation into
+</i>&gt;<i> doing something for which it really wasn&#x27;t intended, operating without a
+</i>&gt;<i> CA. Getting this right is likely to be more complicated than any aspect
+</i>&gt;<i> of the Gemini protocol itself.
+</i>
 I have been thinking this myself lately.  Not that I want to give up on
 TOFU, but that all the more clever/elegant ways of doing it which
 involve certificate chains are actually not the way to go: they might be
@@ -96,73 +80,27 @@ just involves fetching a pile of bytes and hashing it, no understanding
 of keys/signing on the part of the client author required...
 
 &gt;<i> A good solution, once it
-</I>&gt;<i> is actually adopted, is likely to apply to all TLS servers rather than
-</I>&gt;<i> Gemini alone.
-</I>
-I'm not too sure about this.  Solutions which work in an environment
+</i>&gt;<i> is actually adopted, is likely to apply to all TLS servers rather than
+</i>&gt;<i> Gemini alone.
+</i>
+I&#x27;m not too sure about this.  Solutions which work in an environment
 dominated by dissemination of publically available information
 (Geminispace, I hope) may not work acceptably well in an environment
 dominated by private conversations (email, and a lot of the web).  I
-suspect it's a lot easier to come up with something relatively simple
+suspect it&#x27;s a lot easier to come up with something relatively simple
 that works for us which most other TLS servers will be disinterested in.
 
 Cheers,
 Solderpunk
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="002099.html">Removing expiry dates for TOFU
-</A></li>
-	<LI>Next message (by thread): <A HREF="002103.html">Removing expiry dates for TOFU
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2100">[ date ]</a>
-              <a href="thread.html#2100">[ thread ]</a>
-              <a href="subject.html#2100">[ subject ]</a>
-              <a href="author.html#2100">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="002099.html">Removing expiry dates for TOFU</a></li>
+<li>Next message (by thread): <a href="002103.html">Removing expiry dates for TOFU</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2100">[ date ]</a> <a href="thread.html#2100">[ thread ]</a> <a href="subject.html#2100">[ subject ]</a> <a href="author.html#2100">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

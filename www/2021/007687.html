@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Documents with mixed languages</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007697.html">
+<link rel="next" href="007689.html">
+</head>
+<body>
+<h1>Documents with mixed languages</h1>
+<b>Philip Linde</b> linde.philip at gmail.com<br>
+<i>Mon Dec 13 20:22:25 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007697.html">Is streaming a normative protocol expectation? (was Re: Documents with mixed languages)</a></li>
+<li>Next message (by thread): <a href="007689.html">Documents with mixed languages</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7687">[ date ]</a> <a href="thread.html#7687">[ thread ]</a> <a href="subject.html#7687">[ subject ]</a> <a href="author.html#7687">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Mon, 13 Dec 2021 11:21:44 +0000
+Krixano &lt;krixano@protonmail.com&gt; wrote:
+
+&gt;<i> Yeah, some people don&#x27;t know Gemini History apparently, lol.
+</i>
+I do (being an avid phlog reader since long before Gemini) and I&#x27;m well
+aware of the apparent controversy around streaming responses, but so
+what if I didn&#x27;t? Should implementors necessarily familiarize
+themselves with the entire history of the protocol in order to be able
+to implement it? Or fail and get laughed at because they &quot;don&#x27;t know
+Gemini History apparently, lol&quot;?
+
+I imagine that if I actually was clueless about the history of Gemini
+and came to this mailing list only to get laughed at because I didn&#x27;t
+read a bunch of phlogs where people vaguely promote an idea that isn&#x27;t
+allowed by the specification, I would think it patronizing, rude and
+condescending, and would quickly leave what I&#x27;d assume was a bunch of
+antisocial nerds to guard their lawn in peace.
+
+&gt;<i> People need to stop imposing their views on the standard as if it 
+</i>&gt;<i> part of the original design of the protocol when it wasn&#x27;t.
+</i>
+Just to be clear, I&#x27;m reading the standard and interpreting it to my
+best ability. This, in my view, exactly entails not reading things
+into it, by reading it as literally as possible. This isn&#x27;t just out
+of an obstinate desire to cause a ruckus, but because that&#x27;s how people
+will read the specification when they don&#x27;t have our contextual
+baggage. Apparently in this case we&#x27;ve learned that the specification
+doesn&#x27;t reflect behavior which you seem to think is standard.
+Regardless of whether that&#x27;s a mistake in the spec or a
+misinterpretation on your end, we can learn from that literal reading
+what about the spec can be improved.
+
+If from a description of a transaction as something that
+ends with the server closing the connection followed by the client
+handling the response I interpret it to mean exactly that, I don&#x27;t
+think that I am particularly imposing my views on the standard.
+
+&gt;<i> Solderpunk could change things at any time, of course, but that doesn&#x27;t
+</i>&gt;<i> change the original designs. So... No, as far as I&#x27;m aware, Gemini was
+</i>&gt;<i> never about read-only. It was about balancing the power-to-weight
+</i>&gt;<i> ratio. No, Gemini&#x27;s text input was never exclusively for search -
+</i>&gt;<i> there&#x27;s an article written by Solderpunk that details why he included
+</i>&gt;<i> input labels. No, Gemini was never anti-applications (at least since
+</i>&gt;<i> the idea of Client Certificates). Solderpunk wrote an article showing
+</i>&gt;<i> that applications were at least considered as a potential for the
+</i>&gt;<i> protocol.
+</i>
+Completely beside the point. My criticism here has nothing to do with
+the underlying principles of the design of the protocol, or the
+intended use of certain features. My criticism is based on a reading of
+the specification, and server behavior which apparently depends on
+clients not following the specification according to this reading.
+
+&gt;<i> Also, no, having (text, and others) streaming and browsers
+</i>&gt;<i> that interact with streams in Gemini is not against the intended spec.
+</i>
+So you say, but perhaps you have just imposed your own views on the
+standard.
+
+&gt;<i> In fact, allowing for Text Streaming was a decision talked about
+</i>&gt;<i> between Solderpunk, Tomasino (iirc), Mozz, and a few other people.
+</i>&gt;<i> Solderpunk references this feature in one of his recent emails here on
+</i>&gt;<i> the mailing list (regarding how close_notify doesn&#x27;t affect streaming
+</i>&gt;<i> via Gemini).
+</i>
+It was talked about between some people, and Solderpunk refers to it in
+some recent email, yada yada. What use is this to someone reading the
+specification? Is there a canonical amendment to the specification only
+existing in the form of various phlog entries, gemlogs and emails?
+
+&gt;<i> Now, about what the spec states. If you read the spec too literally
+</i>&gt;<i> and linearly, then I can kinda see how people might think the spec says
+</i>&gt;<i> requests must be handled after close_notify, from:
+</i>
+What is the right degree of literality and linearity I should read the
+specification with? Is it OK for example for the server to send the
+response header after sending the response body? May the server
+respond before CR+LF in the request line? What should I replace the
+literal part of my reading with? My own views? The content of some
+even relatively obscure phlog entry?
+
+The point strikes me as rather absurd in the context of what you&#x27;ve
+just said. On one hand you&#x27;re asking people not to read things into the
+standard. On the other hand, apparently my reading of the spec is too
+literal.
+
+&gt;<i> I firmly believe that this is an undesired overly-linear
+</i>&gt;<i> interpretation, and that perhaps Solderpunk might want to consider
+</i>&gt;<i> changing this if necessary, and if his views on streaming haven&#x27;t
+</i>&gt;<i> changed. Remember, the spec isn&#x27;t actually final yet.
+</i>
+That may very well be true, in which case I agree that the
+specification should be updated. But it clearly isn&#x27;t the behavior the
+specification currently specifies.
+
+&gt;<i> 
+</i>&gt;<i> As for the links:
+</i>&gt;<i> On Inputs and Client Certificates: <a href="gopher://zaibatsu.circumlunar.space:70/0/~solderpunk/gemini/inputs-and-client-certs.txt">gopher://zaibatsu.circumlunar.space:70/0/~solderpunk/gemini/inputs-and-client-certs.txt</a>
+</i>&gt;<i> On Streaming (Tomasino): <a href="gemini://rawtext.club/~sloum/geminilist/001696.gmi">gemini://rawtext.club/~sloum/geminilist/001696.gmi</a>
+</i>&gt;<i> On Applications and Streaming (Solderpunk): <a href="gemini://gemini.circumlunar.space/users/solderpunk/gemlog/a-vision-for-gemini-applications.gmi">gemini://gemini.circumlunar.space/users/solderpunk/gemlog/a-vision-for-gemini-applications.gmi</a>
+</i>&gt;<i> Mozz&#x27;s Response to Solderpunk on Streaming: <a href="gemini://mozz.us/journal/2020-06-21.gmi">gemini://mozz.us/journal/2020-06-21.gmi</a>
+</i>&gt;<i> 
+</i>&gt;<i> Links via Gemini:
+</i>&gt;<i> On Inputs and Client Certificates: <a href="gemini://zaibatsu.circumlunar.space/~solderpunk/gemini/inputs-and-client-certs.txt">gemini://zaibatsu.circumlunar.space/~solderpunk/gemini/inputs-and-client-certs.txt</a>
+</i>&gt;<i> On Streaming (Tomasino): [Only Available Via Gopher, afaik]
+</i>&gt;<i> On Applications and Streaming (Solderpunk): <a href="gemini://gemini.circumlunar.space/users/solderpunk/gemlog/a-vision-for-gemini-applications.gmi">gemini://gemini.circumlunar.space/users/solderpunk/gemlog/a-vision-for-gemini-applications.gmi</a>
+</i>&gt;<i> Mozz&#x27;s Response to Solderpunk on Streaming: [Only Available Via Gopher, afaik]
+</i>
+Hey, don&#x27;t forget that email you vaguely referred to that Solderpunk
+sent to the list recently! Jokes aside, this is another great example
+of why I think de facto standards are a bad idea. Clearly, it would be
+advantageous for an implementor to be able to read from the
+specification that it was indeed intended for clients to handle
+streaming responses. Then you don&#x27;t need what increasingly will
+resemble case law to determine whether your implementation is correct.
+
+-- 
+Philip
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007697.html">Is streaming a normative protocol expectation? (was Re: Documents with mixed languages)</a></li>
+<li>Next message (by thread): <a href="007689.html">Documents with mixed languages</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7687">[ date ]</a> <a href="thread.html#7687">[ thread ]</a> <a href="subject.html#7687">[ subject ]</a> <a href="author.html#7687">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

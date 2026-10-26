@@ -1,45 +1,29 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [spec] IRIs, IDNs, and all that international jazz
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3CC7ZETTYI5ROU.27XPE787PQVJB%40stilgar%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="004282.html">
-   <LINK REL="Next"  HREF="004258.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[spec] IRIs, IDNs, and all that international jazz</H1>
-    <B>Solderpunk</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20IRIs%2C%20IDNs%2C%20and%20all%20that%20international%20jazz&In-Reply-To=%3CC7ZETTYI5ROU.27XPE787PQVJB%40stilgar%3E"
-       TITLE="[spec] IRIs, IDNs, and all that international jazz">solderpunk at posteo.net
-       </A><BR>
-    <I>Tue Dec 22 15:13:06 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="004282.html">[spec] What to do of fragments when there is a redirection
-</A></li>
-        <LI>Next message (by thread): <A HREF="004258.html">[spec] IRIs, IDNs, and all that international jazz
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4254">[ date ]</a>
-              <a href="thread.html#4254">[ thread ]</a>
-              <a href="subject.html#4254">[ subject ]</a>
-              <a href="author.html#4254">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] IRIs, IDNs, and all that international jazz</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004282.html">
+<link rel="next" href="004258.html">
+</head>
+<body>
+<h1>[spec] IRIs, IDNs, and all that international jazz</h1>
+<b>Solderpunk</b> solderpunk at posteo.net<br>
+<i>Tue Dec 22 15:13:06 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="004282.html">[spec] What to do of fragments when there is a redirection</a></li>
+<li>Next message (by thread): <a href="004258.html">[spec] IRIs, IDNs, and all that international jazz</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4254">[ date ]</a> <a href="thread.html#4254">[ thread ]</a> <a href="subject.html#4254">[ subject ]</a> <a href="author.html#4254">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Hi folks,
+<pre>Hi folks,
 
-Okay, I'm finally getting involved in this discussion.  Sorry it took
-me a while, and thanks for your patience.  Here's a characteristically
+Okay, I&#x27;m finally getting involved in this discussion.  Sorry it took
+me a while, and thanks for your patience.  Here&#x27;s a characteristically
 long email detailing how my thinking on this front has evolved in
 just the past few days, starting a new thread with the [spec] topic tag.
 
@@ -54,17 +38,17 @@ because a text encoding alone is not sufficient for a client to know
 to do what native speakers of some languages expect (like render
 text right to left).  As weird and foreign as this stuff might seem
 to a lot of people, only one (English) of the ten most widely spoken
-languages in the world (and this doesn't change whether you count
+languages in the world (and this doesn&#x27;t change whether you count
 only native speakers or all speakers) can be properly represented
 in ASCII, so bailing on unicode support when it seems too hard is
 very hard to justify and we should try hard to do the right thing.
 That said, there obviously has to be an upper limit on complexity.
 Hopefully we can strike a good balance...&quot;
 
-At this point, I'll also add that it was obviously my intention from
+At this point, I&#x27;ll also add that it was obviously my intention from
 the very early days that internationalised URLs &quot;just work&quot; in Gemini.
 The clue to this is that the spec defines Gemini requests in terms
-of &quot;UTF-8 encoded URLs&quot;.  Now that I'm a little wiser about these
+of &quot;UTF-8 encoded URLs&quot;.  Now that I&#x27;m a little wiser about these
 things I realise that URIs (and hence URLs) by definition contain only
 characters which are encoded identially in UTF-8 and ASCII, so that
 &quot;UTF-8 encoded URL&quot;, while not a contradiction of any sort, is not
@@ -80,45 +64,45 @@ but more than a casual skim.  At which point my thoughts became:
 and normalisation that?  None of that would be relevant for Gemini.
 That complexity is only required to transform IRIs into URIs, which
 is a workaround for legacy software, document formats and protocols
-which can't handle IRIs directly.  Gemini isn't legacy - if we did a
+which can&#x27;t handle IRIs directly.  Gemini isn&#x27;t legacy - if we did a
 `s/URL/IRL/g` on the spec, we could just pass around UTF-8 encoded
 IRLs without any of this hassle and things would just work.  The spec
 already [somewhat mistakenly: see above] makes it clear that UTF-8 is
 to be expected in requests.  This is a trivial change, not breaking
-at all, let's just do it.
+at all, let&#x27;s just do it.
 
 Of course, conversion of IDNs to punycode for the sake of DNS lookups
-would still be required because we can't change the reality of deployed
-DNS infrastructure, but it's insane to think this is the responsibility
-of every individual client author, it's up to operating systems and
+would still be required because we can&#x27;t change the reality of deployed
+DNS infrastructure, but it&#x27;s insane to think this is the responsibility
+of every individual client author, it&#x27;s up to operating systems and
 standard libraries to abstract this away.  Surely they already do this?
-Let's check...
+Let&#x27;s check...
 
 Python 3.7.3 (default, Apr  3 2019, 05:39:12)
 [GCC 8.3.0] on linux
 Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
-&gt;&gt;&gt;<i> import socket
-</I>&gt;&gt;&gt;<i> socket.getaddrinfo(&quot;r&#228;ksm&#246;rg&#229;s.josefsson.org&quot;, 1965)
-</I>[(&lt;AddressFamily.AF_INET6: 10&gt;, &lt;SocketKind.SOCK_STREAM: 1&gt;, 6, '', ('2001:9b1:8633::102', 1965, 0, 0)), (&lt;AddressFamily.AF_INET6: 10&gt;, &lt;SocketKind.SOCK_DGRAM: 2&gt;, 17, '', ('2001:9b1:8633::102', 1965, 0, 0)), (&lt;AddressFamily.AF_INET6: 10&gt;, &lt;SocketKind.SOCK_RAW: 3&gt;, 0, '', ('2001:9b1:8633::102', 1965, 0, 0)), (&lt;AddressFamily.AF_INET: 2&gt;, &lt;SocketKind.SOCK_STREAM: 1&gt;, 6, '', ('178.174.241.102', 1965)), (&lt;AddressFamily.AF_INET: 2&gt;, &lt;SocketKind.SOCK_DGRAM: 2&gt;, 17, '', ('178.174.241.102', 1965)), (&lt;AddressFamily.AF_INET: 2&gt;, &lt;SocketKind.SOCK_RAW: 3&gt;, 0, '', ('178.174.241.102', 1965))]
+&gt;<i>&gt;&gt; import socket
+</i>&gt;<i>&gt;&gt; socket.getaddrinfo(&quot;r?ksm?rg?s.josefsson.org&quot;, 1965)
+</i>[(&lt;AddressFamily.AF_INET6: 10&gt;, &lt;SocketKind.SOCK_STREAM: 1&gt;, 6, &#x27;&#x27;, (&#x27;2001:9b1:8633::102&#x27;, 1965, 0, 0)), (&lt;AddressFamily.AF_INET6: 10&gt;, &lt;SocketKind.SOCK_DGRAM: 2&gt;, 17, &#x27;&#x27;, (&#x27;2001:9b1:8633::102&#x27;, 1965, 0, 0)), (&lt;AddressFamily.AF_INET6: 10&gt;, &lt;SocketKind.SOCK_RAW: 3&gt;, 0, &#x27;&#x27;, (&#x27;2001:9b1:8633::102&#x27;, 1965, 0, 0)), (&lt;AddressFamily.AF_INET: 2&gt;, &lt;SocketKind.SOCK_STREAM: 1&gt;, 6, &#x27;&#x27;, (&#x27;178.174.241.102&#x27;, 1965)), (&lt;AddressFamily.AF_INET: 2&gt;, &lt;SocketKind.SOCK_DGRAM: 2&gt;, 17, &#x27;&#x27;, (&#x27;178.174.241.102&#x27;, 1965)), (&lt;AddressFamily.AF_INET: 2&gt;, &lt;SocketKind.SOCK_RAW: 3&gt;, 0, &#x27;&#x27;, (&#x27;178.174.241.102&#x27;, 1965))]
 
 Yep, great, wonderful, Python does the punycode stuff for me invisibly,
 this adds no extra complexity at all!&quot;
 
 At this point I was, in my private thoughts, a pretty hardcore IRI
-advocate, and didn't understand why anybody wouldn't be.
+advocate, and didn&#x27;t understand why anybody wouldn&#x27;t be.
 
 Then I did a little more experimenting and realised that DNS lookups
-in Go don't transparently handle the punycoding like Python does, and I
+in Go don&#x27;t transparently handle the punycoding like Python does, and I
 was quite disappointed in Go for that.  Then I started reading through
-all the mailing list posts, and realised that people weren't even upset
+all the mailing list posts, and realised that people weren&#x27;t even upset
 so much about punycoding IDNs as they were about processing IRIs to
 e.g. absolutise relative IRIs or add queries.  This was considered to
 require complex third party libraries in most languages.  I was kind
 of baffled by this because doing this kind of operation with IRIs is
 not substantially different from doing it with URIs (as Sean has shown
-by actually implementing it) and I couldn't believe that something
-so trivial wouldn't be well handled by standard libraries in 2020
-(and, actually, based on some people's posts to the ML it seems like
+by actually implementing it) and I couldn&#x27;t believe that something
+so trivial wouldn&#x27;t be well handled by standard libraries in 2020
+(and, actually, based on some people&#x27;s posts to the ML it seems like
 it often is).  At this point my attitude became:
 
 &quot;Wow, the uptake of these standardised i18n tools in major programming
@@ -130,10 +114,10 @@ deficiencies of their standard libraries, but blame the language
 implementers.  Over time, surely, the existing DNS and URI libraries
 will all be updated to follow the new standards, and those &quot;broken&quot;
 clients will suddenly become &quot;working&quot; clients without their authors
-even having to do anything.  It's unfortunate that there will be a
+even having to do anything.  It&#x27;s unfortunate that there will be a
 transitional period where the Gemini spec is somewhat &quot;aspirational&quot;
 and some clients necessarily fall short due to the failings of others,
-but that's better than leaving things as is and having Gemini be
+but that&#x27;s better than leaving things as is and having Gemini be
 forever broken with regards to internationalisation.&quot;
 
 Then I followed the mailing list threads yet deeper, and reached
@@ -141,22 +125,22 @@ the point where Jason pointed out that RFC 3987 is only a proposed
 standard, that it has effectively been abandoned by the IETF,
 and that now the W3C has its own alternative standardisation of
 &quot;URL&quot; under active development, which is &quot;extremely WWW-centric&quot;
-(I'm taking Jason's word for this, I haven't actually looked into the
+(I&#x27;m taking Jason&#x27;s word for this, I haven&#x27;t actually looked into the
 details of this yet).  This completely undermines my attitude above,
 because it makes it much less likely that standard libraries will
 ever be uniformly upgraded to handle IRIs correctly, and it means
-we can't take the simple moral highground of saying that the Gemini
-spec is based on IETF standards and it's not our fault if standard
+we can&#x27;t take the simple moral highground of saying that the Gemini
+spec is based on IETF standards and it&#x27;s not our fault if standard
 libraries still need to lift their game to reflect those standards.
 
-Now I honestly don't know what to think.  It has always been a core
-tenet of Gemini's design that it is made by joining together mature,
+Now I honestly don&#x27;t know what to think.  It has always been a core
+tenet of Gemini&#x27;s design that it is made by joining together mature,
 widely-implemented IETF standards in simple ways, so that no heavy
 lifting is required to build Gemini software in almost any language
 on any almost platform because all the parts are &quot;radically familiar&quot;.
-I'm very reluctant to move away from that ideal, it's one of our core
+I&#x27;m very reluctant to move away from that ideal, it&#x27;s one of our core
 strengths.  But I also think localisation is important and, within
-reason, I buy the argument that there's a moral obligation to at least
+reason, I buy the argument that there&#x27;s a moral obligation to at least
 seriously try to fix this, and the fact that other technology stacks
 like the web have not is no excuse for us to do them same when we have
 the opportunity to make a fresh start.  But these two principles are in
@@ -173,7 +157,7 @@ to bear that pain.  Ideally, we try to minimise the total amount
 of pain, and preferentially inflict more pain on software authors
 than on content authors (who are not necessarily developers or even
 &quot;power users&quot;), and more pain on server authors than on client authors
-(it's of more benefit to more people for it to be easy to roll your
+(it&#x27;s of more benefit to more people for it to be easy to roll your
 own client than for it to be easy to roll your own server).
 
 The options, then, would appear to be:
@@ -185,11 +169,11 @@ of ASCII.  Clients and servers are permitted to be highly &quot;dumb&quot; in
 this regard, and no existing software breaks.  Ultimate responsibility
 for internationalised links falls to content authors, who are obligated
 to fully punycode and percent-encode all their links so they are
-valid URIs, and if they do this wrong their links don't work and
-it's nobody's fault but their own, and if they don't understand what
+valid URIs, and if they do this wrong their links don&#x27;t work and
+it&#x27;s nobody&#x27;s fault but their own, and if they don&#x27;t understand what
 any of that even *means* they are forced to use ASCII URLs instead.
 Client authors who want to be i18n friendly can visually present these
-links as IRIs if they're up to it, and accept IRIs in the address
+links as IRIs if they&#x27;re up to it, and accept IRIs in the address
 bar (or equivalent) and encode them before doing name lookups or
 sending requests.  This voluntary extra complexity requires being
 able to do punycoding and percent-encoding in both the forward and
@@ -217,32 +201,32 @@ scratch - although, note that if standard library support for percent
 encoding forward and backwards is present, then the standard library
 support for relativising ASCII URLs, which we are basically already
 asuming is present everywhere, is sufficient to build this up, so
-this is not anywhere near as scary as it seems.  There's an addition
+this is not anywhere near as scary as it seems.  There&#x27;s an addition
 wrinkle here in that unicode normalisation needs to be consistent
-between e.g. the client and server's idea of the domain name.
-This could, I think be made entirely the server's responsibility,
+between e.g. the client and server&#x27;s idea of the domain name.
+This could, I think be made entirely the server&#x27;s responsibility,
 by requiring servers to normalise requests in a particular way.
 
 Obviously, option 1. is preferable from the point of view of a spec
 author or a software implementer, but it has to be acknowledged
-that it throws international content authors under the bus (it's
+that it throws international content authors under the bus (it&#x27;s
 true there are such authors on the ML who are happily doing exactly
 what this option requires, but we need to acknowledge that people
 who can converse in technical English about protocol design on a
 mailing list are not a representative sample!).  From the point of
 view of international content authors, 2. and 3. are equivalent.
-It's true that this problem could be minimised by the availability
-of servers which transform text/gemini content on the fly, and it's
-true that historically I've been happiest dumping extra complexity
-on server authors, but I'm not sure this is ideal - users might move
+It&#x27;s true that this problem could be minimised by the availability
+of servers which transform text/gemini content on the fly, and it&#x27;s
+true that historically I&#x27;ve been happiest dumping extra complexity
+on server authors, but I&#x27;m not sure this is ideal - users might move
 their content between hosts and suddenly have their links break,
 which will seem mysterious to them.
 
 Regarding options 2. and 3., from a strictly conceptual/aesthetic
-perspective, 3. is clearly perferable.  It's much nicer not to have to
-map back and forth between a user's perspective of what addresses look
-like and a machine's perspective, but to use the same representation
-for both.  The less client-side munging of what's in a link line,
+perspective, 3. is clearly perferable.  It&#x27;s much nicer not to have to
+map back and forth between a user&#x27;s perspective of what addresses look
+like and a machine&#x27;s perspective, but to use the same representation
+for both.  The less client-side munging of what&#x27;s in a link line,
 the better.  And following an *absolute* IRI is actually easier under
 option 3. than under option 2, because it preserves the beautifully
 simple idea that to follow a link, you just send the corresponding
@@ -253,8 +237,8 @@ ready-to-use request with a label on it!
 But we need to consider the implementation burden.  Both 2. and
 3. require exactly the same punycoding before DNS lookup (and I still
 hope this will become more and more transparently handled by standard
-libraries over time), so it comes down to what's more widely supported
-and what's easiest to implement in the absence of support: percent
+libraries over time), so it comes down to what&#x27;s more widely supported
+and what&#x27;s easiest to implement in the absence of support: percent
 encoding an IRI to a URI so it can be parsed, possibly absolutised
 and then sent over the wire as a purely ASCII request, or parsing
 and possibly absolutising an IRI as-is before sending it as UTF-8?
@@ -264,7 +248,7 @@ is rarely supported in standard libraries and difficult to implement
 from scratch, and that this totally sinks something like option 3.
 But it seems to be the case that IRIs can in fact be processed with
 standard tools in Python and Go, and sort-of-kinda in Java.  Of course,
-that's not everywhere, but the capability doesn't exactly seem rare.
+that&#x27;s not everywhere, but the capability doesn&#x27;t exactly seem rare.
 And in any environment where option 2. is easy, it seems to me that
 3. could be achieved roughly as easily just by transforming an IRI
 to a URI, parsing that and doing absolutisation with the standard URI
@@ -277,21 +261,21 @@ to how stubbornly ASCII-only the environment is.  There might be some
 environments (seemingly Python could be one) where transformation
 *never* needs to happen, and that seems better than an approach where
 transformation *always* needs to happen.  So option 3. actually seems
-within the realm of possibility to me, although I wouldn't want to
+within the realm of possibility to me, although I wouldn&#x27;t want to
 put my full weight behind it until some actual testing has taken place.
 
-It's true that this would be a breaking change, although of a different
-kind from other breaking changes I've pushed back against in the past.
-It's not as if Geminispace would suddenly become impossible to access,
+It&#x27;s true that this would be a breaking change, although of a different
+kind from other breaking changes I&#x27;ve pushed back against in the past.
+It&#x27;s not as if Geminispace would suddenly become impossible to access,
 or would split into two totally incompatible subspaces based on the
 old and new protocol versions.  Any currently extant Gemini document
 which included ASCII-only links would remain perfectly accessible
-by old and new clients alike.  So, it's a relatively soft break.
+by old and new clients alike.  So, it&#x27;s a relatively soft break.
 Given the importance of first-class internationalisation support,
 it might be worthwhile.
 
-Feedback welcome, especially if I've overlooked anything, which is
-certainly possible.  What I'd be most interested in hearing, at this
+Feedback welcome, especially if I&#x27;ve overlooked anything, which is
+certainly possible.  What I&#x27;d be most interested in hearing, at this
 point, is client authors letting me know whether the standard library
 in the language their client is implemented in can straightforwardly:
 
@@ -300,78 +284,22 @@ in the language their client is implemented in can straightforwardly:
    domains?
 2. Transform back and forth between URIs and IRIs?
 3. Do DNS lookups of IDNs without them being punycoded first?  You can
-   test this with r&#228;ksm&#246;rg&#229;s.josefsson.org.
+   test this with r?ksm?rg?s.josefsson.org.
 
 Getting good data on all three of these questions for a wide range
 of languages is necessary to make a well-informed decision here.
 
 Cheers,
 Solderpunk
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="004282.html">[spec] What to do of fragments when there is a redirection
-</A></li>
-	<LI>Next message (by thread): <A HREF="004258.html">[spec] IRIs, IDNs, and all that international jazz
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4254">[ date ]</a>
-              <a href="thread.html#4254">[ thread ]</a>
-              <a href="subject.html#4254">[ subject ]</a>
-              <a href="author.html#4254">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="004282.html">[spec] What to do of fragments when there is a redirection</a></li>
+<li>Next message (by thread): <a href="004258.html">[spec] IRIs, IDNs, and all that international jazz</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4254">[ date ]</a> <a href="thread.html#4254">[ thread ]</a> <a href="subject.html#4254">[ subject ]</a> <a href="author.html#4254">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

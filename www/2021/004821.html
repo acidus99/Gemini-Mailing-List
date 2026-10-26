@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] Signing builds</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004819.html">
+<link rel="next" href="004825.html">
+</head>
+<body>
+<h1>[tech] Signing builds</h1>
+<b>Luke Emmet</b> luke at marmaladefoo.com<br>
+<i>Fri Jan 15 10:23:44 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004819.html">[tech] Signing builds</a></li>
+<li>Next message (by thread): <a href="004825.html">Fwd: [tech] Signing builds</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4821">[ date ]</a> <a href="thread.html#4821">[ thread ]</a> <a href="subject.html#4821">[ subject ]</a> <a href="author.html#4821">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+On 15-Jan-2021 01:59, Mansfield wrote:
+&gt;<i> I&#x27;m wrapping up work on a Gemini client and planning on producing builds
+</i>&gt;<i> for Linux/Darwin/Windows. (32-bit and 64-bit... which I think(?) is
+</i>&gt;<i> standard...)
+</i>&gt;<i>
+</i>&gt;<i> When I test the Windows binary executable there are several warning dialogs
+</i>&gt;<i> that pop up talking about how the exe hasn&#x27;t been signed and is unknown and
+</i>&gt;<i> might be best to not let run. I think that Code Signing certificates and
+</i>&gt;<i> signing the binary are the generally recommended approach to overcome that.
+</i>&gt;<i>
+</i>&gt;<i> I looked into Code Signing certificates and I found some that seem like
+</i>&gt;<i> they&#x27;d work for the Windows builds (from the little that I know... all I
+</i>&gt;<i> need is something called a Code Signing certificate... I don&#x27;t *think*
+</i>&gt;<i> there&#x27;s any OS-specific aspect), but they&#x27;re $100/yr. Not horrible, but
+</i>&gt;<i> certainly more than expected. In my ignorance it feels odd that there&#x27;s
+</i>&gt;<i> nothing like LetsEncrypt for Code Signing certificates.
+</i>&gt;<i>
+</i>&gt;<i> So the question is this: If you were producing a stand-alone binary
+</i>&gt;<i> executable meant to run on Windows and you wanted to minimize the install
+</i>&gt;<i> friction (like not having the warnings described above), how would you
+</i>&gt;<i> approach that?
+</i>
+I went down a similar route for my own native windows gemini client. In 
+my experience some anti-virus products can be quite aggressive to 
+&quot;protect&quot; the end user from unknown apps as well as ones known to be 
+malicious. Basically the anti-virus apps give an unknown app a score 
+based on a number of factors, such as:
+
+ ?- is it signed with a non-self-signed certificate
+
+ ?- is the app &quot;well known&quot; - (size of existing user base)
+
+ ?- does the app want to do anything &quot;risky&quot; (like access a server on an 
+infrequently used obscure port, say 70 or 1965) or use privileged APIs
+
+ ?- does the app include any libraries or source used by other malicious 
+apps
+
+So for something like a gemini client, quite a few of these can trigger 
+warning flags.
+
+&gt;<i> One solution: I could just hope that users would be willing and/or able to
+</i>&gt;<i> ignore the warnings and install it anyway. Keeps costs down... keeps build
+</i>&gt;<i> process simple. Might not have as much adoption as hoped.
+</i>
+Yes, why not start out like this to get some feedback, but eventually 
+your users will complain that they cannot easily install it. Most end 
+users will be uncomfortable with fishing an app out of quarantine and 
+marking it as &quot;safe&quot; against the advice of their AV, even if it is a 
+false positive.
+
+So I think you&#x27;ll need to go down the route of looking into getting a 
+certificate at some point. It is somewhat frustrating to have to battle 
+these self appointed gatekeepers, but...
+
+&gt;<i> Another solution: Pay the yearly fee, sign the builds, avoid the warnings.
+</i>&gt;<i> (I&#x27;m also not sure how the certificate will verify I&#x27;m trustworthy when I&#x27;m
+</i>&gt;<i> not so certain I want any personally identifiable information to be shared
+</i>&gt;<i> with whoever will be running me through whatever process - I dream of
+</i>&gt;<i> something simple like a dns cname record to prove ownership and the cert
+</i>&gt;<i> then saying the builds were produced by the owner of the domain... or
+</i>&gt;<i> something...).
+</i>It&#x27;s frustrating, but I think this is probably needed if you want 
+adoption beyond a few early adopters. I can recommend Certum who have an 
+&quot;open source developer&quot; certificate pack available for a not huge fee.
+&gt;<i> Third option: On the side, I&#x27;ve also written a modified HTTP/HTML server to
+</i>&gt;<i> use a gemini client and make it super easy to browse Gemini space *without*
+</i>&gt;<i> installing a client, but I&#x27;m reluctant to have feature-parity between that
+</i>&gt;<i> browser-based client and this standalone binary client. I could just go
+</i>&gt;<i> with, &quot;Install the unsigned client if you want and if you&#x27;re uncomfortable
+</i>&gt;<i> with that feel free to use the browser-based one, but you&#x27;re missing out if
+</i>&gt;<i> you don&#x27;t install the standalone one&quot;.
+</i>
+Definitely get the users to come onto Gemini - it is quieter and calmer 
+here :)
+
+ ?- Luke
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004819.html">[tech] Signing builds</a></li>
+<li>Next message (by thread): <a href="004825.html">Fwd: [tech] Signing builds</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4821">[ date ]</a> <a href="thread.html#4821">[ thread ]</a> <a href="subject.html#4821">[ subject ]</a> <a href="author.html#4821">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

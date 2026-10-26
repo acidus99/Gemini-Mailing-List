@@ -1,77 +1,61 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Spec proposal
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Spec%20proposal&In-Reply-To=%3C20201022220133.GE30302%40brevard.conman.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="002891.html">
-   <LINK REL="Next"  HREF="002894.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Spec proposal</H1>
-    <B>Sean Conner</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Spec%20proposal&In-Reply-To=%3C20201022220133.GE30302%40brevard.conman.org%3E"
-       TITLE="Spec proposal">sean at conman.org
-       </A><BR>
-    <I>Thu Oct 22 23:01:34 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="002891.html">Spec proposal
-</A></li>
-        <LI>Next message (by thread): <A HREF="002894.html">Spec proposal
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2893">[ date ]</a>
-              <a href="thread.html#2893">[ thread ]</a>
-              <a href="subject.html#2893">[ subject ]</a>
-              <a href="author.html#2893">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spec proposal</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="002891.html">
+<link rel="next" href="002894.html">
+</head>
+<body>
+<h1>Spec proposal</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Thu Oct 22 23:01:34 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="002891.html">Spec proposal</a></li>
+<li>Next message (by thread): <a href="002894.html">Spec proposal</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2893">[ date ]</a> <a href="thread.html#2893">[ thread ]</a> <a href="subject.html#2893">[ subject ]</a> <a href="author.html#2893">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>It was thus said that the Great Ali Fardan once stated:
+<pre>It was thus said that the Great Ali Fardan once stated:
 &gt;<i> Greetings follows, I just found out about gemini recently and I got
-</I>&gt;<i> interested in the project and wanted to be involved, In the process of
-</I>&gt;<i> setting up my gempod (that's how you call them?), I wanted to be able
-</I>&gt;<i> to have an HTML/HTTP mirror for my gempod and I haven't found a gemtext
-</I>&gt;<i> to HTML converter 
-</I>
-  Given how easy it is, I'm surprised there aren't more.  But by searching
+</i>&gt;<i> interested in the project and wanted to be involved, In the process of
+</i>&gt;<i> setting up my gempod (that&#x27;s how you call them?), I wanted to be able
+</i>&gt;<i> to have an HTML/HTTP mirror for my gempod and I haven&#x27;t found a gemtext
+</i>&gt;<i> to HTML converter 
+</i>
+  Given how easy it is, I&#x27;m surprised there aren&#x27;t more.  But by searching
 the mailing list, I did fine reference to two Gemini-text-to-HTML
 converters:
 
-	<A HREF="https://github.com/LukeEmmet/GemiNaut/blob/master/GemiNaut/GmiConverters/GmiToHtml.r3">https://github.com/LukeEmmet/GemiNaut/blob/master/GemiNaut/GmiConverters/GmiToHtml.r3</A>
+	<a href="https://github.com/LukeEmmet/GemiNaut/blob/master/GemiNaut/GmiConverters/GmiToHtml.r3">https://github.com/LukeEmmet/GemiNaut/blob/master/GemiNaut/GmiConverters/GmiToHtml.r3</a>
 	(written in Rebol, a blast from the past)
 
-	<A HREF="https://git.sr.ht/~sotirisp/qute-gemini">https://git.sr.ht/~sotirisp/qute-gemini</A>
+	<a href="https://git.sr.ht/~sotirisp/qute-gemini">https://git.sr.ht/~sotirisp/qute-gemini</a>
 	(Gemini text to Markdown to HTML in python3)
 
 &gt;<i> so I decided to write my own, and in the middle of
-</I>&gt;<i> the process I thought if I'm going write a full parser for gemtext,
-</I>&gt;<i> I might as well make the code reusable and package it as a library, so
-</I>&gt;<i> the project shifted from a gemtext to HTML tool to a gemtext processing
-</I>&gt;<i> library, and here I am.
-</I>
+</i>&gt;<i> the process I thought if I&#x27;m going write a full parser for gemtext,
+</i>&gt;<i> I might as well make the code reusable and package it as a library, so
+</i>&gt;<i> the project shifted from a gemtext to HTML tool to a gemtext processing
+</i>&gt;<i> library, and here I am.
+</i>
   Hello.
 
 &gt;<i> As of now, my implementation is complete, It is almost usable for
-</I>&gt;<i> anyone willing to test it, I wrote manpages for all functions currently
-</I>&gt;<i> implemented, but not for the data types yet, I'm going to work on that,
-</I>&gt;<i> and as part of my project, I want to write a manpage for the text/gemini
-</I>&gt;<i> format (gemtext(5)) and I want it to be precise and spec compliant,
-</I>&gt;<i> if you don't mind, I'll go ahead and write the manpage as a proposal to
-</I>&gt;<i> standardize some of the unclear cases of the spec, if the rest of the
-</I>&gt;<i> community agrees, maybe get the spec updated too?
-</I>&gt;<i> 
-</I>&gt;<i> Attached is a tarball of my current implementation (WIP)
-</I>
+</i>&gt;<i> anyone willing to test it, I wrote manpages for all functions currently
+</i>&gt;<i> implemented, but not for the data types yet, I&#x27;m going to work on that,
+</i>&gt;<i> and as part of my project, I want to write a manpage for the text/gemini
+</i>&gt;<i> format (gemtext(5)) and I want it to be precise and spec compliant,
+</i>&gt;<i> if you don&#x27;t mind, I&#x27;ll go ahead and write the manpage as a proposal to
+</i>&gt;<i> standardize some of the unclear cases of the spec, if the rest of the
+</i>&gt;<i> community agrees, maybe get the spec updated too?
+</i>&gt;<i> 
+</i>&gt;<i> Attached is a tarball of my current implementation (WIP)
+</i>
   And here are some comments from trying it out.  I wrote a simple Gemini
 text file (with very long lines) and ran your test program over it.  In the
 output you have some garbage data on the very first line:
@@ -88,11 +72,11 @@ in the output either.
 
 [spc]lucy:/tmp/libgemtext&gt;valgrind --show-reachable=yes --leak-check=full ./test &lt;/tmp/text.gemini &gt;/tmp/t.gmi
 ==26859== Memcheck, a memory error detector.
-==26859== Copyright (C) 2002-2005, and GNU GPL'd, by Julian Seward et al.
+==26859== Copyright (C) 2002-2005, and GNU GPL&#x27;d, by Julian Seward et al.
 ==26859== Using LibVEX rev 1575, a library for dynamic binary translation.
-==26859== Copyright (C) 2004-2005, and GNU GPL'd, by OpenWorks LLP.
+==26859== Copyright (C) 2004-2005, and GNU GPL&#x27;d, by OpenWorks LLP.
 ==26859== Using valgrind-3.1.1, a dynamic binary instrumentation framework.
-==26859== Copyright (C) 2000-2005, and GNU GPL'd, by Julian Seward et al.
+==26859== Copyright (C) 2000-2005, and GNU GPL&#x27;d, by Julian Seward et al.
 ==26859== For more details, rerun with: -v
 ==26859== 
 ==26859== Conditional jump or move depends on uninitialised value(s)
@@ -127,59 +111,30 @@ in the output either.
 
   You will also want to check the non-happy paths for memory leaks.  In my
 experience, memory leaks are more likely in the non-happy path because
-programmers rarely think through the non-happy path, and it's annoying to
+programmers rarely think through the non-happy path, and it&#x27;s annoying to
 write code to properly handle the non-happy paths in C.
 
-  But I think it's wonderful that there was only one leak, and possibly an
+  But I think it&#x27;s wonderful that there was only one leak, and possibly an
 easy one to fix.  The library itself appears easy to use (if you know C). 
 Good job.
 
   -spc
 
-[1]	If you are doing C, and have access to valgrind (it's almost always
+[1]	If you are doing C, and have access to valgrind (it&#x27;s almost always
 	installed on every Linux system, or available to be installed), use
 	it.  It is a fantastic tool to find memory leaks and issues with
-	unitialized memory.  Yes, it's annoying having to track all the
-	issues down, but I feel it's worth it.
+	unitialized memory.  Yes, it&#x27;s annoying having to track all the
+	issues down, but I feel it&#x27;s worth it.
 
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="002891.html">Spec proposal
-</A></li>
-	<LI>Next message (by thread): <A HREF="002894.html">Spec proposal
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2893">[ date ]</a>
-              <a href="thread.html#2893">[ thread ]</a>
-              <a href="subject.html#2893">[ subject ]</a>
-              <a href="author.html#2893">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="002891.html">Spec proposal</a></li>
+<li>Next message (by thread): <a href="002894.html">Spec proposal</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2893">[ date ]</a> <a href="thread.html#2893">[ thread ]</a> <a href="subject.html#2893">[ subject ]</a> <a href="author.html#2893">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

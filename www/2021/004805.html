@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] Oustanding issues</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004802.html">
+<link rel="next" href="004748.html">
+</head>
+<body>
+<h1>[spec] Oustanding issues</h1>
+<b>Stephane Bortzmeyer</b> stephane at sources.org<br>
+<i>Mon Jan 11 07:33:32 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004802.html">[spec] Oustanding issues</a></li>
+<li>Next message (by thread): <a href="004748.html">[ANN] Schapcom</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4805">[ date ]</a> <a href="thread.html#4805">[ thread ]</a> <a href="subject.html#4805">[ subject ]</a> <a href="author.html#4805">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Sun, Jan 10, 2021 at 05:42:34PM +0000,
+ Martin Keegan &lt;martin at no.ucant.org&gt; wrote 
+ a message of 20 lines which said:
+
+&gt;<i> Clarify whether <a href="gemini://host.domain/path">gemini://host.domain/path</a> and
+</i>&gt;<i> <a href="gemini://host.domain:1965/path">gemini://host.domain:1965/path</a> are to be considered equivalent, and
+</i>&gt;<i> if so, what that means. (This may be more important for the
+</i>&gt;<i> robots.txt side-spec).
+</i>
+Yes, they are equivalent. RFC 3986
+&lt;<a href="gemini://gemini.bortzmeyer.org/rfc-mirror/rfc3986.txt">gemini://gemini.bortzmeyer.org/rfc-mirror/rfc3986.txt</a>&gt;, section
+3.2.3:
+
+   A scheme may define a default port.  For example, the &quot;http&quot; scheme
+   defines a default port of &quot;80&quot;, corresponding to its reserved TCP
+   port number. [...]  URI producers and normalizers should omit the
+   port component and its &quot;:&quot; delimiter if port is empty or if its
+   value would be the same as that of the scheme&#x27;s default.
+
+For instance, the Lupa crawler
+&lt;<a href="gemini://gemini.bortzmeyer.org/software/lupa/">gemini://gemini.bortzmeyer.org/software/lupa/</a>&gt; canonicalizes
+&lt;<a href="gemini://host.example:1965/path">gemini://host.example:1965/path</a>&gt; to &lt;<a href="gemini://host.example/path">gemini://host.example/path</a>&gt;.
+
+% lupa-insert-url <a href="gemini://host.example:1965/path">gemini://host.example:1965/path</a>
+URL <a href="gemini://host.example:1965/path">gemini://host.example:1965/path</a> added to the database (ID 152155, capsule ID 571)
+
+% my-lupa-insert-url <a href="gemini://host.example/path">gemini://host.example/path</a>
+URL <a href="gemini://host.example/path">gemini://host.example/path</a> already in the database
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004802.html">[spec] Oustanding issues</a></li>
+<li>Next message (by thread): <a href="004748.html">[ANN] Schapcom</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4805">[ date ]</a> <a href="thread.html#4805">[ thread ]</a> <a href="subject.html#4805">[ subject ]</a> <a href="author.html#4805">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

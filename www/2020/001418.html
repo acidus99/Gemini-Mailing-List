@@ -1,49 +1,33 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20lang%20parameter%2C%20minor%20line%20type%20changes%2C%0A%20clarifications...&In-Reply-To=%3C20200608073606.GC9769%40SDF.ORG%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="001430.html">
-   <LINK REL="Next"  HREF="001426.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...</H1>
-    <B>solderpunk</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20lang%20parameter%2C%20minor%20line%20type%20changes%2C%0A%20clarifications...&In-Reply-To=%3C20200608073606.GC9769%40SDF.ORG%3E"
-       TITLE="[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...">solderpunk at SDF.ORG
-       </A><BR>
-    <I>Mon Jun  8 08:36:06 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="001430.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
-</A></li>
-        <LI>Next message (by thread): <A HREF="001426.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1418">[ date ]</a>
-              <a href="thread.html#1418">[ thread ]</a>
-              <a href="subject.html#1418">[ subject ]</a>
-              <a href="author.html#1418">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="001430.html">
+<link rel="next" href="001426.html">
+</head>
+<body>
+<h1>[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Mon Jun  8 08:36:06 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="001430.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...</a></li>
+<li>Next message (by thread): <a href="001426.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1418">[ date ]</a> <a href="thread.html#1418">[ thread ]</a> <a href="subject.html#1418">[ subject ]</a> <a href="author.html#1418">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Sun, Jun 07, 2020 at 07:06:38PM -0400, Matthew Graybosch wrote:
+<pre>On Sun, Jun 07, 2020 at 07:06:38PM -0400, Matthew Graybosch wrote:
  
-&gt;<i> I just read the relevant part of the spec, but I'm still not clear on
-</I>&gt;<i> how I should go about specifying that my text is US English. Do I just
-</I>&gt;<i> have to add &quot;lang=en_US&quot; on the first line of a text/gemini file?
-</I>
+&gt;<i> I just read the relevant part of the spec, but I&#x27;m still not clear on
+</i>&gt;<i> how I should go about specifying that my text is US English. Do I just
+</i>&gt;<i> have to add &quot;lang=en_US&quot; on the first line of a text/gemini file?
+</i>
 No, the &quot;lang&quot; parameter is a parameter to the text/gemini MIME type
-which is part of the response header.  It doesn't go in the document
+which is part of the response header.  It doesn&#x27;t go in the document
 itself.  Server software will need to provide admins and/or users some
 way to configure this.
 
@@ -59,23 +43,23 @@ designate different languages depending on which regex the path matches.
 
 Multi-user sites will be trickiest of all and will require users to
 either bother the admin, or for servers to implement something like
-Apache's .htaccess files.
+Apache&#x27;s .htaccess files.
 
-I don't deny that this is kind of painful.  But I don't see a way around
+I don&#x27;t deny that this is kind of painful.  But I don&#x27;t see a way around
 it - if we say that the first line of a text/gemini file should be
 &quot;#lang: en-US&quot; or anything like that we have immediately opened the door
-to arbitrarly many additional options.  This basically gives us HTTP's
+to arbitrarly many additional options.  This basically gives us HTTP&#x27;s
 open-ended response header structure and completely defeats the point of
 having a response header which is explicitly a single line.
  
 &gt;<i> &gt; Lines beginning with &quot;&gt;&quot; are now defined to be quote lines, as per
-</I>&gt;<i> &gt; popular demand.
-</I>&gt;<i> 
-</I>&gt;<i> This will be handy, but now I'm wondering about pre-formatted quotes
-</I>&gt;<i> (mainly for poetry, song lyrics, screenplays, etc.)
-</I>
+</i>&gt;<i> &gt; popular demand.
+</i>&gt;<i> 
+</i>&gt;<i> This will be handy, but now I&#x27;m wondering about pre-formatted quotes
+</i>&gt;<i> (mainly for poetry, song lyrics, screenplays, etc.)
+</i>
 I would expect those to be handled just with pre-formatted lines.  I get
-that they're also a quote of sorts, but simplicity necessitates
+that they&#x27;re also a quote of sorts, but simplicity necessitates
 sacrifcing the ability for total semantic precision.  I hope we can live
 with this.
 
@@ -83,111 +67,22 @@ with this.
 served in its own document as text/plain)
 
 &gt;<i> Furthermore, looking for quote characters inside a preformatted block
-</I>&gt;<i> and then rendering that block in a variable-width font instead (when
-</I>&gt;<i> applicable) sounds like a good way to introduce bugs.
-</I>
-It's also a clear violation of the spec!
+</i>&gt;<i> and then rendering that block in a variable-width font instead (when
+</i>&gt;<i> applicable) sounds like a good way to introduce bugs.
+</i>
+It&#x27;s also a clear violation of the spec!
 
 Cheers,
 Solderpunk
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="001430.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
-</A></li>
-	<LI>Next message (by thread): <A HREF="001426.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1418">[ date ]</a>
-              <a href="thread.html#1418">[ thread ]</a>
-              <a href="subject.html#1418">[ subject ]</a>
-              <a href="author.html#1418">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="001430.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...</a></li>
+<li>Next message (by thread): <a href="001426.html">[SPEC-CHANGE] lang parameter, minor line type changes, clarifications...</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1418">[ date ]</a> <a href="thread.html#1418">[ thread ]</a> <a href="subject.html#1418">[ subject ]</a> <a href="author.html#1418">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

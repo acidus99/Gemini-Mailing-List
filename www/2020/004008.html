@@ -1,83 +1,51 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Crawlers on Gemini and best practices
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Crawlers%20on%20Gemini%20and%20best%20practices&In-Reply-To=%3CCAFaUHvJ7Pyrr%2BQgytM7sHMuYs1nrH9QVS5Wx5OnBsN392uuZJw%40mail.gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="004007.html">
-   <LINK REL="Next"  HREF="004015.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Crawlers on Gemini and best practices</H1>
-    <B>Sudipto Mallick</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Crawlers%20on%20Gemini%20and%20best%20practices&In-Reply-To=%3CCAFaUHvJ7Pyrr%2BQgytM7sHMuYs1nrH9QVS5Wx5OnBsN392uuZJw%40mail.gmail.com%3E"
-       TITLE="Crawlers on Gemini and best practices">smallick.dev at gmail.com
-       </A><BR>
-    <I>Fri Dec 11 13:15:42 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="004007.html">Crawlers on Gemini and best practices
-</A></li>
-        <LI>Next message (by thread): <A HREF="004015.html">Crawlers on Gemini and best practices
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4008">[ date ]</a>
-              <a href="thread.html#4008">[ thread ]</a>
-              <a href="subject.html#4008">[ subject ]</a>
-              <a href="author.html#4008">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crawlers on Gemini and best practices</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004007.html">
+<link rel="next" href="004015.html">
+</head>
+<body>
+<h1>Crawlers on Gemini and best practices</h1>
+<b>Sudipto Mallick</b> smallick.dev at gmail.com<br>
+<i>Fri Dec 11 13:15:42 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="004007.html">Crawlers on Gemini and best practices</a></li>
+<li>Next message (by thread): <a href="004015.html">Crawlers on Gemini and best practices</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4008">[ date ]</a> <a href="thread.html#4008">[ thread ]</a> <a href="subject.html#4008">[ subject ]</a> <a href="author.html#4008">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>&gt;<i> for example:
-</I>&gt;<i>
-</I>&gt;<i>     /a,/p all denied
-</I>&gt;<i>     /a/b,/p/q indexer,researcher allowed
-</I>&gt;<i>     /a/b/c researcher denied
-</I>&gt;<i>     /a/b/c heh allowed
-</I>&gt;<i>
-</I>now the researcher 'heh' may access /p/q/* and and /a/b/*
-&gt;<i> and it may not access /a/b/{X} when {X} != 'c'
-</I>err. sorry. that should be: may not access /a/{X} when {X} != 'b' and
-/p/{Y} when {Y} != 'q' (for all indexers and researchers, hmm.)
+<pre>&gt;<i> for example:
+</i>&gt;<i>
+</i>&gt;<i>     /a,/p all denied
+</i>&gt;<i>     /a/b,/p/q indexer,researcher allowed
+</i>&gt;<i>     /a/b/c researcher denied
+</i>&gt;<i>     /a/b/c heh allowed
+</i>&gt;<i>
+</i>now the researcher &#x27;heh&#x27; may access /p/q/* and and /a/b/*
+&gt;<i> and it may not access /a/b/{X} when {X} != &#x27;c&#x27;
+</i>err. sorry. that should be: may not access /a/{X} when {X} != &#x27;b&#x27; and
+/p/{Y} when {Y} != &#x27;q&#x27; (for all indexers and researchers, hmm.)
 every one other that researchers and indexers may not access /a/* and /p/*
 
-&gt;<i> other researchers may only access /p/q and /a/b/{Z} when {Z} != 'c' so
-</I>&gt;<i> they may not access /a/b/c
-</I>indexers may access /a/b/* and /p/q/*
+&gt;<i> other researchers may only access /p/q and /a/b/{Z} when {Z} != &#x27;c&#x27; so
+</i>&gt;<i> they may not access /a/b/c
+</i>indexers may access /a/b/* and /p/q/*
 ah.
-</PRE>
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="004007.html">Crawlers on Gemini and best practices
-</A></li>
-	<LI>Next message (by thread): <A HREF="004015.html">Crawlers on Gemini and best practices
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4008">[ date ]</a>
-              <a href="thread.html#4008">[ thread ]</a>
-              <a href="subject.html#4008">[ subject ]</a>
-              <a href="author.html#4008">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="004007.html">Crawlers on Gemini and best practices</a></li>
+<li>Next message (by thread): <a href="004015.html">Crawlers on Gemini and best practices</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4008">[ date ]</a> <a href="thread.html#4008">[ thread ]</a> <a href="subject.html#4008">[ subject ]</a> <a href="author.html#4008">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[users] Simple Gemini server for testing in the current directory?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004860.html">
+<link rel="next" href="004862.html">
+</head>
+<body>
+<h1>[users] Simple Gemini server for testing in the current directory?</h1>
+<b>Omar Polo</b> op at omarpolo.com<br>
+<i>Wed Jan 20 09:02:10 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004860.html">[users] Simple Gemini server for testing in the current directory?</a></li>
+<li>Next message (by thread): <a href="004862.html">[users] Simple Gemini server for testing in the current directory?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4861">[ date ]</a> <a href="thread.html#4861">[ thread ]</a> <a href="subject.html#4861">[ subject ]</a> <a href="author.html#4861">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+mailinglists at ngalt.com writes:
+
+&gt;<i> One thing that I like about HTTP is that there are oodles of ways to spin up a simple server for testing on localhost. Things like `python3 -m http.server` and `caddy run` are what I&#x27;m thinking of. Since this is Gemini and not bare-bones HTTP, It&#x27;d have to handle key generation.
+</i>&gt;<i>
+</i>&gt;<i> Is there a server like that yet for Gemini that runs on macOS? 
+</i>
+I&#x27;m writing a server that almost fit in that description, I was thinking
+to share it with the list when I&#x27;ll finish the vhost and configuration
+stuff I was working on, but anyway.
+
+It&#x27;s called gmid[0][1].  It doesn&#x27;t (yet) handle the creation of keys,
+but you can easily generate a cert and store, say, in you home and
+you&#x27;re done.  Once you&#x27;ve built it, you can serve any directory with
+`gmid -c cert.pem -k key.pem -d dir` [2].  Ctrl-c when you&#x27;re done :)
+
+(I&#x27;m also using it to serve my capsule)
+
+It&#x27;s written in C, sandboxed by default (from the next version) on
+OpenBSD, FreeBSD and linux, and with LibreSSL/libretls as only
+dependency.  You&#x27;ll also need lex and yacc/bison to build.  I don&#x27;t have
+a mac, but I don&#x27;t see why it shouldn&#x27;t run fine there.
+
+Cheers,
+
+Omar Polo
+
+
+[0]: <a href="https://github.com/omar-polo/gmid">https://github.com/omar-polo/gmid</a>
+[1]: <a href="gemini://gemini.omarpolo.com/pages/gmid.gmi">gemini://gemini.omarpolo.com/pages/gmid.gmi</a>
+[2]: this on the last stable (v1.4.1), I&#x27;ve changed -c to -C and -k to
+     -K in the master when adding the config (-c)
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004860.html">[users] Simple Gemini server for testing in the current directory?</a></li>
+<li>Next message (by thread): <a href="004862.html">[users] Simple Gemini server for testing in the current directory?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4861">[ date ]</a> <a href="thread.html#4861">[ thread ]</a> <a href="subject.html#4861">[ subject ]</a> <a href="author.html#4861">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

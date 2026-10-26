@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>May user-friendly link names be empty?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007625.html">
+<link rel="next" href="007566.html">
+</head>
+<body>
+<h1>May user-friendly link names be empty?</h1>
+<b>codesoap at mailbox.org</b> codesoap at mailbox.org<br>
+<i>Mon Nov  8 19:07:03 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007625.html">Request for feedback from server/client implementers using non-OpenSSL TLS stacks</a></li>
+<li>Next message (by thread): <a href="007566.html">May user-friendly link names be empty?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7565">[ date ]</a> <a href="thread.html#7565">[ thread ]</a> <a href="subject.html#7565">[ subject ]</a> <a href="author.html#7565">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi all,
+the specification says this about link lines:
+
+&gt;<i> =&gt;[&lt;whitespace&gt;]&lt;URL&gt;[&lt;whitespace&gt;&lt;USER-FRIENDLY LINK NAME&gt;]
+</i>&gt;<i> 
+</i>&gt;<i> where:
+</i>&gt;<i> 
+</i>&gt;<i>     • &lt;whitespace&gt; is any non-zero number of consecutive spaces or tabs
+</i>&gt;<i>     • Square brackets indicate that the enclosed content is optional.
+</i>&gt;<i>     • &lt;URL&gt; is a URL, which may be absolute or relative.
+</i>
+From this description I don&#x27;t know whether &lt;USER-FRIENDLY LINK NAME&gt; MAY
+be empty. Which of these regular expressions would be correct to parse a
+link line?
+
+a) ^=&gt;[ \t]*([^ \t]+)(?:$|[ \t]+([^ \t].*)$)
+b) ^=&gt;[ \t]*([^ \t]+)(?:$|[ \t]+([^ \t]?.*?)$)
+
+Or are both wrong, because I misunderstood &quot;spaces&quot; as 0x20?
+
+Sorry for the nitpicking :p
+
+Greetings
+Richard Ulmer
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007625.html">Request for feedback from server/client implementers using non-OpenSSL TLS stacks</a></li>
+<li>Next message (by thread): <a href="007566.html">May user-friendly link names be empty?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7565">[ date ]</a> <a href="thread.html#7565">[ thread ]</a> <a href="subject.html#7565">[ subject ]</a> <a href="author.html#7565">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

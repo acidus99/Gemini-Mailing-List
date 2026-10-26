@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How do you buffer a Gemini connection?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006237.html">
+<link rel="next" href="006243.html">
+</head>
+<body>
+<h1>How do you buffer a Gemini connection?</h1>
+<b>Ecmel Berk Canlıer</b> me at ecmelberk.com<br>
+<i>Mon Mar 29 07:41:38 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006237.html">How do you buffer a Gemini connection?</a></li>
+<li>Next message (by thread): <a href="006243.html">How do you buffer a Gemini connection?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6238">[ date ]</a> <a href="thread.html#6238">[ thread ]</a> <a href="subject.html#6238">[ subject ]</a> <a href="author.html#6238">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On 3/29/21 9:22 AM, almaember wrote:
+&gt;<i> One question, what do you do if a single line is split into multiple
+</i>&gt;<i> chunks?
+</i>
+<a href="https://git.ebc.li/_/moonlander/src/branch/main/gemtext/src/lib.rs">https://git.ebc.li/_/moonlander/src/branch/main/gemtext/src/lib.rs</a>
+
+The chunked_parse (Line 160) function reads character by character, saving everything into an &quot;incomplete line&quot; buffer (Line 31), and when it encounters a newline it empties and processes the incomplete line buffer and returns the list of &quot;line objects&quot; corresponding to the markup inside the buffer.
+
+When the connection is closed, the finalize function (Line 221) runs and parses the incomplete line buffer one last time to complete the document.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006237.html">How do you buffer a Gemini connection?</a></li>
+<li>Next message (by thread): <a href="006243.html">How do you buffer a Gemini connection?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6238">[ date ]</a> <a href="thread.html#6238">[ thread ]</a> <a href="subject.html#6238">[ subject ]</a> <a href="author.html#6238">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

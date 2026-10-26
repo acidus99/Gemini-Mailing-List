@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fw: Re: [ANN] Specification update</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007608.html">
+<link rel="next" href="007611.html">
+</head>
+<body>
+<h1>Fw: Re: [ANN] Specification update</h1>
+<b>Jason McBrayer</b> jmcbray at carcosa.net<br>
+<i>Mon Nov 15 13:15:55 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007608.html">Fw: Re: [ANN] Specification update</a></li>
+<li>Next message (by thread): <a href="007611.html">Fw: Re: [ANN] Specification update</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7610">[ date ]</a> <a href="thread.html#7610">[ thread ]</a> <a href="subject.html#7610">[ subject ]</a> <a href="author.html#7610">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+Krixano &lt;krixano@protonmail.com&gt; writes:
+
+&gt;<i> I just want to make sure about this, are we sure agunua is reporting
+</i>&gt;<i> things correctly? I find it odd that *every single server* I&#x27;ve tested
+</i>&gt;<i> has had this problem with the notfound errorcode, but not with
+</i>&gt;<i> successful requests.
+</i>
+I believe agunua has a problem with reporting no close_notify on error
+pages, reporting that it is absent whether it was actually sent or
+not. I spent some time over the weekend fixing this issue in Germinal,
+making sure that the same code-paths were used for both 2x responses and
+for errors, but agunua still reported no close_notify for 51 pages. I
+checked the same error pages with portal.mozz.us, and it *is* seeing the
+close_notify being sent. So, I&#x27;m going to assume the error is in agunua.
+
+-- 
+Jason McBrayer      | “Strange is the night where black stars rise,
+jmcbray@carcosa.net | and strange moons circle through the skies,
+                    | but stranger still is lost Carcosa.”
+                    | ― Robert W. Chambers,The King in Yellow
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007608.html">Fw: Re: [ANN] Specification update</a></li>
+<li>Next message (by thread): <a href="007611.html">Fw: Re: [ANN] Specification update</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7610">[ date ]</a> <a href="thread.html#7610">[ thread ]</a> <a href="subject.html#7610">[ subject ]</a> <a href="author.html#7610">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

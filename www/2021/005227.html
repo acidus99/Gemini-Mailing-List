@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[ANN] Paste it to Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005181.html">
+<link rel="next" href="005182.html">
+</head>
+<body>
+<h1>[ANN] Paste it to Gemini</h1>
+<b>Thomas Frohwein</b> tfrohwein at fastmail.com<br>
+<i>Sun Feb 14 03:37:07 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005181.html">[ANN] Paste it to Gemini</a></li>
+<li>Next message (by thread): <a href="005182.html">Should Gemini clients alert users upon redirect?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5227">[ date ]</a> <a href="thread.html#5227">[ thread ]</a> <a href="subject.html#5227">[ subject ]</a> <a href="author.html#5227">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Fri, Feb 12, 2021 at 02:49:08PM +0100, Louis Brauer wrote:
+&gt;<i> You can use any Gemini browser for that, 
+</i>&gt;<i> 
+</i>&gt;<i> i.e. Lagrange:
+</i>&gt;<i> <a href="https://share.getcloudapp.com/yAu6ZN8E">https://share.getcloudapp.com/yAu6ZN8E</a>
+</i>&gt;<i> 
+</i>&gt;<i> or Amfora interactively:
+</i>&gt;<i> <a href="https://share.getcloudapp.com/z8uP4j54">https://share.getcloudapp.com/z8uP4j54</a>
+</i>&gt;<i> 
+</i>&gt;<i> or pass the paste directly to amfora:
+</i>&gt;<i> $ amfora &quot;<a href="gemini://paste.gemigrep.com/paste?This">gemini://paste.gemigrep.com/paste?This</a> is another way to do it&quot;
+</i>&gt;<i> 
+</i>&gt;<i> This will instantly create a new paste and give you the URL.
+</i>[...]
+
+even more low-level approach:
+
+gemigrep.sh:
+```
+#!/bin/sh
+echo &quot;<a href="gemini://paste.gemigrep.com/$(echo">gemini://paste.gemigrep.com/$(echo</a> &quot;<a href="gemini://paste.gemigrep.com/paste?$1">gemini://paste.gemigrep.com/paste?$1</a>&quot; \
+	| openssl s_client -quiet -connect paste.gemigrep.com:1965 2&gt;&amp;1 | tail -1 | cut -d / -f 3)&quot;
+```
+
+Tested on OpenBSD&#x27;s ksh(1).
+
+Limitations:
+- can&#x27;t deal with newlines. You can insert &#x27;%0A&#x27; in the string to force a newline.
+- I haven&#x27;t figured out how to simplify this even more to set an alias... :/
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005181.html">[ANN] Paste it to Gemini</a></li>
+<li>Next message (by thread): <a href="005182.html">Should Gemini clients alert users upon redirect?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5227">[ date ]</a> <a href="thread.html#5227">[ thread ]</a> <a href="subject.html#5227">[ subject ]</a> <a href="author.html#5227">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

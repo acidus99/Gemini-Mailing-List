@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[ANN] edaha.org</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004816.html">
+<link rel="next" href="004842.html">
+</head>
+<body>
+<h1>[ANN] edaha.org</h1>
+<b>Luke Emmet</b> luke at marmaladefoo.com<br>
+<i>Thu Jan 14 22:23:09 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004816.html">[ANN] edaha.org</a></li>
+<li>Next message (by thread): <a href="004842.html">[ANN] edaha.org</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4817">[ date ]</a> <a href="thread.html#4817">[ thread ]</a> <a href="subject.html#4817">[ subject ]</a> <a href="author.html#4817">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On 14-Jan-2021 06:46, me at edaha.org wrote:
+&gt;<i> Announcing my personal gemini site at <a href="gemini://edaha.org">gemini://edaha.org</a>. Currently 
+</i>&gt;<i> running Jetforce as the server software.
+</i>&gt;<i>
+</i>&gt;<i> First post is a guide on how I set up my server using free services 
+</i>&gt;<i> from Oracle&#x27;s cloud offering. You can check it out here: 
+</i>&gt;<i> <a href="gemini://edaha.org/oracle-ci-how-to.gmi">gemini://edaha.org/oracle-ci-how-to.gmi</a>
+</i>
+Hello there
+
+Many thanks for that - this is a great guide for anyone wanting to set 
+up a server in the cloud, and the Oracle offering seems quite generous. 
+I&#x27;ve tried it out today and I can confirm the steps are very well 
+described and it works fine.
+
+But I found a couple of small bugs in your guide that you might want to fix:
+
+1. Opening the VCN firewall,
+
+Guide says: &quot;Enter &quot;1935&quot; in the &quot;Destination Port Range&quot; input box&quot;
+
+This should be port 1965 not 1935 (typo)
+
+2. SSH&#x27;ing into your Ubuntu instance and updating it
+
+Connecting with PuTTY - need to use PuttyGen to import private PEM and 
+generate ppk file. I couldnt get PuTTY to directly use the PEM files.
+
+3. Setting up iptables
+
+Guide says to use: sudo iptables-save &gt; /etc/iptables/rules.v4
+
+I got &quot;permission denied&quot; with that command
+
+Instead this worked for me: sudo iptables-save -f /etc/iptables/rules.v4
+
+Many thanks again - now I have another space to play in.
+
+  - Luke
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004816.html">[ANN] edaha.org</a></li>
+<li>Next message (by thread): <a href="004842.html">[ANN] edaha.org</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4817">[ date ]</a> <a href="thread.html#4817">[ thread ]</a> <a href="subject.html#4817">[ subject ]</a> <a href="author.html#4817">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

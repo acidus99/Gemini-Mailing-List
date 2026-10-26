@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] Signing Gemini capsules</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006159.html">
+<link rel="next" href="006301.html">
+</head>
+<body>
+<h1>[tech] Signing Gemini capsules</h1>
+<b>ew.gemini</b> ew.gemini at nassur.net<br>
+<i>Wed Apr  7 18:20:56 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006159.html">[tech] Signing Gemini capsules</a></li>
+<li>Next message (by thread): <a href="006301.html">[tech] Signing Gemini capsules</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6290">[ date ]</a> <a href="thread.html#6290">[ thread ]</a> <a href="subject.html#6290">[ subject ]</a> <a href="author.html#6290">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hello,
+
+
+nervuri &lt;nervuri@disroot.org&gt; writes:
+
+&gt;<i> On Sun, Mar 07, 2021, Francesco Camuffo wrote:
+</i>&gt;<i>&gt;Hi.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt;I made a very basic proof-of-concept program [1] to check the signify
+</i>&gt;<i>&gt;signature of a resource.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt;[1] <a href="https://git.sr.ht/~fmac/gemisign">https://git.sr.ht/~fmac/gemisign</a>
+</i>&gt;<i>
+</i>&gt;<i>snip
+</i>&gt;<i> My recommendation is to merge key.pub, SHA256SUMS and SHA256SUMS.sig
+</i>&gt;<i> into a single file, to reduce the number of network requests.  I
+</i>&gt;<i> considered concatenating them within a plaintext file (using a separator
+</i>&gt;<i> like &quot;~~~&quot;), but then I discovered signify&#x27;s -z option, which signs a
+</i>&gt;<i> gzip archive and embeds the signature in the gzip header.  GPG can do
+</i>&gt;<i> something similar - see `gpgtar`.
+</i>&gt;<i>
+</i>&gt;<i> Using an archive in this way has several benefits:
+</i>&gt;<i>
+</i>&gt;<i> * compression (which actually matters if you have a big SHA256SUMS file
+</i>&gt;<i> with long, repeating paths)
+</i>&gt;<i> * an elegant way to bundle as many files as we need; for instance, we
+</i>&gt;<i> could add `key-sources` later on
+</i>&gt;<i> * no separate signature file(s)
+</i>&gt;<i>
+</i>&gt;<i> I suggest `.well-known/signature-bundle` as the standard location for
+</i>&gt;<i> the signed archive.  It&#x27;s important for this file *not* to have an
+</i>&gt;<i> extension, because the archive format might change later on, as software
+</i>&gt;<i> evolves.
+</i>&gt;<i>
+</i>&gt;<i> I wrote an implementation in POSIX Shell:
+</i>&gt;<i>
+</i>&gt;<i> <a href="https://tildegit.org/nervuri/NetSigil">https://tildegit.org/nervuri/NetSigil</a>
+</i>&gt;<i>
+</i>
+I spent some time today to retrace what you have outlined. I was
+able to create signature-bundle and extract the information from
+it again.
+
+Some time ago I wrote about my experiments here:
+2020-12-17 Towards a proper FlightLog 4 -- Experiment with
+gpg-Signatures
+=&gt; <a href="gemini://gemini.circumlunar.space/~ew/2020/20201217-towards-a-proper-flightlog-4.gmi">gemini://gemini.circumlunar.space/~ew/2020/20201217-towards-a-proper-flightlog-4.gmi</a>
+
+Apart from file names and such details both ways ware very
+similar:
+- create a list of checksums of all files in the tree
+- sign this list with your secret key
+- publish the corresponding public key.
+
+The biggest difference is the use of tools.
+- I use plain gpg
+- you use signify-openbsd (which I did not know about)
+
+
+signify-openbsd uses a different key generation mechanism.
+Skimming the docs coming with the debian package did not say,
+what algorithm is used. So to me this looks like &quot;but why
+another?&quot; --- this might be my ignorance, however.
+
+So what is the reason you choose signify-openbsd?
+Is there a way to link such a signify pair of keys to my gpg
+key?
+
+
+Thanks for sharing this.
+I especially like the fact that NetSigil is a modest shell script!
+
+Cheers,
+~ew
+
+
+
+-- 
+Keep it simple!
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006159.html">[tech] Signing Gemini capsules</a></li>
+<li>Next message (by thread): <a href="006301.html">[tech] Signing Gemini capsules</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6290">[ date ]</a> <a href="thread.html#6290">[ thread ]</a> <a href="subject.html#6290">[ subject ]</a> <a href="author.html#6290">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

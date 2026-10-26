@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Is streaming a normative protocol expectation? (was Re: Documents with mixed languages)</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007690.html">
+<link rel="next" href="007711.html">
+</head>
+<body>
+<h1>Is streaming a normative protocol expectation? (was Re: Documents with mixed languages)</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Tue Dec 14 01:09:16 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007690.html">Is streaming a normative protocol expectation? (was Re: Documents with mixed languages)</a></li>
+<li>Next message (by thread): <a href="007711.html">Is streaming a normative protocol expectation? (was Re: Documents with mixed languages)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7702">[ date ]</a> <a href="thread.html#7702">[ thread ]</a> <a href="subject.html#7702">[ subject ]</a> <a href="author.html#7702">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Luke Emmet once stated:
+&gt;<i> Hello
+</i>&gt;<i> 
+</i>&gt;<i> On 13-Dec-2021 19:10, Sean Conner wrote:
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;   If you receive a MIME type of &quot;audio/*&quot;, &quot;video/*&quot; or 
+</i>&gt;<i> &gt;   &quot;text/event-stream&quot;
+</i>&gt;<i> &gt;[1], then you probably would want to stream the data or expect to spend
+</i>&gt;<i> &gt;some time downloading the entire content (or abort entirely if you get
+</i>&gt;<i> &gt;&quot;text/event-stream&quot;).
+</i>&gt;<i> 
+</i>&gt;<i> Although strictly speaking according to the workflow described in the 
+</i>&gt;<i> spec, you might validly not know the media type until *after* you have 
+</i>&gt;<i> received the response, the connection is closed, then you have processed 
+</i>&gt;<i> the response :)
+</i>
+  I think you are talking about this from the specification: [1]
+
+C:   Opens connection
+S:   Accepts connection
+C/S: Complete TLS handshake (see section 4)
+C:   Validates server certificate (see 4.2)
+C:   Sends request (one CRLF terminated line) (see section 2)
+S:   Sends response header (one CRLF terminated line), closes connection
+     under non-success conditions (see 3.1 and 3.2)
+S:   Sends response body (text or binary data) (see 3.3)
+S:   Closes connection (including TLS close_notify, see section 4)
+C:   Handles response (see 3.4)
+
+  Yes, it&#x27;s easier for a client to implement this as shown above---read all
+the input, then handle it.  But things can go wrong for a variety of reasons
+(bugs, malicious intent) so clients should be able to deal with a server
+that doesn&#x27;t close the connection (or the connection is so slow that it&#x27;s
+preferrable for the client to abort the transaction) and the server should
+be able to deal with a client that closes the connection before it does. 
+
+  Now strictly speaking, the client knows the MIME type as soon as it gets
+the response header.  How the client deals with the response body (see 3.3
+and 3.4) is up to the client.
+
+  Yes, I get the complaint about having to read anciliary sources to
+&quot;properly&quot; implement the protocol (my biggest beef---not many bot writers
+have bothered reading the &quot;best practices&quot; document sitting along side the
+specification [2]), but as I mentioned above, there are a ton of corner
+cases that need to be considered when implementing the protocol that aren&#x27;t
+mentioned in either document (like text with no whitespace---how do you deal
+with formatting?).  
+
+  -spc
+
+[1]	<a href="gemini://gemini.circumlunar.space/docs/specification.gmi">gemini://gemini.circumlunar.space/docs/specification.gmi</a>
+
+[2]	<a href="gemini://gemini.circumlunar.space/docs/best-practices.gmi">gemini://gemini.circumlunar.space/docs/best-practices.gmi</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007690.html">Is streaming a normative protocol expectation? (was Re: Documents with mixed languages)</a></li>
+<li>Next message (by thread): <a href="007711.html">Is streaming a normative protocol expectation? (was Re: Documents with mixed languages)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7702">[ date ]</a> <a href="thread.html#7702">[ thread ]</a> <a href="subject.html#7702">[ subject ]</a> <a href="author.html#7702">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

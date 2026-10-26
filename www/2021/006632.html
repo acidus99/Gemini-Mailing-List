@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] Pre-generated trust stores for various Gemini clients</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006630.html">
+<link rel="next" href="006635.html">
+</head>
+<body>
+<h1>[tech] Pre-generated trust stores for various Gemini clients</h1>
+<b>nervuri</b> nervuri at disroot.org<br>
+<i>Sun Jun  6 21:20:41 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006630.html">[tech] Pre-generated trust stores for various Gemini clients</a></li>
+<li>Next message (by thread): <a href="006635.html">[tech] Pre-generated trust stores for various Gemini clients</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6632">[ date ]</a> <a href="thread.html#6632">[ thread ]</a> <a href="subject.html#6632">[ subject ]</a> <a href="author.html#6632">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Sun, 2021-06-06, Omar Polo wrote:
+&gt;<i>
+</i>&gt;<i> nervuri &lt;nervuri@disroot.org&gt; writes:
+</i>&gt;<i>
+</i>&gt;<i>&gt; I also want to encourage client authors to bunlde pre-generated trust
+</i>&gt;<i>&gt; stores (verified from several perspectives) into their clients, to
+</i>&gt;<i>&gt; protect the first connection.  [...]
+</i>&gt;<i>
+</i>&gt;<i> from a packager point of view I fear this can break badly.
+</i>&gt;<i>
+</i>&gt;<i> On OSes that provides stable channels, the packages aren&#x27;t update
+</i>&gt;<i> frequently.  If you add to the mix that there are people using Let&#x27;s
+</i>&gt;<i> Encrypt (or similar) and thus change the certificate frequently, there&#x27;s
+</i>&gt;<i> a problem.
+</i>&gt;<i>
+</i>&gt;<i> There is also another drawback to this, that it ties client authors to
+</i>&gt;<i> frequent and periodic updates.  Take elpher for example, it hasn&#x27;t seen
+</i>&gt;<i> commits in a while now (since 2020-09-19 -- almost 9 months!), but it&#x27;s
+</i>&gt;<i> fine because the code still works.
+</i>
+I have mentioned a few solutions to this problem in this thread.  I&#x27;ll
+expand on them here.
+
+1. Clients can periodically refresh the trust store from a chosen source
+(that the user can change, of course).  On mismatches between the local
+trust store and the downloaded one, local entries from capsules that the
+user has visited should take precedence (unless they are expired,
+perhaps).  An option can be provided for advanced users to be notified
+about such mismatches.
+
+2. Most people don&#x27;t know what an X.509 certificate is.  Rather than
+presenting them with a cryptic SSH-like prompt on every mismatch,
+clients could do automatic out-of-band verification based on network
+perspective.  If Tor is available on the user&#x27;s system, such
+verification is simple and anonymous (I exemplified in a previous
+email).  If Tor is not available, we need a few servers running a CGI
+program that takes a hostname[:port] as input, connects to it and
+outputs the certificate it received.  Clients could then validate certs
+by querying these servers.  We also need proxies to protect the user&#x27;s
+privacy when connecting to such servers (one extra hop should suffice -
+see Anonymized DNSCrypt [1] or Oblivious DoH [2]).  You can look at
+Trust Seeker [3] for some ideas, although it&#x27;s just an early sketch and
+the code is embarrassing at this point.  This month I hope to reboot the
+project.
+
+3. Client authors don&#x27;t have to bundle *all* certificates.  They may
+pick only a few Gemini hubs with certificates set to expire many years
+into the future.  This can be done manually.  Alternatively, they may
+only want to exclude short-lived certs, like those signed by Let&#x27;s
+Encrypt.  The trust store generator scripts allow for this.  For
+instance, you can run:
+
+./generate-trust-store.sh 30- 90+
+
+This excludes certificates for which:
+
+{30 days ago} &lt; cert_expiry &lt; {90 days from now}
+
+So this excludes current Let&#x27;s Encrypt certs, for instance.  Of course,
+the numbers can be much higher - it&#x27;s up to the developer.
+
+[1] <a href="https://github.com/DNSCrypt/dnscrypt-protocol/blob/master/ANONYMIZED-DNSCRYPT.txt">https://github.com/DNSCrypt/dnscrypt-protocol/blob/master/ANONYMIZED-DNSCRYPT.txt</a>
+[2] <a href="https://datatracker.ietf.org/doc/html/draft-pauly-dprive-oblivious-doh-06">https://datatracker.ietf.org/doc/html/draft-pauly-dprive-oblivious-doh-06</a>
+[3] <a href="https://tildegit.org/nervuri/trust-seeker">https://tildegit.org/nervuri/trust-seeker</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006630.html">[tech] Pre-generated trust stores for various Gemini clients</a></li>
+<li>Next message (by thread): <a href="006635.html">[tech] Pre-generated trust stores for various Gemini clients</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6632">[ date ]</a> <a href="thread.html#6632">[ thread ]</a> <a href="subject.html#6632">[ subject ]</a> <a href="author.html#6632">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

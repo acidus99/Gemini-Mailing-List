@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Script to test gemini servers</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000296.html">
+<link rel="next" href="000298.html">
+</head>
+<body>
+<h1>Script to test gemini servers</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Thu Jan  9 07:11:32 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000296.html">Script to test gemini servers</a></li>
+<li>Next message (by thread): <a href="000298.html">Script to test gemini servers</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#297">[ date ]</a> <a href="thread.html#297">[ thread ]</a> <a href="subject.html#297">[ subject ]</a> <a href="author.html#297">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Michael Lazar once stated:
+&gt;<i> Hi all,
+</i>
+  Hello.
+
+&gt;<i> I have been working on a python script that can be pointed to a gemini server,
+</i>&gt;<i> and will automatically send various types of requests to surface errors and
+</i>&gt;<i> other strange server behavior. This was suggested in the mailing list a while
+</i>&gt;<i> ago by solderpunk(?). I thought it was a neat idea so I took my own stab at it.
+</i>
+  Thanks for doing this.  I find the results interesting, and yes, you did
+find three bugs in GLV-1.12556.
+
+&gt;<i> For example:
+</i>&gt;<i> 
+</i>&gt;<i> - Does your server support IPv6?
+</i>
+  Mine (GLV-1.12556) does, but my hosting provider doesn&#x27;t have IPv6 yet (or
+maybe they do---it&#x27;s been awhile since I last checked).
+
+&gt;<i> - What version of TLS do you negotiate?
+</i>
+  1.2---it&#x27;s a limitation of the library I&#x27;m using.
+
+&gt;<i> - Is your certificate&#x27;s CA trusted?
+</i>
+  No.  I&#x27;m the one using a custom CA.
+
+&gt;<i> - How do you respond to a http:// URL?
+</i>
+  I reject them.
+
+&gt;<i> - How do you respond to a URL with an invalid UTF-8 byte sequence?
+</i>
+  Here&#x27;s one of the bugs, and I have no idea how I&#x27;ll fix this as it&#x27;s a
+cross-library concern.  Sigh.
+
+&gt;<i> - How do you respond to a request with a newline but no carriage return?
+</i>
+  I respond.  I made CRs optional everywhere internally---it makes it easier
+for me to test.  Now, you did make one test labeled &quot;RequestMissingCR&quot; where
+you did send a LF.  Per the spec, I would expect this to return a 59 Bad
+Request, but since I treat CRs as optional, that&#x27;s why I passed that one.
+
+&gt;<i> Some of the results:
+</i>&gt;<i> 
+</i>&gt;<i> - All servers use &quot;\n&quot; line endings on their home page instead of &quot;\r\n&quot;
+</i>&gt;<i> - No server will accept a URL without a scheme specified (per the spec, this
+</i>&gt;<i>   should be implied as gemini://)
+</i>
+  This was another bug.  I&#x27;ve already fixed this, and the one other bug (I
+allow URLs longer than 1024 characters, which has been fixed for now).
+
+  Again, thanks for this.
+
+  -spc
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000296.html">Script to test gemini servers</a></li>
+<li>Next message (by thread): <a href="000298.html">Script to test gemini servers</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#297">[ date ]</a> <a href="thread.html#297">[ thread ]</a> <a href="subject.html#297">[ subject ]</a> <a href="author.html#297">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

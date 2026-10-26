@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[HELP] A weird issue when downloading files</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000194.html">
+<link rel="next" href="000197.html">
+</head>
+<body>
+<h1>[HELP] A weird issue when downloading files</h1>
+<b>Julien Blanchard</b> julien at typed-hole.org<br>
+<i>Wed Oct  2 09:12:25 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000194.html">[HELP] A weird issue when downloading files</a></li>
+<li>Next message (by thread): <a href="000197.html">gusmobile, a Python library for Gemini requests</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#195">[ date ]</a> <a href="thread.html#195">[ thread ]</a> <a href="subject.html#195">[ subject ]</a> <a href="author.html#195">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+On 10/2/19 12:04 AM, Sean Conner wrote:
+&gt;<i>    I&#x27;m not understanding what you are doing here.
+</i>I wanted to remove the header part in the most convoluted way possible :D
+&gt;<i>    Here&#x27;s how I would do this---read bytes until you have seen the CRLF [1].
+</i>&gt;<i> That&#x27;s the response from the server.  I then would parse that line of data
+</i>&gt;<i> to get the response and MIME type.  Then all I need to do is continue
+</i>&gt;<i> reading data from the server and write that data toa file.  Then launch the
+</i>&gt;<i> external program.
+</i>
+OMG you&#x27;re so right! I was trying to put a square peg in a round hole 
+since I already
+had the content splitted has two strings (header/body) when I should 
+have re-thought
+my parsing strategy the way you&#x27;re describing directly at the bytes level.
+
+&gt;<i>    Not really.  And whatever you are doing it seems overly complicated ... oh
+</i>&gt;<i> wait ... you aren&#x27;t using Python 3 by any chance, are you?
+</i>&gt;<i>
+</i>&gt;<i>    -spc (just a stab in the dark ... )
+</i>&gt;<i>
+</i>&gt;<i> [1]	ASCII character 13 and ASCII character 10
+</i>I&#x27;m using Rust but I&#x27;m curious what the issue could be with python 3?
+
+Anyway thanks a lot Sean! It helped a lot!
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000194.html">[HELP] A weird issue when downloading files</a></li>
+<li>Next message (by thread): <a href="000197.html">gusmobile, a Python library for Gemini requests</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#195">[ date ]</a> <a href="thread.html#195">[ thread ]</a> <a href="subject.html#195">[ subject ]</a> <a href="author.html#195">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

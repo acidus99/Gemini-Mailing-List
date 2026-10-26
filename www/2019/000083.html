@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Questions on INPUT behavior</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000082.html">
+<link rel="next" href="000085.html">
+</head>
+<body>
+<h1>Questions on INPUT behavior</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Sun Aug 25 04:37:27 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000082.html">Questions on INPUT behavior</a></li>
+<li>Next message (by thread): <a href="000085.html">Questions on INPUT behavior</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#83">[ date ]</a> <a href="thread.html#83">[ thread ]</a> <a href="subject.html#83">[ subject ]</a> <a href="author.html#83">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Michael Lazar once stated:
+&gt;<i> Hi all. I&#x27;m looking into implementing a few endpoints on my server that accept
+</i>&gt;<i> user input, and I ended up with a few ambiguities about the gemini specification
+</i>&gt;<i> that I would like to discuss:
+</i>&gt;<i> 
+</i>&gt;<i> ```
+</i>&gt;<i> The requested resource accepts a line of textual user input.
+</i>&gt;<i> The &lt;META&gt; line is a prompt which should be displayed to the
+</i>&gt;<i> user.  The same resource should then be requested again with
+</i>&gt;<i> the user&#x27;s input included as a query component.  Queries are
+</i>&gt;<i> included in requests as per the usual generic URL definition
+</i>&gt;<i> in RFC3986, i.e. separated from the path by a ?.  There is no
+</i>&gt;<i> response body.
+</i>&gt;<i> ```
+</i>
+  I think that should read &quot;there is no request body&quot;---the response can
+include content, dependent upon the status code.
+
+&gt;<i> Here are my questions:
+</i>&gt;<i> 
+</i>&gt;<i> 1. Should the query component be formatted as a &quot;key=value&quot; parameter?
+</i>&gt;<i>    Or should it be added directly as the entire query component?
+</i>&gt;<i> 
+</i>&gt;<i>    A. &quot;<a href="gemini://hostname.com/input?q=AbrahamLincoln">gemini://hostname.com/input?q=AbrahamLincoln</a>&quot;
+</i>&gt;<i>    vs.
+</i>&gt;<i>    B. &quot;<a href="gemini://hostname.com/input?AbrahamLincoln">gemini://hostname.com/input?AbrahamLincoln</a>&quot;
+</i>
+  B, unless there&#x27;s a way to designate the variable name (which I did
+suggest to solderpunk---perhaps I should float it here).
+
+&gt;<i> 2. Should the query component allow percent-sign escaping?
+</i>&gt;<i>    If so, which characters should be escaped?
+</i>&gt;<i> 
+</i>&gt;<i>    A. &quot;<a href="gemini://hostname.com/input?Hello%20world">gemini://hostname.com/input?Hello%20world</a>&quot;
+</i>&gt;<i>    vs.
+</i>&gt;<i>    B. &quot;<a href="gemini://hostname.com/input?Hello">gemini://hostname.com/input?Hello</a> world&quot;
+</i>
+  The following characters in the query should be escaped:
+
+	SPACE # % &lt; &gt; [ \ ] ^ { | } &quot;
+
+and unless you are sending name/value pairs, 
+
+	= &amp;
+
+should also be escaped (this per RFC-3986).
+
+&gt;<i> 3. Should a server be allowed to link to a URL with the user input pre-filled?
+</i>&gt;<i>    E.g. Should this link, if placed in a text/gemini file, mean the same thing
+</i>&gt;<i>    as the user manually typing in &quot;Hello World&quot;?
+</i>&gt;<i> 
+</i>&gt;<i>    A. &quot;=&gt;/input?Hello%20world&quot;
+</i>
+  I don&#x27;t see why not.
+
+	<a href="gemini://gemini.conman.org/cgi?Hello%20World">gemini://gemini.conman.org/cgi?Hello%20World</a>
+
+(this link works, by the way---although it&#x27;s just a sample CGI script)
+
+&gt;<i> 4. If my server has an endpoint that does not request user input, can I
+</i>&gt;<i>    re-purpose the query section for my own needs?
+</i>&gt;<i> 
+</i>&gt;<i>    A. &quot;<a href="gemini://hostname.com/items?page=2&amp;limit=20">gemini://hostname.com/items?page=2&amp;limit=20</a>&quot;
+</i>
+  Again, I don&#x27;t see why not.  The query string is part of a URL, and
+clients send URLs so this should be an issue client side.  What the server
+side does with the query is up to the server.
+
+&gt;<i> 5. In the above example, what happens if a request to that URL returns a status
+</i>&gt;<i>    code of 10? Should the client strip the existing query components from the
+</i>&gt;<i>    URL, or append a new key=value pair to the end?
+</i>
+  That&#x27;s a good question and one I do not have an answer to.
+
+&gt;<i> 6. What widget should the client use to display the input prompt? A single line
+</i>&gt;<i>    input, or a multi-line text box? Should newline characters even be allowed?
+</i>
+  It would depend upon the client.  I think the expectation is a single line
+input, but I can see a multi-line box being useful as well.  
+
+&gt;<i> 7. Should there be a maximum input length? Currently it is implicitly defined
+</i>&gt;<i>    as 1024 bytes minus the length of the URL.
+</i>&gt;<i> 
+</i>&gt;<i> Personally, I have mixed feelings about gemini enabling user input in the first
+</i>&gt;<i> place. I know that gopher supports it using the &quot;7&quot; item type, but I have only
+</i>&gt;<i> seen a couple of compelling use cases for this in the wild. On the other hand,
+</i>&gt;<i> it opens up a Pandora&#x27;s box of complexity by allowing creative developers to
+</i>&gt;<i> port over many features from HTTP.
+</i>
+  True, and I&#x27;ve moved quite a few of my web-based projects to both Gemini
+[1] and Gopher.
+
+&gt;<i> I can already envision XSS style attacks. For example, say a gemini page
+</i>&gt;<i> requests user input that will be rendered in a public text/gemini page like a
+</i>&gt;<i> guestbook. The bad-actor submits a message that contains something like:
+</i>&gt;<i> 
+</i>&gt;<i>     &quot;\n=&gt;<a href="http://malicious.url\thttp://innocent.url">http://malicious.url\thttp://innocent.url</a>&quot;.
+</i>&gt;<i> 
+</i>&gt;<i> Servers will need to be diligent in sanitizing their inputs, which kind of sucks
+</i>&gt;<i> for what should be a simple protocol.
+</i>
+  Experiement---point your favorite terminal based gopher client here:
+
+	<a href="gopher://verisimilitudes.net/02019-08-18.ecma-48&amp;utf-8">gopher://verisimilitudes.net/02019-08-18.ecma-48&amp;utf-8</a>	or
+	<a href="gopher://verisimilitudes.net/02019-08-18.ecma-48%26utf-8">gopher://verisimilitudes.net/02019-08-18.ecma-48%26utf-8</a>
+
+  This page directly embeds ECMA-48 escape sequences (aka ANSI escape codes)
+in the text---what does your favorite terminal based gopher client do?  Does
+it send the raw codes directly to the terminai?  Does it filter them out
+entirely?  Does it show them? [2]
+
+  Also, there&#x27;s nothing that says a server *has* to support user input.
+
+  -spc (
+
+[1]	I even created a CGI interface to my Gemini server, and it can even
+	translate HTTP status codes to Gemini ones.
+
+[2]	My own gopher client (not yet published) does filter out escape
+	sequences and not because of this page---it was a deliberate design
+	choice I made when writing after doing a very deep dive into ECMA-48
+	in the past year or two.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000082.html">Questions on INPUT behavior</a></li>
+<li>Next message (by thread): <a href="000085.html">Questions on INPUT behavior</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#83">[ date ]</a> <a href="thread.html#83">[ thread ]</a> <a href="subject.html#83">[ subject ]</a> <a href="author.html#83">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

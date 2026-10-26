@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Password authentication over Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000050.html">
+<link rel="next" href="000012.html">
+</head>
+<body>
+<h1>Password authentication over Gemini</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Mon Aug 19 21:51:36 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000050.html">Password authentication over Gemini</a></li>
+<li>Next message (by thread): <a href="000012.html">File size issues</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#59">[ date ]</a> <a href="thread.html#59">[ thread ]</a> <a href="subject.html#59">[ subject ]</a> <a href="author.html#59">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great solderpunk once stated:
+&gt;<i> &gt;   You&#x27;re already asking for clients to generate a temporary certificate. 
+</i>&gt;<i> 
+</i>&gt;<i> Which is just some random bytes which can&#x27;t be tied to anything or
+</i>&gt;<i> anyone, so what&#x27;s to be afraid of?
+</i>
+  I&#x27;m not so much afraid as I&#x27;m confused.  I came up with a status code
+proposal back in June [1] where I had status codes for both password
+authentication and certificate authentication:
+
+unauthorized
+        general
+                rejected        301 *
+        password
+                require         310
+                rejected        311
+                expired         312
+        certificate
+                require         320
+                rejected        321
+                expired         322
+                future          323
+
+which you rejected outright and decided to go with just certificate
+authentication.  I can only suppose you have changed your mind somewhat on
+this.
+
+&gt;<i> &gt; Before going too down far this rabbit hole, why not make a few temporary
+</i>&gt;<i> &gt; certificates and hitting:
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt; 	<a href="gemini://gemini.conman.org/private/">gemini://gemini.conman.org/private/</a>
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt;   There&#x27;s nothing there that generates a status of 10, but it is asking for
+</i>&gt;<i> &gt; temporary certificates.  It&#x27;s not even expecting any set information.  It
+</i>&gt;<i> &gt; might be instructive to know what what is and isn&#x27;t required for a
+</i>&gt;<i> &gt; certificate.
+</i>&gt;<i> 
+</i>&gt;<i> Nothing at all is expected of an ephemeral cert generated in response to
+</i>&gt;<i> a 61 status.  It&#x27;s just a random session ID, or rather, some hash of the
+</i>&gt;<i> cert becomes a random ID.
+</i>&gt;<i> 
+</i>&gt;<i> If a server throws up a 62 then it&#x27;s expecting a *particular*
+</i>&gt;<i> certificate from an authorised whitelist.  I never really imagined any
+</i>&gt;<i> of the metadata fields on a certificate being used as part of the
+</i>&gt;<i> validation (on a self-signed certificate they don&#x27;t count for much),
+</i>&gt;<i> though a guess if a server wanted to they could use them.
+</i>
+  A username is a username.  Of the two protected areas on my Gemini server
+[2], one requires a certificate I signed in order to access.  You generate a
+CSR (certificate signing request), I sign it and send back the certificate.
+It is also possible to send me (out of band) a certificate that you
+generated that will also be checked upon each request, but there has to be
+*some* unique information to check (that&#x27;s not to say it has to leak your
+real name or location or anything).  
+
+Right now, the conman-labs-private area just checks the issuer of the
+certificate. The other private area one will accept *any* certificate (aka a
+temporary or transient certificate) and doesn&#x27;t even bother checking the
+certificate.
+
+  -spc
+
+[1]	geminmi://gemini.conman.org/notes/possible-error-codes.txt
+
+[2]	<a href="gemini://gemini.conman.org/private/">gemini://gemini.conman.org/private/</a>
+	<a href="gemini://gemini.conman.org/conman-labs-private/">gemini://gemini.conman.org/conman-labs-private/</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000050.html">Password authentication over Gemini</a></li>
+<li>Next message (by thread): <a href="000012.html">File size issues</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#59">[ date ]</a> <a href="thread.html#59">[ thread ]</a> <a href="subject.html#59">[ subject ]</a> <a href="author.html#59">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text reflow woes (or: I want bullets back!)y</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000303.html">
+<link rel="next" href="000307.html">
+</head>
+<body>
+<h1>Text reflow woes (or: I want bullets back!)y</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Sun Jan 12 18:43:41 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000303.html">[ANN] Announcing free Gemini hosting at gemini.circumlunar.space</a></li>
+<li>Next message (by thread): <a href="000307.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#304">[ date ]</a> <a href="thread.html#304">[ thread ]</a> <a href="subject.html#304">[ subject ]</a> <a href="author.html#304">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Okay, I have started to re-engage with this endless discussion -
+slowly and, I have to admit, reluctantly.  When I think about how many
+details there are to consider here, how many different options we have
+to choose among, and how absolutely incredible the power-to-weight
+ratio is of verbatim fixed-width text with a predefined width (I
+mean, really, you can:
+
+Left align text,
+                             center text,
+                                                 even right align text
+
+without the client having to even know what those things are!), it&#x27;s
+incredibly tempting to echo the &quot;reflowed text be damned!&quot; sentiment
+recently expressed at mozz.us[1] and spec 40 character fixed text and
+just move on.
+
+But I know that&#x27;d be rash.  These days I have been worrying less about
+catering to small-screened mobile devices and thinking more about the
+ability for Gemini to be self-documenting.  Granted, the text/gemini
+format is pretty darned simple by design, but nevertheless, having
+really nice and clear instructions for beginners, many of whom may
+conceivably never have written either web or gopher content before in
+their life, will be important to the widespread adoption of the
+protocol.
+
+Imagine how much harder it would be to learn HTML if websites couldn&#x27;t
+actually contain any code that you could copy and paste!  This is
+exactly where Gemini is today.  Yes, okay, you could put a single
+space at the start of a link line so it would be displayed as-is rather
+than treated as a link, and that would be mostly fine.  But it would
+interfere with the ability to simply copy and paste a block of example
+links and have it work as-is, because the spaces at the front of at
+least some of the lines would get copied as well.
+
+Gopher is better than the current Gemini spec in this regard, because
+you can put gophermap lines in an item type 0 text file no problem and
+they&#x27;ll just be displayed as-is.  But copying and pasting that
+gophermap is not guaranteed to go smoothly.  With terminal-based
+applications, the tabs would stand a good chance of being transformed
+into consecutive spaces, which would actually break them.  Let&#x27;s be
+better than that!  Let&#x27;s make it possible to display, copy and paste 
+Gemini links inside of Gemini documents, to facilitate teaching and
+talking about Gemini over Gemini.  It seems quite natural that this
+should be possible.
+
+Even if text/gemini were specced at 40 fixed-width characters with no
+reflow, meeting this goal would require some syntax comparable to
+&lt;pre&gt; tags in HTML, to switch off processing of Gemini links.  If
+we&#x27;re going to have that anyway, we may as well have reflowed text be
+the default and this &lt;pre&gt; syntax can do double duty by also enabling
+non-reflowed text for source code, poetry, etc.
+
+I remain as commited as ever to the idea that any text/gemini markup
+should have the property that simple clients can just dump it right to
+stdout verbatim and that should be very usable.  As I argued
+previously, this rules out any kind of syntax where &lt;pre&gt; lines are
+indicated by some per-line prefix, as that prefix would break
+copy-and-pastability for simple clients dumping things to stdout.
+This is one more reason not to use the &quot;leading whitespace&quot; system
+proposed by Sean[2] (whose detailed spec remains a very nice and
+useful precise definition of lots of fuzzy concepts being slung around
+here).
+
+So, given this, I am pretty much settled on using an easily
+recognisable line to toggle this mode on or off, say:
+
+```
+
+This is the syntax used in the simplified Markdown proposal at
+mozz.us[3], and in ratfactor&#x27;s &quot;Text Junior&quot; format[4], which others
+on this list have argued is a good candidate for Gemini syntax.
+
+I have experimented with supporting this syntax, and allowing
+reflowing of text not enclosed by ``` lines to an arbitrary
+user-specified width in AV-98 (not pushed to tildegit yet, but expect
+it soon).  It really is not too difficult to do, so I don&#x27;t think
+complexity of implementation is a good argument against this.
+
+Does anybody know of a programming language where lines consisting only
+of three consecutive single quotes happen to occur frequently?
+
+To address briefly some other points raised in this thread:
+
+Somebody suggested that the ``` syntax or similar be used to toggle on
+reflowed text, with fixed text being the default.  I have to admit
+this feels really backwards to me.  There are many obvious and common
+use cases for wanting to embed small fragments of fixed text inside a
+document that one would otherwise want flowed.  I can&#x27;t think of any
+case where I&#x27;d want the reverse, but of course if people can I&#x27;m happy
+to hear them.
+
+I am not crazy about the idea of having text/gemini &quot;source code&quot;
+consist of extremely long lines of text which are then brutally
+wrapped to a given width by a user&#x27;s terminal.  Some editors might be
+smart enough to present that long line wrapped at word boundaries to
+the author, but many won&#x27;t be and this will result in a very ugly
+editing environment.  And I&#x27;m not aware of any terminal emulator which
+wraps long lines at word boundaries, so this will result in an ugly
+reading experience for *all* sized screens.
+
+I also really don&#x27;t like the idea of supporting colour in Gemini
+documents.  I see no way to do this with a syntax which would degrade
+gracefully when simply dumped to stdout.  This would also open the
+possibility of obnoxious pages with gratuitous use of colour.  No,
+thanks!
+
+Cheers,
+Solderpunk
+
+[1] <a href="gemini://mozz.us/journal/2019-12-05.txt">gemini://mozz.us/journal/2019-12-05.txt</a>
+[2] <a href="gemini://gemini.conman.org/gRFC/0004">gemini://gemini.conman.org/gRFC/0004</a>
+[3] <a href="gemini://mozz.us/markdown/">gemini://mozz.us/markdown/</a>
+[4] <a href="gopher://sdf.org:70/0/users/ratfactor/phlog/2019-04-21-text-junior">gopher://sdf.org:70/0/users/ratfactor/phlog/2019-04-21-text-junior</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000303.html">[ANN] Announcing free Gemini hosting at gemini.circumlunar.space</a></li>
+<li>Next message (by thread): <a href="000307.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#304">[ date ]</a> <a href="thread.html#304">[ thread ]</a> <a href="subject.html#304">[ subject ]</a> <a href="author.html#304">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

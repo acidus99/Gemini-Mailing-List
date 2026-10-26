@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Connection Woes</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000213.html">
+<link rel="next" href="000206.html">
+</head>
+<body>
+<h1>Connection Woes</h1>
+<b>Brian Evans</b> b__m__e at mailfence.com<br>
+<i>Mon Oct 14 06:21:27 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000213.html">Redirect loops and mazes</a></li>
+<li>Next message (by thread): <a href="000206.html">Connection Woes</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#205">[ date ]</a> <a href="thread.html#205">[ thread ]</a> <a href="subject.html#205">[ subject ]</a> <a href="author.html#205">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi all. Things had been going pretty well for me and my client as far as gemini is concerned.
+However, as of tonight I am getting prematurely dropped connections from a lot of servers.
+Nothing in my code has changes (nothing that would have an effect on the connection).
+
+My tls.Dial function returns an EOF error. This apparently occurs when the remote server
+terminates the connection before the handshake is complete. If any of you running 
+servers know why this might be happening I would greatly appreciate any input. I am
+still able to reach most servers with AV-98... so I do not really understand the issue :-/
+
+Semi-related, here is what I have as the current landscape:
+
+gemini.conman.org - Up and no issues
+zaibatsu.circumlunar.space - Up and no issues
+typed-hole.org - Up and no issues
+earthlight.xyz - Had a bad certificate, now I get this EOF issue
+carcosa.net - Had bad certificate, now I get connection reset by peer
+heavysquare.com - was Up/fine, now I get connection reset by peer
+mozz.us - was up/fine, now I get EOF
+tilde.black - was up (I love some of the content there in particular), now EOF
+tilde.pink - was fine/up, now EOF
+vger.cloud - was up/fine, now EOF
+yam655.com - was up/fine, now EOF
+
+As you can see, I am only able to visit a small subset of servers all of a sudden. The fact
+that I am still able to visit any seems to indicate that the code has not broken (particularly
+since it seems to be the remote host dropping connections in each case). Does anyone
+see any pattern that makes sense? Maybe all of the EOFs are running the same server
+software or something?
+
+Any help or advice would be really appreciated. This is quite frustrating.
+
+Thanks!
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000213.html">Redirect loops and mazes</a></li>
+<li>Next message (by thread): <a href="000206.html">Connection Woes</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#205">[ date ]</a> <a href="thread.html#205">[ thread ]</a> <a href="subject.html#205">[ subject ]</a> <a href="author.html#205">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

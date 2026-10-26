@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TLS, TOFU and the Gemini security model</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000184.html">
+<link rel="next" href="000191.html">
+</head>
+<body>
+<h1>TLS, TOFU and the Gemini security model</h1>
+<b>Brian Evans</b> b__m__e at mailfence.com<br>
+<i>Mon Sep 30 22:37:26 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000184.html">TLS, TOFU and the Gemini security model</a></li>
+<li>Next message (by thread): <a href="000191.html">TLS, TOFU and the Gemini security model</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#190">[ date ]</a> <a href="thread.html#190">[ thread ]</a> <a href="subject.html#190">[ subject ]</a> <a href="author.html#190">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Bombadillo (on the `tofu` branch, soon to be merged into `develop`) has implemented a trust on first use system. I am storing hashed certs for comparison and validating hostnames and valid dates/times for all certificates. Servers offering multiple certificates is allowed, but Bombadillo will only store the first valid one it finds. 
+
+It is working really well so far. Of the active gemini servers the only one I get a bad certificate from is carcosa.net (which, with how I have built things, prevents the site from being visited at all).
+
+My takeaway regarding TOFU:
+- A tofu system was pretty trivial to set up
+- It seems to work pretty well
+- It took a bit to figure out how I wanted to handle certificates expiring
+- It leaves the client to determine how strict they want to be (will they allow a user to still retrieve data even with a bad cert?)
+
+I was pretty in favor of this model before and continue to be. Servers can still use Let&#x27;s Encrypt and present a certificate to the client and the client will validate it in its own way rather than through a certificate authority.
+
+In terms of adding overhead to gemini as a weekend project: I had the benefit of already having written a parser for a config will that also stores bookmarks. So that now stores hashes as well and just has a data model for them in my main client struct. For those without that, using a database (SQLite is likely a perfect option for this use case) could be a good call, or saving to a JSON file and parsing it on client load... in either case it doesnt seem like too big a challenge. 
+
+Anyway, just thought I&#x27;d report in after having gotten that working. 
+
+Now to figure out sending local certificates to servers... I think I will have pretty good feature coverage after that.
+
+Lastly, for any interested parties, Bombadillo now has a website and gopherspace (it will have a gemini mirror as well, just as soon as I get jetforce to work for me... I had some issues, but will be working through them):
+<a href="http://bombadillo.colorfield.space">http://bombadillo.colorfield.space</a>
+<a href="gopher://bombadillo.colorfield.space">gopher://bombadillo.colorfield.space</a>
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000184.html">TLS, TOFU and the Gemini security model</a></li>
+<li>Next message (by thread): <a href="000191.html">TLS, TOFU and the Gemini security model</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#190">[ date ]</a> <a href="thread.html#190">[ thread ]</a> <a href="subject.html#190">[ subject ]</a> <a href="author.html#190">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

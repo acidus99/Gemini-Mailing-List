@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SPEC] Backwards-compatible metadata in Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005450.html">
+<link rel="next" href="005431.html">
+</head>
+<body>
+<h1>[SPEC] Backwards-compatible metadata in Gemini</h1>
+<b>Stephane Bortzmeyer</b> stephane at sources.org<br>
+<i>Mon Feb 22 10:15:37 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005450.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li>Next message (by thread): <a href="005431.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5427">[ date ]</a> <a href="thread.html#5427">[ thread ]</a> <a href="subject.html#5427">[ subject ]</a> <a href="author.html#5427">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Mon, Feb 22, 2021 at 12:46:22AM +0000,
+ Oliver Simmons &lt;oliversimmo at gmail.com&gt; wrote 
+ a message of 69 lines which said:
+
+&gt;<i> Also for people that don&#x27;t have nice link parsing it would look a
+</i>&gt;<i> mess.
+</i>
+Why? These people would only see the text at the end of the line, not
+the &#x27;data:&#x27; link itself.
+
+&gt;<i> ^^^
+</i>&gt;<i> favicon: ?
+</i>&gt;<i> author: Bob McBobface
+</i>&gt;<i> last-edited: 22nd Feb 2021
+</i>
+&gt;<i> The delimiter would work similar to the opening ``` toggle and there
+</i>&gt;<i> would be no closing one, enforcing placing it at the end of the file.
+</i>
+I think that metadata are important, I find both easrng&#x27;s and your
+proposal fine. I tend to prefer yours since it degrades better for
+people who don&#x27;t have metadata support in their clients. (On the other
+end, easrng&#x27;s is probably better for programs, while yours is better
+for humans, but both work for programs and humans, which I like.)
+
+Now, some details:
+
+* What set of characters in the key (except the colon, of course)?
+LDH? ASCII letters or Unicode?
+
+* What about the value? Completely unstructured and therefore
+unparsable? Your own example for &quot;last-edited&quot; is useless for programs
+since it does not fit any known standard for dates.
+
+* Will we need a list of standard keys, to avoid some people using
+&quot;last-modified&quot;, others &quot;last-edited&quot; and others &quot;last-change&quot;?
+
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005450.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li>Next message (by thread): <a href="005431.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5427">[ date ]</a> <a href="thread.html#5427">[ thread ]</a> <a href="subject.html#5427">[ subject ]</a> <a href="author.html#5427">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

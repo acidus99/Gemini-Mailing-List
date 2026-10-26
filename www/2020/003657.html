@@ -1,62 +1,46 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [SPEC-CHANGE] Mandatory scheme in request and link URLs
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Mandatory%20scheme%20in%20request%20and%20link%20URLs&In-Reply-To=%3C5FC41B80.4070304%40marmaladefoo.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="003656.html">
-   <LINK REL="Next"  HREF="003658.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[SPEC-CHANGE] Mandatory scheme in request and link URLs</H1>
-    <B>Luke Emmet</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Mandatory%20scheme%20in%20request%20and%20link%20URLs&In-Reply-To=%3C5FC41B80.4070304%40marmaladefoo.com%3E"
-       TITLE="[SPEC-CHANGE] Mandatory scheme in request and link URLs">luke at marmaladefoo.com
-       </A><BR>
-    <I>Sun Nov 29 22:06:56 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="003656.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
-</A></li>
-        <LI>Next message (by thread): <A HREF="003658.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3657">[ date ]</a>
-              <a href="thread.html#3657">[ thread ]</a>
-              <a href="subject.html#3657">[ subject ]</a>
-              <a href="author.html#3657">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SPEC-CHANGE] Mandatory scheme in request and link URLs</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="003656.html">
+<link rel="next" href="003658.html">
+</head>
+<body>
+<h1>[SPEC-CHANGE] Mandatory scheme in request and link URLs</h1>
+<b>Luke Emmet</b> luke at marmaladefoo.com<br>
+<i>Sun Nov 29 22:06:56 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="003656.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs</a></li>
+<li>Next message (by thread): <a href="003658.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3657">[ date ]</a> <a href="thread.html#3657">[ thread ]</a> <a href="subject.html#3657">[ subject ]</a> <a href="author.html#3657">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>
+<pre>
 
-On 29-Nov-2020 21:54, <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> wrote:
+On 29-Nov-2020 21:54, colecmac at protonmail.com wrote:
 &gt;<i> (I keep replying only to the author and not the list, sorry.)
-</I>&gt;<i>
-</I>&gt;<i>
-</I>&gt;<i> I agree with everything up to this:
-</I>&gt;<i>
-</I>&gt;&gt;<i> Clients MAY treat
-</I>&gt;&gt;<i> schemeless links in text/gemini documents as errors, but again assuming
-</I>&gt;&gt;<i> a scheme of gemini may be considered a valid application of Postel's
-</I>&gt;&gt;<i> law.
-</I>&gt;&gt;<i>
-</I>&gt;&gt;<i> Authors of Gemini content or software which generates Gemini content
-</I>&gt;&gt;<i> MUST add explicit schemes to any schemeless links.
-</I>&gt;<i> What is the issue with scheme-less link lines? These are perfectly valid,
-</I>&gt;<i> and any client with a good URL parsing library should support them. They
-</I>&gt;<i> are already in use by authors, and are of particular importance to sites
-</I>&gt;<i> that support bi-hosting on the Web and on Gemini, like flounder.online.
-</I>&gt;<i> That way the links users make will work in both spaces automatically.
-</I>
+</i>&gt;<i>
+</i>&gt;<i>
+</i>&gt;<i> I agree with everything up to this:
+</i>&gt;<i>
+</i>&gt;<i>&gt; Clients MAY treat
+</i>&gt;<i>&gt; schemeless links in text/gemini documents as errors, but again assuming
+</i>&gt;<i>&gt; a scheme of gemini may be considered a valid application of Postel&#x27;s
+</i>&gt;<i>&gt; law.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; Authors of Gemini content or software which generates Gemini content
+</i>&gt;<i>&gt; MUST add explicit schemes to any schemeless links.
+</i>&gt;<i> What is the issue with scheme-less link lines? These are perfectly valid,
+</i>&gt;<i> and any client with a good URL parsing library should support them. They
+</i>&gt;<i> are already in use by authors, and are of particular importance to sites
+</i>&gt;<i> that support bi-hosting on the Web and on Gemini, like flounder.online.
+</i>&gt;<i> That way the links users make will work in both spaces automatically.
+</i>
 I think there is some confusion in this thread. Here is my 
 interpretation, maybe it can help clarify the conversation.
 
@@ -78,10 +62,10 @@ This is where there is a change to the spec, which is now that the URL
 sent to the server must be a fully qualified link with a scheme.
 
 &gt;<i> Clients MAY treat
-</I>&gt;<i> schemeless links in text/gemini documents as errors, but again assuming
-</I>&gt;<i> a scheme of gemini may be considered a valid application of Postel's
-</I>&gt;<i> law.
-</I>
+</i>&gt;<i> schemeless links in text/gemini documents as errors, but again assuming
+</i>&gt;<i> a scheme of gemini may be considered a valid application of Postel&#x27;s
+</i>&gt;<i> law.
+</i>
 Solderpunk mentioned (pasted text above) if there is no scheme, the 
 *client* may raise an error. I think to clarify, if there is no scheme 
 on the URL sent to the server, it is the *server* that should respond 
@@ -94,49 +78,15 @@ starts &quot;//&quot;
   - Luke
 
 
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="003656.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
-</A></li>
-	<LI>Next message (by thread): <A HREF="003658.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3657">[ date ]</a>
-              <a href="thread.html#3657">[ thread ]</a>
-              <a href="subject.html#3657">[ subject ]</a>
-              <a href="author.html#3657">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="003656.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs</a></li>
+<li>Next message (by thread): <a href="003658.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3657">[ date ]</a> <a href="thread.html#3657">[ thread ]</a> <a href="subject.html#3657">[ subject ]</a> <a href="author.html#3657">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,60 +1,44 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Encouraging%20HTTP%20Proxies%20to%20support%20Gemini%20hosts%0A%20self-blacklisting&In-Reply-To=%3C20210222014358.GI9315%40brevard.conman.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="005415.html">
-   <LINK REL="Next"  HREF="005492.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</H1>
-    <B>Sean Conner</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Encouraging%20HTTP%20Proxies%20to%20support%20Gemini%20hosts%0A%20self-blacklisting&In-Reply-To=%3C20210222014358.GI9315%40brevard.conman.org%3E"
-       TITLE="[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting">sean at conman.org
-       </A><BR>
-    <I>Mon Feb 22 01:43:58 GMT 2021</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="005415.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting
-</A></li>
-        <LI>Next message (by thread): <A HREF="005492.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#5423">[ date ]</a>
-              <a href="thread.html#5423">[ thread ]</a>
-              <a href="subject.html#5423">[ subject ]</a>
-              <a href="author.html#5423">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005415.html">
+<link rel="next" href="005492.html">
+</head>
+<body>
+<h1>[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Mon Feb 22 01:43:58 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005415.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li>Next message (by thread): <a href="005492.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5423">[ date ]</a> <a href="thread.html#5423">[ thread ]</a> <a href="subject.html#5423">[ subject ]</a> <a href="author.html#5423">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>It was thus said that the Great Mansfield once stated:
+<pre>It was thus said that the Great Mansfield once stated:
 &gt;<i> 
-</I>&gt;<i> I must admit, I'm woefully lacking skill or background with robots.txt. It
-</I>&gt;<i> seems like it could be a great answer.
-</I>&gt;<i> 
-</I>&gt;<i> A few questions to help me educate myself:
-</I>&gt;<i> 
-</I>&gt;<i>  1. How often should that file be referenced by the proxy? It feels like
-</I>&gt;<i> an answer might be, to check that URL before every request, but that goes
-</I>&gt;<i> in the direction of some of the negative feedback about the favicon. One
-</I>&gt;<i> user action -&gt; one gemini request and more.
-</I>
+</i>&gt;<i> I must admit, I&#x27;m woefully lacking skill or background with robots.txt. It
+</i>&gt;<i> seems like it could be a great answer.
+</i>&gt;<i> 
+</i>&gt;<i> A few questions to help me educate myself:
+</i>&gt;<i> 
+</i>&gt;<i>  1. How often should that file be referenced by the proxy? It feels like
+</i>&gt;<i> an answer might be, to check that URL before every request, but that goes
+</i>&gt;<i> in the direction of some of the negative feedback about the favicon. One
+</i>&gt;<i> user action -&gt; one gemini request and more.
+</i>
   I would say once per &quot;visit&quot; would be good enough (say you have 50
 requests to make to a site---check before doing all 50).  Checking
 robots.txt for *every* request is a bit too much.  
 
-&gt;<i>  2. Is 'webproxy' a standard reference to any proxy, or is that something
-</I>&gt;<i> left to us to decide?
-</I>
+&gt;<i>  2. Is &#x27;webproxy&#x27; a standard reference to any proxy, or is that something
+</i>&gt;<i> left to us to decide?
+</i>
   The guide for Gemini [1] says:
 
 	Below are definitions of various &quot;virtual user agents&quot;, each of
@@ -82,12 +66,12 @@ robots.txt for *every* request is a bit too much.
 
   So for example, if you are writing a gopher proxy (user makes a gopher
 request to get to a Gemini site), then you might want to check for
-&quot;webproxy&quot;, even though you aren't actually behind a wesite but a gopher
+&quot;webproxy&quot;, even though you aren&#x27;t actually behind a wesite but a gopher
 site.  This is kind of a judgement call.
 
 &gt;<i>  3. Are there globbing-like syntax rules for the Disallow field?
-</I>
-  No.  But it's not a complete literal match either.  
+</i>
+  No.  But it&#x27;s not a complete literal match either.  
 
 	Disallow:
 
@@ -99,115 +83,41 @@ will not allow any requests at all.
 
 	Disallow: /foo
 
-Will only disallow paths that *start* with the string '/foo', so '/foo',
-'/foobar', '/foo/bar/baz/' will all be disallowed.
+Will only disallow paths that *start* with the string &#x27;/foo&#x27;, so &#x27;/foo&#x27;,
+&#x27;/foobar&#x27;, &#x27;/foo/bar/baz/&#x27; will all be disallowed.
 
-&gt;<i>  4. I'm assuming there could be multiple rules that need to be mixed. Is
-</I>&gt;<i> there a standard algorithm for that process? E.g.:
-</I>&gt;<i> User-agent: webproxy
-</I>&gt;<i> Disallow: /a
-</I>&gt;<i> Allow: /a/b
-</I>&gt;<i> Disallow: /a/b/c
-</I>
-  Allow: isn't in the standard per se, but many crawlers do accept it.  And
-the rules for a user agent are applied in order they're listed.  First match
+&gt;<i>  4. I&#x27;m assuming there could be multiple rules that need to be mixed. Is
+</i>&gt;<i> there a standard algorithm for that process? E.g.:
+</i>&gt;<i> User-agent: webproxy
+</i>&gt;<i> Disallow: /a
+</i>&gt;<i> Allow: /a/b
+</i>&gt;<i> Disallow: /a/b/c
+</i>
+  Allow: isn&#x27;t in the standard per se, but many crawlers do accept it.  And
+the rules for a user agent are applied in order they&#x27;re listed.  First match
 wins.
 
 &gt;<i> Again - it seems like this could work out really well.
-</I>&gt;<i> 
-</I>&gt;<i> Thanks for helping me learn a bit more!
-</I>
+</i>&gt;<i> 
+</i>&gt;<i> Thanks for helping me learn a bit more!
+</i>
   More about it can be read here [2].
 
   -spc
 
-[1]	<A HREF="https://portal.mozz.us/gemini/gemini.circumlunar.space/docs/companion/robots.gmi">https://portal.mozz.us/gemini/gemini.circumlunar.space/docs/companion/robots.gmi</A>
+[1]	<a href="https://portal.mozz.us/gemini/gemini.circumlunar.space/docs/companion/robots.gmi">https://portal.mozz.us/gemini/gemini.circumlunar.space/docs/companion/robots.gmi</a>
 
-[2]	<A HREF="http://www.robotstxt.org/robotstxt.html">http://www.robotstxt.org/robotstxt.html</A>
+[2]	<a href="http://www.robotstxt.org/robotstxt.html">http://www.robotstxt.org/robotstxt.html</a>
 
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="005415.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting
-</A></li>
-	<LI>Next message (by thread): <A HREF="005492.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#5423">[ date ]</a>
-              <a href="thread.html#5423">[ thread ]</a>
-              <a href="subject.html#5423">[ subject ]</a>
-              <a href="author.html#5423">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="005415.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li>Next message (by thread): <a href="005492.html">[SPEC] Encouraging HTTP Proxies to support Gemini hosts self-blacklisting</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5423">[ date ]</a> <a href="thread.html#5423">[ thread ]</a> <a href="subject.html#5423">[ subject ]</a> <a href="author.html#5423">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

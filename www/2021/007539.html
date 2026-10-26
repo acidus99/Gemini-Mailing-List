@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Request for feedback from server/client implementers using non-OpenSSL TLS stacks</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007619.html">
+<link rel="next" href="007543.html">
+</head>
+<body>
+<h1>Request for feedback from server/client implementers using non-OpenSSL TLS stacks</h1>
+<b>Solderpunk</b> solderpunk at posteo.net<br>
+<i>Sun Nov  7 16:07:05 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007619.html">[Agunua] Not detecting TLS close, specially with error pages (Was: [ANN] Specification update</a></li>
+<li>Next message (by thread): <a href="007543.html">Request for feedback from server/client implementers using non-OpenSSL TLS stacks</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7539">[ date ]</a> <a href="thread.html#7539">[ thread ]</a> <a href="subject.html#7539">[ subject ]</a> <a href="author.html#7539">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Howdy all,
+
+When I started Gemini I dearly wanted to specify that TLS 1.3 be the minimum allowed version of TLS.  However, I didn&#x27;t because at that time TLS 1.3 was still not very widely implemented and I did not want to basically make it a requirement that all Gemini implementations rely on OpenSSL.  In particular, I didn&#x27;t want to exclude the possibility of using LibreSSL instead.  So, instead I required 1.2 or above and left lots of caveats in the spec to make my feelings clear.
+
+I have checked in on this issue for the first time in a while, and at least according to the English Wikipedia&#x27;s &quot;Comparison of TLS implementations&quot;, TLS 1.3 is now supported by OpenSSL, LibreSSL, GnuTLS and wolfSSL, and is &quot;experimentally&quot; supported by Mbed TLS (these last two are of somewhat special interest/appeal as they target embedded systems and so are much more lightweight than traditional TLS stacks).  This gives me some glimmer of hope that as part of the spec finalisation we could actual require 1.3 or above as I always wished.
+
+But I realise that there&#x27;s potentially a lot of difference between between a green box on a Wikipedia page and actual practical, compatible real world implementation.  So I would like to ask authors of Gemini servers or clients which use a TLS stack other than OpenSSL whether or not they have encountered any problems actually using TLS 1.3.
+
+I would also like to ask anybody who runs an Gemini indexer/crawler who might have the data at hand if they can provide us with some kind of statistics on the current real-world Gemini TLS version landscape.
+
+Cheers,
+Solderpunk
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007619.html">[Agunua] Not detecting TLS close, specially with error pages (Was: [ANN] Specification update</a></li>
+<li>Next message (by thread): <a href="007543.html">Request for feedback from server/client implementers using non-OpenSSL TLS stacks</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7539">[ date ]</a> <a href="thread.html#7539">[ thread ]</a> <a href="subject.html#7539">[ subject ]</a> <a href="author.html#7539">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

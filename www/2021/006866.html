@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[USER] Weird Title Rendering on Various Clients</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006865.html">
+<link rel="next" href="006852.html">
+</head>
+<body>
+<h1>[USER] Weird Title Rendering on Various Clients</h1>
+<b>mbays</b> mbays at sdf.org<br>
+<i>Thu Jul  8 12:12:02 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006865.html">[USER] Weird Title Rendering on Various Clients</a></li>
+<li>Next message (by thread): <a href="006852.html">[Tech] gemserv and SCGI, anyone?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6866">[ date ]</a> <a href="thread.html#6866">[ thread ]</a> <a href="subject.html#6866">[ subject ]</a> <a href="author.html#6866">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>* Thursday, 2021-07-08 at 07:58 +0300 - skyjake &lt;skyjake@dengine.net&gt;:
+
+&gt;<i> [BOM]
+</i>&gt;<i> Submitted to GitLab:
+</i>&gt;<i> =&gt; <a href="https://gitlab.com/gemini-specification/protocol/-/issues/36">https://gitlab.com/gemini-specification/protocol/-/issues/36</a>
+</i>
+From that issue:
+&gt;<i> 1. The server MUST remove the BOM when serving UTF-8 content that begins with a BOM.
+</i>
+One thing to consider is that a zero width space could be used at the start of a line as a quoting mechanism. It isn&#x27;t a nice solution to gemtext&#x27;s quoting problem, but there doesn&#x27;t seem to be a nice solution. So then even if U+FEFF is the &quot;wrong&quot; zero width space character to use, it might be used, and then it would be strange for it to work for any but the first line. So this suggests we should follow RFC 3629 when it says &#x27;When a protocol forbids use of U+FEFF as a signature for a certain protocol element, then any initial U+FEFF in that protocol element MUST be interpreted as a &quot;ZERO WIDTH NO-BREAK SPACE&quot;.&#x27;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006865.html">[USER] Weird Title Rendering on Various Clients</a></li>
+<li>Next message (by thread): <a href="006852.html">[Tech] gemserv and SCGI, anyone?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6866">[ date ]</a> <a href="thread.html#6866">[ thread ]</a> <a href="subject.html#6866">[ subject ]</a> <a href="author.html#6866">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

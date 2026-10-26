@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text reflow woes (or: I want bullets back!)y</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000289.html">
+<link rel="next" href="000291.html">
+</head>
+<body>
+<h1>Text reflow woes (or: I want bullets back!)y</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Mon Dec 16 05:40:32 GMT 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000289.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000291.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#290">[ date ]</a> <a href="thread.html#290">[ thread ]</a> <a href="subject.html#290">[ subject ]</a> <a href="author.html#290">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Aaron Janse once stated:
+&gt;<i> On Sun, Dec 15, 2019, at 5:53 PM, Brian Evans wrote:
+</i>&gt;<i> 
+</i>&gt;<i> &gt;From a while ago:
+</i>&gt;<i> &gt; Text reflow IS A MUST. We live in a world of wildly varying screen sizes
+</i>&gt;<i> &gt; these days. The trend is clearly headed towards polarization: huge 22&#x27;+
+</i>&gt;<i> &gt; desktop screens in one corner, small less than 7&#x27; smartphone screens in the
+</i>&gt;<i> &gt; other. Nothing in the middle. There&#x27;s no way you&#x27;re going to get decent
+</i>&gt;<i> &gt; presentation of non reflown text on both kinds of displays. No matter how
+</i>&gt;<i> &gt; many kludgy rules you instate on default width, max before forced wrap, etc.
+</i>&gt;<i> 
+</i>&gt;<i> All of this is completely possible without reflow. All we need to do is to
+</i>&gt;<i> state in the spec that text MUST NOT be hard-wrapped at 80 columns unless it&#x27;s
+</i>&gt;<i> supposed to be displayed that way.
+</i>
+  How can you determine if text is text or source code?  This is text, and this
+
+local opts =
+{
+  { &quot;c&quot; , &quot;cert&quot;     , true    , function(c) CERT  = c    end },
+  { &quot;k&quot; , &quot;key&quot;      , true    , function(k) KEY   = k    end },
+  { &quot;n&quot; , &quot;noverify&quot; , false   , function()  NOVER = true end },
+  { &#x27;h&#x27; , &quot;help&quot;     , false   , function()
+      io.stderr:write(string.format(usage,arg[0]))
+      os.exit(false,true)
+    end
+  },
+}
+
+if #arg == 0 then
+  io.stderr:write(string.format(usage,arg[0]))
+  os.exit(false,true)
+end
+
+URL = arg[getopt(arg,opts)]
+nfl.spawn(main,URL)
+nfl.client_eventloop()
+
+is source code.  Both are less than 80 characters in length.
+
+  How do you determine when to wrap and when to reflow?
+
+  I would also like to remind others that not only have I proposed a way to
+designate reflow/verbatim text rendering:
+
+	<a href="https://mailing-list-archive.gemi.dev/www/2019/000114.html">https://mailing-list-archive.gemi.dev/www/2019/000114.html</a>
+
+(under the SAME suject line, from back in September no less!) but I also
+have set up some reflowing tests on my Gemini site:
+
+	<a href="https://mailing-list-archive.gemi.dev/www/2019/000127.html">https://mailing-list-archive.gemi.dev/www/2019/000127.html</a>
+
+If anyone would like to test their client for wrapping purposes, this link
+might be beneficial:
+
+	<a href="gemini://gemini.conman.org/test/wrap;1500">gemini://gemini.conman.org/test/wrap;1500</a>
+
+  -spc (I like my bikesheds green, by the way ... )
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000289.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000291.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#290">[ date ]</a> <a href="thread.html#290">[ thread ]</a> <a href="subject.html#290">[ subject ]</a> <a href="author.html#290">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TLS, TOFU and the Gemini security model</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000189.html">
+<link rel="next" href="000184.html">
+</head>
+<body>
+<h1>TLS, TOFU and the Gemini security model</h1>
+<b>Brian Evans</b> b__m__e at mailfence.com<br>
+<i>Tue Sep 24 18:35:36 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000189.html">TLS, TOFU and the Gemini security model</a></li>
+<li>Next message (by thread): <a href="000184.html">TLS, TOFU and the Gemini security model</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#182">[ date ]</a> <a href="thread.html#182">[ thread ]</a> <a href="subject.html#182">[ subject ]</a> <a href="author.html#182">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Thanks for the detailed thoughts solderpunk. I do not know almost anything about TLS.
+The TLS portion of this was the hardest for me to get going in my client, even while
+implementing the &quot;not at all&quot; approach. There is a lot to know and understand on the
+subject and it can be overwhelming to look into. Which, as Michael points out, does
+go somewhat against the mandate of ease of setup/build. Python may have a robust
+library for this, but not every language does (golang has a solid library for it, or so it
+seems... but it is hard to understand if you do not already know what you are doing.
+Most of the easy routes are designed explicitly for https and will not work with other
+protocols).
+
+Michael writes:
+&gt;<i> Setting up Let&#x27;s Encrypt is about as difficult as setting up a self-signed
+</i>&gt;<i> certificate (correctly)
+</i>
+I agree that Let&#x27;s Encrypt is easy to set up and I have done so for multiple websites.
+However, I think from a philosophical standpoint I, personally, would like gemini to
+be as free of centralized authorities as is possible. 
+
+As such, the TOFU approach sounds.... doable mostly. It makes sense to me how to
+get a hash of a cert and then store that in a map with a hostname as the key. My client
+already stores and parses a config file with options and bookmarks, so adding cert
+hashes seems like no problem. The timeout portion worries me a little bit. I agree that
+long timeouts makes sense, but that trade off is something to think about.
+
+solderpunk writes:
+&gt;<i> [ ... ] and that the hostname the client is trying to connect to
+</i>&gt;<i> is consistent with either the certificate&#x27;s Common Name or Subject
+</i>&gt;<i> Alternative Names
+</i>
+I had been planning on implementing this from the beginning and only threw it aside
+in order to be able to just get connections up and running at all. I think I&#x27;ll spend some
+of today trying to get it set up. :)
+
+
+--?
+Sent with <a href="https://mailfence.com">https://mailfence.com</a>
+Secure and private email
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000189.html">TLS, TOFU and the Gemini security model</a></li>
+<li>Next message (by thread): <a href="000184.html">TLS, TOFU and the Gemini security model</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#182">[ date ]</a> <a href="thread.html#182">[ thread ]</a> <a href="subject.html#182">[ subject ]</a> <a href="author.html#182">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

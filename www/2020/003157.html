@@ -1,54 +1,38 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [ANN] twins, a Gemini server written in Go
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20twins%2C%20a%20Gemini%20server%20written%20in%20Go&In-Reply-To=%3CCAD2gp_Qd%2BQXUxUDY4g3dz5uH2BpPMBrZCSRkfV%2BemCeK%3D6ozgQ%40mail.gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="003103.html">
-   <LINK REL="Next"  HREF="003104.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[ANN] twins, a Gemini server written in Go</H1>
-    <B>John Cowan</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BANN%5D%20twins%2C%20a%20Gemini%20server%20written%20in%20Go&In-Reply-To=%3CCAD2gp_Qd%2BQXUxUDY4g3dz5uH2BpPMBrZCSRkfV%2BemCeK%3D6ozgQ%40mail.gmail.com%3E"
-       TITLE="[ANN] twins, a Gemini server written in Go">cowan at ccil.org
-       </A><BR>
-    <I>Mon Nov  9 04:41:06 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="003103.html">[ANN] twins, a Gemini server written in Go
-</A></li>
-        <LI>Next message (by thread): <A HREF="003104.html">[ANN] twins, a Gemini server written in Go
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3157">[ date ]</a>
-              <a href="thread.html#3157">[ thread ]</a>
-              <a href="subject.html#3157">[ subject ]</a>
-              <a href="author.html#3157">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[ANN] twins, a Gemini server written in Go</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="003103.html">
+<link rel="next" href="003104.html">
+</head>
+<body>
+<h1>[ANN] twins, a Gemini server written in Go</h1>
+<b>John Cowan</b> cowan at ccil.org<br>
+<i>Mon Nov  9 04:41:06 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="003103.html">[ANN] twins, a Gemini server written in Go</a></li>
+<li>Next message (by thread): <a href="003104.html">[ANN] twins, a Gemini server written in Go</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3157">[ date ]</a> <a href="thread.html#3157">[ thread ]</a> <a href="subject.html#3157">[ subject ]</a> <a href="author.html#3157">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Sat, Nov 7, 2020 at 12:17 AM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+<pre>On Sat, Nov 7, 2020 at 12:17 AM Sean Conner &lt;sean at conman.org&gt; wrote:
 
 So what are the standard MIME parameters for text/plain?
 
 
-If you go to &lt;<A HREF="https://www.iana.org/assignments/media-types/media-types.xhtml">https://www.iana.org/assignments/media-types/media-types.xhtml</A>&gt;,
-the IANA registration for MIME-types, you'll find links under text/plain to
+If you go to &lt;<a href="https://www.iana.org/assignments/media-types/media-types.xhtml">https://www.iana.org/assignments/media-types/media-types.xhtml</a>&gt;,
+the IANA registration for MIME-types, you&#x27;ll find links under text/plain to
 RFCs 2046 (optional charset parameter), 3676 (optional format and delsp
-parameters), and 5147 (not sure why it's here; no parameters).
+parameters), and 5147 (not sure why it&#x27;s here; no parameters).
 
 text/markdown?
 &gt;<i>
-</I>
+</i>
 The same process gets you to RFC 7763 (mandatory charset, optional variant).
 
 text/html?
@@ -57,15 +41,15 @@ text/html?
 Charset (optional).
 
 &gt;<i> multipart/alternate?
-</I>
+</i>
 
 Boundary (required)
 
 &gt;<i> And what should a client do when it
-</I>&gt;<i> encounters a non-standard MIME parameter?
-</I>&gt;<i>
-</I>
-Ah.  Now that's from RFC 2045:
+</i>&gt;<i> encounters a non-standard MIME parameter?
+</i>&gt;<i>
+</i>
+Ah.  Now that&#x27;s from RFC 2045:
 
    Parameters are modifiers of the media subtype, and as such do not
    fundamentally affect the nature of the content.  The set of
@@ -86,35 +70,21 @@ spaces and then split them on the equal sign to separate name from value.
 
 
 
-John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
-Do what you will / this Life's a Fiction
+John Cowan          <a href="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</a>        cowan at ccil.org
+Do what you will / this Life&#x27;s a Fiction
 And is made up of / Contradiction.  --William Blake
 -------------- next part --------------
 An HTML attachment was scrubbed...
-URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201108/6d29b6f6/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201108/6d29b6f6/attachment.htm</A>&gt;
-</PRE>
-
-
-
-
-
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20201108/6d29b6f6/attachment.htm">https://mailing-list-archive.gemi.dev/www/attachments/20201108/6d29b6f6/attachment.htm</a>&gt;
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="003103.html">[ANN] twins, a Gemini server written in Go
-</A></li>
-	<LI>Next message (by thread): <A HREF="003104.html">[ANN] twins, a Gemini server written in Go
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3157">[ date ]</a>
-              <a href="thread.html#3157">[ thread ]</a>
-              <a href="subject.html#3157">[ subject ]</a>
-              <a href="author.html#3157">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="003103.html">[ANN] twins, a Gemini server written in Go</a></li>
+<li>Next message (by thread): <a href="003104.html">[ANN] twins, a Gemini server written in Go</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3157">[ date ]</a> <a href="thread.html#3157">[ thread ]</a> <a href="subject.html#3157">[ subject ]</a> <a href="author.html#3157">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

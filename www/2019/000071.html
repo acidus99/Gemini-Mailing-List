@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Markdown and Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000070.html">
+<link rel="next" href="000072.html">
+</head>
+<body>
+<h1>Markdown and Gemini</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Wed Aug 21 22:18:35 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000070.html">Markdown and Gemini</a></li>
+<li>Next message (by thread): <a href="000072.html">Markdown and Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#71">[ date ]</a> <a href="thread.html#71">[ thread ]</a> <a href="subject.html#71">[ subject ]</a> <a href="author.html#71">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great James Tomasino once stated:
+&gt;<i> &gt;From IRC:
+</i>&gt;<i> 
+</i>&gt;<i> &lt;solene&gt; I&#x27;m on a quite fun project I&#x27;ll write about soon. I rewrote a
+</i>&gt;<i> minimalism markup system, it&#x27;s markdown but only with titles and code
+</i>&gt;<i> blocks supports :D the html converter is 18 lines of awk (1 instruction
+</i>&gt;<i> / line)
+</i>&gt;<i> 
+</i>&gt;<i> For those unfamiliar, solene is an openbsd developer and posts here:
+</i>&gt;<i> <a href="gopher://dataswamp.org/1/~solene">gopher://dataswamp.org/1/~solene</a>
+</i>&gt;<i> 
+</i>&gt;<i> She&#x27;s not working on Gemini, but this mini-markup she&#x27;s developing may
+</i>&gt;<i> prove useful for folks writing clients. As we&#x27;ve discussed, it probably
+</i>&gt;<i> doesn&#x27;t make sense to support the full markdown spec (even if you can
+</i>&gt;<i> choose one flavor). Her micro-version might be handy.
+</i>&gt;<i> 
+</i>&gt;<i> Also, many have said they don&#x27;t want to translate to HTML for rendering,
+</i>&gt;<i> which makes sense for most applications. Regardless, her awk parsing
+</i>&gt;<i> will be a helpful aid to anyone looking to write their own.
+</i>&gt;<i> 
+</i>&gt;<i> I&#x27;ve informed her about potential Gemini applications and she said
+</i>&gt;<i> she&#x27;ll be sharing her code soon. I&#x27;ll post a link to the list when it
+</i>&gt;<i> comes up.
+</i>
+  Having written my own markup-langauge, I think I can offer some notes and
+insights into the process.  I am in no way trying to promote what I have as
+a standard, as it barely works for me.  Also, it outputs HTML directly (I
+use it for blogging).
+
+  Anyway.  I came up with my own markup-laguage [1], based off OrgMode from
+Emacs.  It&#x27;s over 700 lines of Lua code [2] geared towards how I write blog
+entries.  I love it and absolutely hate it at the same time.  Mainly, I hate
+it because I keep forgetting what are &quot;special&quot; characters and what aren&#x27;t,
+and more often than not, I end up with half the post in an italicized
+monspaced font.
+
+  The other problem is when a block section isn&#x27;t parsed properly, and I
+have to hunt down what corner case I ran into this time (in fact, just today
+[3] I fixed yet another corner case in rendering, and that happens nearly
+every time I use the thing.  Yes, it starts out simple.  Then you want to
+format this, and then that, and then the other thing, and pretty soon you
+end up with a 700+ line of exceptions threatening to explode.
+
+  As an aside, there are a few aspects I do love about the system.  One is
+the automatic conversion of HTML entities (with exceptions like &amp;amp; and
+&amp;lt; for technical reasons) into their UTF-8 equivalents.  This let&#x27;s me
+type those characters I can&#x27;t type, like &quot;?&quot; as &quot;&amp;uuml;&quot;.  It can also
+handle entities like &quot;&amp;#9772;&quot;.  The second aspect is conversion of some
+short-cut sequences like `` (two agrave accents) into ? (typographical
+quotes).  A third aspect is the ability handle acronyms---that is, it
+converts
+
+		TCP
+
+into
+
+		&lt;abbr title=&quot;Transmission Control Protocol&quot;&gt;TCP&lt;/abbr&gt;
+
+but on an ad-hoc, defined in file, way. [4]
+
+  Anyway, I digress.
+
+  So let&#x27;s define a simple markup language just to discuss some issues.  A
+line starting with &#x27;#&#x27; is a header.  _This is italic text_.  And **some bold
+text**.  And
+
+	* a bullet list
+	* uses a single asterisk, bold uses two.
+	* This is an unordered list.
+
+But
+
+	1 this is a numbered list
+	2 like this
+	3 see?
+
+  Othersise, paragraphs are reflowed.  Links ... um ... just for now, let&#x27;s
+go with [[http://boston.conman.org][this format for links]].  And already
+there are issues, such as: for a bulletted list, are these the same?
+
+*a bullet list
+*uses a single asterisk, bold uses two.
+*This is an unordered list.
+
+* a bullet list
+* uses a single asterisk...
+* This is an ...
+
+	*a bullet list
+* uses a single ...
+	* This is an ...
+
+  And that last one---is that two lists, one with a sub-list underneath it?
+And I picked two asterisks for bold just to make it eastier to detect a list
+vs. bold text.  Because otherwise, you&#x27;ll end up with bizzare rules like:
+
+	If a line starts with 0 or more whitespace plus a &#x27;*&#x27; and the
+	following line starts with 0 or more whiatepsace plus a &#x27;*&#x27; then the
+	&#x27;*&#x27; marks a list, otherwise it starts bold text ...
+
+  That&#x27;s just part of the problems I have with my own markup language---the
+overloaded nature of it all.  I mean, I didn&#x27;t include a way to have
+preformatted text (like source code examples).  Assuming we go along with
+the four leading spaces, what happens when we have a nested list?
+
+* Major Topic I
+  * Minor detail A of topic I
+    * detail 1
+    * detail 2
+
+Um ... and then what if we *do* want a list in a preformatted format?
+
+    * Major Topic 1
+      * Minor detail A of topic 1
+        * detail 1
+        * detail 2
+
+  Or is that just a list?
+
+  The point here isn&#x27;t to try to define a format, my point is to say it&#x27;s a
+messy, difficult job with lots of people wanting different things.  Anyway,
+I rambled on long enough ... 
+
+  -spc
+
+[1]	<a href="https://github.com/spc476/mod_blog/blob/master/NOTES/testmsg">https://github.com/spc476/mod_blog/blob/master/NOTES/testmsg</a>
+
+[2]	<a href="https://github.com/spc476/mod_blog/blob/master/Lua/format.lua">https://github.com/spc476/mod_blog/blob/master/Lua/format.lua</a>
+
+[3]	<a href="http://boston.conman.org/2019/08/21.1">http://boston.conman.org/2019/08/21.1</a>
+	It&#x27;s the blacked out text in the table.  
+
+[4]	I really like HTML in case you can&#x27;t tell.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000070.html">Markdown and Gemini</a></li>
+<li>Next message (by thread): <a href="000072.html">Markdown and Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#71">[ date ]</a> <a href="thread.html#71">[ thread ]</a> <a href="subject.html#71">[ subject ]</a> <a href="author.html#71">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

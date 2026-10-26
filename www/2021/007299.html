@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] comments on the proposed gemini spec revisions</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007295.html">
+<link rel="next" href="007301.html">
+</head>
+<body>
+<h1>[spec] comments on the proposed gemini spec revisions</h1>
+<b>Omar Polo</b> op at omarpolo.com<br>
+<i>Wed Oct 13 21:56:04 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007295.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li>Next message (by thread): <a href="007301.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7299">[ date ]</a> <a href="thread.html#7299">[ thread ]</a> <a href="subject.html#7299">[ subject ]</a> <a href="author.html#7299">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+Oliver Simmons &lt;oliversimmo@gmail.com&gt; writes:
+
+&gt;<i> On Mon, 11 Oct 2021 at 15:12, Omar Polo &lt;op@omarpolo.com&gt; wrote:
+</i>&gt;<i>&gt; I&#x27;ve seen this argument in the gitlab issue too […]
+</i>&gt;<i>
+</i>&gt;<i> I haven&#x27;t checked the issue yet, will do after sending this.
+</i>&gt;<i>
+</i>&gt;<i>&gt; In what language(s) splitting a string is faster than
+</i>&gt;<i>&gt; checking for a prefix?  Splitting requires the allocation of multiple
+</i>&gt;<i>&gt; objects, while the prefix only requires a scan of the first few bytes.
+</i>&gt;<i>
+</i>&gt;<i> I said simpler, not faster. What you said is true in some cases, but
+</i>&gt;<i> not everyone is striving for optimisation speed-wise.
+</i>
+You didn&#x27;t said &quot;faster&quot;, true, but said that (emphasis mine)
+
+&gt;<i> Not having a space means you&#x27;d have to test if the line starts with
+</i>&gt;<i> different things, which would be very annoying and **slower** in most
+</i>&gt;<i> cases.
+</i>
+I was contradicting that.
+
+&gt;<i> It&#x27;ll depend on the language used, but splitting allows you to use a
+</i>&gt;<i> simple equality switch statement, which isn&#x27;t possible by checking
+</i>&gt;<i> with a prefix.
+</i>
+(btw, checking for equality inside a switch statement doesn&#x27;t work for
+strings in languages like C or Java.  Err... yes, it works, but it&#x27;s not
+same the equality you mean ;-)
+
+&gt;<i> The way I understand your message, I would have to use an else-if
+</i>&gt;<i> list, which is hardly ideal.
+</i>
+This depends on the language design.  Some languages allows expression
+inside switches, like Go IIRC, so you could write
+
+switch {
+case strings.HasPrefix(line, &quot;*&quot;):
+	// ...
+case strings.HasPrefix(line, &quot;###&quot;):
+	// ...
+...
+}
+
+other allows to do more elaborate things (clojure for example)
+
+(defn has-prefix? [prefix str]
+  (str/starts-with? str prefix))
+
+(condp has-prefix? line
+  &quot;*&quot;   :item
+  &quot;=&gt;&quot;  :link
+  &quot;###&quot; :header-3
+  ,,,)
+
+Even when we take into account an ancient language like C, you could
+take advantage that the first byte of a line is enough to get an idea of
+its type and greatly reduce the number of chained ifs:
+
+(this is more or less what I have in telescope)
+
+switch (*line) {
+case &#x27;*&#x27;: return LINE_ITEM;
+case &#x27;&gt;&#x27;: return LINE_QUOTE;
+case &#x27;=&#x27;:
+	if (line[1] == &#x27;&gt;&#x27;)
+		return LINE_LINK;
+	break;
+case &#x27;#&#x27;:
+	/* some ifs to check whether is a level 1, 2 or 3 */
+	...
+case &#x27;`&#x27;:
+	/* check for a ``` marker */
+	...
+}
+return LINE_TEXT;
+
+I don&#x27;t think taking into account the particularities of one specific
+programming language is a wise choice for a markup language meant to be
+written by humans for humans.
+
+The question should thus become: is it intuitive for a random user that
+
+#hello world
+
+and
+
+# hello world
+
+are effectively the same line?
+
+Let&#x27;s forget the code when tackling these issues, we think better when
+we&#x27;re not in front of a keyboard.
+
+&gt;<i> [...]
+</i>&gt;<i>
+</i>&gt;<i> At the least, it should be required for link (as you said) and list
+</i>&gt;<i> lines (&quot;* &quot;).
+</i>
+Probably I was too ambiguous.  My point was that in a link line a space
+in necessary between the link and the label, not after the marker.  So,
+outside of the mandatory space to separate a link and its label,
+whitespaces are irrelevant.
+
+&gt;<i> I&#x27;ve seen where people have tried to use *emphasis* at
+</i>&gt;<i> the start of a line and got a bullet point by mistake.
+</i>
+I&#x27;ve seen people writing like that, and a conforming client (IMHO)
+should consider those lines items.
+
+It&#x27;s like using =&gt; something like this &lt;= to highlight text and then
+complaining that a client mis-render a line because the author tried to
+&quot;highlight&quot; the first words and now it&#x27;s a link.
+
+Who cares?  Gemini doesn&#x27;t have inline formatting, so why bother trying
+to support it?
+
+(I&#x27;ve used some *emphasis* on some pages too, but more I write and more
+I think I shouldn&#x27;t, it&#x27;s easier to read without too much noise.  That&#x27;s
+my opinion, at least.)
+
+Anyway, whatever the final decision will be, I hope we could at least
+ensure that all the clients are consistent in their rendering.
+
+&gt;<i>&gt; &gt; I see no downside to enforcing it in the spec (a SHOULD or MUST).
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; My argument is kind the opposite: if there isn&#x27;t a (strong) reason for
+</i>&gt;<i>&gt; requiring something, then that something MUST be optional.  Whitespaces
+</i>&gt;<i>&gt; are required in the link line to separate unambiguously the link from
+</i>&gt;<i>&gt; the label, the other whitespaces in the &quot;special&quot; lines don&#x27;t serve this
+</i>&gt;<i>&gt; purpose so they need to be completely optional.
+</i>&gt;<i>
+</i>&gt;<i> At the very least it should be recommended by the spec IMO.
+</i>&gt;<i>
+</i>&gt;<i> -Oliver Simmons (GoodClover)
+</i>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007295.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li>Next message (by thread): <a href="007301.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7299">[ date ]</a> <a href="thread.html#7299">[ thread ]</a> <a href="subject.html#7299">[ subject ]</a> <a href="author.html#7299">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

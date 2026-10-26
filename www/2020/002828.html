@@ -1,50 +1,34 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Asian Text in URLs
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Asian%20Text%20in%20URLs&In-Reply-To=%3C20201003075317.GA17454%40brevard.conman.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="002832.html">
-   <LINK REL="Next"  HREF="002830.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Asian Text in URLs</H1>
-    <B>Sean Conner</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Asian%20Text%20in%20URLs&In-Reply-To=%3C20201003075317.GA17454%40brevard.conman.org%3E"
-       TITLE="Asian Text in URLs">sean at conman.org
-       </A><BR>
-    <I>Sat Oct  3 08:53:17 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="002832.html">Asian Text in URLs
-</A></li>
-        <LI>Next message (by thread): <A HREF="002830.html">Asian Text in URLs
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2828">[ date ]</a>
-              <a href="thread.html#2828">[ thread ]</a>
-              <a href="subject.html#2828">[ subject ]</a>
-              <a href="author.html#2828">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asian Text in URLs</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="002832.html">
+<link rel="next" href="002830.html">
+</head>
+<body>
+<h1>Asian Text in URLs</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Sat Oct  3 08:53:17 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="002832.html">Asian Text in URLs</a></li>
+<li>Next message (by thread): <a href="002830.html">Asian Text in URLs</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2828">[ date ]</a> <a href="thread.html#2828">[ thread ]</a> <a href="subject.html#2828">[ subject ]</a> <a href="author.html#2828">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>It was thus said that the Great mieum once stated:
+<pre>It was thus said that the Great mieum once stated:
 &gt;<i> Hi Everyone,
-</I>&gt;<i> 
-</I>&gt;<i> I recently decided to start an experimental Gemlog written in Korean. I
-</I>&gt;<i> found, however, that some clients do not like having Asian text in the
-</I>&gt;<i> path of the URL---either as the name of a folder or a file.
-</I>&gt;<i> 
-</I>&gt;<i> What is the general consensus about non-latin characters in URLs? 
-</I>
+</i>&gt;<i> 
+</i>&gt;<i> I recently decided to start an experimental Gemlog written in Korean. I
+</i>&gt;<i> found, however, that some clients do not like having Asian text in the
+</i>&gt;<i> path of the URL---either as the name of a folder or a file.
+</i>&gt;<i> 
+</i>&gt;<i> What is the general consensus about non-latin characters in URLs? 
+</i>
   The actual specification for URLs is RFC-3986, and that lists the valid
 characters for the path portion of a URL, which are:
 
@@ -52,81 +36,37 @@ characters for the path portion of a URL, which are:
 	ABCDEFGHIJKLMNOPQRSTUVWXYZ
 	0123456789
 	-._~
-	!$&amp;'()*+,;=:@
+	!$&amp;&#x27;()*+,;=:@
 
   ANY OTHER CHARACTER has to be percent-encoded.  
 
 
-&gt;<i> For an example, you can point your client to <A HREF="gemini://namu.blue/&#49933;&#47197;/">gemini://namu.blue/&#49933;&#47197;/</A>
-</I>
+&gt;<i> For an example, you can point your client to <a href="gemini://namu.blue/??/">gemini://namu.blue/??/</a>
+</i>
   It should be:
 
-	<A HREF="gemini://namu.blue/%EC%8C%8D%EB%A1%9D/">gemini://namu.blue/%EC%8C%8D%EB%A1%9D/</A>
+	<a href="gemini://namu.blue/%EC%8C%8D%EB%A1%9D/">gemini://namu.blue/%EC%8C%8D%EB%A1%9D/</a>
 
 The server will then have to decode the percent-encoded data to get the
 proper file to use.
   
 &gt;<i> Anyway, I just wanted to see what everyone thinks about the best 
-</I>&gt;<i> practice in this situation. 
-</I>
+</i>&gt;<i> practice in this situation. 
+</i>
   Ensure you are using UTF-8 on the server, and percent-encode the path when
 generating the URL.
 
   -spc
 
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="002832.html">Asian Text in URLs
-</A></li>
-	<LI>Next message (by thread): <A HREF="002830.html">Asian Text in URLs
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2828">[ date ]</a>
-              <a href="thread.html#2828">[ thread ]</a>
-              <a href="subject.html#2828">[ subject ]</a>
-              <a href="author.html#2828">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="002832.html">Asian Text in URLs</a></li>
+<li>Next message (by thread): <a href="002830.html">Asian Text in URLs</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2828">[ date ]</a> <a href="thread.html#2828">[ thread ]</a> <a href="subject.html#2828">[ subject ]</a> <a href="author.html#2828">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

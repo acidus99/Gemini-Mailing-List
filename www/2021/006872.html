@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] Can I use existing ssh keys for gemini identity?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006869.html">
+<link rel="next" href="006871.html">
+</head>
+<body>
+<h1>[tech] Can I use existing ssh keys for gemini identity?</h1>
+<b>Gary Johnson</b> lambdatronic at disroot.org<br>
+<i>Fri Jul  9 16:46:29 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006869.html">[tech] Can I use existing ssh keys for gemini identity?</a></li>
+<li>Next message (by thread): <a href="006871.html">[tech] Can I use existing ssh keys for gemini identity?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6872">[ date ]</a> <a href="thread.html#6872">[ thread ]</a> <a href="subject.html#6872">[ subject ]</a> <a href="author.html#6872">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Chris McGee &lt;newton688@gmail.com&gt; writes:
+
+&gt;<i> Does anyone know of a way to use my ssh RSA key-pairs as my identity for
+</i>&gt;<i> Gemini?
+</i>
+Hi Chris,
+
+  Any Gemini capsule may choose to prompt your browser for a client
+certificate. These can often be provided as either temporary or
+permanent certs if your browser supports this feature. While many
+browsers will auto-generate certs for you on the fly if requested, you
+can also usually provide your own on a capsule by capsule basis.
+
+If you want to use an existing certificate on your machine for one or
+more Gemini capsules, you are free to do so. Just add them to your
+browser&#x27;s certificate collection.
+
+Unfortunately, an SSH RSA key-pair isn&#x27;t an X.509 SSL certificate, which
+is what you need to give your Gemini browser. SSH produces/uses a public
+key file and a private key file. For Gemini, you&#x27;ll need a certificate
+file (which contains the public key plus some ownership and signing
+metadata) as well as a private key file.
+
+I hope that helps.
+
+Happy hacking,
+  Gary
+
+-- 
+GPG Key ID: 7BC158ED
+Use `gpg --search-keys lambdatronic&#x27; to find me
+Protect yourself from surveillance: <a href="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</a>
+=======================================================================
+()  ascii ribbon campaign - against html e-mail
+/\  www.asciiribbon.org   - against proprietary attachments
+
+Why is HTML email a security nightmare? See <a href="https://useplaintext.email/">https://useplaintext.email/</a>
+
+Please avoid sending me MS-Office attachments.
+See <a href="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006869.html">[tech] Can I use existing ssh keys for gemini identity?</a></li>
+<li>Next message (by thread): <a href="006871.html">[tech] Can I use existing ssh keys for gemini identity?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6872">[ date ]</a> <a href="thread.html#6872">[ thread ]</a> <a href="subject.html#6872">[ subject ]</a> <a href="author.html#6872">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

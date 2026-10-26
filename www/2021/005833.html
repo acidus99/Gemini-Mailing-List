@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[announce] Delegation of responsibility for spec finalisation</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005830.html">
+<link rel="next" href="005834.html">
+</head>
+<body>
+<h1>[announce] Delegation of responsibility for spec finalisation</h1>
+<b>Scot</b> gmi1 at scotdoyle.com<br>
+<i>Tue Mar  2 00:23:09 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005830.html">[announce] Delegation of responsibility for spec finalisation</a></li>
+<li>Next message (by thread): <a href="005834.html">[announce] Delegation of responsibility for spec finalisation</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5833">[ date ]</a> <a href="thread.html#5833">[ thread ]</a> <a href="subject.html#5833">[ subject ]</a> <a href="author.html#5833">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On 3/1/21 4:26 PM, Alex // nytpu wrote:
+&gt;<i> On 2021-03-01 03:18PM, Scot wrote:
+</i>&gt;<i>&gt; 1. Not requiring client applications to send TLS close_notify, since
+</i>&gt;<i>&gt; they indicate end-of-data via the request &lt;CR&gt;&lt;LF&gt; ?
+</i>&gt;<i> See this quote from the TLS 1.3 spec:
+</i>&gt;<i>&gt; Each party MUST send a &quot;close_notify&quot; alert before closing its write
+</i>&gt;<i>&gt; side of the connection, unless it has already sent some error alert.
+</i>&gt;<i>&gt; This does not have any effect on its read side of the connection.
+</i>&gt;<i> <a href="https://tools.ietf.org/html/rfc8446#section-6.1">https://tools.ietf.org/html/rfc8446#section-6.1</a> - TLS 1.3
+</i>&gt;<i>
+</i>&gt;<i> The effect of this is that clients MUST send close_notify after writing
+</i>&gt;<i> their a request in order to properly comply with TLS 1.3.  I would
+</i>&gt;<i> operate under the assumption that a server would not send a response
+</i>&gt;<i> until a close_notify is received (or the request would be allowed to
+</i>&gt;<i> time out).  Obviously a robust server would work without a close_notify,
+</i>&gt;<i> but you should still operate within the spec because I&#x27;m wouldn&#x27;t be
+</i>&gt;<i> surprised if at least one or two TLS implementations require it.
+</i>&gt;<i>
+</i>&gt;<i> There&#x27;s even stronger wording for TLS 1.2 which requires a close_notify
+</i>&gt;<i> after writing is completed and for /both/ the sending and receiving
+</i>&gt;<i> parties to send a close_notify after the transaction is completed, so
+</i>&gt;<i> the client would have to send a close_notify after the both request and
+</i>&gt;<i> the response, not just the request.
+</i>&gt;<i> See: <a href="https://tools.ietf.org/html/rfc5246#section-7.2.1">https://tools.ietf.org/html/rfc5246#section-7.2.1</a>
+</i>&gt;<i>
+</i>
+Hi Alex. I would like to follow the RFC too.
+
+After writing C and Python client and server implementations
+last fall, and examing packet traces, my conclusion was that
+this does not work with most TLS libraries. Mostly, they will
+close the connection in both directions if they receive a
+close_notify. Some of this is documented here [1]. This in
+turn causes problems for programming languages which
+expect a given library to behave in a certain way. For example,
+Python still does not allow sending a close_notify from the
+client after the request has been delivered and before
+receiving the response [2].
+
+So, in my opinion, the simplest thing would be to utilize the
+&lt;CR&gt;&lt;LF&gt; of the Gemini request to indicate that the client
+is finished sending its request.
+
+Three benefits of this approach would be:
+
+1. All Gemini clients will keep working right now without changes
+
+2. Because the &lt;CR&gt;&lt;LF&gt; can be explicitely sent by a client
+application and explicetely examined by the server application,
+without broken TLS libraries intervening, it is easy to correctly
+implement
+
+3. Gemini client authors will not experience intense frustration
+at the sad state of TLS library support for half-open close_notify
+(this is the voice of experience speaking...)
+
+&gt;<i> On 2021-03-01 03:18PM, Scot wrote:
+</i>&gt;<i>&gt; 2. Only requiring server applications to send TLS close_notify if all
+</i>&gt;<i>&gt; data has been sent? If the TCP or TLS connection is interrupted by the
+</i>&gt;<i>&gt; client or by an intermediary before the server application has
+</i>&gt;<i>&gt; transmitted all of its data, there doesn&#x27;t seem to be a benefit to
+</i>&gt;<i>&gt; sending a close_notify to the client and it could also cause various
+</i>&gt;<i>&gt; delays which prohibit the server application from moving on to other
+</i>&gt;<i>&gt; work. For example, an unending streaming response would be closed by
+</i>&gt;<i>&gt; the client, in which case there is no need for a close_notify from the
+</i>&gt;<i>&gt; server.
+</i>&gt;<i> The whole point of close_notify is to indicate that the write has
+</i>&gt;<i> successfully been completed.  I may be misunderstanding your question,
+</i>&gt;<i> but if the connection is interrupted then a close_notify should not be
+</i>&gt;<i> sent, as that would erroneously report that the transaction was
+</i>&gt;<i> successfully completed.  For streaming data I assume that it would be
+</i>&gt;<i> properly terminated by the client closing the connection since the data
+</i>&gt;<i> is never completely sent (it&#x27;s unending).
+</i>&gt;<i>
+</i>
+Yes I agree. It doesn&#x27;t matter to me how it is worded, as
+long as its clear that a close_notify doesn&#x27;t need to be sent
+from the server to the client unless the server application
+has been able to send all data that it wants to send first. So
+in the case of streaming, since the server didn&#x27;t reach the end
+of the unending data stream, it would not send close_notify, it
+would just immediately close the TCP connection.
+
+[1] <a href="https://github.com/openssl/openssl/issues/11378">https://github.com/openssl/openssl/issues/11378</a>
+[2] <a href="https://bugs.python.org/issue39951">https://bugs.python.org/issue39951</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005830.html">[announce] Delegation of responsibility for spec finalisation</a></li>
+<li>Next message (by thread): <a href="005834.html">[announce] Delegation of responsibility for spec finalisation</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5833">[ date ]</a> <a href="thread.html#5833">[ thread ]</a> <a href="subject.html#5833">[ subject ]</a> <a href="author.html#5833">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Tech] Useless statistics of the day: status codes</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004700.html">
+<link rel="next" href="004722.html">
+</head>
+<body>
+<h1>[Tech] Useless statistics of the day: status codes</h1>
+<b>Stephane Bortzmeyer</b> stephane at sources.org<br>
+<i>Mon Jan  4 10:53:41 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004700.html">[tech] Proposed reversed Gemini for uploads to servers - Feedback wanted</a></li>
+<li>Next message (by thread): <a href="004722.html">[Tech] Useless statistics of the day: status codes</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4720">[ date ]</a> <a href="thread.html#4720">[ thread ]</a> <a href="subject.html#4720">[ subject ]</a> <a href="author.html#4720">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>In the database of the Lupa crawler
+&lt;<a href="gemini://gemini.bortzmeyer.org/software/lupa/">gemini://gemini.bortzmeyer.org/software/lupa/</a>&gt;, I find the following
+status codes (by order of decreasing frequency):
+
+(The status codes are documented in
+&lt;<a href="gemini://gemini.circumlunar.space/docs/specification.gmi#fragments_could_be_useful_to_indicate_the_exact_section">gemini://gemini.circumlunar.space/docs/specification.gmi#fragments_could_be_useful_to_indicate_the_exact_section</a>&gt;.)
+
+20 : OK
+51 : Not found, because many links no longer work, already, or may be
+never worked
+31 : Permanent redirection (Lupa adds the target URI to its database
+but keeps the original one)
+30 : Temporary redirection
+10 : Input, there are 310 URI replying by asking for input
+50 : Permanent failure, something wrong in the server
+40 : Temporary failure, server overloaded?
+60 : Client certificate required, 40 URI require this authentication
+42 : The ultimate answer (no, actually, CGI error)
+53 : Proxy request refused (typically a name pointing to an IP address
+where the server is not configured for this virtual host)
+
+The rest is marginal, less than ten URI:
+
+49 : First status code I find which is not in the official
+specification. Anyone has an idea? Two URI.
+2 : Old server with the deprecated one-digit status codes?
+39 : Not in the official specification. Anyone has an idea? Two URI.
+59 : Bad request (no idea why my client sends bad requests)
+99 : Not in the official specification. Anyone has an idea? Two URI.
+58 : Not in the official specification. Anyone has an idea? Two URI.
+29 : Not in the official specification. Anyone has an idea? Two URI.
+43 : Proxy error. Reason unknown.
+61 : Certificate not authorised. Since I do not send client
+certificates, this is surprising.
+41 : Server not available (maintenance, for instance).
+52 : Gone. Like 51 but final. Just one URI,
+&lt;<a href="gemini://gemini.conman.org/no-longer-here/">gemini://gemini.conman.org/no-longer-here/</a>&gt; so it&#x27;s probably a test.
+22 : Not in the official specification. Anyone has an idea? One URI.
+69 : Not in the official specification. Anyone has an idea? One URI.
+19 : Not in the official specification. Anyone has an idea? One URI.
+
+The number of status codes not registered in the specification may
+mean that some servers are extending the Gemini protocol with unused
+status codes. But some are also in test capsules like
+&lt;<a href="gemini://gemini.conman.org/">gemini://gemini.conman.org/</a>&gt; or &lt;<a href="gemini://egsam.glv.one/">gemini://egsam.glv.one/</a>&gt;.
+
+Note that Lupa did not find even one occurrence of:
+
+11 : Sensitive input
+44 : Slow down (may be because the crawler is nice)
+62 : Certificate not valid (which makes sense since I don&#x27;t send
+certificates)
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004700.html">[tech] Proposed reversed Gemini for uploads to servers - Feedback wanted</a></li>
+<li>Next message (by thread): <a href="004722.html">[Tech] Useless statistics of the day: status codes</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4720">[ date ]</a> <a href="thread.html#4720">[ thread ]</a> <a href="subject.html#4720">[ subject ]</a> <a href="author.html#4720">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

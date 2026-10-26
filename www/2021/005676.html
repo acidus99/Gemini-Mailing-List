@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SPEC] Backwards-compatible metadata in Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005702.html">
+<link rel="next" href="005677.html">
+</head>
+<body>
+<h1>[SPEC] Backwards-compatible metadata in Gemini</h1>
+<b>Stephane Bortzmeyer</b> stephane at sources.org<br>
+<i>Fri Feb 26 11:53:49 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005702.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li>Next message (by thread): <a href="005677.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5676">[ date ]</a> <a href="thread.html#5676">[ thread ]</a> <a href="subject.html#5676">[ subject ]</a> <a href="author.html#5676">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Thu, Feb 25, 2021 at 10:16:52AM +0100,
+ Omar Polo &lt;op at omarpolo.com&gt; wrote 
+ a message of 161 lines which said:
+
+&gt;<i>     As things stands, I know I can
+</i>&gt;<i> 
+</i>&gt;<i>     cat file1.gmi file2.gmi ... &gt; result.gmi
+</i>&gt;<i> 
+</i>&gt;<i>    and obtain a valid text/gemini file.
+</i>
+One of the things missing in the current specification is a formal
+grammar of gemtext, so there is currently no way to know if lines must
+end with a end-of-line or is the end-of-file sufficient.
+
+=&gt; <a href="gemini://gemini.bortzmeyer.org/gemini/missing-eol.gmi">gemini://gemini.bortzmeyer.org/gemini/missing-eol.gmi</a> Example
+
+Amfora and Lagrange seem to accept the last line (the one without an
+end-of-line). But your example with cat would break it, concatening
+the last line of the first file with the first line of the second file.
+
+&gt;<i> Also, the examples you gave in support of your proposals seems bogus
+</i>&gt;<i> too.  Serving a mailing list archive over Gemini?  Cool, but why convert
+</i>&gt;<i> the mails to text/gemini?  Wrapping them in ``` (with headers visible)
+</i>&gt;<i> or serving them &quot;raw&quot; is not enough?
+</i>
+Because humans (specially non-anglosaxon humans) have trouble with
+&quot;From&quot;, &quot;Subject&quot; and &quot;Message-ID&quot;?
+
+&gt;<i> If we want to build a better GUS I don&#x27;t think that adding metadata
+</i>&gt;<i> to text/gemini will solve anything, it will actually make things
+</i>&gt;<i> worst.  The point is, you can&#x27;t trust 3rd-parties metadata. [...]
+</i>&gt;<i> people will abuse the metadata to &quot;go up&quot; in the search results, and
+</i>&gt;<i> the outcome of that is crystal-clear on the Web,
+</i>
+I&#x27;m not convinced by this &quot;look at the SEO mess&quot; argument. Gemini is
+not the Web, there is no money at stake, marketing people and salesmen
+frown upon Gemini (&quot;what, no pictures? No tracking?&quot;) so I really
+doubt that many people would resort to dirty tricks just to be higher
+in GUS&#x27; results.
+
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005702.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li>Next message (by thread): <a href="005677.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5676">[ date ]</a> <a href="thread.html#5676">[ thread ]</a> <a href="subject.html#5676">[ subject ]</a> <a href="author.html#5676">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

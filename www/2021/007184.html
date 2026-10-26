@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Not always online capsules</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007183.html">
+<link rel="next" href="007196.html">
+</head>
+<body>
+<h1>Not always online capsules</h1>
+<b>Jonathan McHugh</b> indieterminacy at libre.brussels<br>
+<i>Wed Sep 22 12:39:13 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007183.html">Not always online capsules</a></li>
+<li>Next message (by thread): <a href="007196.html">Not always online capsules</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7184">[ date ]</a> <a href="thread.html#7184">[ thread ]</a> <a href="subject.html#7184">[ subject ]</a> <a href="author.html#7184">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Carsten,
+
+I havent touched DNS properly, is this aspect easy to look into.
+
+Could public-inbox serve as an alternative approach?
+=&gt; <a href="https://public-inbox.org/README">https://public-inbox.org/README</a>
+
+```
+By storing (and optionally) exposing an inbox via git, it is
+fast and efficient to host and mirror public-inboxes.
+
+Traditional mailing lists use the &quot;push&quot; model.  For readers,
+that requires commitment to subscribe and effort to unsubscribe.
+New readers may also have difficulty following existing
+discussions if archives do not expose Message-ID and References
+headers.  List server admins are also burdened with delivery
+failures.
+
+public-inbox uses the &quot;pull&quot; model.  Casual readers may
+follow the list via NNTP, IMAP, Atom feed or HTML archives.
+
+If a reader loses interest, they simply stop following.
+
+Since we use git, mirrors are easy-to-setup, and lists are
+easy-to-relocate to different mail addresses without losing
+or splitting archives.
+
+_Anybody_ may also setup a delivery-only mailing list server to
+replay a public-inbox git archive to subscribers via SMTP.
+```
+
+====================
+Jonathan McHugh
+indieterminacy@libre.brussels
+
+September 22, 2021 12:33 PM, &quot;Carsten Strotmann&quot; &lt;carsten@strotmann.de&gt; wrote:
+
+&gt;<i> Hi,
+</i>&gt;<i> 
+</i>&gt;<i> On 22 Sep 2021, at 11:36, Alice wrote:
+</i>&gt;<i> 
+</i>&gt;<i>&gt;&gt; There are registrar that disallow txt records? Lot of other services
+</i>&gt;<i>&gt;&gt; (gitlab pages comes to mind for example) requires user to set TXT
+</i>&gt;<i>&gt;&gt; records.
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; Also SPF and dkim require TXT records - and these are needed for &gt; anyone who wants email at their
+</i>&gt;<i>&gt; own domain.
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; My registrar hides TXT records under an &quot;Advanced&quot; tab, but it&#x27;s &gt; available.
+</i>&gt;<i> 
+</i>&gt;<i> when using TXT records (which might not be the best choice for this function), they should be
+</i>&gt;<i> stored at a well-known subdomain.
+</i>&gt;<i> 
+</i>&gt;<i> The DNS currently has the problem that too many applications try to store information in TXT
+</i>&gt;<i> records on the base domain name, that creates all kinds of operational issues for the DNS service
+</i>&gt;<i> and for the applications.
+</i>&gt;<i> 
+</i>&gt;<i> For example take a look at &quot;dig microsoft.com txt&quot; or &quot;dig twitter.com txt&quot;. Storing more TXT
+</i>&gt;<i> records at that place will make the situation worse.
+</i>&gt;<i> 
+</i>&gt;<i> A well-know subdomain for Gemini parameter information could be something like
+</i>&gt;<i> 
+</i>&gt;<i> _gemini_parameter.domain.tld. TXT &quot;online-start=090000&quot; &quot;online-end=220000&quot; &quot;language=en&quot;
+</i>&gt;<i> 
+</i>&gt;<i> Another (maybe technically better) alternative could be the new SVCB &quot;Service binding and parameter
+</i>&gt;<i> specification via the DNS&quot; record: &lt;<a href="https://datatracker.ietf.org/doc/draft-ietf-dnsop-svcb-https">https://datatracker.ietf.org/doc/draft-ietf-dnsop-svcb-https</a>&gt;
+</i>&gt;<i> 
+</i>&gt;<i> Greetings
+</i>&gt;<i> 
+</i>&gt;<i> Carsten
+</i></pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007183.html">Not always online capsules</a></li>
+<li>Next message (by thread): <a href="007196.html">Not always online capsules</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7184">[ date ]</a> <a href="thread.html#7184">[ thread ]</a> <a href="subject.html#7184">[ subject ]</a> <a href="author.html#7184">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

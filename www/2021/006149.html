@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CGI programs and the gemini protocol</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006147.html">
+<link rel="next" href="006150.html">
+</head>
+<body>
+<h1>CGI programs and the gemini protocol</h1>
+<b>Frank Jüdes</b> Frank.Juedes at linux4specialists.com<br>
+<i>Fri Mar 19 21:30:21 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006147.html">[spec] C program to resolve UTF-8 IDNs</a></li>
+<li>Next message (by thread): <a href="006150.html">CGI programs and the gemini protocol</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6149">[ date ]</a> <a href="thread.html#6149">[ thread ]</a> <a href="subject.html#6149">[ subject ]</a> <a href="author.html#6149">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi fellow Geminauts,
+
+i am fairly new to the gemini protocol, but already like the simplicity of everything, compared to the complexity of &quot;modern&quot; websites.
+
+Currently i am using the Jetforce server and several clients (Kristal, Lagrange, Geminaut) and trying to wrap my head around the /input/ status-code:
+
+ * Upon first invocation my cgi-script figures out that the
+   /QUERY_STRING/ is empty and responds with /10 Please enter some data/
+ * The client is prompting for some data and re-requesting the URL with
+   the data attached: [URL]?Some Data
+ * My CGI program detects that there is some data in the URL and
+   responds with /10 Please enter some more data/
+ * Upon which the client asks me to enter some more data and
+   re-requests the URL, but only with the /some more data/ attached to
+   the URL
+   The data that was already attached to the URL will be replaced with
+   the new data.
+
+Is that the intended functionality?
+
+It is only possible to use one parameter?
+
+That definitely would make parsing the URL somewhat easier, but would require some creativity in the CGI if more than one parameter is needed.
+
+Can somebody please explain this to me in a nutshell? Thank you very much in advance for your help.
+
+Best regards from Charleston (WV),
+     Frank/2
+
+-- 
+------------------------------------------------------------------------
+Frank Jüdes
+2814 Four Mile Road
+Charleston, WV 25312, USA
+Cell: +1-713-885-4421
+------------------------------------------------------------------------
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006147.html">[spec] C program to resolve UTF-8 IDNs</a></li>
+<li>Next message (by thread): <a href="006150.html">CGI programs and the gemini protocol</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6149">[ date ]</a> <a href="thread.html#6149">[ thread ]</a> <a href="subject.html#6149">[ subject ]</a> <a href="author.html#6149">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

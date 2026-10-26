@@ -1,96 +1,69 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Some reading on IRIs and IDNs
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3CgfslRoWBSM67U2ardcdvqbMJJ0NGQqB52e_DWijNt-UUlrOVCkKhn5ESIo75gXPrmID5_67r_hpq9LPfcBizFfbGYQPt6xNgug8aE9_YY6I%3D%40protonmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="003926.html">
-   <LINK REL="Next"  HREF="003976.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Some reading on IRIs and IDNs</H1>
-    <B>colecmac at protonmail.com</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Some%20reading%20on%20IRIs%20and%20IDNs&In-Reply-To=%3CgfslRoWBSM67U2ardcdvqbMJJ0NGQqB52e_DWijNt-UUlrOVCkKhn5ESIo75gXPrmID5_67r_hpq9LPfcBizFfbGYQPt6xNgug8aE9_YY6I%3D%40protonmail.com%3E"
-       TITLE="Some reading on IRIs and IDNs">colecmac at protonmail.com
-       </A><BR>
-    <I>Wed Dec 16 21:08:16 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="003926.html">Some reading on IRIs and IDNs
-</A></li>
-        <LI>Next message (by thread): <A HREF="003976.html">Good practices regarding MIME type
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4097">[ date ]</a>
-              <a href="thread.html#4097">[ thread ]</a>
-              <a href="subject.html#4097">[ subject ]</a>
-              <a href="author.html#4097">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Some reading on IRIs and IDNs</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="003926.html">
+<link rel="next" href="003976.html">
+</head>
+<body>
+<h1>Some reading on IRIs and IDNs</h1>
+<b>colecmac at protonmail.com</b> colecmac at protonmail.com<br>
+<i>Wed Dec 16 21:08:16 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="003926.html">Some reading on IRIs and IDNs</a></li>
+<li>Next message (by thread): <a href="003976.html">Good practices regarding MIME type</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4097">[ date ]</a> <a href="thread.html#4097">[ thread ]</a> <a href="subject.html#4097">[ subject ]</a> <a href="author.html#4097">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Hello,
+<pre>Hello,
 
-I didn't see any email mentioning this so I thought I'd share the
+I didn&#x27;t see any email mentioning this so I thought I&#x27;d share the
 link here. Lagrange[1] has gone ahead with IDN support, and the details
 are found in this post[2] by skyjake.
 
 The relevant points are as follows.
 
 &gt;<i> * The full URL is NFC normalized before sending it to a server.
-</I>&gt;<i> * Domain names with non-ASCII characters are encoded to Punycode before
-</I>&gt;<i>   doing a DNS lookup. The Punycode version of the domain name is sent to
-</I>&gt;<i>   the server in the request URL, and also used for verifying the server
-</I>&gt;<i>   certificate.
-</I>
-This is what I plan on doing in Amfora as well. I will defer to Solderpunk's
-judgement, which is coming[3], but until then that's my plan. The only
+</i>&gt;<i> * Domain names with non-ASCII characters are encoded to Punycode before
+</i>&gt;<i>   doing a DNS lookup. The Punycode version of the domain name is sent to
+</i>&gt;<i>   the server in the request URL, and also used for verifying the server
+</i>&gt;<i>   certificate.
+</i>
+This is what I plan on doing in Amfora as well. I will defer to Solderpunk&#x27;s
+judgement, which is coming[3], but until then that&#x27;s my plan. The only
 difference is that I was planning on allowing both punycoded domains and IDNs
-in certs, to simplify things for sysadmins. But if Lagrange isn't allowing
-it, then maybe I shouldn't... this is quickly approaching &quot;de facto standard&quot;
+in certs, to simplify things for sysadmins. But if Lagrange isn&#x27;t allowing
+it, then maybe I shouldn&#x27;t... this is quickly approaching &quot;de facto standard&quot;
 territory.
 
 For now I will err on the permissive side in that case, allowing both, but this
-is something I'd like hear from Solderpunk on.
+is something I&#x27;d like hear from Solderpunk on.
 
 gemget will do the same, as it uses the go-gemini[4] library as well.
 
 
-1: <A HREF="https://gmi.skyjake.fi/lagrange/">https://gmi.skyjake.fi/lagrange/</A>
-2: <A HREF="gemini://skyjake.fi/gemlog/2020-12_idns-in-lagrange.gmi">gemini://skyjake.fi/gemlog/2020-12_idns-in-lagrange.gmi</A>
-3: <A HREF="gemini://gemini.circumlunar.space/~solderpunk/pikkulog/2020-12.gmi">gemini://gemini.circumlunar.space/~solderpunk/pikkulog/2020-12.gmi</A>
-4: <A HREF="https://github.com/makeworld-the-better-one/go-gemini/issues/10">https://github.com/makeworld-the-better-one/go-gemini/issues/10</A>
+1: <a href="https://gmi.skyjake.fi/lagrange/">https://gmi.skyjake.fi/lagrange/</a>
+2: <a href="gemini://skyjake.fi/gemlog/2020-12_idns-in-lagrange.gmi">gemini://skyjake.fi/gemlog/2020-12_idns-in-lagrange.gmi</a>
+3: <a href="gemini://gemini.circumlunar.space/~solderpunk/pikkulog/2020-12.gmi">gemini://gemini.circumlunar.space/~solderpunk/pikkulog/2020-12.gmi</a>
+4: <a href="https://github.com/makeworld-the-better-one/go-gemini/issues/10">https://github.com/makeworld-the-better-one/go-gemini/issues/10</a>
 
 
 Cheers,
 makeworld
-</PRE>
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="003926.html">Some reading on IRIs and IDNs
-</A></li>
-	<LI>Next message (by thread): <A HREF="003976.html">Good practices regarding MIME type
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4097">[ date ]</a>
-              <a href="thread.html#4097">[ thread ]</a>
-              <a href="subject.html#4097">[ subject ]</a>
-              <a href="author.html#4097">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="003926.html">Some reading on IRIs and IDNs</a></li>
+<li>Next message (by thread): <a href="003976.html">Good practices regarding MIME type</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4097">[ date ]</a> <a href="thread.html#4097">[ thread ]</a> <a href="subject.html#4097">[ subject ]</a> <a href="author.html#4097">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

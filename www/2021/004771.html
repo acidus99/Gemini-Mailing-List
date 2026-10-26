@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] Gemini Acentred Messaging System</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004768.html">
+<link rel="next" href="004774.html">
+</head>
+<body>
+<h1>[tech] Gemini Acentred Messaging System</h1>
+<b>Côme Chilliet</b> come at chilliet.eu<br>
+<i>Thu Jan  7 20:08:12 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004768.html">[tech] Gemini Acentred Messaging System</a></li>
+<li>Next message (by thread): <a href="004774.html">[tech] Gemini Acentred Messaging System</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4771">[ date ]</a> <a href="thread.html#4771">[ thread ]</a> <a href="subject.html#4771">[ subject ]</a> <a href="author.html#4771">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Le jeudi 7 janvier 2021, 17:25:36 CET Johann Galle a ?crit :
+&gt;<i> from &lt;<a href="gemini://gemlog.lanterne.chilliet.eu/GAMS.en.gmi">gemini://gemlog.lanterne.chilliet.eu/GAMS.en.gmi</a>&gt; (revision 1):
+</i>&gt;<i>  &gt; When someone wants to register..., it sends...
+</i>&gt;<i> 
+</i>&gt;<i> I think that should be &quot;they send&quot;?
+</i>
+Yep, fixed.
+
+&gt;<i>  &gt; ... gemlog ...
+</i>&gt;<i> 
+</i>&gt;<i> I assume you are referring to a capsule in the format of the companion
+</i>&gt;<i> specification &quot;subscribing to gemini pages&quot; with this. Maybe I am being overly
+</i>&gt;<i> pedantic, but it might be nice to point it out explicitly.
+</i>
+I am referring to this specification when using the word ?gemfeed? in the section ?The board?. I could link to it, but thinking about it we may also live out of the specification which feed format are supported, if a board author wants to support atom or rss it would work too, they just have to indicate it to potential members.
+
+&gt;<i>  &gt; * convention for thread page naming?
+</i>&gt;<i> 
+</i>&gt;<i> You have taken a quite liberal approach with the rest of the specification, so
+</i>&gt;<i> I don&#x27;t think you&#x27;d need to add this to it.
+</i>
+Well the idea was to be able to link to the board thread before it is created, from the post creating the thread. For this it helps if the thread URI is predictable. But yeah, it may be specific to a board. In my tests so far I use a truncated sha1 of the URI of the first message.
+
+&gt;<i>  &gt; The date must not be in the past or future.
+</i>&gt;<i> 
+</i>&gt;<i> Seeing that the crawler will probably not pick up the post in real time, this is
+</i>&gt;<i> a bit strict. Maybe relax it to something like &quot;not before the last post&quot;,
+</i>&gt;<i> because I think that&#x27;s what would most likely be used in practice: Filter out
+</i>&gt;<i> any posts that are older than when the board last checked that gemlog.
+</i>
+This is bad wording. What I meant was that if you post a post on january 6th but date the post january 5th, the specification does not garantee that the board will see it.
+Of course when the board crawls a feed, it fetch all messages dated from last visit (but last visit may be in the same day, in which case all messages dated today are fetched).
+Feel free to suggest modifications to the text to make this clearer.
+
+&gt;<i>  &gt; ..., containing the tag enclosed in square brackets in the title.
+</i>&gt;<i> 
+</i>&gt;<i> I personally would think of the tag as including the brackets, but that is
+</i>&gt;<i> bikeshedding.
+</i>&gt;<i> 
+</i>&gt;<i> More importantly: It might be simpler if the tag was just a URL/domain of the
+</i>&gt;<i> board or something like that. On the other hand that would eliminate something
+</i>&gt;<i> like posting to mulitple boards with the same tag. But that practice would IMHO
+</i>&gt;<i> only create problems e.g. when replying to someone on one board and it also
+</i>&gt;<i> shows up on another, but the OP is not there. And using the URL/domain would be
+</i>&gt;<i> a nice way to make sure the tags are unique.
+</i>
+The tag needs to be in the message link from gemlog index, other links are not fetched, so board URL is too long to be used here.
+
+&gt;<i>  &gt; When creating a new thread, link to the board homepage instead.
+</i>&gt;<i>  &gt; [...]
+</i>&gt;<i>  &gt; * Handling of errors, like first link to unknown page
+</i>&gt;<i> 
+</i>&gt;<i> I think it would be the easier solution to create a new thread if the first
+</i>&gt;<i> link is to an unknown page, or if there is no link at all. If you think about
+</i>&gt;<i> how threading works with e-mail, it also works that way. And yes sometimes it
+</i>&gt;<i> breaks if the headers are not set right, but it will not be possible to build a
+</i>&gt;<i> perfect system with this eiter.
+</i>
+Hum yeah that may be the best in practice. But I liked the idea of pointing to the board when posting a thread, so that people which do not know about the board can find it. But it may be just good practice and not specification per se.
+
+Thank you for your input.
+
+C?me
+
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004768.html">[tech] Gemini Acentred Messaging System</a></li>
+<li>Next message (by thread): <a href="004774.html">[tech] Gemini Acentred Messaging System</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4771">[ date ]</a> <a href="thread.html#4771">[ thread ]</a> <a href="subject.html#4771">[ subject ]</a> <a href="author.html#4771">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

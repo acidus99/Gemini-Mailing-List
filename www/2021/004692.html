@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] Ambiguity with regards to quote lines</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004695.html">
+<link rel="next" href="004700.html">
+</head>
+<body>
+<h1>[spec] Ambiguity with regards to quote lines</h1>
+<b>Omar Polo</b> op at omarpolo.com<br>
+<i>Sun Jan  3 19:02:06 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004695.html">[spec] Ambiguity with regards to quote lines</a></li>
+<li>Next message (by thread): <a href="004700.html">[tech] Proposed reversed Gemini for uploads to servers - Feedback wanted</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4692">[ date ]</a> <a href="thread.html#4692">[ thread ]</a> <a href="subject.html#4692">[ subject ]</a> <a href="author.html#4692">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+alex wennerberg &lt;alex at alexwennerberg.com&gt; writes:
+
+&gt;<i> Hi all --
+</i>&gt;<i>
+</i>&gt;<i> I noticed there may be a bit of ambiguity in the spec:
+</i>&gt;<i>
+</i>&gt;<i>&gt; Lines beginning with &quot;&gt;&quot; are quote lines.  This line type exists so
+</i>&gt;<i>&gt; that advanced clients may use distinct styling to convey to readers the
+</i>&gt;<i>&gt; important semantic information that certain text is being quoted from
+</i>&gt;<i>&gt; an external source.  For example, when wrapping long lines to the the
+</i>&gt;<i>&gt; viewport, each resultant line may have a &quot;&gt;&quot; symbol placed at the front.
+</i>&gt;<i>
+</i>&gt;<i> What isn&#x27;t clear is whether subsequent quote lines ought to be
+</i>&gt;<i> considered as part of the same quote block, ie, say my client surrounds
+</i>&gt;<i> quotations with &quot; marks. Should these marks surround each line, or
+</i>&gt;<i> surround an entire block of subsequent quote lines?
+</i>&gt;<i>
+</i>&gt;<i> The clients that I tested did the latter, and this seems intuitively
+</i>&gt;<i> correct, but the spec doesn&#x27;t make this explicit.
+</i>
+The spec says that the only state that a parser need to keep is the one
+for the preformatted block, so I guess the intention is to treat
+subsequent quotes as distinct quotes, the same way subsequent paragraphs
+are considered distinct.
+
+&gt;<i> Let me know what you all think.
+</i>&gt;<i>
+</i>&gt;<i> All the best,
+</i>&gt;<i>
+</i>&gt;<i> Alex
+</i>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004695.html">[spec] Ambiguity with regards to quote lines</a></li>
+<li>Next message (by thread): <a href="004700.html">[tech] Proposed reversed Gemini for uploads to servers - Feedback wanted</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4692">[ date ]</a> <a href="thread.html#4692">[ thread ]</a> <a href="subject.html#4692">[ subject ]</a> <a href="author.html#4692">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

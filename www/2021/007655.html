@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Off Topic] WiFi HaLow, Mesh, and Low Powered Devices</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007654.html">
+<link rel="next" href="007656.html">
+</head>
+<body>
+<h1>[Off Topic] WiFi HaLow, Mesh, and Low Powered Devices</h1>
+<b>John Goerzen</b> jgoerzen at complete.org<br>
+<i>Thu Dec  2 20:24:21 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007654.html">[Off Topic] WiFi HaLow, Mesh, and Low Powered Devices</a></li>
+<li>Next message (by thread): <a href="007656.html">[Off Topic] WiFi HaLow, Mesh, and Low Powered Devices</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7655">[ date ]</a> <a href="thread.html#7655">[ thread ]</a> <a href="subject.html#7655">[ subject ]</a> <a href="author.html#7655">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Thu, Dec 02 2021, Andrew Singleton wrote:
+
+&gt;<i> Look. I live Simi-Rural. Meaning not so far out that you have hundreds
+</i>&gt;<i> of acres for cattle, or farms or whatever. Just an eight acre piece of
+</i>&gt;<i> land that&#x27;s more of a family hobby project than anything. And yet that
+</i>&gt;<i> is still a fairly sizeable chunk of land so far as traditional wifi is
+</i>&gt;<i> concerned.
+</i>
+Hi Andrew,
+
+I&#x27;ve been interested in these protocols for a long time.  I&#x27;ve written
+some stuff that runs atop LoRA and XBee SX, for instance, including PPP
+or tun/tap IP/ethernet stacks.
+
+HaLow looks like an interesting middle ground; not as long of a range
+(1km vs 10km) but more easily integrated.
+
+I hear you on the LoRA bandwidth.  XBee SX is better, and I&#x27;ve seen
+effective rates of 50Kbps out of the thing.  My xbnet program at
+<a href="https://github.com/jgoerzen/xbnet">https://github.com/jgoerzen/xbnet</a> covers running TCP/IP using tun/tap as
+well as PPP over it at
+<a href="https://github.com/jgoerzen/xbnet/blob/master/doc/xbnet.1.md">https://github.com/jgoerzen/xbnet/blob/master/doc/xbnet.1.md</a> and I also
+cover running UUCP over the thing.  The XBee SX also has a
+point-to-point &quot;modem emulation&quot; mode in which it looks behaves like a
+regular modem to the OS (no translation code necessary).  That removes
+some of the possibilities of direct node-to-node communication, of
+course, but could, eg, host a number of PPP connections for
+connectivity.
+
+The XBee devices are also interesting for a couple of other reasons.
+One, is they support a self-assembling mesh in firmware, so you get mesh
+routing without having to do anything on the software side.  Very handy,
+though of course it reduces available bandwidth.  Secondly, they support
+TX power up to 1W which is what allows them to achieve near-LoRA
+distance while having a much faster bitrate.  However, they are more
+expensive than LoRA devices, and obviously in the case of the 1W ones,
+more power-hungry.
+
+Since we&#x27;re talking about old protocols, there is, of course, UUCP.
+There is a more modern replacement called NNCP that has quite a few nice
+properties.  It is still asynchronous, but it is fully encrypted and
+authenticated, supports tor-style onion routing and async multicast, and
+so forth.  I have made some blog posts about it and also offer Usenet
+feeds over NNCP.  UUCP or NNCP would be perfect fits for something like
+this.
+
+Another interesting program is Syncthing.  Think of it like a serverless
+Dropbox.  It is fully distributed, and every peer in a network can
+propagate changes.
+
+Both Syncthing and NNCP support a &quot;traveler&quot; device -- say a phone that
+goes to civilization periodically and syncs up things that propagate
+to/from a remote location.
+
+And, there is NNTP, the protocol behind Usenet.  Usenet can be
+exchanged via NNTP, but also via asynchronous means (NNCP, UUCP, etc).
+It can be done in a very low-bandwidth way and could propagate posts,
+(small) files, etc.
+
+Finally, don&#x27;t forget email.  It can be routed in all sorts of ways, too.
+
+I have been writing and coding around some of this stuff.  See:
+
+<a href="https://changelog.complete.org/archives/tag/nncp">https://changelog.complete.org/archives/tag/nncp</a>
+<a href="https://github.com/jgoerzen/nncp-tools">https://github.com/jgoerzen/nncp-tools</a>
+<a href="https://github.com/jgoerzen/gitsync-nncp/blob/main/gitsync-nncp.org">https://github.com/jgoerzen/gitsync-nncp/blob/main/gitsync-nncp.org</a>
+
+I also have a 5-minute lightning talk video I should get uploaded one of
+these days...
+
+- John
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007654.html">[Off Topic] WiFi HaLow, Mesh, and Low Powered Devices</a></li>
+<li>Next message (by thread): <a href="007656.html">[Off Topic] WiFi HaLow, Mesh, and Low Powered Devices</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7655">[ date ]</a> <a href="thread.html#7655">[ thread ]</a> <a href="subject.html#7655">[ subject ]</a> <a href="author.html#7655">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

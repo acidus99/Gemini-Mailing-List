@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>URLs in request lines</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000177.html">
+<link rel="next" href="000149.html">
+</head>
+<body>
+<h1>URLs in request lines</h1>
+<b>plugd</b> plugd at thelambdalab.xyz<br>
+<i>Fri Sep 13 21:02:28 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000177.html">IPv6 and gemini</a></li>
+<li>Next message (by thread): <a href="000149.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#148">[ date ]</a> <a href="thread.html#148">[ thread ]</a> <a href="subject.html#148">[ subject ]</a> <a href="author.html#148">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi all,
+
+This question occurred to me when debugging some 5x error responses from
+servers: how strictly are servers expected to be when responding to
+requests?  In particular, if a client is given a URL such as
+
+<a href="gemini://example.com">gemini://example.com</a>
+
+(i.e. with an empty file name) is it expected to translate it into
+
+<a href="gemini://example.com/">gemini://example.com/</a>  ?
+
+The gopher-side of elpher tends to be on the strict side when
+representing URLs, due to RFC 1436 strongly emphasizing that gopher
+selectors should be regarded as meaningless &quot;opaque&quot; strings which
+aren&#x27;t to be messed with. (Kind of like actor addresses in the actor
+model of computation.) So there is _no_ guarantee that a server will
+return something sensible for the selector taken from the URL
+<a href="gopher://example.com/1/">gopher://example.com/1/</a> if all you&#x27;ve been given is
+<a href="gopher://example.com/1">gopher://example.com/1</a>.
+
+Should I keep this behaviour for gemini too?  TBH I&#x27;d prefer to at least
+to able to interpret <a href="gemini://exmaple.com">gemini://exmaple.com</a> as <a href="gemini://example.com/">gemini://example.com/</a> when
+no filename is present, and leave everything else alone.  Which would
+mean the &quot;/&quot; selector would become the equivalent of &quot;&quot; in gopher.
+
+plugd
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000177.html">IPv6 and gemini</a></li>
+<li>Next message (by thread): <a href="000149.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#148">[ date ]</a> <a href="thread.html#148">[ thread ]</a> <a href="subject.html#148">[ subject ]</a> <a href="author.html#148">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

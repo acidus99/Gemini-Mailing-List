@@ -1,119 +1,69 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [SPEC-CHANGE] Mandatory scheme in request and link URLs
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Mandatory%20scheme%20in%20request%20and%20link%20URLs&In-Reply-To=%3CZo29_VYSA_0K30f9IIrrBdSpXOXtRht1NaAN0shA_ExvI5gikJUgqO1-GGSi_hCKaQzouqFJ46wcgdQ_PALV845DQwGCAj70DMWx237XnkY%3D%40protonmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="003658.html">
-   <LINK REL="Next"  HREF="003660.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[SPEC-CHANGE] Mandatory scheme in request and link URLs</H1>
-    <B>colecmac at protonmail.com</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC-CHANGE%5D%20Mandatory%20scheme%20in%20request%20and%20link%20URLs&In-Reply-To=%3CZo29_VYSA_0K30f9IIrrBdSpXOXtRht1NaAN0shA_ExvI5gikJUgqO1-GGSi_hCKaQzouqFJ46wcgdQ_PALV845DQwGCAj70DMWx237XnkY%3D%40protonmail.com%3E"
-       TITLE="[SPEC-CHANGE] Mandatory scheme in request and link URLs">colecmac at protonmail.com
-       </A><BR>
-    <I>Sun Nov 29 22:22:44 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="003658.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
-</A></li>
-        <LI>Next message (by thread): <A HREF="003660.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3659">[ date ]</a>
-              <a href="thread.html#3659">[ thread ]</a>
-              <a href="subject.html#3659">[ subject ]</a>
-              <a href="author.html#3659">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SPEC-CHANGE] Mandatory scheme in request and link URLs</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="003658.html">
+<link rel="next" href="003660.html">
+</head>
+<body>
+<h1>[SPEC-CHANGE] Mandatory scheme in request and link URLs</h1>
+<b>colecmac at protonmail.com</b> colecmac at protonmail.com<br>
+<i>Sun Nov 29 22:22:44 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="003658.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs</a></li>
+<li>Next message (by thread): <a href="003660.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3659">[ date ]</a> <a href="thread.html#3659">[ thread ]</a> <a href="subject.html#3659">[ subject ]</a> <a href="author.html#3659">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>&gt;<i> I think there is some confusion in this thread. Here is my
-</I>&gt;<i> interpretation, maybe it can help clarify the conversation.
-</I>&gt;<i>
-</I>&gt;<i> There are two &quot;types&quot; of link we are talking about.
-</I>&gt;<i> 1.  The link lines in gemtext files (the line types beginning =&gt;)
-</I>&gt;<i> [snip]
-</I>&gt;<i> 2. The URL submitted to the server with the client request.
-</I>
-I was only talking about the first kind in my email. I'm fine with
+<pre>&gt;<i> I think there is some confusion in this thread. Here is my
+</i>&gt;<i> interpretation, maybe it can help clarify the conversation.
+</i>&gt;<i>
+</i>&gt;<i> There are two &quot;types&quot; of link we are talking about.
+</i>&gt;<i> 1.  The link lines in gemtext files (the line types beginning =&gt;)
+</i>&gt;<i> [snip]
+</i>&gt;<i> 2. The URL submitted to the server with the client request.
+</i>
+I was only talking about the first kind in my email. I&#x27;m fine with
 the change to the request URL.
 
 &gt;<i> I think to clarify, if there is no scheme
-</I>&gt;<i> on the URL sent to the server, it is the server that should respond
-</I>&gt;<i> with an error (after all it is not a valid full URL that is submitted).
-</I>&gt;<i>
-</I>&gt;<i> If there is no scheme on the expressed link in the gemtext (type 1
-</I>&gt;<i> above), the client should interpret it as a relative path, unless it
-</I>&gt;<i> starts &quot;//&quot;
-</I>
+</i>&gt;<i> on the URL sent to the server, it is the server that should respond
+</i>&gt;<i> with an error (after all it is not a valid full URL that is submitted).
+</i>&gt;<i>
+</i>&gt;<i> If there is no scheme on the expressed link in the gemtext (type 1
+</i>&gt;<i> above), the client should interpret it as a relative path, unless it
+</i>&gt;<i> starts &quot;//&quot;
+</i>
 Yes, I agree with all of this. I take issue with two parts:
 
 &gt;<i> Clients MAY treat schemeless links in text/gemini documents as errors
-</I>
+</i>
 and
 
 &gt;<i> Authors of Gemini content or software which generates Gemini content
-</I>&gt;<i> MUST add explicit schemes to any schemeless links.
-</I>
+</i>&gt;<i> MUST add explicit schemes to any schemeless links.
+</i>
 I think both of these changes are not great, as I explained in my original
-email. It effectively disallows schemeless links in gemtext, which I'm
+email. It effectively disallows schemeless links in gemtext, which I&#x27;m
 not in favour of.
 
 
 makeworld
 
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="003658.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
-</A></li>
-	<LI>Next message (by thread): <A HREF="003660.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3659">[ date ]</a>
-              <a href="thread.html#3659">[ thread ]</a>
-              <a href="subject.html#3659">[ subject ]</a>
-              <a href="author.html#3659">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="003658.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs</a></li>
+<li>Next message (by thread): <a href="003660.html">[SPEC-CHANGE] Mandatory scheme in request and link URLs</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3659">[ date ]</a> <a href="thread.html#3659">[ thread ]</a> <a href="subject.html#3659">[ subject ]</a> <a href="author.html#3659">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

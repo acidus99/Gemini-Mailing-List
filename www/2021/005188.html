@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Storing capsule pages?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005187.html">
+<link rel="next" href="005189.html">
+</head>
+<body>
+<h1>Storing capsule pages?</h1>
+<b>Matthew Ernisse</b> matt at going-flying.com<br>
+<i>Fri Feb 12 23:11:44 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005187.html">Storing capsule pages?</a></li>
+<li>Next message (by thread): <a href="005189.html">Storing capsule pages?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5188">[ date ]</a> <a href="thread.html#5188">[ thread ]</a> <a href="subject.html#5188">[ subject ]</a> <a href="author.html#5188">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Fri, Feb 12, 2021 at 11:46:28PM +0100, David Emerson said unto me:
+&gt;<i> 
+</i>&gt;<i> I&#x27;m interested to hear how you all are updating your capsules. I&#x27;m 
+</i>&gt;<i> just building out my infrastructure, and I&#x27;ve decided to use Docker 
+</i>&gt;<i> for my gemini server (agate) and for my proxy (kineto).
+</i>
+
+I&#x27;ve written a little bit about how my capsule is put together but
+the basic overview is this.  Molly Brown runs in a container that has
+read-only bind mounts to the document root and the bare git repository.
+The former is updated by a git post-receive hook running on the server
+that hosts the filesystem, the latter is the actual repository so that
+one can browse it via the git.gmi cgi.
+
+<a href="gemini://going-flying.com/how-built.gmi">gemini://going-flying.com/how-built.gmi</a>
+
+&gt;<i> Those who have regularly updated pages, though: how do you update 
+</i>&gt;<i> them? I&#x27;ve been thinking I&#x27;ll just use GitHub to store the capsule 
+</i>&gt;<i> root, and reference that from the gemini server, but is there a 
+</i>&gt;<i> smarter way?
+</i>
+Off the top of my head, you could have your container&#x27;s entry point do
+a git clone of your github repository into your in-container document
+root and just restart the container every time you want an update.
+
+--Matt
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005187.html">Storing capsule pages?</a></li>
+<li>Next message (by thread): <a href="005189.html">Storing capsule pages?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5188">[ date ]</a> <a href="thread.html#5188">[ thread ]</a> <a href="subject.html#5188">[ subject ]</a> <a href="author.html#5188">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

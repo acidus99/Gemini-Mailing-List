@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>File size issues</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000059.html">
+<link rel="next" href="000016.html">
+</head>
+<body>
+<h1>File size issues</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Thu Aug 15 16:41:10 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000059.html">Password authentication over Gemini</a></li>
+<li>Next message (by thread): <a href="000016.html">File size issues</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#12">[ date ]</a> <a href="thread.html#12">[ thread ]</a> <a href="subject.html#12">[ subject ]</a> <a href="author.html#12">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Two quick points with regard to the fact that Gemini currently does not
+convey file sizes to users at any point:
+
+* Sean has pointed out in one of his RFCs that this means there is no
+  way for a client to know whether or not a download completed
+  successfully or was interrupted due to an accidentally dropped or
+  even a maliciously severred connection
+
+* I&#x27;ve received an email from somebody watching the Gemini design unfold
+  with interest, who is concerned about Gemini clients with limited
+  system resources unwittingly downloading large files (such as PDFs of
+  scanned documents) which they aren&#x27;t even capable of opening.  While I
+  quite like the idea of Gemini being friendly to low-end systems, I do
+  wonder whether or not the TLS requirement makes this a little moot.
+
+Anyway, the question is do we want to change anything to address these
+issues and if so how do we want to do it?
+
+I&#x27;ll quickly note in pasing that both of these problems also exist in
+exactly the same form for Gopher, but I&#x27;ve never once heard Gopher users
+complain about them.  Which isn&#x27;t to say we should cheerfully ignore
+them, but it does establish that they cannot reasonably be considered as
+fatal flaws.
+
+One possibility, as proposed by Sean, is to add file size to the
+response header, with it optionally appearing after the MIME type.  I&#x27;m
+not hugely fond of this myself, simply because it complicates parsing of
+the response header.  Remember that the MIME type can have multiple
+components specifying encodings etc.  If you just split the META part of
+the header on whitespace, the number of components is variable, so
+recognising whether or not an optional filesize is present requires
+actually inspecting the parts and looking for a number.  In fairness to
+Sean, at the time of writing of his RFC the spec spec said META was
+separated from STATUS by a tab (whereas now it is just whitespace), so
+tacking something after META with another tab was unambiguous, assuming
+nobody put tabs in their MIME types...
+
+Another possibility ties into another request I got from somebody very
+early on - it would be nice if there was some way to query a Gemini
+server for the time a resource was last modified, so that Gemini
+equivaents of tools like moku pona could avoid needlessly fetching
+unchanged resources over and over again.  At that point I started
+wondering about giving Gemini some equivalent of HTTP HEAD, although I
+abandoned it pretty quickly when I realised that substantial TLS
+overhead probably made making a whole second request to check if a
+resource had changed not such a worthwhile idea.  But, we could possibly
+bring this idea back, as the response to such a request could naturally
+include the file size as well.  The real question is how to *make* such
+a request, ideally in a way which doesn&#x27;t open the door to a half dozen
+other new &quot;methods&quot;.
+
+At this point I&#x27;m not necessarily convinced that either of these
+problems warrant changes to the protocol.  It&#x27;s not that I can&#x27;t see how
+it would be nice to work around them, but at some point one has to
+accept that protocols which are simple and minimalist by design are
+inevitably going to have some rough spots as a result of that design.
+But if anybody has particularly elegant solutions, I&#x27;m all ears.
+
+Regarding ways to enable something like a HEAD request without changing
+the request format to include a method field - I&#x27;m not quite sure
+whether using a fixed URL fragment, like #meta, on requests would be a
+kosher way to do this.  Does metadata count as &quot;some portion or subset
+of the primary resource, some view on representations of the primary
+resource, or some other resource defined or described by those
+representations&quot; (from RFC3986)?
+
+-Solderpunk
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000059.html">Password authentication over Gemini</a></li>
+<li>Next message (by thread): <a href="000016.html">File size issues</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#12">[ date ]</a> <a href="thread.html#12">[ thread ]</a> <a href="subject.html#12">[ subject ]</a> <a href="author.html#12">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

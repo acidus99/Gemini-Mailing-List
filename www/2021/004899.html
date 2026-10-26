@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[ANN] Public HTTP Proxy at gem.ondollo.com</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004919.html">
+<link rel="next" href="004915.html">
+</head>
+<body>
+<h1>[ANN] Public HTTP Proxy at gem.ondollo.com</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Mon Jan 25 02:23:10 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004919.html">[ANN] Public HTTP Proxy at gem.ondollo.com</a></li>
+<li>Next message (by thread): <a href="004915.html">[ANN] Public HTTP Proxy at gem.ondollo.com</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4899">[ date ]</a> <a href="thread.html#4899">[ thread ]</a> <a href="subject.html#4899">[ subject ]</a> <a href="author.html#4899">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Mansfield once stated:
+&gt;<i> All,
+</i>&gt;<i> 
+</i>&gt;<i> Hopefully the first of several announcements this week:
+</i>&gt;<i> 
+</i>&gt;<i> We would like to share a public HTTP proxy for Gemini Space.
+</i>&gt;<i> 
+</i>&gt;<i> Please find it at <a href="https://gem.ondollo.com/">https://gem.ondollo.com/</a>
+</i>&gt;<i> 
+</i>&gt;<i> We&#x27;ve worked hard to make the HTML/CSS clean and small.
+</i>&gt;<i> 
+</i>&gt;<i> Enjoy!
+</i>
+  Okay, I ran it through the Client Torture Test.  You had possible problems
+with tests 34 through 38 where the first digit was defined, but not the
+second digit (you treated them all as errors).  In my mind, to future proof
+the client, just treat any unknown second digit as &#x27;0&#x27; (so 29 is 20, 39 is
+30, etc).  But hey, another unpainted bikeshed here!
+
+  Also, your client doesn&#x27;t handle the following link properly:
+
+	<a href="gemini://gemini.conman.org/test/UCSD-Pascal-source.zip/">gemini://gemini.conman.org/test/UCSD-Pascal-source.zip/</a>
+
+It strips off the final &#x27;/&#x27;, which does The Wrong Thing in this case (yes,
+the final &#x27;/&#x27; is significant).  Speaking of which, you don&#x27;t handle MIME
+types properly---the page through your proxy tried printing the resulting
+ZIP file as text.  I have a few other pages that return non &quot;text/*&quot; MIME
+files.
+
+  It also sends a client certificate.  Unexpected, but something I think
+people should be aware of.
+
+  -spc
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004919.html">[ANN] Public HTTP Proxy at gem.ondollo.com</a></li>
+<li>Next message (by thread): <a href="004915.html">[ANN] Public HTTP Proxy at gem.ondollo.com</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4899">[ date ]</a> <a href="thread.html#4899">[ thread ]</a> <a href="subject.html#4899">[ subject ]</a> <a href="author.html#4899">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

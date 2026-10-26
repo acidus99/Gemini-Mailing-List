@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Storing capsule pages?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005193.html">
+<link rel="next" href="005195.html">
+</head>
+<body>
+<h1>Storing capsule pages?</h1>
+<b>Omar Polo</b> op at omarpolo.com<br>
+<i>Sat Feb 13 07:52:32 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005193.html">Storing capsule pages?</a></li>
+<li>Next message (by thread): <a href="005195.html">Storing capsule pages?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5194">[ date ]</a> <a href="thread.html#5194">[ thread ]</a> <a href="subject.html#5194">[ subject ]</a> <a href="author.html#5194">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+David Emerson &lt;d at nnix.com&gt; writes:
+
+&gt;<i> I&#x27;m interested to hear how you all are updating your capsules. I&#x27;m just building out my infrastructure, and I&#x27;ve decided to use Docker for my gemini server (agate) and for my proxy (kineto).
+</i>&gt;<i>
+</i>&gt;<i> For now, my index.gmi is in the gemini server&#x27;s docker container. This isn&#x27;t ideal, of course, since I have to rebuild the container every time I want to update the site, but it&#x27;s fine for the moment.
+</i>&gt;<i>
+</i>&gt;<i> Those who have regularly updated pages, though: how do you update them? I&#x27;ve been thinking I&#x27;ll just use GitHub to store the capsule root, and reference that from the gemini server, but is there a smarter way?
+</i>
+I have two capsules, one is generated using a custom clojure script
+(that generates also the web pages for the WWW version of the site),
+while the other is plain text/gemini file.  For both, I use rsync.
+
+In particular, I&#x27;m running my server (gmid) inside a FreeBSD jail and I
+mount the directory that contains the capsules using mount_nullfs (sort
+of mount --bind) in read-only mode, so the server can read the file but
+not edit them.
+
+In your case, I think you can do something very similar with a shared
+volume mounted inside the container to avoid rebuilding the image at
+every update.  Then you can store your file in a git repo (and using a
+post-receive hook to update the site) or rync or ...
+
+Cheers,
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005193.html">Storing capsule pages?</a></li>
+<li>Next message (by thread): <a href="005195.html">Storing capsule pages?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5194">[ date ]</a> <a href="thread.html#5194">[ thread ]</a> <a href="subject.html#5194">[ subject ]</a> <a href="author.html#5194">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

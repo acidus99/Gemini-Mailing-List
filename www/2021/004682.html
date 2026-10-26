@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] Limit valid encodings of text/gemini to UTF-8</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004681.html">
+<link rel="next" href="004684.html">
+</head>
+<body>
+<h1>[spec] Limit valid encodings of text/gemini to UTF-8</h1>
+<b>Côme Chilliet</b> come at chilliet.eu<br>
+<i>Sun Jan  3 16:11:31 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004681.html">[spec] Limit valid encodings of text/gemini to UTF-8</a></li>
+<li>Next message (by thread): <a href="004684.html">[spec] Limit valid encodings of text/gemini to UTF-8</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4682">[ date ]</a> <a href="thread.html#4682">[ thread ]</a> <a href="subject.html#4682">[ subject ]</a> <a href="author.html#4682">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Le dimanche 3 janvier 2021, 17:02:54 CET Petite Abeille a ?crit :
+&gt;<i> &gt; On Jan 3, 2021, at 14:46, Stephane Bortzmeyer &lt;stephane at sources.org&gt; wrote:
+</i>&gt;<i> &gt; UTF-8 has a quasi-monopoly.
+</i>&gt;<i> 
+</i>&gt;<i> Not quite.
+</i>&gt;<i> 
+</i>&gt;<i> For text/gemini, your stats read:
+</i>&gt;<i> 
+</i>&gt;<i> ? Unspecified: 42,322
+</i>&gt;<i> ? utf-8: 6,513
+</i>&gt;<i> ? us-ascii: 3
+</i>&gt;<i> 
+</i>&gt;<i> Unspecified rules. By far. Most likely plain ASCII in practice.
+</i>
+No, the specification specifies that default is utf-8, so unspecified is utf-8.
+I do not set the charset in my server headers as it is redundant because I always send utf-8.
+
+&gt;<i> Ditto for guessing the actual language:
+</i>&gt;<i> 
+</i>&gt;<i> # echo $(openssl s_client -quiet -crlf -connect mozz.us:1965 &lt;&lt;&lt; <a href="gemini://mozz.us/">gemini://mozz.us/</a> 2&gt;/dev/null ) | polyglot detect | cut -d&#x27; &#x27; -f1 | uniq
+</i>&gt;<i> English
+</i>&gt;<i> 
+</i>&gt;<i> <a href="https://polyglot.readthedocs.io/en/latest/Detection.html">https://polyglot.readthedocs.io/en/latest/Detection.html</a>
+</i>
+Language is not the same, because the specification explicitely says that there is no default, so my server always send the lang= header tag for text/gemini content.
+
+C?me
+
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004681.html">[spec] Limit valid encodings of text/gemini to UTF-8</a></li>
+<li>Next message (by thread): <a href="004684.html">[spec] Limit valid encodings of text/gemini to UTF-8</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4682">[ date ]</a> <a href="thread.html#4682">[ thread ]</a> <a href="subject.html#4682">[ subject ]</a> <a href="author.html#4682">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

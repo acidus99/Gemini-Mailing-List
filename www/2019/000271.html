@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Color and escape codes in text/gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000272.html">
+<link rel="next" href="000273.html">
+</head>
+<body>
+<h1>Color and escape codes in text/gemini</h1>
+<b>Baschdel</b> baschdel at disroot.org<br>
+<i>Wed Dec 11 20:52:35 GMT 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000272.html">New server</a></li>
+<li>Next message (by thread): <a href="000273.html">Color and escape codes in text/gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#271">[ date ]</a> <a href="thread.html#271">[ thread ]</a> <a href="subject.html#271">[ subject ]</a> <a href="author.html#271">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>In my last post on this list I called escape codes spaghetti without much of an explaination.
+
+Tl;dr:
+-Do we want color in text/gemini?
+-If yes how should it be standardized?
+
+I really like that there are creative people out there looking for ways to push systems like gemini outside of what they are supposed to be able to do.
+And I don&#x27;t want to decide (at least not now) if the escape code thingy is a &quot;bug&quot; or a feataure in most clients.
+The first question we have ask here is if we want color support at all: 
+I know, that gemini should remain simple and support for 
+colors takes away a good part of this simplicity.
+But there are a lot of usecases for color support.
+(Code highlighting, pretty ascii art, footnotes, ...)
+For me these are two pretty strong arguments against each other.
+
+So in case we want color support:
+Assuming the escape code thingy is a feataure:
+We should standardize which escape codes are allowed and how clients should handle them.
+Assuming it is a &quot;bug&quot;:
+Some people (me included after thinking about it) like to see color being used in gemini so we have to find another way to put colors in while the text/gemini format should remain easy to parse and human readable.
+(Correct me if I&#x27;m wrong but that is how I interpret the text/gemini format: Markup that is easy to parse but still human readable if you open it in something like a text editor)
+
+If I had to standardize it I&#x27;d use custom escape sequences, similar to those already in use but optimized to be no longer than necessary that ALWAYS end in a &#x27;;&#x27;.
+This is not really text editor friendly, but avoids having to escape the escape caracter (I&#x27;m looking at you XML), makes it easy to parse/strip the escape sequences and if you don&#x27;t you at least get very short spaghetti.
+
+In any case I&#x27;m for filtering out unwanted escape codes.
+
+I&#x27;m looking forward to get some other opinions on this.
+
+Greetings
+- Baschdel
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20191211/850760df/attachment.htm">https://mailing-list-archive.gemi.dev/www/attachments/20191211/850760df/attachment.htm</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000272.html">New server</a></li>
+<li>Next message (by thread): <a href="000273.html">Color and escape codes in text/gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#271">[ date ]</a> <a href="thread.html#271">[ thread ]</a> <a href="subject.html#271">[ subject ]</a> <a href="author.html#271">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

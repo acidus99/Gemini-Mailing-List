@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On text reflow. It&#x27;s not about bullets!</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000253.html">
+<link rel="next" href="000254.html">
+</head>
+<body>
+<h1>On text reflow. It&#x27;s not about bullets!</h1>
+<b>Brian Evans</b> b__m__e at mailfence.com<br>
+<i>Fri Nov 29 17:39:59 GMT 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000253.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li>Next message (by thread): <a href="000254.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#252">[ date ]</a> <a href="thread.html#252">[ thread ]</a> <a href="subject.html#252">[ subject ]</a> <a href="author.html#252">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>solderpunk wrote of their suggestion to have a beginning and end marker for raw
+text strings in gemini content. If I am understanding correctly, the suggestion
+would serve a similar purpose to the web tag `pre`:
+&lt;pre&gt;
+Here is
+some text. Whose newlines
+and spacing are exact/raw.
+&lt;/pre&gt;
+
+I actually think we should go the opposite way. I think we should provide a
+start and end marker for reflowed text, treating raw text as the default. Since
+raw text output is what simple clients will likely build, it makes sense to treat
+that as a first class citizen/default. GIven that a large percentage of potential
+userbase will also be using gopher, they are used to text behaving in this way.
+Adding the extra ability to have text reflowed gives them what they know,
+but with added features. Seems like a win.
+
+As a result we could end up with something like the following:
+
+This is a _____line with extra spaces
+________denoted here with udnerscores since this
+__will___be rendered____as html for this list.
+.FLOW
+
+And
+here
+is
+a line
+that
+would get all flowed together
+
+ignoring the newlines
+I have annoyingly entered.
+
+.ENDFLOW
+The flow___state___has been toggled back
+__off, and these 
+spaces and newlines are
+now rendered as written.
+
+________________________________________
+
+Something like the above could work (I am not at all proposing that marker text/name
+it is just being used to represent an idea). Given that .FLOW and .ENDFLOW are on their
+own line it is easy to parse them out and not have them print.
+
+Anyway, those are my two cents at present. Subject to change.
+
+
+--?
+Sent with <a href="https://mailfence.com">https://mailfence.com</a>
+Secure and private email
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000253.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li>Next message (by thread): <a href="000254.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#252">[ date ]</a> <a href="thread.html#252">[ thread ]</a> <a href="subject.html#252">[ subject ]</a> <a href="author.html#252">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

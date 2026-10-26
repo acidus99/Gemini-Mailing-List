@@ -1,53 +1,37 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Ditching mandatory TLS
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Ditching%20mandatory%20TLS&In-Reply-To=%3C20200704211217.GT19717%40brevard.conman.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="002043.html">
-   <LINK REL="Next"  HREF="002047.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Ditching mandatory TLS</H1>
-    <B>Sean Conner</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Ditching%20mandatory%20TLS&In-Reply-To=%3C20200704211217.GT19717%40brevard.conman.org%3E"
-       TITLE="Ditching mandatory TLS">sean at conman.org
-       </A><BR>
-    <I>Sat Jul  4 22:12:17 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="002043.html">Ditching mandatory TLS
-</A></li>
-        <LI>Next message (by thread): <A HREF="002047.html">Ditching mandatory TLS
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2046">[ date ]</a>
-              <a href="thread.html#2046">[ thread ]</a>
-              <a href="subject.html#2046">[ subject ]</a>
-              <a href="author.html#2046">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ditching mandatory TLS</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="002043.html">
+<link rel="next" href="002047.html">
+</head>
+<body>
+<h1>Ditching mandatory TLS</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Sat Jul  4 22:12:17 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="002043.html">Ditching mandatory TLS</a></li>
+<li>Next message (by thread): <a href="002047.html">Ditching mandatory TLS</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2046">[ date ]</a> <a href="thread.html#2046">[ thread ]</a> <a href="subject.html#2046">[ subject ]</a> <a href="author.html#2046">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>It was thus said that the Great Drew DeVault once stated:
+<pre>It was thus said that the Great Drew DeVault once stated:
 &gt;<i> Unpopular opinion time: Gemini should not have mandatory TLS.
-</I>&gt;<i> 
-</I>&gt;<i> - TLS is not conveinent for local development
-</I>&gt;<i> - TLS is inherently dependent on a centralized oligarchy of CAs
-</I>&gt;<i> - Baking TLS into the protocol is going to be a bad look when The Next
-</I>&gt;<i>   TLS comes out
-</I>&gt;<i> - Some alternative modes of internet access have built-in encryption
-</I>&gt;<i>   guarantees: yggdrasil, cjdns, Tor; and for these adding TLS is
-</I>&gt;<i>   redundant (and arguably worse)
-</I>
-  I won't argue that TLS is a bad choice, but before throwing out
+</i>&gt;<i> 
+</i>&gt;<i> - TLS is not conveinent for local development
+</i>&gt;<i> - TLS is inherently dependent on a centralized oligarchy of CAs
+</i>&gt;<i> - Baking TLS into the protocol is going to be a bad look when The Next
+</i>&gt;<i>   TLS comes out
+</i>&gt;<i> - Some alternative modes of internet access have built-in encryption
+</i>&gt;<i>   guarantees: yggdrasil, cjdns, Tor; and for these adding TLS is
+</i>&gt;<i>   redundant (and arguably worse)
+</i>
+  I won&#x27;t argue that TLS is a bad choice, but before throwing out
 alternatives like yggdrasil, cjdns or noise, instead *just implement the
 damn thing* [1][2]---write both a Gemini server and client (for bonus
 points---implement ALL THE ENCRYPTIONS!) so the rest of us can see how easy
@@ -56,27 +40,27 @@ from TLS (or including other mechanisms).
 
   This has already been done once:
 
-	<A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/000457.html">https://lists.orbitalfox.eu/archives/gemini/2020/000457.html</A>
+	<a href="https://mailing-list-archive.gemi.dev/www/2020/000457.html">https://mailing-list-archive.gemi.dev/www/2020/000457.html</a>
 
 and the follow-up:
 
 &gt;<i> ####  About my previous proposal
-</I>&gt;<i> 
-</I>&gt;<i> I'll have to think harder about it (within my limited cryptographic
-</I>&gt;<i> expertise), and perhaps submit it to a cryptographers community for
-</I>&gt;<i> feedback.
-</I>&gt;<i> 
-</I>&gt;<i> At the moment I can see only a minor privacy flaw in it:  the client
-</I>&gt;<i> discloses its identity (and proof of identity) to any server;  instead
-</I>&gt;<i> it should first wait for the server to disclose its identity (and
-</I>&gt;<i> proof of identity) before proceeding.
-</I>&gt;<i> 
-</I>&gt;<i> This issue stems from the fact that the ransport_prepare function
-</I>&gt;<i> is &quot;symmetrical&quot; and tries to reduce network round-trips;  instead the
-</I>&gt;<i> client could first wait for the server verifier and then send its own
-</I>&gt;<i> (i.e. just a minor change to that function).
-</I>
-	(<A HREF="https://lists.orbitalfox.eu/archives/gemini/2020/000477.html">https://lists.orbitalfox.eu/archives/gemini/2020/000477.html</A>)
+</i>&gt;<i> 
+</i>&gt;<i> I&#x27;ll have to think harder about it (within my limited cryptographic
+</i>&gt;<i> expertise), and perhaps submit it to a cryptographers community for
+</i>&gt;<i> feedback.
+</i>&gt;<i> 
+</i>&gt;<i> At the moment I can see only a minor privacy flaw in it:  the client
+</i>&gt;<i> discloses its identity (and proof of identity) to any server;  instead
+</i>&gt;<i> it should first wait for the server to disclose its identity (and
+</i>&gt;<i> proof of identity) before proceeding.
+</i>&gt;<i> 
+</i>&gt;<i> This issue stems from the fact that the ransport_prepare function
+</i>&gt;<i> is &quot;symmetrical&quot; and tries to reduce network round-trips;  instead the
+</i>&gt;<i> client could first wait for the server verifier and then send its own
+</i>&gt;<i> (i.e. just a minor change to that function).
+</i>
+	(<a href="https://mailing-list-archive.gemi.dev/www/2020/000477.html">https://mailing-list-archive.gemi.dev/www/2020/000477.html</a>)
 
   -spc (Note:  not much from Ciprian since then ... )
 
@@ -88,70 +72,15 @@ and the follow-up:
 	came to an end) backing up the argument(s).
 
 [2]	This applies to anyone, not just Drew.
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="002043.html">Ditching mandatory TLS
-</A></li>
-	<LI>Next message (by thread): <A HREF="002047.html">Ditching mandatory TLS
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2046">[ date ]</a>
-              <a href="thread.html#2046">[ thread ]</a>
-              <a href="subject.html#2046">[ subject ]</a>
-              <a href="author.html#2046">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="002043.html">Ditching mandatory TLS</a></li>
+<li>Next message (by thread): <a href="002047.html">Ditching mandatory TLS</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2046">[ date ]</a> <a href="thread.html#2046">[ thread ]</a> <a href="subject.html#2046">[ subject ]</a> <a href="author.html#2046">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

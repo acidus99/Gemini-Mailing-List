@@ -1,69 +1,53 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Client certificate musings
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200527185807.GA21489%40SDF.ORG%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="001092.html">
-   <LINK REL="Next"  HREF="001094.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Client certificate musings</H1>
-    <B>solderpunk</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200527185807.GA21489%40SDF.ORG%3E"
-       TITLE="Client certificate musings">solderpunk at SDF.ORG
-       </A><BR>
-    <I>Wed May 27 19:58:07 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="001092.html">Client certificate musings
-</A></li>
-        <LI>Next message (by thread): <A HREF="001094.html">Client certificate musings
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1093">[ date ]</a>
-              <a href="thread.html#1093">[ thread ]</a>
-              <a href="subject.html#1093">[ subject ]</a>
-              <a href="author.html#1093">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client certificate musings</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="001092.html">
+<link rel="next" href="001094.html">
+</head>
+<body>
+<h1>Client certificate musings</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Wed May 27 19:58:07 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="001092.html">Client certificate musings</a></li>
+<li>Next message (by thread): <a href="001094.html">Client certificate musings</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1093">[ date ]</a> <a href="thread.html#1093">[ thread ]</a> <a href="subject.html#1093">[ subject ]</a> <a href="author.html#1093">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Wed, May 27, 2020 at 07:37:02PM +0100, Martin Keegan wrote:
+<pre>On Wed, May 27, 2020 at 07:37:02PM +0100, Martin Keegan wrote:
  
-&gt;<i> I'd recommend having a look at how Scuttlebutt does its analogous step:
-</I>&gt;<i> &quot;invite codes&quot;. See, e..g.,
-</I>&gt;<i> 
-</I>&gt;<i> <A HREF="https://github.com/ssbc/ssb-server/wiki/pub-servers">https://github.com/ssbc/ssb-server/wiki/pub-servers</A>
-</I>&gt;<i> <A HREF="https://ssbc.github.io/scuttlebutt-protocol-guide/">https://ssbc.github.io/scuttlebutt-protocol-guide/</A> (invite codes section)
-</I>&gt;<i> <A HREF="https://handbook.scuttlebutt.nz/guides/pubs/create-an-invite">https://handbook.scuttlebutt.nz/guides/pubs/create-an-invite</A>
-</I>&gt;<i> 
-</I>&gt;<i> ... which suggests that a layer on top of CSRs may also be useful. Anyway,
-</I>&gt;<i> best way to find out is to try it.
-</I>
+&gt;<i> I&#x27;d recommend having a look at how Scuttlebutt does its analogous step:
+</i>&gt;<i> &quot;invite codes&quot;. See, e..g.,
+</i>&gt;<i> 
+</i>&gt;<i> <a href="https://github.com/ssbc/ssb-server/wiki/pub-servers">https://github.com/ssbc/ssb-server/wiki/pub-servers</a>
+</i>&gt;<i> <a href="https://ssbc.github.io/scuttlebutt-protocol-guide/">https://ssbc.github.io/scuttlebutt-protocol-guide/</a> (invite codes section)
+</i>&gt;<i> <a href="https://handbook.scuttlebutt.nz/guides/pubs/create-an-invite">https://handbook.scuttlebutt.nz/guides/pubs/create-an-invite</a>
+</i>&gt;<i> 
+</i>&gt;<i> ... which suggests that a layer on top of CSRs may also be useful. Anyway,
+</i>&gt;<i> best way to find out is to try it.
+</i>
 Thanks, I will have a read!
  
 &gt;<i> Well, in the two party scenario, sending a CSR and sending a fingerprint
-</I>&gt;<i> seem to be pretty similar: the user's software submits the mystic runes to
-</I>&gt;<i> openssl and the result is pasted to the other party. In the CSR route,
-</I>&gt;<i> however, you do indeed need to save the other party's response (the cert).
-</I>
+</i>&gt;<i> seem to be pretty similar: the user&#x27;s software submits the mystic runes to
+</i>&gt;<i> openssl and the result is pasted to the other party. In the CSR route,
+</i>&gt;<i> however, you do indeed need to save the other party&#x27;s response (the cert).
+</i>
 Sure, but in the fingerprint case the relevant runes just get sent as a
 side-effect of an ordinary TLS transaction.
  
 &gt;<i> I would say that the CSR mechanism goes with the grain of how SSL is
-</I>&gt;<i> conventionally used, and thus is likely to have better existinglibrary/docs
-</I>&gt;<i> support.
-</I>
+</i>&gt;<i> conventionally used, and thus is likely to have better existinglibrary/docs
+</i>&gt;<i> support.
+</i>
 Ah, now *this* is definitely true.  At the start of this whole thing I
-brushed off a lot of people's concerns about the complexity of TLS by
+brushed off a lot of people&#x27;s concerns about the complexity of TLS by
 waving my hands and saying &quot;there are library bindings to do this in
 every language&quot;.  I did not realise that so many of those libraries
 would be so totally unable to handle anything even the slightest bit
@@ -71,113 +55,20 @@ unconventional.  It bothers me a bit now that fully implementing so many
 of the ideas that I thought would make TLS a little bit less of an
 imposition, or a little bit less offensive to radical decentralists,
 looks like it will be quite a pain in some cases.  I never would have
-imagined it would be literally impossible for a server using Python's
+imagined it would be literally impossible for a server using Python&#x27;s
 standard `ssl` module to accept a self-signed client certificate!
 
 Cheers,
 Solderpunk
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="001092.html">Client certificate musings
-</A></li>
-	<LI>Next message (by thread): <A HREF="001094.html">Client certificate musings
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1093">[ date ]</a>
-              <a href="thread.html#1093">[ thread ]</a>
-              <a href="subject.html#1093">[ subject ]</a>
-              <a href="author.html#1093">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="001092.html">Client certificate musings</a></li>
+<li>Next message (by thread): <a href="001094.html">Client certificate musings</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1093">[ date ]</a> <a href="thread.html#1093">[ thread ]</a> <a href="subject.html#1093">[ subject ]</a> <a href="author.html#1093">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

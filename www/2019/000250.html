@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On text reflow. It&#x27;s not about bullets!</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000249.html">
+<link rel="next" href="000251.html">
+</head>
+<body>
+<h1>On text reflow. It&#x27;s not about bullets!</h1>
+<b>Brian Evans</b> b__m__e at mailfence.com<br>
+<i>Thu Nov 28 19:45:47 GMT 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000249.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li>Next message (by thread): <a href="000251.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#250">[ date ]</a> <a href="thread.html#250">[ thread ]</a> <a href="subject.html#250">[ subject ]</a> <a href="author.html#250">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Having read the discourse between andram and solderpunk I have some thoughts:
+
+Reflowed text brings with it other problems for client implementors 
+
+1. No one wants to read text that is flowed to the full width of a full screen reader on a large screen.. So there is a question of reasonable max widths and variance in how those get handled.  
+2. There is also the question of paragraphs. When text is reflowed all but one single space character in a row are generally ignored and newlines and other whitespace are traditionally completely ignored.  As such, defining paragraphs becomes trickier.  There is a LOT more complexity to handling reflowed text than simply saying let the text reflow. Now, wrapping text is easy (and is what I am currently doing in my client), but leaves that ugly jagged look when wrapping occurs (because wrapping leaves and respects newlines). I suppose one solution to this is to re-purpose the non-reflowed line indicator and just follow it with no content to create a blank line. This could get weird to write and read though (for readibility I am using the newly proposed `==`):
+```
+Here are some lines of
+text that could get 
+reflowed
+by the client into
+one long line that then gets
+wrapped.
+==
+So the above should
+put in a blank line between each block
+and create two paragraphs.
+==
+==
+Done with a third block that has a double line break above it
+```
+
+I guess it isnt too cumbersome, but it does feel a little weird. It would be completely unclear with the leading space concept for creating a non-flowed line. As such I think that if the above model for flowing text gets adopted (which, I understand, it may not) I absolutely think a more visible marker for unflowed text is necessary. 
+
+As an aside, did we land on what is to happen if the unflowed text is longer than the current client window? Are we wrapping or truncating? Ideally a horizontal scroll would be available but I do not know any clients that have implemented it and would prefer to not do so for mine.
+
+With either of the above two items the ability to make a small (100 line client) starts to get smaller as there is more parsing overhead than just looking for `=&gt;` and handling those lines.
+
+I would LIKE reflowed text. I do not see it as the necessary thing that andram sees it as. I have been reading gopher content for some time and have not really missed flowed text that much. That said, I NEVER use a phone (and in fact do not have a phone capable of displaying this sort of content) to read gopher content and can see how wrapped text just gets unreadable after a certain point.
+
+I do sort of agree that the ship has sailed regarding markup. `=&gt;` is a concept that could easily be expanded on by those building clients, with or without the blessings of those steering gemini development. Something to think about in that regard is PHP. Yes, PHP. It is an ugly mishmash mess of a language where people have just slapped on this or that and nothing seems to go with the other particularly well. It works, sure... but it is a mess. It might be worth the conversation to see if pointedly steering into the skid  is something to be brought up again? Deliberately adding the things that will be most desired. Doing so could build a big enough swell of features that there would be less desire to do ad-hoc additions on a per client basis. It would have the added benefit of being carefully chosen by those thinking out all of the repercussions, rather than those wanting quick fixes to perceived problems. No matter which way this goes I do think it should be a mandatory part of the spec that a gemini document cannot make further requests (ie. images, stylesheets, scripts in http-land) without a user following a link.
+
+This was all kind of off the top of my head while in a hotel with family for a holiday, so sorry if it isn&#x27;t as coherent as it seemed to me while writing it.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000249.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li>Next message (by thread): <a href="000251.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#250">[ date ]</a> <a href="thread.html#250">[ thread ]</a> <a href="subject.html#250">[ subject ]</a> <a href="author.html#250">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

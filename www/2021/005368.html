@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital signature in gemini pages</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005362.html">
+<link rel="next" href="005374.html">
+</head>
+<body>
+<h1>Digital signature in gemini pages</h1>
+<b>Christophe HENRY</b> listes at sbgodin.fr<br>
+<i>Sat Feb 20 13:54:35 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005362.html">Digital signature in gemini pages</a></li>
+<li>Next message (by thread): <a href="005374.html">Digital signature in gemini pages</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5368">[ date ]</a> <a href="thread.html#5368">[ thread ]</a> <a href="subject.html#5368">[ subject ]</a> <a href="author.html#5368">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Le Fri, 19 Feb 2021 14:06:12 -0500,
+John Cowan &lt;cowan at ccil.org&gt; a ?crit :
+
+&gt;<i> On Fri, Feb 19, 2021 at 11:33 AM Christophe HENRY &lt;listes at sbgodin.fr&gt;
+</i>&gt;<i> wrote:
+</i>&gt;<i> 
+</i>&gt;<i> &gt; There may be several modes:
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; * The browser is configured to not care about signature. Everything
+</i>&gt;<i> &gt; go as usual. Just like any non-aware browser.
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; * The browser is configured to indicate that this file exists, but
+</i>&gt;<i> &gt; does nothing. It would display a special icon https-style.
+</i>&gt;<i> 
+</i>&gt;<i> The only way that can work is for the client to automatically request
+</i>&gt;<i> the signature when a document is retrieved.  This has two problems:
+</i>&gt;<i> (a) it is an automatic network action, which clients are not supposed
+</i>&gt;<i> to do, and (b) it will cause a lot of useless hits when signatures
+</i>&gt;<i> are rare, which is bad considering that Gemini servers are often
+</i>&gt;<i> limited by either CPU or network bandwidth.
+</i>
+You are right. That&#x27;s why the others way come.
+
+ 
+&gt;<i> I think the Right Thing is for browsers to have a command/menu option
+</i>&gt;<i> &quot;Check Signature&quot;, which appends &quot;.asc&quot; to the pathname of the
+</i>&gt;<i> current URI (not to the whole URI), and attempts to retrieve that. If
+</i>&gt;<i> it succeeds and the content matches the current document, all is well.
+</i>
+That sounds good.
+
+
+&gt;<i> However, this assumes that the signature methodology is standardized
+</i>&gt;<i> across all sites.  So a simpler, more Gemini thing to do is to
+</i>&gt;<i> replace &quot;Check Signature&quot; with &quot;View Signature&quot;, which displays the
+</i>&gt;<i> signature and leaves it to the user to determine the signature on the
+</i>&gt;<i> local copy of the document.
+</i>&gt;<i> &gt; * The user would ask the browser to check for a particular site or
+</i>&gt;<i> &gt; for all sites.
+</i>&gt;<i> &gt;
+</i>&gt;<i> 
+</i>&gt;<i> WI don&#x27;t understand this: signatures are per-document, not per-site.
+</i>&gt;<i> And hat does &quot;all sites&quot; even mean?  Even &quot;all documents on the site&quot;
+</i>&gt;<i> does not need to be a finite number, given the ability to generate
+</i>&gt;<i> documents at the server.
+</i>
+Each page would have the &quot;.asc&quot; file. I suppose this file would link to
+the certificate. Such certificate may be found somewhere in the server,
+publicly accessible. 
+
+
+&gt;<i> The rest follow the spirit of &quot;Trust on first use&quot;. For instance,
+</i>&gt;<i> &gt; storing the public key of the author in the website. Maybe a kinda
+</i>&gt;<i> &gt; web-of-trust among some websites gathered in rings?
+</i>&gt;<i> 
+</i>&gt;<i> The server can&#x27;t assume that all documents have the same author, so
+</i>&gt;<i> servers have to be per-document, not per-site.  This adds complexity
+</i>&gt;<i> to the server, as it has to maintain additional metadata as opposed
+</i>&gt;<i> to keeping either signature files or a rewrite rule that requests
+</i>&gt;<i> signature files from a different, more secure site.  The latter is
+</i>&gt;<i> the Right Thing when mirroring documents from elsewhere: if your
+</i>&gt;<i> server is hacked, the hacker will certainly alter the signature as
+</i>&gt;<i> well, but if the signature is off site, that is more difficult.
+</i>
+That&#x27;s right, it&#x27;s always security vs. functionality. At least, each
+page may be signed before publication by the uploader.
+
+-- 
+Christophe HENRY
+FR EO EN - <a href="https://sbgodin.fr">https://sbgodin.fr</a>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 833 bytes
+Desc: Signature digitale OpenPGP
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210220/ca8f3212/attachment.sig">https://mailing-list-archive.gemi.dev/www/attachments/20210220/ca8f3212/attachment.sig</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005362.html">Digital signature in gemini pages</a></li>
+<li>Next message (by thread): <a href="005374.html">Digital signature in gemini pages</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5368">[ date ]</a> <a href="thread.html#5368">[ thread ]</a> <a href="subject.html#5368">[ subject ]</a> <a href="author.html#5368">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>File size issues</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000012.html">
+<link rel="next" href="000020.html">
+</head>
+<body>
+<h1>File size issues</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Thu Aug 15 19:06:20 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000012.html">File size issues</a></li>
+<li>Next message (by thread): <a href="000020.html">File size issues</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#16">[ date ]</a> <a href="thread.html#16">[ thread ]</a> <a href="subject.html#16">[ subject ]</a> <a href="author.html#16">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great solderpunk once stated:
+&gt;<i> Two quick points with regard to the fact that Gemini currently does not
+</i>&gt;<i> convey file sizes to users at any point:
+</i>&gt;<i> 
+</i>&gt;<i> * Sean has pointed out in one of his RFCs that this means there is no
+</i>&gt;<i>   way for a client to know whether or not a download completed
+</i>&gt;<i>   successfully or was interrupted due to an accidentally dropped or
+</i>&gt;<i>   even a maliciously severred connection
+</i>&gt;<i> 
+</i>&gt;<i> * I&#x27;ve received an email from somebody watching the Gemini design unfold
+</i>&gt;<i>   with interest, who is concerned about Gemini clients with limited
+</i>&gt;<i>   system resources unwittingly downloading large files (such as PDFs of
+</i>&gt;<i>   scanned documents) which they aren&#x27;t even capable of opening.  While I
+</i>&gt;<i>   quite like the idea of Gemini being friendly to low-end systems, I do
+</i>&gt;<i>   wonder whether or not the TLS requirement makes this a little moot.
+</i>&gt;<i> 
+</i>&gt;<i> Anyway, the question is do we want to change anything to address these
+</i>&gt;<i> issues and if so how do we want to do it?
+</i>&gt;<i> 
+</i>&gt;<i> I&#x27;ll quickly note in pasing that both of these problems also exist in
+</i>&gt;<i> exactly the same form for Gopher, but I&#x27;ve never once heard Gopher users
+</i>&gt;<i> complain about them. 
+</i>
+  Gopher does address this rather obliquely---text files (and gopher
+indexes) are supposed to end with a &#x27;.&#x27; on a line by itself.  This lets the
+client know it received the data correctly, and it says as much in RFC-1436,
+section 3.8:
+
+	Note that for type 5 or type 9 the client must be prepared to read
+	until the connection closes.  There will be no period at the end of
+	the file; ...
+
+  It&#x27;s not necessarily a pain point about the filesizes not being known
+before hand, but it does make displaying a progress bar (for example)
+difficult to implement.
+
+&gt;<i> One possibility, as proposed by Sean, is to add file size to the
+</i>&gt;<i> response header, with it optionally appearing after the MIME type.  I&#x27;m
+</i>&gt;<i> not hugely fond of this myself, simply because it complicates parsing of
+</i>&gt;<i> the response header.  
+</i>
+  I&#x27;m not seeing much of an issue.  Assuming tabs separate the compoents on
+the status line, then
+
+	(\d+)\t([^\t]+)(\t([^\t]+))*
+
+would parse the line (I suspect, I&#x27;m not a fan of regex but I think the
+above would work to parse the status line).  I don&#x27;t see much of an issue in
+parsing any of the following:
+
+	20&lt;HTAB&gt;text/plain; charset=utf-8&lt;HTAB&gt;2123&lt;CRLF&gt;
+	20&lt;HTAB&gt;text/plain&lt;CRLF&gt;
+
+&gt;<i> Remember that the MIME type can have multiple
+</i>&gt;<i> components specifying encodings etc.  If you just split the META part of
+</i>&gt;<i> the header on whitespace, the number of components is variable, so
+</i>&gt;<i> recognising whether or not an optional filesize is present requires
+</i>&gt;<i> actually inspecting the parts and looking for a number.  In fairness to
+</i>&gt;<i> Sean, at the time of writing of his RFC the spec spec said META was
+</i>&gt;<i> separated from STATUS by a tab (whereas now it is just whitespace), so
+</i>&gt;<i> tacking something after META with another tab was unambiguous, assuming
+</i>&gt;<i> nobody put tabs in their MIME types...
+</i>
+  Which could be specified, &quot;don&#x27;t put tabs in the MIME type section.&quot;
+
+&gt;<i> Another possibility ties into another request I got from somebody very
+</i>&gt;<i> early on - it would be nice if there was some way to query a Gemini
+</i>&gt;<i> server for the time a resource was last modified, so that Gemini
+</i>&gt;<i> equivaents of tools like moku pona could avoid needlessly fetching
+</i>&gt;<i> unchanged resources over and over again.  At that point I started
+</i>&gt;<i> wondering about giving Gemini some equivalent of HTTP HEAD, although I
+</i>&gt;<i> abandoned it pretty quickly when I realised that substantial TLS
+</i>&gt;<i> overhead probably made making a whole second request to check if a
+</i>&gt;<i> resource had changed not such a worthwhile idea.  
+</i>
+  One way would be to query a well-known endpoint (these exist in the HTTP
+world---robots.txt is one such file) that contains tiemstamps for various
+resources.  Slap a MIME type of text/gemini-timestamp and call it done:
+
+<a href="gemini://example.com/">gemini://example.com/</a>	2019-08-15T13:53:00-05:00
+<a href="gemini://example.com/feed">gemini://example.com/feed</a>	2019-07-29T00:00:00-05:00
+<a href="gemini://example.com/other">gemini://example.com/other</a>	2019-08-01T00:00:00-05:00
+
+  That&#x27;s one way.
+
+&gt;<i> But, we could possibly
+</i>&gt;<i> bring this idea back, as the response to such a request could naturally
+</i>&gt;<i> include the file size as well.  The real question is how to *make* such
+</i>&gt;<i> a request, ideally in a way which doesn&#x27;t open the door to a half dozen
+</i>&gt;<i> other new &quot;methods&quot;.
+</i>
+  As I mentioned in a private email to solderpunk earlier, one could always
+take advantage of the sub-delimeters in the path portion.  I had at one
+point mentioned using those to specify the prompt (otherwise the server
+would return a status of 10):
+
+	<a href="gemini://example.com/search;Search%20for">gemini://example.com/search;Search%20for</a>
+
+This could be formalized:
+
+	<a href="gemini://example.com/search;prompt=Search%20for">gemini://example.com/search;prompt=Search%20for</a>
+	<a href="gemini://example.com/blogfeed;timestamp=2019-08-15T00:00:00Z">gemini://example.com/blogfeed;timestamp=2019-08-15T00:00:00Z</a>
+	<a href="gemini://example.com/wildexample;prompt=Search%20for;timestamp=2019-08-15:00:00:00Z?query=foo&amp;usename=bar">gemini://example.com/wildexample;prompt=Search%20for;timestamp=2019-08-15:00:00:00Z?query=foo&amp;usename=bar</a>
+
+  So, you have &quot;prompt&quot; and &quot;timestamp&quot;.  Others could be propsed.  If the
+&quot;timestamp&quot; thing above is accepted, then you might want to have a new
+status code meaning &quot;no change&quot; or &quot;okay, but there&#x27;s no content&quot;.
+
+&gt;<i> Regarding ways to enable something like a HEAD request without changing
+</i>&gt;<i> the request format to include a method field - I&#x27;m not quite sure
+</i>&gt;<i> whether using a fixed URL fragment, like #meta, on requests would be a
+</i>&gt;<i> kosher way to do this.  Does metadata count as &quot;some portion or subset
+</i>&gt;<i> of the primary resource, some view on representations of the primary
+</i>&gt;<i> resource, or some other resource defined or described by those
+</i>&gt;<i> representations&quot; (from RFC3986)?
+</i>
+  Well, there are RFC-5147 and RFC-7111 that give semantics to the URI
+fragment section, but I still think using the sub-delimeter of &#x27;;&#x27; in the
+path portion is the way to go.
+
+  -spc
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000012.html">File size issues</a></li>
+<li>Next message (by thread): <a href="000020.html">File size issues</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#16">[ date ]</a> <a href="thread.html#16">[ thread ]</a> <a href="subject.html#16">[ subject ]</a> <a href="author.html#16">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

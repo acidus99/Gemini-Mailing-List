@@ -1,158 +1,88 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Gemini proxy image display
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20proxy%20image%20display&In-Reply-To=%3CCAPk6LxS24X3mt1wa7aXSxaZ8YfDqypDAbdNZvS82Xh7CFU7%2BqQ%40mail.gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="002631.html">
-   <LINK REL="Next"  HREF="002634.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Gemini proxy image display</H1>
-    <B>Kevin Sangeelee</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20proxy%20image%20display&In-Reply-To=%3CCAPk6LxS24X3mt1wa7aXSxaZ8YfDqypDAbdNZvS82Xh7CFU7%2BqQ%40mail.gmail.com%3E"
-       TITLE="Gemini proxy image display">kevin at susa.net
-       </A><BR>
-    <I>Thu Sep 10 16:12:15 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="002631.html">Gemini proxy image display
-</A></li>
-        <LI>Next message (by thread): <A HREF="002634.html">Gemini proxy image display
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2633">[ date ]</a>
-              <a href="thread.html#2633">[ thread ]</a>
-              <a href="subject.html#2633">[ subject ]</a>
-              <a href="author.html#2633">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini proxy image display</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="002631.html">
+<link rel="next" href="002634.html">
+</head>
+<body>
+<h1>Gemini proxy image display</h1>
+<b>Kevin Sangeelee</b> kevin at susa.net<br>
+<i>Thu Sep 10 16:12:15 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="002631.html">Gemini proxy image display</a></li>
+<li>Next message (by thread): <a href="002634.html">Gemini proxy image display</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2633">[ date ]</a> <a href="thread.html#2633">[ thread ]</a> <a href="subject.html#2633">[ subject ]</a> <a href="author.html#2633">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Do you mean to throw away the first 8k of content bytes?
+<pre>Do you mean to throw away the first 8k of content bytes?
 
 
 Sent from phone
 
-On Thu, 10 Sep 2020, 14:14 Mr. Leveck, &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sysop at 1436.ninja</A>&gt; wrote:
+On Thu, 10 Sep 2020, 14:14 Mr. Leveck, &lt;sysop at 1436.ninja&gt; wrote:
 
 &gt;<i> [repost in new thread]
-</I>&gt;<i>
-</I>&gt;<i> Greetings All!
-</I>&gt;<i>
-</I>&gt;<i>  My www site has for sometime been displaying a homespun gopher proxy
-</I>&gt;<i>  (IE: my website displays my gopherhole). Since I recently installed a
-</I>&gt;<i>  gemini server on my home network, I wanted to expand my proxy to gemini
-</I>&gt;<i>  too. This is complete: <A HREF="https://leveck.us/gemini/1436.ninja/">https://leveck.us/gemini/1436.ninja/</A>
-</I>&gt;<i>
-</I>&gt;<i>  I am having issues, however. With the gopher proxy, I hand binary files
-</I>&gt;<i>  over to curl via php after sending the appropriate header. Curl doesn't
-</I>&gt;<i>  currently support gemini, and I have been chasing my tail on getting
-</I>&gt;<i>  images (and binary files such as my RPoD Palm OS Software Horde) to work
-</I>&gt;<i>  with my proxy.
-</I>&gt;<i>
-</I>&gt;<i>  Anyone got ideas?
-</I>&gt;<i>
-</I>&gt;<i>  Here is the networky portion of the proxy source (line #s from vim):
-</I>&gt;<i>  28  //Gemini Protocol Code
-</I>&gt;<i>  29  //Nathaniel Leveck September 2020
-</I>&gt;<i>  30  $host = $host;
-</I>&gt;<i>  31  $port = 1965;
-</I>&gt;<i>  32  $cert = '/var/www/cert/cert.pem';
-</I>&gt;<i>  33  $context = stream_context_create();
-</I>&gt;<i>  34 stream_context_set_option($context, 'ssl', 'local_cert', $cert);
-</I>&gt;<i>  35  stream_context_set_option($context, 'ssl', 'verify_peer', false);
-</I>&gt;<i>  36  stream_context_set_option($context, 'ssl', 'verify_peer_name', false);
-</I>&gt;<i>  37  stream_context_set_option($context, 'ssl', 'allow_self_signed', true);
-</I>&gt;<i>  38  $socket = stream_socket_client('<A HREF="ssl://">ssl://</A>'.$host.':'.$port, $error,
-</I>&gt;<i> $errorString, 2,
-</I>&gt;<i>  39  STREAM_CLIENT_CONNECT, $context);
-</I>&gt;<i>  40  fwrite($socket, &quot;<A HREF="gemini://">gemini://</A>&quot; . $url . &quot;\r\n&quot;);
-</I>&gt;<i>  41  fread($socket,8192); //disregard the status + meta
-</I>&gt;<i>  42  $content = fread($socket,8192000); //read a suitably large number of
-</I>&gt;<i> bytes
-</I>&gt;<i>
-</I>&gt;<i>  fread, I assume, is my issue. socketread showed me no love...
-</I>&gt;<i>
-</I>&gt;<i> --
-</I>&gt;<i> jynx
-</I>&gt;<i> <A HREF="gopher://1436.ninja">gopher://1436.ninja</A>
-</I>&gt;<i> <A HREF="gemini://1436.ninja">gemini://1436.ninja</A>
-</I>&gt;<i> <A HREF="https://leveck.us">https://leveck.us</A>
-</I>&gt;<i>
-</I>-------------- next part --------------
+</i>&gt;<i>
+</i>&gt;<i> Greetings All!
+</i>&gt;<i>
+</i>&gt;<i>  My www site has for sometime been displaying a homespun gopher proxy
+</i>&gt;<i>  (IE: my website displays my gopherhole). Since I recently installed a
+</i>&gt;<i>  gemini server on my home network, I wanted to expand my proxy to gemini
+</i>&gt;<i>  too. This is complete: <a href="https://leveck.us/gemini/1436.ninja/">https://leveck.us/gemini/1436.ninja/</a>
+</i>&gt;<i>
+</i>&gt;<i>  I am having issues, however. With the gopher proxy, I hand binary files
+</i>&gt;<i>  over to curl via php after sending the appropriate header. Curl doesn&#x27;t
+</i>&gt;<i>  currently support gemini, and I have been chasing my tail on getting
+</i>&gt;<i>  images (and binary files such as my RPoD Palm OS Software Horde) to work
+</i>&gt;<i>  with my proxy.
+</i>&gt;<i>
+</i>&gt;<i>  Anyone got ideas?
+</i>&gt;<i>
+</i>&gt;<i>  Here is the networky portion of the proxy source (line #s from vim):
+</i>&gt;<i>  28  //Gemini Protocol Code
+</i>&gt;<i>  29  //Nathaniel Leveck September 2020
+</i>&gt;<i>  30  $host = $host;
+</i>&gt;<i>  31  $port = 1965;
+</i>&gt;<i>  32  $cert = &#x27;/var/www/cert/cert.pem&#x27;;
+</i>&gt;<i>  33  $context = stream_context_create();
+</i>&gt;<i>  34 stream_context_set_option($context, &#x27;ssl&#x27;, &#x27;local_cert&#x27;, $cert);
+</i>&gt;<i>  35  stream_context_set_option($context, &#x27;ssl&#x27;, &#x27;verify_peer&#x27;, false);
+</i>&gt;<i>  36  stream_context_set_option($context, &#x27;ssl&#x27;, &#x27;verify_peer_name&#x27;, false);
+</i>&gt;<i>  37  stream_context_set_option($context, &#x27;ssl&#x27;, &#x27;allow_self_signed&#x27;, true);
+</i>&gt;<i>  38  $socket = stream_socket_client(&#x27;ssl://&#x27;.$host.&#x27;:&#x27;.$port, $error,
+</i>&gt;<i> $errorString, 2,
+</i>&gt;<i>  39  STREAM_CLIENT_CONNECT, $context);
+</i>&gt;<i>  40  fwrite($socket, &quot;gemini://&quot; . $url . &quot;\r\n&quot;);
+</i>&gt;<i>  41  fread($socket,8192); //disregard the status + meta
+</i>&gt;<i>  42  $content = fread($socket,8192000); //read a suitably large number of
+</i>&gt;<i> bytes
+</i>&gt;<i>
+</i>&gt;<i>  fread, I assume, is my issue. socketread showed me no love...
+</i>&gt;<i>
+</i>&gt;<i> --
+</i>&gt;<i> jynx
+</i>&gt;<i> <a href="gopher://1436.ninja">gopher://1436.ninja</a>
+</i>&gt;<i> <a href="gemini://1436.ninja">gemini://1436.ninja</a>
+</i>&gt;<i> <a href="https://leveck.us">https://leveck.us</a>
+</i>&gt;<i>
+</i>-------------- next part --------------
 An HTML attachment was scrubbed...
-URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20200910/782f980e/attachment.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20200910/782f980e/attachment.htm</A>&gt;
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20200910/782f980e/attachment.htm">https://mailing-list-archive.gemi.dev/www/attachments/20200910/782f980e/attachment.htm</a>&gt;
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="002631.html">Gemini proxy image display
-</A></li>
-	<LI>Next message (by thread): <A HREF="002634.html">Gemini proxy image display
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2633">[ date ]</a>
-              <a href="thread.html#2633">[ thread ]</a>
-              <a href="subject.html#2633">[ subject ]</a>
-              <a href="author.html#2633">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="002631.html">Gemini proxy image display</a></li>
+<li>Next message (by thread): <a href="002634.html">Gemini proxy image display</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2633">[ date ]</a> <a href="thread.html#2633">[ thread ]</a> <a href="subject.html#2633">[ subject ]</a> <a href="author.html#2633">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

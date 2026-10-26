@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[ANN] Specification update</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007558.html">
+<link rel="next" href="007563.html">
+</head>
+<body>
+<h1>[ANN] Specification update</h1>
+<b>Philip Linde</b> linde.philip at gmail.com<br>
+<i>Mon Nov  8 16:14:18 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007558.html">[ANN] Specification update</a></li>
+<li>Next message (by thread): <a href="007563.html">[ANN] Specification update</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7559">[ date ]</a> <a href="thread.html#7559">[ thread ]</a> <a href="subject.html#7559">[ subject ]</a> <a href="author.html#7559">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi Stephane!
+
+On Mon, 8 Nov 2021 16:18:11 +0100
+Stephane Bortzmeyer &lt;stephane@sources.org&gt; wrote:
+
+&gt;<i> On Mon, Nov 08, 2021 at 09:28:41AM -0500,
+</i>&gt;<i>  Jason McBrayer &lt;jmcbray@carcosa.net&gt; wrote 
+</i>&gt;<i>  a message of 15 lines which said:
+</i>&gt;<i> 
+</i>&gt;<i> &gt; Please let me know if carcosa.net is among those.
+</i>&gt;<i> 
+</i>&gt;<i> Indeed it is :-(
+</i>&gt;<i> 
+</i>&gt;<i> % agunua carcosa.net
+</i>&gt;<i> Warning, no TLS shutdown received from the server
+</i>
+Very useful. I have not considered TLS in detail myself, but I tested
+this just now with the Go TLS implementation which does seem to send
+the proper notification as you call Close on connections. Good news for
+people writing server implementations in Go, I think.
+
+I wonder how hard it would be to automatically identify server software
+that doesn&#x27;t implement this properly. Probably some server software
+could be differentiated based on their error code descriptions or how
+they deal with some corner cases. If we could trace these capsules to a
+few server implementations it might not be too much work to reach out
+to the authors and poke at them about the spec change.
+
+With the numbers you suggested earlier, I am wary of strictly enforcing
+close_notify in my client, but in the interim maybe client authors
+could warn as yours does, or provide some way to add domains to an
+exception list.
+
+-- 
+Philip
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007558.html">[ANN] Specification update</a></li>
+<li>Next message (by thread): <a href="007563.html">[ANN] Specification update</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7559">[ date ]</a> <a href="thread.html#7559">[ thread ]</a> <a href="subject.html#7559">[ subject ]</a> <a href="author.html#7559">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

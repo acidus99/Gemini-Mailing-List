@@ -1,190 +1,88 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Gemini and CGI hosting
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20and%20CGI%20hosting&In-Reply-To=%3C20200524144402.GE4190%40SDF.ORG%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="001013.html">
-   <LINK REL="Next"  HREF="000990.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Gemini and CGI hosting</H1>
-    <B>solderpunk</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Gemini%20and%20CGI%20hosting&In-Reply-To=%3C20200524144402.GE4190%40SDF.ORG%3E"
-       TITLE="Gemini and CGI hosting">solderpunk at SDF.ORG
-       </A><BR>
-    <I>Sun May 24 15:44:02 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="001013.html">Gemini and CGI hosting
-</A></li>
-        <LI>Next message (by thread): <A HREF="000990.html">Gemini and CGI hosting
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1017">[ date ]</a>
-              <a href="thread.html#1017">[ thread ]</a>
-              <a href="subject.html#1017">[ subject ]</a>
-              <a href="author.html#1017">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini and CGI hosting</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="001013.html">
+<link rel="next" href="000990.html">
+</head>
+<body>
+<h1>Gemini and CGI hosting</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Sun May 24 15:44:02 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="001013.html">Gemini and CGI hosting</a></li>
+<li>Next message (by thread): <a href="000990.html">Gemini and CGI hosting</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1017">[ date ]</a> <a href="thread.html#1017">[ thread ]</a> <a href="subject.html#1017">[ subject ]</a> <a href="author.html#1017">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Sun, May 24, 2020 at 12:58:48AM -0400, Sean Conner wrote:
+<pre>On Sun, May 24, 2020 at 12:58:48AM -0400, Sean Conner wrote:
 &gt;<i> 
-</I>&gt;<i> From what I can determine
-</I>&gt;<i> (checking Wikipedia, the above article and the Apache documentation) it
-</I>&gt;<i> appears that the Gemini server (or web server in the case of Apache) is
-</I>&gt;<i> expecting the SCGI program to be running already, and all that happens is
-</I>&gt;<i> the Gemini (Apache) server connects to it, sends the request and awaits a
-</I>&gt;<i> response.
-</I>
+</i>&gt;<i> From what I can determine
+</i>&gt;<i> (checking Wikipedia, the above article and the Apache documentation) it
+</i>&gt;<i> appears that the Gemini server (or web server in the case of Apache) is
+</i>&gt;<i> expecting the SCGI program to be running already, and all that happens is
+</i>&gt;<i> the Gemini (Apache) server connects to it, sends the request and awaits a
+</i>&gt;<i> response.
+</i>
 This is precisely what excites me about SCGI.  Until Go gets non-broken
-from the perspective of traditional unix user-based permissions, there's
+from the perspective of traditional unix user-based permissions, there&#x27;s
 no way for Molly Brown to securely kick off a CGI process via fork().
 If something else (a helper program, or the admin) starts the process,
 they can presumably start it as a `nobody` user and chroot it somewhere
-safe.  It's clunky, but I can live with it for now.
+safe.  It&#x27;s clunky, but I can live with it for now.
  
-&gt;<i>   I'm keeping *most* of the RFC-3875 meta-variables except for those that
-</I>&gt;<i> don't really make sense, like GATEWAY_INTERFACE (since it's not),
-</I>&gt;<i> SCRIPT_NAME (since it's not a script), PATH_INFO and PATH_TRANSLATED (again,
-</I>&gt;<i> becuase it's not a script).  I am keeping REQUEST_METHOD, and for
-</I>&gt;<i> REQUEST_URI I have GEMINI_URL and GEMINI_URL_PATH (these are now available
-</I>&gt;<i> in my CGI interface as well).  I haven't added REQUEST_URI because it's
-</I>&gt;<i> underspecced in my opinion---the example only shows the path portion, and I
-</I>&gt;<i> have a workaround in place anyway.
-</I>
+&gt;<i>   I&#x27;m keeping *most* of the RFC-3875 meta-variables except for those that
+</i>&gt;<i> don&#x27;t really make sense, like GATEWAY_INTERFACE (since it&#x27;s not),
+</i>&gt;<i> SCRIPT_NAME (since it&#x27;s not a script), PATH_INFO and PATH_TRANSLATED (again,
+</i>&gt;<i> becuase it&#x27;s not a script).  I am keeping REQUEST_METHOD, and for
+</i>&gt;<i> REQUEST_URI I have GEMINI_URL and GEMINI_URL_PATH (these are now available
+</i>&gt;<i> in my CGI interface as well).  I haven&#x27;t added REQUEST_URI because it&#x27;s
+</i>&gt;<i> underspecced in my opinion---the example only shows the path portion, and I
+</i>&gt;<i> have a workaround in place anyway.
+</i>
 We really need to get the adaptation of RFC-3875 documented somewhere.
-Not in the Gemini-spec, but in some kind of side-spec thing, with it's
+Not in the Gemini-spec, but in some kind of side-spec thing, with it&#x27;s
 own name or ID and file in gemini.circumlunar.space/docs/, or a sub
 directory thereof.  Not just CGI, but our proposed adaptation of robots.txt,
-and other stuff like that.  I dunno what these should be called, I'm not
+and other stuff like that.  I dunno what these should be called, I&#x27;m not
 sure how they should be managed.  I might end up delegating most
 responsibility for these &quot;side specs&quot; to interested people who I trust
 to do a good job.  I have a bunch of ill-formed ideas for side specs
 that it would be good to bring to life.
  
 &gt;<i>   I was going to make SCGI support a handler (like all of my dynamic content
-</I>&gt;<i> generators in GLV-1.12556) but that requires support in the config file and
-</I>&gt;<i> thus leaves users out [1].  I then had an inspired thought (or evil, take
-</I>&gt;<i> your pick) to use symbolic links in the filesystem pointing to the server
-</I>&gt;<i> 
-</I>&gt;<i> lrwxrwxrwx  1 spc spc 16 May 24 00:03 foo -&gt; <A HREF="scgi:////tmp/log">scgi:////tmp/log</A>
-</I>&gt;<i> lrwxrwxrwx  1 spc spc 22 May 23 23:57 here -&gt; <A HREF="scgi://localhost:33333">scgi://localhost:33333</A>
-</I>&gt;<i> lrwxrwxrwx  1 spc spc 22 May 23 23:58 there -&gt; <A HREF="scgi://[fc00::1">scgi://[fc00::1</A>]:3333/
-</I>&gt;<i> 
-</I>&gt;<i>   The first points to a Unix domain socket, the other two to TCP sockets. 
-</I>&gt;<i> This will give users a way to use SCGI without having access to the config
-</I>&gt;<i> files for the Gemini server.  I'm not saying everybody has to use this
-</I>&gt;<i> symbolic hack for SCGI---it's just that I'm using this hack for SCGI support
-</I>&gt;<i> in GLV-1.12556.  
-</I>
+</i>&gt;<i> generators in GLV-1.12556) but that requires support in the config file and
+</i>&gt;<i> thus leaves users out [1].  I then had an inspired thought (or evil, take
+</i>&gt;<i> your pick) to use symbolic links in the filesystem pointing to the server
+</i>&gt;<i> 
+</i>&gt;<i> lrwxrwxrwx  1 spc spc 16 May 24 00:03 foo -&gt; scgi:////tmp/log
+</i>&gt;<i> lrwxrwxrwx  1 spc spc 22 May 23 23:57 here -&gt; scgi://localhost:33333
+</i>&gt;<i> lrwxrwxrwx  1 spc spc 22 May 23 23:58 there -&gt; scgi://[fc00::1]:3333/
+</i>&gt;<i> 
+</i>&gt;<i>   The first points to a Unix domain socket, the other two to TCP sockets. 
+</i>&gt;<i> This will give users a way to use SCGI without having access to the config
+</i>&gt;<i> files for the Gemini server.  I&#x27;m not saying everybody has to use this
+</i>&gt;<i> symbolic hack for SCGI---it&#x27;s just that I&#x27;m using this hack for SCGI support
+</i>&gt;<i> in GLV-1.12556.  
+</i>
 Nice hack!
 
 Cheers,
 Solderpunk
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="001013.html">Gemini and CGI hosting
-</A></li>
-	<LI>Next message (by thread): <A HREF="000990.html">Gemini and CGI hosting
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1017">[ date ]</a>
-              <a href="thread.html#1017">[ thread ]</a>
-              <a href="subject.html#1017">[ subject ]</a>
-              <a href="author.html#1017">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="001013.html">Gemini and CGI hosting</a></li>
+<li>Next message (by thread): <a href="000990.html">Gemini and CGI hosting</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1017">[ date ]</a> <a href="thread.html#1017">[ thread ]</a> <a href="subject.html#1017">[ subject ]</a> <a href="author.html#1017">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

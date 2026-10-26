@@ -1,153 +1,105 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [SPEC] Backwards-compatible metadata in Gemini
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3CCAFkF85aiwBC3oitR1H_jc8yZv2CHa-6ksZpovGYxxG-cnXZ89g%40mail.gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="005575.html">
-   <LINK REL="Next"  HREF="005580.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[SPEC] Backwards-compatible metadata in Gemini</H1>
-    <B>Oliver Simmons</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5BSPEC%5D%20Backwards-compatible%20metadata%20in%20Gemini&In-Reply-To=%3CCAFkF85aiwBC3oitR1H_jc8yZv2CHa-6ksZpovGYxxG-cnXZ89g%40mail.gmail.com%3E"
-       TITLE="[SPEC] Backwards-compatible metadata in Gemini">oliversimmo at gmail.com
-       </A><BR>
-    <I>Wed Feb 24 18:18:23 GMT 2021</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="005575.html">[SPEC] Backwards-compatible metadata in Gemini
-</A></li>
-        <LI>Next message (by thread): <A HREF="005580.html">[SPEC] Backwards-compatible metadata in Gemini
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#5578">[ date ]</a>
-              <a href="thread.html#5578">[ thread ]</a>
-              <a href="subject.html#5578">[ subject ]</a>
-              <a href="author.html#5578">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[SPEC] Backwards-compatible metadata in Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005575.html">
+<link rel="next" href="005580.html">
+</head>
+<body>
+<h1>[SPEC] Backwards-compatible metadata in Gemini</h1>
+<b>Oliver Simmons</b> oliversimmo at gmail.com<br>
+<i>Wed Feb 24 18:18:23 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005575.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li>Next message (by thread): <a href="005580.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5578">[ date ]</a> <a href="thread.html#5578">[ thread ]</a> <a href="subject.html#5578">[ subject ]</a> <a href="author.html#5578">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Wed, 24 Feb 2021 at 16:25, PJ vM &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">pjvm742 at disroot.org</A>&gt; wrote:
+<pre>On Wed, 24 Feb 2021 at 16:25, PJ vM &lt;pjvm742 at disroot.org&gt; wrote:
 &gt;<i>
-</I>&gt;<i> It is maybe important to note that much Gemini content is written with
-</I>&gt;<i> just a text editor, by people who might not want to neatly structure
-</I>&gt;<i> their metadata according to the convention. I'm not sure it would be a
-</I>&gt;<i> good thing for search engines to rely much on metadata - the term
-</I>&gt;<i> &quot;search engine optimisation&quot; comes to mind.
-</I>&gt;<i>
-</I>
+</i>&gt;<i> It is maybe important to note that much Gemini content is written with
+</i>&gt;<i> just a text editor, by people who might not want to neatly structure
+</i>&gt;<i> their metadata according to the convention. I&#x27;m not sure it would be a
+</i>&gt;<i> good thing for search engines to rely much on metadata - the term
+</i>&gt;<i> &quot;search engine optimisation&quot; comes to mind.
+</i>&gt;<i>
+</i>
 SEO would potentially be worse without metadata, as is obvious
 whenever you use the web.
 The first search results are often articles full of &quot;fluff&quot;, cooking
-recipes will for some reason have a backstory, this isn't the
+recipes will for some reason have a backstory, this isn&#x27;t the
 metadata, this is the document itself being full of junk.
 The opposite is true though, people could use metadata to their
-advantage, but with it being structured it's easier to filter the junk
+advantage, but with it being structured it&#x27;s easier to filter the junk
 out, and it also makes adding junk a bit harder.
-I've never done SEO myself - so I may be entirely wrong - but this is
+I&#x27;ve never done SEO myself - so I may be entirely wrong - but this is
 just my perspective on it.
 
 &gt;<i>
-</I>&gt;<i> The user can also look for a line that says &quot;This work is licensed
-</I>&gt;<i> under...&quot;. Metadata need not be structured for human users to understand it.
-</I>&gt;<i>
-</I>
+</i>&gt;<i> The user can also look for a line that says &quot;This work is licensed
+</i>&gt;<i> under...&quot;. Metadata need not be structured for human users to understand it.
+</i>&gt;<i>
+</i>
 Someone searching for freely-licenced (etc) documents is going to have
 a hard time in that case, they would have to go through every document
 manually to find the license.
 Having it always at the end would be faster for people manually
 reading, and would mean search engines/similar could just be asked to
-filter out licenses they don't want (or do want).
+filter out licenses they don&#x27;t want (or do want).
 
 &gt;<i>
-</I>&gt;<i> Anyway, I think there are uses for in-file metadata, particularly for
-</I>&gt;<i> searching a large collection of documents. And sure, it could be useful
-</I>&gt;<i> to adopt a convention (either the &quot;-:&quot; line thing or the key-value pairs
-</I>&gt;<i> at the end of the file thing, or something else entirely) just so that
-</I>&gt;<i> people would have one way to do this that is commonly understood, and so
-</I>&gt;<i> that broadly usable tools could be written for using metadata. However,
-</I>&gt;<i> I don't think it is useful in most of Geminispace, and it should not be
-</I>&gt;<i> used in places where there isn't a need for it. I definitely think we
-</I>&gt;<i> should avoid it becoming an expectation for people who write stuff, or
-</I>&gt;<i> for Gemini clients.
-</I>&gt;<i>
-</I>
-Agree - It certainly shouldn't be used *everywhere*, at least not to a
+</i>&gt;<i> Anyway, I think there are uses for in-file metadata, particularly for
+</i>&gt;<i> searching a large collection of documents. And sure, it could be useful
+</i>&gt;<i> to adopt a convention (either the &quot;-:&quot; line thing or the key-value pairs
+</i>&gt;<i> at the end of the file thing, or something else entirely) just so that
+</i>&gt;<i> people would have one way to do this that is commonly understood, and so
+</i>&gt;<i> that broadly usable tools could be written for using metadata. However,
+</i>&gt;<i> I don&#x27;t think it is useful in most of Geminispace, and it should not be
+</i>&gt;<i> used in places where there isn&#x27;t a need for it. I definitely think we
+</i>&gt;<i> should avoid it becoming an expectation for people who write stuff, or
+</i>&gt;<i> for Gemini clients.
+</i>&gt;<i>
+</i>
+Agree - It certainly shouldn&#x27;t be used *everywhere*, at least not to a
 large extent.
-I'm going to say a typical page would have around MAXIMUM ~3/4 lines,
+I&#x27;m going to say a typical page would have around MAXIMUM ~3/4 lines,
 but Bill Gates also said 640K would be enough so who knows.
 
 &gt;<i>
-</I>&gt;<i> I also think we should choose a convention that is simple and not easily
-</I>&gt;<i> extensible. The key-value pairs at the end of the file thing seems a bit
-</I>&gt;<i> better on non-extensibility - it's definitely better on readability.
-</I>&gt;<i>
-</I>
-:<i>)
-</I>
-Also, I've thought of a great use - email archives.
-Data could be added upon archival by whatever's archiving it (not by
+</i>&gt;<i> I also think we should choose a convention that is simple and not easily
+</i>&gt;<i> extensible. The key-value pairs at the end of the file thing seems a bit
+</i>&gt;<i> better on non-extensibility - it&#x27;s definitely better on readability.
+</i>&gt;<i>
+</i>
+:)
+
+Also, I&#x27;ve thought of a great use - email archives.
+Data could be added upon archival by whatever&#x27;s archiving it (not by
 the people writing emails - that would be stupid).
 Searching them would be made easier if you could just tell your
 searcher to filter to this:
 
 ^^^
 email
-from: <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">oliversimmo at gmail.com</A>
+from: oliversimmo at gmail.com
 from-name: Oliver Simmons
 reply-to: blah blah
 subject: [SPEC] Backwards-compatible metadata in Gemini (this would
 probably make more sense as the page h1, but whatever)
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="005575.html">[SPEC] Backwards-compatible metadata in Gemini
-</A></li>
-	<LI>Next message (by thread): <A HREF="005580.html">[SPEC] Backwards-compatible metadata in Gemini
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#5578">[ date ]</a>
-              <a href="thread.html#5578">[ thread ]</a>
-              <a href="subject.html#5578">[ subject ]</a>
-              <a href="author.html#5578">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="005575.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li>Next message (by thread): <a href="005580.html">[SPEC] Backwards-compatible metadata in Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5578">[ date ]</a> <a href="thread.html#5578">[ thread ]</a> <a href="subject.html#5578">[ subject ]</a> <a href="author.html#5578">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

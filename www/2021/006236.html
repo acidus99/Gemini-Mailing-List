@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How do you buffer a Gemini connection?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006235.html">
+<link rel="next" href="006237.html">
+</head>
+<body>
+<h1>How do you buffer a Gemini connection?</h1>
+<b>Ecmel Berk Canlıer</b> me at ecmelberk.com<br>
+<i>Mon Mar 29 05:17:31 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006235.html">How do you buffer a Gemini connection?</a></li>
+<li>Next message (by thread): <a href="006237.html">How do you buffer a Gemini connection?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6236">[ date ]</a> <a href="thread.html#6236">[ thread ]</a> <a href="subject.html#6236">[ subject ]</a> <a href="author.html#6236">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On 3/28/21 11:07 PM, almaember wrote:
+
+&gt;<i> or how much time it&#x27;s going to take to download, or if it&#x27;s even going &gt; to end at all.
+</i>
+As far as I&#x27;m aware no client has solved this. If TLS close_notify gets standardized we might get a &quot;connection failed&quot; state, but other than that you won&#x27;t be able to know how long the content is and whether you successfully downloaded it or not.
+
+&gt;<i> My ideas as of right now:
+</i>&gt;<i>
+</i>&gt;<i>   - Have a big buffer and store everything in it until the connection is
+</i>&gt;<i>     closed. The connection would be terminated if:
+</i>&gt;<i>      - the connection closes
+</i>&gt;<i>      - the server didn&#x27;t send anything for X seconds
+</i>
+If I know which client you use I can just send a huge file over and possibly overflow your buffer. And it needs to be BIG. I&#x27;m aware of at least one capsule serving ~70MB files. (<a href="gemini://konpeito.media">gemini://konpeito.media</a>)
+
+&gt;<i>   - Buffer by line and don&#x27;t close the connection unless the user
+</i>&gt;<i>     terminates it (by pressing the stop key or by loading another
+</i>&gt;<i>     capsule). Compatible with long polling.
+</i>
+This is what I do on Moonlander. Not by line, as binary data can be sent over Gemini, but in 1029 byte chunks (exactly the max length of one Gemini header. Saves me code in trying to split that too)
+
+I send each chunk into a separate &quot;renderer&quot; for the given file type, which in text&#x27;s case decodes it into the given encoding (default UTF-8) and sends it over to the text/gemini parser which then does the line splitting and parsing there. (And in other cases it will just save the bytes directly to a file)
+
+It&#x27;s a bit more work, but I have successfully downloaded a few of those 70MB files with this approach, so I&#x27;d say it&#x27;s pretty robust.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006235.html">How do you buffer a Gemini connection?</a></li>
+<li>Next message (by thread): <a href="006237.html">How do you buffer a Gemini connection?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6236">[ date ]</a> <a href="thread.html#6236">[ thread ]</a> <a href="subject.html#6236">[ subject ]</a> <a href="author.html#6236">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

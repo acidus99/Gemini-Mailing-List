@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech]: looking for cgi help/documentation/faq or similar</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006260.html">
+<link rel="next" href="006262.html">
+</head>
+<body>
+<h1>[tech]: looking for cgi help/documentation/faq or similar</h1>
+<b>Omar Polo</b> op at omarpolo.com<br>
+<i>Thu Apr  1 13:33:16 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006260.html">[tech]: looking for cgi help/documentation/faq or similar</a></li>
+<li>Next message (by thread): <a href="006262.html">[tech]: looking for cgi help/documentation/faq or similar</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6261">[ date ]</a> <a href="thread.html#6261">[ thread ]</a> <a href="subject.html#6261">[ subject ]</a> <a href="author.html#6261">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+mingmengtou@use.startmail.com writes:
+
+&gt;<i> Hi, where might i find help/docs/faq on gemini cgi? For html i am using:
+</i>&gt;<i> #!/bin/bash
+</i>&gt;<i> echo &quot;Content-type: text/html&quot;
+</i>&gt;<i> echo &quot;&quot;
+</i>&gt;<i> [rest of script]
+</i>&gt;<i>
+</i>&gt;<i> I have not found information for starting a cgi script output for gemini.
+</i>&gt;<i> Thank you for any assistance.
+</i>&gt;<i> Cheers
+</i>&gt;<i> Neil
+</i>
+There are some difference on how Gemini servers implements CGI.
+Usually[0] they just execute your script with a bunch of environment
+variable set, and expect you to handle the transaction.  For instance, a
+simple &quot;hello world&quot;-tier script could be:
+
+	#!/bin/sh
+	printf &quot;20 text/gemini\r\n&quot;
+	echo &quot;# Hello Gemini&quot;
+
+but check the documentation of your server of choice (and also the
+protocol specification.)
+
+Cheers,
+
+Omar Polo
+
+[0]: At least with gmid, GLV-1.12556 and (to some extent) vger; don&#x27;t
+     know what other servers do.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006260.html">[tech]: looking for cgi help/documentation/faq or similar</a></li>
+<li>Next message (by thread): <a href="006262.html">[tech]: looking for cgi help/documentation/faq or similar</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6261">[ date ]</a> <a href="thread.html#6261">[ thread ]</a> <a href="subject.html#6261">[ subject ]</a> <a href="author.html#6261">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

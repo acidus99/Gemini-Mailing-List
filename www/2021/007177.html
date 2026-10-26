@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A simple/toy client in C</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007170.html">
+<link rel="next" href="007187.html">
+</head>
+<body>
+<h1>A simple/toy client in C</h1>
+<b>Michael Forney</b> mforney at mforney.org<br>
+<i>Tue Sep 21 20:12:27 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007170.html">A simple/toy client in C</a></li>
+<li>Next message (by thread): <a href="007187.html">The /now page</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7177">[ date ]</a> <a href="thread.html#7177">[ thread ]</a> <a href="subject.html#7177">[ subject ]</a> <a href="author.html#7177">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On 2021-09-21, Omar Polo &lt;op@omarpolo.com&gt; wrote:
+&gt;<i> stack@tilde.club writes:
+</i>&gt;<i>
+</i>&gt;<i>&gt; [...]
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; I am using BearSSL (for its minimalism). I started with the sample
+</i>&gt;<i>&gt; provided, modified for the Gemini request.  I keep getting stuck with
+</i>&gt;<i>&gt; error 62 (probably because I don&#x27;t understand how to deal with TLS).
+</i>&gt;<i>&gt; I attempted to generate the CA boilerplate code, but there are some
+</i>&gt;<i>&gt; ominous hints that the code is HTTPS-specific.
+</i>&gt;<i>
+</i>&gt;<i> It&#x27;s just a wild guess, I never touched BearSSL, but smell like a
+</i>&gt;<i> possible failure in verifying the certificates.  In geminispace the
+</i>&gt;<i> usage of TOFU and self-signed certificates is way more popular than in
+</i>&gt;<i> the web, and TLS libraries by defaults try to verify the certificate
+</i>&gt;<i> against the installed CAs.  For the record, on libtls is the function is
+</i>&gt;<i> tls_config_insecure_noverifycert.
+</i>
+I have a lot of experience with BearSSL, and I think this is a good
+guess. Error code 62 is BR_ERR_X509_NOT_TRUSTED, which means that the
+server is using a certificate that was not accepted by the X.509
+engine you configured your client to use.
+
+stack, I&#x27;m assuming you were just using br_x509_minimal_context, which
+is configured with a set of CAs, one of which must be found in the
+certificate chain sent by servers. As Omar said, with gemini it is
+common practice to use self-signed certificates, which will need a
+different X.509 engine.
+
+For an example, check out Drew DeVault&#x27;s gmni client, which uses
+BearSSL and implements an `x509_tofu_context`:
+<a href="https://git.sr.ht/~sircmpwn/gmni/tree/master/item/src/tofu.c">https://git.sr.ht/~sircmpwn/gmni/tree/master/item/src/tofu.c</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007170.html">A simple/toy client in C</a></li>
+<li>Next message (by thread): <a href="007187.html">The /now page</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7177">[ date ]</a> <a href="thread.html#7177">[ thread ]</a> <a href="subject.html#7177">[ subject ]</a> <a href="author.html#7177">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

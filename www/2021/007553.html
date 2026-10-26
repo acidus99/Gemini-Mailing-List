@@ -1,43 +1,28 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Request%20for%20feedback%20from%20server/client%20implementers%20using%5Cn%0A%20non-OpenSSL%20TLS%20stacks&In-Reply-To=%3CCFKBDO5SM3PF.1W540LF6GVSDN%40taiga%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="007552.html">
-   
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks</H1>
-    <B>Drew DeVault</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Request%20for%20feedback%20from%20server/client%20implementers%20using%5Cn%0A%20non-OpenSSL%20TLS%20stacks&In-Reply-To=%3CCFKBDO5SM3PF.1W540LF6GVSDN%40taiga%3E"
-       TITLE="Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks">sir at cmpwn.com
-       </A><BR>
-    <I>Mon Nov  8 10:08:45 GMT 2021</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="007552.html">Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks
-</A></li>
-        
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#7553">[ date ]</a>
-              <a href="thread.html#7553">[ thread ]</a>
-              <a href="subject.html#7553">[ subject ]</a>
-              <a href="author.html#7553">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007552.html">
+<link rel="next" href="007564.html">
+</head>
+<body>
+<h1>Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks</h1>
+<b>Drew DeVault</b> sir at cmpwn.com<br>
+<i>Mon Nov  8 10:08:45 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007552.html">Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks</a></li>
+<li>Next message (by thread): <a href="007564.html">Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7553">[ date ]</a> <a href="thread.html#7553">[ thread ]</a> <a href="subject.html#7553">[ subject ]</a> <a href="author.html#7553">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Off the bat, I'm not so sure that gmnisrv or gmni really is all that
+<pre>Off the bat, I&#x27;m not so sure that gmnisrv or gmni really is all that
 popular. I use it myself, and I know several other who also use it, but
-I suspect that we are in the minority. To be honest, it's not even that
+I suspect that we are in the minority. To be honest, it&#x27;s not even that
 great, it crashes fairly often and is pretty unreliable as a result. The
 main appeal is that it is simple and has few dependencies, which are
 traits that BearSSL directly contributes to.
@@ -45,7 +30,7 @@ traits that BearSSL directly contributes to.
 Another goal of gmnisrv is to be easy to maintain and reliable over the
 long-term, which is something that BearSSL offers and something that
 pinning ourselves to bleeding-edge technology witholds. I am very busy
-and I don't have the time to invest in, for example, overhauling the SSL
+and I don&#x27;t have the time to invest in, for example, overhauling the SSL
 stack for my Gemini software. Gemini is designed to be simple to
 implement, and my hope is that it is also simple to maintain.
 
@@ -55,7 +40,7 @@ supported), but what you call &quot;grassroots CDNs&quot; is just another word f
 centralization - these are in conflict, and I tend to cast my lot with
 decentralized governance more so than ideal privacy. This is fixing it
 at the wrong level, anyway - overlay networks like yggdrasil or Tor
-actually obsfucate who you're talking to properly (and provide transport
+actually obsfucate who you&#x27;re talking to properly (and provide transport
 encryption, which is why I would have liked to see optional TLS for
 Gemini under certain circumstances...).
 
@@ -64,42 +49,32 @@ Performance is not important.
 
 In short, the benefits are marginal, using BearSSL provides us with
 greater advantages than disadvantages, and BearSSL better serves the
-project's goals. What's more, I don't think I can easily spare the time
+project&#x27;s goals. What&#x27;s more, I don&#x27;t think I can easily spare the time
 to make the necessary changes myself, and these projects are explicitly
 designed to be low-maintenance. I can hardly find time for the
 improvements I *want* to make, like automatic cert generation based on
-Michael Forney's x509 library.
+Michael Forney&#x27;s x509 library.
 
 That said, if someone does feel strongly enough about this to put in the
 work, I would be willing to accept patches which address the problem. I
 very much do not want to use LibTLS, but maybe mbedTLS is a good option.
 Any patch would have to provide justification that the alternate TLS
 stack is simple, robust, and will be easily maintained in the long term
-(and, for what it's worth, OpenSSL is not any of these!).
+(and, for what it&#x27;s worth, OpenSSL is not any of these!).
 
 Also, in the long term, I plan on writing a Gemini stack in my new
 programming language, which will probably make gmnisrv and gmni
 obsolete. However, we have to make our own crypto stack from scratch
-first, so I wouldn't expect to see that any time soon.
-</PRE>
-
-
+first, so I wouldn&#x27;t expect to see that any time soon.
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="007552.html">Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks
-</A></li>
-	
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#7553">[ date ]</a>
-              <a href="thread.html#7553">[ thread ]</a>
-              <a href="subject.html#7553">[ subject ]</a>
-              <a href="author.html#7553">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="007552.html">Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks</a></li>
+<li>Next message (by thread): <a href="007564.html">Request for feedback from server/client implementers using\n non-OpenSSL TLS stacks</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7553">[ date ]</a> <a href="thread.html#7553">[ thread ]</a> <a href="subject.html#7553">[ subject ]</a> <a href="author.html#7553">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Color and escape codes in text/gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000281.html">
+<link rel="next" href="000292.html">
+</head>
+<body>
+<h1>Color and escape codes in text/gemini</h1>
+<b>Brian Evans</b> b__m__e at mailfence.com<br>
+<i>Fri Dec 13 00:27:07 GMT 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000281.html">Color and escape codes in text/gemini</a></li>
+<li>Next message (by thread): <a href="000292.html">[ANN] Castor, a graphical Gemini browser</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#275">[ date ]</a> <a href="thread.html#275">[ thread ]</a> <a href="subject.html#275">[ subject ]</a> <a href="author.html#275">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>This is interesting timing. Bombadillo v1.x supported printing any escape codes it received.
+With 2.0.0 we eliminated that support in favor of filtering out escape codes (likely in a naive 
+but mostly functional way andy time `\033` is encountered anything that follows it until a 
+`[A-Za-z]` character is reached will not be rendered (including the terminal character that 
+ends the sequence). That is where things stand with Bombadillo&#x27;s mainline release right 
+now.
+
+However, there has been an issue in our backlog for awhile now to reinstate color. I worked
+on this a bit over the last week and have done the following:
+
+I have added a &quot;theme&quot; (previoiusly there was only &#x27;normal&#x27; and &#x27;inverse&#x27;) called &#x27;color&#x27;. This
+theme looks identical to the normal theme, except it will render the escape sequences. This
+approach allows the user to move in and out of this rendering at will. If something doesnt
+look right in `color` mode they can always switch to `normal` mode. Sadly, color is not
+compatible with `inverse` mode since I use escape sequences to achieve the inverse effect 
+and it is immediately removed anyone tosses out a `\033[0m`.
+
+I am kind of opposed to developing any syntax for text/gemini that would treat escape
+sequences any differently than any other text. Clients can choose how and if to implement
+escape codes in a way that makes sense to them and their user-base. I think most clients
+will be well served taking Sean&#x27;s approach of filtering out escape codes. 
+
+For those wanting to keep clients lightweight a simple string replace for `\033` to any other
+character (maybe a box?) will make the escape codes not render, but still show document 
+intent. This is REALLY easy to implement in just about any language.
+
+I really like the usage of color on cat&#x27;s recent page and hope to see more people using
+color. I do 100% agree with Sean though that using color is often presumptuous and I have
+ran into issues where my terminal&#x27;s bg color did not mesh well at all with the colors being
+used by an application (which is partly why bombadillo&#x27;s tui does not use colors, only
+inversion).
+
+I also agree with Sean (it seems to be happening a lot this time around) that getting
+closer to an answer on reflow eventually would be a good idea. As it stands I am 
+wrapping but doing no reflow whatsoever.
+
+--?
+Sent with <a href="https://mailfence.com">https://mailfence.com</a>
+Secure and private email
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000281.html">Color and escape codes in text/gemini</a></li>
+<li>Next message (by thread): <a href="000292.html">[ANN] Castor, a graphical Gemini browser</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#275">[ date ]</a> <a href="thread.html#275">[ thread ]</a> <a href="subject.html#275">[ subject ]</a> <a href="author.html#275">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

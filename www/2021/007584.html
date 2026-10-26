@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Writeable Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007581.html">
+<link rel="next" href="007585.html">
+</head>
+<body>
+<h1>A Writeable Gemini</h1>
+<b>Mansfield</b> mansfield at ondollo.com<br>
+<i>Thu Nov 11 06:52:15 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007581.html">A Writeable Gemini</a></li>
+<li>Next message (by thread): <a href="007585.html">A Writeable Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7584">[ date ]</a> <a href="thread.html#7584">[ thread ]</a> <a href="subject.html#7584">[ subject ]</a> <a href="author.html#7584">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Wed, Nov 10, 2021 at 4:19 AM Omar Polo &lt;op@omarpolo.com&gt; wrote:
+
+&gt;<i>
+</i>&gt;<i> Mansfield &lt;mansfield@ondollo.com&gt; writes:
+</i>&gt;<i>
+</i>&gt;<i> &gt; On Tue, Nov 9, 2021 at 6:46 PM Mansfield &lt;mansfield@ondollo.com&gt; wrote:
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;  On Tue, Nov 9, 2021 at 2:16 AM Balázs Botond &lt;balazsbotond@gmail.com&gt;
+</i>&gt;<i> wrote:
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;  Hi,
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;  On Tue, Nov 9, 2021 at 2:39 AM Mansfield &lt;mansfield@ondollo.com&gt; wrote:
+</i>&gt;<i> &gt;  &gt; My limited response:
+</i>&gt;<i> &gt;  &gt;    <a href="gemini://ondollo.com/~/mansfield/A">gemini://ondollo.com/~/mansfield/A</a> Writeable Gemini.gem
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;  There&#x27;s a problem with the certificate at ondollo.com so your link
+</i>&gt;<i> doesn&#x27;t work.
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;  Botond
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;  Oh... interesting... the classic &quot;works for me&quot;... well, here&#x27;s the
+</i>&gt;<i> cert from the Mozz proxies perspective:
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;  <a href="https://portal.mozz.us/gemini/ondollo.com?crt=1">https://portal.mozz.us/gemini/ondollo.com?crt=1</a>
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;  I wonder what&#x27;s wrong with it? Mozz doesn&#x27;t load the site either...
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;  I guess I gave a poor link as well... the spaces weren&#x27;t encoded. Does
+</i>&gt;<i> this link work for you?
+</i>&gt;<i> &gt;  <a href="gemini://ondollo.com/~/mansfield/A%20Writeable%20Gemini.gem">gemini://ondollo.com/~/mansfield/A%20Writeable%20Gemini.gem</a>
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; I tweaked the server to accept connections that don&#x27;t provide a cert -
+</i>&gt;<i> seems to have turned the Mozz close_notify red x to a green
+</i>&gt;<i> &gt; checkmark.
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; Maybe now things will work better for you (and others with similar
+</i>&gt;<i> clients, no doubt).
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; Many thanks for letting me know that that was broken!
+</i>&gt;<i>
+</i>&gt;<i> It&#x27;s still broken unfortunately.  While it&#x27;s true that the certificate
+</i>&gt;<i> doesn&#x27;t include the domain name:
+</i>&gt;<i>
+</i>&gt;<i> % printf &#x27;<a href="gemini://ondollo.com\r\n">gemini://ondollo.com\r\n</a>&#x27; | nc -Tnoverify -c ondollo.com 1965
+</i>&gt;<i> nc: tls handshake failed (name `ondollo.com&#x27; not present in server
+</i>&gt;<i> certificate)
+</i>&gt;<i>
+</i>&gt;<i> even if I throw a -noname at it (which disables the certificate name
+</i>&gt;<i> checking) the reply is still empty :/
+</i>&gt;<i>
+</i>&gt;<i> % printf &#x27;<a href="gemini://ondollo.com\r\n">gemini://ondollo.com\r\n</a>&#x27; | nc -Tnoverify -Tnoname -c
+</i>&gt;<i> ondollo.com 1965
+</i>&gt;<i> % echo $?
+</i>&gt;<i> 0
+</i>&gt;<i>
+</i>&gt;<i>
+</i>Well, thanks for all the responses - turns out I had a few bits that needed
+adjusting beyond the common_name one.
+
+For anyone else caught in a tls debug process and wanting an easy way to
+test their server, I ended up using a command like this:
+
+```
+echo -e &quot;/\r\n&quot; | openssl s_client -crlf -connect domain.tld:1965 -ign_eof
+```
+
+That command alone won&#x27;t get you all the way there, but it could help. It
+also helps that Gemini clients tend to not be complicated to get going with.
+
+Hopefully everything is accessible now!
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007581.html">A Writeable Gemini</a></li>
+<li>Next message (by thread): <a href="007585.html">A Writeable Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7584">[ date ]</a> <a href="thread.html#7584">[ thread ]</a> <a href="subject.html#7584">[ subject ]</a> <a href="author.html#7584">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

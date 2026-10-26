@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Color and escape codes in text/gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000273.html">
+<link rel="next" href="000277.html">
+</head>
+<body>
+<h1>Color and escape codes in text/gemini</h1>
+<b>Jason McBrayer</b> jmcbray at carcosa.net<br>
+<i>Thu Dec 12 15:18:24 GMT 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000273.html">Color and escape codes in text/gemini</a></li>
+<li>Next message (by thread): <a href="000277.html">Color and escape codes in text/gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#274">[ date ]</a> <a href="thread.html#274">[ thread ]</a> <a href="subject.html#274">[ subject ]</a> <a href="author.html#274">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Sean Conner &lt;sean at conman.org&gt; writes:
+
+&gt;<i> It was thus said that the Great Baschdel once stated:
+</i>&gt;<i>&gt; In any case I&#x27;m for filtering out unwanted escape codes.
+</i>&gt;<i>   That&#x27;s what I do, only I filter out all escape codes, since I don&#x27;t
+</i>&gt;<i> want the screen to mess up and my program get confused as to what is
+</i>&gt;<i> where.
+</i>
+It seems to me that the idea of putting ANSI escape codes
+(oversimplifying here; thanks Sean for the more complete explanation)
+makes a number of assumptions:
+
+1. That all Gemini clients are running on a terminal (emulator) that
+   interprets ANSI escape codes (or the client provides enough terminal
+   emulation to interpret these escape codes).
+
+2. That ANSI escape codes sent by Gemini pages will only interact with
+   your terminal in a safe way.
+
+3. That it is desirable for untrusted content from the Internet to be
+   able to control your terminal.
+
+I, honestly, don&#x27;t think any of these are true.
+
+My suggestion: that the text/gemini format not be allowed to contain
+ANSI escape codes, even with a MIME type specifying an encoding that
+could contain them. If you want to send control codes, it should be sent
+with an appropriate MIME type. I&#x27;m not sure what that would be,
+actually ? is text/plain; charset=us-ascii correct? Or does it need to
+be application/something?
+
+-- 
+Jason McBrayer      | ?Strange is the night where black stars rise,
+jmcbray at carcosa.net | and strange moons circle through the skies,
+                    | but stranger still is lost Carcosa.?
+                    | ? Robert W. Chambers,The King in Yellow
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000273.html">Color and escape codes in text/gemini</a></li>
+<li>Next message (by thread): <a href="000277.html">Color and escape codes in text/gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#274">[ date ]</a> <a href="thread.html#274">[ thread ]</a> <a href="subject.html#274">[ subject ]</a> <a href="author.html#274">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

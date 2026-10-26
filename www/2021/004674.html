@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] Possible Tables Syntax</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004663.html">
+<link rel="next" href="004694.html">
+</head>
+<body>
+<h1>[spec] Possible Tables Syntax</h1>
+<b>zwatotem at gmail.com</b> zwatotem at gmail.com<br>
+<i>Sun Jan  3 15:06:41 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004663.html">[spec] Possible Tables Syntax</a></li>
+<li>Next message (by thread): <a href="004694.html">[spec] Possible Tables Syntax</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4674">[ date ]</a> <a href="thread.html#4674">[ thread ]</a> <a href="subject.html#4674">[ subject ]</a> <a href="author.html#4674">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>First of all, **Hello**, as it&#x27;s my first message here.
+I like the original idea to some extent. It bothers me, that what is meant
+to be a row doesn&#x27;t actually lay in one line. I immediately wanted to
+propose usage of TSVs as they are pretty human readable and have a good
+support in many text parsers. I don&#x27;t want explicit support for tables, but
+rather making TSV inside a preformatted block a *best practice* for
+presenting data of tabular form. Fancy clients could have support for a
+technique of HT rendering known as [elastic
+tabstops](<a href="https://nickgravgaard.com/elastic-tabstops/">https://nickgravgaard.com/elastic-tabstops/</a>) (tl;dr render tabs in
+blocks of neighboring lines to the same stop point, widening ones that are
+too short, if needed). But then simple terminal-based clients aiming to
+benefit from one-scan-to-render feature of text/gemini would suffer with all
+the usual problems we know from attempts to display TSV in the terminal.
+
+Example data (pure TSV):
+```
+Name	Age	Address
+Paul	23	1115 W Franklin
+Bessy the Cow	5	Big Farm Way
+Zeke	45	W Main St
+```
+
+Elastically rendered (using more tabs here, for illustration):
+```
+Name			Age	Address
+Paul			23	1115 W Franklin
+Bessy the Cow		5	Big Farm Way
+Zeke			45	W Main St
+```
+
+Solution could be to implement elastic tabstops in a greedy manner (align to
+the widest cell so-far). I think that greedy renderer is a good midpoint
+between naive aligning to nearest multiples of 4 (or 8 or whatever) and full
+elastic tabstops rendering. With this we could encourage users to make a
+table header containing cells of maximum needed length (for example by
+padding the remaining width with spaces). Obvious flaw of this solution is
+requiring text author to know the maximum widths of their columns (which can
+potentially be big raw data impossible to look up). But then TSV will look
+like table no matter what.
+
+Greedy/semi elastic render (without padded header) (`Name` column made wider
+after encountering Bessy the Cow cell):
+```
+Name	Age	Address
+Paul	23	1115 W Franklin
+Bessy the Cow		5	Big Farm Way
+Zeke			45	W Main St
+```
+Now that I think about it, this has little to nothing to do with spec (maybe
+I should send it to [tech] as well, or instead) as all of this can be put in
+best practices or even emerge as non-written standard for
+formulating/rendering documents. However, I think this is an interesting use
+of an uncommon text rendering technique to make plaintext capable of
+presenting tabular data. Let me know, what you think about that.
+
+Grzegorz Przybylski aka Zwatotem
+
+
+
+
+
+
+
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004663.html">[spec] Possible Tables Syntax</a></li>
+<li>Next message (by thread): <a href="004694.html">[spec] Possible Tables Syntax</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4674">[ date ]</a> <a href="thread.html#4674">[ thread ]</a> <a href="subject.html#4674">[ subject ]</a> <a href="author.html#4674">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

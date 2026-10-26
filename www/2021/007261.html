@@ -1,44 +1,29 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> chat over gemini (or, let's play with streaming text)
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20chat%20over%20gemini%20%28or%2C%20let%27s%20play%20with%20streaming%20text%29&In-Reply-To=%3C87ilycsk8z.fsf%40omarpolo.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="007258.html">
-   
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>chat over gemini (or, let's play with streaming text)</H1>
-    <B>Omar Polo</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20chat%20over%20gemini%20%28or%2C%20let%27s%20play%20with%20streaming%20text%29&In-Reply-To=%3C87ilycsk8z.fsf%40omarpolo.com%3E"
-       TITLE="chat over gemini (or, let's play with streaming text)">op at omarpolo.com
-       </A><BR>
-    <I>Mon Oct  4 17:10:27 BST 2021</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="007258.html">Video: Why Gemini?
-</A></li>
-        
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#7261">[ date ]</a>
-              <a href="thread.html#7261">[ thread ]</a>
-              <a href="subject.html#7261">[ subject ]</a>
-              <a href="author.html#7261">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>chat over gemini (or, let&#x27;s play with streaming text)</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007258.html">
+<link rel="next" href="007262.html">
+</head>
+<body>
+<h1>chat over gemini (or, let&#x27;s play with streaming text)</h1>
+<b>Omar Polo</b> op at omarpolo.com<br>
+<i>Mon Oct  4 17:10:27 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007258.html">Video: Why Gemini?</a></li>
+<li>Next message (by thread): <a href="007262.html">chat over gemini (or, let&#x27;s play with streaming text)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7261">[ date ]</a> <a href="thread.html#7261">[ thread ]</a> <a href="subject.html#7261">[ subject ]</a> <a href="author.html#7261">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Hello,
+<pre>Hello,
 
-One of the things that I love about text/gemini is how it's easy to
-parse, and being it line-based it's also really easy to stream it.  When
+One of the things that I love about text/gemini is how it&#x27;s easy to
+parse, and being it line-based it&#x27;s also really easy to stream it.  When
 I started working on telescope, the idea of being able to stream content
 was present in the design of the parser from the first draft -- it also
 fit nicely with separation in multiple processes (one process does the
@@ -46,56 +31,56 @@ fetching, another one the rendering, and messages are sent from one proc
 to the other.)  But other than knowing from the code that it should
 work, I never played with this aspect of text/gemini.
 
-Fast forward various months, I've just watched the &quot;Why gemini&quot; video by
-Tomasino and I got an urge to build something with streaming text.  I'm
+Fast forward various months, I&#x27;ve just watched the &quot;Why gemini&quot; video by
+Tomasino and I got an urge to build something with streaming text.  I&#x27;m
 attaching a very, very simple CGI script that streams text/gemini to
 build an interactive chatroom.
 
 The idea is similar to the one presented by solderpunk in &quot;A vision for
 gemini applications&quot;
 
-<A HREF="gemini://gemini.circumlunar.space/users/solderpunk/gemlog/a-vision-for-gemini-applications.gmi">gemini://gemini.circumlunar.space/users/solderpunk/gemlog/a-vision-for-gemini-applications.gmi</A>
+<a href="gemini://gemini.circumlunar.space/users/solderpunk/gemlog/a-vision-for-gemini-applications.gmi">gemini://gemini.circumlunar.space/users/solderpunk/gemlog/a-vision-for-gemini-applications.gmi</a>
 
-and, frankly, I'm quite disappointed nobody has built something like
-this before.  (or at least I haven't been able to find it.  I know
-kensanata has made some experiments with a mush, but I haven't played
+and, frankly, I&#x27;m quite disappointed nobody has built something like
+this before.  (or at least I haven&#x27;t been able to find it.  I know
+kensanata has made some experiments with a mush, but I haven&#x27;t played
 with it (yet))
 
 The idea is to provide two pages: one that accepts input via the
 response code 10 and appends to a file, the second is a literal `tail
--f'.  Simple, but it works, and it's immediate.  As soon as someone
-sends something, all the clients reading from `tail -f' gets the
+-f&#x27;.  Simple, but it works, and it&#x27;s immediate.  As soon as someone
+sends something, all the clients reading from `tail -f&#x27; gets the
 message.
 
-(the various `tail -f' gets eventually killed by a SIGPIPE when the
+(the various `tail -f&#x27; gets eventually killed by a SIGPIPE when the
 client closes the connection and the server closes the script stdout.
 It could take a while due to the buffering, but can be worked out.  I
-don't know if servers are expected to kill the spawned scripts -- I
-don't recall anything from the RFC -- but I'm probably wrong.  gmid
-anyway doesn't kill the scripts, it let UNIX do its things with signals.
+don&#x27;t know if servers are expected to kill the spawned scripts -- I
+don&#x27;t recall anything from the RFC -- but I&#x27;m probably wrong.  gmid
+anyway doesn&#x27;t kill the scripts, it let UNIX do its things with signals.
 Feature or bug?  dunno.)
 
-It doesn't require a client certificates, but uses the subject of it if
-provided.  There's a check that can be de-commented to enforce the usage
+It doesn&#x27;t require a client certificates, but uses the subject of it if
+provided.  There&#x27;s a check that can be de-commented to enforce the usage
 of client certificates.
 
-I'm hosting a demo at
+I&#x27;m hosting a demo at
 
-	<A HREF="gemini://gemini.omarpolo.com/cgi/lets-chat">gemini://gemini.omarpolo.com/cgi/lets-chat</A>
+	<a href="gemini://gemini.omarpolo.com/cgi/lets-chat">gemini://gemini.omarpolo.com/cgi/lets-chat</a>
 
-but I don't promise to keep it online.  It's a quick-n-dirty script
+but I don&#x27;t promise to keep it online.  It&#x27;s a quick-n-dirty script
 (less than 50 lines of -hopefully- portable sh), probably filled with
-bugs, wrote only to be a demonstration.  I don't want to moderate it
-if/when people write things.  It's really easy to host it locally, for
-e.g. using gmid (disclaimer: I'm the author)
+bugs, wrote only to be a demonstration.  I don&#x27;t want to moderate it
+if/when people write things.  It&#x27;s really easy to host it locally, for
+e.g. using gmid (disclaimer: I&#x27;m the author)
 
-	$ gmid -x '*' .
+	$ gmid -x &#x27;*&#x27; .
 
 from the same directory where you saved the script.
 
 It seems to work with Telescope, Tinmop and Lagrange.  Kristall and
-Amfora don't seem to support streaming, or maybe I have an old version.
-Elpher doesn't stream by design.
+Amfora don&#x27;t seem to support streaming, or maybe I have an old version.
+Elpher doesn&#x27;t stream by design.
 
 I hope this inspires someone to build amazing things with the streaming
 capability of text/gemini.  There are a lot of possibilities, for
@@ -106,7 +91,7 @@ humans ;)
 
 Gemini clients could &quot;ring&quot; or use some other kind of mechanism to
 inform the user that more content is available in a page (for
-e.g. Telescope adds a `!'  before the tab title.)
+e.g. Telescope adds a `!&#x27;  before the tab title.)
 
 Cheers,
 
@@ -117,35 +102,19 @@ P.S.: this is also a partial reply to the talkat spec.  I love seeing
 what creative things folks are building, and I really hope the best for
 mbays and their idea (if I got the paternity correctly :P), but I also
 like the idea of doing these sort of things over gemini.  On one hand I
-don't want to push gemini over its boundaries, on the other I love doing
+don&#x27;t want to push gemini over its boundaries, on the other I love doing
 that :)
 
 
--------------- next part --------------
-A non-text attachment was scrubbed...
-Name: lets-chat
-Type: application/octet-stream
-Size: 919 bytes
-Desc: not available
-URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20211004/c3f9575e/attachment-0001.obj">https://lists.orbitalfox.eu/archives/gemini/attachments/20211004/c3f9575e/attachment-0001.obj</A>&gt;
-</PRE>
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="007258.html">Video: Why Gemini?
-</A></li>
-	
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#7261">[ date ]</a>
-              <a href="thread.html#7261">[ thread ]</a>
-              <a href="subject.html#7261">[ subject ]</a>
-              <a href="author.html#7261">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="007258.html">Video: Why Gemini?</a></li>
+<li>Next message (by thread): <a href="007262.html">chat over gemini (or, let&#x27;s play with streaming text)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7261">[ date ]</a> <a href="thread.html#7261">[ thread ]</a> <a href="subject.html#7261">[ subject ]</a> <a href="author.html#7261">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

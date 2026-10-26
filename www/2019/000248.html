@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On text reflow. It&#x27;s not about bullets!</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000247.html">
+<link rel="next" href="000249.html">
+</head>
+<body>
+<h1>On text reflow. It&#x27;s not about bullets!</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Tue Nov 26 19:06:30 GMT 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000247.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li>Next message (by thread): <a href="000249.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#248">[ date ]</a> <a href="thread.html#248">[ thread ]</a> <a href="subject.html#248">[ subject ]</a> <a href="author.html#248">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Tue, Nov 26, 2019 at 01:13:31AM +0100, David Requena wrote:
+
+&gt;<i>    Is the spec golden goal to end with exactly on special line marker?
+</i>&gt;<i>    Or is it ending with exactly what is needed, no more, no less?
+</i>
+There is nothing particularly special, as far as I&#x27;m concerned, about
+having exactly one bit of special syntax, as opposed to two or three.
+But I am concerned, and consistently have been all throughout Gemini&#x27;s
+development, about making sure we don&#x27;t provide a toehold for
+extensibility to creep in.
+
+HTML has this problem, very clearly - there is no natural limit at all
+on the variety of tags which could be defined.  And the consequences of
+this have been seen:
+
+* A popular browser invents a tag of its own, like &lt;blink&gt; or &lt;marquee&gt;
+* That tag becomes popular and widely used
+* A new browser comes along which follows the spec, and suddenly the
+  many pages using &lt;blink&gt; or whatever &quot;don&#x27;t work properly&quot;.
+* The new browser is pressured into implementing the non-standard tag
+* Eventually, something invented by a single influential client becomes
+  de-facto standard
+
+HTTP has the same problem, in that request and response headers can grow
+without limit, and hence things like Cookie eventually come along.
+
+I am firmly of the belief that open-endedness and extensibility are
+nothing but poison for a project which wants to remain small and simple
+and to strongly enforce certain ideals.
+
+Thus, my big concern about using == as a start-of-line marker to
+indicate verbatim text (and let me be very clear that I recognise and
+appreciate the beauty of using this common notation for equality to mean
+&quot;present exactly this&quot;!) is that it might soe the seed of the idea that
+the text/gemini syntax is one where features are defined by two
+character markers where the first character is =.  If =&gt; is special and
+== is special then if we ever decide to add explicit representation of
+bullets everybody will have to agree it is obvious and consistent that
+this be done with =* and by this point the war is lost.  =$ and =# and
+=? are all fair game.  Someday somebody will propose that
+
+=I <a href="gemini://foo.org/bar/img.png">gemini://foo.org/bar/img.png</a>
+
+should mean &quot;display the image at this URL inline&quot;!
+
+This is precisely the reason that when the question came up as to how we
+should best implement something like Gopher&#x27;s item type 7 in a system
+without item types, I rejected the notion (even though it seems to make
+perfect sense) that we use =? instead of =&gt; for search points (I *think*
+this was julienxx&#x27;s idea?).
+
+This might seem dramatic, and I admit that Gemini is slightly more
+naturally immune to this than HTML is - Gemini clients are by design
+very simple, which means many people will write them, which means there
+is less likely to evolve a situation where a small number of highly
+influential clients have undue sway over extending the standard (this
+effect is, in my opinion, the most valuable insight in the &quot;Avoiding the
+gravity-well of webbiness in gopher&quot; essay at
+<a href="gopher://fuckup.solutions/1/enkiv2/avoiding-the-gravity-hole-of-webbiness-in-gopher">gopher://fuckup.solutions/1/enkiv2/avoiding-the-gravity-hole-of-webbiness-in-gopher</a>
+- see the final paragraph).  But I do genuinely worry about this.  This
+principle of not inviting future extension has informed a number of
+decisions about the Gemini protocol.
+
+Part of the reason I initially quite liked the idea of using a leading
+space to indicate verbatim text was that it doesn&#x27;t provide any kind of
+hint whatesoever as to a general and extensible markup syntax.
+
+That said, returning to it after quite a long break, I&#x27;m not as partial
+to it as I once was.  In the early days of Gemini there was a lot of
+discussion of whether or not it was a good idea that the original link
+syntax used a tab character in it.  In the end, I found pretty heavily
+convincing the argument that using whitespace in the link syntax was a
+bad idea, because:
+
+* it was impossible to tell just by looking at a file whether or not it
+  was correctly formatted (using tabs) or incorrectly formatted using
+  an equivalent number of spaces
+* copying and pasting a valid link line in a terminal environment would
+  break it, because the tab would be converted to spaces
+* some people, especially Pythonistas, have configured their editors so
+  that the tab key inserts spaces instead of a tab.
+
+So, the tab-based link syntax was banished and =&gt; was born.
+
+I see now that it&#x27;s kind of inconsistent to have ruled against
+syntactic whitespace in one situation but allowed it in another.  Not
+all of the points above apply in this second situation, but given that,
+as you mentioned, one of the common cases for verbatim text is going to
+be inserting chunks of source code, and given that tabs are a frequent
+occurence in source code, it does seem to be inviting confusing and
+ambiguous situations in at least some cases.  So perhaps best to steer
+well clear.
+
+That&#x27;s an awful lot of &quot;not that, but not this either&quot;, which doesn&#x27;t
+leave us with an actual solution, and I&#x27;m aware of how frustrating that
+is.  I do certainly agree with both of your premises, that some solution
+to widely varying screen sizes and some way to embed unreflowd text, are
+very highly desirable.
+ 
+&gt;<i> If you happen to have endured my prose all the way down here, many thanks
+</i>&gt;<i> for
+</i>&gt;<i> your attention. You&#x27;re a remarkably forgiving reader.
+</i>
+Don&#x27;t worry, I have been working hard for months to scare anybody
+without a very high tolerance for verbosity far away from anything to do
+with Gemini. :)
+
+Cheers,
+Solderpunk
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000247.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li>Next message (by thread): <a href="000249.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#248">[ date ]</a> <a href="thread.html#248">[ thread ]</a> <a href="subject.html#248">[ subject ]</a> <a href="author.html#248">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

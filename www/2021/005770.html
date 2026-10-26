@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] Certificate trust</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005786.html">
+<link rel="next" href="005787.html">
+</head>
+<body>
+<h1>[spec] Certificate trust</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Mon Mar  1 03:07:02 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005786.html">[spec] Certificate trust</a></li>
+<li>Next message (by thread): <a href="005787.html">[spec] Certificate trust</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5770">[ date ]</a> <a href="thread.html#5770">[ thread ]</a> <a href="subject.html#5770">[ subject ]</a> <a href="author.html#5770">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Solene Rapenne once stated:
+&gt;<i> On Sun, 28 Feb 2021 20:27:26 +0100
+</i>&gt;<i> C?me Chilliet &lt;come at chilliet.eu&gt;:
+</i>&gt;<i> 
+</i>&gt;<i> &gt; I?m failing to see how TOFU can provide any security, especially if
+</i>&gt;<i> &gt; there is no way to announce a renewal by sending both new and old cert
+</i>&gt;<i> &gt; or something, there is a MITM possibility at each renewal. The only TOFU
+</i>&gt;<i> &gt; example I?ve seen cited is openssh, which seems offtopic because you
+</i>&gt;<i> &gt; usually do not ssh into random machine on the internet by following
+</i>&gt;<i> &gt; links like you do with Gemini.
+</i>&gt;<i> 
+</i>&gt;<i> I suggested something on IRC a while ago, I&#x27;m not sure this would be a
+</i>&gt;<i> good idea but I&#x27;ll share it here.
+</i>&gt;<i> 
+</i>&gt;<i> Instead of TOFU, 2 mecanisms could be used:
+</i>&gt;<i> 
+</i>&gt;<i> 1) Check chain of trust of the certificate, with let&#x27;s encrypt and other
+</i>&gt;<i> provider (they are not alone anymore) it&#x27;s easy to get a valid certificate
+</i>
+  The viability of this approach may depend upon the TLS library used.  I
+use libtls, and I really only have two options:
+
+	1. Do the whole CA thang and let the underlying TLS library validate
+	   the certificate.
+
+	2. Do no validatation whatsoever, leaving the validation up to the
+	   client.
+
+  To do this, I would have to disable validation entirely, and do it
+manually, dipping into the nasty API that is OpenSSL.  I would have to check
+other servers to see how they are handling this and if I could do the same
+thing.
+
+&gt;<i> 2) If 1 is invalid, let&#x27;s (introduce something new here) check if
+</i>&gt;<i> DNS doesn&#x27;t have a TXT field with the certificate fingerprint and
+</i>&gt;<i> see if it matches the current one, accept if OK
+</i>&gt;<i>
+</i>&gt;<i> 3) if 2 found a TXT that doesn&#x27;t match, tell the user, if it matches,
+</i>&gt;<i> accepts, if no TXT, TOFU?
+</i>
+  The general problem with this is not the actual DNS RR used (TXT, SSHFP,
+etc), it&#x27;s making the DNS call itself.  If you haven&#x27;t dived into the mess
+that is DNS and resolving libriaries, it gets about as nasty as TLS with
+about a half dozen libraries that aren&#x27;t compatible at all.  POSIX systems
+come with getaddrinfo(), but that only covers A and AAAA record types.  If
+you want *any* other type of DNS record, you are pretty much forced to
+either use one of the horrible DNS resolving libraries or roll your own.  I
+would tout my own DNS library [1], but it&#x27;s in C (and has a Lua wrapper for
+it).
+
+  I&#x27;m not saying this is a bad idea.  I&#x27;m just saying there are issues with
+it ... 
+
+  -spc
+
+[1]	<a href="https://github.com/spc476/SPCDNS">https://github.com/spc476/SPCDNS</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005786.html">[spec] Certificate trust</a></li>
+<li>Next message (by thread): <a href="005787.html">[spec] Certificate trust</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5770">[ date ]</a> <a href="thread.html#5770">[ thread ]</a> <a href="subject.html#5770">[ subject ]</a> <a href="author.html#5770">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

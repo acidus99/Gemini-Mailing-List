@@ -1,0 +1,28 @@
+# Generate a PKCS12 keystore on Android
+Ariane currently only supports a private key plus X.509 certificate bundled in the PKCS12 archive format.
+
+=> https://en.wikipedia.org/wiki/PKCS_12 PKCS12
+
+To generate a client certificate on your device firstly install Termux if you don't have it already. The latest Termux is now only available on F-Droid:
+
+=> https://www.f-droid.org/ F-Droid
+=> https://termux.com/ Termux
+=> https://f-droid.org/repository/browse/?fdid=com.termux Termux: F-Droid
+
+Open Termux and follow the steps below:
+```
+openssl # follow the prompts to install
+
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
+
+# enter a passphrase and follow the instructions:
+# enter a nickname/identity name in the Organization Name field
+
+cat key.pem >> cert.pem
+openssl pkcs12 -export -in cert.pem -out cert.pfx
+```
+      
+You should now have a cert.pfx file you can use as a Gemini identity in Ariane.
+The same commands can be used after installing OpenSSL on Linux or MacOS if you don't want to install Termux.
+
+2020-11-11

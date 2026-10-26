@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>URLs in request lines</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000171.html">
+<link rel="next" href="000166.html">
+</head>
+<body>
+<h1>URLs in request lines</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Sun Sep 15 09:34:46 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000171.html">URLs in request lines</a></li>
+<li>Next message (by thread): <a href="000166.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#164">[ date ]</a> <a href="thread.html#164">[ thread ]</a> <a href="subject.html#164">[ subject ]</a> <a href="author.html#164">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>&gt;<i>   The TL;DR of this would be:  the following two URLs SHOULD be the same and
+</i>&gt;<i> serve up the same page:
+</i>&gt;<i> 
+</i>&gt;<i>         <a href="gemini://example.com">gemini://example.com</a>
+</i>&gt;<i>         <a href="gemini://example.com/">gemini://example.com/</a> 
+</i>
+I&#x27;ll admit to having not yet done the RFC reading ad thinking required
+to know whether the above is in fact already mandated by RFC-3986, but
+the behaviour above is what I *strongly* think should be correct for
+Gemini, and if it&#x27;s not RFC-mandated then we should make it so in our
+own spec.
+
+&gt;<i>   Again, per RFC-3986, they are (unless some document describing Gemini URLs
+</i>&gt;<i> states otherwise).  I naturally assumed they would be as they are for HTTP.
+</i>&gt;<i> That&#x27;s perhaps an unwarrented assumption, but I would have to think the two
+</i>&gt;<i> *are* the same, because of the nature of URLs.
+</i>
+Certainly, I want Gemini URLs to be as &quot;generic&quot; as possible, and I
+definitely reject the idea of a Gopher-style approach of having our own
+URL standard which deviates from the rest of the world.  Being able to
+do away with that was (a small) part of the motivation for putting
+content type in the Gemini response header.
+
+Are HTTP URLs perfectly generic or do they have some scheme-dependent
+details in there?
+
+So far I have basically treated Gemini URLs as following whatever rules
+HTTP URLs do.  This is because the URL (un)parsing tools in the Python
+standard library don&#x27;t work nicely on schemes they don&#x27;t recognise (like
+gemini://), and they won&#x27;t convert relative URLs to absolute URLs
+correctly.  So, I have written some fairly ugly code where &quot;gemini://&quot;
+is replaced by &quot;http://&quot; before doing stuff using those tools, and then
+this is reversed at the end.  I don&#x27;t really like doing this, but I
+dislike it less than writing my own URL-mangling code.  Because of this
+limitation, practically speaking Gemini URLs had better act identically
+with *some* standard URL scheme that Python is aware of, and HTTP seems
+a much more sensible choice than, say, FTP.
+
+&gt;<i> With that out of the way, I do handle the lack of a trailing slash with
+</i>&gt;<i> the request &lt;<a href="gemini://gemini.conman.org">gemini://gemini.conman.org</a>&gt; in GLV-1.12556 by sending out a
+</i>&gt;<i> redirect.  I think mine is the only server that actually does something
+</i>&gt;<i> different than serve up the top level page [1]. I also do that for any
+</i>&gt;<i> requests that map to a directory that don&#x27;t end in a slash [2].
+</i>
+Something I&#x27;ve written (Gegobi, probably?) sends a redirect to add a
+missing trailing slash for requests that map to directories.  This was
+necessary for relative URL absolutisation to function correctly.  I
+remember thinking at the time it was kind of annoying to have to do
+this, but I guess it&#x27;s the price we have to pay for all of the nice
+stuff that using URLs provides.
+
+-Solderpunk
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000171.html">URLs in request lines</a></li>
+<li>Next message (by thread): <a href="000166.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#164">[ date ]</a> <a href="thread.html#164">[ thread ]</a> <a href="subject.html#164">[ subject ]</a> <a href="author.html#164">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

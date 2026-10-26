@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text reflow woes (or: I want bullets back!)y</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000311.html">
+<link rel="next" href="000314.html">
+</head>
+<body>
+<h1>Text reflow woes (or: I want bullets back!)y</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Tue Jan 14 19:34:00 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000311.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000314.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#313">[ date ]</a> <a href="thread.html#313">[ thread ]</a> <a href="subject.html#313">[ subject ]</a> <a href="author.html#313">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Mon, Jan 13, 2020 at 05:55:04PM -0500, Sean Conner wrote:
+
+It seems easiest to me (and my current experimental implementation in
+AV-98 does this) to make the spec quite strict in this regard: verbatim
+mode is toggled on/off by lines consisting of precisely 3 ticks and
+nothing else.  Which means...
+ 
+&gt;<i> ````
+</i>&gt;<i> Note that there are four ticks.
+</i>&gt;<i>   What&#x27;s the expected result?
+</i>&gt;<i>     Literal text?
+</i>&gt;<i>       Or reflowed text?
+</i>&gt;<i> ```
+</i>
+The first 5 lines of this will be reflowed, the final line will trigger
+literal text below it.
+
+&gt;<i> ```
+</i>&gt;<i> This is similar to the above,
+</i>&gt;<i>   but the block ends with four ticks,
+</i>&gt;<i>     not the expecte three.
+</i>&gt;<i> ````
+</i>
+Literal mode is turned on by the first line but never turned off, so
+there will be a literal line of four ticks and that end, and whatever
+comes lext will be literalised, too!
+ 
+&gt;<i> ``` What about trailing text?
+</i>&gt;<i>   Is that allowd?
+</i>&gt;<i>     What is the expected result?
+</i>&gt;<i> ```
+</i>
+Literal mode won&#x27;t be turned on until the very end, and the first three
+lines will be flowed.
+
+&gt;<i> ```
+</i>&gt;<i> ```
+</i>&gt;<i> 
+</i>&gt;<i> (You should be able to handle the above as well).
+</i>
+Hmm, I think AV-98 will handle that just fine, hang on...yep, no
+problems.
+
+&gt;<i>   One thing to watch out for are lines that exceed the wrapping length with
+</i>&gt;<i> no space (or dash if you are ambitious) characters to break on.
+</i>
+Ah, that&#x27;s an annoying edge case.  I guess such lines can just be broken
+at exactly the viewport width, possibly with a dash at the end of all
+but the final line?
+ 
+&gt;<i>   I want to say Python.  I don&#x27;t program in Python, but I know I have seen
+</i>&gt;<i> that syntax in some lanuage.
+</i>
+I was briefly worried about Python docstrings (before Tomasino pointed
+out we aren&#x27;t using quotes at all!), but PEP 257 recommends always using
+double quotes for them anyway.
+
+Cheers,
+Solderpunk
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000311.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000314.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#313">[ date ]</a> <a href="thread.html#313">[ thread ]</a> <a href="subject.html#313">[ subject ]</a> <a href="author.html#313">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

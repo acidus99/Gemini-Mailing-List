@@ -1,51 +1,35 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Using netcat with gemini (was Re: A question regarding the spec)
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Using%20netcat%20with%20gemini%20%28was%20Re%3A%20A%20question%20regarding%20the%20spec%29&In-Reply-To=%3C20201029003109.ac9266d2e5b032b602820651%40gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="002964.html">
-   <LINK REL="Next"  HREF="002932.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Using netcat with gemini (was Re: A question regarding the spec)</H1>
-    <B>Philip Linde</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Using%20netcat%20with%20gemini%20%28was%20Re%3A%20A%20question%20regarding%20the%20spec%29&In-Reply-To=%3C20201029003109.ac9266d2e5b032b602820651%40gmail.com%3E"
-       TITLE="Using netcat with gemini (was Re: A question regarding the spec)">linde.philip at gmail.com
-       </A><BR>
-    <I>Wed Oct 28 23:31:09 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="002964.html">Using netcat with gemini (was Re: A question regarding the spec)
-</A></li>
-        <LI>Next message (by thread): <A HREF="002932.html">SNI
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2965">[ date ]</a>
-              <a href="thread.html#2965">[ thread ]</a>
-              <a href="subject.html#2965">[ subject ]</a>
-              <a href="author.html#2965">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Using netcat with gemini (was Re: A question regarding the spec)</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="002964.html">
+<link rel="next" href="002932.html">
+</head>
+<body>
+<h1>Using netcat with gemini (was Re: A question regarding the spec)</h1>
+<b>Philip Linde</b> linde.philip at gmail.com<br>
+<i>Wed Oct 28 23:31:09 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="002964.html">Using netcat with gemini (was Re: A question regarding the spec)</a></li>
+<li>Next message (by thread): <a href="002932.html">SNI</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2965">[ date ]</a> <a href="thread.html#2965">[ thread ]</a> <a href="subject.html#2965">[ subject ]</a> <a href="author.html#2965">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Wed, 28 Oct 2020 17:59:21 -0400
-Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
+<pre>On Wed, 28 Oct 2020 17:59:21 -0400
+Sean Conner &lt;sean at conman.org&gt; wrote:
 
 &gt;<i>   The specification should say:
-</I>&gt;<i> 
-</I>&gt;<i> 	If the scheme of the URL is not specified, a scheme of gemini: is
-</I>&gt;<i> 	implied.
-</I>&gt;<i>
-</I>
-The colon also isn't part of the scheme, but the URI as a whole. If one
+</i>&gt;<i> 
+</i>&gt;<i> 	If the scheme of the URL is not specified, a scheme of gemini: is
+</i>&gt;<i> 	implied.
+</i>&gt;<i>
+</i>
+The colon also isn&#x27;t part of the scheme, but the URI as a whole. If one
 can omit both the scheme and the colon, then the slightly adjusted
 &quot;absolute URL&quot; becomes what RFC 3986 calls a &quot;relative reference&quot;,
 e.g. &quot;//gemini.circumlunar.space&quot;. Omitting the scheme from an absolute
@@ -56,22 +40,22 @@ Both our conclusions require similarly liberal interpretation of the
 Gemini spec, though your interpretation is easier to describe in terms
 of modifications to the rules already defined in RFC 3986.
 
-&gt;<i>   I'm not aware of any server that does otherwise.  There are servers out
-</I>&gt;<i> there that play around with trailing '/'  elsewhere in the URL [3], but not
-</I>&gt;<i> at the root.
-</I>
+&gt;<i>   I&#x27;m not aware of any server that does otherwise.  There are servers out
+</i>&gt;<i> there that play around with trailing &#x27;/&#x27;  elsewhere in the URL [3], but not
+</i>&gt;<i> at the root.
+</i>
 As demonstrated by Sudipto Mallick above, gemini.circumlunar.space does
-otherwise. Request &quot;<A HREF="gemini://gemini.circumlunar.space">gemini://gemini.circumlunar.space</A>&quot; and you get one
+otherwise. Request &quot;<a href="gemini://gemini.circumlunar.space">gemini://gemini.circumlunar.space</a>&quot; and you get one
 response (a 31 redirect code), but if you request
-&quot;<A HREF="gemini://gemini.circumlunar.space/">gemini://gemini.circumlunar.space/</A>&quot; you get a code 20 response with
+&quot;<a href="gemini://gemini.circumlunar.space/">gemini://gemini.circumlunar.space/</a>&quot; you get a code 20 response with
 the landing page. The URIs are not treated as equivalent, which they
 should be after normalization.
 
-The path isn't normalized in the same way, so it's not a concern there.
+The path isn&#x27;t normalized in the same way, so it&#x27;s not a concern there.
 
 &gt;<i> [2]	The URI-reference rule is listed third---I think this is a mistake
-</I>&gt;<i> 	on the part of the RFC,
-</I>
+</i>&gt;<i> 	on the part of the RFC,
+</i>
 The order of the ABNF rules in the appendix bears no significance to
 their interpretation. The rule named &quot;URI&quot; defines the URI syntax. The
 rule named &quot;URI-reference&quot; defines a syntax for a sequence that is
@@ -82,7 +66,7 @@ disallow fragments?), modified so that
   authority = host [ &quot;:&quot; port ]
 
 and with the note about implied scheme, which interpreted literally
-would normalize &quot;://example.com&quot; to &quot;<A HREF="gemini://://example.com">gemini://://example.com</A>&quot; and would
+would normalize &quot;://example.com&quot; to &quot;gemini://://example.com&quot; and would
 accept neither &quot;example.com&quot; nor &quot;//example.com&quot;.
 
 By your interpretation (which I agree makes most sense) it is more
@@ -100,34 +84,16 @@ Name: not available
 Type: application/pgp-signature
 Size: 488 bytes
 Desc: not available
-URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201029/0b5b9bec/attachment-0001.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201029/0b5b9bec/attachment-0001.sig</A>&gt;
-</PRE>
-
-
-
-
-
-
-
-
-
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20201029/0b5b9bec/attachment-0001.sig">https://mailing-list-archive.gemi.dev/www/attachments/20201029/0b5b9bec/attachment-0001.sig</a>&gt;
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="002964.html">Using netcat with gemini (was Re: A question regarding the spec)
-</A></li>
-	<LI>Next message (by thread): <A HREF="002932.html">SNI
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2965">[ date ]</a>
-              <a href="thread.html#2965">[ thread ]</a>
-              <a href="subject.html#2965">[ subject ]</a>
-              <a href="author.html#2965">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="002964.html">Using netcat with gemini (was Re: A question regarding the spec)</a></li>
+<li>Next message (by thread): <a href="002932.html">SNI</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2965">[ date ]</a> <a href="thread.html#2965">[ thread ]</a> <a href="subject.html#2965">[ subject ]</a> <a href="author.html#2965">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

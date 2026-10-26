@@ -1,42 +1,26 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Unadorned Gemtext instead of syndication formats
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unadorned%20Gemtext%20instead%20of%20syndication%20formats&In-Reply-To=%3C20200908173157.GG2239112%40tilde.team%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="002591.html">
-   <LINK REL="Next"  HREF="002601.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Unadorned Gemtext instead of syndication formats</H1>
-    <B>easeout at tilde.team</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Unadorned%20Gemtext%20instead%20of%20syndication%20formats&In-Reply-To=%3C20200908173157.GG2239112%40tilde.team%3E"
-       TITLE="Unadorned Gemtext instead of syndication formats">easeout at tilde.team
-       </A><BR>
-    <I>Tue Sep  8 18:31:57 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="002591.html">Language tags in Luke's &quot;A proposed scheme for parsing preformatted alt text&quot;
-</A></li>
-        <LI>Next message (by thread): <A HREF="002601.html">Unadorned Gemtext instead of syndication formats
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2600">[ date ]</a>
-              <a href="thread.html#2600">[ thread ]</a>
-              <a href="subject.html#2600">[ subject ]</a>
-              <a href="author.html#2600">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unadorned Gemtext instead of syndication formats</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="002591.html">
+<link rel="next" href="002601.html">
+</head>
+<body>
+<h1>Unadorned Gemtext instead of syndication formats</h1>
+<b>easeout at tilde.team</b> easeout at tilde.team<br>
+<i>Tue Sep  8 18:31:57 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="002591.html">Language tags in Luke&#x27;s &quot;A proposed scheme for parsing preformatted alt text&quot;</a></li>
+<li>Next message (by thread): <a href="002601.html">Unadorned Gemtext instead of syndication formats</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2600">[ date ]</a> <a href="thread.html#2600">[ thread ]</a> <a href="subject.html#2600">[ subject ]</a> <a href="author.html#2600">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Recently on the mailing list and in #gemini we've been talking about
+<pre>Recently on the mailing list and in #gemini we&#x27;ve been talking about
 syndication, as in RSS / Atom. I want to begin by summarizing some of
 our thoughts.
 
@@ -78,7 +62,7 @@ that matter, a web page.
 
 To address the fact that creating a feed is a few steps more difficult
 than creating a Gemtext page, one idea is to make a new feed format
-which is written in Gemtext and conforms to a pattern. While it's true
+which is written in Gemtext and conforms to a pattern. While it&#x27;s true
 this would be easy to write, there is no existing parser ecosystem for
 it, so it would be effectively Gemini-only. If you wanted to syndicate
 to the broader internet, you would still need to publish something like
@@ -95,68 +79,68 @@ browsable as a regular Gemtext page. And that got us thinking:
 If regular Gemtext pages are easy to parse, can we just treat any
 Gemtext page as a feed? In fact, yes we can. You can poll plain Gemtext
 pages, not feed format files, and detect the links on the page that are
-new. And we don't need a Gemtext feed format pattern, because the
+new. And we don&#x27;t need a Gemtext feed format pattern, because the
 pattern of link lines beginning with &quot;=&gt;&quot; is enough.
 
 # Subscribing to any Gemtext page
 
 To get a feel for that, I did a proof of concept that you can try out:
 
-=&gt; <A HREF="https://github.com/kconner/gemini-subscription-cli">https://github.com/kconner/gemini-subscription-cli</A> Proof of Concept
+=&gt; <a href="https://github.com/kconner/gemini-subscription-cli">https://github.com/kconner/gemini-subscription-cli</a> Proof of Concept
 
 This repository contains a Makefile and a shell script. The script takes
 a list of Gemini URLs to fetch, which are expected to be Gemtext pages.
 It filters them down to just the link lines. It compares the set of link
 lines with a previously-fetched set of link lines, and it identifies and
-emits those that are new. It saves the new total set as the next run's
+emits those that are new. It saves the new total set as the next run&#x27;s
 previous set for comparison.
 
 If you want, you can clone the repo and then try it out.
 
 Subscribe to some pages:
 
-$ echo '<A HREF="gemini://gemini.circumlunar.space:1965/servers/">gemini://gemini.circumlunar.space:1965/servers/</A>' &gt;&gt; subscribed-urls
-$ echo '<A HREF="gemini://tilde.team/~easeout/glog/">gemini://tilde.team/~easeout/glog/</A>' &gt;&gt; subscribed-urls
+$ echo &#x27;<a href="gemini://gemini.circumlunar.space:1965/servers/">gemini://gemini.circumlunar.space:1965/servers/</a>&#x27; &gt;&gt; subscribed-urls
+$ echo &#x27;<a href="gemini://tilde.team/~easeout/glog/">gemini://tilde.team/~easeout/glog/</a>&#x27; &gt;&gt; subscribed-urls
 
-Fetch all the links, since we don't have a prior set to compare to:
+Fetch all the links, since we don&#x27;t have a prior set to compare to:
 
 $ make
-fetched: <A HREF="gemini://gemini.circumlunar.space:1965/servers/">gemini://gemini.circumlunar.space:1965/servers/</A>                                                                   
-fetched: <A HREF="gemini://tilde.team/~easeout/glog/">gemini://tilde.team/~easeout/glog/</A>                                                                                
+fetched: <a href="gemini://gemini.circumlunar.space:1965/servers/">gemini://gemini.circumlunar.space:1965/servers/</a>                                                                   
+fetched: <a href="gemini://tilde.team/~easeout/glog/">gemini://tilde.team/~easeout/glog/</a>                                                                                
 wrote: new-links.gmi                                                                                                       
-=&gt; <A HREF="gemini://gus.guru/known-hosts">gemini://gus.guru/known-hosts</A> Gemini hosts known to GUS                                                                 
-=&gt; <A HREF="gemini://gemini.conman.org">gemini://gemini.conman.org</A>                                                                                              
-=&gt; <A HREF="gemini://zaibatsu.circumlunar.space">gemini://zaibatsu.circumlunar.space</A>                                                                                     
-=&gt; <A HREF="gemini://carcosa.net">gemini://carcosa.net</A>                                                                                                    
-&#8230;
+=&gt; <a href="gemini://gus.guru/known-hosts">gemini://gus.guru/known-hosts</a> Gemini hosts known to GUS                                                                 
+=&gt; <a href="gemini://gemini.conman.org">gemini://gemini.conman.org</a>                                                                                              
+=&gt; <a href="gemini://zaibatsu.circumlunar.space">gemini://zaibatsu.circumlunar.space</a>                                                                                     
+=&gt; <a href="gemini://carcosa.net">gemini://carcosa.net</a>                                                                                                    
+?
 
-Later, update again and identify what's new. (To test right away, you
+Later, update again and identify what&#x27;s new. (To test right away, you
 can delete a few lines from cached-links.gmi.)
 
 $ make
-fetched: <A HREF="gemini://gemini.circumlunar.space:1965/servers/">gemini://gemini.circumlunar.space:1965/servers/</A>
-fetched: <A HREF="gemini://tilde.team/~easeout/glog/">gemini://tilde.team/~easeout/glog/</A>
+fetched: <a href="gemini://gemini.circumlunar.space:1965/servers/">gemini://gemini.circumlunar.space:1965/servers/</a>
+fetched: <a href="gemini://tilde.team/~easeout/glog/">gemini://tilde.team/~easeout/glog/</a>
 wrote: new-links.gmi
-=&gt; <A HREF="gemini://breadpunk.club">gemini://breadpunk.club</A>
+=&gt; <a href="gemini://breadpunk.club">gemini://breadpunk.club</a>
 =&gt; 2020-09-07-re-a-wordpress-confession.gmi 7 September 2020: Re: A Wordpress Confession
 
 # Where does this functionality belong?
 
 This proof of concept demonstrates that any Gemini page can already be
-treated like a feed. This means that, if you don't mind not
+treated like a feed. This means that, if you don&#x27;t mind not
 participating in the broader internet feed reader ecosystem, and you
-don't mind the occasional page redesign creating noise in subscription
-results, you don't have to make a feed file at all. Syndication is
+don&#x27;t mind the occasional page redesign creating noise in subscription
+results, you don&#x27;t have to make a feed file at all. Syndication is
 zero-cost.
 
 In hindsight, why does RSS exist? What is &quot;Really Simple&quot; about it?
-Well, it's simpler than HTML. If HTML was easy enough to parse, you
+Well, it&#x27;s simpler than HTML. If HTML was easy enough to parse, you
 could just subscribe to web pages and not need feed files. But Gemtext
-is already easy to parse. We don't our experience on the web to mislead
+is already easy to parse. We don&#x27;t our experience on the web to mislead
 us into thinking a page, like your blog index page, is not already a
 subscribable list of links.
 
-It's been pointed out this is not very different from Spacewalk, which
+It&#x27;s been pointed out this is not very different from Spacewalk, which
 (I think?) works by just polling Gemini pages and updating when they
 change, as opposed to when their links change. Both of these are useful
 and easy ways to subscribe to any Gemtext page.
@@ -171,81 +155,15 @@ for that to happen, you have to see direct Gemtext subscription working
 in the wild. One way that could work is for a browser to have a way to
 treat a bookmark like a feed subscription. I also think if CAPCOM would
 accept Gemtext pages as a feed URL option, that would go a long way.
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="002591.html">Language tags in Luke's &quot;A proposed scheme for parsing preformatted alt text&quot;
-</A></li>
-	<LI>Next message (by thread): <A HREF="002601.html">Unadorned Gemtext instead of syndication formats
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2600">[ date ]</a>
-              <a href="thread.html#2600">[ thread ]</a>
-              <a href="subject.html#2600">[ subject ]</a>
-              <a href="author.html#2600">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="002591.html">Language tags in Luke&#x27;s &quot;A proposed scheme for parsing preformatted alt text&quot;</a></li>
+<li>Next message (by thread): <a href="002601.html">Unadorned Gemtext instead of syndication formats</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2600">[ date ]</a> <a href="thread.html#2600">[ thread ]</a> <a href="subject.html#2600">[ subject ]</a> <a href="author.html#2600">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

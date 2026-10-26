@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] [spec] TLS statistics</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004679.html">
+<link rel="next" href="004641.html">
+</head>
+<body>
+<h1>[tech] [spec] TLS statistics</h1>
+<b>Côme Chilliet</b> come at chilliet.eu<br>
+<i>Fri Jan  1 14:48:55 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004679.html">[tech] default response?</a></li>
+<li>Next message (by thread): <a href="004641.html">[tech] [spec] TLS statistics</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4640">[ date ]</a> <a href="thread.html#4640">[ thread ]</a> <a href="subject.html#4640">[ subject ]</a> <a href="author.html#4640">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Le mercredi 30 d?cembre 2020, 23:15:11 CET nervuri a ?crit :
+&gt;<i> I did check out *.lanterne.chilliet.eu and it looks like it&#x27;s using a self-made server written in PHP. I&#x27;ll submit an issue one of these days, if someone doesn&#x27;t do it before me.
+</i>&gt;<i> 
+</i>&gt;<i> <a href="gemini://gemlog.lanterne.chilliet.eu/softwares.en.gmi">gemini://gemlog.lanterne.chilliet.eu/softwares.en.gmi</a>
+</i>&gt;<i> <a href="https://framagit.org/MCMic/gemini-server">https://framagit.org/MCMic/gemini-server</a>
+</i>
+Hey, that one is mine.
+
+Indeed I use STREAM_CRYPTO_METHOD_TLS_SERVER which means any TLS version. I can switch to STREAM_CRYPTO_METHOD_TLSv1_2_SERVER but I was afraid this would forbid TLS 1.3.
+I see a STREAM_CRYPTO_METHOD_TLSv1_3_SERVER in the PHP code but not in the documentation :-(
+Which means I need to investigate PHP git history to check when this constant was added and whether I can use it as-is.
+
+Relevant part of my code: <a href="gemini://code.lanterne.chilliet.eu/vendor/mcmic/gemini-server/src/Server.php">gemini://code.lanterne.chilliet.eu/vendor/mcmic/gemini-server/src/Server.php</a> (A fragment here would be handy to point the exact line, but I think no gemini clients support fragments? Here it?s not even text/plain but text/x-php so not sure what should be used?)
+
+C?me
+
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004679.html">[tech] default response?</a></li>
+<li>Next message (by thread): <a href="004641.html">[tech] [spec] TLS statistics</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4640">[ date ]</a> <a href="thread.html#4640">[ thread ]</a> <a href="subject.html#4640">[ subject ]</a> <a href="author.html#4640">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

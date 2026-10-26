@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Malicious Links</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006915.html">
+<link rel="next" href="006924.html">
+</head>
+<body>
+<h1>Malicious Links</h1>
+<b>nervuri</b> nervuri at disroot.org<br>
+<i>Wed Jul 14 21:17:37 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006915.html">Malicious Links</a></li>
+<li>Next message (by thread): <a href="006924.html">Malicious Links</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6919">[ date ]</a> <a href="thread.html#6919">[ thread ]</a> <a href="subject.html#6919">[ subject ]</a> <a href="author.html#6919">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Tue, 2021-07-13, mbays wrote:
+&gt;<i> &quot;MUST prompt&quot; seems too strong to me. For redirects an explicit prompt
+</i>&gt;<i> is necessary, but for just following a link into the scope of a new
+</i>&gt;<i> certificate, I think it is sufficient if the link to be presented in
+</i>&gt;<i> a way which makes explicit the precise URI and what certificate would be
+</i>&gt;<i> used for it. (This is how diohsc works currently, and I think it&#x27;s
+</i>&gt;<i> fine.)
+</i>
+Good point.  What we really want is for the user to be clear on &quot;the
+precise URI and what certificate would be used for it&quot;, as you said.
+I think your client is unique in how it presents the two together.
+Diohsc [1] looks very interesting, by the way.
+
+OK, let&#x27;s change the wording.  How about this:
+
+&quot;Before following a URI which is in scope of a client certificate from a
+page (or via a redirect) outside of that scope, clients MUST display the
+target URI and what client certificate will be used to connect to it.&quot;
+
+We may need to go into more detail, though, since:
+- multiple client certificates can be in the same scope
+- one scope can be the &quot;parent&quot; of another in the path tree
+- the rule should apply if *any* URI in the redirect chain is outside of
+ the client cert&#x27;s scope
+
+[1] <a href="gemini://gemini.thegonz.net/diohsc/">gemini://gemini.thegonz.net/diohsc/</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006915.html">Malicious Links</a></li>
+<li>Next message (by thread): <a href="006924.html">Malicious Links</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6919">[ date ]</a> <a href="thread.html#6919">[ thread ]</a> <a href="subject.html#6919">[ subject ]</a> <a href="author.html#6919">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

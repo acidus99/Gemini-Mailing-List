@@ -1,59 +1,43 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> A proposed scheme for parsing preformatted alt text
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C20200907181610.GD2239112%40tilde.team%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="002586.html">
-   <LINK REL="Next"  HREF="002594.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>A proposed scheme for parsing preformatted alt text</H1>
-    <B>easeout at tilde.team</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C20200907181610.GD2239112%40tilde.team%3E"
-       TITLE="A proposed scheme for parsing preformatted alt text">easeout at tilde.team
-       </A><BR>
-    <I>Mon Sep  7 19:16:10 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="002586.html">A proposed scheme for parsing preformatted alt text
-</A></li>
-        <LI>Next message (by thread): <A HREF="002594.html">A proposed scheme for parsing preformatted alt text
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2590">[ date ]</a>
-              <a href="thread.html#2590">[ thread ]</a>
-              <a href="subject.html#2590">[ subject ]</a>
-              <a href="author.html#2590">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A proposed scheme for parsing preformatted alt text</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="002586.html">
+<link rel="next" href="002594.html">
+</head>
+<body>
+<h1>A proposed scheme for parsing preformatted alt text</h1>
+<b>easeout at tilde.team</b> easeout at tilde.team<br>
+<i>Mon Sep  7 19:16:10 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="002586.html">A proposed scheme for parsing preformatted alt text</a></li>
+<li>Next message (by thread): <a href="002594.html">A proposed scheme for parsing preformatted alt text</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2590">[ date ]</a> <a href="thread.html#2590">[ thread ]</a> <a href="subject.html#2590">[ subject ]</a> <a href="author.html#2590">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Mon, Sep 07, 2020 at 05:36:08PM +0100, Luke Emmet wrote:
+<pre>On Mon, Sep 07, 2020 at 05:36:08PM +0100, Luke Emmet wrote:
 &gt;<i> On 07-Sep-2020 10:06, Kevin Sangeelee wrote:
-</I>&gt;<i> &gt; Anything that adds text that's really only parseable by a machine is
-</I>&gt;<i> &gt; just a teeny bit user-hostile.
-</I>&gt;<i> 
-</I>&gt;<i> Well the alt-text never gets shown to the user, it is invisible to them.
-</I>&gt;<i> Some clients might act on it (for example at the moment to show a tool tip).
-</I>
+</i>&gt;<i> &gt; Anything that adds text that&#x27;s really only parseable by a machine is
+</i>&gt;<i> &gt; just a teeny bit user-hostile.
+</i>&gt;<i> 
+</i>&gt;<i> Well the alt-text never gets shown to the user, it is invisible to them.
+</i>&gt;<i> Some clients might act on it (for example at the moment to show a tool tip).
+</i>
 I think it would be helpful to quote the spec here:
 
-&gt;<i> Use of alt text is at the client's discretion, and simple clients may
-</I>&gt;<i> ignore it. Alt text is recommended for ASCII art or similar
-</I>&gt;<i> non-textual content which, for example, cannot be meaningfully
-</I>&gt;<i> understood when rendered through a screen reader or usefully indexed
-</I>&gt;<i> by a search engine. Alt text may also be used for computer source code
-</I>&gt;<i> to identify the programming language which advanced clients may use
-</I>&gt;<i> for syntax highlighting.
-</I>
+&gt;<i> Use of alt text is at the client&#x27;s discretion, and simple clients may
+</i>&gt;<i> ignore it. Alt text is recommended for ASCII art or similar
+</i>&gt;<i> non-textual content which, for example, cannot be meaningfully
+</i>&gt;<i> understood when rendered through a screen reader or usefully indexed
+</i>&gt;<i> by a search engine. Alt text may also be used for computer source code
+</i>&gt;<i> to identify the programming language which advanced clients may use
+</i>&gt;<i> for syntax highlighting.
+</i>
 Alt text is recommended for, and I think named after, the role of alt
 text in HTML &lt;img&gt;. That is, to be an alternative representation of the
 content, like &quot;Photograph of a woman on a horse&quot;. In that sense it is
@@ -64,7 +48,7 @@ adding extensions to alt text that prevent it from being always
 human-readable.
 
 (Refer to the alt attribute as documented here:)
-<A HREF="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Img">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Img</A>
+<a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Img">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Img</a>
 
 The advanced use case cited in the spec matches the way in
 GitHub-flavored Markdown you can write ```typescript to get TypeScript
@@ -72,17 +56,17 @@ syntax highlighting. While not an alternative content representation,
 that is at least human-readable.
 
 &gt;<i> My personal view is that the CSS style delimiters attribute1: value; is less
-</I>&gt;<i> hostile than others. So it was part of the design consideration. Those
-</I>&gt;<i> clients or users wanting a simple experience can just ignore it all anyway.
-</I>
-I agree it's less hostile than other possibilities, but if you're a user
-who depends on alt text for content representation, it's going to be
+</i>&gt;<i> hostile than others. So it was part of the design consideration. Those
+</i>&gt;<i> clients or users wanting a simple experience can just ignore it all anyway.
+</i>
+I agree it&#x27;s less hostile than other possibilities, but if you&#x27;re a user
+who depends on alt text for content representation, it&#x27;s going to be
 jarring when some of the time you get code read aloud to you by a screen
-reader, or&#8230;&#160;well, you get what I mean.
+reader, or??well, you get what I mean.
 
 Really, I think what we have here is a field with two possible uses that
 are at cross purposes, one for people and one for machines. Syntatically
-it's based on something in Markdown that's for machine use, but it's
+it&#x27;s based on something in Markdown that&#x27;s for machine use, but it&#x27;s
 recommended for the human use. But the whole idea of it being for human
 use is spoiled by the fact that it will grate on humans in cases when it
 is not for their use.
@@ -102,33 +86,15 @@ pressure is not necessarily a bad thing, but consider, an accessibility
 feature like the human-oriented use of alt text is unlikely to become
 popular enough to force its way in by a de facto standard, and would
 therefore need the support of the base spec to see acceptance.
-</PRE>
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="002586.html">A proposed scheme for parsing preformatted alt text
-</A></li>
-	<LI>Next message (by thread): <A HREF="002594.html">A proposed scheme for parsing preformatted alt text
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2590">[ date ]</a>
-              <a href="thread.html#2590">[ thread ]</a>
-              <a href="subject.html#2590">[ subject ]</a>
-              <a href="author.html#2590">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="002586.html">A proposed scheme for parsing preformatted alt text</a></li>
+<li>Next message (by thread): <a href="002594.html">A proposed scheme for parsing preformatted alt text</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2590">[ date ]</a> <a href="thread.html#2590">[ thread ]</a> <a href="subject.html#2590">[ subject ]</a> <a href="author.html#2590">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

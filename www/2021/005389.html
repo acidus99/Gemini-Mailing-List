@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] reverse proxy gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005382.html">
+<link rel="next" href="005391.html">
+</head>
+<body>
+<h1>[tech] reverse proxy gemini</h1>
+<b>Vincent A.</b> vincent at valvin.fr<br>
+<i>Sun Feb 21 09:40:54 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005382.html">[ANN] Hello from filter.id.au</a></li>
+<li>Next message (by thread): <a href="005391.html">[tech] reverse proxy gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5389">[ date ]</a> <a href="thread.html#5389">[ thread ]</a> <a href="subject.html#5389">[ subject ]</a> <a href="author.html#5389">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hello,
+
+My curiosity about Gemini lead me to think about how to host easily many
+different domain on the same server.
+
+I have a simple idea which consists in publishing static content from a
+git repository. And allow users to update their content by updating a
+git repository and maybe through an interface later.
+
+For this I imagine using containerization with an existing gemini
+server. Here I&#x27;ve tested Agate :
+<a href="https://gitlab.com/valvin/gemini-agate-image">https://gitlab.com/valvin/gemini-agate-image</a>
+
+Deploying a single hostname is ok. But I&#x27;m wondering how to deploy many
+hostnames using the same public IP(v4) address. With HTTP we are used to
+deploy a reverse proxy (nginx, haproxy, traefik...). It allowes then to
+split traffic based on the DNS name requested in the &quot;Host&quot; header.
+
+TCP load-balacing doesn&#x27;t allow this I think but maybe I&#x27;m wrong. It
+requires to get the information of hostname in the request.
+
+So I&#x27;m wondering if there is not yet something that has been done about
+this. Or maybe I miss somethin
+g in TCP load-balancing and it is possible
+to do this already.
+
+
+Thank you
+
+Valvin.
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: publickey - vincent at valvin.fr - 1931e3cd.asc
+Type: application/pgp-keys
+Size: 1687 bytes
+Desc: not available
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210221/95952410/attachment-0001.bin">https://mailing-list-archive.gemi.dev/www/attachments/20210221/95952410/attachment-0001.bin</a>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 489 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210221/95952410/attachment-0001.sig">https://mailing-list-archive.gemi.dev/www/attachments/20210221/95952410/attachment-0001.sig</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005382.html">[ANN] Hello from filter.id.au</a></li>
+<li>Next message (by thread): <a href="005391.html">[tech] reverse proxy gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5389">[ date ]</a> <a href="thread.html#5389">[ thread ]</a> <a href="subject.html#5389">[ subject ]</a> <a href="author.html#5389">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

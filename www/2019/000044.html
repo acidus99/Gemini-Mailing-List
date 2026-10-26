@@ -1,130 +1,71 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Password authentication over Gemini
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Password%20authentication%20over%20Gemini&In-Reply-To=%3C20190818214112.GF26287%40brevard.conman.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="000040.html">
-   <LINK REL="Next"  HREF="000050.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Password authentication over Gemini</H1>
-    <B>Sean Conner</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Password%20authentication%20over%20Gemini&In-Reply-To=%3C20190818214112.GF26287%40brevard.conman.org%3E"
-       TITLE="Password authentication over Gemini">sean at conman.org
-       </A><BR>
-    <I>Sun Aug 18 22:41:12 BST 2019</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="000040.html">Password authentication over Gemini
-</A></li>
-        <LI>Next message (by thread): <A HREF="000050.html">Password authentication over Gemini
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#44">[ date ]</a>
-              <a href="thread.html#44">[ thread ]</a>
-              <a href="subject.html#44">[ subject ]</a>
-              <a href="author.html#44">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Password authentication over Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000040.html">
+<link rel="next" href="000050.html">
+</head>
+<body>
+<h1>Password authentication over Gemini</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Sun Aug 18 22:41:12 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000040.html">Password authentication over Gemini</a></li>
+<li>Next message (by thread): <a href="000050.html">Password authentication over Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#44">[ date ]</a> <a href="thread.html#44">[ thread ]</a> <a href="subject.html#44">[ subject ]</a> <a href="author.html#44">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>It was thus said that the Great solderpunk once stated:
-&gt;<i> &gt;   There's no reason for the user to generate a certificate and then provide
-</I>&gt;<i> &gt; a username/password when the certificate already has the username:
-</I>&gt;<i> 
-</I>&gt;<i> This is kind of neat, but would require the interface interaction that
-</I>&gt;<i> happens in response to a 61 to give the user the opportunity to specify
-</I>&gt;<i> these details.  At best, this is an unnecessary bit of UI friction in
-</I>&gt;<i> cases where it won't be used.  At worst, for very privacy-conscious
-</I>&gt;<i> users, being asked to specify any kind of personal information at all to
-</I>&gt;<i> include in something which is supposed to be an entirely ephemeral /
-</I>&gt;<i> disposable / transient will feel like a red flag, I suspect.
-</I>
-  You're already asking for clients to generate a temporary certificate. 
+<pre>It was thus said that the Great solderpunk once stated:
+&gt;<i> &gt;   There&#x27;s no reason for the user to generate a certificate and then provide
+</i>&gt;<i> &gt; a username/password when the certificate already has the username:
+</i>&gt;<i> 
+</i>&gt;<i> This is kind of neat, but would require the interface interaction that
+</i>&gt;<i> happens in response to a 61 to give the user the opportunity to specify
+</i>&gt;<i> these details.  At best, this is an unnecessary bit of UI friction in
+</i>&gt;<i> cases where it won&#x27;t be used.  At worst, for very privacy-conscious
+</i>&gt;<i> users, being asked to specify any kind of personal information at all to
+</i>&gt;<i> include in something which is supposed to be an entirely ephemeral /
+</i>&gt;<i> disposable / transient will feel like a red flag, I suspect.
+</i>
+  You&#x27;re already asking for clients to generate a temporary certificate. 
 Before going too down far this rabbit hole, why not make a few temporary
 certificates and hitting:
 
-	<A HREF="gemini://gemini.conman.org/private/">gemini://gemini.conman.org/private/</A>
+	<a href="gemini://gemini.conman.org/private/">gemini://gemini.conman.org/private/</a>
 
-  There's nothing there that generates a status of 10, but it is asking for
-temporary certificates.  It's not even expecting any set information.  It
-might be instructive to know what what is and isn't required for a
+  There&#x27;s nothing there that generates a status of 10, but it is asking for
+temporary certificates.  It&#x27;s not even expecting any set information.  It
+might be instructive to know what what is and isn&#x27;t required for a
 certificate.
 
 &gt;<i> &gt;   Not much there, other than to ask about having second thoughs about
-</I>&gt;<i> &gt; certificate only authentication?
-</I>&gt;<i> 
-</I>&gt;<i> Sorry, can you clarify?  Do you mean second thoughts about only having
-</I>&gt;<i> certificates as a way to authenticate (i.e. are we sure we don't want
-</I>&gt;<i> passwords as first-class citizens?).  Or do you mean second thoughts
-</I>&gt;<i> about allowing authentication with only a certificate?  Why wouldn't we
-</I>&gt;<i> want to allow that?
-</I>
+</i>&gt;<i> &gt; certificate only authentication?
+</i>&gt;<i> 
+</i>&gt;<i> Sorry, can you clarify?  Do you mean second thoughts about only having
+</i>&gt;<i> certificates as a way to authenticate (i.e. are we sure we don&#x27;t want
+</i>&gt;<i> passwords as first-class citizens?).  Or do you mean second thoughts
+</i>&gt;<i> about allowing authentication with only a certificate?  Why wouldn&#x27;t we
+</i>&gt;<i> want to allow that?
+</i>
   I meant I had no thoughts about your question re: status code of 11.  My
 question to you was, why have a usernames/password scheme when you have
 certificates, which are a combination of username/password?
 
   -spc
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="000040.html">Password authentication over Gemini
-</A></li>
-	<LI>Next message (by thread): <A HREF="000050.html">Password authentication over Gemini
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#44">[ date ]</a>
-              <a href="thread.html#44">[ thread ]</a>
-              <a href="subject.html#44">[ subject ]</a>
-              <a href="author.html#44">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="000040.html">Password authentication over Gemini</a></li>
+<li>Next message (by thread): <a href="000050.html">Password authentication over Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#44">[ date ]</a> <a href="thread.html#44">[ thread ]</a> <a href="subject.html#44">[ subject ]</a> <a href="author.html#44">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

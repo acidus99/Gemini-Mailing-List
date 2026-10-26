@@ -1,51 +1,35 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Caching and status codes
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3C20201106152420.qww6mppzv3mtz6uy%40localhost%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="003085.html">
-   <LINK REL="Next"  HREF="003115.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Caching and status codes</H1>
-    <B>mbays at sdf.org</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3C20201106152420.qww6mppzv3mtz6uy%40localhost%3E"
-       TITLE="Caching and status codes">mbays at sdf.org
-       </A><BR>
-    <I>Fri Nov  6 15:24:20 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="003085.html">Caching and status codes
-</A></li>
-        <LI>Next message (by thread): <A HREF="003115.html">Caching and status codes
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3090">[ date ]</a>
-              <a href="thread.html#3090">[ thread ]</a>
-              <a href="subject.html#3090">[ subject ]</a>
-              <a href="author.html#3090">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caching and status codes</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="003085.html">
+<link rel="next" href="003115.html">
+</head>
+<body>
+<h1>Caching and status codes</h1>
+<b>mbays at sdf.org</b> mbays at sdf.org<br>
+<i>Fri Nov  6 15:24:20 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="003085.html">Caching and status codes</a></li>
+<li>Next message (by thread): <a href="003115.html">Caching and status codes</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3090">[ date ]</a> <a href="thread.html#3090">[ thread ]</a> <a href="subject.html#3090">[ subject ]</a> <a href="author.html#3090">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>* Friday, 2020-11-06 at 14:52 +0900 - bie &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">bie at 202x.moe</A>&gt;:
+<pre>* Friday, 2020-11-06 at 14:52 +0900 - bie &lt;bie at 202x.moe&gt;:
 
-&gt;<i>There's been some light discussion on the gemini irc channel about if
-</I>&gt;<i>and how clients should cache gemini responses, and I'd love to hear how
-</I>&gt;<i>people here think about the issue...
-</I>
-Since gemini requests have no guarantee of idempotency, I think it's 
+&gt;<i>There&#x27;s been some light discussion on the gemini irc channel about if
+</i>&gt;<i>and how clients should cache gemini responses, and I&#x27;d love to hear how
+</i>&gt;<i>people here think about the issue...
+</i>
+Since gemini requests have no guarantee of idempotency, I think it&#x27;s 
 crucial that the user always knows whether an action will cause 
 a request or not. That means simple consistent rules on whether to 
-retrieve from cache or make a request, that don't depend on subtleties 
+retrieve from cache or make a request, that don&#x27;t depend on subtleties 
 like the current time or RAM availability. One simple way to achieve 
 this is to always make a fresh request *except* when navigating history 
 (&quot;back&quot; or &quot;forward&quot;). You could also interpret navigating to an url 
@@ -53,7 +37,7 @@ which is in (linear) history as navigation of history, so load from
 cache (in theory this does require unbounded memory use to store the 
 urls of an unboundedly long history list, but in practice this is 
 unlikely to be more than a few KB). If the page you want to load from 
-cache has been deleted due to memory constraints, I'd say you should 
+cache has been deleted due to memory constraints, I&#x27;d say you should 
 present an error and offer to let the user make the request again, 
 rather than doing it automatically. But if all but the tail is 
 text/gemini, probably you can afford to store everything anyway.
@@ -63,79 +47,16 @@ Name: signature.asc
 Type: application/pgp-signature
 Size: 195 bytes
 Desc: not available
-URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201106/378c00b5/attachment.sig">https://lists.orbitalfox.eu/archives/gemini/attachments/20201106/378c00b5/attachment.sig</A>&gt;
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20201106/378c00b5/attachment.sig">https://mailing-list-archive.gemi.dev/www/attachments/20201106/378c00b5/attachment.sig</a>&gt;
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="003085.html">Caching and status codes
-</A></li>
-	<LI>Next message (by thread): <A HREF="003115.html">Caching and status codes
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3090">[ date ]</a>
-              <a href="thread.html#3090">[ thread ]</a>
-              <a href="subject.html#3090">[ subject ]</a>
-              <a href="author.html#3090">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="003085.html">Caching and status codes</a></li>
+<li>Next message (by thread): <a href="003115.html">Caching and status codes</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3090">[ date ]</a> <a href="thread.html#3090">[ thread ]</a> <a href="subject.html#3090">[ subject ]</a> <a href="author.html#3090">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

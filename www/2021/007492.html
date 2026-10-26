@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007483.html">
+<link rel="next" href="007535.html">
+</head>
+<body>
+<h1>ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Mon Nov  1 22:55:27 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007483.html">ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</a></li>
+<li>Next message (by thread): <a href="007535.html">ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7492">[ date ]</a> <a href="thread.html#7492">[ thread ]</a> <a href="subject.html#7492">[ subject ]</a> <a href="author.html#7492">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Charles Iliya Krempeaux once stated:
+&gt;<i> A number of things to reply to. I wasn&#x27;t sure whether to reply to
+</i>&gt;<i> everything in one giant e-mail, or to reply in separate e-mails (that could
+</i>&gt;<i> turn into their own separate threads). I think I&#x27;ll create a small number
+</i>&gt;<i> of separate replies to make it easier for others to follow.
+</i>&gt;<i> 
+</i>&gt;<i> Regarding:
+</i>&gt;<i> gopher://
+</i>&gt;<i> zaibatsu.circumlunar.space/0/~solderpunk/phlog/why-gopher-needs-crypto.txt
+</i>&gt;<i> 
+</i>&gt;<i> I think the main topics of this is:
+</i>&gt;<i> 
+</i>&gt;<i> №1: being able to detect (or prevent) content modification, and
+</i>&gt;<i> 
+</i>&gt;<i> №2: being able to protect one&#x27;s privacy and make spying very difficult (if
+</i>&gt;<i> not impossible).
+</i>&gt;<i> 
+</i>&gt;<i> (Please correct me if I missed anything.)
+</i>&gt;<i> 
+</i>&gt;<i> Let&#x27;s get technical about this —
+</i>&gt;<i> 
+</i>&gt;<i> I haven&#x27;t read the Gopher spec in a long time, so don&#x27;t recall whether
+</i>&gt;<i> there is something technical that would prevent it, but —
+</i>
+  Yes there is: &lt;<a href="http://boston.conman.org/2019/03/31.1">http://boston.conman.org/2019/03/31.1</a>&gt; Basically, it&#x27;s hard
+to retrofit TLS into gopher without breaking existing clients.   You could
+possibly force it, &lt;<a href="http://boston.conman.org/2021/09/28.1">http://boston.conman.org/2021/09/28.1</a>&gt;, but there are
+security concerns about forced downgrades.  
+
+&gt;<i> One could try to use content-addressing to try to detect content
+</i>&gt;<i> modification.
+</i>&gt;<i> 
+</i>&gt;<i> For example, there could be a convention created (and Gopher clients
+</i>&gt;<i> modified) such that the path in the gopher URL would contain a digest (from
+</i>&gt;<i> a cryptographic hash function) of the content. For example:
+</i>&gt;<i> 
+</i>&gt;<i> gopher://
+</i>&gt;<i> example.com/content/base64/sha3-512/ld7McvClCuTZ1TeOGyJSWHz8cZd+QyksjxuEZIJIUJ8bwYvG8LDQuGBqZD7/YdYRroTm+9SiaDFlcGvW/UizNA==
+</i>&gt;<i> 
+</i>&gt;<i> Notice that there are three main parts to this:
+</i>&gt;<i> 
+</i>&gt;<i> • base64
+</i>&gt;<i> • sha3-512
+</i>&gt;<i> •
+</i>&gt;<i> ld7McvClCuTZ1TeOGyJSWHz8cZd+QyksjxuEZIJIUJ8bwYvG8LDQuGBqZD7/YdYRroTm+9SiaDFlcGvW/UizNA==
+</i>&gt;<i> 
+</i>&gt;<i> The gibberish is base64 encoding of the digest of a sha3-512 hash function.
+</i>&gt;<i> 
+</i>&gt;<i> (One could use base64url if they didn&#x27;t want the gibberish to have the &quot;/&quot;
+</i>&gt;<i> symbol.)
+</i>&gt;<i> 
+</i>&gt;<i> Someone would need to modify Gopher clients to recognize that type of
+</i>&gt;<i> gopher URL, and then, once the data is downloaded, verify that its digest
+</i>&gt;<i> matches the digest in the URL.
+</i>
+  There&#x27;s an awful large number of gopher clients that would need updating,
+and probably won&#x27;t.  Also, this topic might be better discussed on the
+gohper mailing list: &lt;<a href="https://lists.debian.org/gopher-project/">https://lists.debian.org/gopher-project/</a>&gt;.
+
+&gt;<i> And encryption (such as TLS, mentioned in the document) could help prevent
+</i>&gt;<i> the spying to help protect privacy
+</i>&gt;<i> 
+</i>&gt;<i> (Although there are other options than just TLS.)
+</i>
+  And as I&#x27;ve stated before, present both a server and client as a
+proof-of-concept, then it can be discussed.  Until then, it&#x27;s a no go (at
+least, that would be my stance but I stepped down from Gemini development).
+
+  -spc 
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007483.html">ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</a></li>
+<li>Next message (by thread): <a href="007535.html">ANN: go-hg — Mercury Protocol client &amp; server library for Go programming language</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7492">[ date ]</a> <a href="thread.html#7492">[ thread ]</a> <a href="subject.html#7492">[ subject ]</a> <a href="author.html#7492">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

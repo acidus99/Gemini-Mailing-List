@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On text reflow. It&#x27;s not about bullets!</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000250.html">
+<link rel="next" href="000253.html">
+</head>
+<body>
+<h1>On text reflow. It&#x27;s not about bullets!</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Fri Nov 29 15:31:37 GMT 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000250.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li>Next message (by thread): <a href="000253.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#251">[ date ]</a> <a href="thread.html#251">[ thread ]</a> <a href="subject.html#251">[ subject ]</a> <a href="author.html#251">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>A relatively quick response to this, while I have a little spare time
+and one clearly formed idea in my head:
+
+If it is considered desirable that Gemini documents be able to contain
+source code which can be successfully copied and pasted directly into
+another file and then compiled/interpreted without error (which sure
+seems like a nice thing to have, and one which would likely be
+appreciated by a hypothetical &quot;typical Gemini user&quot;)...
+
+and given that the spec currently says (and I am about 95% sure I will
+not be convinced to change this) that simple clients which don&#x27;t want
+to fuss with text formatting can display the non-link lines of
+text/gemini content as if it were text/plain (i.e. raw text with no
+wrapping, reflowing, etc) and still be considered valid, spec-abiding
+Gemini clients...
+
+then the folling seems to me an unescapable conclusion which must be
+taken into account in any discussion of text/gemini markup:
+
+We cannot convey &quot;this line is verbatim text which should not be
+reformatted at all&quot; with a start-of-line marker like ==, because that
+marker will get picked up by the copy and paste, and almost certainly
+break the semantics of the code.  Instead, there need to be lines which
+toggle on and off a verbatim mode, which a user of a simple client that
+does no formatting can simply not select before copying.  Something
+like:
+
+```
+// Parse request as URL
+URL, err := url.Parse(string(request))
+if err != nil {
+    conn.Write([]byte(&quot;59 Error parsing URL!r\n&quot;))
+    log.Status = 59
+    return
+}
+log.RequestURL = URL.String()
+```
+
+That particular example being borrowed from ratfactor&#x27;s Text Junior
+format, but certainly other things would solve the problem.  But there&#x27;s
+no getting around the conclusion that verbatim text needs to be included
+unedited, so needs to be denoted by lines before/after the text iteself,
+not markers at the beginning.
+
+It&#x27;s not logically necessary that the on/off lines be identical, but
+it&#x27;s simplest if they are.
+
+Cheers,
+Solderpunk
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000250.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li>Next message (by thread): <a href="000253.html">On text reflow. It&#x27;s not about bullets!</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#251">[ date ]</a> <a href="thread.html#251">[ thread ]</a> <a href="subject.html#251">[ subject ]</a> <a href="author.html#251">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

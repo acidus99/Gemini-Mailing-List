@@ -1,74 +1,58 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [spec] What to do of fragments when there is a redirection
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20What%20to%20do%20of%20fragments%20when%20there%20is%20a%20redirection&In-Reply-To=%3C5FE3C846.6070606%40marmaladefoo.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="004340.html">
-   <LINK REL="Next"  HREF="004296.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[spec] What to do of fragments when there is a redirection</H1>
-    <B>Luke Emmet</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20What%20to%20do%20of%20fragments%20when%20there%20is%20a%20redirection&In-Reply-To=%3C5FE3C846.6070606%40marmaladefoo.com%3E"
-       TITLE="[spec] What to do of fragments when there is a redirection">luke at marmaladefoo.com
-       </A><BR>
-    <I>Wed Dec 23 22:44:22 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="004340.html">[spec] What to do of fragments when there is a redirection
-</A></li>
-        <LI>Next message (by thread): <A HREF="004296.html">[spec] What to do of fragments when there is a redirection
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4341">[ date ]</a>
-              <a href="thread.html#4341">[ thread ]</a>
-              <a href="subject.html#4341">[ subject ]</a>
-              <a href="author.html#4341">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] What to do of fragments when there is a redirection</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004340.html">
+<link rel="next" href="004296.html">
+</head>
+<body>
+<h1>[spec] What to do of fragments when there is a redirection</h1>
+<b>Luke Emmet</b> luke at marmaladefoo.com<br>
+<i>Wed Dec 23 22:44:22 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="004340.html">[spec] What to do of fragments when there is a redirection</a></li>
+<li>Next message (by thread): <a href="004296.html">[spec] What to do of fragments when there is a redirection</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4341">[ date ]</a> <a href="thread.html#4341">[ thread ]</a> <a href="subject.html#4341">[ subject ]</a> <a href="author.html#4341">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>
+<pre>
 
 On 23-Dec-2020 22:22, William Orr wrote:
-&gt;<i> Wouldn't this be dependent on the other discussion of IRIs, since 
-</I>&gt;<i> gemtext can have arbitrary unicode? Also would require clients to NFC 
-</I>&gt;<i> normalize the prefix/heading lines before doing the matching.
-</I>&gt;<i>
-</I>&gt;<i> 23 dic. 2020 19:40:00 John Cowan &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>&gt;:
-</I>&gt;<i>
-</I>&gt;<i>
-</I>&gt;<i>
-</I>&gt;<i>     On Tue, Dec 22, 2020 at 7:51 PM Philip Linde
-</I>&gt;<i>     &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">linde.philip at gmail.com</A> &lt;mailto:<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">linde.philip at gmail.com</A>&gt;&gt; wrote:
-</I>&gt;<i>
-</I>&gt;<i>         It might be more robust to define the fragment as referring to
-</I>&gt;<i>         the
-</I>&gt;<i>         first heading line that has the fragment content as a prefix, but
-</I>&gt;<i>         that's still prone to break with document changes.
-</I>&gt;<i>
-</I>&gt;<i>
-</I>&gt;<i>     Even HTML fragments break if their referents are deleted.  Nothing
-</I>&gt;<i>     is completely immune.
-</I>&gt;<i>
-</I>&gt;<i>         For a good balance, one might have the fragment be a an exact
-</I>&gt;<i>         match of
-</I>&gt;<i>         the heading line you refer to
-</I>&gt;<i>
-</I>&gt;<i>
-</I>&gt;<i>     That's reasonable, but I think a prefix match would suffice; that
-</I>&gt;<i>     way you aren't tempted to make headings overly short in order to
-</I>&gt;<i>     keep fragments small.
-</I>&gt;<i>
-</I>
+&gt;<i> Wouldn&#x27;t this be dependent on the other discussion of IRIs, since 
+</i>&gt;<i> gemtext can have arbitrary unicode? Also would require clients to NFC 
+</i>&gt;<i> normalize the prefix/heading lines before doing the matching.
+</i>&gt;<i>
+</i>&gt;<i> 23 dic. 2020 19:40:00 John Cowan &lt;cowan at ccil.org&gt;:
+</i>&gt;<i>
+</i>&gt;<i>
+</i>&gt;<i>
+</i>&gt;<i>     On Tue, Dec 22, 2020 at 7:51 PM Philip Linde
+</i>&gt;<i>     &lt;linde.philip at gmail.com &lt;mailto:linde.philip at gmail.com&gt;&gt; wrote:
+</i>&gt;<i>
+</i>&gt;<i>         It might be more robust to define the fragment as referring to
+</i>&gt;<i>         the
+</i>&gt;<i>         first heading line that has the fragment content as a prefix, but
+</i>&gt;<i>         that&#x27;s still prone to break with document changes.
+</i>&gt;<i>
+</i>&gt;<i>
+</i>&gt;<i>     Even HTML fragments break if their referents are deleted.  Nothing
+</i>&gt;<i>     is completely immune.
+</i>&gt;<i>
+</i>&gt;<i>         For a good balance, one might have the fragment be a an exact
+</i>&gt;<i>         match of
+</i>&gt;<i>         the heading line you refer to
+</i>&gt;<i>
+</i>&gt;<i>
+</i>&gt;<i>     That&#x27;s reasonable, but I think a prefix match would suffice; that
+</i>&gt;<i>     way you aren&#x27;t tempted to make headings overly short in order to
+</i>&gt;<i>     keep fragments small.
+</i>&gt;<i>
+</i>
 How about this scheme:
 
   - use the full text of the headings only as index points, encoded in a 
@@ -87,7 +71,7 @@ the marker is therefore &quot;IyBUaGlzIGlz&quot;
 
 So a link to that heading would be:
 
-<A HREF="gemini://server/path/to/end/point.gmi#IyBUaGlzIGlz">gemini://server/path/to/end/point.gmi#IyBUaGlzIGlz</A>
+<a href="gemini://server/path/to/end/point.gmi#IyBUaGlzIGlz">gemini://server/path/to/end/point.gmi#IyBUaGlzIGlz</a>
 
 (or some other value, doesnt have to be 12, but feels about right)
 
@@ -118,30 +102,15 @@ other time if there really is a pressing user need. Is there really a
 requirement really for this yet?
 
   - Luke
-</PRE>
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="004340.html">[spec] What to do of fragments when there is a redirection
-</A></li>
-	<LI>Next message (by thread): <A HREF="004296.html">[spec] What to do of fragments when there is a redirection
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4341">[ date ]</a>
-              <a href="thread.html#4341">[ thread ]</a>
-              <a href="subject.html#4341">[ subject ]</a>
-              <a href="author.html#4341">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="004340.html">[spec] What to do of fragments when there is a redirection</a></li>
+<li>Next message (by thread): <a href="004296.html">[spec] What to do of fragments when there is a redirection</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4341">[ date ]</a> <a href="thread.html#4341">[ thread ]</a> <a href="subject.html#4341">[ subject ]</a> <a href="author.html#4341">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

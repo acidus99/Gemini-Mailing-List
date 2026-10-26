@@ -1,42 +1,26 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [spec] Adapting the HTTP Common Logging Format for use by Gemini servers
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Adapting%20the%20HTTP%20Common%20Logging%20Format%20for%20use%20by%20Gemini%0A%20servers&In-Reply-To=%3CCAD2gp_RAoEDKmS8ixeHC3HzkYHcp7iJEpwJwT4ck_RUjmgEzUA%40mail.gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="004525.html">
-   <LINK REL="Next"  HREF="004480.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[spec] Adapting the HTTP Common Logging Format for use by Gemini servers</H1>
-    <B>John Cowan</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Bspec%5D%20Adapting%20the%20HTTP%20Common%20Logging%20Format%20for%20use%20by%20Gemini%0A%20servers&In-Reply-To=%3CCAD2gp_RAoEDKmS8ixeHC3HzkYHcp7iJEpwJwT4ck_RUjmgEzUA%40mail.gmail.com%3E"
-       TITLE="[spec] Adapting the HTTP Common Logging Format for use by Gemini servers">cowan at ccil.org
-       </A><BR>
-    <I>Sun Dec 27 19:59:02 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="004525.html">IETF policy on encodings and languages
-</A></li>
-        <LI>Next message (by thread): <A HREF="004480.html">[spec] Adapting the HTTP Common Logging Format for use by Gemini servers
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4477">[ date ]</a>
-              <a href="thread.html#4477">[ thread ]</a>
-              <a href="subject.html#4477">[ subject ]</a>
-              <a href="author.html#4477">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] Adapting the HTTP Common Logging Format for use by Gemini servers</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004525.html">
+<link rel="next" href="004480.html">
+</head>
+<body>
+<h1>[spec] Adapting the HTTP Common Logging Format for use by Gemini servers</h1>
+<b>John Cowan</b> cowan at ccil.org<br>
+<i>Sun Dec 27 19:59:02 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="004525.html">IETF policy on encodings and languages</a></li>
+<li>Next message (by thread): <a href="004480.html">[spec] Adapting the HTTP Common Logging Format for use by Gemini servers</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4477">[ date ]</a> <a href="thread.html#4477">[ thread ]</a> <a href="subject.html#4477">[ subject ]</a> <a href="author.html#4477">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>The Common Logging Format as defined by Apache and other HTML servers
+<pre>The Common Logging Format as defined by Apache and other HTML servers
 contains one line per client request divided into seven fields separated by
 a single space.  They are:
 
@@ -62,7 +46,7 @@ HTTP, and fields 2 and 3 are just &quot;-&quot;.
 On the ACAP approach, field 4 uses the date format above, field 5 contains
 GET followed by the path segment of the URL followed by HTTP/1.1 (all space
 separated), and field 6 contains the Gemini code converted to an equivalent
-HTTP code (e.g. 20 becomes 200).  I'll work out the full equivalence later
+HTTP code (e.g. 20 becomes 200).  I&#x27;ll work out the full equivalence later
 if people like this.
 
 On the literal approach, field 4 is ISO 8601 (RFC 3336) format, field 5 is
@@ -73,98 +57,28 @@ The advantage of the ACAP approach is that it allows existing HTTP log
 analyzers to be used.  The literal approach keeps all available information
 but will need its own analysis tools.  Of course, a server can support both
 log formats as well as any other formats desired, so the question is which
-format is Best Practice if only one is provided.  It's possible to convert
+format is Best Practice if only one is provided.  It&#x27;s possible to convert
 literal format to ACAP format after the fact, but not vice versa.
 
 
 
-John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+John Cowan          <a href="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</a>        cowan at ccil.org
     &quot;Mr. Lane, if you ever wish anything that I can do, all you will have
         to do will be to send me a telegram asking and it will be done.&quot;
     &quot;Mr. Hearst, if you ever get a telegram from me asking you to do
         anything, you can put the telegram down as a forgery.&quot;
 -------------- next part --------------
 An HTML attachment was scrubbed...
-URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201227/bb62fb83/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201227/bb62fb83/attachment-0001.htm</A>&gt;
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20201227/bb62fb83/attachment-0001.htm">https://mailing-list-archive.gemi.dev/www/attachments/20201227/bb62fb83/attachment-0001.htm</a>&gt;
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="004525.html">IETF policy on encodings and languages
-</A></li>
-	<LI>Next message (by thread): <A HREF="004480.html">[spec] Adapting the HTTP Common Logging Format for use by Gemini servers
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4477">[ date ]</a>
-              <a href="thread.html#4477">[ thread ]</a>
-              <a href="subject.html#4477">[ subject ]</a>
-              <a href="author.html#4477">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="004525.html">IETF policy on encodings and languages</a></li>
+<li>Next message (by thread): <a href="004480.html">[spec] Adapting the HTTP Common Logging Format for use by Gemini servers</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4477">[ date ]</a> <a href="thread.html#4477">[ thread ]</a> <a href="subject.html#4477">[ subject ]</a> <a href="author.html#4477">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] C program to resolve UTF-8 IDNs</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006146.html">
+<link rel="next" href="006149.html">
+</head>
+<body>
+<h1>[spec] C program to resolve UTF-8 IDNs</h1>
+<b>Scot</b> gmi1 at scotdoyle.com<br>
+<i>Thu Mar 18 02:58:47 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006146.html">C program to resolve UTF-8 IDNs</a></li>
+<li>Next message (by thread): <a href="006149.html">CGI programs and the gemini protocol</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6147">[ date ]</a> <a href="thread.html#6147">[ thread ]</a> <a href="subject.html#6147">[ subject ]</a> <a href="author.html#6147">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On 3/17/21 9:13 PM, Sean Conner wrote:
+&gt;<i> It was thus said that the Great Scot once stated:
+</i>&gt;<i>&gt; Hi Sean,
+</i>&gt;<i>    Hi Scot!
+</i>&gt;<i>
+</i>&gt;<i>&gt; I think you were wondering whether it&#x27;s possible to resolve UTF-8
+</i>&gt;<i>&gt; IDNs with a C or Lua program. This Linux C program [7] will do so
+</i>&gt;<i>&gt; via glibc&#x27;s getaddrinfo(). For platforms without glibc such as the
+</i>&gt;<i>&gt; BSDs, ports of the libidn library [1] are available.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; ...
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; Thoughts?
+</i>&gt;<i>    Thank you *so* much for the sample code, and providing much needed
+</i>&gt;<i> background information about this.  This will make the final decision on IRI
+</i>&gt;<i> support a bit easier to make.  I was not aware of the GNU-specific AI_IDN
+</i>&gt;<i> flag to getaddrinfo() (and I wish it was standard actually), and yes, it
+</i>&gt;<i> does work on systems that have it (Linux).
+</i>&gt;<i>
+</i>&gt;<i>    Just one thing though---you might want to be careful when pasting code
+</i>&gt;<i> into email---the code below contained non-breaking spaces that my C compiler
+</i>&gt;<i> (gcc) did not like.  It&#x27;s an easy fix, so this is mostly an FYI getting
+</i>&gt;<i> weird errors when compiling the code below.
+</i>&gt;<i>
+</i>&gt;<i>    Again, thank you for your message.
+</i>I appreciate the work you are doing and am glad that this might
+have helped.
+
+And thanks for posting the corrected code. I think it&#x27;s missing the
+first line, which is necessary on my system:
+#define _GNU_SOURCE
+
+&gt;<i>    -spc
+</i>&gt;<i>
+</i>&gt;<i>&gt; [1] <a href="https://www.gnu.org/software/libidn/">https://www.gnu.org/software/libidn/</a>
+</i>&gt;<i>&gt; [2] <a href="https://docs.microsoft.com/en-us/windows/win32/api/winnls/nf-winnls-idntoascii">https://docs.microsoft.com/en-us/windows/win32/api/winnls/nf-winnls-idntoascii</a>
+</i>&gt;<i>&gt; [3] <a href="https://docs.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfo">https://docs.microsoft.com/en-us/windows/win32/api/ws2tcpip/nf-ws2tcpip-getaddrinfo</a>
+</i>&gt;<i>&gt; [4] <a href="https://devstreaming-cdn.apple.com/videos/wwdc/2016/714urluxe140lardrb7/714/714_networking_for_the_modern_internet.pdf?dl=1">https://devstreaming-cdn.apple.com/videos/wwdc/2016/714urluxe140lardrb7/714/714_networking_for_the_modern_internet.pdf?dl=1</a>
+</i>&gt;<i>&gt; [5] <a href="https://developer.android.com/reference/kotlin/java/net/IDN">https://developer.android.com/reference/kotlin/java/net/IDN</a>
+</i>&gt;<i>&gt; [6] <a href="https://developer.android.com/reference/android/icu/text/IDNA">https://developer.android.com/reference/android/icu/text/IDNA</a>
+</i>&gt;<i>&gt; [7] Public domain example C program to resolve UTF-8 IDNs
+</i>&gt;<i> P.S.  Here&#x27;s the code with the non-breaking spaces removed.
+</i>&gt;<i>
+</i>&gt;<i> #include &lt;locale.h&gt;
+</i>&gt;<i> #include &lt;netdb.h&gt;
+</i>&gt;<i> #include &lt;stdio.h&gt;
+</i>&gt;<i> #include &lt;string.h&gt;
+</i>&gt;<i> ...
+</i>&gt;<i>
+</i></pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006146.html">C program to resolve UTF-8 IDNs</a></li>
+<li>Next message (by thread): <a href="006149.html">CGI programs and the gemini protocol</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6147">[ date ]</a> <a href="thread.html#6147">[ thread ]</a> <a href="subject.html#6147">[ subject ]</a> <a href="author.html#6147">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

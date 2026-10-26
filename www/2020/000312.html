@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[ANN] Announcing Molly Brown, a Gemini server in Go</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000309.html">
+<link rel="next" href="000315.html">
+</head>
+<body>
+<h1>[ANN] Announcing Molly Brown, a Gemini server in Go</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Tue Jan 14 19:03:48 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000309.html">[ANN] Announcing Molly Brown, a Gemini server in Go</a></li>
+<li>Next message (by thread): <a href="000315.html">CGI and CGI like support (was Re: [ANN] Announcing Molly Brown, a Gemini server in Go)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#312">[ date ]</a> <a href="thread.html#312">[ thread ]</a> <a href="subject.html#312">[ subject ]</a> <a href="author.html#312">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Mon, Jan 13, 2020 at 06:22:40PM -0500, Sean Conner wrote:
+&gt;<i> 
+</i>&gt;<i>   I was looking over the code for CGI support and I notice we took two very
+</i>&gt;<i> different approaches to it.  I based my support upon RFC-3875, with some
+</i>&gt;<i> changes to reflect Gemini (and support running existing web-based CGI
+</i>&gt;<i> programs by mapping the return status codes), while you pretty much just run
+</i>&gt;<i> the script.  I would expect at the very least the QUERY_STRING
+</i>&gt;<i> meta-variable (as RFC-3875 calls it, or &quot;environment variable&quot; as everybody
+</i>&gt;<i> else calls them) to be set.
+</i>&gt;<i> 
+</i>&gt;<i>   But given that CGI wasn&#x27;t specced for Gemini, I think both our
+</i>&gt;<i> implementations are compliant though.
+</i>
+Good eye!  I actually intended to post something abou this to the list
+shortly after implementing that CGI support, but I suppose that must
+have been around the time things started getting really busy for me.
+
+The extremely simple approach to &quot;CGI&quot; (or whatever we want to call
+dynamic content) in MollyBrown came about mostly because sloum was keen
+to start playing with dynamic content, so I did the simplest thing that
+could possibly work - run the script, tell it the corresponding URL over
+stdin and then close the pipe.  It can parse out any user input after a
+&amp; if it needs it.
+
+This decision should not be interpreted as a criticism of your
+RFC-3875-derived implementation.  I think it makes good sense for there
+to be an option for people to easily convert existing web CGI scripts to
+Gemini.
+
+But I do think it would be nice if there was one vaguely standard way
+for servers to implement this kind of thing, so that dynamic content
+generating code could be more portable.  I think for that I&#x27;d probably
+prefer something as light as possible, and to explicitly distance Gemini
+from many of the ideas baked into RFC-3875, especially that dynamic
+content code should have access to the end user&#x27;s IP address.
+
+I think there&#x27;s a lot to recommend the way Molly Brown works, especially
+if we generalise it just a little to &quot;Gemini CGI apps should endlessly
+read single line URLs over THING, until THING is closed, at which point
+the app should terminate&quot;.  Here THING could be stdin, or a TCP
+connection (making a CGI app basically a small self-contained server),
+or a unix domain socket.  Simple servers could do what Molly currently
+does, just spawn the script, send a single URL over stdin and then close
+stdin, giving us the good old fashioned one-process-per-request model of
+traditional web CGI.  But more advanced servers could give admins a way
+to configure different approaches where the process is persistent, more
+like FastCGI.  Or they could round-robin load balance between multiple
+servers on a local network.  The actual CGI program would see very
+little difference between these scenarios, you&#x27;d just give a slightly
+different argument to a library function which produced some kind of
+iterator over URLs.  This has great power:weight.
+
+I was very happy with this idea until I realised that CGI programs
+should also have some way to get access to client certificates, not just
+the URL. :(
+
+I haven&#x27;t returned since then to thinking about how to achieve this.
+Maybe a good subject for a new thread...
+
+Cheers,
+Solderpunk
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000309.html">[ANN] Announcing Molly Brown, a Gemini server in Go</a></li>
+<li>Next message (by thread): <a href="000315.html">CGI and CGI like support (was Re: [ANN] Announcing Molly Brown, a Gemini server in Go)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#312">[ date ]</a> <a href="thread.html#312">[ thread ]</a> <a href="subject.html#312">[ subject ]</a> <a href="author.html#312">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

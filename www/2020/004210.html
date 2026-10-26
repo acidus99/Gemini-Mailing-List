@@ -1,65 +1,38 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Supporting TLS client certificate in PHP?
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Supporting%20TLS%20client%20certificate%20in%20PHP%3F&In-Reply-To=%3C5CDC9D0B-5A0F-4F74-BC10-F72866F902FD%40chilliet.eu%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="004206.html">
-   <LINK REL="Next"  HREF="004212.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Supporting TLS client certificate in PHP?</H1>
-    <B>C&#244;me Chilliet</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Supporting%20TLS%20client%20certificate%20in%20PHP%3F&In-Reply-To=%3C5CDC9D0B-5A0F-4F74-BC10-F72866F902FD%40chilliet.eu%3E"
-       TITLE="Supporting TLS client certificate in PHP?">come at chilliet.eu
-       </A><BR>
-    <I>Mon Dec 21 09:42:31 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="004206.html">Supporting TLS client certificate in PHP?
-</A></li>
-        <LI>Next message (by thread): <A HREF="004212.html">Supporting TLS client certificate in PHP?
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4210">[ date ]</a>
-              <a href="thread.html#4210">[ thread ]</a>
-              <a href="subject.html#4210">[ subject ]</a>
-              <a href="author.html#4210">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supporting TLS client certificate in PHP?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004206.html">
+<link rel="next" href="004212.html">
+</head>
+<body>
+<h1>Supporting TLS client certificate in PHP?</h1>
+<b>Côme Chilliet</b> come at chilliet.eu<br>
+<i>Mon Dec 21 09:42:31 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="004206.html">Supporting TLS client certificate in PHP?</a></li>
+<li>Next message (by thread): <a href="004212.html">Supporting TLS client certificate in PHP?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4210">[ date ]</a> <a href="thread.html#4210">[ thread ]</a> <a href="subject.html#4210">[ subject ]</a> <a href="author.html#4210">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>From what I've seen in libtls source, it sets a custom certificate checking callback function to be able to bypass certificate check while still asking for it when you use these insecure_ family of functions.
+<pre>From what I&#x27;ve seen in libtls source, it sets a custom certificate checking callback function to be able to bypass certificate check while still asking for it when you use these insecure_ family of functions.
 
 Current PHP cannot do that. Not sure what would be the best API for this feature if it was added. Most likely a new context option for ssl which says the client cert is optional. I guess to be complete it would allow disabling client cert validation all together, or only when client cert is absent.
 An other solution is to allow PHP code to set its own callback, but it seems to be dangerous and hard to use.
-</PRE>
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="004206.html">Supporting TLS client certificate in PHP?
-</A></li>
-	<LI>Next message (by thread): <A HREF="004212.html">Supporting TLS client certificate in PHP?
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4210">[ date ]</a>
-              <a href="thread.html#4210">[ thread ]</a>
-              <a href="subject.html#4210">[ subject ]</a>
-              <a href="author.html#4210">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="004206.html">Supporting TLS client certificate in PHP?</a></li>
+<li>Next message (by thread): <a href="004212.html">Supporting TLS client certificate in PHP?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4210">[ date ]</a> <a href="thread.html#4210">[ thread ]</a> <a href="subject.html#4210">[ subject ]</a> <a href="author.html#4210">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

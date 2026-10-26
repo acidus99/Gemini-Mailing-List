@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] Integrity checks for Gemini pages</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006562.html">
+<link rel="next" href="006596.html">
+</head>
+<body>
+<h1>[tech] Integrity checks for Gemini pages</h1>
+<b>nervuri</b> nervuri at disroot.org<br>
+<i>Sun May 23 13:20:35 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006562.html">[tech] Integrity checks for Gemini pages</a></li>
+<li>Next message (by thread): <a href="006596.html">[tech] Integrity checks for Gemini pages</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6569">[ date ]</a> <a href="thread.html#6569">[ thread ]</a> <a href="subject.html#6569">[ subject ]</a> <a href="author.html#6569">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Sat, 2021-05-22, nothien@uber.space wrote:
+&gt;<i>&gt; The idea of hash fragments for third-party links would be especially
+</i>&gt;<i>&gt; interesting to explore, I think.
+</i>&gt;<i>
+</i>&gt;<i> They would only be feasible for static files, such as tarballs etc. that
+</i>&gt;<i> never change, as otherwise any changes (e.g. fixing typos) would break
+</i>&gt;<i> hash fragments from third-party sites to the current one.  The issue
+</i>&gt;<i> thus becomes that it may be misused (i.e. used in the wrong contexts);
+</i>&gt;<i> there is no way to stop this from happening, and it would only add more
+</i>&gt;<i> pain to the situation.
+</i>
+Mismatches can be handled gracefully in the UI - a non-intrusive
+notification for whoever is interested.  Hashes would be used rarely
+anyway.
+
+&gt;<i> Better to rely on explicit hash files in these situations, as is
+</i>&gt;<i> already the convention.
+</i>
+As you say, the solution already exists.  What I&#x27;m looking for are ways
+to make verifying hashes (and signatures) more convenient for end-users.
+
+&gt;<i>&gt; &gt;Integrity on the server-side is out of the scope of Gemini
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; As are many features of current Gemini clients.
+</i>&gt;<i>
+</i>&gt;<i> Such as?  I&#x27;m considering specifically the communication of data over
+</i>&gt;<i> the network via the Gemini protocol.  Gemini clients obviously have more
+</i>&gt;<i> things to do.
+</i>
+Subscribing to pages, for example [1].  This is done by storing the hash
+of a page, then fetching it periodically and notifying the user if it
+changes.  Vaguely similar to what I&#x27;m suggesting.
+
+[1] <a href="https://github.com/makeworld-the-better-one/amfora/wiki/Subscriptions#pages">https://github.com/makeworld-the-better-one/amfora/wiki/Subscriptions#pages</a>
+
+Anyway, no point dragging on.  The niche for this thing may be too small
+to justify the implementation effort, but if anyone likes the idea, they
+are free to code it.  I might do it at some point.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006562.html">[tech] Integrity checks for Gemini pages</a></li>
+<li>Next message (by thread): <a href="006596.html">[tech] Integrity checks for Gemini pages</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6569">[ date ]</a> <a href="thread.html#6569">[ thread ]</a> <a href="subject.html#6569">[ subject ]</a> <a href="author.html#6569">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

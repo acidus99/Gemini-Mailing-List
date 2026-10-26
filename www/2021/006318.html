@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] support for Ed25519 in clients</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006294.html">
+<link rel="next" href="006324.html">
+</head>
+<body>
+<h1>[tech] support for Ed25519 in clients</h1>
+<b>Stéphane Bortzmeyer</b> stephane at sources.org<br>
+<i>Sun Apr 11 07:27:02 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006294.html">[tech] support for Ed25519 in clients</a></li>
+<li>Next message (by thread): <a href="006324.html">[tech] support for Ed25519 in clients</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6318">[ date ]</a> <a href="thread.html#6318">[ thread ]</a> <a href="subject.html#6318">[ subject ]</a> <a href="author.html#6318">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Thu, Apr 08, 2021 at 12:33:39AM +0200,
+ Johann Galle &lt;johann@qwertqwefsday.eu&gt; wrote 
+ a message of 170 lines which said:
+
+&gt;<i> choosing Ed25519 as the default algorithm over ECDSA [1], I have
+</i>&gt;<i> received multiple complaints about server operators not being able
+</i>&gt;<i> to connect to their own servers because clients seemingly did not
+</i>&gt;<i> support this signing algorithm.
+</i>
+Lupa &lt;<a href="gemini://gemini.bortzmeyer.org/software/lupa/stats.gmi">gemini://gemini.bortzmeyer.org/software/lupa/stats.gmi</a>&gt; shows
+that indeed only a small minority of capsules use Ed25519. There is
+probably a chicken-and-egg probleme here, since client support, as you
+noticed, is poor, which does not motivate capsulemasters.
+
+This is a serious problem for Gemini. Ed25519 in TLS was standardized
+in RFC 8410 &lt;<a href="gemini://gemini.bortzmeyer.org/rfc-mirror/rfc8410.txt">gemini://gemini.bortzmeyer.org/rfc-mirror/rfc8410.txt</a>&gt;,
+more than two years ago. And of course, it is much older than that, so
+all TLS implementations should have it by now. The Web has no such
+problem.
+
+Ed25519 has two characteristics:
+
+* not developed inside an &quot;official&quot; agency, which some people believe
+a strength, since there was documented evidence of standard
+development organizations like NIST tampering with the security of
+algorithms, to make surveillance easier,
+
+* widely recognized among cryptographers.
+
+So I do not really see why someone would like to use exotic TLS
+libraries without Ed25519.
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006294.html">[tech] support for Ed25519 in clients</a></li>
+<li>Next message (by thread): <a href="006324.html">[tech] support for Ed25519 in clients</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6318">[ date ]</a> <a href="thread.html#6318">[ thread ]</a> <a href="subject.html#6318">[ subject ]</a> <a href="author.html#6318">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

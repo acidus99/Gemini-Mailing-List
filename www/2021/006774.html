@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>a space case for transparent gemtext compression</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006741.html">
+<link rel="next" href="006749.html">
+</head>
+<body>
+<h1>a space case for transparent gemtext compression</h1>
+<b>indieterminacy at libre.brussels</b> indieterminacy at libre.brussels<br>
+<i>Sun Jun 20 23:02:09 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006741.html">a space case for transparent gemtext compression</a></li>
+<li>Next message (by thread): <a href="006749.html">a space case for transparent gemtext compression</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6774">[ date ]</a> <a href="thread.html#6774">[ thread ]</a> <a href="subject.html#6774">[ subject ]</a> <a href="author.html#6774">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi Christian,
+
+Thanks for your swansong concerning this thread.
+
+Apologies that my response deviates from the topic re compression but your points and citations (btw, do you have the links) do raise some interesting areas.
+
+Given my experience of HTTP content, I have always meant to valorise my workflow across sites. I would like it, so that dependent on the site (or subsite), when I am clicking on the content is subsequently loaded in a different browser or with a different toolsets.
+
+I have seem approaches for dealing with this at an eLisp end but I havent got around to implementing it myself. In some respects, my memory association with a specific site and a specific browser allows me to fudge it. While I do relish bindings and hotkeys, I have appreciated Emacs Hyperbole&#x27;s ability to do something appropriate based around contents of the content in my text buffer (though similarly I havent yet tweaked it for all my needs and workflows) - based on simple clicking.
+
+In general, I do feel that a &#x27;workbench&#x27; approach has a utility, whereby different tools for different functions are available. One should have the ability to orientate towards a tool with minimal cost. A utility should be dependable and expectiations of deviation reasonable.
+
+Going back to HTTP, Javascripts like uMatrix (and things like NoScript) have been informative re the contemptuous/irresponsible behaviour of content providers. The combinations for minimal client supplication in order to receive content are fascinating, as over time they break down (not only from shifts in infrastructure but additionally deterring JS blocker users). Im happy to have these impediments in the way, if only to be reminded of the harm. My less tech savvy partner tollerates this to an extent but edge cases really throw her, so all switches go on (!).
+
+I recall a recent thread concerning clients and the use of favicons, with a lot of heat regarding whether an attempt at adding visual flair was detrimental. Similarly to the issue of compression, there seems to be an awkward dance which may ossilate between different producers and users of tools and content.
+
+Is it possible to avoid an approach which is heavily dependent on (ambiguous?) norms within a site (ie, non protocol hardened expectations), which can be picked up/interpreted by a client? Instead, the client could call upon a repo(s) (pre downloaded, like a CA bundle) - which gives an indication of a URI&#x27;s policies.
+
+If such repo(s) existed, it might allow switching between different clients to satisfy different use cases.
+
+For example:
+* Desire compression and visiting site foo.fr? Use this client for this usecase, with settings Y, R and I built in client side
+* Desire a favicon and visitng site bar.gr? Use this client for this usecase, with settings G, F, and T activated.
+
+
+Kind regards,
+
+
+
+Jonathan
+
+
+
+
+June 19, 2021 12:49 PM, &quot;Christian Seibold&quot; &lt;krixano@mailbox.org&gt; wrote:
+
+&gt;<i> This is the final message that I will be sending on this thread.
+</i>&gt;<i> 
+</i>&gt;<i> The Gemini protocol restricts what is added to the core protocol. Compression is not used there for
+</i>&gt;<i> a reason as outlined by the FAQ, which I have read numerous times.
+</i>&gt;<i> 
+</i>&gt;<i> What the spec does NOT do is outlaw which filetypes can be sent over the protocol. Zip files can be
+</i>&gt;<i> downloaded over gemini. Same with any other filetype.
+</i>&gt;<i> 
+</i>&gt;<i> The spec says how to interpret both the protocol itself, and gemtext. It has nothing to say about
+</i>&gt;<i> handling filetypes, aside from gemtext. Why? Because gemini is a file transfer protocol at its
+</i>&gt;<i> core. You transfer files over it. The spec also purposefully allows for streaming of files, and
+</i>&gt;<i> this has been talked about many times in both a mailing list thread and on Solderpunk&#x27;s gemlog.
+</i>&gt;<i> 
+</i>&gt;<i> What the spec does NOT do is try to censor what files can be downloaded over the protocol. Which
+</i>&gt;<i> means compressed files are allowed to be downloaded over the protocol, just like any other file.
+</i>&gt;<i> This is NOT against the protocol, as shown in the spec:
+</i>&gt;<i> 
+</i>&gt;<i>&gt; Response handling by clients should be informed by the provided MIME type information. Gemini
+</i>&gt;<i>&gt; defines one MIME type of its own (text/gemini) whose handling is discussed below in section 5. In
+</i>&gt;<i>&gt; all other cases, clients should do &quot;something sensible&quot; based on the MIME type. Minimalistic
+</i>&gt;<i>&gt; clients might adopt a strategy of printing all other text/* responses to the screen without
+</i>&gt;<i>&gt; formatting and saving all non-text responses to the disk. Clients for unix systems may consult
+</i>&gt;<i>&gt; /etc/mailcap to find installed programs for handling non-text types.
+</i>&gt;<i> 
+</i>&gt;<i> I will now give various quotes by Solderpunk that show that Solderpunk was a fan of a variety of
+</i>&gt;<i> different types of clients that do different things - from his article on &quot;A vision for Gemini
+</i>&gt;<i> applications&quot;
+</i>&gt;<i> (<a href="gemini://gemini.circumlunar.space/users/solderpunk/gemlog/a-vision-for-gemini-applications.gmi):">gemini://gemini.circumlunar.space/users/solderpunk/gemlog/a-vision-for-gemini-applications.gmi):</a>
+</i>&gt;<i> 
+</i>&gt;<i>&gt; What this provides is a nice little, dare I say it, &quot;containerised&quot; Gemini application experience.
+</i>&gt;<i>&gt; You are easily and reliably identified to one service and one service only, and no external content
+</i>&gt;<i>&gt; can control what you do with that identity, and your identity can&#x27;t accidentally leak out to
+</i>&gt;<i>&gt; anywhere external.
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; Meanwhile, your &quot;everyday&quot; Gemini client, which will let you go anywhere you like and follow
+</i>&gt;<i>&gt; whichever links you like, does not know the paths to any of your client certificates. Maybe it
+</i>&gt;<i>&gt; doesn&#x27;t even support client certificates at all! If you roam the dangerous wild internet frontiers
+</i>&gt;<i>&gt; with this client, and you accidentally follow a malicious link to one of your apps running on
+</i>&gt;<i>&gt; localhost, as long as that app requires an approved client certificate to do anything of
+</i>&gt;<i>&gt; consequence, no damage can be done.
+</i>&gt;<i> 
+</i>&gt;<i> Later on:
+</i>&gt;<i> 
+</i>&gt;<i>&gt; Some people may still be thinking that this looks like an ugly complication, even if you can wrap
+</i>&gt;<i>&gt; these containers up in nice convenient shell scripts (and I&#x27;m sure some kind of GUI management
+</i>&gt;<i>&gt; solution could be whipped up for people who want one): &quot;What, now I need *two* kinds of client to
+</i>&gt;<i>&gt; use Gemini? Gimme a break!&quot;. But I think it&#x27;s a small surface complication which yields large
+</i>&gt;<i>&gt; simplifications deeper down. The containerised identities approach using ultra-slim clients creates
+</i>&gt;<i>&gt; two clearly separate ecological niches for clients: reading static textual content like gemlogs,
+</i>&gt;<i>&gt; technical documentation, fiction, news reports, weather forecasts, etc. on the one hand and making
+</i>&gt;<i>&gt; use of individual, certificate-secured dynamic applications on the other. This allows for client
+</i>&gt;<i>&gt; authors to target one niche only and therefore write simpler clients.
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; In short, different tools for different jobs, but with a common underlying protocol and markup
+</i>&gt;<i>&gt; language.
+</i>&gt;<i>&gt; 
+</i>&gt;<i>&gt; Or they can partake of both Gemini experiences. I really hope that this approach can ease some of
+</i>&gt;<i>&gt; the tensions that are building between people with different visions for what Geminispace should
+</i>&gt;<i>&gt; be, and make the lives of developers easier at the same time.
+</i>&gt;<i> 
+</i>&gt;<i> In summary, and this is the most important one:
+</i>&gt;<i>&gt; Most Gemini clients will fall into one of two distinct categories
+</i>&gt;<i>&gt; * &quot;Reading-centric&quot; clients will probably have very little or no support for client certificates at
+</i>&gt;<i>&gt; all. Instead they will focus on beautiful and customisable typography, bookmarking, feed
+</i>&gt;<i>&gt; subscription, TOC generation, etc. There will be many clients of this kind, taking different
+</i>&gt;<i>&gt; approaches. Many will be graphical. People will love some and hate others. Plenty of room room for
+</i>&gt;<i>&gt; all.
+</i>&gt;<i>&gt; * &quot;App-centric&quot; clients will instead have good support for client certificates and will be designed
+</i>&gt;<i>&gt; to very securely limit the use of those clients to a single app in order to totally avoid the risk
+</i>&gt;<i>&gt; of CSRF. There will be much less variation amongst these clients because they are all just doing
+</i>&gt;<i>&gt; the same basic thing. Most of them will be terminal-based, because that&#x27;s just the better interface
+</i>&gt;<i>&gt; for interacting with text-based applications, but they needn&#x27;t all be.
+</i>&gt;<i>&gt; Hybrid clients attempting to address both the document reading and secure app niches will surely
+</i>&gt;<i>&gt; exist, but to avoid the risk of CSRF they will require either slightly clunky interfaces or good
+</i>&gt;<i>&gt; awareness and understanding from users. These may be the preferred clients of &quot;power users&quot;.
+</i></pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006741.html">a space case for transparent gemtext compression</a></li>
+<li>Next message (by thread): <a href="006749.html">a space case for transparent gemtext compression</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6774">[ date ]</a> <a href="thread.html#6774">[ thread ]</a> <a href="subject.html#6774">[ subject ]</a> <a href="author.html#6774">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

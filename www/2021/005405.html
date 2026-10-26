@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] reverse proxy gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005402.html">
+<link rel="next" href="005398.html">
+</head>
+<body>
+<h1>[tech] reverse proxy gemini</h1>
+<b>Vincent A.</b> vincent at valvin.fr<br>
+<i>Sun Feb 21 18:37:30 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005402.html">[tech] reverse proxy gemini</a></li>
+<li>Next message (by thread): <a href="005398.html">(proposal) on metadata in documents</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5405">[ date ]</a> <a href="thread.html#5405">[ thread ]</a> <a href="subject.html#5405">[ subject ]</a> <a href="author.html#5405">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hello and thank you all for you replies.
+
+It looks SNI is what I was looking for. In my use case I&#x27;d like each
+virtual host runs individually whith their own certificates but hosted
+on the same IP.
+
+I think Hugo solution already implements something near of what I need.
+I&#x27;ll test it quickly.
+
+It looks I have many things to discover like all the server
+implementations ;)
+
+Valvin
+
+Le 21/02/2021 ? 16:52, Omar Polo a ?crit?:
+&gt;<i>
+</i>&gt;<i> Vincent A. &lt;vincent at valvin.fr&gt; writes:
+</i>&gt;<i>
+</i>&gt;<i>&gt; Hello,
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; My curiosity about Gemini lead me to think about how to host easily many
+</i>&gt;<i>&gt; different domain on the same server.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; I have a simple idea which consists in publishing static content from a
+</i>&gt;<i>&gt; git repository. And allow users to update their content by updating a
+</i>&gt;<i>&gt; git repository and maybe through an interface later.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; For this I imagine using containerization with an existing gemini
+</i>&gt;<i>&gt; server. Here I&#x27;ve tested Agate :
+</i>&gt;<i>&gt; <a href="https://gitlab.com/valvin/gemini-agate-image">https://gitlab.com/valvin/gemini-agate-image</a>
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; Deploying a single hostname is ok. But I&#x27;m wondering how to deploy many
+</i>&gt;<i>&gt; hostnames using the same public IP(v4) address. With HTTP we are used to
+</i>&gt;<i>&gt; deploy a reverse proxy (nginx, haproxy, traefik...). It allowes then to
+</i>&gt;<i>&gt; split traffic based on the DNS name requested in the &quot;Host&quot; header.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; TCP load-balacing doesn&#x27;t allow this I think but maybe I&#x27;m wrong. It
+</i>&gt;<i>&gt; requires to get the information of hostname in the request.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; So I&#x27;m wondering if there is not yet something that has been done about
+</i>&gt;<i>&gt; this. Or maybe I miss somethin
+</i>&gt;<i>&gt; g in TCP load-balancing and it is possible
+</i>&gt;<i>&gt; to do this already.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; Thank you
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; Valvin.
+</i>&gt;<i> As Dave was saying, SNI is madatory on Gemini; clients during the TLS
+</i>&gt;<i> handshake tells the server which domain they want to talk to, and so the
+</i>&gt;<i> server can use the correct certificate and serve the right stuff.
+</i>&gt;<i> Support for this varies between servers.
+</i>&gt;<i>
+</i>&gt;<i> Agate supports multiple hosts it, search for &quot;Virtual Hosts&quot; (that&#x27;s how
+</i>&gt;<i> they&#x27;re called) in the readme, but with the limitation of only one
+</i>&gt;<i> certificate.  Other servers (I&#x27;ll shameless advertise my own) like
+</i>&gt;<i> gmid[0] or solene&#x27; vger[1] supports multiple virtual hosts, with
+</i>&gt;<i> different certificates too.
+</i>&gt;<i>
+</i>&gt;<i> Cheers,
+</i>&gt;<i>
+</i>&gt;<i> Omar Polo
+</i>&gt;<i>
+</i>&gt;<i> [0]: <a href="https://github.com/omar-polo/gmid/">https://github.com/omar-polo/gmid/</a>
+</i>&gt;<i> [1]: <a href="https://tildegit.org/solene/vger">https://tildegit.org/solene/vger</a>
+</i>-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: publickey - vincent at valvin.fr - 1931e3cd.asc
+Type: application/pgp-keys
+Size: 1687 bytes
+Desc: not available
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210221/5eef1a7f/attachment.bin">https://mailing-list-archive.gemi.dev/www/attachments/20210221/5eef1a7f/attachment.bin</a>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 489 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210221/5eef1a7f/attachment.sig">https://mailing-list-archive.gemi.dev/www/attachments/20210221/5eef1a7f/attachment.sig</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005402.html">[tech] reverse proxy gemini</a></li>
+<li>Next message (by thread): <a href="005398.html">(proposal) on metadata in documents</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5405">[ date ]</a> <a href="thread.html#5405">[ thread ]</a> <a href="subject.html#5405">[ subject ]</a> <a href="author.html#5405">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[ANN] Public HTTP Proxy at gem.ondollo.com</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004915.html">
+<link rel="next" href="004942.html">
+</head>
+<body>
+<h1>[ANN] Public HTTP Proxy at gem.ondollo.com</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Tue Jan 26 04:28:40 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004915.html">[ANN] Public HTTP Proxy at gem.ondollo.com</a></li>
+<li>Next message (by thread): <a href="004942.html">[ANN] Public HTTP Proxy at gem.ondollo.com</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4920">[ date ]</a> <a href="thread.html#4920">[ thread ]</a> <a href="subject.html#4920">[ subject ]</a> <a href="author.html#4920">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Mansfield once stated:
+&gt;<i> On Sun, Jan 24, 2021 at 7:23 PM Sean Conner &lt;sean at conman.org&gt; wrote:
+</i>&gt;<i> 
+</i>&gt;<i> &gt;   Also, your client doesn&#x27;t handle the following link properly:
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;         <a href="gemini://gemini.conman.org/test/UCSD-Pascal-source.zip/">gemini://gemini.conman.org/test/UCSD-Pascal-source.zip/</a>
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; It strips off the final &#x27;/&#x27;, which does The Wrong Thing in this case (yes,
+</i>&gt;<i> &gt; the final &#x27;/&#x27; is significant).  Speaking of which, you don&#x27;t handle MIME
+</i>&gt;<i> &gt; types properly---the page through your proxy tried printing the resulting
+</i>&gt;<i> &gt; ZIP file as text.  I have a few other pages that return non &quot;text/*&quot; MIME
+</i>&gt;<i> &gt; files.
+</i>&gt;<i> &gt;
+</i>&gt;<i> 
+</i>&gt;<i> Humm... the CLI version (that uses the same library) didn&#x27;t fail on that
+</i>&gt;<i> link. I think the intent is to get a directory listing of the content
+</i>&gt;<i> inside the zip file, right? 
+</i>
+  Right.
+
+&gt;<i> I&#x27;ll have to walk through the code specifically
+</i>&gt;<i> for that to see where it went wrong. Thanks for writing those tests.
+</i>
+  You&#x27;re welcome.
+
+&gt;<i>   It also sends a client certificate.  Unexpected, but something I think
+</i>&gt;<i> &gt; people should be aware of.
+</i>&gt;<i> 
+</i>&gt;<i> True. The client code underneath the HTTP handler always sends a
+</i>&gt;<i> certificate when it makes the Gemini call. It&#x27;s the same certificate for
+</i>&gt;<i> every call, so there&#x27;s nothing leaking from the users browser into the
+</i>&gt;<i> certificate. Was that the concern?
+</i>
+  I wasn&#x27;t actually expecting it to work!
+
+  And personally, I find it hilarious (and wonderful) that it&#x27;s the same
+certificate for everybody.  Certainly makes it harder to track individuals,
+but I can see it breaking some sites that may use certificates to present
+different information.  
+
+&gt;<i> Thanks for your feedback!
+</i>
+  And thanks for the feedback on the feedback.
+
+  -spc
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004915.html">[ANN] Public HTTP Proxy at gem.ondollo.com</a></li>
+<li>Next message (by thread): <a href="004942.html">[ANN] Public HTTP Proxy at gem.ondollo.com</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4920">[ date ]</a> <a href="thread.html#4920">[ thread ]</a> <a href="subject.html#4920">[ subject ]</a> <a href="author.html#4920">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

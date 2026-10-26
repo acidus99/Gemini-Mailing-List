@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[ANN] [tech] Romulus Gemini Client</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006547.html">
+<link rel="next" href="006545.html">
+</head>
+<body>
+<h1>[ANN] [tech] Romulus Gemini Client</h1>
+<b>Luke Emmet</b> luke at marmaladefoo.com<br>
+<i>Fri May 21 09:46:53 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006547.html">[ANN] [tech] Romulus Gemini Client</a></li>
+<li>Next message (by thread): <a href="006545.html">[ANN] [tech] Romulus Gemini Client</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6554">[ date ]</a> <a href="thread.html#6554">[ thread ]</a> <a href="subject.html#6554">[ subject ]</a> <a href="author.html#6554">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi Frank
+
+Thanks for the feedback.
+
+On 20-May-2021 06:13, Frank Jüdes wrote:
+
+&gt;<i> a very nice program and easy to install on Windows. I have been feared in the past by our developers for discovering even the weirdest issues in their programs… I have tested your program - on Windows - against my server, so here&#x27;s a list for you: 😜
+</i>&gt;<i>
+</i>&gt;<i>   * It does not display *all* characters, defined in Unicode version 13.
+</i>&gt;<i>     - That is very likely nothing you can fix before Micro$oft gets its
+</i>&gt;<i>     act together and fixes the issues with the terminal-window object!
+</i>
+Yes Windows Terminal is getting better, but it&#x27;s not perfect yet. I found this checklist about getting the best display of unicode which helps a bit. Certainly you need to use the new Terminal, not just the default Windows shell.
+
+<a href="https://akr.am/blog/posts/using-utf-8-in-the-windows-terminal">https://akr.am/blog/posts/using-utf-8-in-the-windows-terminal</a>
+
+&gt;<i>   * If there are a lot of headers in the document, the /structure/
+</i>&gt;<i>     display overflows and only the top headers will be displayed:
+</i>&gt;<i>     <a href="gemini://h2903872.stratoserver.net/cgi-bin/man2gmi/-k%20str">gemini://h2903872.stratoserver.net/cgi-bin/man2gmi/-k%20str</a>
+</i>
+Yes, that&#x27;s a known limitation for now, although most Gemini pages have less than 10-20 headings which works fine. I might add a scrolling list for such situations, but my thinking for now is that generally having them directly in a menu makes for rapid interaction.
+
+I think Romulus is the first console application to show the document structure, but I&#x27;m happy to be corrected if not.
+
+&gt;<i>   * Something doesn&#x27;t work right when you paste a Gemini-URL out of
+</i>&gt;<i>     another browser into the input-box of Romulus, it either reported
+</i>&gt;<i>     that i was unable to connect or crashed:
+</i>
+Yes, it expects a full URL, so if the &quot;gemini://&quot; scheme is missing it did not default to it.
+This is now fixed in an upcoming commit.
+
+&gt;<i>   * The time-out of five seconds prevents some of the CGI programs on my
+</i>&gt;<i>     server from being used with Romulus:
+</i>&gt;<i>     <a href="gemini://h2903872.stratoserver.net/cgi-bin/figlet/Romulus">gemini://h2903872.stratoserver.net/cgi-bin/figlet/Romulus</a> - will
+</i>&gt;<i>     sometimes work, when the big, fat Database on that machine isn&#x27;t
+</i>&gt;<i>     allocating all resources to itself, but usually if fails with a
+</i>&gt;<i>     time-out. It would be nice to be able to configure the timeout.
+</i>
+Its a possible enhancement, certainly the underlying library SmolNetSharp allows this as a parameter on the request itself.
+
+I&#x27;ve created some issues on the repo to cover the above items.
+
+&gt;<i> That&#x27;s it! - I&#x27;m trying to make it run in Linux and will test there.
+</i>
+Thanks - I&#x27;d be interested to hear how you get on
+
+ - Luke
+
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006547.html">[ANN] [tech] Romulus Gemini Client</a></li>
+<li>Next message (by thread): <a href="006545.html">[ANN] [tech] Romulus Gemini Client</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6554">[ date ]</a> <a href="thread.html#6554">[ thread ]</a> <a href="subject.html#6554">[ subject ]</a> <a href="author.html#6554">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

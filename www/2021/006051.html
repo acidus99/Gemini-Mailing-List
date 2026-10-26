@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] signing when rotating (Was: Re: Enhancing TOFU)</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006043.html">
+<link rel="next" href="006154.html">
+</head>
+<body>
+<h1>[tech] signing when rotating (Was: Re: Enhancing TOFU)</h1>
+<b>mbays</b> mbays at sdf.org<br>
+<i>Wed Mar 10 18:21:44 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006043.html">[tech] signing when rotating (Was: Re: Enhancing TOFU)</a></li>
+<li>Next message (by thread): <a href="006154.html">[tech] signing when rotating (Was: Re: Enhancing TOFU)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6051">[ date ]</a> <a href="thread.html#6051">[ thread ]</a> <a href="subject.html#6051">[ subject ]</a> <a href="author.html#6051">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>* Wednesday, 2021-03-10 at 07:50 +0100 - nothien@uber.space &lt;nothien@uber.space&gt;:
+
+&gt;<i> mbays &lt;mbays@sdf.org&gt; wrote:
+</i>&gt;<i>&gt; * sign it with A to produce a signed certificate S,
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; So why don&#x27;t we make this a convention? Any subtleties I&#x27;m missing?
+</i>&gt;<i>
+</i>&gt;<i> The big issue with this is, what if a client misses a certificate
+</i>&gt;<i> update?
+</i>
+Yes, this isn&#x27;t a perfect robust system, and doesn&#x27;t make sense if you want to rotate certificates frequently. But I&#x27;m imagining that rotating would be something you do only very rarely.
+
+Why would you want to rotate out your current keypair?
+* Advances in cryptography mean you want to switch to a new algorithm.
+* You fear the key might have been compromised.
+* You want to add a wildcard in the CN, e.g. x.y.z -&gt; *.y.z.
+* The certificate is about to expire.
+* Other exceptional circumstances I haven&#x27;t thought of.
+
+As long as you set distant expiration dates, it seems reasonable to expect at least a few years between any of these applying. So just having each certificate sign the next seems like it would deal with most situations, and adds no new protocol complexity or traffic costs.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006043.html">[tech] signing when rotating (Was: Re: Enhancing TOFU)</a></li>
+<li>Next message (by thread): <a href="006154.html">[tech] signing when rotating (Was: Re: Enhancing TOFU)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6051">[ date ]</a> <a href="thread.html#6051">[ thread ]</a> <a href="subject.html#6051">[ subject ]</a> <a href="author.html#6051">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

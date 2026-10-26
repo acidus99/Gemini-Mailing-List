@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] mercury highlights ☿️</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005797.html">
+<link rel="next" href="005747.html">
+</head>
+<body>
+<h1>[spec] mercury highlights ☿️</h1>
+<b>Petite Abeille</b> petite.abeille at gmail.com<br>
+<i>Sun Feb 28 15:40:01 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005797.html">[spec] List of proposed clarifications</a></li>
+<li>Next message (by thread): <a href="005747.html">[spec] mercury highlights ☿️</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5737">[ date ]</a> <a href="thread.html#5737">[ thread ]</a> <a href="subject.html#5737">[ subject ]</a> <a href="author.html#5737">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>BACKGROUND
+Back in mid-2020, Solderpunk outlined the draft of a minimal subset of Gemini, named Mercury:
+
+<a href="https://portal.mozz.us/gemini/gemini.circumlunar.space/users/solderpunk/gemlog/the-mercury-protocol.gmi">https://portal.mozz.us/gemini/gemini.circumlunar.space/users/solderpunk/gemlog/the-mercury-protocol.gmi</a> &lt;<a href="https://portal.mozz.us/gemini/gemini.circumlunar.space/users/solderpunk/gemlog/the-mercury-protocol.gmi">https://portal.mozz.us/gemini/gemini.circumlunar.space/users/solderpunk/gemlog/the-mercury-protocol.gmi</a>&gt;
+
+That subset was always good enough for my needs, and that&#x27;s what I have been using since ? instead of Gemini proper.
+
+What follows is my implementation highlights of Mercury ? for the record.
+
+
+SERVICE DISCOVERY
+mercury:// IRIs SHOULD be resolved through DNS service discovery:
+
+# dig +short TXT _mercury._tcp.host.xyz.
+multiaddr=/dns/host.xyz/tcp/1958/tls/sni/host.xyz
+
+multiaddr ?
+User-agents MUST support tcp.
+User-agents MAY support tls.
+
+Default multiaddr /dns4/host.xyz/tcp/1958
+
+
+REQUEST 4,096 bytes UTF-8 IRI line
+mercury://host.xyz/
+
+
+RESPONSE 4,096 bytes UTF-8 status line 
+20 text/mercury;charset=utf-8;
+Hello Mercury! ??
+
+=&gt; mercury://host.xyz/license CC0-1.0 
+&lt;end of connection&gt; 
+
+
+STATUS
+2 digits code, 4,096 bytes UTF-8 
+
+2x (SUCCESS) 4,096 bytes UTF-8 content-type status line
+20[ text/mercury;charset=utf-8;]
+
+3x (REDIRECT) 4,096 bytes UTF-8 IRI status line
+30 mercury://host.xyz/
+
+4x (FAILURE) 4,096 bytes UTF-8 status line
+40[ DESCRIPTION]
+
+
+TEXT/MERCURY
+text/mercury;charset=utf-8;
+
+Text lines
+Any line which is not a link.
+
+Link lines
+=&gt; IRI[ DESCRIPTION]
+
+=&gt; mercury://host.xyz/license CC0-1.0 
+
+
+MERCURI URN
+urn:mercury:capa
+
+CAPA REQUEST
+urn:mercury:capa
+
+CAPA RESPONSE
+20 text/mercury;charset=utf-8;
+=&gt; urn:mercury:capa
+&lt;end of connection&gt; 
+
+Servers MUST support urn:mercury:capa.
+
+
+MINIMAL SERVER
+# while true; do { echo -e &#x27;20\r\n=&gt; urn:mercury:capa&#x27;; } | nc -l 127.0.0.1 1958; done
+
+MINIMAL CLIENT
+# echo -e &#x27;urn:mercury:capa\r\n&#x27; | nc 127.0.0.1 1958
+20
+=&gt; urn:mercury:capa
+
+
+That&#x27;s all folks.
+
+
+?0?
+
+? <a href="https://github.com/multiformats/multiaddr">https://github.com/multiformats/multiaddr</a> &lt;<a href="https://github.com/multiformats/multiaddr">https://github.com/multiformats/multiaddr</a>&gt;
+
+
+
+
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210228/ee824c2b/attachment.htm">https://mailing-list-archive.gemi.dev/www/attachments/20210228/ee824c2b/attachment.htm</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005797.html">[spec] List of proposed clarifications</a></li>
+<li>Next message (by thread): <a href="005747.html">[spec] mercury highlights ☿️</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5737">[ date ]</a> <a href="thread.html#5737">[ thread ]</a> <a href="subject.html#5737">[ subject ]</a> <a href="author.html#5737">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

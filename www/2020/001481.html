@@ -1,121 +1,85 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3C20200610014704.GB23998%40brevard.conman.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="001477.html">
-   <LINK REL="Next"  HREF="001482.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)</H1>
-    <B>Sean Conner</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%2C%20SCGI%20and%20Certificates%20%28was%20Re%3A%20%5BANN%5D%20Gemini%20browser%20for%20iOS%29&In-Reply-To=%3C20200610014704.GB23998%40brevard.conman.org%3E"
-       TITLE="CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)">sean at conman.org
-       </A><BR>
-    <I>Wed Jun 10 02:47:04 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="001477.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
-</A></li>
-        <LI>Next message (by thread): <A HREF="001482.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1481">[ date ]</a>
-              <a href="thread.html#1481">[ thread ]</a>
-              <a href="subject.html#1481">[ subject ]</a>
-              <a href="author.html#1481">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="001477.html">
+<link rel="next" href="001482.html">
+</head>
+<body>
+<h1>CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Wed Jun 10 02:47:04 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="001477.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)</a></li>
+<li>Next message (by thread): <a href="001482.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1481">[ date ]</a> <a href="thread.html#1481">[ thread ]</a> <a href="subject.html#1481">[ subject ]</a> <a href="author.html#1481">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>It was thus said that the Great Michael Lazar once stated:
-&gt;<i> On Tue, Jun 9, 2020 at 7:14 PM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt; It was thus said that the Great solderpunk once stated:
-</I>&gt;<i> &gt; &gt;
-</I>&gt;<i> &gt; &gt; (following Sean's lead for now, although I need to bring up some points
-</I>&gt;<i> &gt; &gt; for discussion about this in the near future).
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt;   So I have two CGI scripts set up.  Both are in a &quot;protected&quot; area of the
-</I>&gt;<i> &gt; server (on my development machine) that requires a client certificate.  One
-</I>&gt;<i> &gt; receives *just* the RFC-3875 defined variables:
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt; AUTH_TYPE=Certificate
-</I>&gt;<i> &gt; GEMINI_DOCUMENT_ROOT=/home/spc/projects/gemini/non-checkin/cgi-bin
-</I>&gt;<i> &gt; GEMINI_URL=<A HREF="gemini://lucy.roswell.area51/cgi-bin/beta/foobar?one=1&amp;two=2">gemini://lucy.roswell.area51/cgi-bin/beta/foobar?one=1&amp;two=2</A>
-</I>&gt;<i> &gt; GEMINI_URL_PATH=/cgi-bin/beta/foobar
-</I>&gt;<i> &gt; PATH_INFO=/foobar
-</I>&gt;<i> &gt; PATH_TRANSLATED=/home/spc/projects/gemini/non-checkin/cgi-bin/foobar
-</I>&gt;<i> &gt; QUERY_STRING=one=1&amp;two=2
-</I>&gt;<i> &gt; REMOTE_ADDR=::ffff:192.168.1.10
-</I>&gt;<i> &gt; REMOTE_HOST=::ffff:192.168.1.10
-</I>&gt;<i> &gt; REMOTE_USER=Sean Conner
-</I>&gt;<i> &gt; REQUEST_METHOD=
-</I>&gt;<i> &gt; SCRIPT_NAME=/home/spc/projects/gemini/non-checkin/cgi-bin/./beta
-</I>&gt;<i> &gt; SERVER_NAME=lucy.roswell.area51
-</I>&gt;<i> &gt; SERVER_PORT=1965
-</I>&gt;<i> &gt; SERVER_PROTOCOL=GEMINI
-</I>&gt;<i> &gt; SERVER_SOFTWARE=GLV-1.12556/1
-</I>&gt;<i> 
-</I>&gt;<i> I believe this is using SCRIPT_NAME incorrectly per RFC 3875. 
-</I>
+<pre>It was thus said that the Great Michael Lazar once stated:
+&gt;<i> On Tue, Jun 9, 2020 at 7:14 PM Sean Conner &lt;sean at conman.org&gt; wrote:
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; It was thus said that the Great solderpunk once stated:
+</i>&gt;<i> &gt; &gt;
+</i>&gt;<i> &gt; &gt; (following Sean&#x27;s lead for now, although I need to bring up some points
+</i>&gt;<i> &gt; &gt; for discussion about this in the near future).
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;   So I have two CGI scripts set up.  Both are in a &quot;protected&quot; area of the
+</i>&gt;<i> &gt; server (on my development machine) that requires a client certificate.  One
+</i>&gt;<i> &gt; receives *just* the RFC-3875 defined variables:
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; AUTH_TYPE=Certificate
+</i>&gt;<i> &gt; GEMINI_DOCUMENT_ROOT=/home/spc/projects/gemini/non-checkin/cgi-bin
+</i>&gt;<i> &gt; GEMINI_URL=<a href="gemini://lucy.roswell.area51/cgi-bin/beta/foobar?one=1&amp;two=2">gemini://lucy.roswell.area51/cgi-bin/beta/foobar?one=1&amp;two=2</a>
+</i>&gt;<i> &gt; GEMINI_URL_PATH=/cgi-bin/beta/foobar
+</i>&gt;<i> &gt; PATH_INFO=/foobar
+</i>&gt;<i> &gt; PATH_TRANSLATED=/home/spc/projects/gemini/non-checkin/cgi-bin/foobar
+</i>&gt;<i> &gt; QUERY_STRING=one=1&amp;two=2
+</i>&gt;<i> &gt; REMOTE_ADDR=::ffff:192.168.1.10
+</i>&gt;<i> &gt; REMOTE_HOST=::ffff:192.168.1.10
+</i>&gt;<i> &gt; REMOTE_USER=Sean Conner
+</i>&gt;<i> &gt; REQUEST_METHOD=
+</i>&gt;<i> &gt; SCRIPT_NAME=/home/spc/projects/gemini/non-checkin/cgi-bin/./beta
+</i>&gt;<i> &gt; SERVER_NAME=lucy.roswell.area51
+</i>&gt;<i> &gt; SERVER_PORT=1965
+</i>&gt;<i> &gt; SERVER_PROTOCOL=GEMINI
+</i>&gt;<i> &gt; SERVER_SOFTWARE=GLV-1.12556/1
+</i>&gt;<i> 
+</i>&gt;<i> I believe this is using SCRIPT_NAME incorrectly per RFC 3875. 
+</i>
   You are correct.  Sigh.  Off to fix it ...
 
-&gt;<i> I'm also curious how you are handling URL-encoding in your CGI variables. For
-</I>&gt;<i> jetforce, I followed my best interpretation of the RFC 3875 guidelines:
-</I>&gt;<i> 
-</I>&gt;<i> - GEMINI_URL: URL-encoded (not specified by the RFC, of course)
-</I>
+&gt;<i> I&#x27;m also curious how you are handling URL-encoding in your CGI variables. For
+</i>&gt;<i> jetforce, I followed my best interpretation of the RFC 3875 guidelines:
+</i>&gt;<i> 
+</i>&gt;<i> - GEMINI_URL: URL-encoded (not specified by the RFC, of course)
+</i>
   I also URL-encode this.
 
 &gt;<i> - QUERY_STRING: URL-encoded
-</I>
-  I don't URL-decode the query, so what gets passed to the script is what
+</i>
+  I don&#x27;t URL-decode the query, so what gets passed to the script is what
 was passed as the request.
 
 &gt;<i> - PATH_INFO: URL-decoded
-</I>&gt;<i> - SCRIPT_NAME: URL-decoded
-</I>
+</i>&gt;<i> - SCRIPT_NAME: URL-decoded
+</i>
   Same here, modulo the incorrect SCRIPT_NAME in GLV-1.12556.
 
   -spc
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="001477.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
-</A></li>
-	<LI>Next message (by thread): <A HREF="001482.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1481">[ date ]</a>
-              <a href="thread.html#1481">[ thread ]</a>
-              <a href="subject.html#1481">[ subject ]</a>
-              <a href="author.html#1481">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="001477.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)</a></li>
+<li>Next message (by thread): <a href="001482.html">CGI, SCGI and Certificates (was Re: [ANN] Gemini browser for iOS)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1481">[ date ]</a> <a href="thread.html#1481">[ thread ]</a> <a href="subject.html#1481">[ subject ]</a> <a href="author.html#1481">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

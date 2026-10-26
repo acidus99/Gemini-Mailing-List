@@ -1,68 +1,52 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> A proposed scheme for parsing preformatted alt text
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C20200911201603.GH19614%40brevard.conman.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="002681.html">
-   <LINK REL="Next"  HREF="002685.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>A proposed scheme for parsing preformatted alt text</H1>
-    <B>Sean Conner</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20A%20proposed%20scheme%20for%20parsing%20preformatted%20alt%20text&In-Reply-To=%3C20200911201603.GH19614%40brevard.conman.org%3E"
-       TITLE="A proposed scheme for parsing preformatted alt text">sean at conman.org
-       </A><BR>
-    <I>Fri Sep 11 21:16:03 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="002681.html">A proposed scheme for parsing preformatted alt text
-</A></li>
-        <LI>Next message (by thread): <A HREF="002685.html">A proposed scheme for parsing preformatted alt text
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2683">[ date ]</a>
-              <a href="thread.html#2683">[ thread ]</a>
-              <a href="subject.html#2683">[ subject ]</a>
-              <a href="author.html#2683">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A proposed scheme for parsing preformatted alt text</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="002681.html">
+<link rel="next" href="002685.html">
+</head>
+<body>
+<h1>A proposed scheme for parsing preformatted alt text</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Fri Sep 11 21:16:03 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="002681.html">A proposed scheme for parsing preformatted alt text</a></li>
+<li>Next message (by thread): <a href="002685.html">A proposed scheme for parsing preformatted alt text</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2683">[ date ]</a> <a href="thread.html#2683">[ thread ]</a> <a href="subject.html#2683">[ subject ]</a> <a href="author.html#2683">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>It was thus said that the Great Nathan Galt once stated:
+<pre>It was thus said that the Great Nathan Galt once stated:
 &gt;<i> 
-</I>&gt;<i> On Sep 11, 2020, at 11:36 AM, Luke Emmet &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">luke at marmaladefoo.com</A>&gt; wrote:
-</I>&gt;<i> &gt; 
-</I>&gt;<i> &gt; Or are we going to say these implementation terminal escape codes are
-</I>&gt;<i> &gt; left as an ad-hoc convention? That seems to have its own risks as
-</I>&gt;<i> &gt; discussed on this thread and elsewhere.
-</I>&gt;<i> 
-</I>&gt;<i> [shock and horror that people are using ANSI codes for color]
-</I>
-  I've come across ECMA-48 [1] code usage on both gopher and Gemini.  It is
+</i>&gt;<i> On Sep 11, 2020, at 11:36 AM, Luke Emmet &lt;luke at marmaladefoo.com&gt; wrote:
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt; Or are we going to say these implementation terminal escape codes are
+</i>&gt;<i> &gt; left as an ad-hoc convention? That seems to have its own risks as
+</i>&gt;<i> &gt; discussed on this thread and elsewhere.
+</i>&gt;<i> 
+</i>&gt;<i> [shock and horror that people are using ANSI codes for color]
+</i>
+  I&#x27;ve come across ECMA-48 [1] code usage on both gopher and Gemini.  It is
 being done.
 
 &gt;<i> Prior reading:
-</I>&gt;<i> 
-</I>&gt;<i> =&gt; <A HREF="https://en.wikipedia.org/wiki/Escape_character#ASCII_escape_character">https://en.wikipedia.org/wiki/Escape_character#ASCII_escape_character</A>
-</I>&gt;<i> =&gt; <A HREF="https://the.exa.website/">https://the.exa.website/</A> a modern ls(1) replacement
-</I>&gt;<i> 
-</I>&gt;<i> I think ANSI color codes are up to 24-bit color now. Not all terminals
-</I>&gt;<i> support them (Terminal.app doesn&#8217;t; iTerm2 does), but they&#8217;re out there. I
-</I>&gt;<i> was looking up color codes so I could make my EXA_COLORS variable nicer
-</I>&gt;<i> and the whole process wasn&#8217;t pleasant.
-</I>&gt;<i> 
-</I>&gt;<i> Sounds like a good reason to explicitly disallow U+001B in the text/gemini
-</I>&gt;<i> spec and:
-</I>
-  Ban ESC and I can *still* send the codes.  The sequence '&lt;ESC&gt;[' is the
+</i>&gt;<i> 
+</i>&gt;<i> =&gt; <a href="https://en.wikipedia.org/wiki/Escape_character#ASCII_escape_character">https://en.wikipedia.org/wiki/Escape_character#ASCII_escape_character</a>
+</i>&gt;<i> =&gt; <a href="https://the.exa.website/">https://the.exa.website/</a> a modern ls(1) replacement
+</i>&gt;<i> 
+</i>&gt;<i> I think ANSI color codes are up to 24-bit color now. Not all terminals
+</i>&gt;<i> support them (Terminal.app doesn?t; iTerm2 does), but they?re out there. I
+</i>&gt;<i> was looking up color codes so I could make my EXA_COLORS variable nicer
+</i>&gt;<i> and the whole process wasn?t pleasant.
+</i>&gt;<i> 
+</i>&gt;<i> Sounds like a good reason to explicitly disallow U+001B in the text/gemini
+</i>&gt;<i> spec and:
+</i>
+  Ban ESC and I can *still* send the codes.  The sequence &#x27;&lt;ESC&gt;[&#x27; is the
 CONTROL SEQUENCE INTRODUCER and is only one of two ways it is represented. 
 The other way is with codepoint 155 [2].  To be truely safe, you need to
 filter out all control codes (control set 0, from 0 to 31, 127 (which is
@@ -77,35 +61,17 @@ feed).
 	correctly.
 
 [2]	In any of the ISO 8-bit character sets, this is character 155.
-	Unicode also uses this value, but when encoded as UTF-8, it's
+	Unicode also uses this value, but when encoded as UTF-8, it&#x27;s
 	represented as the bytes 194,155.
-</PRE>
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="002681.html">A proposed scheme for parsing preformatted alt text
-</A></li>
-	<LI>Next message (by thread): <A HREF="002685.html">A proposed scheme for parsing preformatted alt text
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#2683">[ date ]</a>
-              <a href="thread.html#2683">[ thread ]</a>
-              <a href="subject.html#2683">[ subject ]</a>
-              <a href="author.html#2683">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="002681.html">A proposed scheme for parsing preformatted alt text</a></li>
+<li>Next message (by thread): <a href="002685.html">A proposed scheme for parsing preformatted alt text</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#2683">[ date ]</a> <a href="thread.html#2683">[ thread ]</a> <a href="subject.html#2683">[ subject ]</a> <a href="author.html#2683">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

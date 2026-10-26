@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] Regarding the proposal to remove status code 11</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006083.html">
+<link rel="next" href="006090.html">
+</head>
+<body>
+<h1>[spec] Regarding the proposal to remove status code 11</h1>
+<b>Luke Emmet</b> luke at marmaladefoo.com<br>
+<i>Sun Mar 14 09:53:38 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006083.html">[spec] Regarding the proposal to remove status code 11</a></li>
+<li>Next message (by thread): <a href="006090.html">[spec] Regarding the proposal to remove status code 11</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6086">[ date ]</a> <a href="thread.html#6086">[ thread ]</a> <a href="subject.html#6086">[ subject ]</a> <a href="author.html#6086">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Apologies - I should improve my proof reading - there were a couple of typos - some missing negations. Here is a fix, but in summary I meant to say
+
+ - Gemini&#x27;s request method *is* idempotent (equivalent to the web&#x27;s GET)
+ - Gemini does not have a *non* idempotent method (safe for sending state to the server)
+
+On 14-Mar-2021 09:32, Luke Emmet wrote:
+
+&gt;<i> Gemini is really a read-only medium as its method is GET only - there is no idempotent method to send data. Servers that attempt to put transient state with side effects (changing a password among other things) by putting these into the URI is poor design IMO.
+</i>
+Gemini&#x27;s method *is* an idempotent method, there is no non-idempotent method in Gemini.
+
+&gt;<i> A URI query should be thought of as a query parameterisation - a way to address server state, rather than as a way to send state to the server. To send state properly you need an idempotent mechanism, which Gemini doesnt have. The web does, as incidentally did early gopher before it adopted URIs. This seems to be a conscious design choice of Gemini.
+</i>
+[...] To send state properly you need a *non*-idempotent mechanism, [...]
+
+&gt;<i> My view is that status 11 is a kind of security theatre - it gives a false sense of security, when in fact it is logically equivalent to status 10 - and in fact the spec allows valid clients to only interpret the first digit, so a client may actually not know. We should not be encouraging its use or authors or users to form a view it is &quot;protecting&quot; them in any significant sense.
+</i>&gt;<i>
+</i>&gt;<i>
+</i>&gt;<i>&gt; Secondly, let&#x27;s look at why exactly it is considered a bad idea to put
+</i>&gt;<i>&gt; sensitive information in a URL. The reasons given by RFC 3986 §7.5
+</i>&gt;<i>&gt; (quoted at the Gitlab issue) are:
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt;&gt; URIs are frequently displayed by browsers, stored in clear text
+</i>&gt;<i>&gt;&gt; bookmarks, and logged by user agent history and intermediary
+</i>&gt;<i>&gt;&gt; applications (proxies) &gt; The last problem can be avoided by not using relay-type proxies (by
+</i>&gt;<i>&gt; which I mean proxies where the TLS connection is with the proxy rather
+</i>&gt;<i>&gt; than with the destination). Note that all the other problems can be
+</i>&gt;<i>&gt; addressed by client software IF it&#x27;s possible to distinguish between
+</i>&gt;<i>&gt; sensitive and non-sensitive input. When the server sends 11, the client
+</i>&gt;<i>&gt; can hide the input the user is typing, and throw away the query after
+</i>&gt;<i>&gt; sending the request, before displaying the URL in the URL bar or saving
+</i>&gt;<i>&gt; it in the browsing history.
+</i>&gt;<i>
+</i>&gt;<i> No, its not possible for either clients nor servers to know which URIs are &quot;sensitive&quot;
+</i>&gt;<i>
+</i>&gt;<i> Q: here is a URI - should a client, proxy or server be prevented from recording or sharing it:
+</i>&gt;<i>
+</i>&gt;<i> <a href="gemini://example.com/foo?bar">gemini://example.com/foo?bar</a>
+</i>&gt;<i>
+</i>&gt;<i> Ans: there is *no* way to know. It depends on the semantics of the application and foo and bar.
+</i>&gt;<i>
+</i>&gt;<i>&gt; So actually, if we reason from the assumption that password
+</i>&gt;<i>&gt; authentication will happen anyway (as I&#x27;ve argued above), removing
+</i>&gt;<i>&gt; status code 11 has rather negative consequences, as it removes the
+</i>&gt;<i>&gt; ability to distinguish between sensitive and non-sensitive input.
+</i>&gt;<i>
+</i>&gt;<i> Status 10 and 11 are currently logically indistinguishable and status 11 is misleading.
+</i>&gt;<i>
+</i>&gt;<i> If we keep status 11, the FAQ could warn off its use and I think clients should warn users to say something like &quot;The server requested to mask the input, however be aware that the parameter will be simply appended in the clear to the subsequent URI, and this does not offer a genuine security feature.&quot;
+</i>&gt;<i>
+</i>&gt;<i>&gt; My conclusion is that removing status code 11 would be unwise, and
+</i>&gt;<i>&gt; instead it would be better to include a recommendation in the best
+</i>&gt;<i>&gt; practices document to throw away the query part after sending a request
+</i>&gt;<i>&gt; that results from user input on a 11 page. Maybe there should also be a
+</i>&gt;<i>&gt; recommendation to store client certs in a password-encrypted vault, as
+</i>&gt;<i>&gt; of course storing long-lived certs unencrypted is about as much of a
+</i>&gt;<i>&gt; problem as storing sensitive queries in the browsing history.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; Thirdly and lastly, about Gitlab. I strongly dislike the fact that
+</i>&gt;<i>&gt; discussions which can have quite an impact on all Gemini users are
+</i>&gt;<i>&gt; happening in Gitlab issues; to stay up-to-date on all these requires
+</i>&gt;<i>&gt; regularly going through multiple webpages, and to comment requires a
+</i>&gt;<i>&gt; Gitlab account! I think this is a mistake.
+</i>&gt;<i>
+</i>&gt;<i> I don&#x27;t think its a big deal - if the BDFN finds it a useful and practical way to gather issues with the spec, I&#x27;m happy to contribute wherever the conversation may happen.
+</i>&gt;<i>
+</i>&gt;<i>&gt; [1] <a href="https://gitlab.com/gemini-specification/protocol/-/issues/17">https://gitlab.com/gemini-specification/protocol/-/issues/17</a>
+</i>&gt;<i>
+</i>&gt;<i>   - Luke
+</i></pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006083.html">[spec] Regarding the proposal to remove status code 11</a></li>
+<li>Next message (by thread): <a href="006090.html">[spec] Regarding the proposal to remove status code 11</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6086">[ date ]</a> <a href="thread.html#6086">[ thread ]</a> <a href="subject.html#6086">[ subject ]</a> <a href="author.html#6086">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

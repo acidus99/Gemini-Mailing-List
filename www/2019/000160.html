@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>URLs in request lines</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000159.html">
+<link rel="next" href="000161.html">
+</head>
+<body>
+<h1>URLs in request lines</h1>
+<b>Bradley D. Thornton</b> Bradley at NorthTech.US<br>
+<i>Sun Sep 15 06:18:55 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000159.html">URLs in request lines</a></li>
+<li>Next message (by thread): <a href="000161.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#160">[ date ]</a> <a href="thread.html#160">[ thread ]</a> <a href="subject.html#160">[ subject ]</a> <a href="author.html#160">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+
+On 9/14/2019 3:36 PM, Sean Conner wrote:
+&gt;<i> 
+</i>&gt;<i>   The TL;DR of this would be:  the following two URLs SHOULD be the same and
+</i>&gt;<i> serve up the same page:
+</i>&gt;<i> 
+</i>&gt;<i>         <a href="gemini://example.com">gemini://example.com</a>
+</i>&gt;<i>         <a href="gemini://example.com/">gemini://example.com/</a> 
+</i>&gt;<i> 
+</i>&gt;<i>   What&#x27;s below is my thought process leading up to that.
+</i>&gt;<i> 
+</i>&gt;<i> 
+</i>&gt;<i>   Technically speaking, these two URLs are NOT the same:
+</i>&gt;<i> 
+</i>&gt;<i> 	<a href="http://example.com/foo">http://example.com/foo</a>
+</i>&gt;<i> 	<a href="http://example.com/foo/">http://example.com/foo/</a>
+</i>&gt;<i> 
+</i>&gt;<i> and a webserver could technically serve up different content for the two
+</i>&gt;<i> requests.
+</i>
+And that does happen sometimes in the real world, and confuses people.
+To me, the trailing slash forces the implication that you&#x27;re looking for
+an index file in that particular directory, whatever kind is specified
+by httpd, rather than a file named foo.
+
+After all, there could exist, both a directory *AND* a file named &#x27;foo&#x27;.
+
+
+&gt;<i> But RFC-3986, section 6.2.3 states that the following are the
+</i>&gt;<i> same for http:
+</i>&gt;<i> 
+</i>&gt;<i> 	<a href="http://example.com">http://example.com</a>
+</i>&gt;<i> 	<a href="http://example.com/">http://example.com/</a>
+</i>&gt;<i>
+</i>
+And IMO, they should be treated as such, but are sometimes not. I&#x27;ve
+received 404&#x27;s on occsion when omitting the trailing slash, and just got
+into the habit of (most often) putting it there when I type in an URL.
+
+But your example above isn&#x27;t the same as the example above that ;)
+
+I do my very best when referring to directory structure to practice this
+too. If nothing else, I get to omit the word, &quot;directory&quot; in Howto&#x27;s and
+tuts or procedural documents I write. After all, without using the word
+&#x27;directory&#x27;, or using the trailing slash, one *could* be referring to a
+regular file type instead of a directory file type ;)
+
+
+&gt;<i>   The question you are asking is---are the these two examples the same for
+</i>&gt;<i> Gemini?
+</i>&gt;<i> 
+</i>&gt;<i> 	<a href="gemini://example.com">gemini://example.com</a>
+</i>&gt;<i> 	<a href="gemini://example.com/">gemini://example.com/</a>
+</i>&gt;<i> 
+</i>&gt;<i>   Again, per RFC-3986, they are (unless some document describing Gemini URLs
+</i>&gt;<i> states otherwise).  I naturally assumed they would be as they are for HTTP.
+</i>&gt;<i> That&#x27;s perhaps an unwarrented assumption, but I would have to think the two
+</i>&gt;<i> *are* the same, because of the nature of URLs.
+</i>
+What about:
+     <a href="gemini://example.com/foo">gemini://example.com/foo</a>
+     <a href="gemini://example.com/foo/">gemini://example.com/foo/</a>
+
+In the first example, couldn&#x27;t that refer to either a request for either
+an index.gmi in foo/ or a file in / called foo?
+
+I&#x27;m not proposing anything. I&#x27;m just asking.
+
+&gt;<i> 
+</i>&gt;<i>   The *only* character that can follow the authority section (hostname,
+</i>&gt;<i> port, etc) of a URL is the slash.  There is no other valid character that
+</i>&gt;<i> can go there.  So while it is possible for a Gemini server to serve up two
+</i>&gt;<i> different resources for the example above, that would, in my opinion,
+</i>&gt;<i> violate the rule of least surprise.  Even with gopher URLs, RFC-4266,
+</i>&gt;<i> section 2.1 says the following are the same:
+</i>&gt;<i> 
+</i>&gt;<i> 	<a href="gopher://example.com">gopher://example.com</a>
+</i>&gt;<i> 	<a href="gopher://example.com/">gopher://example.com/</a>
+</i>&gt;<i> 	<a href="gopher://example.com/1">gopher://example.com/1</a>
+</i>&gt;<i> 
+</i>&gt;<i>   The slash between the authority section and the selector is required not
+</i>&gt;<i> only by URL parsing rules, but because there are alphaebtic gopher types. 
+</i>&gt;<i> Also, RFC-1436 (Introduction) states that gopher selectors are opaque and
+</i>&gt;<i> have no meaning, so the following two are distinct resources:
+</i>&gt;<i> 
+</i>&gt;<i> 	<a href="gopher://example.com/1">gopher://example.com/1</a>
+</i>&gt;<i> 	<a href="gopher://example.com/1/">gopher://example.com/1/</a>
+</i>
+Hm... I don&#x27;t know that I know the difference there.Perhaps I should
+read up in the appropriate section of the RFC below. If that URI were
+for HTTP, it would be saying, &quot;Give me the file named &#x27;1&#x27;. Actually,
+before I over think this, it would mean the same thing in HTTP.
+
+&gt;<i> 
+</i>&gt;<i>   Addtionally, these *are* already covered by RFC-3986 (first example
+</i>&gt;<i> above), but I digress.  So while technically what you say is true (two
+</i>&gt;<i> different resources) I would recommend against it (rule of least surprise).
+</i>&gt;<i> 
+</i>
+ANYWAY...
+
+I&#x27;ve been invited over to another farm tonight to do some Drinkin&#x27;
+Lincoln, and I know they&#x27;ve got good sippin&#x27; whiskey there lolz.
+
+I&#x27;ve finished fiddling with the main gophermap on <a href="gopher://Vger.Cloud">gopher://Vger.Cloud</a>
+and one client is giving me errors about:
+
+&lt;snip&gt;
+sh: 1: Syntax error: &quot;(&quot; unexpected
+&lt;/snip&gt;
+
+And I have no idea where the heck that is. It&#x27;s the only client slinging
+that error to me and it was giving me two of those, so I apparently, and
+somehow inadvertently, fixed one of those errors. I see no open paren&#x27;s
+without a corrsponding closing paren, and then, only in the raw text of
+a sentence.
+
+I also Gave Tim a good plug for Elpher both there and on V&#x27;Ger&#x27;s Gemini
+site. I really like that browser :)
+
+I also botched my install of Elpher, so maybe could use a little guidance ;)
+
+While upgrading from 2.2.0 yesterday, I found out that I got a little
+impatient and didn&#x27;t terminate the upgrade with an &#x27;x&#x27;, after the &#x27;u&#x27; to
+upgrade, and C-Xc&#x27;d out. That left both versions installed, and now,
+even though I&#x27;ve ripped it out and reinstalled it several times
+(including at one point to del the directory (elpher, IIRC) in emacs.d/
+and now I am forever not able to get anything but:
+
+&lt;snip&gt;
+LOADING GEMINI... (use &#x27;u&#x27; to cancel)
+&lt;/snip&gt;
+
+At least <a href="gemini://vger.cloud">gemini://vger.cloud</a> gives me a definitive 51 error :)
+
+&lt;snip&gt;
+
+---- ERROR -----
+
+When attempting to retrieve <a href="gemini://vger.cloud/:">gemini://vger.cloud/:</a>
+Gemini server reports PERMANENT FAILURE for this request: &quot;51	Not Found&quot;.
+
+----------------
+
+Press &#x27;u&#x27; to return to the previous page.
+
+&lt;/snip&gt;
+
+It&#x27;s frustrating, because I&#x27;m not sure why, and every other single
+client brings both sites up just dandy like. And I&#x27;m not trying to
+access my server w/Elpher from localhost, if that&#x27;s relevant.
+
+That should answer your question too from yesterday about the errors
+with your site Sean ;)
+
+I promise to be patient from now one when updating Melpa packages, and
+would like to avoid ripping out Emacs by it&#x27;s fdisking throat and
+re-installing, so if someone&#x27;s got any clues to fix it in situ, please,
+do let me know. I promise to be good next time lol.
+
+-- 
+Bradley D. Thornton
+Manager Network Services
+<a href="http://NorthTech.US">http://NorthTech.US</a>
+TEL: +1.310.421.8268
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000159.html">URLs in request lines</a></li>
+<li>Next message (by thread): <a href="000161.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#160">[ date ]</a> <a href="thread.html#160">[ thread ]</a> <a href="subject.html#160">[ subject ]</a> <a href="author.html#160">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

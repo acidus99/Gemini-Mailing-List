@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anyone still using 16-32bit systems ?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006921.html">
+<link rel="next" href="006925.html">
+</head>
+<body>
+<h1>Anyone still using 16-32bit systems ?</h1>
+<b>Rohan Kumar</b> seirdy at seirdy.one<br>
+<i>Thu Jul 15 21:34:48 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006921.html">Anyone still using 16-32bit systems ?</a></li>
+<li>Next message (by thread): <a href="006925.html">Anyone still using 16-32bit systems ?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6923">[ date ]</a> <a href="thread.html#6923">[ thread ]</a> <a href="subject.html#6923">[ subject ]</a> <a href="author.html#6923">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>I put a TLDR at the bottom of this giant wall of text.
+
+On Thu, Jul 15, 2021 at 05:34:29PM +0530, Arun Isaac wrote:
+&gt;<i> --8&lt;---------------cut here---------------start-------------&gt;8---
+</i>&gt;<i> The embodied energy of the memory chip alone already exceeds the energy
+</i>&gt;<i> consumption of a laptop during its life expectancy of 3 years
+</i>&gt;<i> --8&lt;---------------cut here---------------end---------------&gt;8---
+</i>
+Agreed. If you&#x27;re running a datacenter or homelab, then the footprint of continued uptime could catch up to the manufacturing footprint quite easily; however, I think we should move away from the &quot;scale everything to massive machines&quot; approach in favor of simple software that can run on a near-vintage computer or highly-constrained environment.
+
+Implementation authors can be liberal in deciding what computers to support/not support. When deciding what computers to support on a *platform*, however, we should be more conservative. We should define what computers to consider &quot;vintage&quot; and try to make it possible for non-vintage computers to participate.
+
+It&#x27;s time to write what will definitely become a {web,gem}log post at some point. Oh boy.
+
+## Part 1: Vintage computers
+
+I loosely define a vintage computer to be any computer whose *hardware* prevents it from being useful today for a hypothetical user whose use-case hasn&#x27;t changed since the computer was new, but wants to compute according to current standards. Such a user might have used Gopher and unencrypted IRC in 1996. Today, encryption in-transit has become an expectation for many reasons; this user might now use Gopher-TLS, Gemini, IRC with TLS, or a basic web browser for viewing Web 1.0 sites with HTTPS. Notice that I haven&#x27;t mentioned any particular software implementation by name; I&#x27;m only mentioning implementation-neutral platforms and protocols.
+
+Computers from the start of the millennium and earlier can&#x27;t effectively leverage secure cipher suites supported by most TLS implementations.  They&#x27;re slow, lack SSE2, etc. Users who expect to be able to communicate over the Internet might find themselves unable to use current protocols (https+tlsv1.2, gemini) even if they only want to view very lightweight pages.
+
+These vintage computers still have their uses, but they&#x27;re better relegated to domain-specific applications (distraction-free writing, dumb terminal for another computer on the local network, etc) than general-purpose computing, or they can be used in conjunction with a non-vintage computer (e.g. a proxy that encrypts/decrypts traffic for TLS).
+
+Another example: a user in 1999 might have hosted pages for others to access over the Web on an old personal computer from their home. Today, to do the *exact same thing*, this user might need a beefier computer due to the prevalence of bots, crawlers, and a greater number of users. A server that was just able to handle the load in 1999 might now be considered a vintage server. This user might consider buying a more powerful computer, such as a Raspberry Pi.
+
+( Aside: project of note to bring a subset of modern TLS to the Internet of Old Things: <a href="https://github.com/classilla/cryanc">https://github.com/classilla/cryanc</a> )
+
+## Part 2: relevance to current discussion
+
+Gemini&#x27;s primary use-case is viewing hyperlinked documents over the Internet. Today, use-case comes with default expectations, like encryption, for a baseline level of privacy and authenticity. Two conclusions follow:
+
+1. Some computers are now considered &quot;vintage&quot; in the context of the use-case &quot;viewing hyperlinked documents over the Internet&quot; because they&#x27;ll be painfully slow when handling modern crypto.
+
+2. Gemini must support transit-level encryption to properly meet its stated use-case today.
+
+This means that Gemini probably doesn&#x27;t need to address computers whose hardware prevents the usage of secure TLS. This does NOT mean that Gemini needs to ignore all 32-bit computers; plenty of 32-bit machines can handle TLSv1.2 (with strong cipher-suites) and TLSv1.3 just fine.
+
+## Flaws in what I&#x27;ve written
+
+- I haven&#x27;t researched attempts to use modern crypto on old computers 	very thoroughly; I kind of guessed that Pentium 4 with SSE2 should be 	the &quot;cutoff point&quot; for modern crypto.
+- I might want to pick a word besides &quot;vintage&quot; when describing 	computers that can&#x27;t meet the same use-case after requirements change; 	something that specifically refers to a piece of a technology that 	isn&#x27;t necessarily old (it doesn&#x27;t have to be old) or obsolete (too 	broad) but is just unable to adapt to a use-case being &quot;updated&quot; to 	address current requirements as security holes and bad actors pile up.
+
+## SUMMARY/TLDR
+
+If you&#x27;re making an implementation, feel free to be as portable or non-portable as you want. When deciding norms, *recommended* implementations, and inherent platform limitations: conservatively evaluate what computers cannot handle your desired use-case and try to make sure all other computers are included to the best of your ability.  Don&#x27;t &quot;expire&quot; computers unnecessarily.
+
+-- 
+/Seirdy (seirdy.one)
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006921.html">Anyone still using 16-32bit systems ?</a></li>
+<li>Next message (by thread): <a href="006925.html">Anyone still using 16-32bit systems ?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6923">[ date ]</a> <a href="thread.html#6923">[ thread ]</a> <a href="subject.html#6923">[ subject ]</a> <a href="author.html#6923">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

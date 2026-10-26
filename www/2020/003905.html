@@ -1,60 +1,44 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> IDN with Gemini?
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C87pn3kp5ln.fsf%40disroot.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="003890.html">
-   <LINK REL="Next"  HREF="003907.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>IDN with Gemini?</H1>
-    <B>Gary Johnson</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20IDN%20with%20Gemini%3F&In-Reply-To=%3C87pn3kp5ln.fsf%40disroot.org%3E"
-       TITLE="IDN with Gemini?">lambdatronic at disroot.org
-       </A><BR>
-    <I>Tue Dec  8 17:31:16 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="003890.html">IDN with Gemini?
-</A></li>
-        <LI>Next message (by thread): <A HREF="003907.html">IDN with Gemini?
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3905">[ date ]</a>
-              <a href="thread.html#3905">[ thread ]</a>
-              <a href="subject.html#3905">[ subject ]</a>
-              <a href="author.html#3905">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IDN with Gemini?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="003890.html">
+<link rel="next" href="003907.html">
+</head>
+<body>
+<h1>IDN with Gemini?</h1>
+<b>Gary Johnson</b> lambdatronic at disroot.org<br>
+<i>Tue Dec  8 17:31:16 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="003890.html">IDN with Gemini?</a></li>
+<li>Next message (by thread): <a href="003907.html">IDN with Gemini?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3905">[ date ]</a> <a href="thread.html#3905">[ thread ]</a> <a href="subject.html#3905">[ subject ]</a> <a href="author.html#3905">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>As yet another data point, Java's standard library contains a class
+<pre>As yet another data point, Java&#x27;s standard library contains a class
 (java.net.URI) that correctly parses URIs with non-ASCII characters in
 their paths and query params, but it chokes when they are in the domain
 name.
 
 Therefore, URIs like this should work fine with Space Age:
 
-<A HREF="gemini://gemeaux.bortzmeyer.org:8965/caf&#233;?foo&#233;y=bar&#233;y">gemini://gemeaux.bortzmeyer.org:8965/caf&#233;?foo&#233;y=bar&#233;y</A>
+<a href="gemini://gemeaux.bortzmeyer.org:8965/caf??foo?y=bar?y">gemini://gemeaux.bortzmeyer.org:8965/caf??foo?y=bar?y</a>
 
 But this is a non-starter:
 
-<A HREF="gemini://g&#233;meaux.bortzmeyer.org:8965/caf&#233;?foo&#233;y=bar&#233;y">gemini://g&#233;meaux.bortzmeyer.org:8965/caf&#233;?foo&#233;y=bar&#233;y</A>
+<a href="gemini://g?meaux.bortzmeyer.org:8965/caf??foo?y=bar?y">gemini://g?meaux.bortzmeyer.org:8965/caf??foo?y=bar?y</a>
 
 It looks like there is an incomplete and poorly documented
 implementation of RFC 3987 (IRI) and RFC 3986 (URI) in Apache Jena
-(<A HREF="https://jena.apache.org/documentation/notes/iri.html">https://jena.apache.org/documentation/notes/iri.html</A>), but it's a
+(<a href="https://jena.apache.org/documentation/notes/iri.html">https://jena.apache.org/documentation/notes/iri.html</a>), but it&#x27;s a
 rather heavyweight addition to an otherwise very concise Gemini server.
 
-I'll keep an eye on this thread to see what the community ultimately
+I&#x27;ll keep an eye on this thread to see what the community ultimately
 decides to do about IRI/IDN.
 
 Happy hacking,
@@ -62,43 +46,25 @@ Happy hacking,
 
 -- 
 GPG Key ID: 7BC158ED
-Use `gpg --search-keys lambdatronic' to find me
-Protect yourself from surveillance: <A HREF="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</A>
+Use `gpg --search-keys lambdatronic&#x27; to find me
+Protect yourself from surveillance: <a href="https://emailselfdefense.fsf.org">https://emailselfdefense.fsf.org</a>
 =======================================================================
 ()  ascii ribbon campaign - against html e-mail
 /\  www.asciiribbon.org   - against proprietary attachments
 
-Why is HTML email a security nightmare? See <A HREF="https://useplaintext.email/">https://useplaintext.email/</A>
+Why is HTML email a security nightmare? See <a href="https://useplaintext.email/">https://useplaintext.email/</a>
 
 Please avoid sending me MS-Office attachments.
-See <A HREF="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</A>
-</PRE>
-
-
-
-
-
-
-
-
-
+See <a href="http://www.gnu.org/philosophy/no-word-attachments.html">http://www.gnu.org/philosophy/no-word-attachments.html</a>
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="003890.html">IDN with Gemini?
-</A></li>
-	<LI>Next message (by thread): <A HREF="003907.html">IDN with Gemini?
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3905">[ date ]</a>
-              <a href="thread.html#3905">[ thread ]</a>
-              <a href="subject.html#3905">[ subject ]</a>
-              <a href="author.html#3905">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="003890.html">IDN with Gemini?</a></li>
+<li>Next message (by thread): <a href="003907.html">IDN with Gemini?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3905">[ date ]</a> <a href="thread.html#3905">[ thread ]</a> <a href="subject.html#3905">[ subject ]</a> <a href="author.html#3905">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text reflow woes (or: I want bullets back!)y</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000023.html">
+<link rel="next" href="000028.html">
+</head>
+<body>
+<h1>Text reflow woes (or: I want bullets back!)y</h1>
+<b>Brian Evans</b> b__m__e at mailfence.com<br>
+<i>Sat Aug 17 17:09:59 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000023.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000028.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#25">[ date ]</a> <a href="thread.html#25">[ thread ]</a> <a href="subject.html#25">[ subject ]</a> <a href="author.html#25">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>I think think many clients will opt to implement markdown parsers (heck, some may even try html parsing), 
+but I think it would be a bad call to include it in the spec for gemini. Now that it has been brought up,
+I may add markdown parsing to the client I am working on (I am still in planning stages figuring out
+how I want it to work and the necessary structs and execution flows).
+
+I think markdown can be rendered in cool/sensible ways in a terminal as well, so it can be a very
+nice way to go. I think that inline links can still be handled in the bracket number style (link[7]) that
+many use in gopherspace, for example. However, markdown will require the writing of an actual
+lexer/parser rather than just reading in lines and looking for a magic string at the beginning. Not
+a huge deal for some, an insurmountable challenge for others. Me personally, I think it would be
+fun to code it up, but only as an additional feature for my client and not as a core part of gemini.
+
+I would definitely support a few optional things that can be rendered as a part of text/gemini. I 
+had brought these up with solderpunk earlier in development of the spec and they, I believe,
+were deemed implementation details for the client... which I am mostly fine with. My only worry
+is that if we leave it to clients to add support for things like bold text in gemini documents we
+will end up with a fragmented situation where some clients support one way of doing it and 
+others support others. I think picking the bare minimum essential styling and providing that
+as a part of the spec would be helpful in making text/gemini attractive without going the way
+of html/css/http.
+
+I think the following limited set makes sense and can be handled with basic string replacing if
+people dont want to parse:
+
+1. Bold
+Bold can be rendered in most terminals as bold. Clients that prefer could just string.toUpper
+or the like. If this was done with opening and closing tags a substring replace (or proper parse)
+could just replace it with the escape sequences for bold.
+
+2. Italic
+Same situation as bold, more or less. For situations where italics is not supported by whatever
+viewing system, the tags could be replaced by asterisks? Like *this*.
+
+3. Bold-Italic
+Mostly the same as above, but a combination.
+
+4. Heading (only one level)
+This can be rendered a number of ways. In a terminal I would likely render this with the escape
+for &#x27;inverse&#x27; text. Makes it really pop.
+
+I think the above four would provide sufficient styling to handle most basic uses and provide a
+little bit of flair. If people were into the idea, we&#x27;d need to come up with how to denote those
+things in a text/gemini document.
+
+I am not adamant that the above needs to be included, but I think it could be nice.
+
+As for text reflow: I am not in favor of html style text reflow (ignoring more than one space char).
+I think it makes sense, like gopher, to render text as provided. The exception to this would be
+word wrap, particularly for clients intended on width limited devices. My plan is to have word
+wrapping be a togglable feature in my client.
+
+Anyway, much like solderpunk: just thinking out loud.
+
+ps. As to bullets: since gemini is utf-8 by default bullets should be very much in play.
+--?
+Sent with <a href="https://mailfence.com">https://mailfence.com</a>
+Secure and private email
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000023.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000028.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#25">[ date ]</a> <a href="thread.html#25">[ thread ]</a> <a href="subject.html#25">[ subject ]</a> <a href="author.html#25">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

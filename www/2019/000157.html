@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>URLs in request lines</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000156.html">
+<link rel="next" href="000158.html">
+</head>
+<body>
+<h1>URLs in request lines</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Sat Sep 14 11:04:30 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000156.html">URLs in request lines</a></li>
+<li>Next message (by thread): <a href="000158.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#157">[ date ]</a> <a href="thread.html#157">[ thread ]</a> <a href="subject.html#157">[ subject ]</a> <a href="author.html#157">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Sean Conner once stated:
+&gt;<i>
+</i>&gt;<i>   So, the upshot (as I see it) is that the gopher URL format is divorced
+</i>&gt;<i> from the RFC-3986 URL and is its own thing.  You can&#x27;t really say they have
+</i>&gt;<i> the same semantic rules.  This is also reflected in the caps.txt file you
+</i>&gt;<i> will sometimes find on gopher servers to address the bit in RFC-1436 that
+</i>&gt;<i> gopher selectors are opaque and *no* meaning is to be inferred by the
+</i>&gt;<i> client.
+</i>&gt;<i> 
+</i>&gt;<i>   As far as Gemini goes, I&#x27;ve been parsing Gemini URLs under RFC-3986, just
+</i>&gt;<i> like http:, https:, ftp: and file:.
+</i>
+  To further clarify things, I have one module to parse gopher URLs [1], and
+another one to parse other URLs [2].  And because of how they were written,
+I can parse both types of URLs very easily:
+
+	local dump = require &quot;org.conman.table&quot;.dump
+	local url  = require &quot;org.conman.parsers.url.gopher&quot;
+	           + require &quot;org.conman.parsers.url&quot; -- [3]
+
+	dump(&quot;link&quot;,url:match &quot;<a href="gopher://example.com/7search%09look%20for%20me">gopher://example.com/7search%09look%20for%20me</a>&quot;)
+	dump(&quot;link&quot;,url:match &quot;<a href="gemini://example.com/search?look%20for%20me">gemini://example.com/search?look%20for%20me</a>&quot;)
+
+	link =
+	{
+	  type = &quot;search&quot;,
+	  port = 70.000000,
+	  scheme = &quot;gopher&quot;,
+	  host = &quot;example.com&quot;,
+	  search = &quot;look for me&quot;,
+	  selector = &quot;search&quot;,
+	}
+	
+	link =
+	{
+	  port = 1965.000000,
+	  scheme = &quot;gemini&quot;,
+	  host = &quot;example.com&quot;,
+	  path = &quot;/search&quot;,
+	  query = &quot;look%20for%20me&quot;, -- [4]
+	}
+
+  A generic parsing of the gopher URL will result in:
+
+	link =
+	{
+	  scheme = &quot;gopher&quot;,
+	  host = &quot;example.com&quot;,
+	  path = &quot;/7search\tlook for me&quot;,
+	}
+
+  -spc (Gopher really is its own thing ... )
+
+[1]	<a href="https://github.com/spc476/LPeg-Parsers/blob/master/url/gopher.lua">https://github.com/spc476/LPeg-Parsers/blob/master/url/gopher.lua</a>
+
+[2]	<a href="https://github.com/spc476/LPeg-Parsers/blob/master/url.lua">https://github.com/spc476/LPeg-Parsers/blob/master/url.lua</a>
+
+[3]	Yes, I&#x27;m adding the results of loading two modules.  This only works
+	because of what I&#x27;m returning (an LPEG expression [5]), and yes, it
+	would look weird to a seasoned Lua programmer.
+
+[4]	I have reasons for not decoding the query string in generic URLs.
+
+[5]	<a href="http://www.inf.puc-rio.br/~roberto/lpeg/">http://www.inf.puc-rio.br/~roberto/lpeg/</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000156.html">URLs in request lines</a></li>
+<li>Next message (by thread): <a href="000158.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#157">[ date ]</a> <a href="thread.html#157">[ thread ]</a> <a href="subject.html#157">[ subject ]</a> <a href="author.html#157">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

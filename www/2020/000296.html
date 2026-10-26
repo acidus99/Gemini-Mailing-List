@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Script to test gemini servers</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000306.html">
+<link rel="next" href="000297.html">
+</head>
+<body>
+<h1>Script to test gemini servers</h1>
+<b>Michael Lazar</b> lazar.michael22 at gmail.com<br>
+<i>Thu Jan  9 06:00:04 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000306.html">[ANN] Castor, a graphical Gemini browser</a></li>
+<li>Next message (by thread): <a href="000297.html">Script to test gemini servers</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#296">[ date ]</a> <a href="thread.html#296">[ thread ]</a> <a href="subject.html#296">[ subject ]</a> <a href="author.html#296">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>Hi all,
+
+I have been working on a python script that can be pointed to a gemini server,
+and will automatically send various types of requests to surface errors and
+other strange server behavior. This was suggested in the mailing list a while
+ago by solderpunk(?). I thought it was a neat idea so I took my own stab at it.
+
+I am not attempting to cover 100% of the gemini specification. Some of the
+checks aren&#x27;t even related to the spec, and are strictly informational.
+Take all results with a grain of salt.
+
+For example:
+
+- Does your server support IPv6?
+- What version of TLS do you negotiate?
+- Is your certificate&#x27;s CA trusted?
+- How do you respond to a http:// URL?
+- How do you respond to a URL with an invalid UTF-8 byte sequence?
+- How do you respond to a request with a newline but no carriage return?
+
+The program can be found here:
+
+<a href="https://github.com/michael-lazar/jetforce/blob/master/jetforce_diagnostics.py">https://github.com/michael-lazar/jetforce/blob/master/jetforce_diagnostics.py</a>
+
+I&#x27;ve included it in the jetforce repo out of convenience, but the script can
+be downloaded and run independently of jetforce. The only hard dependency is
+Python 3.7+. The python &quot;pyca/cryptography&quot; library is an optional requirement,
+if you want to inspect server TLS certificates.
+
+Usage:
+  ./jetforce_diagnostics.py host [port]
+
+This is very much still considered a work-in-progress. If you have any
+suggestions or would like to contribute additional tests to run, please feel
+encouraged to respond here or open an issue or PR in the github repo.
+
+To save you all the trouble, I have already run this against all known gemini
+servers and published the results on my server. This is not an attempt to
+shame anybody, my own server exposed several failures that I now need to fix.
+But I think there are some interesting insights to be gleaned about how servers
+are implemented in practice, and how the gemini spec might be improved:
+
+<a href="gemini://mozz.us/diagnostics/">gemini://mozz.us/diagnostics/</a>
+
+Some of the results:
+
+- All servers use &quot;\n&quot; line endings on their home page instead of &quot;\r\n&quot;
+- No server will accept a URL without a scheme specified (per the spec, this
+  should be implied as gemini://)
+- Only half of servers currently support TLS version 1.3
+
+- mozz
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000306.html">[ANN] Castor, a graphical Gemini browser</a></li>
+<li>Next message (by thread): <a href="000297.html">Script to test gemini servers</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#296">[ date ]</a> <a href="thread.html#296">[ thread ]</a> <a href="subject.html#296">[ subject ]</a> <a href="author.html#296">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

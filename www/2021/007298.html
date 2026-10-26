@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] [whitespace]</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007291.html">
+<link rel="next" href="007294.html">
+</head>
+<body>
+<h1>[spec] [whitespace]</h1>
+<b>Plain Text</b> text at sdfeu.org<br>
+<i>Wed Oct 13 22:12:03 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007291.html">[spec] [whitespace]</a></li>
+<li>Next message (by thread): <a href="007294.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7298">[ date ]</a> <a href="thread.html#7298">[ thread ]</a> <a href="subject.html#7298">[ subject ]</a> <a href="author.html#7298">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Mon, 11 Oct 2021 15:15:44 +0000, Plain Text wrote:
+
+&gt;<i> <a href="https://gemini.circumlunar.space/docs/specification.gmi">https://gemini.circumlunar.space/docs/specification.gmi</a>
+</i>
+My try on identifying line types using Python re named groups 
+what became a quite unreadable line, also missing ```, sorry.
+
+
+line.py
+    import re, sys
+    for line in sys.stdin:
+        m = re.match(r&#x27;((?P&lt;heads&gt;(?P&lt;h3&gt;###)|(?P&lt;h2&gt;##)|(?P&lt;h1&gt;#))|(?P&lt;list&gt;\* )|(?P&lt;link&gt;=&gt; (?P&lt;url&gt;[^\s]+))|(?P&lt;quote&gt;&gt;))\s*(?P&lt;content&gt;.*)$&#x27;, line)
+        if m:
+            print(m.groupdict())
+
+example.gmi
+    # Heading of Level One
+    ## Heading of Level Two
+    ### Heading of Level Three
+    ###Heading of Level Three Tight
+    ####Heading of Level Three with starting hash
+    #### Heading of Level Three with starting hash and space
+    * list item
+    *  list item spacey
+    *   list item spaceous
+    =&gt; <a href="http://example.org/no/name">http://example.org/no/name</a>
+    =&gt; <a href="http://example.org/with/name">http://example.org/with/name</a> Linkname
+    &gt;<i>Quote Tight
+</i>    &gt;<i> Quote Nice
+</i>    &gt;<i>&gt;Quote starting with gt
+</i>    &gt;<i>&gt;&gt; Quote starting with two gts
+</i>    End
+
+cat example.gmi | python line.py
+    {&#x27;heads&#x27;: &#x27;#&#x27;, &#x27;h3&#x27;: None, &#x27;h2&#x27;: None, &#x27;h1&#x27;: &#x27;#&#x27;, &#x27;list&#x27;: None, &#x27;link&#x27;: None, &#x27;url&#x27;: None, &#x27;quote&#x27;: None, &#x27;content&#x27;: &#x27;Heading of Level One&#x27;}
+    {&#x27;heads&#x27;: &#x27;##&#x27;, &#x27;h3&#x27;: None, &#x27;h2&#x27;: &#x27;##&#x27;, &#x27;h1&#x27;: None, &#x27;list&#x27;: None, &#x27;link&#x27;: None, &#x27;url&#x27;: None, &#x27;quote&#x27;: None, &#x27;content&#x27;: &#x27;Heading of Level Two&#x27;}
+    {&#x27;heads&#x27;: &#x27;###&#x27;, &#x27;h3&#x27;: &#x27;###&#x27;, &#x27;h2&#x27;: None, &#x27;h1&#x27;: None, &#x27;list&#x27;: None, &#x27;link&#x27;: None, &#x27;url&#x27;: None, &#x27;quote&#x27;: None, &#x27;content&#x27;: &#x27;Heading of Level Three&#x27;}
+    {&#x27;heads&#x27;: &#x27;###&#x27;, &#x27;h3&#x27;: &#x27;###&#x27;, &#x27;h2&#x27;: None, &#x27;h1&#x27;: None, &#x27;list&#x27;: None, &#x27;link&#x27;: None, &#x27;url&#x27;: None, &#x27;quote&#x27;: None, &#x27;content&#x27;: &#x27;Heading of Level Three Tight&#x27;}
+    {&#x27;heads&#x27;: &#x27;###&#x27;, &#x27;h3&#x27;: &#x27;###&#x27;, &#x27;h2&#x27;: None, &#x27;h1&#x27;: None, &#x27;list&#x27;: None, &#x27;link&#x27;: None, &#x27;url&#x27;: None, &#x27;quote&#x27;: None, &#x27;content&#x27;: &#x27;#Heading of Level Three with starting hash&#x27;}
+    {&#x27;heads&#x27;: &#x27;###&#x27;, &#x27;h3&#x27;: &#x27;###&#x27;, &#x27;h2&#x27;: None, &#x27;h1&#x27;: None, &#x27;list&#x27;: None, &#x27;link&#x27;: None, &#x27;url&#x27;: None, &#x27;quote&#x27;: None, &#x27;content&#x27;: &#x27;# Heading of Level Three with starting hash and space&#x27;}
+    {&#x27;heads&#x27;: None, &#x27;h3&#x27;: None, &#x27;h2&#x27;: None, &#x27;h1&#x27;: None, &#x27;list&#x27;: &#x27;* &#x27;, &#x27;link&#x27;: None, &#x27;url&#x27;: None, &#x27;quote&#x27;: None, &#x27;content&#x27;: &#x27;list item&#x27;}
+    {&#x27;heads&#x27;: None, &#x27;h3&#x27;: None, &#x27;h2&#x27;: None, &#x27;h1&#x27;: None, &#x27;list&#x27;: &#x27;* &#x27;, &#x27;link&#x27;: None, &#x27;url&#x27;: None, &#x27;quote&#x27;: None, &#x27;content&#x27;: &#x27;list item spacey&#x27;}
+    {&#x27;heads&#x27;: None, &#x27;h3&#x27;: None, &#x27;h2&#x27;: None, &#x27;h1&#x27;: None, &#x27;list&#x27;: &#x27;* &#x27;, &#x27;link&#x27;: None, &#x27;url&#x27;: None, &#x27;quote&#x27;: None, &#x27;content&#x27;: &#x27;list item spaceous&#x27;}
+    {&#x27;heads&#x27;: None, &#x27;h3&#x27;: None, &#x27;h2&#x27;: None, &#x27;h1&#x27;: None, &#x27;list&#x27;: None, &#x27;link&#x27;: &#x27;=&gt; <a href="http://example.org/no/name">http://example.org/no/name</a>&#x27;, &#x27;url&#x27;: &#x27;<a href="http://example.org/no/name">http://example.org/no/name</a>&#x27;, &#x27;quote&#x27;: None, &#x27;content&#x27;: &#x27;&#x27;}
+    {&#x27;heads&#x27;: None, &#x27;h3&#x27;: None, &#x27;h2&#x27;: None, &#x27;h1&#x27;: None, &#x27;list&#x27;: None, &#x27;link&#x27;: &#x27;=&gt; <a href="http://example.org/with/name">http://example.org/with/name</a>&#x27;, &#x27;url&#x27;: &#x27;<a href="http://example.org/with/name">http://example.org/with/name</a>&#x27;, &#x27;quote&#x27;: None, &#x27;content&#x27;: &#x27;Linkname&#x27;}
+    {&#x27;heads&#x27;: None, &#x27;h3&#x27;: None, &#x27;h2&#x27;: None, &#x27;h1&#x27;: None, &#x27;list&#x27;: None, &#x27;link&#x27;: None, &#x27;url&#x27;: None, &#x27;quote&#x27;: &#x27;&gt;&#x27;, &#x27;content&#x27;: &#x27;Quote Tight&#x27;}
+    {&#x27;heads&#x27;: None, &#x27;h3&#x27;: None, &#x27;h2&#x27;: None, &#x27;h1&#x27;: None, &#x27;list&#x27;: None, &#x27;link&#x27;: None, &#x27;url&#x27;: None, &#x27;quote&#x27;: &#x27;&gt;&#x27;, &#x27;content&#x27;: &#x27;Quote Nice&#x27;}
+    {&#x27;heads&#x27;: None, &#x27;h3&#x27;: None, &#x27;h2&#x27;: None, &#x27;h1&#x27;: None, &#x27;list&#x27;: None, &#x27;link&#x27;: None, &#x27;url&#x27;: None, &#x27;quote&#x27;: &#x27;&gt;&#x27;, &#x27;content&#x27;: &#x27;&gt;Quote starting with gt&#x27;}
+    {&#x27;heads&#x27;: None, &#x27;h3&#x27;: None, &#x27;h2&#x27;: None, &#x27;h1&#x27;: None, &#x27;list&#x27;: None, &#x27;link&#x27;: None, &#x27;url&#x27;: None, &#x27;quote&#x27;: &#x27;&gt;&#x27;, &#x27;content&#x27;: &#x27;&gt;&gt; Quote starting with two gts&#x27;}
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007291.html">[spec] [whitespace]</a></li>
+<li>Next message (by thread): <a href="007294.html">[spec] comments on the proposed gemini spec revisions</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7298">[ date ]</a> <a href="thread.html#7298">[ thread ]</a> <a href="subject.html#7298">[ subject ]</a> <a href="author.html#7298">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

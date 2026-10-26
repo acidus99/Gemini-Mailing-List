@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Clients] Gemini and accessibility regarding preformatted code blocks</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005650.html">
+<link rel="next" href="005657.html">
+</head>
+<body>
+<h1>[Clients] Gemini and accessibility regarding preformatted code blocks</h1>
+<b>Solene Rapenne</b> solene at perso.pw<br>
+<i>Thu Feb 25 23:24:31 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005650.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li>Next message (by thread): <a href="005657.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5651">[ date ]</a> <a href="thread.html#5651">[ thread ]</a> <a href="subject.html#5651">[ subject ]</a> <a href="author.html#5651">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Thu, 25 Feb 2021 15:08:50 -0800
+Rohan Kumar &lt;seirdy at seirdy.one&gt;:
+
+&gt;<i> On Thu, Feb 25, 2021 at 05:25:08PM -0500, Sean Conner wrote:
+</i>&gt;<i> &gt;  I might suggest something like:
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;	preformat = &quot;```&quot; [ [WSP] tag ] [ [WSP] alt-text] end-of-line
+</i>&gt;<i> &gt;	tag       = &#x27;@art&#x27; / &#x27;@code&#x27; / &#x27;@data&#x27; / &#x27;@poem&#x27;
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;  Some examples:
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;``` @code
+</i>&gt;<i> &gt;x = 5
+</i>&gt;<i> &gt;```
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;``` @art Obligatory Cat picture
+</i>&gt;<i> &gt;cat
+</i>&gt;<i> &gt;```
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;``` @data Price list
+</i>&gt;<i> &gt;widget	3.45
+</i>&gt;<i> &gt;gadget	5.99
+</i>&gt;<i> &gt;fob	1.99
+</i>&gt;<i> &gt;```
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;``` @poem
+</i>&gt;<i> &gt;There once was a person from Nantucket ...
+</i>&gt;<i> &gt;```
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;``` Just some regular alt-text
+</i>&gt;<i> &gt;blah
+</i>&gt;<i> &gt;```
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;```
+</i>&gt;<i> &gt;nothing special here
+</i>&gt;<i> &gt;```  
+</i>&gt;<i> 
+</i>&gt;<i> I think that a small but significant change to the spec is necessary 
+</i>&gt;<i> here. My proposal:
+</i>&gt;<i> 
+</i>&gt;<i> - Three backticks signify readable preformatted text (e.g. a code 
+</i>&gt;<i> 	snippet or a poem); screen-readers should not skip this.
+</i>&gt;<i> - Four backticks signify something that isn&#x27;t readable, like ascii-art.
+</i>&gt;<i> 
+</i>&gt;<i> This is consistent with the spirit of gemtext: characters at the 
+</i>&gt;<i> beginning of a line are the only way to describe semantics.
+</i>&gt;<i> 
+</i>&gt;<i> Benefits of this proposal:
+</i>&gt;<i> 
+</i>&gt;<i> - It doesn&#x27;t break any existing sites; it just adds one feature.
+</i>&gt;<i> - It&#x27;s very simple to implement: parsers scan for a single additional 
+</i>&gt;<i> 	backtick
+</i>&gt;<i> - Authors can still provide any alt-text they wish without worrying 
+</i>&gt;<i> 	about &quot;reserved words&quot; like the proposed tags
+</i>&gt;<i> - It provides *critical* semantic information: whether or not a block of 
+</i>&gt;<i> 	preformatted text should be treated as readable text.
+</i>&gt;<i> 
+</i>&gt;<i> I&#x27;m generally against gemtext spec changes, but I think this is 
+</i>&gt;<i> necessary for screenreader-friendliness.
+</i>&gt;<i> 
+</i>
+I don&#x27;t have a strong opinion about adding something like this,
+but if it has to be done, please use another character than `
+
+It&#x27;s hard to differenciate between ``` to ```` and this may confuse
+people, and people writing content may misuse them.
+
+I think keeping ``` like it is now is fine and adding a new syntax
+would need another character like @@@ or %%% to make more sense.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 228 bytes
+Desc: Signature digitale OpenPGP
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210226/b45eb2c5/attachment.sig">https://mailing-list-archive.gemi.dev/www/attachments/20210226/b45eb2c5/attachment.sig</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005650.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li>Next message (by thread): <a href="005657.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5651">[ date ]</a> <a href="thread.html#5651">[ thread ]</a> <a href="subject.html#5651">[ subject ]</a> <a href="author.html#5651">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

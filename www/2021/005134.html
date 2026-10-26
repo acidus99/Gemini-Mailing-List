@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>gemini browsers</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005106.html">
+<link rel="next" href="005230.html">
+</head>
+<body>
+<h1>gemini browsers</h1>
+<b>nervuri</b> nervuri at disroot.org<br>
+<i>Wed Feb 10 16:42:34 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005106.html">gemini browsers</a></li>
+<li>Next message (by thread): <a href="005230.html">gemini browsers</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5134">[ date ]</a> <a href="thread.html#5134">[ thread ]</a> <a href="subject.html#5134">[ subject ]</a> <a href="author.html#5134">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>February 9, 2021 8:06 PM, nervuri wrote:
+
+&gt;<i> Displaying inline images at all goes somewhat against the vision for Gemini (see the FAQ [1]), but as long as it&#x27;s constrained to the same host, and to a reasonable file size, I don&#x27;t see anything wrong with it.
+</i>
+Come to think of it, I do.
+
+1. Increased browser complexity and attack surface.  Think of buffer overflows in graphics libraries.
+
+2. Inline GIFs...  Distracting ads aside, I remember that time when a bunch of imbeciles targeted an epilepsy website with flashing animations in order to provoke seizures.  Let&#x27;s not allow for any of that.  At the very least, inline GIFs should not auto-play.
+
+3. Size bombs, the solution to which can lead to browser fingerprinting.  A gemtext page may link to enormous images.  Downloading them without the user&#x27;s consent would be wrong, at least on limited mobile data connections.  So a responsible browser developer might limit the total size of inline images on each page.  But if each browser has a different size limit, servers can identify the user agent by checking how much of the payload was downloaded.  And if the size limit is user-configurable, those who change the setting can be fingerprinted... and we&#x27;re back to the web.
+
+February 10, 2021 8:23 AM, Stephane Bortzmeyer wrote:
+
+&gt;<i> Pre-fetching images THAT ARE ON THE SAME CAPSULE could be good for privacy, because it would deprive the capsule&#x27;s admin of some knowledge (no way to know if the user really clicked).
+</i>
+I don&#x27;t think this information is sensitive enough to warrant the complications outlined above.
+
+So my recommendation to all Gemini browsers is to *follow the spec* and not display inline images:
+
+&gt;<i> clients MUST NOT automatically make any network connections as part of displaying links whose scheme corresponds to a network protocol (e.g. links beginning with gemini://, gopher://, https://, ftp:// , etc.).
+</i>
+<a href="gemini://gemini.circumlunar.space/docs/specification.gmi">gemini://gemini.circumlunar.space/docs/specification.gmi</a>
+
+The one exception I find acceptable regards web proxies, like <a href="https://proxy.vulpes.one/">https://proxy.vulpes.one/</a> . This is because they can block or resize huge images server-side, to avoid #3.  They can also block GIFs or put them behind static images, to tackle #2.  And #1 is already present in web browsers.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005106.html">gemini browsers</a></li>
+<li>Next message (by thread): <a href="005230.html">gemini browsers</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5134">[ date ]</a> <a href="thread.html#5134">[ thread ]</a> <a href="subject.html#5134">[ subject ]</a> <a href="author.html#5134">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

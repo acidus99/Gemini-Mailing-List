@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Tech] Useless statistics of the day: status codes</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004720.html">
+<link rel="next" href="004723.html">
+</head>
+<body>
+<h1>[Tech] Useless statistics of the day: status codes</h1>
+<b>Solene Rapenne</b> solene at perso.pw<br>
+<i>Mon Jan  4 11:04:58 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004720.html">[Tech] Useless statistics of the day: status codes</a></li>
+<li>Next message (by thread): <a href="004723.html">[Tech] Useless statistics of the day: status codes</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4722">[ date ]</a> <a href="thread.html#4722">[ thread ]</a> <a href="subject.html#4722">[ subject ]</a> <a href="author.html#4722">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Mon, 4 Jan 2021 11:53:41 +0100
+Stephane Bortzmeyer &lt;stephane at sources.org&gt;:
+
+&gt;<i> In the database of the Lupa crawler
+</i>&gt;<i> &lt;<a href="gemini://gemini.bortzmeyer.org/software/lupa/">gemini://gemini.bortzmeyer.org/software/lupa/</a>&gt;, I find the following
+</i>&gt;<i> status codes (by order of decreasing frequency):
+</i>&gt;<i> 
+</i>&gt;<i> (The status codes are documented in
+</i>&gt;<i> &lt;<a href="gemini://gemini.circumlunar.space/docs/specification.gmi#fragments_could_be_useful_to_indicate_the_exact_section">gemini://gemini.circumlunar.space/docs/specification.gmi#fragments_could_be_useful_to_indicate_the_exact_section</a>&gt;.)
+</i>&gt;<i> 
+</i>&gt;<i> 20 : OK
+</i>&gt;<i> 51 : Not found, because many links no longer work, already, or may be
+</i>&gt;<i> never worked
+</i>&gt;<i> 31 : Permanent redirection (Lupa adds the target URI to its database
+</i>&gt;<i> but keeps the original one)
+</i>&gt;<i> 30 : Temporary redirection
+</i>&gt;<i> 10 : Input, there are 310 URI replying by asking for input
+</i>&gt;<i> 50 : Permanent failure, something wrong in the server
+</i>&gt;<i> 40 : Temporary failure, server overloaded?
+</i>&gt;<i> 60 : Client certificate required, 40 URI require this authentication
+</i>&gt;<i> 42 : The ultimate answer (no, actually, CGI error)
+</i>&gt;<i> 53 : Proxy request refused (typically a name pointing to an IP address
+</i>&gt;<i> where the server is not configured for this virtual host)
+</i>&gt;<i> 
+</i>&gt;<i> The rest is marginal, less than ten URI:
+</i>&gt;<i> 
+</i>&gt;<i> 49 : First status code I find which is not in the official
+</i>&gt;<i> specification. Anyone has an idea? Two URI.
+</i>&gt;<i> 2 : Old server with the deprecated one-digit status codes?
+</i>&gt;<i> 39 : Not in the official specification. Anyone has an idea? Two URI.
+</i>&gt;<i> 59 : Bad request (no idea why my client sends bad requests)
+</i>&gt;<i> 99 : Not in the official specification. Anyone has an idea? Two URI.
+</i>&gt;<i> 58 : Not in the official specification. Anyone has an idea? Two URI.
+</i>&gt;<i> 29 : Not in the official specification. Anyone has an idea? Two URI.
+</i>&gt;<i> 43 : Proxy error. Reason unknown.
+</i>&gt;<i> 61 : Certificate not authorised. Since I do not send client
+</i>&gt;<i> certificates, this is surprising.
+</i>&gt;<i> 41 : Server not available (maintenance, for instance).
+</i>&gt;<i> 52 : Gone. Like 51 but final. Just one URI,
+</i>&gt;<i> &lt;<a href="gemini://gemini.conman.org/no-longer-here/">gemini://gemini.conman.org/no-longer-here/</a>&gt; so it&#x27;s probably a test.
+</i>&gt;<i> 22 : Not in the official specification. Anyone has an idea? One URI.
+</i>&gt;<i> 69 : Not in the official specification. Anyone has an idea? One URI.
+</i>&gt;<i> 19 : Not in the official specification. Anyone has an idea? One URI.
+</i>&gt;<i> 
+</i>&gt;<i> The number of status codes not registered in the specification may
+</i>&gt;<i> mean that some servers are extending the Gemini protocol with unused
+</i>&gt;<i> status codes. But some are also in test capsules like
+</i>&gt;<i> &lt;<a href="gemini://gemini.conman.org/">gemini://gemini.conman.org/</a>&gt; or &lt;<a href="gemini://egsam.glv.one/">gemini://egsam.glv.one/</a>&gt;.
+</i>&gt;<i> 
+</i>&gt;<i> Note that Lupa did not find even one occurrence of:
+</i>&gt;<i> 
+</i>&gt;<i> 11 : Sensitive input
+</i>&gt;<i> 44 : Slow down (may be because the crawler is nice)
+</i>&gt;<i> 62 : Certificate not valid (which makes sense since I don&#x27;t send
+</i>&gt;<i> certificates)
+</i>
+My server may be the cause of the 39 codes. When I have read the
+specs I missed the appendix so I assumed all 3x code were fine for
+redirecting and I chose 39.  While looking why Amfora client was
+complaining about &quot;unknown status core 39&quot; on irc #gemini, I&#x27;ve
+been told to look at the appendix and I realized my mistake.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004720.html">[Tech] Useless statistics of the day: status codes</a></li>
+<li>Next message (by thread): <a href="004723.html">[Tech] Useless statistics of the day: status codes</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4722">[ date ]</a> <a href="thread.html#4722">[ thread ]</a> <a href="subject.html#4722">[ subject ]</a> <a href="author.html#4722">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

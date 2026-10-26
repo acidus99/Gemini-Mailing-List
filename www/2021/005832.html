@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alt text and media types for preformatted text</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005829.html">
+<link rel="next" href="005835.html">
+</head>
+<body>
+<h1>Alt text and media types for preformatted text</h1>
+<b>Nathan Galt</b> mailinglists at ngalt.com<br>
+<i>Tue Mar  2 00:00:15 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005829.html">Alt text and media types for preformatted text</a></li>
+<li>Next message (by thread): <a href="005835.html">Alt text and media types for preformatted text</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5832">[ date ]</a> <a href="thread.html#5832">[ thread ]</a> <a href="subject.html#5832">[ subject ]</a> <a href="author.html#5832">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+
+On Mon, Mar 1, 2021, at 1:24 PM, Sean Conner wrote:
+&gt;<i> It was thus said that the Great Thomas Frohwein once stated:
+</i>&gt;<i> &gt; On Mon, Mar 01, 2021 at 10:12:18AM +0000, Caolan McMahon wrote:
+</i>&gt;<i> &gt; [...]
+</i>&gt;<i> &gt; &gt; &gt; &gt; 2. Knowing the content type upfront would allow clients to present streaming
+</i>&gt;<i> &gt; &gt; &gt; &gt; data correctly using appropriate colours and escape codes for code
+</i>&gt;<i> &gt; &gt; &gt; &gt; highlighting, for example.
+</i>&gt;<i> &gt; &gt; &gt; 
+</i>&gt;<i> &gt; &gt; &gt; A solution to a problem of its own making.
+</i>&gt;<i> &gt; &gt; 
+</i>&gt;<i> &gt; &gt; Sorry, I don&#x27;t follow this point.
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt; IMO escape codes are a hack, and universal client support can&#x27;t be
+</i>&gt;<i> &gt; expected. In fact, those may break different terminal/client types.
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt; I think color escape codes should not be considered expected with
+</i>&gt;<i> &gt; clients. In fact, there should probably a discussion if this should be
+</i>&gt;<i> &gt; discouraged in the spec.
+</i>&gt;<i> 
+</i>&gt;<i>   I&#x27;ve talked on this before (several times in fact) and my stance is that
+</i>&gt;<i> controls codes aside from HTAB, CR and LF should not be used in text/gemini. 
+</i>&gt;<i> There&#x27;s the issue that &quot;color escape codes&quot; are an artifact or side effect
+</i>&gt;<i> of a terminal-based Gemini browser and it can&#x27;t be relied to even exist in
+</i>&gt;<i> the graphical browsers that are popping up.  Then there&#x27;s the security
+</i>&gt;<i> issue---there are escape codes that can reprogram the keyboard, and although
+</i>&gt;<i> the usage is rare, it is possible.  There are also escape codes that can
+</i>&gt;<i> resize the window and reposition the window, and there&#x27;s no telling what
+</i>&gt;<i> state the terminal can end in.
+</i>&gt;<i> 
+</i>&gt;<i>   While I would like to disallow control codes in the specification, that
+</i>&gt;<i> might be too big of a change, and *will* affect some sites, but adding
+</i>&gt;<i> verbiage that discourages it can be added.
+</i>&gt;<i> 
+</i>&gt;<i>   -spc
+</i>
+Perhaps this is the wrong way to frame this, but you&#x27;re prioritizing backwards compatibility on a pre-1.0-spec to support an unintended hack that has security issues?
+
+If I had control codes on my capsule, I&#x27;d grumble a bit, sure, but I&#x27;d remove them. I&#x27;m not sure it&#x27;s worth it to shield the tiny handful of **current** capsule operators from some search-and-delete work compared to all the future client implementors who&#x27;ll face at least some pressure to implement color support (and, if they&#x27;re actual terminal applications, open their users to keyboard-reset exploits).
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005829.html">Alt text and media types for preformatted text</a></li>
+<li>Next message (by thread): <a href="005835.html">Alt text and media types for preformatted text</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5832">[ date ]</a> <a href="thread.html#5832">[ thread ]</a> <a href="subject.html#5832">[ subject ]</a> <a href="author.html#5832">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

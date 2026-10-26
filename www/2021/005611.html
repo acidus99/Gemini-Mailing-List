@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] [spec] On extending gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005511.html">
+<link rel="next" href="005668.html">
+</head>
+<body>
+<h1>[tech] [spec] On extending gemini</h1>
+<b>John Cowan</b> cowan at ccil.org<br>
+<i>Thu Feb 25 01:20:14 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005511.html">[tech] [spec] On extending gemini</a></li>
+<li>Next message (by thread): <a href="005668.html">[tech] [spec] On extending gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5611">[ date ]</a> <a href="thread.html#5611">[ thread ]</a> <a href="subject.html#5611">[ subject ]</a> <a href="author.html#5611">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Tue, Feb 23, 2021 at 4:59 AM Nathan Galt &lt;mailinglists at ngalt.com&gt; wrote:
+
+
+&gt;<i> Once some capsules start using metadata that?s only usable in some
+</i>&gt;<i> clients, those capsules will have an implicit Best Viewed In Gemini Client
+</i>&gt;<i> X label stuck to them. The Best Viewed In Browser X era of the Web is _not_
+</i>&gt;<i> something I want replicated in Gemini.
+</i>&gt;<i>
+</i>
+We are already there.
+
+For example, a capsule that contains text/plain files can be rendered in
+some clients but not all, or at least a conformant Gemini client can be
+written that can&#x27;t cope with text/plain.  The same applies to all other
+media types, because media types are extensible.
+
+What is more, a capsule that links to Gopher menus or documents is most
+easily read using a client that supports either Gopher protocol natively or
+an outboard Gopher proxy.  That&#x27;s because of the extensibility of the
+Internet protocol suite.
+
+The issue that arose with &quot;works best in browser X&quot; was presentational:
+some web pages looked good (for particular values of &quot;good&quot;) in browser X
+but not so good in browser Y.  That changed when browsers started to
+include a JavaScript engine, and it became also a matter of what pages
+would even *work* in browser Y at all.  But we are far from that precipice
+now.
+
+Fortunately, we have general agreement that there will be no *standardized*
+presentational markup in text/gemini.  But it&#x27;s still possible to write a
+client that interprets a line beginning with &quot;***&quot; by rendering it in
+italics, and we can&#x27;t stop that, nor can we stop it from spreading to other
+clients, or authors starting to use it.  That&#x27;s because of the
+extensibility of the interpretation of plain-ish text.
+
+The only way to avoid all this is a WHATWG-ish standard in which everything
+a client can do is spelled out in excruciating detail, and whatever is not
+permitted is forbidden.  I think it is 100% unlikely that we will ever go
+there.
+
+Because I?m already strongly in favor of making it easy to make a good
+&gt;<i> Gemini client, I?m against proposals that could, down the line, increase
+</i>&gt;<i> the amount of work that it?d take to make a good, full-featured Gemini
+</i>&gt;<i> client. Arbitrary-metadata proposals are a fully general can of worms that,
+</i>&gt;<i> say, double-digit status codes aren?t.
+</i>
+
+You can abuse metadata, but as I have demonstrated above, you can also
+abuse existing content, and one is no worse than the other.  A metadata FAQ
+would say that clients can convert the values of metadata lines from
+machine-readable to human-readable (from &quot;Jefferson, Thomas&quot; to &quot;Thomas
+Jefferson&quot;, for example, or even from &quot;Waldo, Edward Hamilton&quot; to &quot;Theodore
+Sturgeon&quot;) but a metadata line should otherwise be treated like a text line.
+
+
+
+John Cowan          <a href="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</a>        cowan at ccil.org
+The present impossibility of giving a scientific explanation is no proof
+that there is no scientific explanation. The unexplained is not to be
+identified with the unexplainable, and the strange and extraordinary
+nature of a fact is not a justification for attributing it to powers
+above nature.  --The Catholic Encyclopedia, s.v. &quot;telepathy&quot; (1913)
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210224/54e05a0a/attachment.htm">https://mailing-list-archive.gemi.dev/www/attachments/20210224/54e05a0a/attachment.htm</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005511.html">[tech] [spec] On extending gemini</a></li>
+<li>Next message (by thread): <a href="005668.html">[tech] [spec] On extending gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5611">[ date ]</a> <a href="thread.html#5611">[ thread ]</a> <a href="subject.html#5611">[ subject ]</a> <a href="author.html#5611">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

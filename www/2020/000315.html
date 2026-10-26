@@ -1,72 +1,56 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> CGI and CGI like support (was Re: [ANN] Announcing Molly Brown, a Gemini server in Go)
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%20and%20CGI%20like%20support%20%28was%20Re%3A%20%5BANN%5D%20Announcing%20Molly%20Brown%2C%0A%20a%20Gemini%20server%20in%20Go%29&In-Reply-To=%3C20200114234920.GA13720%40brevard.conman.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="000312.html">
-   <LINK REL="Next"  HREF="000420.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>CGI and CGI like support (was Re: [ANN] Announcing Molly Brown, a Gemini server in Go)</H1>
-    <B>Sean Conner</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20CGI%20and%20CGI%20like%20support%20%28was%20Re%3A%20%5BANN%5D%20Announcing%20Molly%20Brown%2C%0A%20a%20Gemini%20server%20in%20Go%29&In-Reply-To=%3C20200114234920.GA13720%40brevard.conman.org%3E"
-       TITLE="CGI and CGI like support (was Re: [ANN] Announcing Molly Brown, a Gemini server in Go)">sean at conman.org
-       </A><BR>
-    <I>Tue Jan 14 23:49:20 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="000312.html">[ANN] Announcing Molly Brown, a Gemini server in Go
-</A></li>
-        <LI>Next message (by thread): <A HREF="000420.html">CGI and CGI like support (was Re: [ANN] Announcing Molly Brown, a Gemini server in Go)
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#315">[ date ]</a>
-              <a href="thread.html#315">[ thread ]</a>
-              <a href="subject.html#315">[ subject ]</a>
-              <a href="author.html#315">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CGI and CGI like support (was Re: [ANN] Announcing Molly Brown, a Gemini server in Go)</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000312.html">
+<link rel="next" href="000420.html">
+</head>
+<body>
+<h1>CGI and CGI like support (was Re: [ANN] Announcing Molly Brown, a Gemini server in Go)</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Tue Jan 14 23:49:20 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000312.html">[ANN] Announcing Molly Brown, a Gemini server in Go</a></li>
+<li>Next message (by thread): <a href="000420.html">CGI and CGI like support (was Re: [ANN] Announcing Molly Brown, a Gemini server in Go)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#315">[ date ]</a> <a href="thread.html#315">[ thread ]</a> <a href="subject.html#315">[ subject ]</a> <a href="author.html#315">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>It was thus said that the Great solderpunk once stated:
+<pre>It was thus said that the Great solderpunk once stated:
 &gt;<i> 
-</I>&gt;<i> This decision should not be interpreted as a criticism of your
-</I>&gt;<i> RFC-3875-derived implementation.  I think it makes good sense for there
-</I>&gt;<i> to be an option for people to easily convert existing web CGI scripts to
-</I>&gt;<i> Gemini.
-</I>&gt;<i> 
-</I>&gt;<i> But I do think it would be nice if there was one vaguely standard way
-</I>&gt;<i> for servers to implement this kind of thing, so that dynamic content
-</I>&gt;<i> generating code could be more portable.  I think for that I'd probably
-</I>&gt;<i> prefer something as light as possible, and to explicitly distance Gemini
-</I>&gt;<i> from many of the ideas baked into RFC-3875, especially that dynamic
-</I>&gt;<i> content code should have access to the end user's IP address.
-</I>
-  RFC-3875 wasn't that bad to support as there aren't that many
+</i>&gt;<i> This decision should not be interpreted as a criticism of your
+</i>&gt;<i> RFC-3875-derived implementation.  I think it makes good sense for there
+</i>&gt;<i> to be an option for people to easily convert existing web CGI scripts to
+</i>&gt;<i> Gemini.
+</i>&gt;<i> 
+</i>&gt;<i> But I do think it would be nice if there was one vaguely standard way
+</i>&gt;<i> for servers to implement this kind of thing, so that dynamic content
+</i>&gt;<i> generating code could be more portable.  I think for that I&#x27;d probably
+</i>&gt;<i> prefer something as light as possible, and to explicitly distance Gemini
+</i>&gt;<i> from many of the ideas baked into RFC-3875, especially that dynamic
+</i>&gt;<i> content code should have access to the end user&#x27;s IP address.
+</i>
+  RFC-3875 wasn&#x27;t that bad to support as there aren&#x27;t that many
 meta-varables (as they are called) to suport, and several are optional
-anyway.  The RFC doesn't cover how the meta-varriables are sent to the
-script, but under Unixland, it's via envinroment variables.
+anyway.  The RFC doesn&#x27;t cover how the meta-varriables are sent to the
+script, but under Unixland, it&#x27;s via envinroment variables.
 
-Here's what I currently do:
+Here&#x27;s what I currently do:
 
 	AUTH_TYPE
 		Not set unless the client provides a certificate, then this
 		gets set to &quot;Certificate&quot;.
 
 	CONTENT_LENGTH
-		Doesn't apply as there's no way to send a document to a
+		Doesn&#x27;t apply as there&#x27;s no way to send a document to a
 		Gemini server.
 
 	CONTENT_TYPE
-		Doesn't apply.
+		Doesn&#x27;t apply.
 
 	GATEWAY_INTERFACE
 		Set to &quot;CGI/1.1&quot;
@@ -84,9 +68,9 @@ Here's what I currently do:
 	REMOTE_ADDR
 	REMOTE_HOST
 		I take it these are the ones you oject to the most.  But if
-		I'm running a Gemini server, I *already* have your IP
+		I&#x27;m running a Gemini server, I *already* have your IP
 		address anyway.  It seems silly to hide it to me, but I
-		don't live in Europe so take what I say with a grain of salt
+		don&#x27;t live in Europe so take what I say with a grain of salt
 		or two.  I set these (to just the IP address).
 
 	REMOTE_IDENT
@@ -117,7 +101,7 @@ Here's what I currently do:
 	SERVER_SOFTWARE
 		Set to &quot;GLV-1.12556/1&quot;.
 
-  And that's it without further configuration.  As a default, a CGI script
+  And that&#x27;s it without further configuration.  As a default, a CGI script
 will ONLY get these environment variables (whereas your implementation leaks
 the parent environment to the script---might want to check that).  I allow
 one to set other environment variables per script (like $PATH or $LANG or
@@ -139,40 +123,40 @@ option to set some variables that Apache sets as well.
 	TLS_CLIENT_SUBJECT_* (various fields broken down)
 
 and AUTH_TYPE and REMOTE_USER as mentioned above (if Apache compatibility
-requested, the names change but it's largely the same information).  Details
+requested, the names change but it&#x27;s largely the same information).  Details
 can be seen starting here:
 
-<A HREF="https://github.com/spc476/GLV-1.12556/blob/master/Lua/GLV-1/cgi.lua#L241">https://github.com/spc476/GLV-1.12556/blob/master/Lua/GLV-1/cgi.lua#L241</A>
+<a href="https://github.com/spc476/GLV-1.12556/blob/master/Lua/GLV-1/cgi.lua#L241">https://github.com/spc476/GLV-1.12556/blob/master/Lua/GLV-1/cgi.lua#L241</a>
 	
-&gt;<i> I think there's a lot to recommend the way Molly Brown works, especially
-</I>&gt;<i> if we generalise it just a little to &quot;Gemini CGI apps should endlessly
-</I>&gt;<i> read single line URLs over THING, until THING is closed, at which point
-</I>&gt;<i> the app should terminate&quot;.  
-</I>
+&gt;<i> I think there&#x27;s a lot to recommend the way Molly Brown works, especially
+</i>&gt;<i> if we generalise it just a little to &quot;Gemini CGI apps should endlessly
+</i>&gt;<i> read single line URLs over THING, until THING is closed, at which point
+</i>&gt;<i> the app should terminate&quot;.  
+</i>
   Oh, so pretty much a Gemini server sans TLS then.
 
 &gt;<i> Here THING could be stdin, or a TCP
-</I>&gt;<i> connection (making a CGI app basically a small self-contained server),
-</I>&gt;<i> or a unix domain socket.  Simple servers could do what Molly currently
-</I>&gt;<i> does, just spawn the script, send a single URL over stdin and then close
-</I>&gt;<i> stdin, giving us the good old fashioned one-process-per-request model of
-</I>&gt;<i> traditional web CGI.  But more advanced servers could give admins a way
-</I>&gt;<i> to configure different approaches where the process is persistent, more
-</I>&gt;<i> like FastCGI.  Or they could round-robin load balance between multiple
-</I>&gt;<i> servers on a local network.  The actual CGI program would see very
-</I>&gt;<i> little difference between these scenarios, you'd just give a slightly
-</I>&gt;<i> different argument to a library function which produced some kind of
-</I>&gt;<i> iterator over URLs.  This has great power:weight.
-</I>&gt;<i> 
-</I>&gt;<i> I was very happy with this idea until I realised that CGI programs
-</I>&gt;<i> should also have some way to get access to client certificates, not just
-</I>&gt;<i> the URL. :(
-</I>&gt;<i> 
-</I>&gt;<i> I haven't returned since then to thinking about how to achieve this.
-</I>
+</i>&gt;<i> connection (making a CGI app basically a small self-contained server),
+</i>&gt;<i> or a unix domain socket.  Simple servers could do what Molly currently
+</i>&gt;<i> does, just spawn the script, send a single URL over stdin and then close
+</i>&gt;<i> stdin, giving us the good old fashioned one-process-per-request model of
+</i>&gt;<i> traditional web CGI.  But more advanced servers could give admins a way
+</i>&gt;<i> to configure different approaches where the process is persistent, more
+</i>&gt;<i> like FastCGI.  Or they could round-robin load balance between multiple
+</i>&gt;<i> servers on a local network.  The actual CGI program would see very
+</i>&gt;<i> little difference between these scenarios, you&#x27;d just give a slightly
+</i>&gt;<i> different argument to a library function which produced some kind of
+</i>&gt;<i> iterator over URLs.  This has great power:weight.
+</i>&gt;<i> 
+</i>&gt;<i> I was very happy with this idea until I realised that CGI programs
+</i>&gt;<i> should also have some way to get access to client certificates, not just
+</i>&gt;<i> the URL. :(
+</i>&gt;<i> 
+</i>&gt;<i> I haven&#x27;t returned since then to thinking about how to achieve this.
+</i>
   Perhaps a series of line, like:
 
-	Request: <A HREF="gemini://example.net/foo/bar/script">gemini://example.net/foo/bar/script</A>
+	Request: <a href="gemini://example.net/foo/bar/script">gemini://example.net/foo/bar/script</a>
 	TLS_Cipher: ...
 	TLS_Version: ...
 	TLS_CLient_Hash: ...
@@ -186,26 +170,15 @@ way) and I think, easy to deal with.
 that tends to lead to RFC-3875 ...
 
   -spc
-</PRE>
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="000312.html">[ANN] Announcing Molly Brown, a Gemini server in Go
-</A></li>
-	<LI>Next message (by thread): <A HREF="000420.html">CGI and CGI like support (was Re: [ANN] Announcing Molly Brown, a Gemini server in Go)
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#315">[ date ]</a>
-              <a href="thread.html#315">[ thread ]</a>
-              <a href="subject.html#315">[ subject ]</a>
-              <a href="author.html#315">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="000312.html">[ANN] Announcing Molly Brown, a Gemini server in Go</a></li>
+<li>Next message (by thread): <a href="000420.html">CGI and CGI like support (was Re: [ANN] Announcing Molly Brown, a Gemini server in Go)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#315">[ date ]</a> <a href="thread.html#315">[ thread ]</a> <a href="subject.html#315">[ subject ]</a> <a href="author.html#315">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

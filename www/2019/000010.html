@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Password authentication over Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000137.html">
+<link rel="next" href="000015.html">
+</head>
+<body>
+<h1>Password authentication over Gemini</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Thu Aug 15 15:49:42 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000137.html">Client testing (was Re: Text reflow woes (or: I want bullets back!))</a></li>
+<li>Next message (by thread): <a href="000015.html">Password authentication over Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#10">[ date ]</a> <a href="thread.html#10">[ thread ]</a> <a href="subject.html#10">[ subject ]</a> <a href="author.html#10">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>I deliberately chose not to spec any kind of password-based
+authentication in Gemini, since TLS was already mandatory and so client
+certificate authentication was a possibility.  The &quot;maximise power to
+weight ratio&quot; philosophy kind of implies a &quot;there should be only way to
+do it&quot; philosophy as a corollary.
+
+Anyway, I realised to my surprise yesterday morning that actually Gemini
+now supports password authentication quite readily:
+
+CLIENT:    <a href="gemini://example.com/protected-resource/">gemini://example.com/protected-resource/</a>
+SERVER:    61 Please supply a temporary certificate to faciliate
+           interactive login
+CLIENT:    <a href="gemini://example.com/protected-resource/">gemini://example.com/protected-resource/</a>
+           (with disposable certificate)
+SERVER:    10 Username:
+CLIENT:    <a href="gemini://example.com/protected-resource/?solderpunk">gemini://example.com/protected-resource/?solderpunk</a>
+SERVER:    10 Password:
+           (after storing &quot;solderpunk&quot; in memory, indexed by client
+	   certificate fingerprint)
+CLIENT:    <a href="gemini://example.com/protected-resource/?hunter2">gemini://example.com/protected-resource/?hunter2</a>
+SERVER:    21 text/gemini
+           (after retrieving &quot;solderpunk&quot; from memory and verifying that
+	   solderpunk/hunter2 matches what is stored (hashed and salted)
+	   in a database
+
+This is less hassle than using client certificates directly (i.e.
+generate a persistent certificate, email the fingerprint to the remote
+admin, carry your certificate around with you, all as per ssh keys),
+though of course also less secure (weak passwords can be guessed,
+password databases can be stolen).  Different approaches will be more or
+less appropriate for different applications.
+
+This motivates two possible changes to the spec:
+
+Firstly, the &lt;META&gt; value sent with a 6x status is currently undefined.
+I would propose that for 61, &lt;META&gt; should be a human-readable message
+explaining *why* the server is politely requesting the user to
+voluntarily and temporarily surrender their anonymity.  Seems only
+reasonable.
+
+Secondly, as a variant on 10, maybe 11 could carry the extra semantics
+that clients should not echo user input, so it can be used for things
+like passwords.
+
+Any thoughts?
+
+-Solderpunk
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000137.html">Client testing (was Re: Text reflow woes (or: I want bullets back!))</a></li>
+<li>Next message (by thread): <a href="000015.html">Password authentication over Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#10">[ date ]</a> <a href="thread.html#10">[ thread ]</a> <a href="subject.html#10">[ subject ]</a> <a href="author.html#10">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

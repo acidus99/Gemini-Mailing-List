@@ -1,58 +1,42 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Client certificate musings
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200524015714.GC23998%40brevard.conman.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="001005.html">
-   <LINK REL="Next"  HREF="001011.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Client certificate musings</H1>
-    <B>Sean Conner</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Client%20certificate%20musings&In-Reply-To=%3C20200524015714.GC23998%40brevard.conman.org%3E"
-       TITLE="Client certificate musings">sean at conman.org
-       </A><BR>
-    <I>Sun May 24 02:57:14 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="001005.html">Client certificate musings
-</A></li>
-        <LI>Next message (by thread): <A HREF="001011.html">Client certificate musings
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1008">[ date ]</a>
-              <a href="thread.html#1008">[ thread ]</a>
-              <a href="subject.html#1008">[ subject ]</a>
-              <a href="author.html#1008">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client certificate musings</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="001005.html">
+<link rel="next" href="001011.html">
+</head>
+<body>
+<h1>Client certificate musings</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Sun May 24 02:57:14 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="001005.html">Client certificate musings</a></li>
+<li>Next message (by thread): <a href="001011.html">Client certificate musings</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1008">[ date ]</a> <a href="thread.html#1008">[ thread ]</a> <a href="subject.html#1008">[ subject ]</a> <a href="author.html#1008">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>It was thus said that the Great Thomas Karpiniec once stated:
+<pre>It was thus said that the Great Thomas Karpiniec once stated:
 &gt;<i> Hi!
-</I>&gt;<i> 
-</I>&gt;<i> On Sat, May 23, 2020 at 02:56:38PM +0000, solderpunk wrote:
-</I>&gt;<i> &gt; Gemini specs a lot of use for client certificates - partially because
-</I>&gt;<i> &gt; they're a nice tool for the job, partially because the design goal of
-</I>&gt;<i> &gt; maximising power-to-weight ratio means once you accept the weight of
-</I>&gt;<i> &gt; using TLS you'd better implement everything you can using TLS rather
-</I>&gt;<i> &gt; than adding yet another pile of concepts.
-</I>&gt;<i> 
-</I>&gt;<i> This was the thing that stood out most on my first read-through of the
-</I>&gt;<i> spec! I particularly like the insistence &quot;Transient certificates MUST
-</I>&gt;<i> NOT be generated automatically&quot;. I wasn't here for the earlier
-</I>&gt;<i> discussion but I assume this is to fend off servers making sessions
-</I>&gt;<i> purely for tracking purposes by default.
-</I>
-  There wasn't much of a discussion.
+</i>&gt;<i> 
+</i>&gt;<i> On Sat, May 23, 2020 at 02:56:38PM +0000, solderpunk wrote:
+</i>&gt;<i> &gt; Gemini specs a lot of use for client certificates - partially because
+</i>&gt;<i> &gt; they&#x27;re a nice tool for the job, partially because the design goal of
+</i>&gt;<i> &gt; maximising power-to-weight ratio means once you accept the weight of
+</i>&gt;<i> &gt; using TLS you&#x27;d better implement everything you can using TLS rather
+</i>&gt;<i> &gt; than adding yet another pile of concepts.
+</i>&gt;<i> 
+</i>&gt;<i> This was the thing that stood out most on my first read-through of the
+</i>&gt;<i> spec! I particularly like the insistence &quot;Transient certificates MUST
+</i>&gt;<i> NOT be generated automatically&quot;. I wasn&#x27;t here for the earlier
+</i>&gt;<i> discussion but I assume this is to fend off servers making sessions
+</i>&gt;<i> purely for tracking purposes by default.
+</i>
+  There wasn&#x27;t much of a discussion.
 
   Okay, a bit of history of this mess, which can be laid at the feet of me
 and solderpunk.
@@ -83,16 +67,16 @@ certificate is bad.  They also make it easy to use client certificates:
 
   So with all this, by midnight on the 22nd, I had a minimal Gemini server
 written, with client certificate support by the 24th.  Since client
-certificates weren't a part of the original specification, I thought I would
+certificates weren&#x27;t a part of the original specification, I thought I would
 just go ahead and implement it to show it could be done [2].  To that end, I
 set up two end points that were (and still are) protected:
 
-	<A HREF="gemini://gemini.conman.org/private/">gemini://gemini.conman.org/private/</A>
-	<A HREF="gemini://gemini.conman.org/conman-labs-private/">gemini://gemini.conman.org/conman-labs-private/</A>
+	<a href="gemini://gemini.conman.org/private/">gemini://gemini.conman.org/private/</a>
+	<a href="gemini://gemini.conman.org/conman-labs-private/">gemini://gemini.conman.org/conman-labs-private/</a>
 
   I set client certifications optional (else every request would require
 them and this would be checked by libtls), and for &quot;/private/&quot; all I require
-is that a certificate is sent (I don't even bother looking at it).  For
+is that a certificate is sent (I don&#x27;t even bother looking at it).  For
 &quot;/conman-labs-private/&quot; I require a certificate I signed to be used (much
 like Astrobotany).  My intent was to protect certain areas of a Gemini
 server with an access control mechanism, and using certificates was (in my
@@ -105,166 +89,70 @@ some form of &quot;cookie&quot; the client controls by the 19th, because of the
 &quot;/private/&quot; area on my server not requiring any particular client
 certificate (just *a* client certificate).
 
-  And from then, there wasn't much work on it until just recently.  I was
+  And from then, there wasn&#x27;t much work on it until just recently.  I was
 surprised and amused that Astrobotany exists, using client certificates as I
 envisioned them being used.
 
 &gt;<i> &gt;   Right now, AV-98 fills the &quot;Subject&quot; of transient certs with
-</I>&gt;<i> &gt;   random unique values from Python's `uuid` module, because I seemed
-</I>&gt;<i> &gt;   to encounter errors sending totally empty certificates to
-</I>&gt;<i> &gt;   conman.org.
-</I>&gt;<i> 
-</I>&gt;<i> I've seen similar problems before with custom usage of X.509. It would
-</I>&gt;<i> be nice to use something smaller than UUID if possible just to keep
-</I>&gt;<i> cert size down - provided there is library support as you noted.
-</I>
-  I'm not aware of what fields are mandatory either, but certainly using the
+</i>&gt;<i> &gt;   random unique values from Python&#x27;s `uuid` module, because I seemed
+</i>&gt;<i> &gt;   to encounter errors sending totally empty certificates to
+</i>&gt;<i> &gt;   conman.org.
+</i>&gt;<i> 
+</i>&gt;<i> I&#x27;ve seen similar problems before with custom usage of X.509. It would
+</i>&gt;<i> be nice to use something smaller than UUID if possible just to keep
+</i>&gt;<i> cert size down - provided there is library support as you noted.
+</i>
+  I&#x27;m not aware of what fields are mandatory either, but certainly using the
 string &quot;anon&quot; or &quot;unknown&quot; or &quot;noydb&quot; [3].  Or you know, Noah Body or Abby
 Normal.  
 
-&gt;<i> I'm not a big fan of using certificate fields for anything meaningful
-</I>&gt;<i> - it's a side channel (surrounded by lots of other fields that people
-</I>&gt;<i> might be tempted to use) - and it slightly increases the complexity of
-</I>&gt;<i> integration between the TLS library and the client/server code.
-</I>&gt;<i> 
-</I>&gt;<i> When a server wants the client to use a non-disposable certificate
-</I>&gt;<i> there is an ambiguity. Is it just because they want the user to
-</I>&gt;<i> preserve their authentication for more than 24 hours for convenience?
-</I>
+&gt;<i> I&#x27;m not a big fan of using certificate fields for anything meaningful
+</i>&gt;<i> - it&#x27;s a side channel (surrounded by lots of other fields that people
+</i>&gt;<i> might be tempted to use) - and it slightly increases the complexity of
+</i>&gt;<i> integration between the TLS library and the client/server code.
+</i>&gt;<i> 
+</i>&gt;<i> When a server wants the client to use a non-disposable certificate
+</i>&gt;<i> there is an ambiguity. Is it just because they want the user to
+</i>&gt;<i> preserve their authentication for more than 24 hours for convenience?
+</i>
   One scenario I envisioned was a Gemini server serving up sensitive
 material to known, authenticated users.  How that authentication happens is
 beyond the scope of the Gemini protocol, but perhaps a companion way (or a
 &quot;best practices&quot; way) could be discussed.
 
 &gt;<i> Or is it because the user will permanently lose access to their
-</I>&gt;<i> account if they ever lose that key?
-</I>
+</i>&gt;<i> account if they ever lose that key?
+</i>
   Of if they get logged out and forget the password?  That can happen now,
-so I don't think it's of much concern.
+so I don&#x27;t think it&#x27;s of much concern.
 
 &gt;<i> With this in mind, my current opinion is that there should be no way
-</I>&gt;<i> for a server to request a non-disposable certificate. 
-</I>
+</i>&gt;<i> for a server to request a non-disposable certificate. 
+</i>
   I disagree.  I might want to serve up documents to a select few, and I can
 control that by given them a client certificate to use.
 
   -spc
 
-[1]	<A HREF="https://github.com/spc476/libtls-examples">https://github.com/spc476/libtls-examples</A>
+[1]	<a href="https://github.com/spc476/libtls-examples">https://github.com/spc476/libtls-examples</a>
 
-[2]	I've also played around with client certificates for the web.  I
+[2]	I&#x27;ve also played around with client certificates for the web.  I
 	wish they were used more often as they obliviate the need for
 	&quot;logging&quot; in (has certificate?  User is logged in) and &quot;logging out&quot;
 	(client just stops browsing).  It gets difficult when you use
 	multiple devices, and the UI around generating and using them is ...
-	let's say it's &quot;technical&quot; and leave it at that.
+	let&#x27;s say it&#x27;s &quot;technical&quot; and leave it at that.
 
 [3]	None of your darned business.
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="001005.html">Client certificate musings
-</A></li>
-	<LI>Next message (by thread): <A HREF="001011.html">Client certificate musings
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1008">[ date ]</a>
-              <a href="thread.html#1008">[ thread ]</a>
-              <a href="subject.html#1008">[ subject ]</a>
-              <a href="author.html#1008">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="001005.html">Client certificate musings</a></li>
+<li>Next message (by thread): <a href="001011.html">Client certificate musings</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1008">[ date ]</a> <a href="thread.html#1008">[ thread ]</a> <a href="subject.html#1008">[ subject ]</a> <a href="author.html#1008">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

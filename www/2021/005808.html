@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alt text and media types for preformatted text</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005795.html">
+<link rel="next" href="005809.html">
+</head>
+<body>
+<h1>Alt text and media types for preformatted text</h1>
+<b>Philip Linde</b> linde.philip at gmail.com<br>
+<i>Mon Mar  1 13:04:16 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005795.html">Alt text and media types for preformatted text</a></li>
+<li>Next message (by thread): <a href="005809.html">Alt text and media types for preformatted text</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5808">[ date ]</a> <a href="thread.html#5808">[ thread ]</a> <a href="subject.html#5808">[ subject ]</a> <a href="author.html#5808">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Mon, 01 Mar 2021 10:12:18 +0000
+&quot;Caolan McMahon&quot; &lt;caolan at caolan.uk&gt; wrote:
+
+&gt;<i> &gt; How is the type more useful for accessibility than a general
+</i>&gt;<i> &gt; description of its content? Would knowing in an art gallery whether
+</i>&gt;<i> &gt; you&#x27;re standing in front of an oil painting or an aquarelle be more
+</i>&gt;<i> &gt; useful than knowing what the painting depicts?
+</i>&gt;<i> 
+</i>&gt;<i> No, but knowing whether the picture contained text or art would tell you whether to use assistive technology to read it or describe it.
+</i>
+Similarly, describing it would tell me whether to read it or skip it
+and additionally allow an author to give me the gist of its content.
+
+Read me
+
+```C source code
+
+or
+
+```ASCII art depicting sleeping, happy cat
+
+and I simultaneously have an indicator of whether I can comprehend the
+content and a description of it in case I can not. Then I can
+consciously navigate past it or dive into it with my client. The
+problem with accessibility for now, from what I understand, is that
+most clients don&#x27;t have the navigational tools necessary to allow this,
+and screen readers will happily burst out long sequences of nonsense if
+that&#x27;s what&#x27;s presented to them. This is orthogonal.
+
+&gt;<i> It seems most the disagreement here is whether the client should automatically make some sensible choices for the user (content type first), or the user should process the alt text and make their own call (alt text first)?
+</i>
+Most of my disagreement is with the breaking spec change, further
+objections being with the assumptions underlying the definition of the
+supposed problem with the spec as-is, but first and foremost that it
+suggests a breaking change that is likely to hurt accessibility when a
+breaking change isn&#x27;t at all necessary in the first place.
+
+See my suggestion at the end of the mail for how this can be
+implemented without breaking the spec.
+
+&gt;<i> &gt; &gt; 2. Knowing the content type upfront would allow clients to present streaming
+</i>&gt;<i> &gt; &gt; data correctly using appropriate colours and escape codes for code
+</i>&gt;<i> &gt; &gt; highlighting, for example.
+</i>&gt;<i> &gt; 
+</i>&gt;<i> &gt; A solution to a problem of its own making.
+</i>&gt;<i> 
+</i>&gt;<i> Sorry, I don&#x27;t follow this point.
+</i>
+What you&#x27;ve suggested here (different lines before and after the
+block content contain alt text and type information) creates a problem:
+if the type information is after the content, the client can&#x27;t know in
+advance how to e.g. highlight source code. This problem doesn&#x27;t exist
+with the spec in its current form. By saying that the type information
+should then be first, you propose to have solved that problem.
+
+In one mail you have both created and solved a problem, and you list
+having solved the problem you&#x27;ve created as an advantage of the approach
+your suggestion. In that sense it&#x27;s a solution to a problem of its own
+making.
+
+---
+
+My suggestion: if for whatever reason you want to include machine
+readable content information, do it on the alt text line as you already
+MAY according to the current spec. Do this in a manner that&#x27;s both
+unambiguously separate from alt text to the computer and sensible as
+natural plain text and unlikely to appear to mean anything other than
+the machine interpretations, e.g. &quot;(MIME: text/x-art)&quot;. Define this
+format in a companion spec.
+
+It doesn&#x27;t immediately invalidate any existing pages, it&#x27;s gracefully
+forwards- and backwards compatible and it&#x27;s already specified to an
+extent. Clients that don&#x27;t want to deal with this time waster can
+ignore it, and people who are interested can decide on the color of
+their bikeshed (maybe it should be &quot;[MIME: ...]&quot;?!) without constantly
+pushing for completely unnecessary breaking spec changes.
+
+-- 
+Philip
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: not available
+Type: application/pgp-signature
+Size: 488 bytes
+Desc: not available
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210301/0a8c7cca/attachment.sig">https://mailing-list-archive.gemi.dev/www/attachments/20210301/0a8c7cca/attachment.sig</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005795.html">Alt text and media types for preformatted text</a></li>
+<li>Next message (by thread): <a href="005809.html">Alt text and media types for preformatted text</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5808">[ date ]</a> <a href="thread.html#5808">[ thread ]</a> <a href="subject.html#5808">[ subject ]</a> <a href="author.html#5808">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

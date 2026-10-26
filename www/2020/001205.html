@@ -1,47 +1,31 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Possibly silly text/gemini spec suggestion: Frames
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Possibly%20silly%20text/gemini%20spec%20suggestion%3A%20Frames&In-Reply-To=%3C20200530181321.GB29889%40SDF.ORG%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="001164.html">
-   <LINK REL="Next"  HREF="001135.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Possibly silly text/gemini spec suggestion: Frames</H1>
-    <B>solderpunk</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Possibly%20silly%20text/gemini%20spec%20suggestion%3A%20Frames&In-Reply-To=%3C20200530181321.GB29889%40SDF.ORG%3E"
-       TITLE="Possibly silly text/gemini spec suggestion: Frames">solderpunk at SDF.ORG
-       </A><BR>
-    <I>Sat May 30 19:13:21 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="001164.html">Possibly silly text/gemini spec suggestion: Frames
-</A></li>
-        <LI>Next message (by thread): <A HREF="001135.html">&lt;META&gt; overloading...
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1205">[ date ]</a>
-              <a href="thread.html#1205">[ thread ]</a>
-              <a href="subject.html#1205">[ subject ]</a>
-              <a href="author.html#1205">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Possibly silly text/gemini spec suggestion: Frames</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="001164.html">
+<link rel="next" href="001135.html">
+</head>
+<body>
+<h1>Possibly silly text/gemini spec suggestion: Frames</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Sat May 30 19:13:21 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="001164.html">Possibly silly text/gemini spec suggestion: Frames</a></li>
+<li>Next message (by thread): <a href="001135.html">&lt;META&gt; overloading...</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1205">[ date ]</a> <a href="thread.html#1205">[ thread ]</a> <a href="subject.html#1205">[ subject ]</a> <a href="author.html#1205">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Hey,
+<pre>Hey,
 
 Thanks for the suggestion and sorry for the slow response!
 
-Perhaps predictably, I'm not really enthusiastic about this.  I
-acknowledge that you've tried to limit the complexity of this by
+Perhaps predictably, I&#x27;m not really enthusiastic about this.  I
+acknowledge that you&#x27;ve tried to limit the complexity of this by
 explicitly forbidding the nesting of frames (and thank goodness!), but I
 still think this is a substantial increase in complexity compared to
 everything else.
@@ -51,7 +35,7 @@ so far of text/gemini being parsable and renderable line-by-line in a
 single pass with almost no internal state in the parser.  A frame-based
 solution would require a client to hold the entire document in memory at
 once and impose some kind of internal structure on it.  I understand
-it's supposed to be optional, but I would like it if even a &quot;full
+it&#x27;s supposed to be optional, but I would like it if even a &quot;full
 flavoured&quot; renderer which supports all line types is still a pretty
 modest undertaking.
 
@@ -59,22 +43,22 @@ This would also, for the first time, make it really possible to produce
 non-trivially invalid text/gemini.  E.g. a &quot;|  &quot; line encountered befeore a
 &quot;|||&quot; line makes no sense.  People could also easily write, deliberately
 or by accident, a text/gemini document which did nest frames in the way
-that's not allowed, and clients would need to recognise this and then
+that&#x27;s not allowed, and clients would need to recognise this and then
 decide what to do with it.
 
 So the complications and potential problems this brings along are pretty
 substantial, more so than ever other line type so far.
 
-I also appreciate that you've given thought to how this would degrade in
+I also appreciate that you&#x27;ve given thought to how this would degrade in
 a dumb terminal display.  Even if we grant that your suggested layouts
-don't look too bad, I worry that people will come up with other layouts
+don&#x27;t look too bad, I worry that people will come up with other layouts
 which *do* look confusing.
 
-I guess I'm also not clear what problem this is intended to solve which
-couldn't be solved in a simpler way.  If this is just suppose to give
+I guess I&#x27;m also not clear what problem this is intended to solve which
+couldn&#x27;t be solved in a simpler way.  If this is just suppose to give
 text/gemini authors a way to creatively express themselves a bit, then
-I guess this isn't really a concern (but I would suggest that there are
-probably simpler ways to jazz up a page a bit).  But if it's supposed to
+I guess this isn&#x27;t really a concern (but I would suggest that there are
+probably simpler ways to jazz up a page a bit).  But if it&#x27;s supposed to
 make pages easier to navigate, maybe there are other ways to achieve
 this?  In what I assume is the intended rendering of one of your
 examples, the document title remains visible at the top the entire time
@@ -82,7 +66,7 @@ as you scroll through the actual content.  text/gemini already *has* a
 clear and simple way to indicate the title of a document, by putting a
 first-level header on the first non-empty line.  GUI/TUI clients could
 easily extract that title and display it permanently in part of their
-layout.  Navigation links are less obvious, but I'm not sure what is
+layout.  Navigation links are less obvious, but I&#x27;m not sure what is
 wrong with just having them sit, by convention, at the end of a
 document.  Any decent client should allow the user to hit the End key on
 their keyboard and immediately jump down to those links.
@@ -90,95 +74,15 @@ their keyboard and immediately jump down to those links.
 Cheers,
 Solderpunk
 
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="001164.html">Possibly silly text/gemini spec suggestion: Frames
-</A></li>
-	<LI>Next message (by thread): <A HREF="001135.html">&lt;META&gt; overloading...
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#1205">[ date ]</a>
-              <a href="thread.html#1205">[ thread ]</a>
-              <a href="subject.html#1205">[ subject ]</a>
-              <a href="author.html#1205">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="001164.html">Possibly silly text/gemini spec suggestion: Frames</a></li>
+<li>Next message (by thread): <a href="001135.html">&lt;META&gt; overloading...</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#1205">[ date ]</a> <a href="thread.html#1205">[ thread ]</a> <a href="subject.html#1205">[ subject ]</a> <a href="author.html#1205">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

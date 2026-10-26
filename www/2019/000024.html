@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>File size issues</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000022.html">
+<link rel="next" href="000037.html">
+</head>
+<body>
+<h1>File size issues</h1>
+<b>Michael Lazar</b> lazar.michael22 at gmail.com<br>
+<i>Fri Aug 16 20:30:08 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000022.html">File size issues</a></li>
+<li>Next message (by thread): <a href="000037.html">File size issues</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#24">[ date ]</a> <a href="thread.html#24">[ thread ]</a> <a href="subject.html#24">[ subject ]</a> <a href="author.html#24">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>&gt;<i>&gt;&gt;&gt; * Sean has pointed out in one of his RFCs that this means there is no
+</i>&gt;<i>&gt;&gt;&gt;   way for a client to know whether or not a download completed
+</i>&gt;<i>&gt;&gt;&gt;   successfully or was interrupted due to an accidentally dropped or
+</i>&gt;<i>&gt;&gt;&gt;   even a maliciously severred connection
+</i>
+Does TLS not have a native way to handle this? I did a quick search and found
+that either the client/server may send a close_notify message before
+terminating a TLS connection.
+
+    <a href="https://tools.ietf.org/html/rfc5246#section-7.2.1">https://tools.ietf.org/html/rfc5246#section-7.2.1</a>
+
+&gt;<i> Very slick clients could just request a resource directly, keep track of
+</i>&gt;<i> how much response they&#x27;ve pulled down so far (or how many seconds
+</i>&gt;<i> they&#x27;ve been reading for) and once some threshold is passed (1MB?  5
+</i>&gt;<i> seconds?) make another request in a separate thread for the metadata and
+</i>&gt;<i> then begin displaying a progress bar or ETA prompt or something to
+</i>&gt;<i> reassure the user that things really are happening.
+</i>
+The whole idea is serving metadata in a separate TCP request might work fine
+for static files, but it would break down when attempting to serve any type
+of dynamically generated content.
+
+Say I want to host an endpoint that does something like return a random quote
+from fortune(1). Gopher sites love to serve these little CGI tools because
+they&#x27;re fun and require very little effort :) After I generate the text, I can
+easily calculate the size and send along with the response in-line using
+something like a response header. But I wouldn&#x27;t be able to tell you ahead of
+time from a separate metadata TCP request.
+
+&gt;<i> Maybe we don&#x27;t need to worry about this?  There&#x27;s no shame in not being
+</i>&gt;<i> able to match every single useful capability that HTTP has.  It should
+</i>&gt;<i> have been clear from the outset we wouldn&#x27;t be able to do that.
+</i>
+I agree with this sentiment. Knowing the file size would be nice to have, but I
+haven&#x27;t seen any use cases that are compelling enough to justify increasing the
+complexity to the protocol for. Even in HTTP land, Content-Length is an optional
+response header and there are several scenarios where it doesn&#x27;t make sense to
+include it at all.
+
+- mozz
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000022.html">File size issues</a></li>
+<li>Next message (by thread): <a href="000037.html">File size issues</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#24">[ date ]</a> <a href="thread.html#24">[ thread ]</a> <a href="subject.html#24">[ subject ]</a> <a href="author.html#24">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

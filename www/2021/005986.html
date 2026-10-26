@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] Client certificate scopes</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005978.html">
+<link rel="next" href="005987.html">
+</head>
+<body>
+<h1>[spec] Client certificate scopes</h1>
+<b>Omar Polo</b> op at omarpolo.com<br>
+<i>Sun Mar  7 08:20:56 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005978.html">[spec] Client certificate scopes</a></li>
+<li>Next message (by thread): <a href="005987.html">[spec] Client certificate scopes</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5986">[ date ]</a> <a href="thread.html#5986">[ thread ]</a> <a href="subject.html#5986">[ subject ]</a> <a href="author.html#5986">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+Adnan Maolood &lt;me at adnano.co&gt; writes:
+
+&gt;<i> Currently, the Gemini specification requires client certificates be
+</i>&gt;<i> limited to the URL hostname and path for which they were requested. My
+</i>&gt;<i> Gemini client automatically generates certificates for the user, and
+</i>&gt;<i> this requirement makes it much more complicated to store and load
+</i>&gt;<i> certificates. For simplicity&#x27;s sake, I propose that client certificates
+</i>&gt;<i> only be limited to the hostname for which they were requested.
+</i>
+Wouldn&#x27;t this cause problems with multi-user capsules?  e.g. as a user,
+if I used a certificate for <a href="gemini://example.com/~user1/cgi/foo">gemini://example.com/~user1/cgi/foo</a> I may
+don&#x27;t want that same certificate to be sent to
+<a href="gemini://example.com/~user2/cgi/bar">gemini://example.com/~user2/cgi/bar</a>.
+
+Maybe limiting them to a path AND all the descendant paths?  So that
+/~user1/cgi/foo and /~user1/cgi/foo/bar are using the same cert by
+default?
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005978.html">[spec] Client certificate scopes</a></li>
+<li>Next message (by thread): <a href="005987.html">[spec] Client certificate scopes</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5986">[ date ]</a> <a href="thread.html#5986">[ thread ]</a> <a href="subject.html#5986">[ subject ]</a> <a href="author.html#5986">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

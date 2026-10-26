@@ -1,50 +1,34 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Caching and status codes
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3CCAD2gp_QOae7p6VrdAn7OYJwukvhjESsx2aDYX04-Z7Uws8YNeg%40mail.gmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="003083.html">
-   <LINK REL="Next"  HREF="003098.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Caching and status codes</H1>
-    <B>John Cowan</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Caching%20and%20status%20codes&In-Reply-To=%3CCAD2gp_QOae7p6VrdAn7OYJwukvhjESsx2aDYX04-Z7Uws8YNeg%40mail.gmail.com%3E"
-       TITLE="Caching and status codes">cowan at ccil.org
-       </A><BR>
-    <I>Fri Nov  6 22:19:18 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="003083.html">Caching and status codes
-</A></li>
-        <LI>Next message (by thread): <A HREF="003098.html">Caching and status codes
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3092">[ date ]</a>
-              <a href="thread.html#3092">[ thread ]</a>
-              <a href="subject.html#3092">[ subject ]</a>
-              <a href="author.html#3092">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caching and status codes</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="003083.html">
+<link rel="next" href="003098.html">
+</head>
+<body>
+<h1>Caching and status codes</h1>
+<b>John Cowan</b> cowan at ccil.org<br>
+<i>Fri Nov  6 22:19:18 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="003083.html">Caching and status codes</a></li>
+<li>Next message (by thread): <a href="003098.html">Caching and status codes</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3092">[ date ]</a> <a href="thread.html#3092">[ thread ]</a> <a href="subject.html#3092">[ subject ]</a> <a href="author.html#3092">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>On Fri, Nov 6, 2020 at 5:11 AM Philip Linde &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">linde.philip at gmail.com</A>&gt; wrote:
+<pre>On Fri, Nov 6, 2020 at 5:11 AM Philip Linde &lt;linde.philip at gmail.com&gt; wrote:
 
 
-&gt;<i> I think that's the advantage of bie's suggested solution. It doesn't
-</I>&gt;<i> require any breaking changes, and a client that doesn't recognize the
-</I>&gt;<i> difference between codes 20 and 21 will still be fully compatible with
-</I>&gt;<i> a server that does.
-</I>&gt;<i>
-</I>
+&gt;<i> I think that&#x27;s the advantage of bie&#x27;s suggested solution. It doesn&#x27;t
+</i>&gt;<i> require any breaking changes, and a client that doesn&#x27;t recognize the
+</i>&gt;<i> difference between codes 20 and 21 will still be fully compatible with
+</i>&gt;<i> a server that does.
+</i>&gt;<i>
+</i>
 I agree, except that I am in favor of code 22 meaning &quot;It is inadvisable to
 cache this&quot;, on the assumption that most Gemini documents are static and
 will continue to be so.  Even on the Web, most documents are static.  If
@@ -53,55 +37,36 @@ strongly about 21, then both 21 and 22.
 
 
 &gt;<i> There can be different codes roughly representing different cache
-</I>&gt;<i> lifetimes. &quot;PERMANENT&quot; for things that should stick on the disk until
-</I>&gt;<i> the user (or user configured policy) removes them. &quot;SESSION&quot; for things
-</I>&gt;<i> that stick for the lifetime of a browsing session.
-</I>&gt;<i>
-</I>
+</i>&gt;<i> lifetimes. &quot;PERMANENT&quot; for things that should stick on the disk until
+</i>&gt;<i> the user (or user configured policy) removes them. &quot;SESSION&quot; for things
+</i>&gt;<i> that stick for the lifetime of a browsing session.
+</i>&gt;<i>
+</i>
 That seems to me too complex for a client to interpret.  What is a browsing
-session, if I always keep my client running?  Note that &quot;don't cache&quot; can
-also be interpreted as &quot;don't mirror&quot;, which is often an important point
+session, if I always keep my client running?  Note that &quot;don&#x27;t cache&quot; can
+also be interpreted as &quot;don&#x27;t mirror&quot;, which is often an important point
 when dealing with living documents.  There are an awful lot of broken
 mirrors of Wikipedia out there.
 
 
 
 
-John Cowan          <A HREF="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</A>        <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">cowan at ccil.org</A>
+John Cowan          <a href="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</a>        cowan at ccil.org
 But that, he realized, was a foolish thought; as no one knew better than
 he that the Wall had no other side.
         --Arthur C. Clarke, &quot;The Wall of Darkness&quot;
 -------------- next part --------------
 An HTML attachment was scrubbed...
-URL: &lt;<A HREF="https://lists.orbitalfox.eu/archives/gemini/attachments/20201106/4b5c5ae5/attachment-0001.htm">https://lists.orbitalfox.eu/archives/gemini/attachments/20201106/4b5c5ae5/attachment-0001.htm</A>&gt;
-</PRE>
-
-
-
-
-
-
-
-
-
-
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20201106/4b5c5ae5/attachment-0001.htm">https://mailing-list-archive.gemi.dev/www/attachments/20201106/4b5c5ae5/attachment-0001.htm</a>&gt;
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="003083.html">Caching and status codes
-</A></li>
-	<LI>Next message (by thread): <A HREF="003098.html">Caching and status codes
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3092">[ date ]</a>
-              <a href="thread.html#3092">[ thread ]</a>
-              <a href="subject.html#3092">[ subject ]</a>
-              <a href="author.html#3092">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="003083.html">Caching and status codes</a></li>
+<li>Next message (by thread): <a href="003098.html">Caching and status codes</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3092">[ date ]</a> <a href="thread.html#3092">[ thread ]</a> <a href="subject.html#3092">[ subject ]</a> <a href="author.html#3092">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

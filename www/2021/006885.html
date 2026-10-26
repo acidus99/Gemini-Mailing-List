@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Malicious Links</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006884.html">
+<link rel="next" href="006888.html">
+</head>
+<body>
+<h1>Malicious Links</h1>
+<b>nervuri</b> nervuri at disroot.org<br>
+<i>Sat Jul 10 13:55:52 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006884.html">Malicious Links</a></li>
+<li>Next message (by thread): <a href="006888.html">Malicious Links</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6885">[ date ]</a> <a href="thread.html#6885">[ thread ]</a> <a href="subject.html#6885">[ subject ]</a> <a href="author.html#6885">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Fri, 2021-07-09, nothien@uber.space wrote:
+&gt;<i> What does the Gemini community think?  How big of a problem is this?
+</i>&gt;<i> Are there any other feasible workarounds?  Which major (and minor) sites
+</i>&gt;<i> are affected?  Does this call for some sort of change in protocol?
+</i>
+See previous discussions:
+
+<a href="gemini://gemini.circumlunar.space/~/fgaz/posts/2020-06-15-csrf-in-gemini/">gemini://gemini.circumlunar.space/~/fgaz/posts/2020-06-15-csrf-in-gemini/</a>
+- <a href="https://mailing-list-archive.gemi.dev/www/2020/001698.html">https://mailing-list-archive.gemi.dev/www/2020/001698.html</a>
+
+<a href="gemini://gemini.circumlunar.space/users/solderpunk/cornedbeef/a-vision-for-gemini-applications.gmi">gemini://gemini.circumlunar.space/users/solderpunk/cornedbeef/a-vision-for-gemini-applications.gmi</a>
+- <a href="https://mailing-list-archive.gemi.dev/www/2020/001747.html">https://mailing-list-archive.gemi.dev/www/2020/001747.html</a>
+
+Takeaways:
+
+Server-side: mandate client certs for requests with non-trivial
+consequences and use nonces (CSRF tokens) to be extra-safe (see the
+first link).
+
+Client-side: never use a client certificate when following a link from
+outside the client certificate&#x27;s scope, as defined in section 4.3 of the
+spec.  This rule could be added to the spec itself.  Here&#x27;s how the
+scope is defined:
+
+&gt;<i> A client certificate which is generated or loaded in response to such a
+</i>&gt;<i> status code has its scope bound to the same hostname as the request URL
+</i>&gt;<i> and to all paths below the path of the request URL path. E.g. if a
+</i>&gt;<i> request for <a href="gemini://example.com/foo">gemini://example.com/foo</a> returns status 60 and the user
+</i>&gt;<i> chooses to generate a new client certificate in response to this, that
+</i>&gt;<i> same certificate should be used for subsequent requests to
+</i>&gt;<i> <a href="gemini://example.com/foo">gemini://example.com/foo</a>, <a href="gemini://example.com/foo/bar/">gemini://example.com/foo/bar/</a>,
+</i>&gt;<i> <a href="gemini://example.com/foo/bar/baz">gemini://example.com/foo/bar/baz</a>, etc.,
+</i>
+Another client-side takeaway: consider Solderpunk&#x27;s idea of a
+&quot;containerised&quot; client, exemplified in [1].
+
+Such client-side precautions should cover most cases of CSRF, except, to
+quote Solderpunk:
+
+&gt;<i> It is not foolproof - it cannot protect against application-internal
+</i>&gt;<i> CSRF attacks, e.g. some kind of multi-user application where one user
+</i>&gt;<i> can post text/gemini content which is rendered by another user of the
+</i>&gt;<i> same application.
+</i>
+Nonces (CSRF tokens) should be used in such instances.
+
+[1] <a href="https://mailing-list-archive.gemi.dev/www/2020/001771.html">https://mailing-list-archive.gemi.dev/www/2020/001771.html</a>
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006884.html">Malicious Links</a></li>
+<li>Next message (by thread): <a href="006888.html">Malicious Links</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6885">[ date ]</a> <a href="thread.html#6885">[ thread ]</a> <a href="subject.html#6885">[ subject ]</a> <a href="author.html#6885">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

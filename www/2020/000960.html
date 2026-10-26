@@ -1,172 +1,73 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Proposed minor spec changes, for comment.
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3CRqbCjyEwZzDgKkCXsCPDi0_C9lSGwO6HhImf760ciszHLTMm--FI2vzhqjgSC9rdX6Am0EedtIdDy5l50Bna55ZBkzy1m5ZQd_3o3hTCPQ8%3D%40strega-nil.co%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="000959.html">
-   <LINK REL="Next"  HREF="000961.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Proposed minor spec changes, for comment.</H1>
-    <B>Nicole Mazzuca</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3CRqbCjyEwZzDgKkCXsCPDi0_C9lSGwO6HhImf760ciszHLTMm--FI2vzhqjgSC9rdX6Am0EedtIdDy5l50Bna55ZBkzy1m5ZQd_3o3hTCPQ8%3D%40strega-nil.co%3E"
-       TITLE="Proposed minor spec changes, for comment.">nicole at strega-nil.co
-       </A><BR>
-    <I>Fri May 22 03:02:47 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="000959.html">Proposed minor spec changes, for comment.
-</A></li>
-        <LI>Next message (by thread): <A HREF="000961.html">Proposed minor spec changes, for comment.
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#960">[ date ]</a>
-              <a href="thread.html#960">[ thread ]</a>
-              <a href="subject.html#960">[ subject ]</a>
-              <a href="author.html#960">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposed minor spec changes, for comment.</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000959.html">
+<link rel="next" href="000961.html">
+</head>
+<body>
+<h1>Proposed minor spec changes, for comment.</h1>
+<b>Nicole Mazzuca</b> nicole at strega-nil.co<br>
+<i>Fri May 22 03:02:47 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000959.html">Proposed minor spec changes, for comment.</a></li>
+<li>Next message (by thread): <a href="000961.html">Proposed minor spec changes, for comment.</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#960">[ date ]</a> <a href="thread.html#960">[ thread ]</a> <a href="subject.html#960">[ subject ]</a> <a href="author.html#960">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>I am a strong proponent of &quot;follow the existing practice if there isn't good reason to change&quot;. I personally think CRLF should be recommended, but not required for content, as text/* is wont to do over HTTP; I think expecting clients to deal with any of {CR, LF, CRLF} is totally fine. However, the header should _absolutely_ end in CRLF, as every existing protocol works this way.
+<pre>I am a strong proponent of &quot;follow the existing practice if there isn&#x27;t good reason to change&quot;. I personally think CRLF should be recommended, but not required for content, as text/* is wont to do over HTTP; I think expecting clients to deal with any of {CR, LF, CRLF} is totally fine. However, the header should _absolutely_ end in CRLF, as every existing protocol works this way.
 
 
 Nicole
 
-&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208; Original Message &#8208;&#8208;&#8208;&#8208;&#8208;&#8208;&#8208;
-On Thursday, May 21, 2020 5:45 PM, Matt Brubeck &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">mbrubeck at limpet.net</A>&gt; wrote:
-
-&gt;<i> On Thu, May 21, 2020 at 1:47 PM solderpunk <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">solderpunk at sdf.org</A> wrote:
-</I>&gt;<i>
-</I>&gt;<i> &gt; Some quick experimentation with Python revealed that str.splitlines()
-</I>&gt;<i> &gt; is, indeed, smart enough to handle CRLF, CR and LF as linebreaks.
-</I>&gt;<i>
-</I>&gt;<i> For what it's worth, the Rust standard library is designed to work
-</I>&gt;<i> with both LF (&quot;\n&quot;) and CRLF (&quot;\r\n&quot;) line endings, but not CR alone
-</I>&gt;<i> (&quot;\r&quot;):
-</I>&gt;<i> <A HREF="https://github.com/rust-lang/rfcs/blob/master/text/1212-line-endings.md">https://github.com/rust-lang/rfcs/blob/master/text/1212-line-endings.md</A>
-</I>&gt;<i>
-</I>&gt;<i> In the discussion that led to this, there was no real support for
-</I>&gt;<i> supporting &quot;\r&quot; line endings, nor for other uncommon newlines like
-</I>&gt;<i> U+2028 LINE SEPARATOR:
-</I>&gt;<i> <A HREF="https://github.com/rust-lang/rfcs/pull/1212">https://github.com/rust-lang/rfcs/pull/1212</A>
-</I>&gt;<i>
-</I>&gt;<i> I think text/gemini should allow both &quot;\n&quot; and &quot;\r\n&quot;. Requiring a
-</I>&gt;<i> single style would either place a burden on content authors (on
-</I>&gt;<i> servers that don't auto-convert line endings), or make servers more
-</I>&gt;<i> complex and less efficient. (They would need to inspect every
-</I>&gt;<i> text/gemini file and possibly transform it, rather than stream it
-</I>&gt;<i> directly from disk to the network.) Meanwhile, I think client
-</I>&gt;<i> software can handle either option fairly simply.
-</I>&gt;<i>
-</I>&gt;<i> For the protocol header, I don't have a strong opinion. Any choice we
-</I>&gt;<i> make is fairly easy to implement in both server and client. However, I
-</I>&gt;<i> have a slight preference for specifying just &quot;\n&quot; as the header
-</I>&gt;<i> terminator. One byte is (marginally) more efficient than two, and in
-</I>&gt;<i> some languages it's slightly simpler to split on a single-byte
-</I>&gt;<i> delimiter.
-</I>
-
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+??????? Original Message ???????
+On Thursday, May 21, 2020 5:45 PM, Matt Brubeck &lt;mbrubeck at limpet.net&gt; wrote:
+
+&gt;<i> On Thu, May 21, 2020 at 1:47 PM solderpunk solderpunk at sdf.org wrote:
+</i>&gt;<i>
+</i>&gt;<i> &gt; Some quick experimentation with Python revealed that str.splitlines()
+</i>&gt;<i> &gt; is, indeed, smart enough to handle CRLF, CR and LF as linebreaks.
+</i>&gt;<i>
+</i>&gt;<i> For what it&#x27;s worth, the Rust standard library is designed to work
+</i>&gt;<i> with both LF (&quot;\n&quot;) and CRLF (&quot;\r\n&quot;) line endings, but not CR alone
+</i>&gt;<i> (&quot;\r&quot;):
+</i>&gt;<i> <a href="https://github.com/rust-lang/rfcs/blob/master/text/1212-line-endings.md">https://github.com/rust-lang/rfcs/blob/master/text/1212-line-endings.md</a>
+</i>&gt;<i>
+</i>&gt;<i> In the discussion that led to this, there was no real support for
+</i>&gt;<i> supporting &quot;\r&quot; line endings, nor for other uncommon newlines like
+</i>&gt;<i> U+2028 LINE SEPARATOR:
+</i>&gt;<i> <a href="https://github.com/rust-lang/rfcs/pull/1212">https://github.com/rust-lang/rfcs/pull/1212</a>
+</i>&gt;<i>
+</i>&gt;<i> I think text/gemini should allow both &quot;\n&quot; and &quot;\r\n&quot;. Requiring a
+</i>&gt;<i> single style would either place a burden on content authors (on
+</i>&gt;<i> servers that don&#x27;t auto-convert line endings), or make servers more
+</i>&gt;<i> complex and less efficient. (They would need to inspect every
+</i>&gt;<i> text/gemini file and possibly transform it, rather than stream it
+</i>&gt;<i> directly from disk to the network.) Meanwhile, I think client
+</i>&gt;<i> software can handle either option fairly simply.
+</i>&gt;<i>
+</i>&gt;<i> For the protocol header, I don&#x27;t have a strong opinion. Any choice we
+</i>&gt;<i> make is fairly easy to implement in both server and client. However, I
+</i>&gt;<i> have a slight preference for specifying just &quot;\n&quot; as the header
+</i>&gt;<i> terminator. One byte is (marginally) more efficient than two, and in
+</i>&gt;<i> some languages it&#x27;s slightly simpler to split on a single-byte
+</i>&gt;<i> delimiter.
+</i>
+
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="000959.html">Proposed minor spec changes, for comment.
-</A></li>
-	<LI>Next message (by thread): <A HREF="000961.html">Proposed minor spec changes, for comment.
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#960">[ date ]</a>
-              <a href="thread.html#960">[ thread ]</a>
-              <a href="subject.html#960">[ subject ]</a>
-              <a href="author.html#960">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="000959.html">Proposed minor spec changes, for comment.</a></li>
+<li>Next message (by thread): <a href="000961.html">Proposed minor spec changes, for comment.</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#960">[ date ]</a> <a href="thread.html#960">[ thread ]</a> <a href="subject.html#960">[ subject ]</a> <a href="author.html#960">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>URLs in request lines</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000148.html">
+<link rel="next" href="000150.html">
+</head>
+<body>
+<h1>URLs in request lines</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Fri Sep 13 21:42:10 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000148.html">URLs in request lines</a></li>
+<li>Next message (by thread): <a href="000150.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#149">[ date ]</a> <a href="thread.html#149">[ thread ]</a> <a href="subject.html#149">[ subject ]</a> <a href="author.html#149">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great plugd once stated:
+&gt;<i> Hi all,
+</i>&gt;<i> 
+</i>&gt;<i> This question occurred to me when debugging some 5x error responses from
+</i>&gt;<i> servers: how strictly are servers expected to be when responding to
+</i>&gt;<i> requests?  In particular, if a client is given a URL such as
+</i>&gt;<i> 
+</i>&gt;<i> <a href="gemini://example.com">gemini://example.com</a>
+</i>&gt;<i> 
+</i>&gt;<i> (i.e. with an empty file name) is it expected to translate it into
+</i>&gt;<i> 
+</i>&gt;<i> <a href="gemini://example.com/">gemini://example.com/</a>  ?
+</i>
+  Yes.  In RFC-3986, if you follow the BNF, you&#x27;ll find this bit:
+
+   URI           = scheme &quot;:&quot; hier-part [ &quot;?&quot; query ] [ &quot;#&quot; fragment ]
+
+   hier-part     = &quot;//&quot; authority path-abempty
+                 / path-absolute
+                 / path-rootless
+                 / path-empty
+
+   path-abempty  = *( &quot;/&quot; segment )
+
+  When parsing a URL like:
+
+	<a href="gemini://example.com">gemini://example.com</a>
+
+we have the &#x27;scheme&#x27; portion, then the two &#x27;//&#x27; which means we&#x27;re following
+the first rule in &#x27;hier-part&#x27;.  &#x27;authority&#x27; is the host part (which I didn&#x27;t
+include) followed by a &#x27;path-abempty&#x27;, of which there can be 0 or more of,
+so that&#x27;s a perfectly cromulent URL.  It&#x27;s the responsibility of the
+*server* to handle the situation, not the client.
+
+  Semantically speaking, these:
+
+	<a href="gemini://example.com">gemini://example.com</a>
+	<a href="gemini://example.com/">gemini://example.com/</a>
+
+are the same.
+
+  A related problem is a relative URL like:
+
+	/test/torture/../../test/./torture/../../../../test/./././torture/./0022
+
+  That collapses down to:
+
+	/test/torture/0022
+
+but in this case, I think it would be the responsibiliy of the *client* to
+collapse the first into the second (and then add the scheme, host, etc.).  I
+know my own server does the collapsing, but I think I may change that.
+
+  -spc
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000148.html">URLs in request lines</a></li>
+<li>Next message (by thread): <a href="000150.html">URLs in request lines</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#149">[ date ]</a> <a href="thread.html#149">[ thread ]</a> <a href="subject.html#149">[ subject ]</a> <a href="author.html#149">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

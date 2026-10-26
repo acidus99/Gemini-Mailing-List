@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Gemini-style proposal (specifically to the harm of using Unicode characters as if they were formatted ascii)</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="007504.html">
+<link rel="next" href="007521.html">
+</head>
+<body>
+<h1>A Gemini-style proposal (specifically to the harm of using Unicode characters as if they were formatted ascii)</h1>
+<b>babiak</b> babiak at disroot.org<br>
+<i>Wed Nov  3 10:41:02 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="007504.html">A Gemini-style proposal</a></li>
+<li>Next message (by thread): <a href="007521.html">A Gemini-style proposal (specifically to the harm of using Unicode characters as if they were formatted ascii)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7505">[ date ]</a> <a href="thread.html#7505">[ thread ]</a> <a href="subject.html#7505">[ subject ]</a> <a href="author.html#7505">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>TL;DR : I could bring up any number of straw-man arguments, but those are not useful. The actual argument is as follows. Unicode mathematical characters used as if they were normal characters, just in a fancier font is just plain rude to multiple groups of people, some of whom the gemini specification explicitly recommends accommodating.
+
+
+Hello, I actually have some knowledge that is relevant here.
+
+&gt;<i> ...
+</i>&gt;<i> Regular people don&#x27;t care whether these were originally for mathematics or not — they look like bold versions of characters. And a number of people are already using them as such. (There are even online tools to help people use them.)
+</i>&gt;<i> ...
+</i>
+This is true. However, as things currently stand, this is not a good thing.
+
+The reason is simple: not everyone looks at screens. Screen readers exist. If I remember correctly, screen readers are actually explicitly mentioned in the gemtext specification, in the context of alt ext for ascii art in preformatted blocs. One could say, the gemini protocol was designed with text-to-speech systems in mind as well as screens. Currently, espeak reads &quot;𝐀, 𝗔&quot; as &quot;letter 1d400, letter 1d5d4&quot;. This is worse than putting a clapping hand emoji between every other word, as that at least leaves the words intact.
+
+While it is doubtless possible to write a screen reader that reads these mathematical symbols as if they were not mathematical symbols, for this change to be accepted would require *almost every screen reader on the market* to make this change. Also, what if the character is actually being used in the original context? Say someone wrote down an equation, using these symbols, and didn&#x27;t note down multiplication? How would a screen reader recognise it as a mathematical context, not formatting?
+
+And even if you are willing to intentionally/neglectfully exclude those with eyesight worse than yours, the fact remains that searching for this text would simply not work on most computers, using the most common algorithms.
+
+Then there&#x27;s the whole issue of older hardware, with limited or non-existent Unicode support. Expecting everyone to just use a specific set of characters from a relatively modern encoding, when some people are working on getting a functional gemini client working on hardware my father used as a child (slight exaggeration may exist) is just asking for trouble.
+
+&gt;<i>
+</i>&gt;<i> If Gemtext can ignore the original semantics of the asterisk, the back-tick, the pound symbol, the equal symbol, and the greater-than symbol — then why can&#x27;t we also do the same with those mathematical characters?
+</i>&gt;<i>
+</i>
+I personally don&#x27;t recall the pound symbol having any meaning in gemini, I&#x27;ll have to look through the spec again. However!
+
+I have a multi-part answer:
+ - tradition: For most of these old symbols, the &quot;original&quot; meaning is no longer used. Even where it is, alternate meanings are common, and well understood. These new symbols still hold their original meaning.
+ - legibility: If someone sees a couple of lines beginning with an asterisk, it is pretty obvious they are bullet points. A screen reader might read them out, in which case they work as audible bullet points, or not, in which case the actual sentences should be entirely understandable. While an individual with a Unicode-supporting font and fully functioning eyes will understand the intended meaning behind these characters, lose any of these, and the entire word is gone, either turned into tofu, or into gibberish.
+
+With no disrespect intended, Babiak.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="007504.html">A Gemini-style proposal</a></li>
+<li>Next message (by thread): <a href="007521.html">A Gemini-style proposal (specifically to the harm of using Unicode characters as if they were formatted ascii)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#7505">[ date ]</a> <a href="thread.html#7505">[ thread ]</a> <a href="subject.html#7505">[ subject ]</a> <a href="author.html#7505">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

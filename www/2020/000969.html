@@ -1,56 +1,40 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Proposed minor spec changes, for comment.
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C20200522160730.GD22060%40SDF.ORG%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="000963.html">
-   <LINK REL="Next"  HREF="000970.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Proposed minor spec changes, for comment.</H1>
-    <B>solderpunk</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Proposed%20minor%20spec%20changes%2C%20for%20comment.&In-Reply-To=%3C20200522160730.GD22060%40SDF.ORG%3E"
-       TITLE="Proposed minor spec changes, for comment.">solderpunk at SDF.ORG
-       </A><BR>
-    <I>Fri May 22 17:07:30 BST 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="000963.html">Proposed minor spec changes, for comment.
-</A></li>
-        <LI>Next message (by thread): <A HREF="000970.html">Proposed minor spec changes, for comment.
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#969">[ date ]</a>
-              <a href="thread.html#969">[ thread ]</a>
-              <a href="subject.html#969">[ subject ]</a>
-              <a href="author.html#969">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Proposed minor spec changes, for comment.</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000963.html">
+<link rel="next" href="000970.html">
+</head>
+<body>
+<h1>Proposed minor spec changes, for comment.</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Fri May 22 17:07:30 BST 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000963.html">Proposed minor spec changes, for comment.</a></li>
+<li>Next message (by thread): <a href="000970.html">Proposed minor spec changes, for comment.</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#969">[ date ]</a> <a href="thread.html#969">[ thread ]</a> <a href="subject.html#969">[ subject ]</a> <a href="author.html#969">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Thanks, everybody, for your thoughts on this matter!  I've made a
+<pre>Thanks, everybody, for your thoughts on this matter!  I&#x27;ve made a
 decision.
 
 Let me start out by saying how thoroughly ridiculous it is that in 2020
 people can still have spirited discussions about how the concept of &quot;a
 line of text&quot; should work!  I hope that one day this is standardised
-once and for all across all systems, but I won't hold my breath.
+once and for all across all systems, but I won&#x27;t hold my breath.
 
 The line of thinking to my decision has gone something like this:
 
-While it's true that the spec currently is totally ambiguous on what our
-supposedly line-oriented format uses to define a line, and that's a
-genuine problem which needs to be fixed because specs *shouldn't* be
+While it&#x27;s true that the spec currently is totally ambiguous on what our
+supposedly line-oriented format uses to define a line, and that&#x27;s a
+genuine problem which needs to be fixed because specs *shouldn&#x27;t* be
 ambiguous about this kind of thing (thanks to everybody who flagged this
-issue!), it's also true that as far as I'm aware this ambiguity has
+issue!), it&#x27;s also true that as far as I&#x27;m aware this ambiguity has
 created precisely zero interoperability problems for anybody.
 
 In a situation where some spec detail is ambiguous but everything is
@@ -58,7 +42,7 @@ working just fine 100%, the obvious default course of action should be
 to codify whatever the current practice is.
 
 That seems to be everybody using plain LF.  So, there would need to be a
-very compelling reason *not* to allow plain LF.  I can't think of any
+very compelling reason *not* to allow plain LF.  I can&#x27;t think of any
 and nobody has mentioned any, so, first conclusion: plain LF has to be
 allowed.
 
@@ -79,17 +63,17 @@ implement Gemini on an old CR-based system is going to have muuuuuch
 bigger problems to worry about than translating line endings, this seems
 very hard to justify.  I did previously have the notion that this was
 somehow &quot;the right thing to do&quot;, but having had to spend more time and
-energy thinking about this issue than it really deserves, I'm a bit more
+energy thinking about this issue than it really deserves, I&#x27;m a bit more
 inclined to help &quot;grease the wheels of history&quot; on its clear path toward
 reduced variability in such a fundamental matter.  LFCR is now well and
-truly dead, and CR is very, very close to it.  It's clear that other new
+truly dead, and CR is very, very close to it.  It&#x27;s clear that other new
 technologies are choosing to leave it behind, so we might as well follow
 suit and help the world get to a place of only having to worry about two
 common EOLs instead of three (and may our grandchildren only have to
-worry about one!).  Conclusion the third, let's not allow CR.
+worry about one!).  Conclusion the third, let&#x27;s not allow CR.
 
 Since CRLF is the canonical form of all text/* subtypes, these changes
-to the Gemini spec won't go in section 1.3.5 (which defines
+to the Gemini spec won&#x27;t go in section 1.3.5 (which defines
 text/gemini), but in section 1.3.3 (which defines response bodies in
 general, and is where we e.g. define UTF-8 as the default encoding).  I
 will probably borrow verbatim the wording used by the HTTP spec but just
@@ -103,7 +87,7 @@ of modern systems using anything other than LF or CRLF, server munging
 should not be necessary and Gemini content can be served as verbatim
 binary data from the filesystem, which is a very desirable property.
 
-I'll make this change, along with the two other uncontroversial
+I&#x27;ll make this change, along with the two other uncontroversial
 housekeeping changes (mandating SNI and requiring response headers to
 use exactly one space instead of arbitrary whitespace), tonight or
 tomorow.  Then we can shift focus to more important things, like client
@@ -112,98 +96,15 @@ certificates.
 Cheers,
 Solderpunk
 
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="000963.html">Proposed minor spec changes, for comment.
-</A></li>
-	<LI>Next message (by thread): <A HREF="000970.html">Proposed minor spec changes, for comment.
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#969">[ date ]</a>
-              <a href="thread.html#969">[ thread ]</a>
-              <a href="subject.html#969">[ subject ]</a>
-              <a href="author.html#969">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="000963.html">Proposed minor spec changes, for comment.</a></li>
+<li>Next message (by thread): <a href="000970.html">Proposed minor spec changes, for comment.</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#969">[ date ]</a> <a href="thread.html#969">[ thread ]</a> <a href="subject.html#969">[ subject ]</a> <a href="author.html#969">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] client with broken resolution of references?</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005364.html">
+<link rel="next" href="005365.html">
+</head>
+<body>
+<h1>[tech] client with broken resolution of references?</h1>
+<b>mbays at sdf.org</b> mbays at sdf.org<br>
+<i>Fri Feb 19 18:15:26 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005364.html">Is it Amphora or Anfora?</a></li>
+<li>Next message (by thread): <a href="005365.html">[tech] gmnhg v0.1.1 (Hugo-to-Gemini site converter)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5361">[ date ]</a> <a href="thread.html#5361">[ thread ]</a> <a href="subject.html#5361">[ subject ]</a> <a href="author.html#5361">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>I&#x27;m seeing a lot of this sort of thing in my logs:
+2021-02-19T09:06:21+01:00 [scrubbed]    20      <a href="gemini://gemini.thegonz.net/gredig/v">gemini://gemini.thegonz.net/gredig/v</a>
+2021-02-19T09:06:30+01:00 [scrubbed]    20      <a href="gemini://gemini.thegonz.net/gredig/v/fra/v">gemini://gemini.thegonz.net/gredig/v/fra/v</a>
+2021-02-19T09:06:38+01:00 [scrubbed]    20      <a href="gemini://gemini.thegonz.net/gredig/v/fra/v/fra/v">gemini://gemini.thegonz.net/gredig/v/fra/v/fra/v</a>
+2021-02-19T09:06:45+01:00 [scrubbed]    20      <a href="gemini://gemini.thegonz.net/gredig/v/fra/v/fra/v/intro.gmi">gemini://gemini.thegonz.net/gredig/v/fra/v/fra/v/intro.gmi</a>
+2021-02-19T09:06:49+01:00 [scrubbed]    20      <a href="gemini://gemini.thegonz.net/gredig/v/fra/v/fra/v/intro.gmi">gemini://gemini.thegonz.net/gredig/v/fra/v/fra/v/intro.gmi</a>
+
+Context: /gredig/v is a cgi script which outputs text/gemini containing 
+links &quot;fra/v&quot; and &quot;intro.gmi&quot;.
+
+This looks to me like the result of a client (or bot, but judging from 
+timestamps I&#x27;m guessing an interactive client) which assumes that an URL 
+without a &#x27;.&#x27; must be missing a trailing slash. Combined with 
+molly-brown&#x27;s behaviour of running the cgi script /foo if it exists when 
+responding to a request for /foo/bar, this explains the log.
+
+None of the clients I&#x27;ve tested behave like this, but I haven&#x27;t tested 
+many.
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 195 bytes
+Desc: not available
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210219/2be935b0/attachment.sig">https://mailing-list-archive.gemi.dev/www/attachments/20210219/2be935b0/attachment.sig</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005364.html">Is it Amphora or Anfora?</a></li>
+<li>Next message (by thread): <a href="005365.html">[tech] gmnhg v0.1.1 (Hugo-to-Gemini site converter)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5361">[ date ]</a> <a href="thread.html#5361">[ thread ]</a> <a href="subject.html#5361">[ subject ]</a> <a href="author.html#5361">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

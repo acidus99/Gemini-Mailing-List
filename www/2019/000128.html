@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CGI suport for Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000126.html">
+<link rel="next" href="000130.html">
+</head>
+<body>
+<h1>CGI suport for Gemini</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Sun Sep  8 07:31:25 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000126.html">CGI suport for Gemini</a></li>
+<li>Next message (by thread): <a href="000130.html">Defining sections in Gemini maps?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#128">[ date ]</a> <a href="thread.html#128">[ thread ]</a> <a href="subject.html#128">[ subject ]</a> <a href="author.html#128">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great solderpunk once stated:
+&gt;<i> Thanks for taking the time to write this up!
+</i>&gt;<i> 
+</i>&gt;<i> I guess I&#x27;m a little surprised / confused to see how closely your
+</i>&gt;<i> implementation sticks to the HTTP version of CGI, 
+</i>
+  I would think that&#x27;s now par for course 8-P
+
+&gt;<i> i.e. by going to the
+</i>&gt;<i> extent of adding a meaningless dummy environment variable for
+</i>&gt;<i> REQUEST_METHOD because that variable MUST exist in HTTP CGI
+</i>&gt;<i> implementations.  
+</i>
+  I did it to see just how difficult it would be, and in fact, it wasn&#x27;t
+that difficult at all (well, supporting the command line options of RFC-3875
+took a bit of work and I had to change how I parse URLs, but that was the
+only real snag).
+
+&gt;<i> I understand this this approach (combined with
+</i>&gt;<i> translating HTTP status codes to Gemini codes) permits existing CGI
+</i>&gt;<i> scripts written for HTTP to be deployed over Gemini without
+</i>&gt;<i> modification, which I suppose is nice, but...I imagine the majority of
+</i>&gt;<i> existing CGI scripts generate HTML output, which, while perfectly
+</i>&gt;<i> cromulent to serve over Gemini, is not really supposed to be mainstream
+</i>&gt;<i> usage.
+</i>
+  No, but I did have ulterior motives---my web-based blog is CGI based, and
+I can run it via this module (as long as I enable the http-environment
+variables).
+
+&gt;<i> Back when I started work on Shizaru I expected to one day add CGI
+</i>&gt;<i> support and my plan then was to actually *not* set REMOTE_ADDR at all
+</i>&gt;<i> (along with lots of other things, like stripping any Cookie headers out
+</i>&gt;<i> of the response).  I see now this would be an RFC violation, but if I
+</i>&gt;<i> ever get around to this, I&#x27;ll still do it.  Shizaru is supposed to be
+</i>&gt;<i> about Doing the Right Thing and creating a subspace of the web where
+</i>&gt;<i> people can relax and feel safe.  It&#x27;s explicitly an opinionated piece of
+</i>&gt;<i> software and I guess you could even call it an activism project, so,
+</i>&gt;<i> well, RFC be damned.
+</i>
+  I might be inclined to set REMOTE_ADDR to &quot;127.0.0.1&quot; and call it a day. 
+That way, any CGI scripts that rely upon that have something, and it doesn&#x27;t
+leak any information.  And nothing in the RFC state you *have* to set the
+HTTP related environment variables (or do what I do and set them to &quot;&quot; to
+prevent CGI scripts from bombing out).
+
+  I could even do that for my CGI module for Gemini---technically, the CGI
+script doesn&#x27;t get raw access to the socket, so the data is &quot;technically&quot;
+coming from the localhost ... 
+
+&gt;<i> To the extent that I presume the majority of CGI scripts for Gemini will
+</i>&gt;<i> be written from scratch for Gemini and so backward compatibility isn&#x27;t
+</i>&gt;<i> a problem, I wonder if it&#x27;s worthwhile including something in the spec
+</i>&gt;<i> defining an explicit subset of RFC-3875 as being used for Gemini.  This
+</i>&gt;<i> would let us get rid of stuff which is obviously not needed (like
+</i>&gt;<i> REQUEST_METHOD), and gives us the option of maybe getting rid of stuff
+</i>&gt;<i> that maybe we can agree we&#x27;d rather not have (like REMOTE_ADDR?).
+</i>
+  Here are the environment variables defined by RFC-3875, and some
+appropriate ways to handle them:
+
+	AUTH_TYPE		only if a user certificate, then set to &quot;Certificate&quot;
+	CONTENT_LENGTH		don&#x27;t set (it&#x27;s optional)
+	CONTENT_TYPE		don&#x27;t set (it&#x27;s optional)
+	GATEWAY_INTERFACE	&quot;CGI/1.1&quot;
+	PATH_INFO		required under certain conditions (see RFC)
+	PATH_TRANSLATED		required under certain conditions (see RFC)
+	QUERY_STRING		&quot;&quot; if no query sent, otherwise, query string (this is MANDATORY)
+	REMOTE_ADDR		&quot;127.0.0.1&quot;
+	REMOTE_HOST		&quot;127.0.0.1&quot;
+	REMOTE_IDENT		don&#x27;t set (it&#x27;s optional)
+	REMOTE_USER		only if a user certificate, then the CN field of the subject
+	REQUEST_METHOD		&quot;&quot;
+	SCRIPT_NAME		set (see RFC)
+	SERVER_NAME		set
+	SERVER_PORT		set
+	SERVER_PROTOCOL		&quot;GEMINI&quot;
+	SERVER_SOFTWARE		set
+
+  If you *want* to run a web-based CGI script, then the following should
+probably be defined as:
+
+	DOCUMENT_ROOT		maybe set? (Apache sets this)
+	REQUEST_METHOD		&quot;GET&quot;
+	SERVER_PROTOCOL		&quot;HTTP/1.0&quot;
+
+and translate status codes appropriately.
+	
+  Also, one could define other environment variables starting with &quot;GEMINI_&quot;
+but I can&#x27;t think of much that could be set (wait, maybe the TLS client
+certificate stuff, now that I think about it), but it&#x27;s allowed under the
+RFC.  Also, some critical environment variables used by the OS like PATH,
+LANG, etc.  I did set up a way to define these (and others) on a global and
+per-script basis.
+
+  You don&#x27;t have to deviate from the RFC *that much.*
+
+  -spc
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000126.html">CGI suport for Gemini</a></li>
+<li>Next message (by thread): <a href="000130.html">Defining sections in Gemini maps?</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#128">[ date ]</a> <a href="thread.html#128">[ thread ]</a> <a href="subject.html#128">[ subject ]</a> <a href="author.html#128">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

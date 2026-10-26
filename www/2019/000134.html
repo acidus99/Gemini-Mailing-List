@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Best practices in Gemini servers</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000133.html">
+<link rel="next" href="000135.html">
+</head>
+<body>
+<h1>Best practices in Gemini servers</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Tue Sep 10 03:07:41 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000133.html">Defining sections in Gemini maps?</a></li>
+<li>Next message (by thread): <a href="000135.html">Best practices in Gemini servers</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#134">[ date ]</a> <a href="thread.html#134">[ thread ]</a> <a href="subject.html#134">[ subject ]</a> <a href="author.html#134">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+  To get away from the text formatting argument (which I think comprises
+over half the messages so far) I thought I might ask for some guidelines as
+to the best practice for Gemini servers.  I came up with these as I was
+reworking my Gemini server (getting ready to release it, as I&#x27;ve had one
+person already request a copy).  So here we go:
+
+  I have this bit of code to check the request:
+
+	  if loc.scheme ~= &#x27;gemini&#x27;
+	  or loc.host   ~= CONF.network.host
+	  or loc.port   ~= CONF.network.port then
+	    log(ios,59,&quot;&quot;,reply(ios,&quot;59\t&quot;,MSG[59],&quot;\r\n&quot;))
+	    ios:close()
+	    return
+	  end
+
+  I&#x27;m currently returning a &quot;Bad Request&quot; for this, if the protocol, host
+and port don&#x27;t match what is currently configured on my server.  The other
+possible status is &quot;Proxy Request Refused&quot;.  My server doesn&#x27;t do proxy
+requests.  What should the proper status code be?  Is &quot;Bad Request&quot; fine
+here?
+
+  Next.  Each request is run through a series of checks to see if a resource
+has moved or is gone:
+
+	redirect =
+	{
+	  permanent = { ... } -- list of permenent redirects
+	  temporary = { ... } -- list of tempoarary redirects
+	  gone      = { ... } -- list of gone items
+	}
+
+  For any given list, it&#x27;s checked in the order presented, but the ordering
+of the major sections is currently defined as: temporary, permanent then
+gone.  I keep going back and forth if this shouldn&#x27;t be: gone, permanent,
+temporary or even if it matters.
+
+  Next.  The actual order of things is:
+
+	read request
+	check redirects
+	check authorization
+	check handlers
+
+  Each of the checks consist of the path matched against a pattern, and the
+first match wins.  So for instance (the path fields, for instance, are Lua
+patterns---think regex):
+
+	redirect =
+	{
+	  permanent =
+	  {
+	    { &#x27;^/source%-code$&#x27;     , &quot;/sourcecode/&quot;   } ,
+	    { &#x27;^/source%-code/(.*)&#x27; , &quot;/sourcecode/$1&quot; } ,
+	  }
+	},
+
+	authorization =
+	{
+	  {
+	    path   = &#x27;^/private/&#x27;,
+	    status = 61,
+	    check  = function(issuer,subject,url) ... end,
+	  },
+	
+	  {
+	    path   = &#x27;^/conman%-labs%-private/&#x27;,
+	    status = 62,
+	    check  = function(issuer,subject,url) ... end,
+	  },
+	},
+
+	handler =
+	{
+	  {
+	    path   = &#x27;^(/hilo/)(.*)&#x27;,
+	    module = &quot;hilo&quot;,
+	  },
+	
+	  {
+	    path   = &#x27;^/test/wrap(%;?(%d*))&#x27;,
+	    module = &quot;wrap&quot;,
+	  },
+	
+	  {
+	    path      = &quot;.*&quot;,
+	    module    = &quot;filesystem&quot;,
+	    directory = &quot;gemini.conman.org&quot;,
+	    no_access =
+	    {
+	      &quot;^%.&quot;,  -- no to any dot files
+	      &quot;%~$&quot;,  -- no to any backup files
+	    },
+	  },
+
+  So given a path like &quot;/private/Welcome.txt&quot;, there are no redirects that
+match, so it&#x27;s not redirected.  It does match one of the authorization
+patterns, so a check for the certificate is made, and if it passes that
+(it&#x27;s done that way so that the individual handlers don&#x27;t have to handle
+authentication themselves), then it goes through the handlers to match the
+last one, pointing to the &quot;filename&quot; handler.  My question here, or more of
+a concern really, is I think I have the ordering wrong---I think I should
+check authorization first before redirection checking, because not doing so
+may lead to leaking of protected resource names.
+
+  So my question here, does it make sense to have the order be:
+
+	check request
+	check authorization
+	check redirection
+	check handlers
+
+to prevent possible leaking of data?  I&#x27;m thinking yes, but wouldn&#x27;t mind
+seeing a discussion.
+
+  -spc (So anyway, back to our regularly schedule talk on text formatting ... )
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000133.html">Defining sections in Gemini maps?</a></li>
+<li>Next message (by thread): <a href="000135.html">Best practices in Gemini servers</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#134">[ date ]</a> <a href="thread.html#134">[ thread ]</a> <a href="subject.html#134">[ subject ]</a> <a href="author.html#134">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

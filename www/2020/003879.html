@@ -1,48 +1,32 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Three possible uses for IRIs
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3C20201208083619.GP24194%40brevard.conman.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="003878.html">
-   <LINK REL="Next"  HREF="003881.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Three possible uses for IRIs</H1>
-    <B>Sean Conner</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3C20201208083619.GP24194%40brevard.conman.org%3E"
-       TITLE="Three possible uses for IRIs">sean at conman.org
-       </A><BR>
-    <I>Tue Dec  8 08:36:20 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="003878.html">Three possible uses for IRIs
-</A></li>
-        <LI>Next message (by thread): <A HREF="003881.html">Three possible uses for IRIs
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3879">[ date ]</a>
-              <a href="thread.html#3879">[ thread ]</a>
-              <a href="subject.html#3879">[ subject ]</a>
-              <a href="author.html#3879">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three possible uses for IRIs</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="003878.html">
+<link rel="next" href="003881.html">
+</head>
+<body>
+<h1>Three possible uses for IRIs</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Tue Dec  8 08:36:20 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="003878.html">Three possible uses for IRIs</a></li>
+<li>Next message (by thread): <a href="003881.html">Three possible uses for IRIs</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3879">[ date ]</a> <a href="thread.html#3879">[ thread ]</a> <a href="subject.html#3879">[ subject ]</a> <a href="author.html#3879">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>It was thus said that the Great <A HREF="https://lists.orbitalfox.eu/listinfo/gemini">colecmac at protonmail.com</A> once stated:
+<pre>It was thus said that the Great colecmac at protonmail.com once stated:
 &gt;<i> 
-</I>&gt;<i> The fact that writing URLs for non-English languages is difficult sucks. But
-</I>&gt;<i> due the complexity, and most of all the fact that this would be a breaking
-</I>&gt;<i> change, I don't see IRIs as an option.
-</I>
-  I thought I might see what's involved with handling IRIs.
+</i>&gt;<i> The fact that writing URLs for non-English languages is difficult sucks. But
+</i>&gt;<i> due the complexity, and most of all the fact that this would be a breaking
+</i>&gt;<i> change, I don&#x27;t see IRIs as an option.
+</i>
+  I thought I might see what&#x27;s involved with handling IRIs.
 
   The actual differences between RFC-3986 (URI) and RFC-3987 (IRI) besides
 one being a standard (URI) and one being a proposed standard (IRI) comes
@@ -72,73 +56,42 @@ to
    ipchar         = iunreserved / pct-encoded / sub-delims / &quot;:&quot; / &quot;@&quot; 
    iprivate       = %xE000-F8FF / %xF0000-FFFFD / %x100000-10FFFD
 
-and that's it as far as the RFCs go (aside from the rule name changes).  As
+and that&#x27;s it as far as the RFCs go (aside from the rule name changes).  As
 a quick proof-of-concept, I just accepted all non-control UTF-8 characters
 as unreserved (including the private space) as that was the easiest thing to
 do, and yes, it works (but does allow potentially bad IRIs through).  
 
   But the code to *build* a URL from the parsed representation [2] ssumes
 US-ASCII.  Again, it would take just a few small changes to allow UTF-8
-characters on input and escape them properly for a URL.  That's something
-I'll try working on tomorrow.
+characters on input and escape them properly for a URL.  That&#x27;s something
+I&#x27;ll try working on tomorrow.
 
   That still leaves the question of punycode [3] and Unicode normalization
 (ugh).
 
-&gt;<i> P.S. I'll admit I'm biased. I write more code for Gemini than I do content, and
-</I>&gt;<i> primarily use my native language English.
-</I>
+&gt;<i> P.S. I&#x27;ll admit I&#x27;m biased. I write more code for Gemini than I do content, and
+</i>&gt;<i> primarily use my native language English.
+</i>
   I am biased too, as a monolingual US mutt, but I do want to try this stuff
 out.
 
   -spc
 
-[1]	<A HREF="https://github.com/spc476/LPeg-Parsers/blob/master/url.lua">https://github.com/spc476/LPeg-Parsers/blob/master/url.lua</A>
+[1]	<a href="https://github.com/spc476/LPeg-Parsers/blob/master/url.lua">https://github.com/spc476/LPeg-Parsers/blob/master/url.lua</a>
 
-[2]	<A HREF="https://github.com/spc476/GLV-1.12556/blob/master/Lua/GLV-1/url-util.lua">https://github.com/spc476/GLV-1.12556/blob/master/Lua/GLV-1/url-util.lua</A>
+[2]	<a href="https://github.com/spc476/GLV-1.12556/blob/master/Lua/GLV-1/url-util.lua">https://github.com/spc476/GLV-1.12556/blob/master/Lua/GLV-1/url-util.lua</a>
 
 [3]	RFC-3492, which includes C code to encode and decode punycode text,
 	which is valgrind clean (I checked).
-</PRE>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="003878.html">Three possible uses for IRIs
-</A></li>
-	<LI>Next message (by thread): <A HREF="003881.html">Three possible uses for IRIs
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3879">[ date ]</a>
-              <a href="thread.html#3879">[ thread ]</a>
-              <a href="subject.html#3879">[ subject ]</a>
-              <a href="author.html#3879">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="003878.html">Three possible uses for IRIs</a></li>
+<li>Next message (by thread): <a href="003881.html">Three possible uses for IRIs</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3879">[ date ]</a> <a href="thread.html#3879">[ thread ]</a> <a href="subject.html#3879">[ subject ]</a> <a href="author.html#3879">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

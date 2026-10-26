@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CGI programs and the gemini protocol</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006150.html">
+<link rel="next" href="006158.html">
+</head>
+<body>
+<h1>CGI programs and the gemini protocol</h1>
+<b>Philip Linde</b> linde.philip at gmail.com<br>
+<i>Sat Mar 20 00:46:30 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006150.html">CGI programs and the gemini protocol</a></li>
+<li>Next message (by thread): <a href="006158.html">CGI programs and the gemini protocol</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6151">[ date ]</a> <a href="thread.html#6151">[ thread ]</a> <a href="subject.html#6151">[ subject ]</a> <a href="author.html#6151">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>I don&#x27;t see how it&#x27;s how it&#x27;s underspecified. In particular, I don&#x27;t
+see why anyone should assume &amp;-separated values. The spec refers to
+IETF RFC 3986, which doesn&#x27;t at all concern how to encode multiple
+values. It simple describes the query as a segment of a URI starting
+with a &quot;?&quot; and ending with the end of the URI or a fragment marker
+&quot;#&quot;.
+
+The spec makes it clear that the input should be included as a query
+component. There can only be one RFC 3986 query component. Possibly
+calling it *the* query component instead would be a useful
+clarification for people who are not so familiar with RFC 3986.
+
+If a server wants to produce a e.g. a form with multiple input
+queries, accumulating a form state throughout, they can encode the
+state of the completed parts of the form in the path segment and serve
+a redirect after each input.
+
+If this is a new feature that people want, I think it should be
+discussed as such. To say that it&#x27;s underspecified is however just
+wishful thinking.
+
+--
+Philip
+
+On 3/20/21, Sean Conner &lt;sean@conman.org&gt; wrote:
+&gt;<i> It was thus said that the Great Frank Jüdes once stated:
+</i>&gt;<i>&gt; Hi fellow Geminauts,
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; i am fairly new to the gemini protocol, but already like the simplicity
+</i>&gt;<i>&gt; of everything, compared to the complexity of &quot;modern&quot; websites.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; Currently i am using the Jetforce server and several clients (Kristal,
+</i>&gt;<i>&gt; Lagrange, Geminaut) and trying to wrap my head around the /input/
+</i>&gt;<i>&gt; status-code:
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt;  * Upon first invocation my cgi-script figures out that the
+</i>&gt;<i>&gt;    /QUERY_STRING/ is empty and responds with /10 Please enter some data/
+</i>&gt;<i>&gt;  * The client is prompting for some data and re-requesting the URL with
+</i>&gt;<i>&gt;    the data attached: [URL]?Some Data
+</i>&gt;<i>&gt;  * My CGI program detects that there is some data in the URL and
+</i>&gt;<i>&gt;    responds with /10 Please enter some more data/
+</i>&gt;<i>&gt;  * Upon which the client asks me to enter some more data and
+</i>&gt;<i>&gt;    re-requests the URL, but only with the /some more data/ attached to
+</i>&gt;<i>&gt;    the URL
+</i>&gt;<i>&gt;    The data that was already attached to the URL will be replaced with
+</i>&gt;<i>&gt;    the new data.
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; Is that the intended functionality?
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; It is only possible to use one parameter?
+</i>&gt;<i>
+</i>&gt;<i>   It&#x27;s underspecified, and it&#x27;s a current issue:
+</i>&gt;<i>
+</i>&gt;<i> 	<a href="https://gitlab.com/gemini-specification/protocol/-/issues/19">https://gitlab.com/gemini-specification/protocol/-/issues/19</a>
+</i>&gt;<i>
+</i>&gt;<i>&gt; That definitely would make parsing the URL somewhat easier, but would
+</i>&gt;<i>&gt; require some creativity in the CGI if more than one parameter is needed.
+</i>&gt;<i>
+</i>&gt;<i>   Yes, and it depends upon the quality of implementation of the CGI spec.
+</i>&gt;<i>
+</i>&gt;<i>&gt; Can somebody please explain this to me in a nutshell? Thank you very
+</i>&gt;<i>&gt; much in advance for your help.
+</i>&gt;<i>
+</i>&gt;<i>   Unfortunately, it&#x27;s an open issue.  I&#x27;m [1] leaning towards appending the
+</i>&gt;<i> new output (option #2 on the issue) but the spec needs to be updated first.
+</i>&gt;<i>
+</i>&gt;<i>   -spc
+</i>&gt;<i>
+</i>&gt;<i> [1]	Disclaimer:  speaking with my BDFLA [2] hat here.
+</i>&gt;<i>
+</i>&gt;<i> [2]	Benevelent Dictator For Life&#x27;s Assistant.
+</i>&gt;<i>
+</i>&gt;<i>
+</i></pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006150.html">CGI programs and the gemini protocol</a></li>
+<li>Next message (by thread): <a href="006158.html">CGI programs and the gemini protocol</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6151">[ date ]</a> <a href="thread.html#6151">[ thread ]</a> <a href="subject.html#6151">[ subject ]</a> <a href="author.html#6151">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

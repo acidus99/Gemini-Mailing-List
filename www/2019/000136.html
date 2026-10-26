@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Best practices in Gemini servers</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000135.html">
+<link rel="next" href="000138.html">
+</head>
+<body>
+<h1>Best practices in Gemini servers</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Tue Sep 10 20:35:23 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000135.html">Best practices in Gemini servers</a></li>
+<li>Next message (by thread): <a href="000138.html">Best practices in Gemini servers</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#136">[ date ]</a> <a href="thread.html#136">[ thread ]</a> <a href="subject.html#136">[ subject ]</a> <a href="author.html#136">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Jason McBrayer once stated:
+&gt;<i> Sean Conner &lt;sean at conman.org&gt; writes:
+</i>&gt;<i> 
+</i>&gt;<i> &gt;   I&#x27;m currently returning a &quot;Bad Request&quot; for this, if the protocol, host
+</i>&gt;<i> &gt; and port don&#x27;t match what is currently configured on my server.  The other
+</i>&gt;<i> &gt; possible status is &quot;Proxy Request Refused&quot;.  My server doesn&#x27;t do proxy
+</i>&gt;<i> &gt; requests.  What should the proper status code be?  Is &quot;Bad Request&quot; fine
+</i>&gt;<i> &gt; here?
+</i>&gt;<i> 
+</i>&gt;<i> In my opinion, the Most Correct response to return would be &quot;Proxy
+</i>&gt;<i> Request Refused&quot;. If they had made the same request to a the right
+</i>&gt;<i> server or if this server had been configured differently, it would have
+</i>&gt;<i> succeeded, so the request isn&#x27;t malformed or anything. But Bad Request
+</i>&gt;<i> is probably the next-best response; Not Found would also make a kind of
+</i>&gt;<i> sense. 
+</i>
+  Hmmm ... if my sever did any proxying, then yes, &quot;Proxy Request Refused&quot;
+would make sense.  &quot;Not found&quot; doesn&#x27;t, because the resource could be found,
+not just through me.  
+
+  I suppose I could serve up &quot;Proxy Request Refused&quot; ... 
+
+&gt;<i> &gt;   So my question here, does it make sense to have the order be:
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; 	check request
+</i>&gt;<i> &gt; 	check authorization
+</i>&gt;<i> &gt; 	check redirection
+</i>&gt;<i> &gt; 	check handlers
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; to prevent possible leaking of data?  I&#x27;m thinking yes, but wouldn&#x27;t mind
+</i>&gt;<i> &gt; seeing a discussion.
+</i>&gt;<i> &gt;
+</i>&gt;<i> 
+</i>&gt;<i> I think this is good. I don&#x27;t know that there&#x27;s an equivalent best
+</i>&gt;<i> practices in HTTP; I think this is all pretty implementation-defined. 
+</i>
+  I only thought of that as I refactoring my server code.  I think I will
+make that change as it feels right to me as well.  Thanks.
+
+  -spc
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000135.html">Best practices in Gemini servers</a></li>
+<li>Next message (by thread): <a href="000138.html">Best practices in Gemini servers</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#136">[ date ]</a> <a href="thread.html#136">[ thread ]</a> <a href="subject.html#136">[ subject ]</a> <a href="author.html#136">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

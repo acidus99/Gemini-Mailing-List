@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Script to test gemini servers</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000298.html">
+<link rel="next" href="000302.html">
+</head>
+<body>
+<h1>Script to test gemini servers</h1>
+<b>Michael Lazar</b> lazar.michael22 at gmail.com<br>
+<i>Fri Jan 10 05:08:31 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000298.html">Script to test gemini servers</a></li>
+<li>Next message (by thread): <a href="000302.html">[ANN] Announcing Molly Brown, a Gemini server in Go</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#299">[ date ]</a> <a href="thread.html#299">[ thread ]</a> <a href="subject.html#299">[ subject ]</a> <a href="author.html#299">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Thu, Jan 9, 2020 at 2:11 AM Sean Conner &lt;sean at conman.org&gt; wrote:
+&gt;<i>
+</i>&gt;<i> It was thus said that the Great Michael Lazar once stated:
+</i>&gt;<i> &gt; - How do you respond to a request with a newline but no carriage return?
+</i>&gt;<i>
+</i>&gt;<i>   I respond.  I made CRs optional everywhere internally---it makes it easier
+</i>&gt;<i> for me to test.  Now, you did make one test labeled &quot;RequestMissingCR&quot; where
+</i>&gt;<i> you did send a LF.  Per the spec, I would expect this to return a 59 Bad
+</i>&gt;<i> Request, but since I treat CRs as optional, that&#x27;s why I passed that one.
+</i>
+It&#x27;s interesting to hear that this was intentional on your part. You&#x27;re not
+alone on this, 3/5 servers that I tested didn&#x27;t care about the CR at all. My
+own server does require the CR, but I didn&#x27;t like writing it that way and felt
+like I had to jump through unnecessary hoops to conform to the specification:
+
+    data = await self.reader.readuntil(b&quot;\r\n&quot;)
+
+instead of the more straightforward:
+
+    data = await self.reader.readline()
+
+I would prefer it if CR was optional. Similar to how &lt;whitespace&gt; is already
+defined as &quot;any non-zero number of consecutive spaces or tabs&quot;. The same
+argument applies here. Content authors can&#x27;t visually distinguish newline
+characters in text/gemini files, and I can&#x27;t tell the difference in my terminal
+when I&#x27;m inspecting a gemini request.
+
+   &lt;newline&gt; = [&lt;CR&gt;]&lt;LF&gt;
+
+- mozz
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000298.html">Script to test gemini servers</a></li>
+<li>Next message (by thread): <a href="000302.html">[ANN] Announcing Molly Brown, a Gemini server in Go</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#299">[ date ]</a> <a href="thread.html#299">[ thread ]</a> <a href="subject.html#299">[ subject ]</a> <a href="author.html#299">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

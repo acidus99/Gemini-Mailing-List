@@ -1,50 +1,34 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> [tech] [spec] TLS statistics
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20%5Bspec%5D%20TLS%20statistics&In-Reply-To=%3Cc78464d729c9e7fb40c356d0d49418d8%40disroot.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="004608.html">
-   <LINK REL="Next"  HREF="004614.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>[tech] [spec] TLS statistics</H1>
-    <B>nervuri</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20%5Btech%5D%20%5Bspec%5D%20TLS%20statistics&In-Reply-To=%3Cc78464d729c9e7fb40c356d0d49418d8%40disroot.org%3E"
-       TITLE="[tech] [spec] TLS statistics">nervuri at disroot.org
-       </A><BR>
-    <I>Wed Dec 30 18:56:32 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="004608.html">[tech] default response?
-</A></li>
-        <LI>Next message (by thread): <A HREF="004614.html">[tech] [spec] TLS statistics
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4613">[ date ]</a>
-              <a href="thread.html#4613">[ thread ]</a>
-              <a href="subject.html#4613">[ subject ]</a>
-              <a href="author.html#4613">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] [spec] TLS statistics</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004608.html">
+<link rel="next" href="004614.html">
+</head>
+<body>
+<h1>[tech] [spec] TLS statistics</h1>
+<b>nervuri</b> nervuri at disroot.org<br>
+<i>Wed Dec 30 18:56:32 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="004608.html">[tech] default response?</a></li>
+<li>Next message (by thread): <a href="004614.html">[tech] [spec] TLS statistics</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4613">[ date ]</a> <a href="thread.html#4613">[ thread ]</a> <a href="subject.html#4613">[ subject ]</a> <a href="author.html#4613">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>Hi,
+<pre>Hi,
 
-I recently gathered TLS-related statistics on Gemini servers, using a few shell scripts and OpenSSL. You'll find everything here:
+I recently gathered TLS-related statistics on Gemini servers, using a few shell scripts and OpenSSL. You&#x27;ll find everything here:
 
-<A HREF="https://gitlab.com/nervuri/gemini-stats">https://gitlab.com/nervuri/gemini-stats</A>
+<a href="https://gitlab.com/nervuri/gemini-stats">https://gitlab.com/nervuri/gemini-stats</a>
 
 Among other things, the repo contains:
 * data/certs/ - all certificates for servers listed by GUS
-* data/ip/ip-hosts - ip &amp; hostname pairs compatible with the OS's hosts file
+* data/ip/ip-hosts - ip &amp; hostname pairs compatible with the OS&#x27;s hosts file
 * cipher-suites.md - stats on TLSv1.2 cipher suites supported by Gemini servers
 
 Highlights:
@@ -61,7 +45,7 @@ Highlights:
 * 40 support TLSv1.1
 * 39 support TLSv1.0
 
-* 66 certs are signed by Let's Encrypt
+* 66 certs are signed by Let&#x27;s Encrypt
 * 35 pass OpenSSL validation
 * 359 fail OpenSSL validation (not signed by a trusted CA, expired, etc)
 
@@ -111,41 +95,22 @@ Highlights:
 
 These are the stats I find most interesting, but check the repo for more details. Let me know if I messed up somewhere.
 
-I was especially interested in TLS 1.3 support. From the spec it seems like you're looking forward to getting rid of TLS 1.2, but is there a plan for that? Currently over 100 servers do not support 1.3.
+I was especially interested in TLS 1.3 support. From the spec it seems like you&#x27;re looking forward to getting rid of TLS 1.2, but is there a plan for that? Currently over 100 servers do not support 1.3.
 
-  &gt; Hopefully TLS 1.3 or higher can be specced in the near future. Clients who wish to be &quot;ahead of the curve MAY refuse to connect to servers using TLS version 1.2 or lower.
-
-As far as I know, with TLSv1.2 client certs are sent in the clear, revealing login information to the ISP (and whoever else is looking). In this respect, when used with TLS 1.2, client certs are worse than cookies. Also, 1.2 isn't compatible with encrypted SNI. So I hope it will be phased out soon, if possible. Let me know your thoughts.
+  &gt;<i> Hopefully TLS 1.3 or higher can be specced in the near future. Clients who wish to be &quot;ahead of the curve MAY refuse to connect to servers using TLS version 1.2 or lower.
+</i>
+As far as I know, with TLSv1.2 client certs are sent in the clear, revealing login information to the ISP (and whoever else is looking). In this respect, when used with TLS 1.2, client certs are worse than cookies. Also, 1.2 isn&#x27;t compatible with encrypted SNI. So I hope it will be phased out soon, if possible. Let me know your thoughts.
 
 Cheers!
-</PRE>
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="004608.html">[tech] default response?
-</A></li>
-	<LI>Next message (by thread): <A HREF="004614.html">[tech] [spec] TLS statistics
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#4613">[ date ]</a>
-              <a href="thread.html#4613">[ thread ]</a>
-              <a href="subject.html#4613">[ subject ]</a>
-              <a href="author.html#4613">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="004608.html">[tech] default response?</a></li>
+<li>Next message (by thread): <a href="004614.html">[tech] [spec] TLS statistics</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4613">[ date ]</a> <a href="thread.html#4613">[ thread ]</a> <a href="subject.html#4613">[ subject ]</a> <a href="author.html#4613">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

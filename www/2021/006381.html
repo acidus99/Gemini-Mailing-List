@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[ANN] New version of Agunua with the recursive downloader</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006483.html">
+<link rel="next" href="006495.html">
+</head>
+<body>
+<h1>[ANN] New version of Agunua with the recursive downloader</h1>
+<b>Stephane Bortzmeyer</b> stephane at sources.org<br>
+<i>Sat Apr 17 16:16:26 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006483.html">[tech] tls user_canceled issue with Java server + Go client</a></li>
+<li>Next message (by thread): <a href="006495.html">[tech] Re: New version of Agunua with the recursive downloader</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6381">[ date ]</a> <a href="thread.html#6381">[ thread ]</a> <a href="subject.html#6381">[ subject ]</a> <a href="author.html#6381">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>I just released version 1.3 of the Agunua library
+&lt;<a href="gemini://gemini.bortzmeyer.org/software/agunua/">gemini://gemini.bortzmeyer.org/software/agunua/</a>&gt;. It comes with a
+command-line client, agunua, but also, new in version 1.3, a recursive
+downloader, to get an entire capsule, geminitrack (the name comes from
+the Web equivalent httrack). Useful for backups, for instance. I
+believe there was no such program in the (rich) Gemini software
+ecosystem.
+
+geminitrack <a href="gemini://gémeaux.bortzmeyer.org/">gemini://gémeaux.bortzmeyer.org/</a>
+
+And you have all the files at this capsule in your directory.
+
+More details:
+
+## Usage
+
+```
+geminitrack URL
+```
+
+And the files will be downloaded to the current directory, in a subdirectory named from the capsule name. The files will be named from the Gemini URL with some caveats (see later). The program limits itself to URLs which start with the original URL. So, it will never go to another capsule, for instance. `geminitrack` does not modify the files at all, so some internal links may break (for instance links to directories, links with queries, etc). 
+
+By default, it limits the number of files downloaded and the time spent, mostly to preserve the remote server. *Don&#x27;t change this behaviour unless you know the remote capsule authorizes it.*
+
+Download is unconditional: whether or not there already exist a file in the destination directory, it will be written over.
+
+Warning: characters in the URL path must be letters, digits and a few others. Everything else will be replaced with underscores.
+
+## Options 
+
+* `--verbose`: makes the download more talkative (default is false)
+* `--maximum-files N`: maximum number of files to download (default 20)
+* `--directory S`: directory to put the files on (default is current directory)
+* `--exclude S`: files to exclude from downloading (a regular expression) (default is none)
+* `--maximum-time N`:  maximum number of seconds for the download (default 30)
+* `--sleep N`: number of seconds to sleep between two resources (default 1)
+* `--raw-directory`: do not add the capsule name (and possibly path) after the storage directory (default is to add them)
+* `--secure`: accepts only certificates signed a known Certificate Authority (default is to accept anything)
+* `--no-tofu`: do not perform TOFU (Trust On First Use) key checking
+* `--accept-expired-certificate`:  expired certificates are not accepted unless you use also this option
+
+## Licence, author, etc
+
+See [the general README of Agunua](README.md).
+
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006483.html">[tech] tls user_canceled issue with Java server + Go client</a></li>
+<li>Next message (by thread): <a href="006495.html">[tech] Re: New version of Agunua with the recursive downloader</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6381">[ date ]</a> <a href="thread.html#6381">[ thread ]</a> <a href="subject.html#6381">[ subject ]</a> <a href="author.html#6381">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Message boards via e-mail, not Gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="004783.html">
+<link rel="next" href="004799.html">
+</head>
+<body>
+<h1>Message boards via e-mail, not Gemini</h1>
+<b>nothien at uber.space</b> nothien at uber.space<br>
+<i>Fri Jan  8 16:08:50 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="004783.html">Message boards via e-mail, not Gemini</a></li>
+<li>Next message (by thread): <a href="004799.html">Message boards via e-mail, not Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4784">[ date ]</a> <a href="thread.html#4784">[ thread ]</a> <a href="subject.html#4784">[ subject ]</a> <a href="author.html#4784">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>nothien at uber.space wrote:
+&gt;<i> ```
+</i>&gt;<i> $ mlist us/list/gemini | mseq -S
+</i>&gt;<i> $ mhdr -h To:Cc -A : |
+</i>&gt;<i>     sed -e &#x27;s/^.* &lt;\(.*\)&gt;$/\1/&#x27; -e &#x27;s/^\(.*\)@\(.*\)$/\2 \1/&#x27; |
+</i>&gt;<i>     sort -u |
+</i>&gt;<i>     awk &#x27;BEG{p=&quot;&quot;;c=0}{if(p==$1){c++}else{if (length(p))print c,p;p=$1;c=1}}END{print c,p}&#x27; |
+</i>&gt;<i>     sort -nr
+</i>&gt;<i> ...
+</i>&gt;<i> ```
+</i>
+Whoops, missed &quot;From&quot; (thus missing mails never replied to).  Adding it
+in, we get:
+
+```
+28 gmail.com
+8 protonmail.com
+5 tilde.team
+5 lists.orbitalfox.eu
+5 disroot.org
+3 riseup.net
+3 posteo.net
+3 posteo.de
+2 typed-hole.org
+2 sdf.org
+2 rawtext.club
+2 mailbox.org
+2 kaction.cc
+2 g-n.site
+2 envs.net
+1 ybad.name
+1 yandex.ru
+1 xylon.me.uk
+1 wydooghe.com
+1 worrbase.com
+1 welz.org.za
+1 vyhnal.net
+1 vnsf.xyz
+1 vittal.dev
+1 uri.edu
+1 ur.gs
+1 uber.space
+1 twistfold.it
+1 tryingtobeawesome.com
+1 tilde.pink
+1 tilde.institute
+1 thesudorm.com
+1 talon.computer
+1 systemli.org
+1 swinslow.net
+1 svmhdvn.name
+1 susa.net
+1 strotmann.de
+1 stillspinning.cc
+1 stellarbound.space
+1 sources.org
+1 slub.co
+1 shtanton.com
+1 shit.cx
+1 shadowfacts.net
+1 seirdy.one
+1 SDF.ORG
+1 sdf.org
+1 sdfeu.org
+1 scotdoyle.com
+1 rwv.io
+1 rw-net.de
+1 runbox.com
+1 royniang.com
+1 rocketnine.space
+1 rkumar-dekstop
+1 rawhex.com
+1 randomroad.net
+1 qwertqwefsday.eu
+1 provisoire.ca
+1 posixcafe.org
+1 pm.me
+1 perso.pw
+1 paulgorman.org
+1 paritybit.ca
+1 palm93.com
+1 owlsne.st
+1 outlook.com
+1 orlando-lutes.com
+1 orbitalfox.eu
+1 openwork.nz
+1 ondollo.com
+1 omarpolo.com
+1 nytpu.com
+1 nuegia.net
+1 no.ucant.org
+1 nothien.uber.space
+1 ngalt.com
+1 nerdtracker.com
+1 natpen.net
+1 nassur.net
+1 namu.blue
+1 monocles.de
+1 mmn.on.ca
+1 mmn.name
+1 meff.me
+1 mckillop.org
+1 maxxk.me
+1 masterq32.de
+1 marmaladefoo.com
+1 macaw.me
+1 low-key.me
+1 lolcow.email
+1 librem.one
+1 lavabit.com
+1 jb55.com
+1 jannisr.de
+1 iwritethe.codes
+1 itwont.work
+1 iki.fi
+1 iff.ink
+1 idiomdrottning.org
+1 hushmail.com
+1 gugod.fr
+1 gsthnz.com
+1 gph.dk
+1 going-flying.com
+1 gkbrk.com
+1 foxypossibilities.com
+1 fastmail.se
+1 fastmail.com
+1 eulenzombie.de
+1 enzo.thebackupbox.net
+1 emmah.net
+1 eml.cc
+1 emilis.net
+1 eletrotupi.com
+1 ecmelberk.com
+1 drsudo.com
+1 dmerej.info
+1 deszaras.xyz
+1 depar.is
+1 dengine.net
+1 dejanstrbac.com
+1 ctrl-c.club
+1 crowesnest.io
+1 coopdot.com
+1 conman.org
+1 cmpwn.com
+1 chilliet.eu
+1 celehner.com
+1 ccil.org
+1 cbrews.xyz
+1 carcosa.net
+1 caolan.uk
+1 calcuode.com
+1 benthor.name
+1 bendb.com
+1 benburwell.com
+1 benaaron.dev
+1 asciiking.com
+1 apintandaparma.club
+1 apetre.sc
+1 anemon.es
+1 andygrn.co.uk
+1 alexwennerberg.com
+1 adnano.co
+1 activ.ism.rocks
+1 acdw.net
+1 abrah.ms
+1 202x.moe
+```
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="004783.html">Message boards via e-mail, not Gemini</a></li>
+<li>Next message (by thread): <a href="004799.html">Message boards via e-mail, not Gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#4784">[ date ]</a> <a href="thread.html#4784">[ thread ]</a> <a href="subject.html#4784">[ subject ]</a> <a href="author.html#4784">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

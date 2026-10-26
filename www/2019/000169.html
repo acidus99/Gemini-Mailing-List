@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IPv6 and gemini</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000165.html">
+<link rel="next" href="000170.html">
+</head>
+<body>
+<h1>IPv6 and gemini</h1>
+<b>solderpunk</b> solderpunk at SDF.ORG<br>
+<i>Sun Sep 15 13:47:51 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000165.html">IPv6 and gemini</a></li>
+<li>Next message (by thread): <a href="000170.html">IPv6 and gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#169">[ date ]</a> <a href="thread.html#169">[ thread ]</a> <a href="subject.html#169">[ subject ]</a> <a href="author.html#169">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>&gt;<i>   Sad.  It&#x27;s not that hard to support IPv6.  In C, just by calling
+</i>&gt;<i> getaddrinfo() you can get both IPv4 and IPv6 addresses for a hostname (and
+</i>&gt;<i> it supports parsing IP addresses of either family), and socket(), bind(),
+</i>&gt;<i> listen(), connect(), etc. all support IPv6.
+</i>
+There are bindings for all of this in Python, too, in the `socket&#x27;
+module.  VF-1 and AV-98 both use getaddrinfo to support connecting to
+IPv6 servers.  But Agena and Gegobi both use some easy/lazy higher-level
+tools in the `socketserver` module, which allow writing simple forking
+or threaded TCP servers without having to bother actually writing any of
+the networks.  Obviously you sacrifice some degree of control and
+performance, but I thought they&#x27;d be fine for non-critical applications
+like, well, anything Gemini related in these easy days!  Not handling
+IPv6 is a bit of a deal-breaker, though, so I&#x27;ll have to actually do
+things properly...
+ 
+&gt;<i>   I suspect this was done intentionall to disuade people from using
+</i>&gt;<i> self-signed certificates because dragons.  Or hackers.  Or something.
+</i>
+Dragon hackers!
+
+&quot;Welcome to Gemini: here be dragons.  It&#x27;s okay, they like TOFU!&quot;
+
+&gt;<i>   Remove the TLS restriction, and it&#x27;s not a problem at all.  The problem is
+</i>&gt;<i> that during the TLS negotiation, the hostname of the server you are
+</i>&gt;<i> connecting to is sent [1] as part of the protocol.  There is a way to
+</i>&gt;<i> extract which server is being referenced and thus, you can figure out which
+</i>&gt;<i> set of files (or handlers) to serve the request from.
+</i>
+Hmm.  Are you talking about SNI (Server Name Indication) here?
+
+-Solderpunk
+
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000165.html">IPv6 and gemini</a></li>
+<li>Next message (by thread): <a href="000170.html">IPv6 and gemini</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#169">[ date ]</a> <a href="thread.html#169">[ thread ]</a> <a href="subject.html#169">[ subject ]</a> <a href="author.html#169">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

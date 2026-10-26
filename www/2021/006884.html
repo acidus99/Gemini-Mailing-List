@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Malicious Links</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006900.html">
+<link rel="next" href="006885.html">
+</head>
+<body>
+<h1>Malicious Links</h1>
+<b>mbays</b> mbays at sdf.org<br>
+<i>Sat Jul 10 13:36:25 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006900.html">Malicious Links</a></li>
+<li>Next message (by thread): <a href="006885.html">Malicious Links</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6884">[ date ]</a> <a href="thread.html#6884">[ thread ]</a> <a href="subject.html#6884">[ subject ]</a> <a href="author.html#6884">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>* Friday, 2021-07-09 at 23:25 +0100 - nothien@uber.space &lt;nothien@uber.space&gt;:
+
+&gt;<i> Malicious Gemini pages (or parts thereof) can contain links to such
+</i>&gt;<i> locations.  Depending upon the user&#x27;s Gemini client configuration, it
+</i>&gt;<i> may not show them the URL they are going to (e.g. Amfora, I think), and
+</i>&gt;<i> they may accidentally delete their account at <a href="gemini://example.org">gemini://example.org</a> (or
+</i>&gt;<i> perform any other action involuntarily) this way.
+</i>
+I think you&#x27;ve hit the core of the problem there. I&#x27;d say this is a problem to deal with on the client side, not on the server side, and certainly not by changing the protocol. Clients should get some sort of explicit user authorisation before applying a client certificate to the destination of a cross-site link, e.g. by showing the full link, or by asking for confirmation.
+
+Sometimes &quot;cross-site&quot; is too restrictive. To deal with multi-user sites, the rule should probably really be that a client certificate is only automatically applied to the destination of a link if it&#x27;s already being applied at the source, because they&#x27;re both below some common root where the certificate is active. That still leaves the case of interactive systems which include user-submitted links... probably that is a case where the system should be filtering those links server-side.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006900.html">Malicious Links</a></li>
+<li>Next message (by thread): <a href="006885.html">Malicious Links</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6884">[ date ]</a> <a href="thread.html#6884">[ thread ]</a> <a href="subject.html#6884">[ subject ]</a> <a href="author.html#6884">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital signature in gemini pages</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005360.html">
+<link rel="next" href="005368.html">
+</head>
+<body>
+<h1>Digital signature in gemini pages</h1>
+<b>John Cowan</b> cowan at ccil.org<br>
+<i>Fri Feb 19 19:06:12 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005360.html">Digital signature in gemini pages</a></li>
+<li>Next message (by thread): <a href="005368.html">Digital signature in gemini pages</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5362">[ date ]</a> <a href="thread.html#5362">[ thread ]</a> <a href="subject.html#5362">[ subject ]</a> <a href="author.html#5362">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Fri, Feb 19, 2021 at 11:33 AM Christophe HENRY &lt;listes at sbgodin.fr&gt; wrote:
+
+
+&gt;<i> There may be several modes:
+</i>&gt;<i>
+</i>&gt;<i> * The browser is configured to not care about signature. Everything go
+</i>&gt;<i>   as usual. Just like any non-aware browser.
+</i>&gt;<i>
+</i>&gt;<i> * The browser is configured to indicate that this file exists, but does
+</i>&gt;<i>   nothing. It would display a special icon https-style.
+</i>&gt;<i>
+</i>
+The only way that can work is for the client to automatically request the
+signature when a document is retrieved.  This has two problems:  (a) it is
+an automatic network action, which clients are not supposed to do, and (b)
+it will cause a lot of useless hits when signatures are rare, which is bad
+considering that Gemini servers are often limited by either CPU or network
+bandwidth.
+
+I think the Right Thing is for browsers to have a command/menu option
+&quot;Check Signature&quot;, which appends &quot;.asc&quot; to the pathname of the current URI
+(not to the whole URI), and attempts to retrieve that. If it succeeds and
+the content matches the current document, all is well.
+
+However, this assumes that the signature methodology is standardized across
+all sites.  So a simpler, more Gemini thing to do is to replace &quot;Check
+Signature&quot; with &quot;View Signature&quot;, which displays the signature and leaves
+it to the user to determine the signature on the local copy of the document.
+
+
+&gt;<i> * The user would ask the browser to check for a particular site or for
+</i>&gt;<i>   all sites.
+</i>&gt;<i>
+</i>
+WI don&#x27;t understand this: signatures are per-document, not per-site.  And
+hat does &quot;all sites&quot; even mean?  Even &quot;all documents on the site&quot; does not
+need to be a finite number, given the ability to generate documents at the
+server.
+
+The rest follow the spirit of &quot;Trust on first use&quot;. For instance,
+&gt;<i> storing the public key of the author in the website. Maybe a kinda
+</i>&gt;<i> web-of-trust among some websites gathered in rings?
+</i>&gt;<i>
+</i>
+The server can&#x27;t assume that all documents have the same author, so servers
+have to be per-document, not per-site.  This adds complexity to the server,
+as it has to maintain additional metadata as opposed to keeping either
+signature files or a rewrite rule that requests signature files from a
+different, more secure site.  The latter is the Right Thing when mirroring
+documents from elsewhere: if your server is hacked, the hacker will
+certainly alter the signature as well, but if the signature is off site,
+that is more difficult.
+
+
+John Cowan          <a href="http://vrici.lojban.org/~cowan">http://vrici.lojban.org/~cowan</a>        cowan at ccil.org
+It was dreary and wearisome.  Cold clammy winter still held sway in this
+forsaken country.  The only green was the scum of livid weed on the dark
+greasy surfaces of the sullen waters.  Dead grasses and rotting reeds loomed
+up in the mists like ragged shadows of long-forgotten summers.
+        --LOTR, &quot;The Passage of the Marshes&quot;
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210219/6d1e44b6/attachment.htm">https://mailing-list-archive.gemi.dev/www/attachments/20210219/6d1e44b6/attachment.htm</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005360.html">Digital signature in gemini pages</a></li>
+<li>Next message (by thread): <a href="005368.html">Digital signature in gemini pages</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5362">[ date ]</a> <a href="thread.html#5362">[ thread ]</a> <a href="subject.html#5362">[ subject ]</a> <a href="author.html#5362">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

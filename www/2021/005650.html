@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[Clients] Gemini and accessibility regarding preformatted code blocks</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005646.html">
+<link rel="next" href="005651.html">
+</head>
+<body>
+<h1>[Clients] Gemini and accessibility regarding preformatted code blocks</h1>
+<b>Rohan Kumar</b> seirdy at seirdy.one<br>
+<i>Thu Feb 25 23:08:50 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005646.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li>Next message (by thread): <a href="005651.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5650">[ date ]</a> <a href="thread.html#5650">[ thread ]</a> <a href="subject.html#5650">[ subject ]</a> <a href="author.html#5650">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Thu, Feb 25, 2021 at 05:25:08PM -0500, Sean Conner wrote:
+&gt;<i>  I might suggest something like:
+</i>&gt;<i>
+</i>&gt;<i>	preformat = &quot;```&quot; [ [WSP] tag ] [ [WSP] alt-text] end-of-line
+</i>&gt;<i>	tag       = &#x27;@art&#x27; / &#x27;@code&#x27; / &#x27;@data&#x27; / &#x27;@poem&#x27;
+</i>&gt;<i>
+</i>&gt;<i>  Some examples:
+</i>&gt;<i>
+</i>&gt;<i>``` @code
+</i>&gt;<i>x = 5
+</i>&gt;<i>```
+</i>&gt;<i>
+</i>&gt;<i>``` @art Obligatory Cat picture
+</i>&gt;<i>cat
+</i>&gt;<i>```
+</i>&gt;<i>
+</i>&gt;<i>``` @data Price list
+</i>&gt;<i>widget	3.45
+</i>&gt;<i>gadget	5.99
+</i>&gt;<i>fob	1.99
+</i>&gt;<i>```
+</i>&gt;<i>
+</i>&gt;<i>``` @poem
+</i>&gt;<i>There once was a person from Nantucket ...
+</i>&gt;<i>```
+</i>&gt;<i>
+</i>&gt;<i>``` Just some regular alt-text
+</i>&gt;<i>blah
+</i>&gt;<i>```
+</i>&gt;<i>
+</i>&gt;<i>```
+</i>&gt;<i>nothing special here
+</i>&gt;<i>```
+</i>
+I think that a small but significant change to the spec is necessary 
+here. My proposal:
+
+- Three backticks signify readable preformatted text (e.g. a code 
+	snippet or a poem); screen-readers should not skip this.
+- Four backticks signify something that isn&#x27;t readable, like ascii-art.
+
+This is consistent with the spirit of gemtext: characters at the 
+beginning of a line are the only way to describe semantics.
+
+Benefits of this proposal:
+
+- It doesn&#x27;t break any existing sites; it just adds one feature.
+- It&#x27;s very simple to implement: parsers scan for a single additional 
+	backtick
+- Authors can still provide any alt-text they wish without worrying 
+	about &quot;reserved words&quot; like the proposed tags
+- It provides *critical* semantic information: whether or not a block of 
+	preformatted text should be treated as readable text.
+
+I&#x27;m generally against gemtext spec changes, but I think this is 
+necessary for screenreader-friendliness.
+
+-- 
+/Seirdy
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 898 bytes
+Desc: not available
+URL: &lt;<a href="https://mailing-list-archive.gemi.dev/www/attachments/20210225/608dc54c/attachment.sig">https://mailing-list-archive.gemi.dev/www/attachments/20210225/608dc54c/attachment.sig</a>&gt;
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005646.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li>Next message (by thread): <a href="005651.html">[Clients] Gemini and accessibility regarding preformatted code blocks</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5650">[ date ]</a> <a href="thread.html#5650">[ thread ]</a> <a href="subject.html#5650">[ subject ]</a> <a href="author.html#5650">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

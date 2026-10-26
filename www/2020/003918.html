@@ -1,104 +1,69 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> Three possible uses for IRIs
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3CIdNipzIlMuD9MeFCzj7fCU2NF3ijC2ygMHJ7KOOWnhu7Pb6-RkEWcwPQlbZBkbuPyLGGXJuWcSwIjojR2KZFJ4TuTVHRVxgRBXGlzrL0szg%3D%40protonmail.com%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="003916.html">
-   <LINK REL="Next"  HREF="003922.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>Three possible uses for IRIs</H1>
-    <B>colecmac at protonmail.com</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20Three%20possible%20uses%20for%20IRIs&In-Reply-To=%3CIdNipzIlMuD9MeFCzj7fCU2NF3ijC2ygMHJ7KOOWnhu7Pb6-RkEWcwPQlbZBkbuPyLGGXJuWcSwIjojR2KZFJ4TuTVHRVxgRBXGlzrL0szg%3D%40protonmail.com%3E"
-       TITLE="Three possible uses for IRIs">colecmac at protonmail.com
-       </A><BR>
-    <I>Tue Dec  8 21:56:57 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="003916.html">Three possible uses for IRIs
-</A></li>
-        <LI>Next message (by thread): <A HREF="003922.html">Three possible uses for IRIs
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3918">[ date ]</a>
-              <a href="thread.html#3918">[ thread ]</a>
-              <a href="subject.html#3918">[ subject ]</a>
-              <a href="author.html#3918">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three possible uses for IRIs</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="003916.html">
+<link rel="next" href="003922.html">
+</head>
+<body>
+<h1>Three possible uses for IRIs</h1>
+<b>colecmac at protonmail.com</b> colecmac at protonmail.com<br>
+<i>Tue Dec  8 21:56:57 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="003916.html">Three possible uses for IRIs</a></li>
+<li>Next message (by thread): <a href="003922.html">Three possible uses for IRIs</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3918">[ date ]</a> <a href="thread.html#3918">[ thread ]</a> <a href="subject.html#3918">[ subject ]</a> <a href="author.html#3918">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>&gt;<i> &gt; The most difficult part of what you outlined is the Unicode normalization,
-</I>&gt;<i> &gt; which maybe not all languages have libraries for, and would also require
-</I>&gt;<i> &gt; updating every so often. But it wouldn't be a requirement for clients at all,
-</I>&gt;<i> &gt; just something nice to have.
-</I>&gt;<i>
-</I>&gt;<i> If a client has an unnormalized IRI, it needs to normalize it before sending
-</I>&gt;<i> it to the server.
-</I>
-Could you justify this? It's a good thing to have, but it feels like a big ask,
+<pre>&gt;<i> &gt; The most difficult part of what you outlined is the Unicode normalization,
+</i>&gt;<i> &gt; which maybe not all languages have libraries for, and would also require
+</i>&gt;<i> &gt; updating every so often. But it wouldn&#x27;t be a requirement for clients at all,
+</i>&gt;<i> &gt; just something nice to have.
+</i>&gt;<i>
+</i>&gt;<i> If a client has an unnormalized IRI, it needs to normalize it before sending
+</i>&gt;<i> it to the server.
+</i>
+Could you justify this? It&#x27;s a good thing to have, but it feels like a big ask,
 as Unicode support and especially things like normalization are not straightforward
-in all languages. I don't see why it can't just be recommended and not required.
+in all languages. I don&#x27;t see why it can&#x27;t just be recommended and not required.
 
 &gt;<i> &gt; I assume you mean NFC normalization?
-</I>&gt;<i>
-</I>&gt;<i> Yes.&#160; When I speak of normalization, I mean NFC normalization exclusively.
-</I>
+</i>&gt;<i>
+</i>&gt;<i> Yes.? When I speak of normalization, I mean NFC normalization exclusively.
+</i>
 Sounds good!
 
 &gt;<i> &gt; What if the user named a domain/file/folder in a non-NFC way? Now does the server
-</I>&gt;<i> &gt; need to support NFC as well, and apply it to vhost recognition or local file paths
-</I>&gt;<i> &gt; to correctly match requests? That seems wrong. But so does the user entering
-</I>&gt;<i> &gt; something visually identical to what the sysadmin typed, and things not
-</I>&gt;<i> &gt; working.
-</I>&gt;<i>
-</I>&gt;<i> I'm okay with that just failing, as file names are not really part of text/gemini
-</I>&gt;<i> content.&#160; The difference will be obvious to the admin by checking the requested
-</I>&gt;<i> URIs from the server log against the %-encoded names of the folders.
-</I>
+</i>&gt;<i> &gt; need to support NFC as well, and apply it to vhost recognition or local file paths
+</i>&gt;<i> &gt; to correctly match requests? That seems wrong. But so does the user entering
+</i>&gt;<i> &gt; something visually identical to what the sysadmin typed, and things not
+</i>&gt;<i> &gt; working.
+</i>&gt;<i>
+</i>&gt;<i> I&#x27;m okay with that just failing, as file names are not really part of text/gemini
+</i>&gt;<i> content.? The difference will be obvious to the admin by checking the requested
+</i>&gt;<i> URIs from the server log against the %-encoded names of the folders.
+</i>
 The issue is that admins are not the only ones who create folders and files.
 Non-technical people will as well, and a bug like this will be very confusing.
-Everything will look right, but it just won't work. However, I doubt this will
-occur very often, and it's an acceptable tradeoff to supporting Unicode.
+Everything will look right, but it just won&#x27;t work. However, I doubt this will
+occur very often, and it&#x27;s an acceptable tradeoff to supporting Unicode.
 
 
 makeworld
-</PRE>
-
-
-
-
-
-
-
-
-
-
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="003916.html">Three possible uses for IRIs
-</A></li>
-	<LI>Next message (by thread): <A HREF="003922.html">Three possible uses for IRIs
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#3918">[ date ]</a>
-              <a href="thread.html#3918">[ thread ]</a>
-              <a href="subject.html#3918">[ subject ]</a>
-              <a href="author.html#3918">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="003916.html">Three possible uses for IRIs</a></li>
+<li>Next message (by thread): <a href="003922.html">Three possible uses for IRIs</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#3918">[ date ]</a> <a href="thread.html#3918">[ thread ]</a> <a href="subject.html#3918">[ subject ]</a> <a href="author.html#3918">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

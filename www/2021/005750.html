@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[spec] Clarify purpose of alt-text</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="005743.html">
+<link rel="next" href="005758.html">
+</head>
+<body>
+<h1>[spec] Clarify purpose of alt-text</h1>
+<b>Bradley D. Thornton</b> Bradley at NorthTech.US<br>
+<i>Sun Feb 28 19:54:56 GMT 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="005743.html">[spec] Clarify purpose of alt-text</a></li>
+<li>Next message (by thread): <a href="005758.html">[spec] Clarify purpose of alt-text</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5750">[ date ]</a> <a href="thread.html#5750">[ thread ]</a> <a href="subject.html#5750">[ subject ]</a> <a href="author.html#5750">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>
+
+On 2/28/2021 7:41 AM, Adnan Maolood wrote:
+&gt;<i> On Sun Feb 28, 2021 at 10:20 AM EST, Luke Emmet wrote:
+</i>&gt;<i>&gt; I disagree - at present the spec lends equal weight to the two possible
+</i>&gt;<i>&gt; interpretations of the label of the preformatted text areas
+</i>&gt;<i>&gt;
+</i>&gt;<i>&gt; - they may be interpreted as an alternative label for screen reader
+</i>&gt;<i>&gt; (an accessibility label since ascii art is meaningless to non-visual
+</i>&gt;<i>&gt; users)
+</i>&gt;<i>&gt; - they may be used for text type identification (to convey the type of
+</i>&gt;<i>&gt; content shown, for syntax highlighting or possibly more useful semantic
+</i>&gt;<i>&gt; purposes, for example a client may choose not to render ascii art at
+</i>&gt;<i>&gt; all)
+</i>&gt;<i> 
+</i>&gt;<i> Currently the specification only allows for specifying the language for
+</i>&gt;<i> computer source code, not for identifying the type of text. So this
+</i>&gt;<i> would mean expanding the scope of the specification, not restricting it.
+</i>&gt;<i> I am not really in favor of this.
+</i>
+Neither of the two current basic discussions on how to handle this
+advocate for any change in the spec - nor should they. There&#x27;s no reason
+to consider it for such, especially when both general concepts offer a
+resolution that does not suggest any changes in the spec.
+
+My original suggestion was for a &#x27;convention&#x27; that the authors of
+clients could find consensus with that will enable the non-sighted
+reader to configure that client so as not to render content in between
+the preformatted text area of a .gmi file.
+
+That remains my concern. The rest may be worthwhile, or not, but in
+either case they involve no changes to the spec.
+
+Whether:
+
+```:
+
+```
+
+or:
+
+```@
+
+```
+
+or:
+
+preformat = &quot;```&quot; [ [WSP] tag ] [ [WSP] alt-text] end-of-line
+tag       = &#x27;@art&#x27; / &#x27;@code&#x27; / &#x27;@data&#x27; / &#x27;@poem&#x27;
+
+None of these involve any mention (and again, nor should they) of a
+change in the spec.
+
+This entire discussion evolves around what *some* clients *may*
+incorporate (by convention) in the form of a configurable option of
+their software so that a block of preformatted text can be opted out
+from being rendered in the Gemini browser.
+
+In the first example a single, innocuous character can be keyed upon to
+signal that *if* a client has incorporated an opt-out for displaying
+blocks of preformatted text for the purposes of user accessability, it
+won&#x27;t display that block of preformatted text to the reader.
+
+It doesn&#x27;t get in the way of reading raw gemtext, it is hardly noticable
+if  you are, and it means nothing but part of the comment that follows
+the opening markdown tag, such that it is.
+
+The second example is simply a different character, but part of a more
+comprehensive suggestion to accommodate much more than what was my
+initial concern for user accessability. That too, is  something that
+*may* or may not be adopted by authors of gemini clients.
+
+The third example provides the same as the second suggested solution,
+but with a somewhat different approach that may offer more (and I dread
+using  this word but I guess I must) extensibility.
+
+Absolutely NONE of the suggestions above have anything at all to do with
+a channge in the spec. They do, however, require two things:
+
+1.) Authors of gemini clients will need to decide how they are going to
+address this and either alone or with the participation of others on
+this list come to a consensus as to how &quot;they&quot; best feel it can be
+integrated into Gemini clients, while maintaining the simplicity that
+Solderpunk has established is one of the paradigms of Project Gemini.
+
+2.) People who author .gmi files will need to incorporate the
+methodology proscribed by the authors of Gemini clients *if* they wish
+to participate in making sure that the pages they author assist in the
+aim to deliver Gemini content to the non-sighted readers of this world,
+and dare I say, given the context of what Gemini is, it stands to reason
+that this number will be significant.
+
+Providing what I&#x27;ve just said above. Two things *should* be considered.
+
+1.) the method should be easy to implement in a client, in any language
+
+2.) the method *must* be stupid simple for people like me so that I can
+accommodate such user accessibility when authoring my .gmi files.
+
+If you write gemlogs, then I think you prolly agree wholeheartedly with
+that second point.
+
+
+
+&gt;<i> 
+</i>&gt;<i> Are there really any content types besides ASCII art that clients would
+</i>&gt;<i> need to decide whether to show or not?
+</i>
+Yes. And they are myriad. Consider log dumps, interminable parts lists
+or inventory sheets, perhaps even Microsoft EULAs (because as we all
+know, if you&#x27;re a living breathing organism, you&#x27;re already
+non-compliant with their licenses).
+
+There are a thousand use cases where it might be obvious to the
+*Authors* of .gmi files that what they&#x27;re about to  publish in those
+blocks are quite simply, tl;dr.
+
+&gt;<i> 
+</i>&gt;<i> In my opinion designating the content type is not really necessary for
+</i>&gt;<i> the above examples. It is much simpler to treat the presence of alt-text
+</i>&gt;<i> as an indicator that the preformatted text is not accessible.
+</i>&gt;<i> 
+</i>
+I&#x27;m thinking that what you just suggested is a topic for another
+discussion. A discussion where the authors of Gemini clients incorporate
+a quick and easy way for the reader to change configurations and refresh
+the page they&#x27;re viewing, in case the reader wants to actually be
+presented with what is contained within the preformatted text block.
+
+Example: a non-sighted person wants to install a daemon, but they&#x27;re a
+seasoned sysadmin, so they really don&#x27;t want to be bothered with all of
+the syntax noise of many particular parts  of a tutorial or HowTo on
+pulling, compiling and installing the software, most can already write a
+server block in Nginx in their sleep - so that would be noise to render
+that audibly (I would think), but when they get to the page where the
+config.exs file is they may actually want to listen to all of that.
+
+I dunno, even sighted folks skip the parts of code in tuts that they
+don&#x27;t need to bother with.
+
+In any case, that&#x27;s a &#x27;feature&#x27; that the authors of some clients *may*
+choose to offer the people that use their software - and as far as the
+reader goes, that&#x27;s really irrespective of whether there&#x27;s Alt text or
+white space following the markdown tag  (Yes, text would be nice, huh?).
+
+So, basically, if you are wondering how many pages Stephanie&#x27;s LUPA says
+are currently in Gemini space, the anser at this moment is 113,310; with
+forty something new sites being discovered in the past day or so.
+
+That number&#x27;s not getting smaller. it&#x27;s getting much bigger, much faster
+ everyday, and at this very moment, that&#x27;s a lot of .gmi files that
+content publishers *may* try to take the opportunity to paste in the
+teensy little change to their pages in service to their fellow humans.
+
+So with that in mind, I would suggest that *time is of the essence*, so
+that those authoring new pages can get on board with whatever solution
+is settled upon (if they choose to do so).
+
+I hope that helps :)
+
+Kindest regards,
+
+
+-- 
+Bradley D. Thornton
+Manager Network Services
+<a href="http://NorthTech.US">http://NorthTech.US</a>
+TEL: +1.310.421.8268
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="005743.html">[spec] Clarify purpose of alt-text</a></li>
+<li>Next message (by thread): <a href="005758.html">[spec] Clarify purpose of alt-text</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#5750">[ date ]</a> <a href="thread.html#5750">[ thread ]</a> <a href="subject.html#5750">[ subject ]</a> <a href="author.html#5750">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

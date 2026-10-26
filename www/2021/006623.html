@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[tech] Pre-generated trust stores for various Gemini clients</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="006609.html">
+<link rel="next" href="006630.html">
+</head>
+<body>
+<h1>[tech] Pre-generated trust stores for various Gemini clients</h1>
+<b>nervuri</b> nervuri at disroot.org<br>
+<i>Sat Jun  5 22:48:24 BST 2021</i>
+<ul>
+<li>Previous message (by thread): <a href="006609.html">[tech] Pre-generated trust stores for various Gemini clients</a></li>
+<li>Next message (by thread): <a href="006630.html">[tech] Pre-generated trust stores for various Gemini clients</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6623">[ date ]</a> <a href="thread.html#6623">[ thread ]</a> <a href="subject.html#6623">[ subject ]</a> <a href="author.html#6623">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>On Fri, 2021-06-04, panda-roux wrote:
+&gt;<i> - What&#x27;s your process for requesting the removal of a domain&#x27;s
+</i>&gt;<i> certificate from this list?
+</i>
+I&#x27;ll be adding code to prune certificates of capsules that have been
+offline for a while (2-3 weeks).  Aside from this, there&#x27;s a link to my
+contact info in the project&#x27;s README, if a domain admin wants to request
+removal.
+
+I don&#x27;t see why anyone would, though. The repo does not hold capsule
+contents or personally identifiable information.  It just contains
+copies of public TLS certificates, which can help people connect more
+securely.
+
+&gt;<i> - Does the software you&#x27;re using to generate this list respond to any
+</i>&gt;<i> robots.txt directives (i.e. &quot;don&#x27;t index me&quot; or &quot;expire after x days&quot;)?
+</i>
+No, because the `get-certs.sh` script is not a crawler and does not
+&quot;speak&quot; Gemini.  It only works on the TLS level.  All scripts are
+available here [1], by the way.
+
+[1] <a href="https://tildegit.org/nervuri/trust-store-generators">https://tildegit.org/nervuri/trust-store-generators</a>
+
+&gt;<i> - Does this break if I arbitrarily decide to change my a cert on my
+</i>&gt;<i> domain, or is it regularly kept up-to-date?  If so, how often?
+</i>
+Certificates are &quot;updated every few days (no more than a week)&quot;, as
+stated in the README.  I generally run the scripts once every 3-4 days.
+Later I might use a daily cron job, but I want a more hands-on approach
+in the initial stage.
+
+&gt;<i> - Why circumvent TOFU?  I don&#x27;t mean for this to come across as
+</i>&gt;<i> antagonistic, but doesn&#x27;t this defeat the purpose of having a
+</i>&gt;<i> decentralized protocol in the first place?
+</i>
+I think &quot;complement&quot; is more appropriate than &quot;circumvent&quot;.  I&#x27;m doing
+it because TOFU does not protect the first connection.  Also, the intent
+here is not for this repo to be a single source of trust.  I&#x27;d like
+other people to run these (or similar) scripts and publish certificates
+downloaded from their network perspectives.  Having verification from
+multiple sources will give us a more trustworthy ecosystem.
+
+I also want to encourage client authors to bunlde pre-generated trust
+stores (verified from several perspectives) into their clients, to
+protect the first connection.  However, this by itself is not enough; we
+also need an out-of-band verification method to help with certificate
+mismatch prompts.  These prompts arguably do more harm than good if they
+are frequent and users have no information on which to base the trust
+decision.  People may become accustomed to saying &quot;yes&quot; all the time,
+despite the warning.
+
+Here&#x27;s an example of anonymous out-of-band verification using Tor and
+OpenSSL.  In case of mismatch, run:
+
+host_and_port=&#x27;rawtext.club:1965&#x27;
+torsocks --isolate openssl s_client -connect &quot;$host_and_port&quot; &lt;/dev/null 2&gt;/dev/null \
+ | sed -ne &#x27;/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p&#x27;
+
+This gives you the certificate in PEM format, from the perspective of a
+random Tor exit node.  You can run it repeatedly to check from multiple
+Tor perspectives.  To get the fingerprint in your client&#x27;s format, you
+can append a few conversion commands.  For instance, this gives you the
+fingerprint in Agunua&#x27;s format (spki:sha256:base64):
+
+host_and_port=&#x27;rawtext.club:1965&#x27;
+torsocks --isolate openssl s_client -connect &quot;$host_and_port&quot; &lt;/dev/null 2&gt;/dev/null \
+ | sed -ne &#x27;/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p&#x27; \
+ | openssl x509 -pubkey -noout \
+ | openssl pkey -pubin -outform der \
+ | openssl dgst -sha256 -binary \
+ | openssl enc -base64 -A
+
+This is cumbersome to do by hand, but it can be built into clients, to
+be executed automatically in case of mismatch on systems where Tor is
+installed.
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="006609.html">[tech] Pre-generated trust stores for various Gemini clients</a></li>
+<li>Next message (by thread): <a href="006630.html">[tech] Pre-generated trust stores for various Gemini clients</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#6623">[ date ]</a> <a href="thread.html#6623">[ thread ]</a> <a href="subject.html#6623">[ subject ]</a> <a href="author.html#6623">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

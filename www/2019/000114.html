@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Text format proposal (was Re: Text reflow woes (or: I want bullets back!)y)</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000112.html">
+<link rel="next" href="000115.html">
+</head>
+<body>
+<h1>Text format proposal (was Re: Text reflow woes (or: I want bullets back!)y)</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Fri Sep  6 06:39:24 BST 2019</i>
+<ul>
+<li>Previous message (by thread): <a href="000112.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000115.html">Text format proposal (was Re: Text reflow woes (or: I want bullets back!)y)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#114">[ date ]</a> <a href="thread.html#114">[ thread ]</a> <a href="subject.html#114">[ subject ]</a> <a href="author.html#114">[ author ]</a></li>
+</ul>
+<hr>
+<!--beginarticle-->
+<pre>It was thus said that the Great Brian Evans once stated:
+  &gt;<i> 
+</i>  &gt;<i> Tomasino writes:
+</i>  &gt;<i> &gt; I can&#x27;t believe how simple that
+</i>  &gt;<i> &gt; is. A leading space for fixed
+</i>  &gt;<i> &gt; content is ridiculously simple. I
+</i>  &gt;<i> &gt; love it.
+</i>  &gt;<i> 
+</i>  &gt;<i> Right? Nice and easy. Given that
+</i>  &gt;<i> fixed content will likely be more
+</i>  &gt;<i> rare than wrapped or flowed content
+</i>  &gt;<i> it seems like an elegant solution.
+</i>
+How about a full sample?
+
+  -spc (This entire email fits the
+	specificaion below ... )
+
+  A Proposed Formatting Specification
+        for Gemini Index files.
+            by Sean Conner
+
+The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, 
+&quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;NOT RECOMMENDED&quot;, &quot;MAY&quot;, and 
+&quot;OPTIONAL&quot; in this document are to be interpreted as described in BCP 14 
+[RFC2119] [RFC8174] when, and only when, they appear in all capitals, as 
+shown here.
+
+=&gt; <a href="https://www.ietf.org/rfc/rfc2119.txt">https://www.ietf.org/rfc/rfc2119.txt</a> [RFC2119] BCP 14
+=&gt; <a href="https://www.ietf.org/rfc/rfc8174.txt">https://www.ietf.org/rfc/rfc8174.txt</a> [RFC8174] (update)
+
+A Gemini index file, regardless of character encoding [1], shall only
+consist of the space character [2], graphic characters [3] and a limited set
+of control characters out of the C0 set [4]; the C1 control set [5] is
+outright rejected and MUST NOT appear in a Gemini index file.
+
+The following C0 control set characters are allowed:
+
+  HT (character 9) Horizontal Tab. 
+     Classified as &quot;whitespace&quot;
+
+  LF (character 10) Line Feed.
+     Classified as &quot;end of line marker&quot;
+
+  CR (character 13) Carriage Return.
+     Classified as &quot;end of line marker&quot;
+
+  SP (character 32) Space.
+     Classified as &quot;whitespace&quot;
+
+Any other C0 control character MUST NOT appear in a Gemini index file. 
+Characters not defined as &quot;end of line marker&quot; or &quot;whitespace&quot; is
+considered, per this specification, to be a &quot;graphical character&quot;.
+
+The two characters LF and CR MUST appear in that order in a Gemini index
+file.  It is unspecified (at this time) what should happen if a single LF or
+CR is encountered.  Both characters together constitute the &quot;end of line
+marker&quot;.  It is also unspecified (at this time) what should happen if a C0
+control character not listed above, or a C1 control character is encountered
+in a Gemini index file.
+
+A &quot;line of text&quot; is any sequence of &quot;whitespace&quot; and &quot;graphical characters&quot;
+followed by an &quot;end of line marker&quot;.
+
+A &quot;line of text&quot; that starts with the character sequence =&gt; is considered a
+&quot;link line&quot; and contains a link to another document.  The BNF [RFC5234] for
+a &quot;link line&quot; is:
+
+  link = mark WSP url [ WSP text ] CRLF
+  mark = &quot;=&gt;&quot;
+  url  = %x21-7E 
+              ; see [RFC3986] for syntax
+  text = %x20-FF 
+              ; see [RFC3629] for format
+  CR   = %x0D
+  LF   = %x0A
+  CRLF = CR LF
+  SP   = %x20
+  HTAB = %x09
+  WSP  = SP / HTAB
+
+=&gt; <a href="https://www.ietf.org/rfc/rfc5234">https://www.ietf.org/rfc/rfc5234</a> [RFC5234] BNF syntax
+=&gt; <a href="https://www.ietf.org/rfc/rfc3986">https://www.ietf.org/rfc/rfc3986</a> [RFC3986] URL syntax
+=&gt; <a href="https://www.ietf.org/rfc/rfc3629">https://www.ietf.org/rfc/rfc3629</a> [RFC3639] UTF-8 format
+
+For maximum interoperability, the text portion (if present) should be at
+most 40 characters in length; if longer, it is up to the client to handle it
+as it sees fit.  It MAY &quot;wrap&quot;, it SHOULD &quot;reflow&quot;, it MAY &quot;cut off&quot; the text. 
+If the text portion doesn&#x27;t appear, then the URL MUST be displayed as the
+text portion, subject to the same limitations just mentioned.
+
+To &quot;wrap&quot; text, once the text has reached the right edge of the screen [6],
+the text resumes at the left edge, even if it cuts a word in half.  Upon
+encoutering an &quot;end of line marker&quot;, move to the next line.  For example, to
+&quot;wrap&quot; the following paragraphs:
+
+&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Vestibulum mauris
+leo, condimentum vitae varius at, elementum sed odio.  Sed commodo felis
+lacinia blandit vestibulum.  
+Duis vel sagittis massa.  Maecenas sodales dui
+tristique velit luctus tincidunt a sit amet neque.  Sed vitae velit in
+sapien semper accumsan.  Nulla sem odio, malesuada a viverra at, tristique
+eu tortor.
+
+&quot;Quisque auctor porta enim, eget tincidunt augue cursus non.  Nulla at
+condimentum purus.  Curabitur maximus malesuada risus, at ultrices nisl
+luctus vel.  Nulla eget est luctus, dignissim urna vel, luctus felis.  Donec
+facilisis malesuada porta.  Nulla elementum felis ut justo sollicitudin
+pellentesque.  Vestibulum faucibus, ipsum tincidunt volutpat lacinia, turpis
+libero bibendum sem, in malesuada turpis lectus et neque.&quot;
+
+with a width of 30 characters:
+
+  123456789012345678901234567890
+  ------------------------------
+  &quot;Lorem ipsum dolor sit amet, c
+  onsectetur adipiscing elit. Ve
+  stibulum mauris leo, condiment
+  um vitae varius at, elementum 
+  sed odio. Sed commodo felis la
+  cinia blandit vestibulum. 
+  Duis vel sagittis massa. Maece
+  nas sodales dui tristique veli
+  t luctus tincidunt a sit amet 
+  neque. Sed vitae velit in sapi
+  en semper accumsan. Nulla sem 
+  odio, malesuada a viverra at, 
+  tristique eu tortor.
+
+  &quot;Quisque auctor porta enim, eg
+  et tincidunt augue cursus non.
+   Nulla at condimentum purus. C
+  urabitur maximus malesuada ris
+  us, at ultrices nisl luctus ve
+  l. Nulla eget est luctus, dign
+  issim urna vel, luctus felis. 
+  Donec facilisis malesuada port
+  a. Nulla elementum felis ut ju
+  sto sollicitudin pellentesque.
+   Vestibulum faucibus, ipsum ti
+  ncidunt volutpat lacinia, turp
+  is libero bibendum sem, in mal
+  esuada turpis lectus et neque.
+  &quot;
+To &quot;reflow&quot; text, lines are broken at whitespace [7], where an &quot;end of line
+marker&quot; is placed to start the next line, and any existing &quot;end of line
+markers&quot; are ignored unless there are two in a row.  For example, the two
+example paragraphs &quot;reflowed&quot; at 30 characters:
+
+  123456789012345678901234567890
+  ------------------------------
+  &quot;Lorem ipsum dolor sit amet,
+  consectetur adipiscing elit. 
+  Vestibulum mauris leo,
+  condimentum vitae varius at,
+  elementum sed odio.  Sed
+  commodo felis lacinia blandit
+  vestibulum.  Duis vel
+  sagittis massa.  Maecenas
+  sodales dui tristique velit
+  luctus tincidunt a sit amet
+  neque.  Sed vitae velit in
+  sapien semper accumsan. 
+  Nulla sem odio, malesuada a
+  viverra at, tristique eu
+  tortor.
+
+  &quot;Quisque auctor porta enim,
+  eget tincidunt augue cursus
+  non.  Nulla at condimentum
+  purus.  Curabitur maximus
+  malesuada risus, at ultrices
+  nisl luctus vel.  Nulla eget
+  est luctus, dignissim urna
+  vel, luctus felis.  Donec
+  facilisis malesuada porta. 
+  Nulla elementum felis ut
+  justo sollicitudin
+  pellentesque.  Vestibulum
+  faucibus, ipsum tincidunt
+  volutpat lacinia, turpis
+  libero bibendum sem, in
+  malesuada turpis lectus et
+  neque.&quot;
+
+If a suitable breaking point cannot be found (no whitespace or &quot;end of line
+markers&quot; found), then the line MUST be wrapped to the next line, at which
+the &quot;reflow&quot; algorithm is picked up again.  An example of a paragraph that
+exhibits such behavior, again at 30 characters:
+
+&quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit.  Vestibulum mauris
+leo, condimentumvitaevariusat,elementum sed odio.  Sed commodo felis
+lacinia blandit vestibulum.  Duis vel sagittis massa.  Maecenas sodales dui
+tristique velit luctus tincidunt a sit amet neque.  Sed vitae velit in
+sapien semper accumsan.  Nulla sem odio, malesuada a viverra at, tristique
+eu tortor.&quot;
+
+  123456789012345678901234567890
+  ------------------------------
+  &quot;Lorem ipsum dolor sit amet,
+  consectetur adipiscing elit. 
+  Vestibulum mauris leo,
+  condimentumvitaevariusat,eleme
+  ntum sed odio.  Sed commodo
+  felis lacinia blandit
+  vestibulum.  Duis vel
+  sagittis massa.  Maecenas
+  sodales dui tristique velit
+  luctus tincidunt a sit amet
+  neque.  Sed vitae velit in
+  sapien semper accumsan. 
+  Nulla sem odio, malesuada a
+  viverra at, tristique eu
+  tortor.&quot;
+
+  To &quot;cut off&quot;, any characters past the right edge of the screen are simple
+discared until the next &quot;end of line marker&quot;:
+
+    123456789012345678901234567890
+    ------------------------------
+    &quot;Lorem ipsum dolor sit amet, c
+    leo, condimentum vitae varius 
+    lacinia blandit vestibulum.  
+    Duis vel sagittis massa.  Maec
+    tristique velit luctus tincidu
+    sapien semper accumsan.  Nulla
+    eu tortor.
+
+    &quot;Quisque auctor porta enim, eg
+    condimentum purus.  Curabitur 
+    luctus vel.  Nulla eget est lu
+    facilisis malesuada porta.  Nu
+    pellentesque.  Vestibulum fauc
+    libero bibendum sem, in malesu
+
+A &quot;line of text&quot; that starts with one or more &quot;whitespace&quot; characters,
+followed by &quot;graphical characters&quot; is a &quot;fixed line&quot; and MUST NOT be
+&quot;reflowed&quot;; it MAY be &quot;wrapped&quot; or it MAY be &quot;cut off&quot;.  For maximum
+interoperability, such &quot;fixed&quot; lines SHOULD be 40 characters or less.  The
+BNF for a &quot;fixed&quot; line:
+
+  fixed = 1*WSP VCHAR *text CRLF
+  VCHAR = %x21-FF
+               ; see [RFC3629] for format
+
+=&gt; <a href="https://www.ietf.org/rfc/rfc3629">https://www.ietf.org/rfc/rfc3629</a> [RFC3639] UTF-8 format
+
+It is an ambiguous condition when a line consists of only whitespace
+characters, and such a line SHOULD NOT appear in a Gemini index file.
+
+A &quot;line of text&quot; that does not start with whitespace or the character
+sequence =&gt; is subject to being &quot;reflowed&quot; until two consecutive &quot;end of
+line markers&quot; are encountered.
+
+It should be noted that this document follows the format given above, with
+no fixed line longer than 40 characters and no link text longer than 40
+characters.  The rest of the text can be reflowed at any given width.  This
+should give a feeling for what such a document would look like.
+
+               * * * * *
+
+[1] An assumption is being made that any character encoding system used is
+based on US-ASCII, which defines the first 128 characters.
+
+[2] US-ASCII character 32.  It is both considered a control character as one
+of the unit separation characters FS (file separator), GS (group separator),
+RS (record separator) and US (unit separator) as a finer grained separator
+character, and as a graphic character dispite not having a graphical
+representation.  For UTF-8, this will also include the variations on white
+space, such as thin spacing, zero-width spacing, etc.
+
+[3] Any character with a visual representation, or as part of a visual
+representation.
+
+[4] Characters 0 through 31.
+
+[5] The so-called ANSI escape codes.  See Wikipedia for more information.
+=&gt; <a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes#C1_controls">https://en.wikipedia.org/wiki/C0_and_C1_control_codes#C1_controls</a> C1 Set
+
+[6] This assumes a &quot;left-to-right&quot; ordering of characters.  Other orderings
+of rendering text is out of scope for this document.
+
+[7] An ambitious implementation may want to break at a dash (-) or a soft
+hyphen (UTF-8 character \u00AD).
+</pre>
+<!--endarticle-->
+<hr>
+<ul>
+<li>Previous message (by thread): <a href="000112.html">Text reflow woes (or: I want bullets back!)y</a></li>
+<li>Next message (by thread): <a href="000115.html">Text format proposal (was Re: Text reflow woes (or: I want bullets back!)y)</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#114">[ date ]</a> <a href="thread.html#114">[ thread ]</a> <a href="subject.html#114">[ subject ]</a> <a href="author.html#114">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>

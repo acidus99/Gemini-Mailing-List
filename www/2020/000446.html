@@ -1,194 +1,178 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML>
- <HEAD>
-   <TITLE> An outsider's view of the `gemini://` protocol
-   </TITLE>
-   <LINK REL="Index" HREF="index.html" >
-   <LINK REL="made" HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20outsider%27s%20view%20of%20the%20%60gemini%3A//%60%20protocol&In-Reply-To=%3C20200228090709.GB16159%40brevard.conman.org%3E">
-   <META NAME="robots" CONTENT="index,nofollow">
-   <style type="text/css">
-       pre {
-           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
-           }
-   </style>
-   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
-   <LINK REL="Previous"  HREF="000445.html">
-   <LINK REL="Next"  HREF="000449.html">
- </HEAD>
- <BODY BGCOLOR="#ffffff">
-   <H1>An outsider's view of the `gemini://` protocol</H1>
-    <B>Sean Conner</B> 
-    <A HREF="mailto:gemini%40lists.orbitalfox.eu?Subject=Re%3A%20An%20outsider%27s%20view%20of%20the%20%60gemini%3A//%60%20protocol&In-Reply-To=%3C20200228090709.GB16159%40brevard.conman.org%3E"
-       TITLE="An outsider's view of the `gemini://` protocol">sean at conman.org
-       </A><BR>
-    <I>Fri Feb 28 09:07:09 GMT 2020</I>
-    <P><UL>
-        <LI>Previous message (by thread): <A HREF="000445.html">An outsider's view of the `gemini://` protocol
-</A></li>
-        <LI>Next message (by thread): <A HREF="000449.html">An outsider's view of the `gemini://` protocol
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#446">[ date ]</a>
-              <a href="thread.html#446">[ thread ]</a>
-              <a href="subject.html#446">[ subject ]</a>
-              <a href="author.html#446">[ author ]</a>
-         </LI>
-       </UL>
-    <HR>  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>An outsider&#x27;s view of the `gemini://` protocol</title>
+<style>body { background: white; color: black; } body > h1:first-child { margin-top: 0; } pre { white-space: pre-wrap; }</style>
+<link rel="index" href="index.html">
+<link rel="prev" href="000445.html">
+<link rel="next" href="000449.html">
+</head>
+<body>
+<h1>An outsider&#x27;s view of the `gemini://` protocol</h1>
+<b>Sean Conner</b> sean at conman.org<br>
+<i>Fri Feb 28 09:07:09 GMT 2020</i>
+<ul>
+<li>Previous message (by thread): <a href="000445.html">An outsider&#x27;s view of the `gemini://` protocol</a></li>
+<li>Next message (by thread): <a href="000449.html">An outsider&#x27;s view of the `gemini://` protocol</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#446">[ date ]</a> <a href="thread.html#446">[ thread ]</a> <a href="subject.html#446">[ subject ]</a> <a href="author.html#446">[ author ]</a></li>
+</ul>
+<hr>
 <!--beginarticle-->
-<PRE>It was thus said that the Great Ciprian Dorin Craciun once stated:
-&gt;<i> On Fri, Feb 28, 2020 at 4:44 AM Sean Conner &lt;<A HREF="https://lists.orbitalfox.eu/listinfo/gemini">sean at conman.org</A>&gt; wrote:
-</I>&gt;<i> &gt;   I disagree.  Using &quot;proper symbols&quot; is over all harder to deal with.
-</I>&gt;<i> &gt; First, it tends to be English-centric.  I mean, we could go with:
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt;         defectum:tempus:tardius
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt; or how about
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt;         teip:sealadach:n&#237;os-moille
-</I>&gt;<i> 
-</I>&gt;<i> 
-</I>&gt;<i> The protocol is already English centric, for example the MIME types
-</I>&gt;<i> (which are IANA standards), it uses lef-to-right writing, it uses
-</I>&gt;<i> UTF-8 which is optimized for Latin-based alphabets, etc.;  so if we
-</I>&gt;<i> want to be politically correct, we could use Latin or Esperanto.
-</I>
+<pre>It was thus said that the Great Ciprian Dorin Craciun once stated:
+&gt;<i> On Fri, Feb 28, 2020 at 4:44 AM Sean Conner &lt;sean at conman.org&gt; wrote:
+</i>&gt;<i> &gt;   I disagree.  Using &quot;proper symbols&quot; is over all harder to deal with.
+</i>&gt;<i> &gt; First, it tends to be English-centric.  I mean, we could go with:
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;         defectum:tempus:tardius
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt; or how about
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;         teip:sealadach:n?os-moille
+</i>&gt;<i> 
+</i>&gt;<i> 
+</i>&gt;<i> The protocol is already English centric, for example the MIME types
+</i>&gt;<i> (which are IANA standards), it uses lef-to-right writing, it uses
+</i>&gt;<i> UTF-8 which is optimized for Latin-based alphabets, etc.;  so if we
+</i>&gt;<i> want to be politically correct, we could use Latin or Esperanto.
+</i>
   Why is a numeric status code so bad?  Yes, the rest of the protocol is
 English centric (MIME types; left-to-right, UTF-8).  It just seems that
 using words (regardless of language) is just complexity for its own sake.
 
 &gt;<i> OK, although I understand why things are harder in C, you present
-</I>&gt;<i> above only the &quot;easy part&quot;.  Please take into account the
-</I>&gt;<i> line-reading, splitting into code and meta (and the protocol does say
-</I>&gt;<i> one or multiple whitespaces in between), checking the `CRLF` at the
-</I>&gt;<i> end.  Now assuming you've done all that even the code above has a
-</I>&gt;<i> couple of bugs:
-</I>&gt;<i> * what if the server sends `99`?  (it is not covered);
-</I>&gt;<i> * what if the server sends just `6`? (it is not covered, although
-</I>&gt;<i> given that perhaps `status` is `\0` terminated it won't be a large
-</I>&gt;<i> problem, but still it would fall through;)
-</I>&gt;<i> * what if the server just sends an empty status code? (is it checked
-</I>&gt;<i> by the parser?)
-</I>
-  Oh, thanks for the client test suggestions.  I'll need to add those to my
+</i>&gt;<i> above only the &quot;easy part&quot;.  Please take into account the
+</i>&gt;<i> line-reading, splitting into code and meta (and the protocol does say
+</i>&gt;<i> one or multiple whitespaces in between), checking the `CRLF` at the
+</i>&gt;<i> end.  Now assuming you&#x27;ve done all that even the code above has a
+</i>&gt;<i> couple of bugs:
+</i>&gt;<i> * what if the server sends `99`?  (it is not covered);
+</i>&gt;<i> * what if the server sends just `6`? (it is not covered, although
+</i>&gt;<i> given that perhaps `status` is `\0` terminated it won&#x27;t be a large
+</i>&gt;<i> problem, but still it would fall through;)
+</i>&gt;<i> * what if the server just sends an empty status code? (is it checked
+</i>&gt;<i> by the parser?)
+</i>
+  Oh, thanks for the client test suggestions.  I&#x27;ll need to add those to my
 client torture test (for a client, I would expect it to just reject the
 response and indicate a server error to the user).
 
 &gt;<i> As minor issues:
-</I>&gt;<i> * why `CRLF`?  it's easier (both in terms of availability of functions
-</I>&gt;<i> and efficiency) to split lines by a single character `\n` than by a
-</I>&gt;<i> string;
-</I>
+</i>&gt;<i> * why `CRLF`?  it&#x27;s easier (both in terms of availability of functions
+</i>&gt;<i> and efficiency) to split lines by a single character `\n` than by a
+</i>&gt;<i> string;
+</i>
   That was discussed earlier on the list:
 
-	<A HREF="https://lists.orbitalfox.eu/archives/gemini/2019/000116.html">https://lists.orbitalfox.eu/archives/gemini/2019/000116.html</A>
+	<a href="https://mailing-list-archive.gemi.dev/www/2019/000116.html">https://mailing-list-archive.gemi.dev/www/2019/000116.html</a>
 
 &gt;<i> * why allow &quot;one-or-more whitespaces&quot; especially in protocol related
-</I>&gt;<i> parts?  why not mandate a strict syntax?
-</I>
+</i>&gt;<i> parts?  why not mandate a strict syntax?
+</i>
   solderpunk will have to answer that one.
 
 &gt;<i> &gt; &gt; On a second thought, why TLS?  Why not something based on NaCL /
-</I>&gt;<i> &gt; &gt; `libsodium` constructs, or even the &quot;Noise Protocol&quot;
-</I>&gt;<i> &gt; &gt; (<A HREF="http://www.noiseprotocol.org/">http://www.noiseprotocol.org/</A>)?
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt;         1) Never, *NEVER* implement crypto yourself.
-</I>&gt;<i> 
-</I>&gt;<i> I was never proposing to implement crypto ourselves.  `libsodium` /
-</I>&gt;<i> NaCL provides very useful high-level constructs, tailored for specific
-</I>&gt;<i> use-cases (like for example message encryption and signing), that are
-</I>&gt;<i> proven to be safe, and exports them with a very simple API that can be
-</I>&gt;<i> easily understood and used.
-</I>
+</i>&gt;<i> &gt; &gt; `libsodium` constructs, or even the &quot;Noise Protocol&quot;
+</i>&gt;<i> &gt; &gt; (<a href="http://www.noiseprotocol.org/)?">http://www.noiseprotocol.org/)?</a>
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;         1) Never, *NEVER* implement crypto yourself.
+</i>&gt;<i> 
+</i>&gt;<i> I was never proposing to implement crypto ourselves.  `libsodium` /
+</i>&gt;<i> NaCL provides very useful high-level constructs, tailored for specific
+</i>&gt;<i> use-cases (like for example message encryption and signing), that are
+</i>&gt;<i> proven to be safe, and exports them with a very simple API that can be
+</i>&gt;<i> easily understood and used.
+</i>
   TLS was choosen because the COMMUNICATIONS LINK is encrypted, not just the
 payload.  All Eve (the evesdropper) can see is what IP address you are
 connecting to, not what content you are reading, nor (depending upon the TLS
 version) what virtual server you might be talking to.
 
 &gt;<i> &gt;         2) OpenSSL exists and has support in most (if not all) popular
-</I>&gt;<i> &gt;         languages.
-</I>&gt;<i> 
-</I>&gt;<i> Don't know what to say...  I find the OpenSSL documentation terrible,
-</I>&gt;<i> and it's hard to use...  In fact given the complexity of TLS I would
-</I>&gt;<i> say any wrapper, reimplementation, or alternative is as bad.  For
-</I>&gt;<i> example I played with Go's TLS library and even though it's manageable
-</I>&gt;<i> it requires lots of attention to get things right.
-</I>
-  Yes, it is horrible.  And people make do.  I know for myself I'm using
+</i>&gt;<i> &gt;         languages.
+</i>&gt;<i> 
+</i>&gt;<i> Don&#x27;t know what to say...  I find the OpenSSL documentation terrible,
+</i>&gt;<i> and it&#x27;s hard to use...  In fact given the complexity of TLS I would
+</i>&gt;<i> say any wrapper, reimplementation, or alternative is as bad.  For
+</i>&gt;<i> example I played with Go&#x27;s TLS library and even though it&#x27;s manageable
+</i>&gt;<i> it requires lots of attention to get things right.
+</i>
+  Yes, it is horrible.  And people make do.  I know for myself I&#x27;m using
 libtls, which is part of LibreSSL (a fork of OpenSSL) which makes using TLS
 trivial.  I was able, with just the header file tls.h and man pages, wrap
 libtls for Lua [1], which I use for my Gemini server GLV-1.12556 [2].  I
 just wish libtls was more widely available.
 
 &gt;<i> &gt; &gt; Why not just re-use PGP to sign / encrypt requests and replies?  With
-</I>&gt;<i> &gt; &gt; regard to PGP,
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt;   There are issues with using PGP:
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt;         <A HREF="https://latacora.micro.blog/2019/07/16/the-pgp-problem.html">https://latacora.micro.blog/2019/07/16/the-pgp-problem.html</A>
-</I>&gt;<i> 
-</I>&gt;<i> There are issues with any technology, TLS included.
-</I>&gt;<i> 
-</I>&gt;<i> However I would say it's easier to integrate GnuPG (even through
-</I>&gt;<i> subprocesses) in order to encrypt / decrypt payloads (especially given
-</I>&gt;<i> how low in count they are for Gemini's ecosystem) than implementing
-</I>&gt;<i> TLS.  Moreover it offers out-of-the-box the whole client side
-</I>&gt;<i> certificate management, which adding to a TLS-based client would be
-</I>&gt;<i> much more involved, more on this bellow...
-</I>
+</i>&gt;<i> &gt; &gt; regard to PGP,
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;   There are issues with using PGP:
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;         <a href="https://latacora.micro.blog/2019/07/16/the-pgp-problem.html">https://latacora.micro.blog/2019/07/16/the-pgp-problem.html</a>
+</i>&gt;<i> 
+</i>&gt;<i> There are issues with any technology, TLS included.
+</i>&gt;<i> 
+</i>&gt;<i> However I would say it&#x27;s easier to integrate GnuPG (even through
+</i>&gt;<i> subprocesses) in order to encrypt / decrypt payloads (especially given
+</i>&gt;<i> how low in count they are for Gemini&#x27;s ecosystem) than implementing
+</i>&gt;<i> TLS.  Moreover it offers out-of-the-box the whole client side
+</i>&gt;<i> certificate management, which adding to a TLS-based client would be
+</i>&gt;<i> much more involved, more on this bellow...
+</i>
   As I have mentioned, that only protects the payload, not the
 communications channel.
 
 &gt;<i> &gt;   The hardest problem with crypto is key management.  If anything, key
-</I>&gt;<i> &gt; management with PGP seems more problematic than with OpenSSL and the CA
-</I>&gt;<i> &gt; infrastructure (as bad as the CA infrastructure is).
-</I>&gt;<i> 
-</I>&gt;<i> One of the `<A HREF="gemini://`">gemini://`</A> specifications explicitly states that the
-</I>&gt;<i> server certificate authentication model is similar to SSH's first use
-</I>&gt;<i> accept and cache afterward.  However say you'll go with the actual CA
-</I>&gt;<i> model, now you need to juggle Let's Encrypt (each 3 months) (or add
-</I>&gt;<i> support for ACME in your server), then juggle PEM files, etc.
-</I>&gt;<i> Regardless, either way one will have to implement all this certificate
-</I>&gt;<i> management from scratch.
-</I>
+</i>&gt;<i> &gt; management with PGP seems more problematic than with OpenSSL and the CA
+</i>&gt;<i> &gt; infrastructure (as bad as the CA infrastructure is).
+</i>&gt;<i> 
+</i>&gt;<i> One of the `<a href="gemini://`">gemini://`</a> specifications explicitly states that the
+</i>&gt;<i> server certificate authentication model is similar to SSH&#x27;s first use
+</i>&gt;<i> accept and cache afterward.  However say you&#x27;ll go with the actual CA
+</i>&gt;<i> model, now you need to juggle Let&#x27;s Encrypt (each 3 months) (or add
+</i>&gt;<i> support for ACME in your server), then juggle PEM files, etc.
+</i>&gt;<i> Regardless, either way one will have to implement all this certificate
+</i>&gt;<i> management from scratch.
+</i>
   Or self-signed certificates.
 
-  Okay, we use NaCL.  Now what?  What's needed to secure the communication
+  Okay, we use NaCL.  Now what?  What&#x27;s needed to secure the communication
 channel?  A key exchange.  Again, rule 1---never implement crypto.
 
 &gt;<i> &gt;   Forms lead to applications.  Applications lead to client side scripting.
-</I>&gt;<i> &gt; Client side scripting leads to the web ...
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt;   Of course there's pressure to expand the protocol.  solderpunk is trying
-</I>&gt;<i> &gt; his hardest to keep that from happening and turning Gemini into another web
-</I>&gt;<i> &gt; clone.
-</I>&gt;<i> 
-</I>&gt;<i> 
-</I>&gt;<i> But you are already implementing &quot;applications&quot; on-top of Gemini (and
-</I>&gt;<i> Gopher) through CGI...  
-</I>
-  Yes ... but there's only two Gemini servers that support CGI, GLV-1.12556
+</i>&gt;<i> &gt; Client side scripting leads to the web ...
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;   Of course there&#x27;s pressure to expand the protocol.  solderpunk is trying
+</i>&gt;<i> &gt; his hardest to keep that from happening and turning Gemini into another web
+</i>&gt;<i> &gt; clone.
+</i>&gt;<i> 
+</i>&gt;<i> 
+</i>&gt;<i> But you are already implementing &quot;applications&quot; on-top of Gemini (and
+</i>&gt;<i> Gopher) through CGI...  
+</i>
+  Yes ... but there&#x27;s only two Gemini servers that support CGI, GLV-1.12556
 [2] and Jetforce [3] (two out of five Gemini server programs).  I
 implemented CGI in GLV-1.12556 just because I could (and I think to prove a
-point).  I technically don't need CGI support for the server I run since
-it's just as easy for me to implement custom handlers [4].
+point).  I technically don&#x27;t need CGI support for the server I run since
+it&#x27;s just as easy for me to implement custom handlers [4].
 
 &gt;<i> &gt; &gt; Regarding an up-to-date Gopher map alternative, I think this is an
-</I>&gt;<i> &gt; &gt; important piece of the Gopher ecosystem that is missing from today's
-</I>&gt;<i> &gt; &gt; world:  a machine-parsable standard format of indexing documents.  I
-</I>&gt;<i> &gt; &gt; very fondly remember &quot;directory&quot; sites of yesteryear (like DMOZ or the
-</I>&gt;<i> &gt; &gt; countless other clones) that strives to categorize the internet not by
-</I>&gt;<i> &gt; &gt; &quot;machine learning&quot; but by human curation.
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt;   Could you provide an example of what you mean by this?  I'm not sure why a
-</I>&gt;<i> &gt; map alternative is needed.
-</I>&gt;<i> 
-</I>&gt;<i> One problem with today's web is that the actual &quot;web structure&quot; is
-</I>&gt;<i> embedded in unstructured documents as links.  What I liked about
-</I>&gt;<i> Gopher maps is that it gave a machine-readable, but still
-</I>&gt;<i> user-friendly, way to map and categorize the &quot;web contents&quot;.
-</I>
-  One problem with that---incentives.  What's my incentive to make all this
+</i>&gt;<i> &gt; &gt; important piece of the Gopher ecosystem that is missing from today&#x27;s
+</i>&gt;<i> &gt; &gt; world:  a machine-parsable standard format of indexing documents.  I
+</i>&gt;<i> &gt; &gt; very fondly remember &quot;directory&quot; sites of yesteryear (like DMOZ or the
+</i>&gt;<i> &gt; &gt; countless other clones) that strives to categorize the internet not by
+</i>&gt;<i> &gt; &gt; &quot;machine learning&quot; but by human curation.
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;   Could you provide an example of what you mean by this?  I&#x27;m not sure why a
+</i>&gt;<i> &gt; map alternative is needed.
+</i>&gt;<i> 
+</i>&gt;<i> One problem with today&#x27;s web is that the actual &quot;web structure&quot; is
+</i>&gt;<i> embedded in unstructured documents as links.  What I liked about
+</i>&gt;<i> Gopher maps is that it gave a machine-readable, but still
+</i>&gt;<i> user-friendly, way to map and categorize the &quot;web contents&quot;.
+</i>
+  One problem with that---incentives.  What&#x27;s my incentive to make all this
 information more easily machine readable?  On the web, you do that, and what
 happens?  Google comes along, munches on all that sweet machine readable
 data and serves it up directly to users, meaning the user just has to go to
@@ -203,62 +187,47 @@ And for what?  It was a pain to maintain, the tooling was poor, and Google
 would just suck it up and serve it to users directly, no reason for anyone
 to actually visit your site.
 
-  As a user, that's great!  As a web site operator, not so much.
+  As a user, that&#x27;s great!  As a web site operator, not so much.
 
 &gt;<i> &gt; &gt; * and perhaps add support for content-based addressing (as opposed to
-</I>&gt;<i> &gt; &gt; server-based addressing) (i.e. persistent URL's);
-</I>&gt;<i> &gt;
-</I>&gt;<i> &gt;   There already exist such protocols---I'm not sure what a new one based
-</I>&gt;<i> &gt; around Gemini would buy.
-</I>&gt;<i> 
-</I>&gt;<i> I agree that `<A HREF="gemini://`">gemini://`</A> is first and foremost a &quot;transfer&quot; protocol.
-</I>&gt;<i> However one can include a document's identity as a first class citizen
-</I>&gt;<i> of the protocol.
-</I>&gt;<i> 
-</I>&gt;<i> For example say each document is identified by its SHA;  then when
-</I>&gt;<i> replying with a document also send that SHA in form of a permanent URL
-</I>&gt;<i> like say `gemini-object:?sha={SHA}&amp;location=<A HREF="gemini://first-server/...&amp;location=gemini://second-server/...`;">gemini://first-server/...&amp;location=gemini://second-server/...`;</A>
-</I>&gt;<i>  then a client (that perhaps has bookmarked that particular version of
-</I>&gt;<i> that document) could send that URL to a server (of his choosing via
-</I>&gt;<i> configuration, to the first one specified in `location`, etc.) and if
-</I>&gt;<i> that server has that document just reply with that, else use
-</I>&gt;<i> `location`, else return 404.
-</I>
-  Hey, go ahead and implement that.  I'd like to see that ... 
+</i>&gt;<i> &gt; &gt; server-based addressing) (i.e. persistent URL&#x27;s);
+</i>&gt;<i> &gt;
+</i>&gt;<i> &gt;   There already exist such protocols---I&#x27;m not sure what a new one based
+</i>&gt;<i> &gt; around Gemini would buy.
+</i>&gt;<i> 
+</i>&gt;<i> I agree that `<a href="gemini://`">gemini://`</a> is first and foremost a &quot;transfer&quot; protocol.
+</i>&gt;<i> However one can include a document&#x27;s identity as a first class citizen
+</i>&gt;<i> of the protocol.
+</i>&gt;<i> 
+</i>&gt;<i> For example say each document is identified by its SHA;  then when
+</i>&gt;<i> replying with a document also send that SHA in form of a permanent URL
+</i>&gt;<i> like say `gemini-object:?sha={SHA}&amp;location=<a href="gemini://first-server/...&amp;location=gemini://second-server/...`">gemini://first-server/...&amp;location=gemini://second-server/...`</a>;
+</i>&gt;<i>  then a client (that perhaps has bookmarked that particular version of
+</i>&gt;<i> that document) could send that URL to a server (of his choosing via
+</i>&gt;<i> configuration, to the first one specified in `location`, etc.) and if
+</i>&gt;<i> that server has that document just reply with that, else use
+</i>&gt;<i> `location`, else return 404.
+</i>
+  Hey, go ahead and implement that.  I&#x27;d like to see that ... 
 
   -spc (I got my feet wet in Gemini by implementing the first server ... )
 
-[1]	<A HREF="https://github.com/spc476/lua-conmanorg/blob/master/src/tls.c">https://github.com/spc476/lua-conmanorg/blob/master/src/tls.c</A>
+[1]	<a href="https://github.com/spc476/lua-conmanorg/blob/master/src/tls.c">https://github.com/spc476/lua-conmanorg/blob/master/src/tls.c</a>
 
-[2]	<A HREF="https://github.com/spc476/GLV-1.12556">https://github.com/spc476/GLV-1.12556</A>
+[2]	<a href="https://github.com/spc476/GLV-1.12556">https://github.com/spc476/GLV-1.12556</a>
 
-[3]	<A HREF="https://github.com/michael-lazar/jetforce">https://github.com/michael-lazar/jetforce</A>
+[3]	<a href="https://github.com/michael-lazar/jetforce">https://github.com/michael-lazar/jetforce</a>
 
-[4]	<A HREF="gopher://gopher.conman.org/1Gopher:Ext:GLV-1/handlers/">gopher://gopher.conman.org/1Gopher:Ext:GLV-1/handlers/</A>
-</PRE>
-
-
-
-
-
-
+[4]	<a href="gopher://gopher.conman.org/1Gopher:Ext:GLV-1/handlers/">gopher://gopher.conman.org/1Gopher:Ext:GLV-1/handlers/</a>
+</pre>
 <!--endarticle-->
-    <HR>
-    <P><UL>
-        <!--threads-->
-	<LI>Previous message (by thread): <A HREF="000445.html">An outsider's view of the `gemini://` protocol
-</A></li>
-	<LI>Next message (by thread): <A HREF="000449.html">An outsider's view of the `gemini://` protocol
-</A></li>
-         <LI> <B>Messages sorted by:</B> 
-              <a href="date.html#446">[ date ]</a>
-              <a href="thread.html#446">[ thread ]</a>
-              <a href="subject.html#446">[ subject ]</a>
-              <a href="author.html#446">[ author ]</a>
-         </LI>
-       </UL>
-
 <hr>
-<a href="https://lists.orbitalfox.eu/listinfo/gemini">More information about the Gemini
-mailing list</a><br>
-</body></html>
+<ul>
+<li>Previous message (by thread): <a href="000445.html">An outsider&#x27;s view of the `gemini://` protocol</a></li>
+<li>Next message (by thread): <a href="000449.html">An outsider&#x27;s view of the `gemini://` protocol</a></li>
+<li><b>Messages sorted by:</b> <a href="date.html#446">[ date ]</a> <a href="thread.html#446">[ thread ]</a> <a href="subject.html#446">[ subject ]</a> <a href="author.html#446">[ author ]</a></li>
+</ul>
+<hr>
+<a href="../index.html">Archive home</a> | <a href="https://github.com/acidus99/Gemini-Mailing-List">About this archive</a>
+</body>
+</html>
