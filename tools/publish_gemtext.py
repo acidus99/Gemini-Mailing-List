@@ -306,7 +306,7 @@ def index_page(threads):
         if previous != current:
             lines.append(f"### {MONTHS[current[1] - 1]} {current[0]}")
         authors = len({(post.name, post.address) for post in thread.posts})
-        lines.append(f"=> {thread.filename} 🧵 {first.title} • 📧 {len(thread.posts)} • 🗣️ {authors}")
+        lines.append(f"=> {thread.filename} {first.title} • 📧 {len(thread.posts)} • 🗣️ {authors}")
         previous = current
     return "\n".join(lines) + "\n"
 
